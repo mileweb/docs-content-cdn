@@ -55,10 +55,6 @@
                 "path": "/docs/portal/properties/deleting-property.md"
               },
               {
-                "title": "Clone a Property Version",
-                "path": "/docs/portal/properties/cloning-property.md"
-              },
-              {
                 "title": "Compare Property Versions",
                 "path": "/docs/portal/properties/comparing-properties.md"
               },
