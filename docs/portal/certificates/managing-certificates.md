@@ -1,12 +1,10 @@
-# Certificate Types
+# Creating a New Certificate
 
-CDN360 supports regular, subject alternative names (SAN) and wildcard certificates. In terms of publick key algorithm, it suports both RSA and ECDSA.
+There are two options to create a new certificate: 
 
-## Creating a New Certificate
+1. Auto-generation of a self-signed certificate.
 
-There are two ways to create a new certificate: 
-
-1. Auto-generation of a self-signed certificate. In particular, if you need to apply a certificate from a CA, you can download the CSR of the new self-signed certificate and submit to the CA. Once you receive the CA-signed certificate and chain certificate(s), you can upload them as a new version;
+In particular, if you need a certificate signing request (CSR) to apply for a certificate from a CA, you should choose this option. You can then download the CSR of the new self-signed certificate and submit to the CA. Once you receive the CA-signed certificate and chain certificate(s), you can upload them as a new version;
 
 2. Uploading everything: private key, certificate and chain certificate(s).
 
@@ -19,11 +17,30 @@ The following procedure describes how to generate self-signed certificates. Self
 
 ![null](</docs/resources/images/Create new Certificate Button.png>)
 
-3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table above). Required fields are denoted by an asterisk (\*).
+3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table below). Required fields are denoted by an asterisk (\*).
+
+| **Fields**                                                                                                                     | **Description**                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| Certificate Name                                                                                                               | Enter a name that helps you identify this certificate.                                                                         |
+| Certificate Description                                                                                                        | Add a description to associate with this certificate.                                                                          |
+| Auto Renew                                                                                                                     | Select whether you want CDN360 to renew the certificate automatically. Choices are:                                            |
+| Share With                                                                                                                     | This field is available to resellers only. It allows resellers to select whether this certificate will be shared. Choices are: |
+| **Auto Generate Certificate Tab**                                                                                              |                                                                                                                                |
+| Cipher type                                                                                                                    | Select a cipher. Choices are:                                                                                                  |
+| Common Name                                                                                                                    | Enter a common name you want to use for the certificate.                                                                       |
+| SAN                                                                                                                            | Enter one or more subject alternative names (SANs).                                                                            |
+| Country                                                                                                                        | Enter the name of a country in two letter [ISO-3166 country code](<https://www.iso.org/obp/ui/#search>) format.                |
+| State                                                                                                                          | Enter the name of a state.                                                                                                     |
+| City                                                                                                                           | Enter the name of a city.                                                                                                      |
+| Street                                                                                                                         | Enter the name of a street.                                                                                                    |
+| Company                                                                                                                        | Enter a company name.                                                                                                          |
+| Department                                                                                                                     | Enter a department name.                                                                                                       |
+| Email                                                                                                                          | Enter an email address.                                                                                                        |
+| Comments                                                                                                                       | Enter comments about the certificate.                                                                                          |
 
 4. Click the **Save Certificate** button followed by **OK**.
 
-Your certificate is saved and appears on the Certificates page. You can now use the certificate with any properties you create. You can also download the CSR to apply for a signed certificate from a CA, and then refer to "Uploading an Existing Certificate" below to create a new version   of this certificate.
+Your certificate is saved and appears on the Certificates page. You can now use the certificate with any properties you create. You can also download the CSR to apply for a signed certificate from a CA, and then upload it to create a [new version](#updating-expiring-certificates) of this certificate.
 
 ## Uploading an Existing Certificate
 
@@ -39,7 +56,7 @@ To upload the files as a new certificate:
 
 ![null](</docs/resources/images/Create new Certificate Button.png>)
 
-3. Complete the fields in the Create Certificate form and **Upload Certificate** tab (refer to the table above). Required fields are denoted by an asterisk (\*).
+3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
 
 ![null](</docs/resources/images/Upload Certificate.png>)
 
@@ -49,7 +66,7 @@ Your certificate is saved and can now be used with any properties you create.
 
 ## Updating Expiring Certificates
 
-An expired certificate causes browsers to stop loading web content and display alerts to visitors. To help you avoid these situations, CDN360 sends an email notification when a certificate used in production is close to reaching its expiration date. CDN360 supports certificate [auto-renewal](<Auto-Renewing a Certificate through Let's Encrypt.htm>) through [Let’s Encrypt](<https://letsencrypt.org/docs/challenge-types/>). If you choose to renew by yourself, perform the following procedure.
+An expired certificate causes browsers to stop loading web content and display alerts to visitors. To help you avoid these situations, CDN360 sends an email notification when a certificate used in production is close to reaching its expiration date. CDN360 supports certificate [auto-renewal](<Auto-Renewing a Certificate through Let's Encrypt.htm>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>). If you choose to renew by yourself, perform the following procedure.
 
 **Note**: To update a certificate, the certificate must show **Owned** in the **Ownership** column.
 
@@ -147,7 +164,7 @@ Deleting a certificate removes that certificate permanently.
 
 ## Downloading a CSR
 
-A certificate signing request (CSR) is a file that contains information a certificate authority (CA) needs to create and digitally sign a TLS certificate. If your website uses a CA certificate, you can generate a CSR through CDN360 to test your configuration.
+A certificate signing request (CSR) is a file that contains information a certificate authority (CA) needs to create and digitally sign a TLS certificate. CDN360 allows you to download the CSR that corresponds to the latest version of each certificate. You can send this CSR to apply for a new certificate from a CA and come back to upload the CA-signed certificate as a new version.
 
 **Note**: To download a CSR, the certificate must show **Owned** in the **Ownership** column.
 
