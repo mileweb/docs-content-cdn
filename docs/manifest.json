@@ -53,7 +53,7 @@
               {
                 "title": "Delete a Property",
                 "path": "/docs/portal/properties/deleting-property.md"
-              }
+              },
               {
                 "title": "Clone a Property Version",
                 "path": "/docs/portal/properties/cloning-property.md"
@@ -65,7 +65,7 @@
               {
                 "title": "Manage Origins",
                 "path": "/docs/portal/properties/managing-origins.md"
-              },
+              }
             ]
           },
           {
