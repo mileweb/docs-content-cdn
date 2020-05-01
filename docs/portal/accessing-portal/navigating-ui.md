@@ -6,7 +6,7 @@ When you first log in to the CDN360 portal, menus and submenus appear in the lef
 
 The default menu lists the CDN360 activities you can perform.
 
-![null](</docs/resources/images/Screen 1.png>)
+<p align=center><img src="/docs/resources/images/Screen 1.png" alt="navigation menu" width="300"></p>
 
 ## Dashboard
 
