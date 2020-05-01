@@ -33,44 +33,12 @@ The following figure shows the key elements on the page, and the table following
 
 ![null](</docs/resources/images/Identity & Access Management Page.png>)
 
-## Permissions That Can Be Assigned to Roles
 
-| **This Permission...**                         | **Allows the Role to...**                      |
-| ---------------------------------------------- | ---------------------------------------------- |
-| certificate.create                             | Create certificates                            |
-| certificate.delete                             | Delete certificates                            |
-| certificate.deployment.production              | Deploy certificates to production environments |
-| certificate.deployment.staging                 | Deploy certificates to staging environments    |
-| certificate.download.csr                       | Download CSRs                                  |
-| certificate.read                               | Read certificates                              |
-| certificate.update                             | Update certificates                            |
-| cname.create                                   | Create CNAMEs                                  |
-| cname.delete                                   | Delete CNAMEs                                  |
-| cname.read                                     | Read CNAMEs                                    |
-| cname.update                                   | Update CNAMEs                                  |
-| dashboard.read                                 | Read the dashboard                             |
-| notification.create                            | Create notifications                           |
-| notification.delete                            | Delete notifications                           |
-| notification.read                              | Read notifications                             |
-| property.create                                | Create properties                              |
-| property.delete                                | Delete properties                              |
-| property.deployment.production                 | Deploy properties to production environments   |
-| property.deployment.read                       | Read property deployments                      |
-| property.deployment.staging                    | Deploy properties to staging environments      |
-| property.read                                  | Read properties                                |
-| property.update                                | Update properties                              |
-| property.validation                            | Validate properties                            |
-| property.validation.read                       | Read property validations                      |
-| purge.create                                   | Create purge requests                          |
-| purge.read                                     | Read purge requests                            |
-| report.read                                    | Read reports                                   |
-| role.create                                    | Create roles                                   |
-| role.delete                                    | Delete roles                                   |
-| role.read                                      | Read roles                                     |
-| role.update                                    | Update roles                                   |
-| user.create                                    | Create users                                   |
-| user.delete                                    | Delete users                                   |
-| user.read                                      | Read users                                     |
-| user.suspend                                   | Suspend users or reactivate suspended users    |
-| user.update                                    | Update users                                   |
+| **Fields** | **Description** |
+| :----------: | --------------- |
+| 1 | Identity and access management tasks are organized into four tabs:<ul><br> <li>**Users** allows administrators to manage users. Operators and viewers are limited to seeing other portal users. This is the tab that appears when the Identity & Access Management page appears. <li>**Roles** allows administrators to manage roles. Operators and viewers are limited to seeing roles. <li>**Audit Logs** allows administrators to manage audit logs. This tab is not available to operators and viewers. <li>**Security**   allows administrators to define security for the portal. This tab is not available to operators and viewers.|
+| 2 | To filter users on the **Users** tab or roles on the **Roles** tab, type characters in this field and then press the Enter key. All properties that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **Reset** button.|
+| 3 | Each user or role appears on a row within its respective tab.|
+| 4 | The **Actions** drop-down list on each row has options appropriate for each tab|
+| 5 | The **Users** tab has an **+ Add User** button that allows administrators to create new users. Similarly, the **Roles** tab has an **+ Add Role** button that allows administrators to [create new roles](<docs/portal/../../managing-roles.md>). These buttons do not appear for viewers.|
 

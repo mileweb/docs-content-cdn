@@ -6,7 +6,7 @@ After you create a property, you can deploy it to the staging environment to mak
 
 2. On the Properties page, click the ID of the property you want to deploy. 
 
-    OR
+    <br><u>OR</u></br><br>
 
     Click the **Actions** menu for the property you want to deploy, and then select **Edit**.
 

@@ -2,7 +2,7 @@
 
 Let's Encrypt (LE) is a Certificate Authority (CA) that issues free certificates to the public. It provides a set of API and CLI tools to help you apply for and renew certificates automatically. If you want a certificate to cover one or more hostnames, you must prove to LE that you are the owner of all the hostnames. Although LE provides various ways (challenges) for you to prove ownership, CDN360 supports the "HTTP-01 challenge". To pass the challenge, you must make sure that all hostnames using the certificate are already pointed to a CNAME on CDN360. Otherwise, some challenge requests from LE may go to undesired destinations.
 
-To use the CDN360 auto-renew feature, you need an "initial" valid, expired, or self-signed certificate. You can also use the CDN360 [API](</apidocs>) or portal to generate one automatically. The content of the certificate — such as common name or subject alternate names (SAN) — is not important.
+To use the CDN360 auto-renew feature, you need an "initial" valid, expired, or self-signed certificate. You can also use the [CDN360 API](</apidocs#tag/Certificate-Management>) or portal to generate one automatically. The content of the certificate — such as common name or subject alternate names (SAN) — is not important.
 
 The following procedure describes how to use the auto-renew feature:
 

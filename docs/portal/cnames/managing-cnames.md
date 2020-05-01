@@ -8,9 +8,9 @@ The following figure shows the key elements on the page, and the table following
 
 ![null](</docs/resources/images/CNAMES_Overview.png>)
 
-| **Fields** | **Description** |
-| ---------- | --------------- |
-| 1 | To filter CNAMEs, type characters in this field and then press the Enter key. All CNAMEs that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field. |
-| 2 | Each CNAME appears on its own row. |
-| 3 | The **Actions** drop-down list on each row has options to edit a CNAME?? and delete a CNAME??. |
-| 4 | The **Create CNAME** button allows you to create?? new CNAMEs.|
+| **Fields**   | **Description**                                                 |
+| :----------: | --------------------------------------------------------------- |
+| 1            | To filter CNAMEs, type characters in this field and then press the Enter key. All CNAMEs that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field.                                              |
+| 2            | Each CNAME appears on its own row.                              |
+| 3            | The **Actions** drop-down list on each row has options to [edit a CNAME](</docs/portal/cnames/editing-cname.md>) and [delete a CNAME](</docs/portal/cnames/deleting-cname.md>).                                               |
+| 4            | The **Create CNAME** button allows you to [create new CNAMEs](</docs/portal/cnames/creating-cname.md>).                                          |

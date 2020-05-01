@@ -9,10 +9,10 @@ The following figure shows the key elements on the page, and the table following
 ![null](</docs/resources/images/Content Management.png>) MARC: NEED NEW SCREEN??
 
 | **Fields** | **Description** |
-| ---------- | --------------- |
+| :----------: | --------------- |
 | 1 | To filter purges, type characters in this field and then press the Enter key. All purges that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field. |
-| 2 | Each purge appears on its own row. Clicking an ID shows detailed information?? about the purge.|
-| 3 | The **Create Purge** button allows you to create?? a purge request.|
+| 2 | Each purge appears on its own row. Clicking an ID shows detailed information about the purge.|
+| 3 | The **Create Purge** button allows you to create a purge request.|
 
 ## Creating a Purge Request
 
@@ -30,9 +30,9 @@ If the content on your origin web server has changed, request a purge to have CD
 | Target Environment | Select whether the purge will occur in a staging or production environment.|
 | Purge Action | Select whether you want the content deleted or invalidated.|
 | Purge Type | Select whether you want to purge a file or a directory.|
-| Add a file to be purged | If Purge Type is set to File, select http or https from the drop-down list, enter the name of the file to be purged, and then click Add File. Repeat this step for each additional file you want to purge.|
-| Add a file purge header | If Purge Type is set to File, specify the name and value of the HTTP request header included in the cache key, and then click Add Header. Repeat this step for each additional request header you want to purge.|
-| Add a directory to be purged | If Purge Type is set to Directory, select http or https from the drop-down list, enter the name of the directory to be purged, and then click Add Directory. Note that subdirectories associated with the directory will also be purged. Repeat this step for each additional directory you want to purge.|
+| Add a file to be purged | If **Purge Type** is set to **File**, select **http** or **https** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge.|
+| Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge.|
+| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **http** or **https** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories associated with the directory will also be purged. Repeat this step for each additional directory you want to purge.|
 
 4. Click **Start Purge**.
 
@@ -48,14 +48,14 @@ If the content on your origin web server has changed, request a purge to have CD
 1. In the left pane, click **Content Management**.
 2. A **Purge** tab on the Content Management page shows details similar to those in the following figure:
 
-- ID = ID associated with the purge request.
-- Target environment where the purge occurred = either Staging or Production.
-- Action that was performed = either Delete or Invalidate.
-- Type = object on which the purge was requested.
-- Date and time when the purge request was submitted and completed.
-- A success rate indicator that shows a completion percentage from 0 to 100%.
+   <ul><li> ID = ID associated with the purge request.<br>
+   <li>Target environment where the purge occurred = either <strong>Staging</strong> or <strong>Production</strong>.<br>
+   <li> Action that was performed = either <strong>Delete</strong> or <strong>Invalidate</strong>.<br>
+   <li>Type = object on which the purge was requested.<br>
+   <li>Date and time when the purge request was submitted and completed.<br>
+   <li>A success rate indicator that shows a completion percentage from 0 to 100%.</ul>
 
 ![null](</docs/resources/images/dashboard13.png>)
 
-3. To specify the exact content you want to purge, click [here](#creating-a-purge-request).
+3. To specify the exact content you want to purge, create a purge request  .
 

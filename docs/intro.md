@@ -36,5 +36,5 @@ The CDN360 content delivery platform provides a rich [API](</apidocs>) that supp
 
 ## Where to Go from Here
 
-Perform the steps in the [Getting Started Guide](</docs/getting-started.md>).
+Perform the steps in the [CDN360 Quick Start](</docs/getting-started.md>).
 
