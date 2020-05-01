@@ -19,7 +19,7 @@ The following procedure describes how to generate self-signed certificates. Self
 
 3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table below). Required fields are denoted by an asterisk (\*).
 
-<p align="center"><img src="/docs/resources/images/Auto Generate Certificate.png" alt="Auto Generate Certificate" width="650"></p>
+<p align="center"><img src="/docs/resources/images/Auto Generate Certificate.png" alt="Auto Generate Certificate" width="700"></p>
 
 | **Fields**                                                                                                                     | **Description**                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -60,7 +60,7 @@ To upload the files as a new certificate:
 
 3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
 
-<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="650"></p>
+<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="700"></p>
 
 4. Click the <strong>Save Certificate</strong> button followed by **OK**. 
 
@@ -84,7 +84,7 @@ An expired certificate causes browsers to stop loading web content and display a
 
 4. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version** and skip to step 13.
 
-![null](</docs/resources/images/Buttons for Uploading Certs.png>)
+<p align="center"><img src="/docs/resources/images/Buttons for Uploading Certs.png" alt="Upload Certificate Version" width="700"></p>
 
 5. Use one of the following steps to apply for a new version from a CA:
 
@@ -103,11 +103,9 @@ An expired certificate causes browsers to stop loading web content and display a
 
 11. On the right side of the certificate details form, click the **Create Version** button.
 
-![null](</docs/resources/images/Create Version Button - Updating properties.png>)
-
 12. On the **Upload Certificate** tab, upload the certificate and chain certificate, and then click **Save Version**.
 
-![null](</docs/resources/images/Certificate Versions.png>)
+<p align="center"><img src="/docs/resources/images/Certificate Versions.png" alt="Upload Certificate Version" width="700"></p>
 
 13. Deploy the new certificate version to production.
 
@@ -140,7 +138,7 @@ After you create a certificate, you can deploy it to the staging environment whe
 2. On the Certificates page, click the name of the certificate you want to deploy.
 3. Scroll down to the **Deployment** section, and then select **Staging** or **Production** from the **Deployment Destination** drop-down list.
 
-![null](</docs/resources/images/Selecting a Deployment Options.png>)
+<p align="center"><img src="/docs/resources/images/Selecting a Deployment Options.png" alt="Deployment Options" width="700"></p>
 
 4. Click the **Deploy Configuration** button. When the Deployment Confirmation pop-up appears, click **OK**. Wait for the message that the certificate has been successfully deployed, or click the **Go to Dashboard** button to perform other tasks while deployment continues in the background, and then click **Tasks** in the left pane to confirm that the certificate was deployed successfully.
 
