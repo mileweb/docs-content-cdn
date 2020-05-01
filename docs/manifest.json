@@ -27,49 +27,45 @@
             "title": "Properties",
             "routes": [
               {
-                "title": "Managing Properties",
+                "title": "Overview of Property",
                 "path": "/docs/portal/properties/managing-properties.md"
               },
               {
-                "title": "Creating a Property",
+                "title": "Create a Property",
                 "path": "/docs/portal/properties/creating-property.md"
               },
               {
-                "title": "Managing Origins",
-                "path": "/docs/portal/properties/managing-origins.md"
-              },
-              {
-                "title": "Deploying a Property",
-                "path": "/docs/portal/properties/deploying-property.md"
-              },
-              {
-                "title": "Testing a Property",
-                "path": "/docs/portal/properties/testing-property.md"
-              },
-              {
-                "title": "Undeploying a Property",
-                "path": "/docs/portal/properties/undeploying-property.md"
-              },
-              {
-                "title": "Editing Properties",
+                "title": "Edit a Property",
                 "path": "/docs/portal/properties/editing-properties.md"
               },
               {
-                "title": "Cloning Properties",
-                "path": "/docs/portal/properties/cloning-property.md"
-              },
-              {
-                "title": "Validating Properties",
+                "title": "Validate a Property",
                 "path": "/docs/portal/properties/validating-property.md"
               },
               {
-                "title": "Comparing Property Versions",
+                "title": "Deploy/Undeploy a Property",
+                "path": "/docs/portal/properties/deploying-property.md"
+              },
+              {
+                "title": "Test a Property",
+                "path": "/docs/portal/properties/testing-property.md"
+              },
+              {
+                "title": "Delete a Property",
+                "path": "/docs/portal/properties/deleting-property.md"
+              }
+              {
+                "title": "Clone a Property Version",
+                "path": "/docs/portal/properties/cloning-property.md"
+              },
+              {
+                "title": "Compare Property Versions",
                 "path": "/docs/portal/properties/comparing-properties.md"
               },
               {
-                "title": "Deleting Property",
-                "path": "/docs/portal/properties/deleting-property.md"
-              }
+                "title": "Manage Origins",
+                "path": "/docs/portal/properties/managing-origins.md"
+              },
             ]
           },
           {
