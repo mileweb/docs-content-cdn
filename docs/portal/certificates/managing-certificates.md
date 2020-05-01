@@ -19,7 +19,7 @@ The following procedure describes how to generate self-signed certificates. Self
 
 3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table below). Required fields are denoted by an asterisk (\*).
 
-<p align="center"><img src="/docs/resources/images/Auto Generate Certificate.png" alt="Auto Generate Certificate" width="600"></p>
+<p align="center"><img src="/docs/resources/images/Auto Generate Certificate.png" alt="Auto Generate Certificate" width="650"></p>
 
 | **Fields**                                                                                                                     | **Description**                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -60,7 +60,7 @@ To upload the files as a new certificate:
 
 3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
 
-![null](</docs/resources/images/Upload Certificate.png>)
+<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="650"></p>
 
 4. Click the <strong>Save Certificate</strong> button followed by **OK**. 
 
@@ -68,7 +68,7 @@ Your certificate is saved and can now be used with any properties you create.
 
 ## Updating Expiring Certificates
 
-An expired certificate causes browsers to stop loading web content and display alerts to visitors. To help you avoid these situations, CDN360 sends an email notification when a certificate used in production is close to reaching its expiration date. CDN360 supports certificate [auto-renewal](<Auto-Renewing a Certificate through Let's Encrypt.htm>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>). If you choose to renew by yourself, perform the following procedure.
+An expired certificate causes browsers to stop loading web content and display alerts to visitors. To help you avoid these situations, CDN360 sends an email notification when a certificate used in production is close to reaching its expiration date. CDN360 supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>). If you choose to renew by yourself, perform the following procedure.
 
 **Note**: To update a certificate, the certificate must show **Owned** in the **Ownership** column.
 
