@@ -93,11 +93,19 @@
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
-                "title": "Managing Certificates",
-                "path": "/docs/portal/certificates/managing-certificates.md"
+                "title": "Create a Certificate",
+                "path": "/docs/portal/certificates/creating-certificates.md"
               },
               {
-                "title": "Auto-Renewal",
+                "title": "Update a Certificate",
+                "path": "/docs/portal/certificates/updating-certificates.md"
+              },
+              {
+                "title": "Deploy a Certificate",
+                "path": "/docs/portal/certificates/deploying-certificates.md"
+              },
+              {
+                "title": "Auto-Renewal of a Certificate",
                 "path": "/docs/portal/certificates/auto-renewal.md"
               }
             ]
