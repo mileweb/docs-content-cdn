@@ -22,7 +22,7 @@ If you click the **Actions** dropdown list, you will see all the available actio
 <p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate List" width="700"></p>
 The options are:
 
-- **Edit**: [Make changes](</docs/portal/certificates/updating-certificates>) to the selected certificate;
+- **Edit**: [Make changes](</docs/portal/certificates/updating-certificates.md>) to the selected certificate;
 - **Download CSR**: Download a certificate signing request (CSR) from the latest version of the selected certificate;
 - **Delete**: Delete the certificate. If the certificate is deployed, you have to undeploy it first;
 - **Undeploy from Staging**: Undeploy the certificate from the staging environment;
