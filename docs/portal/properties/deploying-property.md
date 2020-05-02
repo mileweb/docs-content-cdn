@@ -15,3 +15,11 @@ After you have created and validated a property version, you are ready to deploy
 5. When the Deployment Confirmation pop-up appears, click **OK**. The deployment process usually finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment.
 
 6. You can follow the [steps on this section](</docs/portal/properties/testing-property.md#testing-property-in-staging>) to test the property in the staging environment.
+
+# Undeploying a Property
+
+1. In the left pane, click **Properties**.
+
+2. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
+
+3. When the confirmation message appears, click **Yes, Undeploy!**. When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
