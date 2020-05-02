@@ -66,7 +66,7 @@ To upload the files as a new certificate:
 
 Your certificate is saved and can now be used with any properties you create.
 
-## Updating Expiring Certificates
+# Updating Expiring Certificates
 
 An expired certificate causes browsers to stop loading web content and display alerts to visitors. To help you avoid these situations, CDN360 sends an email notification when a certificate used in production is close to reaching its expiration date. CDN360 supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>). If you choose to renew by yourself, perform the following procedure.
 
@@ -109,7 +109,7 @@ An expired certificate causes browsers to stop loading web content and display a
 
 13. Deploy the new certificate version to production.
 
-## Viewing Certificate Details
+# Viewing Certificate Details
 
 1.  In the left pane, click **Certificates**.
 2. Click the **+** icon next to the certificate name. For example:
@@ -118,7 +118,7 @@ An expired certificate causes browsers to stop loading web content and display a
 
 3. To remove the details. click the **–** icon next to the certificate name.
 
-## Deploying and Undeploying Certificates
+# Deploying and Undeploying Certificates
 
 After you create a certificate, you can deploy it to the staging environment for testing, and then to the CDN360 production environment if testing is successful.
 
@@ -126,7 +126,7 @@ After you create a certificate, you can deploy it to the staging environment for
 
 If you decide not to use a deployed certificate, you can undeploy it from the staging and production environments.
 
-### Deploying Certificates
+## Deploying Certificates
 
 After you create a certificate, you can deploy it to the staging environment where your original content is fetched and staged on servers set up for testing. If testing is successful, you can deploy the certificate to the CDN360 production environment.
 
@@ -142,7 +142,7 @@ After you create a certificate, you can deploy it to the staging environment whe
 
 4. Click the **Deploy Configuration** button. When the Deployment Confirmation pop-up appears, click **OK**. Wait for the message that the certificate has been successfully deployed, or click the **Go to Dashboard** button to perform other tasks while deployment continues in the background, and then click **Tasks** in the left pane to confirm that the certificate was deployed successfully.
 
-### Undeploying Certificates
+## Undeploying Certificates
 
 If you no longer need a certificate in a staging or production environment, you can undeploy the certificate.
 
@@ -152,7 +152,7 @@ To undeploy a certificate from staging or production environments, the certifica
 2. On the Certificates page, click the **Actions** drop-down list for the certificate you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 3. When the Undeployment Confirmation dialog box appears, click **OK**.
 
-## Deleting Certificates
+# Deleting a Certificate
 
 Deleting a certificate removes that certificate permanently.
 
@@ -162,7 +162,7 @@ Deleting a certificate removes that certificate permanently.
 2. On the Certificates page, click the **Actions** drop-down list of the certificate you want to delete, and then select **Delete**.
 3. When prompted to confirm the deletion, click **OK** to delete the certificate. 
 
-## Downloading a CSR
+# Downloading a CSR
 
 A certificate signing request (CSR) is a file that contains information a certificate authority (CA) needs to create and digitally sign a TLS certificate. CDN360 allows you to download the CSR that corresponds to the latest version of each certificate. You can send this CSR to apply for a new certificate from a CA and come back to upload the CA-signed certificate as a new version.
 
