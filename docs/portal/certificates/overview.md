@@ -8,11 +8,22 @@ Certificates are managed from the Certificates page. To display this page, click
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-![null](</docs/resources/images/Certificates Page.png>)
+<p align="center"><img src="/docs/resources/images/Certificates Page.png" alt="Certificate List" width="700"></p>
 
 | **Element Number**|**Description**|
 |-|-|
 |1|A search box that you can enter any keyword to filter the certificate list|
-|2|The list of all certificates that are available to you. Some of them may be shared certificates from your reseller.|
+|2|The list of all certificates that are available to you. Click the **+** sign to see which properties are using each certificate.|
 |3|The button to create new certificates.|
 |4|Dropdown list to take actions on each certificate.|
+
+## Actions to Certificates
+If you click the **Actions** dropdown list, you will see all the available actions that can be taken:
+<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate List" width="700"></p>
+The options are:
+
+- **Edit**: Make changes to the selected certificate;
+- **Download CSR**: Download a certificate signing request (CSR) from the latest version of the selected certificate;
+- **Delete**: Delete the certificate. If the certificate is deployed, you have to undeploy it first;
+- **Undeploy from Staging**: Undeploy the certificate from the staging environment;
+- **Undeploy from Production**: Undeploy the certificate from the Production environment.
