@@ -14,7 +14,7 @@ The following figure shows the key elements on the page, and the table following
 |-|-|
 |1|A search box that you can enter any keyword to filter the certificate list|
 |2|The list of all certificates that are available to you. Click the **+** sign to see which properties are using each certificate.|
-|3|The button to create new certificates.|
+|3|The button to [create new certificates](</docs/portal/certificates/creating-certificates.md>).|
 |4|Dropdown list to take actions on each certificate.|
 
 ## Actions to Certificates
@@ -22,7 +22,7 @@ If you click the **Actions** dropdown list, you will see all the available actio
 <p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate List" width="700"></p>
 The options are:
 
-- **Edit**: Make changes to the selected certificate;
+- **Edit**: [Make changes](</docs/portal/certificates/editing-certificates>) to the selected certificate;
 - **Download CSR**: Download a certificate signing request (CSR) from the latest version of the selected certificate;
 - **Delete**: Delete the certificate. If the certificate is deployed, you have to undeploy it first;
 - **Undeploy from Staging**: Undeploy the certificate from the staging environment;
