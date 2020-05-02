@@ -22,4 +22,6 @@ After you have created and validated a property version, you are ready to deploy
 
 2. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
+<p align="center"><img src="/docs/resources/images/UndeployAProperty.png" alt="property undeployment" width="700"></p>
+
 3. When the confirmation message appears, click **Yes, Undeploy!**. When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
