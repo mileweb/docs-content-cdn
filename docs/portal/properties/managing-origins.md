@@ -1,37 +1,26 @@
 
 # Managing Origins for Your Property
 
-Origins are your web servers containing the content you want CDN360 to accelerate. Configuring origins allows CDN360 to communicate with your origin servers.
+Origins are your web servers containing the content you want CDN360 to accelerate. CDN360 supports more than one origin for each property, and a plethora of setting regarding how to access your origins.
 
-## Adding Origins to Your Property
+## Adding or Editing of Origins in a Property
 
-Adding origins to your property tells CDN360 where to obtain the content you want to accelerate. Origins are servers you maintain that allow CDN360 to fetch their content.
+1. In the left pane, click **Properties**, then click the ID of the property you want to edit. Select the property version to be edited, clone it if needed. You should see the section about origin as shown below:
+<p align="center"><img src="/docs/resources/images/OriginList.png" alt="Upload Certificate Version" width="600"></p>
+2. If there is any existing origin as shown by the picture above, you can click the **Edit** or **Remove** links to edit or remove them. You click the **Add Origin to List** below to add a new origin. The following dialog box will show up:
+<p align="center"><img src="/docs/resources/images/Add Origin Page.png" alt="Upload Certificate Version" width="600"></p>
+The Edit Origin UI is basically the same.
 
-1. If you are creating, editing, or cloning a property and the Add Origin form is displayed, skip to step 2. Otherwise:
-<ul>a. In the left pane, click <strong>Properties</strong>. <br/>
-b. On the Properties page, click the ID of a property.<br/><br/>
-<ul><u>OR</u></ul><br/>
-
-
-a. Click the **Origins** menu for the property you want to clone, and then select **Edit**.
-b. Next to the **Version Number** field, click the **Edit** button.
-
-![null](</docs/resources/images/Property - Edit Origins.png>)
-
-c. Under the **Origins** field, click the **Add Origin To List** link.</ul>
-
-2. Complete the fields in the Add Origin form. Required fields are denoted by an asterisk (*).
-
-> ![null](</docs/resources/images/Add Origin Page.png>)
+3. Complete the fields in the Add Origin form. Required fields are denoted by an asterisk (*).
 
 | **Fields**             | **Description**                                       |
 | ---------------------- | ----------------------------------------------------- |
-| Auto Detect            | If you are creating a new property and want CDN360 to detect an origin automatically, click this button. If you accept the origin name, it appears in the **Origin Name** field. This button does not appear when editing or cloning a property.                                                           |
-| Origin Name            | To manually enter an origin name, enter it in this field.                                                                           |
-| Servers                | <p>Enter a hostname or IP address of the primary HTTP or HTTPS server from which CDN360 is expected to retrieve your content. After entering the server hostname or IP address, click **Validate** to verify that the server information is correct and reachable.</p><p> To add more servers, click the **Add new +** link. To remove a server, click the **Remove** link.</p>                                                                               |
-| Backup Servers         | <p>Enter a hostname or IP address of the backup HTTP or HTTPS server that CDN360 will query for content if the primary server is not available. When requests are made, CDN360 queries the primary server(s) you specified in your configuration. If the primary server(s) are down, CDN360 will query the backup servers for the requested information.</p> <p>Click **Add new +** to specify the backup server, and then click **Validate** to verify. To add more backup servers, click the **Add new +** link again. To remove a backup server, click the **Remove** link.</p>                                                                               |
-| **Advanced Settings**                                                         ||
-| Supported Protocols   | Select the protocol that your origin server supports. Choices are: <ul><strong><li>HTTP</strong> = use HTTP only.<li><strong>HTTPS</strong> = use HTTPS only.<br><li><strong>Both</strong> = use HTTP and HTTPS. (*default*)</li></li></br>                                                       |
+| Auto Detect            | This button only appears when are create a new property. When you click it CDN360 will try to resolve the IP address of the hostname you entered for the property. It may or may not be the origin you want to use. Please double check the results.|
+| Origin Name            | A name to identify this origin. It will be used by the [`origin_pass` directive](</docs/edge-logic/supported-directives.md#origin_pass>) in [Edge Logic](</docs/edge-logic/>) to refer to this origin|
+| Servers                | Enter a hostname or IP address of the primary HTTP or HTTPS server from which CDN360 is expected to retrieve your content. After entering the server hostname or IP address, click **Validate** to verify that the server information is correct and reachable. To add more servers, click the **Add new +** link. To remove a server, click the **Remove** link.|
+| Backup Servers         | Enter a hostname or IP address of the backup HTTP or HTTPS server that CDN360 will query for content if the primary server is not available. Click **Add new +** to specify the backup server, and then click **Validate** to verify. To remove a backup server, click the **Remove** link.|
+|| **Advanced Settings**                                                         |
+| Supported Protocols   | The protocol that your origin server supports. Choices are: <ul><strong><li>HTTP</strong> = use HTTP only.<li><strong>HTTPS</strong> = use HTTPS only.<br><li><strong>Both</strong> = use HTTP and HTTPS. (*default*)</li></li></br>                                                       |
 | Supported SNI         | Select whether your server supports Server Name Indication (SNI). Choices are:<br><ul><li><strong>True</strong> = server supports SNI. (*default*)<li><strong>False</strong> = server does not support SNI.</li></li></ul></br>                                                                    |
 | Verify Origin         | Select whether CDN360 performs backend verification of the TLS certificate on the origin servers. Choices are:<br><ul><li><strong>True</strong> = perform backend verification.<li><strong>False</strong> = do not perform backend verification. (*default*)</li></li></ul></br>                    |
 | Host Header           | Enter a hostname that CDN will use to contact the origin.                        |
