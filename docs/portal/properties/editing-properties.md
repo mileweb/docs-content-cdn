@@ -11,6 +11,6 @@
 
 4. If there is a padlock icon next to the version number, it means this version has been deployed. Therefore any editing is disallowed to this version and the **Edit** button is disabled. This is to ensure we can always realiably rollback to any version that has ever been deployed. If you want to make any changes on top of this version, you need to click the **Clone** button to create a new version to edit.
 
-5. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*). They are described in the [Creating a Property](creating-property.md) section.
+5. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*). They are described in the [Creating a Property](</docs/portal/properties/creating-property.md>) section.
 
 6. Save and validate the new version before you can deploy it.
