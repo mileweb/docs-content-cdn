@@ -16,7 +16,7 @@ The Edit Origin UI is basically the same.
 | **Fields**             | **Description**                                       |
 | ---------------------- | ----------------------------------------------------- |
 | Auto Detect            | This button only appears when are create a new property. When you click it CDN360 will try to resolve the IP address of the hostname you entered for the property. It may or may not be the origin you want to use. Please double check the results.|
-| Origin Name            | A name to identify this origin. It will be used by the [`origin_pass` directive](</docs/edge-logic/supported-directives.md#origin_pass>) in [Edge Logic](</docs/edge-logic/>) to refer to this origin|
+| Origin Name            | A name to identify this origin. It will be used by the [`origin_pass` directive](</docs/edge-logic/supported-directives.md#origin_pass>) in [Edge Logic](</docs/edge-logic/intro.md>) to refer to this origin|
 | Servers                | Enter a hostname or IP address of the primary HTTP or HTTPS server from which CDN360 is expected to retrieve your content. After entering the server hostname or IP address, click **Validate** to verify that the server information is correct and reachable. To add more servers, click the **Add new +** link. To remove a server, click the **Remove** link.|
 | Backup Servers         | Enter a hostname or IP address of the backup HTTP or HTTPS server that CDN360 will query for content if the primary server is not available. Click **Add new +** to specify the backup server, and then click **Validate** to verify. To remove a backup server, click the **Remove** link.|
 || **Advanced Settings**                                                         |
