@@ -6,7 +6,7 @@ CDN360 sends an email notification when a certificate used in production is clos
 
 ## If you already have a new CA-signed version with a private key and chain certificate
 1. In the certificate details form, click **Create Version**.
-![null](</docs/resources/images/Create Version.png>)
+<p align="center"><img src="/docs/resources/images/CreateCertVersion.png" alt="Upload Certificate Version" width="700"></p>
 2. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version**.
 <p align="center"><img src="/docs/resources/images/Buttons for Uploading Certs.png" alt="Upload Certificate Version" width="700"></p>
 3. Deploy the new version to production.
@@ -14,6 +14,7 @@ CDN360 sends an email notification when a certificate used in production is clos
 
 ## If you need a CSR to apply for the new certificate from a CA
 If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, you need to go through steps 1-2 to create a self-signed version. Otherwise, you can skip tp step 3.
+
 1. Click **Create Version**.
 2. Click the **Auto Generate Certificate** tab, complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)), and click **Save Version**.
 3. Click the **Download CSR** button to get the CSR generated from the latest version.
