@@ -21,8 +21,8 @@ If your company's security policy requires the new certificate to have a new pri
 
 3. Click the <img src="/docs/resources/images/DownloadCSRButton.png" alt="Download CSR" width="120"> button on top of the Certificate Details page to get the CSR generated from the latest version.
 4. Send the downloaded CSR to the CA to apply for a new certificate.
-5. When you receive the new certificate and chain certificate, return to the same Certificates Details page and click **Create Version**.
+5. When you receive the new CA-signed certificate and chain certificate, return to the same Certificates Details page and click **Create Version**.
 6. On the **Upload Certificate** tab, upload the certificate and chain certificate. There is no need to upload the private key. Click **Save Version**.
 7. Deploy the new certificate version to production.
 
-**Note**: To update a certificate, the certificate must show **Owned** in the **Ownership** column.
+**Note**: To update a certificate, you must be the owner of the certificate.
