@@ -4,7 +4,7 @@ On CDN360, each certificate is versioned, and each version is not editable once 
 
 CDN360 sends an email notification when a certificate used in production is close to its expiration date. CDN360 also supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>), so you don't need to ever worry about the expiration of your certificates. If you choose to renew manually, just follow one of the procedures below.
 
-## If you already have a new CA-signed version with a private key and chain certificate
+## If you already have a new CA-signed certificate with private key and chain certificate
 1. In the certificate details form, click **Create Version**.
 <p align="center"><img src="/docs/resources/images/CreateCertVersion.png" alt="Upload Certificate Version" width="700"></p>
 2. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version**.
