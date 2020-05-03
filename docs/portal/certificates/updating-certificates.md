@@ -17,9 +17,9 @@ If your company's security policy requires the new certificate to have a new pri
 
 1. Click **Create Version**.
 2. Click the **Auto Generate Certificate** tab, complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)), and click **Save Version**.
-<p align="center"><img src="/docs/resources/images/CertificateSelfSignedVersion.png" alt="Certificate New Self-Signed Version" width="700"></p>
+<p align="center"><img src="/docs/resources/images/CertificateSelfSignedVersion.png" alt="Certificate New Self-Signed Version" width="600"></p>
 
-3. Click the <img src="/docs/resources/images/DownloadCSRButton.png" alt="Download CSR" width="100"> button on top of the Certificate Details page to get the CSR generated from the latest version.
+3. Click the <img src="/docs/resources/images/DownloadCSRButton.png" alt="Download CSR" width="120"> button on top of the Certificate Details page to get the CSR generated from the latest version.
 4. Send the downloaded CSR to the CA to apply for a new certificate.
 5. When you receive the new certificate and chain certificate, return to the same Certificates Details page and click **Create Version**.
 6. On the **Upload Certificate** tab, upload the certificate and chain certificate. There is no need to upload the private key. Click **Save Version**.
