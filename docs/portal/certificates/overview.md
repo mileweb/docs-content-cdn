@@ -19,7 +19,7 @@ The following figure shows the key elements on the page, and the table following
 
 ## Actions to Certificates
 If you click the **Actions** dropdown list, you will see all the available actions that can be taken:
-<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate List" width="700"></p>
+<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="700"></p>
 The options are:
 
 - **Edit**: [Make changes](</docs/portal/certificates/updating-certificates.md>) to the selected certificate;
