@@ -7,13 +7,14 @@ CDN360 sends an email notification when a certificate used in production is clos
 ## If you already have a new CA-signed certificate with private key and chain certificate
 1. In the certificate details form, click **Create Version**.
 <p align="center"><img src="/docs/resources/images/CreateCertVersion.png" alt="Upload Certificate Version" width="700"></p>
+
 2. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version**.
 <p align="center"><img src="/docs/resources/images/Buttons for Uploading Certs.png" alt="Upload Certificate Version" width="700"></p>
 3. Deploy the new version to production.
 <p align="center"><img src="/docs/resources/images/CertificateDeploy.png" alt="Upload Certificate Version" width="500"></p>
 
 ## If you need a CSR to apply for the new certificate from a CA
-If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, you need to go through steps 1-2 to create a self-signed version. Otherwise, you can skip to step 3.
+If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, you need to follow steps 1 and 2 to create a self-signed version. Otherwise, you can skip to step 3.
 
 1. Click **Create Version**.
 2. Click the **Auto Generate Certificate** tab, complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)), and click **Save Version**.
@@ -21,8 +22,8 @@ If your company's security policy requires the new certificate to have a new pri
 
 3. Click the <img src="/docs/resources/images/DownloadCSRButton.png" alt="Download CSR" width="120"> button on top of the Certificate Details page to get the CSR generated from the latest version.
 4. Send the downloaded CSR to the CA to apply for a new certificate.
-5. When you receive the new CA-signed certificate and chain certificate, return to the same Certificates Details page and click **Create Version**.
-6. On the **Upload Certificate** tab, upload the certificate and chain certificate. There is no need to upload the private key. Click **Save Version**.
+5. When you receive the new CA-signed certificate, return to the same Certificates Details page and click **Create Version**.
+6. On the **Upload Certificate** tab, upload the new certificate and optionally, the chain certificate. Click **Save Version**. You don't need to worry about the private key because it will be the same one as the last version.
 7. Deploy the new certificate version to production.
 
 **Note**: To update a certificate, you must be the owner of the certificate.
