@@ -1,23 +1,27 @@
 # Deploying Your Property
 
-After you create a property, you can deploy it to the staging environment to make sure it is configured properly and that your visitors can access the expected content. Once you confirm that the property is ready to go live, you can deploy it to the production environment.
+After you have created and validated a property version, you are ready to deploy it. We highly recommend you to always deploy to the staging environment to make sure it is configured properly and the behavior is as expected. Once you confirm that the property is ready to go live, you can deploy it to the production environment.
 
 1. In the left pane, click **Properties**. 
 
 2. On the Properties page, click the ID of the property you want to deploy. 
 
-    <br><u>OR</u></br><br>
-
-    Click the **Actions** menu for the property you want to deploy, and then select **Edit**.
-
 3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the drop-down list, and then click the **Deploy Configuration** button.
 
-![null](</docs/resources/images/Deployment Selections and Button.png>)
+<p align="center"><img src="/docs/resources/images/Deployment Selections and Button.png" alt="property deployment selection" width="600"></p>
 
-4. If the selected property is already deployed to the production environment, the next form compares the deployed property with the one you want to deploy to production. Compare the two properties, and then click **Deploy to Production** to deploy the selected property or **Back** to not deploy the property.
+4. If the property is already deployed to the environment you select, the next form compares the deployed version with the one you want to deploy. If you are OK with the difference, click the **Deploy to ...** button on the top right corner, or **Back** to cancel the deployment.
 
-5. When the Deployment Confirmation pop-up appears, click **OK**. Wait for the message that the configuration has been successfully deployed, or click the **Go to Dashboard** button to perform other tasks while the deployment continues in the background. When the validation completes, click **Tasks** in the left pane to confirm that the property was deployed successfully.
+5. When the Deployment Confirmation pop-up appears, click **OK**. The deployment process usually finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment.
 
-6. Test your deployment in the [staging](</docs/portal/properties/testing-property.md#testing-property-in-staging>) or [production](/docs/portal/properties/testing-property.md#testing-property-in-production>) environment.
+6. You can follow the [steps on this section](</docs/portal/properties/testing-property.md#testing-property-in-staging>) to test the property in the staging environment.
 
+# Undeploying a Property
 
+1. In the left pane, click **Properties**.
+
+2. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
+
+<p align="center"><img src="/docs/resources/images/UndeployAProperty.png" alt="property undeployment" width="700"></p>
+
+3. When the confirmation message appears, click **Yes, Undeploy!**. When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
