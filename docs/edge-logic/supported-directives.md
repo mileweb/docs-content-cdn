@@ -107,7 +107,7 @@ This directive allows the users to add up to 2 customized fields into the access
 **Default**: `-`<br/>
 **Context**: server, location
 
-This directive enables proxying the WebSocket protocol.
+This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
