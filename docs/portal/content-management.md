@@ -48,14 +48,14 @@ If the content on your origin web server has changed, request a purge to have CD
 1. In the left pane, click **Content Management**.
 2. A **Purge** tab on the Content Management page shows details similar to those in the following figure:
 
-   <ul><li> ID = ID associated with the purge request.<br>
-   <li>Target environment where the purge occurred = either <strong>Staging</strong> or <strong>Production</strong>.<br>
-   <li> Action that was performed = either <strong>Delete</strong> or <strong>Invalidate</strong>.<br>
-   <li>Type = object on which the purge was requested.<br>
+   <ul><li> <strong>ID</strong> associated with the purge request.<br>
+   <li><strong>Target</strong> environment where the purge occurred (either <strong>Staging</strong> or <strong>Production</strong>).<br>
+   <li><strong>Action</strong> that was performed (either <strong>Delete</strong> or <strong>Invalidate</strong>).<br>
+   <li><strong>Type</strong> = object on which the purge was requested.<br>
    <li>Date and time when the purge request was submitted and completed.<br>
    <li>A success rate indicator that shows a completion percentage from 0 to 100%.</ul>
 
 ![null](</docs/resources/images/dashboard13.png>)
 
-3. To specify the exact content you want to purge, create a purge request  .
+3. To specify the exact content you want to purge, create a purge request.
 

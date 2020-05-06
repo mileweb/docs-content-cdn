@@ -18,15 +18,15 @@ Creating a CNAME is a three-step process:
 | **Fields**                               | **Description**                     |
 | ---------------------------------------- | ----------------------------------- |
 | What does a CNAME do? Add a description. | Enter a description for the CNAME.  |
-| CNAME                                    | Either enter a CNAME manually in the text field or click **Auto Generate** to have CDN360 generate a CNAME for you. If you enter a CNAME, your typed entry must be a valid domain name.                     |
+| CNAME                                    | Either enter a CNAME manually in the text field or click the **Auto Generate** button to have CDN360 generate a CNAME for you. If you enter a CNAME, your typed entry must be a valid domain name.                     |
 
 4. Click the **Create Client Region Rule** button. The Create Client Region Rule dialog box appears, with fields for specifying how CDN360 handles requests from different regions. Required fields are denoted by an asterisk (\*).
 
 **Note**: If you do not create a client region rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
 
-<ul>a. Complete all the fields, and then click the **Create Client Region Rule** button. 
+<ul>a. Complete all the fields, and then click the <strong>Create Client Region Rule</strong> button. 
 
-b. To specify more client region rules, repeat this step for each additional rule.
+b. To specify more client region rules, repeat step 4a for each additional rule.
 
 ![null](</docs/resources/images/Create Client Region Rule.png>)
 

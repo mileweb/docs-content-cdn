@@ -1,8 +1,8 @@
 # Deploying and Undeploying Certificates
 
-After you created or updated a certificate, you need to deploy it to the staging or production environments before it can be used by any properties. If a certificate is no longer used by any property in those environments, you should undeploy it. In particular, you want to delete a certificate from the CDN360 platform, you have to undeploy it first.
+After you create or update a certificate, you need to deploy it to the staging or production environment before it can be used by any properties. If a certificate is no longer used by any property in those environments, you should undeploy it. Undeploying a certificate is also a prerequisite if you want to delete a certificate from the CDN360 platform.
 
-**Note**: To deploy or undeploy a certificate to staging or production environments, you must be the owner of the certificate.
+**Note**: To deploy a certificate to, or undeploy a certificate from, the staging or production environment, you must be the owner of the certificate.
 
 ## Deploying a Certificate
 
@@ -19,4 +19,5 @@ If you no longer need a certificate in a staging or production environment, you 
 1. In the left pane, click **Certificates**.
 2. On the Certificates page, click the **Actions** drop-down list for the certificate you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 <p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="700"></p>
-3. When the Undeployment Confirmation dialog box appears, click **OK**. The undeploymet process takes about 5 minutes.
+
+3. When the Undeployment Confirmation dialog box appears, click <strong>OK</strong>. The undeployment process takes about 5 minutes.
