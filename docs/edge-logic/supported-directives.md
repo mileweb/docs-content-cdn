@@ -100,6 +100,14 @@ Denies access for the specified network or address. (Work in progress to make th
 
 This directive allows the users to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you [configure the format](https://docs.google.com/document/d/155m9F0oFIDXRLeFmLqbdb0gWiHAyTWB8rPLWdRVGXoI/edit#heading=h.owglsmu6p2rb) of the download log, or using our [advanced traffic analysis](https://obd.quantil.com) tool.
 
+### `enable_websocket`
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
+
+**Syntax**: `enable_websocket;`<br/>
+**Default**: `-`<br/>
+**Context**: server, location
+
+This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -290,7 +298,7 @@ This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
-<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
 
 **Syntax**:  `origin_set_header field value qtl_if(condition);` <br/>
 **Default**: `origin_set_header host $host;` <br/>
