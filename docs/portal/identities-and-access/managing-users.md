@@ -17,7 +17,7 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 | ---------- | --------------- |
 | Email | Enter this user's email address.|
 | Roles | To assign one or more roles to this user, click the **+ Add Roles** button, check one or more roles in the Add Roles dialog box, and then click the **Save** button. To delete one or more roles, check the role(s) and click the **Delete** button.|
-| Description | Enter a descrption for this user.|
+| Description | Enter a description for this user.|
 
 
 4. Click **Save & Invite**. An invitation to join the portal is sent to the user. 
