@@ -1,6 +1,6 @@
 # Overview of Certificates
 
-A digital certificate allows your website to exchange data securely over the Internet using the public key infrastructure (PKI). The certificate enables encryption of the communications between a website and its visitors. CDN360 supports regular, subject alternative names (SAN), and wildcard certificates. CDN360 also suppports RSA and ECDSA public key algorithms. You can upload your existing certificate, generate self-signed certificates, and use Let's Encrypt to renew expiring certificates automatically.
+A digital certificate allows your website to exchange data securely over the Internet using the public key infrastructure (PKI). The certificate enables encryption of the communications between a website and its visitors. CDN360 supports regular, subject alternative names (SAN), and wildcard certificates. CDN360 also supports RSA and ECDSA public key algorithms. You can upload your existing certificate, generate self-signed certificates, and use Let's Encrypt to renew expiring certificates automatically.
 
 ## Certificates Page 
 
