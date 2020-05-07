@@ -39,7 +39,6 @@ b. To specify more client region rules, repeat step 4a for each additional rule.
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic.|
 | Weight | Adjust how this rule behaves relative to other rules for the same client region.                                                                   |
 
-
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 
 ![null](</docs/resources/images/cname3.png>)
