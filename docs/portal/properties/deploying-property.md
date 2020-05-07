@@ -14,7 +14,7 @@ After you have created and validated a property version, you are ready to deploy
 
 5. When the Deployment Confirmation pop-up appears, click **OK**. The deployment process usually finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment.
 
-6. Perform the [steps in this section](</docs/portal/properties/testing-property.md#testing-property-in-staging>) to test the property in the staging environment.
+6. Click [here](</docs/portal/properties/testing-property.md#testing-property-in-staging>) to test the property in the staging environment.
 
 # Undeploying a Property
 
