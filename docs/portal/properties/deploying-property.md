@@ -24,4 +24,4 @@ After you have created and validated a property version, you are ready to deploy
 
 <p align="center"><img src="/docs/resources/images/UndeployAProperty.png" alt="property undeployment" width="700"></p>
 
-3. When the confirmation message appears, click **Yes, Undeploy!**. When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
+3. When the confirmation message appears, click **Yes, Undeploy!** When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
