@@ -3,7 +3,7 @@
 CDN360 allows you to compare two versions of a property side by side.
 
 1. In the left pane, click **Properties**.
-2. On the Properties page, click the **Actions** menu of the property whose version you want to compare, and then select **Compare Versions**.<br><ul>OR</ul><br> If you are already on the property details page click the **Compare Versions** button.</ul>
+2. On the Properties page, click the **Actions** menu of the property whose version you want to compare, and then select **Compare Versions**.<br><ul>OR</ul><br> From the Property Details page, click the **Compare Versions** button.</ul>
 
 3. By default, the version you selected appears on the left side of the Compare Versions form. To select another version, click it from the drop-down list.
 
