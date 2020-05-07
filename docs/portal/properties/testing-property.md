@@ -1,10 +1,10 @@
 # Testing Property
 
-Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN360 has a dedicated staging environment for this purpose. You can follow the steps in the [Deploying Your Property](</docs/portal/properties/deploying-property.md>) section to deploy to the staging environment.
+Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN360 has a dedicated staging environment for this purpose. You can follow the steps in [Deploying Your Property](</docs/portal/properties/deploying-property.md>) to deploy the property to the staging environment.
 
 ## Testing Your Property in Staging
 
-CDN360 provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlgslb.com`. You can also see their IP address by issuing the following command:
+CDN360 provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlgslb.com`. You can also see their IP addresses by issuing the following command:
 
 ```bash
 $ dig staging.qtlgslb.com
@@ -32,7 +32,7 @@ If you use a smart DNS service, you can also direct a small portion of the produ
 ```
 163.171.233.53 faster.mydomain.com
 ```
-- If the cURL command is used, the ```--resolve``` option can be used to directly map the hostname to be accelerated to the IP address of the CDN360 staging server(s). For example:
+- If you use the cURL command, you can add ```--resolve``` to directly map the hostname to be accelerated to the IP address of the CDN360 staging server(s). For example:
 
 ```bash
 $ curl -v https://faster.mydomain.com/index.html --resolve faster.mydomain.com:443:163.171.233.53
