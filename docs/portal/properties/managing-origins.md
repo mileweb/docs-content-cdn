@@ -1,13 +1,15 @@
 
 # Managing Origins for Your Property
 
-Origins are your web servers containing the content you want CDN360 to accelerate. CDN360 supports more than one origin for each property, and a plethora of setting regarding how to access your origins.
+Origins are your web servers containing the content you want CDN360 to accelerate. CDN360 supports more than one origin for each property, along with a plethora of settings for defining access to your origins.
 
 ## Adding or Editing of Origins in a Property
 
-1. In the left pane, click **Properties**, then click the ID of the property you want to edit and select the version from the dropdown list. Click the **Edit** or **Clone** button to make changes. You should now see the section about origin as shown below:
+1. In the left pane, click **Properties**.
+2. From the Prperty page, click the ID of the property you want to edit, and then select the version from the drop-down list. 
+3. Click the **Edit** or **Clone** button to make changes. You should now see the section about origin as shown below:
 <p align="center"><img src="/docs/resources/images/OriginList.png" alt="Upload Certificate Version" width="600"></p>
-2. If there is any existing origin as the "temporary" shown by the picture above, you can click the **Edit** or **Remove** links to edit or remove them. You click the **Add Origin To List** link below to add a new origin. The following dialog box will show up:
+4. If there is an existing origin (similar to the "temporary" one shown above), you can click the **Edit** or **Remove** links to edit or remove the origin. To add a new origin, click the **Add Origin To List** link and then complete the fields in the following dialog box.
 <p align="center"><img src="/docs/resources/images/Add Origin Page.png" alt="Upload Certificate Version" width="600"></p>
 **NOTE** The Edit Origin UI is basically the same.
 
@@ -27,4 +29,4 @@ Origins are your web servers containing the content you want CDN360 to accelerat
 | Direct Connection     | This option specifies how the CDN360 edge servers should reach the origin servers for uncached content or uncacheable requests. Choices are:<ul><li><strong>Always Direct</strong> = The edge servers should always go directly to the origin servers.<li><strong>Auto</strong> = Automatically decide whether to go to the origin directly or to a parent CDN360 server, based on performance and resource availability. (*default*)<li><strong>No Direct</strong> = Always go to a parent CDN360 server. Choose this one if you want to maximize the cache hit ratio on CDN360</ul>|
 | Authentication        | Enables authentication for Amazon Web Services (AWS) S3 servers. Choices are:<ul><li><strong>None</strong> = no authentication. (*default*) <br><li><strong>AWS S3</strong> = enables authentication for AWS S3 servers. If you select this choice, you need to provide additional information to access the S3 bucket:<ul><li><strong>Region</strong> = select a [region](<https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions>) from the drop-down list.<li><strong>Access Key</strong> = enter the AWS access key to authenticate with the S3 server.<li><strong>Secret Key</strong> = enter the AWS secret key to authenticate with the S3 server.</ul>|
 
-4. Click the **Add Origin** button
+5. Click the **Add Origin** button
