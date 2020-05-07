@@ -3,8 +3,8 @@
 A "property" is the configuration of one or more hostnames (domains) that need to be deployed to the CDN360 proxy servers. It determines how you want the servers to obtain, manage, and distribute your content to the end users. The key elements of a property include:
 - Hostname(s) to be accelerated.
 - One or more origin servers.
-- Proxy server behaviors, such as cache time amd header modification.
-- Whether HTTPS is requred, TLS certificates, and TLS protocol version.
+- Proxy server behaviors, such as cache time and header modification.
+- Whether HTTPS is required, TLS certificates, and TLS protocol version.
 
 ## Managing Properties
 
