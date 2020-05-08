@@ -56,7 +56,7 @@ To upload the files as a new certificate:
 
 3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
 
-<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="800"></p>
+<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="700"></p>
 
 4. Click the **Save Certificate** button followed by **OK**. 
 
