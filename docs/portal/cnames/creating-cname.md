@@ -42,7 +42,7 @@ b. To specify more client region rules, repeat step 4a for each additional rule.
 
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 
-<p align=center><img src="/docs/resources/images/Create cname3png" alt="advanced settings" width="800"></p>
+<p align=center><img src="/docs/resources/images/Create cname3.png" alt="advanced settings" width="800"></p>
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |
