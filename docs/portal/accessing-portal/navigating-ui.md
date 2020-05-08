@@ -12,7 +12,7 @@ The default menu lists the CDN360 activities you can perform.
 
 The dashboard is the default page that appears when you log in to the CDN360 portal. It contains charts that show a snapshot of your account traffic over a recent period of time. For detailed information, hover your mouse over the data entry points. For example:
 
-<p align=center><img src="/docs/resources/images/Total Bandwidth.png" alt="total bandwidth" width="300"></p>
+<p align=center><img src="/docs/resources/images/Total Bandwidth.png" alt="total bandwidth" width="1000"></p>
 
 ![null](</docs/resources/images/Total Bandwidth.png>)
 
