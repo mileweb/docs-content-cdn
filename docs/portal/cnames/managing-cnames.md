@@ -6,7 +6,7 @@ CNAMEs are managed from the CNAME page. Using this page, you define CNAMEs to w
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/CNAMES_Overview.png" alt="cnames overview" width="800"></p>
+<p align=center><img src="/docs/resources/images/CNAMES_Overview.png" alt="cnames overview" width="900"></p>
 
 | **Fields**   | **Description**                                                                        |
 | :----------: | ---------------------------------------------------------------------------------------|
