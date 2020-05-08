@@ -13,7 +13,7 @@ Creating a CNAME is a three-step process:
 2. At the top right of the screen, click the **Create CNAME** button. 
 3. Complete the fields in the Create a CNAME form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/cname1.png" alt="cname overview page" width="600"></p>
+<p align=center><img src="/docs/resources/images/cname1.png" alt="cname overview page" width="800"></p>
 
 
 | **Fields**                               | **Description**                     |
@@ -29,7 +29,7 @@ Creating a CNAME is a three-step process:
 
 b. To specify more client region rules, repeat step 4a for each additional rule.
 
-<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="350"></p>
+<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="800"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
