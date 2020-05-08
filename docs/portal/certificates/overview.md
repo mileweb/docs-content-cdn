@@ -8,7 +8,7 @@ Certificates are managed from the Certificates page. To display this page, click
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align="center"><img src="/docs/resources/images/Certificates Page.png" alt="Certificate List" width="800"></p>
+<p align="center"><img src="/docs/resources/images/Certificates Page.png" alt="Certificate List" width="750"></p>
 
 | **Element Number**|**Description**|
 |-|-|
