@@ -45,15 +45,13 @@ figure here??
 
 <ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
-![null](</docs/resources/images/CNAME Delete.png>)
 <p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client region rule.</ul><br>
 
 7. To change the Has Beian setting, expand **Advanced Settings** and make your change.
 
-![null](</docs/resources/images/CNAMEs - Advanced Settings.png>)
-<p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="800"></p>
+<p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
