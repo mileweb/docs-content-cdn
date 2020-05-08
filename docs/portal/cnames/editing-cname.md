@@ -6,7 +6,7 @@
    Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br><br>
 3. At the top right of the page, click the **Edit** button.
 
-![null](</docs/resources/images/Edit CNAME - Edit Button.png>)
+<p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="800"></p>
 
 The CNAME form that appears allows you to create, edit, and delete client region rules, and change advanced settings. Refer to the appropriate steps below.
 ![null](</docs/resources/images/Editing CNAME Form.png>)
