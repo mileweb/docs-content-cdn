@@ -5,7 +5,7 @@ If you forgot your password:
 1. Click the **Forgot password** link at the bottom of the login page.
 2. In the Password Reset page, enter your username and click the **I'm not a robot** check box to complete the reCAPTCHA requirement.
 
-<p align=center><img src="/docs/resources/images/forgotpassword.png" alt="forgot password" width="300"></p>
+<p align=center><img src="/docs/resources/images/forgotpsword.png" alt="forgot password" width="300"></p>
 
 3. Click the **Submit** button.
 
