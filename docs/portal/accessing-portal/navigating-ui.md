@@ -23,7 +23,9 @@ From the dashboard, you can view:
 
 A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays that chart on the [Reports page](</docs/portal/reports.md>), where you can define report parameters, and then view the results on the selected chart.
 
-<kbd>![null](<../../resources/images/Traffic Volume.png>)</kbd>
+<kbd>
+  ![null](<../../resources/images/Traffic Volume.png>)
+  </kbd>
 
 ## Reports
 
