@@ -5,7 +5,7 @@ A role is a collection of one or more permissions that can be performed within t
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="500"></p>
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**. 
 3. At the right side of the page, click the **Add Role** button.
@@ -32,7 +32,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**.
 3. From the Roles page, click the name of the role you want to edit and then click **Edit** at the top right of the Role Details page.<br>
@@ -41,7 +41,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 4. Make your changes in the Edit Role form (see the table above). Required fields are denoted by an asterisk (\*).
 
-1. Click **Save**.
+5. Click **Save**.
 
 ## Deleting a Role
 
@@ -49,7 +49,7 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**.
 
