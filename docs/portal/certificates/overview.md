@@ -19,7 +19,7 @@ The following figure shows the key elements on the page, and the table following
 
 ## Certificate Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with certificates.
-<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="700"></p>
+<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="900"></p>
 The actions are:
 
 - **Edit**: [Update](</docs/portal/certificates/updating-certificates.md>) and/or deploy the selected certificate.
