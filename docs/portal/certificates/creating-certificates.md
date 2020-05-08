@@ -18,7 +18,7 @@ The following procedure describes how to generate self-signed certificates. Self
 
 3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table below). Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/Auto Generate Certificate.png" alt="auto generate cert" width="400"></p>
+<p align=center><img src="/docs/resources/images/Auto Generate Certificate.png" alt="auto generate cert" width="800"></p>
 
 | **Fields**|**Description**|
 |-|-|
