@@ -14,8 +14,6 @@ The dashboard is the default page that appears when you log in to the CDN360 por
 
 <p align=center><img src="/docs/resources/images/Total Bandwidth.png" alt="total bandwidth" width="1000"></p>
 
-![null](</docs/resources/images/Total Bandwidth.png>)
-
 From the dashboard, you can view:
 
 - Traffic volume, traffic bandwidth, and traffic requests information for all properties.
@@ -25,7 +23,8 @@ From the dashboard, you can view:
 
 A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays that chart on the [Reports page](</docs/portal/reports.md>), where you can define report parameters, and then view the results on the selected chart.
 
-![null](<../../resources/images/Traffic Volume.png>)
+<p align=center><img src="/docs/resources/images/Traffic Volume.png" alt="traffic volume" width="1000"></p>
+
 
 ## Reports
 
