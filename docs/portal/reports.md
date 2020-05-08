@@ -6,7 +6,7 @@ Reports are generated from the Reports page. To display this page, click **Repor
 
 The following figure shows the key elements on the page.
 
-<p align=center><img src="/docs/resources/images/Report Page.png" alt="report page" width="700"></p>
+Need figure??
 
 ## Supported Report Types
 
