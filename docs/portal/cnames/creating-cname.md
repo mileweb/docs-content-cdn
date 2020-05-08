@@ -13,7 +13,8 @@ Creating a CNAME is a three-step process:
 2. At the top right of the screen, click the **Create CNAME** button. 
 3. Complete the fields in the Create a CNAME form. Required fields are denoted by an asterisk (\*).
 
-![null](</docs/resources/images/cname1.png>)
+<p align=center><img src="/docs/resources/images/cname1.png" alt="cname overview page" width="300"></p>
+
 
 | **Fields**                               | **Description**                     |
 | ---------------------------------------- | ----------------------------------- |
