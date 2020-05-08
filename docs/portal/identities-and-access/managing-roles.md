@@ -5,7 +5,7 @@ A role is a collection of one or more permissions that can be performed within t
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="500"></p>
 
 2. At the top of the page, click **Roles**. 
 3. At the right side of the page, click the **Add Role** button.
