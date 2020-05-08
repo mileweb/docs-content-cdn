@@ -29,7 +29,7 @@ Creating a CNAME is a three-step process:
 
 b. To specify more client region rules, repeat step 4a for each additional rule.
 
-<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="400"></p>
+<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="600"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
