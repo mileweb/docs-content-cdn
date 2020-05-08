@@ -18,7 +18,7 @@ The following procedure describes how to generate self-signed certificates. Self
 
 3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table below). Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/Auto Generate Certificate.png" alt="auto generate cert" width="700"></p>
+<p align=center><img src="/docs/resources/images/Auto Generate Certificate.png" alt="auto generate cert" width="650"></p>
 
 | **Fields**|**Description**|
 |-|-|
@@ -52,11 +52,11 @@ To upload the files as a new certificate:
 1. In the left pane, click **Certificates**.<br>
 2. At the top right, click the **Create Certificate** button. 
 
-<p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="Create new certi button" width="750"></p>
+<p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="Create new certi button" width="800"></p>
 
 3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
 
-<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="700"></p>
+<p align="center"><img src="/docs/resources/images/Upload Certificate.png" alt="Upload Certificate" width="800"></p>
 
 4. Click the **Save Certificate** button followed by **OK**. 
 
