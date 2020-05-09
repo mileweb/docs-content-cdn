@@ -5,11 +5,11 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the **Add User** button at the right side of the page.
 
-![null](</docs/resources/images/Add User Button.png>)
+<p align=center><img src="/docs/resources/images/Add User Button.png" alt="select add user button" width="900"></p>
 
 3. Complete the fields in the Add User form. Required fields are denoted by an asterisk (\*).
 
@@ -17,7 +17,7 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 | ---------- | --------------- |
 | Email | Enter this user's email address.|
 | Roles | To assign one or more roles to this user, click the **+ Add Roles** button, check one or more roles in the Add Roles dialog box, and then click the **Save** button. To delete one or more roles, check the role(s) and click the **Delete** button.|
-| Description | Enter a descrption for this user.|
+| Description | Enter a description for this user.|
 
 
 4. Click **Save & Invite**. An invitation to join the portal is sent to the user. 
@@ -30,7 +30,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the ID of the user you want to edit. <br>
 
@@ -42,7 +42,7 @@ Click the **Actions** menu for the user you want to edit, and then select **Edit
 
 3. Make your changes in the Edit User form.
 
-![null](</docs/resources/images/Edit User Form.png>)
+<p align=center><img src="/docs/resources/images/Edit User Form.png" alt="select identity management page" width="900"></p>
 
 | **Fields**         | **Description**                              |
 | ------------------ | -------------------------------------------- |
@@ -63,7 +63,7 @@ Administrators delete users from the **Users** tab on the Identity & Access Mana
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the **Actions** menu for the user you want to delete, and then select **Delete**.
 
@@ -81,14 +81,14 @@ The suspended user will not be able to log in to the portal until the user is re
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:<br><br>
 
    - Click the **Actions** menu for the user you want to suspend, and then select **Suspend**. When prompted to suspend the user, click **OK**.<br><br>
    - To view the user's details before suspension, click the ID of the user you want to suspend. Review the user details, and then click the **Suspend** button next to the **Status** field followed by the **Save** button at the top right of the form. When prompted to update the user, click **OK**.</br></br>
 
-![null](</docs/resources/images/Suspend button.png>)
+<p align=center><img src="/docs/resources/images/Suspend button.png" alt="suspend button" width="900"></p>
 
 ## Reactivating a Suspended User
 
@@ -96,12 +96,11 @@ From the **Users** tab on the Identity & Access Management page, administrators 
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    ![null](</docs/resources/images/Selecting the Identity and Access Management Page.png>)
+    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
-
-1. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:
+2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:
 
 <ul><ul><li>Click the <strong>Actions</strong> menu for the suspended user you want to reactivate, and then select <strong>Activate</strong>. When prompted to activate the user, click <strong>OK</strong>.<br><br>
 <li>To view the user's details before activation, click the ID of the user you want to activate. Review the user details, and then click the <strong>Activate</strong> button next to the <strong>Status</strong> field followed by the <strong>Save</strong> button at the top right of the form. When prompted to update the user, click <strong>OK</strong>.</br></br>
 
-![null](</docs/resources/images/Activate.png>)
+<p align=center><img src="/docs/resources/images/Activate.png" alt="activate" width="900"></p>
