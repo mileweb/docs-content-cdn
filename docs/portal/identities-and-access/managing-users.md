@@ -9,7 +9,7 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the **Add User** button at the right side of the page.
 
-<p align=center><img src="/docs/resources/images/Add User Button.png" alt="select add user button" width="400"></p>
+<p align=center><img src="/docs/resources/images/Add User Button.png" alt="select add user button" width="700"></p>
 
 3. Complete the fields in the Add User form. Required fields are denoted by an asterisk (\*).
 
@@ -42,7 +42,7 @@ Click the **Actions** menu for the user you want to edit, and then select **Edit
 
 3. Make your changes in the Edit User form.
 
-<p align=center><img src="/docs/resources/images/Edit User Form.png" alt="select identity management page" width="400"></p>
+<p align=center><img src="/docs/resources/images/Edit User Form.png" alt="select identity management page" width="700"></p>
 
 | **Fields**         | **Description**                              |
 | ------------------ | -------------------------------------------- |
@@ -88,7 +88,7 @@ The suspended user will not be able to log in to the portal until the user is re
    - Click the **Actions** menu for the user you want to suspend, and then select **Suspend**. When prompted to suspend the user, click **OK**.<br><br>
    - To view the user's details before suspension, click the ID of the user you want to suspend. Review the user details, and then click the **Suspend** button next to the **Status** field followed by the **Save** button at the top right of the form. When prompted to update the user, click **OK**.</br></br>
 
-<p align=center><img src="/docs/resources/images/Suspend button.png" alt="suspend button" width="400"></p>
+<p align=center><img src="/docs/resources/images/Suspend button.png" alt="suspend button" width="700"></p>
 
 ## Reactivating a Suspended User
 
@@ -103,4 +103,4 @@ From the **Users** tab on the Identity & Access Management page, administrators 
 <ul><ul><li>Click the <strong>Actions</strong> menu for the suspended user you want to reactivate, and then select <strong>Activate</strong>. When prompted to activate the user, click <strong>OK</strong>.<br><br>
 <li>To view the user's details before activation, click the ID of the user you want to activate. Review the user details, and then click the <strong>Activate</strong> button next to the <strong>Status</strong> field followed by the <strong>Save</strong> button at the top right of the form. When prompted to update the user, click <strong>OK</strong>.</br></br>
 
-<p align=center><img src="/docs/resources/images/Activate.png" alt="activate" width="400"></p>
+<p align=center><img src="/docs/resources/images/Activate.png" alt="activate" width="700"></p>
