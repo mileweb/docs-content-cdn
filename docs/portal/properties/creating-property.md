@@ -9,7 +9,7 @@ To create a property, complete the Create a Property form with required informat
 
 3. Complete the fields in the Create a Property form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/Create a Property.png" alt="edit property" width="700"></p>
+<p align=center><img src="/docs/resources/images/Create a Property.png" alt="edit property" width="800"></p>
 
 | **Fields**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
