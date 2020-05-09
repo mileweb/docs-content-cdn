@@ -12,7 +12,7 @@ On the CDN360 platform, property configurations are versioned to support trackin
 
 Properties are managed from the Properties page. To display this page, click **Properties** in the left pane. The following figure shows the key elements on the page, and the table following the figure describes them.
 
-![null](</docs/resources/images/Properties Page.png>)
+<p align=center><img src="/docs/resources/images/Properties Page.png" alt="properties page" width="900"></p>
 
 
 | **Fields**   | **Description**                                                                           |
