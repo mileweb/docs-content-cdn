@@ -6,10 +6,10 @@
    Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br><br>
 3. At the top right of the page, click the **Edit** button.
 
-<p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="700"></p>
+<p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
 The CNAME form that appears allows you to create, edit, and delete client region rules, and change advanced settings. Refer to the appropriate steps below.
-<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="700"></p>
+<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
 
 4. To create one or more client region rules, perform the following steps.
 
@@ -17,12 +17,12 @@ The CNAME form that appears allows you to create, edit, and delete client regio
 
 <ul>a. At the top right of the page, click the <strong>Create Client Region Rule</strong> button.
 
-<p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="700"></p>
+<p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
 b. Complete all the fields, and then click the **Create Client Region Rule** button.
 c. To add more client region rules, repeat this step for each additional rule.
 
-<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="450"></p>
+<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="900"></p>
 
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
@@ -45,13 +45,13 @@ figure here??
 
 <ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
-<p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
+<p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="900"></p>
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client region rule.</ul><br>
 
 7. To change the Has Beian setting, expand **Advanced Settings** and make your change.
 
-<p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
+<p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="900"></p>
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
