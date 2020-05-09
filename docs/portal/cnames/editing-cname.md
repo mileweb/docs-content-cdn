@@ -9,7 +9,7 @@
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
 The CNAME form that appears allows you to create, edit, and delete client region rules, and change advanced settings. Refer to the appropriate steps below.
-<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="800"></p>
+<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
 
 4. To create one or more client region rules, perform the following steps.
 
@@ -24,12 +24,12 @@ c. To add more client region rules, repeat this step for each additional rule.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="450"></p>
 
-| **Fields**        | **Description**                                            |
-| ----------------- | ---------------------------------------------------------- |
+| **Fields**        | **Description**   |
+| ----------------- | ----------------- |
 | Client Region     | Select a region for this rule. If you leave this field empty, a rule covering ALL regions is created automatically.|
-| Client ISP        | Select a client ISP.                                       |
-| Action Type       | Select the type of action to be performed. Choices are:<br><li><strong>Deliver</strong> = specifies the server groups to deliver your traffic. Only one deliver action is allowed for each client region. All servers in the selected server group will be used as candidates in the load balancing algorithm.<li><strong>Redirect</strong> = directs traffic requests to the target specified in the Redirect target field (see below). This can be your origin site or another CDN provider. There can be multiple redirect actions for each client region.<li><strong>Reject</strong> = directs traffic requests to web servers that always respond with a 403 - forbidden error message. Only one reject action is allowed for each client region.</br>                                   |
-| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server group options:<br><li><strong>Standard</strong> = standard server group.</li><li><strong>Premium</strong> = includes the standard server group.<li><strong>Premium+</strong> = includes the standard and premium server groups.<li><strong>Ultra</strong> = includes the standard, premium, and premium+ server groups.                                                                          |
+| Client ISP        | Select a client ISP. |
+| Action Type       | Select the type of action to be performed. Choices are:<br><li><strong>Deliver</strong> = specifies the server groups to deliver your traffic. Only one deliver action is allowed for each client region. All servers in the selected server group will be used as candidates in the load balancing algorithm.<li><strong>Redirect</strong> = directs traffic requests to the target specified in the Redirect target field (see below). This can be your origin site or another CDN provider. There can be multiple redirect actions for each client region.<li><strong>Reject</strong> = directs traffic requests to web servers that always respond with a 403 - forbidden error message. Only one reject action is allowed for each client region.</br> |
+| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server group options:<br><li><strong>Standard</strong> = standard server group.</li><li><strong>Premium</strong> = includes the standard server group.<li><strong>Premium+</strong> = includes the standard and premium server groups.<li><strong>Ultra</strong> = includes the standard, premium, and premium+ server groups.  |
 | Redirect Target   | If <strong>Action Type</strong> is set to **Redirect**, specify an IP address or hostname to which CDN360 will redirect your traffic.|
 | Weight | Adjust how this rule behaves relative to other rules for the same client region.                                      
 
