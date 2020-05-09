@@ -24,7 +24,7 @@ The following report types are supported:
 1. In the left pane, click **Reports**. 
 2. Complete the fields in the Reports page:
 
-<p align=center><img src="/docs/resources/images/Report Page.png" alt="report page" width="700"></p>
+<p align=center><img src="/docs/resources/images/Report Page.png" alt="report page" width="900"></p>
 
 | **Fields**      | **Description**                                       |
 | --------------- | ----------------------------------------------------- |
