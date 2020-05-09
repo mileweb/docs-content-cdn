@@ -59,4 +59,4 @@ Assuming you have a domain with ICP Beian, perform the following steps to enable
 
 ### How to support websocket?
 
-What you need to do is to add `include ../conf/cs_websocket_default.conf;` in the location where websocket is needed.
+What you need to do is to use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client will be using HTTP/1.1 (not HTTP/2) to connect.
