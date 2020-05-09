@@ -7,7 +7,7 @@ A property version must be validated before it can be deployed to staging and/or
 1. In the left pane, click **Tasks**.
 2. Confirm that the **Validation** radio button is selected.
 
-<p align="center"><img src="/docs/resources/images/Validations_Overview.png" alt="Upload Certificate Version" width="600"></p>
+<p align="center"><img src="/docs/resources/images/Validations_Overview.png" alt="Upload Certificate Version" width="900"></p>
  
 3. Click an ID or task name to display the details about the validation results.
 
