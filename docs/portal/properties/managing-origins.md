@@ -13,7 +13,7 @@ Origins are your web servers containing the content you want CDN360 to accelerat
 
 <p><br><strong>Note:</strong> The fields for adding and editing origins are similar.</p>
 
-<p align="center"><img src="/docs/resources/images/Add Origin Page.png" alt="Upload Certificate Version" width="600"></p>
+<p align="center"><img src="/docs/resources/images/Add Origin Page.png" alt="Upload Certificate Version" width="700"></p>
 
 | **Fields**             | **Description**                                       |
 | ---------------------- | ----------------------------------------------------- |
