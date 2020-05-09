@@ -52,7 +52,7 @@ To upload the files as a new certificate:
 1. In the left pane, click **Certificates**.<br>
 2. At the top right, click the **Create Certificate** button. 
 
-<p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="Create new certi button" width="800"></p>
+<p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="Create new certi button" width="900"></p>
 
 3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
 
