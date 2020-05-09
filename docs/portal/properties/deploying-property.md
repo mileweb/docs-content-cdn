@@ -8,7 +8,7 @@ After you have created and validated a property version, you are ready to deploy
 
 3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the drop-down list, and then click the **Deploy Configuration** button.
 
-<p align="center"><img src="/docs/resources/images/Deployment Selections and Button.png" alt="property deployment selection" width="600"></p>
+<p align=center><img src="/docs/resources/images/Deployment Selections and Button.png" alt="deployment selections and button" width="900"></p>
 
 4. If the property is already deployed to the environment you select, the next form compares the deployed version with the one you want to deploy. If you are OK with the difference, click the **Deploy to ...** button on the top right corner, or **Back** to cancel the deployment.
 
