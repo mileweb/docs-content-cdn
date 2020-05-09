@@ -5,7 +5,7 @@
 
 2. On the Properties page, click the ID of the property you want to edit.
 
-<p align="center"><img src="/docs/resources/images/Edit Properties.png" alt="Upload Certificate Version" width="600"></p>
+<p align="center"><img src="/docs/resources/images/Edit Properties.png" alt="Upload Certificate Version" width="700"></p>
 
 3. From the drop-down list, choose the property version you want to edit. If the **Edit** button is enabled, you can click it to start editing.
 
