@@ -6,10 +6,10 @@
    Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br><br>
 3. At the top right of the page, click the **Edit** button.
 
-<p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
+<p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="700"></p>
 
 The CNAME form that appears allows you to create, edit, and delete client region rules, and change advanced settings. Refer to the appropriate steps below.
-<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
+<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="700"></p>
 
 4. To create one or more client region rules, perform the following steps.
 
@@ -17,7 +17,7 @@ The CNAME form that appears allows you to create, edit, and delete client regio
 
 <ul>a. At the top right of the page, click the <strong>Create Client Region Rule</strong> button.
 
-<p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="750"></p>
+<p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="700"></p>
 
 b. Complete all the fields, and then click the **Create Client Region Rule** button.
 c. To add more client region rules, repeat this step for each additional rule.
