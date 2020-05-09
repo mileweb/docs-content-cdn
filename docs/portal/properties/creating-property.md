@@ -5,7 +5,7 @@ To create a property, complete the Create a Property form with required informat
 1. In the left pane, click **Properties**.
 2. At the top right of the Properties page, click the **Create Property** button. 
 
-![null](</docs/resources/images/Create Property.png>)
+<p align=center><img src="/docs/resources/images/Create Property.png" alt="create property" width="900"></p>
 
 3. Complete the fields in the Create a Property form. Required fields are denoted by an asterisk (\*).
 
