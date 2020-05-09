@@ -22,7 +22,7 @@ The CNAME form that appears allows you to create, edit, and delete client regio
 b. Complete all the fields, and then click the **Create Client Region Rule** button.
 c. To add more client region rules, repeat this step for each additional rule.
 
-<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="900"></p>
+<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="700"></p>
 
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
