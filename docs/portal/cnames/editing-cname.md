@@ -51,7 +51,7 @@ figure here??
 
 7. To change the Has Beian setting, expand **Advanced Settings** and make your change.
 
-<p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="900"></p>
+<p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
