@@ -7,7 +7,7 @@ Property versions must be validated before they can be deployed to staging or pr
 Tasks are managed from the Tasks page. To display this page, click **Tasks** in the left pane.
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-![null](</docs/resources/images/Tasks Page.png>)
+<p align=center><img src="/docs/resources/images/Tasks Page.png" alt="tasks page" width="900"></p>
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
@@ -20,16 +20,16 @@ The following figure shows the key elements on the page, and the table following
 1. In the left pane, click **Tasks**.
 2. To view details about tasks related to validations, click the task ID or name on the **Validation** tab. The following figure shows task details for a successful validation.
 
-(/docs/resources/images/Successful Validation.png)
+<p align=center><img src="/docs/resources/images/Successful Validation.png" alt="successful validation" width="900"></p>
 
 <ul>The following figure shows task details for a failed validation.</ul>
 
-![null](</docs/resources/images/Failed Validation.png>)
+<p align=center><img src="/docs/resources/images/Failed Validation.png" alt="failed validation" width="900"></p>
 
 3. To view details about tasks related to deployments, click the ID or name of a task on the **Deployment** tab. The following figure shows task details for a successful deployment. If **Certificate ID** or **Property ID** appears at the bottom left, clicking it displays the form for that certificate or property.
 
-![null](</docs/resources/images/Successful Deployment.png>)
+<p align=center><img src="/docs/resources/images/Successful Deployment.png" alt="successful deployment" width="900"></p>
 
  <ul>The following figure shows task details for a failed deployment. If **Certificate ID** or **Property ID** appears at the bottom left, clicking it displays the form for that certificate or property.</ul>
 
-![null](</docs/resources/images/Failed Deployment.png>)
+<p align=center><img src="/docs/resources/images/Failed Deployment.png" alt="failed deployment" width="900"></p>
