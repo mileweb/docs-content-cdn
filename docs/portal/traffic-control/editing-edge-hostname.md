@@ -23,6 +23,7 @@ c. To add more client zone rules, repeat this step for each additional rule.
 
 You can also delete any un-needed client zone rules by clicking the **delete** link. 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
+
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
 | Client Region     | Select a region for this rule. We currently support country-level granularity.|
