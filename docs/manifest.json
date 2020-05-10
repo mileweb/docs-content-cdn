@@ -69,19 +69,19 @@
             "routes": [
               {
                 "title": "Overview of Traffic Control",
-                "path": "/docs/portal/cnames/managing-cnames.md"
+                "path": "/docs/portal/traffic-control/overview.md"
               },
               {
                 "title": "Create an Edge Hostname",
-                "path": "/docs/portal/cnames/creating-cname.md"
+                "path": "/docs/portal/traffic-control/creating-edge-hostname.md"
               },
               {
                 "title": "Edit an Edge Hostname",
-                "path": "/docs/portal/cnames/editing-cname.md"
+                "path": "/docs/portal/traffic-control/editing-edge-hostname.md"
               },
               {
                 "title": "Delete an Edge Hostname",
-                "path": "/docs/portal/cnames/deleting-cname.md"
+                "path": "/docs/portal/traffic-control/deleting-edge-hostname.md"
               }
             ]
           },
