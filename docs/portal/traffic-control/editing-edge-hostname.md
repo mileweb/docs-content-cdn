@@ -22,6 +22,7 @@ c. To add more client zone rules, repeat this step for each additional rule.
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
 
 You can also delete any un-needed client zone rules by clicking the **delete** link. 
+
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
 | **Fields**        | **Description**   |
@@ -34,6 +35,7 @@ You can also delete any un-needed client zone rules by clicking the **delete** l
 | Weight | If there are multiple rules defined for a client zone, those rules will be applied randomly for end users from this zone. The probability of each rule is proportional to this weight nubmer.|
 
 5. To edit an existing client zone rule:
+
 <ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
 <ul>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
 <ul>c. Click the <strong>Update Client Zone Rule** button.</strong></ul>
