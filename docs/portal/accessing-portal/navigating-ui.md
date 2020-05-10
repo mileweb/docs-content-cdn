@@ -38,9 +38,9 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 
 The [Properties page](</docs/portal/properties/managing-properties.md>) allows you to create and manage the properties accelerated by CDN360.
 
-## CNAMEs
+## Traffic Control
 
-The [CNAMEs page](</docs/portal/cnames/managing-cnames.md>) allows you to create and manage the Canonical Name Record (CNAME) to which you will map your hostnames. You must create a CNAME record before CDN360 can serve as a reverse proxy and start routing client traffic through the CDN servers.
+The [Traffic Control page](</docs/portal/traffic-control/overview.md>) allows you to create and manage the edge hostnames to which you will map your service hostnames. You must create a CNAME record with your DNS service to start routing client traffic to the CDN360 servers.
 
 ## Certificates
 
