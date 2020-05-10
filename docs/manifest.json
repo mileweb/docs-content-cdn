@@ -66,10 +66,9 @@
           },
           {
             "title": "Traffic Control",
-            "path": "/docs/portal/cnames/overview.md",
             "routes": [
               {
-                "title": "Manage Edge Hostnames",
+                "title": "Overview of Traffic Control",
                 "path": "/docs/portal/cnames/managing-cnames.md"
               },
               {
