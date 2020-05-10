@@ -65,22 +65,23 @@
             ]
           },
           {
-            "title": "CNAMEs",
+            "title": "Traffic Control",
+            "path": "/docs/portal/cnames/overview.md",
             "routes": [
               {
-                "title": "Managing CNAMEs",
+                "title": "Manage Edge Hostnames",
                 "path": "/docs/portal/cnames/managing-cnames.md"
               },
               {
-                "title": "Creating a CNAME",
+                "title": "Create an Edge Hostname",
                 "path": "/docs/portal/cnames/creating-cname.md"
               },
               {
-                "title": "Editing a CNAME",
+                "title": "Edit an Edge Hostname",
                 "path": "/docs/portal/cnames/editing-cname.md"
               },
               {
-                "title": "Deleting a CNAME",
+                "title": "Delete an Edge Hostname",
                 "path": "/docs/portal/cnames/deleting-cname.md"
               }
             ]
