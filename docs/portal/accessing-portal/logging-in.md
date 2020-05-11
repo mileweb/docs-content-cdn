@@ -8,6 +8,7 @@
 
 <ul><strong>Note:</strong> If you forgot your password, click [here](</docs/portal/accessing-portal/forgot-password.md>).</ul>
 
+
 3. Click the **Sign In** button.
 
 ## Where to Go from Here
