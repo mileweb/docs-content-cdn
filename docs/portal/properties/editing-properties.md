@@ -5,12 +5,12 @@
 
 2. On the Properties page, click the ID of the property you want to edit.
 
-<p align="center"><img src="/docs/resources/images/Edit Properties.png" alt="Upload Certificate Version" width="600"></p>
+<p align="center"><img src="/docs/resources/images/Edit Properties.png" alt="Upload Certificate Version" width="700"></p>
 
-3. Choose the property version you wish to edit from the dropdown list. If the **Edit** button is enabled, you can click it to start editing.
+3. From the drop-down list, choose the property version you want to edit. If the **Edit** button is enabled, you can click it to start editing.
 
-4. If there is a padlock icon next to the version number, it means this version has been deployed. Therefore any editing is disallowed to this version and the **Edit** button is disabled. This is to ensure we can always realiably rollback to any version that has ever been deployed. If you want to make any changes on top of this version, you need to click the **Clone** button to create a new version to edit.
+**Note:** If there is a padlock icon next to the version number, it means this version has been deployed. Therefore, editing this version is not permitted and the **Edit** button is disabled. This ensures that CDN360 can reliably roll back to any version that has been deployed. If you want to make any changes on top of this version, click the **Clone** button to create a new version to edit.
 
-5. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*). They are described in the [Creating a Property](</docs/portal/properties/creating-property.md>) section.
+4. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*) and described in [Creating a Property](</docs/portal/properties/creating-property.md>).
 
-6. Save and validate the new version before you can deploy it.
+5. Save and validate the new version before you can deploy it.

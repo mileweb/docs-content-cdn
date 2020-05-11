@@ -1,6 +1,6 @@
 # Overview of Certificates
 
-A digital certificate allows your website to exchange data securely over the Internet using the public key infrastructure (PKI). The certificate enables encryption of the communications between a website and its visitors. CDN360 supports regular, subject alternative names (SAN), and wildcard certificates. CDN360 also suppports RSA and ECDSA public key algorithms. You can upload your existing certificate, generate self-signed certificates, and use Let's Encrypt to renew expiring certificates automatically.
+A digital certificate allows your website to exchange data securely over the Internet using the public key infrastructure (PKI). The certificate enables encryption of the communications between a website and its visitors. CDN360 supports regular, subject alternative names (SAN), and wildcard certificates. CDN360 also supports RSA and ECDSA public key algorithms. You can upload your existing certificate, generate self-signed certificates, and use Let's Encrypt to renew expiring certificates automatically.
 
 ## Certificates Page 
 
@@ -8,7 +8,7 @@ Certificates are managed from the Certificates page. To display this page, click
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align="center"><img src="/docs/resources/images/Certificates Page.png" alt="Certificate List" width="700"></p>
+<p align="center"><img src="/docs/resources/images/Certificates Page.png" alt="Certificate List" width="900"></p>
 
 | **Element Number**|**Description**|
 |-|-|
@@ -19,7 +19,7 @@ The following figure shows the key elements on the page, and the table following
 
 ## Certificate Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with certificates.
-<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="700"></p>
+<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="900"></p>
 The actions are:
 
 - **Edit**: [Update](</docs/portal/certificates/updating-certificates.md>) and/or deploy the selected certificate.

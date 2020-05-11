@@ -6,7 +6,7 @@ Reports are generated from the Reports page. To display this page, click **Repor
 
 The following figure shows the key elements on the page.
 
-![null](</docs/resources/images/Report Page.png>)
+Need figure??
 
 ## Supported Report Types
 
@@ -24,14 +24,14 @@ The following report types are supported:
 1. In the left pane, click **Reports**. 
 2. Complete the fields in the Reports page:
 
-![null](</docs/resources/images/Report Page.png>)
+<p align=center><img src="/docs/resources/images/Report Page.png" alt="report page" width="900"></p>
 
 | **Fields**      | **Description**                                       |
 | --------------- | ----------------------------------------------------- |
 | Report Type     | Select the type of report you want to generate.       | 
 | Hostnames       | Select one or more hostnames that you defined when you created your property.                                                                    |
 | Date Range      | Select the start and end dates and the time for the report.                                                                   |
-| Report Interval | Select the granularity of the returned data. Choices are: <li><strong>5 minutes</strong>. *(default)*<li><strong>1 Hour</strong>.<br><li><strong>1 Day</strong>.<li><strong>1 Month.</li></br>
+| Report Interval | Select the granularity of the returned data. Choices are: <li><strong>5 minutes</strong>. *(default)*<li><strong>1 Hour</strong>.<br><li><strong>1 Day</strong>.<li><strong>1 Month.</li>
 | Protocol        | Select the protocol-based data traffic that will be covered by the report. Choices are: <li><strong>All</strong> = use  HTTP and HTTPS. *(default)*<li><strong>HTTP</strong> = use HTTP only.<br><li><strong>HTTPS</strong> = use HTTPS only.         | 
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. Choices are. Choices are: <li><strong>This Account Only</strong>.</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong> *(default)*
 
