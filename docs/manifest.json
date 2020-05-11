@@ -6,27 +6,27 @@
       "links": [
         {
           "title": "Quick Start",
-          "description": "Getting started with CDN360",
+          "caption": "Getting started with CDN360",
           "icon": "bolt",
-          "url": "/docs/intro"
+          "path": "docs/intro"
         },
         {
           "title": "Portal Reference",
-          "description": "CDN360 Portal reference",
+          "caption": "CDN360 Portal reference",
           "icon": "book",
-          "url": "/docs/portal/accessing-portal/logging-in"
+          "path": "docs/portal/accessing-portal/logging-in"
         },
         {
           "title": "API Reference",
-          "description": "CDN360 API reference",
+          "caption": "CDN360 API reference",
           "icon": "gear",
-          "url": "/apidocs"
+          "path": "apidocs"
         },
         {
           "title": "Edge Logic Reference",
-          "description": "Learn CDN360 Edge Logic",
+          "caption": "Learn CDN360 Edge Logic",
           "icon": "cli",
-          "url": "/docs/edge-logic/intro"
+          "path": "/docs/edge-logic/intro"
         }
       ]
     },
