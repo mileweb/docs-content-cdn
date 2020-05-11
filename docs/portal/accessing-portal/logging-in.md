@@ -6,7 +6,7 @@
 
 2. Enter your username in the top field and your password in the bottom field. For security, each typed password character is masked with a dot (●). To unmask the password, click the ![null](</docs/resources/images/eye icon.png>) icon.
 
-<strong>Note:</strong> If you forgot your password, click .[here](</docs/portal/accessing-portal/forgot-password.md>)
+<strong>Note:</strong> If you forgot your password, click [here](</docs/portal/accessing-portal/forgot-password.md>)
 
 3. Click the **Sign In** button.
 
