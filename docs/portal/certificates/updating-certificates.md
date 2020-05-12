@@ -8,7 +8,7 @@ CDN360 sends an email notification when a certificate used in production is clos
 1. In the certificate details form, click **Create Version**.
 <p align="center"><img src="/docs/resources/images/CreateCertVersion.png" alt="Upload Certificate Version" width="700"></p>
 
-2. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version**.
+2. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version** followed by **OK** at the confirmation pop-up.
 <p align="center"><img src="/docs/resources/images/Buttons for Uploading Certs.png" alt="Upload Certificate Version" width="700"></p>
 3. Deploy the new version to production.
 <p align="center"><img src="/docs/resources/images/CertificateDeploy.png" alt="Upload Certificate Version" width="500"></p>
