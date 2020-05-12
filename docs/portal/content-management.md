@@ -1,4 +1,4 @@
-# Overview
+# Managing Content
 
 CDN360 supports a content management purge function that allows you to override the cache time. This feature is handy when the content on your web server has changed and you want CDN360 to update its servers with your changes. For example, if your website has a cache time of one week, but you want your website visitors to see a new update to one of your pages, you can use the purge option to flush the cache and enable your visitors to view the new content.
 
