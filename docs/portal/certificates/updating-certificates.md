@@ -5,16 +5,18 @@ On CDN360, each certificate is versioned, and each version is not editable once 
 CDN360 sends an email notification when a certificate used in production is close to its expiration date. For convenience, CDN360 supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>), so you never need to worry about the expiration of your certificates. If you prefer to renew your certificates manually, perform one of the following procedures.
 
 ## If you already have a new CA-signed certificate with private key and chain certificate
-1. In the certificate details form, click **Create Version**.
+1. In the left pane, click **Certificates**.
+2. Click a certificate name.
+3. In the certificate details form, click **Create Version**.
 <p align="center"><img src="/docs/resources/images/CreateCertVersion.png" alt="Upload Certificate Version" width="700"></p>
 
-2. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version** followed by **OK** at the confirmation pop-up.
+4. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version** followed by **OK** at the confirmation pop-up.
 <p align="center"><img src="/docs/resources/images/Buttons for Uploading Certs.png" alt="Upload Certificate Version" width="700"></p>
-3. Deploy the new version to production.
+5. Deploy the new version to production.
 <p align="center"><img src="/docs/resources/images/CertificateDeploy.png" alt="Upload Certificate Version" width="500"></p>
 
 ## If you need a CSR to apply for the new certificate from a CA
-If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, follow steps 1 and 2 to create a self-signed version. Otherwise, you can skip to step 3.
+If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, follow steps 1 and 2 below to create a self-signed version. Otherwise, you can skip to step 3.
 
 1. Click **Create Version**.
 2. Click the **Auto Generate Certificate** tab, complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)), and click **Save Version**.
