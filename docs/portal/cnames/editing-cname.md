@@ -3,7 +3,7 @@
 1. In the left pane, click **CNAMEs**.
 2. Click the CNAME you want to edit 
    <br><U>OR </u></br>
-   Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br><br>
+   Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br>
 3. At the top right of the page, click the **Edit** button.
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
