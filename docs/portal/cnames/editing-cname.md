@@ -63,7 +63,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 ## Changing the Has Bien Setting for a CNAME
 
-1. Near the bototm of the form, expand **Advanced Settings** and make your change.
+1. Near the bottom of the form, expand **Advanced Settings** and make your change.
 
 <p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
 
