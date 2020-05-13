@@ -46,7 +46,7 @@ b. To specify more client region rules, repeat step 4a for each additional rule.
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |
-| Has Beian       |        Select whether content will be served from PoPs inside or outside China. Choices are: <br><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*)<li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.                                                           |
+| Has Beian       |        Select whether content will be served from PoPs inside or outside China. Choices are: <br><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*)<li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.
 
 6. Click the **Create CNAME** button.
 7. After creating the CNAME, update your DNS records to point your hostname(s) to the CNAME.
