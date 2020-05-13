@@ -19,4 +19,4 @@ The following figure shows the key elements on the page, and the table following
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with CNAMEs.
 (Show CNAME Actions drop-down menu??)
 - **Edit**: [Update](</docs/portal/cnames/editing-cname.md>) the selected CNAME.
-- **Delete**: .[Delete](</docs/portal/cnames/deleting-cname.md>) the CNAME.
+- **Delete**: [Delete](</docs/portal/cnames/deleting-cname.md>) the CNAME.
