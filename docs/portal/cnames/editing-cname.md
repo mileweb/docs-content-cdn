@@ -49,7 +49,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 5. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
 
-## Deleting a Client Region Rule
+## Deleting a Client Zone Rule
 
 1. At the right side of the form, click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
@@ -61,7 +61,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 4. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
 
-## Changing the Has Bien Setting
+## Changing the Has Bien Setting for a CNAME
 
 1. Near the bototm of the form, expand **Advanced Settings** and make your change.
 
