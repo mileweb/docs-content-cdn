@@ -8,15 +8,14 @@
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-<p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
-
-**Note**: If you do not create a client zone rule, or if you leave the **Client Region** field empty on the Create Client Zone Rule form, a rule covering ALL regions is created automatically.
-
 4. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
 5. Complete all the fields, and then click the **Create Client Zone Rule** button.
+
+**Note**: If you do not create a client zone rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
+
 6. To add more client zone rules, repeat this step for each additional rule.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
