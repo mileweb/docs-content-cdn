@@ -16,7 +16,7 @@
 
 **Note**: If you do not create a client zone rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
 
-6. To add more client zone rules, repeat this step for each additional rule.
+6. To add more client zone rules, repeat steps 4 and 5 for each additional rule.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
 
@@ -51,7 +51,7 @@ figure here??
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
-| Has Beian       |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</li></br>|
+| Has Beian       |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
 
 3. Click **Update**.
 4. When a message confirms that the CNAME was updated click **OK**.
