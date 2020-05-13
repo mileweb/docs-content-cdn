@@ -11,16 +11,16 @@
 The CNAME form that appears allows you to create, edit, and delete client region rules, and change advanced settings. Refer to the appropriate steps below.
 <p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
 
-4. To create one or more client region rules, perform the following steps.
+## Creating Client Region Rules
 
 **Note**: If you do not create a client region rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
 
-<ul>a. At the top right of the page, click the <strong>Create Client Region Rule</strong> button.
+1. At the top right of the page, click the <strong>Create Client Region Rule</strong> button.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
-b. Complete all the fields, and then click the **Create Client Region Rule** button.
-c. To add more client region rules, repeat this step for each additional rule.
+2. Complete all the fields, and then click the **Create Client Region Rule** button.
+3. To add more client region rules, repeat this step for each additional rule.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
 
@@ -33,23 +33,23 @@ c. To add more client region rules, repeat this step for each additional rule.
 | Redirect Target   | If <strong>Action Type</strong> is set to **Redirect**, specify an IP address or hostname to which CDN360 will redirect your traffic.|
 | Weight | Adjust how this rule behaves relative to other rules for the same client region.                                      
 
-5. To edit an existing client zone rule:
-<ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
+## Editing a Client Zone Rule
+<ul>1. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
 <<screen here>>??
-<ul>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
-<ul>c. Click the <strong>Update Client Zone Rule** button.</strong></ul>
+<ul>2. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
+<ul>3. Click the <strong>Update Client Zone Rule** button.</strong></ul>
 
 figure here??
 
-6. To delete a client region rule:
+## Deleting a Client Region Rule
 
-<ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
+<ul>1. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
 <p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client region rule.</ul><br>
 
-7. To change the Has Beian setting, expand **Advanced Settings** and make your change.
+2. To change the Has Beian setting, expand **Advanced Settings** and make your change.
 
 <p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
 
@@ -57,7 +57,7 @@ figure here??
 | --------------- | --------------- |
 | Has Beian       |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</li></br>|
 
-8. Click **Update**.
-9. When a message confirms that the CNAME was updated click **OK**.
-10. Click **Close** to return to the main page.
+3. Click **Update**.
+4. When a message confirms that the CNAME was updated click **OK**.
+5. Click **Close** to return to the main page.
 
