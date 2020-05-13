@@ -11,16 +11,16 @@
 The CNAME form that appears allows you to create, edit, and delete client region rules, and change advanced settings. Refer to the appropriate steps below.
 <p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
 
-## Creating Client Region Rules
+## Creating Client Zone Rules
 
-**Note**: If you do not create a client region rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
+**Note**: If you do not create a client zone rule, or if you leave the **Client Region** field empty on the Create Client Zone Rule form, a rule covering ALL regions is created automatically.
 
-1. At the top right of the page, click the <strong>Create Client Region Rule</strong> button.
+1. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
-2. Complete all the fields, and then click the **Create Client Region Rule** button.
-3. To add more client region rules, repeat this step for each additional rule.
+2. Complete all the fields, and then click the **Create Client Zone Rule** button.
+3. To add more client zone rules, repeat this step for each additional rule.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
 
