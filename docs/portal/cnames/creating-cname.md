@@ -4,7 +4,7 @@ For the CDN360 portal to serve your content, you must create a CNAME. The CNAME 
 
 Creating a CNAME is a three-step process:
 
-- Create a CNAME using the procedure below. (Alternatively, you can use the [CDN360 API](</apidocs#tag/CNAME-Management>).)
+- Create a CNAME using the procedure below. (Alternatively, you can use the [CDN360 API](</docs/apispec>).)
 - [Deploy the property](</docs/portal/properties/deploying-property.md>) defined with the hostname(s) to production.
 
 - Update your DNS records to point your hostname(s) to the CNAME.
