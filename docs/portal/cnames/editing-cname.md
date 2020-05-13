@@ -4,15 +4,19 @@
 2. Click the CNAME you want to edit 
    <br><U>OR </u></br>
    Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br>
-3. At the top right of the page, click the **Edit** button.
+3. At the top right of the form, click the **Edit** button.
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-4. At the right side of the page, click the <strong>Create Client Zone Rule</strong> button.
+The CNAME form that appears allows you to create, edit, and delete client zone rules as well as change advanced settings. For more information, refere to the appropriate topic below.
+
+##Creating Client Zone Rules
+
+1. At the right side of the  Client Zone Rules form, click the <strong>Create Client Zone Rule</strong> button.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
-5. Complete all the fields, and then click the **Create Client Zone Rule** button.
+2. Complete all the fields, and then click the **Create Client Zone Rule** button.
 
 **Note**: If you do not create a client zone rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
 
@@ -27,10 +31,12 @@
 | Redirect Target   | If <strong>Action Type</strong> is set to **Redirect**, specify an IP address or hostname to which CDN360 will redirect your traffic.|
 | Weight | Adjust how this rule behaves relative to other rules for the same client region.
    
-6. To add more client zone rules, repeat steps 4 and 5 for each additional rule.
+3. To create more client zone rules, repeat steps 1 and 2 for each additional rule.
+
+4. When you finish, perform any other edits on this form, and then save your changes.
 
 ## Editing a Client Zone Rule
-<ul>1. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
+<ul>1. At the right side of the Client Zone Rules form, click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
 <<screen here>>??
 <ul>2. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
 <ul>3. Click the <strong>Update Client Zone Rule** button.</strong></ul>
@@ -39,13 +45,17 @@ figure here??
 
 ## Deleting a Client Region Rule
 
-<ul>1. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
+1. At the right side of the Client Zone Rules form, click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
 <p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
 
-<ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client region rule.</ul><br>
+2. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client region rule.</ul><br>
 
-2. To change the Has Beian setting, expand **Advanced Settings** and make your change.
+3. Perform any other edits on this form. When you finish, save your changes.
+
+## Changing the Has Bien Setting
+
+1. From the Client Zone Rules form. expand **Advanced Settings** and make your change.
 
 <p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
 
@@ -53,7 +63,12 @@ figure here??
 | --------------- | --------------- |
 | Has Beian       |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
 
-3. Click **Update**.
-4. When a message confirms that the CNAME was updated click **OK**.
-5. Click **Close** to return to the main page.
+2. Perform any other edits on this form. When you finish, save your changes.
 
+## Saving Your Changes
+
+After creating editing, or deleting client zone rules, or changing advanced settings, save your changes.
+
+1. At the bottom right, click **Update**.
+2. When a message confirms that the CNAME was updated click **OK**.
+3. Click **Close** to return to the main page.
