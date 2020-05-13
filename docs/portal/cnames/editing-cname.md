@@ -33,12 +33,21 @@ Controls appear for creating, editing, and deleting client zone rules and changi
    
 3. To create more client zone rules, repeat steps 1 and 2 for each additional rule.
 
-4. When you finish, perform any other edits on this form, and then save your changes.
+4. When you finish, perform any other edits on this form.
+
+5. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
+
 
 ## Editing a Client Zone Rule
 1. At the right side of the form, click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
+
 2. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
+
 3. Click the <strong>Update Client Zone Rule** button.</strong></ul>
+
+4. Perform any other edits on this form. 
+
+5. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
 
 ## Deleting a Client Region Rule
 
@@ -48,7 +57,9 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 2. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client region rule.</ul><br>
 
-3. Perform any other edits on this form. When you finish, save your changes.
+3. Perform any other edits on this form. 
+
+4. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
 
 ## Changing the Has Bien Setting
 
@@ -60,12 +71,6 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 | --------------- | --------------- |
 | Has Beian       |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
 
-2. Perform any other edits on this form. When you finish, save your changes.
+2. Perform any other edits on this form. 
 
-## Saving Your Changes
-
-After creating editing, or deleting client zone rules, or changing advanced settings, save your changes.
-
-1. At the bottom right, click **Update**.
-2. When a message confirms that the CNAME was updated, click **OK**.
-3. Click **Close** to return to the main page.
+3. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
