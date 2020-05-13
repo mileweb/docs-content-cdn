@@ -8,7 +8,7 @@
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-4. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.
+4. At the right side of the page, click the <strong>Create Client Zone Rule</strong> button.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
