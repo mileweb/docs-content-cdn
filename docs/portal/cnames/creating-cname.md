@@ -27,7 +27,7 @@ Creating a CNAME is a three-step process:
 
 <ul>a. Complete all the fields, and then click the <strong>Create Client Region Rule</strong> button. 
 
-b. To specify more client region rules, repeat step 4a for each additional rule.
+b. To specify more client region rules, repeat step 4a for each additional rule.</ul>
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="500"></p>
 
