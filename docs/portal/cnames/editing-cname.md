@@ -43,7 +43,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 2. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).
 
-3. Click the <strong>Update Client Zone Rule** button.</strong>
+3. Click the <strong>Update **Client Zone Rule** button.</strong>
 
 4. Perform any other edits on this form. 
 
