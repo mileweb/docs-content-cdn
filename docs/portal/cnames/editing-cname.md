@@ -8,9 +8,9 @@
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-The displayed form allows you to create, edit, and delete client zone rules as well as change advanced settings for the selected CNAME. For more information, refere to the appropriate topic below.
+The Client Zone Rules form that appears allows you to create, edit, and delete client zone rules as well as change advanced settings for the selected CNAME. For more information, refere to the appropriate topic below.
 
-##Creating Client Zone Rules
+## Creating Client Zone Rules
 
 1. At the right side of the  Client Zone Rules form, click the <strong>Create Client Zone Rule</strong> button.
 
