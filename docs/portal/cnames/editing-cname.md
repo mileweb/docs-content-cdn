@@ -36,7 +36,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 4. When you finish, perform any other edits on this form, and then save your changes.
 
 ## Editing a Client Zone Rule
-1. At the right side of the Client Zone Rules form, click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
+1. At the right side of the form, click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
 2. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
 3. Click the <strong>Update Client Zone Rule** button.</strong></ul>
 
