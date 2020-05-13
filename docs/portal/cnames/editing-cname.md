@@ -8,7 +8,7 @@
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-Controls appear for creating, editing, and deleting client zone rules and changing advanced settings for the selected CNAME. For more information, refere to the appropriate topic below.
+Controls appear for creating, editing, and deleting client zone rules and changing advanced settings for the selected CNAME. For more information, refer to the topics below.
 
 ## Creating Client Zone Rules
 
