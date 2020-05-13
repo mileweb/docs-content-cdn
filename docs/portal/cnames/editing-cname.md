@@ -16,8 +16,6 @@
 
 **Note**: If you do not create a client zone rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
 
-6. To add more client zone rules, repeat steps 4 and 5 for each additional rule.
-
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
 
 | **Fields**        | **Description**   |
@@ -27,7 +25,9 @@
 | Action Type       | Select the type of action to be performed. Choices are:<br><ul><li><strong>Deliver</strong> = specifies the server groups to deliver your traffic. Only one deliver action is allowed for each client region. All servers in the selected server group will be used as candidates in the load balancing algorithm.<li><strong>Redirect</strong> = directs traffic requests to the target specified in the Redirect target field (see below). This can be your origin site or another CDN provider. There can be multiple redirect actions for each client region.<li><strong>Reject</strong> = directs traffic requests to web servers that always respond with a 403 - forbidden error message. Only one reject action is allowed for each client region.<ul></br> |
 | Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server group options:<br><li><strong>Standard</strong> = standard server group.</li><li><strong>Premium</strong> = includes the standard server group.<li><strong>Premium+</strong> = includes the standard and premium server groups.<li><strong>Ultra</strong> = includes the standard, premium, and premium+ server groups.  |
 | Redirect Target   | If <strong>Action Type</strong> is set to **Redirect**, specify an IP address or hostname to which CDN360 will redirect your traffic.|
-| Weight | Adjust how this rule behaves relative to other rules for the same client region.                                      
+| Weight | Adjust how this rule behaves relative to other rules for the same client region.
+   
+6. To add more client zone rules, repeat steps 4 and 5 for each additional rule.
 
 ## Editing a Client Zone Rule
 <ul>1. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
