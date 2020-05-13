@@ -8,11 +8,11 @@
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-The Client Zone Rules form that appears allows you to create, edit, and delete client zone rules as well as change advanced settings for the selected CNAME. For more information, refere to the appropriate topic below.
+Controls appear for creating, editing, and deleting client zone rules and changing advanced settings for the selected CNAME. For more information, refere to the appropriate topic below.
 
 ## Creating Client Zone Rules
 
-1. At the right side of the  Client Zone Rules form, click the <strong>Create Client Zone Rule</strong> button.
+1. At the right side of the form, click the <strong>Create Client Zone Rule</strong> button.
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
 
@@ -45,7 +45,7 @@ figure here??
 
 ## Deleting a Client Region Rule
 
-1. At the right side of the Client Zone Rules form, click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
+1. At the right side of the form, click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
 <p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
 
@@ -55,7 +55,7 @@ figure here??
 
 ## Changing the Has Bien Setting
 
-1. From the Client Zone Rules form. expand **Advanced Settings** and make your change.
+1. Near the bototm of the form, expand **Advanced Settings** and make your change.
 
 <p align=center><img src="/docs/resources/images/CNAMEs - Advanced Settings.png" alt="cname advanced settings" width="700"></p>
 
@@ -70,5 +70,5 @@ figure here??
 After creating editing, or deleting client zone rules, or changing advanced settings, save your changes.
 
 1. At the bottom right, click **Update**.
-2. When a message confirms that the CNAME was updated click **OK**.
+2. When a message confirms that the CNAME was updated, click **OK**.
 3. Click **Close** to return to the main page.
