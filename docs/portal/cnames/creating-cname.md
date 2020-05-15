@@ -10,7 +10,7 @@ Creating a CNAME is a three-step process:
 - Update your DNS records to point your hostname(s) to the CNAME.
 
 1. In the left pane, click **CNAMEs**.
-2. At the top right of the screen, click the **Create CNAME** button. 
+2. At the top right of the CNAMEs page, click the **Create CNAME** button. 
 3. Complete the fields in the Create a CNAME form. Required fields are denoted by an asterisk (\*).
 
 <p align=center><img src="/docs/resources/images/cname1.png" alt="cname overview page" width="900"></p>
