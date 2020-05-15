@@ -27,4 +27,3 @@ The actions are:
 - **Delete**: Delete the certificate. If the certificate is deployed, you have to undeploy it first.
 - **Undeploy from Staging**: [Undeploy](</docs/portal/certificates/deploying-certificates.md>) the certificate from the staging environment.
 - **Undeploy from Production**: [Undeploy](</docs/portal/certificates/deploying-certificates.md>) the certificate from the production environment.
-
