@@ -16,9 +16,8 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 | **Fields** | **Description** |
 | ---------- | --------------- |
 | Email | Enter this user's email address.|
-| Roles | To assign one or more roles to this user, click **+ Add Roles**, enter a role name and check one or more roles in the Add Roles dialog box, and then click the **Save** button. To delete one or more roles, check the role(s) and click the **Delete** button.|
+| Roles | To assign one or more roles to this user, click **+ Add Roles**, enter a role name and check one or more roles in the Add Roles dialog box, and then click the **Save** button. If you decide not to add one or more roles to this user, check them, and then click the **Delete** button in the **Roles** section.
 | Description | Enter a description for this user.|
-
 
 4. Click **Save & Invite**. An invitation to join the portal is sent to the user. 
 5. The user clicks the **Join Now!** button in the invitation, enters the required information on the Join CDNetworks Portal page, and then clicks the **Save & Join** button.
@@ -50,7 +49,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
 |Status              | Shows the user's current status. A button to the right allows you to change the user's status between active and suspended.| 
 | Email              | Enter this user's email address.             |
 | Phone Number       | Enter the telephone number for this user.    |
-| Roles              | To add one or more roles to this user, click the **+ Add Roles** button, enter a role name and check one or more roles in the Add Roles dialog box, and click the **Save** button. To delete one or more roles, check the role(s) and click the **Delete** button.   |
+| Roles              | To add one or more roles to this user, click the **+ Add Roles** button, enter a role name and check one or more roles in the Add Roles dialog box, and click the **Save** button. If you decide not to add one or more roles to this user, check them, and then click the **Delete** button in the **Roles** section.   |
 | Description        | Enter a description for this user.           |
 
 4. Click **Save**.
