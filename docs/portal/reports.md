@@ -4,9 +4,14 @@ CDN360 provides reporting capabilities that allow you to analyze the traffic to 
 
 Reports are generated from the Reports page. To display this page, click **Reports** in the left pane.
 
-The following figure shows the key elements on the page.
+The following figure shows the key elements on the page, and the table following the figure describes them.
 
 Need figure??
+
+| **Element Number**|**Description**|
+|-|-|
+|1|Specify the report type, date range, report interval, hostname, protocol, and report range.|
+|2|The **Generate Report** button allows you to generate the report defined by the report parameters.|
 
 ## Supported Report Types
 
