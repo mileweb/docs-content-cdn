@@ -22,7 +22,8 @@ The following report types are supported:
 | Traffic Volume        | Shows edge versus origin traffic.                                 |
 | Traffic Bandwidth     | Shows edge versus origin traffic bandwidth. Lines represent edge traffic from CDN360 servers, traffic from your origin servers, and cache hit rate. The vertical (Y) axis shows the bandwidth and hit ratio, while the horizontal (X) axis shows time. The cache hit rate is computed as (edge traffic - origin traffic) / edge traffic.     |
 | Requests              | Shows requests made to the files of your property. Lines show the requests to CDN360 edge servers, requests to your origin servers, and cache hit rate. The cache hit rate is computed as (edge requests - origin requests)/edge requests.              |
-| Status Code Details   | Shows the percentage of HTTP status codes returned. For example, code 200 represents a successful request.                                                   |
+| Status Code Details   | Shows the percentage of HTTP status codes returned. For example, code 200 represents a successful request. |
+| Traffic Volume Summary| Summarizes the edge traffic volume.                               |
 
 ## Generating Reports
 
