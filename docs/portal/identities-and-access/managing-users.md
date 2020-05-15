@@ -33,7 +33,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
     <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the ID of the user you want to edit.
-<ul><u>OR</u>
+<br?<ul><u>OR</u></br>
 Click the **Actions** menu for the user you want to edit, and then select **Edit**.
 
 **Tip:** Use the filter at the top left of the page to filter users.</ul>
