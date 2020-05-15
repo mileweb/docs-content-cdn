@@ -40,7 +40,7 @@ The following report types are supported:
 | Report Interval | Select the granularity of the returned data. Choices are: <li><strong>5 minutes</strong>. *(default)*<li><strong>1 Hour</strong>.<br><li><strong>1 Day</strong>.<li><strong>1 Month.</li>
 | Protocol        | Select the protocol-based data traffic that will be covered by the report. Choices are: <li><strong>All</strong> = use  HTTP and HTTPS. *(default)*<li><strong>HTTP</strong> = use HTTP only.<br><li><strong>HTTPS</strong> = use HTTPS only.         | 
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. Choices are. Choices are: <li><strong>This Account Only</strong>.</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong> *(default)*
-| Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to either not group the results (*default*) or to group them by hostnames, server groups, hostnames and server groups or server groups and hostnames. |
+| Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to either not group the results (*default*) or to group them by hostnames, server groups, hostnames and server groups, or server groups and hostnames. |
 
 **Note:** All volume and bandwidth report data pertains to the HTTP payload only. It does not include the overhead from TCP, IP, and MAC headers. CDNetworks adds 4.56% (66 bytes) of overhead to each 1448-byte payload to generate the "billing volume" on the invoice.
 
