@@ -50,7 +50,7 @@ If you already have a certificate with the private key and the CA chain certific
 To upload the files as a new certificate:
 
 1. In the left pane, click **Certificates**.<br>
-2. At the top right, click the **Create Certificate** button. 
+2. At the top right of the Certificates page, click the **Create Certificate** button. 
 
 <p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="Create new certi button" width="900"></p>
 
