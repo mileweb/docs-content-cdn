@@ -8,7 +8,7 @@ A role is a collection of one or more permissions that can be performed within t
     <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**. 
-3. At the right side of the page, click the **Add Role** button.
+3. At the right side of the page, click the **+ Add Role** button.
 
 ![null](</docs/resources/images/Add Role Button.png>)
 
@@ -20,7 +20,7 @@ A role is a collection of one or more permissions that can be performed within t
 |     ---------------- |---------------------------------- |
 | Role Name            | Enter a name for this role.       |
 | Description          | Enter a description for this role.|
-| Permissions          | To assign one or more permissions to this role, click **Add Permissions**, check one or more [permissions]?? from the Add Permissions dialog box, and then click **Save**. If you decide not to add one or more permissions to this role, check them, and then click the **Delete** button at the top right of the **Permissions** section.|
+| Permissions          | To assign one or more permissions to this role, click **+ Add Permissions**, enter a permisison name and check one or more permissions from the Add Permissions dialog box, and then click **Save**. If you decide not to add one or more permissions to this role, check them, and then click the **Delete** button at the top right of the **Permissions** section.|
 | Users                | To assign users to this role, click **Assign Users**, check one or more users from the Assign Users dialog box, and then click **Assign**. If you decide not to add one or more users to this role, check them, and then click the **Delete** button at the top right of the **Users** section.               |
 
 5. Click **Save**.
