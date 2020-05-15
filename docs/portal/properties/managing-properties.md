@@ -15,12 +15,12 @@ Properties are managed from the Properties page. To display this page, click **P
 <p align=center><img src="/docs/resources/images/Properties Page.png" alt="properties page" width="900"></p>
 
 
-| **Fields**   | **Description**                                                                           |
-| :----------: | ----------------------------------------------------------------------------------------- |
-| 1            | A search box that you can enter any keyword to filter the property list.                  |
-| 2            | The list of all properties that are available to you.                                     |
-| 3            | Dropdown list to take actions on each property.                                           |
-| 4            | The button to [create new properties](<docs/portal/properties/../../../creating-property.md>).    |
+| **Element Number**   | **Description**                                                                           |
+| :------------------: | ----------------------------------------------------------------------------------------- |
+| 1                    | A search box that you can enter any keyword to filter the property list.                  |
+| 2                    | The list of all properties that are available to you.                                     |
+| 3                    | Dropdown list to take actions on each property.                                           |
+| 4                    | The button to [create new properties](<docs/portal/properties/../../../creating-property.md>).    |
 
 ## Property Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with properties.
