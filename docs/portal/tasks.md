@@ -18,7 +18,7 @@ The following figure shows the key elements on the page, and the table following
 ## Viewing Task Details
 
 1. In the left pane, click **Tasks**.
-2. To view details about tasks related to validations, confirm that the **Validation** radio button is selected. Then click the task ID or name on the **Validation** tab. The following figure shows task details for a successful validation.
+2. To view details about tasks related to validations, confirm that the **Validation** radio button is selected. Then click a task ID or name. The following figure shows task details for a successful validation.
 
 <p align=center><img src="/docs/resources/images/Successful Validation.png" alt="successful validation" width="900"></p>
 
@@ -26,7 +26,7 @@ The following figure shows the key elements on the page, and the table following
 
 <p align=center><img src="/docs/resources/images/Failed Validation.png" alt="failed validation" width="900"></p>
 
-3. To view details about tasks related to deployments, click the **Deployment** radio button. Then click the ID or name of a task on the **Deployment** tab. The following figure shows task details for a successful deployment. If **Certificate ID** or **Property ID** appears at the bottom left, clicking it displays the form for that certificate or property.
+3. To view details about tasks related to deployments, click the **Deployment** radio button. Then click a task ID or name. The following figure shows task details for a successful deployment. If **Certificate ID** or **Property ID** appears at the bottom left, clicking it displays the form for that certificate or property.
 
 <p align=center><img src="/docs/resources/images/Successful Deployment.png" alt="successful deployment" width="900"></p>
 
