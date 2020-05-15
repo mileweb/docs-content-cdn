@@ -25,5 +25,6 @@ The actions are:
 - **Edit**: [Update](</docs/portal/certificates/updating-certificates.md>) and/or deploy the selected certificate.
 - **Download CSR**: Download a certificate signing request (CSR) from the latest version of the selected certificate.
 - **Delete**: Delete the certificate. If the certificate is deployed, you have to undeploy it first.
-- **Undeploy from Staging**: .[Undeploy](</docs/portal/certificates/deploying-certificates.md>) the certificate from the staging environment.
-- **Undeploy from Production**: .[Undeploy](</docs/portal/certificates/deploying-certificates.md>) the certificate from the production environment.
+- **Undeploy from Staging**: [Undeploy](</docs/portal/certificates/deploying-certificates.md>) the certificate from the staging environment.
+- **Undeploy from Production**: [Undeploy](</docs/portal/certificates/deploying-certificates.md>) the certificate from the production environment.
+
