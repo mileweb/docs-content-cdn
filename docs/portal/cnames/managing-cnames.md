@@ -8,12 +8,12 @@ The following figure shows the key elements on the page, and the table following
 
 <p align=center><img src="/docs/resources/images/CNAMES_Overview.png" alt="cnames overview" width="900"></p>
 
-| **Fields**   | **Description**                                                                        |
-| :----------: | ---------------------------------------------------------------------------------------|
-| 1            | A search box that you can enter any keyword to filter the CNAME list.                  |
-| 2            | The list of all CNAMEs that are available to you.                                      |
-| 3            | Drop-down list to take actions on each CNAME.                                          |
-| 4            | The button to [create new CNAMEs](<docs/portal/cnames/../../../creating-cname.md>).    |
+| **Element Number**   | **Description**                                                                        |
+| :------------------: | ---------------------------------------------------------------------------------------|
+| 1                    | A search box that you can enter any keyword to filter the CNAME list.                  |
+| 2                    | The list of all CNAMEs that are available to you.                                      |
+| 3                    | Drop-down list to take actions on each CNAME.                                          |
+| 4                    | The button to [create new CNAMEs](<docs/portal/cnames/../../../creating-cname.md>).    |
 
 ## CNAME Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with CNAMEs.
