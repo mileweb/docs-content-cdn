@@ -20,8 +20,8 @@ A role is a collection of one or more permissions that can be performed within t
 |     ---------------- |---------------------------------- |
 | Role Name            | Enter a name for this role.       |
 | Description          | Enter a description for this role.|
-| Permissions          | To assign one or more permissions to this role, click **+ Add Permissions**, enter a permisison name and check one or more permissions from the Add Permissions dialog box, and then click **Save**. If you decide not to add one or more permissions to this role, check them, and then click the **Delete** button at the top right of the **Permissions** section.|
-| Users                | To assign users to this role, click **Assign Users**, check one or more users from the Assign Users dialog box, and then click **Assign**. If you decide not to add one or more users to this role, check them, and then click the **Delete** button at the top right of the **Users** section.               |
+| Permissions          | To assign one or more permissions to this role, click **+ Add Permissions**, enter a permisison name and check one or more permissions in the Add Permissions dialog box, and then click **Save**. If you decide not to add one or more permissions to this role, check them, and then click the **Delete** button in the **Permissions** section.|
+| Users                | To assign users to this role, click **+ Assign Users**, check one or more users in the Assign Users dialog box, and then click **Assign**. If you decide not to add one or more users to this role, check them, and then click the **Delete** button in the **Users** section.               |
 
 5. Click **Save**.
 
