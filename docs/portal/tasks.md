@@ -9,7 +9,7 @@ The following figure shows the key elements on the page, and the table following
 
 <p align=center><img src="/docs/resources/images/Tasks Page.png" alt="tasks page" width="900"></p>
 
-| **Element Numbers** | **Description** |
+| **Element Number** | **Description** |
 | :-----------------: | --------------- |
 | 1 | Use these radio buttons to view tasks that have been validated or deployed. The most recent tasks appear at the top of the list.
 | 2 | To filter tasks, type characters in this field and press the Enter key. Tasks that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the Reset button.
