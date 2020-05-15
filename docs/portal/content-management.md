@@ -38,9 +38,7 @@ If the content on your origin web server has changed, request a purge to have CD
 ## Viewing Purge Details
 
 1. In the left pane, click **Content Management**.
-2. Click the ID associated with the purge operation. A Purge Details form similar to the following example provides details about the selected purge operation.
-   
-   <<figure here, see Flare??>>
+2. Click the ID associated with the purge operation. A Purge Details form provides details about the selected purge operation.
 
 ## Purge History
 
