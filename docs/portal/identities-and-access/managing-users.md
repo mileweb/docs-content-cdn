@@ -33,9 +33,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
     <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the ID of the user you want to edit.
-
 <ul><u>OR</u>
-
 Click the **Actions** menu for the user you want to edit, and then select **Edit**.
 
 **Tip:** Use the filter at the top left of the page to filter users.</ul>
@@ -83,7 +81,7 @@ The suspended user will not be able to log in to the portal until the user is re
 
     <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
-2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:<br><br>
+2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:<br>
 
    - Click the **Actions** menu for the user you want to suspend, and then select **Suspend**. When prompted to suspend the user, click **OK**.<br><br>
    - To view the user's details before suspension, click the ID of the user you want to suspend. Review the user details, and then click the **Suspend** button next to the **Status** field followed by the **Save** button at the top right of the form. When prompted to update the user, click **OK**.</br></br>
