@@ -6,7 +6,7 @@ Content management purge activities are performed from the Content Management pa
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-![null](</docs/resources/images/Content Management.png>) MARC: NEED NEW SCREEN??
+![null](</docs/resources/images/Content Management.png>)
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
@@ -29,9 +29,9 @@ If the content on your origin web server has changed, request a purge to have CD
 | Target Environment | Select whether the purge will occur in a staging or production environment.|
 | Purge Action | Select whether you want the content deleted or invalidated.|
 | Purge Type | Select whether you want to purge a file or a directory.|
-| Add a file to be purged | If **Purge Type** is set to **File**, select **https** (*default*) or **http** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge.|
-| Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge.|
-| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https** (*default*) or **http** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories associated with the directory will also be purged. Repeat this step for each additional directory you want to purge.|
+| Add a file to be purged | If **Purge Type** is set to **File**, select **https** (*default*) or **http** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge. If you decide not to add one or more files, click the **x** icon at the right side of the file name.|
+| Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to add one or more request headers, click the **x** icon at the right side of the header name.|
+| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https** (*default*) or **http** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories associated with the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to add one or more directories, click the **x** icon at the right side of the directory name.|
 
 4. Click **Start Purge**.
 
