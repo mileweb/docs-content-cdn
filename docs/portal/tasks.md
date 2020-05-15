@@ -9,9 +9,9 @@ The following figure shows the key elements on the page, and the table following
 
 <p align=center><img src="/docs/resources/images/Tasks Page.png" alt="tasks page" width="900"></p>
 
-| **Fields** | **Description** |
-| :----------: | --------------- |
-| 1 | Use these radio buttons to view tasks that have been validated or deployed: <ul><li>**Validation** lists the validation tasks that have been performed, with the most recent ones at the top of the list.<br><li>**Deployment** lists the deployment tasks that have been performed, with the most recent ones at the top of the list.
+| **Element Numbers** | **Description** |
+| :-----------------: | --------------- |
+| 1 | Use these radio buttons to view tasks that have been validated or deployed. The most recent tasks appear at the top of the list.
 | 2 | To filter tasks, type characters in this field and press the Enter key. Tasks that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the Reset button.
 | 3 | Click a task ID or name to view details about the selected task.|
 
