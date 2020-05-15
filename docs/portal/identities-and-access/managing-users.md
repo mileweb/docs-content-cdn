@@ -7,7 +7,7 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 
     <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
-2. With the **Users** tab of the Identity & Access Management page displayed, click the **Add User** button at the right side of the page.
+2. With the **Users** tab of the Identity & Access Management page displayed, click the **+ Add User** button at the right side of the page.
 
 <p align=center><img src="/docs/resources/images/Add User Button.png" alt="select add user button" width="900"></p>
 
