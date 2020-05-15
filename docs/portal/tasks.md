@@ -26,10 +26,10 @@ The following figure shows the key elements on the page, and the table following
 
 <p align=center><img src="/docs/resources/images/Failed Validation.png" alt="failed validation" width="900"></p>
 
-3. To view details about tasks related to deployments, click the **Deployment** radio button. Then click a task ID or name. The following figure shows task details for a successful deployment. If **Certificate ID** or **Property ID** appears at the bottom left, clicking it displays the form for that certificate or property.
+3. To view details about tasks related to deployments, click the **Deployment** radio button. Then click a task ID or name. The following figure shows task details for a successful deployment. If a **Certificate ID** or **Property ID** appears, clicking it displays the form for that certificate or property.
 
 <p align=center><img src="/docs/resources/images/Successful Deployment.png" alt="successful deployment" width="900"></p>
 
- <ul>The following figure shows task details for a failed deployment. If **Certificate ID** or **Property ID** appears at the bottom left, clicking it displays the form for that certificate or property.</ul>
+ <ul>The following figure shows task details for a failed deployment. If a <strong>Certificate ID</strong> or <strong>Property ID</strong> appears, clicking it displays the form for that certificate or property.</ul>
 
 <p align=center><img src="/docs/resources/images/Failed Deployment.png" alt="failed deployment" width="900"></p>
