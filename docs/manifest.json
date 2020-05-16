@@ -1,4 +1,35 @@
 {
+    "metadata": {
+      "id": "cdn",
+      "title": "CDN360",
+      "description": "CDN360 leads the evolution of content delivery networks (CDNs) by accelerating, securing, scaling, and delivering content to website visitors worldwide, regardless of their location.",
+      "links": [
+        {
+          "title": "Quick Start",
+          "caption": "Getting started with CDN360",
+          "icon": "bolt",
+          "path": "docs/intro"
+        },
+        {
+          "title": "Portal Reference",
+          "caption": "CDN360 Portal reference",
+          "icon": "book",
+          "path": "docs/portal/accessing-portal/logging-in"
+        },
+        {
+          "title": "API Reference",
+          "caption": "CDN360 API reference",
+          "icon": "gear",
+          "path": "apidocs"
+        },
+        {
+          "title": "Edge Logic Reference",
+          "caption": "Learn CDN360 Edge Logic",
+          "icon": "cli",
+          "path": "docs/edge-logic/intro"
+        }
+      ]
+    },
     "routes": [
       { "title": "Introduction", "path": "/docs/intro.md" },
       { "title": "Getting Started", "path": "/docs/getting-started.md" },
