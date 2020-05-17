@@ -55,7 +55,7 @@
             ]
           },
           {
-            "title": "Properties",
+            "title": "Edge Configurations",
             "routes": [
               {
                 "title": "Overview of Property",
@@ -96,7 +96,7 @@
             ]
           },
           {
-            "title": "Traffic Control",
+            "title": "Traffic Management",
             "routes": [
               {
                 "title": "Overview of Traffic Control",
