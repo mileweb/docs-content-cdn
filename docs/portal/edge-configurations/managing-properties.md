@@ -1,4 +1,4 @@
-# About Properties
+# Configure the Edge with Properties
 
 A "property" is the configuration of one or more hostnames (domains) that need to be deployed to the CDN360 edge servers. It determines how you want the servers to obtain, cache, modify, and distribute your content to the end users. The key elements of a property include:
 - Hostname(s) to be accelerated.

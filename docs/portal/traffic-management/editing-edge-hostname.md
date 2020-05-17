@@ -1,52 +1,45 @@
 # Editing an Edge Hostname
 
-1. In the left pane, click **Traffic Control**.
+1. In the left pane, click **Traffic Management**.
 2. Click the edge hostname you want to edit 
 3. At the top right of the page, click the **Edit** button.
-
-<p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
 The Edge Hostname form appears for creating, editing, and deleting client zone rules and changing advanced settings. For more information, refer to the topics below.
 <p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
 
 4. To create one or more client zone rules, perform the following steps.
 
-
-<ul>a. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.</ul>
-
-<p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
-
-<ul>b. Complete all the fields, and then click the **Create Client Zone Rule** button.</ul>
-<ul>c. To add more client zone rules, repeat this step for each additional rule.</ul>
+<ul><li>a. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.</li>
+<li>b. Complete all the fields, and then click the **Create Client Zone Rule** button.</li>
+<li>c. To add more client zone rules, repeat this step for each additional rule.</li></ul>
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
 
-You can also delete any un-needed client zone rules by clicking the **delete** link. 
-
-**Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
-
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
-| Client Region     | Select a region for this rule. We currently support country-level granularity.|
-| Client ISP        | Select a client ISP. |
-| Action Type       | Select the type of action to be performed for end users in this zone. Choices are:<br><li><strong>Deliver</strong> = specifies the server groups to deliver your traffic. Only one deliver action is allowed for each client zone. All servers in the selected server groups will be used as candidates by the load balancing algorithm. Therefore, more server groups usually means better performance. However, the traffic unit price will higher for the higher server groups. <li><strong>Redirect</strong> = directs traffic to the target specified in the Redirect target field (see below). This can be your origin site or even another CDN provider. There can be multiple redirect actions for each client zone.<li><strong>Reject</strong> = directs traffic requests to dedicated reject servers that always respond with a 403 - forbidden error message. Only one reject action is allowed for each client zone.</br> |
-| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server group options:<br><li><strong>Standard</strong> = standard server group.</li><li><strong>Premium</strong> = includes the standard server group.<li><strong>Premium+</strong> = includes the standard and premium server groups.<li><strong>Ultra</strong> = includes the standard, premium, and premium+ server groups.  |
-| Redirect Target   | If <strong>Action Type</strong> is set to **Redirect**, specify an IP address or hostname to which CDN360 will redirect your traffic.|
-| Weight | If there are multiple rules defined for a client zone, those rules will be applied randomly for end users from this zone. The probability of each rule is proportional to this weight nubmer.|
+| Client Region     | Select a region that defines this client zone. We currently support country-level granularity.|
+| Client ISP        | Select a ISP that defines this client zone. |
+| Action Type       | Select the type of action to be performed to requests from this client zone. Choices are:<br><ul><li><strong>Deliver</strong> = Contents will be served by CDN360 servers to fullfill the requests from this client zone. Only one delivery action is allowed for each client zone. You need to select the server groups to deliver the contents. </li><li><strong>Redirect</strong> = Redirect client requests to another destination specified in the Redirect Target field (see below). This can be your origin site or maybe another CDN provider. There can be multiple redirect actions for each client zone.</li><li><strong>Reject</strong> = Client requests will always receive a response with a 403 - forbidden error message. Only one reject action is allowed for each client zone.</li></ul>  
+| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server groups to deliver the contents for this client zone. CDN360 servers are divided into 4 groups based on the traffic cost from low to high: <strong>Standard</strong>, <strong>Premium</strong>, <strong>Premium+</strong> and <strong>Ultra</strong>. When you select one group, all the lower groups will be automatically included. |
+| Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic. |
+| Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional this specified weight. |
 
 5. To edit an existing client zone rule:
 
-<ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.<br><br></ul>
-<ul>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
-<ul>c. Click the <strong>Update Client Zone Rule** button.</strong></ul>
+<ul><li>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.</li>
+<li>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).</li>
+<li>c. Click the <strong>Update Client Zone Rule** button.</strong></li></ul>
 
-6. To delete a client region rule:
+6. To delete a client zone rule:
 
-<ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
+<ul><li>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.
 
 <p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
+</li>
+</li>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</li></ul>
 
-<ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</ul><br>
+**Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
+
 
 7. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
 
