@@ -1,7 +1,7 @@
 
 # Editing Properties
 
-1. In the left pane, click **Properties**.
+1. In the left pane, click **Edge Configurations**.
 
 2. On the Properties page, click the ID of the property you want to edit.
 
