@@ -1,9 +1,10 @@
 # About Properties
 
-A "property" is the configuration of one or more hostnames (domains) that need to be deployed to the CDN360 proxy servers. It determines how you want the servers to obtain, manage, and distribute your content to the end users. The key elements of a property include:
+A "property" is the configuration of one or more hostnames (domains) that need to be deployed to the CDN360 edge servers. It determines how you want the servers to obtain, cache, modify, and distribute your content to the end users. The key elements of a property include:
 - Hostname(s) to be accelerated.
 - One or more origin servers.
-- Proxy server behaviors, such as cache time and header modification.
+- Caching rules for different types of contents.
+- Modifications to the URL or HTTP header fields.
 - Whether HTTPS is required, TLS certificates, and TLS protocol version.
 
 ## Managing Properties
@@ -25,8 +26,8 @@ Properties are managed from the Properties page. To display this page, click **P
 ## Property Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with properties.
 (Show Properties Actions drop-down menu??)
-- **Edit**: [Update](<docs/portal/edge-configurations/../../../editing-properties.md>) the selected property.
-- **Compare**: [Compare](<docs/portal/edge-configurations/../../../comparing-properties.md>) two properties.
-- **Undeploy**: Undeploy a property from the staging or production environment. I need to point undeploy to the Undeployng a Property topic??
+- **Edit**: [Update](<docs/portal/edge-configurations/editing-properties.md>) the selected property.
+- **Compare**: [Compare](<docs/portal/edge-configurations/comparing-properties.md>) two properties.
+- **Undeploy**: Undeploy a property from the staging or production environment.
 - **Delete**: Delete the property.
 
