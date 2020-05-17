@@ -58,7 +58,7 @@
             "title": "Edge Configurations",
             "routes": [
               {
-                "title": "Overview of Property",
+                "title": "Overview",
                 "path": "/docs/portal/edge-configurations/managing-properties.md"
               },
               {
@@ -99,7 +99,7 @@
             "title": "Traffic Management",
             "routes": [
               {
-                "title": "Overview of Traffic Control",
+                "title": "Overview",
                 "path": "/docs/portal/traffic-management/overview.md"
               },
               {
@@ -120,7 +120,7 @@
             "title": "Certificates",
             "routes": [
               {
-                "title": "Overview of Certificate",
+                "title": "Overview",
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
