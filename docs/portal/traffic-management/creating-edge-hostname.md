@@ -1,44 +1,39 @@
-# Creating a Edge Hostname 
+# Creating an Edge Hostname 
 
-For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record. For the new edge hostname, you can define different rules to handle request from different client zones. A client zone is defined by a geographical region and one or more ISPs.
+For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record on your DNS server. With the new edge hostname, you can define different rules to handle request from different client zones. A **client zone** is a combination of a geographical region and one or more ISPs, for example, "US+Comcast".
 
-Creating a CNAME is a three-step process:
+Creating an Edge Hostname is a three-step process:
 
-- Create a CNAME using the procedure below. (Alternatively, you can use the [CDN360 API](</apidocs#operation/createCNAME>).)
-- [Deploy the property](</docs/portal/edge-configurations/deploying-property.md>) defined with the hostname(s) to production.
-
-- Update your DNS records to point your hostname(s) to the CNAME.
-
-1. In the left pane, click **CNAMEs**.
-2. At the top right of the screen, click the **Create CNAME** button. 
-3. Complete the fields in the Create a CNAME form. Required fields are denoted by an asterisk (\*).
+1. In the left pane, click **Traffic Management**.
+2. At the top right of the screen, click the **Create Edge Hostname** button. 
+3. Complete the fields in the Create an Edge Hostname form. Required fields are denoted by an asterisk (\*).
 
 <p align=center><img src="/docs/resources/images/cname1.png" alt="cname overview page" width="900"></p>
 
 
 | **Fields**                               | **Description**                     |
 | ---------------------------------------- | ----------------------------------- |
-| What does a CNAME do? Add a description. | Enter a description for the CNAME.  |
-| CNAME                                    | Either enter a CNAME manually in the text field or click the **Auto Generate** button to have CDN360 generate a CNAME for you. If you enter a CNAME, your typed entry must be a valid domain name.                     |
+| Description. | Enter a description for the CNAME.  |
+| Hostname       | Either enter the first part of the edge hostname manually in the text field or click the **Auto Generate** button to generate a random one. |
 
-4. Click the **Create Client Region Rule** button. The Create Client Region Rule dialog box appears, with fields for specifying how CDN360 handles requests from different regions. Required fields are denoted by an asterisk (\*).
+4. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields to define the client zone and how to handle requests come from it. Required fields are denoted by an asterisk (\*).
 
-**Note**: If you do not create a client region rule, or if you leave the **Client Region** field empty, a rule covering ALL regions is created automatically.
+**Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
 
-<ul>a. Complete all the fields, and then click the <strong>Create Client Region Rule</strong> button. 
+<ul>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button. 
 
-b. To specify more client region rules, repeat step 4a for each additional rule.</ul>
+b. To specify more client zone rules, repeat step 4a for each additional rule.</ul>
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="500"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
-| Client Region     | Select a region for this rule. If you leave this field empty, a rule covering ALL regions is created automatically.|
-| Client ISP        | Select a client ISP.                                                      |
-| Action Type       | Select the type of action to be performed. Choices are:<br><ul><li><strong>Deliver</strong> = specifies the server groups to deliver your traffic. Only one delivery action is allowed for each client region. All servers in the selected server group will be used as candidates in the load balancing algorithm.<li><strong>Redirect</strong> = directs traffic requests to the target specified in the Redirect target field (see below). This can be your origin site or another CDN provider. There can be multiple redirect actions for each client region.</li><li><strong>Reject</strong> = directs traffic requests to web servers that always respond with a 403 - forbidden error message. Only one reject action is allowed for each client region.</li></ul>  
-| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server group options:<br><li><strong>Standard</strong> = standard server group.</li><li><strong>Premium</strong> = includes the standard server group.</li><li><strong>Premium+</strong> = includes the standard and premium server groups.<li><strong>Ultra</strong> = includes the standard, premium, and premium+ server groups.</li>                                                                      |
-| Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic.                                                               |
-| Weight | Adjust how this rule behaves relative to other rules for the same client region.      |
+| Client Region     | Select a region that defines this client zone.|
+| Client ISP        | Select a ISP that defines this client zone.|
+| Action Type       | Select the type of action to be performed to requests from this client zone. Choices are:<br><ul><li><strong>Deliver</strong> = Contents will be served by CDN360 servers to fullfill the requests from this client zone. Only one delivery action is allowed for each client zone. You need to select the server groups to deliver the contents. </li><li><strong>Redirect</strong> = Redirect client requests to another destination specified in the Redirect Target field (see below). This can be your origin site or maybe another CDN provider. There can be multiple redirect actions for each client zone.</li><li><strong>Reject</strong> = Client requests will always receive a response with a 403 - forbidden error message. Only one reject action is allowed for each client zone.</li></ul>  
+| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server groups to deliver the contents for this client zone. CDN360 servers are divided into 4 groups based on the traffic cost from low to high: <strong>Standard</strong>, <strong>Premium</strong>, <strong>Premium+</strong> and <strong>Ultra</strong>. When you select one group, all the lower groups will be automatically included. |
+| Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic. |
+| Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional this specified weight. |
 
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 
@@ -46,7 +41,7 @@ b. To specify more client region rules, repeat step 4a for each additional rule.
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |
-| Has Beian       |        Select whether content will be served from PoPs inside or outside China. Choices are: <br><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*)</li><li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</li>
+| Has ICP Beian   |   Select whether content will be served from PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = contents will only be served from PoPs located outside mainland China. (*default*)</li><li><strong>Yes</strong> = all PoPs, including the ones located in mainland China will be used to server the contents. You have to make sure all the service hostnames using this edge hostname have ICP Beian in China.</li>|
 
-6. Click the **Create CNAME** button.
-7. After creating the CNAME, update your DNS records to point your hostname(s) to the CNAME.
+6. Click the **Create Edge Hostname** button.
+7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.
