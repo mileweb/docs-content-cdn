@@ -1,6 +1,6 @@
 # Creating a Property
 
-To create a property, complete the Create a Property form with required information. After creating a property, save and [validate](</docs/portal/edge-configurations/validating-property.md>) the property before you deploy and test it.
+To create a property, complete the Create a Property form with required information. After creating a property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
 
 1. In the left pane, click **Edge Configurations**.
 2. At the top right of the Properties page, click the **Create Property** button. 
@@ -24,7 +24,7 @@ To create a property, complete the Create a Property form with required informat
 | Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](ToBeDone). If you require this feature, contact CDNetworks.|
 | Advanced Settings         | Use [advanced settings](</docs/portal/edge-configurations/advanced-settings.md>) to specify cache sharing, China ICP Beian, and a load balancer hash key.|
 
-4. To save the property, click the **Save** button. Several basic syntax checks are performed. If errors are found, you are prompted to fix them before the property is saved. Any property version will have to be "validated" before it can be deployed to staging or production. You can click the <strong>Save & Validate</strong> button to start the validation process. When the Confirmation pop-up appears, click <strong>OK</strong>. The validation process usually takes less than a minute. You can either wait for it to finish or close the progress dialog box to perform other tasks while validation continues in the background. You can click <strong>Tasks</strong> in the left pane to [check the validation results](</docs/portal/edge-configurations/validating-property.md>). If there is a failure, perform the instructions in the error message to fix it.
+4. To save the property, click the **Save** button. Several basic syntax checks are performed. If errors are found, you are prompted to fix them before the property is saved. Any property version will have to be "validated" before it can be deployed to staging or production. You can click the <strong>Save & Validate</strong> button to start the validation process. When the Confirmation pop-up appears, click <strong>OK</strong>. The validation process usually takes less than a minute. You can either wait for it to finish or close the progress dialog box to perform other tasks while validation continues in the background. You can click <strong>Tasks</strong> in the left pane to [check the validation results](</docs/portal/tasks/validations.md>). If there is a failure, perform the instructions in the error message to fix it.
 
 5. If the property is validated successfully, you can [deploy](</docs/portal/edge-configurations/deploying-property.md>) it to the staging or production environment. By default, trial users will have access to the staging environment only. Please contact the support team to enable access to the production environment.
 

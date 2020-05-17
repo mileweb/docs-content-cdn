@@ -143,6 +143,18 @@
           },
           { "title": "Reports", "path": "/docs/portal/reports.md" },
           { "title": "Content Management", "path": "/docs/portal/content-management.md" },
+          { "title": "Tasks",
+            "routes": [
+              {
+                "title": "Validations",
+                "path": "/docs/portal/tasks/validations.md"
+              },
+              {
+                "title": "Deployments",
+                "path": "/docs/portal/tasks/deployments.md"
+              }
+            ]
+          },
           {
             "title": "Identities and Access",
             "routes": [
