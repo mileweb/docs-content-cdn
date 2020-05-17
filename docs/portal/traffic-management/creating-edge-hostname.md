@@ -1,11 +1,11 @@
-# Creating a CNAME
+# Creating a Edge Hostname 
 
-For the CDN360 portal to serve your content, you must create a CNAME. The CNAME is configured with one or more client region rules that indicate how CDN360 will handle client requests.
+For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record. For the new edge hostname, you can define different rules to handle request from different client zones. A client zone is defined by a geographical region and one or more ISPs.
 
 Creating a CNAME is a three-step process:
 
 - Create a CNAME using the procedure below. (Alternatively, you can use the [CDN360 API](</apidocs#operation/createCNAME>).)
-- [Deploy the property](</docs/portal/properties/deploying-property.md>) defined with the hostname(s) to production.
+- [Deploy the property](</docs/portal/edge-configurations/deploying-property.md>) defined with the hostname(s) to production.
 
 - Update your DNS records to point your hostname(s) to the CNAME.
 

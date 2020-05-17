@@ -14,5 +14,5 @@ The following procedure describes how to use the auto-renew feature:
 
 4. Attach the initial certificate to the property created in the previous step.
 5. Deploy the property and certificate to production.
-6. Update your DNS server to point the hostnames to a CDN360 CNAME. If you do not have a CNAME, [create one](</docs/portal/cnames/creating-cname.md>).
+6. Update your DNS server to point the hostnames to a CDN360 edge hostname. If you do not have an edge hostname, [create one](</docs/portal/traffic-management/creating-edge-hostname.md>).
 7. After you perform the steps above, and if the initial certificate's expiration date is within 25 days, CDN360 renews the certificate automatically through LE within one hour. You will receive notifications about the success or failure of the renewal.

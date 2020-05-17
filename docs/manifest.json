@@ -59,60 +59,60 @@
             "routes": [
               {
                 "title": "Overview of Property",
-                "path": "/docs/portal/properties/managing-properties.md"
+                "path": "/docs/portal/edge-configurations/managing-properties.md"
               },
               {
                 "title": "Create a Property",
-                "path": "/docs/portal/properties/creating-property.md"
+                "path": "/docs/portal/edge-configurations/creating-property.md"
               },
               {
                 "title": "Edit a Property",
-                "path": "/docs/portal/properties/editing-properties.md"
+                "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
                 "title": "Validate a Property",
-                "path": "/docs/portal/properties/validating-property.md"
+                "path": "/docs/portal/edge-configurations/validating-property.md"
               },
               {
                 "title": "Deploy/Undeploy a Property",
-                "path": "/docs/portal/properties/deploying-property.md"
+                "path": "/docs/portal/edge-configurations/deploying-property.md"
               },
               {
                 "title": "Test a Property",
-                "path": "/docs/portal/properties/testing-property.md"
+                "path": "/docs/portal/edge-configurations/testing-property.md"
               },
               {
                 "title": "Delete a Property",
-                "path": "/docs/portal/properties/deleting-property.md"
+                "path": "/docs/portal/edge-configurations/deleting-property.md"
               },
               {
                 "title": "Compare Property Versions",
-                "path": "/docs/portal/properties/comparing-properties.md"
+                "path": "/docs/portal/edge-configurations/comparing-properties.md"
               },
               {
                 "title": "Manage Origins",
-                "path": "/docs/portal/properties/managing-origins.md"
+                "path": "/docs/portal/edge-configurations/managing-origins.md"
               }
             ]
           },
           {
-            "title": "CNAMEs",
+            "title": "Traffic Control",
             "routes": [
               {
-                "title": "Managing CNAMEs",
-                "path": "/docs/portal/cnames/managing-cnames.md"
+                "title": "Overview of Traffic Control",
+                "path": "/docs/portal/traffic-management/overview.md"
               },
               {
-                "title": "Creating a CNAME",
-                "path": "/docs/portal/cnames/creating-cname.md"
+                "title": "Create an Edge Hostname",
+                "path": "/docs/portal/traffic-management/creating-edge-hostname.md"
               },
               {
-                "title": "Editing a CNAME",
-                "path": "/docs/portal/cnames/editing-cname.md"
+                "title": "Edit an Edge Hostname",
+                "path": "/docs/portal/traffic-management/editing-edge-hostname.md"
               },
               {
-                "title": "Deleting a CNAME",
-                "path": "/docs/portal/cnames/deleting-cname.md"
+                "title": "Delete an Edge Hostname",
+                "path": "/docs/portal/traffic-management/deleting-edge-hostname.md"
               }
             ]
           },
