@@ -36,7 +36,7 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 
 ## Properties
 
-The [Properties page](</docs/portal/properties/managing-properties.md>) allows you to create and manage the properties accelerated by CDN360.
+The [Properties page](</docs/portal/edge-configurations/managing-properties.md>) allows you to create and manage the properties accelerated by CDN360.
 
 ## Traffic Control
 

@@ -5,7 +5,7 @@ For the CDN360 platform to serve your content to the end users, you must create 
 Creating a CNAME is a three-step process:
 
 - Create a CNAME using the procedure below. (Alternatively, you can use the [CDN360 API](</apidocs#operation/createCNAME>).)
-- [Deploy the property](</docs/portal/properties/deploying-property.md>) defined with the hostname(s) to production.
+- [Deploy the property](</docs/portal/edge-configurations/deploying-property.md>) defined with the hostname(s) to production.
 
 - Update your DNS records to point your hostname(s) to the CNAME.
 
