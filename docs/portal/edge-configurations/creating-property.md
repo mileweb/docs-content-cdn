@@ -2,7 +2,7 @@
 
 To create a property, complete the Create a Property form with required information. After creating a property, save and [validate](</docs/portal/edge-configurations/validating-property.md>) the property before you deploy and test it.
 
-1. In the left pane, click **Properties**.
+1. In the left pane, click **Edge Configurations**.
 2. At the top right of the Properties page, click the **Create Property** button. 
 
 <p align=center><img src="/docs/resources/images/Create Property.png" alt="create property" width="900"></p>

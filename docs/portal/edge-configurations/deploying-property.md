@@ -2,7 +2,7 @@
 
 After you have created and validated a property version, you are ready to deploy it. We highly recommend you to always deploy to the staging environment to make sure it is configured properly and the behavior is as expected. Once you confirm that the property is ready to go live, you can deploy it to the production environment.
 
-1. In the left pane, click **Properties**. 
+1. In the left pane, click **Edge Configurations**. 
 
 2. On the Properties page, click the ID of the property you want to deploy. 
 
@@ -18,10 +18,8 @@ After you have created and validated a property version, you are ready to deploy
 
 # Undeploying a Property
 
-1. In the left pane, click **Properties**.
-
-2. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
+1. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
 <p align="center"><img src="/docs/resources/images/UndeployAProperty.png" alt="property undeployment" width="900"></p>
 
-3. When the confirmation message appears, click **Yes, Undeploy!** When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
+2. When the confirmation message appears, click **Yes, Undeploy!** When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at anytime.
