@@ -18,12 +18,9 @@ Creating an Edge Hostname is a three-step process:
 
 4. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields to define the client zone and how to handle requests come from it. Required fields are denoted by an asterisk (\*).
 
+<ul><li>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button. </li>
+<li>b. To specify more client zone rules, repeat step 4a for each additional rule.</li></ul>
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
-
-<ul>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button. 
-
-b. To specify more client zone rules, repeat step 4a for each additional rule.</ul>
-
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="500"></p>
 
 | **Fields**        | **Description**                                                           |
@@ -41,7 +38,9 @@ b. To specify more client zone rules, repeat step 4a for each additional rule.</
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |
-| Has ICP Beian   |   Select whether content will be served from PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = contents will only be served from PoPs located outside mainland China. (*default*)</li><li><strong>Yes</strong> = all PoPs, including the ones located in mainland China will be used to server the contents. You have to make sure all the service hostnames using this edge hostname have ICP Beian in China.</li>|
+| Has ICP Beian   |   This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></br>
+
+Select whether content will be served from PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = contents will only be served from PoPs located outside mainland China. (*default*)</li><li><strong>Yes</strong> = all PoPs, including the ones located in mainland China will be used to server the contents. You have to make sure all the service hostnames using this edge hostname have ICP Beian in China.</li>|
 
 6. Click the **Create Edge Hostname** button.
 7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.
