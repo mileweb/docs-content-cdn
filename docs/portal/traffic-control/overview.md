@@ -16,4 +16,4 @@ This pages displays the list of edge hostnames in your account. The following fi
 ## Edge Hostname Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with each edge hostname.
 - **Edit**: [Update](</docs/portal/traffic-control/editing-edge-hostname.md>) the selected edge hostname.
-- **Delete**: Delete the edge hostname.
+- **Delete**: [Delete](</docs/portal/cnames/deleting-edge-hostname.md>) the edge hostname.

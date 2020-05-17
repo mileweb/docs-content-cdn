@@ -6,7 +6,7 @@
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-The Edge Hostname form that appears allows you to create, edit, and delete client zone rules, and change advanced settings. Refer to the appropriate steps below.
+The Edge Hostname form appears for creating, editing, and deleting client zone rules and changing advanced settings. For more information, refer to the topics below.
 <p align=center><img src="/docs/resources/images/Editing CNAME Form.png" alt="edit cname form" width="900"></p>
 
 4. To create one or more client zone rules, perform the following steps.
