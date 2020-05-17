@@ -11,9 +11,9 @@ This pages displays the list of edge hostnames in your account. The following fi
 | 1            | A search box that you can enter any keyword to filter the edge hostname list.                  |
 | 2            | The list of all edge hostnames in your account.                                      |
 | 3            | Drop-down list to take actions on each edge hostname.                                          |
-| 4            | The button to [create a new edge hostname](<docs/portal/traffic-control/creating-edge-hostname.md>).    |
+| 4            | The button to [create a new edge hostname](<docs/portal/traffic-management/creating-edge-hostname.md>).    |
 
 ## Edge Hostname Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with each edge hostname.
-- **Edit**: [Update](</docs/portal/traffic-control/editing-edge-hostname.md>) the selected edge hostname.
-- **Delete**: [Delete](</docs/portal/cnames/deleting-edge-hostname.md>) the edge hostname.
+- **Edit**: [Update](</docs/portal/traffic-management/editing-edge-hostname.md>) the selected edge hostname.
+- **Delete**: [Delete](</docs/portal/traffic-management/deleting-edge-hostname.md>) the edge hostname.

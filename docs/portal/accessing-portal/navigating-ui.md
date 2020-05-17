@@ -40,7 +40,7 @@ The [Properties page](</docs/portal/edge-configurations/managing-properties.md>)
 
 ## Traffic Control
 
-The [Traffic Control page](</docs/portal/traffic-control/overview.md>) allows you to create and manage the edge hostnames to which you will map your service hostnames. You must create a CNAME record with your DNS service to start routing client traffic to the CDN360 servers.
+The [Traffic Control page](</docs/portal/traffic-management/overview.md>) allows you to create and manage the edge hostnames to which you will map your service hostnames. You must create a CNAME record with your DNS service to start routing client traffic to the CDN360 servers.
 
 ## Certificates
 
