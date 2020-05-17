@@ -1,6 +1,6 @@
 # Editing an Edge Hostname
 
-1. In the left pane, click **Traffic Control**.
+1. In the left pane, click **Traffic Management**.
 2. Click the edge hostname you want to edit 
 3. At the top right of the page, click the **Edit** button.
 
@@ -13,17 +13,10 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 
 <ul>a. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.</ul>
-
-<p align=center><img src="/docs/resources/images/Create Client Region Rule Button.png" alt="create client region rule button" width="900"></p>
-
 <ul>b. Complete all the fields, and then click the **Create Client Zone Rule** button.</ul>
 <ul>c. To add more client zone rules, repeat this step for each additional rule.</ul>
 
 <p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="create client region rule" width="500"></p>
-
-You can also delete any un-needed client zone rules by clicking the **delete** link. 
-
-**Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
@@ -40,13 +33,15 @@ You can also delete any un-needed client zone rules by clicking the **delete** l
 <ul>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).<br><br></ul>
 <ul>c. Click the <strong>Update Client Zone Rule** button.</strong></ul>
 
-6. To delete a client region rule:
+6. To delete a client zone rule:
 
 <ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
 <p align=center><img src="/docs/resources/images/CNAME Delete.png" alt="cname delete" width="800"></p>
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</ul><br>
+**Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
+
 
 7. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
 
