@@ -1,4 +1,4 @@
-# Traffic Control and Edge Hostname
+# Managing Traffic with Edge Hostnames
 
 Without a CDN, your service hostname always got resolved to the IP address of the server hosting your service. To start using CDN360, the end users' traffic needs to be directed to our edge servers. This can be done by creating a CNAME record with your DNS service provider that points your service hostname to a CDN360 'edge hostname' you create on this page. You can maintain multiple edge hostnames in your account for different traffic management requirements. Each edge hostname can be configured with sophisticated policies based on end users' geographic location and ISP, like a smart DNS service. Most importantly, those policies give you full control of the trade-off between service performance and the cost.
 
