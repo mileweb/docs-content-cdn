@@ -26,8 +26,8 @@ Properties are managed from the Properties page. To display this page, click **P
 ## Property Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with properties.
 (Show Properties Actions drop-down menu??)
-- **Edit**: [Update](<docs/portal/edge-configurations/editing-properties.md>) the selected property.
-- **Compare**: [Compare](<docs/portal/edge-configurations/comparing-properties.md>) two properties.
+- **Edit**: [Update](</docs/portal/edge-configurations/editing-properties.md>) the selected property.
+- **Compare**: [Compare](</docs/portal/edge-configurations/comparing-properties.md>) two properties.
 - **Undeploy**: Undeploy a property from the staging or production environment.
 - **Delete**: Delete the property.
 
