@@ -19,7 +19,7 @@ Creating an edge hostname is a three-step process:
 | **Fields**                               | **Description**                     |
 | ---------------------------------------- | ----------------------------------- |
 | Add a description about this edge hostname. | Enter a description for the edge hostname.  |
-| CNAME                                    | Either enter the first part of an edge hostname manually in the text field or click the **Auto Generate** button to have CDN360 generate it for you. If you enter it manually, your typed entry must be a valid domain name.                     |
+| Hostname                                    | Either enter the first part of an edge hostname manually in the text field or click the **Auto Generate** button to have CDN360 generate it for you. If you enter it manually, your typed entry must be a valid domain name.                     |
 
 4. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields for specifying how CDN360 handles requests from different zones. Required fields are denoted by an asterisk (\*).
 
