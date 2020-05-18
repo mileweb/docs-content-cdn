@@ -61,7 +61,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 4. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
 
-## Changing the Has ICP Bien Setting for a CNAME
+## Changing the Has ICP Bien Setting for an Edge Hostname
 
 1. Near the bottom of the form, expand **Advanced Settings** and make your change.
 
