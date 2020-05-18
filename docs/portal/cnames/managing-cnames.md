@@ -17,6 +17,6 @@ The following figure shows the key elements on the page, and the table following
 
 ## Edge Hostname Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with edge hostnames.
-(Show CNAME Actions drop-down menu??)
+(Show Actions drop-down menu??)
 - **Edit**: [Update](</docs/portal/cnames/editing-cname.md>) the selected edge hostname.
 - **Delete**: [Delete](</docs/portal/cnames/deleting-cname.md>) the edge hostname.
