@@ -27,6 +27,6 @@ Clicking the **Actions** drop-down list shows all the available actions that can
 (Show Properties Actions drop-down menu??)
 - **Edit**: [Update](<docs/portal/properties/../../../editing-properties.md>) the selected property.
 - **Compare**: [Compare](<docs/portal/properties/../../../comparing-properties.md>) two properties.
-- **Undeploy**: [Undeploy](docs/portal/properties/../../../deploying-property.md>) a property from the staging or production environment.
-- **Delete**: [Delete](docs/portal/properties/../../../deleting-property.md>) the property.
+- **Undeploy**: [Undeploy](<docs/portal/properties/../../../deploying-property.md>) a property from the staging or production environment.
+- **Delete**: [Delete](<docs/portal/properties/../../../deleting-property.md>) the property.
 
