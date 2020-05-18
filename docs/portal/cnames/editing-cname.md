@@ -1,14 +1,14 @@
 # Editing a CNAME
 
-1. In the left pane, click **CNAMEs**.
-2. Click the CNAME you want to edit. 
+1. In the left pane, click **Traffic Management**.
+2. Click the edge hostname you want to edit. 
    <br><U>OR </u></br>
-   Click the **Actions** drop-down list for the CNAME you want to edit, and then select **Edit**.<br>
+   Click the **Actions** drop-down list for the edge hostname you want to edit, and then select **Edit**.<br>
 3. At the top right of the form, click the **Edit** button.
 
 <p align=center><img src="/docs/resources/images/Edit CNAME - Edit Button.png" alt="edit cname button" width="900"></p>
 
-Controls appear for creating, editing, and deleting client zone rules and changing advanced settings for the selected CNAME. For more information, refer to the topics below.
+Controls appear for creating, editing, and deleting client zone rules and changing advanced settings for the selected edge hostname. For more information, refer to the topics below.
 
 ## Creating Client Zone Rules
 
@@ -61,7 +61,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 4. When you finish all edits, click **Update** at the bottom right of the form. Then click **OK** at the confirmation prompt and  **Close**.
 
-## Changing the Has Bien Setting for a CNAME
+## Changing the Has ICP Bien Setting for a CNAME
 
 1. Near the bottom of the form, expand **Advanced Settings** and make your change.
 
@@ -69,7 +69,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
-| Has Beian       |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
+| Has ICp Beian   |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
 
 2. Perform any other edits on this form. 
 
