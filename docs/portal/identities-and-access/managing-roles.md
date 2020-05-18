@@ -78,10 +78,10 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 | certificate.download.csr                       | Download CSRs          |
 | certificate.read                               | Read certificates      |
 | certificate.update                             | Update certificates    |
-| cname.create                                   | Create CNAMEs          |
-| cname.delete                                   | Delete CNAMEs          |
-| cname.read                                     | Read CNAMEs            |
-| cname.update                                   | Update CNAMEs          |
+| cname.create                                   | Create edge hostnames  |
+| cname.delete                                   | Delete edge hostnames  |
+| cname.read                                     | Read  edge hostnames   |
+| cname.update                                   | Update  edge hostnames |
 | dashboard.read                                 | Read the dashboard     |
 | notification.create                            | Create notifications   |
 | notification.delete                            | Delete notifications   |
