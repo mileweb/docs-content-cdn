@@ -40,7 +40,7 @@ Displays the [Properties page](</docs/portal/properties/managing-properties.md>)
 
 ## Traffic Management
 
-Displays the [CNAMEs page](</docs/portal/cnames/managing-cnames.md>), which allows you to create and manage the Canonical Name Record (CNAME) to which you will map your hostnames. You must create a CNAME record before CDN360 can serve as a reverse proxy and start routing client traffic through the CDN servers.
+Displays the [CNAMEs page](</docs/portal/cnames/managing-cnames.md>), which allows you to create and manage edge hostnames to which you will map your hostnames. You must create an edge hostname before CDN360 can serve as a reverse proxy and start routing client traffic through the CDN servers.
 
 ## Certificates
 
