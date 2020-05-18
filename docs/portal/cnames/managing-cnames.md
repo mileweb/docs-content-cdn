@@ -2,7 +2,7 @@
 
 An edge hostname is a DNS record used to alias one domain name to a different domain name. The edge hostname performs aliasing by pointing a domain or subdomain to the IP address of the destination hostname. In this way, if the IP address of the destination hostname changes, you will not need to change your DNS records because the edge hostname will have the same IP address.
 
-Edge hostnames are managed from the CNAMEs page. Using this page, you define edhe host names to which you can point your hostnames. To display this page, click **Traffic Management** in the left pane.
+Edge hostnames are managed from the CNAMEs page. Using this page, you define the host names to which you can point your hostnames. To display this page, click **Traffic Management** in the left pane.
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
