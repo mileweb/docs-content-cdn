@@ -69,7 +69,7 @@ Controls appear for creating, editing, and deleting client zone rules and changi
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
-| Has ICp Beian   |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
+| Has ICP Beian   |      Select whether content will be served from PoPs inside or outside China. Choices are: <br><ul><li><strong>No</strong> = content is served to website visitors in China from PoPs located outside China. (*default*) <li><strong>Yes</strong> = content is served to website visitors in China from PoPs located in China.</ul></li></br>|
 
 2. Perform any other edits on this form. 
 
