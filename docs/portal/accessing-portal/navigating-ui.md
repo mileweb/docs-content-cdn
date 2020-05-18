@@ -34,13 +34,13 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 - Number of requests made to the files on your property.
 - Percentage of each HTTP status code returned as a result of requests to your content.
 
-## Properties
+## Edge Configurations
 
-The [Properties page](</docs/portal/properties/managing-properties.md>) allows you to create and manage the properties accelerated by CDN360.
+Displays the [Properties page](</docs/portal/properties/managing-properties.md>), which allows you to create and manage the properties accelerated by CDN360.
 
-## CNAMEs
+## Traffic Management
 
-The [CNAMEs page](</docs/portal/cnames/managing-cnames.md>) allows you to create and manage the Canonical Name Record (CNAME) to which you will map your hostnames. You must create a CNAME record before CDN360 can serve as a reverse proxy and start routing client traffic through the CDN servers.
+Displays the [CNAMEs page](</docs/portal/cnames/managing-cnames.md>), which allows you to create and manage the Canonical Name Record (CNAME) to which you will map your hostnames. You must create a CNAME record before CDN360 can serve as a reverse proxy and start routing client traffic through the CDN servers.
 
 ## Certificates
 
