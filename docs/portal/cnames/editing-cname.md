@@ -1,4 +1,4 @@
-# Editing a CNAME
+# Editing an Edge Hostname
 
 1. In the left pane, click **Traffic Management**.
 2. Click the edge hostname you want to edit. 
