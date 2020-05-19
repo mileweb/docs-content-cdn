@@ -1,6 +1,6 @@
 # Deploying Your Property
 
-After you have created and validated a property version, you are ready to deploy it. We highly recommend you to always deploy to the staging environment to make sure it is configured properly and the behavior is as expected. Once you confirm that the property is ready to go live, you can deploy it to the production environment.
+After you create and validate a property version, you are ready to deploy it. We highly recommend that you always deploy the property to the staging environment to make sure it is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
 
 1. In the left pane, click **Edge Configurations**. 
 
@@ -10,11 +10,11 @@ After you have created and validated a property version, you are ready to deploy
 
 <p align=center><img src="/docs/resources/images/Deployment Selections and Button.png" alt="deployment selections and button" width="900"></p>
 
-4. If the property is already deployed to the environment you select, the next form compares the deployed version with the one you want to deploy. If you are OK with the difference, click the **Deploy to ...** button on the top right corner, or **Back** to cancel the deployment.
+4. If the property is already deployed to the environment you select, the next form compares the deployed version with the one you want to deploy. If you are satisfied with the differences, click the **Deploy to ...** button on the top right corner (or click **Back** to cancel the deployment).
 
-5. When the Deployment Confirmation pop-up appears, click **OK**. The deployment process usually finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment.
+5. When the Deployment Confirmation pop-up appears, click **OK**. Usually,the deployment process finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment.
 
-6. Click [here](</docs/portal/edge-configurations/testing-property.md#testing-property-in-staging>) to test the property in the staging environment.
+6. Click [here](</docs/portal/edge-configurations/testing-property.md#testing-property-in-staging>) for instructions about testing the property in the staging environment.
 
 # Undeploying a Property
 
