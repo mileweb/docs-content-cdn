@@ -1,6 +1,6 @@
 # Deploying Your Property
 
-After you create and validate a property version, you are ready to deploy it. We highly recommend that you always deploy the property to the staging environment to make sure it is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
+After you create and validate a property version, you are ready to deploy it. Initially, we highly recommend that you always deploy the property to the staging environment to make sure it is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
 
 1. In the left pane, click **Edge Configurations**. 
 
