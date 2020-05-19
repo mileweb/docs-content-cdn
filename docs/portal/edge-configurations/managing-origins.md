@@ -3,7 +3,7 @@
 
 Origins are your web servers containing the content you want CDN360 to accelerate. CDN360 supports more than one origin for each property, along with a plethora of settings for defining access to your origins.
 
-## Adding or Editing of Origins in a Property
+## Adding or Editing Origins in a Property
 
 1. In the left pane, click **Edge Configurations**.
 2. From the Property page, click the ID of the property you want to edit, and then select the version from the drop-down list. 
