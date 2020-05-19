@@ -5,7 +5,7 @@ Origins are your web servers containing the content you want CDN360 to accelerat
 
 ## Adding or Editing of Origins in a Property
 
-1. In the left pane, click **Properties**.
+1. In the left pane, click **Edge Configurations**.
 2. From the Property page, click the ID of the property you want to edit, and then select the version from the drop-down list. 
 3. Click the **Edit** or **Clone** button to make changes. A section similar to the one below appears.
 <p align="center"><img src="/docs/resources/images/OriginList.png" alt="Upload Certificate Version" width="700"></p>
