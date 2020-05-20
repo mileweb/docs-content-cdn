@@ -40,5 +40,5 @@ The following figure shows the key elements on the page, and the table following
 | 2 | To filter users on the **Users** tab or roles on the **Roles** tab, type characters in this field and then press the Enter key. All properties that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **Reset** button.|
 | 3 | Each user or role appears on a row within its respective tab.|
 | 4 | The **Actions** drop-down list on each row has options appropriate for each tab.|
-| 5 | The **Users** tab has an **+ Add User** button that allows administrators to create new users. Similarly, the **Roles** tab has an **+ Add Role** button that allows administrators to [create new roles](<docs/portal/../../managing-roles.md>). These buttons do not appear for viewers.|
+| 5 | The **Users** tab has an **+ Add User** button that allows administrators to create new users. Similarly, the **Roles** tab has an **+ Add Role** button that allows administrators to [create new roles](<docs/portal/identities-and-access/managing-roles.md>). These buttons do not appear for viewers.|
 
