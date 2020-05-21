@@ -48,11 +48,11 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](http://www.beian.miit.gov.cn/). For certain domains, a [Security Beian](http://www.beian.gov.cn/) is also required. As a CDN provider, we cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, we can use servers located in close proximity to Mainland China (for example, Hong Kong, Korea and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
 
-Assuming you have a domain with ICP Beian, perform the following steps to enable local delivery in Mainland China: 
+If you have one or more domains with ICP Beian and want them to be accelerated in China, please first make sure with customer service that we have all the required information on file about your business. Once we confirm that is the case, your China Delivery service will be enabled. Then you just need to perform the following steps to enable local delivery of domains in Mainland China: 
 
-1. Create a [CNAME](<../../apidocs#operation/createCNAME>) with "hasBeian" set to true, and use this CNAME for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
+1. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
 
-2. Set "hasBeian" to true in the [property](/apidocs#operation/createProperty) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
+2. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
 
 ### How to support websocket?
 
