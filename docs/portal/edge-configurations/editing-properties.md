@@ -3,7 +3,9 @@
 
 1. In the left pane, click **Edge Configurations**.
 
-2. On the Properties page, click the ID of the property you want to edit.
+2. On the Properties page, click the ID of the prperty you want to edit. 
+   <br><U>OR </u></br>
+   Click the **Actions** menu for the property you want to edit, and then select **Edit**.
 
 <p align="center"><img src="/docs/resources/images/Edit Properties.png" alt="Upload Certificate Version" width="700"></p>
 
