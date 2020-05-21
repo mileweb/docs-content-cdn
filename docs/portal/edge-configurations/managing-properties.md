@@ -28,6 +28,6 @@ Clicking the **Actions** drop-down list shows all the available actions that can
 (Show Properties Actions drop-down menu??)
 - **Edit**: [Update](</docs/portal/edge-configurations/editing-properties.md>) the selected property.
 - **Compare**: [Compare](</docs/portal/edge-configurations/comparing-properties.md>) two properties.
-- **Undeploy**: Undeploy a property from the staging or production environment.
+- **Undeploy**: [Undeploy](</docs/portal/edge-configurations/deploying-properties.md>) two properties.
 - **Delete**: Delete the property.
 
