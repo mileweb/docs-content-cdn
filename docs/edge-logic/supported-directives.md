@@ -186,7 +186,9 @@ Specifies that a given location can only be used for internal requests. No chang
 
 <span class="badge">standard</span>
 
-Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’.
+**Default**: `limit_rate 2m;` <br/>
+
+Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’. The default value is 2MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
