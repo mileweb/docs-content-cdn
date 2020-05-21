@@ -40,12 +40,9 @@ origin_header_modify Vary "" policy=preserve;
 ```
 However, preserving a `Vary` header prevents the response from being cached because [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) is configured by default. If it is absolutely important for the CDN360 servers to cache multiple versions based on the `Vary` header, contact our customer support to obtain permission to set `proxy_cache_vary on`.
 
-### How to chase redirections from origin?
+### How to follow redirections from origin?
 
-When the origin responds with 30x redirection, you may want the CDN servers to chase it until the redirection stops, instead of passing the redirection to the client, which takes more time to get the final content. If you want to turn it on, you just need to do the following:
-```
-TBD
-```
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn this feature on, you just need to use the directive [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) in the location where it is needed.
 
 ### China Delivery and Beian
 
