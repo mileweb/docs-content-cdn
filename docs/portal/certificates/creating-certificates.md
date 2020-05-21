@@ -11,7 +11,7 @@ There are two ways to create a new certificate:
 The following procedure describes how to generate self-signed certificates. Self-signed certificates can be used for testing purposes or internal use before deploying the certificate into the production environment. If you need a CSR to obtain a signed certificate from a CA, create a self-signed certificate first.
 
 1. In the left pane, click **Certificates**.
-2. At the top right, click the **Create Certificate** button. 
+2. At the top right of the Certificates page, click the **Create Certificate** button. 
 
 <p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="create new cert button menu" width="900"></p>
 
@@ -50,7 +50,7 @@ If you already have a certificate with the private key and the CA chain certific
 To upload the files as a new certificate:
 
 1. In the left pane, click **Certificates**.<br>
-2. At the top right, click the **Create Certificate** button. 
+2. At the top right of the Certificates page, click the **Create Certificate** button. 
 
 <p align=center><img src="/docs/resources/images/Create new Certificate Button.png" alt="Create new certi button" width="900"></p>
 

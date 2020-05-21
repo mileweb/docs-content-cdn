@@ -25,7 +25,7 @@ There are several ways to send test traffic to the staging environment:
 faster.mydomain.com CNAME staging.qtlgslb.com
 ```
 
-If you use a smart DNS service, you can also direct a small portion of the production traffic to the staging CNAME to have a more thorough test.
+If you use a smart DNS service, you can also direct a small portion of the production traffic to the staging hostname to have a more thorough test.
 - Modify the ```/etc/hosts``` file to hard code the hostname to be accelerated to one of the staging servers IP addresses. For example:
 
 
