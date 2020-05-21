@@ -50,9 +50,9 @@ The Chinese Ministry of Industry and Information Technology (MIIT) requires ever
 
 If you have one or more domains with ICP Beian and want them to be accelerated in China, please first make sure with customer service that we have all the required information on file about your business. Once we confirm that is the case, your China Delivery service will be enabled. Then you just need to perform the following steps to enable local delivery of domains in Mainland China: 
 
-1. Create an [Edge Hostname](<../../apidocs#operation/createEdgeHostname>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
+1. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
 
-2. Set "hasBeian" to true in the [property](/apidocs#operation/createProperty) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
+2. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
 
 ### How to support websocket?
 
