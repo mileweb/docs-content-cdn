@@ -9,7 +9,7 @@ Origins are your web servers containing the content you want CDN360 to accelerat
 2. From the Property page, click the ID of the property you want to edit, and then select the version from the **Version Number** drop-down list. 
 3. Click the **Edit** or **Clone** button to make changes. A section similar to the one below appears.
 <p align="center"><img src="/docs/resources/images/OriginList.png" alt="Upload Certificate Version" width="700"></p>
-4. If there is an existing origin (similar to the "temporary" one in the figure above), you can click the <strong>Edit</strong> link in the **Origins** field and complete the fields in the following dialog box to edit the origin, or click the <strong>Remove</strong> link to remove the origin. To add a new origin, click the <strong>Add Origin To List</strong> link, and then complete the fields in the following dialog box. Required fields are denoted by an asterisk (*).
+4. <ul>If there is an existing origin (similar to the "temporary" one in the figure above), you can click the <strong>Edit</strong> link in the **Origins** field and complete the fields in the following dialog box to edit the origin, or click the <strong>Remove</strong> link to remove the origin. To add a new origin, click the <strong>Add Origin To List</strong> link, and then complete the fields in the following dialog box. Required fields are denoted by an asterisk (*).</ul>
 
 <p><br><strong>Note:</strong> The fields for adding and editing origins are similar.</p>
 
