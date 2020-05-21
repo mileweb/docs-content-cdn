@@ -210,6 +210,17 @@ Sets configuration depending on a request URI. No change to the public version.
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
 
+### `origin_follow_redirect`
+
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+
+**Syntax**: `origin_follow_redirect;` <br/>
+**Default**: - <br/>
+**Context**: location
+
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that has uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
+
+
 ### `origin_header_modify`
 
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
