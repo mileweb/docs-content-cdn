@@ -21,7 +21,7 @@ To create a property, complete the Create a Property form with required informat
 | Description               | Add a description for this first property version. |
 | Hostnames                 | Enter one or more hostnames to be accelerated and which your end users will access. |
 | Origins                   | Origins are your servers that CDN360 accesses to fetch your content. You can specify more than one server. Click the **Add Origin To List** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
-| Edge Logic                | Write NGINX configuration code to specify how you want CDN360 to deliver content to your visitors (refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>)). You can click the [**Wizard** button](ToBeDone) to bootstrap this configuration using the Cache Settings dialog box.|
+| Edge Logic                | Write NGINX configuration code to specify how you want CDN360 to deliver content to your visitors (refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>)). You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Cache Settings dialog box.|
 | TLS Settings              | Select the [TLS client certificate settings](ToBeDone) for your property.|
 | Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](ToBeDone). If you require this feature, contact CDNetworks.|
 | Advanced Settings         | Use [advanced settings](</docs/portal/edge-configurations/advanced-settings.md>) to specify cache sharing, China ICP Beian, and a load balancer hash key.|
