@@ -1,7 +1,7 @@
 # Using Properties to Configure the Edge
 
 A "property" is a configuration of one or more hostnames (domains) that need to be deployed to the CDN360 edge servers. A property determines how you want the servers to obtain, cache, modify, and distribute your content to end users. The key elements of a property include:
-- Hostname(s) to be accelerated.
+- Service hostname(s) to be accelerated.
 - One or more origin servers.
 - Caching rules for different types of contents.
 - Modifications to the URL or HTTP header fields.
@@ -11,7 +11,7 @@ A "property" is a configuration of one or more hostnames (domains) that need to 
 
 On the CDN360 platform, each property is versioned to support tracking the history of changes and to allow rollback if needed. Each version can be deployed independently to the staging or production environment. On the portal, you can create, modify, validate, and deploy properties. You can also undeploy and delete properties if needed.
 
-To start working with properties, click **Edge Configurations** in the left pane. The following figure shows the key elements on the page, and the table following the figure describes them.
+To get started, click **Edge Configurations** in the main menu and the property list page should show up. The following figure shows the key elements on the page, and the table following the figure describes them.
 
 <p align=center><img src="/docs/resources/images/Properties Page.png" alt="properties page" width="900"></p>
 
