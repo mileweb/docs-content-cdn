@@ -2,6 +2,8 @@
 
 To create a property, complete the Create a Property form with required information. After creating a property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
 
+## Basic Steps
+
 1. In the left pane, click **Edge Configurations**.
 2. At the top right of the Properties page, click the **Create Property** button. 
 
@@ -28,3 +30,10 @@ To create a property, complete the Create a Property form with required informat
 
 5. If the property is validated successfully, you can [deploy](</docs/portal/edge-configurations/deploying-property.md>) it to the staging or production environment. By default, trial users will have access to the staging environment only. Please contact the support team to enable access to the production environment.
 
+## Edge Logic Wizard
+
+## TLS Settings
+
+## Real-Time Log
+
+## Advanced Settings
