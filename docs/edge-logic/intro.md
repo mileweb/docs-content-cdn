@@ -6,4 +6,4 @@ In the last 3 years, we made significant changes to the open-source version of t
 
 This document is an introduction about how to accomplish this. Please notice that the Edge Logic described in this document is part of the [property configuration](/apidocs#operation/createProperty). Users still need to define the other essential parts, such as the hostname(s) to be accelerated, in order to create a complete property that can be deployed to the CDN360 servers. Users can do this easily using the [product portal](https://console.cdnetworks.com/cdn) or [API](/apidocs).
 
-As an introduction to any new languange, let's get started with a "hello world" example.
+Like any other introductions to a new language, let's get started with a "hello world" example.
