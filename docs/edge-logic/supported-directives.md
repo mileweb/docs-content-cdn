@@ -169,13 +169,6 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 Control the server behavior based on the specified condition. No change to the public version, but [use with caution](</docs/edge-logic/multiple-origins.md#ifcaution>)! 
 
 
-### [`include`](http://nginx.org/en/docs/ngx_core_module.html#include)
-
-<span class="badge">standard</span>
-
-Includes another file, or files matching the specified mask, into configuration. No change to the public version. 
-
-
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
 <span class="badge">advanced</span>
