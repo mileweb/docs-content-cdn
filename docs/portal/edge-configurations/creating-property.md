@@ -42,12 +42,12 @@ This section allows the user to enable HTTPS for this property by attaching a TL
 
 ## Real-Time Log
 
-Real-time log is a feature that can be used to "stream" access log in real time to your designated HTTP(s) endpoint. You can specify the format of each log entry using nginx variables. If you use JSON format for the log, you need to select "JSON" to escape special character in the variable values. You can also specify a sample rate to reduce the amount of data and the format. Request headers can be used to pass additional information to the receiving endpoint.
+Real-time log is a feature that can be used to "stream" access log in real time to your designated HTTP(s) endpoint. You can specify the format of each log entry using nginx variables. If you use JSON format for the log, you need to select "JSON" to escape special character in the variable values. You can also specify a sample rate to reduce the amount of log entries. Request headers can be used to pass additional information to the receiving endpoint.
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="900"></p>
 
 ## Advanced Settings
 
-**Cache Key Hostname:** By default, the Host header value in the client request is used in the cache key. If this property contains multiple service hostnames, the contents of different hostnames will cached separately. If you want all hostnames to share one cached copy, you can specify a fixed "Cache Key Hostname" to override the detaul behavior.
+**Cache Key Hostname:** By default, the Host header value in the client request is used in the cache key. If this property contains multiple service hostnames, the contents of different hostnames will be cached separately. If you want all hostnames to share one cached copy, you can specify a fixed "Cache Key Hostname" to override the detaul behavior.
 
 **Has ICP Beian:** If this property needs to be served from servers in mainland China, you have to make sure all the hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. If that is the case, you can set "Has ICP Beien" to true.
 
