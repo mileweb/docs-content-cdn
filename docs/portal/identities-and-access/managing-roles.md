@@ -12,7 +12,7 @@ A role is a collection of one or more permissions that can be performed within t
 
 ![null](</docs/resources/images/identities-and-access/iam-roles.png>)
 
-1. Complete the fields in the Add Role form. Required fields are denoted by an asterisk (\*).
+4. Complete the fields in the Add Role form. Required fields are denoted by an asterisk (\*).
 
 ![null](</docs/resources/images/identities-and-access/iam-add-role.png>)
 

@@ -8,4 +8,5 @@ CDN360 allows you to compare two versions of a property side by side.
 3. By default, the version you selected appears on the left side of the Compare Versions form. To select a different version, click it from the drop-down list.
 4. At the top right, click in the **Please select a version** drop-down list, and then select another version. The selected versions appear side by side with differences highlighted. For example:
 <p align=center><img src="/docs/resources/images/edge-configurations/property-versions-compare.png" alt="compare versions" width="900"></p>
-1. When you finish comparing the property versions, click the <strong>Back</strong> button at the top right of the form.
+
+5. When you finish comparing the property versions, click the <strong>Back</strong> button at the top right of the form.

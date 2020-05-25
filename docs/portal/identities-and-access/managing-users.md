@@ -11,7 +11,7 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 
 <p align=center><img src="/docs/resources/images/identities-and-access/iam-users.png" alt="select add user button" width="900"></p>
 
-1. Complete the fields in the Add User form. Required fields are denoted by an asterisk (\*).
+3. Complete the fields in the Add User form. Required fields are denoted by an asterisk (\*).
 
 | **Fields** | **Description** |
 | ---------- | --------------- |
@@ -52,7 +52,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
 | Roles              | To add one or more roles to this user, click the **+ Add Roles** button, enter a role name and check one or more roles in the Add Roles dialog box, and click the **Save** button. If you decide not to add one or more roles to this user, check them, and then click the **Delete** button in the **Roles** section.   |
 | Description        | Enter a description for this user.           |
 
-1. Click **Save**.
+4. Click **Save**.
 
 ## Deleting a User
 

@@ -16,7 +16,7 @@ Creating an Edge Hostname is a three-step process:
 | Description. | Enter a description for the CNAME.  |
 | Hostname       | Either enter the first part of the edge hostname manually in the text field or click the **Auto Generate** button to generate a random one. |
 
-1. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields to define the client zone and how to handle requests come from it. Required fields are denoted by an asterisk (\*).
+4. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields to define the client zone and how to handle requests come from it. Required fields are denoted by an asterisk (\*).
 
 <ul><li>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button. </li>
 <li>b. To specify more client zone rules, repeat step 4a for each additional rule.</li></ul>
@@ -33,7 +33,7 @@ Creating an Edge Hostname is a three-step process:
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic. |
 | Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional this specified weight. |
 
-1. Expand **Advanced Settings**, and then confirm or change the following field.
+5. Expand **Advanced Settings**, and then confirm or change the following field.
 
 <p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="advanced settings" width="400"></p>
 
@@ -41,5 +41,5 @@ Creating an Edge Hostname is a three-step process:
 | --------------- | ------------------------------------------------------------ |
 | Has ICP Beian   |   This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></br>|
 
-1. Click the **Create Edge Hostname** button.
-2. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.
+6. Click the **Create Edge Hostname** button.
+7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.

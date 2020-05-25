@@ -7,7 +7,7 @@
 The Edge Hostname form appears for creating, editing, and deleting client zone rules and changing advanced settings. For more information, refer to the topics below.
 <p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form"></p>
 
-1. To create one or more client zone rules, perform the following steps.
+4. To create one or more client zone rules, perform the following steps.
 
 <ul><li>a. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.</li>
 <li>b. Complete all the fields, and then click the **Create Client Zone Rule** button.</li>
@@ -24,7 +24,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic. |
 | Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional this specified weight. |
 
-1. To edit an existing client zone rule:
+5. To edit an existing client zone rule:
 
 <ul><li>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.</li>
 <li>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).</li>
@@ -40,8 +40,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
-
-1. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
+7. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
 
 <p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="edge hostname advanced settings" width="700"></p>
 
@@ -49,7 +48,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 | --------------- | --------------- |
 | Has ICP Beian  | This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></br>|
 
-1. Click **Update**.
-2. When a message confirms that the edge hostname was updated click **OK**.
-3.  Click **Close** to return to the main page.
+8. Click **Update**.
+9. When a message confirms that the edge hostname was updated click **OK**.
+10.  Click **Close** to return to the main page.
 
