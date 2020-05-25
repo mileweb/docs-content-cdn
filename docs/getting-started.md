@@ -13,5 +13,5 @@ Using CDN360 to accelerate and distribute your content involves the following st
 
 The following figure shows the steps for creating an acceleration service.
 
-![null](</docs/resources/images/flowchart.png>)
+![null](</docs/resources/images/getting-started-flowchart.png>)
 

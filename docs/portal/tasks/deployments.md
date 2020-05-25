@@ -7,7 +7,7 @@ The deployment of property and certificates is a quite challenging task. We need
 1. In the left pane, click **Tasks**.
 2. Confirm that the **Deployment** radio button is selected.
 
-<p align="center"><img src="/docs/resources/images/deployment_tasks.png" alt="Deployment Tasks" width="900"></p>
+<p align="center"><img src="/docs/resources/images/tasks/tasks-deployment.png" alt="Deployment Tasks" width="900"></p>
  
 3. Click an ID or task name to display the details about the deployment task.
 

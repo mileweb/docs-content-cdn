@@ -8,7 +8,7 @@ After you create and validate a property version, you are ready to deploy it. In
 
 3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the drop-down list, and then click the **Deploy Configuration** button.
 
-<p align=center><img src="/docs/resources/images/Deployment Selections and Button.png" alt="deployment selections and button" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment.png" alt="deployment selections and button" width="900"></p>
 
 4. If the property is already deployed to the environment you select, the next form compares the deployed version with the one you want to deploy. If you are satisfied with the differences, click the **Deploy to ...** button on the top right corner (or click **Back** to cancel the deployment).
 
@@ -20,6 +20,6 @@ After you create and validate a property version, you are ready to deploy it. In
 
 1. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
-<p align="center"><img src="/docs/resources/images/UndeployAProperty.png" alt="property undeployment" width="900"></p>
+<p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="900"></p>
 
 2. When the confirmation message appears, click **Yes, Undeploy!** When the Undeploying Configuration pop-up appears, you can either wait for the process to finish or click the **Go to Dashboard** button to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the undeployment status at any time.

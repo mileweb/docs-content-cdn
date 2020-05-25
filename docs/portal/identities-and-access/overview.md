@@ -27,11 +27,11 @@ Initially, the portal provides three default roles: Admin, Operator, and Viewer.
 
 To display the Identity & Access Management page, click your initials at the top right of the portal, and then select **Identity & Access Management**.
 
-<p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/Identity & Access Management Page.png" alt="select identity management page" width="900"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-w-numbers.png" alt="select identity management page" width="900"></p>
 
 
 | **Fields** | **Description** |

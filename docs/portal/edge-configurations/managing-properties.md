@@ -13,7 +13,7 @@ On the CDN360 platform, each property is versioned to support tracking the histo
 
 To get started, click **Edge Configurations** in the main menu and the property list page should show up. The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/Properties Page.png" alt="properties page" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/properties-w-numbers.png" alt="properties page" width="900"></p>
 
 
 | **Fields**   | **Description**                                                                           |
