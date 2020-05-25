@@ -8,7 +8,7 @@ Certificates are managed from the Certificates page. To display this page, click
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align="center"><img src="/docs/resources/images/Certificates Page.png" alt="Certificate List" width="900"></p>
+<p align="center"><img src="/docs/resources/images/certificates/Certificates Page.png" alt="Certificate List" width="900"></p>
 
 | **Element Number**|**Description**|
 |-|-|
@@ -19,7 +19,7 @@ The following figure shows the key elements on the page, and the table following
 
 ## Certificate Actions
 Clicking the **Actions** drop-down list shows all the available actions that can be performed with certificates.
-<p align="center"><img src="/docs/resources/images/CertificateActions.png" alt="Certificate Actions" width="900"></p>
+<p align="center"><img src="/docs/resources/images/certificates/CertificateActions.png" alt="Certificate Actions" width="900"></p>
 The actions are:
 
 - **Edit**: [Update](</docs/portal/certificates/updating-certificates.md>) and/or deploy the selected certificate.

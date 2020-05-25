@@ -5,16 +5,16 @@ A role is a collection of one or more permissions that can be performed within t
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**. 
 3. At the right side of the page, click the **+ Add Role** button.
 
-![null](</docs/resources/images/Add Role Button.png>)
+![null](</docs/resources/images/identities-and-access/Add Role Button.png>)
 
 4. Complete the fields in the Add Role form. Required fields are denoted by an asterisk (\*).
 
-![null](</docs/resources/images/Add Role Form.png>)
+![null](</docs/resources/images/identities-and-access/Add Role Form.png>)
 
 | **Fields**           | **Description**                   |
 |     ---------------- |---------------------------------- |
@@ -32,7 +32,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**.
 
@@ -49,7 +49,7 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/Selecting the Identity and Access Management Page.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**.
 

@@ -8,7 +8,7 @@ Creating an Edge Hostname is a three-step process:
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
 3. Complete the fields in the Create an Edge Hostname form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/cname1.png" alt="cname overview page" width="900"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/cname1.png" alt="cname overview page" width="900"></p>
 
 
 | **Fields**                               | **Description**                     |
@@ -22,7 +22,7 @@ Creating an Edge Hostname is a three-step process:
 <li>b. To specify more client zone rules, repeat step 4a for each additional rule.</li></ul>
 
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
-<p align=center><img src="/docs/resources/images/Create Client Region Rule.png" alt="createclient region rule" width="500"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/Create Client Region Rule.png" alt="createclient region rule" width="500"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
@@ -35,7 +35,7 @@ Creating an Edge Hostname is a three-step process:
 
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 
-<p align=center><img src="/docs/resources/images/cname3.png" alt="advanced settings" width="600"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/cname3.png" alt="advanced settings" width="600"></p>
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |

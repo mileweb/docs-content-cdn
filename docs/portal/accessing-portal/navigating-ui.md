@@ -4,13 +4,13 @@ When you first log in to the CDN360 portal, menus and submenus appear in the lef
 
 The default menu lists the CDN360 activities you can perform.
 
-<p align=center><img src="/docs/resources/images/side-menu.png" alt="navigation menu" width="300"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
 
 ## Dashboard
 
 The dashboard is the default page that appears when you log in to the CDN360 portal. It contains charts that show a snapshot of your account traffic over a recent period of time. For detailed information, hover your mouse over the data entry points. For example:
 
-<p align=center><img src="/docs/resources/images/Total Bandwidth.png" alt="total bandwidth" width="1000"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/Total Bandwidth.png" alt="total bandwidth" width="1000"></p>
 
 From the dashboard, you can view:
 
@@ -21,7 +21,7 @@ From the dashboard, you can view:
 
 A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays that chart on the [Reports page](</docs/portal/reports.md>), where you can define report parameters, and then view the results on the selected chart.
 
-<p align=center><img src="/docs/resources/images/Traffic Volume.png" alt="traffic volume" width="1000"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/Traffic Volume.png" alt="traffic volume" width="1000"></p>
 
 
 ## Reports
