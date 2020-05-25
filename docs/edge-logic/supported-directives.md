@@ -169,13 +169,6 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 Control the server behavior based on the specified condition. No change to the public version, but [use with caution](</docs/edge-logic/multiple-origins.md#ifcaution>)! 
 
 
-### [`include`](http://nginx.org/en/docs/ngx_core_module.html#include)
-
-<span class="badge">standard</span>
-
-Includes another file, or files matching the specified mask, into configuration. No change to the public version. 
-
-
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
 <span class="badge">advanced</span>
@@ -186,7 +179,9 @@ Specifies that a given location can only be used for internal requests. No chang
 
 <span class="badge">standard</span>
 
-Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’.
+**Default**: `limit_rate 2m;` <br/>
+
+Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’. The default value is 2MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -209,6 +204,17 @@ Sets configuration depending on a request URI. No change to the public version.
 **Context**: http, server, location
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
+
+### `origin_follow_redirect`
+
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+
+**Syntax**: `origin_follow_redirect;` <br/>
+**Default**: - <br/>
+**Context**: location
+
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that has uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
+
 
 ### `origin_header_modify`
 

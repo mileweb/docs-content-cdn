@@ -1,7 +1,5 @@
 # Navigating the CDN360 User Interface
 
-After you sign up for a CDN360 account, you will have access to the CDN360 documentation and online help.
-
 When you first log in to the CDN360 portal, menus and submenus appear in the left pane and the dashboard appears in the workspace to the right.
 
 The default menu lists the CDN360 activities you can perform.
@@ -34,22 +32,22 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 - Number of requests made to the files on your property.
 - Percentage of each HTTP status code returned as a result of requests to your content.
 
-## Properties
+## Edge Configurations
 
-The [Properties page](</docs/portal/properties/managing-properties.md>) allows you to create and manage the properties accelerated by CDN360.
+On CDN360, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, validate, test, deploy and upgrade it all conveniently on this portal.
 
-## CNAMEs
+## Traffic Management
 
-The [CNAMEs page](</docs/portal/cnames/managing-cnames.md>) allows you to create and manage the Canonical Name Record (CNAME) to which you will map your hostnames. You must create a CNAME record before CDN360 can serve as a reverse proxy and start routing client traffic through the CDN servers.
+CDN360 also gives you full control of its Global Service Load Balancing (GSLB) system through the [Traffic Management page](</docs/portal/traffic-management/overview.md>). You do this by creating Edge Hostnames to be used in CNAME records to map your service hostnames to. The rules you specify for each Edge Hostname control where each end user's request is routed to.
 
 ## Certificates
 
-The [Certificates page](</docs/portal/certificates/overview.md>) allows you to manage certificates used with the HTTPS and TLS security protocols.
+The [Certificates page](</docs/portal/certificates/overview.md>) allows you to manage certificates to be used with the TLS protocol.
 
 ## Content Management
 
-The [Content Management page](</docs/portal/content-management.md>) allows you to override cache times. For example, if your website has a cache time of one week, but there is a new update to one of your pages that you want your website visitors to see, you can use the purge option to flush the cache. This page also shows a record of the purge requests submitted and allows you to specify content you want to purge.
+The [Content Management page](</docs/portal/content-management.md>) allows you to create purge requests and check the status of the previously submitted ones. A purge request is used to flush cached contents before they expire, in order to make the updated version to be available to the end users sooner.
 
 ## Tasks
 
-The [Tasks page](</docs/portal/tasks.md>) shows your validation, deployment, and undeployment requests. This page also allows you to view properties submitted for validation, as well as deployment and undeployment history.
+On the [Tasks page](</docs/portal/tasks.md>) you can check the status of all previously sumitted validation and deployment requests. Some of those synchronous tasks can take a few minutes to finish.
