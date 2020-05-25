@@ -8,7 +8,7 @@ Creating an Edge Hostname is a three-step process:
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
 3. Complete the fields in the Create an Edge Hostname form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/traffic-management/cname1.png" alt="cname overview page" width="900"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-a-cname.png" alt="cname overview page" width="900"></p>
 
 
 | **Fields**                               | **Description**                     |
@@ -22,7 +22,7 @@ Creating an Edge Hostname is a three-step process:
 <li>b. To specify more client zone rules, repeat step 4a for each additional rule.</li></ul>
 
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
-<p align=center><img src="/docs/resources/images/traffic-management/Create Client Region Rule.png" alt="createclient region rule" width="500"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule" width="500"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
@@ -33,13 +33,13 @@ Creating an Edge Hostname is a three-step process:
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic. |
 | Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional this specified weight. |
 
-5. Expand **Advanced Settings**, and then confirm or change the following field.
+1. Expand **Advanced Settings**, and then confirm or change the following field.
 
-<p align=center><img src="/docs/resources/images/traffic-management/cname3.png" alt="advanced settings" width="600"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-advanced-settings.png" alt="advanced settings" width="600"></p>
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |
 | Has ICP Beian   |   This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></br>|
 
-6. Click the **Create Edge Hostname** button.
-7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.
+1. Click the **Create Edge Hostname** button.
+2. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.
