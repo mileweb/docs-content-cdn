@@ -8,14 +8,14 @@ CDN360 sends an email notification when a certificate used in production is clos
 1. In the left pane, click **Certificates**.
 2. Click a certificate name.
 3. In the certificate details form, click **Create Version**.
-<p align="center"><img src="/docs/resources/images/certificates/CreateCertVersion.png" alt="Upload Certificate Version" width="700"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-versions.png" alt="Upload Certificate Version" width="700"></p>
 
 4. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version** followed by **OK** at the confirmation pop-up.
-<p align="center"><img src="/docs/resources/images/certificates/Buttons for Uploading Certs.png" alt="Upload Certificate Version" width="700"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-versions-upload.png" alt="Upload Certificate Version" width="700"></p>
 5. Scroll down to the <strong>Deployment</strong> section, and then select <strong>Production</strong> from the <strong>Deployment Destination</strong> drop-down list to deploy the new version to production.<br>
 6. Click <strong>Deploy Configuration</strong>.</br>
 
-<p align="center"><img src="/docs/resources/images/certificates/CertificateDeploy.png" alt="Upload Certificate Version" width="500"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="500"></p>
 
 ## If you need a CSR to apply for the new certificate from a CA
 If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, follow steps 1 and 2 below to create a self-signed version. Otherwise, you can skip to step 3.
@@ -24,7 +24,7 @@ If your company's security policy requires the new certificate to have a new pri
 2. Click a certificate name.
 3. Click **Create Version**.
 4. Click the **Auto Generate Certificate** tab, complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)), and click **Save Version**.
-<p align="center"><img src="/docs/resources/images/certificates/CertificateSelfSignedVersion.png" alt="Certificate New Self-Signed Version" width="700"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-versions-autogenerate.png" alt="Certificate New Self-Signed Version" width="700"></p>
 
 5. Click the **Download CSR** button at the top of the Certificate Details page to generate the CSR from the latest version.
 6. Send the downloaded CSR to the CA to apply for a new certificate.
