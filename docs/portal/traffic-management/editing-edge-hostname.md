@@ -5,7 +5,7 @@
 3. At the top right of the page, click the **Edit** button.
 
 The Edge Hostname form appears for creating, editing, and deleting client zone rules and changing advanced settings. For more information, refer to the topics below.
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-cname.png" alt="edit cname form" width="900"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form"></p>
 
 1. To create one or more client zone rules, perform the following steps.
 
@@ -13,7 +13,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 <li>b. Complete all the fields, and then click the **Create Client Zone Rule** button.</li>
 <li>c. To add more client zone rules, repeat this step for each additional rule.</li></ul>
 
-<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="create client region rule" width="500"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="create client region rule"></p>
 
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
@@ -34,7 +34,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 <ul><li>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.
 
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-delete-cname.png" alt="cname delete" width="800"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-delete-zone-rule.png" alt="zone rule delete"></p>
 </li>
 </li>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</li></ul>
 
@@ -43,7 +43,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 1. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
 
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-advanced-settings.png" alt="cname advanced settings" width="700"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-advanced-settings.png" alt="edge hostname advanced settings" width="700"></p>
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |

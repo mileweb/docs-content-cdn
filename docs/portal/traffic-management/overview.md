@@ -4,7 +4,7 @@ When a content-delivery network is not used, your service hostname should always
 
 In the left pane, click **Traffic Management** to see a page with a list of the edge hostnames in your account. The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-w-numbers.png" alt="edge hostname overview" width="900"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-w-numbers.png" alt="edge hostname overview"></p>
 
 | **Fields**   | **Description**                                                                        |
 | :----------: | ---------------------------------------------------------------------------------------|
