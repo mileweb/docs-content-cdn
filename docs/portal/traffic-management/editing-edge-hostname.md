@@ -43,7 +43,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 1. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
 
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-advanced-settings.png" alt="edge hostname advanced settings" width="700"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="edge hostname advanced settings" width="700"></p>
 
 | **Fields**      | **Description** |
 | --------------- | --------------- |
