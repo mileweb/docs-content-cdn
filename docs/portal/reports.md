@@ -6,7 +6,7 @@ Reports are generated from the Reports page. To display this page, click **Repor
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-Need figure??
+<p align=center><img src="/docs/resources/images/reports-w-numbers.png" alt="report page" width="900"></p>
 
 | **Element Number**|**Description**|
 |-|-|
@@ -30,7 +30,7 @@ The following report types are supported:
 1. In the left pane, click **Reports**. 
 2. Complete the fields in the Reports page:
 
-<p align=center><img src="/docs/resources/images/reports.png" alt="report page" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports-wo-numbers.png" alt="report page" width="900"></p>
 
 | **Fields**      | **Description**                                       |
 | --------------- | ----------------------------------------------------- |
