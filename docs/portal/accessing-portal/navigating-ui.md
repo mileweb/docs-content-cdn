@@ -50,4 +50,4 @@ The [Content Management page](</docs/portal/content-management.md>) allows you t
 
 ## Tasks
 
-On the [Tasks page](</docs/portal/tasks.md>), you can check the status of all previously sumitted validation and deployment requests. Synchronous tasks can take a few minutes to finish.
+On the [Tasks page](</docs/portal/tasks.md>), you can check the status of all previously submitted validation and deployment requests. Synchronous tasks can take a few minutes to finish.
