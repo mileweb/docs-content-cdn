@@ -49,6 +49,6 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 | Has ICP Beian  | This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are:<br><ul><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. </li><li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></ul>  
 
 8. Click **Update**.
-9. When a message confirms that the edge hostname was updated click **OK**.
+9. When a message confirms that the edge hostname was updated, click **OK**.
 10.  Click **Close** to return to the main page.
 
