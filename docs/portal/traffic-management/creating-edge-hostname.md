@@ -1,8 +1,6 @@
 # Creating an Edge Hostname 
 
-For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record on your DNS server. With the new edge hostname, you can define different rules to handle request from different client zones. A **client zone** is a combination of a geographical region and one or more ISPs, for example, "US+Comcast".
-
-Creating an Edge Hostname is a three-step process:
+For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record on your DNS server. With the new edge hostname, you can define different rules to handle requests from different client zones. A **client zone** is a combination of a geographical region and one or more ISPs (for example, "US+Comcast").
 
 1. In the left pane, click **Traffic Management**.
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
