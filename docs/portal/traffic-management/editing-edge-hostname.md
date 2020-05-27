@@ -28,7 +28,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 <ul><li>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to edit, and then select <strong>Edit</strong>.</li>
 <li>b. Make your changes in the Update Client Zone Rule dialog box (for assistance, see the table above).</li>
-<li>c. Click the <strong>Update Client Zone Rule** button.</strong></li></ul>
+<li>c. Click the <strong>Update Client Zone Rule</strong> button.</li></ul>
 
 6. To delete a client zone rule:
 
