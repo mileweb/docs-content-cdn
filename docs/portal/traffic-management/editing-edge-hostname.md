@@ -10,7 +10,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 4. To create one or more client zone rules, perform the following steps.
 
 <ul><li>a. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.</li>
-<li>b. Complete all the fields, and then click the **Create Client Zone Rule** button.</li>
+<li>b. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button.</li>
 <li>c. To add more client zone rules, repeat this step for each additional rule.</li></ul>
 
 <p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="create client region rule"></p>
