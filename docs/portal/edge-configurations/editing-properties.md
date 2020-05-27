@@ -15,4 +15,4 @@
 
 4. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*) and described in [Creating a Property](</docs/portal/edge-configurations/creating-property.md>).
 
-5. Save and validate the new version before you deploy it.
+5. Save and [validate](</docs/portal/tasks/validations.md>) the new version before you deploy it.
