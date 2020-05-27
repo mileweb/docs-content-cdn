@@ -63,7 +63,7 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 
 <ul><u>OR</u></ul></ul>
 
-<ul><ul><li>To see the details of a role before deleting it, click the role name To delete the role, click <strong>Delete</strong> at the top right of the Role Details page.</ul></ul>
+<ul><ul><li>To see the details of a role before deleting it, click the role name. To delete the role, click <strong>Delete</strong> at the top right of the Role Details page.</ul></ul>
 
 4. If the role has no assigned users, click **Yes, delete!** to delete the role. If the role has one or more assigned users, click **Un-assign from all users and delete** to delete the role.
 
@@ -80,9 +80,11 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 | certificate.update                             | Update certificates    |
 | cname.create                                   | Create edge hostnames  |
 | cname.delete                                   | Delete edge hostnames  |
-| cname.read                                     | Read  edge hostnames   |
-| cname.update                                   | Update  edge hostnames |
 | dashboard.read                                 | Read the dashboard     |
+| edgeHostNames.create                           | Create  edge hostnames |
+| edgeHostNames.delete                           | Delete  edge hostnames |
+| edgeHostNames.read                             | Read  edge hostnames   |
+| edgeHostNames.update                           | Update  edge hostnames |
 | notification.create                            | Create notifications   |
 | notification.delete                            | Delete notifications   |
 | notification.read                              | Read notifications     |
