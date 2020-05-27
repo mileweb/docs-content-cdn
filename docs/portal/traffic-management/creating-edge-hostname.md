@@ -41,5 +41,5 @@ Creating an Edge Hostname is a three-step process:
 | --------------- | ------------------------------------------------------------ |
 | Has ICP Beian   |   This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></br>|
 
-6. Click the **Create Edge Hostname** button.
+6. Click the **Create the Edge Hostname** button.
 7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.
