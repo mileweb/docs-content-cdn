@@ -36,7 +36,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 <p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-delete-zone-rule.png" alt="zone rule delete"></p>
 </li>
-</li>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</li></ul>
+<li>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</li></ul>
 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
