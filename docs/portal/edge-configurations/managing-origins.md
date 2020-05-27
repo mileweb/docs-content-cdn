@@ -1,7 +1,7 @@
 
 # Managing Origins for Your Property
 
-Origins are your web servers containing the content you want CDN360 to accelerate. CDN360 supports more than one origin for each property, along with a plethora of settings for defining access to your origins.
+Origins are your web servers containing the content you want CDN360 to accelerate. CDN360 supports more than one origin for each property, along with a number of settings for defining access to your origins.
 
 ## Adding, Editing, or Removing Origins in a Property
 
