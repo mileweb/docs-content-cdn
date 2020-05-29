@@ -24,8 +24,7 @@ Using the Properties page, you can create, modify, validate, and deploy properti
 | 4            | The button to [create new properties](</docs/portal/edge-configurations/creating-property.md>).    |
 
 ## Property Actions
-Clicking the **Actions** drop-down list shows all the available actions that can be performed with properties.
-(Show Properties Actions drop-down menu??)
+Clicking the **Actions** drop-down list shows all the available actions that can be performed on properties.
 - **Edit**: [Update](</docs/portal/edge-configurations/editing-properties.md>) the selected property.
 - **Compare**: [Compare](</docs/portal/edge-configurations/comparing-properties.md>) two properties.
 - **Undeploy**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md>) properties.
