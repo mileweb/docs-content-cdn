@@ -1,8 +1,6 @@
 # Creating an Edge Hostname 
 
-For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record on your DNS server. With the new edge hostname, you can define different rules to handle request from different client zones. A **client zone** is a combination of a geographical region and one or more ISPs, for example, "US+Comcast".
-
-Creating an Edge Hostname is a three-step process:
+For the CDN360 platform to serve your content to the end users, you must create an edge hostname to be used by the CNAME record on your DNS server. With the new edge hostname, you can define different rules to handle requests from different client zones. A **client zone** is a combination of a geographical region and one or more ISPs (for example, "US+Comcast").
 
 1. In the left pane, click **Traffic Management**.
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
@@ -41,5 +39,5 @@ Creating an Edge Hostname is a three-step process:
 | --------------- | ------------------------------------------------------------ |
 | Has ICP Beian   |   This setting determines whether the end users' requests will be directed to PoPs inside mainland China. Choices are: <br><li><strong>No</strong> = this edge hostname will be used by some service hostname that does not have ICP Beian. It will not resolve to any server IP in mainland China. Only server IPs outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by servers locally.</li></br>|
 
-6. Click the **Create Edge Hostname** button.
+6. Click the **Create the Edge Hostname** button.
 7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created Edge Hostname.

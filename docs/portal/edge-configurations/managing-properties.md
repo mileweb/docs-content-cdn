@@ -9,9 +9,9 @@ A "property" is a configuration of one or more hostnames (domains) that need to 
 
 ## Managing Properties
 
-On the CDN360 platform, each property is versioned to support tracking the history of changes and to allow rollback if needed. Each version can be deployed independently to the staging or production environment. On the portal, you can create, modify, validate, and deploy properties. You can also undeploy and delete properties if needed.
+On the CDN360 platform, each property is versioned to track the history of changes and allow rollback if needed. Each version can be deployed independently to the staging or production environment. 
 
-To get started, click **Edge Configurations** in the main menu and the property list page should show up. The following figure shows the key elements on the page, and the table following the figure describes them.
+Using the Properties page, you can create, modify, validate, and deploy properties. You can also undeploy and delete properties if needed. To display the Properties page, click **Edge Configurations** in the left pane. The following figure shows the key elements on the page, and the table following the figure describes them.
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-w-numbers.png" alt="properties page" width="900"></p>
 
@@ -28,6 +28,6 @@ Clicking the **Actions** drop-down list shows all the available actions that can
 (Show Properties Actions drop-down menu??)
 - **Edit**: [Update](</docs/portal/edge-configurations/editing-properties.md>) the selected property.
 - **Compare**: [Compare](</docs/portal/edge-configurations/comparing-properties.md>) two properties.
-- **Undeploy**: Undeploy a property from the staging or production environment.
+- **Undeploy**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md>) properties.
 - **Delete**: Delete the property.
 

@@ -34,11 +34,11 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 
 ## Edge Configurations
 
-On CDN360, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, validate, test, deploy and upgrade it all conveniently on this portal.
+In CDN360, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, and then validate, test, deploy, and upgrade it -- all conveniently from the CDN360 portal.
 
 ## Traffic Management
 
-CDN360 also gives you full control of its Global Service Load Balancing (GSLB) system through the [Traffic Management page](</docs/portal/traffic-management/overview.md>). You do this by creating Edge Hostnames to be used in CNAME records to map your service hostnames to. The rules you specify for each Edge Hostname control where each end user's request is routed to.
+CDN360 gives you full control of its Global Service Load Balancing (GSLB) system through the [Traffic Management page](</docs/portal/traffic-management/overview.md>). Using this page, you create edge hostnames that will be used in CNAME records to map your service hostnames. The rules you specify for each edge hostname control where each end user's request is routed.
 
 ## Certificates
 
@@ -46,8 +46,8 @@ The [Certificates page](</docs/portal/certificates/overview.md>) allows you to m
 
 ## Content Management
 
-The [Content Management page](</docs/portal/content-management.md>) allows you to create purge requests and check the status of the previously submitted ones. A purge request is used to flush cached contents before they expire, in order to make the updated version to be available to the end users sooner.
+The [Content Management page](</docs/portal/content-management.md>) allows you to create purge requests and check the status of previously submitted requests. A purge request is used to flush cached contents before they expire in order to make the updated version available to the end users sooner.
 
 ## Tasks
 
-On the [Tasks page](</docs/portal/tasks.md>) you can check the status of all previously sumitted validation and deployment requests. Some of those synchronous tasks can take a few minutes to finish.
+On the [Tasks page](</docs/portal/tasks.md>), you can check the status of all previously submitted validation and deployment requests. Synchronous tasks can take a few minutes to finish.

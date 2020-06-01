@@ -1,4 +1,4 @@
-#Managing Users
+# Managing Users
 ## Adding a User
 
 Administrators add users from the **Users** tab on the Identity & Access Management page.

@@ -1,6 +1,6 @@
 # Testing Property
 
-Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN360 has a dedicated staging environment for this purpose. You can follow the steps in [Deploying Your Property](</docs/portal/edge-configurations/deploying-property.md>) to deploy the property to the staging environment.
+Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN360 has a dedicated staging environment for this purpose. To deploy the property to the staging environment, perform the steps in [Deploying Your Property](</docs/portal/edge-configurations/deploying-property.md>).
 
 ## Testing Your Property in Staging
 
