@@ -1,4 +1,4 @@
-g:# Quick Start
+# Quick Start
 
 Using CDN360 to accelerate and distribute your content involves the following steps:
 
@@ -13,5 +13,5 @@ Using CDN360 to accelerate and distribute your content involves the following st
 
 The following figure shows the steps to follow when using CDN360 to accelerate your content.
 
-![null](</docs/resources/images/flowchart.png>)
+![null](</docs/resources/images/getting-started-flowchart.png>)
 
