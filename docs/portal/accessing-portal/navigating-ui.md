@@ -27,7 +27,7 @@ A legend below each chart shows the names of the data entry points in the chart.
 The [Reports page](</docs/portal/reports.md>) allows you to generate reports about:
 
 - Traffic volume and bandwidth to your hostnames.
-- Number of requests made to the files to your property.
+- Number of requests made to the files of your property.
 - Percentage of each HTTP status code returned as a result of requests to your content.
 
 ## Edge Configurations
