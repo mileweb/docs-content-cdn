@@ -100,6 +100,14 @@ Denies access for the specified network or address. (Work in progress to make th
 
 This directive allows the users to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you [configure the format](https://docs.google.com/document/d/155m9F0oFIDXRLeFmLqbdb0gWiHAyTWB8rPLWdRVGXoI/edit#heading=h.owglsmu6p2rb) of the download log, or using our [advanced traffic analysis](https://obd.quantil.com) tool.
 
+### `enable_websocket`
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
+
+**Syntax**: `enable_websocket;`<br/>
+**Default**: `-`<br/>
+**Context**: server, location
+
+This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -161,13 +169,6 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 Control the server behavior based on the specified condition. No change to the public version, but [use with caution](</docs/edge-logic/multiple-origins.md#ifcaution>)! 
 
 
-### [`include`](http://nginx.org/en/docs/ngx_core_module.html#include)
-
-<span class="badge">standard</span>
-
-Includes another file, or files matching the specified mask, into configuration. No change to the public version. 
-
-
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
 <span class="badge">advanced</span>
@@ -178,7 +179,9 @@ Specifies that a given location can only be used for internal requests. No chang
 
 <span class="badge">standard</span>
 
-Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’.
+**Default**: `limit_rate 2m;` <br/>
+
+Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’. The default value is 2MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -201,6 +204,17 @@ Sets configuration depending on a request URI. No change to the public version.
 **Context**: http, server, location
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
+
+### `origin_follow_redirect`
+
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+
+**Syntax**: `origin_follow_redirect;` <br/>
+**Default**: - <br/>
+**Context**: location
+
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that has uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
+
 
 ### `origin_header_modify`
 
@@ -290,7 +304,7 @@ This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
-<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
 
 **Syntax**:  `origin_set_header field value qtl_if(condition);` <br/>
 **Default**: `origin_set_header host $host;` <br/>

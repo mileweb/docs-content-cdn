@@ -1,4 +1,35 @@
 {
+    "metadata": {
+      "id": "cdn",
+      "title": "CDN360",
+      "description": "CDN360 leads the evolution of content delivery networks (CDNs) by accelerating, securing, scaling, and delivering content to website visitors worldwide, regardless of their location.",
+      "links": [
+        {
+          "title": "Quick Start",
+          "caption": "Getting started with CDN360",
+          "icon": "bolt",
+          "path": "docs/intro"
+        },
+        {
+          "title": "Portal Reference",
+          "caption": "CDN360 Portal reference",
+          "icon": "book",
+          "path": "docs/portal/accessing-portal/logging-in"
+        },
+        {
+          "title": "API Reference",
+          "caption": "CDN360 API reference",
+          "icon": "gear",
+          "path": "apidocs"
+        },
+        {
+          "title": "Edge Logic Reference",
+          "caption": "Learn CDN360 Edge Logic",
+          "icon": "cli",
+          "path": "docs/edge-logic/intro"
+        }
+      ]
+    },
     "routes": [
       { "title": "Introduction", "path": "/docs/intro.md" },
       { "title": "Getting Started", "path": "/docs/getting-started.md" },
@@ -24,72 +55,60 @@
             ]
           },
           {
-            "title": "Properties",
+            "title": "Edge Configurations",
             "routes": [
               {
-                "title": "Managing Properties",
-                "path": "/docs/portal/properties/managing-properties.md"
+                "title": "Overview",
+                "path": "/docs/portal/edge-configurations/managing-properties.md"
               },
               {
-                "title": "Creating a Property",
-                "path": "/docs/portal/properties/creating-property.md"
+                "title": "Create a Property",
+                "path": "/docs/portal/edge-configurations/creating-property.md"
               },
               {
-                "title": "Managing Origins",
-                "path": "/docs/portal/properties/managing-origins.md"
+                "title": "Edit a Property",
+                "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
-                "title": "Deploying a Property",
-                "path": "/docs/portal/properties/deploying-property.md"
+                "title": "Deploy/Undeploy a Property",
+                "path": "/docs/portal/edge-configurations/deploying-property.md"
               },
               {
-                "title": "Testing a Property",
-                "path": "/docs/portal/properties/testing-property.md"
+                "title": "Test a Property",
+                "path": "/docs/portal/edge-configurations/testing-property.md"
               },
               {
-                "title": "Undeploying a Property",
-                "path": "/docs/portal/properties/undeploying-property.md"
+                "title": "Delete a Property",
+                "path": "/docs/portal/edge-configurations/deleting-property.md"
               },
               {
-                "title": "Editing Properties",
-                "path": "/docs/portal/properties/editing-properties.md"
+                "title": "Compare Property Versions",
+                "path": "/docs/portal/edge-configurations/comparing-properties.md"
               },
               {
-                "title": "Cloning Properties",
-                "path": "/docs/portal/properties/cloning-property.md"
-              },
-              {
-                "title": "Validating Properties",
-                "path": "/docs/portal/properties/validating-property.md"
-              },
-              {
-                "title": "Comparing Property Versions",
-                "path": "/docs/portal/properties/comparing-properties.md"
-              },
-              {
-                "title": "Deleting Property",
-                "path": "/docs/portal/properties/deleting-property.md"
+                "title": "Manage Origins",
+                "path": "/docs/portal/edge-configurations/managing-origins.md"
               }
             ]
           },
           {
-            "title": "CNAMEs",
+            "title": "Traffic Management",
             "routes": [
               {
-                "title": "Managing CNAMEs",
-                "path": "/docs/portal/cnames/managing-cnames.md"
+                "title": "Overview",
+                "path": "/docs/portal/traffic-management/overview.md"
               },
               {
-                "title": "Creating a CNAME",
-                "path": "/docs/portal/cnames/creating-cname.md"
+                "title": "Create an Edge Hostname",
+                "path": "/docs/portal/traffic-management/creating-edge-hostname.md"
               },
               {
-                "title": "Editing a CNAME",
-                "path": "/docs/portal/cnames/editing-cname.md"
+                "title": "Edit an Edge Hostname",
+                "path": "/docs/portal/traffic-management/editing-edge-hostname.md"
               },
               {
-                "title": "Deleting a CNAME",
-                "path": "/docs/portal/cnames/deleting-cname.md"
+                "title": "Delete an Edge Hostname",
+                "path": "/docs/portal/traffic-management/deleting-edge-hostname.md"
               }
             ]
           },
@@ -101,17 +120,37 @@
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
-                "title": "Managing Certificates",
-                "path": "/docs/portal/certificates/managing-certificates.md"
+                "title": "Create a Certificate",
+                "path": "/docs/portal/certificates/creating-certificates.md"
               },
               {
-                "title": "Auto-Renewal",
+                "title": "Update a Certificate",
+                "path": "/docs/portal/certificates/updating-certificates.md"
+              },
+              {
+                "title": "Deploy a Certificate",
+                "path": "/docs/portal/certificates/deploying-certificates.md"
+              },
+              {
+                "title": "Auto-Renew a Certificate",
                 "path": "/docs/portal/certificates/auto-renewal.md"
               }
             ]
           },
           { "title": "Reports", "path": "/docs/portal/reports.md" },
           { "title": "Content Management", "path": "/docs/portal/content-management.md" },
+          { "title": "Tasks",
+            "routes": [
+              {
+                "title": "Validations",
+                "path": "/docs/portal/tasks/validations.md"
+              },
+              {
+                "title": "Deployments",
+                "path": "/docs/portal/tasks/deployments.md"
+              }
+            ]
+          },
           {
             "title": "Identities and Access",
             "routes": [

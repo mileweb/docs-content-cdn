@@ -3,7 +3,7 @@
   "info": {
     "title": "CDN360 API Specification",
     "version": "1.0",
-    "description": "CDN360 APIs allow you to manage CDN360 Services",
+    "description": "CDN360 APIs allow you to manage CDN360 Services.",
     "contact": {
       "url": "https://www.quantil.com"
     }
@@ -1404,6 +1404,15 @@
                               "isp": {
                                 "type": "string",
                                 "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                              },
+                              "enableIPv6": {
+                                "type": "boolean",
+                                "default": "true",
+                                "description": "Indicates whether an IPv6 address can be used.",
+                                "enum": [
+                                  "true",
+                                  "false"
+                                ]
                               }
                             },
                             "required": [
@@ -1440,7 +1449,8 @@
                               ]
                             },
                             "isp": "all",
-                            "weight": 100
+                            "weight": 100,
+                            "enableIPv6": true
                           }
                         ]
                       },
@@ -1764,6 +1774,15 @@
                         "isp": {
                           "type": "string",
                           "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                        },
+                        "enableIPv6": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Indicates whether an IPv6 address can be used.",
+                          "enum": [
+                            "true",
+                            "false"
+                          ]
                         }
                       },
                       "required": [
@@ -1793,6 +1812,7 @@
                             "standard"
                           ]
                         },
+                        "enableIPv6": true,
                         "weight": 100
                       }
                     ]
@@ -1820,6 +1840,33 @@
         "responses": {
           "204": {
             "description": "The CNAME was successfully updated."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid client zone": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "Invalid client region 'abc'."
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
           },
           "404": {
             "description": "The CNAME could not be found. Refer to the response body for details.",
@@ -1971,6 +2018,15 @@
                       "isp": {
                         "type": "string",
                         "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                      },
+                      "enableIPv6": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Indicates whether an IPv6 address can be used.",
+                        "enum": [
+                          "true",
+                          "false"
+                        ]
                       }
                     },
                     "required": [
@@ -1993,7 +2049,17 @@
             }
           },
           "description": "The request body contains the fields you wish to modify."
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
       }
     },
     "/cdn/properties/{propertyID}/versions": {
@@ -2992,7 +3058,7 @@
         ]
       },
       "get": {
-        "summary": "Query Property List",
+        "summary": "Query property list",
         "tags": [
           "Property Management"
         ],
@@ -3211,7 +3277,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that specific value of the field will be returned.  If a colon and value are omitted, all properties with a nonempty value for the field will be returned. If there is  more than one <i>hasConfig</i> query parameter, they will be combined together allowing you to find properties matching multiple fields.  If a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
+            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nIf there is more than one <i>hasConfig</i> query parameter, they will be combined together. Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
           },
           {
             "schema": {
@@ -3544,6 +3610,15 @@
                         "isp": {
                           "type": "string",
                           "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                        },
+                        "enableIPv6": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Indicates whether an IPv6 address can be used.",
+                          "enum": [
+                            "true",
+                            "false"
+                          ]
                         }
                       },
                       "required": [
@@ -3575,7 +3650,8 @@
                           "by": [
                             "standard"
                           ]
-                        }
+                        },
+                        "enableIPv6": true
                       }
                     ]
                   }
@@ -14678,7 +14754,7 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 200,
-              "default": "200"
+              "default": 100
             },
             "in": "query",
             "name": "limit",
@@ -18020,6 +18096,503 @@
           }
         ]
       }
+    },
+    "/ngadmin/apicalls": {
+      "get": {
+        "summary": "Retrieve a list of API calls that have been made.",
+        "tags": [
+          "API Call History"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a summary of API calls that have been made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Total number of available API calls. This may be larger than the number actually returned."
+                    },
+                    "apiCalls": {
+                      "type": "array",
+                      "description": "A list of API calls.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "apiRequestId": {
+                            "type": "string",
+                            "description": "A unique ID representing the API call."
+                          },
+                          "requestTimestamp": {
+                            "type": "string",
+                            "description": "RFC 3339 date with UTC time which indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\""
+                          },
+                          "requestURL": {
+                            "type": "string",
+                            "description": "URL that was requested."
+                          },
+                          "requestMethod": {
+                            "type": "string",
+                            "description": "Indicates the HTTP method that was used. Example:  \"GET\""
+                          },
+                          "isSafe": {
+                            "type": "boolean",
+                            "description": "A value of <i>true</i> indicates the API call is read-only and does not modify any resource. A value of <i>false</i> means a modification can occur.  For example, a call to create or deploy a property is not safe, so <i>false</i> would be returned."
+                          },
+                          "responseCode": {
+                            "type": "integer",
+                            "description": "HTTP response code for the API call."
+                          },
+                          "onBehalfOf": {
+                            "type": "string",
+                            "description": "A nonempty value indicates that an API call was made on your behalf. For example, the CDN360 support team may help you with configuration."
+                          },
+                          "apiName": {
+                            "type": "string",
+                            "description": "Indicates the API account name used in the API call. This field will be omitted if the admin API account is used."
+                          }
+                        },
+                        "required": [
+                          "apiRequestId",
+                          "requestTimestamp",
+                          "requestURL",
+                          "requestMethod",
+                          "isSafe",
+                          "responseCode"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "apiCalls"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "count": 570,
+                      "apiCalls": [
+                        {
+                          "apiRequestId": "2d99b9d962847b3f",
+                          "requestTimestamp": "2020-04-24T20:09:15Z",
+                          "requestURL": "https://ngapi.cdnetworks.com/ngadmin/apicalls?limit=5",
+                          "requestMethod": "GET",
+                          "isSafe": true,
+                          "responseCode": 0
+                        },
+                        {
+                          "apiRequestId": "94d2b2168fabccb7",
+                          "requestTimestamp": "2020-04-24T20:09:06Z",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/certificates?offset=0&limit=10&search=&sortOrder=desc",
+                          "requestMethod": "GET",
+                          "isSafe": true,
+                          "apiName": "myapiname",
+                          "responseCode": 200
+                        },
+                        {
+                          "apiRequestId": "97f8af300ff5a982",
+                          "requestTimestamp": "2020-04-24T20:09:02Z",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
+                          "requestMethod": "GET",
+                          "isSafe": true,
+                          "apiName": "myapiname",
+                          "responseCode": 200
+                        },
+                        {
+                          "apiRequestId": "f291e3014bd06216",
+                          "requestTimestamp": "2020-04-24T20:09:02Z",
+                          "requestURL": "https://ngapi-integration.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb",
+                          "requestMethod": "GET",
+                          "isSafe": true,
+                          "apiName": "myapiname2",
+                          "responseCode": 200
+                        },
+                        {
+                          "apiRequestId": "f03ca108dd17d342",
+                          "requestTimestamp": "2020-04-24T20:09:02Z",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
+                          "requestMethod": "GET",
+                          "isSafe": true,
+                          "apiName": "myapiname",
+                          "responseCode": 200
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid list limit": {
+                    "value": {
+                      "code": "InvalidListLimit",
+                      "message": "The value of limit should be between 1 and 200, inclusive."
+                    }
+                  },
+                  "Invalid URL": {
+                    "value": {
+                      "code": "InvalidUrl",
+                      "message": "Invalid safe : abc"
+                    }
+                  },
+                  "Invalid status code": {
+                    "value": {
+                      "code": "InvalidStatusCode",
+                      "message": "The status code 'abc' is invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-ngadmin-apicalls",
+        "description": "Retrieve a list of recent API calls that have been made by you or on your behalf. API calls triggered by portal users are included as well. Query parameters allow you to filter results.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "GET",
+                "POST",
+                "PATCH",
+                "DELETE",
+                "PUT"
+              ]
+            },
+            "in": "query",
+            "name": "method",
+            "description": "Filter results by HTTP method. Example: \"PATCH\"."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "path",
+            "description": "Specify the path portion of a URI to filter out calls to a particular path. For example, to get a list of calls to property API endpoints using https://ngapi.cdnetworks.com/cdn/properties, you would specify \"path=/cdn/properties\"."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            },
+            "in": "query",
+            "name": "safe",
+            "description": "Filter results by whether they are considered safe or not. Safe calls do not make changes to resources."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "caller",
+            "description": "Filter results by specifying the API login name or API  account ID. You can get IDs by obtaining a <a href=\"api.html#operation/get-ngadmin-apiAccounts\">list of your API accounts</a>."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "onbehalfof",
+            "description": "The value can be a customer ID to return API calls made on behalf of that customer, <i>none</i> to fetch API calls made directly or through the portal,  or <i>any</i> to fetch calls made on behalf of any customer.  The last option would only apply if you are a reseller."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Filter API calls by specifying a comma separated list of HTTP response status codes. You can also specify individual status codes such as \"200\" or \"404\". You can also  pass \"2xx\", \"3xx\", \"4xx\", or \"5xx\" to request all API calls whose response status codes begin with the first digit. For example, \"2xx\" will include API calls whose status were \"200\", \"201\", and \"204\"."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 format date indicating the beginning of the time period when API calls were made. Example: <code>startdate=2019-10-30T00:00:00Z</code> "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period when API calls were made. Example: <code>startdate=2019-10-30T00:00:00Z</code> "
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "Indicates the first item to return. The default is \"0\"."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of API calls to return. The default is to return up to 100 calls."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "If you are a reseller, you can specify whether to include API calls from children customers. A value of \"self-only\" will only return API calls corresponding to your account.  A value of \"self+children\" will return your API calls along with those of your children customers."
+          }
+        ]
+      }
+    },
+    "/ngadmin/apicalls/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls\"</a>."
+        }
+      ],
+      "get": {
+        "summary": "Get details about an API call",
+        "tags": [
+          "API Call History"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains details about an API call.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "apiRequestId": {
+                      "type": "string",
+                      "description": "A unique ID representing the API call."
+                    },
+                    "apiName": {
+                      "type": "string",
+                      "description": "The API name used to make the API call."
+                    },
+                    "apiAccountId": {
+                      "type": "string",
+                      "description": "The ID of an API account if one other than the administrative API account was used to make the API call."
+                    },
+                    "clientIp": {
+                      "type": "string",
+                      "description": "Caller's IP address."
+                    },
+                    "requestHeaders": {
+                      "type": "array",
+                      "description": "An array of all the request headers passed in the API call. Each entry consists of the header along with its value. Example: \"Content-Type:application/json;charset=UTF-8\".",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "requestBody": {
+                      "type": "string",
+                      "description": "Body of the HTTP request."
+                    },
+                    "requestTimestamp": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the API call was made. Example: \"2020-04-24T15:21:17Z\" "
+                    },
+                    "requestMethod": {
+                      "type": "string",
+                      "description": "Indicates the HTTP request method used to make the API call.",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "requestURL": {
+                      "type": "string",
+                      "description": "The URL of the API call."
+                    },
+                    "isSafe": {
+                      "type": "boolean",
+                      "description": "A value of <i>true</i> indicates the API call is read-only and does not modify any resource. A value of <i>false</i> means a modification can occur.  For example, a call to create or deploy a property is not safe, so <i>false</i> would be returned."
+                    },
+                    "responseHeaders": {
+                      "type": "array",
+                      "description": "HTTP headers that are returned in the response.  Each entry includes the header name along with its value. Example: \"Qtl-Request-Id:bf9bdb402ef4eaf5\"",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "responseTimestamp": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the response was sent."
+                    },
+                    "responseCode": {
+                      "type": "integer",
+                      "description": "HTTP response status code for the API call."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "apiRequestId",
+                    "apiName",
+                    "clientIp",
+                    "requestHeaders",
+                    "requestBody",
+                    "requestTimestamp",
+                    "requestMethod",
+                    "requestURL",
+                    "isSafe",
+                    "responseHeaders",
+                    "responseTimestamp",
+                    "responseCode"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "requestHeaders": [
+                        "sec-fetch-dest:empty",
+                        "user-agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36",
+                        "dnt:1",
+                        "content-type:application/json",
+                        "accept:application/json",
+                        "sec-fetch-site:same-origin",
+                        "sec-fetch-mode:cors",
+                        "referer:https://console.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb?taskId=5ea30363f5a9ba7b2b4251f9&taskName=Validate%20version%201%20of%20property%20%27xyzabc20200424%27",
+                        "accept-encoding:gzip, deflate, br",
+                        "accept-language:en-US,en;q=0.9",
+                        "cookie:_ga=GA1.2.1656448886.1553879004; LPVID=MyMDIzZGU0YTFmOWMyMTll; MPEL=CH; LPSID-78804126=iQsfcMCrQQ6Ep7Pi6CcYkQ; crowd.token_key=Rl6Fjm4WCtDMPHWrHhMpyQAAAAAAAAACYnVydG9uLmxlZQ; LPSID-75492851=w619XhnXQOu0ZILa4ci9hg; connect.sid=s%3AM2j0Xp9ij9Kv8J8I-OVa6xnoxJfrq37g.p%2FFU8DdBACz0F3aV7sgobPRYrBn3ZFty%2BkT4Tu%2BB9rs",
+                        "x-cloud-trace-context:7752735628596068accfa93df2473873/8494161987970494246",
+                        "x-forwarded-proto:https",
+                        "authorization:Basic YnVydG9uY29tcGFueTItYXBpOnBvUG9IRm8wQms3SGcwOXVzYzBDOGR6SVlIcz0=",
+                        "date:Fri, 24 Apr 2020 15:21:17 UTC",
+                        "host:ngapi.cdnetworks.com",
+                        "via:1.1 google, 1.1 google",
+                        "x-forwarded-for:220.242.143.61, 35.241.43.180, 35.222.43.216, 35.241.43.180",
+                        "connection:Keep-Alive"
+                      ],
+                      "requestBody": "",
+                      "requestURL": "https://ngapi.cdnetworks.com/cdnapi/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
+                      "requestMethod": "GET",
+                      "requestTimestamp": "2020-04-24T15:21:17Z",
+                      "responseHeaders": [
+                        "Qtl-Request-Id:bf9bdb402ef4eaf5",
+                        "Vary:Accept-Encoding",
+                        "Date:Fri, 24 Apr 2020 15:21:17 GMT",
+                        "Content-Type:application/json;charset=UTF-8"
+                      ],
+                      "responseCode": 200,
+                      "responseTimestamp": "2020-04-24T15:21:18Z",
+                      "isSafe": true,
+                      "customerId": "10000005",
+                      "apiRequestId": "bf9bdb402ef4eaf5",
+                      "clientIp": "123.45.67.89",
+                      "apiName": "mycompanyapiname"
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customerId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid request ID": {
+                    "value": {
+                      "code": "InvalidRequestId",
+                      "message": "The request does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-ngadmin-apicalls-id",
+        "description": "Get details about an API call including its response status, request and response headers, and caller's IP address. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -18080,6 +18653,10 @@
     {
       "name": "Customer Management",
       "description": "These APIs allow you to update customer level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, and delete customer accounts."
+    },
+    {
+      "name": "API Call History",
+      "description": "Obtain a summary of API calls that have been made by you or on your behalf."
     }
   ]
 }

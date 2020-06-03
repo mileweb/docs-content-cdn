@@ -40,23 +40,20 @@ origin_header_modify Vary "" policy=preserve;
 ```
 However, preserving a `Vary` header prevents the response from being cached because [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) is configured by default. If it is absolutely important for the CDN360 servers to cache multiple versions based on the `Vary` header, contact our customer support to obtain permission to set `proxy_cache_vary on`.
 
-### How to chase redirections from origin?
+### How to follow redirections from origin?
 
-When the origin responds with 30x redirection, you may want the CDN servers to chase it until the redirection stops, instead of passing the redirection to the client, which takes more time to get the final content. If you want to turn it on, you just need to do the following:
-```
-TBD
-```
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn this feature on, you just need to use the directive [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) in the location where it is needed.
 
 ### China Delivery and Beian
 
 The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](http://www.beian.miit.gov.cn/). For certain domains, a [Security Beian](http://www.beian.gov.cn/) is also required. As a CDN provider, we cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, we can use servers located in close proximity to Mainland China (for example, Hong Kong, Korea and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
 
-Assuming you have a domain with ICP Beian, perform the following steps to enable local delivery in Mainland China: 
+If you have one or more domains with ICP Beian and want them to be accelerated in China, please first make sure with customer service that we have all the required information on file about your business. Once we confirm that is the case, your China Delivery service will be enabled. Then you just need to perform the following steps to enable local delivery of domains in Mainland China: 
 
-1. Create a [CNAME](<../../apidocs#operation/createCNAME>) with "hasBeian" set to true, and use this CNAME for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
+1. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
 
-2. Set "hasBeian" to true in the [property](/apidocs#operation/createProperty) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
+2. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
 
 ### How to support websocket?
 
-What you need to do is to add `include ../conf/cs_websocket_default.conf;` in the location where websocket is needed.
+What you need to do is to use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client will be using HTTP/1.1 (not HTTP/2) to connect.
