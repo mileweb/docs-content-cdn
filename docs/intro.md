@@ -14,7 +14,7 @@ By keeping content close to website visitors, utilizing intelligent request rout
 - Rich API and Edge Logic empower you to implement features at the CDN level without touching your application codebase.
 - Sophisticated access-control algorithms can be implemented using Edge Logic to process requests and protected content at the edge.
 - Requests and responses are processed at the edge using familiar tools such as NGINX configuration scripts and JavaScript.
-- Flexible cost /performance management empowers you to customize service coverage, so you can manage expenses according to the performance you need.
+- Flexible cost/performance management empowers you to customize service coverage, so you can manage expenses according to the performance you need.
 - Internet and direct traffic are monitored dynamically based on real-time performance metrics and system-load information.
 - High-level view of your network traffic and site performance can be viewed and printed as a customized report for analysis.
 - Allows your content to reach customers in mainland China. (CDNetworks can also help to secure all necessary permissions and licenses.)
