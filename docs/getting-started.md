@@ -8,7 +8,7 @@ Using CDN360 to accelerate and distribute your content involves the following st
 4. [Validate the property](</docs/portal/edge-configurations/validating-property.md>).
 5. Optionally [deploy the property to staging servers](</docs/portal/edge-configurations/deploying-property.md>) and make sure the cache behaves as expected.
 6. [Deploy the property to production servers](</docs/portal/edge-configurations/deploying-property.md>) and make sure the cache behaves as expected.
-7. [Create an edge hostname](</docs/portal/traffic-control/creating-edge-hostname.md>) for the service hostname(s) in the property.
+7. [Create an edge hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) for the service hostname(s) in the property.
 8. Modify your DNS to add a CNAME record to point your service hostname(s) to the edge hostname.
 
 The following figure shows the steps to follow when using CDN360 to accelerate your content.
