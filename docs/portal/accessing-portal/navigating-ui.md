@@ -16,8 +16,6 @@ From the dashboard, you can view:
 
 - Traffic volume, traffic bandwidth, and traffic requests information for all properties.
 - Status codes for all properties.
-- Charts that summarize traffic bandwidth for all properties.
-- Charts of total property traffic volume.
 
 A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays that chart on the [Reports page](</docs/portal/reports.md>), where you can define report parameters, and then view the results on the selected chart.
 
@@ -28,8 +26,8 @@ A legend below each chart shows the names of the data entry points in the chart.
 
 The [Reports page](</docs/portal/reports.md>) allows you to generate reports about:
 
-- Traffic volume and bandwidth on your domain.
-- Number of requests made to the files on your property.
+- Traffic volume and bandwidth to your hostnames.
+- Number of requests made to the files of your property.
 - Percentage of each HTTP status code returned as a result of requests to your content.
 
 ## Edge Configurations
