@@ -488,6 +488,8 @@ Defines conditions under which the response will not be saved to a cache. No cha
 
 <span class="badge">standard</span>
 
+**Default:** proxy_pass_header Date; <br/>
+
 Permits passing [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header fields from a proxied server to a client. No change to the public version. 
 
 
