@@ -394,9 +394,9 @@ Determines in which cases a stale cached response can be used during communicati
 
 <span class="badge">standard</span>
 
-**Contexts:** http, server, location, if in location
+**Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in if in location (ETA: June 2020).
+Sets caching time for different response codes. Changing the public version to enable it in if in location (ETA: Aug 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
