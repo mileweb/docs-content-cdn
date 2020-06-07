@@ -84,13 +84,6 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
-
-### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
-
-<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
-
-Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
-
 ### `custom_log_field`
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
 
@@ -99,6 +92,12 @@ Denies access for the specified network or address. (Work in progress to make th
 **Context**: http, server, location, if in location
 
 This directive allows the users to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you [configure the format](https://docs.google.com/document/d/155m9F0oFIDXRLeFmLqbdb0gWiHAyTWB8rPLWdRVGXoI/edit#heading=h.owglsmu6p2rb) of the download log, or using our [advanced traffic analysis](https://obd.quantil.com) tool.
+
+### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
+
+<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
+
+Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
 
 ### `enable_websocket`
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
