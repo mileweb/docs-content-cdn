@@ -11,13 +11,13 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 
 | **Fields**                               | **Description**                     |
 | ---------------------------------------- | ----------------------------------- |
-| Description. | Enter a description for the edge hostname.  |
+| Description | Enter a description for the edge hostname.  |
 | Hostname       | Either enter the first part of the edge hostname manually in the text field or click the **Auto Generate** button to generate a random one. |
 
 4. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields to define the client zone and how to handle requests come from it. Required fields are denoted by an asterisk (\*).
 
-<ul><li>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button. </li>
-<li>b. To specify more client zone rules, repeat step 4a for each additional rule.</li></ul>
+<ul>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button.</ul>
+<ul>b. To specify more client zone rules, repeat step 4a for each additional rule.</ul>
 
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
 <p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule"></p>
@@ -26,10 +26,10 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 | ----------------- | ------------------------------------------------------------------------- |
 | Client Region     | Select a region that defines this client zone.|
 | Client ISP        | Select an ISP that defines this client zone.|
-| Action Type       | Select the type of action to be performed to requests from this client zone. Choices are:<br><ul><li><strong>Deliver</strong> = Contents will be served by CDN360 servers to fulfill the requests from this client zone. Only one delivery action is allowed for each client zone. You need to select the server groups to deliver the contents. </li><li><strong>Redirect</strong> = Redirect client requests to another destination specified in the Redirect Target field (see below). This can be your origin site or maybe another CDN provider. There can be multiple redirect actions for each client zone.</li><li><strong>Reject</strong> = Client requests will always receive a response with a 403 - forbidden error message. Only one reject action is allowed for each client zone.</li></ul>  
+| Action Type       | Select the type of action to be performed to requests from this client zone. Choices are:<br><ul><li><strong>Deliver</strong> = contents will be served by CDN360 servers to fulfill the requests from this client zone. Only one delivery action is allowed for each client zone. You need to select the server groups to deliver the contents. </li><li><strong>Redirect</strong> = redirect client requests to another destination specified in the Redirect Target field (see below). This can be your origin site or another CDN provider. There can be multiple redirect actions for each client zone.</li><li><strong>Reject</strong> = client requests will always receive a response with a 403 - forbidden error message. Only one reject action is allowed for each client zone.</li></ul>  
 | Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server groups to deliver the content for this client zone. CDN360 servers are organized into 4 groups based on traffic cost from low to high: <strong>Standard</strong>, <strong>Premium</strong>, <strong>Premium+</strong>, and <strong>Ultra</strong>. When you select one group, all the lower groups will be automatically included. For more information, see [About Server Groups](#about-server-groups) below. To see the location of servers in each group, go to: https://www.cdnetworks.com/cdn360/.|
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN360 will redirect your traffic. |
-| Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional to this weight. |
+| Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional to the weight specified here. |
 
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 

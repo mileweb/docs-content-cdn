@@ -84,13 +84,6 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
-
-### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
-
-<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
-
-Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
-
 ### `custom_log_field`
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
 
@@ -99,6 +92,12 @@ Denies access for the specified network or address. (Work in progress to make th
 **Context**: http, server, location, if in location
 
 This directive allows the users to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you [configure the format](https://docs.google.com/document/d/155m9F0oFIDXRLeFmLqbdb0gWiHAyTWB8rPLWdRVGXoI/edit#heading=h.owglsmu6p2rb) of the download log, or using our [advanced traffic analysis](https://obd.quantil.com) tool.
+
+### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
+
+<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
+
+Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
 
 ### `enable_websocket`
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
@@ -394,9 +393,9 @@ Determines in which cases a stale cached response can be used during communicati
 
 <span class="badge">standard</span>
 
-**Contexts:** http, server, location, if in location
+**Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in if in location (ETA: June 2020).
+Sets caching time for different response codes. Changing the public version to enable it in if in location (ETA: Aug 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
@@ -488,8 +487,9 @@ Defines conditions under which the response will not be saved to a cache. No cha
 
 <span class="badge">standard</span>
 
-Permits passing [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header fields from a proxied server to a client. No change to the public version. 
+**Default:** `proxy_pass_header Date;` <br/>
 
+Permits passing [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header fields from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin.
 
 ### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
 
