@@ -31,7 +31,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
 
     <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
 
-2. With the **Users** tab of the Identity & Access Management page displayed, click the ID of the user you want to edit 
+2. With the **Users** tab of the Identity & Access Management page displayed, click the ID of the user you want to edit. 
    <br><U>OR </u></br>
    Click the **Actions** menu for the user you want to edit, and then select **Edit**.
 
@@ -70,7 +70,7 @@ Administrators delete users from the **Users** tab on the Identity & Access Mana
 
 ## Suspending a User
 
-Administrators suspend users from the **Users** tab on the Identity & Access Management page. Suspending a user temporarily blocks the user's access to the portal; however, their username, roles, password, and other settings are not deleted. Users are not notified that they have been suspended. They simply cannot log in anymore.
+Administrators suspend users from the **Users** tab on the Identity & Access Management page. Suspending a user temporarily blocks the user's access to the portal; however, the user's username, roles, password, and other settings are not deleted. Users are not notified that they have been suspended. They simply cannot log in anymore.
 
 If a user is logged in at the time of suspension, the user can continue using the portal, but cannot log in again after logging out. If a suspended user tries to log in, a message tells the user that the account is suspended and the user is directed to contact the site administrator.
 
@@ -98,6 +98,6 @@ From the **Users** tab on the Identity & Access Management page, administrators 
 2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:
 
 <ul><ul><li>Click the <strong>Actions</strong> menu for the suspended user you want to reactivate, and then select <strong>Activate</strong>. When prompted to activate the user, click <strong>OK</strong>.<br><br>
-<li>To view the user's details before activation, click the ID of the user you want to activate. Review the user details, and then click the <strong>Activate</strong> button next to the <strong>Status</strong> field followed by the <strong>Save</strong> button at the top right of the form. When prompted to update the user, click <strong>OK</strong>.</br></br>
+<li>To view the user's details before reactivation, click the ID of the user you want to activate. Review the user details, and then click the <strong>Activate</strong> button next to the <strong>Status</strong> field followed by the <strong>Save</strong> button at the top right of the form. When prompted to update the user, click <strong>OK</strong>.</br></br>
 
 <p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-activate.png" alt="activate" width="900"></p>
