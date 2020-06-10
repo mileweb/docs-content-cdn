@@ -37,10 +37,10 @@ The following report types are supported:
 | Report Type     | Select the type of report you want to generate.       | 
 | Hostnames       | Select one or more hostnames defined in your properties.         |
 | Date Range      | Select the start and end dates and the time for the report. |
-| Report Interval | Select the granularity of the returned data. Choices are: <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
-| Protocol        | Select the protocol-based data traffic that will be reported. Choices are: <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
-| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. Choices are: <li><strong>This Account Only</strong>.</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong> *(default)*
-| Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group or not group the results. Choices are:<li><strong>None</strong></li><li><strong>Hostnames</strong></li><li><strong>Server Groups</strong></li><li><strong>Hostnames + Server Groups</strong></li><li><strong>Server Groups + Hostnames</strong>.</li> |
+| Report Interval | Select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
+| Protocol        | Select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
+| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>.</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>. *(default)*
+| Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group or not group the results. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Hostnames + Server Groups</strong>.</li><li><strong>Server Groups + Hostnames</strong>.</li> |
 
 **Note:** All volume and bandwidth report data pertains to the HTTP payload only. It does not include the overhead from TCP, IP, and MAC headers. CDNetworks adds 4.56% (66 bytes) of overhead to each 1448-byte payload to generate the "billing volume" on your invoice.
 
@@ -49,4 +49,4 @@ The following report types are supported:
 
 <ul><li>Mouse over data points in the report to view detailed information.<br>
 <li>Drag over the chart to magnify areas, and then use the <strong>Reset zoom</strong> button to return to the default zoom level.<br>
-<li>Use the <strong>Download Options</strong> button at the top-right of the report to download raw data in comma-separated-value (CSV) format.
+<li>Use the <strong>Download Options</strong> button at the top right of the report to download raw data in comma-separated-value (CSV) format.
