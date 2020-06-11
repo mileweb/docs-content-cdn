@@ -37,12 +37,12 @@ This wizard can be used to create an initial version of the edge logic. It suppo
 
 ## TLS Settings
 
-This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, you can add a second certificate with algorithms that are different from the certificate. The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [Openssl documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
+This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate. The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
 <p align=center><img src="/docs/resources/images/edge-configurations/property-tls.png" alt="TLS Settings" width="700"></p>
 
 ## Real-Time Log
 
-Real-time log allows you to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using nginx variables. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+Real-time log allows you to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using NGINX variables. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="900"></p>
 
 ## Advanced Settings
