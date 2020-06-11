@@ -1,6 +1,6 @@
 # About Identities and Access
 
-The Identity & Access Management page defines the users allowed to access the portal and the permissions to view and/or configure portal settings.
+The Identity & Access Management page defines the users allowed to access the portal and the permissions to view and         configure portal settings.
 
 
 ## What are Users?
