@@ -26,12 +26,12 @@ If the content on your origin web server has changed, request a purge to have CD
 
 |**Fields**|**Description**|
 |----------|---------------|
-| Target Environment | Select whether the purge will occur in a staging or production environment.|
-| Purge Action | Select whether you want the content deleted or invalidated.|
+| Target Environment | Select whether the purge will occur in the staging or production environment.|
+| Purge Action | Select whether you want the content deleted or invalidated.  <br><ul><li><strong>Delete</strong> = removes the object from the cache of edge servers. The next time the edge server receives a request for the removed content, it retrieves the current version from your origin server. </li><li><strong>Invalidate</strong> = this is the default setting and marks the cached content as invalid. However, the content is not removed from cache and objects are not retrieved from your origin unless they are newer than the cached versions. With this setting, CDN360 edge servers can continue serving stale content to your end users if the origin cannot be reached.</li></ul> |
 | Purge Type | Select whether you want to purge a file or a directory.|
 | Add a file to be purged | If **Purge Type** is set to **File**, select **https** (*default*) or **http** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge. If you decide not to add one or more files, click the **x** icon at the right side of the file name.|
 | Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to add one or more request headers, click the **x** icon at the right side of the header name.|
-| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https** (*default*) or **http** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories associated with the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to add one or more directories, click the **x** icon at the right side of the directory name.|
+| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https** (*default*) or **http** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to add one or more directories, click the **x** icon at the right side of the directory name.|
 
 4. Click **Start Purge**.
 
@@ -45,14 +45,14 @@ If the content on your origin web server has changed, request a purge to have CD
 1. In the left pane, click **Content Management**.
 2. A **Purge** tab on the Content Management page shows details similar to those in the following figure:
 
-   <ul><li> <strong>ID</strong> associated with the purge request.<br>
-   <li><strong>Target</strong> environment where the purge occurred (either <strong>Staging</strong> or <strong>Production</strong>).<br>
-   <li><strong>Action</strong> that was performed (either <strong>Delete</strong> or <strong>Invalidate</strong>).<br>
-   <li><strong>Type</strong> = object on which the purge was requested.<br>
+   <ul><li> ID associated with the purge request.<br>
+   <li>Target environment where the purge occurred (either Staging or Production).<br>
+   <li>Action that was performed (either Delete or Invalidate).<br>
+   <li>Type of object on which the purge was requested.<br>
    <li>Date and time when the purge request was submitted and completed.<br>
    <li>A success rate indicator that shows a completion percentage from 0 to 100%.</ul>
 
 ![null](</docs/resources/images/content-management/content-management-wo-numbers.png>)
 
-3. To specify the exact content you want to purge, create a purge request.
+1. To specify the exact content you want to purge, create a purge request.
 
