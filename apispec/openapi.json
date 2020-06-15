@@ -11,7 +11,7 @@
   "servers": [
     {
       "url": "https://ngapi.cdnetworks.com"
-    },
+    }
   ],
   "paths": {
     "/cdn/properties/{propertyID}/versions/{version}": {
