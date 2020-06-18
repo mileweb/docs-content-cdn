@@ -3,14 +3,14 @@
   "info": {
     "title": "CDN360 API Specification",
     "version": "1.0",
-    "description": "CDN360 APIs allow you to manage CDN360 Services.",
+    "description": "CDN360 APIs allow you to manage CDN360 services.",
     "contact": {
-      "url": "https://www.quantil.com"
+      "url": "https://www.cdnetworks.com"
     }
   },
   "servers": [
     {
-      "url": "https://ngapi.quantil.com"
+      "url": "https://ngapi.cdnetworks.com"
     }
   ],
   "paths": {
@@ -1213,15 +1213,15 @@
         ]
       }
     },
-    "/cdn/cnames/{CNAME}": {
+    "/cdn/edgeHostnames/{edgeHostname}": {
       "get": {
-        "summary": "Get a CNAME",
+        "summary": "Get an edge hostname",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "responses": {
           "200": {
-            "description": "The response body contains details of the CNAME.",
+            "description": "The response body contains details of the edge hostname.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1270,26 +1270,26 @@
                     },
                     "lastUpdateTime": {
                       "type": "string",
-                      "description": "RFC 3339 format date indicating when the CNAME was last updated.",
+                      "description": "RFC 3339 format date indicating when the edge hostname was last updated.",
                       "example": "2019-11-11T23:35:00Z"
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "RFC 3339 format date indicating when the CNAME was created.",
+                      "description": "RFC 3339 format date indicating when the edge hostname was created.",
                       "example": "2019-11-11T23:34:59Z"
                     },
                     "ownerCustomerId": {
                       "type": "integer",
-                      "description": "Indicates the customer account that owns the CNAME.",
+                      "description": "Indicates the customer account that owns the edge hostname.",
                       "format": "int64"
                     },
                     "configs": {
                       "type": "object",
                       "description": "Contains settings that can be modified.",
                       "properties": {
-                        "cname": {
+                        "edgeHostname": {
                           "type": "string",
-                          "description": "A CNAME."
+                          "description": "An edge hostname."
                         },
                         "pciRequired": {
                           "type": "boolean",
@@ -1298,7 +1298,7 @@
                         },
                         "description": {
                           "type": "string",
-                          "description": "A description of the CNAME."
+                          "description": "A description of the edge hostname."
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -1308,7 +1308,7 @@
                         "clientZones": {
                           "type": "array",
                           "items": {
-                            "title": "CNAME Client Zone Rule",
+                            "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
                             "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
                             "x-examples": {
@@ -1350,12 +1350,12 @@
                               }
                             },
                             "x-tags": [
-                              "CNAME Management"
+                              "Edge Hostname Management"
                             ],
                             "properties": {
                               "region": {
                                 "type": "string",
-                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-cnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
                               },
                               "weight": {
                                 "type": "integer",
@@ -1403,7 +1403,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
                               },
                               "enableIPv6": {
                                 "type": "boolean",
@@ -1422,11 +1422,11 @@
                         },
                         "estimatedBandwidth": {
                           "type": "string",
-                          "description": "An estimate of the bandwidth required to serve content using this CNAME. Units of meaurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                          "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                         }
                       },
                       "required": [
-                        "cname"
+                        "edge hostname"
                       ]
                     }
                   }
@@ -1434,10 +1434,9 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "ownerCustomerId": 20000021,
+                      "ownerCustomerId": 123456,
                       "configs": {
-                        "cname": "testcname.qtlcdn.com",
-                        "pciRequired": false,
+                        "edgeHostname": "rtycno8odxuwycaror3f.qtlcdn.com",
                         "hasBeian": false,
                         "clientZones": [
                           {
@@ -1449,27 +1448,20 @@
                               ]
                             },
                             "isp": "all",
-                            "weight": 100,
-                            "enableIPv6": true
+                            "enableIPv6": true,
+                            "weight": 100
                           }
-                        ]
+                        ],
+                        "geoFences": []
                       },
-                      "creationTime": "2020-02-11T23:36:15Z",
-                      "lastUpdateTime": "2020-02-11T23:36:17Z",
+                      "creationTime": "2020-05-30T00:43:49Z",
+                      "lastUpdateTime": "2020-05-30T00:43:49Z",
                       "history": [
                         {
-                          "apiAccountId": "5640",
-                          "apiName": "apiaccount-operator",
+                          "apiName": "myapiname",
                           "operation": "creation",
-                          "time": "2020-02-11T23:36:15Z",
-                          "apiRequestId": "38adfc359ba51eec"
-                        },
-                        {
-                          "apiAccountId": "5640",
-                          "apiName": "apiaccount-operator",
-                          "operation": "update",
-                          "time": "2020-02-11T23:36:17Z",
-                          "apiRequestId": "4b7b23f1d33e761d"
+                          "time": "2020-05-30T00:43:49Z",
+                          "apiRequestId": "b46c1a060706c4e9"
                         }
                       ]
                     }
@@ -1479,7 +1471,7 @@
             }
           },
           "404": {
-            "description": "The CNAME was not found.",
+            "description": "The edge hostname was not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1496,8 +1488,8 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "code": "InvalidCNAME",
-                      "message": "The specified CNAME does not exist or the caller doesn't have access to this resource."
+                      "code": "InvalidEdgeHostname",
+                      "message": "The specified edge hostname does not exist or the caller doesn't have access to this resource."
                     }
                   }
                 }
@@ -1505,8 +1497,8 @@
             }
           }
         },
-        "description": "This API returns information about a CNAME including the associated client zone rules and operation history.",
-        "operationId": "getCNAME",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history.",
+        "operationId": "getEdgeHostname",
         "parameters": [
           {
             "schema": {
@@ -1519,16 +1511,16 @@
         ]
       },
       "delete": {
-        "summary": "Delete a CNAME",
+        "summary": "Delete an edge hostname",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "responses": {
           "204": {
-            "description": "The CNAME was successfully deleted."
+            "description": "The edge hostname was successfully deleted."
           },
           "404": {
-            "description": "The CNAME could not be found.",
+            "description": "The edge hostname could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1545,8 +1537,8 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "code": "InvalidCNAME",
-                      "message": "The specified CNAME does not exist or the caller doesn't have access to this resource."
+                      "code": "InvalidEdgeHostname",
+                      "message": "The specified edge hostname does not exist or the caller doesn't have access to this resource."
                     }
                   }
                 }
@@ -1554,8 +1546,8 @@
             }
           }
         },
-        "operationId": "deleteCNAME",
-        "description": "Use this API to delete a CNAME. If you have configured your DNS server with this CNAME, you should update your DNS records before deleting it. Otherwise, visitors to the associated hostnames will see an error.",
+        "operationId": "deleteEdgeHostname",
+        "description": "Use this API to delete an edge hostname. If you have configured your DNS server with this edge hostname, you should update your DNS records before deleting it. Otherwise, visitors to the associated hostnames will see an error.",
         "parameters": [
           {
             "schema": {
@@ -1572,17 +1564,17 @@
           "schema": {
             "type": "string"
           },
-          "name": "CNAME",
+          "name": "edgeHostname",
           "in": "path",
           "required": true,
-          "description": "a CNAME"
+          "description": "an edge hostname"
         }
       ],
       "put": {
-        "summary": "Update a CNAME",
+        "summary": "Update an edge hostname",
         "responses": {
           "204": {
-            "description": "The CNAME was updated."
+            "description": "The edge hostname was updated."
           },
           "400": {
             "description": "The request was invalid. Refer to the response body for details.",
@@ -1617,7 +1609,7 @@
             }
           },
           "404": {
-            "description": "The CNAME was not found.",
+            "description": "The edge hostname was not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1634,8 +1626,8 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "code": "InvalidCNAME",
-                      "message": "The specified CNAME does not exist or the caller doesn't have access to this resource."
+                      "code": "InvalidEdgeHostname",
+                      "message": "The specified edge hostname does not exist or the caller doesn't have access to this resource."
                     }
                   }
                 }
@@ -1643,10 +1635,10 @@
             }
           }
         },
-        "operationId": "updateCNAME",
-        "description": "Use this API to update a CNAME. Be sure to enter all fields describing your CNAME including ones that are not changing.",
+        "operationId": "updateEdgeHostname",
+        "description": "Use this API to update an edge hostname. Be sure to enter all fields describing your edge hostname including ones that are not changing.",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "requestBody": {
           "content": {
@@ -1654,13 +1646,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "cname": {
+                  "edgeHostname": {
                     "type": "string",
-                    "description": "The CNAME"
+                    "description": "The edge hostname"
                   },
                   "description": {
                     "type": "string",
-                    "description": "A description of the CNAME."
+                    "description": "A description of the edge hostname."
                   },
                   "pciRequired": {
                     "type": "boolean",
@@ -1678,7 +1670,7 @@
                     "type": "array",
                     "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule is created which uses our 'standard' server group to handle all requests.  <code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
-                      "title": "CNAME Client Zone Rule",
+                      "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
                       "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
                       "x-examples": {
@@ -1720,12 +1712,12 @@
                         }
                       },
                       "x-tags": [
-                        "CNAME Management"
+                        "Edge Hostname Management"
                       ],
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-cnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -1773,7 +1765,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
                         },
                         "enableIPv6": {
                           "type": "boolean",
@@ -1792,17 +1784,17 @@
                   },
                   "estimatedBandwidth": {
                     "type": "string",
-                    "description": "An estimate of the bandwidth required to serve content using this CNAME. Units of meaurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                    "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                   }
                 },
                 "required": [
-                  "cname"
+                  "edgeHostname"
                 ]
               },
               "examples": {
                 "example-1": {
                   "value": {
-                    "cname": "testcname.t1573515322742.qtlcdn.com",
+                    "edgeHostname": "testcname.t1573515322742.qtlcdn.com",
                     "clientZones": [
                       {
                         "region": "all",
@@ -1821,7 +1813,7 @@
               }
             }
           },
-          "description": "The request body fully describes the CNAME. Please include all fields even if you are not changing their values."
+          "description": "The request body fully describes the edge hostname. Please include all fields even if you are not changing their values."
         },
         "parameters": [
           {
@@ -1835,11 +1827,11 @@
         ]
       },
       "patch": {
-        "summary": "Update a CNAME",
-        "operationId": "patch-cdn-cnames-CNAME",
+        "summary": "Update an edge hostname",
+        "operationId": "patch-cdn-edge-hostname",
         "responses": {
           "204": {
-            "description": "The CNAME was successfully updated."
+            "description": "The edge hostname was successfully updated."
           },
           "400": {
             "description": "The request was invalid. Refer to the response body for details.",
@@ -1869,7 +1861,7 @@
             "headers": {}
           },
           "404": {
-            "description": "The CNAME could not be found. Refer to the response body for details.",
+            "description": "The edge hostname could not be found. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1884,10 +1876,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid CNAME": {
+                  "Invalid edge hostname": {
                     "value": {
-                      "code": "InvalidCNAME",
-                      "message": "The specified CNAME does not exist or the caller doesn't have access to this resource."
+                      "code": "InvalidEdgeHostname",
+                      "message": "The specified edge hostname does not exist or the caller doesn't have access to this resource."
                     }
                   }
                 }
@@ -1895,9 +1887,9 @@
             }
           }
         },
-        "description": "This API allows you to update a CNAME by sending only the fields that are changing.",
+        "description": "This API allows you to update an edge hostname by sending only the fields that are changing.",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "requestBody": {
           "content": {
@@ -1907,7 +1899,7 @@
                 "properties": {
                   "description": {
                     "type": "string",
-                    "description": "A description of the CNAME."
+                    "description": "A description of the edge hostname."
                   },
                   "pciRequired": {
                     "type": "boolean",
@@ -1922,7 +1914,7 @@
                     "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
                   },
                   "clientZones": {
-                    "title": "CNAME Client Zone Rule",
+                    "title": "Edge Hostname Client Zone Rule",
                     "type": "object",
                     "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
                     "x-examples": {
@@ -1964,12 +1956,12 @@
                       }
                     },
                     "x-tags": [
-                      "CNAME Management"
+                      "Edge Hostname Management"
                     ],
                     "properties": {
                       "region": {
                         "type": "string",
-                        "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-cnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                        "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
                       },
                       "weight": {
                         "type": "integer",
@@ -2017,7 +2009,7 @@
                       },
                       "isp": {
                         "type": "string",
-                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
                       },
                       "enableIPv6": {
                         "type": "boolean",
@@ -2035,14 +2027,14 @@
                   },
                   "estimatedBandwidth": {
                     "type": "string",
-                    "description": "An estimate of the bandwidth required to serve content using this CNAME. Units of meaurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                    "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                   }
                 }
               },
               "examples": {
                 "example-1": {
                   "value": {
-                    "description": "This is a new CNAME for use with our hostname."
+                    "description": "This is a new edge hostname for use with our property."
                   }
                 }
               }
@@ -3350,11 +3342,11 @@
         ]
       }
     },
-    "/cdn/cnames": {
+    "/cdn/edgeHostnames": {
       "post": {
-        "summary": "Create a CNAME",
+        "summary": "Create an edge hostname",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "responses": {
           "201": {
@@ -3364,7 +3356,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The value is a URL to the new CNAME.",
+                "description": "The value is a URL to the new edge hostname.",
                 "required": true
               }
             }
@@ -3391,10 +3383,10 @@
                       "message": "Invalid client region 'aaabcde'."
                     }
                   },
-                  "Invalid CNAME suffix": {
+                  "Invalid edge hostname suffix": {
                     "value": {
-                      "code": "InvalidCnameSuffix",
-                      "message": "Invalid CNAME 'testdomain-.mydomain.info'. The CNAME can end with these values:  .qtlgslb.com."
+                      "code": "InvalidEdgeHostnameSuffix",
+                      "message": "Invalid edge hostname 'testdomain-.mydomain.info'. The edge hostname can end with these values:  .qtlgslb.com."
                     }
                   },
                   "Invalid weight code": {
@@ -3403,10 +3395,10 @@
                       "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
                     }
                   },
-                  "Invalid CNAME": {
+                  "Invalid Edge Hostname": {
                     "value": {
-                      "code": "InvalidCname",
-                      "message": "Invalid CNAME 'abcdef'. The CNAME must be a valid domain name string."
+                      "code": "InvalidEdgeHostname",
+                      "message": "Invalid edge hostname 'abcdef'. The edge hostname must be a valid domain name string."
                     }
                   }
                 }
@@ -3414,7 +3406,7 @@
             }
           },
           "402": {
-            "description": "Too many CNAMEs have been created.",
+            "description": "Too many edge hostnames have been created.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3429,10 +3421,10 @@
                   }
                 },
                 "examples": {
-                  "Too many CNAMEs": {
+                  "Too many edge hostnames": {
                     "value": {
-                      "code": "TooManyCnames",
-                      "message": "The number of CNAMES exceeds the account maximum."
+                      "code": "TooManyEdgeHostnames",
+                      "message": "The number of edge hostnames exceeds the account maximum."
                     }
                   }
                 }
@@ -3440,7 +3432,7 @@
             }
           },
           "409": {
-            "description": "The CNAME could not be created due to a conflict. Refer to the response body for details.",
+            "description": "The edge hostname could not be created due to a conflict. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3455,10 +3447,10 @@
                   }
                 },
                 "examples": {
-                  "CNAME already exists": {
+                  "Edge hostname already exists": {
                     "value": {
-                      "code": "CnameAlreadyExists",
-                      "message": "The proposed CNAME cannot be created because it already exists."
+                      "code": "EdgeHostnameAlreadyExists",
+                      "message": "The proposed edge hostname cannot be created because it already exists."
                     }
                   }
                 }
@@ -3466,55 +3458,43 @@
             }
           }
         },
-        "description": "This API enables you to create CNAMEs to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to a CNAME created using this API in order for CDN360 to handle your content.",
-        "operationId": "createCNAME",
+        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to an edge hostname created using this API in order for CDN360 to handle your content.",
+        "operationId": "createEdgeHostname",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "cname": {
+                  "edgeHostname": {
                     "type": "string",
-                    "description": "A CNAME you wish to use. It should end with \".qtlgslb.com\".",
+                    "description": "An edge hostname you wish to use. It should end with \".qtlgslb.com\".",
                     "example": "testcname.123.qtlgslb.com"
                   },
                   "description": {
                     "type": "string",
-                    "description": "A description of the CNAME."
+                    "description": "A description of the edge hostname."
                   },
                   "pciRequired": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Indicates whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs.",
-                    "enum": [
-                      "true",
-                      "false"
-                    ]
+                    "description": "Indicates whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
                   },
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "enum": [
-                      "true",
-                      "false"
-                    ],
                     "description": "Indicate whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China.\n"
                   },
                   "gdprCompliant": {
                     "type": "boolean",
                     "default": false,
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries.",
-                    "enum": [
-                      "true",
-                      "false"
-                    ]
+                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "type": "array",
                     "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
-                      "title": "CNAME Client Zone Rule",
+                      "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
                       "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
                       "x-examples": {
@@ -3556,12 +3536,12 @@
                         }
                       },
                       "x-tags": [
-                        "CNAME Management"
+                        "Edge Hostname Management"
                       ],
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-cnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes.  For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -3609,7 +3589,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-cnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
                         },
                         "enableIPv6": {
                           "type": "boolean",
@@ -3628,19 +3608,19 @@
                   },
                   "estimatedBandwiidth": {
                     "type": "string",
-                    "description": "An estimate of the bandwidth required to serve content using this CNAME. Units of meaurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                    "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                   }
                 }
               },
               "examples": {
                 "example-1": {
                   "value": {
-                    "cname": "testcname.t1573428787161.g-beta.qtlcdn.com"
+                    "edgeHostname": "testcname.t1573428787161.g-beta.qtlcdn.com"
                   }
                 },
                 "example-2": {
                   "value": {
-                    "cname": "testcname.123.qtlgslb.com",
+                    "edgeHostname": "testcname.123.qtlgslb.com",
                     "clientZones": [
                       {
                         "region": "eu",
@@ -3659,7 +3639,7 @@
               }
             }
           },
-          "description": "The request body contains rules for your CNAME."
+          "description": "The request body contains rules for your edge hostname."
         },
         "parameters": [
           {
@@ -3673,38 +3653,38 @@
         ]
       },
       "get": {
-        "summary": "Get a list of CNAMEs",
+        "summary": "Get a list of edge hostnames",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "responses": {
           "200": {
-            "description": "The response contains CNAMEs matching the criteria.",
+            "description": "The response contains edge hostnames matching the criteria.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "cnames": {
+                    "edgeHostnames": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "cname": {
+                          "edgeHostname": {
                             "type": "string",
-                            "description": "A CNAME."
+                            "description": "An edge hostname."
                           },
                           "description": {
                             "type": "string",
-                            "description": "Description of the CNAME."
+                            "description": "Description of the edge hostname."
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC3339 format string indicating when the CNAME was last updated."
+                            "description": "RFC3339 format string indicating when the edge hostname was last updated."
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC3339 format string indicating when the CNAME was created."
+                            "description": "RFC3339 format string indicating when the edge hostname was created."
                           },
                           "hasBeian": {
                             "type": "boolean",
@@ -3712,7 +3692,7 @@
                           },
                           "highestServerGroup": {
                             "type": "string",
-                            "description": "Indicates the highest server group that can be used to serve this CNAME. The server groups are specified when you create a client zone rule for a <a href=\"#operation/createCNAME\">new CNAME</a>. ",
+                            "description": "Indicates the highest server group that can be used to serve this edge hostname. The server groups are specified when you create a client zone rule for a <a href=\"#operation/createEdgeHostname\">new edge hostname</a>. ",
                             "enum": [
                               "standard",
                               "premium",
@@ -3722,7 +3702,7 @@
                           }
                         },
                         "required": [
-                          "cname",
+                          "edgeHostname",
                           "description",
                           "lastUpdateTime",
                           "creationTime",
@@ -3734,7 +3714,7 @@
                     "count": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "Total number of CNAMEs in the account. The actual number of CNAMEs returned in the <i>cnames</i> field may be smaller if query parameters are specified."
+                      "description": "Total number of edge hostnames in the account. The actual number of edge hostnames returned in the <i>edgehostnames</i> field may be smaller if query parameters are specified."
                     }
                   },
                   "required": [
@@ -3745,17 +3725,17 @@
                   "example-1": {
                     "value": {
                       "count": 2,
-                      "cnames": [
+                      "edgeHostnames": [
                         {
-                          "cname": "ekgggzcmswu4vc.qtlcdn.com",
-                          "description": "my CNAME",
+                          "edgeHostname": "ekgggzcmswu4vc.qtlcdn.com",
+                          "description": "my edge hostname",
                           "hasBeian": false,
                           "highestServerGroup": "standard",
                           "lastUpdateTime": "2019-12-04T19:44:12Z",
                           "creationTime": "2019-12-04T19:44:12Z"
                         },
                         {
-                          "cname": "cdn.admtl.com.qtlcdn.com",
+                          "edgeHostname": "cdn.admtl.com.qtlcdn.com",
                           "description": "",
                           "hasBeian": false,
                           "highestServerGroup": "standard",
@@ -3814,8 +3794,8 @@
             }
           }
         },
-        "operationId": "getCNAMES",
-        "description": "Get a list of CNAMEs. Specify search, offset, and limit parameters to filter your results. The default is to return the most recently updated CNAME first.",
+        "operationId": "getEdgeHostnames",
+        "description": "Get a list of edge hostnames. Specify search, offset, and limit parameters to filter your results. The default is to return the most recently updated edge hostname first.",
         "parameters": [
           {
             "schema": {
@@ -3823,7 +3803,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "The value is matched against the 'description' and 'cname' fields of each CNAME."
+            "description": "The value is matched against the 'description' and 'edgeHostname' fields of each edge hostname."
           },
           {
             "schema": {
@@ -3833,7 +3813,7 @@
             },
             "in": "query",
             "name": "offset",
-            "description": "Indicates the first CNAME to return. The first has an offset of 0."
+            "description": "Indicates the first edge hostname to return. The first has an offset of 0."
           },
           {
             "schema": {
@@ -3843,7 +3823,7 @@
             },
             "in": "query",
             "name": "limit",
-            "description": "Maximum number of CNAMEs to return."
+            "description": "Maximum number of edge hostnames to return."
           },
           {
             "schema": {
@@ -3856,7 +3836,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "Order the list of CNAMEs."
+            "description": "Order the list of edge hostnames."
           },
           {
             "schema": {
@@ -3870,7 +3850,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "Indicates the order of CNAMEs returned. Use 'asc' for ascending order or 'desc' for descending order."
+            "description": "Indicates the order of edge hostnames returned. Use 'asc' for ascending order or 'desc' for descending order."
           },
           {
             "schema": {
@@ -3886,7 +3866,7 @@
             },
             "in": "query",
             "name": "hasBeian",
-            "description": "Specify <i>true</i> to obtain a list of CNAMEs flagged for use with hostnames that have a Beian license allowing them to be served by servers in mainland China. Specify <i>false</i> to only retrieve those CNAMEs without the Beian flag.  By default, all CNAMEs are returned."
+            "description": "Specify <i>true</i> to obtain a list of edge hostnames flagged for use with hostnames that have a Beian license allowing them to be served by servers in mainland China. Specify <i>false</i> to only retrieve those edge hostnames without the Beian flag.  By default, all edge hostnames are returned."
           }
         ]
       }
@@ -11389,7 +11369,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "A URL to the annotation object, for example, <code>Location: http://ngapi.quantil.com/cdn/annotations/5dd50ef0ace044000163278f</code>.",
+                "description": "A URL to the annotation object, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/annotations/5dd50ef0ace044000163278f</code>.",
                 "required": true
               }
             }
@@ -11455,19 +11435,13 @@
                   "serverGroups": {
                     "type": "array",
                     "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
-                    "enum": [
-                      "standard",
-                      "premium",
-                      "premium+",
-                      "ultra"
-                    ],
                     "items": {
                       "type": "string"
                     }
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createCNAME\">Create a CNAME API</a>.",
+                    "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
                     "items": {
                       "type": "string"
                     }
@@ -13030,15 +13004,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned.",
-                          "enum": [
-                            "edge response",
-                            "edge request",
-                            "intermediate response",
-                            "intermediate request",
-                            "origin response",
-                            "origin request"
-                          ],
+                          "description": "Indicates the type of data returned: \"edge response\"",
                           "items": {
                             "type": "string"
                           }
@@ -14079,10 +14045,6 @@
                     "products": {
                       "type": "array",
                       "description": "Products that the API account has access to.  Supported products are \"CDN\" and \"ECP\".",
-                      "enum": [
-                        "CDN",
-                        "ECP"
-                      ],
                       "items": {
                         "type": "string"
                       }
@@ -14212,6 +14174,15 @@
                     "description": "Email address of the primary user of the API account."
                   }
                 }
+              },
+              "examples": {
+                "Update several fields and force a password reset.": {
+                  "value": {
+                    "responsiblePerson": "Juan Jimenez",
+                    "emailAddress": "juanj@company.com",
+                    "apiKey": "reset"
+                  }
+                }
               }
             }
           },
@@ -14335,10 +14306,6 @@
                     "products": {
                       "type": "array",
                       "description": "Products that the API account has access to.  Supported products are \"CDN\" and \"ECP\".",
-                      "enum": [
-                        "CDN",
-                        "ECP"
-                      ],
                       "items": {
                         "type": "string"
                       }
@@ -14525,10 +14492,6 @@
                   },
                   "products": {
                     "type": "array",
-                    "enum": [
-                      "CDN",
-                      "ECP"
-                    ],
                     "description": "Products that the API account has access to.  Supported products are \"CDN\" and \"ECP\".",
                     "items": {
                       "type": "string"
@@ -15340,7 +15303,7 @@
     },
     "/cdn/report/cnameReq": {
       "post": {
-        "summary": "Obtain CNAME statistics",
+        "summary": "Get CNAME statistics",
         "tags": [
           "Reports"
         ],
@@ -15670,7 +15633,7 @@
     },
     "/cdn/report/cnameReqSummary": {
       "post": {
-        "summary": "Obtain CNAME summary statistics",
+        "summary": "Get CNAME summary statistics",
         "tags": [
           "Reports"
         ],
@@ -15699,10 +15662,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned.",
-                          "enum": [
-                            "cname dns request"
-                          ],
+                          "description": "Indicates the type of data returned: \"cname dns request\"",
                           "items": {
                             "type": "string"
                           }
@@ -15837,7 +15797,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"cnamest\". We only support grouping by \"cnames\"."
+                      "message": "Invalid group name(s): \"abc\". We only support grouping by \"cnames\"."
                     }
                   },
                   "Invalid time span": {
@@ -15926,15 +15886,15 @@
         }
       }
     },
-    "/cdn/cnames/isps": {
+    "/cdn/edgeHostnames/isps": {
       "get": {
         "summary": "Get a list of ISPs",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "responses": {
           "200": {
-            "description": "The response contains a list of ISPs. You can specify an ISP's code in a <a href=\"#operation/createCNAME\">CNAME's client zone rule</a>.",
+            "description": "The response contains a list of ISPs. You can specify an ISP's code in an <a href=\"#operation/createEdgeHostname\">edge hostname's client zone rule</a>.",
             "content": {
               "application/json": {
                 "schema": {
@@ -16146,8 +16106,8 @@
             }
           }
         },
-        "operationId": "get-cdn-cnames-isps",
-        "description": "Obtain a list of ISPs that can be used in <a href=\"#operation/createCNAME\">CNAME client zone rules</a>.",
+        "operationId": "get-cdn-edgeHostnames-isps",
+        "description": "Obtain a list of ISPs that can be used in <a href=\"#operation/createEdgeHostname\">edge hostname client zone rules</a>.",
         "parameters": [
           {
             "schema": {
@@ -17987,15 +17947,15 @@
         ]
       }
     },
-    "/cdn/cnames/clientRegions": {
+    "/cdn/edgeHostnames/clientRegions": {
       "get": {
         "summary": "Get client regions",
         "tags": [
-          "CNAME Management"
+          "Edge Hostname Management"
         ],
         "responses": {
           "200": {
-            "description": "The response body contains a list of regions. You can specify a region's code in a CNAME's client zone rule.",
+            "description": "The response body contains a list of regions. You can specify a region's code in an edge hostname's client zone rule.",
             "content": {
               "application/json": {
                 "schema": {
@@ -18070,8 +18030,8 @@
             }
           }
         },
-        "operationId": "get-cdn-cnames-clientRegions",
-        "description": "Get a list of client regions that can be used in <a href=\"#operation/createCNAME\">CNAME client zone rules</a>. Query parameters allow you to filter and sort the results.",
+        "operationId": "get-cdn-edgeHostnames-clientRegions",
+        "description": "Get a list of client regions that can be used in <a href=\"#operation/createEdgeHostname\">edge hostname client zone rules</a>. Query parameters allow you to filter and sort the results.",
         "parameters": [
           {
             "schema": {
@@ -18147,7 +18107,7 @@
                           },
                           "onBehalfOf": {
                             "type": "string",
-                            "description": "A nonempty value indicates that an API call was made on your behalf. For example, the CDN360 support team may help you with configuration."
+                            "description": "A nonempty value indicates that an API call was made on your behalf. For example, the CDN360 support team may have helped you with configuration."
                           },
                           "apiName": {
                             "type": "string",
@@ -18204,7 +18164,7 @@
                         {
                           "apiRequestId": "f291e3014bd06216",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi-integration.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname2",
@@ -18309,7 +18269,7 @@
             },
             "in": "query",
             "name": "caller",
-            "description": "Filter results by specifying the API login name or API  account ID. You can get IDs by obtaining a <a href=\"api.html#operation/get-ngadmin-apiAccounts\">list of your API accounts</a>."
+            "description": "Filter results by specifying the API login name or API  account ID. You can get IDs by obtaining a <a href=\"#operation/get-ngadmin-apiAccounts\">list of your API accounts</a>."
           },
           {
             "schema": {
@@ -18546,9 +18506,6 @@
                       "type": "string"
                     }
                   }
-                },
-                "examples": {
-                  "example-1": {}
                 }
               }
             }
@@ -18612,7 +18569,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version which has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"http://cdn360doc.quantil.com/Content/Resources/Images/flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version which has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
@@ -18620,15 +18577,15 @@
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. You have the option of deploying to a <i>staging</i> environment to test your configurations before deploying to <i>production</i>. <h2>Testing a staged property</h2>If you have deployed to staging, you can send traffic to our staging servers to ensure the property behaves as you intended. The staging cache servers can be found through a special hostname <i>staging.qtlgslb.com</i>. You can get IP addresses of staging cache servers using the Unix/Linux dig command.  For example:\n<pre> <code> $ dig staging.qtlgslb.com <br/> ... <br /> ;; ANSWER SECTION:<br/> staging.qtlgslb.com.    59      IN      A       163.171.228.89<br/> staging.qtlgslb.com.    59      IN      A       163.171.233.53<br/> staging.qtlgslb.com.    59      IN      A       163.171.230.47<br/> </code> </pre> You can also call the <a href=\"#operation/getStagingServers\">Query list of staging servers API</a> to get IP addresses you can use. You have several ways to set up your system to test against staging: <ol> <li>Modify your DNS server to point your deployed property's hostname to the CDN360 staging hostname <i>staging.qtlgslb.com</i>.</li> <li>Modify your HOSTS file (/etc/hosts on Linux) to hard code the property's hostname to one of the staging servers' IP addresses.</li> <li> If the cURL command is used, the --resolve option can be used to directly map the property's hostname to an IP address of a CDN360 staging server.</li> </ol> Once you have done the setup, you can access your content via the hostname. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createCNAME\">create a CNAME</a> and set your DNS server to point the CNAME to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. You have the option of deploying to a <i>staging</i> environment to test your configurations before deploying to <i>production</i>. <h2>Testing a staged property</h2>If you have deployed to staging, you can send traffic to our staging servers to ensure the property behaves as you intended. The staging cache servers can be found through a special hostname <i>staging.qtlgslb.com</i>. You can get IP addresses of staging cache servers using the Unix/Linux dig command.  For example:\n<pre> <code> $ dig staging.qtlgslb.com <br/> ... <br /> ;; ANSWER SECTION:<br/> staging.qtlgslb.com.    59      IN      A       163.171.228.89<br/> staging.qtlgslb.com.    59      IN      A       163.171.233.53<br/> staging.qtlgslb.com.    59      IN      A       163.171.230.47<br/> </code> </pre> You can also call the <a href=\"#operation/getStagingServers\">Query list of staging servers API</a> to get IP addresses you can use. You have several ways to set up your system to test against staging: <ol> <li>Modify your DNS server to point your deployed property's hostname to the CDN360 staging hostname <i>staging.qtlgslb.com</i>.</li> <li>Modify your HOSTS file (/etc/hosts on Linux) to hard code the property's hostname to one of the staging servers' IP addresses.</li> <li> If the cURL command is used, the --resolve option can be used to directly map the property's hostname to an IP address of a CDN360 staging server.</li> </ol> Once you have done the setup, you can access your content via the hostname. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
       "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available which allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
     },
     {
-      "name": "CNAME Management",
-      "description": "You must create a CNAME for hostnames of properties deployed to production. You can define rules to apply to visitors from different client zones which are combinations of geographic regions and ISPs.  You must modify your DNS records to point the hostnames to a CNAME in order for visitor requests to be handled by CDN360."
+      "name": "Edge Hostname Management",
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones which are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360."
     },
     {
       "name": "Reports",

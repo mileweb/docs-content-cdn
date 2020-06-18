@@ -6,5 +6,13 @@ If we have multiple files in different formats (ex: `yaml` / `json` mixed) with 
 to do that we should use `swagger-merger` like that:
 
 ```bash
-npx swagger-merger -i openapi.yaml -o openapi.json
+❯ npx swagger-merger -i openapi.yaml -o openapi.json
 ```
+
+then, to make sure file is valid and have no parsing issues:
+
+```bash
+❯ npx jsonlint ./openapi.json -q
+```
+
+It will output nothing if there is no issues and will throw an issues if there will be one.
