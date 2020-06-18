@@ -74,8 +74,8 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 | ---------------------------------------------- | ---------------------- |
 | certificate.create                             | Create certificates    |
 | certificate.delete                             | Delete certificates    |
-| certificate.deployment.production              | Deploy certificates to production environments |
-| certificate.deployment.staging                 | Deploy certificates to staging environments    |
+| certificate.deployment.production              | Deploy certificates to production environment |
+| certificate.deployment.staging                 | Deploy certificates to staging environment    |
 | certificate.download.csr                       | Download CSRs          |
 | certificate.read                               | Read certificates      |
 | certificate.update                             | Update certificates    |
@@ -89,9 +89,9 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 | notification.read                              | Read notifications     |
 | property.create                                | Create properties      |
 | property.delete                                | Delete properties      |
-| property.deployment.production                 | Deploy properties to production environments   |
+| property.deployment.production                 | Deploy properties to production environment   |
 | property.deployment.read                       | Read property deployments |
-| property.deployment.staging                    | Deploy properties to staging environments      |
+| property.deployment.staging                    | Deploy properties to staging environment      |
 | property.read                                  | Read properties        |
 | property.update                                | Update properties      |
 | property.validation                            | Validate properties    |
