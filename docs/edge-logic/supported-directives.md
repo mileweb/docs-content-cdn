@@ -171,7 +171,7 @@ if ($http_x = 1 && $http_y != 2) && http_z) {
 ...
 }
 ```
-If one sub-condition evaluated false, the subsequent ones will not be evaluated.
+We support up to 10 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
