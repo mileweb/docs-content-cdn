@@ -51,7 +51,7 @@ add_header X-Cache-Status $upstream_cache_status policy=preserve;
 Example with variable:
 ```nginx
 set $cache_status_method "preserve";  
-if ($arg_debug = cache_status)
+if ($arg_debug = cache_status) {
     set $cache_status_method "overwrite";
 }
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
