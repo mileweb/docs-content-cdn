@@ -51,7 +51,7 @@ add_header X-Cache-Status $upstream_cache_status policy=preserve;
 Example with variable:
 ```nginx
 set $cache_status_method "preserve";  
-if ($arg_debug = cache_status)
+if ($arg_debug = cache_status) {
     set $cache_status_method "overwrite";
 }
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
@@ -165,8 +165,13 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. No change to the public version, but [use with caution](</docs/edge-logic/multiple-origins.md#ifcaution>)! 
-
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. Please also wrote [some instructions](</docs/edge-logic/multiple-origins.md#ifcaution>)! to explain this topic. One improvement we did is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
+```nginx
+if ($http_x = 1 && $http_y != 2) && http_z) {
+...
+}
+```
+We support up to 10 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
