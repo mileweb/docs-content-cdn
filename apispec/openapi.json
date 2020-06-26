@@ -11,6 +11,10 @@
   "servers": [
     {
       "url": "https://ngapi.cdnetworks.com"
+    },
+    {
+      "url": "https://ngapi.quantil.com",
+      "description": ""
     }
   ],
   "paths": {
@@ -326,6 +330,13 @@
                           "required": [
                             "startParameter"
                           ]
+                        },
+                        "tlsSessionTimeout": {
+                          "type": "integer",
+                          "minimum": 300,
+                          "maximum": 86400,
+                          "default": 1800,
+                          "description": "Lifespan of TLS session ticket in seconds."
                         }
                       }
                     },
@@ -810,6 +821,13 @@
                     "required": [
                       "startParameter"
                     ]
+                  },
+                  "tlsSessionTimeout": {
+                    "type": "integer",
+                    "minimum": 300,
+                    "maximum": 86400,
+                    "default": 1800,
+                    "description": "Lifespan of TLS session ticket in seconds."
                   }
                 }
               },
@@ -1794,7 +1812,7 @@
               "examples": {
                 "example-1": {
                   "value": {
-                    "edgeHostname": "testcname.t1573515322742.qtlcdn.com",
+                    "edgeHostname": "test.t1573515322742.qtlcdn.com",
                     "clientZones": [
                       {
                         "region": "all",
@@ -2288,7 +2306,7 @@
         "summary": "Create a property version",
         "responses": {
           "201": {
-            "description": "A new property version was successfully created. The <b>Location</b> HTTP header indicates the version number. Example:  Location: http://ngapi.cdnetworks.com/cdn/properties/e0d1819863b856c42635ae17/versions/8",
+            "description": "A new property version was successfully created. The <b>Location</b> HTTP header indicates the version number. Example:  <code>Location: http://ngapi.cdnetworks.com/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -2598,6 +2616,13 @@
                     "required": [
                       "startParameter"
                     ]
+                  },
+                  "tlsSessionTimeout": {
+                    "type": "integer",
+                    "minimum": 300,
+                    "maximum": 86400,
+                    "default": 1800,
+                    "description": "Lifespan of TLS session ticket in seconds."
                   }
                 }
               },
@@ -2643,7 +2668,7 @@
         "summary": "Create a property",
         "responses": {
           "201": {
-            "description": "This response indicates the property was successfully created. A Location header containing the URL of the new property is returned. For example, Location: http://ngapi.cdnetworks.com/cdn/properties/8fdc9c949e986564cc24b149",
+            "description": "This response indicates the property was successfully created. A Location header containing the URL of the new property is returned. For example, <code>Location: http://ngapi.cdnetworks.com/cdn/properties/8fdc9c949e986564cc24b149</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -2680,6 +2705,12 @@
                     "value": {
                       "code": "InvalidCertId",
                       "message": "The specified tlsCertificateId does not exist."
+                    }
+                  },
+                  "Invalid TLS session timeout": {
+                    "value": {
+                      "code": "InvalidTLSSessionTimeout",
+                      "message": "The TLS session timeout value should be between 300 and 86400 inclusive."
                     }
                   }
                 }
@@ -2997,6 +3028,13 @@
                         "required": [
                           "startParameter"
                         ]
+                      },
+                      "tlsSessionTimeout": {
+                        "type": "integer",
+                        "minimum": 300,
+                        "maximum": 86400,
+                        "default": 1800,
+                        "description": "Lifespan of TLS session ticket in seconds."
                       }
                     }
                   }
@@ -3469,7 +3507,7 @@
                   "edgeHostname": {
                     "type": "string",
                     "description": "An edge hostname you wish to use. It should end with \".qtlgslb.com\".",
-                    "example": "testcname.123.qtlgslb.com"
+                    "example": "test.123.qtlgslb.com"
                   },
                   "description": {
                     "type": "string",
@@ -3615,12 +3653,12 @@
               "examples": {
                 "example-1": {
                   "value": {
-                    "edgeHostname": "testcname.t1573428787161.g-beta.qtlcdn.com"
+                    "edgeHostname": "test.t1573428787161.qtlcdn.com"
                   }
                 },
                 "example-2": {
                   "value": {
-                    "edgeHostname": "testcname.123.qtlgslb.com",
+                    "edgeHostname": "test.123.qtlgslb.com",
                     "clientZones": [
                       {
                         "region": "eu",
@@ -11985,7 +12023,7 @@
                           },
                           "clientRegions": {
                             "type": "array",
-                            "description": "One or more client regions. Refer to the information about client regions in the <i>Create a CNAME</i> API.",
+                            "description": "One or more client regions. Refer to the information about client regions in the <i>Create an edge hostname</i> API.",
                             "items": {
                               "type": "string"
                             }
@@ -12361,7 +12399,7 @@
                     },
                     "clientRegions": {
                       "type": "array",
-                      "description": "One or more client regions. Refer to the information about client regions in the <i>Create a CNAME</i> API.",
+                      "description": "One or more client regions. Refer to the information about client regions in the <i>Create an edge hostname</i> API.",
                       "items": {
                         "type": "string"
                       }
@@ -15301,9 +15339,9 @@
         ]
       }
     },
-    "/cdn/report/cnameReq": {
+    "/cdn/report/edgeHostnameReq": {
       "post": {
-        "summary": "Get CNAME statistics",
+        "summary": "Get edge hostname statistics",
         "tags": [
           "Reports"
         ],
@@ -15425,7 +15463,7 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "dataName": "cname dns requests",
+                      "dataName": "edgeHostname dns requests",
                       "dataUnit": "counts",
                       "dataSeries": [
                         {
@@ -15536,10 +15574,10 @@
                       "message": "The max time span of 'daily' report must be no more than 366 days."
                     }
                   },
-                  "Invalid CNAMEs": {
+                  "Invalid Edge Hostnames": {
                     "value": {
-                      "code": "InvalidCnames",
-                      "message": "Invalid CNAME(s): 'a'."
+                      "code": "InvalidEdgeHostnames",
+                      "message": "Invalid Edge Hostname(s): 'a'."
                     }
                   }
                 }
@@ -15547,8 +15585,8 @@
             }
           }
         },
-        "operationId": "post-cdn-report-cnameReq",
-        "description": "Get the number of DNS requests to resolve your CNAMEs.",
+        "operationId": "post-cdn-report-edgeHostnameReq",
+        "description": "Get the number of DNS requests to resolve your edge hostnames.",
         "parameters": [
           {
             "schema": {
@@ -15600,11 +15638,11 @@
                 "properties": {
                   "filters": {
                     "type": "object",
-                    "description": "Limit statistics to specific CNAMEs.",
+                    "description": "Limit statistics to specific edge hostnames.",
                     "properties": {
-                      "cnames": {
+                      "edgeHostnames": {
                         "type": "array",
-                        "description": "One or more CNAMEs.",
+                        "description": "One or more edge hostnames.",
                         "items": {
                           "type": "string"
                         }
@@ -15617,9 +15655,9 @@
                 "example-1": {
                   "value": {
                     "filters": {
-                      "cnames": [
-                        "cname1.qtlglb.com",
-                        "cname2.qtlglb.com"
+                      "edgeHostnames": [
+                        "myedgehost1.qtlglb.com",
+                        "myedgehost2.qtlglb.com"
                       ]
                     }
                   }
@@ -15627,19 +15665,20 @@
               }
             }
           },
-          "description": "Optionally specify the CNAMEs to obtain statistics for them.  If unspecified, data for all CNAMEs in your account will be returned."
+          "description": "Optionally specify the edge hostnames to obtain statistics for them. If unspecified, data for all edge hostnames in your account will be returned."
         }
-      }
+      },
+      "parameters": []
     },
-    "/cdn/report/cnameReqSummary": {
+    "/cdn/report/edgeHostnameReqSummary": {
       "post": {
-        "summary": "Get CNAME summary statistics",
+        "summary": "Get edge hostname summary statistics",
         "tags": [
           "Reports"
         ],
         "responses": {
           "200": {
-            "description": "The response contains a summary of DNS requests by CNAME. It can contain up to 10000 groups representing a breakdown of requests by 10000 CNAMEs. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "description": "The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
             "content": {
               "application/json": {
                 "schema": {
@@ -15662,7 +15701,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned: \"cname dns request\"",
+                          "description": "Indicates the type of data returned: \"edgeHostname dns request\"",
                           "items": {
                             "type": "string"
                           }
@@ -15703,7 +15742,7 @@
                         "endTime": "2020-01-29T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "cname dns request"
+                          "edgeHostname dns request"
                         ],
                         "dataUnit": "counts"
                       },
@@ -15717,14 +15756,14 @@
                       ]
                     }
                   },
-                  "Summary broken down by CNAME": {
+                  "Summary broken down by edge hostname": {
                     "value": {
                       "metaData": {
                         "startTime": "2020-01-28T12:35:00Z",
                         "endTime": "2020-01-29T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "cname dns request"
+                          "edgeHostname dns request"
                         ],
                         "dataUnit": "counts"
                       },
@@ -15736,37 +15775,37 @@
                           ]
                         },
                         {
-                          "group": "cnamereport1580294661282.qtlcdn.com.",
+                          "group": "report1580294661282.qtlcdn.com.",
                           "data": [
                             10
                           ]
                         },
                         {
-                          "group": "cnamereport1580297455005.qtlcdn.com.",
+                          "group": "report1580297455005.qtlcdn.com.",
                           "data": [
                             2
                           ]
                         },
                         {
-                          "group": "cnamereport1580299885881.qtlcdn.com.",
+                          "group": "report1580299885881.qtlcdn.com.",
                           "data": [
                             2
                           ]
                         },
                         {
-                          "group": "testcname.t1580282270963.qtlcdn.com.",
+                          "group": "test.t1580282270963.qtlcdn.com.",
                           "data": [
                             1
                           ]
                         },
                         {
-                          "group": "testcname.t1580282275253.qtlcdn.com.",
+                          "group": "test.t1580282275253.qtlcdn.com.",
                           "data": [
                             1
                           ]
                         },
                         {
-                          "group": "testcname.t1580282280011.qtlcdn.com.",
+                          "group": "test.t1580282280011.qtlcdn.com.",
                           "data": [
                             2
                           ]
@@ -15797,7 +15836,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"abc\". We only support grouping by \"cnames\"."
+                      "message": "Invalid group name(s): \"abc\". We only support grouping by \"edgeHostnames\"."
                     }
                   },
                   "Invalid time span": {
@@ -15811,8 +15850,8 @@
             }
           }
         },
-        "operationId": "post-cdn-report-cnameReqSummary",
-        "description": "Obtain a summary of DNS requests for one or more CNAMEs. This API allows you to see the actual number of requests for each CNAME.",
+        "operationId": "post-cdn-report-edgeHostnameReqSummary",
+        "description": "Obtain a summary of DNS requests for one or more edge hostnames. This API allows you to see the actual number of requests for each edge hostname.",
         "parameters": [
           {
             "schema": {
@@ -15840,12 +15879,12 @@
                 "type": "object",
                 "properties": {
                   "filters": {
-                    "description": "Limit statistics to specific CNAMEs.\n",
+                    "description": "Limit statistics to specific edge hostnames.\n",
                     "type": "object",
                     "properties": {
-                      "cnames": {
+                      "edgeHostnames": {
                         "type": "array",
-                        "description": "One or more CNAMEs.",
+                        "description": "One or more edge hostnames.",
                         "items": {
                           "type": "string"
                         }
@@ -15854,7 +15893,7 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "Specify this to get data for each CNAME.",
+                    "description": "Specify an array containing \"edgeHostnames\" to get data for each edge hostname.",
                     "items": {
                       "type": "string"
                     }
@@ -15862,19 +15901,19 @@
                 }
               },
               "examples": {
-                "Group by CNAMEs": {
+                "Group by edge hostnames": {
                   "value": {
                     "groupBy": [
-                      "cnames"
+                      "edgeHostnames"
                     ]
                   }
                 },
                 "Filter results": {
                   "value": {
                     "filters": {
-                      "cnames": [
-                        "cname1.qtlglb.com",
-                        "cname2.qtlglb.com"
+                      "edgeHostnames": [
+                        "myedgehost1.qtlglb.com",
+                        "myedgehost2.qtlglb.com"
                       ]
                     }
                   }
@@ -15882,9 +15921,10 @@
               }
             }
           },
-          "description": "You can request a breakdown of requests by CNAME."
+          "description": "You can request a breakdown of requests by edge hostname."
         }
-      }
+      },
+      "parameters": []
     },
     "/cdn/edgeHostnames/isps": {
       "get": {
