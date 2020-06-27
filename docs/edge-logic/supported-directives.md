@@ -51,7 +51,7 @@ add_header X-Cache-Status $upstream_cache_status policy=preserve;
 Example with variable:
 ```nginx
 set $cache_status_method "preserve";  
-if ($arg_debug = cache_status)
+if ($arg_debug = cache_status) {
     set $cache_status_method "overwrite";
 }
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
@@ -106,7 +106,7 @@ Denies access for the specified network or address. (Work in progress to make th
 **Default**: `-`<br/>
 **Context**: server, location
 
-This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2.
+This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2. The read and send timeouts are set to 60s. This directive should not be used with `origin_read_timeout` or `origin_send_timeout` in the same context.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -165,8 +165,13 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. No change to the public version, but [use with caution](</docs/edge-logic/multiple-origins.md#ifcaution>)! 
-
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. Please also wrote [some instructions](</docs/edge-logic/multiple-origins.md#ifcaution>)! to explain this topic. One improvement we did is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
+```nginx
+if ($http_x = 1 && $http_y != 2) && http_z) {
+...
+}
+```
+We support up to 10 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -199,7 +204,7 @@ Sets configuration depending on a request URI. No change to the public version.
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
 
 **Syntax**: `origin_connect_timeout time;` <br/>
-**Default**: `origin_connect_timeout 60s;` <br/>
+**Default**: `origin_connect_timeout 5s;` <br/>
 **Context**: http, server, location
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
@@ -285,7 +290,7 @@ If the URI is omitted, the variable ```$request_uri``` (with all the query strin
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
 
 **Syntax**: `origin_read_timeout time;` <br/>
-**Default**:  `origin_read_timeout 60s;` <br/>
+**Default**:  `origin_read_timeout 20s;` <br/>
 **Context**:  http, server, location
 
 This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,600] followed by ‘s’ OR an integer in [1,10] followed by ‘m’. 
@@ -296,7 +301,7 @@ This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_
 <span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span>
 
 **Syntax**: `origin_send_timeout time;` <br/>
-**Default**: `origin_send_timeout 60s;` <br/>
+**Default**: `origin_send_timeout 20s;` <br/>
 **Context**:  http, server, location
 
 This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,600] followed by ‘s’ OR an integer in [1,10] followed by ‘m’.

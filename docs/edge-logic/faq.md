@@ -52,8 +52,8 @@ If you have one or more domains with ICP Beian and want them to be accelerated i
 
 1. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
 
-2. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. 
+2. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. Otherwise they will return status code 451.
 
 ### How to support websocket?
 
-What you need to do is to use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client will be using HTTP/1.1 (not HTTP/2) to connect.
+What you need to do is to use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client will be using HTTP/1.1 (not HTTP/2) to connect. This directive also sets the read and send timeouts to 60s. It should not be used with the `origin_read_timeout` or `origin_send_timeout` directives in the same location.
