@@ -17,7 +17,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 4. Click the **Create Client Zone Rule** button. The Create Client Zone Rule dialog box appears, with fields to define the client zone and how to handle requests come from it. Required fields are denoted by an asterisk (\*).
 
 <ul>a. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button.</ul>
-<ul>b. To specify more client zone rules, repeat step 4a for each additional rule.</ul>
+<ul>b. To specify more client zone rules, repeat steps 4 and 4a for each additional rule.</ul>
 
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
 <p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule"></p>
@@ -33,7 +33,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 
-<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="advanced settings" width="400"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="advanced settings" width="550"></p>
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |
