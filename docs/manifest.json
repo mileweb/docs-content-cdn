@@ -3,6 +3,7 @@
       "id": "cdn",
       "title": "CDN360",
       "description": "CDN360 leads the evolution of content delivery networks (CDNs) by accelerating, securing, scaling, and delivering content to website visitors worldwide, regardless of their location.",
+      "showOnMainPage": true,
       "links": [
         {
           "title": "Quick Start",
