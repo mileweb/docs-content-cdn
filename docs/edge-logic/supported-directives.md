@@ -197,7 +197,7 @@ Sets the initial amount of traffic after which the further transmission of a res
 
 <span class="badge">standard</span>
 
-Sets configuration depending on a request URI. No change to the public version. 
+Sets configuration depending on the request URI without query string. No change to the public version.
 
 ### `origin_connect_timeout`
 
@@ -510,7 +510,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 ### `realtime_log_sample_rate`
 
-<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA June 2020</span>
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA July 2020</span>
 
 **Syntax:** `realtime_log_sample_rate {sample rate};` <br/>
 **Default:** none <br/>
