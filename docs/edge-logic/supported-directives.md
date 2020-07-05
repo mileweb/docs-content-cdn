@@ -132,7 +132,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | URL<br>codec | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;``` |
-| HMAC<br>generation | **HMAC** | ```eval_func $output HMAC $key $message {digest algorithm};```<br>```{digest algorithm}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
+| HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
 
 **NOTE:** The output value of the functions in **bold** is a binary string which may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE or HEX_ENCODE to convert it to a printable format.
@@ -145,6 +145,8 @@ Examples:
     "ad8fdcda140f607697ec80a8c38e86af19f4bb79ee7f7544abcfaadd827901af"
     eval_func $aseout ENCRYPT_AES_256_CBC $secret_key $iv $message;
     eval_func $hmacout HMAC $secret_key $message SHA256;
+    eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
+    #$hmacout and $hmacout1 should be equal
 ```
 
 ### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
