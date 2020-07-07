@@ -42,7 +42,7 @@ This section allows you to enable HTTPS for this property by attaching a TLS cer
 
 ## Real-Time Log
 
-Real-time log allows you to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using NGINX variables. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+If you signed an agreement with CDNetworks for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using NGINX variables. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="900"></p>
 
 ## Advanced Settings
