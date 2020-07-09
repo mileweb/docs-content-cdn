@@ -219,7 +219,7 @@ This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/n
 **Default**: `origin_fast_route off;` <br/>
 **Context**: http, server, location, if in location
 
-This directive enables a proprietary fast route to be used to access the origin. It is powered by our HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
+This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
 
 ### `origin_follow_redirect`
 
@@ -229,7 +229,7 @@ This directive enables a proprietary fast route to be used to access the origin.
 **Default**: - <br/>
 **Context**: location
 
-When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that has uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
 
 
 ### `origin_header_modify`
