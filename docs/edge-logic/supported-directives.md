@@ -85,7 +85,7 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### `custom_log_field`
-<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
@@ -95,7 +95,7 @@ This directive allows the users to add up to 2 customized fields into the access
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
+<span class="badge">standard</span><span class="badge">ETA: Sep 2020</span>
 
 Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
 
@@ -211,9 +211,19 @@ Sets configuration depending on the request URI without query string. No change 
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
 
+### `origin_fast_route`
+
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
+
+**Syntax**: `origin_fast_route on|off;` <br/>
+**Default**: `origin_fast_route off;` <br/>
+**Context**: http, server, location, if in location
+
+This directive enables a proprietary fast route to be used to access the origin. It is powered by our HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
+
 ### `origin_follow_redirect`
 
-<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
 
 **Syntax**: `origin_follow_redirect;` <br/>
 **Default**: - <br/>
@@ -259,7 +269,6 @@ origin_header_modify Cache-Control "" policy=overwrite;
 The directive is merged across different levels (http/server/location/location if). If the same header name exists in different levels, the configuration for that header name in the innermost level takes effect.
 
 Although CDN360 has hierarchical cache structure, the directive changes the header only in the origin response. 
-
 
 ### `origin_limit_rate`
 
