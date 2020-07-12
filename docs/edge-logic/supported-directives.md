@@ -167,7 +167,7 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. One improvement we did is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. One important improvement we made is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
 ```nginx
 if ($http_x = 1 && $http_y != 2) && http_z) {
 ...
