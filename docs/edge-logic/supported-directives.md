@@ -85,7 +85,7 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### `custom_log_field`
-<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
@@ -95,7 +95,7 @@ This directive allows the users to add up to 2 customized fields into the access
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
+<span class="badge">standard</span><span class="badge">ETA: Sep 2020</span>
 
 Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
 
@@ -106,7 +106,7 @@ Denies access for the specified network or address. (Work in progress to make th
 **Default**: `-`<br/>
 **Context**: server, location
 
-This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2. The read and send timeouts are set to 60s. This directive should not be used with `origin_read_timeout` or `origin_send_timeout` in the same context.
+This directive enables proxying the WebSocket protocol. The client has to make sure not to use HTTP/2. The read and send timeouts are set to 21s. This directive should not be used with `origin_read_timeout` or `origin_send_timeout` in the same context.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -167,13 +167,13 @@ Enables gzipping of responses for the specified MIME types in addition to “tex
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. Please also wrote [some instructions](</docs/edge-logic/multiple-origins.md#ifcaution>)! to explain this topic. One improvement we did is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. One important improvement we made is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
 ```nginx
 if ($http_x = 1 && $http_y != 2) && http_z) {
 ...
 }
 ```
-We support up to 10 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
+We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -211,15 +211,25 @@ Sets configuration depending on the request URI without query string. No change 
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
 
+### `origin_fast_route`
+
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
+
+**Syntax**: `origin_fast_route on|off;` <br/>
+**Default**: `origin_fast_route off;` <br/>
+**Context**: http, server, location, if in location
+
+This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
+
 ### `origin_follow_redirect`
 
-<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: July 2020</span>
+<span class="badge">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
 
 **Syntax**: `origin_follow_redirect;` <br/>
 **Default**: - <br/>
 **Context**: location
 
-When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that has uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
+When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
 
 
 ### `origin_header_modify`
@@ -260,7 +270,6 @@ The directive is merged across different levels (http/server/location/location i
 
 Although CDN360 has hierarchical cache structure, the directive changes the header only in the origin response. 
 
-
 ### `origin_limit_rate`
 
 <span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
@@ -295,7 +304,7 @@ If the URI is omitted, the variable ```$request_uri``` (with all the query strin
 **Default**:  `origin_read_timeout 20s;` <br/>
 **Context**:  http, server, location
 
-This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,600] followed by ‘s’ OR an integer in [1,10] followed by ‘m’. 
+This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,21] followed by ‘s’. 
 
 
 ### `origin_send_timeout`
@@ -306,7 +315,7 @@ This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_
 **Default**: `origin_send_timeout 20s;` <br/>
 **Context**:  http, server, location
 
-This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,600] followed by ‘s’ OR an integer in [1,10] followed by ‘m’.
+This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,21] followed by ‘s’.
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 

@@ -14,6 +14,7 @@ Similarly, the following example shows how to include some request headers in ca
 ```nginx
 set $cache_misc "hdr1=$http_header1&hdr2=$http_header2";
 ```
+
 ### HTTP Header Manipulation
 
 If you need to add/modify/delete some headers to the request to the origin, you need the [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) directive. For example:
@@ -28,6 +29,7 @@ If you need to add/modify/delete some headers to the response to clients, you ne
 ```nginx
 add_header CDN-Name Quantil;
 ```
+
 ### The support (and non-support) of `Vary`
 
 CDN360 servers by default remove any `Vary` header in the response from origin servers. Therefore, every URL will have no more than one cached version. If you want to have different versions cached based on some request header or cookie values, put them explicitly into the cache key using the `$cache_misc` variable mentioned above. For example:
@@ -56,4 +58,4 @@ If you have one or more domains with ICP Beian and want them to be accelerated i
 
 ### How to support websocket?
 
-What you need to do is to use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client will be using HTTP/1.1 (not HTTP/2) to connect. This directive also sets the read and send timeouts to 60s. It should not be used with the `origin_read_timeout` or `origin_send_timeout` directives in the same location.
+What you need to do is to use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client will be using HTTP/1.1 (not HTTP/2) to connect. This directive also sets the read and send timeouts to 21s. It should not be used with the `origin_read_timeout` or `origin_send_timeout` directives in the same location.
