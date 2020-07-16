@@ -38,6 +38,10 @@ This wizard can be used to create an initial version of the edge logic. It suppo
 ## TLS Settings
 
 This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate. The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
+
+**Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
+
+
 <p align=center><img src="/docs/resources/images/edge-configurations/property-tls.png" alt="TLS Settings" width="700"></p>
 
 ## Real-Time Log
