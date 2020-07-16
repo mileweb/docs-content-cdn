@@ -596,7 +596,7 @@ Defines a secret word used to check authenticity of requested links. No change t
 
 <span class="badge">standard</span>
 
-Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning value to the `$cache_misc` variable.
+Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning value to the `$cache_misc` variable.
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
