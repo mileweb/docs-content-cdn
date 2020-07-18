@@ -36,7 +36,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 2. At the top of the page, click **Roles**.
 
-3. From the Roles page, click the name of the role you want to edit and then click **Edit** at the top right of the Role Details page. 
+3. From the Roles page, click the name of the role you want to edit, and then click **Edit** at the top right of the Role Details page. 
    <br><U>OR </u></br>
    Click the **Actions** menu for the role you want to edit, and then select **Edit**.
 

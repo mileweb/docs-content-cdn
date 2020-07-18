@@ -4,7 +4,7 @@ This section lists all the directives you can use in the CDN360 Edge Logic. Alth
 
 Each non-proprietary directive includes a direct link to the official NGINX documentation. A detailed description is provided if the directive has been modified in any way from the original version, such as limitations on the parameters of some directives. 
 
-In the following list, the "standard" directives are available to all customers, and they should cover the most common use cases. The "advanced" ones are usually more resource -consuming and they will be granted on a case-by-case basis. Please contact customer service if you need one or more of them.
+In the following list, the <span class="badge">standard</span> directives are available to all customers, and they should cover the most common use cases. The <span class="badge">advanced</span> ones are usually more resource-consuming and they will be granted on a case-by-case basis. Please contact customer service if you need one or more of them.
 
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
@@ -112,7 +112,7 @@ This directive enables proxying the WebSocket protocol. The client has to make s
 
 <span class="badge">advanced</span>
 
-Defines the URI that will be shown for the specified errors. No change to the public version. 
+Defines the URI that will be shown for the specified error codes. No change to the public version. We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for error codes returned from the origin.
 
 
 ### [`eval_func`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.ff3eprwz0chu)
@@ -541,12 +541,6 @@ Stops processing and returns the specified code to a client. No change to the pu
 
 Rewrite the request URI when a regular expression pattern is matched. No change to the public version. 
 
-### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
-
-<span class="badge">standard</span>
-
-Sets a value for the specified variable. No change to the public version. 
-
 ### [`satisfy`](http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy)
 
 <span class="badge">standard</span>
@@ -597,6 +591,12 @@ Defines an expression for which the MD5 hash value will be computed and compared
 <span class="badge">standard</span>
 
 Defines a secret word used to check authenticity of requested links. No change to the public version.
+
+### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
+
+<span class="badge">standard</span>
+
+Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 

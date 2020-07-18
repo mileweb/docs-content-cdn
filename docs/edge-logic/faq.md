@@ -14,6 +14,7 @@ Similarly, the following example shows how to include some request headers in ca
 ```nginx
 set $cache_misc "hdr1=$http_header1&hdr2=$http_header2";
 ```
+
 ### HTTP Header Manipulation
 
 If you need to add/modify/delete some headers to the request to the origin, you need the [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) directive. For example:
@@ -28,6 +29,7 @@ If you need to add/modify/delete some headers to the response to clients, you ne
 ```nginx
 add_header CDN-Name Quantil;
 ```
+
 ### The support (and non-support) of `Vary`
 
 CDN360 servers by default remove any `Vary` header in the response from origin servers. Therefore, every URL will have no more than one cached version. If you want to have different versions cached based on some request header or cookie values, put them explicitly into the cache key using the `$cache_misc` variable mentioned above. For example:

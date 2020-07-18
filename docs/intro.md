@@ -1,23 +1,23 @@
 # Welcome to CDN360
 
-CDN360 leads the evolution of content delivery networks (CDNs) by accelerating, securing, scaling, and delivering content to website visitors worldwide, regardless of their location. With points of presence on every continent, visitor requests are routed to edge servers based on factors such as proximity and resource/content availability.
+CDN360 is leading the next evolution of content delivery networks (CDN). 
 
-By keeping content close to website visitors, utilizing intelligent request routing, and employing high-performance computing, storage, and network resources, CDN360:
+CDN360 is designed to accelerate and deliver your applications to users worldwide, regardless of their location. It boosts content delivery, improves load times, and offers many more clear-cut advantages to deliver an unparalleled user experience.
 
-- Reduces workloads on origin servers by more than 90%.
-- Slashes Time-To-First-Byte (TTFB) latencies.
-- Achieves superior SEO and bounce-rate reduction.
-- Improves user experiences.
+In addition to accelerating, securing, and scaling your applications, CDN360 enables you to have granular control over your content delivery and costs. Unique self-service capabilities, along with a friendly, yet powerful user interface and application programming interface (API), provide for seamless integration into your SDLCs.
 
 ## CDN360 Key Features
 
-- Rich API and Edge Logic empower you to implement features at the CDN level without touching your application codebase.
-- Sophisticated access-control algorithms can be implemented using Edge Logic to process requests and protected content at the edge.
-- Requests and responses are processed at the edge using familiar tools such as NGINX configuration scripts and JavaScript.
-- Flexible cost/performance management empowers you to customize service coverage, so you can manage expenses according to the performance you need.
-- Internet and direct traffic are monitored dynamically based on real-time performance metrics and system-load information.
-- High-level view of your network traffic and site performance can be viewed and printed as a customized report for analysis.
-- Allows your content to reach customers in mainland China. (CDNetworks can also help to secure all necessary permissions and licenses.)
+CDN360's key features make it easy for anyone with a minimum background in CDN to get started, while offering powerful features for advanced users as well.
+- A rich API, Edge Logic, and processing at the edge enable you to implement features at the CDN level without touching your application codebase.
+- You can configure CDN360, test its behavior in a dedicated staging environment, and then deploy to production in minutes, without long wait times to create and change configurations by email or phone calls. CDN360 also allows you to self-configure edge servers and customize GSLB service maps.
+- Flexible cost/performance management empowers you to self-customize service coverage to manage expenses according to the performance you need.
+- State-of-the-art load balancing dynamically monitors the Internet to direct traffic based on real-time performance metrics and system-load information.
+- Sophisticated access-control algorithms with Edge Logic process requests to protected content at the edge. Support for NGINX configuration scripts and JavaScript allow you to process requests and responses on the edge using familiar tools.
+- With points of presence deployed on every continent, CDN360 routes user requests to edge servers based on factors such as proximity and resource/content availability, reducing workloads on origin servers by more than 90%. Cached content on the edge remains available even if the origin server stops responding to requests.
+- CDN360 allows your content to reach customers in mainland China. CDNetworks can also help to secure all necessary permissions and licenses.
+- The CDN360 infrastructure provides a natural shield from a wide array of attacks against content providers and their users. Web Application Firewall (WAF) and DDoS mitigation afford even greater protection against serious threats.
+- As part of CDN360, you receive access to raw data and tools to obtain invaluable insight into your audience’s activity, location, devices, carriers, and more.
 
 ## CDN360 Graphical User Interface (GUI)
 
