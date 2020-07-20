@@ -59,7 +59,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span><span class="badge">ETA: July 2020</span>
+<span class="badge">standard</span><span class="badge">ETA: Sep 2020</span>
 
 Allows access for the specified network or address. (Work in progress to make this only apply on edge.)
 
@@ -153,21 +153,21 @@ Examples:
 
 <span class="badge">standard</span>
 
-Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the public version. 
+Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the public version. The cache time on the server is not affected by this directive.
 
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
 <span class="badge">advanced</span>
 
-Enables gzipping of responses for the specified MIME types in addition to “text/html”. No change to the public version. We always have gzip on. 
+CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. We are working on supporting wildcards like `text/*`, ETA is Sep. 2020.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. One important improvement we made is to support the `&&` operator, which performs logical AND of two sub-conditions. (ETA: July 2020) For example:
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. One important improvement we made is to support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
 if ($http_x = 1 && $http_y != 2) && http_z) {
 ...
