@@ -16380,6 +16380,46 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "chinaBizInfo": {
+                      "title": "chinaBizInfo",
+                      "type": "object",
+                      "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                      "properties": {
+                        "category": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            999
+                          ],
+                          "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idType": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            999
+                          ],
+                          "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idNumber": {
+                          "type": "string",
+                          "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -16656,6 +16696,46 @@
                       "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
+                      }
+                    },
+                    "chinaBizInfo": {
+                      "title": "chinaBizInfo",
+                      "type": "object",
+                      "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                      "properties": {
+                        "category": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            999
+                          ],
+                          "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idType": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            999
+                          ],
+                          "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idNumber": {
+                          "type": "string",
+                          "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                        }
                       }
                     }
                   },
@@ -16996,6 +17076,46 @@
                     "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                     "items": {
                       "type": "string"
+                    }
+                  },
+                  "chinaBizInfo": {
+                    "title": "chinaBizInfo",
+                    "type": "object",
+                    "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                    "properties": {
+                      "category": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          999
+                        ],
+                        "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idType": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          999
+                        ],
+                        "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idNumber": {
+                        "type": "string",
+                        "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                      }
                     }
                   }
                 }
@@ -17429,7 +17549,7 @@
             }
           }
         },
-        "description": "Resellers can use this API to create a child customer.",
+        "description": "Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the phone, address, responsiblePerson, and chinaBizInfo fields for the customer before enabling deployment to China.",
         "tags": [
           "Customer Management"
         ],
@@ -17615,6 +17735,46 @@
                         "state": "CA",
                         "zipcode": "95054",
                         "country": "USA"
+                      }
+                    }
+                  },
+                  "chinaBizInfo": {
+                    "title": "chinaBizInfo",
+                    "type": "object",
+                    "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                    "properties": {
+                      "category": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          999
+                        ],
+                        "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idType": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          999
+                        ],
+                        "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idNumber": {
+                        "type": "string",
+                        "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
                       }
                     }
                   }
@@ -18590,6 +18750,174 @@
           }
         ]
       }
+    },
+    "/cdn/systemConfigs": {
+      "get": {
+        "summary": "Get system configuration",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains system configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "minimumSupportedCacheVersion": {
+                      "type": "string",
+                      "description": "The minimum version of the cache server required to validate and deploy properties."
+                    },
+                    "baseDirectives": {
+                      "type": "array",
+                      "description": "A list of edge logic directives that are available to everyone.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "advancedDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that can be enabled by contacting our support team.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "publishedPrice": {
+                      "type": "object",
+                      "required": [
+                        "perGB",
+                        "perMHttpsReq"
+                      ],
+                      "description": "Describes the price for traffic and requests.",
+                      "properties": {
+                        "perGB": {
+                          "type": "object",
+                          "description": "Describes the price for each gigabyte of traffic used  within each server group.",
+                          "required": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra"
+                          ],
+                          "properties": {
+                            "standard": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the standard server group."
+                            },
+                            "premium": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the premium server group."
+                            },
+                            "premium+": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the premium+ server group."
+                            },
+                            "ultra": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the ultra server group."
+                            }
+                          }
+                        },
+                        "perMHttpsReq": {
+                          "type": "number",
+                          "description": "Price in US dollars of one million HTTPS requests."
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "minimumSupportedCacheVersion",
+                    "baseDirectives",
+                    "advancedDirectives",
+                    "publishedPrice"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "minimumSupportedCacheVersion": "1.16.1.1.1.11-20",
+                      "baseDirectives": [
+                        "origin_pass",
+                        "add_header",
+                        "expires",
+                        "allow",
+                        "deny",
+                        "limit_rate",
+                        "limit_rate_after",
+                        "location",
+                        "set",
+                        "if",
+                        "return",
+                        "break",
+                        "rewrite",
+                        "satisfy",
+                        "proxy_cache_bypass",
+                        "proxy_cache_valid",
+                        "proxy_ignore_headers",
+                        "proxy_hide_header",
+                        "proxy_no_cache",
+                        "proxy_pass_header",
+                        "valid_referers",
+                        "origin_limit_rate",
+                        "proxy_cache_min_age",
+                        "origin_set_header",
+                        "proxy_buffering",
+                        "proxy_cache_methods"
+                      ],
+                      "advancedDirectives": [
+                        "internal",
+                        "auth_request",
+                        "auth_request_set",
+                        "gzip_types",
+                        "proxy_cache_min_uses",
+                        "proxy_cache_use_stale",
+                        "proxy_cookie_domain",
+                        "proxy_cookie_path",
+                        "proxy_next_upstream",
+                        "proxy_next_upstream_timeout",
+                        "proxy_next_upstream_tries",
+                        "proxy_redirect",
+                        "proxy_ssl_protocols",
+                        "secure_link",
+                        "secure_link_md5",
+                        "secure_link_secret",
+                        "sub_filter",
+                        "sub_filter_last_modified",
+                        "sub_filter_once",
+                        "sub_filter_types",
+                        "slice",
+                        "error_page",
+                        "origin_connect_timeout",
+                        "origin_read_timeout",
+                        "origin_send_timeout",
+                        "proxy_cache_vary",
+                        "eval_func",
+                        "realtime_log_switch",
+                        "proxy_ignore_cache_control",
+                        "origin_header_modify",
+                        "enable_websocket",
+                        "sorted_querystring_filter_parameter"
+                      ],
+                      "publishedPrice": {
+                        "perGB": {
+                          "standard": 0.057,
+                          "premium": 0.112,
+                          "ultra": 0.279,
+                          "premium+": 0.197
+                        },
+                        "perMHttpsReq": 0.99
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-systemConfigs",
+        "description": "This API returns system configuration settings including supported edge logic directives, advanced edge logic directives, and the default pricing for traffic and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive."
+      }
     }
   },
   "components": {
@@ -18649,11 +18977,15 @@
     },
     {
       "name": "Customer Management",
-      "description": "These APIs allow you to update customer level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, and delete customer accounts."
+      "description": "These APIs allow you to update customer level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts."
     },
     {
       "name": "API Call History",
       "description": "Obtain a summary of API calls that have been made by you or on your behalf."
+    },
+    {
+      "name": "CDN Product Management",
+      "description": "These APIs allow you to fetch CDN settings that apply to your account. If you are a reseller, you can use APIs to set up the service quotas for your child customers."
     }
   ]
 }
