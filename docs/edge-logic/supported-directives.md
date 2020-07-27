@@ -175,7 +175,7 @@ if ($http_x = 1 && $http_y != 2) && http_z) {
 }
 ```
 We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
-*  Support of string prefix check. The condition `$s1 ^ $s2` returns true if `$s1` begins with `$s2`. `$s1 !^ $s2' does the opposite.
+*  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
