@@ -160,20 +160,20 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 <span class="badge">advanced</span>
 
-CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. We are working on supporting wildcards like `text/*`, ETA is Sep. 2020. It will support up to 10 "head wildcards" and 10 "tail wildcards".
+CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*`, ETA is Sep. 2020. It will support up to 10 "head wildcards" and 10 "tail wildcards".
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. One important improvement we made is to support the `&&` operator, which performs logical AND of two sub-conditions. For example:
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made a few improvements to this directive:
+*  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
-if ($http_x = 1 && $http_y != 2) && http_z) {
-...
-}
+if ($http_x = 1 && $http_y != 2) && $http_z) { ... }
 ```
 We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
+*  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -187,7 +187,7 @@ Specifies that a given location can only be used for internal requests. No chang
 
 **Default**: `limit_rate 2m;` <br/>
 
-Limits the rate of response transmission to a client. We limit the value to be an integer in [1-8] followed by ‘m’. The default value is 2MByte/s.
+Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 2MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -604,7 +604,8 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 **Contexts:** http, server
 
-Sets the size of the slice when fetching large files from the origin. We made a change that prevents this directive from being used in any "location" block. If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to chase origin’s redirection. The value is limited to 0 OR an integer in [4,512] followed by ‘m’.
+
+Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to chase origin’s redirection. The value is limited to 0 OR an integer in [4,512] followed by ‘m’.
 
 ### `sorted_querystring_filter_parameter`
 
