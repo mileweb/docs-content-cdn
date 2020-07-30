@@ -1682,7 +1682,7 @@
                   },
                   "gdprCompliant": {
                     "type": "boolean",
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
+                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "type": "array",
@@ -1929,7 +1929,7 @@
                   },
                   "grprCompliant": {
                     "type": "boolean",
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
+                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "title": "Edge Hostname Client Zone Rule",
@@ -5114,7 +5114,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. One you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
+        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
         "operationId": "downloadCSR",
         "responses": {
           "200": {
@@ -18391,7 +18391,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls\"</a>."
+          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls."
         }
       ],
       "get": {
@@ -18578,7 +18578,7 @@
           }
         },
         "operationId": "get-ngadmin-apicalls-id",
-        "description": "Get details about an API call including its response status, request and response headers, and caller's IP address. ",
+        "description": "Get details about an API call including its response status, request and response headers, and caller's IP address.",
         "parameters": [
           {
             "schema": {
