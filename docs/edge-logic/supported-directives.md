@@ -59,7 +59,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span><span class="badge">ETA: Sep 2020</span>
+<span class="badge">standard</span> <span class="badge yellow">ETA: Sep 2020</span>
 
 Allows access for the specified network or address. (Work in progress to make this only apply on edge.)
 
@@ -95,12 +95,12 @@ This directive allows the users to add up to 2 customized fields into the access
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span><span class="badge">ETA: Sep 2020</span>
+<span class="badge">standard</span> <span class="badge yellow">ETA: Sep 2020</span>
 
 Denies access for the specified network or address. (Work in progress to make this only apply on edge.)
 
 ### `enable_websocket`
-<span class="badge dark">advanced</span><span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `enable_websocket;`<br/>
 **Default**: `-`<br/>
@@ -117,7 +117,7 @@ Defines the URI that will be shown for the specified error codes. No change to t
 
 ### [`eval_func`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.ff3eprwz0chu)
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `eval_func $result {function name} {parameters};` <br/>
 **Default**: `-` <br/>
@@ -203,7 +203,7 @@ Sets configuration depending on the request URI without query string. No change 
 
 ### `origin_connect_timeout`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_connect_timeout time;` <br/>
 **Default**: `origin_connect_timeout 5s;` <br/>
@@ -213,7 +213,7 @@ This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/n
 
 ### `origin_fast_route`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
 
 **Syntax**: `origin_fast_route on|off;` <br/>
 **Default**: `origin_fast_route off;` <br/>
@@ -223,7 +223,7 @@ This directive enables a fast route to be used to access the origin. It is power
 
 ### `origin_follow_redirect`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
 
 **Syntax**: `origin_follow_redirect;` <br/>
 **Default**: - <br/>
@@ -234,7 +234,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 ### `origin_header_modify`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_header_modify field value policy=value qtl_if(condition);` <br/>
 **Default**:  - <br/>
@@ -272,7 +272,7 @@ Although CDN360 has hierarchical cache structure, the directive changes the head
 
 ### `origin_limit_rate`
 
-<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_limit_rate rate;`<br>
 **Default**: `origin_limit_rate 0;`<br>
@@ -282,7 +282,7 @@ This a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_
 
 ### `origin_pass`
 
-<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_pass _origin_name[URI];`<br>
 **Default**: none <br>
@@ -298,7 +298,7 @@ If the URI is omitted, the variable ```$request_uri``` (with all the query strin
 
 ### `origin_read_timeout`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_read_timeout time;` <br/>
 **Default**:  `origin_read_timeout 20s;` <br/>
@@ -309,7 +309,7 @@ This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_
 
 ### `origin_send_timeout`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_send_timeout time;` <br/>
 **Default**: `origin_send_timeout 20s;` <br/>
@@ -319,7 +319,7 @@ This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
-<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**:  `origin_set_header field value qtl_if(condition);` <br/>
 **Default**: `origin_set_header host $host;` <br/>
@@ -365,7 +365,7 @@ Specify the HTTPS methods whose response will be cached.
 
 ### [`proxy_cache_min_age`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.geuwzglsxykl) 
 
-<span class="badge">standard</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `proxy_cache_min_age time;` <br/>
 **Default**: `proxy_cache_min_age 0s;` <br/>
@@ -411,11 +411,11 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in if in location (ETA: Aug 2020).
+Sets caching time for different response codes. Changing the public version to enable it in if in location (ETA: Oct 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `proxy_cache_vary on | off;` <br/>
 **Default**: `proxy_cache_vary off;` <br/>
@@ -447,7 +447,7 @@ Sets response header fields that will not be passed to the client. No change to 
 
 ### `proxy_ignore_cache_control`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `proxy_ignore_cache_control directives…;` <br/>
 **Default:** none <br/>
@@ -521,7 +521,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 ### `realtime_log_sample_rate`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span><span class="badge">ETA July 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge">ETA July 2020</span>
 
 **Syntax:** `realtime_log_sample_rate {sample rate};` <br/>
 **Default:** none <br/>
@@ -550,7 +550,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module, 
 
 ### `sanitize_accept_encoding`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `sanitize_accept_encoding enc1 enc2 … ;` <br/>
 **Default:** `sanitize_accept_encoding gzip;` <br/>
@@ -609,7 +609,7 @@ Sets the size of the slice when fetching large files from the origin. <span styl
 
 ### `sorted_querystring_filter_parameter`
 
-<span class="badge dark">advanced</span><span class="badge">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** sorted_querystring_filter_parameter param1 param2 … ; <br/>
 **Default:** none <br/>
