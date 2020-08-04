@@ -2,7 +2,7 @@
 
 CDN360 is leading the next evolution of content delivery networks (CDN). 
 
-CDN360 is designed to accelerate and deliver your applications to users worldwide, regardless of their location. It boosts content delivery, improves load times, and many more clear-cut advantages to deliver an unparalleled user experience.
+CDN360 is designed to accelerate and deliver your applications to users worldwide, regardless of their location. It boosts content delivery, improves load times, and offers many more clear-cut advantages to deliver an unparalleled user experience.
 
 In addition to accelerating, securing, and scaling your applications, CDN360 enables you to have granular control over your content delivery and costs. Unique self-service capabilities, along with a friendly, yet powerful user interface and application programming interface (API), provide for seamless integration into your SDLCs.
 
