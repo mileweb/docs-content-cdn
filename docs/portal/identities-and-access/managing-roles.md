@@ -80,10 +80,10 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 | certificate.read                               | Read certificates      |
 | certificate.update                             | Update certificates    |
 | dashboard.read                                 | Read the dashboard     |
-| edgeHostNames.create                           | Create  edge hostnames |
-| edgeHostNames.delete                           | Delete  edge hostnames |
-| edgeHostNames.read                             | Read  edge hostnames   |
-| edgeHostNames.update                           | Update  edge hostnames |
+| edgeHostnames.create                           | Create  edge hostnames |
+| edgeHostnames.delete                           | Delete  edge hostnames |
+| edgeHostnames.read                             | Read  edge hostnames   |
+| edgeHostnames.update                           | Update  edge hostnames |
 | notification.create                            | Create notifications   |
 | notification.delete                            | Delete notifications   |
 | notification.read                              | Read notifications     |
