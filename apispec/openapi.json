@@ -18551,11 +18551,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-<<<<<<< HEAD
-          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls."
-=======
-          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls\</a>."
->>>>>>> 7b2fc198fd56919ae3fc19128bd0bbf7592331c0
+          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls.",
         }
       ],
       "get": {
