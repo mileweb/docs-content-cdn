@@ -130,7 +130,7 @@
                         },
                         "cacheKeyHostname": {
                           "type": "string",
-                          "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                          "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                           "maxLength": 80,
                           "pattern": "^[a-z.-_]+"
                         },
@@ -143,11 +143,11 @@
                         },
                         "realTimeLog": {
                           "type": "object",
-                          "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                          "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                           "properties": {
                             "logUrl": {
                               "type": "string",
-                              "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                              "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                             },
                             "sampleRate": {
                               "type": "integer",
@@ -202,7 +202,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -304,7 +304,7 @@
                         "allowProtocolDowngrade": {
                           "type": "boolean",
                           "default": false,
-                          "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                          "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                         },
                         "tlsCertificateId1": {
                           "type": "number",
@@ -621,7 +621,7 @@
                   },
                   "cacheKeyHostname": {
                     "type": "string",
-                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                     "maxLength": 80,
                     "pattern": "^[a-z.-_]+"
                   },
@@ -634,11 +634,11 @@
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                     "properties": {
                       "logUrl": {
                         "type": "string",
-                        "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                        "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                       },
                       "sampleRate": {
                         "type": "integer",
@@ -693,7 +693,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -795,7 +795,7 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
@@ -1378,7 +1378,7 @@
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1393,7 +1393,7 @@
                                       "redirect",
                                       "reject"
                                     ],
-                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                                   },
                                   "by": {
                                     "type": "array",
@@ -1686,7 +1686,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule is created which uses our 'standard' server group to handle all requests.  <code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule is created that uses our 'standard' server group to handle all requests.  <code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -1740,7 +1740,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -1755,7 +1755,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -1984,7 +1984,7 @@
                       "weight": {
                         "type": "integer",
                         "default": 100,
-                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                         "minimum": 0,
                         "maximum": 100
                       },
@@ -1999,7 +1999,7 @@
                               "redirect",
                               "reject"
                             ],
-                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                           },
                           "by": {
                             "type": "array",
@@ -2416,7 +2416,7 @@
                   },
                   "cacheKeyHostname": {
                     "type": "string",
-                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                     "maxLength": 80,
                     "pattern": "^[a-z.-_]+"
                   },
@@ -2429,11 +2429,11 @@
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                     "properties": {
                       "logUrl": {
                         "type": "string",
-                        "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                        "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                       },
                       "sampleRate": {
                         "type": "integer",
@@ -2488,7 +2488,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -2590,7 +2590,7 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
@@ -2747,7 +2747,7 @@
             }
           },
           "409": {
-            "description": "This error is returned if you try to create a property which already exists.",
+            "description": "This error is returned if you try to create a property that already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2828,7 +2828,7 @@
                       },
                       "cacheKeyHostname": {
                         "type": "string",
-                        "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                        "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                         "maxLength": 80,
                         "pattern": "^[a-z.-_]+"
                       },
@@ -2841,11 +2841,11 @@
                       },
                       "realTimeLog": {
                         "type": "object",
-                        "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                        "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                         "properties": {
                           "logUrl": {
                             "type": "string",
-                            "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                            "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                           },
                           "sampleRate": {
                             "type": "integer",
@@ -2900,7 +2900,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -3002,7 +3002,7 @@
                       "allowProtocolDowngrade": {
                         "type": "boolean",
                         "default": false,
-                        "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                        "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                       },
                       "tlsCertificateId1": {
                         "type": "number",
@@ -3530,7 +3530,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created that uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -3584,7 +3584,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -3599,7 +3599,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -4038,7 +4038,7 @@
                   "sharingMethod": {
                     "type": "string",
                     "default": "none",
-                    "description": "This field can only be used if you are a reseller.\nA value of \"all\" indicates all child customers can use the certificate. A value of \"none\" indicates no child customers can use it.\nIf the value \"some\" is given, specify the IDs of your customers to share the certificate within the <i>shareWith</i> field.",
+                    "description": "This field can be used only if you are a reseller.\nA value of \"all\" indicates all child customers can use the certificate. A value of \"none\" indicates no child customers can use it.\nIf the value \"some\" is given, specify the IDs of your customers to share the certificate within the <i>shareWith</i> field.",
                     "enum": [
                       "all",
                       "none",
@@ -4867,7 +4867,7 @@
                       "none",
                       "some"
                     ],
-                    "description": "This field can only be used by resellers to indicate who can use the certificate. \"All\" indicates all child customers can use the certificate; \"none\" indicates no child customers can use it. If the value is \"some\", specify the child customers allowed to use the certificate in the <i>shareWith</i> field."
+                    "description": "This field can be used only by resellers to indicate who can use the certificate. \"All\" indicates all child customers can use the certificate; \"none\" indicates no child customers can use it. If the value is \"some\", specify the child customers allowed to use the certificate in the <i>shareWith</i> field."
                   },
                   "shareWith": {
                     "type": "array",
@@ -6075,7 +6075,7 @@
             },
             "in": "query",
             "name": "taskIds",
-            "description": "A comma separated list of task IDs indicating which ones to return."
+            "description": "A comma-separated list of task IDs indicating which ones to return."
           },
           {
             "schema": {
@@ -6479,11 +6479,11 @@
                     },
                     "apiAccountId": {
                       "type": "string",
-                      "description": "ID of the API account which created the deployment task."
+                      "description": "ID of the API account that created the deployment task."
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "ID of the customer which created the deployment task.\n",
+                      "description": "ID of the customer that created the deployment task.\n",
                       "minimum": 1
                     }
                   },
@@ -7356,7 +7356,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -7429,7 +7429,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -7821,7 +7821,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8206,7 +8206,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8593,7 +8593,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8765,7 +8765,7 @@
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\" which indicates the number of times a status code appears.",
+                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
                       "enum": [
                         "counts"
                       ]
@@ -9185,7 +9185,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -9571,7 +9571,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -9743,7 +9743,7 @@
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\" which indicates the number of times a status code appears.",
+                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
                       "enum": [
                         "counts"
                       ]
@@ -10223,7 +10223,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -10682,7 +10682,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -11746,7 +11746,7 @@
                           },
                           "successRate": {
                             "type": "number",
-                            "description": "A percentage which indicates the completion of the purge request. ",
+                            "description": "A percentage that indicates the completion of the purge request. ",
                             "minimum": 0,
                             "maximum": 100
                           },
@@ -12039,7 +12039,7 @@
                           },
                           "comments": {
                             "type": "string",
-                            "description": "Text which appears in the report shown on the CDN360 portal."
+                            "description": "Text that appears in the report shown on the CDN360 portal."
                           }
                         },
                         "required": [
@@ -12201,7 +12201,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -12415,7 +12415,7 @@
                     },
                     "comments": {
                       "type": "string",
-                      "description": "Text which appears in the report shown on the CDN360 portal."
+                      "description": "Text that appears in the report shown on the CDN360 portal."
                     }
                   },
                   "required": [
@@ -12709,7 +12709,7 @@
                     },
                     "successRate": {
                       "type": "number",
-                      "description": "A percentage which indicates the completion of the purge request.",
+                      "description": "A percentage that indicates the completion of the purge request.",
                       "minimum": 0,
                       "maximum": 100
                     },
@@ -13248,7 +13248,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -13577,7 +13577,7 @@
                       },
                       "impersonateExceptions": {
                         "type": "array",
-                        "description": "This setting applies to resellers only.  It contains a list of customer IDs which are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
+                        "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                         "items": {
                           "type": "integer"
                         }
@@ -13694,7 +13694,7 @@
                           },
                           "status": {
                             "type": "string",
-                            "description": "Indicates the status of the account. An account can be <i>active</i> which means login is allowed; <i>pending</i> which means the user has been invited to use the portal but has not completed account setup; or <i>suspended</i> which prevents logins.",
+                            "description": "Indicates the status of the account. An account can be <i>active</i>, which means login is allowed; <i>pending</i>, which means the user has been invited to use the portal but has not completed account setup; or <i>suspended</i>, which prevents logins.",
                             "enum": [
                               "active",
                               "suspended",
@@ -14507,7 +14507,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access which allows updates to objects like properties.",
+        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access, which allows updates to objects like properties.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -14931,7 +14931,7 @@
                         },
                         "impersonateExceptions": {
                           "type": "array",
-                          "description": "This setting applies to resellers only.  It contains a list of customer IDs which are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
+                          "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                           "items": {
                             "type": "integer"
                           }
@@ -15294,7 +15294,7 @@
                       },
                       "impersonateExceptions": {
                         "type": "array",
-                        "description": "This setting applies to resellers only.  It contains a list of customer IDs which are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
+                        "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                         "items": {
                           "type": "integer"
                         }
@@ -15325,7 +15325,7 @@
               }
             }
           },
-          "description": "The request body contains the fields which will be updated.  If a field is omitted, it will not be modified."
+          "description": "The request body contains the fields that will be updated.  If a field is omitted, it will not be modified."
         },
         "parameters": [
           {
@@ -16363,7 +16363,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -16376,7 +16376,7 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
                       }
@@ -16680,7 +16680,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -16693,7 +16693,7 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
                       }
@@ -16990,7 +16990,7 @@
                         "default": [
                           "0.0.0.0/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -17073,7 +17073,7 @@
                     "default": [
                       "0.0.0.0/0"
                     ],
-                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                     "items": {
                       "type": "string"
                     }
@@ -17377,7 +17377,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -17578,7 +17578,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.\n",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.\n",
                     "items": {
                       "type": "string"
                     }
@@ -17615,7 +17615,7 @@
                         "default": [
                           "0.0.0.0/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -18087,7 +18087,7 @@
             },
             "in": "query",
             "name": "ids",
-            "description": "Comma separated list of IDs of customers to return."
+            "description": "Comma-separated list of IDs of customers to return."
           },
           {
             "schema": {
@@ -18108,7 +18108,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma separated list of products which can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
+            "description": "Comma-separated list of products that can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
           },
           {
             "schema": {
@@ -18142,7 +18142,7 @@
             },
             "in": "query",
             "name": "regionalOffices",
-            "description": "Comma separated list of regional offices of customers to return. A case insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
+            "description": "Comma-separated list of regional offices of customers to return. A case-insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
           }
         ]
       }
@@ -18287,7 +18287,7 @@
                           },
                           "requestTimestamp": {
                             "type": "string",
-                            "description": "RFC 3339 date with UTC time which indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\""
+                            "description": "RFC 3339 date with UTC time that indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\""
                           },
                           "requestURL": {
                             "type": "string",
@@ -18493,7 +18493,7 @@
             },
             "in": "query",
             "name": "status",
-            "description": "Filter API calls by specifying a comma separated list of HTTP response status codes. You can also specify individual status codes such as \"200\" or \"404\". You can also  pass \"2xx\", \"3xx\", \"4xx\", or \"5xx\" to request all API calls whose response status codes begin with the first digit. For example, \"2xx\" will include API calls whose status were \"200\", \"201\", and \"204\"."
+            "description": "Filter API calls by specifying a comma-separated list of HTTP response status codes. You can also specify individual status codes such as \"200\" or \"404\". You can also  pass \"2xx\", \"3xx\", \"4xx\", or \"5xx\" to request all API calls whose response status codes begin with the first digit. For example, \"2xx\" will include API calls whose status were \"200\", \"201\", and \"204\"."
           },
           {
             "schema": {
@@ -18933,11 +18933,11 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production.   If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version that is immutable. You can choose to deploy any version to staging or production.   If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version which has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
@@ -18949,11 +18949,11 @@
     },
     {
       "name": "Hostnames",
-      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available which allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
+      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
     },
     {
       "name": "Edge Hostname Management",
-      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones which are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360."
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360."
     },
     {
       "name": "Reports",
