@@ -233,7 +233,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 ### `origin_header_modify`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_header_modify field value policy=value qtl_if(condition);` <br/>
 **Default**:  - <br/>
