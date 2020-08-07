@@ -233,7 +233,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 ### `origin_header_modify`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_header_modify field value policy=value qtl_if(condition);` <br/>
 **Default**:  - <br/>
@@ -392,12 +392,6 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (NGINX d
 
 If there is no suffix in the time, the configured value is considered in seconds.
 
-### [`proxy_cache_min_uses`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_min_uses)
-
-<span class="badge dark">advanced</span>
-
-Sets the number of requests after which the response will be cached. No change to the public version. 
-
 ### [`proxy_cache_use_stale`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale)
 
 <span class="badge dark">advanced</span>
@@ -446,7 +440,7 @@ Sets response header fields that will not be passed to the client. No change to 
 
 ### `proxy_ignore_cache_control`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `proxy_ignore_cache_control directives…;` <br/>
 **Default:** none <br/>
@@ -599,16 +593,17 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
-<span class="badge dark">advanced</span>
+<span class="badge">standard</span>
 
 **Contexts:** http, server
 
 
 Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to chase origin’s redirection. The value is limited to 0 OR an integer in [4,512] followed by ‘m’.
+The origin should support HTTP status 206.
 
 ### `sorted_querystring_filter_parameter`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** sorted_querystring_filter_parameter param1 param2 … ; <br/>
 **Default:** none <br/>
