@@ -159,7 +159,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 <span class="badge dark">advanced</span>
 
-CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*`, ETA is Sep. 2020. It will support up to 10 "head wildcards" and 10 "tail wildcards".
+CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript`and ETA is Sep. 2020. Up to 20 wildcards will be supported.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
