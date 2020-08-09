@@ -169,7 +169,7 @@ CDN360 has gzip always on, but by default only applies to content type “text/h
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made a few improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
-if ($http_x = 1 && $http_y != 2) && $http_z) { ... }
+if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
 We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 *  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
