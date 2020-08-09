@@ -558,7 +558,7 @@ For example: if the configuration is:
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
 The processing logic will be:
-```nginx
+```php
 if (A-E-header.contains("gzip") && A-E-header.contains("br"))
     A-E-header="gzip,br";
 else if (A-E-header.contains("gzip")) A-E-header="gzip";
