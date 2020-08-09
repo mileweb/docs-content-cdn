@@ -293,7 +293,7 @@ origin_pass my_origin;    #URI is not specified,
 origin_pass my_origin/$uri;
 origin_pass my_origin/abc/$uri;
 ```
-If the URI is omitted, the variable ```$request_uri``` (with all the query strings) is appended automatically when accessing the origin.
+If the URI is omitted, the variable `$uri` and all the query strings are appended automatically when accessing the origin.
 
 ### `origin_read_timeout`
 
