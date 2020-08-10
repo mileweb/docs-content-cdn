@@ -46,9 +46,9 @@ If the content on your origin web server has changed, request a purge to have CD
 2. A **Purge** tab on the Content Management page shows details similar to those in the following figure:
 
    <ul><li> ID associated with the purge request.<br>
-   <li>Target environment where the purge occurred (either Staging or Production).<br>
+   <li>Hostname of the property associated with the purge request.<br><li>Target environment where the purge occurred (either Staging or Production).<br>
    <li>Action that was performed (either Delete or Invalidate).<br>
-   <li>Type of object on which the purge was requested.<br>
+   <li>Number of files and directories purged.<br>
    <li>Date and time when the purge request was submitted and completed.<br>
    <li>A success rate indicator that shows a completion percentage from 0 to 100%.</ul>
 

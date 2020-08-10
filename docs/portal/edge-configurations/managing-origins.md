@@ -10,7 +10,7 @@ Origins are your web servers containing the content you want CDN360 to accelerat
 3. Click the **Edit** or **Clone** button to make changes. A section similar to the one below appears.
 4. Edit or remove an existing origin or add a new one:
    - If there is an existing origin (similar to the "temporary" one in the figure below), you can click the <strong>Edit</strong> link in the <strong>Origins</strong> field and complete the fields in the following dialog box to edit the origin, or click the <strong>Remove</strong> link to remove the origin. 
-   - To add a new origin, click the <strong>Add Origin To List</strong> link, and then complete the fields in the following dialog box. Required fields are denoted by an asterisk (*). 
+   - To add a new origin, click the <strong>Add New</strong> link, and then complete the fields in the following dialog box. Required fields are denoted by an asterisk (*). 
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-origins.png" width="700"></p>
 
