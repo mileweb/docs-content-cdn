@@ -11,9 +11,10 @@ In the following list, the <span class="badge">standard</span> directives are av
 <span class="badge">standard</span>
 
 This directive modifies the response headers to the client. CDNetworks has made the following major changes to the open-source version:
-1. The following new parameter has been introduced to control the behavior more precisely:
+
+1. A parameter "policy=" has been introduced to control the behavior more precisely:
 ```nginx
-policy=repeat|overwrite|preserve
+add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```
 ```overwrite```: If the header being added exists in the upstream response, the local configuration overrides the header value. If you want to remove a header, set the value to an empty string.
 
@@ -141,7 +142,7 @@ Examples:
     eval_func $secret_key SHA256 "mySecret123!";
     eval_func $text HEX_ENCODE $secret_key;
     #the value of $text should be 
-    "ad8fdcda140f607697ec80a8c38e86af19f4bb79ee7f7544abcfaadd827901af"
+    #"ad8fdcda140f607697ec80a8c38e86af19f4bb79ee7f7544abcfaadd827901af"
     eval_func $aseout ENCRYPT_AES_256_CBC $secret_key $iv $message;
     eval_func $hmacout HMAC $secret_key $message SHA256;
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
