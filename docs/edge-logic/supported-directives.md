@@ -4,7 +4,7 @@ This section lists all the directives you can use in the CDN360 Edge Logic. Alth
 
 Each non-proprietary directive includes a direct link to the official NGINX documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives. 
 
-In the following list, the "standard" directives are available to all customers and should cover the most common use cases. The "advanced" directives are usually more resource-consuming than standard directives and will be granted on a case-by-case basis. If you need one more of them, contact CDNetworks customer service.
+In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
@@ -404,7 +404,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Aug 2020).
+Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Oct 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
