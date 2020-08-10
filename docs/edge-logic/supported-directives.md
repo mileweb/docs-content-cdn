@@ -159,7 +159,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 <span class="badge dark">advanced</span>
 
-CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*`, ETA is Sep. 2020. It will support up to 10 "head wildcards" and 10 "tail wildcards".
+CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript`and ETA is Sep. 2020. Up to 20 wildcards will be supported.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
@@ -169,7 +169,7 @@ CDN360 has gzip always on, but by default only applies to content type “text/h
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made a few improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
-if ($http_x = 1 && $http_y != 2) && $http_z) { ... }
+if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
 We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 *  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
@@ -293,7 +293,7 @@ origin_pass my_origin;    #URI is not specified,
 origin_pass my_origin/$uri;
 origin_pass my_origin/abc/$uri;
 ```
-If the URI is omitted, the variable ```$request_uri``` (with all the query strings) is appended automatically when accessing the origin.
+If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin.
 
 ### `origin_read_timeout`
 
@@ -558,7 +558,7 @@ For example: if the configuration is:
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
 The processing logic will be:
-```nginx
+```php
 if (A-E-header.contains("gzip") && A-E-header.contains("br"))
     A-E-header="gzip,br";
 else if (A-E-header.contains("gzip")) A-E-header="gzip";
