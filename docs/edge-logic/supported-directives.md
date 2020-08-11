@@ -4,16 +4,17 @@ This section lists all the directives you can use in the CDN360 Edge Logic. Alth
 
 Each non-proprietary directive includes a direct link to the official NGINX documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives. 
 
-In the following list, the "standard" directives are available to all customers and should cover the most common use cases. The "advanced" directives are usually more resource-consuming than standard directives and will be granted on a case-by-case basis. If you need one more of them, contact CDNetworks customer service.
+In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">standard</span>
 
 This directive modifies the response headers to the client. CDNetworks has made the following major changes to the open-source version:
-1. The following new parameter has been introduced to control the behavior more precisely:
+
+1. A parameter "policy=" has been introduced to control the behavior more precisely:
 ```nginx
-policy=repeat|overwrite|preserve
+add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```
 ```overwrite```: If the header being added exists in the upstream response, the local configuration overrides the header value. If you want to remove a header, set the value to an empty string.
 
@@ -141,7 +142,7 @@ Examples:
     eval_func $secret_key SHA256 "mySecret123!";
     eval_func $text HEX_ENCODE $secret_key;
     #the value of $text should be 
-    "ad8fdcda140f607697ec80a8c38e86af19f4bb79ee7f7544abcfaadd827901af"
+    #"ad8fdcda140f607697ec80a8c38e86af19f4bb79ee7f7544abcfaadd827901af"
     eval_func $aseout ENCRYPT_AES_256_CBC $secret_key $iv $message;
     eval_func $hmacout HMAC $secret_key $message SHA256;
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
@@ -159,7 +160,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 <span class="badge dark">advanced</span>
 
-CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*`, ETA is Sep. 2020. It will support up to 10 "head wildcards" and 10 "tail wildcards".
+CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript`and ETA is Sep. 2020. Up to 20 wildcards will be supported.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
@@ -169,7 +170,7 @@ CDN360 has gzip always on, but by default only applies to content type “text/h
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made a few improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
-if ($http_x = 1 && $http_y != 2) && $http_z) { ... }
+if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
 We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
 *  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
@@ -293,7 +294,7 @@ origin_pass my_origin;    #URI is not specified,
 origin_pass my_origin/$uri;
 origin_pass my_origin/abc/$uri;
 ```
-If the URI is omitted, the variable ```$request_uri``` (with all the query strings) is appended automatically when accessing the origin.
+If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin.
 
 ### `origin_read_timeout`
 
@@ -404,7 +405,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Aug 2020).
+Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Oct 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
@@ -558,7 +559,7 @@ For example: if the configuration is:
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
 The processing logic will be:
-```nginx
+```php
 if (A-E-header.contains("gzip") && A-E-header.contains("br"))
     A-E-header="gzip,br";
 else if (A-E-header.contains("gzip")) A-E-header="gzip";
@@ -598,8 +599,8 @@ Assigns a value to the specified variable. No change to the public version. In p
 **Contexts:** http, server
 
 
-Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to chase origin’s redirection. The value is limited to 0 OR an integer in [4,512] followed by ‘m’.
-The origin should support HTTP status 206.
+Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to follow origin’s redirection. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`.
+For this directive to work correctly, the origin should support HTTP status 206 for ranged requests.
 
 ### `sorted_querystring_filter_parameter`
 
