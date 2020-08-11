@@ -12,8 +12,9 @@ CDN360 sends an email notification when a certificate used in production is clos
 
 4. In the **Upload Certificate** tab, upload the private key, certificate, and chain certificate files. Then click **Save Version** followed by **OK** at the confirmation pop-up.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-upload.png" alt="Upload Certificate Version" width="700"></p>
-5. Scroll down to the <strong>Deployment</strong> section, and then select <strong>Production</strong> from the <strong>Deployment Destination</strong> drop-down list to deploy the new version to production.<br>
-6. Click <strong>Deploy Configuration</strong>.</br>
+5. Scroll down to the <strong>Deployment</strong> section, and then select <strong>Production</strong> from the <strong>Deployment Destination</strong> drop-down list to deploy the new version to production.<br><br>
+<strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deployment History</strong> button.</br></br>
+6. Click <strong>Deploy Configuration</strong>.</br><br>
 
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="500"></p>
 
@@ -30,7 +31,7 @@ If your company's security policy requires the new certificate to have a new pri
 6. Send the downloaded CSR to the CA to apply for a new certificate.
 7. When you receive the new CA-signed certificate, return to the same Certificate Details page and click **Create Version**.
 8. On the **Upload Certificate** tab, upload the new certificate and, optionally, the chain certificate. Click **Save Version**. You don't need to worry about the private key because it will be the same one as the last version.
-9. Scroll down to the **Deployment** section, and then select **Production** from the **Deployment Destination** drop-down list to deploy the new version to production.
+9. Scroll down to the **Deployment** section, and then select **Production** from the **Deployment Destination** drop-down list to deploy the new version to production.<br><br><strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button.</br></br>
 10. Click **Deploy Configuration**.
 
 **Note**: To update a certificate, you must be the owner of the certificate.

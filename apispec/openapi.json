@@ -130,7 +130,7 @@
                         },
                         "cacheKeyHostname": {
                           "type": "string",
-                          "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                          "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                           "maxLength": 80,
                           "pattern": "^[a-z.-_]+"
                         },
@@ -143,11 +143,11 @@
                         },
                         "realTimeLog": {
                           "type": "object",
-                          "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                          "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                           "properties": {
                             "logUrl": {
                               "type": "string",
-                              "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                              "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                             },
                             "sampleRate": {
                               "type": "integer",
@@ -202,7 +202,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -304,7 +304,7 @@
                         "allowProtocolDowngrade": {
                           "type": "boolean",
                           "default": false,
-                          "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                          "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                         },
                         "tlsCertificateId1": {
                           "type": "number",
@@ -337,6 +337,11 @@
                           "maximum": 86400,
                           "default": 1800,
                           "description": "Lifespan of TLS session ticket in seconds."
+                        },
+                        "enableOcspStapling": {
+                          "type": "boolean",
+                          "default": false,
+                          "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
                         }
                       }
                     },
@@ -621,7 +626,7 @@
                   },
                   "cacheKeyHostname": {
                     "type": "string",
-                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                     "maxLength": 80,
                     "pattern": "^[a-z.-_]+"
                   },
@@ -634,11 +639,11 @@
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                     "properties": {
                       "logUrl": {
                         "type": "string",
-                        "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                        "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                       },
                       "sampleRate": {
                         "type": "integer",
@@ -693,7 +698,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -795,7 +800,7 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
@@ -828,6 +833,11 @@
                     "maximum": 86400,
                     "default": 1800,
                     "description": "Lifespan of TLS session ticket in seconds."
+                  },
+                  "enableOcspStapling": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
                   }
                 }
               },
@@ -1378,7 +1388,7 @@
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1393,7 +1403,7 @@
                                       "redirect",
                                       "reject"
                                     ],
-                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                                   },
                                   "by": {
                                     "type": "array",
@@ -1425,12 +1435,8 @@
                               },
                               "enableIPv6": {
                                 "type": "boolean",
-                                "default": "true",
-                                "description": "Indicates whether an IPv6 address can be used.",
-                                "enum": [
-                                  "true",
-                                  "false"
-                                ]
+                                "default": true,
+                                "description": "Indicates whether an IPv6 address can be used."
                               }
                             },
                             "required": [
@@ -1682,11 +1688,11 @@
                   },
                   "gdprCompliant": {
                     "type": "boolean",
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
+                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule is created which uses our 'standard' server group to handle all requests.  <code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule is created that uses our 'standard' server group to handle all requests.  <code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -1740,7 +1746,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -1755,7 +1761,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -1787,12 +1793,8 @@
                         },
                         "enableIPv6": {
                           "type": "boolean",
-                          "default": "true",
-                          "description": "Indicates whether an IPv6 address can be used.",
-                          "enum": [
-                            "true",
-                            "false"
-                          ]
+                          "default": true,
+                          "description": "Indicates whether an IPv6 address can be used."
                         }
                       },
                       "required": [
@@ -1929,7 +1931,7 @@
                   },
                   "grprCompliant": {
                     "type": "boolean",
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
+                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "title": "Edge Hostname Client Zone Rule",
@@ -1984,7 +1986,7 @@
                       "weight": {
                         "type": "integer",
                         "default": 100,
-                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                         "minimum": 0,
                         "maximum": 100
                       },
@@ -1999,7 +2001,7 @@
                               "redirect",
                               "reject"
                             ],
-                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                           },
                           "by": {
                             "type": "array",
@@ -2031,12 +2033,8 @@
                       },
                       "enableIPv6": {
                         "type": "boolean",
-                        "default": "true",
-                        "description": "Indicates whether an IPv6 address can be used.",
-                        "enum": [
-                          "true",
-                          "false"
-                        ]
+                        "default": true,
+                        "description": "Indicates whether an IPv6 address can be used."
                       }
                     },
                     "required": [
@@ -2416,7 +2414,7 @@
                   },
                   "cacheKeyHostname": {
                     "type": "string",
-                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                    "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                     "maxLength": 80,
                     "pattern": "^[a-z.-_]+"
                   },
@@ -2429,11 +2427,11 @@
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                     "properties": {
                       "logUrl": {
                         "type": "string",
-                        "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                        "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                       },
                       "sampleRate": {
                         "type": "integer",
@@ -2488,7 +2486,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -2590,7 +2588,7 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
@@ -2623,6 +2621,11 @@
                     "maximum": 86400,
                     "default": 1800,
                     "description": "Lifespan of TLS session ticket in seconds."
+                  },
+                  "enableOcspStapling": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
                   }
                 }
               },
@@ -2747,7 +2750,7 @@
             }
           },
           "409": {
-            "description": "This error is returned if you try to create a property which already exists.",
+            "description": "This error is returned if you try to create a property that already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2828,7 +2831,7 @@
                       },
                       "cacheKeyHostname": {
                         "type": "string",
-                        "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
+                        "description": "The cachekey hostname must be a string made of lowercase letters, digits, dot, dash, and underscore. If not specified, the incoming Host header value will be used and the cache will not be shared across different hostnames in this property.\n",
                         "maxLength": 80,
                         "pattern": "^[a-z.-_]+"
                       },
@@ -2841,11 +2844,11 @@
                       },
                       "realTimeLog": {
                         "type": "object",
-                        "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can only be used if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                        "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                         "properties": {
                           "logUrl": {
                             "type": "string",
-                            "description": "The URL which receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
+                            "description": "The URL that receives the notifications. It must begin with “http” or \"https\". The server should support the POST method. This is a required field."
                           },
                           "sampleRate": {
                             "type": "integer",
@@ -2900,7 +2903,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\" which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -3002,7 +3005,7 @@
                       "allowProtocolDowngrade": {
                         "type": "boolean",
                         "default": false,
-                        "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate which means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                        "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
                       },
                       "tlsCertificateId1": {
                         "type": "number",
@@ -3035,6 +3038,11 @@
                         "maximum": 86400,
                         "default": 1800,
                         "description": "Lifespan of TLS session ticket in seconds."
+                      },
+                      "enableOcspStapling": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
                       }
                     }
                   }
@@ -3526,11 +3534,11 @@
                   "gdprCompliant": {
                     "type": "boolean",
                     "default": false,
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by a IP addresses in EEA countries."
+                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created that uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -3584,7 +3592,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules which apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -3599,7 +3607,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server which always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -3631,12 +3639,8 @@
                         },
                         "enableIPv6": {
                           "type": "boolean",
-                          "default": "true",
-                          "description": "Indicates whether an IPv6 address can be used.",
-                          "enum": [
-                            "true",
-                            "false"
-                          ]
+                          "default": true,
+                          "description": "Indicates whether an IPv6 address can be used."
                         }
                       },
                       "required": [
@@ -4038,7 +4042,7 @@
                   "sharingMethod": {
                     "type": "string",
                     "default": "none",
-                    "description": "This field can only be used if you are a reseller.\nA value of \"all\" indicates all child customers can use the certificate. A value of \"none\" indicates no child customers can use it.\nIf the value \"some\" is given, specify the IDs of your customers to share the certificate within the <i>shareWith</i> field.",
+                    "description": "This field can be used only if you are a reseller.\nA value of \"all\" indicates all child customers can use the certificate. A value of \"none\" indicates no child customers can use it.\nIf the value \"some\" is given, specify the IDs of your customers to share the certificate within the <i>shareWith</i> field.",
                     "enum": [
                       "all",
                       "none",
@@ -4867,7 +4871,7 @@
                       "none",
                       "some"
                     ],
-                    "description": "This field can only be used by resellers to indicate who can use the certificate. \"All\" indicates all child customers can use the certificate; \"none\" indicates no child customers can use it. If the value is \"some\", specify the child customers allowed to use the certificate in the <i>shareWith</i> field."
+                    "description": "This field can be used only by resellers to indicate who can use the certificate. \"All\" indicates all child customers can use the certificate; \"none\" indicates no child customers can use it. If the value is \"some\", specify the child customers allowed to use the certificate in the <i>shareWith</i> field."
                   },
                   "shareWith": {
                     "type": "array",
@@ -5114,7 +5118,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. One you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
+        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
         "operationId": "downloadCSR",
         "responses": {
           "200": {
@@ -6075,7 +6079,7 @@
             },
             "in": "query",
             "name": "taskIds",
-            "description": "A comma separated list of task IDs indicating which ones to return."
+            "description": "A comma-separated list of task IDs indicating which ones to return."
           },
           {
             "schema": {
@@ -6479,11 +6483,11 @@
                     },
                     "apiAccountId": {
                       "type": "string",
-                      "description": "ID of the API account which created the deployment task."
+                      "description": "ID of the API account that created the deployment task."
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "ID of the customer which created the deployment task.\n",
+                      "description": "ID of the customer that created the deployment task.\n",
                       "minimum": 1
                     }
                   },
@@ -7356,7 +7360,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -7429,7 +7433,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -7821,7 +7825,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8206,7 +8210,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8593,7 +8597,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8765,7 +8769,7 @@
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\" which indicates the number of times a status code appears.",
+                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
                       "enum": [
                         "counts"
                       ]
@@ -9185,7 +9189,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -9571,7 +9575,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -9743,7 +9747,7 @@
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\" which indicates the number of times a status code appears.",
+                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
                       "enum": [
                         "counts"
                       ]
@@ -10223,7 +10227,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -10682,7 +10686,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -11746,7 +11750,7 @@
                           },
                           "successRate": {
                             "type": "number",
-                            "description": "A percentage which indicates the completion of the purge request. ",
+                            "description": "A percentage that indicates the completion of the purge request. ",
                             "minimum": 0,
                             "maximum": 100
                           },
@@ -12039,7 +12043,7 @@
                           },
                           "comments": {
                             "type": "string",
-                            "description": "Text which appears in the report shown on the CDN360 portal."
+                            "description": "Text that appears in the report shown on the CDN360 portal."
                           }
                         },
                         "required": [
@@ -12201,7 +12205,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -12415,7 +12419,7 @@
                     },
                     "comments": {
                       "type": "string",
-                      "description": "Text which appears in the report shown on the CDN360 portal."
+                      "description": "Text that appears in the report shown on the CDN360 portal."
                     }
                   },
                   "required": [
@@ -12709,7 +12713,7 @@
                     },
                     "successRate": {
                       "type": "number",
-                      "description": "A percentage which indicates the completion of the purge request.",
+                      "description": "A percentage that indicates the completion of the purge request.",
                       "minimum": 0,
                       "maximum": 100
                     },
@@ -13248,7 +13252,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -13577,7 +13581,7 @@
                       },
                       "impersonateExceptions": {
                         "type": "array",
-                        "description": "This setting applies to resellers only.  It contains a list of customer IDs which are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
+                        "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                         "items": {
                           "type": "integer"
                         }
@@ -13685,16 +13689,13 @@
                             "description": "Email address of the user."
                           },
                           "isMaster": {
-                            "type": "string",
+                            "type": "boolean",
                             "description": "Indicates whether or not this portal user has full access to all subscribed products.",
-                            "enum": [
-                              "true",
-                              "false"
-                            ]
+                            "default": false
                           },
                           "status": {
                             "type": "string",
-                            "description": "Indicates the status of the account. An account can be <i>active</i> which means login is allowed; <i>pending</i> which means the user has been invited to use the portal but has not completed account setup; or <i>suspended</i> which prevents logins.",
+                            "description": "Indicates the status of the account. An account can be <i>active</i>, which means login is allowed; <i>pending</i>, which means the user has been invited to use the portal but has not completed account setup; or <i>suspended</i>, which prevents logins.",
                             "enum": [
                               "active",
                               "suspended",
@@ -14507,7 +14508,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access which allows updates to objects like properties.",
+        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access, which allows updates to objects like properties.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -14931,7 +14932,7 @@
                         },
                         "impersonateExceptions": {
                           "type": "array",
-                          "description": "This setting applies to resellers only.  It contains a list of customer IDs which are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
+                          "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                           "items": {
                             "type": "integer"
                           }
@@ -15294,7 +15295,7 @@
                       },
                       "impersonateExceptions": {
                         "type": "array",
-                        "description": "This setting applies to resellers only.  It contains a list of customer IDs which are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
+                        "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                         "items": {
                           "type": "integer"
                         }
@@ -15325,7 +15326,7 @@
               }
             }
           },
-          "description": "The request body contains the fields which will be updated.  If a field is omitted, it will not be modified."
+          "description": "The request body contains the fields that will be updated.  If a field is omitted, it will not be modified."
         },
         "parameters": [
           {
@@ -16363,7 +16364,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -16376,9 +16377,49 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
+                      }
+                    },
+                    "chinaBizInfo": {
+                      "title": "chinaBizInfo",
+                      "type": "object",
+                      "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                      "properties": {
+                        "category": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            999
+                          ],
+                          "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idType": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            999
+                          ],
+                          "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idNumber": {
+                          "type": "string",
+                          "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                        }
                       }
                     }
                   },
@@ -16640,7 +16681,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -16653,9 +16694,49 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
+                      }
+                    },
+                    "chinaBizInfo": {
+                      "title": "chinaBizInfo",
+                      "type": "object",
+                      "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                      "properties": {
+                        "category": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            999
+                          ],
+                          "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idType": {
+                          "type": "integer",
+                          "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            999
+                          ],
+                          "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                        },
+                        "idNumber": {
+                          "type": "string",
+                          "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                        }
                       }
                     }
                   },
@@ -16910,7 +16991,7 @@
                         "default": [
                           "0.0.0.0/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -16993,9 +17074,49 @@
                     "default": [
                       "0.0.0.0/0"
                     ],
-                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                     "items": {
                       "type": "string"
+                    }
+                  },
+                  "chinaBizInfo": {
+                    "title": "chinaBizInfo",
+                    "type": "object",
+                    "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                    "properties": {
+                      "category": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          999
+                        ],
+                        "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idType": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          999
+                        ],
+                        "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idNumber": {
+                        "type": "string",
+                        "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                      }
                     }
                   }
                 }
@@ -17257,7 +17378,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -17429,7 +17550,7 @@
             }
           }
         },
-        "description": "Resellers can use this API to create a child customer.",
+        "description": "Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the phone, address, responsiblePerson, and chinaBizInfo fields for the customer before enabling deployment to China.",
         "tags": [
           "Customer Management"
         ],
@@ -17458,7 +17579,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.\n",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.\n",
                     "items": {
                       "type": "string"
                     }
@@ -17495,7 +17616,7 @@
                         "default": [
                           "0.0.0.0/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -17617,6 +17738,46 @@
                         "country": "USA"
                       }
                     }
+                  },
+                  "chinaBizInfo": {
+                    "title": "chinaBizInfo",
+                    "type": "object",
+                    "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+                    "properties": {
+                      "category": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          999
+                        ],
+                        "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idType": {
+                        "type": "integer",
+                        "enum": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          999
+                        ],
+                        "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+                      },
+                      "idNumber": {
+                        "type": "string",
+                        "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -17650,7 +17811,7 @@
                     "name": "Nata Inc.",
                     "portalSettings": {
                       "logoutIdleTime": "355",
-                      "enforce2fa": "true",
+                      "enforce2fa": true,
                       "passwordExpirationDays": "41"
                     }
                   }
@@ -17927,7 +18088,7 @@
             },
             "in": "query",
             "name": "ids",
-            "description": "Comma separated list of IDs of customers to return."
+            "description": "Comma-separated list of IDs of customers to return."
           },
           {
             "schema": {
@@ -17948,7 +18109,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma separated list of products which can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
+            "description": "Comma-separated list of products that can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
           },
           {
             "schema": {
@@ -17982,7 +18143,7 @@
             },
             "in": "query",
             "name": "regionalOffices",
-            "description": "Comma separated list of regional offices of customers to return. A case insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
+            "description": "Comma-separated list of regional offices of customers to return. A case-insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
           }
         ]
       }
@@ -18127,7 +18288,7 @@
                           },
                           "requestTimestamp": {
                             "type": "string",
-                            "description": "RFC 3339 date with UTC time which indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\""
+                            "description": "RFC 3339 date with UTC time that indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\""
                           },
                           "requestURL": {
                             "type": "string",
@@ -18333,7 +18494,7 @@
             },
             "in": "query",
             "name": "status",
-            "description": "Filter API calls by specifying a comma separated list of HTTP response status codes. You can also specify individual status codes such as \"200\" or \"404\". You can also  pass \"2xx\", \"3xx\", \"4xx\", or \"5xx\" to request all API calls whose response status codes begin with the first digit. For example, \"2xx\" will include API calls whose status were \"200\", \"201\", and \"204\"."
+            "description": "Filter API calls by specifying a comma-separated list of HTTP response status codes. You can also specify individual status codes such as \"200\" or \"404\". You can also  pass \"2xx\", \"3xx\", \"4xx\", or \"5xx\" to request all API calls whose response status codes begin with the first digit. For example, \"2xx\" will include API calls whose status were \"200\", \"201\", and \"204\"."
           },
           {
             "schema": {
@@ -18391,7 +18552,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls\"</a>."
+          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls</a>."
         }
       ],
       "get": {
@@ -18578,7 +18739,7 @@
           }
         },
         "operationId": "get-ngadmin-apicalls-id",
-        "description": "Get details about an API call including its response status, request and response headers, and caller's IP address. ",
+        "description": "Get details about an API call including its response status, request and response headers, and caller's IP address.",
         "parameters": [
           {
             "schema": {
@@ -18589,6 +18750,1643 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ]
+      }
+    },
+    "/cdn/systemConfigs": {
+      "get": {
+        "summary": "Get system configuration",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains system configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "minimumSupportedCacheVersion": {
+                      "type": "string",
+                      "description": "The minimum version of the cache server required to validate and deploy properties."
+                    },
+                    "baseDirectives": {
+                      "type": "array",
+                      "description": "A list of edge logic directives that are available to everyone.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "advancedDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that can be enabled by contacting our support team.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "publishedPrice": {
+                      "type": "object",
+                      "required": [
+                        "perGB",
+                        "perMHttpsReq"
+                      ],
+                      "description": "Describes the price for traffic and requests.",
+                      "properties": {
+                        "perGB": {
+                          "type": "object",
+                          "description": "Describes the price for each gigabyte of traffic used  within each server group.",
+                          "required": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra"
+                          ],
+                          "properties": {
+                            "standard": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the standard server group."
+                            },
+                            "premium": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the premium server group."
+                            },
+                            "premium+": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the premium+ server group."
+                            },
+                            "ultra": {
+                              "type": "number",
+                              "description": "Price in US dollars per gigabyte of traffic using the ultra server group."
+                            }
+                          }
+                        },
+                        "perMHttpsReq": {
+                          "type": "number",
+                          "description": "Price in US dollars of one million HTTPS requests."
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "minimumSupportedCacheVersion",
+                    "baseDirectives",
+                    "advancedDirectives",
+                    "publishedPrice"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "minimumSupportedCacheVersion": "1.16.1.1.1.11-20",
+                      "baseDirectives": [
+                        "origin_pass",
+                        "add_header",
+                        "expires",
+                        "allow",
+                        "deny",
+                        "limit_rate",
+                        "limit_rate_after",
+                        "location",
+                        "set",
+                        "if",
+                        "return",
+                        "break",
+                        "rewrite",
+                        "satisfy",
+                        "proxy_cache_bypass",
+                        "proxy_cache_valid",
+                        "proxy_ignore_headers",
+                        "proxy_hide_header",
+                        "proxy_no_cache",
+                        "proxy_pass_header",
+                        "valid_referers",
+                        "origin_limit_rate",
+                        "proxy_cache_min_age",
+                        "origin_set_header",
+                        "proxy_buffering",
+                        "proxy_cache_methods"
+                      ],
+                      "advancedDirectives": [
+                        "internal",
+                        "auth_request",
+                        "auth_request_set",
+                        "gzip_types",
+                        "proxy_cache_min_uses",
+                        "proxy_cache_use_stale",
+                        "proxy_cookie_domain",
+                        "proxy_cookie_path",
+                        "proxy_next_upstream",
+                        "proxy_next_upstream_timeout",
+                        "proxy_next_upstream_tries",
+                        "proxy_redirect",
+                        "proxy_ssl_protocols",
+                        "secure_link",
+                        "secure_link_md5",
+                        "secure_link_secret",
+                        "sub_filter",
+                        "sub_filter_last_modified",
+                        "sub_filter_once",
+                        "sub_filter_types",
+                        "slice",
+                        "error_page",
+                        "origin_connect_timeout",
+                        "origin_read_timeout",
+                        "origin_send_timeout",
+                        "proxy_cache_vary",
+                        "eval_func",
+                        "realtime_log_switch",
+                        "proxy_ignore_cache_control",
+                        "origin_header_modify",
+                        "enable_websocket",
+                        "sorted_querystring_filter_parameter"
+                      ],
+                      "publishedPrice": {
+                        "perGB": {
+                          "standard": 0.057,
+                          "premium": 0.112,
+                          "ultra": 0.279,
+                          "premium+": 0.197
+                        },
+                        "perMHttpsReq": 0.99
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-systemConfigs",
+        "description": "This API returns system configuration settings including supported edge logic directives, advanced edge logic directives, and the default pricing for traffic and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive."
+      }
+    },
+    "/cdn/serviceQuotas": {
+      "post": {
+        "summary": "Create a service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "201": {
+            "description": "A Location header will contain a URL to the newly created service quota.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The Location header's value is a URL to the new service quota object. You can use the ID to get information or to update it."
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource Limit Exceeded": {
+                    "value": {
+                      "code": "ResourceLimitExceeded",
+                      "message": "This customer's 'allowedCacheDirectives' list should be a subset of the reseller's list."
+                    }
+                  },
+                  "Duplicate configuration": {
+                    "value": {
+                      "code": "DuplicateCustomerId",
+                      "message": "The provided customer ID already has a CDN config."
+                    }
+                  },
+                  "Invalid certificate limit": {
+                    "value": {
+                      "code": "InvalidCertificateLimit",
+                      "message": "The value for limit should be non-negative."
+                    }
+                  },
+                  "Invalid directives": {
+                    "value": {
+                      "code": "InvalidDirectives",
+                      "message": "Invalid directive 'test directive' for allowedCacheDirectives field."
+                    }
+                  },
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The specified customer ID does not exist or the caller doesn't have access to this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-serviceQuotas",
+        "description": "A reseller can use this API to define CDN360 service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customerId": {
+                    "type": "integer",
+                    "description": "ID of the customer for which to create the service quota.",
+                    "minimum": 1
+                  },
+                  "status": {
+                    "type": "string",
+                    "default": "suspended",
+                    "enum": [
+                      "active",
+                      "trial",
+                      "suspended"
+                    ],
+                    "description": "Indicates the status of the customer's access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. "
+                  },
+                  "contractId": {
+                    "type": "string",
+                    "description": "ID representing the contract, used for billing."
+                  },
+                  "protocolDowngradeAgreementId": {
+                    "type": "string",
+                    "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
+                  },
+                  "accountManagerEmail": {
+                    "type": "string",
+                    "description": "An email address representing the account manager."
+                  },
+                  "trialDeadline": {
+                    "type": "string",
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>. "
+                  },
+                  "usageLimitDays": {
+                    "type": "integer",
+                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. A value of 0 means there is no limit on the customer.",
+                    "minimum": 0,
+                    "maximum": 365,
+                    "default": 0
+                  },
+                  "usageLimitDollar": {
+                    "type": "integer",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing. A value of 0 means there is no limit on the customer.",
+                    "minimum": 0,
+                    "default": 0
+                  },
+                  "allowDeploymentInChina": {
+                    "type": "boolean",
+                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
+                    "default": false
+                  },
+                  "hostnameLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of hostnames allowed in production."
+                  },
+                  "edgeHostnameLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of edge hostnames that can be created."
+                  },
+                  "filePurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "filePurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "prefetchQuota": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                  },
+                  "propertyLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of properties that can be created."
+                  },
+                  "certificateLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of certificates that can be created."
+                  },
+                  "logConfigLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of log configurations."
+                  },
+                  "maximumChildCustomers": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "For resellers, this represents the maximum number of child customers allowed."
+                  },
+                  "allowedCacheDirectives": {
+                    "type": "array",
+                    "description": "A list of advanced <a href=\"https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives\">edge logic directives</a> that are permitted to be used in addition to standard ones.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "customerId"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "customerId": "12345678",
+                    "status": "active",
+                    "contractId": "",
+                    "protocolDowngradeAgreementId": "",
+                    "hostnameLimit": "10",
+                    "edgeHostnameLimit": "10",
+                    "propertyLimit": "10",
+                    "certificateLimit": "100",
+                    "logConfigLimit": "10",
+                    "filePurgeQuotaInStaging": "10",
+                    "dirPurgeQuotaInStaging": "10",
+                    "filePurgeQuotaInProduction": "10",
+                    "dirPurgeQuotaInProduction": "10",
+                    "prefetchQuota": "10",
+                    "maximumChildCustomers": "10",
+                    "allowProduction": true,
+                    "accountManagerEmail": "manager@somecompany.com",
+                    "usageLimitDays": "50",
+                    "usageLimitDollar": "100",
+                    "allowedCacheDirectives": [
+                      "proxy_cookie_path"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body contains the service quota settings for the customer."
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "customerId",
+            "description": "ID of a customer. It can be <i>me</i> to return the caller's own service quota."
+          }
+        ]
+      },
+      "parameters": [],
+      "get": {
+        "summary": "Get the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the service quotas for a CDN360 customer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "protocolDowngradeAgreementId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "protocolDowngradeAgreementId": {
+                      "type": "string",
+                      "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 1234567890,
+                      "contractId": "",
+                      "protocolDowngradeAgreementId": "",
+                      "hostnameLimit": 20,
+                      "propertyLimit": 20,
+                      "certificateLimit": 20,
+                      "edgeHostnameLimit": 10,
+                      "filePurgeQuotaInStaging": 100,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 100,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 20,
+                      "logConfigLimit": 20,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The provided customer ID does not exist or the caller does not have permission to access it."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No service quota was explicitly defined for this customer. The response body will contain the default settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "protocolDowngradeAgreementId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "protocolDowngradeAgreementId": {
+                      "type": "string",
+                      "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "customerId": 1234567890,
+                      "hostnameLimit": 1000000,
+                      "propertyLimit": 1000000,
+                      "certificateLimit": 1000000,
+                      "edgeHostnameLimit": 1000000,
+                      "filePurgeQuotaInStaging": 5000,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 5000,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 5000,
+                      "logConfigLimit": 1000000,
+                      "maximumChildCustomers": 1000000,
+                      "allowedCacheDirectives": [],
+                      "status": "suspended",
+                      "allowProduction": false,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-serviceQuotas-customerId=-id",
+        "description": "Get the CDN service quota for a customer.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "customerId",
+            "description": "ID of a customer. It can be <i>me</i> to return the caller's own service quota object."
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "204": {
+            "description": "The service quota was successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The provided customer ID does not exist or is not a child of the caller."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Has certificate in production": {
+                    "value": {
+                      "code": "HasCertificateInProduction",
+                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has edge hostname": {
+                    "value": {
+                      "code": "HasEdgeHostname",
+                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has property in production": {
+                    "value": {
+                      "code": "HasPropertyInProduction",
+                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-serviceQuotas",
+        "description": "This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "customerId",
+            "description": "ID of a customer whose service quota should be deleted."
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update the service quota for a customer",
+        "operationId": "patch-cdn-serviceQuotas",
+        "responses": {
+          "200": {
+            "description": "The customer's quota was updated successfully."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource Limit Exceeded": {
+                    "value": {
+                      "code": "ResourceLimitExceeded",
+                      "message": "This customer cannot have a higher 'propertyLimit' limit than the reseller."
+                    }
+                  },
+                  "Invalid customer ID update": {
+                    "value": {
+                      "code": "InvalidCustomerIdUpdate",
+                      "message": "The customer ID field cannot be updated."
+                    }
+                  },
+                  "Invalid certificate limit": {
+                    "value": {
+                      "code": "InvalidCertificateLimit",
+                      "message": "The value for limit should be non-negative."
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource limit exceeded": {
+                    "value": {
+                      "code": "ResourceLimitExceeded",
+                      "message": "This customer cannot have a higher 'hostnameLimit' limit than the reseller."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "This API allows a reseller to update an existing service quota for a child customer.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "updateServiceQuotaBody",
+                "type": "object",
+                "description": "This object contains the fields of the service quota that can be updated.",
+                "x-tags": [
+                  "CDN Product Management"
+                ],
+                "properties": {
+                  "contractId": {
+                    "type": "string",
+                    "description": "ID representing the contract, used for billing."
+                  },
+                  "protocolDowngradeAgreementId": {
+                    "type": "string",
+                    "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
+                  },
+                  "hostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of hostnames allowed in production.\n",
+                    "default": 100
+                  },
+                  "propertyLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of properties that can be created.\n"
+                  },
+                  "certificateLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of certificates that can be created."
+                  },
+                  "edgeHostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of edge hostnames that can be created.",
+                    "default": 100
+                  },
+                  "filePurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "filePurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "prefetchQuota": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                  },
+                  "logConfigLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of log configurations."
+                  },
+                  "maximumChildCustomers": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "For resellers, this represents the maximum number of child customers allowed."
+                  },
+                  "allowedCacheDirectives": {
+                    "type": "array",
+                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer  is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "enum": [
+                      "active",
+                      "suspended",
+                      "trial"
+                    ]
+                  },
+                  "allowProduction": {
+                    "type": "boolean",
+                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                    "default": false
+                  },
+                  "usageLimitDollar": {
+                    "type": "integer",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "minimum": 0
+                  },
+                  "usageLimitDays": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 365,
+                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.\n"
+                  },
+                  "allowDeploymentInChina": {
+                    "type": "boolean",
+                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
+                    "default": false
+                  },
+                  "trialDeadline": {
+                    "type": "string",
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filePurgeQuotaInStaging": 100
+                  }
+                }
+              }
+            }
+          },
+          "description": "Include the fields that you wish to update. Omitted fields will not be changed."
+        },
+        "tags": [
+          "CDN Product Management"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "customerId",
+            "description": "ID of a customer. "
+          }
+        ]
+      }
+    },
+    "/cdn/serviceQuotas/{serviceQuotaId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "serviceQuotaId",
+          "in": "path",
+          "required": true,
+          "description": "Specify the service quota ID. It is returned when <a href=\"#operation/post-cdn-serviceQuotas\">creating a service quota</a>."
+        }
+      ],
+      "get": {
+        "summary": "Get a service quota by service quota ID",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the service quotas for a CDN360 customer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "protocolDowngradeAgreementId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "protocolDowngradeAgreementId": {
+                      "type": "string",
+                      "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 1234567890,
+                      "contractId": "",
+                      "protocolDowngradeAgreementId": "",
+                      "hostnameLimit": 20,
+                      "propertyLimit": 20,
+                      "certificateLimit": 20,
+                      "edgeHostnameLimit": 10,
+                      "filePurgeQuotaInStaging": 100,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 100,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 20,
+                      "logConfigLimit": 20,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid service quota ID": {
+                    "value": {
+                      "code": "InvalidServiceQuotaId",
+                      "message": "The serviceQuotaId does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The request could not be completed. Refer to the response body for details.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Access denied": {
+                    "value": {
+                      "code": "AccessDenied",
+                      "message": "The serviceQuotaId is not for a child customer of the caller."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-serviceQuotas-serviceQuotaId",
+        "description": "This API allows a reseller to get a child customer's service quota by referencing its service quota ID."
+      },
+      "patch": {
+        "summary": "Update a service quota by service quota ID",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The customer's quota was updated successfully."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource limit exceeded": {
+                    "value": {
+                      "code": "ResourceLimitExceeded",
+                      "message": "This customer cannot have a higher 'propertyLimit' limit than the reseller."
+                    }
+                  },
+                  "Invalid customer ID update": {
+                    "value": {
+                      "code": "InvalidCustomerIdUpdate",
+                      "message": "The customer ID field cannot be updated."
+                    }
+                  },
+                  "Invalid certificate limit": {
+                    "value": {
+                      "code": "InvalidCertificateLimit",
+                      "message": "The value for limit should be non-negative."
+                    }
+                  },
+                  "Invalid service quota ID": {
+                    "value": {
+                      "code": "InvalidServiceQuotaId",
+                      "message": "The serviceQuotaId does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Access denied": {
+                    "value": {
+                      "code": "AccessDenied",
+                      "message": "The serviceQuotaId is not for a child customer of the caller."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patch-cdn-serviceQuotas-serviceQuotaId",
+        "description": "This API allows a reseller to update a child customer's service quota by referencing its service quota ID.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "updateServiceQuotaBody",
+                "type": "object",
+                "description": "This object contains the fields of the service quota that can be updated.",
+                "x-tags": [
+                  "CDN Product Management"
+                ],
+                "properties": {
+                  "contractId": {
+                    "type": "string",
+                    "description": "ID representing the contract, used for billing."
+                  },
+                  "protocolDowngradeAgreementId": {
+                    "type": "string",
+                    "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
+                  },
+                  "hostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of hostnames allowed in production.\n",
+                    "default": 100
+                  },
+                  "propertyLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of properties that can be created.\n"
+                  },
+                  "certificateLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of certificates that can be created."
+                  },
+                  "edgeHostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of edge hostnames that can be created.",
+                    "default": 100
+                  },
+                  "filePurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "filePurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "prefetchQuota": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                  },
+                  "logConfigLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of log configurations."
+                  },
+                  "maximumChildCustomers": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "For resellers, this represents the maximum number of child customers allowed."
+                  },
+                  "allowedCacheDirectives": {
+                    "type": "array",
+                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer  is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "enum": [
+                      "active",
+                      "suspended",
+                      "trial"
+                    ]
+                  },
+                  "allowProduction": {
+                    "type": "boolean",
+                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                    "default": false
+                  },
+                  "usageLimitDollar": {
+                    "type": "integer",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "minimum": 0
+                  },
+                  "usageLimitDays": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 365,
+                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.\n"
+                  },
+                  "allowDeploymentInChina": {
+                    "type": "boolean",
+                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
+                    "default": false
+                  },
+                  "trialDeadline": {
+                    "type": "string",
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filePurgeQuotaInStaging": 100
+                  }
+                }
+              }
+            }
+          },
+          "description": "Include the fields that you wish to update. Omitted fields will not be changed."
+        }
+      },
+      "delete": {
+        "summary": "Delete a service quota by service quota ID",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "204": {
+            "description": "The service quota was successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid service quota ID": {
+                    "value": {
+                      "code": "InvalidServiceQuotaId",
+                      "message": "The serviceQuotaId does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-serviceQuotas-serviceQuotaId",
+        "description": "This API allows a reseller to delete a child customer's service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
       }
     }
   },
@@ -18605,11 +20403,11 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production.   If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version that is immutable. You can choose to deploy any version to staging or production.   If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version which has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
@@ -18621,11 +20419,11 @@
     },
     {
       "name": "Hostnames",
-      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available which allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
+      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
     },
     {
       "name": "Edge Hostname Management",
-      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones which are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360."
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360."
     },
     {
       "name": "Reports",
@@ -18649,11 +20447,15 @@
     },
     {
       "name": "Customer Management",
-      "description": "These APIs allow you to update customer level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, and delete customer accounts."
+      "description": "These APIs allow you to update customer level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts."
     },
     {
       "name": "API Call History",
       "description": "Obtain a summary of API calls that have been made by you or on your behalf."
+    },
+    {
+      "name": "CDN Product Management",
+      "description": "These APIs allow you to fetch CDN settings that apply to your account. If you are a reseller, you can use APIs to manage the service quotas of your child customers."
     }
   ]
 }
