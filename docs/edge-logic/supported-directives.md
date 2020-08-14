@@ -85,7 +85,7 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### `custom_log_field`
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
@@ -213,7 +213,7 @@ This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/n
 
 ### `origin_fast_route`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_fast_route on|off;` <br/>
 **Default**: `origin_fast_route off;` <br/>
@@ -223,7 +223,7 @@ This directive enables a fast route to be used to access the origin. It is power
 
 ### `origin_follow_redirect`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_follow_redirect;` <br/>
 **Default**: - <br/>
@@ -515,7 +515,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 ### `realtime_log_sample_rate`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge">ETA July 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `realtime_log_sample_rate {sample rate};` <br/>
 **Default:** none <br/>
