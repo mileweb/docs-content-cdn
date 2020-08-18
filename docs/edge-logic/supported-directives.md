@@ -596,11 +596,12 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 <span class="badge">standard</span>
 
-**Contexts:** http, server
+**Contexts:** http, server, ~~location~~
 
 
-Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to follow origin’s redirection. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`.
-For this directive to work correctly, the origin should support HTTP status 206 for ranged requests.
+Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`. The origin has to support ranged request and respond with status code 206. When caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the ranged responses. We made a few change to this directive on top of the open-source version:
+* We disallowed this directive in any "location" block. As a result, the entire website must use the same slice size. This is to avoid potential problems when a request is processed in multiple locations.
+* CDN360 requires all the cached slices carry the same ETag value. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients will be terminated and all the cached slices will be purged immediately. So please make sure the ETag of a file on origin does not change unless the file content really changes.
 
 ### `sorted_querystring_filter_parameter`
 
