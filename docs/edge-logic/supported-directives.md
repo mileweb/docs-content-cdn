@@ -582,7 +582,7 @@ Defines an expression for which the MD5 hash value will be computed and compared
 
 ### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)
 
-<span class="badge">standard</span>
+<span class="badge dark">advanced</span>
 
 Defines a secret word used to check authenticity of requested links. No change to the public version.
 
