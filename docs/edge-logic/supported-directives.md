@@ -596,12 +596,22 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 <span class="badge">standard</span>
 
-**Contexts:** http, server, ~~location~~
+**Contexts:** http, server~~, location~~
 
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`. The origin has to support ranged request and respond with status code 206. When caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the ranged responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block. As a result, the entire website must use the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations.
-* CDN360 requires all cached slices carry the same ETag value. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. So please make sure the ETag of a file on origin does not change unless the file content really changes.
+* CDN360 requires all cached slices carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. So please make sure the ETag of a file on origin does not change unless the file content really changes. This behavior can be disabled by `slice_ignore_etag on;`.
+
+### `slice_ignore_etag`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax:** `slice_ignore_etag on/off;` <br/>
+**Default:** `slice_ignore_etag off;` <br/>
+**Contexts:** http, server
+
+This directive can be used to disable the ETag consistency check of sliced files. It should only be used as a workaround in case the origin may generate different ETag values for the same file.
 
 ### `sorted_querystring_filter_parameter`
 
