@@ -596,7 +596,7 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 <span class="badge">standard</span>
 
-**Contexts:** http, server~~, location~~
+**Contexts:** http, server, ~~location~~
 
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`. The origin has to support ranged request and respond with status code 206. When caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the ranged responses. We made the following changes to this directive on top of the open-source version:
