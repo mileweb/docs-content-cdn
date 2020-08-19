@@ -28,6 +28,12 @@
           "caption": "Learn CDN360 Edge Logic",
           "icon": "cli",
           "path": "docs/edge-logic/intro"
+        },
+        {
+          "title": "Ele Test",
+          "caption": "Understanding Call to Manifest",
+          "icon": "ele",
+          "path": "docs/edge-logic/intro"
         }
       ]
     },
