@@ -405,7 +405,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Oct 2020).
+Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
@@ -599,9 +599,9 @@ Assigns a value to the specified variable. No change to the public version. In p
 **Contexts:** http, server, ~~location~~
 
 
-Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`. The origin has to support ranged request and respond with status code 206. When caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the ranged responses. We made the following changes to this directive on top of the open-source version:
-* We disallowed this directive in any "location" block. As a result, the entire website must use the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations.
-* CDN360 requires all cached slices carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. So please make sure the ETag of a file on origin does not change unless the file content really changes. This behavior can be disabled by `slice_ignore_etag on;`.
+Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
+* We disallowed this directive in any "location" block to ensure the entire domain to have the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
+* CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 
 ### `slice_ignore_etag`
 
@@ -611,7 +611,7 @@ Sets the size of the slices when fetching large files from the origin. The valid
 **Default:** `slice_ignore_etag off;` <br/>
 **Contexts:** http, server
 
-This directive can be used to disable the ETag consistency check of sliced files. It should only be used as a workaround in case the origin may generate different ETag values for the same file.
+This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
 
 ### `sorted_querystring_filter_parameter`
 
