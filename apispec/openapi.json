@@ -181,12 +181,15 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                          "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                         },
                         "redirectHttpToHttps": {
-                          "type": "boolean",
+                          "type": [
+                            "boolean",
+                            "string"
+                          ],
                           "default": false,
-                          "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                          "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                         },
                         "origins": {
                           "type": "array",
@@ -342,6 +345,96 @@
                           "type": "boolean",
                           "default": false,
                           "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                        },
+                        "beianContentType": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 24,
+                          "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                        },
+                        "accessControlRules": {
+                          "type": "array",
+                          "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                          "items": {
+                            "title": "accessControlRule",
+                            "type": "object",
+                            "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "maxLength": 60,
+                                "minLength": 0,
+                                "description": "An optional ID for the access control rule."
+                              },
+                              "conditions": {
+                                "type": "object",
+                                "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                                "properties": {
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "https",
+                                      "http"
+                                    ],
+                                    "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                                  },
+                                  "hostname": {
+                                    "type": "string",
+                                    "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                                  },
+                                  "uri": {
+                                    "type": "string",
+                                    "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                                    "maxLength": 500
+                                  },
+                                  "serverRegions": {
+                                    "type": "array",
+                                    "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "clientRegions": {
+                                    "type": "array",
+                                    "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "clientIpRange": {
+                                    "type": "array",
+                                    "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                                    "items": {
+                                      "type": "string",
+                                      "maxLength": 2
+                                    }
+                                  }
+                                }
+                              },
+                              "action": {
+                                "type": "object",
+                                "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                                "required": [
+                                  "status"
+                                ],
+                                "properties": {
+                                  "status": {
+                                    "type": "string",
+                                    "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                                  },
+                                  "message": {
+                                    "type": "string",
+                                    "maxLength": 200,
+                                    "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                                  }
+                                }
+                              }
+                            },
+                            "required": [
+                              "conditions",
+                              "action"
+                            ]
+                          }
                         }
                       }
                     },
@@ -548,6 +641,12 @@
                       "code": "InvalidVersion",
                       "message": "The version number must be a positive integer."
                     }
+                  },
+                  "Invalid redirect HTTP to HTTPS": {
+                    "value": {
+                      "code": "InvalidRedirectHttpToHttps",
+                      "message": "The allowed values for redirectHttpToHttps are true, false, 302, 307 and 308."
+                    }
                   }
                 }
               }
@@ -677,12 +776,15 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                   },
                   "redirectHttpToHttps": {
-                    "type": "boolean",
+                    "type": [
+                      "boolean",
+                      "string"
+                    ],
                     "default": false,
-                    "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                    "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -838,6 +940,96 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                  },
+                  "beianContentType": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 24,
+                    "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                  },
+                  "accessControlRules": {
+                    "type": "array",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "items": {
+                      "title": "accessControlRule",
+                      "type": "object",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "minLength": 0,
+                          "description": "An optional ID for the access control rule."
+                        },
+                        "conditions": {
+                          "type": "object",
+                          "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                          "properties": {
+                            "scheme": {
+                              "type": "string",
+                              "enum": [
+                                "https",
+                                "http"
+                              ],
+                              "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                            },
+                            "hostname": {
+                              "type": "string",
+                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                            },
+                            "uri": {
+                              "type": "string",
+                              "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                              "maxLength": 500
+                            },
+                            "serverRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientIpRange": {
+                              "type": "array",
+                              "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 2
+                              }
+                            }
+                          }
+                        },
+                        "action": {
+                          "type": "object",
+                          "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                            },
+                            "message": {
+                              "type": "string",
+                              "maxLength": 200,
+                              "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "conditions",
+                        "action"
+                      ]
+                    }
                   }
                 }
               },
@@ -1388,7 +1580,7 @@
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1403,7 +1595,7 @@
                                       "redirect",
                                       "reject"
                                     ],
-                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                                   },
                                   "by": {
                                     "type": "array",
@@ -1423,6 +1615,11 @@
                                     "type": "string",
                                     "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                                     "example": "domain.com"
+                                  },
+                                  "enableIPv6": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                                    "default": "true"
                                   }
                                 },
                                 "required": [
@@ -1432,11 +1629,6 @@
                               "isp": {
                                 "type": "string",
                                 "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                              },
-                              "enableIPv6": {
-                                "type": "boolean",
-                                "default": true,
-                                "description": "Indicates whether an IPv6 address can be used."
                               }
                             },
                             "required": [
@@ -1469,10 +1661,10 @@
                               "type": "deliver",
                               "by": [
                                 "standard"
-                              ]
+                              ],
+                              "enableIPv6": true
                             },
                             "isp": "all",
-                            "enableIPv6": true,
                             "weight": 100
                           }
                         ],
@@ -1746,7 +1938,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -1761,7 +1953,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -1781,6 +1973,11 @@
                               "type": "string",
                               "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                               "example": "domain.com"
+                            },
+                            "enableIPv6": {
+                              "type": "boolean",
+                              "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                              "default": "true"
                             }
                           },
                           "required": [
@@ -1790,11 +1987,6 @@
                         "isp": {
                           "type": "string",
                           "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                        },
-                        "enableIPv6": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Indicates whether an IPv6 address can be used."
                         }
                       },
                       "required": [
@@ -1822,9 +2014,9 @@
                           "type": "deliver",
                           "by": [
                             "standard"
-                          ]
+                          ],
+                          "enableIPv6": true
                         },
-                        "enableIPv6": true,
                         "weight": 100
                       }
                     ]
@@ -1986,7 +2178,7 @@
                       "weight": {
                         "type": "integer",
                         "default": 100,
-                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                         "minimum": 0,
                         "maximum": 100
                       },
@@ -2001,7 +2193,7 @@
                               "redirect",
                               "reject"
                             ],
-                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                           },
                           "by": {
                             "type": "array",
@@ -2021,6 +2213,11 @@
                             "type": "string",
                             "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                             "example": "domain.com"
+                          },
+                          "enableIPv6": {
+                            "type": "boolean",
+                            "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                            "default": "true"
                           }
                         },
                         "required": [
@@ -2030,11 +2227,6 @@
                       "isp": {
                         "type": "string",
                         "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                      },
-                      "enableIPv6": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Indicates whether an IPv6 address can be used."
                       }
                     },
                     "required": [
@@ -2465,12 +2657,15 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                   },
                   "redirectHttpToHttps": {
-                    "type": "boolean",
+                    "type": [
+                      "boolean",
+                      "string"
+                    ],
                     "default": false,
-                    "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                    "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -2626,6 +2821,96 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                  },
+                  "beianContentType": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 24,
+                    "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                  },
+                  "accessControlRules": {
+                    "type": "array",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "items": {
+                      "title": "accessControlRule",
+                      "type": "object",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "minLength": 0,
+                          "description": "An optional ID for the access control rule."
+                        },
+                        "conditions": {
+                          "type": "object",
+                          "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                          "properties": {
+                            "scheme": {
+                              "type": "string",
+                              "enum": [
+                                "https",
+                                "http"
+                              ],
+                              "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                            },
+                            "hostname": {
+                              "type": "string",
+                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                            },
+                            "uri": {
+                              "type": "string",
+                              "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                              "maxLength": 500
+                            },
+                            "serverRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientIpRange": {
+                              "type": "array",
+                              "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 2
+                              }
+                            }
+                          }
+                        },
+                        "action": {
+                          "type": "object",
+                          "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                            },
+                            "message": {
+                              "type": "string",
+                              "maxLength": 200,
+                              "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "conditions",
+                        "action"
+                      ]
+                    }
                   }
                 }
               },
@@ -2882,12 +3167,15 @@
                       "hasBeian": {
                         "type": "boolean",
                         "default": false,
-                        "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                        "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                       },
                       "redirectHttpToHttps": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": false,
-                        "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                        "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                       },
                       "origins": {
                         "type": "array",
@@ -3043,6 +3331,96 @@
                         "type": "boolean",
                         "default": false,
                         "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                      },
+                      "beianContentType": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 24,
+                        "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                      },
+                      "accessControlRules": {
+                        "type": "array",
+                        "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                        "items": {
+                          "title": "accessControlRule",
+                          "type": "object",
+                          "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "maxLength": 60,
+                              "minLength": 0,
+                              "description": "An optional ID for the access control rule."
+                            },
+                            "conditions": {
+                              "type": "object",
+                              "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                              "properties": {
+                                "scheme": {
+                                  "type": "string",
+                                  "enum": [
+                                    "https",
+                                    "http"
+                                  ],
+                                  "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                                },
+                                "hostname": {
+                                  "type": "string",
+                                  "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                                },
+                                "uri": {
+                                  "type": "string",
+                                  "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                                  "maxLength": 500
+                                },
+                                "serverRegions": {
+                                  "type": "array",
+                                  "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "clientRegions": {
+                                  "type": "array",
+                                  "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "clientIpRange": {
+                                  "type": "array",
+                                  "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                                  "items": {
+                                    "type": "string",
+                                    "maxLength": 2
+                                  }
+                                }
+                              }
+                            },
+                            "action": {
+                              "type": "object",
+                              "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                              "required": [
+                                "status"
+                              ],
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "maxLength": 200,
+                                  "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "conditions",
+                            "action"
+                          ]
+                        }
                       }
                     }
                   }
@@ -3538,7 +3916,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created that uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -3592,7 +3970,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -3607,7 +3985,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -3627,6 +4005,11 @@
                               "type": "string",
                               "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                               "example": "domain.com"
+                            },
+                            "enableIPv6": {
+                              "type": "boolean",
+                              "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                              "default": "true"
                             }
                           },
                           "required": [
@@ -3636,11 +4019,6 @@
                         "isp": {
                           "type": "string",
                           "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                        },
-                        "enableIPv6": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Indicates whether an IPv6 address can be used."
                         }
                       },
                       "required": [
@@ -3671,9 +4049,9 @@
                           "type": "deliver",
                           "by": [
                             "standard"
-                          ]
-                        },
-                        "enableIPv6": true
+                          ],
+                          "enableIPv6": true
+                        }
                       }
                     ]
                   }
@@ -10999,7 +11377,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -14508,7 +14886,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access, which allows updates to objects like properties.",
+        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access which allows updates to objects like properties.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -17388,7 +17766,7 @@
                     },
                     "ipWhiteList": {
                       "type": "array",
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
                       }
@@ -18109,7 +18487,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma-separated list of products that can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
+            "description": "Comma-separated list of products which can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
           },
           {
             "schema": {
@@ -18143,7 +18521,7 @@
             },
             "in": "query",
             "name": "regionalOffices",
-            "description": "Comma-separated list of regional offices of customers to return. A case-insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
+            "description": "Comma-separated list of regional offices of customers to return. A case insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
           }
         ]
       }
@@ -19107,6 +19485,11 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "allowProduction": {
+                    "type": "boolean",
+                    "default": "false",
+                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted."
                   }
                 },
                 "required": [
@@ -19145,16 +19528,7 @@
           },
           "description": "The request body contains the service quota settings for the customer."
         },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "customerId",
-            "description": "ID of a customer. It can be <i>me</i> to return the caller's own service quota."
-          }
-        ]
+        "parameters": []
       },
       "parameters": [],
       "get": {
@@ -20383,6 +20757,70 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The request is forbidden. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Access denied": {
+                    "value": {
+                      "code": "AccessDenied",
+                      "message": "The serviceQuotaId is not for a child customer of the caller."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Has certificate in production": {
+                    "value": {
+                      "code": "HasCertificateInProduction",
+                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has edge hostname": {
+                    "value": {
+                      "code": "HasEdgeHostname",
+                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has property in production": {
+                    "value": {
+                      "code": "HasPropertyInProduction",
+                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "delete-cdn-serviceQuotas-serviceQuotaId",
@@ -20403,7 +20841,7 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version that is immutable. You can choose to deploy any version to staging or production.   If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
     },
     {
       "name": "Property Management",
