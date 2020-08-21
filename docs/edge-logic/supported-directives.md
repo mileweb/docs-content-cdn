@@ -85,7 +85,7 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### `custom_log_field`
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
@@ -213,7 +213,7 @@ This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/n
 
 ### `origin_fast_route`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_fast_route on|off;` <br/>
 **Default**: `origin_fast_route off;` <br/>
@@ -223,7 +223,7 @@ This directive enables a fast route to be used to access the origin. It is power
 
 ### `origin_follow_redirect`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_follow_redirect;` <br/>
 **Default**: - <br/>
@@ -405,7 +405,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Oct 2020).
+Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020).
 
 ### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
 
@@ -515,7 +515,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 ### `realtime_log_sample_rate`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge">ETA July 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `realtime_log_sample_rate {sample rate};` <br/>
 **Default:** none <br/>
@@ -582,7 +582,7 @@ Defines an expression for which the MD5 hash value will be computed and compared
 
 ### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)
 
-<span class="badge">standard</span>
+<span class="badge dark">advanced</span>
 
 Defines a secret word used to check authenticity of requested links. No change to the public version.
 
@@ -596,11 +596,22 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 <span class="badge">standard</span>
 
+**Contexts:** http, server, ~~location~~
+
+
+Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
+* We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
+* CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
+
+### `slice_ignore_etag`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax:** `slice_ignore_etag on/off;` <br/>
+**Default:** `slice_ignore_etag off;` <br/>
 **Contexts:** http, server
 
-
-Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to follow origin’s redirection. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`.
-For this directive to work correctly, the origin should support HTTP status 206 for ranged requests.
+This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
 
 ### `sorted_querystring_filter_parameter`
 
