@@ -185,7 +185,7 @@ Specifies that a given location can be used for internal requests only. No chang
 
 <span class="badge">standard</span>
 
-**Default**: `limit_rate 4m;` <br/>
+**Default**: `limit_rate 2m;` <br/>
 
 Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 2MByte/s.
 
