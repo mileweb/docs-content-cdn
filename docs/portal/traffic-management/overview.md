@@ -14,6 +14,6 @@ In the left pane, click **Traffic Management** to see a page with a list of the 
 | 4            | The button to [create a new edge hostname](</docs/portal/traffic-management/creating-edge-hostname.md>).    |
 
 ## Edge Hostname Actions
-Clicking the **Actions** drop-down list shows all the available actions that can be performed on edge hostnames.
+Each edge hostname has a vertical ellipsis below the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected edge hostname.
 - **Edit**: [Update](</docs/portal/traffic-management/editing-edge-hostname.md>) the selected edge hostname.
 - **Delete**: [Delete](</docs/portal/traffic-management/deleting-edge-hostname.md>) the selected edge hostname.

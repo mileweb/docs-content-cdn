@@ -84,14 +84,14 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
-### `custom_log_field`
+### [`custom_log_field`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#custom_log_field)
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
 **Context**: http, server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you [configure the format](https://docs.google.com/document/d/155m9F0oFIDXRLeFmLqbdb0gWiHAyTWB8rPLWdRVGXoI/edit#heading=h.owglsmu6p2rb) of the download log, or using our [advanced traffic analysis](https://obd.quantil.com) tool.
+This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log using our advanced traffic analysis tool. If you require this feature, contact our support team.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -99,7 +99,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 Denies access for the specified network or address. (Work in progress to make this apply only on edge.)
 
-### `enable_websocket`
+### [`enable_websocket`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#enable_websocket)
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `enable_websocket;`<br/>
@@ -115,7 +115,7 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 Defines the URI that will be shown for the specified error codes. No change to the public version. We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for error codes returned from the origin.
 
 
-### [`eval_func`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.ff3eprwz0chu)
+### [`eval_func`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#eval_func)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -201,7 +201,7 @@ Sets the initial amount of traffic after which the further transmission of a res
 
 Sets configuration depending on the request URI without query string. No change to the public version.
 
-### `origin_connect_timeout`
+### [`origin_connect_timeout`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_connect_timeout)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -211,7 +211,7 @@ Sets configuration depending on the request URI without query string. No change 
 
 This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
 
-### `origin_fast_route`
+### [`origin_fast_route`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_fast_route)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
 
@@ -221,7 +221,7 @@ This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/n
 
 This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
 
-### `origin_follow_redirect`
+### [`origin_follow_redirect`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_follow_redirect)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
 
@@ -232,7 +232,7 @@ This directive enables a fast route to be used to access the origin. It is power
 When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
 
 
-### `origin_header_modify`
+### [`origin_header_modify`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_header_modify)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -270,7 +270,7 @@ The directive is merged across different levels (http/server/location/location i
 
 Although CDN360 has hierarchical cache structure, the directive changes the header only in the origin response. 
 
-### `origin_limit_rate`
+### [`origin_limit_rate`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_limit_rate)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -280,7 +280,7 @@ Although CDN360 has hierarchical cache structure, the directive changes the head
 
 This a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed of reading the response from the origin server.
 
-### `origin_pass`
+### [`origin_pass`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_pass)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -296,7 +296,7 @@ origin_pass my_origin/abc/$uri;
 ```
 If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin.
 
-### `origin_read_timeout`
+### [`origin_read_timeout`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_read_timeout)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -307,7 +307,7 @@ If an URI is not specified, the full normalized request URI (which may have been
 This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,21] followed by ‘s’. 
 
 
-### `origin_send_timeout`
+### [`origin_send_timeout`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#origin_send_timeout)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -363,7 +363,7 @@ Defines conditions under which the response will not be taken from a cache. No c
 
 Specify the HTTPS methods whose response will be cached.
 
-### [`proxy_cache_min_age`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.geuwzglsxykl) 
+### [proxy_cache_min_age](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#proxy_cache_min_age) 
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -407,7 +407,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 Sets caching time for different response codes. Changing the public version to enable it in "if in location" (ETA: Oct 2020).
 
-### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
+### [proxy_cache_vary](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#proxy_cache_vary)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -439,7 +439,7 @@ Sets a text that should be changed in the path attribute of the `Set-Cookie` hea
 
 Sets response header fields that will not be passed to the client. No change to the public version. 
 
-### `proxy_ignore_cache_control`
+### [`proxy_ignore_cache_control`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#proxy_ignore_cache_control)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -513,7 +513,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
 
-### `realtime_log_sample_rate`
+### [`realtime_log_sample_rate`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#realtime_log_sample_rate)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge">ETA July 2020</span>
 
@@ -521,7 +521,9 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** none <br/>
 **Contexts:** http, server, location, if in location
 
-This CDN360-proprietary directive sets the sample rate of the [Real-Time Log](https://docs.google.com/document/d/1ju14e1arEPLsGFmxaYExjcdO7bwdYQ-m4h7tdbqpEZI/edit#heading=h.tbbol2vdsupw). The parameter value can be an integer in [0,65536]. 0 turns off the real time logging. Variable is supported. By default, the sample rate is set for the entire site by the `realTimeLog` field of the property JSON. Use this directive to change the sample rate or turn off real-time logging selectively for some locations.
+"This CDN360-proprietary directive sets the sample rate used by our real-time log feature, which allows requests to a CDN360 property to trigger notifications on a server of your choosing.  To configure the feature, modify the [realTimeLog field of a property](<https://docs.cdnetworks.com/cdn/apidocs#operation/createProperty>).
+
+The parameter value can be an integer in [0,65536]. 0 turns off the real time logging. Variable is supported. By default, the sample rate is set for the entire site by the `realTimeLog` field of the property JSON. Use this directive to change the sample rate or turn off real-time logging selectively for some locations.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -542,7 +544,7 @@ Rewrite the request URI when a regular expression pattern is matched. No change 
 Allows access if all (all) or at least one (any) of the ngx_http_access_module, ngx_http_auth_basic_module, ngx_http_auth_request_module, or ngx_http_auth_jwt_module modules allows access. No change to the public version. 
 
 
-### `sanitize_accept_encoding`
+### [`sanitize_accept_encoding`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#sanitize_accept_encoding)
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -602,7 +604,7 @@ Assigns a value to the specified variable. No change to the public version. In p
 Sets the size of the slice when fetching large files from the origin. <span style='background:#ffff06'>We made a change that disallows this directive in any "location" block.</span> If slice is enabled, the entire website must use the same slice size. This behavior avoids potential problems when trying to follow origin’s redirection. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is no less than `512k` and up to `512m`.
 For this directive to work correctly, the origin should support HTTP status 206 for ranged requests.
 
-### `sorted_querystring_filter_parameter`
+### [`sorted_querystring_filter_parameter`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 

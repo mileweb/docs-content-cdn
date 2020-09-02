@@ -5,7 +5,7 @@
 
 2. On the Properties page, click the ID of the property you want to edit. 
    <br><U>OR </u></br>
-   Click the **Actions** menu for the property you want to edit, and then select **Edit**.
+   Below the **Actions** column, click the vertical ellipsis for the property you want to edit, and then select **Edit**.
 
 3. From the **Version Number** drop-down list, choose the property version you want to edit. If the **Edit** button is enabled, you can click it to start editing.
 

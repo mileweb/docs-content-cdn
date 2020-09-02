@@ -6,7 +6,7 @@ After you create and validate a property version, you are ready to deploy it. In
 
 2. On the Properties page, click the ID of the property you want to deploy. 
 
-3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the drop-down list, and then click the **Deploy Configuration** button.
+3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the **Deployment Destination** drop-down list, and then click the **Deploy Configuration** button.
 
 **Note:** To view the deployment history of the property before deploying it, click the **Deployment History** button.
 
@@ -20,7 +20,7 @@ After you create and validate a property version, you are ready to deploy it. In
 
 # Undeploying a Property
 
-1. On the Properties page, click the **Actions** menu of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
+1. Below the **Actions** column on the Properties page, click the vertical ellipsis of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="900"></p>
 
@@ -28,4 +28,4 @@ After you create and validate a property version, you are ready to deploy it. In
 
 # Viewing a Property's Deployment History
 
-On the Properties page, click the **Actions** menu of the property whose deployment history you want to view, and then select **Deployment History**. The Deployment page appears, with a deployment history of the selected property.
+Below the **Actions** column on the Properties page, click the vertical ellipsis of the property whose deployment history you want to view, and then select **Deployment History**. The Deployment page appears, with a deployment history of the selected property.

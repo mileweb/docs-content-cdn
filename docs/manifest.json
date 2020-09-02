@@ -135,6 +135,10 @@
               {
                 "title": "Auto-Renew a Certificate",
                 "path": "/docs/portal/certificates/auto-renewal.md"
+              },
+              {
+                  "title": "Delete a Certificate",
+                "path": "/docs/portal/certificates/deleting-certificate.md"
               }
             ]
           },

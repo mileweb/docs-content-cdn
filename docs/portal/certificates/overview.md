@@ -23,7 +23,7 @@ The following figure shows the key elements on the page, and the table following
 |4|Drop-down list to take actions on each certificate.|
 
 ## Certificate Actions
-Clicking the **Actions** drop-down list shows all the available actions that can be performed on certificates.
+Each certificate has a vertical ellipsis below the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected certificate.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-actions.png" alt="Certificate Actions" width="900"></p>
 The actions are:
 
