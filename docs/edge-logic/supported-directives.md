@@ -185,15 +185,15 @@ Specifies that a given location can be used for internal requests only. No chang
 
 <span class="badge">standard</span>
 
-**Default**: `limit_rate 2m;` <br/>
+**Default**: `limit_rate 4m;` <br/>
 
-Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 2MByte/s.
+Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
 <span class="badge">standard</span>
 
-**Default**: `limit_rate_after 0;` <br/>
+**Default**: `limit_rate_after 4m;` <br/>
 
 Sets the initial amount of traffic (in bytes) after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
 
