@@ -181,12 +181,15 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                          "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                         },
                         "redirectHttpToHttps": {
-                          "type": "boolean",
+                          "type": [
+                            "boolean",
+                            "string"
+                          ],
                           "default": false,
-                          "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                          "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                         },
                         "origins": {
                           "type": "array",
@@ -264,7 +267,7 @@
                         "schemeInCacheKey": {
                           "type": "boolean",
                           "default": false,
-                          "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                          "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                         },
                         "tlsMaxVersion": {
                           "type": "string",
@@ -278,7 +281,7 @@
                         },
                         "loadBalancerHashKey": {
                           "type": "string",
-                          "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                          "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                           "maxLength": 100
                         },
                         "tlsCertificateId": {
@@ -342,6 +345,96 @@
                           "type": "boolean",
                           "default": false,
                           "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                        },
+                        "beianContentType": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 24,
+                          "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                        },
+                        "accessControlRules": {
+                          "type": "array",
+                          "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                          "items": {
+                            "title": "accessControlRule",
+                            "type": "object",
+                            "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "maxLength": 60,
+                                "minLength": 0,
+                                "description": "An optional ID for the access control rule."
+                              },
+                              "conditions": {
+                                "type": "object",
+                                "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                                "properties": {
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "https",
+                                      "http"
+                                    ],
+                                    "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                                  },
+                                  "hostname": {
+                                    "type": "string",
+                                    "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                                  },
+                                  "uri": {
+                                    "type": "string",
+                                    "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                                    "maxLength": 500
+                                  },
+                                  "serverRegions": {
+                                    "type": "array",
+                                    "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "clientRegions": {
+                                    "type": "array",
+                                    "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "clientIpRange": {
+                                    "type": "array",
+                                    "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                                    "items": {
+                                      "type": "string",
+                                      "maxLength": 2
+                                    }
+                                  }
+                                }
+                              },
+                              "action": {
+                                "type": "object",
+                                "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                                "required": [
+                                  "status"
+                                ],
+                                "properties": {
+                                  "status": {
+                                    "type": "string",
+                                    "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                                  },
+                                  "message": {
+                                    "type": "string",
+                                    "maxLength": 200,
+                                    "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                                  }
+                                }
+                              }
+                            },
+                            "required": [
+                              "conditions",
+                              "action"
+                            ]
+                          }
                         }
                       }
                     },
@@ -548,6 +641,12 @@
                       "code": "InvalidVersion",
                       "message": "The version number must be a positive integer."
                     }
+                  },
+                  "Invalid redirect HTTP to HTTPS": {
+                    "value": {
+                      "code": "InvalidRedirectHttpToHttps",
+                      "message": "The allowed values for redirectHttpToHttps are true, false, 302, 307 and 308."
+                    }
                   }
                 }
               }
@@ -677,12 +776,15 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                    "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                   },
                   "redirectHttpToHttps": {
-                    "type": "boolean",
+                    "type": [
+                      "boolean",
+                      "string"
+                    ],
                     "default": false,
-                    "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                    "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -760,7 +862,7 @@
                   "schemeInCacheKey": {
                     "type": "boolean",
                     "default": false,
-                    "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                    "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                   },
                   "tlsMaxVersion": {
                     "type": "string",
@@ -774,7 +876,7 @@
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
-                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
@@ -838,6 +940,96 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                  },
+                  "beianContentType": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 24,
+                    "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                  },
+                  "accessControlRules": {
+                    "type": "array",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "items": {
+                      "title": "accessControlRule",
+                      "type": "object",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "minLength": 0,
+                          "description": "An optional ID for the access control rule."
+                        },
+                        "conditions": {
+                          "type": "object",
+                          "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                          "properties": {
+                            "scheme": {
+                              "type": "string",
+                              "enum": [
+                                "https",
+                                "http"
+                              ],
+                              "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                            },
+                            "hostname": {
+                              "type": "string",
+                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                            },
+                            "uri": {
+                              "type": "string",
+                              "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                              "maxLength": 500
+                            },
+                            "serverRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientIpRange": {
+                              "type": "array",
+                              "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 2
+                              }
+                            }
+                          }
+                        },
+                        "action": {
+                          "type": "object",
+                          "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                            },
+                            "message": {
+                              "type": "string",
+                              "maxLength": 200,
+                              "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "conditions",
+                        "action"
+                      ]
+                    }
                   }
                 }
               },
@@ -1388,7 +1580,7 @@
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1403,7 +1595,7 @@
                                       "redirect",
                                       "reject"
                                     ],
-                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                                    "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                                   },
                                   "by": {
                                     "type": "array",
@@ -1423,6 +1615,11 @@
                                     "type": "string",
                                     "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                                     "example": "domain.com"
+                                  },
+                                  "enableIPv6": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
+                                    "default": "true"
                                   }
                                 },
                                 "required": [
@@ -1431,12 +1628,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                              },
-                              "enableIPv6": {
-                                "type": "boolean",
-                                "default": true,
-                                "description": "Indicates whether an IPv6 address can be used."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                               }
                             },
                             "required": [
@@ -1469,10 +1661,10 @@
                               "type": "deliver",
                               "by": [
                                 "standard"
-                              ]
+                              ],
+                              "enableIPv6": true
                             },
                             "isp": "all",
-                            "enableIPv6": true,
                             "weight": 100
                           }
                         ],
@@ -1746,7 +1938,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -1761,7 +1953,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -1781,6 +1973,11 @@
                               "type": "string",
                               "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                               "example": "domain.com"
+                            },
+                            "enableIPv6": {
+                              "type": "boolean",
+                              "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
+                              "default": "true"
                             }
                           },
                           "required": [
@@ -1789,12 +1986,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                        },
-                        "enableIPv6": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Indicates whether an IPv6 address can be used."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -1822,9 +2014,9 @@
                           "type": "deliver",
                           "by": [
                             "standard"
-                          ]
+                          ],
+                          "enableIPv6": true
                         },
-                        "enableIPv6": true,
                         "weight": 100
                       }
                     ]
@@ -1873,6 +2065,12 @@
                     "value": {
                       "code": "InvalidClientZone",
                       "message": "Invalid client region 'abc'."
+                    }
+                  },
+                  "Invalid ISP": {
+                    "value": {
+                      "code": "InvalidISP",
+                      "message": "Invalid ISP 'abcdef'."
                     }
                   }
                 }
@@ -1986,7 +2184,7 @@
                       "weight": {
                         "type": "integer",
                         "default": 100,
-                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                         "minimum": 0,
                         "maximum": 100
                       },
@@ -2001,7 +2199,7 @@
                               "redirect",
                               "reject"
                             ],
-                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                            "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                           },
                           "by": {
                             "type": "array",
@@ -2021,6 +2219,11 @@
                             "type": "string",
                             "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                             "example": "domain.com"
+                          },
+                          "enableIPv6": {
+                            "type": "boolean",
+                            "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
+                            "default": "true"
                           }
                         },
                         "required": [
@@ -2029,12 +2232,7 @@
                       },
                       "isp": {
                         "type": "string",
-                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                      },
-                      "enableIPv6": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Indicates whether an IPv6 address can be used."
+                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                       }
                     },
                     "required": [
@@ -2465,12 +2663,15 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                    "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                   },
                   "redirectHttpToHttps": {
-                    "type": "boolean",
+                    "type": [
+                      "boolean",
+                      "string"
+                    ],
                     "default": false,
-                    "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                    "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -2548,7 +2749,7 @@
                   "schemeInCacheKey": {
                     "type": "boolean",
                     "default": false,
-                    "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                    "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                   },
                   "tlsMaxVersion": {
                     "type": "string",
@@ -2562,7 +2763,7 @@
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
-                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
@@ -2626,6 +2827,96 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                  },
+                  "beianContentType": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 24,
+                    "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                  },
+                  "accessControlRules": {
+                    "type": "array",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "items": {
+                      "title": "accessControlRule",
+                      "type": "object",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "minLength": 0,
+                          "description": "An optional ID for the access control rule."
+                        },
+                        "conditions": {
+                          "type": "object",
+                          "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                          "properties": {
+                            "scheme": {
+                              "type": "string",
+                              "enum": [
+                                "https",
+                                "http"
+                              ],
+                              "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                            },
+                            "hostname": {
+                              "type": "string",
+                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                            },
+                            "uri": {
+                              "type": "string",
+                              "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                              "maxLength": 500
+                            },
+                            "serverRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientRegions": {
+                              "type": "array",
+                              "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "clientIpRange": {
+                              "type": "array",
+                              "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 2
+                              }
+                            }
+                          }
+                        },
+                        "action": {
+                          "type": "object",
+                          "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                            },
+                            "message": {
+                              "type": "string",
+                              "maxLength": 200,
+                              "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "conditions",
+                        "action"
+                      ]
+                    }
                   }
                 }
               },
@@ -2882,12 +3173,15 @@
                       "hasBeian": {
                         "type": "boolean",
                         "default": false,
-                        "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China."
+                        "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                       },
                       "redirectHttpToHttps": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": false,
-                        "description": "When set to <i>true</i>, the server will redirect  all HTTP requests to HTTPS using status code 301."
+                        "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                       },
                       "origins": {
                         "type": "array",
@@ -2965,7 +3259,7 @@
                       "schemeInCacheKey": {
                         "type": "boolean",
                         "default": false,
-                        "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                        "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                       },
                       "tlsMaxVersion": {
                         "type": "string",
@@ -2979,7 +3273,7 @@
                       },
                       "loadBalancerHashKey": {
                         "type": "string",
-                        "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                        "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                         "maxLength": 100
                       },
                       "tlsCertificateId": {
@@ -3043,6 +3337,96 @@
                         "type": "boolean",
                         "default": false,
                         "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                      },
+                      "beianContentType": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 24,
+                        "description": "If you are planning to distribute content through servers in mainland China, you will need to set the <i>hasBeian</i> field to <i>true</i> and also indicate the type of content you are distributing. Enter the value that best corresponds to your content:\n\n<table>\n<tr><th>Value</th><th>Content Type</th></tr>\n<tr><td>1</td><td>Instant Messaging</td></tr>\n<tr><td>2</td><td>Search Engine</td></tr>\n<tr><td>3</td><td>Web Portal</td></tr>\n<tr><td>4</td><td>Online Postal Service</td></tr>\n<tr><td>5</td><td>Online News</td></tr>\n<tr><td>6</td><td>Blog</td></tr>\n<tr><td>7</td><td>Advertisement</td></tr>\n<tr><td>8</td><td>Organization Web Portal</td></tr>\n<tr><td>9</td><td>Shopping</td></tr>\n<tr><td>10</td><td>Online Payment</td></tr>\n<tr><td>11</td><td>Online Bank</td></tr>\n<tr><td>12</td><td>Online Stock Market</td></tr>\n<tr><td>13</td><td>Online Gaming</td></tr>\n<tr><td>14</td><td>Online Music</td></tr>\n<tr><td>15</td><td>Online Movie</td></tr>\n<tr><td>16</td><td>Online Picture</td></tr>\n<tr><td>17</td><td>Software Download</td></tr>\n<tr><td>18</td><td>Job Hunting</td></tr>\n<tr><td>19</td><td>Online Dating</td></tr>\n<tr><td>20</td><td>Online Real Property</td></tr>\n<tr><td>21</td><td>Online Education</td></tr>\n<tr><td>22</td><td>Web Design</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>Others</td></tr>\n</table>"
+                      },
+                      "accessControlRules": {
+                        "type": "array",
+                        "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                        "items": {
+                          "title": "accessControlRule",
+                          "type": "object",
+                          "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "maxLength": 60,
+                              "minLength": 0,
+                              "description": "An optional ID for the access control rule."
+                            },
+                            "conditions": {
+                              "type": "object",
+                              "description": "Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.",
+                              "properties": {
+                                "scheme": {
+                                  "type": "string",
+                                  "enum": [
+                                    "https",
+                                    "http"
+                                  ],
+                                  "description": "Indicates whether the incoming request uses HTTP or HTTPS."
+                                },
+                                "hostname": {
+                                  "type": "string",
+                                  "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                                },
+                                "uri": {
+                                  "type": "string",
+                                  "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                                  "maxLength": 500
+                                },
+                                "serverRegions": {
+                                  "type": "array",
+                                  "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, \"US\" to represent \"United States of America\".",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "clientRegions": {
+                                  "type": "array",
+                                  "description": "An array of <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, \"CN\" to represent \"China\".",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "clientIpRange": {
+                                  "type": "array",
+                                  "description": "Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.",
+                                  "items": {
+                                    "type": "string",
+                                    "maxLength": 2
+                                  }
+                                }
+                              }
+                            },
+                            "action": {
+                              "type": "object",
+                              "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
+                              "required": [
+                                "status"
+                              ],
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "maxLength": 200,
+                                  "description": "If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field's value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client."
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "conditions",
+                            "action"
+                          ]
+                        }
                       }
                     }
                   }
@@ -3375,7 +3759,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "Returns results in sorted order"
+            "description": "Returns results in sorted order."
           },
           {
             "schema": {
@@ -3538,7 +3922,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created that uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -3592,7 +3976,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\":     <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -3607,7 +3991,7 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\".  Up to one \"reject\" action is allowed for each client zone.\n"
+                              "description": "Defines the action taken for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
                             },
                             "by": {
                               "type": "array",
@@ -3627,6 +4011,11 @@
                               "type": "string",
                               "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
                               "example": "domain.com"
+                            },
+                            "enableIPv6": {
+                              "type": "boolean",
+                              "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
+                              "default": "true"
                             }
                           },
                           "required": [
@@ -3635,12 +4024,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
-                        },
-                        "enableIPv6": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Indicates whether an IPv6 address can be used."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -3671,9 +4055,9 @@
                           "type": "deliver",
                           "by": [
                             "standard"
-                          ]
-                        },
-                        "enableIPv6": true
+                          ],
+                          "enableIPv6": true
+                        }
                       }
                     ]
                   }
@@ -4051,7 +4435,7 @@
                   },
                   "shareWith": {
                     "type": "array",
-                    "description": "This field is available to resellers only. It is associated with the <i>sharingMethod</i> field and is only used if the value of <i>sharingMethod</i> is \"some\".  Enter a list of customer IDs.",
+                    "description": "This field is available to resellers only. It is associated with the <i>sharingMethod</i> field and is used only if the value of <i>sharingMethod</i> is \"some\".  Enter a list of customer IDs.",
                     "items": {
                       "type": "integer"
                     }
@@ -4145,7 +4529,7 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                   }
                 },
                 "required": [
@@ -4307,7 +4691,7 @@
                           },
                           "forceRenew": {
                             "type": "boolean",
-                            "description": "Setting the value to true requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                            "description": "Setting the value to true requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                           }
                         }
                       }
@@ -4667,7 +5051,7 @@
                     },
                     "forceRenew": {
                       "type": "boolean",
-                      "description": "A value of <i>true</i> requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                      "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                     }
                   },
                   "required": [
@@ -4966,7 +5350,7 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                   }
                 }
               },
@@ -5549,7 +5933,7 @@
             },
             "in": "query",
             "name": "propertyId",
-            "description": "Only return validation tasks associated with a specific property ID."
+            "description": "Return validation tasks associated only with a specific property ID."
           },
           {
             "schema": {
@@ -5557,7 +5941,7 @@
             },
             "in": "query",
             "name": "propertyVersion",
-            "description": "Only return validation tasks for a particular property version.\n"
+            "description": "Return validation tasks only for a particular property version.\n"
           },
           {
             "schema": {
@@ -5568,7 +5952,7 @@
             },
             "in": "query",
             "name": "limit",
-            "description": "This indicates the maximum number of validation tasks to return."
+            "description": "Indicates the maximum number of validation tasks to return."
           },
           {
             "schema": {
@@ -6189,7 +6573,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Name of the deployment task"
+                    "description": "Name of the deployment task."
                   },
                   "target": {
                     "type": "string",
@@ -6378,7 +6762,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "ID of the deployment task"
+          "description": "ID of the deployment task."
         }
       ],
       "get": {
@@ -6396,7 +6780,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "description": "Name of the deployment task"
+                      "description": "Name of the deployment task."
                     },
                     "submissionTime": {
                       "type": "string",
@@ -6588,7 +6972,7 @@
     },
     "/cdn/stagingServers": {
       "get": {
-        "summary": "Query list of staging servers.",
+        "summary": "Query list of staging servers",
         "tags": [
           "Deployment Management"
         ],
@@ -7537,7 +7921,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -7929,7 +8313,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -8314,7 +8698,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
             "required": true
           },
           {
@@ -8701,7 +9085,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -9293,7 +9677,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -9679,7 +10063,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -10331,7 +10715,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -10639,7 +11023,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -10999,7 +11383,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "An object which can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -11103,7 +11487,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -11495,7 +11879,7 @@
                       "configuration",
                       "operation"
                     ],
-                    "description": "This summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>"
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>"
                   },
                   "comments": {
                     "type": "string",
@@ -11691,7 +12075,7 @@
               }
             }
           },
-          "description": "The request body is used to specify which files and directories are purged, the type of purge to do, and what environment is affected. To ensure that all variations of a file are purged, put the file path into the <i>dirUrls</i> list. If a file has multiple copies cached to to the origin's Vary header, you must also purge it by putting the file path into the <i>dirUrls</i> list.\n\n\n"
+          "description": "The request body is used to specify which files and directories are purged, the type of purge to do, and what environment is affected. To ensure that all variations of a file are purged, put the file path into the <i>dirUrls</i> list. If a file has multiple copies cached to to the origin's Vary header, you must also purge it by putting the file path into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
         }
       },
       "get": {
@@ -11888,7 +12272,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339 date indicating the beginning of the time period. It must be in UTC time, for example, \" 2019-11-01T01:00:00Z\"."
+            "description": "RFC 3339 date indicating the beginning of the time period. It must be in UTC time, for example, \"2019-11-01T01:00:00Z\"."
           },
           {
             "schema": {
@@ -11898,7 +12282,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. It must be in UTC time, for example, \" 2019-11-01T01:00:00Z\"."
+            "description": "RFC 3339 date indicating the end of the time period. It must be in UTC time, for example, \"2019-11-01T01:00:00Z\"."
           },
           {
             "schema": {
@@ -12604,7 +12988,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "description": "This summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>",
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>",
                     "enum": [
                       "client",
                       "configuration",
@@ -13640,7 +14024,7 @@
             },
             "in": "header",
             "name": "On-Behalf-Of",
-            "description": "If you are a reseller, you can use this header to specify the ID of a child customer. This will result in the new user account created for the child customer."
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer. This will result in a new user account being created for the child customer."
           }
         ]
       },
@@ -14508,7 +14892,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access, which allows updates to objects like properties.",
+        "description": "Create an API account that can be used to call CDN360 APIs.  You can opt to give read-only access or operator access which allows updates to objects like properties.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -15627,7 +16011,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
             "required": true
           }
         ],
@@ -16170,6 +16554,14 @@
             "in": "query",
             "name": "sortOrder",
             "description": "Order of ISPs returned. Use 'asc' for ascending order or 'desc' for descending order."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "regionCode",
+            "description": "Limit returned ISPs to those operating in a particular region. The value of <i>regionCode</i> should be one of the codes representing a region returned by the <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">client regions API</a>."
           }
         ]
       }
@@ -17388,7 +17780,7 @@
                     },
                     "ipWhiteList": {
                       "type": "array",
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"] which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
                       "items": {
                         "type": "string"
                       }
@@ -18109,7 +18501,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma-separated list of products that can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
+            "description": "Comma-separated list of products which can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
           },
           {
             "schema": {
@@ -18143,7 +18535,7 @@
             },
             "in": "query",
             "name": "regionalOffices",
-            "description": "Comma-separated list of regional offices of customers to return. A case-insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
+            "description": "Comma-separated list of regional offices of customers to return. A case insensitive search for the regional offices will be done.  You can specify a value ending with an asterisk character, '*', in which case all customers whose regional offices begin with the preceding characters will be returned."
           }
         ]
       }
@@ -18254,13 +18646,21 @@
             "in": "query",
             "name": "sortOrder",
             "description": "Order of client regions returned. Use 'asc' for ascending order or 'desc' for descending order."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ispCode",
+            "description": "Limit the returned regions to those where an ISP operates. The value should be one of the ISP codes returned by the <a href=\"#operation/get-cdn-edgeHostnames-isps\">ISPs API</a>."
           }
         ]
       }
     },
     "/ngadmin/apicalls": {
       "get": {
-        "summary": "Retrieve a list of API calls that have been made.",
+        "summary": "Retrieve a list of API calls that have been made",
         "tags": [
           "API Call History"
         ],
@@ -19107,6 +19507,11 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "allowProduction": {
+                    "type": "boolean",
+                    "default": "false",
+                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted."
                   }
                 },
                 "required": [
@@ -19145,16 +19550,7 @@
           },
           "description": "The request body contains the service quota settings for the customer."
         },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "customerId",
-            "description": "ID of a customer. It can be <i>me</i> to return the caller's own service quota."
-          }
-        ]
+        "parameters": []
       },
       "parameters": [],
       "get": {
@@ -20383,10 +20779,633 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The request is forbidden. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Access denied": {
+                    "value": {
+                      "code": "AccessDenied",
+                      "message": "The serviceQuotaId is not for a child customer of the caller."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Has certificate in production": {
+                    "value": {
+                      "code": "HasCertificateInProduction",
+                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has edge hostname": {
+                    "value": {
+                      "code": "HasEdgeHostname",
+                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has property in production": {
+                    "value": {
+                      "code": "HasPropertyInProduction",
+                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "delete-cdn-serviceQuotas-serviceQuotaId",
         "description": "This API allows a reseller to delete a child customer's service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
+      }
+    },
+    "/cdn/report/fastOriginReq": {
+      "post": {
+        "summary": "Get origin fast route requests",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "reportResponse",
+                  "type": "object",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "fast route origin requests",
+                      "dataUnit": "counts",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2020-08-25T08:00:00Z",
+                          "data": 123
+                        },
+                        {
+                          "timestamp": "2020-08-26T08:00:00Z",
+                          "data": 1145
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  },
+                  "Invalid protocol": {
+                    "value": {
+                      "code": "InvalidProtocol",
+                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-fastOriginReq",
+        "description": "Return the number of requests to your origin server that are using our <a href=\"cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>\n",
+            "name": "Report-Range"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> Your startdate may be rounded down to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data beginning 2019-09-05T03:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "required": true,
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "protocol",
+            "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "reportfilters",
+                "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "x-tags": [
+                  "Reports"
+                ],
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "enum": [
+                          "standard",
+                          "premium",
+                          "premium+",
+                          "ultra"
+                        ],
+                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
+                    "enum": [
+                      "hostnames",
+                      "serverGroups"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "mydomain.com"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cdn/report/fastOriginVol": {
+      "post": {
+        "summary": "Get origin fast route traffic volume",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "default": "megabytes",
+                      "description": "Unit of measurement."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points for the time period include the upload and download traffic.",
+                      "items": {
+                        "type": "object",
+                        "description": "Describes upload and download traffic for a particular timestamp.",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "dataUp": {
+                            "type": "number",
+                            "description": "Indicates the amount of traffic in megabytes uploaded to the origin using the fast route feature.",
+                            "default": 0,
+                            "minimum": 0
+                          },
+                          "dataDown": {
+                            "type": "number",
+                            "description": "Indicates the amount of traffic in megabytes downloaded from the origin using the fast route feature.",
+                            "default": 0,
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "timestamp",
+                          "dataUp",
+                          "dataDown"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName",
+                    "dataUnit"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "fast route origin volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2020-08-25T08:00:00Z",
+                          "dataUp": 123,
+                          "dataDown": 4567
+                        },
+                        {
+                          "timestamp": "2020-08-26T08:00:00Z",
+                          "dataUp": 1145,
+                          "dataDown": 8901
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  },
+                  "Invalid protocol": {
+                    "value": {
+                      "code": "InvalidProtocol",
+                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-fastOriginVol",
+        "description": "Return the traffic to your origin server that uses our <a href=\"cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>\n"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> Your startdate may be rounded down to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data beginning 2019-09-05T03:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "protocol",
+            "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "reportfilters",
+                "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "x-tags": [
+                  "Reports"
+                ],
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "enum": [
+                          "standard",
+                          "premium",
+                          "premium+",
+                          "ultra"
+                        ],
+                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
+                    "enum": [
+                      "hostnames",
+                      "serverGroups"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "mydomain.com"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -20396,14 +21415,14 @@
       "APIKey": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to CDNetworks' platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall =\"curl -i --url '${API_SERVER}/cdnapi/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall =\"curl -i --url '${API_SERVER}/cdnapi/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
       }
     }
   },
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version that is immutable. You can choose to deploy any version to staging or production.   If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
     },
     {
       "name": "Property Management",
