@@ -39,7 +39,7 @@
         "heading": true,
         "routes": [
           {
-            "title": "Accessing Portal",
+            "title": "Accessing the Portal",
             "routes": [
               {
                 "title": "Logging-In",
@@ -135,6 +135,10 @@
               {
                 "title": "Auto-Renew a Certificate",
                 "path": "/docs/portal/certificates/auto-renewal.md"
+              },
+              {
+                  "title": "Delete a Certificate",
+                "path": "/docs/portal/certificates/deleting-certificate.md"
               }
             ]
           },

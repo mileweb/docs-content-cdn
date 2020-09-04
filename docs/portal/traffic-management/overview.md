@@ -1,6 +1,6 @@
 # Manage Traffic with Edge Hostnames
 
-When a content delivery network is not used, your service hostname should always resolve to the IP address of the server hosting the service. To start acceleration with CDN360, end user traffic must be directed to the CDN360 edge servers. This can be done by creating a CNAME record with your DNS service provider that points the end user service hostname to a CDN360 "edge hostname" you create. You can maintain multiple edge hostnames in your account for different traffic management requirements. Each edge hostname can be configured with sophisticated policies to handle end user requests based on their geographic location and ISP. These policies also allow you to control the trade-off between service performance and cost.
+When a content delivery network is not used, your service hostname should always resolve to the IP address of the server hosting the service. <p>To start acceleration with CDN360, end user traffic must be directed to the CDN360 edge servers. This can be done by creating a CNAME record with your DNS service provider that points the end user service hostname to a CDN360 "edge hostname" you create. You can maintain multiple edge hostnames in your account for different traffic management requirements. Each edge hostname can be configured with sophisticated policies to handle end user requests based on their geographic location and ISP. These policies also allow you to control the trade-off between service performance and cost.
 
 In the left pane, click **Traffic Management** to see a page with a list of the edge hostnames in your account. The following figure shows the key elements on the page, and the table following the figure describes them.
 
@@ -14,6 +14,6 @@ In the left pane, click **Traffic Management** to see a page with a list of the 
 | 4            | The button to [create a new edge hostname](</docs/portal/traffic-management/creating-edge-hostname.md>).    |
 
 ## Edge Hostname Actions
-Clicking the **Actions** drop-down list shows all the available actions that can be performed on edge hostnames.
+Each edge hostname has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected edge hostname.
 - **Edit**: [Update](</docs/portal/traffic-management/editing-edge-hostname.md>) the selected edge hostname.
 - **Delete**: [Delete](</docs/portal/traffic-management/deleting-edge-hostname.md>) the selected edge hostname.
