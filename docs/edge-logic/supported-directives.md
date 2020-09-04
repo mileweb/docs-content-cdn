@@ -85,7 +85,7 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### [`custom_log_field`](https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives#custom_log_field)
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow">ETA: Aug 2020</span>
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow"></span>
 =======
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>

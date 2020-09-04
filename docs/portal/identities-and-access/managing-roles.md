@@ -1,7 +1,10 @@
 # Managing Roles
+
+A role is a collection of one or more permissions that can be performed within the portal. 
+
 ## Adding a Role
 
-A role is a collection of one or more permissions that can be performed within the portal. Administrators add roles from the **Roles** tab on the Identity & Access Management page. As part of this procedure, administrators assign roles to users, which define the activities that users can perform in the portal.
+Administrators add roles from the **Roles** tab on the Identity & Access Management page. As part of this procedure, administrators assign roles to users, which define the activities that users can perform in the portal.
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 

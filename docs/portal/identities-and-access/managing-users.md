@@ -72,7 +72,7 @@ Administrators delete users from the **Users** tab on the Identity & Access Mana
 
 Administrators suspend users from the **Users** tab on the Identity & Access Management page. Suspending a user temporarily blocks the user's access to the portal; however, the user's username, roles, password, and other settings are not deleted. Users are not notified that they have been suspended. They simply cannot log in anymore.
 
-If a user is logged in at the time of suspension, the user can continue using the portal, but cannot log in again after logging out. If a suspended user tries to log in, a message tells the user that the account is suspended and the user is directed to contact the site administrator.
+If a user is logged in at the time of suspension, the user can continue using the portal, but cannot log in again after logging out. If a suspended user tries to log in, a message states that the account is suspended and directs the user to the site administrator.
 
 The suspended user will not be able to log in to the portal until the user is reactivated.
 
