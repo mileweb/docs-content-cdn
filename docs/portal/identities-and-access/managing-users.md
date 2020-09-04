@@ -33,7 +33,7 @@ Administrators edit users from the **Users** tab on the Identity & Access Manage
 
 2. With the **Users** tab of the Identity & Access Management page displayed, click the ID of the user you want to edit. 
    <br><U>OR </u></br>
-    Below the **Actions** column, click the vertical ellipsis for the user you want to edit, and then select **Edit**.
+    In the **Actions** column, click the vertical ellipsis for the user you want to edit, and then select **Edit**.
    
 **Tip:** Use the filter at the top left of the page to filter users.</ul>
 
@@ -62,7 +62,7 @@ Administrators delete users from the **Users** tab on the Identity & Access Mana
 
     <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
 
-2. Below the **Actions** column on the Identity & Access Management page, click the vertical ellipsis of the user you want to delete, and then select **Delete**.
+2. In the **Actions** column on the Identity & Access Management page, click the vertical ellipsis of the user you want to delete, and then select **Delete**.
    
 **Tip:** Use the filter at the top left of the page to filter users.
 
@@ -82,7 +82,7 @@ The suspended user will not be able to log in to the portal until the user is re
 
 2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:<br>
 
-   - Below the **Actions** column, click the vertical ellipsis for the user you want to suspend, and then select **Suspend**. When prompted to suspend the user, click **OK**.<br><br>
+   - In the **Actions** column, click the vertical ellipsis for the user you want to suspend, and then select **Suspend**. When prompted to suspend the user, click **OK**.<br><br>
    - To view the user's details before suspension, click the ID of the user you want to suspend. Review the user details, and then click the **Suspend** button next to the **Status** field followed by the **Save** button at the top right of the form. When prompted to update the user, click **OK**.</br></br>
 
 <p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-suspend.png" alt="suspend button" width="900"></p>
@@ -97,7 +97,7 @@ From the **Users** tab on the Identity & Access Management page, administrators 
 
 2. With the **Users** tab of the Identity & Access Management page displayed, perform one of the following steps:
 
-<ul><ul><li>Below the <strong>Actions</strong> column, click the vertical ellipsis for suspended user you want to reactivate, and then select <strong>Activate</strong>. When prompted to activate the user, click <strong>OK</strong>.<br><br>
+<ul><ul><li>In the <strong>Actions</strong> column, click the vertical ellipsis for suspended user you want to reactivate, and then select <strong>Activate</strong>. When prompted to activate the user, click <strong>OK</strong>.<br><br>
 <li>To view the user's details before reactivation, click the ID of the user you want to activate. Review the user details, and then click the <strong>Activate</strong> button next to the <strong>Status</strong> field followed by the <strong>Save</strong> button at the top right of the form. When prompted to update the user, click <strong>OK</strong>.</br></br>
 
 <p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-activate.png" alt="activate" width="900"></p>
