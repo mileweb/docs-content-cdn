@@ -32,12 +32,12 @@ To create a property, complete the Create a Property form with required informat
 
 ## Edge Logic Wizard
 
-This wizard can be used to create an initial version of the edge logic. It supports some of the most basic cache configurations. You can modify the generated edge logic code to add complicated behaviors.
+This wizard can be used to create an initial version of the edge logic. It supports some of the most basic cache configurations. You can modify the generated edge logic code to add complicated behaviors to suit your requirements.
 <p align=center><img src="/docs/resources/images/edge-configurations/property-edge-logic-wizard.png" alt="Edge Logic Wizard" width="600"></p>
 
 ## TLS Settings
 
-This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate. The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
+This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate. It also allows you to downgrade the protocol from HTTPS to HTTP when accessing the origin, although doing so may expose you to security risks. The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
 
 **Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
 
