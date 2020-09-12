@@ -85,8 +85,8 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### `custom_log_field`
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span> <span class="badge yellow"></span>
-=======
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
@@ -101,6 +101,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 Denies access for the specified network or address. (Work in progress to make this apply only on edge.)
 
 ### `enable_websocket`
+
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `enable_websocket;`<br/>
