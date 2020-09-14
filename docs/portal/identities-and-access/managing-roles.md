@@ -1,7 +1,10 @@
 # Managing Roles
+
+A role is a collection of one or more permissions that can be performed within the portal. 
+
 ## Adding a Role
 
-A role is a collection of one or more permissions that can be performed within the portal. Administrators add roles from the **Roles** tab on the Identity & Access Management page. As part of this procedure, administrators assign roles to users, which define the activities that users can perform in the portal.
+Administrators add roles from the **Roles** tab on the Identity & Access Management page. As part of this procedure, administrators assign roles to users, which define the activities that users can perform in the portal.
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
@@ -38,7 +41,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 3. From the Roles page, click the name of the role you want to edit, and then click **Edit** at the top right of the Role Details page. 
    <br><U>OR </u></br>
-   Click the **Actions** menu for the role you want to edit, and then select **Edit**.
+   In the **Actions** column, click the vertical ellipsis for the role you want to edit, and then select **Edit**.
 
 4. Make your changes in the Edit Role form (for assistance, see the table above). Required fields are denoted by an asterisk (\*).
 
@@ -56,7 +59,7 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 
 3. Delete one or more roles:<br>
 
-<ul><ul><li>To delete one role from the Roles page, click the <strong>Actions</strong> menu for a role, and then select <strong>Delete</strong>.</ul><br>
+<ul><ul><li>To delete one role from the Roles page, click a role's vertical ellipsis in the <strong>Actions</strong> column, and then select <strong>Delete</strong>.</ul><br>
 
 <ul><u>OR</u></ul></ul>
 

@@ -85,13 +85,14 @@ Sets the request variable to the given value after the authorization request com
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
 ### `custom_log_field`
+
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
 **Context**: http, server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you [configure the format](https://docs.google.com/document/d/155m9F0oFIDXRLeFmLqbdb0gWiHAyTWB8rPLWdRVGXoI/edit#heading=h.owglsmu6p2rb) of the download log, or using our [advanced traffic analysis](https://obd.quantil.com) tool.
+This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log using our advanced traffic analysis tool. If you require this feature, contact our support team.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -100,6 +101,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 Denies access for the specified network or address. (Work in progress to make this apply only on edge.)
 
 ### `enable_websocket`
+
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `enable_websocket;`<br/>
@@ -115,7 +117,7 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 Defines the URI that will be shown for the specified error codes. No change to the public version. We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for error codes returned from the origin.
 
 
-### [`eval_func`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.ff3eprwz0chu)
+### `eval_func`
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -185,15 +187,17 @@ Specifies that a given location can be used for internal requests only. No chang
 
 <span class="badge">standard</span>
 
-**Default**: `limit_rate 2m;` <br/>
+**Default**: `limit_rate 4m;` <br/>
 
-Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 2MByte/s.
+Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
 <span class="badge">standard</span>
 
-Sets the initial amount of traffic after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
+**Default**: `limit_rate_after 4m;` <br/>
+
+Sets the initial amount of traffic (in bytes) after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
 
 ### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
@@ -363,7 +367,7 @@ Defines conditions under which the response will not be taken from a cache. No c
 
 Specify the HTTPS methods whose response will be cached.
 
-### [`proxy_cache_min_age`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.geuwzglsxykl) 
+### proxy_cache_min_age 
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -407,7 +411,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020).
 
-### [`proxy_cache_vary`](https://docs.google.com/document/d/1T4NVOiiv_OlYA6nzDcoTm7MpQMBz5E1nr-W78_7GNiQ/edit#bookmark=id.mu0spq8pii23)
+### proxy_cache_vary
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
@@ -521,7 +525,9 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** none <br/>
 **Contexts:** http, server, location, if in location
 
-This CDN360-proprietary directive sets the sample rate of the [Real-Time Log](https://docs.google.com/document/d/1ju14e1arEPLsGFmxaYExjcdO7bwdYQ-m4h7tdbqpEZI/edit#heading=h.tbbol2vdsupw). The parameter value can be an integer in [0,65536]. 0 turns off the real time logging. Variable is supported. By default, the sample rate is set for the entire site by the `realTimeLog` field of the property JSON. Use this directive to change the sample rate or turn off real-time logging selectively for some locations.
+"This CDN360-proprietary directive sets the sample rate used by our real-time log feature, which allows requests to a CDN360 property to trigger notifications on a server of your choosing.  To configure the feature, modify the [realTimeLog field of a property](<https://docs.cdnetworks.com/cdn/apidocs#operation/createProperty>).
+
+The parameter value can be an integer in [0,65536]. 0 turns off the real time logging. Variable is supported. By default, the sample rate is set for the entire site by the `realTimeLog` field of the property JSON. Use this directive to change the sample rate or turn off real-time logging selectively for some locations.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
