@@ -4,7 +4,7 @@ A digital certificate allows your website to exchange data securely over the Int
 
 ## Certificates Page 
 
-Certificates are managed from the Certificates page. To display this page, click **Certificates** in the left pane. All certificates are versioned in CDN360. Once a version is saved, it cannot be changed. If you need to update an expiring certificate, you just create a new version and deploy it to replace the old one. At any time, only one version of each certificate can be deployed into the staging or production environment. 
+Certificates are managed from the Certificates page. To display this page, click **Certificates** in the left pane. All certificates are versioned in CDN360. After a version is saved, it cannot be changed. If you need to update an expiring certificate, you just create a new version and deploy it to replace the old one. At any time, only one version of each certificate can be deployed into the staging or production environment. 
 
 The **Ownership** field on the Certificates page shows whether a certificate is shared or owned.
 
@@ -23,7 +23,7 @@ The following figure shows the key elements on the page, and the table following
 |4|Drop-down list to take actions on each certificate.|
 
 ## Certificate Actions
-Clicking the **Actions** drop-down list shows all the available actions that can be performed on certificates.
+Each certificate has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected certificate.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-actions.png" alt="Certificate Actions" width="900"></p>
 The actions are:
 
