@@ -181,7 +181,7 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
+                          "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                         },
                         "redirectHttpToHttps": {
                           "type": [
@@ -205,7 +205,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -267,7 +267,7 @@
                         "schemeInCacheKey": {
                           "type": "boolean",
                           "default": false,
-                          "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                          "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                         },
                         "tlsMaxVersion": {
                           "type": "string",
@@ -281,7 +281,7 @@
                         },
                         "loadBalancerHashKey": {
                           "type": "string",
-                          "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                          "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                           "maxLength": 100
                         },
                         "tlsCertificateId": {
@@ -307,7 +307,7 @@
                         "allowProtocolDowngrade": {
                           "type": "boolean",
                           "default": false,
-                          "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                          "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
                         },
                         "tlsCertificateId1": {
                           "type": "number",
@@ -776,7 +776,7 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
+                    "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                   },
                   "redirectHttpToHttps": {
                     "type": [
@@ -800,7 +800,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -862,7 +862,7 @@
                   "schemeInCacheKey": {
                     "type": "boolean",
                     "default": false,
-                    "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                    "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                   },
                   "tlsMaxVersion": {
                     "type": "string",
@@ -876,7 +876,7 @@
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
-                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
@@ -902,7 +902,7 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                    "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
@@ -1618,7 +1618,7 @@
                                   },
                                   "enableIPv6": {
                                     "type": "boolean",
-                                    "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                                    "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
                                     "default": "true"
                                   }
                                 },
@@ -1628,7 +1628,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                               }
                             },
                             "required": [
@@ -1976,7 +1976,7 @@
                             },
                             "enableIPv6": {
                               "type": "boolean",
-                              "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                              "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
                               "default": "true"
                             }
                           },
@@ -1986,7 +1986,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -2065,6 +2065,12 @@
                     "value": {
                       "code": "InvalidClientZone",
                       "message": "Invalid client region 'abc'."
+                    }
+                  },
+                  "Invalid ISP": {
+                    "value": {
+                      "code": "InvalidISP",
+                      "message": "Invalid ISP 'abcdef'."
                     }
                   }
                 }
@@ -2216,7 +2222,7 @@
                           },
                           "enableIPv6": {
                             "type": "boolean",
-                            "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                            "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
                             "default": "true"
                           }
                         },
@@ -2226,7 +2232,7 @@
                       },
                       "isp": {
                         "type": "string",
-                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                       }
                     },
                     "required": [
@@ -2657,7 +2663,7 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
+                    "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                   },
                   "redirectHttpToHttps": {
                     "type": [
@@ -2681,7 +2687,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -2743,7 +2749,7 @@
                   "schemeInCacheKey": {
                     "type": "boolean",
                     "default": false,
-                    "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                    "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                   },
                   "tlsMaxVersion": {
                     "type": "string",
@@ -2757,7 +2763,7 @@
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
-                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                    "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
@@ -2783,7 +2789,7 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                    "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
@@ -3167,7 +3173,7 @@
                       "hasBeian": {
                         "type": "boolean",
                         "default": false,
-                        "description": "The value indicates if all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
+                        "description": "The value indicates whether all the hostnames in this property have Beian license on file with the Chinese government. This is required to serve this property from servers in mainland China. A value of <i>false</i> means servers outside of mainland China will be used to distribute content to visitors in China. If set to <i>true</i> you must also specify the content type in the <i>beianContentType</i> field."
                       },
                       "redirectHttpToHttps": {
                         "type": [
@@ -3191,7 +3197,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space. The address can take one of the following 3 forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nThe only allowed parameter today is “backup\", which is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\nThere should be at least one primary server defined.\nExample:\n<code>[\"www.abc.com\", \"www1.abc.com:8080\", \"www2.abc.com:880,4443 backup\"]</code>\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -3253,7 +3259,7 @@
                       "schemeInCacheKey": {
                         "type": "boolean",
                         "default": false,
-                        "description": "It specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content are known to be different for different schemes.\n"
+                        "description": "Specifies whether the scheme (“http” or “https”) should be included in the cache key. Default behavior is </i>false</i>. Set to <i>true</i> if the content is known to be different for different schemes.\n"
                       },
                       "tlsMaxVersion": {
                         "type": "string",
@@ -3267,7 +3273,7 @@
                       },
                       "loadBalancerHashKey": {
                         "type": "string",
-                        "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, and underscore _, equal sign =, dollar sign $, and sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
+                        "description": "Multiple tiers of load balancing are used in our CDN pops to distribute the client requests to different servers. We are using consistent hashing in many of those places. By default, the URL is used as the hash key, which should be good enough in most cases. Here you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header to indicate the resources. \n\nThis is an optional field. The default value is an empty string. A valid value is a string meeting the following criteria:\n<ol>\n<li>Consists of alphanumeric characters, underscore _, equal sign =, dollar sign $, and ampersand sign &.</li>\n<li>The variable names can only be in one of the following formats: $http_name, $cookie_name, or $arg_name.</li>\n<li>At least one variable must be specified. No more than three are permitted.</li>\n<li>The total length should be no more than 100 characters.</li>\n</ol>\nThe validator will treat any dollar sign and the string after it (before any = or & or $) as a variable. \n\nHere are some examples of valid values:\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>\n",
                         "maxLength": 100
                       },
                       "tlsCertificateId": {
@@ -3293,7 +3299,7 @@
                       "allowProtocolDowngrade": {
                         "type": "boolean",
                         "default": false,
-                        "description": " It can only be set to <i>true</i> if you have a “Protocol Downgrade Agreement” on file with us. This value only has an effect when the property has an attached certificate that means some client requests can use HTTPS. When this value is <i>false</i>, we require all the origins to support HTTPS. When this value is <i>true</i>, we allow origins that only support HTTP.\n"
+                        "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
                       },
                       "tlsCertificateId1": {
                         "type": "number",
@@ -3753,7 +3759,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "Returns results in sorted order"
+            "description": "Returns results in sorted order."
           },
           {
             "schema": {
@@ -4008,7 +4014,7 @@
                             },
                             "enableIPv6": {
                               "type": "boolean",
-                              "description": "Indicates whether an IPv6 address can be used. This value is only used if the client zone rule's action type is \"deliver\".",
+                              "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
                               "default": "true"
                             }
                           },
@@ -4018,7 +4024,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -4429,7 +4435,7 @@
                   },
                   "shareWith": {
                     "type": "array",
-                    "description": "This field is available to resellers only. It is associated with the <i>sharingMethod</i> field and is only used if the value of <i>sharingMethod</i> is \"some\".  Enter a list of customer IDs.",
+                    "description": "This field is available to resellers only. It is associated with the <i>sharingMethod</i> field and is used only if the value of <i>sharingMethod</i> is \"some\".  Enter a list of customer IDs.",
                     "items": {
                       "type": "integer"
                     }
@@ -4523,7 +4529,7 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                   }
                 },
                 "required": [
@@ -4685,7 +4691,7 @@
                           },
                           "forceRenew": {
                             "type": "boolean",
-                            "description": "Setting the value to true requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                            "description": "Setting the value to true requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                           }
                         }
                       }
@@ -5045,7 +5051,7 @@
                     },
                     "forceRenew": {
                       "type": "boolean",
-                      "description": "A value of <i>true</i> requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                      "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                     }
                   },
                   "required": [
@@ -5344,7 +5350,7 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
                   }
                 }
               },
@@ -5927,7 +5933,7 @@
             },
             "in": "query",
             "name": "propertyId",
-            "description": "Only return validation tasks associated with a specific property ID."
+            "description": "Return validation tasks associated only with a specific property ID."
           },
           {
             "schema": {
@@ -5935,7 +5941,7 @@
             },
             "in": "query",
             "name": "propertyVersion",
-            "description": "Only return validation tasks for a particular property version.\n"
+            "description": "Return validation tasks only for a particular property version.\n"
           },
           {
             "schema": {
@@ -5946,7 +5952,7 @@
             },
             "in": "query",
             "name": "limit",
-            "description": "This indicates the maximum number of validation tasks to return."
+            "description": "Indicates the maximum number of validation tasks to return."
           },
           {
             "schema": {
@@ -6567,7 +6573,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Name of the deployment task"
+                    "description": "Name of the deployment task."
                   },
                   "target": {
                     "type": "string",
@@ -6756,7 +6762,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "ID of the deployment task"
+          "description": "ID of the deployment task."
         }
       ],
       "get": {
@@ -6774,7 +6780,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "description": "Name of the deployment task"
+                      "description": "Name of the deployment task."
                     },
                     "submissionTime": {
                       "type": "string",
@@ -6966,7 +6972,7 @@
     },
     "/cdn/stagingServers": {
       "get": {
-        "summary": "Query list of staging servers.",
+        "summary": "Query list of staging servers",
         "tags": [
           "Deployment Management"
         ],
@@ -7915,7 +7921,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -8307,7 +8313,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -8692,7 +8698,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
             "required": true
           },
           {
@@ -9079,7 +9085,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -9671,7 +9677,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -10057,7 +10063,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -10709,7 +10715,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -11017,7 +11023,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -11481,7 +11487,7 @@
             "in": "query",
             "name": "type",
             "required": true,
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code>  means the day as defined in UTC+8 time."
           },
           {
             "schema": {
@@ -11873,7 +11879,7 @@
                       "configuration",
                       "operation"
                     ],
-                    "description": "This summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>"
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>"
                   },
                   "comments": {
                     "type": "string",
@@ -12069,7 +12075,7 @@
               }
             }
           },
-          "description": "The request body is used to specify which files and directories are purged, the type of purge to do, and what environment is affected. To ensure that all variations of a file are purged, put the file path into the <i>dirUrls</i> list. If a file has multiple copies cached to to the origin's Vary header, you must also purge it by putting the file path into the <i>dirUrls</i> list.\n\n\n"
+          "description": "The request body is used to specify which files and directories are purged, the type of purge to do, and what environment is affected. To ensure that all variations of a file are purged, put the file path into the <i>dirUrls</i> list. If a file has multiple copies cached to to the origin's Vary header, you must also purge it by putting the file path into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
         }
       },
       "get": {
@@ -12266,7 +12272,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339 date indicating the beginning of the time period. It must be in UTC time, for example, \" 2019-11-01T01:00:00Z\"."
+            "description": "RFC 3339 date indicating the beginning of the time period. It must be in UTC time, for example, \"2019-11-01T01:00:00Z\"."
           },
           {
             "schema": {
@@ -12276,7 +12282,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. It must be in UTC time, for example, \" 2019-11-01T01:00:00Z\"."
+            "description": "RFC 3339 date indicating the end of the time period. It must be in UTC time, for example, \"2019-11-01T01:00:00Z\"."
           },
           {
             "schema": {
@@ -12982,7 +12988,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "description": "This summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>",
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers.</td></tr></table>",
                     "enum": [
                       "client",
                       "configuration",
@@ -14018,7 +14024,7 @@
             },
             "in": "header",
             "name": "On-Behalf-Of",
-            "description": "If you are a reseller, you can use this header to specify the ID of a child customer. This will result in the new user account created for the child customer."
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer. This will result in a new user account being created for the child customer."
           }
         ]
       },
@@ -16005,7 +16011,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, 3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, or +12.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
             "required": true
           }
         ],
@@ -16548,6 +16554,14 @@
             "in": "query",
             "name": "sortOrder",
             "description": "Order of ISPs returned. Use 'asc' for ascending order or 'desc' for descending order."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "regionCode",
+            "description": "Limit returned ISPs to those operating in a particular region. The value of <i>regionCode</i> should be one of the codes representing a region returned by the <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">client regions API</a>."
           }
         ]
       }
@@ -18632,13 +18646,21 @@
             "in": "query",
             "name": "sortOrder",
             "description": "Order of client regions returned. Use 'asc' for ascending order or 'desc' for descending order."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ispCode",
+            "description": "Limit the returned regions to those where an ISP operates. The value should be one of the ISP codes returned by the <a href=\"#operation/get-cdn-edgeHostnames-isps\">ISPs API</a>."
           }
         ]
       }
     },
     "/ngadmin/apicalls": {
       "get": {
-        "summary": "Retrieve a list of API calls that have been made.",
+        "summary": "Retrieve a list of API calls that have been made",
         "tags": [
           "API Call History"
         ],
@@ -19394,10 +19416,6 @@
                     "type": "string",
                     "description": "ID representing the contract, used for billing."
                   },
-                  "protocolDowngradeAgreementId": {
-                    "type": "string",
-                    "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
-                  },
                   "accountManagerEmail": {
                     "type": "string",
                     "description": "An email address representing the account manager."
@@ -19502,7 +19520,6 @@
                     "customerId": "12345678",
                     "status": "active",
                     "contractId": "",
-                    "protocolDowngradeAgreementId": "",
                     "hostnameLimit": "10",
                     "edgeHostnameLimit": "10",
                     "propertyLimit": "10",
@@ -19550,7 +19567,6 @@
                       "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
                       "customerId": 10008046,
                       "contractId": "",
-                      "protocolDowngradeAgreementId": "",
                       "hostnameLimit": 13,
                       "propertyLimit": 13,
                       "certificateLimit": 11,
@@ -19587,10 +19603,6 @@
                     "contractId": {
                       "type": "string",
                       "description": "ID representing the contract, used for billing."
-                    },
-                    "protocolDowngradeAgreementId": {
-                      "type": "string",
-                      "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
                     },
                     "hostnameLimit": {
                       "type": "integer",
@@ -19700,7 +19712,6 @@
                       "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
                       "customerId": 1234567890,
                       "contractId": "",
-                      "protocolDowngradeAgreementId": "",
                       "hostnameLimit": 20,
                       "propertyLimit": 20,
                       "certificateLimit": 20,
@@ -19713,7 +19724,7 @@
                       "logConfigLimit": 20,
                       "maximumChildCustomers": 0,
                       "allowedCacheDirectives": [
-                        "slice"
+                        "secure_link"
                       ],
                       "status": "active",
                       "allowProduction": true,
@@ -19765,7 +19776,6 @@
                       "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
                       "customerId": 10008046,
                       "contractId": "",
-                      "protocolDowngradeAgreementId": "",
                       "hostnameLimit": 13,
                       "propertyLimit": 13,
                       "certificateLimit": 11,
@@ -19802,10 +19812,6 @@
                     "contractId": {
                       "type": "string",
                       "description": "ID representing the contract, used for billing."
-                    },
-                    "protocolDowngradeAgreementId": {
-                      "type": "string",
-                      "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
                     },
                     "hostnameLimit": {
                       "type": "integer",
@@ -20120,10 +20126,6 @@
                     "type": "string",
                     "description": "ID representing the contract, used for billing."
                   },
-                  "protocolDowngradeAgreementId": {
-                    "type": "string",
-                    "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
-                  },
                   "hostnameLimit": {
                     "type": "integer",
                     "description": "Maximum number of hostnames allowed in production.\n",
@@ -20279,7 +20281,6 @@
                       "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
                       "customerId": 10008046,
                       "contractId": "",
-                      "protocolDowngradeAgreementId": "",
                       "hostnameLimit": 13,
                       "propertyLimit": 13,
                       "certificateLimit": 11,
@@ -20316,10 +20317,6 @@
                     "contractId": {
                       "type": "string",
                       "description": "ID representing the contract, used for billing."
-                    },
-                    "protocolDowngradeAgreementId": {
-                      "type": "string",
-                      "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
                     },
                     "hostnameLimit": {
                       "type": "integer",
@@ -20429,7 +20426,6 @@
                       "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
                       "customerId": 1234567890,
                       "contractId": "",
-                      "protocolDowngradeAgreementId": "",
                       "hostnameLimit": 20,
                       "propertyLimit": 20,
                       "certificateLimit": 20,
@@ -20442,7 +20438,7 @@
                       "logConfigLimit": 20,
                       "maximumChildCustomers": 0,
                       "allowedCacheDirectives": [
-                        "slice"
+                        "secure_link"
                       ],
                       "status": "active",
                       "allowProduction": true,
@@ -20608,10 +20604,6 @@
                   "contractId": {
                     "type": "string",
                     "description": "ID representing the contract, used for billing."
-                  },
-                  "protocolDowngradeAgreementId": {
-                    "type": "string",
-                    "description": "ID of an agreement permitting downgrade from HTTPS to HTTP."
                   },
                   "hostnameLimit": {
                     "type": "integer",
@@ -20826,6 +20818,565 @@
         "operationId": "delete-cdn-serviceQuotas-serviceQuotaId",
         "description": "This API allows a reseller to delete a child customer's service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
       }
+    },
+    "/cdn/report/fastOriginReq": {
+      "post": {
+        "summary": "Get origin fast route requests",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "reportResponse",
+                  "type": "object",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "fast route origin requests",
+                      "dataUnit": "counts",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2020-08-25T08:00:00Z",
+                          "data": 123
+                        },
+                        {
+                          "timestamp": "2020-08-26T08:00:00Z",
+                          "data": 1145
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  },
+                  "Invalid protocol": {
+                    "value": {
+                      "code": "InvalidProtocol",
+                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-fastOriginReq",
+        "description": "Return the number of requests to your origin server that are using our <a href=\"cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>\n",
+            "name": "Report-Range"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> Your startdate may be rounded down to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data beginning 2019-09-05T03:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "required": true,
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "protocol",
+            "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "reportfilters",
+                "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "x-tags": [
+                  "Reports"
+                ],
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "enum": [
+                          "standard",
+                          "premium",
+                          "premium+",
+                          "ultra"
+                        ],
+                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
+                    "enum": [
+                      "hostnames",
+                      "serverGroups"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "mydomain.com"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cdn/report/fastOriginVol": {
+      "post": {
+        "summary": "Get origin fast route traffic volume",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "default": "megabytes",
+                      "description": "Unit of measurement."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points for the time period include the upload and download traffic.",
+                      "items": {
+                        "type": "object",
+                        "description": "Describes upload and download traffic for a particular timestamp.",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "dataUp": {
+                            "type": "number",
+                            "description": "Indicates the amount of traffic in megabytes uploaded to the origin using the fast route feature.",
+                            "default": 0,
+                            "minimum": 0
+                          },
+                          "dataDown": {
+                            "type": "number",
+                            "description": "Indicates the amount of traffic in megabytes downloaded from the origin using the fast route feature.",
+                            "default": 0,
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "timestamp",
+                          "dataUp",
+                          "dataDown"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName",
+                    "dataUnit"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "fast route origin volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2020-08-25T08:00:00Z",
+                          "dataUp": 123,
+                          "dataDown": 4567
+                        },
+                        {
+                          "timestamp": "2020-08-26T08:00:00Z",
+                          "dataUp": 1145,
+                          "dataDown": 8901
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  },
+                  "Invalid protocol": {
+                    "value": {
+                      "code": "InvalidProtocol",
+                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-fastOriginVol",
+        "description": "Return the traffic to your origin server that uses our <a href=\"cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>\n"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> Your startdate may be rounded down to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data beginning 2019-09-05T03:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  For example, <code>type=daily+8</code> means the day as defined in UTC+8 time."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "protocol",
+            "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "reportfilters",
+                "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "x-tags": [
+                  "Reports"
+                ],
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "enum": [
+                          "standard",
+                          "premium",
+                          "premium+",
+                          "ultra"
+                        ],
+                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
+                    "enum": [
+                      "hostnames",
+                      "serverGroups"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "mydomain.com"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -20834,7 +21385,7 @@
       "APIKey": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to CDNetworks' platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall =\"curl -i --url '${API_SERVER}/cdnapi/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall =\"curl -i --url '${API_SERVER}/cdnapi/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
       }
     }
   },
