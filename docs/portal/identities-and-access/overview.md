@@ -36,7 +36,7 @@ The following figure shows the key elements on the page, and the table following
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
-| 1 | Identity and access management tasks are organized into four tabs:<ul><br> <li>**Users** allows administrators to manage users. Operators and viewers are limited to seeing other portal users. This tab appears when you click **Identity & Access Management**. <li>**Roles** allows administrators to manage roles. Operators and viewers are limited to seeing roles. <li>**Audit Logs** allows administrators to manage audit logs. This tab is not available to operators and viewers. <li>**Security**   allows administrators to define security for the portal. This tab is not available to operators and viewers.|
+| 1 | Identity and access management tasks are organized into four tabs:<ul> <li>**Users** allows administrators to manage users. Operators and viewers are limited to seeing other portal users. This tab appears when you click **Identity & Access Management**. <li>**Roles** allows administrators to manage roles. Operators and viewers are limited to seeing roles. <li>**Audit Logs** allows administrators to manage audit logs. This tab is not available to operators and viewers. <li>**Security**   allows administrators to define security for the portal. This tab is not available to operators and viewers.|
 | 2 | To filter users on the **Users** tab or roles on the **Roles** tab, type characters in this box. All users or roles that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **Reset** button.|
 | 3 | Each user or role appears on a row within its respective tab.|
 | 4 | Drop-down list to take actions on the appropriate item.|
