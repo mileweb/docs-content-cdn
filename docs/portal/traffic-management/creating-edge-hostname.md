@@ -34,7 +34,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 
 5. Expand **Advanced Settings**, and then confirm or change the following field.
 
-<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="advanced settings" width="550"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="advanced settings" width="700"></p>
 
 | **Fields**      | **Description**                                              |
 | --------------- | ------------------------------------------------------------ |

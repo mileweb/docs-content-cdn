@@ -1,6 +1,6 @@
 ## An Introduction to the CDN360 Edge Logic
 
-CDN360’s proxy server is developed on top of the open-source software [NGINX](nginx.org), which is widely used to build powerful web servers and reverse proxy servers with superior performance. NGINX has its own configuration language, which is described in greater detail on their [documentation website](http://nginx.org/en/docs/).
+CDN360’s proxy server is developed on top of the open-source software [NGINX](http://nginx.org), which is widely used to build powerful web servers and reverse proxy servers with superior performance. NGINX has its own configuration language, which is described in greater detail on their [documentation website](http://nginx.org/en/docs/).
 
 Starting from 2016, CDNetworks has made significant changes to the open-source version of the software to enhance it as a CDN proxy server. One of CDN360’s main design goals is to give you as much control as possible to self-provision the service. Based on this commitment, we allow you to code directly in the NGINX language to control the proxy servers. We believe this gives you the maximum flexibility to achieve your business requirements.
 
