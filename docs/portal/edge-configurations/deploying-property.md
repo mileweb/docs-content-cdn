@@ -5,7 +5,7 @@ After you create and validate a property version, you are ready to deploy it. In
 1. In the left pane, click **Edge Configurations**. 
 
 2. On the Properties page, click the ID of the property you want to deploy.
-    <br><U>OR </u></br>
+    <br><u>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the property you want to deploy, and then select **Edit**. 
 
 3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the **Deployment Destination** drop-down list, and then click the **Deploy Configuration** button.
