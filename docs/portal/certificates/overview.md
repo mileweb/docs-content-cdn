@@ -18,7 +18,7 @@ The following figure shows the key elements on the page, and the table following
 | **Element Number**|**Description**|
 |-|-|
 |1|A search box that you can enter any keyword to filter the certificate list.|
-|2|The list of all certificates that are available to you. Click the **+** sign to see which properties are using each certificate.|
+|2|The list of all certificates that are available to you. Click the **+** sign for details about the certificate.|
 |3|The button to [create new certificates](</docs/portal/certificates/creating-certificates.md>).|
 |4|Drop-down list to take actions on each certificate.|
 
