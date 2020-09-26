@@ -20,7 +20,7 @@ To create a property, complete the Create a Property form with required informat
 | Configuration Version     | Read-only field that shows the version number of this property. By default, your first property configuration is Version 1. |
 | Description               | Add a description for this first property version. |
 | Hostnames                 | Enter one or more hostnames to be accelerated and which your end users will access. |
-| Origins                   | Origins are your servers that CDN360 accesses to fetch your content. You can specify more than one server. Click the **Add Origin To List** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
+| Origins                   | Origins are your servers that CDN360 accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
 | Edge Logic                | Write NGINX configuration code to specify how you want CDN360 to deliver content to your visitors (refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>)). You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Cache Settings dialog box.|
 | TLS Settings              | Select the [TLS client certificate settings](#tls-settings) for your property.|
 | Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact CDNetworks.|
