@@ -2,6 +2,8 @@
 
 1. In the left pane, click **Traffic Management**.
 2. Click the edge hostname you want to edit. 
+    <br><U>OR </u></br>
+  In the **Actions** column, click the vertical ellipsis for the edge hostname you want to edit, and then select **Edit**.
 3. At the top right of the page, click the **Edit** button.
 
 The Edge Hostname form appears for creating, editing, and deleting client zone rules and changing advanced settings. For more information, refer to the topics below.
