@@ -594,18 +594,19 @@
           "schema": {
             "type": "string"
           },
-          "name": "version",
+          "name": "propertyID",
           "in": "path",
           "required": true,
-          "description": "A property version. It must be an integer value >=1 or the word \"latest\", in which case the most recent version is returned."
+          "description": "ID of a property."
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "propertyID",
+          "name": "version",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "A property version. It must be an integer value >=1 or the word \"latest\", in which case the most recent version is returned."
         }
       ],
       "patch": {
@@ -1056,6 +1057,87 @@
           },
           "description": "The body consists of the property configuration you wish to set."
         },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a property version",
+        "tags": [
+          "Property Management"
+        ],
+        "responses": {
+          "204": {
+            "description": "The property version was deleted."
+          },
+          "404": {
+            "description": "Invalid property. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid property ID": {
+                    "value": {
+                      "code": "InvalidPropertyId",
+                      "message": "The specified property ID does not exist."
+                    }
+                  },
+                  "Invalid property version ": {
+                    "value": {
+                      "code": "InvalidVersion",
+                      "message": "The property version specified does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The property version could not be deleted. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Property in use": {
+                    "value": {
+                      "code": "PropertyInUse",
+                      "message": "The property version is currently deployed to staging or production and cannot be deleted. The user needs to create a deployment task to remove the property from cache servers."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-properties-propertyID-versions-version",
+        "description": "Delete a property version.",
         "parameters": [
           {
             "schema": {
@@ -5519,6 +5601,34 @@
                     "csr": {
                       "type": "string",
                       "description": "The CSR."
+                    },
+                    "latestVersion": {
+                      "type": "integer",
+                      "description": "Most recent version of the certifiate.",
+                      "minimum": 1
+                    },
+                    "ownerCustomerId": {
+                      "type": "integer",
+                      "description": "A reference to the customer that owns the certificate.",
+                      "minimum": 1
+                    },
+                    "dcvFile": {
+                      "type": "object",
+                      "description": "This field is only returned if the <i>dcv</i> query parameter is specified.",
+                      "properties": {
+                        "uri": {
+                          "type": "string",
+                          "description": "A URI that is accessible on your hostnames using the certificate. The file's content will consist of a SHA-256 hash and the domain sectigo.com. Example:\n\n<pre>\na6e96b23f9e2add3f79c2907ded1adc43961b05f6d702758a200a8ec8b4d7115\nsectigo.com\n</pre>"
+                        },
+                        "expirationTime": {
+                          "type": "string",
+                          "description": "An RFC 3339 date indicating when the file expires."
+                        }
+                      },
+                      "required": [
+                        "uri",
+                        "expirationTime"
+                      ]
                     }
                   }
                 },
@@ -5527,6 +5637,18 @@
                     "value": {
                       "certificateId": "7c034044e749c8cdeafe4a64",
                       "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIIDCTCCAfECAQAwgYgxHTAbBgkqhkiG9w0BCQEWDmFhYUBuaXguY29tLnVhMQsw\nCQYDVQQLEwJRQTEVMBMGA1UEChMMTml4c29sdXRpb25zMQswCQYDVQQHEwJLaDES\nMBAGA1UECBMJc29tZVN0YXRlMQswCQYDVQQGEwJVQTEVMBMGA1UEAxMMbXd0cmlh\nbC5pbmZvMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvzUq0sTrv/iT\nKDzHtnzutsWRjY0uy4ukAWJxzu1zH9qgnydJV//zlLZROiUc03xOz6pcuH4fLI2S\naJEzzzMNEjBqZmuLYdKPkz7XsV91SKepKwtX6jEC531b/Ehs9UDh+u2Dkzpd08y4\nAzOBlK2rkV5fJNAwoZ566XpFgVPqasVNMvVTegbTKKVu8Z65j5YHapsnxQOD8wKo\nwvdAmVeMsqtWn5Ui9pGe24BT3LUsczYX0PV9YQHfbG1aCUYF0+mu1ng41eHc0YJQ\nPQE7Cx4OsVAMkCKkuMfFdENxvsZFeJe2WvjdR+aCcdgylmpdS0CJprcM7ZYm6ggF\nA5XDodu8MQIDAQABoDswOQYJKoZIhvcNAQkOMSwwKjAoBgNVHREEITAfgglhLm5p\neC5jb22CEmIubml4c29sdXRpb25zLmNvbTANBgkqhkiG9w0BAQsFAAOCAQEAoHJD\nuh0jytZCkwVkggYSJKiCS3iF08iuGDuBuBBX51I3Hh1dUeHhd9UGUItmOIPncH+M\nB5rlm/CsXnJTUI/rBX03N3QJkb9DYdNNka5RKiUCVuBKK6CcbnDCEI0aK8WzN+05\n5O0XIF1XqJXosySCZdPXaQSGtycwKYqLF4BDo47TO9R+hWQgzGkSEPA9f+gJxKIQ\nF0dZZWcEXiZAs9cFk1toCaoDPwzS0aAEAThB75OEYpzwvxPlJLePOOZjYdj38gCG\nxQz2t3G4Lfx8fNnpGIFp4jzqR4idqH37L4QTmcWtgi5yIiQpsUz0OpfnWKT1EwA6\nvgQzLTPfTDDxySvd6Q==\n-----END CERTIFICATE REQUEST-----\n"
+                    }
+                  },
+                  "Example of response to query using dcv parameter": {
+                    "value": {
+                      "certificateId": "8e9ab756d633b1de7a0590c6",
+                      "csr": "-----BEGIN CERTIFICATE REQUEST-----\naIICsjCCAZoCAQAwMDELMAkGA1UECBMCQ0ExCzAJBgNVBAYTAlVTMRQwEgYDVQQD\nEwtiaW50ZXN0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJqc\ndcK2ZRSNI3FQui3usTfUIJXNHQQPqAigNjJc5XgsU6X4abMlHQSIe6AlbK/ScRrC\n0JziTj6dUsYiWJ4ZpNDF8cjFbrW/1W6f0sdy3OMpIdZuBBglFQiw03ogkqfOkjgq\nzoT+wMazd8jqpHvgyq5yoCQ91e7Hq5Zd0r2TQRwW9Bv15N/4ygFol+DCPY3QUrj2\nyR5nAJaSAVTb48VAt58q6Oog+FVlMkV+RUg9g956Qd8SNdYHS/nWlpdacH54+rl+\nBCvtI+nprAbUhwGxLYHdAuNZ0QVXp6CTw8nkn+i9I+uMkWsJlc141bcbt/lnV99T\nTHmjpcB15+zwTTv7kOMCAwEAAaA9MDsGCSqGSIb3DQEJDjEuMCwwKgYDVR0RBCMw\nIYIPd3d3LmJpbnRlc3QuY29tgg5kbC5iaW50ZXN0LmNvbTANBgkqhkiG9w0BAQsF\nAAOCAQEAhE4AVdeR+ewYW0bde5e2PZqu048T1HMKyNKSvGjck33WoitCZv52UJh5\np4/6laHxHoyegxNG1lvXEQ72SBQ0kUQJ15TIXXYmg1ev3I3ZmS1KsCWrlqdq6Udw\nwhb9CyRjObwcyUgZ+72L7X820o7cULox83eMnWH1HSx/NPxfASBoiqCI9nodKLIw\nqFE9cr3ziOw1yn/1DCo2YsBDm9NbCUArKRM+tbG+wK+9CfYH3g9ZC74u5ghIiDce\nqPamrST/89IZOOUBCaMDnzTmk9IhCOQkgTXeM+001D5EluydEXButhoFjtKe6d4V\nRqYPefPscRExLkjO6KjdKgR2/GCmHg==\n-----END CERTIFICATE REQUEST-----\n",
+                      "ownerCustomerId": 1,
+                      "latestVersion": 2,
+                      "dcvFile": {
+                        "uri": "/.well-known/pki-validation/8EAA4C3B692BA43579B00CD30F0E5D7C.txt",
+                        "expirationTime": "2020-09-18T20:10:25Z"
+                      }
                     }
                   }
                 }
@@ -5568,6 +5690,17 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sectigo"
+              ]
+            },
+            "in": "query",
+            "name": "dcv",
+            "description": "This optional parameter can be used to request a domain control validation (DCV) file. Currently, we support the certificate authority, Sectigo, by specifying \"sectigo\" as the value of the parameter."
           }
         ]
       }
@@ -6005,6 +6138,22 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "Enter an RFC 3339 format date to return validation tasks which were submitted by this date."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "Enter an RFC 3339 format date to return validation tasks which were submitted no later than this date."
           }
         ]
       },
@@ -6391,6 +6540,12 @@
                       "code": "InvalidListLimit",
                       "message": "The value of limit should be an integer."
                     }
+                  },
+                  "Invalid start date": {
+                    "value": {
+                      "code": "InvalidStartDate",
+                      "message": "Invalid parameter 'startdate'. '2020-09-20T00:00:00Za' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
                   }
                 }
               }
@@ -6498,6 +6653,22 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "Enter an RFC 3339 format date to return deployments which were submitted by this date."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "Enter an RFC 3339 format date to return deployments which were submitted no later than this date."
           }
         ]
       },
@@ -13430,7 +13601,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned: \"edge response\"",
+                          "description": "Indicates the type of data returned. \"edge response\" represents edge traffic. \"fast route response\" refers to traffic from your origin accelerated through the HDT product. \"fast route request\" refers to traffic to your origin accelerated through the HDT product. The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
                           "items": {
                             "type": "string"
                           }
@@ -13455,8 +13626,11 @@
                             "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
-                            "type": "number",
-                            "description": "Data value. The units of measurement are determined by the dataUnit field."
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
                           }
                         }
                       }
@@ -13471,7 +13645,9 @@
                         "endTime": "2019-09-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge response"
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
                         ],
                         "dataUnit": "megabytes"
                       },
@@ -13479,7 +13655,9 @@
                         {
                           "group": "__all__",
                           "data": [
-                            214.57945
+                            214.57945,
+                            0,
+                            0
                           ]
                         }
                       ]
@@ -13492,7 +13670,9 @@
                         "endTime": "2020-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge response"
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
                         ],
                         "dataUnit": "megabytes"
                       },
@@ -13500,25 +13680,33 @@
                         {
                           "group": "__all__",
                           "data": [
-                            1338301885.66941
+                            1338301885.66941,
+                            0,
+                            0
                           ]
                         },
                         {
                           "group": "domain1.com",
                           "data": [
-                            798516559.66809
+                            798516559.66809,
+                            0,
+                            0
                           ]
                         },
                         {
                           "group": "domain2.com",
                           "data": [
-                            2.72993
+                            2.72993,
+                            0,
+                            0
                           ]
                         },
                         {
                           "group": "domain3.com",
                           "data": [
-                            539785323.27139
+                            539785323.27139,
+                            0,
+                            0
                           ]
                         }
                       ]
@@ -13531,7 +13719,9 @@
                         "endTime": "2020-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge response"
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
                         ],
                         "dataUnit": "megabytes"
                       },
@@ -13539,13 +13729,17 @@
                         {
                           "group": "__all__",
                           "data": [
-                            1338301838.57147
+                            1338301838.57147,
+                            0,
+                            0
                           ]
                         },
                         {
                           "group": "standard",
                           "data": [
-                            1338301838.57147
+                            1338301838.57147,
+                            0,
+                            0
                           ]
                         }
                       ]
@@ -19547,708 +19741,7 @@
         },
         "parameters": []
       },
-      "parameters": [],
-      "get": {
-        "summary": "Get the service quota for a customer",
-        "tags": [
-          "CDN Product Management"
-        ],
-        "responses": {
-          "200": {
-            "description": "The response contains the service quotas for a CDN360 customer.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "serviceQuotaResponse",
-                  "type": "object",
-                  "description": "Describes the service quotas for a customer",
-                  "x-examples": {
-                    "example-1": {
-                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
-                      "customerId": 10008046,
-                      "contractId": "",
-                      "hostnameLimit": 13,
-                      "propertyLimit": 13,
-                      "certificateLimit": 11,
-                      "edgeHostnameLimit": 8,
-                      "filePurgeQuotaInStaging": 13,
-                      "dirPurgeQuotaInStaging": 13,
-                      "filePurgeQuotaInProduction": 13,
-                      "dirPurgeQuotaInProduction": 13,
-                      "prefetchQuota": 13,
-                      "logConfigLimit": 13,
-                      "maximumChildCustomers": 0,
-                      "allowedCacheDirectives": [
-                        "slice"
-                      ],
-                      "status": "active",
-                      "allowProduction": true,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
-                  "properties": {
-                    "serviceQuotaId": {
-                      "type": "string",
-                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "description": "ID of the customer."
-                    },
-                    "contractId": {
-                      "type": "string",
-                      "description": "ID representing the contract, used for billing."
-                    },
-                    "hostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of hostnames allowed in production.\n",
-                      "default": 100
-                    },
-                    "propertyLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of properties that can be created.\n"
-                    },
-                    "certificateLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of certificates that can be created."
-                    },
-                    "edgeHostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of edge hostnames that can be created.",
-                      "default": 100
-                    },
-                    "filePurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "filePurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "prefetchQuota": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
-                    },
-                    "logConfigLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of log configurations."
-                    },
-                    "maximumChildCustomers": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "For resellers, this represents the maximum number of child customers allowed."
-                    },
-                    "allowedCacheDirectives": {
-                      "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
-                      "enum": [
-                        "active",
-                        "suspended",
-                        "trial"
-                      ]
-                    },
-                    "allowProduction": {
-                      "type": "boolean",
-                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
-                      "default": false
-                    },
-                    "usageLimitDollar": {
-                      "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
-                      "minimum": 0
-                    },
-                    "usageLimitDays": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "maximum": 365,
-                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
-                    },
-                    "allowDeploymentInChina": {
-                      "type": "boolean",
-                      "default": false,
-                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
-                    },
-                    "trialDeadline": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
-                    }
-                  },
-                  "required": [
-                    "customerId",
-                    "status"
-                  ]
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
-                      "customerId": 1234567890,
-                      "contractId": "",
-                      "hostnameLimit": 20,
-                      "propertyLimit": 20,
-                      "certificateLimit": 20,
-                      "edgeHostnameLimit": 10,
-                      "filePurgeQuotaInStaging": 100,
-                      "dirPurgeQuotaInStaging": 20,
-                      "filePurgeQuotaInProduction": 100,
-                      "dirPurgeQuotaInProduction": 20,
-                      "prefetchQuota": 20,
-                      "logConfigLimit": 20,
-                      "maximumChildCustomers": 0,
-                      "allowedCacheDirectives": [
-                        "secure_link"
-                      ],
-                      "status": "active",
-                      "allowProduction": true,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request was invalid. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Invalid customer ID": {
-                    "value": {
-                      "code": "InvalidCustomerId",
-                      "message": "The provided customer ID does not exist or the caller does not have permission to access it."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "No service quota was explicitly defined for this customer. The response body will contain the default settings.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "serviceQuotaResponse",
-                  "type": "object",
-                  "description": "Describes the service quotas for a customer",
-                  "x-examples": {
-                    "example-1": {
-                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
-                      "customerId": 10008046,
-                      "contractId": "",
-                      "hostnameLimit": 13,
-                      "propertyLimit": 13,
-                      "certificateLimit": 11,
-                      "edgeHostnameLimit": 8,
-                      "filePurgeQuotaInStaging": 13,
-                      "dirPurgeQuotaInStaging": 13,
-                      "filePurgeQuotaInProduction": 13,
-                      "dirPurgeQuotaInProduction": 13,
-                      "prefetchQuota": 13,
-                      "logConfigLimit": 13,
-                      "maximumChildCustomers": 0,
-                      "allowedCacheDirectives": [
-                        "slice"
-                      ],
-                      "status": "active",
-                      "allowProduction": true,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
-                  "properties": {
-                    "serviceQuotaId": {
-                      "type": "string",
-                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "description": "ID of the customer."
-                    },
-                    "contractId": {
-                      "type": "string",
-                      "description": "ID representing the contract, used for billing."
-                    },
-                    "hostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of hostnames allowed in production.\n",
-                      "default": 100
-                    },
-                    "propertyLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of properties that can be created.\n"
-                    },
-                    "certificateLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of certificates that can be created."
-                    },
-                    "edgeHostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of edge hostnames that can be created.",
-                      "default": 100
-                    },
-                    "filePurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "filePurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "prefetchQuota": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
-                    },
-                    "logConfigLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of log configurations."
-                    },
-                    "maximumChildCustomers": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "For resellers, this represents the maximum number of child customers allowed."
-                    },
-                    "allowedCacheDirectives": {
-                      "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
-                      "enum": [
-                        "active",
-                        "suspended",
-                        "trial"
-                      ]
-                    },
-                    "allowProduction": {
-                      "type": "boolean",
-                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
-                      "default": false
-                    },
-                    "usageLimitDollar": {
-                      "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
-                      "minimum": 0
-                    },
-                    "usageLimitDays": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "maximum": 365,
-                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
-                    },
-                    "allowDeploymentInChina": {
-                      "type": "boolean",
-                      "default": false,
-                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
-                    },
-                    "trialDeadline": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
-                    }
-                  },
-                  "required": [
-                    "customerId",
-                    "status"
-                  ]
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "customerId": 1234567890,
-                      "hostnameLimit": 1000000,
-                      "propertyLimit": 1000000,
-                      "certificateLimit": 1000000,
-                      "edgeHostnameLimit": 1000000,
-                      "filePurgeQuotaInStaging": 5000,
-                      "dirPurgeQuotaInStaging": 20,
-                      "filePurgeQuotaInProduction": 5000,
-                      "dirPurgeQuotaInProduction": 20,
-                      "prefetchQuota": 5000,
-                      "logConfigLimit": 1000000,
-                      "maximumChildCustomers": 1000000,
-                      "allowedCacheDirectives": [],
-                      "status": "suspended",
-                      "allowProduction": false,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-cdn-serviceQuotas-customerId=-id",
-        "description": "Get the CDN service quota for a customer.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "customerId",
-            "description": "ID of a customer. It can be <i>me</i> to return the caller's own service quota object."
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete a service quota for a customer",
-        "tags": [
-          "CDN Product Management"
-        ],
-        "responses": {
-          "204": {
-            "description": "The service quota was successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Invalid customer ID": {
-                    "value": {
-                      "code": "InvalidCustomerId",
-                      "message": "The provided customer ID does not exist or is not a child of the caller."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Has certificate in production": {
-                    "value": {
-                      "code": "HasCertificateInProduction",
-                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
-                    }
-                  },
-                  "Has edge hostname": {
-                    "value": {
-                      "code": "HasEdgeHostname",
-                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
-                    }
-                  },
-                  "Has property in production": {
-                    "value": {
-                      "code": "HasPropertyInProduction",
-                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "delete-cdn-serviceQuotas",
-        "description": "This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "customerId",
-            "description": "ID of a customer whose service quota should be deleted."
-          }
-        ]
-      },
-      "patch": {
-        "summary": "Update the service quota for a customer",
-        "operationId": "patch-cdn-serviceQuotas",
-        "responses": {
-          "200": {
-            "description": "The customer's quota was updated successfully."
-          },
-          "400": {
-            "description": "The request was invalid. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Resource Limit Exceeded": {
-                    "value": {
-                      "code": "ResourceLimitExceeded",
-                      "message": "This customer cannot have a higher 'propertyLimit' limit than the reseller."
-                    }
-                  },
-                  "Invalid customer ID update": {
-                    "value": {
-                      "code": "InvalidCustomerIdUpdate",
-                      "message": "The customer ID field cannot be updated."
-                    }
-                  },
-                  "Invalid certificate limit": {
-                    "value": {
-                      "code": "InvalidCertificateLimit",
-                      "message": "The value for limit should be non-negative."
-                    }
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Resource limit exceeded": {
-                    "value": {
-                      "code": "ResourceLimitExceeded",
-                      "message": "This customer cannot have a higher 'hostnameLimit' limit than the reseller."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "description": "This API allows a reseller to update an existing service quota for a child customer.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "updateServiceQuotaBody",
-                "type": "object",
-                "description": "This object contains the fields of the service quota that can be updated.",
-                "x-tags": [
-                  "CDN Product Management"
-                ],
-                "properties": {
-                  "contractId": {
-                    "type": "string",
-                    "description": "ID representing the contract, used for billing."
-                  },
-                  "hostnameLimit": {
-                    "type": "integer",
-                    "description": "Maximum number of hostnames allowed in production.\n",
-                    "default": 100
-                  },
-                  "propertyLimit": {
-                    "type": "integer",
-                    "default": 100,
-                    "description": "Maximum number of properties that can be created.\n"
-                  },
-                  "certificateLimit": {
-                    "type": "integer",
-                    "default": 100,
-                    "description": "Maximum number of certificates that can be created."
-                  },
-                  "edgeHostnameLimit": {
-                    "type": "integer",
-                    "description": "Maximum number of edge hostnames that can be created.",
-                    "default": 100
-                  },
-                  "filePurgeQuotaInStaging": {
-                    "type": "integer",
-                    "default": 5000,
-                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
-                  },
-                  "dirPurgeQuotaInStaging": {
-                    "type": "integer",
-                    "default": 20,
-                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
-                  },
-                  "filePurgeQuotaInProduction": {
-                    "type": "integer",
-                    "default": 5000,
-                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
-                  },
-                  "dirPurgeQuotaInProduction": {
-                    "type": "integer",
-                    "default": 20,
-                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
-                  },
-                  "prefetchQuota": {
-                    "type": "integer",
-                    "default": 5000,
-                    "description": "Maximum number of prefetch requests in a 24 hour window."
-                  },
-                  "logConfigLimit": {
-                    "type": "integer",
-                    "default": 100,
-                    "description": "Maximum number of log configurations."
-                  },
-                  "maximumChildCustomers": {
-                    "type": "integer",
-                    "default": 20,
-                    "description": "For resellers, this represents the maximum number of child customers allowed."
-                  },
-                  "allowedCacheDirectives": {
-                    "type": "array",
-                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer  is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
-                    "enum": [
-                      "active",
-                      "suspended",
-                      "trial"
-                    ]
-                  },
-                  "allowProduction": {
-                    "type": "boolean",
-                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
-                    "default": false
-                  },
-                  "usageLimitDollar": {
-                    "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
-                    "minimum": 0
-                  },
-                  "usageLimitDays": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 365,
-                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.\n"
-                  },
-                  "allowDeploymentInChina": {
-                    "type": "boolean",
-                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
-                    "default": false
-                  },
-                  "trialDeadline": {
-                    "type": "string",
-                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
-                  }
-                }
-              },
-              "examples": {
-                "example-1": {
-                  "value": {
-                    "filePurgeQuotaInStaging": 100
-                  }
-                }
-              }
-            }
-          },
-          "description": "Include the fields that you wish to update. Omitted fields will not be changed."
-        },
-        "tags": [
-          "CDN Product Management"
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "customerId",
-            "description": "ID of a customer. "
-          }
-        ]
-      }
+      "parameters": []
     },
     "/cdn/serviceQuotas/{serviceQuotaId}": {
       "parameters": [
@@ -20413,6 +19906,14 @@
                     "trialDeadline": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    },
+                    "upgradeDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                    },
+                    "suspensionDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
                     }
                   },
                   "required": [
@@ -21376,6 +20877,690 @@
             }
           }
         }
+      }
+    },
+    "/cdn/serviceQuotas/customer/{customerId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "customerId",
+          "in": "path",
+          "required": true,
+          "description": "ID of a customer.  For the \"Get the service quota for a customer\" API, its value can also be <i>me</i> to fetch your own service quota settings. You cannot specify \"me\" to update or delete your own settings."
+        }
+      ],
+      "get": {
+        "summary": "Get the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the service quotas for a CDN360 customer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    },
+                    "upgradeDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                    },
+                    "suspensionDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 1234567890,
+                      "contractId": "",
+                      "hostnameLimit": 20,
+                      "propertyLimit": 20,
+                      "certificateLimit": 20,
+                      "edgeHostnameLimit": 10,
+                      "filePurgeQuotaInStaging": 100,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 100,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 20,
+                      "logConfigLimit": 20,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "secure_link"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The provided customer ID does not exist or the caller does not have permission to access it."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No service quota was explicitly defined for this customer. The response body will contain the default settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    },
+                    "upgradeDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                    },
+                    "suspensionDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "customerId": 1234567890,
+                      "hostnameLimit": 1000000,
+                      "propertyLimit": 1000000,
+                      "certificateLimit": 1000000,
+                      "edgeHostnameLimit": 1000000,
+                      "filePurgeQuotaInStaging": 5000,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 5000,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 5000,
+                      "logConfigLimit": 1000000,
+                      "maximumChildCustomers": 1000000,
+                      "allowedCacheDirectives": [],
+                      "status": "suspended",
+                      "allowProduction": false,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-serviceQuotas-customer-customerId",
+        "description": "Get the CDN service quota for a customer."
+      },
+      "patch": {
+        "summary": "Update the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The customer's quota was updated successfully."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource limit exceeded": {
+                    "value": {
+                      "code": "ResourceLimitExceeded",
+                      "message": "This customer cannot have a higher 'propertyLimit' limit than the reseller."
+                    }
+                  },
+                  "Invalid customer ID update": {
+                    "value": {
+                      "code": "InvalidCustomerIdUpdate",
+                      "message": "The customer ID field cannot be updated."
+                    }
+                  },
+                  "Invalid certificate limit": {
+                    "value": {
+                      "code": "InvalidCertificateLimit",
+                      "message": "The value for limit should be non-negative."
+                    }
+                  },
+                  "Invalid status": {
+                    "value": {
+                      "code": "InvalidStatus",
+                      "message": "The 'trial' status cannot be specified by this customer."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patch-cdn-serviceQuotas-customer-customerId",
+        "description": "This API allows a reseller to update an existing service quota for a child customer.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "updateServiceQuotaBody",
+                "type": "object",
+                "description": "This object contains the fields of the service quota that can be updated.",
+                "x-tags": [
+                  "CDN Product Management"
+                ],
+                "properties": {
+                  "contractId": {
+                    "type": "string",
+                    "description": "ID representing the contract, used for billing."
+                  },
+                  "hostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of hostnames allowed in production.\n",
+                    "default": 100
+                  },
+                  "propertyLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of properties that can be created.\n"
+                  },
+                  "certificateLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of certificates that can be created."
+                  },
+                  "edgeHostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of edge hostnames that can be created.",
+                    "default": 100
+                  },
+                  "filePurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "filePurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "prefetchQuota": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                  },
+                  "logConfigLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of log configurations."
+                  },
+                  "maximumChildCustomers": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "For resellers, this represents the maximum number of child customers allowed."
+                  },
+                  "allowedCacheDirectives": {
+                    "type": "array",
+                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer  is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "enum": [
+                      "active",
+                      "suspended",
+                      "trial"
+                    ]
+                  },
+                  "allowProduction": {
+                    "type": "boolean",
+                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                    "default": false
+                  },
+                  "usageLimitDollar": {
+                    "type": "integer",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "minimum": 0
+                  },
+                  "usageLimitDays": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 365,
+                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.\n"
+                  },
+                  "allowDeploymentInChina": {
+                    "type": "boolean",
+                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
+                    "default": false
+                  },
+                  "trialDeadline": {
+                    "type": "string",
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filePurgeQuotaInStaging": 100
+                  }
+                }
+              }
+            }
+          },
+          "description": "Include the fields that you wish to update. Omitted fields will not be changed."
+        }
+      },
+      "delete": {
+        "summary": "Delete the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "204": {
+            "description": "The service quota was successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The provided customer ID does not exist or is not a child of the caller."
+                    }
+                  },
+                  "Has certificate in production": {
+                    "value": {
+                      "code": "HasCertificateInProduction",
+                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has edge hostname": {
+                    "value": {
+                      "code": "HasEdgeHostname",
+                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has property in production": {
+                    "value": {
+                      "code": "HasPropertyInProduction",
+                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-serviceQuotas-customer-customerId",
+        "description": "This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
       }
     }
   },
