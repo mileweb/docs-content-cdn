@@ -369,7 +369,7 @@ Defines conditions under which the response will not be taken from a cache. No c
 **Default**: `proxy_cache_lock on;` <br/>
 **Context**: http, server, location
 
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. CDN360 by default turns it on to reduce the traffic to the origin servers. You may want to turn it off when you do expect every edge requests to be forwarded to the origin. For example, when you set the cache time to 0, you should always turn off the lock:
+When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. CDN360 by default turns it on to reduce the traffic to the origin servers. However, locking will introduce un-necessary latency when most of the contents are not cacheable. You may want to turn it off in such cases or when you expect every edge requests to be forwarded to the origin. For example, when you set the cache time to 0, most likely you should turn off the lock:
 ```nginx
 proxy_cache_valid 0;
 proxy_cache_lock off;
