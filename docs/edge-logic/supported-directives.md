@@ -359,7 +359,41 @@ Enables or disables buffering of responses from the proxied server. No change to
 
 <span class="badge">standard</span>
 
-Defines conditions under which the response will not be taken from a cache. No change to the public version. 
+Defines conditions under which the response will not be taken from a cache. No change to the public version. This should be used if you know the content is not cacheable under those conditions. It should be usually used together with `proxy_no_cache`.
+
+### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
+
+<span class="badge">standard</span>
+
+**Syntax**: `proxy_cache_lock on/off;` <br/>
+**Default**: `proxy_cache_lock on;` <br/>
+**Context**: http, server, location
+
+When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. CDN360 by default turns it on to reduce the traffic to the origin servers. You may want to turn it off when you do expect every edge requests to be forwarded to the origin. For example, when you set the cache time to 0, you should always turn off the lock:
+```
+proxy_cache_valid 0;
+proxy_cache_lock off;
+```
+
+### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
+
+<span class="badge">standard</span>
+
+**Syntax**: `proxy_cache_lock_age time;` <br/>
+**Default**: `proxy_cache_lock_age 15s;` <br/>
+**Context**: http, server, location
+
+If the last request passed to the proxied server for populating a new cache element has not completed for the specified time, one more request may be passed to the proxied server. No change to the public version.
+
+### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
+
+<span class="badge">standard</span>
+
+**Syntax**: `proxy_cache_lock_timeout time;` <br/>
+**Default**: `proxy_cache_lock_timeout 15s;` <br/>
+**Context**: http, server, location
+
+Sets a timeout for `proxy_cache_lock`. When the time expires, the request will be passed to the proxied server, however, the response will not be cached. No change to the public version.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -409,7 +443,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020).
+Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020). If you know the content is dynamic and not cacheable, it is more efficient to use `proxy_cache_bypass 1; proxy_no_cache 1` than `proxy_cache_valid 0; proxy_cache_lock off;`. You should only use the latter if you want the content to be cached and every request to be forwarded to the origin for validation purpose.
 
 ### proxy_cache_vary
 
