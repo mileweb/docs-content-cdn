@@ -126,7 +126,7 @@
                       "properties": {
                         "description": {
                           "type": "string",
-                          "description": "a description of the version\n"
+                          "description": "A description of the version.\n"
                         },
                         "cacheKeyHostname": {
                           "type": "string",
@@ -143,7 +143,7 @@
                         },
                         "realTimeLog": {
                           "type": "object",
-                          "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                          "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server. It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                           "properties": {
                             "logUrl": {
                               "type": "string",
@@ -189,7 +189,7 @@
                             "string"
                           ],
                           "default": false,
-                          "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                          "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                         },
                         "origins": {
                           "type": "array",
@@ -205,7 +205,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -213,7 +213,7 @@
                               },
                               "supportedProtocol": {
                                 "type": "string",
-                                "description": "This optional field indicates the protocol supported by the origin server.  If you do not have a “Protocol Downgrade Agreement” on file, AND this property has a certificate attached to it, the value cannot be <i>http</i>. Otherwise, error code “invalidProtocolDowngrade” will be returned if you specify <i>http</i>.\nIf you do have the agreement on file with us, we also require the <i>allowProtocolDowngrade</i> field to be explicitly set to <i>true</i>.",
+                                "description": "This optional field indicates the protocol supported by the origin server. If this property has a certificate attached to it, the value can be set to <i>http</i> if the <i>allowProtocolDowngrade</i> field is also set to <i>true</i>.",
                                 "enum": [
                                   "http",
                                   "https",
@@ -227,7 +227,7 @@
                               },
                               "hostHeader": {
                                 "type": "string",
-                                "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the  HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                                "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                                 "format": "hostname"
                               },
                               "supportSni": {
@@ -286,7 +286,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "number",
-                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.   It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                         },
                         "tlsMinVersion": {
                           "type": "string",
@@ -311,7 +311,7 @@
                         },
                         "tlsCertificateId1": {
                           "type": "number",
-                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.  It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
                         },
                         "videoSeek": {
                           "type": "object",
@@ -354,7 +354,7 @@
                         },
                         "accessControlRules": {
                           "type": "array",
-                          "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                          "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                           "items": {
                             "title": "accessControlRule",
                             "type": "object",
@@ -722,7 +722,7 @@
                 "properties": {
                   "description": {
                     "type": "string",
-                    "description": "a description of the version\n"
+                    "description": "A description of the version.\n"
                   },
                   "cacheKeyHostname": {
                     "type": "string",
@@ -739,7 +739,7 @@
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server. It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                     "properties": {
                       "logUrl": {
                         "type": "string",
@@ -785,7 +785,7 @@
                       "string"
                     ],
                     "default": false,
-                    "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                    "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -801,7 +801,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -809,7 +809,7 @@
                         },
                         "supportedProtocol": {
                           "type": "string",
-                          "description": "This optional field indicates the protocol supported by the origin server.  If you do not have a “Protocol Downgrade Agreement” on file, AND this property has a certificate attached to it, the value cannot be <i>http</i>. Otherwise, error code “invalidProtocolDowngrade” will be returned if you specify <i>http</i>.\nIf you do have the agreement on file with us, we also require the <i>allowProtocolDowngrade</i> field to be explicitly set to <i>true</i>.",
+                          "description": "This optional field indicates the protocol supported by the origin server. If this property has a certificate attached to it, the value can be set to <i>http</i> if the <i>allowProtocolDowngrade</i> field is also set to <i>true</i>.",
                           "enum": [
                             "http",
                             "https",
@@ -823,7 +823,7 @@
                         },
                         "hostHeader": {
                           "type": "string",
-                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the  HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
                         "supportSni": {
@@ -882,7 +882,7 @@
                   },
                   "tlsCertificateId": {
                     "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.   It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -907,7 +907,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.  It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -950,7 +950,7 @@
                   },
                   "accessControlRules": {
                     "type": "array",
-                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
@@ -2690,7 +2690,7 @@
                 "properties": {
                   "description": {
                     "type": "string",
-                    "description": "a description of the version\n"
+                    "description": "A description of the version.\n"
                   },
                   "cacheKeyHostname": {
                     "type": "string",
@@ -2707,7 +2707,7 @@
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                    "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server. It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                     "properties": {
                       "logUrl": {
                         "type": "string",
@@ -2753,7 +2753,7 @@
                       "string"
                     ],
                     "default": false,
-                    "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                    "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -2769,7 +2769,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -2777,7 +2777,7 @@
                         },
                         "supportedProtocol": {
                           "type": "string",
-                          "description": "This optional field indicates the protocol supported by the origin server.  If you do not have a “Protocol Downgrade Agreement” on file, AND this property has a certificate attached to it, the value cannot be <i>http</i>. Otherwise, error code “invalidProtocolDowngrade” will be returned if you specify <i>http</i>.\nIf you do have the agreement on file with us, we also require the <i>allowProtocolDowngrade</i> field to be explicitly set to <i>true</i>.",
+                          "description": "This optional field indicates the protocol supported by the origin server. If this property has a certificate attached to it, the value can be set to <i>http</i> if the <i>allowProtocolDowngrade</i> field is also set to <i>true</i>.",
                           "enum": [
                             "http",
                             "https",
@@ -2791,7 +2791,7 @@
                         },
                         "hostHeader": {
                           "type": "string",
-                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the  HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
                         "supportSni": {
@@ -2850,7 +2850,7 @@
                   },
                   "tlsCertificateId": {
                     "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.   It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -2875,7 +2875,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.  It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -2918,7 +2918,7 @@
                   },
                   "accessControlRules": {
                     "type": "array",
-                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
@@ -3200,7 +3200,7 @@
                     "properties": {
                       "description": {
                         "type": "string",
-                        "description": "a description of the version\n"
+                        "description": "A description of the version.\n"
                       },
                       "cacheKeyHostname": {
                         "type": "string",
@@ -3217,7 +3217,7 @@
                       },
                       "realTimeLog": {
                         "type": "object",
-                        "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server.  It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
+                        "description": "This optional field allows you to configure notifications about client requests to be sent to a remote server. It can be used only if you have access to our <i>realtime_log_switch</i> directive. Please contact our support team if you require this feature.",
                         "properties": {
                           "logUrl": {
                             "type": "string",
@@ -3263,7 +3263,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "This field can be set to either a boolean value or a string. When set to the boolean value <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                        "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                       },
                       "origins": {
                         "type": "array",
@@ -3279,7 +3279,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while  the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -3287,7 +3287,7 @@
                             },
                             "supportedProtocol": {
                               "type": "string",
-                              "description": "This optional field indicates the protocol supported by the origin server.  If you do not have a “Protocol Downgrade Agreement” on file, AND this property has a certificate attached to it, the value cannot be <i>http</i>. Otherwise, error code “invalidProtocolDowngrade” will be returned if you specify <i>http</i>.\nIf you do have the agreement on file with us, we also require the <i>allowProtocolDowngrade</i> field to be explicitly set to <i>true</i>.",
+                              "description": "This optional field indicates the protocol supported by the origin server. If this property has a certificate attached to it, the value can be set to <i>http</i> if the <i>allowProtocolDowngrade</i> field is also set to <i>true</i>.",
                               "enum": [
                                 "http",
                                 "https",
@@ -3301,7 +3301,7 @@
                             },
                             "hostHeader": {
                               "type": "string",
-                              "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the  HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                              "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                               "format": "hostname"
                             },
                             "supportSni": {
@@ -3360,7 +3360,7 @@
                       },
                       "tlsCertificateId": {
                         "type": "number",
-                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.   It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                       },
                       "tlsMinVersion": {
                         "type": "string",
@@ -3385,7 +3385,7 @@
                       },
                       "tlsCertificateId1": {
                         "type": "number",
-                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>.  It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
                       },
                       "videoSeek": {
                         "type": "object",
@@ -3428,7 +3428,7 @@
                       },
                       "accessControlRules": {
                         "type": "array",
-                        "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                        "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                         "items": {
                           "title": "accessControlRule",
                           "type": "object",
@@ -4374,7 +4374,7 @@
             },
             "in": "query",
             "name": "hasBeian",
-            "description": "Specify <i>true</i> to obtain a list of edge hostnames flagged for use with hostnames that have a Beian license allowing them to be served by servers in mainland China. Specify <i>false</i> to only retrieve those edge hostnames without the Beian flag.  By default, all edge hostnames are returned."
+            "description": "Specify <i>true</i> to obtain a list of edge hostnames flagged for use with hostnames that have a Beian license allowing them to be served by servers in mainland China. Specify <i>false</i> to only retrieve those edge hostnames without the Beian flag. By default, all edge hostnames are returned."
           }
         ]
       }
@@ -4540,7 +4540,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN360.  The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdnapi/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN360. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdnapi/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -4898,7 +4898,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "Filters the results based on where the certificate has been deployed. <table><tr><th>Value</th><th>Effect</th></tr><tr><td></td><td>An empty target parameter results in all certificates being returned  whether or not they have been deployed.</td></tr><td>all</td><td>Return all certificates deployed to either staging or production environments.</td></tr><tr><td>staging</td><td>Only return certificates deployed to staging.</td></tr><tr><td>production</td><td>Only return certificates deployed to production.</td></tr></table>\n"
+            "description": "Filters the results based on where the certificate has been deployed. <table><tr><th>Value</th><th>Effect</th></tr><tr><td></td><td>An empty target parameter results in all certificates being returned whether or not they have been deployed.</td></tr><td>all</td><td>Return all certificates deployed to either staging or production environments.</td></tr><tr><td>staging</td><td>Only return certificates deployed to staging.</td></tr><tr><td>production</td><td>Only return certificates deployed to production.</td></tr></table>\n"
           },
           {
             "schema": {
@@ -6116,7 +6116,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "Return results sorted by when the task was submitted (submissionTime) or when the task  was completed (finishTime). "
+            "description": "Return results sorted by when the task was submitted (submissionTime) or when the task was completed (finishTime). "
           },
           {
             "schema": {
@@ -6552,7 +6552,7 @@
             }
           }
         },
-        "description": "Get a summary of deployment tasks. Filter results using  the query parameters. If you specify more than one query parameter, only the tasks meeting all criteria will be returned.",
+        "description": "Get a summary of deployment tasks. Filter results using the query parameters. If you specify more than one query parameter, only the tasks meeting all criteria will be returned.",
         "operationId": "queryDeploymentTaskList",
         "parameters": [
           {
@@ -7265,7 +7265,7 @@
                           },
                           "propertyInStaging": {
                             "type": "object",
-                            "description": "Describes the property deployed to staging.  It can be 'null' if the property is not deployed to staging.",
+                            "description": "Describes the property deployed to staging. It can be 'null' if the property is not deployed to staging.",
                             "properties": {
                               "propertyId": {
                                 "type": "string",
@@ -7459,7 +7459,7 @@
                     },
                     "propertyInStaging": {
                       "type": "object",
-                      "description": "Describes the property deployed to staging.  It can be 'null' if the property is not deployed to staging.",
+                      "description": "Describes the property deployed to staging. It can be 'null' if the property is not deployed to staging.",
                       "properties": {
                         "propertyId": {
                           "type": "string",
@@ -7774,7 +7774,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -8076,7 +8076,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period.  The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
             "required": true
           },
           {
@@ -8236,7 +8236,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -8631,7 +8631,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -9017,7 +9017,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -9737,7 +9737,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period.  Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9995,7 +9995,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -10123,7 +10123,7 @@
           }
         },
         "operationId": "getOriginRequests",
-        "description": "Get the number of requests to your origin servers for a time period.  Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Get the number of requests to your origin servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11033,7 +11033,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -11419,7 +11419,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -11546,7 +11546,7 @@
             }
           }
         },
-        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period.  Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "operationId": "getEdgeUploadTrafficVolume",
         "requestBody": {
           "content": {
@@ -13578,7 +13578,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains a summary of traffic by group.  It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "description": "The response contains a summary of traffic by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
             "content": {
               "application/json": {
                 "schema": {
@@ -13791,7 +13791,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339 date indicating the beginning of the time period.  The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
             "required": true
           },
           {
@@ -16022,7 +16022,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
@@ -20424,7 +20424,7 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of  a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
