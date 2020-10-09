@@ -390,10 +390,10 @@ If the last request passed to the proxied server for populating a new cache elem
 <span class="badge">standard</span>
 
 **Syntax**: `proxy_cache_lock_timeout time;` <br/>
-**Default**: `proxy_cache_lock_timeout 15s;` <br/>
+**Default**: `proxy_cache_lock_timeout 0s;` <br/>
 **Context**: http, server, location
 
-Sets a timeout for `proxy_cache_lock`. When the time expires, the request will be passed to the proxied server, however, the response will not be cached. No change to the public version.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this long, it will be released to the proxied server and the response will not be used to fill the cache. `proxy_cache_lock_age` determines how often a request should be sent to fill the cache. No change to the public version. We set the default value to 0 to optimize the latency. You can set it to some higher value to reduce the traffic to origin.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
