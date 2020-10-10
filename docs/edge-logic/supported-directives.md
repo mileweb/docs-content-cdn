@@ -369,11 +369,7 @@ Defines conditions under which the response will not be taken from a cache. No c
 **Default**: `proxy_cache_lock on;` <br/>
 **Context**: http, server, location
 
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. CDN360 by default turns it on to reduce the traffic to the origin servers. However, locking will introduce un-necessary latency when most of the contents are not cacheable. You may want to turn it off in such cases or when you expect every edge requests to be forwarded to the origin. For example, when you set the cache time to 0, most likely you should turn off the lock:
-```nginx
-proxy_cache_valid 0;
-proxy_cache_lock off;
-```
+When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. CDN360 by default turns it on to better control the traffic to the origin servers. However, since locking will introduce un-necessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` defaults to 0. If you know that most contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, you should use `proxy_cache_bypass` and `proxy_no_cache` to skip caching for them to get the best possible latency.
 
 ### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
 
@@ -393,7 +389,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default**: `proxy_cache_lock_timeout 0s;` <br/>
 **Context**: http, server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this long, it will be released to the proxied server and the response will not be used to fill the cache. `proxy_cache_lock_age` determines how often a request should be sent to fill the cache. No change to the public version. We set the default value to 0 to optimize the latency. You can set it to some higher value to reduce the traffic to origin.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this long, it will be released to the proxied server and the response will not be used to fill the cache. (`proxy_cache_lock_age` determines how often a request should be sent to fill the cache.) No change to the public version. We set the default value to 0s to optimize for latency. You can set it to some higher value if you know that most contents are cacheable and you want to reduce the origin traffic.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -443,7 +439,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020). If you know the content is dynamic and not cacheable, it is more efficient to use `proxy_cache_bypass 1; proxy_no_cache 1` than `proxy_cache_valid 0; proxy_cache_lock off;`. You should only use the latter if you want the content to be cached and every request to be forwarded to the origin for validation purpose.
+Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020). If you know the content is dynamic and not cacheable, it is more efficient to use `proxy_cache_bypass 1; proxy_no_cache 1` to completely bypass caching.
 
 ### proxy_cache_vary
 
