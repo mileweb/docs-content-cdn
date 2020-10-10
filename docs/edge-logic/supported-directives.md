@@ -441,7 +441,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020). The specified cache time is only applied to responses without caching instructions from the origin. A value of 0 makes those contents not cached. If you have a way to identify dynamic/non-cachable content from the request, you should use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
+Sets caching time for different response codes. We are changing the open-source version to support variable (ETA: Oct 2020). The specified cache time is only applied to responses without caching instructions from the origin. A value of 0 makes those contents not cached. If you have a way to identify dynamic/non-cachable contents based on request, you should use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
 
 ### proxy_cache_vary
 
