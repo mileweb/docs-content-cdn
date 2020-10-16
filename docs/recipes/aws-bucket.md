@@ -1,20 +1,20 @@
 ## AWS S3 Bucket Acceleration
 
-Let’s assume we have a domain `waytoo.digital` and we would like to setup a bucket on its subdomain called `files.waytoo.digital`, so later our users can access the data in that bucket through this subdomain.
+Let’s assume we have a domain `waytoo.digital`, and we would like to setup a bucket on its subdomain called `files.waytoo.digital` so later our users can access the data in that bucket through this subdomain.
 
-### Setting up a S3 Bucket
+### Setting up an S3 Bucket
 
 Log in to the AWS S3 console and create a new bucket. It will show you the creation wizard:
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-bucket.png" alt="create bucket" width="720"></p>
 
-Enter Bucket Name(it should be qualified DNS prefix) - files-waytoo-digital in our case. Click Next. Skip "Configure Options".
+Enter Bucket Name(DNS qualified prefix) - `files-waytoo-digital` in our case. Click Next. Skip "Configure Options".
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-bucket-set-permissions.png" alt="create bucket" width="720"></p>
 
-For now, use default `“Block all public access”` permissions, or AWS doesn’t give you to click next. Click Next and Save. Now we have bucket creaated.
+For now, use the default `“Block all public access”` permissions, or AWS doesn’t give you to click next. Click Next and Save. Now we have a bucket created.
 
-Assign appropriate permissions, so the content of a bucket can be accessed.
+Assign appropriate permissions, so it will be possible to access the bucket contents.
     
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-bucket-settings-permissions.png" alt="create bucket" width="720"></p>
 
@@ -36,7 +36,7 @@ Setup CORS. Just copy and paste code below:
 </CORSConfiguration>
 ```
 
-Upload a file to the bucket to test our setup and grant public read access to the uploaded object.
+Upload a file to the bucket to test our setup and grant the public read access to the uploaded object.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-upload-file.png" alt="create bucket" width="720"></p>
 
@@ -44,8 +44,7 @@ Click on the uploaded file in bucket reveals the information we can use:
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-uploaded-file-info.png" alt="create bucket" width="500"></p>
 
-Amazon S3 uses a convention for accessing the bucket names through URI: `<BUCKET_NAME>.<REGION>.amazonaws.com`. Currently, instead of the region, it returns us `s3`. Anyway, we just use the bucket domain name to setup the **CDN360**.
-<br/>
+Amazon S3 uses a convention for accessing the bucket names through URI: `<BUCKET_NAME>.<REGION>.amazonaws.com`. Currently, instead of the region, it returns us `s3`. Anyway, we use the bucket domain name to setup the **CDN360**.
 
 ### Setting up CDN360
 
@@ -69,14 +68,14 @@ PING files-waytoo-digital.qtlcdn.com (14.0.119.186): 56 data bytes
 
 #### Certificates 
 Create a Certificate in **“Certificates”**
-We are going to generate a certificate and sign it automatically with Let’s Encrypt
+Let's generate a certificate and sign it automatically with Let’s Encrypt.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-certificate.png" alt="create bucket" width="600"></p>
 
-It’s dramatically easy to do. On **"Auto Generate Certificate"** tab, fill the *Certificate name* and *Certificate description* fields. Set *Auto Renew* to *Let’s Encrypt*. Then provide the *Common name* and *SAN* values. We just use `files.waytoo.digital` in both cases. Then click *“Save certificate”* certificate will be saved.
+It’s dramatically easy to do. On the **"Auto Generate Certificate"** tab, fill the *Certificate name* and *Certificate description* fields. Set *Auto Renew* to *Let’s Encrypt*. Then provide the *Common name* and *SAN* values. We enter `files.waytoo.digital` in both cases. Then click *“Save certificate”* to save the settings.
 
 Deploy a Certificate to **Staging** environment
-When the certificate had been saved it is now possible to deploy it. We going to deploy it to staging to test our setup prior to put it to production.
+When we had saved the certificate, it is now possible to deploy it. We are going to deploy it to staging to test our setup before putting it to production.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
@@ -85,21 +84,21 @@ Create a Property in **“Edge Configurations”**.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property.png" alt="create bucket" width="720"></p>
 
-We should fill in the *Property Name*, optionally a *Description* for the property, and the *Description* of the configuration version. Also, *Hostnames* field require at least one hostname entered. This is how the cache will identify and handle requests with property configuration.
+We should fill in the *Property Name*, optionally a *Description* for the property, and the *Description* of the configuration version. Also, the *Hostnames* field requires at least one hostname entered. The cache will identify and handle requests with property configuration by matching the request header `Host` value with *Hostnames* field values.
     
 Then we should add origin(our S3 bucket):
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-origin.png" alt="create bucket" width="720"></p>
 
-*Origin name* will be used in edge-logic script, in our case it's called `aws_origin`, we also should add out S3 bucket domain(`files-waytoo-digital.s3.amazonaws.com`) to *Servers* field and click validate to check if everything is ok.
+*Origin name* will be used in the edge-logic script; in our case, it's called `aws_origin`; we also should add out the S3 bucket domain(`files-waytoo-digital.s3.amazonaws.com`) to *Servers* field and click validate to check if everything is ok.
 
-In advanced settings we should fill the *Host Header* with the origin hostname - `files-waytoo-digital.s3.amazonaws.com`. This value will be set as `Host` in request header between the **Edge** and the **Origin**. If we will not do that - the value of Host will be `files.waytoo.digital` and Amazon S3 will respond with `Bucket not found` error. So, that’s an important step. Click Save and we are done.
+We should fill the *Host Header* with the origin hostname - `files-waytoo-digital.s3.amazonaws.com` in advanced settings. This value will be set as `Host` in the request header between the **Edge** and the **Origin**. If we do not do that, the Host's value will be `files.waytoo.digital`, and Amazon S3 will respond with a `Bucket not found` error. So, that’s an important step. Click Save, and that's it.
 
 We have created an origin. Next, we should create an initial edge-logic configuration. Click Wizard button:
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-wizard.png" alt="create bucket" width="600"></p>
 
-We just selecte previously configured origin, set cache time to 3600 minutes and ignore cache-control headers from origin to handle cache behavior on the edge. Click **"OK"**. Edge-logic script will be generated:
+We select previously configured origin, set cache time to 3600 minutes, and ignore cache-control headers from origin to handle cache behavior on edge. Click **"OK"**. The system will generate an edge-logic script for us:
 
  ```nginx
      location / { #This is the default location.
@@ -109,21 +108,21 @@ We just selecte previously configured origin, set cache time to 3600 minutes and
       }
  ```
 
- From now you can edit this script and setup any logic you want. Having all about there one small thing remaining for this property - Add the Certificate. Choose a certificate we have created and deployed to Staging previously.
+From now, you can edit this script and setup any logic you want. Having all about there one small thing remaining for this property - Add the Certificate. Choose a certificate we have created and deployed to Staging previously.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-tls.png" alt="create bucket" width="600"></p>
 	
-Click “Validate & Save” to check if everything configured correctly.
+Click “Validate & Save” to check if everything is configured correctly.
 
 Deploy a Property to Staging.
 
-If no issues occurred during the “Validate & Save” - congratulations. Now we can deploy property and test our Staging deployment.
+Suppose no issues occurred during the “Validate & Save” - congratulations. Now we can deploy property and test our Staging deployment.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
 #### Testing(Staging) 
 
-To test staging deployments we should know the staging servers IP addresses:
+To test staging deployments, we should know the staging servers IP addresses:
 
 ```bash
 $ dig staging.qtlgslb.com
@@ -134,7 +133,7 @@ staging.qtlgslb.com.    59  IN  A   163.171.230.47
 ...
 ```
 
-Now, let's pick one of those adresses returned above and check if everything we have setup and deployed previously works.
+Now, let's pick one of those addresses returned above and check if everything we have setup and deployed previously works.
 
 ```bash
 ❯ curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:163.171.228.89
@@ -154,7 +153,7 @@ server: QTL_Cache/1.2.03
 accept-ranges: bytes
 ```
 
-By requesting the same item again we will see that now cache status is **HIT**
+By requesting the same item again, we will see that now cache status is **HIT**
 
 ```bash
 ❯ curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:163.171.228.89
@@ -178,7 +177,7 @@ Everything works as expected, so let's deploy everything to production.
 
 #### Deployment to Production
 
-To deploy configuration to production, we should do it both in **"Certificates"** and **"Edge Configurations"**. Navigate to **"Certificates"** first, select certificate, set *Deployment destination* to *Production* and click **"Deploy Configuration"**.
+To deploy the configuration to production, we should do it both in **"Certificates"** and **"Edge Configurations"**. Navigate to **"Certificates"** first, select certificate, set *Deployment destination* to *Production* and click **"Deploy Configuration"**.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-production.png" alt="create bucket" width="500"></p>
 
@@ -186,7 +185,7 @@ Then navigate to **"Edge Configurations"** and do the same with your property.
 
 #### Testing(Production)
 
-Before we can try it in production, we should Create/Change CNAME record of your DNS and point it to the *Edge Hostname* we have created in the beginning(`files-waytoo-digital.qtlcdn.com`)
+Before we can try it in production, we should Create/Change the CNAME record of your DNS and point it to the *Edge Hostname* we have created in the beginning(`files-waytoo-digital.qtlcdn.com`)
 
 ```bash
 ❯ dig files.waytoo.digital
