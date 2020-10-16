@@ -81,7 +81,7 @@ When the certificate had been saved it is now possible to deploy it. We going to
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
 #### Edge Configurations
-8. Create a Property in **“Edge Configurations”**. 
+Create a Property in **“Edge Configurations”**. 
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property.png" alt="create bucket" width="720"></p>
 
