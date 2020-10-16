@@ -103,7 +103,7 @@ We just selecte previously configured origin, set cache time to 3600 minutes and
 
  ```nginx
      location / { #This is the default location.
-      origin_pass aws-bucket;
+      origin_pass aws_origin;
       proxy_cache_valid 3600m; #200, 301, and 302 responses will be cached for 3600m
       proxy_ignore_headers Cache-Control Expires; #This will force the cache server to ignore cache control headers from origin.
       }
