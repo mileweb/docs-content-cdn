@@ -1,8 +1,8 @@
-## How to Setup AWS S3 Bucket Acceleration with CDN360
+## AWS S3 Bucket Acceleration
 
 Let’s assume we have a domain `waytoo.digital` and we would like to setup a bucket on its subdomain called `files.waytoo.digital`, so later our users can access the data in that bucket through this subdomain.
 
-### Setting up Amazon S3 Bucket
+### Setting up a S3 Bucket
 
 Log in to the AWS S3 console and create a new bucket. It will show you the creation wizard:
 
