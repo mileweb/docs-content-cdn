@@ -1,6 +1,7 @@
 ## AWS S3 Bucket Acceleration
 
 Let’s assume we have a domain `waytoo.digital`, and we would like to setup a bucket on its subdomain called `files.waytoo.digital` so later our users can access the data in that bucket through this subdomain.
+Let's start with the creating and accessing the public AWS Bucket, and then we will look into how to access private AWS Bucket.
 
 ### Setting up an S3 Bucket
 
@@ -217,3 +218,47 @@ accept-ranges: bytes
 ```
 
 Congratulations. You've just accelerated Amazon S3 Bucket with **CDN360**
+
+### Accessing Private Buckets
+
+Now, let's block the public access to our bucket and setup a CDN360 to access it.
+
+#### Block public access
+
+Previously we have made our bucket public. Now, in bucket settings, we should set the default permissions back to make the bucket private again.
+
+<p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-permissions-private.png" alt="create bucket" width="720"></p>
+
+#### Enable Origin Authentication
+
+Now we can edit our property settings and setup the `Origin Authentication for S3`. Before doing that, make sure you know: *1) AWS Bucket region*, *2) AWS Acces Key*, *3) AWS Access Secret*.
+
+All right. Now go to **"Edge Configurations** then choose the property we configured before.
+
+<p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-property-clone.png" alt="create bucket" width="720"></p>
+
+Click *"Clone"* to create a new configuration version. Now we can edit it. Click on *"Edit"* and then in *"Advanced Settings"* set the Authentication Method to *"AWS S3"* and fill the required fields as follows.
+
+<p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-origin-auth.png" alt="create bucket" width="600"></p>
+
+Then click *"Save"* and deploy this configuration to *Staging*. Check that it works.
+
+```bash
+curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:163.171.228.89
+HTTP/2 200
+content-type: application/octet-stream
+content-length: 1024000
+x-amz-id-2: oTixActu2B9rtfEvOUDkmelQxPIgFYfRdC4T950YuXL/tv7Zu+pSHgkCXiAuouaRpjLpqTyf3xE=
+x-amz-request-id: AQ7S4P0H1K0H0R9G
+date: Fri, 16 Oct 2020 09:04:34 GMT
+last-modified: Fri, 16 Oct 2020 09:04:10 GMT
+etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
+x-cache-status: HIT
+x-qtl-request-id: 105b10794ee438213fac428c0ef60379
+x-via: 2.0 na-us-iad1-cache-0003 [HIT]
+age: 16
+server: QTL_Cache/1.2.03
+accept-ranges: bytes
+```
+
+That's it. Now you can put it in Production.
