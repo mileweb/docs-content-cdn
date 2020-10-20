@@ -363,7 +363,7 @@ Defines conditions under which the response will not be taken from a cache. No c
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
-<span class="badge">standard</span>
+<span class="badge dark">advanced</span>
 
 **Syntax**: `proxy_cache_lock on/off;` <br/>
 **Default**: `proxy_cache_lock on;` <br/>
