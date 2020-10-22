@@ -4,7 +4,9 @@ After you create and validate a property version, you are ready to deploy it. In
 
 1. In the left pane, click **Edge Configurations**. 
 
-2. On the Properties page, click the ID of the property you want to deploy. 
+2. On the Properties page, click the ID of the property you want to deploy.
+    <br><u>OR </u></br>
+  In the **Actions** column, click the vertical ellipsis for the property you want to deploy, and then select **Edit**. 
 
 3. Scroll down to the **Deployment** section, select either **Staging** or **Production** from the **Deployment Destination** drop-down list, and then click the **Deploy Configuration** button.
 
@@ -12,11 +14,9 @@ After you create and validate a property version, you are ready to deploy it. In
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment.png" alt="deployment selections and button" width="900"></p>
 
-4. If the property is already deployed to the selected environment, the next form compares the deployed version with the one you want to deploy. If you are satisfied with the differences, click the **Deploy to ...** button on the top right corner (or click **Back** to cancel the deployment).
+4. When the Deployment Confirmation pop-up appears, click **OK**. Usually, the deployment process finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment at any time.
 
-5. When the Deployment Confirmation pop-up appears, click **OK**. Usually, the deployment process finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment at any time.
-
-6. Click [here](</docs/portal/edge-configurations/testing-property.md#testing-property-in-staging>) for instructions about testing the property in the staging environment.
+5. Click [here](</docs/portal/edge-configurations/testing-property.md#testing-property-in-staging>) for instructions about testing the property in the staging environment.
 
 # Undeploying a Property
 
@@ -28,4 +28,6 @@ After you create and validate a property version, you are ready to deploy it. In
 
 # Viewing a Property's Deployment History
 
-In the **Actions** column on the Properties page, click the vertical ellipsis of the property whose deployment history you want to view, and then select **Deployment History**. The Deployment page appears, with a deployment history of the selected property.
+1. In the **Actions** column on the Properties page, click the vertical ellipsis of the property whose deployment history you want to view, and then select **Deployment History**. The Deployment page appears, with a deployment history of the selected property.
+2. To view task details, click the ID or task name for a deployment.
+3. Clicking the **Property ID** link under **Actions** on the Task Details page displays the page where you can edit the corresponding property.

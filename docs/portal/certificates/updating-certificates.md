@@ -7,6 +7,8 @@ CDN360 sends an email notification when a certificate used in production is clos
 ## If you already have a new CA-signed certificate with private key and chain certificate
 1. In the left pane, click **Certificates**.
 2. Click a certificate name.
+    <br><u>OR </u></br>
+  In the **Actions** column, click the vertical ellipsis for the certificate you want to edit, and then select **Edit**.
 3. In the certificate details form, click **Create Version**.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions.png" alt="Upload Certificate Version" width="700"></p>
 
@@ -16,7 +18,7 @@ CDN360 sends an email notification when a certificate used in production is clos
 <strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deployment History</strong> button.</br></br>
 6. Click <strong>Deploy Configuration</strong>.</br><br>
 
-<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="500"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
 
 ## If you need a CSR to apply for the new certificate from a CA
 If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, perform the following procedure to create a self-signed version. Otherwise, skip steps 3 and 4.

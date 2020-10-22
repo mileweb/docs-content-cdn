@@ -19,8 +19,7 @@ From the dashboard, you can view:
 
 A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays that chart on the [Reports page](</docs/portal/reports.md>), where you can define report parameters, and then view the results on the selected chart.
 
-<p align=center><img src="/docs/resources/images/accessing-portal/traffic-volume.png" alt="traffic volume" width="1000"></p>
-
+<p align=center><img src="/docs/resources/images/traffic-volume.png" alt="traffic volume" width="1000"></p>
 
 ## Reports
 
@@ -48,4 +47,4 @@ The [Content Management page](</docs/portal/content-management.md>) allows you t
 
 ## Tasks
 
-On the [Tasks page](</docs/portal/tasks.md>), you can check the status of all previously submitted validation and deployment requests. Synchronous tasks can take a few minutes to finish.
+On the Tasks page, you can check the status of all previously submitted [validation](</docs/portal/tasks/validations.md>) and [deployment/undeployment](</docs/portal/tasks/deployments.md>) requests. Synchronous tasks can take a few minutes to finish.

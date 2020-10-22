@@ -12,7 +12,7 @@ The following figure shows the key elements on the page, and the table following
 | :----------: | --------------- |
 | 1 | To filter purges, type characters in this field and then press the Enter key. All purges that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field. |
 | 2 | Each purge appears on its own row. Clicking an ID shows detailed information about the purge.|
-| 3 | The **Create Purge** button allows you to create a purge request.|
+| 3 | The button to create purge requests.|
 
 ## Creating a Purge Request
 
