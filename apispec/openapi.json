@@ -20306,7 +20306,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
-        "description": "Return the number of requests to your origin server that are using our <a href=\"cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "description": "Return the number of requests to your origin server that are using our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
         "parameters": [
           {
             "schema": {
@@ -20528,7 +20528,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
-        "description": "Return the traffic to your origin server that uses our <a href=\"cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
         "parameters": [
           {
             "schema": {
