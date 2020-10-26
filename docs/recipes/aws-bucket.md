@@ -47,7 +47,7 @@ We'll start by creating and accessing the public AWS bucket, and then we'll look
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-upload-file.png" alt="create bucket" width="720"></p>
 
-11. Click on the uploaded file in the bucket to see the information we can use: <<use for what or to do what??>>
+11. Click on the uploaded file in the bucket to check the uploaded object URL.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-uploaded-file-info.png" alt="create bucket" width="500"></p>
 
@@ -121,11 +121,11 @@ We have created an origin. Next we will create an initial edge-logic configurati
 11. Click **"OK"**. The system generates the following edge-logic script:
 
  ```nginx
-     location / { #This is the default location.
-      origin_pass aws_origin;
-      proxy_cache_valid 3600m; #200, 301, and 302 responses will be cached for 3600m
-      proxy_ignore_headers Cache-Control Expires; #This will force the cache server to ignore cache control headers from origin.
-      }
+        location / { #This is the default location.
+            origin_pass aws_origin;
+            proxy_cache_valid 3600m; #200, 301, and 302 responses will be cached for 3600m
+            proxy_ignore_headers Cache-Control Expires; #This will force the cache server to ignore cache control headers from origin.
+        }
  ```
 
 You can edit this script and set up any logic you need to address your requirements. 
@@ -295,5 +295,4 @@ accept-ranges: bytes
 ```
 
 That's all there is to it!
-
 Now you can place your property into production.
