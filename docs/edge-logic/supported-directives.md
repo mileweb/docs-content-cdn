@@ -162,7 +162,11 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 <span class="badge dark">advanced</span>
 
-CDN360 has gzip always on, but by default only applies to content type “text/html”. This directive can be used to enable compression on more MIME types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript`and ETA is Sep. 2020. Up to 20 wildcards will be supported.
+**Syntax**: `gzip_types mime-type ...;` <br/>
+**Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
+**Context**:  http, server, location
+
+CDN360 has gzip always on, and applies to the default MIME types above. In addition, compression is only activated when the response body size is greater than 1000 bytes. We believe the default behavior should be good enough for the vast majority of users. This directive can be used to enable compression on other types. The search and match is case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript`and ETA is Nov. 2020. 
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
