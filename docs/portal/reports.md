@@ -19,10 +19,12 @@ The following report types are supported:
 
 | **Report**            | **Description**                                                   |
 | --------------------- | ----------------------------------------------------------------- |
-| Traffic Volume        | Shows edge versus origin traffic.                                 |
-| Traffic Bandwidth     | Shows edge versus origin traffic bandwidth. Lines represent edge traffic from CDN360 servers, traffic from your origin servers, and cache hit rate. The vertical (Y) axis shows the bandwidth and hit ratio, while the horizontal (X) axis shows time. The cache hit rate is computed as (edge traffic - origin traffic) / edge traffic.     |
-| Requests              | Shows requests made to the files of your property. Lines show the requests to CDN360 edge servers, requests to your origin servers, and cache hit rate. The cache hit rate is computed as (edge requests - origin requests)/edge requests.              |
-| Status Code Details   | Shows the percentage of HTTP status codes returned. For example, code 200 represents a successful request. |
+| Traffic Volume        | Reports edge versus origin traffic.                                 |
+| Traffic Bandwidth     | Reports edge versus origin traffic bandwidth. Lines represent edge traffic from CDN360 servers, traffic from your origin servers, and cache hit rate. The vertical (Y) axis shows the bandwidth and hit ratio, while the horizontal (X) axis shows time. The cache hit rate is computed as (edge traffic - origin traffic) / edge traffic.     |
+| Requests              | Reports requests made to the files of your property. Lines show the requests to CDN360 edge servers, requests to your origin servers, and cache hit rate. The cache hit rate is computed as (edge requests - origin requests)/edge requests.              |
+| Status Code Details   | Reports the percentage of HTTP status codes returned. For example, code 200 represents a successful request. |
+| Fast Route Traffic Volume   | Reports the traffic to your origin server that use CDNetworks' <a href="cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
+| Fast Route Traffic Requests   | Reports the number of requests to your origin server that use CDNetworks' <a href="cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
 | Traffic Volume Summary| Summarizes the edge traffic volume.                               |
 
 ## Generating Reports
