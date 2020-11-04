@@ -66,7 +66,7 @@ Administrators delete users from the **Users** tab on the Identity & Access Mana
    
 **Tip:** Use the filter at the top left of the page to filter users.
 
-1. When prompted to confirm the deletion, click **OK** to delete the user.
+3. When prompted to confirm the deletion, click **OK** to delete the user.
 
 ## Suspending a User
 

@@ -8,7 +8,7 @@ The following procedure describes how to use the auto-renew feature:
 
 1. [Create the initial certificate](</docs/portal/certificates/creating-certificates.md>).
 2. On the Create Certificate form, make sure **Auto Renew** is set to **Let's Encrypt**. You can also do this on the Certificate Details page any time after the certificate is created.
-3. Create the property that contains the hostname(s) to be accelerated. 
+3. Create the property that contains the hostname(s) to be accelerated. In the **Advanced Settings** of the Property page, make sure **Disable Certificate Renew Automation** is set to **No**.
 
 **Note:** The property cannot contain wildcard characters in the hostname because HTTP-01 challenges do not support wildcard domains.
 
