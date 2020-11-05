@@ -108,7 +108,7 @@
                               {
                                 "hostHeader": "testcustomer.g.qtlcdn.com",
                                 "servers": [
-                                  "edgetools.quantil.com"
+                                  "edgetools.theoriginserver.com"
                                 ],
                                 "name": "my_origin_1572420965460",
                                 "directConnection": "noDirect"
@@ -166,7 +166,24 @@
                             },
                             "format": {
                               "type": "string",
-                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                            },
+                            "headers": {
+                              "type": "array",
+                              "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "Name of an HTTP header."
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "Value of an HTTP header."
+                                  }
+                                }
+                              }
                             }
                           },
                           "required": [
@@ -176,7 +193,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 200000,
-                          "description": "Refer to https://docs.quantil.com/edgelogic"
+                          "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -435,6 +452,11 @@
                               "action"
                             ]
                           }
+                        },
+                        "disableCertAutomation": {
+                          "type": "boolean",
+                          "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                          "default": "false"
                         }
                       }
                     },
@@ -648,6 +670,12 @@
                       "code": "InvalidRedirectHttpToHttps",
                       "message": "The allowed values for redirectHttpToHttps are true, false, 302, 307 and 308."
                     }
+                  },
+                  "OriginHostnameConflict": {
+                    "value": {
+                      "code": "OriginHostnameConflict",
+                      "message": "At least one of the hostnames is equal to an origin's server name."
+                    }
                   }
                 }
               }
@@ -704,7 +732,7 @@
                         {
                           "hostHeader": "testcustomer.g.qtlcdn.com",
                           "servers": [
-                            "edgetools.quantil.com"
+                            "edgetools.theoriginserver.com"
                           ],
                           "name": "my_origin_1572420965460",
                           "directConnection": "noDirect"
@@ -762,7 +790,24 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                      },
+                      "headers": {
+                        "type": "array",
+                        "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name of an HTTP header."
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "Value of an HTTP header."
+                            }
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -772,7 +817,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 200000,
-                    "description": "Refer to https://docs.quantil.com/edgelogic"
+                    "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -1031,6 +1076,11 @@
                         "action"
                       ]
                     }
+                  },
+                  "disableCertAutomation": {
+                    "type": "boolean",
+                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "default": "false"
                   }
                 }
               },
@@ -2616,6 +2666,12 @@
                       "code": "InvalidOrigins",
                       "message": "The origin hostHeader 'invalid' is invalid. It must be a valid hostname or a variable name ($ + a string consists of lower case a-z and '_' with length 3-60)."
                     }
+                  },
+                  "OriginHostnameConflict": {
+                    "value": {
+                      "code": "OriginHostnameConflict",
+                      "message": "At least one of the hostnames is equal to an origin's server name."
+                    }
                   }
                 }
               }
@@ -2672,7 +2728,7 @@
                         {
                           "hostHeader": "testcustomer.g.qtlcdn.com",
                           "servers": [
-                            "edgetools.quantil.com"
+                            "edgetools.theoriginserver.com"
                           ],
                           "name": "my_origin_1572420965460",
                           "directConnection": "noDirect"
@@ -2730,7 +2786,24 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                      },
+                      "headers": {
+                        "type": "array",
+                        "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name of an HTTP header."
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "Value of an HTTP header."
+                            }
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -2740,7 +2813,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 200000,
-                    "description": "Refer to https://docs.quantil.com/edgelogic"
+                    "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -2999,6 +3072,11 @@
                         "action"
                       ]
                     }
+                  },
+                  "disableCertAutomation": {
+                    "type": "boolean",
+                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "default": "false"
                   }
                 }
               },
@@ -3087,6 +3165,12 @@
                     "value": {
                       "code": "InvalidTLSSessionTimeout",
                       "message": "The TLS session timeout value should be between 300 and 86400 inclusive."
+                    }
+                  },
+                  "OriginHostnameConflict": {
+                    "value": {
+                      "code": "OriginHostnameConflict",
+                      "message": "At least one of the hostnames is equal to an origin's server name."
                     }
                   }
                 }
@@ -3182,7 +3266,7 @@
                             {
                               "hostHeader": "testcustomer.g.qtlcdn.com",
                               "servers": [
-                                "edgetools.quantil.com"
+                                "edgetools.theoriginserver.com"
                               ],
                               "name": "my_origin_1572420965460",
                               "directConnection": "noDirect"
@@ -3240,7 +3324,24 @@
                           },
                           "format": {
                             "type": "string",
-                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                          },
+                          "headers": {
+                            "type": "array",
+                            "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "description": "Name of an HTTP header."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Value of an HTTP header."
+                                }
+                              }
+                            }
                           }
                         },
                         "required": [
@@ -3250,7 +3351,7 @@
                       "edgeLogic": {
                         "type": "string",
                         "maxLength": 200000,
-                        "description": "Refer to https://docs.quantil.com/edgelogic"
+                        "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                       },
                       "hasBeian": {
                         "type": "boolean",
@@ -3509,6 +3610,11 @@
                             "action"
                           ]
                         }
+                      },
+                      "disableCertAutomation": {
+                        "type": "boolean",
+                        "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                        "default": "false"
                       }
                     }
                   }
@@ -3522,7 +3628,7 @@
                 "example-1": {
                   "value": {
                     "name": "TestProperty1572420065294",
-                    "description": "validPropertyNoCertificate_PropertyEndToEndTestSteps",
+                    "description": "a new property",
                     "version": {
                       "syntaxVersion": 1,
                       "edgeLogic": "location / {origin_pass my_origin_1572420065294;}",
@@ -3530,7 +3636,7 @@
                         {
                           "hostHeader": "testcustomer.g.qtlcdn.com",
                           "servers": [
-                            "edgetools.quantil.com"
+                            "edgetools.theoriginserver.com"
                           ],
                           "name": "my_origin_1572420065294",
                           "directConnection": "auto"
@@ -3539,6 +3645,47 @@
                       "hostnames": [
                         "testcustomer1572420065294.g.qtlcdn.com"
                       ]
+                    }
+                  }
+                },
+                "example-2": {
+                  "value": {
+                    "name": "TestProperty1572420065294",
+                    "description": "validPropertyNoCertificate_PropertyEndToEndTestSteps",
+                    "version": {
+                      "syntaxVersion": 1,
+                      "edgeLogic": "location / {origin_pass my_origin_1572420065294;}",
+                      "origins": [
+                        {
+                          "hostHeader": "testcustomer.g.qtlcdn.com",
+                          "servers": [
+                            "edgetools.theoriginserver.com"
+                          ],
+                          "name": "my_origin_1572420065294",
+                          "directConnection": "auto"
+                        }
+                      ],
+                      "hostnames": [
+                        "testcustomer1572420065294.g.qtlcdn.com"
+                      ],
+                      "realTimeLog": {
+                        "logUrl": "https://mynotification.info/downloadNotify/index.php",
+                        "sampleRate": 2,
+                        "escape": "json",
+                        "format": "$server_addr",
+                        "headers": [
+                          {
+                            "name": "X-My-Header",
+                            "value": "123abc"
+                          }
+                        ],
+                        "redirectHttpToHttps": true,
+                        "loadBalancerHashKey": "$http_hashvalue",
+                        "videoSeek": {
+                          "startParameter": "start",
+                          "endParameter": "end"
+                        }
+                      }
                     }
                   }
                 }
@@ -7923,11 +8070,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -7957,17 +8099,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -7996,11 +8127,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -8030,17 +8156,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -8388,11 +8503,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -8422,17 +8532,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -9052,11 +9151,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -9086,17 +9180,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -10008,6 +10091,15 @@
                           "type": "string"
                         }
                       }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
                     }
                   }
                 },
@@ -11054,11 +11146,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -11088,17 +11175,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -11367,11 +11443,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -11401,17 +11472,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -12573,11 +12633,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -12607,17 +12662,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -13549,6 +13593,47 @@
                         }
                       ]
                     }
+                  },
+                  "Traffic grouped by server groups and customer IDs": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-08-01T12:35:00Z",
+                        "endTime": "2020-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            4400.65621,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "premium,123456",
+                          "data": [
+                            2200.29969,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            2200.35652,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -13588,7 +13673,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "Get a summary of traffic during a timespan grouped by hostnames or server groups.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get a summary of traffic during a timespan. You can group results by hostnames or server groups. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
         "parameters": [
           {
             "schema": {
@@ -13633,9 +13718,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltersummary",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-tags": [
+                  "Reports"
+                ],
+                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to only return data for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -13650,9 +13738,6 @@
                     ]
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -13664,30 +13749,27 @@
                           "type": "string"
                         }
                       },
-                      "serverGroups": {
+                      "servergroups": {
                         "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "premium+",
-                          "ultra"
-                        ],
                         "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "Resellers can limit the data by specifying IDs of child customers.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "groupby": {
+                        "type": "array",
+                        "description": "You can choose to group by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                        "items": {
+                          "type": "string"
+                        }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -19503,7 +19585,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of advanced <a href=\"https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives\">edge logic directives</a> that are permitted to be used in addition to standard ones.",
+                    "description": "A list of advanced <a href=\"/cdn/docs/edge-logic/supported-directives\">edge logic directives</a> that are permitted to be used in addition to standard ones.",
                     "items": {
                       "type": "string"
                     }
@@ -20306,7 +20388,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
-        "description": "Return the number of requests to your origin server that are using our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "description": "Return the number of requests to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
         "parameters": [
           {
             "schema": {
@@ -20528,7 +20610,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
-        "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
         "parameters": [
           {
             "schema": {
@@ -20586,7 +20668,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltershostnamesonly",
                 "type": "object",
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
@@ -20596,16 +20678,12 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
                   "Reports"
                 ],
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -20616,31 +20694,7 @@
                         "items": {
                           "type": "string"
                         }
-                      },
-                      "serverGroups": {
-                        "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "premium+",
-                          "ultra"
-                        ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
-                        "items": {
-                          "type": "string"
-                        }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -20672,6 +20726,960 @@
           "in": "path",
           "required": true,
           "description": "ID of a customer.  For the \"Get the service quota for a customer\" API, its value can also be <i>me</i> to fetch your own service quota settings. You cannot specify \"me\" to update or delete your own settings."
+        }
+      ],
+      "get": {
+        "summary": "Get the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the service quotas for a CDN360 customer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    },
+                    "upgradeDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                    },
+                    "suspensionDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 1234567890,
+                      "contractId": "",
+                      "hostnameLimit": 20,
+                      "propertyLimit": 20,
+                      "certificateLimit": 20,
+                      "edgeHostnameLimit": 10,
+                      "filePurgeQuotaInStaging": 100,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 100,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 20,
+                      "logConfigLimit": 20,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "secure_link"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The provided customer ID does not exist or the caller does not have permission to access it."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No service quota was explicitly defined for this customer. The response body will contain the default settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "serviceQuotaResponse",
+                  "type": "object",
+                  "description": "Describes the service quotas for a customer",
+                  "x-examples": {
+                    "example-1": {
+                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
+                      "customerId": 10008046,
+                      "contractId": "",
+                      "hostnameLimit": 13,
+                      "propertyLimit": 13,
+                      "certificateLimit": 11,
+                      "edgeHostnameLimit": 8,
+                      "filePurgeQuotaInStaging": 13,
+                      "dirPurgeQuotaInStaging": 13,
+                      "filePurgeQuotaInProduction": 13,
+                      "dirPurgeQuotaInProduction": 13,
+                      "prefetchQuota": 13,
+                      "logConfigLimit": 13,
+                      "maximumChildCustomers": 0,
+                      "allowedCacheDirectives": [
+                        "slice"
+                      ],
+                      "status": "active",
+                      "allowProduction": true,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  },
+                  "x-tags": [
+                    "CDN Product Management"
+                  ],
+                  "properties": {
+                    "serviceQuotaId": {
+                      "type": "string",
+                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "ID of the customer."
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "ID representing the contract, used for billing."
+                    },
+                    "hostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of hostnames allowed in production.\n",
+                      "default": 100
+                    },
+                    "propertyLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of properties that can be created.\n"
+                    },
+                    "certificateLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of certificates that can be created."
+                    },
+                    "edgeHostnameLimit": {
+                      "type": "integer",
+                      "description": "Maximum number of edge hostnames that can be created.",
+                      "default": 100
+                    },
+                    "filePurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInStaging": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    },
+                    "filePurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "dirPurgeQuotaInProduction": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    },
+                    "prefetchQuota": {
+                      "type": "integer",
+                      "default": 5000,
+                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                    },
+                    "logConfigLimit": {
+                      "type": "integer",
+                      "default": 100,
+                      "description": "Maximum number of log configurations."
+                    },
+                    "maximumChildCustomers": {
+                      "type": "integer",
+                      "default": 20,
+                      "description": "For resellers, this represents the maximum number of child customers allowed."
+                    },
+                    "allowedCacheDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "enum": [
+                        "active",
+                        "suspended",
+                        "trial"
+                      ]
+                    },
+                    "allowProduction": {
+                      "type": "boolean",
+                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                      "default": false
+                    },
+                    "usageLimitDollar": {
+                      "type": "integer",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "minimum": 0
+                    },
+                    "usageLimitDays": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 365,
+                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                    },
+                    "allowDeploymentInChina": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
+                    },
+                    "trialDeadline": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                    },
+                    "upgradeDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                    },
+                    "suspensionDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "status"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "customerId": 1234567890,
+                      "hostnameLimit": 1000000,
+                      "propertyLimit": 1000000,
+                      "certificateLimit": 1000000,
+                      "edgeHostnameLimit": 1000000,
+                      "filePurgeQuotaInStaging": 5000,
+                      "dirPurgeQuotaInStaging": 20,
+                      "filePurgeQuotaInProduction": 5000,
+                      "dirPurgeQuotaInProduction": 20,
+                      "prefetchQuota": 5000,
+                      "logConfigLimit": 1000000,
+                      "maximumChildCustomers": 1000000,
+                      "allowedCacheDirectives": [],
+                      "status": "suspended",
+                      "allowProduction": false,
+                      "usageLimitDays": 0,
+                      "usageLimitDollar": 0,
+                      "allowDeploymentInChina": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-serviceQuotas-customer-customerId",
+        "description": "Get the CDN service quota for a customer."
+      },
+      "patch": {
+        "summary": "Update the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The customer's quota was updated successfully."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource limit exceeded": {
+                    "value": {
+                      "code": "ResourceLimitExceeded",
+                      "message": "This customer cannot have a higher 'propertyLimit' limit than the reseller."
+                    }
+                  },
+                  "Invalid customer ID update": {
+                    "value": {
+                      "code": "InvalidCustomerIdUpdate",
+                      "message": "The customer ID field cannot be updated."
+                    }
+                  },
+                  "Invalid certificate limit": {
+                    "value": {
+                      "code": "InvalidCertificateLimit",
+                      "message": "The value for limit should be non-negative."
+                    }
+                  },
+                  "Invalid status": {
+                    "value": {
+                      "code": "InvalidStatus",
+                      "message": "The 'trial' status cannot be specified by this customer."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patch-cdn-serviceQuotas-customer-customerId",
+        "description": "This API allows a reseller to update an existing service quota for a child customer.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "updateServiceQuotaBody",
+                "type": "object",
+                "description": "This object contains the fields of the service quota that can be updated.",
+                "x-tags": [
+                  "CDN Product Management"
+                ],
+                "properties": {
+                  "contractId": {
+                    "type": "string",
+                    "description": "ID representing the contract, used for billing."
+                  },
+                  "hostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of hostnames allowed in production.\n",
+                    "default": 100
+                  },
+                  "propertyLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of properties that can be created.\n"
+                  },
+                  "certificateLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of certificates that can be created."
+                  },
+                  "edgeHostnameLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of edge hostnames that can be created.",
+                    "default": 100
+                  },
+                  "filePurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInStaging": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                  },
+                  "filePurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "dirPurgeQuotaInProduction": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                  },
+                  "prefetchQuota": {
+                    "type": "integer",
+                    "default": 5000,
+                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                  },
+                  "logConfigLimit": {
+                    "type": "integer",
+                    "default": 100,
+                    "description": "Maximum number of log configurations."
+                  },
+                  "maximumChildCustomers": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "For resellers, this represents the maximum number of child customers allowed."
+                  },
+                  "allowedCacheDirectives": {
+                    "type": "array",
+                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer  is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "enum": [
+                      "active",
+                      "suspended",
+                      "trial"
+                    ]
+                  },
+                  "allowProduction": {
+                    "type": "boolean",
+                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
+                    "default": false
+                  },
+                  "usageLimitDollar": {
+                    "type": "integer",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "minimum": 0
+                  },
+                  "usageLimitDays": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 365,
+                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.\n"
+                  },
+                  "allowDeploymentInChina": {
+                    "type": "boolean",
+                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
+                    "default": false
+                  },
+                  "trialDeadline": {
+                    "type": "string",
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filePurgeQuotaInStaging": 100
+                  }
+                }
+              }
+            }
+          },
+          "description": "Include the fields that you wish to update. Omitted fields will not be changed."
+        }
+      },
+      "delete": {
+        "summary": "Delete the service quota for a customer",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "204": {
+            "description": "The service quota was successfully deleted."
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The provided customer ID does not exist or is not a child of the caller."
+                    }
+                  },
+                  "Has certificate in production": {
+                    "value": {
+                      "code": "HasCertificateInProduction",
+                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has edge hostname": {
+                    "value": {
+                      "code": "HasEdgeHostname",
+                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  },
+                  "Has property in production": {
+                    "value": {
+                      "code": "HasPropertyInProduction",
+                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-serviceQuotas-customer-customerId",
+        "description": "This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
+      }
+    },
+    "/cdn/report/cpuTime": {
+      "post": {
+        "summary": "Get CPU time used",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "reportResponse",
+                  "type": "object",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "cpu time",
+                      "dataUnit": "seconds",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2020-08-01T00:00:00Z",
+                          "data": 9900540
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid protocol": {
+                    "value": {
+                      "code": "InvalidProtocol",
+                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                    }
+                  },
+                  "Invalid hostnames": {
+                    "value": {
+                      "code": "InvalidHostnames",
+                      "message": "Duplicate hostname(s) 'domain.info'."
+                    }
+                  },
+                  "Invalid time span": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The max time span of 'daily' report must be no more than 366 days."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-cpuTime",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> Your startdate may be rounded down to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data beginning 2019-09-05T03:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "protocol",
+            "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
+          }
+        ],
+        "description": "Get the amount of CPU time in seconds used to handle requests for your content.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "reportfiltershostnamesonly",
+                "type": "object",
+                "x-tags": [
+                  "Reports"
+                ],
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Return data for a specific hostname only": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "endtoendsds.domain.info"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames will be included."
         }
       ],
       "get": {
@@ -22331,7 +23339,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
