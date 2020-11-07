@@ -541,6 +541,16 @@ Defines conditions under which the response will not be saved to a cache. No cha
 
 Permits passing [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header fields from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin.
 
+### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)
+
+<span class="badge">standard</span>
+
+**Syntax:**	`proxy_pass_request_headers on | off;` <br/>
+**Default:**	`proxy_pass_request_headers on;` <br/>
+**Context:**	http, server, location
+
+Enables of disables passing request headers from client to upstream. No change to the public version.
+
 ### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
 
 <span class="badge dark">advanced</span>
