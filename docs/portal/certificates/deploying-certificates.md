@@ -9,7 +9,7 @@ After you create or update a certificate, you must deploy it to either the stagi
 1. In the left pane, click **Certificates**. 
 2. On the Certificates page, click the name of the certificate you want to deploy.
 3. Scroll down to the **Deployment** section, and then select **Staging** or **Production** from the **Deployment Destination** drop-down list.
-<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="575"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="700"></p>
 
 <strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button.
 

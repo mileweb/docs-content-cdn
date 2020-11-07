@@ -208,6 +208,16 @@
             "path": "/docs/edge-logic/faq.md"
           }
         ]
+      },
+      { 
+        "title": "Recipes",
+        "heading": true,
+        "routes": [
+          {
+            "title": "AWS Bucket Acceleration",
+            "path": "/docs/recipes/aws-bucket.md"
+          }
+        ]
       }
     ]
   }

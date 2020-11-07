@@ -26,7 +26,7 @@ The following procedure describes how to generate self-signed certificates. Self
 |Certificate Description|Add a description about this certificate.|
 |Auto Renew|Select whether you want CDN360 to [renew the certificate automatically](/docs/portal/certificates/auto-renewal.md) through Let's Encrypt (**LE**).|
 |Share With|This field is available to resellers only. It allows resellers to select the child customers with whom they want to share the certificate.|
-|**Auto Generate Certificate Tab**|
+|| **Auto Generate Certificate Tab**                                      |
 |Public Key Algorithm|Select a public key algorithm for this certificate: RSA2048 or ECC256.|
 |Common Name|Enter a common name you want to use for the certificate (can be any text).|
 |SAN|Enter one or more subject alternative names (SANs), which will be the hostnames you want this certificate to cover.|
