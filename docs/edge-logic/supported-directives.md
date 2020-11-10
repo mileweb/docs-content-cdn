@@ -6,6 +6,16 @@ Each non-proprietary directive includes a direct link to the official NGINX docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
+### `access_log_sample_rate`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `access_log_sample_rate {N};`<br/>
+**Default**: `access_log_sample_rate 1;`<br/>
+**Context**: http, server, location, if in location
+
+This directive allows you to reduce the number of access log entries. A setting of `N` means one log entry for every N edge requests. N=0 would turn off the access log.
+
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">standard</span>
@@ -352,6 +362,7 @@ For example:
 ```nginx
 origin_set_header X-Forwarded-For $client_real_ip;
 ```
+One thing to notice is that if you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
 
 ### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
 
