@@ -136,7 +136,7 @@
                         },
                         "hostnames": {
                           "type": "array",
-                          "description": "Hostnames associated with the property.",
+                          "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                           "items": {
                             "type": "string"
                           }
@@ -760,7 +760,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "Hostnames associated with the property.",
+                    "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                     "items": {
                       "type": "string"
                     }
@@ -2756,7 +2756,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "Hostnames associated with the property.",
+                    "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                     "items": {
                       "type": "string"
                     }
@@ -3294,7 +3294,7 @@
                       },
                       "hostnames": {
                         "type": "array",
-                        "description": "Hostnames associated with the property.",
+                        "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                         "items": {
                           "type": "string"
                         }
@@ -6468,6 +6468,22 @@
                     "finishTime": {
                       "type": "string",
                       "description": "An RFC 3339 date indicating when the task finished."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the property validation task."
+                    },
+                    "apiAccountId": {
+                      "type": "integer",
+                      "description": "ID of an API account used to create the validation task."
+                    },
+                    "apiName": {
+                      "type": "string",
+                      "description": "Name of an API account used to create the validation task."
+                    },
+                    "cacheVersion": {
+                      "type": "string",
+                      "description": "CDN360 cache version used when validating the property."
                     }
                   },
                   "required": [
@@ -6489,7 +6505,10 @@
                       "status": "waiting",
                       "statusDetails": "queued after 0 tasks",
                       "customerId": 10000021,
-                      "apiRequestId": "43e220b980b7f7ed"
+                      "apiRequestId": "43e220b980b7f7ed",
+                      "apiAccountId": 10000021,
+                      "apiName": "myAPIName",
+                      "cacheVersion": "1.18.0.1.2.03-224"
                     }
                   },
                   "Failed validation": {
@@ -6501,7 +6520,10 @@
                       "status": "failed",
                       "statusDetails": "invalid number of arguments in \"expires\" directive in /usr/local/qtl-nginx/conf/../domain_conf/ccve-validation.conf:21",
                       "customerId": 10000021,
-                      "apiRequestId": "495e81f2772b525d"
+                      "apiRequestId": "495e81f2772b525d",
+                      "apiAccountId": 10000021,
+                      "apiName": "myApiName",
+                      "cacheVersion": "1.18.0.1.2.03-224"
                     }
                   },
                   "Successful validation": {
@@ -6513,7 +6535,10 @@
                       "status": "succeeded",
                       "statusDetails": "[{\"url\":\"http://testdomain-t1573528182678.domain.info\",\"status\":\"succeeded\",\"reason\":\"200\"}]",
                       "customerId": 10000021,
-                      "apiRequestId": "a69ae9342c576554"
+                      "apiRequestId": "a69ae9342c576554",
+                      "apiAccountId": 10000021,
+                      "apiName": "myAPIName",
+                      "cacheVersion": "1.18.0.1.2.03-224"
                     }
                   }
                 }
