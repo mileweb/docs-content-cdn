@@ -594,9 +594,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** none <br/>
 **Contexts:** http, server, location, if in location
 
-"This CDN360-proprietary directive sets the sample rate used by our real-time log feature, which allows requests to a CDN360 property to trigger notifications on a server of your choosing.  To configure the feature, modify the [realTimeLog field of a property](<https://docs.cdnetworks.com/cdn/apidocs#operation/createProperty>).
-
-The parameter value can be an integer in [0,65536]. 0 turns off the real time logging. Variable is supported. By default, the sample rate is set for the entire site by the `realTimeLog` field of the property JSON. Use this directive to change the sample rate or turn off real-time logging selectively for some locations.
+Real-Time Log is a powerful feature of CDN360 that when enabled, sends a log entry for each request in real-time to an ingestion server of your choosing. The format of the log entry is highly configurable. To avoid overwhelming the ingestion server, the user can set a sample rate `N` which means one log entry for every N requests. N can be any integer in [0, 65536] and 0 turns off the feature. A default sample rate is specified in the [realTimeLog field of a property](</cdn/apidocs#operation/createProperty>), which is applied to all requests. This directive can be used to change the sample rate or turn off the logging selectively for some locations.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
