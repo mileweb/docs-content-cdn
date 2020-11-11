@@ -46,7 +46,7 @@ The policy parameter also supports variables; the value must be one of the three
 
 If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
 
-2. The new parameter ```qtl_if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```qtl_if``` parameter should always be at the end of the directive configuration. A condition may be any of the following,
+2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following,
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
@@ -266,7 +266,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
-**Syntax**: `origin_header_modify field value policy=value qtl_if(condition);` <br/>
+**Syntax**: `origin_header_modify field value policy=value if(condition);` <br/>
 **Default**:  - <br/>
 **Context**:  http, server, location, if in location
 
@@ -278,7 +278,7 @@ Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The p
 *   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response.
 *   The ```preserve``` policy adds the header and the value into the upstream response only if the header does not exist in the upstream response.
 
-The parameter ```qtl_if``` is introduced to add the header based on the condition. A condition can be one of the following:
+The parameter ```if``` is introduced to add the header based on the condition. A condition can be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   A comparison of a variable with a string using the "=" and "!=" operators.
@@ -288,9 +288,9 @@ Examples:
 
 Added a header ```X-Status``` based on origin's status code:
 ```nginx
-origin_header_modify X-Status Good qtl_if($upstream_response_status ~ "^[23]");
-origin_header_modify X-Status ClientErr qtl_if($upstream_response_status ~ "^4");
-origin_header_modify X-Status ServerErr qtl_if($upstream_response_status ~ "^5");
+origin_header_modify X-Status Good if($upstream_response_status ~ "^[23]");
+origin_header_modify X-Status ClientErr if($upstream_response_status ~ "^4");
+origin_header_modify X-Status ServerErr if($upstream_response_status ~ "^5");
 ```
 Delete the ```Cache-Control``` header in the origin's response:
 ```nginx
@@ -351,14 +351,14 @@ This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
-**Syntax**:  `origin_set_header field value qtl_if(condition);` <br/>
+**Syntax**:  `origin_set_header field value if(condition);` <br/>
 **Default**: `origin_set_header host $host;` <br/>
 **Contexts**: http, server, location, if in location
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
 1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
-2. Use the new parameter  ```qtl_if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```qtl_if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
+2. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
