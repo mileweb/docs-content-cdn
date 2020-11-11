@@ -192,8 +192,8 @@ if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```nginx
 if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
 ```
-Please notice that when used together, `&&` has higher precedence than `||` and you can't use parenthesis to group sub-conditions.
-We support up to 9 sub-conditions and the evaluation logic automatically skips the ones that are not necessary.
+Please notice that when used together, `&&` has higher precedence than `||` and using parenthesis to group sub-conditions is not supported.
+We support up to 9 sub-conditions and the evaluation logic automatically skips the ones that are not affecting the final result.
 *  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
 *  Support multiple `elseif` and a final `else` after an `if` block. For example:
 ```nginx
