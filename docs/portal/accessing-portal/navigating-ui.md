@@ -17,7 +17,7 @@ From the dashboard, you can view:
 - Traffic volume, traffic bandwidth, and traffic requests information for all properties.
 - Status codes for all properties.
 
-A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays that chart on the [Reports page](</docs/portal/reports.md>), where you can define report parameters, and then view the results on the selected chart.
+A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays the [Reports page](</docs/portal/reports.md>), where you can define report parameters and view a graph that compares the current 5-Minute Edge to the option selected in the drop-down list (Traffic Volume, Traffic Bandwidth, and so on) at the top left of the dashboard chart.
 
 <p align=center><img src="/docs/resources/images/traffic-volume.png" alt="traffic volume" width="1000"></p>
 
