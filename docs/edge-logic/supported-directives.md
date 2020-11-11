@@ -69,9 +69,9 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span> <span class="badge yellow">ETA: Sep 2020</span>
+<span class="badge">standard</span>
 
-Allows access for the specified network or address. (Work in progress to make this apply only on edge.)
+Allows access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -106,9 +106,9 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span> <span class="badge yellow">ETA: Sep 2020</span>
+<span class="badge">standard</span>
 
-Denies access for the specified network or address. (Work in progress to make this apply only on edge.)
+Denies access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
 
 ### `enable_websocket`
 
@@ -176,7 +176,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context**:  http, server, location
 
-CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is only activated when the response body size is greater than 1000 bytes. The default behavior should work well for the vast majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript` with an ETA of Nov. 2020. 
+CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is only activated when the response body size is greater than 1000 bytes. The default behavior should work well for the vast majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support (up to 20) wildcards like `text/*` and `*javascript`.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
@@ -468,7 +468,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We are modifying the open-source version to support setting `time` with a variable. (ETA: Nov 2020). The specified time is only applied to responses without caching instructions from the origin. A value of 0 makes those contents not cached. If you can identify dynamic/non-cacheable contents based on request, you should use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
+Sets caching time for different response codes. We enhanced the open-source version to support setting `time` with a variable. The specified time is only applied to responses without caching instructions from the origin. A value of 0 makes those contents not cached. If you can identify dynamic/non-cacheable contents based on request, you should use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
 
 ### proxy_cache_vary
 
