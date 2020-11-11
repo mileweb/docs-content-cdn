@@ -200,7 +200,7 @@ We support up to 9 sub-conditions and the evaluation logic automatically skips t
 ```nginx
 if ($http_x = 1) { ... }
 elseif ($http_x = 2) { ... }
-elseif ($http_x = 5) { ... }
+elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
 
