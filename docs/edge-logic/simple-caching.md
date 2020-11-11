@@ -8,7 +8,8 @@ location / { # the default location
 }
 location ~ /.*\.(html?|css|png|js|jpe?g) { # static content
   proxy_cache_valid 1d; # cache for a day if no instruction from the origin
-  proxy_cache_min_age 1d; # cache for a day even if origin's max-age is less than a day.
+  proxy_cache_min_age 1d; # cache for a day even if origin's 
+                          # max-age is less than a day.
   origin_pass www_origin; # fetch content from this origin
 }
 ```
