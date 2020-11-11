@@ -2,14 +2,14 @@
 
 A property that always returns a fixed string is not very interesting. A typical CDN configuration usually requires the proxy servers to fetch some content from some origin servers and cache the content for a certain period of time for end users to retrieve. Assume you need to accelerate the hostname "faster.cdnetworks.com" and that the origin server’s hostname is "[www.cdnetworks.com](https://www.cdnetworks.com)". By default, you want the CDN360’s proxy server to cache the content following the `cache-control` and `expires` headers from the origin. If the origin does not specify an object’s cache time, you want to cache for 10 minutes. Because you know that HTML, CSS, PNG, JS, and JPEG files won’t be updated frequently, you want to cache them for a day if the origin’s instruction is shorter than a day. The Edge Logic should resemble the following:
 ```nginx
-location / {
-  proxy_cache_valid 10m;
-  origin_pass www_origin;
+location / { # the default location
+  proxy_cache_valid 10m; # cache for 10 min if no instruction from the origin
+  origin_pass www_origin; # fetch content from this origin
 }
-location ~ /.*\.(html?|css|png|js|jpe?g) {
-  proxy_cache_valid 1d;
-  proxy_cache_min_age 1d;
-  origin_pass www_origin;
+location ~ /.*\.(html?|css|png|js|jpe?g) { # static content
+  proxy_cache_valid 1d; # cache for a day if no instruction from the origin
+  proxy_cache_min_age 1d; # cache for a day even if origin's max-age is less than a day.
+  origin_pass www_origin; # fetch content from this origin
 }
 ```
 There are two "[location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)" directives:
