@@ -32,7 +32,7 @@ To create a property, complete the Create a Property form with required informat
 
 ## Edge Logic Wizard
 
-This wizard can be used to create an initial version of the Edge Logic. It supports some of the most basic cache configurations. You can modify the generated Edge Logic code to add complicated behaviors to suit your requirements.
+This wizard can be used to create an initial version of the Edge Logic. It supports some of the most basic cache configurations. You can modify the generated Edge Logic code to add complicated behaviors to suit your requirements. You can also set cache behavior for multiple locations.
 <p align=center><img src="/docs/resources/images/edge-configurations/property-edge-logic-wizard.png" alt="Edge Logic Wizard" width="600"></p>
 
 ## TLS Settings
