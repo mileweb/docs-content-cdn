@@ -6,16 +6,6 @@ Each non-proprietary directive includes a direct link to the official NGINX docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
-### `access_log_sample_rate`
-
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
-
-**Syntax**: `access_log_sample_rate {N};`<br/>
-**Default**: `access_log_sample_rate 1;`<br/>
-**Context**: http, server, location, if in location
-
-This directive allows you to reduce the number of access log entries. A setting of `N` means one log entry for every N edge requests. N=0 would turn off the access log.
-
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">standard</span>
@@ -46,7 +36,7 @@ The policy parameter also supports variables; the value must be one of the three
 
 If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
 
-2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following,
+2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
@@ -176,14 +166,14 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context**:  http, server, location
 
-CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is only activated when the response body size is greater than 1000 bytes. The default behavior should work well for the vast majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support (up to 20) wildcards like `text/*` and `*javascript`.
+CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for the majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made a few improvements to this directive:
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
 if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
@@ -192,10 +182,10 @@ if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```nginx
 if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
 ```
-Please notice that when used together, `&&` has higher precedence than `||` and using parenthesis to group sub-conditions is not supported.
+Please notice that when used together, `&&` has higher precedence than `||` and using parentheses to group sub-conditions is not supported.
 We support up to 9 sub-conditions and the evaluation logic automatically skips the ones that are not affecting the final result.
 *  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
-*  Support of integer value comparison with `<`, `<=`, `>`, `>=`. The user has to make sure both operands are valid integers, otherwise the result will be `false`. A valid integer can be either decimal, or hexidecimal with leading '0x'.
+*  Support of integer value comparison with `<`, `<=`, `>`, `>=`. Make sure both operands are valid integers; otherwise, the result will be `false`. A valid integer can be either decimal or hexadecimal with a leading '0x'.
 *  Support multiple `elseif` and a final `else` after an `if` block. For example:
 ```nginx
 if ($http_x = 1) { ... }
@@ -469,7 +459,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We enhanced the open-source version to support setting `time` with a variable. The specified time is only applied to responses without caching instructions from the origin. A value of 0 makes those contents not cached. If you can identify dynamic/non-cacheable contents based on request, you should use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
+Sets caching time for different response codes. We enhanced the open-source version to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
 
 ### proxy_cache_vary
 
@@ -586,16 +576,6 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 <span class="badge dark">advanced</span>
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
-
-### `realtime_log_sample_rate`
-
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
-
-**Syntax:** `realtime_log_sample_rate {sample rate};` <br/>
-**Default:** none <br/>
-**Contexts:** http, server, location, if in location
-
-Real-Time Log is a powerful feature of CDN360 that when enabled, sends a log entry for each request in real-time to an ingestion server of your choosing. The format of the log entry is highly configurable. To avoid overwhelming the ingestion server, the user can set a sample rate `N` which means one log entry for every N requests. N can be any integer in [0, 65536] and 0 turns off the feature. A default sample rate is specified in the [realTimeLog field of a property](</cdn/apidocs#operation/createProperty>), which is applied to all requests. This directive can be used to change the sample rate or turn off the logging selectively for some locations.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
