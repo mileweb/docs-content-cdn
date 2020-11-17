@@ -6,16 +6,6 @@ Each non-proprietary directive includes a direct link to the official NGINX docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
-### `access_log_sample_rate`
-
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
-
-**Syntax**: `access_log_sample_rate {N};`<br/>
-**Default**: `access_log_sample_rate 1;`<br/>
-**Context**: http, server, location, if in location
-
-This directive allows you to reduce the number of access log entries. A setting of `N` means one log entry for every N edge requests. N=0 would turn off the access log.
-
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">standard</span>
@@ -46,7 +36,7 @@ The policy parameter also supports variables; the value must be one of the three
 
 If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
 
-2. The new parameter ```qtl_if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```qtl_if``` parameter should always be at the end of the directive configuration. A condition may be any of the following,
+2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
@@ -69,9 +59,9 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span> <span class="badge yellow">ETA: Sep 2020</span>
+<span class="badge">standard</span>
 
-Allows access for the specified network or address. (Work in progress to make this apply only on edge.)
+Allows access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -106,9 +96,9 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span> <span class="badge yellow">ETA: Sep 2020</span>
+<span class="badge">standard</span>
 
-Denies access for the specified network or address. (Work in progress to make this apply only on edge.)
+Denies access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
 
 ### `enable_websocket`
 
@@ -176,20 +166,33 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context**:  http, server, location
 
-CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is only activated when the response body size is greater than 1000 bytes. The default behavior should work well for the vast majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We are working on supporting wildcards like `text/*` and `*javascript` with an ETA of Nov. 2020. 
+CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for the majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">standard</span>
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made a few improvements to this directive:
+Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 ```nginx
 if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
-We support up to 9 sub-conditions. If one sub-condition is evaluated false, the subsequent ones will not be evaluated.
+*  Support the `||` operator, which performs logical OR of two sub-conditions. For example:
+```nginx
+if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
+```
+Please notice that when used together, `&&` has higher precedence than `||` and using parentheses to group sub-conditions is not supported.
+We support up to 9 sub-conditions and the evaluation logic automatically skips the ones that are not affecting the final result.
 *  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
+*  Support of integer value comparison with `<`, `<=`, `>`, `>=`. Make sure both operands are valid integers; otherwise, the result will be `false`. A valid integer can be either decimal or hexadecimal with a leading '0x'.
+*  Support multiple `elseif` and a final `else` after an `if` block. For example:
+```nginx
+if ($http_x = 1) { ... }
+elseif ($http_x = 2) { ... }
+elseif ($http_x >= 0xa) { ... }
+else { ... }
+```
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -254,7 +257,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
-**Syntax**: `origin_header_modify field value policy=value qtl_if(condition);` <br/>
+**Syntax**: `origin_header_modify field value policy=value if(condition);` <br/>
 **Default**:  - <br/>
 **Context**:  http, server, location, if in location
 
@@ -266,7 +269,7 @@ Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The p
 *   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response.
 *   The ```preserve``` policy adds the header and the value into the upstream response only if the header does not exist in the upstream response.
 
-The parameter ```qtl_if``` is introduced to add the header based on the condition. A condition can be one of the following:
+The parameter ```if``` is introduced to add the header based on the condition. A condition can be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   A comparison of a variable with a string using the "=" and "!=" operators.
@@ -276,9 +279,9 @@ Examples:
 
 Added a header ```X-Status``` based on origin's status code:
 ```nginx
-origin_header_modify X-Status Good qtl_if($upstream_response_status ~ "^[23]");
-origin_header_modify X-Status ClientErr qtl_if($upstream_response_status ~ "^4");
-origin_header_modify X-Status ServerErr qtl_if($upstream_response_status ~ "^5");
+origin_header_modify X-Status Good if($upstream_response_status ~ "^[23]");
+origin_header_modify X-Status ClientErr if($upstream_response_status ~ "^4");
+origin_header_modify X-Status ServerErr if($upstream_response_status ~ "^5");
 ```
 Delete the ```Cache-Control``` header in the origin's response:
 ```nginx
@@ -339,14 +342,14 @@ This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
-**Syntax**:  `origin_set_header field value qtl_if(condition);` <br/>
+**Syntax**:  `origin_set_header field value if(condition);` <br/>
 **Default**: `origin_set_header host $host;` <br/>
 **Contexts**: http, server, location, if in location
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
 1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
-2. Use the new parameter  ```qtl_if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```qtl_if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
+2. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
@@ -456,7 +459,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We are modifying the open-source version to support setting `time` with a variable. (ETA: Nov 2020). The specified time is only applied to responses without caching instructions from the origin. A value of 0 makes those contents not cached. If you can identify dynamic/non-cacheable contents based on request, you should use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
+Sets caching time for different response codes. We enhanced the open-source version to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
 
 ### proxy_cache_vary
 
@@ -573,18 +576,6 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 <span class="badge dark">advanced</span>
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
-
-### `realtime_log_sample_rate`
-
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
-
-**Syntax:** `realtime_log_sample_rate {sample rate};` <br/>
-**Default:** none <br/>
-**Contexts:** http, server, location, if in location
-
-"This CDN360-proprietary directive sets the sample rate used by our real-time log feature, which allows requests to a CDN360 property to trigger notifications on a server of your choosing.  To configure the feature, modify the [realTimeLog field of a property](<https://docs.cdnetworks.com/cdn/apidocs#operation/createProperty>).
-
-The parameter value can be an integer in [0,65536]. 0 turns off the real time logging. Variable is supported. By default, the sample rate is set for the entire site by the `realTimeLog` field of the property JSON. Use this directive to change the sample rate or turn off real-time logging selectively for some locations.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
