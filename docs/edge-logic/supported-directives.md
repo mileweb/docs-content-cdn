@@ -649,8 +649,9 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 <span class="badge">standard</span>
 
+**Syntax:**	`slice size;` <br/>
+**Default:**	`slice 0;` <br/>
 **Contexts:** http, server
-
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
