@@ -8,7 +8,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 This directive modifies the response headers to the client. CDNetworks has made the following major changes to the open-source version:
 
@@ -160,7 +160,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
-<span class="badge dark">advanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `gzip_types mime-type ...;` <br/>
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
@@ -171,7 +171,7 @@ CDN360 has gzip always on, and applies it to the default MIME types above. In ad
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
@@ -452,7 +452,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**:	`proxy_cache_valid [code ...] time;` <br/>
 **Default**:	— <br/>
@@ -647,7 +647,7 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax:**	`slice size;` <br/>
 **Default:**	`slice 0;` <br/>
