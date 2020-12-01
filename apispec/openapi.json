@@ -4,6 +4,11 @@
     "title": "CDN360 API Specification",
     "version": "1.0",
     "description": "CDN360 APIs allow you to manage CDN360 services.",
+    "x-logo": {
+      "url": "images/cdn6.jpg",
+      "backgroundColor": "#FFFFFF",
+      "altText": "CDNetworks logo"
+    },
     "contact": {
       "url": "https://www.cdnetworks.com"
     }
@@ -465,7 +470,7 @@
                             "postRewrite"
                           ],
                           "default": "preRewrite",
-                          "description": "This setting controls how the URI of the incoming request is incorporated into the cache key. The default setting, \"preRewrite\", puts the URI into the cache key. If you have any \"rewrite\" directive that modifies the URI, then you may wish to use the setting \"postRewrite\". This puts the modified URI into the cache key instead which can result in a higher cache hit ratio."
+                          "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                         }
                       }
                     },
@@ -1098,7 +1103,7 @@
                       "postRewrite"
                     ],
                     "default": "preRewrite",
-                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key. The default setting, \"preRewrite\", puts the URI into the cache key. If you have any \"rewrite\" directive that modifies the URI, then you may wish to use the setting \"postRewrite\". This puts the modified URI into the cache key instead which can result in a higher cache hit ratio."
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                   }
                 }
               },
@@ -3103,7 +3108,7 @@
                       "postRewrite"
                     ],
                     "default": "preRewrite",
-                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key. The default setting, \"preRewrite\", puts the URI into the cache key. If you have any \"rewrite\" directive that modifies the URI, then you may wish to use the setting \"postRewrite\". This puts the modified URI into the cache key instead which can result in a higher cache hit ratio."
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                   }
                 }
               },
@@ -3650,7 +3655,7 @@
                           "postRewrite"
                         ],
                         "default": "preRewrite",
-                        "description": "This setting controls how the URI of the incoming request is incorporated into the cache key. The default setting, \"preRewrite\", puts the URI into the cache key. If you have any \"rewrite\" directive that modifies the URI, then you may wish to use the setting \"postRewrite\". This puts the modified URI into the cache key instead which can result in a higher cache hit ratio."
+                        "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                       }
                     }
                   }
