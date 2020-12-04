@@ -4,6 +4,11 @@
     "title": "CDN360 API Specification",
     "version": "1.0",
     "description": "CDN360 APIs allow you to manage CDN360 services.",
+    "x-logo": {
+      "url": "images/cdn6.jpg",
+      "backgroundColor": "#FFFFFF",
+      "altText": "CDNetworks logo"
+    },
     "contact": {
       "url": "https://www.cdnetworks.com"
     }
@@ -278,8 +283,8 @@
                         },
                         "disableHttp2": {
                           "type": "boolean",
-                          "default": false,
-                          "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                          "default": "false",
+                          "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                         },
                         "schemeInCacheKey": {
                           "type": "boolean",
@@ -457,6 +462,15 @@
                           "type": "boolean",
                           "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                           "default": "false"
+                        },
+                        "cacheKeyUri": {
+                          "type": "string",
+                          "enum": [
+                            "preRewrite",
+                            "postRewrite"
+                          ],
+                          "default": "preRewrite",
+                          "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                         }
                       }
                     },
@@ -902,8 +916,8 @@
                   },
                   "disableHttp2": {
                     "type": "boolean",
-                    "default": false,
-                    "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                    "default": "false",
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -1081,6 +1095,15 @@
                     "type": "boolean",
                     "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                     "default": "false"
+                  },
+                  "cacheKeyUri": {
+                    "type": "string",
+                    "enum": [
+                      "preRewrite",
+                      "postRewrite"
+                    ],
+                    "default": "preRewrite",
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                   }
                 }
               },
@@ -2898,8 +2921,8 @@
                   },
                   "disableHttp2": {
                     "type": "boolean",
-                    "default": false,
-                    "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                    "default": "false",
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -3077,6 +3100,15 @@
                     "type": "boolean",
                     "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                     "default": "false"
+                  },
+                  "cacheKeyUri": {
+                    "type": "string",
+                    "enum": [
+                      "preRewrite",
+                      "postRewrite"
+                    ],
+                    "default": "preRewrite",
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                   }
                 }
               },
@@ -3436,8 +3468,8 @@
                       },
                       "disableHttp2": {
                         "type": "boolean",
-                        "default": false,
-                        "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                        "default": "false",
+                        "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                       },
                       "schemeInCacheKey": {
                         "type": "boolean",
@@ -3615,6 +3647,15 @@
                         "type": "boolean",
                         "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                         "default": "false"
+                      },
+                      "cacheKeyUri": {
+                        "type": "string",
+                        "enum": [
+                          "preRewrite",
+                          "postRewrite"
+                        ],
+                        "default": "preRewrite",
+                        "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                       }
                     }
                   }
