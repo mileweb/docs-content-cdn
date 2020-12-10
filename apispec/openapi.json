@@ -466,6 +466,30 @@
                           ],
                           "default": "preRewrite",
                           "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                        },
+                        "extraServicePorts": {
+                          "type": "object",
+                          "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                          "properties": {
+                            "http": {
+                              "type": "array",
+                              "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                              "items": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 65535
+                              }
+                            },
+                            "https": {
+                              "type": "array",
+                              "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                              "items": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 65535
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1099,6 +1123,30 @@
                     ],
                     "default": "preRewrite",
                     "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                  },
+                  "extraServicePorts": {
+                    "type": "object",
+                    "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                    "properties": {
+                      "http": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      },
+                      "https": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -2690,6 +2738,12 @@
                       "code": "OriginHostnameConflict",
                       "message": "At least one of the hostnames is equal to an origin's server name."
                     }
+                  },
+                  "Invalid service port": {
+                    "value": {
+                      "code": "InvalidServicePort",
+                      "message": "The https service port 1234 is not supported."
+                    }
                   }
                 }
               }
@@ -3104,6 +3158,30 @@
                     ],
                     "default": "preRewrite",
                     "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                  },
+                  "extraServicePorts": {
+                    "type": "object",
+                    "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                    "properties": {
+                      "http": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      },
+                      "https": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -3198,6 +3276,12 @@
                     "value": {
                       "code": "OriginHostnameConflict",
                       "message": "At least one of the hostnames is equal to an origin's server name."
+                    }
+                  },
+                  "Invalid service port": {
+                    "value": {
+                      "code": "InvalidServicePort",
+                      "message": "The https service port 1234 is not supported."
                     }
                   }
                 }
@@ -3651,6 +3735,30 @@
                         ],
                         "default": "preRewrite",
                         "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                      },
+                      "extraServicePorts": {
+                        "type": "object",
+                        "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                        "properties": {
+                          "http": {
+                            "type": "array",
+                            "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                            "items": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 65535
+                            }
+                          },
+                          "https": {
+                            "type": "array",
+                            "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                            "items": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 65535
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -3947,7 +4055,7 @@
             }
           }
         },
-        "description": "The API returns a summary of all properties including the ID, latest version number, comments, staging version number, production version number, and last update time of each one.",
+        "description": "The API returns a summary of properties including the ID, latest version number, comments, staging version number, production version number, and last update time of each one. Use query parameters to filter the list of returned properties.",
         "operationId": "getPropertyList",
         "parameters": [
           {
@@ -3964,7 +4072,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nIf there is more than one <i>hasConfig</i> query parameter, they will be combined together. Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
+            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'.  Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nIf there is more than one <i>hasConfig</i> query parameter, they will be combined together. Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
           },
           {
             "schema": {
@@ -5040,7 +5148,7 @@
           }
         },
         "operationId": "getCertificates",
-        "description": "Get a list of available certificates including each certificate's ID, name, version deployed to production, version deployed to staging, the latest version number, when the certificate was last updated, and when the certificate expires. By default, certificates are returned in order of most recently updated first. Query parameters can be used to filter the list of returned certificates.",
+        "description": "Get a list of available certificates including each certificate's ID, name, version deployed to production, version deployed to staging, the latest version number, when the certificate was last updated, and when the certificate expires. By default, certificates are returned in order of most recently updated first. Use query parameters to filter the list of returned certificates.",
         "parameters": [
           {
             "schema": {
@@ -19324,11 +19432,11 @@
                     },
                     "publishedPrice": {
                       "type": "object",
+                      "description": "Describes the price for traffic and requests.",
                       "required": [
                         "perGB",
                         "perMHttpsReq"
                       ],
-                      "description": "Describes the price for traffic and requests.",
                       "properties": {
                         "perGB": {
                           "type": "object",
@@ -19361,6 +19469,30 @@
                         "perMHttpsReq": {
                           "type": "number",
                           "description": "Price in US dollars of one million HTTPS requests."
+                        }
+                      }
+                    },
+                    "extraServicePorts": {
+                      "type": "object",
+                      "description": "This field lists nonstandard ports that can be used to handle HTTP and HTTPS requests. If your website uses a nonstandard port which is not listed, please contact our support team. You can specify one of these port numbers in the <i>extraServicePorts</i> field of your property configuration.",
+                      "properties": {
+                        "http": {
+                          "type": "array",
+                          "description": "Specifies ports other than the default 80 which can be used to handle HTTP requests.",
+                          "items": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 65535
+                          }
+                        },
+                        "https": {
+                          "type": "array",
+                          "description": "Specify ports other than the default 443 which can be used to handle HTTPS requests.",
+                          "items": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 65535
+                          }
                         }
                       }
                     }
@@ -19446,6 +19578,17 @@
                           "premium+": 0.197
                         },
                         "perMHttpsReq": 0.99
+                      },
+                      "extraServicePorts": {
+                        "http": [
+                          85,
+                          1999,
+                          8080
+                        ],
+                        "https": [
+                          2000,
+                          65535
+                        ]
                       }
                     }
                   }
@@ -19455,7 +19598,7 @@
           }
         },
         "operationId": "get-cdn-systemConfigs",
-        "description": "This API returns system configuration settings including supported edge logic directives, advanced edge logic directives, and the default pricing for traffic and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive."
+        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">edge logic directives</a>, advanced edge logic directives, the default pricing for traffic and HTTPS requests, and nonstandard ports which can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive or port which is not listed."
       }
     },
     "/cdn/serviceQuotas": {
