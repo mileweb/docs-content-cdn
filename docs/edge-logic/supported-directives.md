@@ -8,7 +8,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 This directive modifies the response headers to the client. CDNetworks has made the following major changes to the open-source version:
 
@@ -108,7 +108,7 @@ Denies access for the specified network or address. (Work in progress to make th
 **Default**: `-`<br/>
 **Context**: server, location
 
-This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The read and send timeouts are set to 21s. Do not use this directive with `origin_read_timeout` or `origin_send_timeout` in the same context.
+This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The default read and send timeouts are set to 21s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -160,7 +160,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
-<span class="badge dark">advanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `gzip_types mime-type ...;` <br/>
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
@@ -171,7 +171,7 @@ CDN360 has gzip always on, and applies it to the default MIME types above. In ad
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
@@ -228,9 +228,9 @@ Sets configuration depending on the request URI without query string. No change 
 
 **Syntax**: `origin_connect_timeout time;` <br/>
 **Default**: `origin_connect_timeout 5s;` <br/>
-**Context**: http, server, location
+**Context**: http, server
 
-This is a wrapper of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,30] followed by ‘s’.
+This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
 ### `origin_fast_route`
 
@@ -323,10 +323,9 @@ If an URI is not specified, the full normalized request URI (which may have been
 
 **Syntax**: `origin_read_timeout time;` <br/>
 **Default**:  `origin_read_timeout 20s;` <br/>
-**Context**:  http, server, location
+**Context**:  http, server
 
-This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,21] followed by ‘s’. 
-
+This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level. 
 
 ### `origin_send_timeout`
 
@@ -334,9 +333,9 @@ This is a wrapper of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_
 
 **Syntax**: `origin_send_timeout time;` <br/>
 **Default**: `origin_send_timeout 20s;` <br/>
-**Context**:  http, server, location
+**Context**:  http, server
 
-This is a wrapper of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,21] followed by ‘s’.
+This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
@@ -453,7 +452,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**:	`proxy_cache_valid [code ...] time;` <br/>
 **Default**:	— <br/>
@@ -648,14 +647,16 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
-**Contexts:** http, server, ~~location~~
-
+**Syntax:**	`slice size;` <br/>
+**Default:**	`slice 0;` <br/>
+**Contexts:** http, server
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
 * CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
+* When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
 
 ### `slice_ignore_etag`
 

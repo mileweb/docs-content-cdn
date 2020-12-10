@@ -24,7 +24,7 @@ The following report types are supported:
 | Requests              | Reports requests made to the files of your property. Lines show the requests to CDN360 edge servers, requests to your origin servers, and cache hit rate. The cache hit rate is computed as (edge requests - origin requests)/edge requests.              |
 | Status Code Details   | Reports the percentage of HTTP status codes returned. For example, code 200 represents a successful request. |
 | Fast Route Traffic Volume   | Reports the traffic to your origin server that use CDNetworks' <a href="/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
-| Fast Route Traffic Requests   | Reports the number of requests to your origin server that uses CDNetworks' <a href="/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
+| Fast Route Requests   | Reports the number of requests to your origin server that uses CDNetworks' <a href="/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
 | Traffic Volume Summary| Summarizes the edge traffic volume.                               |
 
 ## Generating Reports
@@ -39,9 +39,11 @@ The following report types are supported:
 | Report Type     | Select the type of report you want to generate.       | 
 | Hostnames       | Select one or more hostnames defined in your properties.         |
 | Date Range      | Select the start and end dates and the time for the report. |
-| Report Interval | Select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
+| Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
 | Protocol        | Select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.
+| Server Groups        | By default Traffic Volume Summary reports on all server groups. To choose specific server groups, select them from the available choices.<li><strong>Standard</strong></li><li><strong>Premium</strong>.</li><li><strong>Premium+</strong>.</li><li><strong>Ultra</strong>.|
+| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.|
 | Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group the results according to one or more of the following choices. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Customer Ids</strong>.</li> |
 
 **Note:** All volume and bandwidth report data pertains to the HTTP payload only. It does not include the overhead from TCP, IP, and MAC headers. CDNetworks adds 4.56% (66 bytes) of overhead to each 1448-byte payload to generate the "billing volume" on your invoice.
