@@ -40,7 +40,7 @@
                         "version": 1,
                         "configs": {
                           "description": "validPropertyVersionAllFields_PropertySteps",
-                          "cacheKeyHostname": "testdomain-t1572317034478.mwtrial.info",
+                          "cacheKeyHostname": "testdomain-t1572317034478.mydomain.info",
                           "tlsCertificateId": "8fde2798385e3d0db19bc330",
                           "tlsMinVersion": "1.1",
                           "tlsMaxVersion": "1.2",
@@ -59,8 +59,8 @@
                             "responseDone": {}
                           },
                           "hostnames": [
-                            "testdomain-t1572317034478.mwtrial.info",
-                            "testdomain-t1572317034478.mwtrial.info"
+                            "testdomain-t1572317034478.mydomain.info",
+                            "testdomain-t1572317034478.mydomain.info"
                           ],
                           "origins": [
                             {
@@ -69,7 +69,7 @@
                               "hostHeader": "autohostheader.com",
                               "directConnection": "alwaysDirect",
                               "servers": [
-                                "mwtrial.info"
+                                "mydomain.info"
                               ]
                             }
                           ],
@@ -247,11 +247,6 @@
                                 "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                                 "format": "hostname"
                               },
-                              "supportSni": {
-                                "type": "boolean",
-                                "default": true,
-                                "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                              },
                               "verifyOrigin": {
                                 "type": "boolean",
                                 "default": false,
@@ -267,6 +262,13 @@
                                     "description": "Authentication method."
                                   }
                                 }
+                              },
+                              "keepAliveTimeout": {
+                                "type": "integer",
+                                "default": 60,
+                                "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                                "minimum": 5,
+                                "maximum": 600
                               }
                             }
                           }
@@ -527,7 +529,7 @@
                       "version": 1,
                       "configs": {
                         "description": "validPropertyVersionAllFields_PropertySteps",
-                        "cacheKeyHostname": "testdomain-t1572403678265.mwtrial.info",
+                        "cacheKeyHostname": "testdomain-t1572403678265.mydomain.info",
                         "tlsCertificateId": "b0b3f432ccbaafb5693ce13d",
                         "tlsMinVersion": "1.1",
                         "tlsMaxVersion": "1.2",
@@ -546,8 +548,8 @@
                           "responseDone": {}
                         },
                         "hostnames": [
-                          "testdomain-t1572403678233.mwtrial.info",
-                          "testdomain-t1572403678265.mwtrial.info"
+                          "testdomain-t1572403678233.mydomain.info",
+                          "testdomain-t1572403678265.mydomain.info"
                         ],
                         "origins": [
                           {
@@ -555,9 +557,8 @@
                             "supportedProtocol": "both",
                             "hostHeader": "autohostheader.com",
                             "directConnection": "alwaysDirect",
-                            "supportSni": true,
                             "servers": [
-                              "mwtrial.info"
+                              "mydomain.info"
                             ]
                           }
                         ],
@@ -904,11 +905,6 @@
                           "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
-                        "supportSni": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                        },
                         "verifyOrigin": {
                           "type": "boolean",
                           "default": false,
@@ -924,6 +920,13 @@
                               "description": "Authentication method."
                             }
                           }
+                        },
+                        "keepAliveTimeout": {
+                          "type": "integer",
+                          "default": 60,
+                          "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                          "minimum": 5,
+                          "maximum": 600
                         }
                       }
                     }
@@ -1158,9 +1161,8 @@
                         "supportedProtocol": "both",
                         "hostHeader": "autohostheader.com",
                         "servers": [
-                          "mwtrial.info"
+                          "mydomain.info"
                         ],
-                        "supportSni": false,
                         "name": "my_origin_1572403819776",
                         "verifyOrigin": null,
                         "directConnection": "auto"
@@ -1826,7 +1828,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                               }
                             },
                             "required": [
@@ -2184,7 +2186,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -2430,7 +2432,7 @@
                       },
                       "isp": {
                         "type": "string",
-                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                       }
                     },
                     "required": [
@@ -2939,11 +2941,6 @@
                           "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
-                        "supportSni": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                        },
                         "verifyOrigin": {
                           "type": "boolean",
                           "default": false,
@@ -2959,6 +2956,13 @@
                               "description": "Authentication method."
                             }
                           }
+                        },
+                        "keepAliveTimeout": {
+                          "type": "integer",
+                          "default": 60,
+                          "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                          "minimum": 5,
+                          "maximum": 600
                         }
                       }
                     }
@@ -3516,11 +3520,6 @@
                               "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                               "format": "hostname"
                             },
-                            "supportSni": {
-                              "type": "boolean",
-                              "default": true,
-                              "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                            },
                             "verifyOrigin": {
                               "type": "boolean",
                               "default": false,
@@ -3536,6 +3535,13 @@
                                   "description": "Authentication method."
                                 }
                               }
+                            },
+                            "keepAliveTimeout": {
+                              "type": "integer",
+                              "default": 60,
+                              "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                              "minimum": 5,
+                              "maximum": 600
                             }
                           }
                         }
@@ -4203,6 +4209,12 @@
                       "code": "InvalidEdgeHostname",
                       "message": "Invalid edge hostname 'abcdef'. The edge hostname must be a valid domain name string."
                     }
+                  },
+                  "Invalid ISP": {
+                    "value": {
+                      "code": "InvalidISP",
+                      "message": "You may specify up to 10 ISPs."
+                    }
                   }
                 }
               }
@@ -4397,7 +4409,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -6602,7 +6614,7 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "Refers to the owner of the validation task.\n",
+                      "description": "ID of the customer whose property is validated.",
                       "minimum": 1
                     },
                     "apiRequestId": {
@@ -6628,6 +6640,10 @@
                     "cacheVersion": {
                       "type": "string",
                       "description": "CDN360 cache version used when validating the property."
+                    },
+                    "impersonatingParentCustomerId": {
+                      "type": "integer",
+                      "description": "If a reseller validates a property on behalf of a child customer, then this field will be present and indicate the reseller's ID."
                     }
                   },
                   "required": [
@@ -7044,6 +7060,12 @@
                       "code": "InvalidPropertyVersion",
                       "message": "The specified version 999 or property 1c2a0ce09612e9988c345dff does not exist."
                     }
+                  },
+                  "Invalid certificate version": {
+                    "value": {
+                      "code": "InvalidCertificateVersion",
+                      "message": "The specified version 100 of certificate 5c65d18197146f000148511f does not exist."
+                    }
                   }
                 }
               }
@@ -7358,8 +7380,12 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "ID of the customer that created the deployment task.\n",
+                      "description": "ID of the customer whose properties or certificates are deployed by this task.\n",
                       "minimum": 1
+                    },
+                    "impersonatingParentCustomerId": {
+                      "type": "integer",
+                      "description": "If a reseller deploys a property or certificate on behalf of a child customer, then this field will be present and indicate the reseller's ID."
                     }
                   },
                   "required": [
@@ -13325,7 +13351,8 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "Refers to a customer."
+                      "description": "ID of customer whose files or directories are purged.",
+                      "minimum": 1
                     },
                     "dirHeaders": {
                       "type": "array",
@@ -13341,6 +13368,10 @@
                           }
                         }
                       }
+                    },
+                    "impersonatingParentCustomerId": {
+                      "type": "integer",
+                      "description": "If a reseller performs a purge on behalf of a child customer, then this field will be present and indicate the reseller's ID."
                     }
                   },
                   "required": [
@@ -14334,6 +14365,10 @@
                           "lastLoginTime": {
                             "type": "string",
                             "description": "RFC 3339 date indicating when the user last logged in to the portal."
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer to which the user belongs."
                           }
                         },
                         "required": [
@@ -14342,7 +14377,8 @@
                           "emailAddress",
                           "status",
                           "creationTime",
-                          "lastLoginTime"
+                          "lastLoginTime",
+                          "customerId"
                         ]
                       }
                     }
@@ -14365,7 +14401,8 @@
                           "creationTime": "2016-09-12T20:30:50Z",
                           "lastLoginTime": "2019-12-07T19:24:33Z",
                           "id": 592,
-                          "emailAddress": "John.Doe@company.com"
+                          "emailAddress": "John.Doe@company.com",
+                          "customerId": 123456
                         },
                         {
                           "loginName": "alee",
@@ -14374,7 +14411,8 @@
                           "status": "active",
                           "creationTime": "2018-08-22T16:58:12Z",
                           "id": 4327,
-                          "emailAddress": "alee@company.com"
+                          "emailAddress": "alee@company.com",
+                          "customerId": 123456
                         }
                       ]
                     }
@@ -14579,28 +14617,9 @@
                       "format": "email",
                       "description": "Email address of the primary user of the API account."
                     },
-                    "records": {
-                      "type": "object",
-                      "description": "Contains some additional information about the API account.",
-                      "required": [
-                        "customerId",
-                        "creationTime",
-                        "lastUpdateTime"
-                      ],
-                      "properties": {
-                        "customerId": {
-                          "type": "integer",
-                          "description": "ID of the customer."
-                        },
-                        "creationTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date when the API account was created."
-                        },
-                        "lastUpdateTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date when the account was last updated."
-                        }
-                      }
+                    "customerId": {
+                      "type": "integer",
+                      "description": "ID of the customer that owns the API account."
                     }
                   },
                   "required": [
@@ -14609,7 +14628,7 @@
                     "type",
                     "products",
                     "emailAddress",
-                    "records"
+                    "customerId"
                   ]
                 },
                 "examples": {
@@ -15266,6 +15285,10 @@
                             "type": "string",
                             "description": "Email address of the primary user of the API account.",
                             "format": "email"
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer to which the API account belongs."
                           }
                         },
                         "required": [
@@ -15275,7 +15298,8 @@
                           "responsiblePerson",
                           "creationTime",
                           "lastUpdateTime",
-                          "emailAddress"
+                          "emailAddress",
+                          "customerId"
                         ]
                       }
                     }
@@ -15297,7 +15321,8 @@
                           "responsiblePerson": "John Doe",
                           "creationTime": "2019-12-19T03:05:17Z",
                           "lastUpdateTime": "2019-12-19T03:05:17Z",
-                          "emailAddress": "john.doe@company.com"
+                          "emailAddress": "john.doe@company.com",
+                          "customerId": 12345678
                         }
                       ]
                     }
@@ -19495,6 +19520,13 @@
                           }
                         }
                       }
+                    },
+                    "advancedFeaures": {
+                      "type": "array",
+                      "description": "List of advanced features that could be enabled for customers via the service quota API. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -19589,7 +19621,10 @@
                           2000,
                           65535
                         ]
-                      }
+                      },
+                      "advancedFeatures": [
+                        "realTimeLog"
+                      ]
                     }
                   }
                 }
@@ -19789,6 +19824,47 @@
                     "type": "boolean",
                     "default": "false",
                     "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted."
+                  },
+                  "advancedFeatures": {
+                    "type": "array",
+                    "description": "List of advanced features available to the customer. Currently, the only supported feature is \"realTimeLog\", which allows a customer to monitor requests from their client as they occur. Please contact our support team if you require this feature.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "directiveParameterLimits": {
+                    "title": "directiveParameterLimits",
+                    "type": "object",
+                    "x-tags": [
+                      "CDN Product Management"
+                    ],
+                    "description": "Contains limits on values of edge logic directives.",
+                    "properties": {
+                      "maxLimitRate": {
+                        "type": "integer",
+                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxUpstreamKeepaliveTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                      },
+                      "maxOriginConnectTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                      },
+                      "maxOriginReadTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxOriginSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -20001,6 +20077,47 @@
                     "suspensionDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    },
+                    "advancedFeatures": {
+                      "type": "array",
+                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "directiveParameterLimits": {
+                      "title": "directiveParameterLimits",
+                      "type": "object",
+                      "x-tags": [
+                        "CDN Product Management"
+                      ],
+                      "description": "Contains limits on values of edge logic directives.",
+                      "properties": {
+                        "maxLimitRate": {
+                          "type": "integer",
+                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxUpstreamKeepaliveTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                        },
+                        "maxOriginConnectTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        },
+                        "maxOriginReadTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxOriginSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -20143,6 +20260,12 @@
                     "value": {
                       "code": "InvalidServiceQuotaId",
                       "message": "The serviceQuotaId does not exist."
+                    }
+                  },
+                  "Invalid directive parameter limits": {
+                    "value": {
+                      "code": "InvalidDirectiveParameterLimits",
+                      "message": "The directive parameter limits cannot be empty. "
                     }
                   }
                 }
@@ -20288,6 +20411,47 @@
                   "trialDeadline": {
                     "type": "string",
                     "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  },
+                  "advancedFeatures": {
+                    "type": "array",
+                    "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "directiveParameterLimits": {
+                    "title": "directiveParameterLimits",
+                    "type": "object",
+                    "x-tags": [
+                      "CDN Product Management"
+                    ],
+                    "description": "Contains limits on values of edge logic directives.",
+                    "properties": {
+                      "maxLimitRate": {
+                        "type": "integer",
+                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxUpstreamKeepaliveTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                      },
+                      "maxOriginConnectTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                      },
+                      "maxOriginReadTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxOriginSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      }
+                    }
                   }
                 }
               },
@@ -21094,6 +21258,47 @@
                     "suspensionDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    },
+                    "advancedFeatures": {
+                      "type": "array",
+                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "directiveParameterLimits": {
+                      "title": "directiveParameterLimits",
+                      "type": "object",
+                      "x-tags": [
+                        "CDN Product Management"
+                      ],
+                      "description": "Contains limits on values of edge logic directives.",
+                      "properties": {
+                        "maxLimitRate": {
+                          "type": "integer",
+                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxUpstreamKeepaliveTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                        },
+                        "maxOriginConnectTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        },
+                        "maxOriginReadTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxOriginSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -21311,6 +21516,47 @@
                     "suspensionDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    },
+                    "advancedFeatures": {
+                      "type": "array",
+                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "directiveParameterLimits": {
+                      "title": "directiveParameterLimits",
+                      "type": "object",
+                      "x-tags": [
+                        "CDN Product Management"
+                      ],
+                      "description": "Contains limits on values of edge logic directives.",
+                      "properties": {
+                        "maxLimitRate": {
+                          "type": "integer",
+                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxUpstreamKeepaliveTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                        },
+                        "maxOriginConnectTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        },
+                        "maxOriginReadTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxOriginSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -21396,6 +21642,12 @@
                     "value": {
                       "code": "InvalidStatus",
                       "message": "The 'trial' status cannot be specified by this customer."
+                    }
+                  },
+                  "Invalid directive parameter limits": {
+                    "value": {
+                      "code": "InvalidDirectiveParameterLimits",
+                      "message": "The directive parameter limits cannot be empty. "
                     }
                   }
                 }
@@ -21515,6 +21767,47 @@
                   "trialDeadline": {
                     "type": "string",
                     "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  },
+                  "advancedFeatures": {
+                    "type": "array",
+                    "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "directiveParameterLimits": {
+                    "title": "directiveParameterLimits",
+                    "type": "object",
+                    "x-tags": [
+                      "CDN Product Management"
+                    ],
+                    "description": "Contains limits on values of edge logic directives.",
+                    "properties": {
+                      "maxLimitRate": {
+                        "type": "integer",
+                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxUpstreamKeepaliveTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                      },
+                      "maxOriginConnectTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                      },
+                      "maxOriginReadTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxOriginSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      }
+                    }
                   }
                 }
               },
