@@ -84,6 +84,36 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
+### `clent_body_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+
+**Syntax**: `clent_body_timeout time;`<br/>
+**Default**: matches `origin_send_timeout` if it is set, or 20s <br/>
+**Context**: http, server
+
+This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
+### `clent_header_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+
+**Syntax**: `clent_header_timeout time;`<br/>
+**Default**: `clent_header_timeout 10;`<br/>
+**Context**: http, server
+
+This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
+### `clent_send_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `clent_send_timeout time;`<br/>
+**Default**: matches `origin_read_timeout` if it is set, or 20s <br/>
+**Context**: http, server
+
+This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
 ### `custom_log_field`
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
