@@ -600,6 +600,22 @@ Enables of disables passing request headers from client to upstream. No change t
 
 Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
 
+### `proxy_set`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `proxy_set $variable value [if(...)];`<br>
+**Default**: none <br>
+**Context**: http, server, location, if in location
+
+This directive assigns the `value` to the `$variable`, similar to the [`set`](#set) directive. The difference is that `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore the `value` can be a response header value. In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
+```nginx
+set $cache_time 1d; # by default, cache for 1 day
+# if origin's response contains a cachetime header, use it to override de default
+proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
+proxy_cache_valid $cache_time;
+```
+
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
 <span class="badge dark">advanced</span>
