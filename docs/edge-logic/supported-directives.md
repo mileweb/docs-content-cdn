@@ -611,9 +611,12 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 This directive assigns the `value` to the `$variable`, similar to the [`set`](#set) directive. The difference is that `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore the `value` can be a response header value. In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
 ```nginx
 set $cache_time 1d; # by default, cache for 1 day
-# if origin's response contains a cachetime header, use it to override de default
+# if origin responds a "cachetime" header, use it to override the default
 proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
 proxy_cache_valid $cache_time;
+# extract a part from the origin's response header and send to client
+proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
+add_header version-number $version_number;
 ```
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
