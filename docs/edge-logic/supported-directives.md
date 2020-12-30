@@ -84,31 +84,31 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
-### `clent_body_timeout`
+### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
-**Syntax**: `clent_body_timeout time;`<br/>
+**Syntax**: `client_body_timeout time;`<br/>
 **Default**: matches `origin_send_timeout` if it is set, or 20s <br/>
 **Context**: http, server
 
 This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `clent_header_timeout`
+### `client_header_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
-**Syntax**: `clent_header_timeout time;`<br/>
-**Default**: `clent_header_timeout 10;`<br/>
+**Syntax**: `client_header_timeout time;`<br/>
+**Default**: `client_header_timeout 10;`<br/>
 **Context**: http, server
 
 This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `clent_send_timeout`
+### `client_send_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
-**Syntax**: `clent_send_timeout time;`<br/>
+**Syntax**: `client_send_timeout time;`<br/>
 **Default**: matches `origin_read_timeout` if it is set, or 20s <br/>
 **Context**: http, server
 
@@ -291,7 +291,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **Default**:  - <br/>
 **Context**:  http, server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. The directive supports NGINX variables.
+Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports NGINX variables.
 
 Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
 
@@ -608,7 +608,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **Default**: none <br>
 **Context**: http, server, location, if in location
 
-This directive assigns the `value` to the `$variable`, similar to the [`set`](#set) directive. The difference is that `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore the `value` can be a response header value. In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
+This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While looking very similar to the [`set`](#set) directive, the biggest difference is the time at which they are executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore the `value` can have information contained in the response header (after modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
 ```nginx
 set $cache_time 1d; # by default, cache for 1 day
 # if origin responds a "cachetime" header, use it to override the default
