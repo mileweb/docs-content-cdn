@@ -122,7 +122,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 **Default**: `-`<br/>
 **Context**: http, server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log using our advanced traffic analysis tool. If you require this feature, contact our support team.
+This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
