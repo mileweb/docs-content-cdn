@@ -29,8 +29,8 @@ If you need to add, modify, or delete some header fields in the response to clie
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before all other processings of the response. This is very useful if you want to override some settings from the origin that affect how CDN servers process the response.
-We also have a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client in order to consolidate the responses from the origin to improve the cache hit ratio.
+We created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before all the other processings happen to the response. This is very useful if you want to override some settings (such as cache time) from the origin that may affect how CDN servers process the response.
+In order to consolidate the responses from the origin to improve the cache hit ratio, we also created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
 
 ### The support (and non-support) of `Vary`
 
