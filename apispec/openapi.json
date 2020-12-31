@@ -1832,7 +1832,8 @@
                               }
                             },
                             "required": [
-                              "region"
+                              "region",
+                              "isp"
                             ]
                           }
                         },
@@ -2190,7 +2191,8 @@
                         }
                       },
                       "required": [
-                        "region"
+                        "region",
+                        "isp"
                       ]
                     }
                   },
@@ -2436,7 +2438,8 @@
                       }
                     },
                     "required": [
-                      "region"
+                      "region",
+                      "isp"
                     ]
                   },
                   "estimatedBandwidth": {
@@ -4413,7 +4416,8 @@
                         }
                       },
                       "required": [
-                        "region"
+                        "region",
+                        "isp"
                       ]
                     }
                   },
@@ -16936,7 +16940,9 @@
                         "apiAccountLimit": {
                           "type": "integer",
                           "default": 3,
-                          "description": "Maximum number of API accounts that can be created."
+                          "description": "Maximum number of API accounts that can be created.",
+                          "maximum": 100,
+                          "minimum": 1
                         },
                         "type": {
                           "type": "string",
@@ -16983,7 +16989,9 @@
                         "contactLimit": {
                           "type": "integer",
                           "default": 20,
-                          "description": "Number of portal user accounts the customer is permitted to have."
+                          "description": "Number of portal user accounts the customer is permitted to have.",
+                          "minimum": 1,
+                          "maximum": 100
                         }
                       },
                       "required": [
@@ -17253,7 +17261,9 @@
                         "apiAccountLimit": {
                           "type": "integer",
                           "default": 3,
-                          "description": "Maximum number of API accounts that can be created."
+                          "description": "Maximum number of API accounts that can be created.",
+                          "maximum": 100,
+                          "minimum": 1
                         },
                         "type": {
                           "type": "string",
@@ -17300,7 +17310,9 @@
                         "contactLimit": {
                           "type": "integer",
                           "default": 20,
-                          "description": "Number of portal user accounts the customer is permitted to have."
+                          "description": "Number of portal user accounts the customer is permitted to have.",
+                          "minimum": 1,
+                          "maximum": 100
                         }
                       },
                       "required": [
@@ -17673,7 +17685,9 @@
                       "apiAccountLimit": {
                         "type": "integer",
                         "default": 3,
-                        "description": "Maximum number of API accounts that can be created."
+                        "description": "Maximum number of API accounts that can be created.",
+                        "maximum": 100,
+                        "minimum": 1
                       },
                       "type": {
                         "type": "string",
@@ -17720,7 +17734,9 @@
                       "contactLimit": {
                         "type": "integer",
                         "default": 20,
-                        "description": "Number of portal user accounts the customer is permitted to have."
+                        "description": "Number of portal user accounts the customer is permitted to have.",
+                        "minimum": 1,
+                        "maximum": 100
                       }
                     },
                     "required": [
@@ -17950,7 +17966,9 @@
                         "apiAccountLimit": {
                           "type": "integer",
                           "default": 3,
-                          "description": "Maximum number of API accounts that can be created."
+                          "description": "Maximum number of API accounts that can be created.",
+                          "maximum": 100,
+                          "minimum": 1
                         },
                         "type": {
                           "type": "string",
@@ -17997,7 +18015,9 @@
                         "contactLimit": {
                           "type": "integer",
                           "default": 20,
-                          "description": "Number of portal user accounts the customer is permitted to have."
+                          "description": "Number of portal user accounts the customer is permitted to have.",
+                          "minimum": 1,
+                          "maximum": 100
                         }
                       },
                       "required": [
@@ -18298,7 +18318,9 @@
                       "apiAccountLimit": {
                         "type": "integer",
                         "default": 3,
-                        "description": "Maximum number of API accounts that can be created."
+                        "description": "Maximum number of API accounts that can be created.",
+                        "maximum": 100,
+                        "minimum": 1
                       },
                       "type": {
                         "type": "string",
@@ -18345,7 +18367,9 @@
                       "contactLimit": {
                         "type": "integer",
                         "default": 20,
-                        "description": "Number of portal user accounts the customer is permitted to have."
+                        "description": "Number of portal user accounts the customer is permitted to have.",
+                        "minimum": 1,
+                        "maximum": 100
                       }
                     },
                     "required": [
@@ -19838,7 +19862,7 @@
                     "x-tags": [
                       "CDN Product Management"
                     ],
-                    "description": "Contains limits on values of edge logic directives.",
+                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
@@ -19863,6 +19887,21 @@
                         "type": "integer",
                         "minimum": 1,
                         "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      },
+                      "maxClientHeaderTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                      },
+                      "maxClientSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                      },
+                      "maxClientBodyTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                       }
                     }
                   }
@@ -20091,7 +20130,7 @@
                       "x-tags": [
                         "CDN Product Management"
                       ],
-                      "description": "Contains limits on values of edge logic directives.",
+                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
@@ -20116,6 +20155,21 @@
                           "type": "integer",
                           "minimum": 1,
                           "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        },
+                        "maxClientHeaderTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        },
+                        "maxClientSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        },
+                        "maxClientBodyTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                         }
                       }
                     }
@@ -20425,7 +20479,7 @@
                     "x-tags": [
                       "CDN Product Management"
                     ],
-                    "description": "Contains limits on values of edge logic directives.",
+                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
@@ -20450,6 +20504,21 @@
                         "type": "integer",
                         "minimum": 1,
                         "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      },
+                      "maxClientHeaderTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                      },
+                      "maxClientSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                      },
+                      "maxClientBodyTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                       }
                     }
                   }
@@ -21272,7 +21341,7 @@
                       "x-tags": [
                         "CDN Product Management"
                       ],
-                      "description": "Contains limits on values of edge logic directives.",
+                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
@@ -21297,6 +21366,21 @@
                           "type": "integer",
                           "minimum": 1,
                           "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        },
+                        "maxClientHeaderTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        },
+                        "maxClientSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        },
+                        "maxClientBodyTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                         }
                       }
                     }
@@ -21530,7 +21614,7 @@
                       "x-tags": [
                         "CDN Product Management"
                       ],
-                      "description": "Contains limits on values of edge logic directives.",
+                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
@@ -21555,6 +21639,21 @@
                           "type": "integer",
                           "minimum": 1,
                           "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        },
+                        "maxClientHeaderTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        },
+                        "maxClientSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        },
+                        "maxClientBodyTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                         }
                       }
                     }
@@ -21781,7 +21880,7 @@
                     "x-tags": [
                       "CDN Product Management"
                     ],
-                    "description": "Contains limits on values of edge logic directives.",
+                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
@@ -21806,6 +21905,21 @@
                         "type": "integer",
                         "minimum": 1,
                         "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      },
+                      "maxClientHeaderTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                      },
+                      "maxClientSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                      },
+                      "maxClientBodyTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                       }
                     }
                   }
