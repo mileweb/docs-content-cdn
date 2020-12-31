@@ -26,7 +26,7 @@ The following report types are supported:
 | Fast Route Traffic Volume   | Reports the traffic to your origin server that use CDNetworks' <a href="/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
 | Fast Route Requests   | Reports the number of requests to your origin server that uses CDNetworks' <a href="/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
 | Traffic Volume Summary| Summarizes the edge traffic volume.                               |
-| CPU Time| Reports the CPU time used, in UTC time format.                               |
+| CPU Time| Reports the CPU time consumed in each time interval to serve your properties. You can toggle the unit between **seconds** and **number of cores**. For example, if 3000 seconds of CPU time are reported in a 5-minute interval, it means your properties are maxing out an average of 10 (=3000s/5m) physical CPU cores during that period.                               |
 | Edge Hostname Request| Shows the number of requests made to your [edge hostnames](</docs/portal/traffic-management/creating-edge-hostname.md>) over a period of time.                               |
 
 ## Generating Reports
