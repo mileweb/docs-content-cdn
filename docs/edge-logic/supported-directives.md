@@ -84,6 +84,36 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
+### `client_body_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+
+**Syntax**: `client_body_timeout time;`<br/>
+**Default**: matches `origin_send_timeout` if it is set, or 20s <br/>
+**Context**: http, server
+
+This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
+### `client_header_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+
+**Syntax**: `client_header_timeout time;`<br/>
+**Default**: `client_header_timeout 10;`<br/>
+**Context**: http, server
+
+This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
+### `client_send_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `client_send_timeout time;`<br/>
+**Default**: matches `origin_read_timeout` if it is set, or 20s <br/>
+**Context**: http, server
+
+This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
 ### `custom_log_field`
 
 <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
@@ -92,7 +122,7 @@ Stops processing the current set of ngx_http_rewrite_module directives. No chang
 **Default**: `-`<br/>
 **Context**: http, server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log using our advanced traffic analysis tool. If you require this feature, contact our support team.
+This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -261,7 +291,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **Default**:  - <br/>
 **Context**:  http, server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. The directive supports NGINX variables.
+Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports NGINX variables.
 
 Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
 
@@ -569,6 +599,26 @@ Enables of disables passing request headers from client to upstream. No change t
 <span class="badge dark">advanced</span>
 
 Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
+
+### `proxy_set`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `proxy_set $variable value [if(...)];`<br>
+**Default**: none <br>
+**Context**: http, server, location, if in location
+
+This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While this directive looks very similar to the [`set`](#set) directive, it differs in when it is executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore, the `value` can have information contained in the response header (after being modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
+```nginx
+set $cache_time 1d; # by default, cache for 1 day
+# if origin responds with a "cachetime" header, use it to override the default
+proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
+proxy_cache_valid $cache_time;
+# extract a part from the origin's response header and send to client
+proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
+add_header version-number $version_number;
+```
+The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 

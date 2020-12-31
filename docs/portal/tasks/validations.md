@@ -8,6 +8,12 @@ You can check the status of all property validations using the Tasks.
 
 <p align="center"><img src="/docs/resources/images/tasks/tasks-validation.png" alt="Validation Tasks" width="900"></p>
  
-2. Click an ID or task name to display the details about the validation results.
+2. To filter results by time range, click the icon circled in the following figure, select or enter a start date and end date, and then click the icon to the right of the **End date** field. To remove the filter, click the circled icon below, and then click the **X** icon to the right of the **End date** field.
 
-**Note:** You can use the **Search** box at the top to filter the results. Filtering is not case-sensitive.
+**Note:** You can also use the **Search** box at the top to filter the results. Filtering is not case-sensitive.
+
+<p align="center"><img src="/docs/resources/images/tasks/validation_time_range_filter.png" alt="Validation Tasks" width="900"></p>
+
+3. To display details about a validation result, click an ID or task name.
+
+
