@@ -8,7 +8,7 @@ When a property and its associated certificates are deployed, CDN360 sends the c
 
 <p align="center"><img src="/docs/resources/images/tasks/tasks-deployment.png" alt="Deployment Tasks" width="900"></p>
  
-2. To filter results by time range, click the icon circled in the following figure to specify a start and an end date to filter the results. 
+2. To filter results by time range, click the icon circled in the following figure and specify a start date and end date for your search.
 
 **Note:** You can also use the **Search** box at the top of the Deployment form to filter the results. Filtering is not case-sensitive.
 
