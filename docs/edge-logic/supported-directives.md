@@ -42,7 +42,7 @@ If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Cont
 *   Comparison of a variable with a string using the "=" and "!=" operators.
 *   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
 
-3. Another change made to this directive is to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
+3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
 
  Example configurations:
 ```nginx
@@ -196,8 +196,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context**:  http, server, location
 
-CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for the majority of users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
-
+CDN360 has gzip always on, and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
@@ -205,6 +204,7 @@ CDN360 has gzip always on, and applies it to the default MIME types above. In ad
 
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
+
 ```nginx
 if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
@@ -319,7 +319,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same header name exists in different levels, the configuration for that header name in the innermost level takes effect.
 
-Although CDN360 has hierarchical cache structure, the directive changes the header only in the origin response. 
+Although CDN360 has a hierarchical cache structure, the directive changes the header only in the origin response. 
 
 ### `origin_limit_rate`
 
@@ -329,7 +329,7 @@ Although CDN360 has hierarchical cache structure, the directive changes the head
 **Default**: `origin_limit_rate 0;`<br>
 **Context**: http, server, location
 
-This a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed of reading the response from the origin server.
+This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
 
 ### `origin_pass`
 
@@ -382,11 +382,11 @@ This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_ht
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
-*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expressions in single or double quotes.
+*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
 
 Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
-*   $request_scheme : scheme used by the client
+*   $request_scheme: scheme used by the client
 *   $client_real_ip:  client’s IP address
 *   $client_country_code:  client’s ISO3166 country code
 
@@ -406,7 +406,7 @@ Enables or disables buffering of responses from the proxied server. No change to
 
 <span class="badge">standard</span>
 
-Defines conditions under which the response will not be taken from a cache. No change to the public version. This should be used if you know the content is not cacheable under those conditions. It should be usually used together with `proxy_no_cache`.
+Defines conditions under which the response will not be taken from a cache. No change to the public version. This should be used if you know the content is not cacheable under those conditions. It should usually be used together with `proxy_no_cache`.
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
@@ -416,7 +416,7 @@ Defines conditions under which the response will not be taken from a cache. No c
 **Default**: `proxy_cache_lock on;` <br/>
 **Context**: http, server, location
 
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN360 turns it on to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, you should use `proxy_cache_bypass` and `proxy_no_cache` to skip caching for them to get the best possible latency.
+When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN360 turns it on to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
 
 ### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
 
@@ -436,7 +436,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default**: `proxy_cache_lock_timeout 0s;` <br/>
 **Context**: http, server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most contents are cacheable and want to reduce origin traffic.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -703,7 +703,7 @@ Assigns a value to the specified variable. No change to the public version. In p
 **Default:**	`slice 0;` <br/>
 **Contexts:** http, server
 
-Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, the statement `proxy_cache_valid 206 ...` should be used to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
+Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
 * CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
