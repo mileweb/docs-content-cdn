@@ -40,7 +40,7 @@
                         "version": 1,
                         "configs": {
                           "description": "validPropertyVersionAllFields_PropertySteps",
-                          "cacheKeyHostname": "testdomain-t1572317034478.mwtrial.info",
+                          "cacheKeyHostname": "testdomain-t1572317034478.mydomain.info",
                           "tlsCertificateId": "8fde2798385e3d0db19bc330",
                           "tlsMinVersion": "1.1",
                           "tlsMaxVersion": "1.2",
@@ -59,8 +59,8 @@
                             "responseDone": {}
                           },
                           "hostnames": [
-                            "testdomain-t1572317034478.mwtrial.info",
-                            "testdomain-t1572317034478.mwtrial.info"
+                            "testdomain-t1572317034478.mydomain.info",
+                            "testdomain-t1572317034478.mydomain.info"
                           ],
                           "origins": [
                             {
@@ -69,7 +69,7 @@
                               "hostHeader": "autohostheader.com",
                               "directConnection": "alwaysDirect",
                               "servers": [
-                                "mwtrial.info"
+                                "mydomain.info"
                               ]
                             }
                           ],
@@ -108,7 +108,7 @@
                               {
                                 "hostHeader": "testcustomer.g.qtlcdn.com",
                                 "servers": [
-                                  "edgetools.quantil.com"
+                                  "edgetools.theoriginserver.com"
                                 ],
                                 "name": "my_origin_1572420965460",
                                 "directConnection": "noDirect"
@@ -136,7 +136,7 @@
                         },
                         "hostnames": {
                           "type": "array",
-                          "description": "Hostnames associated with the property.",
+                          "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                           "items": {
                             "type": "string"
                           }
@@ -166,7 +166,24 @@
                             },
                             "format": {
                               "type": "string",
-                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                            },
+                            "headers": {
+                              "type": "array",
+                              "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "Name of an HTTP header."
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "Value of an HTTP header."
+                                  }
+                                }
+                              }
                             }
                           },
                           "required": [
@@ -176,7 +193,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 200000,
-                          "description": "Refer to https://docs.quantil.com/edgelogic"
+                          "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -230,11 +247,6 @@
                                 "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                                 "format": "hostname"
                               },
-                              "supportSni": {
-                                "type": "boolean",
-                                "default": true,
-                                "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                              },
                               "verifyOrigin": {
                                 "type": "boolean",
                                 "default": false,
@@ -250,6 +262,13 @@
                                     "description": "Authentication method."
                                   }
                                 }
+                              },
+                              "keepAliveTimeout": {
+                                "type": "integer",
+                                "default": 60,
+                                "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                                "minimum": 5,
+                                "maximum": 600
                               }
                             }
                           }
@@ -261,8 +280,8 @@
                         },
                         "disableHttp2": {
                           "type": "boolean",
-                          "default": false,
-                          "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                          "default": "false",
+                          "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                         },
                         "schemeInCacheKey": {
                           "type": "boolean",
@@ -354,7 +373,7 @@
                         },
                         "accessControlRules": {
                           "type": "array",
-                          "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                          "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                           "items": {
                             "title": "accessControlRule",
                             "type": "object",
@@ -435,6 +454,44 @@
                               "action"
                             ]
                           }
+                        },
+                        "disableCertAutomation": {
+                          "type": "boolean",
+                          "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                          "default": "false"
+                        },
+                        "cacheKeyUri": {
+                          "type": "string",
+                          "enum": [
+                            "preRewrite",
+                            "postRewrite"
+                          ],
+                          "default": "preRewrite",
+                          "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                        },
+                        "extraServicePorts": {
+                          "type": "object",
+                          "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                          "properties": {
+                            "http": {
+                              "type": "array",
+                              "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                              "items": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 65535
+                              }
+                            },
+                            "https": {
+                              "type": "array",
+                              "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                              "items": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 65535
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -472,7 +529,7 @@
                       "version": 1,
                       "configs": {
                         "description": "validPropertyVersionAllFields_PropertySteps",
-                        "cacheKeyHostname": "testdomain-t1572403678265.mwtrial.info",
+                        "cacheKeyHostname": "testdomain-t1572403678265.mydomain.info",
                         "tlsCertificateId": "b0b3f432ccbaafb5693ce13d",
                         "tlsMinVersion": "1.1",
                         "tlsMaxVersion": "1.2",
@@ -491,8 +548,8 @@
                           "responseDone": {}
                         },
                         "hostnames": [
-                          "testdomain-t1572403678233.mwtrial.info",
-                          "testdomain-t1572403678265.mwtrial.info"
+                          "testdomain-t1572403678233.mydomain.info",
+                          "testdomain-t1572403678265.mydomain.info"
                         ],
                         "origins": [
                           {
@@ -500,9 +557,8 @@
                             "supportedProtocol": "both",
                             "hostHeader": "autohostheader.com",
                             "directConnection": "alwaysDirect",
-                            "supportSni": true,
                             "servers": [
-                              "mwtrial.info"
+                              "mydomain.info"
                             ]
                           }
                         ],
@@ -648,6 +704,12 @@
                       "code": "InvalidRedirectHttpToHttps",
                       "message": "The allowed values for redirectHttpToHttps are true, false, 302, 307 and 308."
                     }
+                  },
+                  "OriginHostnameConflict": {
+                    "value": {
+                      "code": "OriginHostnameConflict",
+                      "message": "At least one of the hostnames is equal to an origin's server name."
+                    }
                   }
                 }
               }
@@ -704,7 +766,7 @@
                         {
                           "hostHeader": "testcustomer.g.qtlcdn.com",
                           "servers": [
-                            "edgetools.quantil.com"
+                            "edgetools.theoriginserver.com"
                           ],
                           "name": "my_origin_1572420965460",
                           "directConnection": "noDirect"
@@ -732,7 +794,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "Hostnames associated with the property.",
+                    "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                     "items": {
                       "type": "string"
                     }
@@ -762,7 +824,24 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                      },
+                      "headers": {
+                        "type": "array",
+                        "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name of an HTTP header."
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "Value of an HTTP header."
+                            }
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -772,7 +851,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 200000,
-                    "description": "Refer to https://docs.quantil.com/edgelogic"
+                    "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -826,11 +905,6 @@
                           "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
-                        "supportSni": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                        },
                         "verifyOrigin": {
                           "type": "boolean",
                           "default": false,
@@ -846,6 +920,13 @@
                               "description": "Authentication method."
                             }
                           }
+                        },
+                        "keepAliveTimeout": {
+                          "type": "integer",
+                          "default": 60,
+                          "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                          "minimum": 5,
+                          "maximum": 600
                         }
                       }
                     }
@@ -857,8 +938,8 @@
                   },
                   "disableHttp2": {
                     "type": "boolean",
-                    "default": false,
-                    "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                    "default": "false",
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -950,7 +1031,7 @@
                   },
                   "accessControlRules": {
                     "type": "array",
-                    "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
@@ -1031,6 +1112,44 @@
                         "action"
                       ]
                     }
+                  },
+                  "disableCertAutomation": {
+                    "type": "boolean",
+                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "default": "false"
+                  },
+                  "cacheKeyUri": {
+                    "type": "string",
+                    "enum": [
+                      "preRewrite",
+                      "postRewrite"
+                    ],
+                    "default": "preRewrite",
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                  },
+                  "extraServicePorts": {
+                    "type": "object",
+                    "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                    "properties": {
+                      "http": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      },
+                      "https": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -1042,9 +1161,8 @@
                         "supportedProtocol": "both",
                         "hostHeader": "autohostheader.com",
                         "servers": [
-                          "mwtrial.info"
+                          "mydomain.info"
                         ],
-                        "supportSni": false,
                         "name": "my_origin_1572403819776",
                         "verifyOrigin": null,
                         "directConnection": "auto"
@@ -1710,11 +1828,12 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                               }
                             },
                             "required": [
-                              "region"
+                              "region",
+                              "isp"
                             ]
                           }
                         },
@@ -2068,11 +2187,12 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
-                        "region"
+                        "region",
+                        "isp"
                       ]
                     }
                   },
@@ -2314,11 +2434,12 @@
                       },
                       "isp": {
                         "type": "string",
-                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                       }
                     },
                     "required": [
-                      "region"
+                      "region",
+                      "isp"
                     ]
                   },
                   "estimatedBandwidth": {
@@ -2616,6 +2737,18 @@
                       "code": "InvalidOrigins",
                       "message": "The origin hostHeader 'invalid' is invalid. It must be a valid hostname or a variable name ($ + a string consists of lower case a-z and '_' with length 3-60)."
                     }
+                  },
+                  "OriginHostnameConflict": {
+                    "value": {
+                      "code": "OriginHostnameConflict",
+                      "message": "At least one of the hostnames is equal to an origin's server name."
+                    }
+                  },
+                  "Invalid service port": {
+                    "value": {
+                      "code": "InvalidServicePort",
+                      "message": "The https service port 1234 is not supported."
+                    }
                   }
                 }
               }
@@ -2672,7 +2805,7 @@
                         {
                           "hostHeader": "testcustomer.g.qtlcdn.com",
                           "servers": [
-                            "edgetools.quantil.com"
+                            "edgetools.theoriginserver.com"
                           ],
                           "name": "my_origin_1572420965460",
                           "directConnection": "noDirect"
@@ -2700,7 +2833,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "Hostnames associated with the property.",
+                    "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                     "items": {
                       "type": "string"
                     }
@@ -2730,7 +2863,24 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                      },
+                      "headers": {
+                        "type": "array",
+                        "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Name of an HTTP header."
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "Value of an HTTP header."
+                            }
+                          }
+                        }
                       }
                     },
                     "required": [
@@ -2740,7 +2890,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 200000,
-                    "description": "Refer to https://docs.quantil.com/edgelogic"
+                    "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -2794,11 +2944,6 @@
                           "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
-                        "supportSni": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                        },
                         "verifyOrigin": {
                           "type": "boolean",
                           "default": false,
@@ -2814,6 +2959,13 @@
                               "description": "Authentication method."
                             }
                           }
+                        },
+                        "keepAliveTimeout": {
+                          "type": "integer",
+                          "default": 60,
+                          "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                          "minimum": 5,
+                          "maximum": 600
                         }
                       }
                     }
@@ -2825,8 +2977,8 @@
                   },
                   "disableHttp2": {
                     "type": "boolean",
-                    "default": false,
-                    "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                    "default": "false",
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -2918,7 +3070,7 @@
                   },
                   "accessControlRules": {
                     "type": "array",
-                    "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
@@ -2998,6 +3150,44 @@
                         "conditions",
                         "action"
                       ]
+                    }
+                  },
+                  "disableCertAutomation": {
+                    "type": "boolean",
+                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "default": "false"
+                  },
+                  "cacheKeyUri": {
+                    "type": "string",
+                    "enum": [
+                      "preRewrite",
+                      "postRewrite"
+                    ],
+                    "default": "preRewrite",
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                  },
+                  "extraServicePorts": {
+                    "type": "object",
+                    "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                    "properties": {
+                      "http": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      },
+                      "https": {
+                        "type": "array",
+                        "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 65535
+                        }
+                      }
                     }
                   }
                 }
@@ -3087,6 +3277,18 @@
                     "value": {
                       "code": "InvalidTLSSessionTimeout",
                       "message": "The TLS session timeout value should be between 300 and 86400 inclusive."
+                    }
+                  },
+                  "OriginHostnameConflict": {
+                    "value": {
+                      "code": "OriginHostnameConflict",
+                      "message": "At least one of the hostnames is equal to an origin's server name."
+                    }
+                  },
+                  "Invalid service port": {
+                    "value": {
+                      "code": "InvalidServicePort",
+                      "message": "The https service port 1234 is not supported."
                     }
                   }
                 }
@@ -3182,7 +3384,7 @@
                             {
                               "hostHeader": "testcustomer.g.qtlcdn.com",
                               "servers": [
-                                "edgetools.quantil.com"
+                                "edgetools.theoriginserver.com"
                               ],
                               "name": "my_origin_1572420965460",
                               "directConnection": "noDirect"
@@ -3210,7 +3412,7 @@
                       },
                       "hostnames": {
                         "type": "array",
-                        "description": "Hostnames associated with the property.",
+                        "description": "Hostnames associated with the property. A valid value is a fully qualified hostname such as www.domain.com or a wildcard hostname such as *.domain.com. Any given hostname can only be in one deployed property at a particular time. However, a wildcard hostname is permitted to overlap other hostnames you own.",
                         "items": {
                           "type": "string"
                         }
@@ -3240,7 +3442,24 @@
                           },
                           "format": {
                             "type": "string",
-                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                          },
+                          "headers": {
+                            "type": "array",
+                            "description": "HTTP header names and values to be sent to the notification server. A header name can contain any alphanumeric character or hyphen, \"-\". A header value can contain any printable characters. It can also include any of the built-in variables supported in the <i>format</i> field of the realTimeLog object.",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "description": "Name of an HTTP header."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Value of an HTTP header."
+                                }
+                              }
+                            }
                           }
                         },
                         "required": [
@@ -3250,7 +3469,7 @@
                       "edgeLogic": {
                         "type": "string",
                         "maxLength": 200000,
-                        "description": "Refer to https://docs.quantil.com/edgelogic"
+                        "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                       },
                       "hasBeian": {
                         "type": "boolean",
@@ -3304,11 +3523,6 @@
                               "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                               "format": "hostname"
                             },
-                            "supportSni": {
-                              "type": "boolean",
-                              "default": true,
-                              "description": "Optional. If set to <i>true</i>, the SNI extension will be enabled in the TLS handshake with the origin server."
-                            },
                             "verifyOrigin": {
                               "type": "boolean",
                               "default": false,
@@ -3324,6 +3538,13 @@
                                   "description": "Authentication method."
                                 }
                               }
+                            },
+                            "keepAliveTimeout": {
+                              "type": "integer",
+                              "default": 60,
+                              "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
+                              "minimum": 5,
+                              "maximum": 600
                             }
                           }
                         }
@@ -3335,8 +3556,8 @@
                       },
                       "disableHttp2": {
                         "type": "boolean",
-                        "default": false,
-                        "description": "When set to <i>true</i>, the server will not support HTTP/2. Only HTTP/1.1 will be supported.\n"
+                        "default": "false",
+                        "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                       },
                       "schemeInCacheKey": {
                         "type": "boolean",
@@ -3428,7 +3649,7 @@
                       },
                       "accessControlRules": {
                         "type": "array",
-                        "description": "Specify one or more access control rule(s) to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                        "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
                         "items": {
                           "title": "accessControlRule",
                           "type": "object",
@@ -3509,6 +3730,44 @@
                             "action"
                           ]
                         }
+                      },
+                      "disableCertAutomation": {
+                        "type": "boolean",
+                        "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                        "default": "false"
+                      },
+                      "cacheKeyUri": {
+                        "type": "string",
+                        "enum": [
+                          "preRewrite",
+                          "postRewrite"
+                        ],
+                        "default": "preRewrite",
+                        "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                      },
+                      "extraServicePorts": {
+                        "type": "object",
+                        "description": "This field lists ports other than the default 80 used to handle HTTP requests and ports other than the default 443 used to handle HTTPS requests. ",
+                        "properties": {
+                          "http": {
+                            "type": "array",
+                            "description": "This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                            "items": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 65535
+                            }
+                          },
+                          "https": {
+                            "type": "array",
+                            "description": "This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API's response. If you need another port, please contact our support team.",
+                            "items": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 65535
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -3522,7 +3781,7 @@
                 "example-1": {
                   "value": {
                     "name": "TestProperty1572420065294",
-                    "description": "validPropertyNoCertificate_PropertyEndToEndTestSteps",
+                    "description": "a new property",
                     "version": {
                       "syntaxVersion": 1,
                       "edgeLogic": "location / {origin_pass my_origin_1572420065294;}",
@@ -3530,7 +3789,7 @@
                         {
                           "hostHeader": "testcustomer.g.qtlcdn.com",
                           "servers": [
-                            "edgetools.quantil.com"
+                            "edgetools.theoriginserver.com"
                           ],
                           "name": "my_origin_1572420065294",
                           "directConnection": "auto"
@@ -3539,6 +3798,47 @@
                       "hostnames": [
                         "testcustomer1572420065294.g.qtlcdn.com"
                       ]
+                    }
+                  }
+                },
+                "example-2": {
+                  "value": {
+                    "name": "TestProperty1572420065294",
+                    "description": "validPropertyNoCertificate_PropertyEndToEndTestSteps",
+                    "version": {
+                      "syntaxVersion": 1,
+                      "edgeLogic": "location / {origin_pass my_origin_1572420065294;}",
+                      "origins": [
+                        {
+                          "hostHeader": "testcustomer.g.qtlcdn.com",
+                          "servers": [
+                            "edgetools.theoriginserver.com"
+                          ],
+                          "name": "my_origin_1572420065294",
+                          "directConnection": "auto"
+                        }
+                      ],
+                      "hostnames": [
+                        "testcustomer1572420065294.g.qtlcdn.com"
+                      ],
+                      "realTimeLog": {
+                        "logUrl": "https://mynotification.info/downloadNotify/index.php",
+                        "sampleRate": 2,
+                        "escape": "json",
+                        "format": "$server_addr",
+                        "headers": [
+                          {
+                            "name": "X-My-Header",
+                            "value": "123abc"
+                          }
+                        ],
+                        "redirectHttpToHttps": true,
+                        "loadBalancerHashKey": "$http_hashvalue",
+                        "videoSeek": {
+                          "startParameter": "start",
+                          "endParameter": "end"
+                        }
+                      }
                     }
                   }
                 }
@@ -3764,7 +4064,7 @@
             }
           }
         },
-        "description": "The API returns a summary of all properties including the ID, latest version number, comments, staging version number, production version number, and last update time of each one.",
+        "description": "The API returns a summary of properties including the ID, latest version number, comments, staging version number, production version number, and last update time of each one. Use query parameters to filter the list of returned properties.",
         "operationId": "getPropertyList",
         "parameters": [
           {
@@ -3781,7 +4081,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nIf there is more than one <i>hasConfig</i> query parameter, they will be combined together. Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
+            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'.  Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nIf there is more than one <i>hasConfig</i> query parameter, they will be combined together. Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
           },
           {
             "schema": {
@@ -3911,6 +4211,12 @@
                     "value": {
                       "code": "InvalidEdgeHostname",
                       "message": "Invalid edge hostname 'abcdef'. The edge hostname must be a valid domain name string."
+                    }
+                  },
+                  "Invalid ISP": {
+                    "value": {
+                      "code": "InvalidISP",
+                      "message": "You may specify up to 10 ISPs."
                     }
                   }
                 }
@@ -4106,11 +4412,12 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
-                        "region"
+                        "region",
+                        "isp"
                       ]
                     }
                   },
@@ -4857,7 +5164,7 @@
           }
         },
         "operationId": "getCertificates",
-        "description": "Get a list of available certificates including each certificate's ID, name, version deployed to production, version deployed to staging, the latest version number, when the certificate was last updated, and when the certificate expires. By default, certificates are returned in order of most recently updated first. Query parameters can be used to filter the list of returned certificates.",
+        "description": "Get a list of available certificates including each certificate's ID, name, version deployed to production, version deployed to staging, the latest version number, when the certificate was last updated, and when the certificate expires. By default, certificates are returned in order of most recently updated first. Use query parameters to filter the list of returned certificates.",
         "parameters": [
           {
             "schema": {
@@ -6311,7 +6618,7 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "Refers to the owner of the validation task.\n",
+                      "description": "ID of the customer whose property is validated.",
                       "minimum": 1
                     },
                     "apiRequestId": {
@@ -6321,6 +6628,26 @@
                     "finishTime": {
                       "type": "string",
                       "description": "An RFC 3339 date indicating when the task finished."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the property validation task."
+                    },
+                    "apiAccountId": {
+                      "type": "integer",
+                      "description": "ID of an API account used to create the validation task."
+                    },
+                    "apiName": {
+                      "type": "string",
+                      "description": "Name of an API account used to create the validation task."
+                    },
+                    "cacheVersion": {
+                      "type": "string",
+                      "description": "CDN360 cache version used when validating the property."
+                    },
+                    "impersonatingParentCustomerId": {
+                      "type": "integer",
+                      "description": "If a reseller validates a property on behalf of a child customer, then this field will be present and indicate the reseller's ID."
                     }
                   },
                   "required": [
@@ -6342,7 +6669,10 @@
                       "status": "waiting",
                       "statusDetails": "queued after 0 tasks",
                       "customerId": 10000021,
-                      "apiRequestId": "43e220b980b7f7ed"
+                      "apiRequestId": "43e220b980b7f7ed",
+                      "apiAccountId": 10000021,
+                      "apiName": "myAPIName",
+                      "cacheVersion": "1.18.0.1.2.03-224"
                     }
                   },
                   "Failed validation": {
@@ -6354,7 +6684,10 @@
                       "status": "failed",
                       "statusDetails": "invalid number of arguments in \"expires\" directive in /usr/local/qtl-nginx/conf/../domain_conf/ccve-validation.conf:21",
                       "customerId": 10000021,
-                      "apiRequestId": "495e81f2772b525d"
+                      "apiRequestId": "495e81f2772b525d",
+                      "apiAccountId": 10000021,
+                      "apiName": "myApiName",
+                      "cacheVersion": "1.18.0.1.2.03-224"
                     }
                   },
                   "Successful validation": {
@@ -6366,7 +6699,10 @@
                       "status": "succeeded",
                       "statusDetails": "[{\"url\":\"http://testdomain-t1573528182678.domain.info\",\"status\":\"succeeded\",\"reason\":\"200\"}]",
                       "customerId": 10000021,
-                      "apiRequestId": "a69ae9342c576554"
+                      "apiRequestId": "a69ae9342c576554",
+                      "apiAccountId": 10000021,
+                      "apiName": "myAPIName",
+                      "cacheVersion": "1.18.0.1.2.03-224"
                     }
                   }
                 }
@@ -6728,6 +7064,12 @@
                       "code": "InvalidPropertyVersion",
                       "message": "The specified version 999 or property 1c2a0ce09612e9988c345dff does not exist."
                     }
+                  },
+                  "Invalid certificate version": {
+                    "value": {
+                      "code": "InvalidCertificateVersion",
+                      "message": "The specified version 100 of certificate 5c65d18197146f000148511f does not exist."
+                    }
                   }
                 }
               }
@@ -7042,8 +7384,12 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "ID of the customer that created the deployment task.\n",
+                      "description": "ID of the customer whose properties or certificates are deployed by this task.\n",
                       "minimum": 1
+                    },
+                    "impersonatingParentCustomerId": {
+                      "type": "integer",
+                      "description": "If a reseller deploys a property or certificate on behalf of a child customer, then this field will be present and indicate the reseller's ID."
                     }
                   },
                   "required": [
@@ -7923,11 +8269,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -7957,17 +8298,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -7996,11 +8326,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -8030,17 +8355,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -8388,11 +8702,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -8422,17 +8731,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -9052,11 +9350,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -9086,17 +9379,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -11054,11 +11336,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -11088,17 +11365,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -11367,11 +11633,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -11401,17 +11662,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -12573,11 +12823,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -12607,17 +12852,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -13121,7 +13355,8 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "Refers to a customer."
+                      "description": "ID of customer whose files or directories are purged.",
+                      "minimum": 1
                     },
                     "dirHeaders": {
                       "type": "array",
@@ -13137,6 +13372,10 @@
                           }
                         }
                       }
+                    },
+                    "impersonatingParentCustomerId": {
+                      "type": "integer",
+                      "description": "If a reseller performs a purge on behalf of a child customer, then this field will be present and indicate the reseller's ID."
                     }
                   },
                   "required": [
@@ -13549,6 +13788,47 @@
                         }
                       ]
                     }
+                  },
+                  "Traffic grouped by server groups and customer IDs": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-08-01T12:35:00Z",
+                        "endTime": "2020-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            4400.65621,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "premium,123456",
+                          "data": [
+                            2200.29969,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            2200.35652,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -13588,7 +13868,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "Get a summary of traffic during a timespan grouped by hostnames or server groups.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get a summary of traffic during a timespan. You can group results by hostnames or server groups. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
         "parameters": [
           {
             "schema": {
@@ -13633,9 +13913,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltersummary",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-tags": [
+                  "Reports"
+                ],
+                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to only return data for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -13650,9 +13933,6 @@
                     ]
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -13664,30 +13944,27 @@
                           "type": "string"
                         }
                       },
-                      "serverGroups": {
+                      "servergroups": {
                         "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "premium+",
-                          "ultra"
-                        ],
                         "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "Resellers can limit the data by specifying IDs of child customers.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "groupby": {
+                        "type": "array",
+                        "description": "You can choose to group by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                        "items": {
+                          "type": "string"
+                        }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -14092,6 +14369,10 @@
                           "lastLoginTime": {
                             "type": "string",
                             "description": "RFC 3339 date indicating when the user last logged in to the portal."
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer to which the user belongs."
                           }
                         },
                         "required": [
@@ -14100,7 +14381,8 @@
                           "emailAddress",
                           "status",
                           "creationTime",
-                          "lastLoginTime"
+                          "lastLoginTime",
+                          "customerId"
                         ]
                       }
                     }
@@ -14123,7 +14405,8 @@
                           "creationTime": "2016-09-12T20:30:50Z",
                           "lastLoginTime": "2019-12-07T19:24:33Z",
                           "id": 592,
-                          "emailAddress": "John.Doe@company.com"
+                          "emailAddress": "John.Doe@company.com",
+                          "customerId": 123456
                         },
                         {
                           "loginName": "alee",
@@ -14132,7 +14415,8 @@
                           "status": "active",
                           "creationTime": "2018-08-22T16:58:12Z",
                           "id": 4327,
-                          "emailAddress": "alee@company.com"
+                          "emailAddress": "alee@company.com",
+                          "customerId": 123456
                         }
                       ]
                     }
@@ -14337,28 +14621,9 @@
                       "format": "email",
                       "description": "Email address of the primary user of the API account."
                     },
-                    "records": {
-                      "type": "object",
-                      "description": "Contains some additional information about the API account.",
-                      "required": [
-                        "customerId",
-                        "creationTime",
-                        "lastUpdateTime"
-                      ],
-                      "properties": {
-                        "customerId": {
-                          "type": "integer",
-                          "description": "ID of the customer."
-                        },
-                        "creationTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date when the API account was created."
-                        },
-                        "lastUpdateTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date when the account was last updated."
-                        }
-                      }
+                    "customerId": {
+                      "type": "integer",
+                      "description": "ID of the customer that owns the API account."
                     }
                   },
                   "required": [
@@ -14367,7 +14632,7 @@
                     "type",
                     "products",
                     "emailAddress",
-                    "records"
+                    "customerId"
                   ]
                 },
                 "examples": {
@@ -15024,6 +15289,10 @@
                             "type": "string",
                             "description": "Email address of the primary user of the API account.",
                             "format": "email"
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer to which the API account belongs."
                           }
                         },
                         "required": [
@@ -15033,7 +15302,8 @@
                           "responsiblePerson",
                           "creationTime",
                           "lastUpdateTime",
-                          "emailAddress"
+                          "emailAddress",
+                          "customerId"
                         ]
                       }
                     }
@@ -15055,7 +15325,8 @@
                           "responsiblePerson": "John Doe",
                           "creationTime": "2019-12-19T03:05:17Z",
                           "lastUpdateTime": "2019-12-19T03:05:17Z",
-                          "emailAddress": "john.doe@company.com"
+                          "emailAddress": "john.doe@company.com",
+                          "customerId": 12345678
                         }
                       ]
                     }
@@ -16669,7 +16940,9 @@
                         "apiAccountLimit": {
                           "type": "integer",
                           "default": 3,
-                          "description": "Maximum number of API accounts that can be created."
+                          "description": "Maximum number of API accounts that can be created.",
+                          "maximum": 100,
+                          "minimum": 1
                         },
                         "type": {
                           "type": "string",
@@ -16716,7 +16989,9 @@
                         "contactLimit": {
                           "type": "integer",
                           "default": 20,
-                          "description": "Number of portal user accounts the customer is permitted to have."
+                          "description": "Number of portal user accounts the customer is permitted to have.",
+                          "minimum": 1,
+                          "maximum": 100
                         }
                       },
                       "required": [
@@ -16986,7 +17261,9 @@
                         "apiAccountLimit": {
                           "type": "integer",
                           "default": 3,
-                          "description": "Maximum number of API accounts that can be created."
+                          "description": "Maximum number of API accounts that can be created.",
+                          "maximum": 100,
+                          "minimum": 1
                         },
                         "type": {
                           "type": "string",
@@ -17033,7 +17310,9 @@
                         "contactLimit": {
                           "type": "integer",
                           "default": 20,
-                          "description": "Number of portal user accounts the customer is permitted to have."
+                          "description": "Number of portal user accounts the customer is permitted to have.",
+                          "minimum": 1,
+                          "maximum": 100
                         }
                       },
                       "required": [
@@ -17406,7 +17685,9 @@
                       "apiAccountLimit": {
                         "type": "integer",
                         "default": 3,
-                        "description": "Maximum number of API accounts that can be created."
+                        "description": "Maximum number of API accounts that can be created.",
+                        "maximum": 100,
+                        "minimum": 1
                       },
                       "type": {
                         "type": "string",
@@ -17453,7 +17734,9 @@
                       "contactLimit": {
                         "type": "integer",
                         "default": 20,
-                        "description": "Number of portal user accounts the customer is permitted to have."
+                        "description": "Number of portal user accounts the customer is permitted to have.",
+                        "minimum": 1,
+                        "maximum": 100
                       }
                     },
                     "required": [
@@ -17683,7 +17966,9 @@
                         "apiAccountLimit": {
                           "type": "integer",
                           "default": 3,
-                          "description": "Maximum number of API accounts that can be created."
+                          "description": "Maximum number of API accounts that can be created.",
+                          "maximum": 100,
+                          "minimum": 1
                         },
                         "type": {
                           "type": "string",
@@ -17730,7 +18015,9 @@
                         "contactLimit": {
                           "type": "integer",
                           "default": 20,
-                          "description": "Number of portal user accounts the customer is permitted to have."
+                          "description": "Number of portal user accounts the customer is permitted to have.",
+                          "minimum": 1,
+                          "maximum": 100
                         }
                       },
                       "required": [
@@ -18031,7 +18318,9 @@
                       "apiAccountLimit": {
                         "type": "integer",
                         "default": 3,
-                        "description": "Maximum number of API accounts that can be created."
+                        "description": "Maximum number of API accounts that can be created.",
+                        "maximum": 100,
+                        "minimum": 1
                       },
                       "type": {
                         "type": "string",
@@ -18078,7 +18367,9 @@
                       "contactLimit": {
                         "type": "integer",
                         "default": 20,
-                        "description": "Number of portal user accounts the customer is permitted to have."
+                        "description": "Number of portal user accounts the customer is permitted to have.",
+                        "minimum": 1,
+                        "maximum": 100
                       }
                     },
                     "required": [
@@ -19190,11 +19481,11 @@
                     },
                     "publishedPrice": {
                       "type": "object",
+                      "description": "Describes the price for traffic and requests.",
                       "required": [
                         "perGB",
                         "perMHttpsReq"
                       ],
-                      "description": "Describes the price for traffic and requests.",
                       "properties": {
                         "perGB": {
                           "type": "object",
@@ -19228,6 +19519,37 @@
                           "type": "number",
                           "description": "Price in US dollars of one million HTTPS requests."
                         }
+                      }
+                    },
+                    "extraServicePorts": {
+                      "type": "object",
+                      "description": "This field lists nonstandard ports that can be used to handle HTTP and HTTPS requests. If your website uses a nonstandard port which is not listed, please contact our support team. You can specify one of these port numbers in the <i>extraServicePorts</i> field of your property configuration.",
+                      "properties": {
+                        "http": {
+                          "type": "array",
+                          "description": "Specifies ports other than the default 80 which can be used to handle HTTP requests.",
+                          "items": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 65535
+                          }
+                        },
+                        "https": {
+                          "type": "array",
+                          "description": "Specify ports other than the default 443 which can be used to handle HTTPS requests.",
+                          "items": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 65535
+                          }
+                        }
+                      }
+                    },
+                    "advancedFeaures": {
+                      "type": "array",
+                      "description": "List of advanced features that could be enabled for customers via the service quota API. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
                       }
                     }
                   },
@@ -19312,7 +19634,21 @@
                           "premium+": 0.197
                         },
                         "perMHttpsReq": 0.99
-                      }
+                      },
+                      "extraServicePorts": {
+                        "http": [
+                          85,
+                          1999,
+                          8080
+                        ],
+                        "https": [
+                          2000,
+                          65535
+                        ]
+                      },
+                      "advancedFeatures": [
+                        "realTimeLog"
+                      ]
                     }
                   }
                 }
@@ -19321,7 +19657,7 @@
           }
         },
         "operationId": "get-cdn-systemConfigs",
-        "description": "This API returns system configuration settings including supported edge logic directives, advanced edge logic directives, and the default pricing for traffic and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive."
+        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">edge logic directives</a>, advanced edge logic directives, the default pricing for traffic and HTTPS requests, and nonstandard ports which can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive or port which is not listed."
       }
     },
     "/cdn/serviceQuotas": {
@@ -19503,7 +19839,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of advanced <a href=\"https://docs.cdnetworks.com/cdn/docs/edge-logic/supported-directives\">edge logic directives</a> that are permitted to be used in addition to standard ones.",
+                    "description": "A list of advanced <a href=\"/cdn/docs/edge-logic/supported-directives\">edge logic directives</a> that are permitted to be used in addition to standard ones.",
                     "items": {
                       "type": "string"
                     }
@@ -19512,6 +19848,62 @@
                     "type": "boolean",
                     "default": "false",
                     "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted."
+                  },
+                  "advancedFeatures": {
+                    "type": "array",
+                    "description": "List of advanced features available to the customer. Currently, the only supported feature is \"realTimeLog\", which allows a customer to monitor requests from their client as they occur. Please contact our support team if you require this feature.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "directiveParameterLimits": {
+                    "title": "directiveParameterLimits",
+                    "type": "object",
+                    "x-tags": [
+                      "CDN Product Management"
+                    ],
+                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                    "properties": {
+                      "maxLimitRate": {
+                        "type": "integer",
+                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxUpstreamKeepaliveTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                      },
+                      "maxOriginConnectTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                      },
+                      "maxOriginReadTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxOriginSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      },
+                      "maxClientHeaderTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                      },
+                      "maxClientSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                      },
+                      "maxClientBodyTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -19724,6 +20116,62 @@
                     "suspensionDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    },
+                    "advancedFeatures": {
+                      "type": "array",
+                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "directiveParameterLimits": {
+                      "title": "directiveParameterLimits",
+                      "type": "object",
+                      "x-tags": [
+                        "CDN Product Management"
+                      ],
+                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                      "properties": {
+                        "maxLimitRate": {
+                          "type": "integer",
+                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxUpstreamKeepaliveTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                        },
+                        "maxOriginConnectTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        },
+                        "maxOriginReadTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxOriginSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        },
+                        "maxClientHeaderTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        },
+                        "maxClientSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        },
+                        "maxClientBodyTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -19866,6 +20314,12 @@
                     "value": {
                       "code": "InvalidServiceQuotaId",
                       "message": "The serviceQuotaId does not exist."
+                    }
+                  },
+                  "Invalid directive parameter limits": {
+                    "value": {
+                      "code": "InvalidDirectiveParameterLimits",
+                      "message": "The directive parameter limits cannot be empty. "
                     }
                   }
                 }
@@ -20011,6 +20465,62 @@
                   "trialDeadline": {
                     "type": "string",
                     "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  },
+                  "advancedFeatures": {
+                    "type": "array",
+                    "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "directiveParameterLimits": {
+                    "title": "directiveParameterLimits",
+                    "type": "object",
+                    "x-tags": [
+                      "CDN Product Management"
+                    ],
+                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                    "properties": {
+                      "maxLimitRate": {
+                        "type": "integer",
+                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxUpstreamKeepaliveTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                      },
+                      "maxOriginConnectTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                      },
+                      "maxOriginReadTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxOriginSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      },
+                      "maxClientHeaderTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                      },
+                      "maxClientSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                      },
+                      "maxClientBodyTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                      }
+                    }
                   }
                 }
               },
@@ -20306,7 +20816,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
-        "description": "Return the number of requests to your origin server that are using our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "description": "Return the number of requests to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
         "parameters": [
           {
             "schema": {
@@ -20528,7 +21038,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
-        "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.  ",
+        "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
         "parameters": [
           {
             "schema": {
@@ -20596,11 +21106,6 @@
                         "domain.info"
                       ]
                     }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
                   }
                 },
                 "x-tags": [
@@ -20630,17 +21135,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  },
-                  "groupBy": {
-                    "type": "array",
-                    "description": "Supported by summary report APIs only. You can choose to group by \"hostnames\", \"serverGroups\", or both.",
-                    "enum": [
-                      "hostnames",
-                      "serverGroups"
-                    ],
-                    "items": {
-                      "type": "string"
                     }
                   }
                 }
@@ -20833,6 +21327,62 @@
                     "suspensionDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    },
+                    "advancedFeatures": {
+                      "type": "array",
+                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "directiveParameterLimits": {
+                      "title": "directiveParameterLimits",
+                      "type": "object",
+                      "x-tags": [
+                        "CDN Product Management"
+                      ],
+                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                      "properties": {
+                        "maxLimitRate": {
+                          "type": "integer",
+                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxUpstreamKeepaliveTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                        },
+                        "maxOriginConnectTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        },
+                        "maxOriginReadTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxOriginSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        },
+                        "maxClientHeaderTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        },
+                        "maxClientSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        },
+                        "maxClientBodyTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -21050,6 +21600,62 @@
                     "suspensionDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                    },
+                    "advancedFeatures": {
+                      "type": "array",
+                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "directiveParameterLimits": {
+                      "title": "directiveParameterLimits",
+                      "type": "object",
+                      "x-tags": [
+                        "CDN Product Management"
+                      ],
+                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                      "properties": {
+                        "maxLimitRate": {
+                          "type": "integer",
+                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxUpstreamKeepaliveTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                        },
+                        "maxOriginConnectTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        },
+                        "maxOriginReadTimeOut": {
+                          "type": "integer",
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "minimum": 1
+                        },
+                        "maxOriginSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        },
+                        "maxClientHeaderTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        },
+                        "maxClientSendTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        },
+                        "maxClientBodyTimeOut": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -21135,6 +21741,12 @@
                     "value": {
                       "code": "InvalidStatus",
                       "message": "The 'trial' status cannot be specified by this customer."
+                    }
+                  },
+                  "Invalid directive parameter limits": {
+                    "value": {
+                      "code": "InvalidDirectiveParameterLimits",
+                      "message": "The directive parameter limits cannot be empty. "
                     }
                   }
                 }
@@ -21254,6 +21866,62 @@
                   "trialDeadline": {
                     "type": "string",
                     "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                  },
+                  "advancedFeatures": {
+                    "type": "array",
+                    "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "directiveParameterLimits": {
+                    "title": "directiveParameterLimits",
+                    "type": "object",
+                    "x-tags": [
+                      "CDN Product Management"
+                    ],
+                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                    "properties": {
+                      "maxLimitRate": {
+                        "type": "integer",
+                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxUpstreamKeepaliveTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+                      },
+                      "maxOriginConnectTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                      },
+                      "maxOriginReadTimeOut": {
+                        "type": "integer",
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "minimum": 1
+                      },
+                      "maxOriginSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                      },
+                      "maxClientHeaderTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                      },
+                      "maxClientSendTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                      },
+                      "maxClientBodyTimeOut": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                      }
+                    }
                   }
                 }
               },
@@ -21628,690 +22296,6 @@
           "description": "The request body can include filters to customize the results. By default, data from all hostnames will be included."
         }
       }
-    },
-    "/cdn/serviceQuotas/customer/{customerId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "customerId",
-          "in": "path",
-          "required": true,
-          "description": "ID of a customer.  For the \"Get the service quota for a customer\" API, its value can also be <i>me</i> to fetch your own service quota settings. You cannot specify \"me\" to update or delete your own settings."
-        }
-      ],
-      "get": {
-        "summary": "Get the service quota for a customer",
-        "tags": [
-          "CDN Product Management"
-        ],
-        "responses": {
-          "200": {
-            "description": "The response contains the service quotas for a CDN360 customer.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "serviceQuotaResponse",
-                  "type": "object",
-                  "description": "Describes the service quotas for a customer",
-                  "x-examples": {
-                    "example-1": {
-                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
-                      "customerId": 10008046,
-                      "contractId": "",
-                      "hostnameLimit": 13,
-                      "propertyLimit": 13,
-                      "certificateLimit": 11,
-                      "edgeHostnameLimit": 8,
-                      "filePurgeQuotaInStaging": 13,
-                      "dirPurgeQuotaInStaging": 13,
-                      "filePurgeQuotaInProduction": 13,
-                      "dirPurgeQuotaInProduction": 13,
-                      "prefetchQuota": 13,
-                      "logConfigLimit": 13,
-                      "maximumChildCustomers": 0,
-                      "allowedCacheDirectives": [
-                        "slice"
-                      ],
-                      "status": "active",
-                      "allowProduction": true,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
-                  "properties": {
-                    "serviceQuotaId": {
-                      "type": "string",
-                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "description": "ID of the customer."
-                    },
-                    "contractId": {
-                      "type": "string",
-                      "description": "ID representing the contract, used for billing."
-                    },
-                    "hostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of hostnames allowed in production.\n",
-                      "default": 100
-                    },
-                    "propertyLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of properties that can be created.\n"
-                    },
-                    "certificateLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of certificates that can be created."
-                    },
-                    "edgeHostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of edge hostnames that can be created.",
-                      "default": 100
-                    },
-                    "filePurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "filePurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "prefetchQuota": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
-                    },
-                    "logConfigLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of log configurations."
-                    },
-                    "maximumChildCustomers": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "For resellers, this represents the maximum number of child customers allowed."
-                    },
-                    "allowedCacheDirectives": {
-                      "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
-                      "enum": [
-                        "active",
-                        "suspended",
-                        "trial"
-                      ]
-                    },
-                    "allowProduction": {
-                      "type": "boolean",
-                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
-                      "default": false
-                    },
-                    "usageLimitDollar": {
-                      "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
-                      "minimum": 0
-                    },
-                    "usageLimitDays": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "maximum": 365,
-                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
-                    },
-                    "allowDeploymentInChina": {
-                      "type": "boolean",
-                      "default": false,
-                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
-                    },
-                    "trialDeadline": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
-                    },
-                    "upgradeDate": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
-                    },
-                    "suspensionDate": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
-                    }
-                  },
-                  "required": [
-                    "customerId",
-                    "status"
-                  ]
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
-                      "customerId": 1234567890,
-                      "contractId": "",
-                      "hostnameLimit": 20,
-                      "propertyLimit": 20,
-                      "certificateLimit": 20,
-                      "edgeHostnameLimit": 10,
-                      "filePurgeQuotaInStaging": 100,
-                      "dirPurgeQuotaInStaging": 20,
-                      "filePurgeQuotaInProduction": 100,
-                      "dirPurgeQuotaInProduction": 20,
-                      "prefetchQuota": 20,
-                      "logConfigLimit": 20,
-                      "maximumChildCustomers": 0,
-                      "allowedCacheDirectives": [
-                        "secure_link"
-                      ],
-                      "status": "active",
-                      "allowProduction": true,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Invalid customer ID": {
-                    "value": {
-                      "code": "InvalidCustomerId",
-                      "message": "The provided customer ID does not exist or the caller does not have permission to access it."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "No service quota was explicitly defined for this customer. The response body will contain the default settings.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "serviceQuotaResponse",
-                  "type": "object",
-                  "description": "Describes the service quotas for a customer",
-                  "x-examples": {
-                    "example-1": {
-                      "serviceQuotaId": "5efbadf08bb3b2298802b0f3",
-                      "customerId": 10008046,
-                      "contractId": "",
-                      "hostnameLimit": 13,
-                      "propertyLimit": 13,
-                      "certificateLimit": 11,
-                      "edgeHostnameLimit": 8,
-                      "filePurgeQuotaInStaging": 13,
-                      "dirPurgeQuotaInStaging": 13,
-                      "filePurgeQuotaInProduction": 13,
-                      "dirPurgeQuotaInProduction": 13,
-                      "prefetchQuota": 13,
-                      "logConfigLimit": 13,
-                      "maximumChildCustomers": 0,
-                      "allowedCacheDirectives": [
-                        "slice"
-                      ],
-                      "status": "active",
-                      "allowProduction": true,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
-                  "properties": {
-                    "serviceQuotaId": {
-                      "type": "string",
-                      "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
-                    },
-                    "customerId": {
-                      "type": "string",
-                      "description": "ID of the customer."
-                    },
-                    "contractId": {
-                      "type": "string",
-                      "description": "ID representing the contract, used for billing."
-                    },
-                    "hostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of hostnames allowed in production.\n",
-                      "default": 100
-                    },
-                    "propertyLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of properties that can be created.\n"
-                    },
-                    "certificateLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of certificates that can be created."
-                    },
-                    "edgeHostnameLimit": {
-                      "type": "integer",
-                      "description": "Maximum number of edge hostnames that can be created.",
-                      "default": 100
-                    },
-                    "filePurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInStaging": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
-                    },
-                    "filePurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "dirPurgeQuotaInProduction": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
-                    },
-                    "prefetchQuota": {
-                      "type": "integer",
-                      "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
-                    },
-                    "logConfigLimit": {
-                      "type": "integer",
-                      "default": 100,
-                      "description": "Maximum number of log configurations."
-                    },
-                    "maximumChildCustomers": {
-                      "type": "integer",
-                      "default": 20,
-                      "description": "For resellers, this represents the maximum number of child customers allowed."
-                    },
-                    "allowedCacheDirectives": {
-                      "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
-                      "enum": [
-                        "active",
-                        "suspended",
-                        "trial"
-                      ]
-                    },
-                    "allowProduction": {
-                      "type": "boolean",
-                      "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
-                      "default": false
-                    },
-                    "usageLimitDollar": {
-                      "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
-                      "minimum": 0
-                    },
-                    "usageLimitDays": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "maximum": 365,
-                      "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
-                    },
-                    "allowDeploymentInChina": {
-                      "type": "boolean",
-                      "default": false,
-                      "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China."
-                    },
-                    "trialDeadline": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
-                    },
-                    "upgradeDate": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
-                    },
-                    "suspensionDate": {
-                      "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
-                    }
-                  },
-                  "required": [
-                    "customerId",
-                    "status"
-                  ]
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "customerId": 1234567890,
-                      "hostnameLimit": 1000000,
-                      "propertyLimit": 1000000,
-                      "certificateLimit": 1000000,
-                      "edgeHostnameLimit": 1000000,
-                      "filePurgeQuotaInStaging": 5000,
-                      "dirPurgeQuotaInStaging": 20,
-                      "filePurgeQuotaInProduction": 5000,
-                      "dirPurgeQuotaInProduction": 20,
-                      "prefetchQuota": 5000,
-                      "logConfigLimit": 1000000,
-                      "maximumChildCustomers": 1000000,
-                      "allowedCacheDirectives": [],
-                      "status": "suspended",
-                      "allowProduction": false,
-                      "usageLimitDays": 0,
-                      "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-cdn-serviceQuotas-customer-customerId",
-        "description": "Get the CDN service quota for a customer."
-      },
-      "patch": {
-        "summary": "Update the service quota for a customer",
-        "tags": [
-          "CDN Product Management"
-        ],
-        "responses": {
-          "200": {
-            "description": "The customer's quota was updated successfully."
-          },
-          "400": {
-            "description": "The request was invalid. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Resource limit exceeded": {
-                    "value": {
-                      "code": "ResourceLimitExceeded",
-                      "message": "This customer cannot have a higher 'propertyLimit' limit than the reseller."
-                    }
-                  },
-                  "Invalid customer ID update": {
-                    "value": {
-                      "code": "InvalidCustomerIdUpdate",
-                      "message": "The customer ID field cannot be updated."
-                    }
-                  },
-                  "Invalid certificate limit": {
-                    "value": {
-                      "code": "InvalidCertificateLimit",
-                      "message": "The value for limit should be non-negative."
-                    }
-                  },
-                  "Invalid status": {
-                    "value": {
-                      "code": "InvalidStatus",
-                      "message": "The 'trial' status cannot be specified by this customer."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "patch-cdn-serviceQuotas-customer-customerId",
-        "description": "This API allows a reseller to update an existing service quota for a child customer.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "updateServiceQuotaBody",
-                "type": "object",
-                "description": "This object contains the fields of the service quota that can be updated.",
-                "x-tags": [
-                  "CDN Product Management"
-                ],
-                "properties": {
-                  "contractId": {
-                    "type": "string",
-                    "description": "ID representing the contract, used for billing."
-                  },
-                  "hostnameLimit": {
-                    "type": "integer",
-                    "description": "Maximum number of hostnames allowed in production.\n",
-                    "default": 100
-                  },
-                  "propertyLimit": {
-                    "type": "integer",
-                    "default": 100,
-                    "description": "Maximum number of properties that can be created.\n"
-                  },
-                  "certificateLimit": {
-                    "type": "integer",
-                    "default": 100,
-                    "description": "Maximum number of certificates that can be created."
-                  },
-                  "edgeHostnameLimit": {
-                    "type": "integer",
-                    "description": "Maximum number of edge hostnames that can be created.",
-                    "default": 100
-                  },
-                  "filePurgeQuotaInStaging": {
-                    "type": "integer",
-                    "default": 5000,
-                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
-                  },
-                  "dirPurgeQuotaInStaging": {
-                    "type": "integer",
-                    "default": 20,
-                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
-                  },
-                  "filePurgeQuotaInProduction": {
-                    "type": "integer",
-                    "default": 5000,
-                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
-                  },
-                  "dirPurgeQuotaInProduction": {
-                    "type": "integer",
-                    "default": 20,
-                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
-                  },
-                  "prefetchQuota": {
-                    "type": "integer",
-                    "default": 5000,
-                    "description": "Maximum number of prefetch requests in a 24 hour window."
-                  },
-                  "logConfigLimit": {
-                    "type": "integer",
-                    "default": 100,
-                    "description": "Maximum number of log configurations."
-                  },
-                  "maximumChildCustomers": {
-                    "type": "integer",
-                    "default": 20,
-                    "description": "For resellers, this represents the maximum number of child customers allowed."
-                  },
-                  "allowedCacheDirectives": {
-                    "type": "array",
-                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer  is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
-                    "enum": [
-                      "active",
-                      "suspended",
-                      "trial"
-                    ]
-                  },
-                  "allowProduction": {
-                    "type": "boolean",
-                    "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted.",
-                    "default": false
-                  },
-                  "usageLimitDollar": {
-                    "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
-                    "minimum": 0
-                  },
-                  "usageLimitDays": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 365,
-                    "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.\n"
-                  },
-                  "allowDeploymentInChina": {
-                    "type": "boolean",
-                    "description": "Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer's name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href=\"#operation/post-ngadmin-customers\">creating</a> or <a href=\"#operation/patch-ngadmin-customers-id\">updating</a> a customer.",
-                    "default": false
-                  },
-                  "trialDeadline": {
-                    "type": "string",
-                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
-                  }
-                }
-              },
-              "examples": {
-                "example-1": {
-                  "value": {
-                    "filePurgeQuotaInStaging": 100
-                  }
-                }
-              }
-            }
-          },
-          "description": "Include the fields that you wish to update. Omitted fields will not be changed."
-        }
-      },
-      "delete": {
-        "summary": "Delete the service quota for a customer",
-        "tags": [
-          "CDN Product Management"
-        ],
-        "responses": {
-          "204": {
-            "description": "The service quota was successfully deleted."
-          },
-          "400": {
-            "description": "Invalid request. Refer to the response body for details.",
-            "headers": {},
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "examples": {
-                  "Invalid customer ID": {
-                    "value": {
-                      "code": "InvalidCustomerId",
-                      "message": "The provided customer ID does not exist or is not a child of the caller."
-                    }
-                  },
-                  "Has certificate in production": {
-                    "value": {
-                      "code": "HasCertificateInProduction",
-                      "message": "This customer still has certificates deployed in production. They must be deleted before the configuration can be deleted."
-                    }
-                  },
-                  "Has edge hostname": {
-                    "value": {
-                      "code": "HasEdgeHostname",
-                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
-                    }
-                  },
-                  "Has property in production": {
-                    "value": {
-                      "code": "HasPropertyInProduction",
-                      "message": "This customer still has properties deployed in production. They must be deleted before the configuration can be deleted."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The service quota cannot be deleted due to a conflict. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "delete-cdn-serviceQuotas-customer-customerId",
-        "description": "This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
-      }
     }
   },
   "components": {
@@ -22331,7 +22315,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"https://docs.quantil.com/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",

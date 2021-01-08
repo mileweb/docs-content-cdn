@@ -17,7 +17,7 @@ set $cache_misc "hdr1=$http_header1&hdr2=$http_header2";
 
 ### HTTP Header Manipulation
 
-If you need to add, modify, or delete some headers to the request to the origin, use the [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) directive. For example:
+If you need to add, modify, or delete some header fields in the request to the origin, use the [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) directive. For example:
 ```nginx
 origin_set_header CDN-Name Quantil;
 ```
@@ -25,10 +25,12 @@ In particular, this is the code to send the client's IP address to the origin se
 ```nginx
 origin_set_header Client-IP $client_real_ip;
 ```
-If you need to add, modify, or delete some headers to the response to clients, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. For example:
+If you need to add, modify, or delete some header fields in the response to clients, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. For example:
 ```nginx
 add_header CDN-Name Quantil;
 ```
+We created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before all the other processings happen to the response. This is very useful if you want to override some settings (such as cache time) from the origin that may affect how CDN servers process the response.
+In order to consolidate the responses from the origin to improve the cache hit ratio, we also created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
 
 ### The support (and non-support) of `Vary`
 
@@ -38,8 +40,10 @@ set $cache_misc "ae=$http_accept_encoding";
 ```
 If you want to send a `Vary` header to the clients to make sure they cache different variations properly, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. If you have to pass the `Vary` header from the origin to the client, use the following configuration to "undo" the default removal of the header:
 ```nginx
-origin_header_modify Vary "" policy=preserve; # preserve the Vary header from origin
-proxy_ignore_headers Vary; # ignore the Vary header, just pass it to the client
+# preserve the Vary header from origin
+origin_header_modify Vary "" policy=preserve;
+# ignore the Vary header, just pass it to the client
+proxy_ignore_headers Vary; 
 ```
 In this case, the servers cache the content as if the `Vary` header does not exist. Without `proxy_ignore_headers Vary`, the preserved `Vary` header would prevent the response from being cached because [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) is configured by default. If it is absolutely important for the CDN360 servers to cache multiple versions based on the `Vary` header, contact CDNetworks customer support to obtain permission to set `proxy_cache_vary on`.
 
@@ -59,4 +63,4 @@ If you have one or more domains with ICP Beian and want them to be accelerated i
 
 ### How to support websocket?
 
-Use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client uses HTTP/1.1 (not HTTP/2) to connect. This directive also sets the read and send timeouts to 21s. It should not be used with the `origin_read_timeout` or `origin_send_timeout` directives in the same location.
+Use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where websocket is needed. Make sure the client uses HTTP/1.1 (not HTTP/2) to connect. This directive also sets the read and send timeouts to 21s by default. They can be changed using the [`origin_read_timeout`](</docs/edge-logic/supported-directives.md#origin_read_timeout>) or [`origin_send_timeout`](</docs/edge-logic/supported-directives.md#origin_send_timeout>) directives.
