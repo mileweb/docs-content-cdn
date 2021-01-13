@@ -76,7 +76,7 @@ If you only have the origin server at a central data center or cloud, the perfor
 * Simply using a CDN can shave a few seconds
 
 If you use CDN360, your clients will connect to our PoP that is closest to them. The round trip time (RTT) can be a few hundred milliseconds smaller compared to connecting to the origin server directly. The TCP and TLS handshakes usually take 3-4 RTTs which can easily be a second faster through CDN. The CDN360 servers by default maintain persistent connections to the origin. You can increase the [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) to up to 10 minutes in the origin configurations.
-* #### Cache the response!
+* Cache the response!
 
 "Dynamic" does not mean the content is not cacheable at all. In many cases, the end users will not feel the difference if you cache the NBA score for 1 second. If you have 10 requests per second to get the score, you could save 90% of the bandwidth and processing power. If the response depends on some query paremeter or request header values, you need to make sure those variables are [included in the cache key](#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key).
 * Enable Fast Route to origin
