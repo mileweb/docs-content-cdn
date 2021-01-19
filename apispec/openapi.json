@@ -1730,7 +1730,7 @@
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
-                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
+                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -1914,7 +1914,7 @@
             }
           }
         },
-        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history.",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -2085,11 +2085,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule is created that uses our 'standard' server group to handle all requests.  <code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2336,7 +2336,7 @@
                   "clientZones": {
                     "title": "Edge Hostname Client Zone Rule",
                     "type": "object",
-                    "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
+                    "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
                     "x-examples": {
                       "example-1": {
                         "region": "all",
@@ -4310,11 +4310,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which uses our 'standard' server group to handle all requests:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\"]}}</code>",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4421,7 +4421,7 @@
                       ]
                     }
                   },
-                  "estimatedBandwiidth": {
+                  "estimatedBandwidth": {
                     "type": "string",
                     "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                   }
@@ -22331,7 +22331,7 @@
     },
     {
       "name": "Edge Hostname Management",
-      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360."
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360. Different properties' hostnames may point to the same edge hostname if the same rules apply."
     },
     {
       "name": "Reports",
