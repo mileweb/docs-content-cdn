@@ -1730,7 +1730,7 @@
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
-                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
+                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -2085,11 +2085,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2334,113 +2334,116 @@
                     "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
-                    "title": "Edge Hostname Client Zone Rule",
-                    "type": "object",
-                    "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
-                    "x-examples": {
-                      "example-1": {
-                        "region": "all",
-                        "action": {
-                          "type": "deliver",
-                          "by": [
-                            "standard"
-                          ]
-                        }
-                      },
-                      "example-2": {
-                        "region": "as.cn",
-                        "action": {
-                          "type": "deliver",
-                          "by": [
-                            "standard",
-                            "premium",
-                            "premium+"
-                          ]
-                        }
-                      },
-                      "example-3": {
-                        "region": "apac",
-                        "action": {
-                          "type": "reject"
-                        }
-                      },
-                      "example-4": {
-                        "region": "as.cn",
-                        "action": {
-                          "type": "redirect",
-                          "to": [
-                            "redirect.cname.com"
-                          ]
-                        },
-                        "weight": 10
-                      }
-                    },
-                    "x-tags": [
-                      "Edge Hostname Management"
-                    ],
-                    "properties": {
-                      "region": {
-                        "type": "string",
-                        "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
-                      },
-                      "weight": {
-                        "type": "integer",
-                        "default": 100,
-                        "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
-                        "minimum": 0,
-                        "maximum": 100
-                      },
-                      "action": {
-                        "type": "object",
-                        "description": "This object describes the action to take for requests matching the rule.",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "deliver",
-                              "redirect",
-                              "reject"
-                            ],
-                            "description": "Defines the action to take for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
-                          },
-                          "by": {
-                            "type": "array",
-                            "default": "standard",
-                            "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
-                            "enum": [
-                              "standard",
-                              "premium",
-                              "premium+",
-                              "ultra"
-                            ],
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "to": {
-                            "type": "string",
-                            "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
-                            "example": "domain.com"
-                          },
-                          "enableIPv6": {
-                            "type": "boolean",
-                            "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
-                            "default": "true"
+                    "type": "array",
+                    "items": {
+                      "title": "Edge Hostname Client Zone Rule",
+                      "type": "object",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "x-examples": {
+                        "example-1": {
+                          "region": "all",
+                          "action": {
+                            "type": "deliver",
+                            "by": [
+                              "standard"
+                            ]
                           }
                         },
-                        "required": [
-                          "type"
-                        ]
+                        "example-2": {
+                          "region": "as.cn",
+                          "action": {
+                            "type": "deliver",
+                            "by": [
+                              "standard",
+                              "premium",
+                              "premium+"
+                            ]
+                          }
+                        },
+                        "example-3": {
+                          "region": "apac",
+                          "action": {
+                            "type": "reject"
+                          }
+                        },
+                        "example-4": {
+                          "region": "as.cn",
+                          "action": {
+                            "type": "redirect",
+                            "to": [
+                              "redirect.cname.com"
+                            ]
+                          },
+                          "weight": 10
+                        }
                       },
-                      "isp": {
-                        "type": "string",
-                        "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
-                      }
-                    },
-                    "required": [
-                      "region",
-                      "isp"
-                    ]
+                      "x-tags": [
+                        "Edge Hostname Management"
+                      ],
+                      "properties": {
+                        "region": {
+                          "type": "string",
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                        },
+                        "weight": {
+                          "type": "integer",
+                          "default": 100,
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "action": {
+                          "type": "object",
+                          "description": "This object describes the action to take for requests matching the rule.",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "deliver",
+                                "redirect",
+                                "reject"
+                              ],
+                              "description": "Defines the action to take for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
+                            },
+                            "by": {
+                              "type": "array",
+                              "default": "standard",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "enum": [
+                                "standard",
+                                "premium",
+                                "premium+",
+                                "ultra"
+                              ],
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "to": {
+                              "type": "string",
+                              "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
+                              "example": "domain.com"
+                            },
+                            "enableIPv6": {
+                              "type": "boolean",
+                              "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
+                              "default": "true"
+                            }
+                          },
+                          "required": [
+                            "type"
+                          ]
+                        },
+                        "isp": {
+                          "type": "string",
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                        }
+                      },
+                      "required": [
+                        "region",
+                        "isp"
+                      ]
+                    }
                   },
                   "estimatedBandwidth": {
                     "type": "string",
@@ -4310,11 +4313,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can create custom rules instead to match your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
