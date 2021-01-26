@@ -25,12 +25,14 @@ In particular, this is the code to send the client's IP address to the origin se
 ```nginx
 origin_set_header Client-IP $client_real_ip;
 ```
+In order to consolidate the responses from the origin to improve the cache hit ratio, we also created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
+
 If you need to add, modify, or delete some header fields in the response to clients, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. For example:
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before all the other processings happen to the response. This is very useful if you want to override some settings (such as cache time) from the origin that may affect how CDN servers process the response.
-In order to consolidate the responses from the origin to improve the cache hit ratio, we also created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
+We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before any other processings happen to the response. This can be very useful if you need to override some header value (such as cache time) from the origin that may affect the CDN servers' behavior.
+
 
 ### The support (and non-support) of `Vary`
 
