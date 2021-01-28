@@ -65,7 +65,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 <span class="badge">standard</span>
 
-**Syntax**: `allow address | CIDR | unix: | all;`
+**Syntax**: `allow address | CIDR | unix: | all;`<br/>
 **Default**: `-` <br/>
 **Context**: http, server, location
 
@@ -76,8 +76,8 @@ Allows access for the specified network or address. (Work in progress to make th
 
 <span class="badge dark">advanced</span>
 
-**Syntax**:	`auth_request uri | off`;
-**Default**:	`auth_request off;`
+**Syntax**:	`auth_request uri | off`;<br/>
+**Default**:	`auth_request off;`<br/>
 **Context**:	http, server, location
 
 Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
@@ -87,8 +87,8 @@ Enables authorization based on the result of a subrequest and sets the URI to wh
 
 <span class="badge dark">advanced</span>
 
-**Syntax**:	`auth_request_set $variable value;`
-**Default**:	`—`
+**Syntax**:	`auth_request_set $variable value;`<br/>
+**Default**:	`—`<br/>
 **Context**:	http, server, location
 
 Sets the request variable to the given value after the authorization request completes. No change to the public version. 
@@ -97,8 +97,8 @@ Sets the request variable to the given value after the authorization request com
 
 <span class="badge">standard</span>
 
-**Syntax**:	`break;`
-**Default**:	`—`
+**Syntax**:	`break;`<br/>
+**Default**:	`—`<br/>
 **Context**:	server, location, if
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
