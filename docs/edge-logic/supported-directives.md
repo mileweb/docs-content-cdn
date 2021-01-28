@@ -65,11 +65,11 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 <span class="badge">standard</span>
 
-**Syntax**: `allow address | CIDR | unix: | all;`<br/>
+**Syntax**: `allow address | CIDR | all;`<br/>
 **Default**: `-` <br/>
 **Context**: http, server, location
 
-Allows access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Mar. 2021</span>)
+Allows access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -147,7 +147,11 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 <span class="badge">standard</span>
 
-Denies access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
+**Syntax**:	`deny address | CIDR | all;`<br/>
+**Default**:	`—`<br/>
+**Context**:	http, server, location
+
+Denies access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 ### `enable_websocket`
 
