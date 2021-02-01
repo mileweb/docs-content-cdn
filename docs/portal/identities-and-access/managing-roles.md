@@ -20,7 +20,7 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 ![null](</docs/resources/images/identities-and-access/iam-add-role.png>)
 
 | **Fields**           | **Description**                   |
-|     ---------------- |---------------------------------- |
+| -------------------- |---------------------------------- |
 | Role Name            | Enter a name for this role.       |
 | Description          | Enter a description for this role.|
 | Permissions          | To assign one or more permissions to this role, click **+ Add Permissions**, check one or more permissions in the Add Permissions dialog box, and then click **Save**. If you decide not to add one or more permissions to this role, check them, and then click the **Delete** button in the **Permissions** section.|

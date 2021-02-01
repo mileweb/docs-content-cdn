@@ -8,10 +8,10 @@ The following figure shows the key elements on the page, and the table following
 
 <p align=center><img src="/docs/resources/images/reports-w-numbers.png" alt="report page" width="900"></p>
 
-| **Element Number**|**Description**|
-|-|-|
-|<p style="text-align: center;">1</p>|Specify the report type, date range, report interval, hostname, protocol, and report range.|
-|<p style="text-align: center;">2</p>|The **Generate Report** button allows you to generate the report defined by the report parameters.|
+| **Fields**   | **Description**                                                                                           |
+| :----------: | --------------------------------------------------------------------------------------------------------- |
+| 1            | Specify the report type, date range, report interval, hostname, protocol, and report range.               |
+| 2            | The **Generate Report** button allows you to generate the report defined by the report parameters.        |
 
 ## Supported Report Types
 
@@ -43,7 +43,7 @@ The following report types are supported:
 | Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
 | Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties.         |
 | Edge Hostnames  | For Edge Hostname Request, select one or more edge hostnames.         |
-| Protocol        | For all reports except Edge Hostname Request, select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
+| Scheme        | For all reports except Edge Hostname Request, select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.
 | Server Groups        | By default Traffic Volume Summary reports on all server groups. To choose specific server groups, select them from the available choices.<li><strong>Standard</strong></li><li><strong>Premium</strong>.</li><li><strong>Premium+</strong>.</li><li><strong>Ultra</strong>.|
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.|
