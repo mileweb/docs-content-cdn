@@ -8280,7 +8280,7 @@
             }
           }
         },
-        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.\n",
+        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The network overhead at all layers such as various protocol headers, TCP and TLS handshakes, and TCP retransmission is not included in this API's results. We will add 8% to account for the overhead when generating the \"billing volume\" on your invoice.\n",
         "operationId": "getEdgeTrafficVolume",
         "requestBody": {
           "content": {
