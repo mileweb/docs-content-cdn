@@ -2,7 +2,7 @@
 
 ### How do you include query parameters and/or request headers in the cache key?
 
-CDN360 defines the following special variable that is accessible in the Edge Logic: `$cache_misc`. This variable is part of the cache key. If you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+By default, the cache key of CDN360 includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
@@ -25,12 +25,14 @@ In particular, this is the code to send the client's IP address to the origin se
 ```nginx
 origin_set_header Client-IP $client_real_ip;
 ```
+In order to consolidate the responses from the origin to improve the cache hit ratio, we created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
+
 If you need to add, modify, or delete some header fields in the response to clients, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. For example:
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before all the other processings happen to the response. This is very useful if you want to override some settings (such as cache time) from the origin that may affect how CDN servers process the response.
-In order to consolidate the responses from the origin to improve the cache hit ratio, we also created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
+We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before any other processings happen to the response. This can be very useful if you need to override some header value (such as cache time) from the origin that may affect the CDN servers' behavior.
+
 
 ### The support (and non-support) of `Vary`
 

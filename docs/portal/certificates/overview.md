@@ -15,13 +15,15 @@ The following figure shows the key elements on the page, and the table following
 
 <p align="center"><img src="/docs/resources/images/certificates/certificates-w-numbers.png" alt="Certificate List" width="900"></p>
 
-| **Element Number**|**Description**|
-|-|-|
-|<p style="text-align: center;">1</p>|A search box that you can enter any keyword to filter the certificate list.|
-|<p style="text-align: center;">2</p>|The list of all certificates that are available to you. Click the **+** sign for details about the certificate.|
-|<p style="text-align: center;">3</p>|Icons to filter certificates by Auto Renew, Staging Version, and Production Version.|
-|<p style="text-align: center;">4</p>|Drop-down lists to take actions on each certificate.|
-|<p style="text-align: center;">5<p>|The button to [create new certificates](</docs/portal/certificates/creating-certificates.md>).|
+| **Fields**   | **Description**                                                                                           |
+| :----------: | --------------------------------------------------------------------------------------------------------- |
+| 1            | A search box that you can enter any keyword to filter the certificate list.                               |
+| 2            | The list of all certificates that are available to you. Click the **+** sign for details about the certificate.  |
+| 3            | Icons to filter certificates by Auto Renew, Staging Version, and Production Version.                      |
+| 4            | Drop-down lists to take actions on each certificate.                                                      |
+| 5            | The button to [create new certificates](</docs/portal/certificates/creating-certificates.md>).            |
+
+
 
 ## Certificate Actions
 Each certificate has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected certificate.
