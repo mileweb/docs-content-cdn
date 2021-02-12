@@ -8257,10 +8257,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid hostnames": {
@@ -8280,7 +8280,7 @@
             }
           }
         },
-        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The network overhead at all layers such as various protocol headers, TCP and TLS handshakes, and TCP retransmission is not included in this API's results. We will add 8% to account for the overhead when generating the \"billing volume\" on your invoice.\n",
+        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The network overhead at all layers such as various protocol headers, TCP and TLS handshakes, and TCP retransmission is not included in this API's results. We will add 8% to account for the overhead when generating the \"billing volume\" on your invoice.\n",
         "operationId": "getEdgeTrafficVolume",
         "requestBody": {
           "content": {
@@ -8448,7 +8448,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -8711,7 +8711,7 @@
           }
         },
         "operationId": "getOriginTrafficVolume",
-        "description": "Gets the origin traffic volume in megabytes for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the origin traffic volume in megabytes for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "tags": [
           "Reports"
         ],
@@ -8824,7 +8824,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -8987,10 +8987,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid time span": {
@@ -9004,7 +9004,7 @@
             }
           }
         },
-        "description": "Gets the number of requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Gets the number of requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9102,7 +9102,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -9362,7 +9362,7 @@
           }
         },
         "operationId": "getEdgeBandwidth",
-        "description": "Get the bandwidth in Mbps to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get the bandwidth in Mbps to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9472,7 +9472,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -9938,7 +9938,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10035,7 +10035,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -10277,10 +10277,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid time span": {
@@ -10295,7 +10295,7 @@
           }
         },
         "operationId": "getOriginRequests",
-        "description": "Get the number of requests to your origin servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Get the number of requests to your origin servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10392,7 +10392,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -10918,7 +10918,7 @@
           }
         },
         "operationId": "getOriginStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to your origin servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to your origin servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11015,7 +11015,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -11275,7 +11275,7 @@
           }
         },
         "operationId": "getIntermediateTraffic",
-        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN360 servers. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN360 servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "parameters": [
           {
             "schema": {
@@ -11323,7 +11323,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -11627,10 +11627,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid time span": {
@@ -11644,7 +11644,7 @@
             }
           }
         },
-        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "operationId": "getEdgeUploadTrafficVolume",
         "requestBody": {
           "content": {
@@ -11755,7 +11755,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -13924,8 +13924,8 @@
               ]
             },
             "in": "query",
-            "name": "protocol",
-            "description": "Limits the results to the specified protocol."
+            "name": "scheme",
+            "description": "Limits the results to the specified scheme."
           },
           {
             "schema": {
@@ -20831,10 +20831,10 @@
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
                   },
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'httpsd'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   }
                 }
@@ -20893,7 +20893,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           }
         ],
@@ -21053,10 +21053,10 @@
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
                   },
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'httpsd'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   }
                 }
@@ -21115,7 +21115,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           }
         ],
@@ -22195,10 +22195,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The scheme must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid hostnames": {
@@ -22265,10 +22265,11 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "all"
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           }
         ],
