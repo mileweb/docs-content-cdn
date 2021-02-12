@@ -69,7 +69,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 **Default**: `-` <br/>
 **Context**: http, server, location
 
-Allows access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
+Allows access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -151,7 +151,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 **Default**:	`—`<br/>
 **Context**:	http, server, location
 
-Denies access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
+Denies access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 ### `enable_websocket`
 
@@ -365,10 +365,10 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 This directive specifies the origin to fetch the content. It is a wrapper of the NGINX [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. Examples:
 ```nginx
 origin_pass my_origin;    #URI is not specified, 
-origin_pass my_origin/$uri;
+origin_pass my_origin/$uri; #same as above without query string
 origin_pass my_origin/abc/$uri;
 ```
-If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin.
+If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `/$uri` after the origin name.
 
 ### `origin_read_timeout`
 
