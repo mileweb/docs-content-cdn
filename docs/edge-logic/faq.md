@@ -2,7 +2,7 @@
 
 ### How do you include query parameters and/or request headers in the cache key?
 
-By default, the cache key of CDN360 includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
@@ -31,7 +31,7 @@ If you need to add, modify, or delete some header fields in the response to clie
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before any other processings happen to the response. This can be very useful if you need to override some header value (such as cache time) from the origin that may affect the CDN servers' behavior.
+We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin, before any other processing of the response. This can be very useful if you need to override some header value (such as cache time) from the origin that may affect the CDN servers' behavior.
 
 
 ### The support (and non-support) of `Vary`
