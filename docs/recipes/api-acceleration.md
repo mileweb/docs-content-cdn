@@ -31,7 +31,7 @@ no longer be used because we later will CNAME it to a CDN360 edge hostname to di
 client's traffic to the platform to be accelerated.
 * No API service should be running without the protection of TLS encryption. You need to
 upload the certificate for `api.company.com` to the CDN360 platform. We recommend the use
-of [Let's Encrypt] to automatically renew the certificate.
+of [Let's Encrypt](/docs/portal/certificates/auto-renewal) to automatically renew the certificate.
 <p align=center><img src="/docs/resources/images/recipes/api/upload-certificate.png" alt="upload certificate" width="700"></p>
 
 * Go to the CDN360 portal to create an property to accelerate this API service. The 
