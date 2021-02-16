@@ -2752,6 +2752,18 @@
                       "code": "InvalidServicePort",
                       "message": "The https service port 1234 is not supported."
                     }
+                  },
+                  "Unauthorized directive": {
+                    "value": {
+                      "code": "UnauthorizedDirective",
+                      "message": "The directive 'origin_fast_route' is not enabled for your account. Please contact our support team if you require it."
+                    }
+                  },
+                  "Invalid directive": {
+                    "value": {
+                      "code": "InvalidDirective",
+                      "message": "An invalid directive 'ORIGIN_set_header' was found in your edge logic. Please refer to the API documentation for a list of supported directives."
+                    }
                   }
                 }
               }
@@ -3292,6 +3304,18 @@
                     "value": {
                       "code": "InvalidServicePort",
                       "message": "The https service port 1234 is not supported."
+                    }
+                  },
+                  "Unauthorized directive": {
+                    "value": {
+                      "code": "UnauthorizedDirective",
+                      "message": "The directive 'origin_fast_route' is not enabled for your account. Please contact our support team if you require it."
+                    }
+                  },
+                  "Invalid directive": {
+                    "value": {
+                      "code": "InvalidDirective",
+                      "message": "An invalid directive 'ORIGIN_set_header' was found in your edge logic. Please refer to the API documentation for a list of supported directives."
                     }
                   }
                 }
@@ -4201,7 +4225,7 @@
                   "Invalid edge hostname suffix": {
                     "value": {
                       "code": "InvalidEdgeHostnameSuffix",
-                      "message": "Invalid edge hostname 'testdomain-.mydomain.info'. The edge hostname can end with these values:  .qtlgslb.com."
+                      "message": "Invalid edge hostname 'testdomain-.mydomain.info'. The edge hostname can end with these values:  .qtlcdn.com."
                     }
                   },
                   "Invalid weight code": {
@@ -4289,8 +4313,8 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "An edge hostname you wish to use. It should end with \".qtlgslb.com\".",
-                    "example": "test.123.qtlgslb.com"
+                    "description": "An edge hostname you wish to use. It should end with \".qtlcdn.com\".",
+                    "example": "test.123.qtlcdn.com"
                   },
                   "description": {
                     "type": "string",
@@ -4438,7 +4462,7 @@
                 },
                 "example-2": {
                   "value": {
-                    "edgeHostname": "test.123.qtlgslb.com",
+                    "edgeHostname": "test.123.qtlcdn.com",
                     "clientZones": [
                       {
                         "region": "eu",
@@ -7540,7 +7564,7 @@
             }
           }
         },
-        "description": "This API returns a list of staging servers. Use these to test your deployments to staging before you deploy to production. (You can also get the IP addresses using this command on a Linux/Unix based system:  <code>dig staging.qtlgslb.com</code>).\n\nUse one of the following methods to test a property deployed to staging:\n\n<ol>\n<li>Modify your DNS server's CNAME record to point the property's hostname to staging.qtlgslb.com.</li>\n<li>Modify your hosts file (/etc/hosts on a Unix or Linux based system) to point your property's hostname to one of the staging servers' IP addresses.</li>\n<li>Use the curl utility's --resolve option to map the property's hostname to one of the staging servers' IP addresses.</li></ol>\n\nAlthough we do not expect the IP addresses to change often, they may change without notice. If you use options 2 or 3 above, you should periodically check if the IP address is still valid using this API.",
+        "description": "This API returns a list of staging servers. Use these to test your deployments to staging before you deploy to production. (You can also get the IP addresses using this command on a Linux/Unix based system:  <code>dig staging.qtlcdn.com</code>).\n\nUse one of the following methods to test a property deployed to staging:\n\n<ol>\n<li>Modify your DNS server's CNAME record to point the property's hostname to staging.qtlcdn.com.</li>\n<li>Modify your hosts file (/etc/hosts on a Unix or Linux based system) to point your property's hostname to one of the staging servers' IP addresses.</li>\n<li>Use the curl utility's --resolve option to map the property's hostname to one of the staging servers' IP addresses.</li></ol>\n\nAlthough we do not expect the IP addresses to change often, they may change without notice. If you use options 2 or 3 above, you should periodically check if the IP address is still valid using this API.",
         "operationId": "getStagingServers",
         "parameters": [
           {
@@ -8233,10 +8257,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid hostnames": {
@@ -8256,7 +8280,7 @@
             }
           }
         },
-        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.\n",
+        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The network overhead at all layers such as various protocol headers, TCP and TLS handshakes, and TCP retransmission is not included in this API's results. We will add 8% to account for the overhead when generating the \"billing volume\" on your invoice.\n",
         "operationId": "getEdgeTrafficVolume",
         "requestBody": {
           "content": {
@@ -8424,7 +8448,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -8687,7 +8711,7 @@
           }
         },
         "operationId": "getOriginTrafficVolume",
-        "description": "Gets the origin traffic volume in megabytes for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the origin traffic volume in megabytes for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "tags": [
           "Reports"
         ],
@@ -8800,7 +8824,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -8963,10 +8987,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid time span": {
@@ -8980,7 +9004,7 @@
             }
           }
         },
-        "description": "Gets the number of requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Gets the number of requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9078,7 +9102,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -9338,7 +9362,7 @@
           }
         },
         "operationId": "getEdgeBandwidth",
-        "description": "Get the bandwidth in Mbps to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get the bandwidth in Mbps to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9448,7 +9472,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -9914,7 +9938,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10011,7 +10035,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -10253,10 +10277,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid time span": {
@@ -10271,7 +10295,7 @@
           }
         },
         "operationId": "getOriginRequests",
-        "description": "Get the number of requests to your origin servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Get the number of requests to your origin servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10368,7 +10392,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -10894,7 +10918,7 @@
           }
         },
         "operationId": "getOriginStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to your origin servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to your origin servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10991,7 +11015,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -11251,7 +11275,7 @@
           }
         },
         "operationId": "getIntermediateTraffic",
-        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN360 servers. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN360 servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "parameters": [
           {
             "schema": {
@@ -11299,7 +11323,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -11603,10 +11627,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid time span": {
@@ -11620,7 +11644,7 @@
             }
           }
         },
-        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period. Query parameters let you specify the time period and protocol. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "operationId": "getEdgeUploadTrafficVolume",
         "requestBody": {
           "content": {
@@ -11731,7 +11755,7 @@
               "minLength": 0
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           },
           {
@@ -13900,8 +13924,8 @@
               ]
             },
             "in": "query",
-            "name": "protocol",
-            "description": "Limits the results to the specified protocol."
+            "name": "scheme",
+            "description": "Limits the results to the specified scheme."
           },
           {
             "schema": {
@@ -20807,10 +20831,10 @@
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
                   },
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'httpsd'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   }
                 }
@@ -20869,7 +20893,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           }
         ],
@@ -21029,10 +21053,10 @@
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
                   },
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'httpsd'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'httpsd'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   }
                 }
@@ -21091,7 +21115,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           }
         ],
@@ -22171,10 +22195,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid protocol": {
+                  "Invalid scheme": {
                     "value": {
-                      "code": "InvalidProtocol",
-                      "message": "Invalid parameter 'protocol': 'invalidProtocol'. The protocol type must be 'http', 'https' or 'all'."
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The scheme must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid hostnames": {
@@ -22241,10 +22265,11 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "all"
             },
             "in": "query",
-            "name": "protocol",
+            "name": "scheme",
             "description": "Choose whether to include HTTP and HTTPS traffic in the results. The default \"all\" includes both types of traffic."
           }
         ],
@@ -22326,7 +22351,7 @@
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. You have the option of deploying to a <i>staging</i> environment to test your configurations before deploying to <i>production</i>. <h2>Testing a staged property</h2>If you have deployed to staging, you can send traffic to our staging servers to ensure the property behaves as you intended. The staging cache servers can be found through a special hostname <i>staging.qtlgslb.com</i>. You can get IP addresses of staging cache servers using the Unix/Linux dig command.  For example:\n<pre> <code> $ dig staging.qtlgslb.com <br/> ... <br /> ;; ANSWER SECTION:<br/> staging.qtlgslb.com.    59      IN      A       163.171.228.89<br/> staging.qtlgslb.com.    59      IN      A       163.171.233.53<br/> staging.qtlgslb.com.    59      IN      A       163.171.230.47<br/> </code> </pre> You can also call the <a href=\"#operation/getStagingServers\">Query list of staging servers API</a> to get IP addresses you can use. You have several ways to set up your system to test against staging: <ol> <li>Modify your DNS server to point your deployed property's hostname to the CDN360 staging hostname <i>staging.qtlgslb.com</i>.</li> <li>Modify your HOSTS file (/etc/hosts on Linux) to hard code the property's hostname to one of the staging servers' IP addresses.</li> <li> If the cURL command is used, the --resolve option can be used to directly map the property's hostname to an IP address of a CDN360 staging server.</li> </ol> Once you have done the setup, you can access your content via the hostname. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. You have the option of deploying to a <i>staging</i> environment to test your configurations before deploying to <i>production</i>. <h2>Testing a staged property</h2>If you have deployed to staging, you can send traffic to our staging servers to ensure the property behaves as you intended. The staging servers can be found through a special hostname <i>staging.qtlcdn.com</i>. You can get IP addresses of staging servers using the Unix/Linux dig command.  For example:\n<pre> <code> $ dig staging.qtlcdn.com <br/> ... <br /> ;; ANSWER SECTION:<br/> staging.qtlcdn.com.    59      IN      A       163.171.228.89<br/> staging.qtlcdn.com.    59      IN      A       163.171.230.47<br/> </code> </pre> You can also call the <a href=\"#operation/getStagingServers\">Query list of staging servers API</a> to get IP addresses you can use. You have several ways to set up your system to test against staging: <ol> <li>Modify your DNS server to point your deployed property's hostname to the CDN360 staging hostname <i>staging.qtlcdn.com</i>.</li> <li>Modify your HOSTS file (/etc/hosts on Linux) to hard code the property's hostname to one of the staging servers' IP addresses.</li> <li> If the cURL command is used, the --resolve option can be used to directly map the property's hostname to an IP address of a CDN360 staging server.</li> </ol> Once you have done the setup, you can access your content via the hostname. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",

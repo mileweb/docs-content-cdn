@@ -10,7 +10,11 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
-This directive modifies the response headers to the client. CDNetworks has made the following major changes to the open-source version:
+**Syntax**: `add_header name value [policy=...] [if(...)] [always];`<br/>
+**Default**: `-` <br/>
+**Context**: http, server, location, if in location
+
+This directive modifies the response headers to the client. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
 1. A parameter "policy=" has been introduced to control the behavior more precisely:
 ```nginx
@@ -61,12 +65,20 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 <span class="badge">standard</span>
 
-Allows access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
+**Syntax**: `allow address | CIDR | all;`<br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Allows access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
 
 <span class="badge dark">advanced</span>
+
+**Syntax**:	`auth_request uri | off`;<br/>
+**Default**:	`auth_request off;`<br/>
+**Context**:	http, server, location
 
 Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
 
@@ -75,12 +87,19 @@ Enables authorization based on the result of a subrequest and sets the URI to wh
 
 <span class="badge dark">advanced</span>
 
-Sets the request variable to the given value after the authorization request completes. No change to the public version. 
+**Syntax**:	`auth_request_set $variable value;`<br/>
+**Default**:	`—`<br/>
+**Context**:	http, server, location
 
+Sets the request variable to the given value after the authorization request completes. No change to the public version. 
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 
 <span class="badge">standard</span>
+
+**Syntax**:	`break;`<br/>
+**Default**:	`—`<br/>
+**Context**:	server, location, if
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
@@ -128,7 +147,11 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 <span class="badge">standard</span>
 
-Denies access for the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Dec. 2020</span>)
+**Syntax**:	`deny address | CIDR | all;`<br/>
+**Default**:	`—`<br/>
+**Context**:	http, server, location
+
+Denies access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 ### `enable_websocket`
 
@@ -342,10 +365,10 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 This directive specifies the origin to fetch the content. It is a wrapper of the NGINX [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. Examples:
 ```nginx
 origin_pass my_origin;    #URI is not specified, 
-origin_pass my_origin/$uri;
+origin_pass my_origin/$uri; #same as above without query string
 origin_pass my_origin/abc/$uri;
 ```
-If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin.
+If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `/$uri` after the origin name.
 
 ### `origin_read_timeout`
 
