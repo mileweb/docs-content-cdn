@@ -24,18 +24,20 @@ CDN360 servers need to use it to reach the origin servers. The name `api.company
 no longer be used because we later will CNAME it to a CDN360 edge hostname to direct
 client's traffic to the platform to be accelerated.
 * No API server should be running without the protection of TLS encryption. You need to
-upload the certificate for `api.company.com` to the CDN360 platform:
+upload the certificate for `api.company.com` to the CDN360 platform. We recommend the use
+of [Let's Encrypt] to automatically renew the certificate.
 <p align=center><img src="/docs/resources/images/recipes/api/upload-certificate.png" alt="upload certificate" width="700"></p>
-* Go to the CDN360 portal to create an property. The important thing here is to enter the
-correct hostname to be accelerated(TBA): `api.company.com`.
+
+* Go to the CDN360 portal to create an property to accelerate this API service. The 
+important thing in this step is to enter the correct hostname to be accelerated: `api.company.com`.
 <p align=center><img src="/docs/resources/images/recipes/api/create-property.png" alt="create property" width="720"></p>
 
 * Enter the information about the origin. A few things to note on this page: The server
 is specified with the new DNS record we just created. We are enforcing the HTTPS protocol
 to reach the origin to ensure security. The `Host` header value is specified to be the
 one required by the origin. In this case, we can actually leave it empty because by
-default, CDN360 will pass the header value received from client to the origin. We also
-chose "Always Direct" to reach the origin without a parent cache. Because we want to
+default, CDN360 will pass the `Host` header value received from client to the origin. We also
+chose "Always Direct" to reach the origin without going though a parent cache. This is because we want to
 minimize latency and we know there is not going to be cache hit across different servers.
 <p align=center><img src="/docs/resources/images/recipes/api/origin.png" alt="create origin" width="600"></p>
 
@@ -69,7 +71,7 @@ location / { #This is the default location.
   origin_fast_route on; #enable the Fast Route to origin
 }
 ```
-* You also need to make sure the correct certificate is attached to this property:
+* You also need to make sure the correct certificate is attached to this property.
 <p align=center><img src="/docs/resources/images/recipes/api/attach-certificate.png" alt="attach certificate" width="600"></p>
 * You can test the above property [in staging](/docs/portal/edge-configurations/testing-property#testing-property-in-staging)
 and then deploy to production.
