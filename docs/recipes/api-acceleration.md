@@ -3,11 +3,13 @@
 API calls are usually considered dynamic HTTP requests, since the responses are generated
 by the server in real time based on some input parameters supplied in the request. As we
 mentioned in the [FAQ](/docs/edge-logic/faq#what-about-dynamic-content), dynamic requests
-such as REST API calls can be very effectively
-accelerated by CDN360. In this article, we are going to use an example to illustrate how
+such as REST API calls can be very effectively accelerated by CDN360. For example, the user
+of a mobile or web app may reload the same page repeatedly, which may generate lots of 
+duplicated API calls in a short period of time. Some caching using CDN can result in a
+drastic improvement of the performance. In this article, we are going to use an example to illustrate how
 to use the portal to create a property to accelerate an API server.
 
-Here are the assumption about this task:
+Here are the assumptions about this task:
 * The API server to be accelerated has a hostname: `api.company.com`. The server requires
 the request `Host` header to carry this value.
 * You currently setup the DNS server to resolve this hostname to 2 IP addresses: `1.1.1.1`
@@ -16,7 +18,10 @@ and `1.1.1.2`
 * The client is using the `Authorization` request header to pass the credential to the
 server following the format of [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
 This makes it easy for the CDN360 servers to obtain the API user name with the built-in
-variable `$remote_user`.
+variable `$remote_user`. Please notice that this does not mean you have to use the basic
+authentication which transfers the secret password in clear text. You are free to use
+algorithms like [AWSv2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html)
+to generate the signature after the colon.
 * All the input variables to the API server are specified in the request query string.
 
 In order to use CDN360 to accelerate this service, we need to do the following:
@@ -24,7 +29,7 @@ In order to use CDN360 to accelerate this service, we need to do the following:
 CDN360 servers need to use it to reach the origin servers. The name `api.company.com` can
 no longer be used because we later will CNAME it to a CDN360 edge hostname to direct
 client's traffic to the platform to be accelerated.
-* No API server should be running without the protection of TLS encryption. You need to
+* No API service should be running without the protection of TLS encryption. You need to
 upload the certificate for `api.company.com` to the CDN360 platform. We recommend the use
 of [Let's Encrypt] to automatically renew the certificate.
 <p align=center><img src="/docs/resources/images/recipes/api/upload-certificate.png" alt="upload certificate" width="700"></p>
@@ -81,5 +86,10 @@ and then deploy to production.
 destination and performance/cost requirement. Then, update the DNS record of `api.company.com`
 to CNAME to this edge hostname.
 
-Any request to `api.company.com` is now accelerated by CDN360 platform and the end users
-will experience a faster and more stable service!
+Any request to `api.company.com` will be routed to the CDN360 platform. Every cache-miss
+or expiration will be forwarded to the origin to validate the credential and fetch the latest content.
+If the same request comes again from the same user and the same IP address before the 
+cached copy expires, the content will be served immediately by the CDN360 server, with
+much smaller turn-around time. The end user will experience an improved performance and 
+the origin server will be alleviated from generating the same content repeatedly in a 
+short period of time. 
