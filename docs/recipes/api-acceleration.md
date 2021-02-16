@@ -27,4 +27,4 @@ client's traffic to the platform to be accelerated.
 correct hostname to be accelerated: `api.company.com`:
 <p align=center><img src="/docs/resources/images/recipes/api/create-property.png" alt="create property" width="720"></p>
 3. Enter the information about the origin
-
+<p align=center><img src="/docs/resources/images/recipes/api/origin.png" alt="create property" width="720"></p>
