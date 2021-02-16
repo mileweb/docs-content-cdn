@@ -216,6 +216,10 @@
           {
             "title": "AWS Bucket Acceleration",
             "path": "/docs/recipes/aws-bucket.md"
+          },
+          {
+            "title": "REST API Acceleration",
+            "path": "/docs/recipes/api-acceleration.md"
           }
         ]
       }
