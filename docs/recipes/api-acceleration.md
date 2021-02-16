@@ -2,7 +2,8 @@
 
 API calls are usually considered dynamic HTTP requests, since the responses are generated
 by the server in real time based on some input parameters supplied in the request. As we
-mentioned in the [FAQ], dynamic requests such as REST API calls can be very effectively
+mentioned in the [FAQ](/docs/edge-logic/faq#what-about-dynamic-content), dynamic requests
+such as REST API calls can be very effectively
 accelerated by CDN360. In this article, we are going to use an example to illustrate how
 to use the portal to create a property to accelerate an API server.
 
@@ -71,10 +72,14 @@ location / { #This is the default location.
   origin_fast_route on; #enable the Fast Route to origin
 }
 ```
-* You also need to make sure the correct certificate is attached to this property.
+* Make sure the correct certificate is attached to this property. You can configure the
+TLS min/max versions and cipher suites based on your security requirements:
 <p align=center><img src="/docs/resources/images/recipes/api/attach-certificate.png" alt="attach certificate" width="600"></p>
-* You can test the above property [in staging](/docs/portal/edge-configurations/testing-property#testing-property-in-staging)
+* Optionally test the above property [in staging](/docs/portal/edge-configurations/testing-property#testing-property-in-staging)
 and then deploy to production.
 * If you still don't have one, create an "edge hostname" based on your intended delivery
 destination and performance/cost requirement. Then, update the DNS record of `api.company.com`
 to CNAME to this edge hostname.
+
+Any request to `api.company.com` is now accelerated by CDN360 platform and the end users
+will experience a faster and more stable service!
