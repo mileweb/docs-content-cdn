@@ -43,7 +43,7 @@ is specified with the new DNS record we just created. We are enforcing the HTTPS
 to reach the origin to ensure security. The `Host` header value is specified to be the
 one required by the origin. In this case, we can actually leave it empty because by
 default, CDN360 will pass the `Host` header value received from client to the origin. We also
-chose "Always Direct" to reach the origin without going though a parent cache. This is because we want to
+chose "Always Direct" to reach the origin without going through a parent cache. This is because we want to
 minimize latency and we know there is not going to be cache hit across different servers.
 <p align=center><img src="/docs/resources/images/recipes/api/origin.png" alt="create origin" width="600"></p>
 
@@ -51,9 +51,9 @@ minimize latency and we know there is not going to be cache hit across different
 that the API user name and client IP are added to the cache key. This ensures that the 
 cached content will be only served to the same user from the same IP address. Combined
 with HTTPS and the short cache time of 1 minute, this should be safe enough for the vast
-majority of applications in the world. Another thing to notice is that we allow the
+majority of applications in the industry. Another thing to notice is that we allow the
 clients to use the `Cache-Control: no-cache` header field to by pass cache. When a CDN360
-server sees this field value, it will not look up the cache and go directly to origin.
+server sees this field value, it will go directly to origin without looking up the cache.
 Last but not least, we enabled the [Fast Route to origin](/docs/edge-logic/supported-directives#origin_fast_route)
 to ensure stable connections to the origin.
 
@@ -86,7 +86,7 @@ and then deploy to production.
 destination and performance/cost requirement. Then, update the DNS record of `api.company.com`
 to CNAME to this edge hostname.
 
-Any request to `api.company.com` will be routed to the CDN360 platform. Every cache-miss
+Any request to `api.company.com` will now be routed to the CDN360 platform. Every cache-miss
 or expiration will be forwarded to the origin to validate the credential and fetch the latest content.
 If the same request comes again from the same user and the same IP address before the 
 cached copy expires, the content will be served immediately by the CDN360 server, with
