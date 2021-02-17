@@ -28,6 +28,7 @@ The following report types are supported:
 | Traffic Volume Summary| Summarizes the edge traffic volume.                               |
 | CPU Time| Reports the CPU time consumed in each time interval to serve your properties. You can toggle the unit between **seconds** and **number of cores**. For example, if 3000 seconds of CPU time are reported in a 5-minute interval, it means your properties are maxing out an average of 10 (=3000s/5m) physical CPU cores during that period.                               |
 | Edge Hostname Request| Shows the number of requests made to your [edge hostnames](</docs/portal/traffic-management/creating-edge-hostname.md>) over a period of time.                               |
+| Access Log Download| Shows what content has been requested and when it was requested, the IP address from which requests were made, the value of the User-Agent HTTP request header, and the size of the content requested.                    |
 
 ## Generating Reports
 
@@ -40,6 +41,7 @@ The following report types are supported:
 | --------------- | ----------------------------------------------------- |
 | Report Type     | Select the type of report you want to generate.       | 
 | Date Range      | Select the start and end dates and the time for the report. |
+| Hostname | For Access Log Download reports, select a property hostname. Logs related to visitors associated with that hostname will be generated for you to view and download.
 | Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
 | Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties.         |
 | Edge Hostnames  | For Edge Hostname Request, select one or more edge hostnames.         |
