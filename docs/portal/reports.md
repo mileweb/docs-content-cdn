@@ -41,7 +41,7 @@ The following report types are supported:
 | --------------- | ----------------------------------------------------- |
 | Report Type     | Select the type of report you want to generate.       | 
 | Date Range      | Select the start and end dates and the time for the report. |
-| Hostname | For Access Log Download reports, select a property hostname. Logs related to visitors associated with that hostname will be generated for you to view and download.
+| Hostname | For Access Log Download reports, select a property hostname. Logs of visitors to the hostname will be generated for you to view and download.
 | Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
 | Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties.         |
 | Edge Hostnames  | For Edge Hostname Request, select one or more edge hostnames.         |
