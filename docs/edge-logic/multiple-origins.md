@@ -1,4 +1,4 @@
-## Multiple Origins
+## Multiple Origins with `if`
 
 This section describes a use case that is a little bit more complicated than the previous one. Assume a domain needs to load content from two different origins based on the value of a request header `x-origin`. For origin #2, you want to modify the URI by adding an extra root folder "/images" for all the images, HTML, and CSS objects. You need to send a header `x-msg2origin` to the origin, but the value is different for the two origins. The Edge Logic should resemble the following:
 ```nginx
