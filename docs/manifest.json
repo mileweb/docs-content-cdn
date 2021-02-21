@@ -192,7 +192,7 @@
             "path": "/docs/edge-logic/simple-caching.md"
           },
           {
-            "title": "Multiple Origins",
+            "title": "Multiple Origins with 'if'",
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
