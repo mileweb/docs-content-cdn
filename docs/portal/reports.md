@@ -10,7 +10,7 @@ The following figure shows the key elements on the page, and the table following
 
 | **Fields**   | **Description**                                                                                           |
 | :----------: | --------------------------------------------------------------------------------------------------------- |
-| 1            | Specify the report type, date range, report interval, hostname, protocol, and report range.               |
+| 1            | Specify the report type, date range, and other parameters appropriate for the report you want to generate.               |
 | 2            | The **Generate Report** button allows you to generate the report defined by the report parameters.        |
 
 ## Supported Report Types
