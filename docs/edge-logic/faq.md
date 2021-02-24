@@ -31,7 +31,7 @@ If you need to add, modify, or delete some header fields in the response to clie
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from origin before any other processing of the response. This can be very useful if you need to override some header value (such as cache time) from the origin that may affect the CDN servers' behavior.
+We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from the origin prior to processing the response. This can be very useful if you need to override a header value (such as cache time) from the origin that may affect the CDN servers' behavior.
 
 
 ### The support (and non-support) of `Vary`
