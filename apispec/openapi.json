@@ -19578,6 +19578,10 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "oldestPropertyValidationTime": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating the oldest validated property that can be deployed. Properties validated before this date must be re-validated before you can deploy them. Example: \"2021-02-05T00:00:00Z\""
                     }
                   },
                   "required": [
@@ -19675,7 +19679,8 @@
                       },
                       "advancedFeatures": [
                         "realTimeLog"
-                      ]
+                      ],
+                      "oldestPropertyValidationTime": "2021-02-05T00:00:00Z"
                     }
                   }
                 }
@@ -22198,7 +22203,7 @@
                   "Invalid scheme": {
                     "value": {
                       "code": "InvalidScheme",
-                      "message": "Invalid parameter 'scheme': 'invalid'. The scheme must be 'http', 'https' or 'all'."
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
                   },
                   "Invalid hostnames": {
@@ -22323,6 +22328,163 @@
           },
           "description": "The request body can include filters to customize the results. By default, data from all hostnames will be included."
         }
+      }
+    },
+    "/cdn/hostnames/historical/{hostname}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "hostname",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get historical information about one hostname",
+        "tags": [
+          "Hostnames"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains details about the hostname.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hostname": {
+                      "type": "string",
+                      "description": "A hostname that was defined in a property."
+                    },
+                    "history": {
+                      "type": "array",
+                      "description": "The history contains deployment and undeployment dates. It is empty if the hostname has never been deployed to production.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer using the hostname."
+                          },
+                          "propertyId": {
+                            "type": "string",
+                            "description": "ID of the property that included the hostname."
+                          },
+                          "deploymentDate": {
+                            "type": "string",
+                            "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was deployed. Example: \"2020-04-24T20:09:15Z\""
+                          },
+                          "undeploymentDate": {
+                            "type": "string",
+                            "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was undeployed. Example: \"2020-04-24T20:09:15Z\""
+                          }
+                        },
+                        "required": [
+                          "customerId",
+                          "propertyId",
+                          "deploymentDate"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "hostname": "test20201203.com",
+                      "history": [
+                        {
+                          "customerId": 123456,
+                          "propertyId": "8453f93ad91fd4338eb87510",
+                          "deploymentDate": "2021-01-29T08:06:38Z",
+                          "undeploymentDate": "2021-01-29T09:30:49Z"
+                        },
+                        {
+                          "customerId": 123456,
+                          "propertyId": "8453f93ad91fd4338eb87510",
+                          "deploymentDate": "2021-01-29T09:30:49Z",
+                          "undeploymentDate": "2021-01-29T09:35:42Z"
+                        },
+                        {
+                          "customerId": 123456,
+                          "propertyId": "8453f93ad91fd4338eb87510",
+                          "deploymentDate": "2021-01-29T09:35:42Z",
+                          "undeploymentDate": "2021-01-29T09:38:22Z"
+                        },
+                        {
+                          "customerId": 123456,
+                          "deploymentDate": "2021-01-29T09:38:22Z",
+                          "undeploymentDate": "2021-02-13T08:06:12Z"
+                        },
+                        {
+                          "customerId": 123456,
+                          "propertyId": "8453f93ad91fd4338eb87516",
+                          "deploymentDate": "2021-02-13T08:06:12Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid date": {
+                    "value": {
+                      "code": "InvalidDate",
+                      "message": "Invalid parameter 'startdate'. 'abc' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-hostnames-historical-hostname",
+        "description": "This API returns information about a hostname's deployments to production. Query parameters let you specify a timeframe to search.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN360.",
+            "name": "startdate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "End of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> The default is the current time."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
       }
     }
   },

@@ -28,6 +28,7 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 - Traffic volume and bandwidth to your hostnames.
 - Number of requests made to the files of your property.
 - Percentage of each HTTP status code returned as a result of requests to your content.
+- Content that has been requested and when, the IP address from which requests were made, the value of the User-Agent HTTP request header, and the size of the content requested.
 
 ## Edge Configurations
 

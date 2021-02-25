@@ -16,17 +16,19 @@ The following procedure describes how to generate self-signed certificates. Self
 <p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="create new cert button menu" width="900"></p>
 
 
-3. Complete the fields in the Create Certificate form and **Auto Generate Certificate** tab (refer to the table below). Required fields are denoted by an asterisk (\*).
+3. Complete the fields at the top of the Create a Certificate form. Next to **Creation Method**, click  **Auto-Generate** and complete the additional fields. Required fields are denoted by an asterisk (\*).
 
 <p align=center><img src="/docs/resources/images/certificates/create-certificate-autogenerate.png" alt="auto generate cert" width="650"></p>
 
 | **Fields**|**Description**|
 |-|-|
+|| **Options at the top of the Create a Certificate Form**                                      |
 |Certificate Name|Enter a name that helps you identify this certificate.|
 |Certificate Description|Add a description about this certificate.|
 |Auto Renew|Select whether you want CDN360 to [renew the certificate automatically](/docs/portal/certificates/auto-renewal.md) through Let's Encrypt (**LE**).|
 |Share With|This field is available to resellers only. It allows resellers to select the child customers with whom they want to share the certificate.|
-|| **Auto Generate Certificate Tab**                                      |
+|Creation Method|Specify whether you want to upload a certificate you already have or generate a certificate using CDN360.|
+|| **Auto-Generate Options**                                      |
 |Public Key Algorithm|Select a public key algorithm for this certificate: RSA2048 or ECC256.|
 |Common Name|Enter a common name you want to use for the certificate (can be any text).|
 |SAN|Enter one or more subject alternative names (SANs), which will be the hostnames you want this certificate to cover.|
@@ -54,7 +56,7 @@ To upload the files as a new certificate:
 
 <p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certi button" width="900"></p>
 
-3. Complete the fields in the Create Certificate form and **Upload Certificate** tab. Required fields are denoted by an asterisk (\*).
+3. Complete the fields at the top of the Create a Certificate form (see the table above). Next to **Creation Method**, click  **Upload** and upload the private key, certificate, and chain certificate. Required fields are denoted by an asterisk (\*).
 
 <p align="center"><img src="/docs/resources/images/certificates/create-certificate-upload.png" alt="Upload Certificate" width="600"></p>
 
