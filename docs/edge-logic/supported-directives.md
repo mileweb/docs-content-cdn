@@ -189,6 +189,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;``` |
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
+| string<br>manipulation | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 
 **NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
 
@@ -273,7 +274,11 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 
 <span class="badge">standard</span>
 
-Sets configuration depending on the request URI without query string. No change to the public version.
+**Syntax**: `location [ = | ~ | ~* | ^~ ] pattern { ... }` <br/>
+**Default**: `-` <br/>
+**Context**: server, location
+
+Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
 
 ### `origin_connect_timeout`
 
@@ -511,7 +516,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We enhanced the open-source version to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
+Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching. The header values of `Cache-Control`, `Expires`, etc have higher precedence unless ignored by [`proxy_ignore_cache_control`](https://docdev.quantil.com/cdn/docs/edge-logic/supported-directives#proxy_ignore_cache_control) or [`proxy_ignore_headers`](https://docdev.quantil.com/cdn/docs/edge-logic/supported-directives#proxy_ignore_headers).
 
 ### proxy_cache_vary
 
