@@ -693,13 +693,11 @@ The directive is merged across different levels (http/server/location/location i
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
 
-### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
-
-<span class="badge">standard</span>
+### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)  <span class="badge">standard</span>
 
 **Syntax:** `return code [text];
-             return code URL;
-             return URL;` <br/>
+       return code URL;
+       return URL;` <br/>
 **Default:** `-` <br/>
 **Contexts:** server, location, if
 
@@ -707,10 +705,7 @@ Stops processing and returns the specified code to a client. No change to the [o
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
-
-<span class="badge">standard</span>
-
+### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)  <span class="badge">standard</span>
 **Syntax:** `rewrite regex replacement [flag];` <br/>
 **Default:** `-` <br/>
 **Contexts:** server, location, if
