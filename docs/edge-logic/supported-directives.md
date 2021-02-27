@@ -6,7 +6,9 @@ Each non-proprietary directive includes a direct link to the official NGINX docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
-### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)  <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
+
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `add_header name value [policy=...] [if(...)] [always];`<br/>
 **Default**: `-` <br/>
@@ -59,7 +61,9 @@ if ($arg_debug = cache_status) {
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 ```
 
-### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)  <span class="badge">standard</span>
+### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
+
+<span class="badge">standard</span>
 
 **Syntax**: `allow address | CIDR | all;`<br/>
 **Default**: `-` <br/>
@@ -68,7 +72,9 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 Allows access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 
-### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)  <span class="badge dark">advanced</span>
+### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
+
+<span class="badge dark">advanced</span>
 
 **Syntax**:	`auth_request uri | off`;<br/>
 **Default**:	`auth_request off;`<br/>
@@ -77,7 +83,9 @@ Allows access from the specified network or address. (Work in progress to make t
 Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
 
 
-### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)  <span class="badge dark">advanced</span>
+### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
+
+<span class="badge dark">advanced</span>
 
 **Syntax**:	`auth_request_set $variable value;`<br/>
 **Default**:	`—`<br/>
@@ -85,7 +93,9 @@ Enables authorization based on the result of a subrequest and sets the URI to wh
 
 Sets the request variable to the given value after the authorization request completes. No change to the public version. 
 
-### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)  <span class="badge">standard</span>
+### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
+
+<span class="badge">standard</span>
 
 **Syntax**:	`break;`<br/>
 **Default**:	`—`<br/>
@@ -95,7 +105,9 @@ Stops processing the current set of ngx_http_rewrite_module directives. No chang
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### `client_body_timeout`  <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+### `client_body_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `client_body_timeout time;`<br/>
 **Default**: matches `origin_send_timeout` if it is set, or 20s <br/>
@@ -103,7 +115,9 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `client_header_timeout`  <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+### `client_header_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `client_header_timeout time;`<br/>
 **Default**: `client_header_timeout 10;`<br/>
@@ -111,7 +125,9 @@ This directive sets the maximum idle time when receiving the request body from t
 
 This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `client_send_timeout`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `client_send_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `client_send_timeout time;`<br/>
 **Default**: matches `origin_read_timeout` if it is set, or 20s <br/>
@@ -119,7 +135,9 @@ This directive sets the maximum wait time for the complete request header from t
 
 This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `custom_log_field`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `custom_log_field`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default**: `-`<br/>
@@ -127,7 +145,9 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
 
-### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)  <span class="badge">standard</span>
+### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
+
+<span class="badge">standard</span>
 
 **Syntax**:	`deny address | CIDR | all;`<br/>
 **Default**:	`—`<br/>
@@ -135,7 +155,9 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 Denies access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
-### `enable_websocket`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `enable_websocket`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `enable_websocket;`<br/>
 **Default**: `-`<br/>
@@ -143,12 +165,16 @@ Denies access from the specified network or address. (Work in progress to make t
 
 This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The default read and send timeouts are set to 21s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
 
-### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)  <span class="badge dark">advanced</span>
+### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
+
+<span class="badge dark">advanced</span>
 
 Defines the URI that will be shown for the specified error codes. No change to the public version. We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for error codes returned from the origin.
 
 
-### `eval_func`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `eval_func`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `eval_func $result {function name} {parameters};` <br/>
 **Default**: `-` <br/>
@@ -182,12 +208,16 @@ Examples:
 ```
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)  <span class="badge">standard</span>
+### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
+
+<span class="badge">standard</span>
 
 Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the public version. The cache time on the server is not affected by this directive.
 
 
-### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)  <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
+
+<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `gzip_types mime-type ...;` <br/>
 **Default**: `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
@@ -195,7 +225,9 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 CDN360 always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
-### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)  <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
+
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**:	`if (condition) { ... }`<br/>
 **Default**:	`—`<br/>
@@ -224,23 +256,31 @@ else { ... }
 ```
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)  <span class="badge dark">advanced</span>
+### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
+
+<span class="badge dark">advanced</span>
 
 Specifies that a given location can be used for internal requests only. No change to the public version. 
 
-### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)  <span class="badge">standard</span>
+### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
+
+<span class="badge">standard</span>
 
 **Default**: `limit_rate 4m;` <br/>
 
 Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
 
-### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)  <span class="badge">standard</span>
+### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
+
+<span class="badge">standard</span>
 
 **Default**: `limit_rate_after 4m;` <br/>
 
 Sets the initial amount of traffic (in bytes) after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
 
-### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)  <span class="badge">standard</span>
+### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
+
+<span class="badge">standard</span>
 
 **Syntax**: `location [ = | ~ | ~* | ^~ ] pattern { ... }` <br/>
 **Default**: `-` <br/>
@@ -248,7 +288,9 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 
 Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
 
-### `origin_connect_timeout`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_connect_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_connect_timeout time;` <br/>
 **Default**: `origin_connect_timeout 5s;` <br/>
@@ -256,7 +298,9 @@ Sets configuration depending on the request URI without query string. No change 
 
 This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
-### `origin_fast_route`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_fast_route`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_fast_route on|off;` <br/>
 **Default**: `origin_fast_route off;` <br/>
@@ -264,7 +308,9 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 
 This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
 
-### `origin_follow_redirect`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_follow_redirect`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_follow_redirect;` <br/>
 **Default**: - <br/>
@@ -273,7 +319,9 @@ This directive enables a fast route to be used to access the origin. It is power
 When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
 
 
-### `origin_header_modify`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_header_modify`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_header_modify field value policy=value if(condition);` <br/>
 **Default**:  - <br/>
@@ -309,7 +357,9 @@ The directive is merged across different levels (http/server/location/location i
 
 Although CDN360 has a hierarchical cache structure, the directive changes the header only in the origin response. 
 
-### `origin_limit_rate`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_limit_rate`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_limit_rate rate;`<br>
 **Default**: `origin_limit_rate 0;`<br>
@@ -317,7 +367,9 @@ Although CDN360 has a hierarchical cache structure, the directive changes the he
 
 This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
 
-### `origin_pass`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_pass`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_pass _origin_name[URI];`<br>
 **Default**: none <br>
@@ -331,7 +383,9 @@ origin_pass my_origin/abc/$uri;
 ```
 If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `/$uri` after the origin name.
 
-### `origin_read_timeout`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_read_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_read_timeout time;` <br/>
 **Default**:  `origin_read_timeout 20s;` <br/>
@@ -339,7 +393,9 @@ If an URI is not specified, the full normalized request URI (which may have been
 
 This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level. 
 
-### `origin_send_timeout`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `origin_send_timeout`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `origin_send_timeout time;` <br/>
 **Default**: `origin_send_timeout 20s;` <br/>
@@ -347,7 +403,9 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 
 This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
-### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**:  `origin_set_header field value if(condition);` <br/>
 **Default**: `origin_set_header host $host;` <br/>
@@ -374,7 +432,9 @@ origin_set_header X-Forwarded-For $client_real_ip;
 ```
 One thing to notice is that if you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
 
-### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)  <span class="badge">standard</span>
+### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_buffering on | off;` <br/>
 **Default**: `proxy_buffering on;` <br/>
@@ -382,7 +442,9 @@ One thing to notice is that if you want to use this directive to set the `Host` 
 
 Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
 
-### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)  <span class="badge">standard</span>
+### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_cache_bypass string ...;` <br/>
 **Default**: `-` <br/>
@@ -396,7 +458,9 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 Please notice that this directive does not prevent the response from being save in the cache.
 That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
-### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)  <span class="badge dark">advanced</span>
+### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
+
+<span class="badge dark">advanced</span>
 
 **Syntax**: `proxy_cache_lock on/off;` <br/>
 **Default**: `proxy_cache_lock on;` <br/>
@@ -404,7 +468,9 @@ That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_ca
 
 When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN360 turns it on to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
 
-### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)  <span class="badge">standard</span>
+### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_cache_lock_age time;` <br/>
 **Default**: `proxy_cache_lock_age 15s;` <br/>
@@ -412,7 +478,9 @@ When enabled, only one request at a time will be allowed to populate a new cache
 
 If the last request passed to the proxied server for populating a new cache element has not completed for the specified time, one more request may be passed to the proxied server. No change to the public version.
 
-### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)  <span class="badge">standard</span>
+### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_cache_lock_timeout time;` <br/>
 **Default**: `proxy_cache_lock_timeout 0s;` <br/>
@@ -420,7 +488,9 @@ If the last request passed to the proxied server for populating a new cache elem
 
 Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
-### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)  <span class="badge">standard</span>
+### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_cache_methods GET | HEAD | POST ...;` <br/>
 **Default**: `proxy_cache_methods GET HEAD;` <br/>
@@ -428,7 +498,9 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 
 If the client request method is listed in this directive then the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
 
-### proxy_cache_min_age   <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### proxy_cache_min_age 
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `proxy_cache_min_age time;` <br/>
 **Default**: `proxy_cache_min_age 0s;` <br/>
@@ -456,11 +528,15 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (NGINX d
 
 If there is no suffix in the time, the configured value is considered in seconds.
 
-### [`proxy_cache_use_stale`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale)  <span class="badge dark">advanced</span>
+### [`proxy_cache_use_stale`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale)
+
+<span class="badge dark">advanced</span>
 
 Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the public version. 
 
-### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)  <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
+
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**:	`proxy_cache_valid [code ...] time;` <br/>
 **Default**:	— <br/>
@@ -468,7 +544,9 @@ Determines in which cases a stale cached response can be used during communicati
 
 Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching. The header values of `Cache-Control`, `Expires`, etc have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers).
 
-### proxy_cache_vary  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### proxy_cache_vary
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `proxy_cache_vary on | off;` <br/>
 **Default**: `proxy_cache_vary off;` <br/>
@@ -480,19 +558,27 @@ If `proxy_cache_vary` is "off", the CDN360 cache servers do not cache any respon
 
 Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq.md#the-support-and-non-support-of-vary>).
 
-### [`proxy_cookie_domain`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_domain)  <span class="badge dark">advanced</span>
+### [`proxy_cookie_domain`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_domain)
+
+<span class="badge dark">advanced</span>
 
 Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
 
-### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)  <span class="badge dark">advanced</span>
+### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)
+
+<span class="badge dark">advanced</span>
 
 Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
 
-### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)  <span class="badge">standard</span>
+### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)
+
+<span class="badge">standard</span>
 
 Sets response header fields that will not be passed to the client. No change to the public version. 
 
-### `proxy_ignore_cache_control`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `proxy_ignore_cache_control`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `proxy_ignore_cache_control directives…;` <br/>
 **Default:** none <br/>
@@ -514,7 +600,9 @@ proxy_ignore_cache_control no-cache no-store;
 ```
 Note: This directive does not modify the "Cache-Control" header from the origin.
 
-### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)  <span class="badge">standard</span>
+### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_ignore_headers field ...;` <br/>
 **Default**: `-` <br/>
@@ -522,19 +610,27 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 Disables processing of certain response header fields from the proxied server. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). 
 
-### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)  <span class="badge dark">advanced</span>
+### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
+
+<span class="badge dark">advanced</span>
 
 Specifies in which cases a request should be passed to the next upstream server. No change to the public version. 
 
-### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)  <span class="badge dark">advanced</span>
+### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
+
+<span class="badge dark">advanced</span>
 
 Limits the time during which a request can be passed to the next upstream server. No change to the public version.
 
-### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)  <span class="badge dark">advanced</span>
+### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
+
+<span class="badge dark">advanced</span>
 
 Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
 
-### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)  <span class="badge">standard</span>
+### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
+
+<span class="badge">standard</span>
 
 **Syntax**: `proxy_no_cache string ...;` <br/>
 **Default**: `-` <br/>
@@ -547,13 +643,17 @@ proxy_no_cache $http_pragma    $http_authorization;
 ```
 Since the content is not saved, usually there is no point to look up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
 
-### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)  <span class="badge">standard</span>
+### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
+
+<span class="badge">standard</span>
 
 **Default:** `proxy_pass_header Date;` <br/>
 
 Permits passing [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header fields from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin.
 
-### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)  <span class="badge">standard</span>
+### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)
+
+<span class="badge">standard</span>
 
 **Syntax:**	`proxy_pass_request_headers on | off;` <br/>
 **Default:**	`proxy_pass_request_headers on;` <br/>
@@ -561,11 +661,15 @@ Permits passing [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_prox
 
 Enables of disables passing request headers from client to upstream. No change to the public version.
 
-### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)  <span class="badge dark">advanced</span>
+### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
+
+<span class="badge dark">advanced</span>
 
 Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
 
-### `proxy_set`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `proxy_set`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `proxy_set $variable value [if(...)];`<br>
 **Default**: none <br>
@@ -583,11 +687,15 @@ add_header version-number $version_number;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
 
-### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)  <span class="badge dark">advanced</span>
+### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
+
+<span class="badge dark">advanced</span>
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
 
-### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)  <span class="badge">standard</span>
+### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
+
+<span class="badge">standard</span>
 
 **Syntax:** `return code [text];
        return code URL;
@@ -599,7 +707,9 @@ Stops processing and returns the specified code to a client. No change to the [o
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)  <span class="badge">standard</span>
+### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
+
+<span class="badge">standard</span>
 
 **Syntax:** `rewrite regex replacement [flag];` <br/>
 **Default:** `-` <br/>
@@ -609,12 +719,16 @@ Rewrite the request URI when a regular expression pattern is matched. No change 
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### [`satisfy`](http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy)  <span class="badge">standard</span>
+### [`satisfy`](http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy)
+
+<span class="badge">standard</span>
 
 Allows access if all (all) or at least one (any) of the ngx_http_access_module, ngx_http_auth_basic_module, ngx_http_auth_request_module, or ngx_http_auth_jwt_module modules allows access. No change to the public version. 
 
 
-### `sanitize_accept_encoding`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `sanitize_accept_encoding`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `sanitize_accept_encoding enc1 enc2 … ;` <br/>
 **Default:** `sanitize_accept_encoding gzip;` <br/>
@@ -638,19 +752,27 @@ else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
 
-### [`secure_link`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link)  <span class="badge dark">advanced</span>
+### [`secure_link`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link)
+
+<span class="badge dark">advanced</span>
 
 Defines a string with variables from which the checksum value and lifetime of a link will be extracted. No change to the public version.
 
-### [`secure_link_md5`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5)  <span class="badge dark">advanced</span>
+### [`secure_link_md5`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5)
+
+<span class="badge dark">advanced</span>
 
 Defines an expression for which the MD5 hash value will be computed and compared with the value passed in a request. No change to the public version.
 
-### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)  <span class="badge dark">advanced</span>
+### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)
+
+<span class="badge dark">advanced</span>
 
 Defines a secret word used to check authenticity of requested links. No change to the public version.
 
-### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)  <span class="badge">standard</span>
+### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
+
+<span class="badge">standard</span>
 
 **Syntax:**	`set $variable value;` <br/>
 **Default:**	`-` <br/>
@@ -660,7 +782,9 @@ Assigns a value to the specified variable. No change to the public version. In p
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)  <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
+
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax:**	`slice size;` <br/>
 **Default:**	`slice 0;` <br/>
@@ -671,7 +795,9 @@ Sets the size of the slices when fetching large files from the origin. The valid
 * CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
 
-### `slice_ignore_etag`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `slice_ignore_etag`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** `slice_ignore_etag on/off;` <br/>
 **Default:** `slice_ignore_etag off;` <br/>
@@ -679,7 +805,9 @@ Sets the size of the slices when fetching large files from the origin. The valid
 
 This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
 
-### `sorted_querystring_filter_parameter`  <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+### `sorted_querystring_filter_parameter`
+
+<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax:** sorted_querystring_filter_parameter param1 param2 … ; <br/>
 **Default:** none <br/>
@@ -688,23 +816,33 @@ This directive can be used to disable the ETag consistency check of sliced files
 Removes some query parameters from the variable ```$sorted_querystring_args```.
 This feature is implemented on top of this [open-source project](https://github.com/wandenberg/nginx-sorted-querystring-module).
 
-### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)  <span class="badge dark">advanced</span>
+### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)
+
+<span class="badge dark">advanced</span>
 
 Sets a string to replace in the response and a replacement string. No change to the public version.
 
-### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)  <span class="badge dark">advanced</span>
+### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
+
+<span class="badge dark">advanced</span>
 
 Allows preserving the “Last-Modified” header field from the original response during replacement to facilitate response caching. No change to the public version.
 
-### [`sub_filter_once`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_once)  <span class="badge dark">advanced</span>
+### [`sub_filter_once`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_once)
+
+<span class="badge dark">advanced</span>
 
 Indicates whether to look for each string to replace once or repeatedly. No change to the public version.
 
-### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)  <span class="badge">standard</span>
+### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)
+
+<span class="badge">standard</span>
 
 Enables string replacement in responses with the specified MIME types in addition to “text/html”. No change to the public version.
 
 
-### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)  <span class="badge">standard</span>
+### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
+
+<span class="badge">standard</span>
 
 Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
