@@ -103,6 +103,8 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+
 ### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
@@ -176,7 +178,7 @@ Defines the URI that will be shown for the specified error codes. No change to t
 
 **Syntax**: `eval_func $result {function name} {parameters};` <br/>
 **Default**: `-` <br/>
-**Context**:  http, server, location, if in location
+**Context**:  http, server, location, if
 
 This is a directive to perform some common encoding, decoding, hash, hash-mac, encryption, decryption and comparison algorithms. It is added to the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html).  Supported functions are:
 
@@ -204,6 +206,7 @@ Examples:
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
     #$hmacout and $hmacout1 should be equal
 ```
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
 
@@ -226,6 +229,10 @@ CDN360 always uses gzip and applies it to the default MIME types above. In addit
 
 <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
+**Syntax**:	`if (condition) { ... }`<br/>
+**Default**:	`—`<br/>
+**Context**:	server, location
+
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 
@@ -247,6 +254,7 @@ elseif ($http_x = 2) { ... }
 elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -689,13 +697,27 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 <span class="badge">standard</span>
 
-Stops processing and returns the specified code to a client. No change to the public version. 
+**Syntax:** `return code [text];
+             return code URL;
+             return URL;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location, if
+
+Stops processing and returns the specified code to a client. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return). 
+
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
 
 <span class="badge">standard</span>
 
-Rewrite the request URI when a regular expression pattern is matched. No change to the public version. 
+**Syntax:** `rewrite regex replacement [flag];` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location, if
+
+Rewrite the request URI when a regular expression pattern is matched. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite). 
+
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`satisfy`](http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy)
 
@@ -752,7 +774,13 @@ Defines a secret word used to check authenticity of requested links. No change t
 
 <span class="badge">standard</span>
 
+**Syntax:**	`set $variable value;` <br/>
+**Default:**	`-` <br/>
+**Contexts:** server, location, if
+
 Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
+
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
