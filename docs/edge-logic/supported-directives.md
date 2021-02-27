@@ -448,7 +448,7 @@ proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
 proxy_cache_bypass $http_pragma    $http_authorization;
 ```
 Please notice that this directive does not prevent the response from being save in the cache.
-That behavior is controlled by another directive `proxy_no_cache(#proxy_no_cache)`, and usually the two should be used together.
+That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
@@ -633,7 +633,7 @@ Defines conditions under which the response will not be saved to a cache. If at 
 proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-Since the content is not saved, usually there is no point to look up the cache under the same conditions. Therefore, this directive is commonly used together with the `[proxy_cache_bypass](#proxy_cache_bypass)` directive.
+Since the content is not saved, usually there is no point to look up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
