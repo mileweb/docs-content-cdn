@@ -6,9 +6,7 @@ Each non-proprietary directive includes a direct link to the official NGINX docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
-### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
-
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)  <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `add_header name value [policy=...] [if(...)] [always];`<br/>
 **Default**: `-` <br/>
@@ -61,9 +59,7 @@ if ($arg_debug = cache_status) {
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 ```
 
-### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
-
-<span class="badge">standard</span>
+### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)  <span class="badge">standard</span>
 
 **Syntax**: `allow address | CIDR | all;`<br/>
 **Default**: `-` <br/>
@@ -72,9 +68,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 Allows access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
 
-### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
-
-<span class="badge dark">advanced</span>
+### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)  <span class="badge dark">advanced</span>
 
 **Syntax**:	`auth_request uri | off`;<br/>
 **Default**:	`auth_request off;`<br/>
@@ -83,9 +77,7 @@ Allows access from the specified network or address. (Work in progress to make t
 Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
 
 
-### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
-
-<span class="badge dark">advanced</span>
+### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)  <span class="badge dark">advanced</span>
 
 **Syntax**:	`auth_request_set $variable value;`<br/>
 **Default**:	`—`<br/>
@@ -93,9 +85,7 @@ Enables authorization based on the result of a subrequest and sets the URI to wh
 
 Sets the request variable to the given value after the authorization request completes. No change to the public version. 
 
-### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
-
-<span class="badge">standard</span>
+### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)  <span class="badge">standard</span>
 
 **Syntax**:	`break;`<br/>
 **Default**:	`—`<br/>
@@ -105,9 +95,7 @@ Stops processing the current set of ngx_http_rewrite_module directives. No chang
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### `client_body_timeout`
-
-<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+### `client_body_timeout`  <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `client_body_timeout time;`<br/>
 **Default**: matches `origin_send_timeout` if it is set, or 20s <br/>
@@ -115,9 +103,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `client_header_timeout`
-
-<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+### `client_header_timeout`  <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax**: `client_header_timeout time;`<br/>
 **Default**: `client_header_timeout 10;`<br/>
@@ -125,9 +111,7 @@ This directive sets the maximum idle time when receiving the request body from t
 
 This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
-### `client_send_timeout`
-
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+### `client_send_timeout`  <span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
 
 **Syntax**: `client_send_timeout time;`<br/>
 **Default**: matches `origin_read_timeout` if it is set, or 20s <br/>
@@ -706,6 +690,7 @@ Stops processing and returns the specified code to a client. No change to the [o
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)  <span class="badge">standard</span>
+
 **Syntax:** `rewrite regex replacement [flag];` <br/>
 **Default:** `-` <br/>
 **Contexts:** server, location, if
