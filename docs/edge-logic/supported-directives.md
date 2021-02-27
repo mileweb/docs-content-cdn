@@ -428,13 +428,27 @@ One thing to notice is that if you want to use this directive to set the `Host` 
 
 <span class="badge">standard</span>
 
-Enables or disables buffering of responses from the proxied server. No change to the public version. 
+**Syntax**: `proxy_buffering on | off;` <br/>
+**Default**: `proxy_buffering on;` <br/>
+**Context**: http, server, location
+
+Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
 <span class="badge">standard</span>
 
-Defines conditions under which the response will not be taken from a cache. No change to the public version. This should be used if you know the content is not cacheable under those conditions. It should usually be used together with `proxy_no_cache`.
+**Syntax**: `proxy_cache_bypass string ...;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Defines conditions under which the response will not be taken from a cache. If at least one value of the string parameters is not empty and is not equal to “0” then the response will not be taken from the cache. This should be used if you know the content is not cacheable under those conditions:
+```nginx
+proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
+proxy_cache_bypass $http_pragma    $http_authorization;
+```
+Please notice that this directive does not prevent the response from being save in the cache.
+That behavior is controlled by another directive `proxy_no_cache(#proxy_no_cache)`, and usually the two should be used together.
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
@@ -470,7 +484,11 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 
 <span class="badge">standard</span>
 
-Specify the HTTPS methods whose response will be cached.
+**Syntax**: `proxy_cache_methods GET | HEAD | POST ...;` <br/>
+**Default**: `proxy_cache_methods GET HEAD;` <br/>
+**Context**: http, server, location
+
+If the client request method is listed in this directive then the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
 
 ### proxy_cache_min_age 
 
@@ -578,7 +596,11 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 <span class="badge">standard</span>
 
-Disables processing of certain response header fields from the proxied server. No change to the public version. 
+**Syntax**: `proxy_ignore_headers field ...;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Disables processing of certain response header fields from the proxied server. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). 
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
@@ -602,7 +624,16 @@ Limits the number of possible tries for passing a request to the next upstream s
 
 <span class="badge">standard</span>
 
-Defines conditions under which the response will not be saved to a cache. No change to the public version. 
+**Syntax**: `proxy_no_cache string ...;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0” then the response will not be saved:
+```nginx
+proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
+proxy_no_cache $http_pragma    $http_authorization;
+```
+Since the content is not saved, usually there is no point to look up the cache under the same conditions. Therefore, this directive is commonly used together with the `[proxy_cache_bypass](#proxy_cache_bypass)` directive.
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
