@@ -3,7 +3,7 @@
 Here are all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both cases.
 | **Variable Name** | **Description** | **Supported in Edge Logic** | **Supported in Real-Time Log** |
 | ---- | ---- | ---- | ---- |
-| $arg__name_*| one query parameter | <span class="badge green">TRUE</span> | <span class="badge green">TRUE</span> |
+| $arg__name_| one query parameter | <span class="badge green">TRUE</span> | <span class="badge green">TRUE</span> |
 | $args | the full query string from client | TRUE | TRUE |
 | $bytes_received | bytes received from client | TRUE | TRUE |
 | $body_bytes_sent | body bytes sent to client | FALSE | TRUE |
@@ -47,7 +47,7 @@ Here are all the built-in variables supported by the CDN360 servers. You can use
 | $request_uri | URI with query string | TRUE | TRUE |
 | $sc_completed | 1: if last byte was served <br> 0: if last byte was not served  | FALSE | TRUE |
 | $sc_initial | 1: if first byte was served <br> 0: if first byte was not served | FALSE | TRUE |
-| $sent_http_* | one header sent to client | FALSE | TRUE |
+| $sent_http__name_ | one header sent to client | FALSE | TRUE |
 | $sent_http_content_length | Content-Length to client | FALSE | TRUE |
 | $served_from_cache | 1: HIT on edge <br> 0: MISS on edge | TRUE | TRUE |
 | $server_addr | IP address of the edge server | FALSE | TRUE |
