@@ -4,12 +4,12 @@ Here are all the built-in variables supported by the CDN360 servers. You can use
 
 | **Variable Name** | **Description** | **Supported in Edge Logic** | **Supported in Real-Time Log** |
 | ---- | ---- | ---- | ---- |
-| $arg_ _name_| one query parameter | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $arg__name_| one query parameter | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $bytes_received | bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $body_bytes_sent | body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $bytes_sent| total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $cache_misc | to set the parameters to cache key | <span class="badge green">Yes</span> |FALSE |
+| $cache_misc | to set the parameters to cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | $client_country_code | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $client_http_version | client's HTTP version, HTTP/1.1 or HTTP/2.0 etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $client_ip_version | client's IP version <br> 4: for IPv4 <br> 6: for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
