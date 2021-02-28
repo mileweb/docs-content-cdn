@@ -46,7 +46,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $request_method | HTTP method: GET, POST, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_scheme | http or https | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_time | request processing time in seconds with a milliseconds resolution; <br> time elapsed since the first bytes were read from the client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_uri | URI with query string | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $request_uri | request URI with query string received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $sc_completed | 1: if last byte was served <br> 0: if last byte was not served  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sc_initial | 1: if first byte was served <br> 0: if first byte was not served | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sent\_http\__name_ | header with the specified name sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -73,3 +73,4 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $upstream_response_length | response length | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_response_time | keeps time spent on receiving the response from the upstream server; <br> the time is kept in seconds with millisecond resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_status | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $uri | request $uri without query string. In Edge Logic, it may be modified by the [rewrite](/docs/edge-logic/supported-directives#rewrite) directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
