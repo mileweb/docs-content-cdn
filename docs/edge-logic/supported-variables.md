@@ -5,7 +5,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 
 | **Variable Name** | **Description** | **Supported in Edge Logic** | **Supported in Real-Time Log** |
 | ---- | ---- | ---- | ---- |
-| $arg__name_| one query parameter | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $bytes_received | bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $body_bytes_sent | body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -20,12 +20,12 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $connection_requests | current number of requests in the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $content_length | request content-length header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $content_type | request content-type header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $cookie__name_ | one cookie value | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $cookie__name_ | cookie with the specified name received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $dollar_sign | a literal dollar sign | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $error_code | error about client and origin | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $host | host header or matched server_name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $hostname | server's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $http__name_ | one request header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $http__name_ | request header with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $http_host | request Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $invalid_referer | empty string, if the “Referer” request header field value is considered valid, otherwise “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $is_args | empty or ?, when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -49,7 +49,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $request_uri | URI with query string | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $sc_completed | 1: if last byte was served <br> 0: if last byte was not served  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sc_initial | 1: if first byte was served <br> 0: if first byte was not served | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $sent\_http\__name_ | one header sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $sent\_http\__name_ | header with the specified name sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sent_http_content_length | Content-Length to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $served_from_cache | 1: HIT on edge <br> 0: MISS on edge | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $server_addr | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -67,9 +67,9 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $upstream_bytes_received | number of bytes received from an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_bytes_sent | number of bytes sent to an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_connect_time | keeps time spent on establishing a connection with the upstream server; <br> the time is kept in seconds with millisecond resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_cookie__name_ | cookie with the specified name sent by the upstream server in the “Set-Cookie” response header field | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $upstream\_cookie\__name_ | cookie with the specified name sent by the upstream server in the “Set-Cookie” response header field | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_header_time | keeps time spent on receiving the response header from the upstream server; <br> the time is kept in seconds with millisecond resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_http__name_ | one header received from origin | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $upstream\_http\__name_ | header with the specified name received from origin | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_response_length | response length | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_response_time | keeps time spent on receiving the response from the upstream server; <br> the time is kept in seconds with millisecond resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_status | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
