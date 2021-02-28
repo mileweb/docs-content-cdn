@@ -375,13 +375,13 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **Default**: none <br>
 **Context**: location, if in location
 
-This directive specifies the origin to fetch the content. It is a wrapper of the NGINX [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. Examples:
+This directive specifies the origin to fetch the content. It is a wrapper of the NGINX [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `$uri` after the origin name. Examples:
 ```nginx
-origin_pass my_origin;    #URI is not specified, 
-origin_pass my_origin/$uri; #same as above without query string
-origin_pass my_origin/abc/$uri;
+# when URI is not specified, $uri and query string will be appended by default
+origin_pass my_origin;
+origin_pass my_origin$uri; #same as above without query string
+origin_pass my_origin/abc$uri;
 ```
-If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `/$uri` after the origin name.
 
 ### `origin_read_timeout`
 
