@@ -14,6 +14,10 @@ Similarly, the following example shows how to include some request headers in ca
 ```nginx
 set $cache_misc "hdr1=$http_header1&hdr2=$http_header2";
 ```
+If you want to keep any previously assigned value, you can append to this variable:
+```nginx
+set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
+```
 
 ### HTTP Header Manipulation
 
