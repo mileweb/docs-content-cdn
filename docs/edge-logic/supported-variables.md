@@ -1,9 +1,10 @@
 ## Built-in Variables
 
 Here are all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both cases.
+
 | **Variable Name** | **Description** | **Supported in Edge Logic** | **Supported in Real-Time Log** |
 | ---- | ---- | ---- | ---- |
-| $arg_name| one query parameter | TRUE | TRUE |
+| $arg_name| one query parameter | <span class="badge green">TRUE</span> | <span class="badge green">TRUE</span> |
 | $args | the full query string from client | TRUE | TRUE |
 | $bytes_received | bytes received from client | TRUE | TRUE |
 | $body_bytes_sent | body bytes sent to client | FALSE | TRUE |
