@@ -1,8 +1,8 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of NGINX, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives. 
+This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives. 
 
-Each non-proprietary directive includes a direct link to the official NGINX documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives. 
+Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives. 
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
@@ -327,7 +327,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **Default**:  - <br/>
 **Context**:  http, server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports NGINX variables.
+Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
 
 Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
 
@@ -375,11 +375,12 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **Default**: none <br>
 **Context**: location, if in location
 
-This directive specifies the origin to fetch the content. It is a wrapper of the NGINX [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `$uri` after the origin name. Examples:
+This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
 ```nginx
 # when URI is not specified, $uri and query string will be appended by default
 origin_pass my_origin;
-origin_pass my_origin$uri; #same as above without query string
+origin_pass my_origin$uri$is_args$args; #same as above
+origin_pass my_origin$uri; #to drop the query string
 origin_pass my_origin/abc$uri;
 ```
 
@@ -450,12 +451,12 @@ Enables or disables buffering of responses from the proxied server. No change to
 **Default**: `-` <br/>
 **Context**: http, server, location
 
-Defines conditions under which the response will not be taken from a cache. If at least one value of the string parameters is not empty and is not equal to “0” then the response will not be taken from the cache. This should be used if you know the content is not cacheable under those conditions:
+Defines conditions under which the response will not be taken from cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be taken from the cache. This should be used if you know the content is not cacheable according to the conditions above. Examples:
 ```nginx
 proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
 proxy_cache_bypass $http_pragma    $http_authorization;
 ```
-Please notice that this directive does not prevent the response from being save in the cache.
+This directive does not prevent the response from being save in the cache.
 That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
@@ -496,7 +497,7 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 **Default**: `proxy_cache_methods GET HEAD;` <br/>
 **Context**: http, server, location
 
-If the client request method is listed in this directive then the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
+If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
 
 ### proxy_cache_min_age 
 
@@ -510,11 +511,11 @@ Description:
 
 This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
 
-NGINX calculates the cache time from the headers in the upstream response or from the NGINX directives in the following order:
+nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (NGINX directive)
+X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
 
- When NGINX calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, NGINX ignores the value in the proxy_cache_min_age directive.
+ When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
 
  Note: The time variable in this directive can have a number with one of the following suffixes or a combination of the following suffixes:
 
@@ -542,7 +543,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching. The header values of `Cache-Control`, `Expires`, etc have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers).
+Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 disables caching of the content. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching. The header values of `Cache-Control`, `Expires`, etc have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers).
 
 ### proxy_cache_vary
 
@@ -636,12 +637,12 @@ Limits the number of possible tries for passing a request to the next upstream s
 **Default**: `-` <br/>
 **Context**: http, server, location
 
-Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0” then the response will not be saved:
+Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be saved:
 ```nginx
 proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-Since the content is not saved, usually there is no point to look up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
+Since the content is not saved, usually there is no point in looking up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
