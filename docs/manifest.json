@@ -204,6 +204,10 @@
             "path": "/docs/edge-logic/supported-directives.md"
           },
           {
+            "title": "Built-in Variables",
+            "path": "/docs/edge-logic/built-in-variables.md"
+          },
+          {
             "title": "FAQ",
             "path": "/docs/edge-logic/faq.md"
           }

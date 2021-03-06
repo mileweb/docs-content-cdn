@@ -1,8 +1,8 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of NGINX, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives. 
+This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives.
 
-Each non-proprietary directive includes a direct link to the official NGINX documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives. 
+Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
@@ -103,6 +103,8 @@ Sets the request variable to the given value after the authorization request com
 
 Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
 
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+
 ### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
@@ -176,7 +178,7 @@ Defines the URI that will be shown for the specified error codes. No change to t
 
 **Syntax**: `eval_func $result {function name} {parameters};` <br/>
 **Default**: `-` <br/>
-**Context**:  http, server, location, if in location
+**Context**:  http, server, location, if
 
 This is a directive to perform some common encoding, decoding, hash, hash-mac, encryption, decryption and comparison algorithms. It is added to the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html).  Supported functions are:
 
@@ -189,6 +191,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;``` |
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
+| string<br>manipulation | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 
 **NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
 
@@ -203,6 +206,7 @@ Examples:
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
     #$hmacout and $hmacout1 should be equal
 ```
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
 
@@ -225,6 +229,10 @@ CDN360 always uses gzip and applies it to the default MIME types above. In addit
 
 <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
+**Syntax**:	`if (condition) { ... }`<br/>
+**Default**:	`—`<br/>
+**Context**:	server, location
+
 Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
 *  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
 
@@ -246,6 +254,7 @@ elseif ($http_x = 2) { ... }
 elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -273,7 +282,11 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 
 <span class="badge">standard</span>
 
-Sets configuration depending on the request URI without query string. No change to the public version.
+**Syntax**: `location [ = | ~ | ~* | ^~ ] pattern { ... }` <br/>
+**Default**: `-` <br/>
+**Context**: server, location
+
+Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
 
 ### `origin_connect_timeout`
 
@@ -314,7 +327,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **Default**:  - <br/>
 **Context**:  http, server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports NGINX variables.
+Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
 
 Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
 
@@ -362,13 +375,14 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **Default**: none <br>
 **Context**: location, if in location
 
-This directive specifies the origin to fetch the content. It is a wrapper of the NGINX [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. Examples:
+This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
 ```nginx
-origin_pass my_origin;    #URI is not specified, 
-origin_pass my_origin/$uri; #same as above without query string
-origin_pass my_origin/abc/$uri;
+# when URI is not specified, $uri and query string will be appended by default
+origin_pass my_origin;
+origin_pass my_origin$uri$is_args$args; #same as above
+origin_pass my_origin$uri; #to drop the query string
+origin_pass my_origin/abc$uri;
 ```
-If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. If you want to drop the query string, just put `/$uri` after the origin name.
 
 ### `origin_read_timeout`
 
@@ -423,13 +437,27 @@ One thing to notice is that if you want to use this directive to set the `Host` 
 
 <span class="badge">standard</span>
 
-Enables or disables buffering of responses from the proxied server. No change to the public version. 
+**Syntax**: `proxy_buffering on | off;` <br/>
+**Default**: `proxy_buffering on;` <br/>
+**Context**: http, server, location
+
+Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
 <span class="badge">standard</span>
 
-Defines conditions under which the response will not be taken from a cache. No change to the public version. This should be used if you know the content is not cacheable under those conditions. It should usually be used together with `proxy_no_cache`.
+**Syntax**: `proxy_cache_bypass string ...;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Defines conditions under which the response will not be taken from cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be taken from the cache. This should be used if you know the content is not cacheable according to the conditions above. Examples:
+```nginx
+proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
+proxy_cache_bypass $http_pragma    $http_authorization;
+```
+This directive does not prevent the response from being saved in the cache.
+That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
@@ -465,7 +493,11 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 
 <span class="badge">standard</span>
 
-Specify the HTTPS methods whose response will be cached.
+**Syntax**: `proxy_cache_methods GET | HEAD | POST ...;` <br/>
+**Default**: `proxy_cache_methods GET HEAD;` <br/>
+**Context**: http, server, location
+
+If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
 
 ### proxy_cache_min_age 
 
@@ -479,11 +511,11 @@ Description:
 
 This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
 
-NGINX calculates the cache time from the headers in the upstream response or from the NGINX directives in the following order:
+nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (NGINX directive)
+X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
 
- When NGINX calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, NGINX ignores the value in the proxy_cache_min_age directive.
+ When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
 
  Note: The time variable in this directive can have a number with one of the following suffixes or a combination of the following suffixes:
 
@@ -511,7 +543,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We enhanced the open-source version to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 makes the contents not cached. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching.
+Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. The specified time is applied only to responses without caching instructions from the origin. A value of 0 disables caching of the content. If you can identify dynamic/non-cacheable contents based on request, use `proxy_cache_bypass` and `proxy_no_cache` to bypass caching. The header values of `Cache-Control`, `Expires`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers).
 
 ### proxy_cache_vary
 
@@ -573,7 +605,11 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 <span class="badge">standard</span>
 
-Disables processing of certain response header fields from the proxied server. No change to the public version. 
+**Syntax**: `proxy_ignore_headers field ...;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Disables processing of certain response header fields from the proxied server. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). 
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
@@ -597,7 +633,16 @@ Limits the number of possible tries for passing a request to the next upstream s
 
 <span class="badge">standard</span>
 
-Defines conditions under which the response will not be saved to a cache. No change to the public version. 
+**Syntax**: `proxy_no_cache string ...;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location
+
+Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be saved:
+```nginx
+proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
+proxy_no_cache $http_pragma    $http_authorization;
+```
+Since the content is not saved, usually there is no point in looking up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
@@ -653,13 +698,27 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 <span class="badge">standard</span>
 
-Stops processing and returns the specified code to a client. No change to the public version. 
+**Syntax:** `return code [text];
+       return code URL;
+       return URL;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location, if
+
+Stops processing and returns the specified code to a client. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return). 
+
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
 
 <span class="badge">standard</span>
 
-Rewrite the request URI when a regular expression pattern is matched. No change to the public version. 
+**Syntax:** `rewrite regex replacement [flag];` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location, if
+
+Rewrite the request URI when a regular expression pattern is matched. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite). 
+
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`satisfy`](http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy)
 
@@ -716,7 +775,13 @@ Defines a secret word used to check authenticity of requested links. No change t
 
 <span class="badge">standard</span>
 
+**Syntax:**	`set $variable value;` <br/>
+**Default:**	`-` <br/>
+**Contexts:** server, location, if
+
 Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
+
+This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
