@@ -37,7 +37,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $pid | process ID of the service | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $pipe | 'p' if request is pipelined, or '.' otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $qtl_req_id | a unique ID for the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $qtl_upstream_cache_status | edge cache HIT, MISS etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $qtl_upstream_cache_status | edge cache HIT, MISS, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $realtime_log_ds_factor | RT log downsample factor. A value N means one log entry for every N requests| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $realtime_log_ds_ratio | RT log downsample ratio. The value should be 1/N, as decimal number between 0 and 1. (ETA: April 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $remote_user | user name supplied with Basic authentication | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
