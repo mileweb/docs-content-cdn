@@ -19,14 +19,14 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $client_real_ip | client's IP address | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $connection_requests | current number of requests in the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $content_length | request's Content-Length header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $content_type | request content-type header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $content_type | request's Content-Type header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $cookie__name_ | cookie with the specified name received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $dollar_sign | a literal dollar sign | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $error_code | error about client and origin | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $host | host header, same as $http_host | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $hostname | server's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $http__name_ | request header with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $http_host | request Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $http_host | request's Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $invalid_referer | empty string if the “Referer” request header field value is considered valid; otherwise “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $is_args | empty or ?, when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $msec | current time in seconds with milliseconds resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -57,7 +57,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $service_port | port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; <br> it can be modified by directive 'sorted_querystring_filter_parameter'| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $ssl_cipher | TLS cipher suite used | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $ssl_protocol | returns protocol name like: TLSv1.1 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $ssl_protocol | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_server_name | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $status | HTTP status code to client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $tcpinfo_delivery_rate | TCP connection performance metrics, in bytes/s, to report the rate at which the sent data is acknowledged | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -71,6 +71,6 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $upstream_header_time | time spent in seconds with millisecond resolution receiving the response header from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream\_http\__name_ | header with the specified name received from origin | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_response_length | response length | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_response_time | keeps time spent on receiving the response from the upstream server; <br> the time is kept in seconds with millisecond resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $upstream_response_time | time spent in seconds with millisecond resolution receiving the complete response from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_status | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $uri | request $uri without query string. In Edge Logic, it may be modified by the [rewrite](/docs/edge-logic/supported-directives#rewrite) directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

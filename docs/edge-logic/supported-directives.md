@@ -1,8 +1,8 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives. 
+This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives.
 
-Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives. 
+Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
@@ -456,7 +456,7 @@ Defines conditions under which the response will not be taken from cache. If at 
 proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
 proxy_cache_bypass $http_pragma    $http_authorization;
 ```
-This directive does not prevent the response from being save in the cache.
+This directive does not prevent the response from being saved in the cache.
 That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
