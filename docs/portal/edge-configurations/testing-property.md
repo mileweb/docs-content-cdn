@@ -4,25 +4,25 @@ Before you deploy your property to production, we recommend you test and verify 
 
 ## Testing Your Property in Staging
 
-CDN360 provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlgslb.com`. You can also see their IP addresses by issuing the following command:
+CDN360 provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlcdn.com`. You can also see their IP addresses by issuing the following command:
 
 ```bash
-$ dig staging.qtlgslb.com
+$ dig staging.qtlcdn.com
 ...
 ;; ANSWER SECTION:
-staging.qtlgslb.com.	59	IN	A	163.171.233.53
-staging.qtlgslb.com.	59	IN	A	163.171.228.89
-staging.qtlgslb.com.	59	IN	A	163.171.230.47
+staging.qtlcdn.com.	19	IN	A	163.171.228.89
+staging.qtlcdn.com.	19	IN	A	163.171.230.47
+staging.qtlcdn.com.	19	IN	A	115.223.12.247
 ...
 ```
 
 There are several ways to send test traffic to the staging environment:
 
 
-- Modify your DNS server to point your hostname to the CDN360 staging hostname ```staging.qtlgslb.com```. For example:
+- Modify your DNS server to point your hostname to the CDN360 staging hostname ```staging.qtlcdn.com```. For example:
 
 ```
-faster.mydomain.com CNAME staging.qtlgslb.com
+faster.mydomain.com CNAME staging.qtlcdn.com
 ```
 
 If you use a smart DNS service, you can also direct a small portion of the production traffic to the staging hostname to have a more thorough test.
@@ -30,10 +30,10 @@ If you use a smart DNS service, you can also direct a small portion of the produ
 
 
 ```
-163.171.233.53 faster.mydomain.com
+163.171.230.47 faster.mydomain.com
 ```
 - If you use the cURL command, you can add ```--resolve``` to directly map the hostname to be accelerated to the IP address of the CDN360 staging server(s). For example:
 
 ```bash
-$ curl -v https://faster.mydomain.com/index.html --resolve faster.mydomain.com:443:163.171.233.53
+$ curl -v https://faster.mydomain.com/index.html --resolve faster.mydomain.com:443:163.171.230.47
 ```
