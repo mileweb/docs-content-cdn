@@ -63,6 +63,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $tcpinfo_delivery_rate | TCP connection performance metrics, in bytes/s, to report the rate at which the sent data is acknowledged | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $tcpinfo_min_rtt | minimal RTT observed by TCP stack for the flow in microseconds | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $tcpinfo_rtt | RTT in microseconds | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $time_http | current time in RFC7231 format that can be used for HTTP Date header (ETA: April 2021)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_bytes_received | number of bytes received from an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_bytes_sent | number of bytes sent to an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_connect_time | time spent in seconds with millisecond resolution establishing a connection with the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
