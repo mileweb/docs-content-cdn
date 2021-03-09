@@ -150,8 +150,8 @@ This directive allows you to add up to 2 customized fields into the access log. 
 <span class="badge">standard</span>
 
 **Syntax**:	`deny address | CIDR | all;`<br/>
-**Default**:	`—`<br/>
-**Context**:	http, server, location
+**Default**: `—`<br/>
+**Context**: http, server, location
 
 Denies access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
 
@@ -169,8 +169,22 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 
 <span class="badge dark">advanced</span>
 
-Defines the URI that will be shown for the specified error codes. No change to the public version. We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for error codes returned from the origin.
+**Syntax**: `error_page code ... uri;` <br/>
+**Default**: `-` <br/>
+**Context**: http, server, location, if in location
 
+Defines the URI to be redirected to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We just configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for status codes returned from the origin.
+
+This directive is very useful to modify the response based on the status code received from the origin. For example, to change the status code 403 to 404:
+```nginx
+location /abc {
+  origin_pass my-origin;
+  error_page 403 @return404;
+}
+location @return404 {
+  return 404;
+}
+```
 
 ### `eval_func`
 
