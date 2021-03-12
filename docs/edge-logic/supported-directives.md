@@ -226,8 +226,8 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 <span class="badge">standard</span>
 
-**Syntax**: `expires time;` <br/>
-              `expires epoch | max | off;` <br/>
+**Syntax**: `expires time;
+       expires epoch | max | off;` <br/>
 **Default**: `expires off;` <br/>
 **Context**: server, location, if in location
 
