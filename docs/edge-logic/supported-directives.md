@@ -69,7 +69,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 **Default**: `-` <br/>
 **Context**: server, location
 
-Allows access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
+Allows access from the specified network or address. Usually used together with [`deny`](#deny). (Work in progress to enable it in the Edge Logic <span class="badge yellow">ETA: May. 2021</span>)
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -153,7 +153,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 **Default**: `—`<br/>
 **Context**: server, location
 
-Denies access from the specified network or address. (Work in progress to make this apply only on edge. <span class="badge yellow">ETA: Apr. 2021</span>)
+Denies access from the specified network or address. Usually used together with [`allow`](#allow). (Work in progress to enable it in the Edge Logic <span class="badge yellow">ETA: May. 2021</span>)
 
 ### `enable_websocket`
 
@@ -720,6 +720,16 @@ The directive is merged across different levels (http/server/location/location i
 <span class="badge dark">advanced</span>
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+
+### `realtime_log_downsample`
+
+<span class="badge">standard</span>
+
+**Syntax:** `realtime_log_downsample factor;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location
+
+Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be a integer in [0, 65535]. 0 disables the logging; 1 means no downsample; 100 means one log entry for every 100 requests. Variable is supported.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
