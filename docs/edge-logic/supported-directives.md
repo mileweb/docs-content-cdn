@@ -729,7 +729,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** `-` <br/>
 **Contexts:** server, location
 
-Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be a integer in [0, 65535]. 0 disables the logging; 1 means no downsample; 100 means one log entry for every 100 requests. Variable is supported.
+Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or an empty string. Variable is also supported. A value of 0 disables the logging; 1 means no downsample; N means one log entry for every N requests. Empty string means no overriding the main setting. Any invalid value results in a factor of 100. 
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
