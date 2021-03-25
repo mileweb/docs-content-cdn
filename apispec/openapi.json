@@ -3993,8 +3993,19 @@
                                 }
                               }
                             }
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "If you are a reseller obtaining list of properties using the Report-Range header, this field indicates the ID of the child customer that owns the property."
                           }
-                        }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "creationTime",
+                          "lastUpdateTime",
+                          "latestVersion"
+                        ]
                       }
                     },
                     "count": {
@@ -4074,16 +4085,22 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid list offset": {
                     "value": {
                       "code": "InvalidListOffset",
                       "message": "The offset must be a valid non-negative integer."
                     }
                   },
-                  "example-2": {
+                  "Invalid target": {
                     "value": {
                       "code": "InvalidTarget",
                       "message": "Invalid target query parameter. Only \"all\", \"staging\", or \"production\" are allowed."
+                    }
+                  },
+                  "Too many entries": {
+                    "value": {
+                      "code": "TooManyEntries",
+                      "message": "This query could not be completed due to the exceptionally large amount of data to be processed. Please try to use some filters to reduce the scope of the query."
                     }
                   }
                 }
@@ -4177,6 +4194,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include properties from the caller.</td></tr><tr><td>children-only</td><td>Include properties from children customers only.</td></tr><tr><td>self+children</td><td>Include properties of both the caller and children customers.</td></tr></table>"
           }
         ]
       }
@@ -12187,7 +12212,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header is a URL representing the new purge request, for example, <code>Location: http://ngapi.cdnetworksl.com/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "description": "The Location header is a URL representing the new purge request, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
                 "required": true
               }
             }
@@ -12410,11 +12435,12 @@
                           },
                           "apiAccountId": {
                             "type": "string",
-                            "description": "Indicates an API account."
+                            "description": "ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>."
                           }
                         },
                         "required": [
-                          "target"
+                          "target",
+                          "apiRequestId"
                         ]
                       }
                     }
@@ -12540,7 +12566,7 @@
           {
             "schema": {
               "type": "integer",
-              "maximum": 0,
+              "maximum": "",
               "minimum": 0,
               "default": "0"
             },
@@ -12550,7 +12576,7 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "number"
             },
             "in": "query",
             "name": "limit",
@@ -13382,7 +13408,7 @@
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "ID of customer whose files or directories are purged.",
+                      "description": "ID of the customer whose files or directories are purged.",
                       "minimum": 1
                     },
                     "dirHeaders": {
@@ -13403,6 +13429,10 @@
                     "impersonatingParentCustomerId": {
                       "type": "integer",
                       "description": "If a reseller performs a purge on behalf of a child customer, then this field will be present and indicate the reseller's ID."
+                    },
+                    "apiAccountId": {
+                      "type": "string",
+                      "description": "ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>."
                     }
                   },
                   "required": [
@@ -22486,6 +22516,636 @@
           }
         ]
       }
+    },
+    "/cdn/prefetches": {
+      "post": {
+        "summary": "Create a prefetch request",
+        "tags": [
+          "Content Management"
+        ],
+        "responses": {
+          "201": {
+            "description": "The prefetch request was successfully created. The <i>Location</i> header includes a reference to the task.  Call the <a href=\"#operation/queryPrefetchStatus\">Query Prefetch Request status API</a> to check its status.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The Location header is a URL representing the new prefetch request, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "required": true
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "An error code."
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "An error message."
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ]
+                },
+                "examples": {
+                  "Invalid prefetch URL": {
+                    "value": {
+                      "code": "InvalidPrefetchUrl",
+                      "message": "The file list shouldn't be empty."
+                    }
+                  },
+                  "No such domain": {
+                    "value": {
+                      "code": "NoSuchDomain",
+                      "message": "The host 'www.example.com' has not been deployed in the 'production' environment."
+                    }
+                  },
+                  "Invalid region": {
+                    "value": {
+                      "code": "InvalidRegion",
+                      "message": "Invalid region: abc. Regions must be in ISO-3166 2-letter format."
+                    }
+                  },
+                  "Invalid time": {
+                    "value": {
+                      "code": "InvalidTime",
+                      "message": "The start time has to be within 24 hours in the future."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-prefetches",
+        "description": "Create a prefetch request to warm up the CDN360 cache with contents from your origin in anticipation of visitors. This is helpful to prevent a sudden influx of requests to your origin servers. The URLs you prefetch must be for hostnames of properties deployed to production.\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "Enter a short description of the prefetch task."
+                  },
+                  "fileList": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "A URL to prefetch. It must begin with 'http' or 'https'.\n"
+                        },
+                        "headers": {
+                          "type": "array",
+                          "description": "If a URL's cache key depends on request headers, you can specify the header values that are applicable to prefetch one version of the URL.",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "HTTP header name."
+                              },
+                              "value": {
+                                "type": "string",
+                                "description": "HTTP header value."
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ]
+                    }
+                  },
+                  "regions": {
+                    "type": "array",
+                    "description": "A list of ISO 3166-2 country codes representing the locations of CDN360 servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "startTime": {
+                    "type": "string",
+                    "description": "RFC 3339 date indicating when the prefetch should begin. This must be in UTC time, for example, \"2021-03-06T00:00:00Z\"."
+                  }
+                },
+                "required": [
+                  "fileList"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "my new prefetch request",
+                    "fileList": [
+                      {
+                        "url": "http://example.com"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "Specify the URLs you wish to prefetch."
+        }
+      },
+      "get": {
+        "summary": "Query prefetch request list",
+        "tags": [
+          "Content Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a list of prefetch requests.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "Total number of prefetch requests matching the criteria specified in the query parameters. The actual number of entries in prefetchRequests may be fewer if you specified the parameter."
+                    },
+                    "prefetchRequests": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "prefetch request task ID.\n"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": " a short description of the prefetch task."
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Indicates the status of the prefetch request.",
+                            "enum": [
+                              "waiting",
+                              "inprogress",
+                              "finished"
+                            ]
+                          },
+                          "submissionTime": {
+                            "type": "string",
+                            "description": "RFC 3339 date indicating when the prefetch request was submitted."
+                          },
+                          "finishTime": {
+                            "type": "string",
+                            "description": "RFC 3339 date indicating when the prefetch completed."
+                          },
+                          "successRate": {
+                            "type": "number",
+                            "description": "A percentage that indicates the completion of the prefetch request.",
+                            "minimum": 0,
+                            "maximum": 100
+                          },
+                          "apiRequestId": {
+                            "type": "string",
+                            "description": "Indicates the corresponding API request ID."
+                          },
+                          "fileEntries": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "Number of URLs in the prefetch request."
+                          },
+                          "hostnames": {
+                            "type": "array",
+                            "description": "List of hostnames that were prefetched.",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "apiAccountId": {
+                            "type": "string",
+                            "description": "ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>."
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "status",
+                          "submissionTime",
+                          "successRate",
+                          "apiRequestId",
+                          "fileEntries",
+                          "hostnames"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "count": 2,
+                      "prefetchRequests": [
+                        {
+                          "apiRequestId": "889c2c5a2d9d93ce",
+                          "fileEntries": 2,
+                          "hostnames": [
+                            "example.com"
+                          ],
+                          "id": "4f8553f7f30942fd8a2d247f05db3602",
+                          "name": "another prefetch request",
+                          "status": "waiting",
+                          "submissionTime": "2021-03-05T00:34:28Z",
+                          "successRate": 0
+                        },
+                        {
+                          "apiRequestId": "39ac9855a7a7d547",
+                          "fileEntries": 2,
+                          "finishTime": "2021-03-04T23:30:28Z",
+                          "hostnames": [
+                            "example2.com"
+                          ],
+                          "id": "17b36e2902544776a6e0043ce622ab10",
+                          "name": "my new prefetch request",
+                          "status": "finished",
+                          "submissionTime": "2021-03-04T23:30:07Z",
+                          "successRate": 100
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid list limit": {
+                    "value": {
+                      "code": "InvalidListLimit",
+                      "message": "The value of limit should be between 1 and 200, inclusive."
+                    }
+                  },
+                  "Invalid sort by": {
+                    "value": {
+                      "code": "InvalidSortBy",
+                      "message": "The valid sort by values for this endpoint are 'submissionTime', 'finishTime'."
+                    }
+                  },
+                  "Invalid sort order": {
+                    "value": {
+                      "code": "InvalidSortOrder",
+                      "message": "The valid sort order values are asc and desc."
+                    }
+                  },
+                  "Invalid startdate": {
+                    "value": {
+                      "code": "InvalidStartDate",
+                      "message": "Invalid parameter 'startdate'. 'a' is not a valid RFC3339 timestamp in UTC. The timestamp should be in  \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  },
+                  "Invalid list offset": {
+                    "value": {
+                      "code": "InvalidListOffset",
+                      "message": "The offset must be a valid non-negative integer."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-prefetches",
+        "description": "Get a list of prefetch requests. Filter the list by specifying query parameters.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. It must be in UTC time, for example, \"2021-03-01T01:00:00Z\"."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. It must be in UTC time, for example, \"2021-03-01T01:00:00Z\"."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first prefetch request to return."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of prefetch requests to return."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "submissionTime",
+                "finishTime"
+              ]
+            },
+            "in": "query",
+            "name": "sortby",
+            "description": "Controls the order in which prefetch requests are returned. The default is to return the most recently submitted request first."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "in": "query",
+            "name": "sortorder",
+            "description": "Order of prefetch requests. The default is to return the most recent prefetch request first. Enter 'asc' for ascending order or 'desc' for descending order."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "The value will be used to match on prefetch request names, hostnames, and the task IDs to limit the prefetch requests that are returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.\n\n\n"
+          }
+        ]
+      }
+    },
+    "/cdn/prefetches/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of a prefetch request."
+        }
+      ],
+      "get": {
+        "summary": "Query prefetch request status",
+        "tags": [
+          "Content Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a summary of the prefetch request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "A short description of the prefetch task.",
+                      "maxLength": 1000
+                    },
+                    "fileList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "A URL to prefetch. It must begin with 'http' or 'https'."
+                          },
+                          "headers": {
+                            "type": "array",
+                            "description": "If a URL's cache key depends on request headers, you can specify the header values that are applicable to prefetch one version of the URL.",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "description": "HTTP header name."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "HTTP header value."
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
+                      }
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "description": "Details about the prefetch request's status.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID of the prefetch request."
+                        },
+                        "submissionTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the prefetch request was submitted."
+                        },
+                        "successRate": {
+                          "type": "number",
+                          "description": "A percentage that indicates the completion of the prefetch request.",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Indicates the status of the prefetch request.",
+                          "enum": [
+                            "waiting",
+                            "inprogress",
+                            "finished"
+                          ]
+                        },
+                        "finishTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the prefetch completed."
+                        },
+                        "apiRequestId": {
+                          "type": "string",
+                          "description": "Indicates the corresponding API request ID."
+                        },
+                        "apiName": {
+                          "type": "string",
+                          "description": "Name of API account which created this prefetch request. If a reseller does it on behalf of a child customer, then it is the API account name of the reseller."
+                        },
+                        "customerId": {
+                          "type": "string",
+                          "description": "ID of the customer whose URLs are prefetched."
+                        },
+                        "impersonatingParentCustomerId": {
+                          "type": "string",
+                          "description": "If a reseller performs a prefetch on behalf of a child customer, then this field will be present and indicate the reseller's ID."
+                        },
+                        "apiAccountId": {
+                          "type": "string",
+                          "description": "ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>."
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "submissionTime",
+                        "successRate",
+                        "status",
+                        "apiRequestId",
+                        "customerId"
+                      ]
+                    },
+                    "regions": {
+                      "type": "array",
+                      "description": "A list of ISO 3166-2 country codes representing the locations of CDN360 servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "startTime": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the prefetch should begin. This must be in UTC time, for example, \"2021-03-06T00:00:00Z\"."
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "name": "my new prefetch request",
+                      "fileList": [
+                        {
+                          "url": "http://example.com"
+                        },
+                        {
+                          "url": "http://example.com/abc",
+                          "headers": [
+                            {
+                              "name": "MyheaderName",
+                              "value": "123"
+                            }
+                          ]
+                        }
+                      ],
+                      "regions": [
+                        "US"
+                      ],
+                      "startTime": "2021-03-06T00:00:00Z",
+                      "metaData": {
+                        "id": "4f8553f7f30942fd8a2d247f05db3602",
+                        "submissionTime": "2021-03-05T00:34:28Z",
+                        "successRate": 0,
+                        "status": "waiting",
+                        "apiRequestId": "889c2c5a2d9d93ce",
+                        "apiName": "theapiaccountname",
+                        "customerId": 12345678
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid pefetch task ID": {
+                    "value": {
+                      "code": "InvalidPrefetchTaskId",
+                      "message": "The specified prefetch task ID does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-prefetches-id",
+        "description": "Get details on the status of a prefetch request.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -22533,7 +23193,7 @@
     },
     {
       "name": "Content Management",
-      "description": "The content management APIs allow you to request an update (or purge) of your cached content ahead of the schedule determined by your <a href=\"#operation/getPropertyVersion\">property configuration</a>.  You can purge files or directories.  The purge requests are asynchronous. APIs are available for you to check the status of your purge requests."
+      "description": "The content management APIs allow you to request an update (or purge) of your cached content ahead of the schedule determined by your <a href=\"#operation/getPropertyVersion\">property configuration</a>.  You can purge files or directories.  The purge requests are asynchronous. APIs are available for you to check the status of your purge requests. You can also prefetch URLs to warm up your cache in advance of requests from visitors. This allows you to manage traffic to your origin servers."
     },
     {
       "name": "Portal User Management",
