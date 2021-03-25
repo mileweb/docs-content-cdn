@@ -173,9 +173,9 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 **Default**: `-` <br/>
 **Context**: server, location, if in location
 
-Defines the URI to be redirected to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We just configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it work for status codes returned from the origin.
+Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also react to status codes returned from the origin.
 
-This directive is very useful to modify the response based on the status code received from the origin. For example, to change the status code 403 to 404:
+This directive enables the modification of the response based on the status code received from the origin. For example, this is how to use it to change the status code 403 to 404:
 ```nginx
 location /abc {
   origin_pass my-origin;
@@ -231,7 +231,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default**: `expires off;` <br/>
 **Context**: server, location, if in location
 
-Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive only affects the header fields sent to the client. It does not change the cache time of the content on the server.
+Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
 
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
@@ -570,7 +570,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default**:	— <br/>
 **Contexts:** http, server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 disables caching of the content. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching with improved performance.
+Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 disables caching of the content. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
 ### proxy_cache_vary
 
@@ -729,7 +729,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** `-` <br/>
 **Contexts:** server, location
 
-Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or an empty string. Variable is also supported. A value of 0 disables the logging; 1 means no downsample; N means one log entry for every N requests. Empty string means no overriding the main setting. Any invalid value results in a factor of 100. 
+Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or an empty string. A variable is also supported. A value of 0 disables the logging; 1 means do not downsample; N means one log entry for every N requests. A empty string means do not override the main setting. Any invalid value results in a factor of 100. 
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
