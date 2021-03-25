@@ -884,3 +884,14 @@ Enables string replacement in responses with the specified MIME types in additio
 <span class="badge">standard</span>
 
 Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
+
+### `access_log_downsample`
+
+<span class="badge">standard</span>
+
+**Syntax:** `access_log_downsample factor;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server
+
+This is a directive for our operation purpose. If a property is having a too high request rate such that its access log may overload our log processing system, we use this directive to reduce the amount of log entries. A `factor` of N means one log entry for every N requests. It has no effect on the edge behavior, including the real-time log. However, you will see reduced number of entries if you download the access log from the portal or through the API.
+
