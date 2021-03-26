@@ -173,7 +173,7 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 **Default**: `-` <br/>
 **Context**: server, location, if in location
 
-Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also react to status codes returned from the origin.
+Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also respond to status codes returned from the origin.
 
 This directive enables the modification of the response based on the status code received from the origin. For example, this is how to use it to change the status code 403 to 404:
 ```nginx
