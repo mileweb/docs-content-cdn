@@ -33,10 +33,10 @@ If your company's security policy requires the new certificate to have a new pri
 6. Set the **Creation Method** setting to **Auto-Generate**. Then complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)) and click **Save Version**.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-autogenerate.png" alt="Certificate New Self-Signed Version" width="700"></p>
 
-6. Click the **Download CSR** button at the top of the Certificate Details page to generate the CSR from the latest version.
-7. Send the downloaded CSR to the CA to apply for a new certificate.
-8. When you receive the new CA-signed certificate, return to the same Certificate Details page and click **Create Version**.
-9. With **Creation Method** set  to **Upload**, upload the new certificate and, optionally, the chain certificate. Click **Save Version**. Do not worry about the private key because it will be the same one as the last version.
-10. Scroll down to the **Deployment** section, and then select **Production** from the **Deployment Destination** drop-down list to deploy the new version to production.<br><br><strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button.</br></br>
-11. To deploy the certificate now, click **Deploy Now**. To deploy it at a later time, click **Add to Standby task** to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>).</br>
+7. Click the **Download CSR** button at the top of the Certificate Details page to generate the CSR from the latest version.
+8. Send the downloaded CSR to the CA to apply for a new certificate.
+9. When you receive the new CA-signed certificate, return to the same Certificate Details page and click **Create Version**.
+10. With **Creation Method** set  to **Upload**, upload the new certificate and, optionally, the chain certificate. Click **Save Version**. Do not worry about the private key because it will be the same one as the last version.
+11. Scroll down to the **Deployment** section, and then select **Production** from the **Deployment Destination** drop-down list to deploy the new version to production.<br><br><strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button.</br></br>
+12. To deploy the certificate now, click **Deploy Now**. To deploy it at a later time, click **Add to Standby task** to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>).</br>
 **Note**: To update a certificate, you must be the owner of the certificate.
