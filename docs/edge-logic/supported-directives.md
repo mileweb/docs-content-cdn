@@ -893,5 +893,5 @@ Specifies the “Referer” request header field values that will cause the embe
 **Default:** `-` <br/>
 **Contexts:** server
 
-This is a directive for our operation purpose. If a property is having a too high request rate such that its access log may overload our log processing system, we use this directive to reduce the amount of log entries. A `factor` of N means one log entry for every N requests. It has no effect on the edge behavior, including the real-time log. However, you will see reduced number of entries if you download the access log from the portal or through the API.
+This is a directive to optimize our internal operations. If a property's hostnames receive such a large number of requests that its access log may overload our log processing system, we use this directive to reduce the amount of log entries. A `factor` of N means one log entry for every N requests. It has no effect on the edge behavior, including the real-time log. However, you will see reduced number of entries if you download the access log from the portal or through the API.
 
