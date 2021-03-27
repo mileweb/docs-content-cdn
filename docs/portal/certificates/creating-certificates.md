@@ -29,7 +29,7 @@ The following procedure describes how to generate self-signed certificates. Self
 |Share With|This field is available to resellers only. It allows resellers to select the child customers with whom they want to share the certificate.|
 |Creation Method|Specify whether you want to upload a certificate you already have or generate a certificate using CDN360.|
 || **Auto-Generate Options**                                      |
-|Template|Populates the form fields below this field with the settings from a template you select from this drop-down list. A template is a collection of auto-generate options that you frequently use. Before you use this option, you must save at least one template (see step 4 below). After the fields are populated with the settings from a template, you can change them in the fields below to suit your requirements, and then save the settings in a new template.|
+|Template|Populates the form fields with settings from a template. A template is a collection of frequently used settings. Before you use this option, you must save at least one template (see step 4 below). After the fields are populated with the settings from a template, you can change them in the fields below to suit your requirements, and then save the settings in a new template.|
 |Public Key Algorithm|Select a public key algorithm for this certificate: RSA2048 or ECC256.|
 |Common Name|Enter a common name you want to use for the certificate (can be any text).|
 |SAN|Enter one or more subject alternative names (SANs), which will be the hostnames you want this certificate to cover.|
