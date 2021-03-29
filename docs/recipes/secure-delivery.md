@@ -75,12 +75,13 @@ The `eval_func` directive can also be used to generate necessary token to access
 origin. Here is an example to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
 ```nginx
 ##required input variables: $awskey $awsseckey $awsbucket/$s3key
-#construct STS
+#Step 1: construct STS
 set $awsdatev2 $time_rfc822;
 set $awssts "GET\n\n\n$awsdatev2\n/$awsbucket/$s3key";
-#sign STS with secKey
+#Step 2: sign STS with secKey
 eval_func $awssigv2 HMAC $awsseckey $awssts SHA1;
 eval_func $awssigv2_b64 BASE64_ENCODE $awssigv2;
+#Step 3: set the required header fields
 origin_set_header Date $awsdatev2;
 origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
