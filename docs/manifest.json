@@ -224,6 +224,10 @@
           {
             "title": "REST API Acceleration",
             "path": "/docs/recipes/api-acceleration.md"
+          },
+          {
+            "title": "Secure Content Delivery",
+            "path": "/docs/recipes/secure-delivery.md"
           }
         ]
       }
