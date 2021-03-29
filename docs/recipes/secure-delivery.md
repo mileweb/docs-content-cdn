@@ -64,7 +64,8 @@ with SHA256:
 ```nginx
 eval_func $binhash HMAC $secret_key $request_uri SHA256;
 eval_func $b64hash BASE64_ENCODE $binhash;
-if ($b64hash != $http_x_hash) { # the client passes the hash through the X-Hash header
+# assume the client passes the hash through the X-Hash header
+if ($b64hash != $http_x_hash) {
     return 403;
 }
 ```
