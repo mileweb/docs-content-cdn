@@ -9,8 +9,8 @@ customers.
 ### Layer 4 DDoS Mitigation
 At the entry point of every CDN360 PoP is a high-performance layer 4 DDoS firewall. This
 is a group of machines that is capable ot analyzing the incoming traffic at line-speed.
-Based on configurable rules, it drops all the suspicious packets that may endanger the
-service and forward only the safe packets to the servers behind it. This feature is 
+Based on regularly updated rules, it drops any suspicious packets that may endanger the
+services and forward only the safe ones to the servers behind it. This feature is 
 enabled for all services and transparent to our customers.
 
 ### Access Control at the Edge
@@ -71,8 +71,7 @@ if ($b64hash != $http_x_hash) {
 ```
 
 ### Access Control to the Origin
-The `eval_func` directive can also be used to generate necessary token to access the
-origin. Here is an example to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
+It is always a good idea to setup some ACL rules on the origin to avoid spamming. In that case, the `eval_func` directive can also be used to generate the necessary token to access the origin. Here is an example to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
 ```nginx
 ##required input variables: $awskey $awsseckey $awsbucket/$s3key
 #Step 1: construct STS
