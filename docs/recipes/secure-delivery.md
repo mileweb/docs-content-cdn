@@ -38,7 +38,7 @@ if ($http_my_token != 'authorized' && $arg_my_token != 'authorized') {
 ```
 * Based on a remote authorization server's response, with `auth_request` directive:
 ```nginx
-location /private/ {
+location /protected/ {
     auth_request /auth; # 2xx to grant access, 401 or 403 to reject
     ...
 }
@@ -95,7 +95,7 @@ this feature for you to manage and apply them with the least possible amount of 
 ### Bot Management
 Sometimes, before loading page, you want to make sure the request was made by a human using a browser, instead of a bot or crawler. Here is a piece of simple Edge Logic code to prompt the user to click a button to continue:
 ```nginx
-location /protected {
+location /protected/ {
     if ($cookie_validated = '') {
         add_header Set-Cookie 'validated=1; Max-Age=60';
         add_header Content-Type 'text/html';
@@ -114,5 +114,18 @@ location /protected {
 More sophisticated method can be implemented this way to block more advanced bots.
 
 ### TLS features
+* CDN360 supports TLS certificates with both RSA and ECDSA algorithms. You can even configure 2 certificates with different algorithms at the same time and the server will pick one based on the client's capability and preference.
+* We highly recommend you to set the minimum TLS vertion to 1.2. You should really take advantage of TLSv1.3 for maximum security and performance.
+* CDN360 also allows you to fully configure the TLS ciphers based on your security requirements. For example, prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
+* If a client request is using HTTPS, CDN360 will also contact the origin with HTTPS to ensure the entire path is encrypted. Although we support "protocol downgrade", you really shouldn't use it unless absolutely necessary.
+* If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS conterpart. You can achieve this on CDN360 portal with a simple dropdown list.
 
 ### Bypass Caching of Sensitive Data
+If you know that some information are very sensitive and should never be stored on the edge server, you can use the `proxy_cache_bypass` and `proxy_no_cache` directives. For example:
+```nginx
+location /credit-card-info {
+    proxy_cache_bypass 1;
+    proxy_no_cache 1;
+}
+```
+This is important to meet certain privacy standard such as PCI-DSS and HIPAA.
