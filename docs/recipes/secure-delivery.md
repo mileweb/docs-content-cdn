@@ -12,7 +12,7 @@ services and forward only the safe ones to the servers behind it. This feature i
 enabled for all services and transparent to our customers.
 
 ### Access Control at the Edge
-We enhanced the following access control features of the open-source nginx:
+Access control is essential to protect the content from unauthorized users. It is also important to mitigate some common layer 7 attacks. CDN360 supports a variety access control methods. Many of them are based on enhanced features of the open-source nginx. We also introduced the proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support any customized algorithms.
 * Client IP Restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>):
 ```nginx
 allow 123.0.0.1/8;
