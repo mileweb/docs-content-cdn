@@ -93,6 +93,25 @@ the portal, which may be accessible by operators not authorized to see them, we 
 this feature for you to manage and apply them with the least possible amount of exposure.
 
 ### Bot Management
+Sometimes, before loading page, you want to make sure the request was made by a human using a browser, instead of a bot or crawler. Here is a piece of simple Edge Logic code to prompt the user to click a button to continue:
+```nginx
+location /protected {
+    if ($cookie_validated = '') {
+        add_header Set-Cookie 'validated=1; Max-Age=60';
+        add_header Content-Type 'text/html';
+        return 200 '<!DOCTYPE html>
+<html>
+  <script>
+    alert("Human, click OK to proceed.");
+    location.href="$request_uri";
+  </script>
+</html>';
+    }
+    # continue loading the page from origin or cache
+    origin_pass my_origin;
+}
+```
+More sophisticated method can be implemented this way to block more advanced bots.
 
 ### TLS features
 
