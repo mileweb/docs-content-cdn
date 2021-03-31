@@ -86,8 +86,7 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
 
 ### Secret Management
-Access control algorithms using `secure_link` or `eval_func` require a secret key for HMAC generation or encryption. To avoid exposing those secrets in clear text on the portal that may be accessible by operators not authorized to see them, we designed
-this feature for you to manage and apply them with the least possible amount of exposure.
+As shown in the sections above, access control algorithms using `secure_link` or `eval_func` usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, we don't want to expose them in clear text in the Edge Logic. The "secret management" feature is created for you to manage and apply secret keys with the least possible amount of exposure.
 
 ### Bot Management
 Sometimes, before loading page, you want to make sure the request was made by a human using a browser, instead of a bot or crawler. Here is a piece of simple Edge Logic code to prompt the user to click a button to continue:
