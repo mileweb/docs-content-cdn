@@ -28,7 +28,7 @@ if ($invalid_referer) {
     return 403;
 }
 ```
-* Based on any request header or query parameter value:
+* Based on any request header or query parameter value using the enhanced [`if`](</docs/edge-logic/supported-directives.md#if>) directive:
 ```nginx
 if ($http_my_token != 'authorized' && $arg_my_token != 'authorized') {
     return 403;

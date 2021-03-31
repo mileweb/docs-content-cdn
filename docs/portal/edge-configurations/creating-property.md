@@ -41,7 +41,7 @@ This wizard can be used to create an initial version of the Edge Logic. It suppo
 
 ## TLS Settings
 
-This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate. This section includes an option to downgrade the protocol from HTTPS to HTTP when accessing the origin, although doing so may expose you to security risks. This section also allows you to enable Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates (refer to https://en.wikipedia.org/wiki/OCSP_stapling). The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html).
+This section allows you to enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate. This section includes an option to downgrade the protocol from HTTPS to HTTP when accessing the origin, although doing so may expose you to security risks. This section also allows you to enable Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates (refer to https://en.wikipedia.org/wiki/OCSP_stapling). The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT).
 
 **Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
 
