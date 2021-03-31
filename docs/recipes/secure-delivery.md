@@ -2,9 +2,7 @@
 
 Security and protection of privacy has brought increasingly more concerns in the last few 
 years. CDN360 is equipped with many features to help you achieve your security goals with 
-a smooth and uninterrupted service for your clients. The features mentioned in this 
-article are available without additional charge or even enabled by default for all 
-customers.
+a smooth and uninterrupted service for your clients. This article also introduces some common good practices to achieve the maximum security.
 
 ### Layer 4 DDoS Mitigation
 At the entry point of every CDN360 PoP is a high-performance layer 4 DDoS firewall. This
@@ -15,13 +13,13 @@ enabled for all services and transparent to our customers.
 
 ### Access Control at the Edge
 We enhanced the following access control features of the open-source nginx:
-* Client IP Restrictions with `allow` and `deny`:
+* Client IP Restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow> and [`deny`](</docs/edge-logic/supported-directives.md#deny>:
 ```nginx
 allow 123.0.0.1/8;
 allow 234.12.34.56;
 deny all;
 ```
-* Check the `Referer` request header with `valid_referers`:
+* Check the `Referer` request header with [`valid_referers`](</docs/edge-logic/supported-directives.md#valid_referers>:
 ```nginx
 valid_referers none blocked server_names
                *.example.com example.* www.example.org/galleries/
@@ -36,7 +34,7 @@ if ($http_my_token != 'authorized' && $arg_my_token != 'authorized') {
     return 403;
 }
 ```
-* Based on a remote authorization server's response, with `auth_request` directive:
+* Based on a remote authorization server's response, with [`auth_request`](</docs/edge-logic/supported-directives.md#auth_request>:
 ```nginx
 location /protected/ {
     auth_request /auth; # 2xx to grant access, 401 or 403 to reject
@@ -51,7 +49,7 @@ location = /auth {
     proxy_set_header X-Original-URI $request_uri;
 }
 ```
-* Use the nginx built-in `secure_link` algorithm. This feature allows the client to 
+* Use the nginx built-in [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link> algorithm. This feature allows the client to 
 generate an MD5 HMAC from components in the HTTP request with a secret key. An expiration 
 time can also be specified. The edge server grants the request only after the MD5 value is
 validated and the request is not expired. Please refer to the [official nginx
@@ -59,7 +57,7 @@ documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#se
 for details.
 
 * Even more complicated algorithms can be achieved with the proprietary directive
-`eval_func`. Here is an example to implement the validation of an HMAC authentication code
+[`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>. Here is an example to implement the validation of an HMAC authentication code
 with SHA256:
 ```nginx
 eval_func $binhash HMAC $secret_key $request_uri SHA256;
@@ -71,7 +69,7 @@ if ($b64hash != $http_x_hash) {
 ```
 
 ### Access Control to the Origin
-It is always a good idea to setup some ACL rules on the origin to avoid spamming. In that case, the `eval_func` directive can also be used to generate the necessary token to access the origin. Here is an example to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
+It is always a good idea to setup some ACL rules on the origin to avoid spamming. In that case, the [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func> directive can also be used to generate the necessary token to access the origin. Here is an example to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
 ```nginx
 ##required input variables: $awskey $awsseckey $awsbucket/$s3key
 #Step 1: construct STS
@@ -87,7 +85,7 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 
 ### Secret Management 
 <span class="badge yellow">ETA: May. 2021</span>
-As shown in the sections above, access control algorithms using `secure_link` or `eval_func` usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you don't want to expose them in clear text in the Edge Logic. The "secret management" feature is created for you to manage and apply secret keys with the least possible amount of exposure.
+As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link> or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func> usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you don't want to expose them in clear text in the Edge Logic. The "secret management" feature is created for you to manage and apply secret keys with the least possible amount of exposure.
 
 ### Bot Management
 Sometimes, before loading page, you want to make sure the request was made by a human using a browser, instead of a bot or crawler. Here is a piece of simple Edge Logic code to prompt the user to click a button to continue:
@@ -115,10 +113,11 @@ More sophisticated method can be implemented this way to block more advanced bot
 * We highly recommend you to set the minimum TLS vertion to 1.2. You should really take advantage of TLSv1.3 for maximum security and performance.
 * CDN360 also allows you to fully configure the TLS ciphers based on your security requirements. For example, prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * If a client request is using HTTPS, CDN360 will contact the origin with the same protocol to ensure the entire path is encrypted. Although we support "protocol downgrade", you really shouldn't use it unless absolutely necessary.
+* To avoid the "man-in-the-middle" attack or DNS hijack of your origin's hostname, you should enable the validation of the origin's certificate.
 * If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS conterpart. You can achieve this on CDN360 portal with a simple dropdown list.
 
 ### Bypass Caching of Sensitive Data
-If you know that some information are very sensitive and should never be stored on the edge server, you can use the `proxy_cache_bypass` and `proxy_no_cache` directives to achieve this. For example:
+If you know that some information are very sensitive and should never be stored on the edge server, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass> and [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache> directives to achieve this. For example:
 ```nginx
 location /credit-card-info {
     proxy_cache_bypass 1;
