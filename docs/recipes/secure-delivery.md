@@ -86,10 +86,7 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
 
 ### Secret Management
-As mentioned above, the directive `eval_func` can be used to implement some sophisticated
-algorithms for access control. However, all those algorithms are using some secret key
-to for HMAC generation or encryption. To avoid exposing those secrets in clear text on
-the portal, which may be accessible by operators not authorized to see them, we designed
+Access control algorithms using `secure_link` or `eval_func` require a secret key for HMAC generation or encryption. To avoid exposing those secrets in clear text on the portal that may be accessible by operators not authorized to see them, we designed
 this feature for you to manage and apply them with the least possible amount of exposure.
 
 ### Bot Management
