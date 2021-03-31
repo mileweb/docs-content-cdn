@@ -431,6 +431,20 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 
 This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
+### `origin_selection_algorithm`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `origin_selection_algorithm {algorithm name};` <br/>
+**Default**: `origin_selection_algorithm round_robin;` <br/>
+**Context**: server, location
+
+This directive specifies the origin peer selection algorithm. The valid values are:
+* consistent_hash : Consistent hash will be used as the peer selection algorithm.
+* round_robin : Round robin will be used as the peer selection algorithm.
+* sorted_list : Select the peer based on the probed network quality.
+
+
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
