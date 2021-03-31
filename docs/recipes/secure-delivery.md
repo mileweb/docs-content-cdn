@@ -115,7 +115,7 @@ More sophisticated method can be implemented this way to block more advanced bot
 * CDN360 also allows you to fully configure the TLS ciphers based on your security requirements. For example, prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * If a client request is using HTTPS, CDN360 will contact the origin with the same protocol to ensure the entire path is encrypted. Although we support "protocol downgrade", you really shouldn't use it unless absolutely necessary.
 * To avoid the "man-in-the-middle" attack or DNS hijack of your origin's hostname, you should enable the validation of the origin's certificate.
-* If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS conterpart. You can achieve this on CDN360 portal with a simple dropdown list.
+* If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS conterpart. You can achieve this on [CDN360 portal](/docs/portal/edge-configurations/creating-property.md#tls-settings) with a simple dropdown list.
 
 ### Bypass Caching of Sensitive Data
 If you know that some information are very sensitive and should never be stored on the edge server, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) and [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) directives to achieve this. For example:
