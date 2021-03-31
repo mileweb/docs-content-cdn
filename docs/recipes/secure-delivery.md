@@ -85,7 +85,8 @@ origin_set_header Date $awsdatev2;
 origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
 
-### Secret Management (<span class="badge yellow">ETA: May. 2021</span>)
+### Secret Management 
+<span class="badge yellow">ETA: May. 2021</span>
 As shown in the sections above, access control algorithms using `secure_link` or `eval_func` usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you don't want to expose them in clear text in the Edge Logic. The "secret management" feature is created for you to manage and apply secret keys with the least possible amount of exposure.
 
 ### Bot Management
