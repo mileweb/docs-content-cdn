@@ -626,7 +626,7 @@ Sets response header fields that will not be passed to the client. No change to 
 **Default:** none <br/>
 **Contexts:** http, server, location, if in location 
 
-Disables processing of certain `cache-control` directives in the proxy server. The following directives can be ignored: 
+Disables processing of certain `cache-control` directives in the response from the origin. The following directives can be ignored:
 
 *   no-cache
 *   no-store
@@ -650,7 +650,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **Default**: `-` <br/>
 **Context**: server, location
 
-Disables processing of certain response header fields from the proxied server. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). 
+Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
