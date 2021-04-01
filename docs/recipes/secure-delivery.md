@@ -1,19 +1,14 @@
 ## Secure Content Delivery with CDN360
 
-Security and protection of privacy has brought increasingly more concerns in the last few 
-years. CDN360 is equipped with many features to help you achieve your security goals with 
-a smooth and uninterrupted service for your clients. This article also introduces some common good practices to achieve the maximum security.
+Security and protection of privacy have raised increasing concerns over the last few years — and for good reason. Hardly a day goes by when the headlines aren't filled with another major security breach. With these concerns in mind, CDN360 has adopted several features to help you achieve your security goals with smooth and uninterrupted service for your clients. This article describes these features, along with a few best practices to help you optimize security.
 
 ### Layer 4 DDoS Mitigation
-At the entry point of every CDN360 PoP is a high-performance layer 4 DDoS firewall. This
-is a group of machines that is capable ot analyzing the incoming traffic at line-speed.
-Based on regularly updated rules, it drops any suspicious packets that may endanger the
-services and forward only the safe ones to the servers behind it. This feature is 
-enabled for all services and transparent to our customers.
+At the entry point of every CDN360 Point of Presence (PoP) is a high-performance Layer 4 distributed denial-of-service (DDoS) firewall. The firewall consists of a group of machines that analyze incoming traffic at line speed.
+Based on regularly updated rules, the firewall rejects suspicious packets that may endanger services and forwards only the "safe" packets to the servers located behind the firewall. This feature is enabled for all services and is transparent to customers.
 
 ### Access Control at the Edge
-Access control is essential to protect the content from unauthorized users. It is also important to mitigate some common layer 7 attacks. CDN360 supports a variety access control methods. Many of them are based on enhanced features of the open-source nginx. We also introduced the proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support any customized algorithms.
-* Client IP Restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>):
+Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN360 supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
+* Client IP restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>):
 ```nginx
 allow 123.0.0.1/8;
 allow 234.12.34.56;
@@ -49,15 +44,9 @@ location = /auth {
     proxy_set_header X-Original-URI $request_uri;
 }
 ```
-* Use the nginx built-in [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) algorithm. This feature allows the client to 
-generate an MD5 HMAC from components in the HTTP request with a secret key. An expiration 
-time can also be specified. The edge server grants the request only after the MD5 value is
-validated and the request is not expired. Please refer to the [official nginx
-documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link)
-for details.
+* Use the NGINX built-in [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) algorithm. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official NGINX documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
 
-* Even more complicated algorithms can be achieved with the proprietary directive
-[`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>). Here is an example to implement the validation of an HMAC authentication code
+* Even more complex algorithms can be achieved with the proprietary directive [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>). Here is an example of how to implement the validation of an HMAC authentication code
 with SHA256:
 ```nginx
 eval_func $binhash HMAC $secret_key $request_uri SHA256;
@@ -69,7 +58,7 @@ if ($b64hash != $http_x_hash) {
 ```
 
 ### Access Control to the Origin
-It is always a good idea to setup some ACL rules on the origin to avoid spamming. In that case, the [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive can also be used to generate the necessary token to access the origin. Here is an example to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
+It is always a good idea to set up some ACL rules on the origin to avoid spamming. In this case, the [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive can also be used to generate the required token for accessing the origin. Here is an example of how to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
 ```nginx
 ##required input variables: $awskey $awsseckey $awsbucket/$s3key
 #Step 1: construct STS
@@ -86,10 +75,10 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ### Secret Management 
 <span class="badge yellow">ETA: May. 2021</span>
 
-As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you don't want to expose them in clear text in the Edge Logic. The "secret management" feature is created for you to manage and apply secret keys with the least possible amount of exposure.
+As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The "secret management" feature allows you to manage and apply secret keys with minimal exposure.
 
 ### Bot Management
-Sometimes, before loading page, you want to make sure the request was made by a human using a browser, instead of a bot or crawler. Here is a piece of simple Edge Logic code to prompt the user to click a button to continue:
+Before a page is loaded, there may be times when you want to make sure that a request was made by a human using a browser instead of by a bot or crawler. The following Edge Logic code prompts users to click a button to continue:
 ```nginx
 location /protected/ {
     if ($cookie_validated = '') {
@@ -107,22 +96,22 @@ location /protected/ {
     origin_pass my_origin;
 }
 ```
-More sophisticated method can be implemented this way to block more advanced bots.
+More sophisticated methods can be adopted in this way to block more advanced bots.
 
 ### TLS features
-* CDN360 supports TLS certificates with both RSA and ECDSA algorithms. You can even configure 2 certificates with different algorithms in the same property and the server will pick one based on the client's capability and preference.
-* We highly recommend you to set the minimum TLS vertion to 1.2. You should really take advantage of TLSv1.3 for maximum security and performance.
-* CDN360 also allows you to fully configure the TLS ciphers based on your security requirements. For example, prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
-* If a client request is using HTTPS, CDN360 will contact the origin with the same protocol to ensure the entire path is encrypted. Although we support "protocol downgrade", you really shouldn't use it unless absolutely necessary.
-* To avoid the "man-in-the-middle" attack or DNS hijack of your origin's hostname, you should enable the validation of the origin's certificate.
-* If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS conterpart. You can achieve this on [CDN360 portal](/docs/portal/edge-configurations/creating-property.md#tls-settings) with a simple dropdown list.
+* CDN360 supports TLS certificates with both RSA and ECDSA algorithms. You can even configure 2 certificates with different algorithms in the same property and have the server pick one based on the client's capability and preference.
+* We highly recommend that you set the minimum TLS version to 1.2. For maximum security and performance, however, you should really take advantage of TLSv1.3.
+* CDN360 also allows you to fully configure TLS ciphers based on your security requirements. For example, you can prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
+* If a client request uses HTTPS, CDN360 contacts the origin with the same protocol to ensure that the entire path is encrypted. Although CDN360 supports "protocol downgrades," you should avoid using them unless absolutely necessary.
+* To avoid "man-in-the-middle" attacks or DNS hijacking attempts of your origin's hostname, enable the validation of the origin's certificate.
+* If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS counterpart. You can achieve this on the [CDN360 portal](/docs/portal/edge-configurations/creating-property.md#tls-settings) with a simple drop-down list.
 
 ### Bypass Caching of Sensitive Data
-If you know that some information are very sensitive and should never be stored on the edge server, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) and [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) directives to achieve this. For example:
+If you know that some information is extremely sensitive and should never be stored on the edge server, use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) and [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) directives to bypass caching of confidential content. For example:
 ```nginx
 location /credit-card-info {
     proxy_cache_bypass 1;
     proxy_no_cache 1;
 }
 ```
-This is important to meet certain privacy standard such as PCI-DSS and HIPAA.
+This is particularly important when meeting privacy standards such as PCI-DSS and HIPAA.
