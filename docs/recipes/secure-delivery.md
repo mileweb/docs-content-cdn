@@ -78,10 +78,10 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The "secret management" feature allows you to manage and apply secret keys with minimal exposure.
 
 ### Bot Management
-Before a page is loaded, there may be times when you want to make sure that a request was made by a human using a browser instead of by a bot or crawler. The following Edge Logic code prompts users to click a button to continue:
+Before the content is delivered to fulfill a request, there may be times when you want to make sure the request was made by a human using a browser instead of by a bot or crawler. The following Edge Logic code demonstrates how to prompt the users to click a button to receive the requested content:
 ```nginx
 location /protected/ {
-    if ($cookie_validated = '') {
+    if ($cookie_validated = '') { #check the existence of the cookie 'validated'
         add_header Set-Cookie 'validated=1; Max-Age=60';
         add_header Content-Type 'text/html' policy=overwrite;
         return 200 '<!DOCTYPE html>
