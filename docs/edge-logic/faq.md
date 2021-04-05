@@ -1,6 +1,6 @@
 ## Frequently Asked Questions
 
-### How do you include query parameters and/or request headers in the cache key?
+### How to include query parameters and/or request headers in the cache key?
 
 By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
@@ -12,7 +12,8 @@ set $cache_misc "?abc=$arg_abc&def=$arg_def";
 ```
 Similarly, the following example shows how to include some request headers in cache key:
 ```nginx
-set $cache_misc "hdr1=$http_header1&hdr2=$http_header2";
+set $cache_misc "ae=$http_accept_encoding";
+set $cache_misc $cache_misc."hdr1=$http_header1&hdr2=$http_header2";
 ```
 If you want to keep any previously assigned value, you can append to this variable:
 ```nginx
