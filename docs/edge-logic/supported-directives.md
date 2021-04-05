@@ -790,8 +790,10 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module, 
 **Default:** `sanitize_accept_encoding gzip;` <br/>
 **Contexts:** http, server
 
-This directive processes the incoming `Accept-Encoding` header to consolidate the value. The goal is to increase the cache efficiency and hit ratio by limiting the maximum number of variations due to the `Accept-Encoding` header to 5.
-
+This directive processes the incoming `Accept-Encoding` header to consolidate the value. The goal is to increase the cache efficiency and hit ratio by limiting the maximum number of variations due to the `Accept-Encoding` header to 5. If you use this directive to change the default setting, most likely you will need to add the header field value into the cache key:
+```nginx
+set $cache_misc $cache_misc."ae=$http_accept_encoding";
+```
 You can specify up to four combinations of content-encoding algorithms after this directive. Each combination is a comma-separated list of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the client, the CDN360 proxy server tries to match the `Accept-Encoding` header with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
 
 For example: if the configuration is:
