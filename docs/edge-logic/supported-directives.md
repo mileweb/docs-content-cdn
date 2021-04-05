@@ -574,7 +574,11 @@ If there is no suffix in the time, the configured value is considered in seconds
 
 <span class="badge dark">advanced</span>
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the public version. 
+**Syntax**:	`proxy_cache_use_stale error | timeout | invalid_header | updating | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | off ...;` <br/>
+**Default**: `proxy_cache_use_stale error timeout;` <br/>
+**Context**: server, location
+
+Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale).
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -582,7 +586,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Syntax**:	`proxy_cache_valid [code ...] time;` <br/>
 **Default**:	— <br/>
-**Contexts:** http, server, location
+**Contexts:** server, location
 
 Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 disables caching of the content. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
