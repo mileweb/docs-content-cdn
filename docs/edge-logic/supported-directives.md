@@ -790,11 +790,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module, 
 **Default:** `sanitize_accept_encoding gzip;` <br/>
 **Contexts:** http, server
 
-This directive processes the incoming `Accept-Encoding` header to consolidate the value. The goal is to increase the cache efficiency and hit ratio by limiting the maximum number of variations due to the `Accept-Encoding` header to 5. If you use this directive to change the default setting, most likely you will need to add the header field value into the cache key:
-```nginx
-set $cache_misc $cache_misc."ae=$http_accept_encoding";
-```
-You can specify up to four combinations of content-encoding algorithms after this directive. Each combination is a comma-separated list of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the client, the CDN360 proxy server tries to match the `Accept-Encoding` header with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN360 edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
 
 For example: if the configuration is:
 ```nginx
@@ -810,6 +806,11 @@ else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
 It is not hard to see that the default setting of this directive rewrites the header value to either "gzip" or "identity". Combined with the default caching policy, each server would [cache the response in only one of the two encoded formats](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary). If a client's request is asking for the other format, the server would compress or decompress the cached version on-the-fly to fulfill it.
+
+If you use this directive and override the default setting, most likely you also want to cache the response in different encodings separately. You can achieve this by adding the header field value into the cache key:
+```nginx
+set $cache_misc $cache_misc."ae=$http_accept_encoding";
+```
 
 ### [`secure_link`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link)
 
