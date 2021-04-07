@@ -8,7 +8,7 @@ Based on regularly updated rules, the firewall rejects suspicious packets that m
 
 ### Access Control at the Edge
 Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN360 supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
-* Client IP restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>):
+* Client IP restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>): <span class="badge yellow">ETA: May. 2021</span>
 ```nginx
 allow 123.0.0.1/8;
 allow 234.12.34.56;
