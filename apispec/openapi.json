@@ -4197,11 +4197,17 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
             },
             "in": "header",
             "name": "Report-Range",
-            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include properties from the caller.</td></tr><tr><td>children-only</td><td>Include properties from children customers only.</td></tr><tr><td>self+children</td><td>Include properties of both the caller and children customers.</td></tr></table>"
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include properties of the caller.</td></tr><tr><td>children-only</td><td>Include properties of children customers only.</td></tr><tr><td>self+children</td><td>Include properties of both the caller and children customers.</td></tr></table>"
           }
         ]
       }
@@ -4566,6 +4572,10 @@
                               "premium+",
                               "ultra"
                             ]
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer that owns the edge hostname will be returned in response to a reseller using the Report-Range header with a value of self+children or children-only."
                           }
                         },
                         "required": [
@@ -4734,6 +4744,20 @@
             "in": "query",
             "name": "hasBeian",
             "description": "Specify <i>true</i> to obtain a list of edge hostnames flagged for use with hostnames that have a Beian license allowing them to be served by servers in mainland China. Specify <i>false</i> to only retrieve those edge hostnames without the Beian flag. By default, all edge hostnames are returned."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ],
+              "default": "self-only"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include edge hostnames of the caller.</td></tr><tr><td>children-only</td><td>Include edge hostnames of children customers only.</td></tr><tr><td>self+children</td><td>Include edge hostnames of both the caller and children customers.</td></tr></table>"
           }
         ]
       }
@@ -6313,6 +6337,10 @@
                         "apiAccountId": {
                           "type": "integer",
                           "description": "Refers to an API account that generated the validation task."
+                        },
+                        "customerId": {
+                          "type": "integer",
+                          "description": "ID of the customer who owns the property will be returned to a reseller using the Report-Range header with a value of self+children or children-only."
                         }
                       },
                       "required": [
@@ -6379,9 +6407,6 @@
                       "type": "string"
                     },
                     "message": {
-                      "type": "string"
-                    },
-                    "": {
                       "type": "string"
                     }
                   }
@@ -6513,6 +6538,20 @@
             "in": "query",
             "name": "enddate",
             "description": "Enter an RFC 3339 format date to return validation tasks which were submitted no later than this date."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ],
+              "default": "self-only"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include validation tasks of the caller.</td></tr><tr><td>children-only</td><td>Include validation tasks of children customers only.</td></tr><tr><td>self+children</td><td>Include validation tasks of both the caller and children customers.</td></tr></table>"
           }
         ]
       },
@@ -6860,6 +6899,10 @@
                           "apiRequestId": {
                             "type": "string",
                             "description": "An internal ID indicating the associated API call."
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer that deployed will be returned to a reseller using the Report-Range header with a value of self+children or children-only."
                           }
                         },
                         "required": [
@@ -7057,6 +7100,20 @@
             "in": "query",
             "name": "enddate",
             "description": "Enter an RFC 3339 format date to return deployments which were submitted no later than this date."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ],
+              "default": "self-only"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include deployment tasks of the caller.</td></tr><tr><td>children-only</td><td>Include deployment tasks of children customers only</td></tr><tr><td>self+children</td><td>Include deployment tasks of both the caller and children customers.</td></tr></table>"
           }
         ]
       },
@@ -7641,7 +7698,7 @@
                           "hostname": {
                             "type": "string",
                             "format": "hostname",
-                            "description": "A hostname that has been deployed to production or staging."
+                            "description": "A hostname whose property has been deployed to production or staging."
                           },
                           "propertyInProduction": {
                             "type": "object",
@@ -7653,11 +7710,15 @@
                               },
                               "version": {
                                 "type": "integer",
-                                "description": "Property version."
+                                "description": "Property version deployed to production."
                               },
                               "certificateId": {
                                 "type": "string",
                                 "description": "ID of certificate deployed to production."
+                              },
+                              "customerId": {
+                                "type": "integer",
+                                "description": "ID of the customer that owns the property will be returned to a reseller getting the list of hostnames using the Report-Range header with a value of self+children or children-only. It is not returned in the API call used to get information about a specific hostname."
                               }
                             }
                           },
@@ -7676,6 +7737,10 @@
                               "certificateId": {
                                 "type": "string",
                                 "description": "ID of certificate deployed to staging."
+                              },
+                              "customerId": {
+                                "type": "integer",
+                                "description": "ID of the customer that owns the property will be returned to a reseller getting the list of hostnames using the Report-Range header with a value of self+children or children-only. It is not returned in the API call used to get information about a specific hostname."
                               }
                             }
                           }
@@ -7750,13 +7815,19 @@
                       "code": "InvalidListOffset",
                       "message": "The offset must be a valid non-negative integer."
                     }
+                  },
+                  "Invalid target": {
+                    "value": {
+                      "code": "InvalidTarget",
+                      "message": "Invalid target query parameter. Only 'all', 'staging', or 'production' are allowed."
+                    }
                   }
                 }
               }
             }
           }
         },
-        "description": "Get a list of hostnames that have been deployed to production or staging.",
+        "description": "Get a list of hostnames belonging to properties that have been deployed to production or staging.",
         "operationId": "listhostnames",
         "parameters": [
           {
@@ -7787,6 +7858,34 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ],
+              "default": "self-only"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames of the caller.</td></tr><tr><td>children-only</td><td>Include hostnames of children customers only.</td></tr><tr><td>self+children</td><td>Include hostnames of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "staging",
+                "production"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "target",
+            "description": "Limit the response to hostnames from properties deployed to staging only or production only. By default, all hostnames from properties deployed to either production or staging are returned."
           }
         ]
       },
@@ -7835,7 +7934,7 @@
                     "hostname": {
                       "type": "string",
                       "format": "hostname",
-                      "description": "A hostname that has been deployed to production or staging."
+                      "description": "A hostname whose property has been deployed to production or staging."
                     },
                     "propertyInProduction": {
                       "type": "object",
@@ -7847,11 +7946,15 @@
                         },
                         "version": {
                           "type": "integer",
-                          "description": "Property version."
+                          "description": "Property version deployed to production."
                         },
                         "certificateId": {
                           "type": "string",
                           "description": "ID of certificate deployed to production."
+                        },
+                        "customerId": {
+                          "type": "integer",
+                          "description": "ID of the customer that owns the property will be returned to a reseller getting the list of hostnames using the Report-Range header with a value of self+children or children-only. It is not returned in the API call used to get information about a specific hostname."
                         }
                       }
                     },
@@ -7870,6 +7973,10 @@
                         "certificateId": {
                           "type": "string",
                           "description": "ID of certificate deployed to staging."
+                        },
+                        "customerId": {
+                          "type": "integer",
+                          "description": "ID of the customer that owns the property will be returned to a reseller getting the list of hostnames using the Report-Range header with a value of self+children or children-only. It is not returned in the API call used to get information about a specific hostname."
                         }
                       }
                     }
@@ -7904,7 +8011,7 @@
             }
           }
         },
-        "description": "This API returns information about a specific hostname deployed to production or staging.",
+        "description": "This API returns information about a specific hostname belonging to a property that has been deployed to production or staging.",
         "operationId": "queryOneHostname",
         "parameters": [
           {
@@ -7926,7 +8033,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response body contains a list of hostnames.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8009,7 +8116,7 @@
             }
           }
         },
-        "description": "Get a list of hostnames that were successfully <a href=\"#tag/Deployment-Management\">deployed</a> to production during a particular timeframe.",
+        "description": "Get a list of hostnames belonging to properties that were successfully <a href=\"#tag/Deployment-Management\">deployed</a> to production during a particular timeframe.",
         "operationId": "getHistoricalHostnames",
         "parameters": [
           {
@@ -19290,7 +19397,7 @@
             },
             "in": "header",
             "name": "Report-Range",
-            "description": "If you are a reseller, you can specify whether to include API calls from children customers. A value of \"self-only\" will only return API calls corresponding to your account. A value of \"self+children\" will return your API calls along with those of your children customers. A value of \"children-only\" will return API calls of your children customers."
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include API calls of the caller.</td></tr><tr><td>children-only</td><td>Include API calls of children customers only.</td></tr><tr><td>self+children</td><td>Include API calls of both the caller and children customers.</td></tr></table>"
           }
         ]
       }
@@ -20005,7 +20112,226 @@
         },
         "parameters": []
       },
-      "parameters": []
+      "parameters": [],
+      "get": {
+        "summary": "Get a list of service quotas",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a list of service quotas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Total number of service quota entries available. The number returned in serviceQuotaList may be fewer as it is limited to 200 entries."
+                    },
+                    "serviceQuotaList": {
+                      "type": "array",
+                      "description": "A list of up to 200 service quota summaries.",
+                      "items": {
+                        "type": "object",
+                        "description": "Summarizes service quotas for a customer.",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "A service quota ID. You can use this to <a href=\"#operation/get-cdn-serviceQuotas-serviceQuotaId\">get more details about the service quota</a>."
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer."
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status."
+                          },
+                          "allowProduction": {
+                            "type": "boolean",
+                            "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted."
+                          },
+                          "trialDeadline": {
+                            "type": "string",
+                            "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                          },
+                          "usageLimitDays": {
+                            "type": "integer",
+                            "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
+                          },
+                          "usageLimitDollar": {
+                            "type": "string",
+                            "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "customerId",
+                          "status",
+                          "allowProduction"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "count": 1,
+                      "serviceQuotaList": [
+                        {
+                          "id": "5d012ea3bb7cc5a2223edcc2",
+                          "customerId": 12345678,
+                          "status": "active",
+                          "allowProduction": true,
+                          "usageLimitDays": 0,
+                          "usageLimitDollar": 0
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid allow production parameter": {
+                    "value": {
+                      "code": "InvalidAllowProduction",
+                      "message": "The specified 'allowProduction' value is invalid."
+                    }
+                  },
+                  "Invalid list limit": {
+                    "value": {
+                      "code": "InvalidListLimit",
+                      "message": "The value of limit should be between 1 and 200, inclusive."
+                    }
+                  },
+                  "Invalid list offset": {
+                    "value": {
+                      "code": "InvalidListOffset",
+                      "message": "The offset must be a valid non-negative integer."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-serviceQuotas",
+        "description": "Obtain a list of service quotas. Optional query parameters let you filter the results.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Return service quota of the caller only.</td></tr><tr><td>children-only</td><td>Include service quotas of children customers only.</td></tr><tr><td>self+children</td><td>Include service quotas of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "suspended",
+                "trial"
+              ]
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Return service quotas with a particular status. By default, all service quotas are returned."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            },
+            "in": "query",
+            "name": "allowProduction",
+            "description": "Return service quotas depending on whether the customer is permitted to deploy to production or not. By default, all are returned regardless."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "usageLimit",
+            "description": "If the parameter is specified, return service quotas where both usageLimitDays and usageLimitDollar have non-zero values. The actual parameter value is ignored."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "allowedCacheDirectives",
+            "description": "Return service quotas of customers permitted to use an advanced <a href=\"/cdn/docs/edge-logic/supported-directives#expires\">edge logic directive</a> specified by this parameter."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "accountManagerEmail",
+            "description": "Return service quotas whose accountManagerEmail matches this value."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": "0",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first service quota to return."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": "100",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of service quotas to return. "
+          }
+        ]
+      }
     },
     "/cdn/serviceQuotas/{serviceQuotaId}": {
       "parameters": [
@@ -20139,7 +20465,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -21350,7 +21676,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -21623,7 +21949,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than that of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -23146,6 +23472,713 @@
           }
         ]
       }
+    },
+    "/cdn/apiPermissions": {
+      "post": {
+        "summary": "Create an API permission",
+        "tags": [
+          "API Access Control"
+        ],
+        "responses": {
+          "201": {
+            "description": "The API permission was created. A location header in the response allows you to access its settings. The ID is the API account's ID.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Refers to the API permission for the API account. Example: Location: https://ngapi.cdnetworks.com/cdn/apiPermissions/1234567890\n",
+                "required": true
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Duplicate API account ID": {
+                    "value": {
+                      "code": "DuplicateApiAccountId",
+                      "message": "The provided API account ID already has an account permission."
+                    }
+                  },
+                  "Invalid input": {
+                    "value": {
+                      "code": "InvalidInput",
+                      "message": "The value for 'deploymentTasks' invalid. Use one of false, 'staging', 'production', or 'both'."
+                    }
+                  },
+                  "Invalid API account ID": {
+                    "value": {
+                      "code": "InvalidApiAccountId",
+                      "message": "Please specify the apiAccountId."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-apiPermissions",
+        "description": "Control what CDN endpoints an API account can access. The permissions work in conjunction with the API's account type, operator or read-only. For example, for security you can limit a read-only API account to calling the property management APIs. This would allow the API account to see your property configurations but not make changes to them.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer for which you are creating an API permission."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apiAccountId": {
+                    "type": "string",
+                    "description": "ID of an API account."
+                  },
+                  "allowedOperations": {
+                    "type": "object",
+                    "description": "Customize the access given to the API account. Unspecified fields will be given default values.",
+                    "properties": {
+                      "certificates": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                      },
+                      "properties": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                      },
+                      "edgeHostnames": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                      },
+                      "validations": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                      },
+                      "deploymentTasks": {
+                        "type": "string",
+                        "default": "staging",
+                        "enum": [
+                          "false",
+                          "staging",
+                          "production",
+                          "both"
+                        ],
+                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                      },
+                      "purges": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                      },
+                      "prefetches": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                      },
+                      "annotations": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                      },
+                      "apiPermissions": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                      },
+                      "systemConfigs": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                      },
+                      "reports": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                      },
+                      "serviceQuotas": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                      },
+                      "hostnames": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "apiAccountId"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "apiAccountId": "12345678",
+                    "allowedOperations": {
+                      "serviceQuotas": true,
+                      "deploymentTasks": "both"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Customize the access permitted to an API account."
+        }
+      }
+    },
+    "/cdn/apiPermissions/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of an API account."
+        }
+      ],
+      "get": {
+        "summary": "Query an API permission",
+        "tags": [
+          "API Access Control"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the API account's permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiAccountId": {
+                      "type": "string",
+                      "description": "ID of an API account."
+                    },
+                    "allowedOperations": {
+                      "type": "object",
+                      "description": "This object contains the permissions given to the API account. Fields without custom settings will be given default values.",
+                      "required": [
+                        "certificates",
+                        "properties",
+                        "edgeHostnames",
+                        "validations",
+                        "deploymentTasks",
+                        "purges",
+                        "prefetches",
+                        "annotations",
+                        "apiPermissions",
+                        "systemConfigs",
+                        "reports",
+                        "serviceQuotas",
+                        "hostnames"
+                      ],
+                      "properties": {
+                        "certificates": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                        },
+                        "properties": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                        },
+                        "edgeHostnames": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                        },
+                        "validations": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                        },
+                        "deploymentTasks": {
+                          "type": "string",
+                          "default": "staging",
+                          "enum": [
+                            "false",
+                            "staging",
+                            "production",
+                            "both"
+                          ],
+                          "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                        },
+                        "purges": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                        },
+                        "prefetches": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                        },
+                        "annotations": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                        },
+                        "apiPermissions": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                        },
+                        "systemConfigs": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                        },
+                        "reports": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                        },
+                        "serviceQuotas": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                        },
+                        "hostnames": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "apiAccountId",
+                    "allowedOperations"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "apiAccountId": "12345678",
+                      "allowedOperations": {
+                        "certificates": true,
+                        "properties": true,
+                        "edgeHostnames": false,
+                        "validations": true,
+                        "deploymentTasks": "both",
+                        "purges": true,
+                        "prefetches": true,
+                        "logConfigs": false,
+                        "annotations": true,
+                        "apiPermissions": false,
+                        "systemConfigs": true,
+                        "reports": true,
+                        "serviceQuotas": true,
+                        "hostnames": true,
+                        "blockCommands": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the request is for a valid API account without any custom permissions, the default permissions will be returned in the response. Otherwise, if the API account ID is invalid, a message will indicate that.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Error code if there is a problem with the API call. It would be returned in conjunction with a <i>message</i> field."
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "An error message if there is a problem with the API call. It would be returned in conjunction with a <i>code</i> field."
+                    },
+                    "apiAccountId": {
+                      "type": "string",
+                      "description": "ID of an API account. This field is returned if the API account exists but only has default permissions. The <i>allowedOperations</i> field would also be returned in the response."
+                    },
+                    "allowedOperations": {
+                      "type": "object",
+                      "description": "This object contains the default permissions given to the API account. This field is returned along with the <i>apiAccountId</i> field if the account exists but only has default permissions.",
+                      "properties": {
+                        "certificates": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                        },
+                        "properties": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                        },
+                        "edgeHostnames": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                        },
+                        "validations": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                        },
+                        "deploymentTasks": {
+                          "type": "string",
+                          "default": "staging",
+                          "enum": [
+                            "false",
+                            "staging",
+                            "production",
+                            "both"
+                          ],
+                          "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                        },
+                        "purges": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                        },
+                        "prefetches": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                        },
+                        "annotations": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                        },
+                        "apiPermissions": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                        },
+                        "systemConfigs": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                        },
+                        "reports": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                        },
+                        "serviceQuotas": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                        },
+                        "hostnames": {
+                          "type": "boolean",
+                          "default": "true",
+                          "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.                    \n"
+                        }
+                      },
+                      "required": [
+                        "certificates",
+                        "properties",
+                        "edgeHostnames",
+                        "validations",
+                        "deploymentTasks",
+                        "purges",
+                        "prefetches",
+                        "annotations",
+                        "apiPermissions",
+                        "systemConfigs",
+                        "reports",
+                        "serviceQuotas",
+                        "hostnames"
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid API account ID": {
+                    "value": {
+                      "code": "InvalidAccountId",
+                      "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
+                    }
+                  },
+                  "Valid API account with default permissions only": {
+                    "value": {
+                      "apiAccountId": "12345678",
+                      "allowedOperations": {
+                        "certificates": true,
+                        "properties": true,
+                        "edgeHostnames": false,
+                        "validations": true,
+                        "deploymentTasks": "staging",
+                        "purges": true,
+                        "prefetches": true,
+                        "logConfigs": false,
+                        "annotations": true,
+                        "apiPermissions": false,
+                        "systemConfigs": true,
+                        "reports": true,
+                        "serviceQuotas": false,
+                        "hostnames": true,
+                        "blockCommands": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-apiPermissions-id",
+        "description": "Return an API account's permissions, both custom ones as well as the defaults.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update an API permission",
+        "tags": [
+          "API Access Control"
+        ],
+        "responses": {
+          "204": {
+            "description": "The account's API permissions were updated."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid input": {
+                    "value": {
+                      "code": "InvalidInput",
+                      "message": "We could not fulfill your request. Please check your input."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The API account could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid account ID": {
+                    "value": {
+                      "code": "InvalidAccountId",
+                      "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patch-cdn-apiPermissions-id",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "description": "Update permissions for an API account.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "allowedOperations": {
+                    "type": "object",
+                    "description": "Customize the access given to the API account. Unspecified fields will be given default values.",
+                    "properties": {
+                      "certificates": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                      },
+                      "properties": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                      },
+                      "edgeHostnames": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                      },
+                      "validations": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                      },
+                      "deploymentTasks": {
+                        "type": "string",
+                        "default": "staging",
+                        "enum": [
+                          "false",
+                          "staging",
+                          "production",
+                          "both"
+                        ],
+                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                      },
+                      "purges": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                      },
+                      "prefetches": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                      },
+                      "annotations": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                      },
+                      "apiPermissions": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                      },
+                      "systemConfigs": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                      },
+                      "reports": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                      },
+                      "serviceQuotas": {
+                        "type": "boolean",
+                        "default": "false",
+                        "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                      },
+                      "hostnames": {
+                        "type": "boolean",
+                        "default": "true",
+                        "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Specify the permissions to update."
+        }
+      },
+      "delete": {
+        "summary": "Delete an API permission",
+        "tags": [
+          "API Access Control"
+        ],
+        "responses": {
+          "204": {
+            "description": "The API account's custom permissions were removed. This does not remove the API account itself. The API account still has default permissions."
+          },
+          "404": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid account ID": {
+                    "value": {
+                      "code": "InvalidAccountId",
+                      "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-apiPermissions-id",
+        "description": "Delete custom permissions for an API account.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -23214,6 +24247,10 @@
     {
       "name": "CDN Product Management",
       "description": "These APIs allow you to fetch CDN settings that apply to your account. If you are a reseller, you can use APIs to manage the service quotas of your child customers."
+    },
+    {
+      "name": "API Access Control",
+      "description": "These APIs allow you to customize what a CDN360 API account can do. The permissions work in conjunction with the API account type (read-only and operator)."
     }
   ]
 }

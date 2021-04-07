@@ -431,6 +431,20 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 
 This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
+### `origin_selection_algorithm`
+
+<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+
+**Syntax**: `origin_selection_algorithm {algorithm name};` <br/>
+**Default**: `origin_selection_algorithm round_robin;` <br/>
+**Context**: server, location
+
+This directive specifies the origin peer selection algorithm. The valid values are:
+* consistent_hash : Consistent hash will be used as the peer selection algorithm.
+* round_robin : Round robin will be used as the peer selection algorithm.
+* sorted_list : Select the peer based on the probed network quality.
+
+
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
@@ -560,7 +574,11 @@ If there is no suffix in the time, the configured value is considered in seconds
 
 <span class="badge dark">advanced</span>
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the public version. 
+**Syntax**:	`proxy_cache_use_stale error | timeout | invalid_header | updating | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | off ...;` <br/>
+**Default**: `proxy_cache_use_stale error timeout;` <br/>
+**Context**: server, location
+
+Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN360 edge server would return stale cached content if there is any problem establishing connection to the origin.
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -568,7 +586,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 **Syntax**:	`proxy_cache_valid [code ...] time;` <br/>
 **Default**:	— <br/>
-**Contexts:** http, server, location
+**Context**: server, location
 
 Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 disables caching of the content. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
@@ -612,7 +630,7 @@ Sets response header fields that will not be passed to the client. No change to 
 **Default:** none <br/>
 **Contexts:** http, server, location, if in location 
 
-Disables processing of certain `cache-control` directives in the proxy server. The following directives can be ignored: 
+Disables processing of certain `cache-control` directives in the response from the origin. The following directives can be ignored:
 
 *   no-cache
 *   no-store
@@ -636,7 +654,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **Default**: `-` <br/>
 **Context**: server, location
 
-Disables processing of certain response header fields from the proxied server. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). 
+Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
@@ -772,9 +790,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module, 
 **Default:** `sanitize_accept_encoding gzip;` <br/>
 **Contexts:** http, server
 
-This directive processes the incoming `Accept-Encoding` header to consolidate the value. The goal is to increase the cache efficiency and hit ratio by limiting the maximum number of variations due to the `Accept-Encoding` header to 5.
-
-You can specify up to four combinations of content-encoding algorithms after this directive. Each combination is a comma-separated list of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the client, the CDN360 proxy server tries to match the `Accept-Encoding` header with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN360 edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
 
 For example: if the configuration is:
 ```nginx
@@ -788,6 +804,12 @@ else if (A-E-header.contains("gzip")) A-E-header="gzip";
 else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
+```
+It is not hard to see that the default setting of this directive rewrites the header value to either "gzip" or "identity". Combined with the default caching policy, each server would [cache the response in only one of the two encoded formats](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary). If a client's request is asking for the other format, the server would compress or decompress the cached version on-the-fly to fulfill it.
+
+If you use this directive and override the default setting, most likely you also want to cache the response in different encodings separately. You can achieve this by adding the header field value into the cache key:
+```nginx
+set $cache_misc $cache_misc."ae=$http_accept_encoding";
 ```
 
 ### [`secure_link`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link)
