@@ -4,7 +4,7 @@ Security and privacy protection have raised increasing concerns over the last fe
 
 ### Layer 4 DDoS Mitigation
 At the entry point of every CDN360 Point of Presence (PoP) is a high-performance Layer 4 distributed denial-of-service (DDoS) firewall. The firewall consists of a group of machines that analyze incoming traffic at line speed.
-Based on regularly updated rules, the firewall rejects suspicious packets that may endanger services and forwards only the "safe" packets to the servers located behind the firewall. This feature is enabled for all services and is transparent to all the users.
+Based on regularly updated rules, the firewall rejects suspicious packets that may endanger services and forwards only the "safe" packets to the servers located behind the firewall. This feature is enabled by default and is transparent to all the users.
 
 ### Access Control at the Edge
 Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN360 supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
