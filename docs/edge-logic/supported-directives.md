@@ -578,7 +578,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 **Default**: `proxy_cache_use_stale error timeout;` <br/>
 **Context**: server, location
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale).
+Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN360 edge server would return stale cached content if there is any problem establishing connection to the origin.
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
