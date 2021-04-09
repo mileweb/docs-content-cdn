@@ -1,6 +1,6 @@
 ## Frequently Asked Questions
 
-### How the cache time for a cacheable object is determined?
+### How the cache time for an object is determined?
 
 There are many directives you can use in the Edge Logic to control the cache time. If none of them is configured, the default behavior of CDN360 edge servers is "honor the origin". That is, the instructions in the `Cache-Control` and `Expires` header fields are followed. If these two headers are not present in a response from the origin, the response is not cached. In the meantime, the presence of the `Set-Cookie` header also prevents caching of the response. 
 
@@ -10,12 +10,12 @@ By default, the `Date` header field is passed all the way from the origin to the
 
 If the above mentioned default behavior is not meeting your requirement, you can use the following directives to alter it.
 
-* To ignore one or more of the three special header fields above, you can use the `proxy_ignore_headers` directive. For example:
+* To ignore one or more of the three special header fields above, you can use the [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) directive. For example:
 ```nginx
 proxy_ignore_headers Set-Cookie;
 ```
 In this case, the servers will behave as if the `Set-Cookie` header does not exist.
-* `proxy_cache_valid` can be used to set a cache time if the three special header fields are not present or ignored. You can use it multiple times to set different cache times for different status codes. For example:
+* [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) can be used to set a cache time if the three special header fields are not present or ignored. You can use it multiple times to set different cache times for different status codes. For example:
 ```nginx
 location / { # the default location
     proxy_cache_valid 5m; # cache 200, 301 and 302 for 5 minutes
@@ -25,11 +25,14 @@ location /no-cache {
     proxy_cache_valid 200 0; # cache 200 response, but revalidate every time.
 }
 ```
-* While `proxy_ignore_headers` ignores the specified header fields altogether, `proxy_ignore_cache_control` can be used to ignore specific directives in the `Cache-Control` header field. For example:
+* While [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) ignores the specified header fields altogether, [`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>) can be used to ignore specific directives in the `Cache-Control` header field. For example:
 ```nginx
 proxy_ignore_cache_control no-cache no-store;
 ```
-* The proprietary directive `proxy_cache_min_age` can be used to override the `max-age` in the `Cache-Control` header field to enforce a minimum cache time.
+* The proprietary directive [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) can be used to override the `max-age` in the `Cache-Control` header field to enforce a minimum cache time.
+* If you don't want a request to be served from the cache, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive. [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) can be used to prevent a response from being cached.
+
+Since you are interested in the caching behavior of CDN360, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
 
 ### How to include query parameters and/or request headers in the cache key?
 
