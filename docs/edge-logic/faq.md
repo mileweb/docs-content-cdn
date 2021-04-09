@@ -2,13 +2,13 @@
 
 ### How the cache time for an object is determined?
 
-There are many directives you can use in the Edge Logic to control the cache time. If none of them is configured, the default behavior of CDN360 edge servers is "honor the origin". That is, the instructions in the `Cache-Control` and `Expires` header fields are followed. If these two headers are not present in a response from the origin, the response is not cached. In the meantime, the presence of the `Set-Cookie` header also prevents caching of the response. 
+There are many directives you can use in the Edge Logic to control the cache time. If none of them is configured, the default behavior of CDN360 edge servers is to "honor the origin". That is, the instructions in the `Cache-Control` and `Expires` header fields are followed. If these two fields are not present in a response from the origin, the response is not cached. The presence of the `Set-Cookie` header field also prevents caching of the response. 
 
-We modified the open-source NGINX to strictly follow the HTTP standard regarding 'zero-time cache'. When `no-cache` or `max-age=0` is present in the `Cache-Control` header field, the response is still cached, but expires immediately. Any subsequent request for this object will result in a revalidation request to the origin with the `If-Modified-SInce` header. If `no-store` is in the `Cache-Control` header field, the response will not be cached.
+We modified the open-source NGINX to strictly follow the HTTP standard regarding 'zero-time cache'. When `no-cache` or `max-age=0` is present in the `Cache-Control` header field, the response is still cached but expires immediately. Any subsequent request for this object will result in a revalidation request to the origin with the `If-Modified-SInce` header. If `no-store` is in the `Cache-Control` header field, the response will not be cached.
 
-By default, the `Date` header field is passed all the way from the origin to the edge server, and efforts have been made to ensure the `Age` header field reflects the time since the response is retrieved from the origin, even when parent cache is used.
+By default, the `Date` header field is passed all the way from the origin to the edge servers. Efforts have also been made to ensure the `Age` header field reflects the time since the response is retrieved from the origin, even when parent cache is used.
 
-If the above mentioned default behavior is not meeting your requirement, you can use the following directives to alter it.
+If the default behavior mentioned above does not meet your requirement, use the following directives to alter it.
 
 * To ignore one or more of the three special header fields above, you can use the [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) directive. For example:
 ```nginx
