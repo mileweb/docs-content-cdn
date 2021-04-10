@@ -37,12 +37,12 @@ location /protected/ {
 }
 
 location = /auth { # calls a remote server to authenticate the request
-    proxy_pass https://remote.auth-server.com/;
+    origin_pass remote-auth-server;
     proxy_method HEAD; # specify method required by the remote server
-    proxy_pass_request_body off;
-    proxy_set_header Content-Length "";
+    proxy_pass_request_body off; # remove the request body, if any
+    origin_set_header Content-Length "" policy=overwrite;
     # forward the original request URI to the remote server
-    proxy_set_header X-Original-URI $request_uri;
+    origin_set_header X-Original-URI $request_uri;
 }
 ```
 * Use the NGINX built-in [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) algorithm. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official NGINX documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
