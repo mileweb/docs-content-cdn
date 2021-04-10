@@ -451,7 +451,7 @@ This directive specifies the origin peer selection algorithm. The valid values a
 
 **Syntax:**  `origin_set_header field value if(condition);` <br/>
 **Default:** `origin_set_header host $host;` <br/>
-**Contexts:** http, server, location, if in location
+**Contexts:** server, location, if in location
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
@@ -609,7 +609,7 @@ Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq
 <span class="badge dark">advanced</span>
 
 **Syntax:** `proxy_cookie_domain off;
-       proxy_cookie_domain domain replacement;` <br/>
+       proxy_cookie_domain {domain} {replacement};` <br/>
 **Default:** `proxy_cookie_domain off;` <br/>
 **Context:** server, location
 
@@ -620,7 +620,7 @@ Sets a text that should be changed in the domain attribute of the `Set-Cookie` h
 <span class="badge dark">advanced</span>
 
 **Syntax:** `proxy_cookie_path off;
-       proxy_cookie_path path replacement;` <br/>
+       proxy_cookie_path {path} {replacement};` <br/>
 **Default:** `proxy_cookie_path off;` <br/>
 **Context:** server, location
 
@@ -684,8 +684,8 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `proxy_next_upstream error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | non_idempotent | off ...;`
-**Default:** `proxy_next_upstream error timeout;`
+**Syntax:** `proxy_next_upstream error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | non_idempotent | off ...;` <br/>
+**Default:** `proxy_next_upstream error timeout;` <br/>
 **Context:** server, location
 
 Specifies in which cases a request should be passed to the next origin server. No change to the public version. 
@@ -694,8 +694,8 @@ Specifies in which cases a request should be passed to the next origin server. N
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `proxy_next_upstream_timeout {time};`
-**Default:** `proxy_next_upstream_timeout 0;`
+**Syntax:** `proxy_next_upstream_timeout {time};` <br/>
+**Default:** `proxy_next_upstream_timeout 0;` <br/>
 **Context:** server, location
 
 Limits the time during which a request can be passed to the next upstream server. No change to the public version.
@@ -704,8 +704,8 @@ Limits the time during which a request can be passed to the next upstream server
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `proxy_next_upstream_tries {number};`
-**Default:** `proxy_next_upstream_tries 0;`
+**Syntax:** `proxy_next_upstream_tries {number};` <br/>
+**Default:** `proxy_next_upstream_tries 0;` <br/>
 **Context:** server, location
 
 Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
@@ -761,8 +761,8 @@ Enables of disables passing request headers from client to upstream. No change t
 
 **Syntax:** `proxy_redirect default;
        proxy_redirect off;
-       proxy_redirect redirect replacement;`
-**Default:** `proxy_redirect default;`
+       proxy_redirect redirect replacement;` <br/>
+**Default:** `proxy_redirect default;` <br/>
 **Context:** server, location
 
 Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
@@ -791,8 +791,8 @@ The directive is merged across different levels (http/server/location/location i
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `proxy_ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2] [TLSv1.3];`
-**Default:** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;`
+**Syntax:** `proxy_ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2] [TLSv1.3];` <br/>
+**Default:** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;` <br/>
 **Context:** server, location
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
@@ -837,11 +837,11 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 <span class="badge">standard</span>
 
-**Syntax:** `satisfy all | any;`
-**Default:** `satisfy all;`
+**Syntax:** `satisfy all | any;` <br/>
+**Default:** `satisfy all;` <br/>
 **Context:** server, location
 
-Allows access if all (all) or at least one (any) of the ngx_http_access_module (`allow`, `deny`), ngx_http_auth_request_module (`auth_request`) modules allows access. No change to the public version.
+Allows access if all (all) or at least one (any) of the ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) modules allows access. No change to the public version.
 
 ### `sanitize_accept_encoding`
 
@@ -849,7 +849,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 
 **Syntax:** `sanitize_accept_encoding enc1 enc2 … ;` <br/>
 **Default:** `sanitize_accept_encoding gzip;` <br/>
-**Contexts:** http, server
+**Contexts:** server
 
 This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN360 edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
 
@@ -877,17 +877,29 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 <span class="badge dark">advanced</span>
 
+**Syntax:** `secure_link expression;` <br/>
+**Default:** `—` <br/>
+**Context:** server, location
+
 Defines a string with variables from which the checksum value and lifetime of a link will be extracted. No change to the public version.
 
 ### [`secure_link_md5`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5)
 
 <span class="badge dark">advanced</span>
 
+**Syntax:** `secure_link_md5 expression;` <br/>
+**Default:** `—` <br/>
+**Context:** server, location
+
 Defines an expression for which the MD5 hash value will be computed and compared with the value passed in a request. No change to the public version.
 
 ### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)
 
 <span class="badge dark">advanced</span>
+
+**Syntax:** `secure_link_secret word;` <br/>
+**Default:** `—` <br/>
+**Context:** location
 
 Defines a secret word used to check authenticity of requested links. No change to the public version.
 
@@ -908,8 +920,8 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 <span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
 
 **Syntax:**	`slice size;` <br/>
-**Default:**	`slice 0;` <br/>
-**Contexts:** http, server
+**Default:** `slice 0;` <br/>
+**Contexts:** server
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
@@ -922,7 +934,7 @@ Sets the size of the slices when fetching large files from the origin. The valid
 
 **Syntax:** `slice_ignore_etag on/off;` <br/>
 **Default:** `slice_ignore_etag off;` <br/>
-**Contexts:** http, server
+**Contexts:** server
 
 This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
 
@@ -932,7 +944,7 @@ This directive can be used to disable the ETag consistency check of sliced files
 
 **Syntax:** sorted_querystring_filter_parameter param1 param2 … ; <br/>
 **Default:** none <br/>
-**Contexts:** http, server, location, if in location
+**Contexts:** server, location, if in location
 
 Removes some query parameters from the variable ```$sorted_querystring_args```.
 This feature is implemented on top of this [open-source project](https://github.com/wandenberg/nginx-sorted-querystring-module).
@@ -941,11 +953,19 @@ This feature is implemented on top of this [open-source project](https://github.
 
 <span class="badge dark">advanced</span>
 
+**Syntax:** `sub_filter {string} {replacement};` <br/>
+**Default:** `—` <br/>
+**Context:** server, location
+
 Sets a string to replace in the response and a replacement string. No change to the public version.
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
 
 <span class="badge dark">advanced</span>
+
+**Syntax:** `sub_filter_last_modified on | off;` <br/>
+**Default:** `sub_filter_last_modified off;` <br/>
+**Context:** server, location
 
 Allows preserving the “Last-Modified” header field from the original response during replacement to facilitate response caching. No change to the public version.
 
@@ -953,11 +973,19 @@ Allows preserving the “Last-Modified” header field from the original respons
 
 <span class="badge dark">advanced</span>
 
+**Syntax:** `sub_filter_once on | off;` <br/>
+**Default:** `sub_filter_once on;` <br/>
+**Context:** server, location
+
 Indicates whether to look for each string to replace once or repeatedly. No change to the public version.
 
 ### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)
 
 <span class="badge">standard</span>
+
+**Syntax:** `sub_filter_types {mime-type} ...;` <br/>
+**Default:** `sub_filter_types text/html;` <br/>
+**Context:** server, location
 
 Enables string replacement in responses with the specified MIME types in addition to “text/html”. No change to the public version.
 
@@ -965,6 +993,10 @@ Enables string replacement in responses with the specified MIME types in additio
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
 <span class="badge">standard</span>
+
+**Syntax:** `valid_referers none | blocked | server_names | {string} ...;` <br/>
+**Default:** `—` <br/>
+**Context:** server, location
 
 Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
 
