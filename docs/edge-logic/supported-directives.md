@@ -942,8 +942,8 @@ This directive can be used to disable the ETag consistency check of sliced files
 
 <span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
 
-**Syntax:** sorted_querystring_filter_parameter param1 param2 … ; <br/>
-**Default:** none <br/>
+**Syntax:** `sorted_querystring_filter_parameter {param1} {param2} … ;` <br/>
+**Default:** `-` <br/>
 **Contexts:** server, location, if in location
 
 Removes some query parameters from the variable ```$sorted_querystring_args```.
