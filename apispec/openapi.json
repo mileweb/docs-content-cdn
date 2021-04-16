@@ -5093,8 +5093,9 @@
                       "type": "integer",
                       "description": "Total number of available certificates. The actual number returned depends on the query parameters."
                     },
-                    "": {
+                    "certificates": {
                       "type": "array",
+                      "description": "List of certificates.",
                       "items": {
                         "type": "object",
                         "description": "Summarizes a certificate.",
@@ -5330,6 +5331,20 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include certificates owned by or shared with the caller.</td></tr><tr><td>children-only</td><td>Include certificates owned by or shared with children customers only.</td></tr><tr><td>self+children</td><td>Include certificates owned by or shared with the caller or children customers.</td></tr></table>"
           }
         ]
       }
@@ -15538,6 +15553,12 @@
                       "code": "InvalidSortOrder",
                       "message": "The valid sort order values are asc and desc."
                     }
+                  },
+                  "Invalid type": {
+                    "value": {
+                      "code": "InvalidType",
+                      "message": "Type should be \"operator\" or \"read-only\"."
+                    }
                   }
                 }
               }
@@ -15621,6 +15642,18 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "operator",
+                "read-only"
+              ]
+            },
+            "in": "query",
+            "name": "type",
+            "description": "Specify <i>operator</i> or <i>read-only</i> to filter the results. If unspecified, all API accounts will be returned."
           }
         ]
       }
@@ -18741,6 +18774,18 @@
                           "regionalOffice": {
                             "type": "string",
                             "description": "Regional sales office name that satisfies the regular expression [0-9a-zA-Z_-]{1,28}. "
+                          },
+                          "products": {
+                            "type": "array",
+                            "description": "List of products that the customer has access to.",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "CDN",
+                                "HDT",
+                                "ECP"
+                              ]
+                            }
                           }
                         },
                         "required": [
@@ -18753,7 +18798,8 @@
                           "lastUpdatTime",
                           "type",
                           "phone",
-                          "regionalOffice"
+                          "regionalOffice",
+                          "products"
                         ]
                       }
                     }
@@ -18776,7 +18822,10 @@
                           "lastUpdateTime": "2019-12-10T23:26:41Z",
                           "type": "regular",
                           "phone": "",
-                          "regionalOffice": "East"
+                          "regionalOffice": "East",
+                          "products": [
+                            "CDN"
+                          ]
                         },
                         {
                           "customerId": 20006185,
@@ -18788,7 +18837,10 @@
                           "lastUpdateTime": "2020-02-20T15:20:37Z",
                           "type": "regular",
                           "phone": "123456789",
-                          "regionalOffice": "West"
+                          "regionalOffice": "West",
+                          "products": [
+                            "CDN"
+                          ]
                         }
                       ],
                       "count": 2
@@ -18797,9 +18849,6 @@
                 }
               }
             }
-          },
-          "201": {
-            "description": "Created"
           },
           "400": {
             "description": "Invalid request. Refer to the response body for details.",
@@ -18868,9 +18917,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "403": {
             "description": "The API call is not permitted.",
@@ -18955,7 +19001,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma-separated list of products which can include 'CDN' representing CDN360 and 'ECP' representing Edge Computing Platform."
+            "description": "Comma-separated list of products which can include 'CDN' representing CDN360, 'HDT' representing High-Speed Data Transmission', and 'ECP' representing Edge Computing Platform. Only customers with access to the specified products will be returned."
           },
           {
             "schema": {
