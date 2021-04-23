@@ -39,7 +39,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $qtl_req_id | a unique ID for the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $qtl_upstream_cache_status | edge cache HIT, MISS, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $realtime_log_ds_factor | RT log downsample factor. A value N means one log entry for every N requests| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $realtime_log_ds_ratio | RT log downsample ratio. The value should be 1/N, as decimal number between 0 and 1. (ETA: April 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $realtime_log_ds_ratio | RT log downsample ratio. The value should be 1/N, as a decimal number between 0 and 1. (ETA: May 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $remote_user | user name supplied with Basic authentication | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request | full HTTP request line | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_length | length of request line, header and body | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
