@@ -28,24 +28,24 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $http__name_ | request header with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $http_host | request's Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $invalid_referer | empty string if the “Referer” request header field value is considered valid; otherwise “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $is_args | empty or ?, when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $is_args | empty or "?", when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $msec | current time in seconds with milliseconds resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $sec | current unix time in integer seconds | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $origin_host | origin's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $origin_ip | origin's IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $origin_status_code | origin's status code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $pid | process ID of the service | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $pipe | 'p' if request is pipelined, or '.' otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $pipe | "p" if request is pipelined, or "." otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $qtl_req_id | a unique ID for the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $qtl_upstream_cache_status | edge cache HIT, MISS, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $realtime_log_ds_factor | RT log downsample factor. A value N means one log entry for every N requests| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $realtime_log_ds_ratio | RT log downsample ratio. The value should be 1/N, as decimal number between 0 and 1. (ETA: April 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $realtime_log_ds_ratio | RT log downsample ratio. The value should be 1/N, as a decimal number between 0 and 1. (ETA: May 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $remote_user | user name supplied with Basic authentication | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request | full HTTP request line | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_length | length of request line, header and body | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_method | HTTP method: GET, POST, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_scheme | http or https | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_time | request processing time in seconds with milliseconds resolution; <br> time elapsed since the first bytes were read from the client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $request_scheme | "http" or "https" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $request_time | request processing time in seconds with milliseconds resolution; time elapsed since the first byte was read from the client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_uri | request URI with query string received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $sc_completed | 1: if last byte was served <br> 0: if last byte was not served  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sc_initial | 1: if first byte was served <br> 0: if first byte was not served | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -55,15 +55,15 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $server_addr | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $server_protocol | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $service_port | port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; <br> it can be modified by directive 'sorted_querystring_filter_parameter'| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $ssl_cipher | TLS cipher suite used | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_protocol | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_server_name | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $status | HTTP status code to client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $tcpinfo_delivery_rate | TCP connection performance metrics, in bytes/s, to report the rate at which the sent data is acknowledged | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $tcpinfo_min_rtt | minimal RTT observed by TCP stack for the flow in microseconds | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $tcpinfo_rtt | RTT in microseconds | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $time_http | current time in RFC7231 format that can be used for HTTP Date header (ETA: April 2021)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $tcpinfo_min_rtt | minimum RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $tcpinfo_rtt | latest RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $time_http | current time in RFC7231 format that can be used for HTTP Date header (ETA: May 2021)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_bytes_received | number of bytes received from an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_bytes_sent | number of bytes sent to an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_connect_time | time spent in seconds with millisecond resolution establishing a connection with the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -73,4 +73,4 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $upstream_response_length | response length | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_response_time | time spent in seconds with millisecond resolution receiving the complete response from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_status | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $uri | request $uri without query string. In Edge Logic, it may be modified by the [rewrite](/docs/edge-logic/supported-directives#rewrite) directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $uri | request $uri without query string. In Edge Logic, it may be modified by the "[rewrite](/docs/edge-logic/supported-directives#rewrite)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
