@@ -55,7 +55,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $server_addr | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $server_protocol | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $service_port | port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; <br> it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $ssl_cipher | TLS cipher suite used | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_protocol | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_server_name | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
