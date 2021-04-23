@@ -55,7 +55,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $server_addr | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $server_protocol | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $service_port | port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; <br> it can be modified by directive "sorted_querystring_filter_parameter"| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; <br> it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $ssl_cipher | TLS cipher suite used | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_protocol | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_server_name | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -73,4 +73,4 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $upstream_response_length | response length | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_response_time | time spent in seconds with millisecond resolution receiving the complete response from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $upstream_status | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $uri | request $uri without query string. In Edge Logic, it may be modified by the [rewrite](/docs/edge-logic/supported-directives#rewrite) directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $uri | request $uri without query string. In Edge Logic, it may be modified by the "[rewrite](/docs/edge-logic/supported-directives#rewrite)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
