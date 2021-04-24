@@ -205,6 +205,8 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;``` |
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
+| integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
+| integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
 | string<br>manipulation | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 
 **NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
