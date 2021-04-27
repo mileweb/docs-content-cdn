@@ -584,7 +584,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 
 ### [`proxy_cache_use_stale`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale)
 
-<span class="badge dark">advanced</span>
+<span class="badge">standard</span>
 
 **Syntax:** `proxy_cache_use_stale error | timeout | invalid_header | updating | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | off ...;` <br/>
 **Default:** `proxy_cache_use_stale error timeout;` <br/>
