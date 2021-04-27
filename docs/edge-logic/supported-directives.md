@@ -486,7 +486,7 @@ One thing to notice is that if you want to use this directive to set the `Host` 
 
 Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
 
-### ['proxy_cache_background_update'](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
+### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
 <span class="badge">standard</span>
 
