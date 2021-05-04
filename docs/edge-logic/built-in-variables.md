@@ -7,9 +7,9 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | ---- | ---- | ---- | ---- |
 | $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $bytes_received <span class="badge green small">#</span>| bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $body_bytes_sent <span class="badge green small">#</span>| body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $bytes_sent <span class="badge green small">#</span>| total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $bytes_received <span class="badge small" title="numerical value">#</span>| bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $body_bytes_sent <span class="badge small" title="numerical value">#</span>| body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $bytes_sent <span class="badge small" title="numerical value">#</span>| total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $cache_misc | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | $client_country_code | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $client_http_version | client's HTTP version, like "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
