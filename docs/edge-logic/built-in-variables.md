@@ -13,7 +13,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | <span class="var">$cache_misc</span> | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span class="var">$client_country_code</span> | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span class="var">$client_http_version</span> | client's HTTP version, like "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span class="var">$client_ip_version</span> | client's IP version <br> 4: for IPv4 <br> 6: for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> client's IP version: 4 for IPv4; 6 for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span class="var">$client_isp</span> | client's ISP information | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span class="var">$client_province_code</span> | client's China province code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span class="var">$client_real_ip</span> | client's IP address | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
