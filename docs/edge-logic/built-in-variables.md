@@ -3,12 +3,12 @@
 The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places.
 If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
-| **Variable Name** | **Description** | **Good in Edge Logic** | **Good in [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** | **Value Type** |
-| ---- | ---- | ---- | ---- | ---- |
+| **Variable Name** | **Description** | **Good in Edge Logic** | **Good in [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
+| ---- | ---- | ---- | ---- |
 | $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $bytes_received | bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $body_bytes_sent | body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $bytes_received<span class="badge green">123</span> | bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $body_bytes_sent<span class="badge green">#</span> | body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $bytes_sent| total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $cache_misc | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | $client_country_code | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
