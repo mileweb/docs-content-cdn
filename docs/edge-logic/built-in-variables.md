@@ -47,11 +47,11 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $request_scheme | "http" or "https" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_time |<span class="badge small" title="numerical value">#</span> request processing time in seconds with milliseconds resolution; time elapsed since the first byte was read from the client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $request_uri | request URI with query string received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sc_completed |<span class="badge small" title="numerical value">#</span> 1: if last byte was served <br> 0: if last byte was not served  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $sc_initial |<span class="badge small" title="numerical value">#</span> 1: if first byte was served <br> 0: if first byte was not served | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $sc_completed |<span class="badge small" title="numerical value">#</span> Value is 1 if the last byte was served to the client; 0 otherwise.  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $sc_initial |<span class="badge small" title="numerical value">#</span> Value is 1 if the first byte was served to the client; 0 otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sent\_http\__name_ | header with the specified name sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $sent_http_content_length |<span class="badge small" title="numerical value">#</span> Content-Length to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $served_from_cache |<span class="badge small" title="numerical value">#</span> 1: HIT on edge <br> 0: MISS on edge | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| $served_from_cache |<span class="badge small" title="numerical value">#</span> Value is 1 for a HIT on edge; 0 for a MISS. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $server_addr | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $server_protocol | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $service_port |<span class="badge small" title="numerical value">#</span> port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -60,7 +60,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | $ssl_protocol | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $ssl_server_name | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $status | HTTP status code to client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $tcpinfo_delivery_rate |<span class="badge small" title="numerical value">#</span> TCP connection performance metrics, in bytes/s, to report the rate at which the sent data is acknowledged | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $tcpinfo_delivery_rate |<span class="badge small" title="numerical value">#</span> the rate, in bytes/s, at which the sent data is acknowledged by the client. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $tcpinfo_min_rtt |<span class="badge small" title="numerical value">#</span> minimum RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $tcpinfo_rtt |<span class="badge small" title="numerical value">#</span> latest RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $time_http | current time in RFC7231 format that can be used for HTTP Date header (ETA: May 2021)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
