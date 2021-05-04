@@ -3,9 +3,8 @@
 The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places.
 If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
-| **Variable Name** | **Description** | **Supported** | **in** |
-| - | - | **Edge Logic** | **[Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
-| ---- | ---- | ---- | ---- |
+| **Variable Name** | **Description** | **Good in Edge Logic** | **Good in [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** | **Value Type** |
+| ---- | ---- | ---- | ---- | ---- |
 | $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $bytes_received | bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
