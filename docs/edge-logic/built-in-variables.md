@@ -5,10 +5,10 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 
 | **Variable Name** | **Description** | **Edge Logic** | **[Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
-| $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $bytes_received <span class="badge small" title="numerical value">#</span>| bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $body_bytes_sent <span class="badge small" title="numerical value">#</span>| body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| $arg__name_| query parameter with the specified name | <span class="badge green">&#x2714;</span> | <span class="badge green">&#x2714;</span> |
+| $args | the full query string from client | <span class="badge green">&#x2714;</span> | <span class="badge green">&#x2714;</span> |
+| $bytes_received <span class="badge small" title="numerical value">#</span>| bytes received from client | <span class="badge green">&#x2714;</span> | <span class="badge green">&#x2714;</span> |
+| $body_bytes_sent <span class="badge small" title="numerical value">#</span>| body bytes sent to client | <span class="badge yellow">&#x2718;</span> | <span class="badge green">&#x2714;</span> |
 | $bytes_sent <span class="badge small" title="numerical value">#</span>| total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | $cache_misc | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | $client_country_code | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
