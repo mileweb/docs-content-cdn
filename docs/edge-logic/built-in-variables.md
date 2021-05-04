@@ -4,7 +4,7 @@ The table below lists all the built-in variables supported by the CDN360 servers
 If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
 | **Variable Name** | **Description** | **Supported** | **in** |
-| | | **Edge Logic** | **[Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
+| - | - | **Edge Logic** | **[Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
 | $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
