@@ -356,7 +356,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **Default:**  - <br/>
 **Context:** server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream_http_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
+Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream\_http\_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
 
 Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
 
@@ -466,9 +466,9 @@ This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_ht
 
 Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
-*   $request_scheme: scheme used by the client
-*   $client_real_ip:  client’s IP address
-*   $client_country_code:  client’s ISO3166 country code
+*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
+*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
+*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  client’s ISO3166 country code
 
 For example:
 ```nginx
