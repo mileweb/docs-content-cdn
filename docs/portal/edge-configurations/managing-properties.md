@@ -32,4 +32,6 @@ Each property has a vertical ellipsis in the **Actions** column. Clicking the el
 - **Undeploy from Production**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md>) the selected property from production.
 - **Delete**: [Delete](</docs/portal/edge-configurations/deleting-property.md>) the selected property.
 - **Deployment History**: [View](</docs/portal/edge-configurations/deploying-property.md>) the deployment history of the selected property.
+- **Clone**: [Copy](</docs/portal/edge-configurations/creating-property.md>) settings into the Create a Property form to create a new property.
+- **Report**: [Run](</docs/portal/reports.md>) a report using the hostnames of the deployed property. This action is available only for properties that have been deployed to production.
 

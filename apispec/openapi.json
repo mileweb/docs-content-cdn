@@ -4125,7 +4125,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'.  Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nIf there is more than one <i>hasConfig</i> query parameter, they will be combined together. Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\n"
+            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value of the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'.  Partial matches are supported.  For example: <code>hasConfig=hostnames:domain</code>\nIn this case, the API will return all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a nonempty value for the field will be returned.\n\nSpecify multiple <i>hasConfig</i> parameters to filter on multiple conditions. Example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\nSubfields of a property version can be specified by using the period symbol as a separator. Refer to examples below.\n\nIf matching against values with spaces or special characters, remember to encode them in the URL.\n\nAdditional examples:\n\n<table>\n<tr><th>Value</th><th>Description</th></tr>\n<tr><td>hasConfig=disableHttp2:true</td><td>Return properties that don't support HTTP2</td></tr>\n<tr><td>hasConfig=extraServicePorts.http:85</td><td>Return properties supporting port 85 for HTTP requests.</td></tr>\n<tr><td>hasConfig=origins.servers:myorigin.com</td>\n<td>Return properties using myorigin.com as an origin server.</td></tr>\n</table>\n\n"
           },
           {
             "schema": {
@@ -14127,7 +14127,13 @@
                         "type": "array",
                         "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra"
+                          ]
                         }
                       },
                       "customerIds": {
@@ -14136,14 +14142,19 @@
                         "items": {
                           "type": "string"
                         }
-                      },
-                      "groupby": {
-                        "type": "array",
-                        "description": "You can choose to group by \"hostnames\", \"serverGroups\", and \"customerIds\".",
-                        "items": {
-                          "type": "string"
-                        }
                       }
+                    }
+                  },
+                  "groupby": {
+                    "type": "array",
+                    "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "hostnames",
+                        "serverGroups",
+                        "customerIds"
+                      ]
                     }
                   }
                 }
@@ -14159,10 +14170,18 @@
                 },
                 "Group by server groups": {
                   "value": {
-                    "filters": {},
                     "groupBy": [
                       "serverGroups"
                     ]
+                  }
+                },
+                "Filter by server groups": {
+                  "value": {
+                    "filters": {
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    }
                   }
                 }
               }
@@ -14551,7 +14570,7 @@
                           },
                           "customerId": {
                             "type": "integer",
-                            "description": "ID of the customer to which the user belongs."
+                            "description": "ID of the customer to which the user belongs. This is returned if a reseller specifies the Report-Range header with a value of self+children or children-only."
                           }
                         },
                         "required": [
@@ -14560,8 +14579,7 @@
                           "emailAddress",
                           "status",
                           "creationTime",
-                          "lastLoginTime",
-                          "customerId"
+                          "lastLoginTime"
                         ]
                       }
                     }
@@ -14737,13 +14755,14 @@
               "type": "string",
               "enum": [
                 "self-only",
-                "self+children"
+                "self+children",
+                "children-only"
               ],
               "default": "self-only"
             },
             "in": "header",
             "name": "Report-Range",
-            "description": "An optional header that resellers can use to return results from the reseller only (self-only) or the reseller and children accounts (self+children)."
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include accounts of the caller.</td></tr><tr><td>children-only</td><td>Include  accounts of children customers only.</td></tr><tr><td>self+children</td><td>Include accounts of both the caller and children customers.</td></tr></table>"
           },
           {
             "schema": {
@@ -15471,7 +15490,7 @@
                           },
                           "customerId": {
                             "type": "integer",
-                            "description": "ID of the customer to which the API account belongs."
+                            "description": "ID of the customer to which the API account belongs. This is returned if a reseller specifies the Report-Range header with a value of self+children or children-only."
                           }
                         },
                         "required": [
@@ -15481,8 +15500,7 @@
                           "responsiblePerson",
                           "creationTime",
                           "lastUpdateTime",
-                          "emailAddress",
-                          "customerId"
+                          "emailAddress"
                         ]
                       }
                     }
@@ -15574,12 +15592,13 @@
               "default": "self-only",
               "enum": [
                 "self-only",
-                "self+children"
+                "self+children",
+                "children-only"
               ]
             },
             "in": "header",
             "name": "Report-Range",
-            "description": "Resellers can use this field to obtain API accounts from all child customers by specifying \"self+children\"."
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include API accounts of the caller.</td></tr><tr><td>children-only</td><td>Include API accounts of children customers only.</td></tr><tr><td>self+children</td><td>Include API accounts of both the caller and children customers.</td></tr></table>"
           },
           {
             "schema": {
@@ -24224,6 +24243,276 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ]
+      }
+    },
+    "/cdn/report/reqSummary": {
+      "post": {
+        "summary": "Get a summary of requests",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of requests by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are actually more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \"edge response\" represents edge traffic. \"fast route response\" refers to traffic from your origin accelerated through the HDT product. The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2021-04-01T12:35:00Z",
+                        "endTime": "2021-04-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            865,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-reqSummary",
+        "description": "Get a summary of requests during a timespan. You can group results by hostnames or server groups. If you are a reseller, you can also group by customerIds to distinguish your child customers' requests.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limits the results to the specified scheme. By default, data from HTTPS and HTTP requests are returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "reportfiltersummary",
+                "type": "object",
+                "x-tags": [
+                  "Reports"
+                ],
+                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to only return data for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "servergroups": {
+                        "type": "array",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra"
+                          ]
+                        }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "Resellers can limit the data by specifying IDs of child customers.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupby": {
+                    "type": "array",
+                    "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "hostnames",
+                        "serverGroups",
+                        "customerIds"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Filter by a specific hostname": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  }
+                },
+                "Group results by hostnames": {
+                  "value": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "Filter by server groups": {
+                  "value": {
+                    "filters": {
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
+        }
       }
     }
   },

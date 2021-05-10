@@ -1,76 +1,75 @@
 ## Built-in Variables
 
-The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places.
+The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
 If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
-| **Variable Name** | **Description** | **Supported in Edge Logic** | **Supported in [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
+| **Variable Name** | **Description** | **Edge Logic** | **[R-T Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
-| $arg__name_| query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $args | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $bytes_received | bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $body_bytes_sent | body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $bytes_sent| total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $cache_misc | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
-| $client_country_code | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $client_http_version | client's HTTP version, like "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $client_ip_version | client's IP version <br> 4: for IPv4 <br> 6: for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $client_isp | client's ISP information | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $client_province_code | client's China province code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $client_real_ip | client's IP address | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $connection_requests | current number of requests in the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $content_length | request's Content-Length header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $content_type | request's Content-Type header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $cookie__name_ | cookie with the specified name received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $dollar_sign | a literal dollar sign | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $error_code | error about client and origin | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $host | host header, same as $http_host | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $hostname | server's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $http__name_ | request header with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $http_host | request's Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $invalid_referer | empty string if the “Referer” request header field value is considered valid; otherwise “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $is_args | empty or "?", when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $msec | current time in seconds with milliseconds resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sec | current unix time in integer seconds | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $origin_host | origin's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $origin_ip | origin's IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $origin_status_code | origin's status code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $pid | process ID of the service | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $pipe | "p" if request is pipelined, or "." otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $qtl_req_id | a unique ID for the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $qtl_upstream_cache_status | edge cache HIT, MISS, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $realtime_log_ds_factor | RT log downsample factor. A value N means one log entry for every N requests| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $realtime_log_ds_ratio | RT log downsample ratio. The value should be 1/N, as a decimal number between 0 and 1. (ETA: May 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $remote_user | user name supplied with Basic authentication | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request | full HTTP request line | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_length | length of request line, header and body | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_method | HTTP method: GET, POST, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_scheme | "http" or "https" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_time | request processing time in seconds with milliseconds resolution; time elapsed since the first byte was read from the client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $request_uri | request URI with query string received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sc_completed | 1: if last byte was served <br> 0: if last byte was not served  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $sc_initial | 1: if first byte was served <br> 0: if first byte was not served | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $sent\_http\__name_ | header with the specified name sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $sent_http_content_length | Content-Length to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $served_from_cache | 1: HIT on edge <br> 0: MISS on edge | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $server_addr | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $server_protocol | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $service_port | port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $sorted_querystring_args | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $ssl_cipher | TLS cipher suite used | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $ssl_protocol | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $ssl_server_name | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $status | HTTP status code to client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $tcpinfo_delivery_rate | TCP connection performance metrics, in bytes/s, to report the rate at which the sent data is acknowledged | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $tcpinfo_min_rtt | minimum RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $tcpinfo_rtt | latest RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| $time_http | current time in RFC7231 format that can be used for HTTP Date header (ETA: May 2021)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_bytes_received | number of bytes received from an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_bytes_sent | number of bytes sent to an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_connect_time | time spent in seconds with millisecond resolution establishing a connection with the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream\_cookie\__name_ | cookie with the specified name sent by the upstream server in the “Set-Cookie” response header field | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_header_time | time spent in seconds with millisecond resolution receiving the response header from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream\_http\__name_ | header with the specified name received from origin | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_response_length | response length | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_response_time | time spent in seconds with millisecond resolution receiving the complete response from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $upstream_status | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| $uri | request $uri without query string. In Edge Logic, it may be modified by the "[rewrite](/docs/edge-logic/supported-directives#rewrite)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="args"></span><span class="var">$args</span> | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="bytes_received"></span><span class="var">$bytes_received</span> |<span class="badge small" title="numerical value">#</span> bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="body_bytes_sent"></span><span class="var">$body_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="cache_misc"></span><span class="var">$cache_misc</span> | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
+| <span id="client_country_code"></span><span class="var">$client_country_code</span> | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_http_version"></span><span class="var">$client_http_version</span> | client's HTTP version, like "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> client's IP version: 4 for IPv4; 6 for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_isp"></span><span class="var">$client_isp</span> | client's ISP information | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_province_code"></span><span class="var">$client_province_code</span> | client's China province code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | client's IP address | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> current number of requests in the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> request's Content-Length header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="content_type"></span><span class="var">$content_type</span> | request's Content-Type header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | cookie with the specified name received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="dollar_sign"></span><span class="var">$dollar_sign</span> | a literal dollar sign | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="error_code"></span><span class="var">$error_code</span> | error about client and origin | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="host"></span><span class="var">$host</span> | host header, same as $http_host | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="hostname"></span><span class="var">$hostname</span> | server's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="http_"></span><span class="var">$http_<em>name</em></span> | request header with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="http_host"></span><span class="var">$http_host</span> | request's Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="invalid_referer"></span><span class="var">$invalid_referer</span> | empty string if the “Referer” request header field value is considered valid; otherwise “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="is_args"></span><span class="var">$is_args</span> | empty or "?", when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="msec"></span><span class="var">$msec</span> |<span class="badge small" title="numerical value">#</span> current time in seconds with milliseconds resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="sec"></span><span class="var">$sec</span> |<span class="badge small" title="numerical value">#</span> current unix time in integer seconds | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="origin_host"></span><span class="var">$origin_host</span> | origin's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="origin_ip"></span><span class="var">$origin_ip</span> | origin's IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="origin_status_code"></span><span class="var">$origin_status_code</span> | origin's status code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="pid"></span><span class="var">$pid</span> | process ID of the service | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="pipe"></span><span class="var">$pipe</span> | "p" if request is pipelined, or "." otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | a unique ID for the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | edge cache HIT, MISS, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> RT log downsample factor. A value N means one log entry for every N requests| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> RT log downsample ratio. The value should be 1/N, as a decimal number between 0 and 1. (ETA: May 2021)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="remote_user"></span><span class="var">$remote_user</span> | user name supplied with Basic authentication | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request"></span><span class="var">$request</span> | full HTTP request line | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_length"></span><span class="var">$request_length</span> |<span class="badge small" title="numerical value">#</span> length of request line, header and body | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_method"></span><span class="var">$request_method</span> | HTTP method: GET, POST, etc. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_scheme"></span><span class="var">$request_scheme</span> | "http" or "https" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_time"></span><span class="var">$request_time</span> |<span class="badge small" title="numerical value">#</span> request processing time in seconds with milliseconds resolution; time elapsed since the first byte was read from the client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_uri"></span><span class="var">$request_uri</span> | request URI with query string received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="sc_completed"></span><span class="var">$sc_completed</span> |<span class="badge small" title="numerical value">#</span> Value is 1 if the last byte was served to the client; 0 otherwise.  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="sc_initial"></span><span class="var">$sc_initial</span> |<span class="badge small" title="numerical value">#</span> Value is 1 if the first byte was served to the client; 0 otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="sent_http_"></span><span class="var">$sent\_http\_<em>name</em></span> | header with the specified name sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="sent_http_content_length"></span><span class="var">$sent_http_content_length</span> |<span class="badge small" title="numerical value">#</span> Content-Length to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="served_from_cache"></span><span class="var">$served_from_cache</span> |<span class="badge small" title="numerical value">#</span> Value is 1 for a HIT on edge; 0 for a MISS. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="server_addr"></span><span class="var">$server_addr</span> | IP address of the edge server | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> port number that received the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | TLS cipher suite used | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | returns protocol name like "TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS SNI servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="status"></span><span class="var">$status</span> | HTTP status code to client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="tcpinfo_delivery_rate"></span><span class="var">$tcpinfo_delivery_rate</span> |<span class="badge small" title="numerical value">#</span> the rate, in bytes/s, at which the sent data is acknowledged by the client. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="tcpinfo_min_rtt"></span><span class="var">$tcpinfo_min_rtt</span> |<span class="badge small" title="numerical value">#</span> minimum RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="tcpinfo_rtt"></span><span class="var">$tcpinfo_rtt</span> |<span class="badge small" title="numerical value">#</span> latest RTT, in microseconds, observed by TCP stack for the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="time_http"></span><span class="var">$time_http</span> | current time in RFC7231 format that can be used for HTTP Date header (ETA: May 2021)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_bytes_received"></span><span class="var">$upstream_bytes_received</span> |<span class="badge small" title="numerical value">#</span> number of bytes received from an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_bytes_sent"></span><span class="var">$upstream_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> number of bytes sent to an upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_connect_time"></span><span class="var">$upstream_connect_time</span> |<span class="badge small" title="numerical value">#</span> time spent in seconds with millisecond resolution establishing a connection with the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_cookie_"></span><span class="var">$upstream\_cookie\_<em>name</em></span> | cookie with the specified name sent by the upstream server in the “Set-Cookie” response header field | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_header_time"></span><span class="var">$upstream_header_time</span> |<span class="badge small" title="numerical value">#</span> time spent in seconds with millisecond resolution receiving the response header from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_http_"></span><span class="var">$upstream\_http\_<em>name</em></span> | header with the specified name received from origin | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_response_time"></span><span class="var">$upstream_response_time</span> |<span class="badge small" title="numerical value">#</span> time spent in seconds with millisecond resolution receiving the complete response from the upstream server | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="upstream_status"></span><span class="var">$upstream_status</span> | status code from upstream | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="uri"></span><span class="var">$uri</span> | request $uri without query string. In Edge Logic, it may be modified by the "[rewrite](/docs/edge-logic/supported-directives#rewrite)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
