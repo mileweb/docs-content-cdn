@@ -969,7 +969,7 @@ This feature is implemented on top of this [open-source project](https://github.
 **Default:** `—` <br/>
 **Context:** server, location
 
-Sets a string to replace in the response and a replacement string. No change to the public version.
+Sets a string to replace in the response and a replacement string. No change to the public version. Note that when the response is compressed, the search and replace may not work as desired.
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
 
