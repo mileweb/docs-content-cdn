@@ -468,7 +468,7 @@ Because of the hierarchical cache structure, the built-in variables $scheme and 
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
 *   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
-*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  client’s ISO3166 country code
+*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  client’s ISO 3166 country code
 
 For example:
 ```nginx
@@ -494,7 +494,7 @@ Enables or disables buffering of responses from the proxied server. No change to
 **Default:** `proxy_cache_background_update off;` <br/>
 **Context:** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item, while a stale cached response is returned to the client. It should help with the responsiveness in serving popular large files, which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. 
+Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. 
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
