@@ -73,7 +73,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 1. The directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the remote logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Some of those candidate variables can be passed are: [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time).
 
-2. If the response from upstream has a `Content-Length` header, the open-source version removes it and converts the Transfer-Encoding to 'chunked'. Our modified version would restore the `Content-Length` header before sending the response to the client.
+2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. Our modified version restores the `Content-Length` header before sending the response to the client.
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
