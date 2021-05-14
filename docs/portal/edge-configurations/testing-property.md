@@ -17,7 +17,7 @@ $ curl staging.qtlcdn.com
 ]
 ```
 
-When selecting the staging IP address, please note that you should not select the IP address from the location started with "CA." (China) if your property hostname does not have an ICP BeiAn.  Fail to do so will result in an HTTP 451 Unavailable For Legal Reasons status error.
+When selecting the staging IP address, please note that you should not select the IP address from the location started with "CN." (China) if your property hostname does not have an ICP BeiAn.  Fail to do so will result in an HTTP 451 Unavailable For Legal Reasons status error.
 
 Once obtained the staging IP, there are different ways to send test traffic to the staging environment:
 
