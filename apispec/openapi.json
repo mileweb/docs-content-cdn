@@ -4117,7 +4117,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "The value of the search parameter is matched on the <i>id</i>, <i>name</i>, <i>description</i>, and <i>hostnames</i> fields of each property."
+            "description": "The value of the search parameter is matched on the <i>id</i>, <i>name</i>, <i>description</i>, and <i>hostnames</i> fields of each property. A value like \"domain.com\" would match on hostnames domain.com and abc.123domain.com.\n\nUse a value beginning with the '^' character to narrow the matches to properties with <i>name</i>, <i>description</i>, or <i>hostnames</i> fields beginning with the text following the '^'. For example, \"^domain\" would match on hostnames domain.com and domain123.com but not abc.123domain.com. \n\nSince a limited number of characters are permitted in URIs, you must encode '^' as '%5E' when specifying a search parameter containing it in the URI, for example, <code>curl -i --url 'https://ngapi.cdnetworks.com/cdn/properties?search=%5Edomain' ... </code>.\n\nNote that a property will be returned if the search matches on any version of the property which has not been deleted. Also, when searching for a property by its ID, you must specify the entire ID as partial matches are not supported."
           },
           {
             "schema": {
@@ -13652,58 +13652,28 @@
                   "properties": {
                     "requests": {
                       "type": "integer",
-                      "description": "Number of purge requests to production.",
+                      "description": "Number of purge requests.",
                       "minimum": 0
                     },
                     "fileRequests": {
                       "type": "integer",
-                      "description": "Number of purge API requests to production with non-empty fileURLs.\n",
+                      "description": "Number of purge API requests with non-empty fileURLs.\n",
                       "minimum": 0
                     },
                     "dirRequests": {
                       "type": "integer",
-                      "description": "Number of purge API requests to production with non-empty dirUrls.",
+                      "description": "Number of purge API requests with non-empty dirUrls.",
                       "minimum": 0
                     },
                     "fileEntries": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "Total number of fileUrls entries in purge requests to production."
+                      "description": "Total number of fileUrls entries in purge requests."
                     },
                     "dirEntries": {
                       "type": "integer",
-                      "description": "Total number of dirUrls entries in purge requests to production."
-                    },
-                    "staging": {
-                      "type": "object",
-                      "description": "Purge summary for staging environment.",
-                      "properties": {
-                        "requests": {
-                          "type": "integer",
-                          "minimum": 0,
-                          "description": "Total number of purge requests to staging."
-                        },
-                        "fileRequests": {
-                          "type": "integer",
-                          "description": "Total number of purge requests to staging with non-empty fileUrls.",
-                          "minimum": 0
-                        },
-                        "dirRequests": {
-                          "type": "integer",
-                          "minimum": 0,
-                          "description": "Total number of purge requests to staging with non-empty dirUrls.\n"
-                        },
-                        "fileEntries": {
-                          "type": "integer",
-                          "description": "Total number of fileUrls entries in purges to staging.",
-                          "minimum": 0
-                        },
-                        "dirEntries": {
-                          "type": "integer",
-                          "description": "Total number of dirUrls entries in purges to staging.",
-                          "minimum": 0
-                        }
-                      }
+                      "description": "Total number of dirUrls entries in purge requests.",
+                      "minimum": 0
                     }
                   }
                 },
@@ -13714,14 +13684,7 @@
                       "fileRequests": 1,
                       "dirRequests": 1,
                       "fileEntries": 2,
-                      "dirEntries": 2,
-                      "staging": {
-                        "requests": 0,
-                        "fileRequests": 0,
-                        "dirRequests": 0,
-                        "fileEntries": 0,
-                        "dirEntries": 0
-                      }
+                      "dirEntries": 2
                     }
                   }
                 }
@@ -13755,6 +13718,12 @@
                       "code": "InvalidTimeSpan",
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
+                  },
+                  "Invalid target": {
+                    "value": {
+                      "code": "InvalidTarget",
+                      "message": "An invalid target was specified. It must be either 'staging' or 'production' or left empty."
+                    }
                   }
                 }
               }
@@ -13762,7 +13731,7 @@
           }
         },
         "operationId": "queryPurgeSummary",
-        "description": "Returns a summary of purge requests that were made during a period of time against the production and staging environments. Query parameters let you specify the timeframe.",
+        "description": "Returns a summary of purge requests that were made during a period of time. Query parameters let you specify the timeframe and target environment.",
         "parameters": [
           {
             "schema": {
@@ -13789,6 +13758,19 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "production",
+              "enum": [
+                "staging",
+                "production"
+              ]
+            },
+            "in": "query",
+            "name": "target",
+            "description": "Indicates the environment."
           }
         ]
       }
