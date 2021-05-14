@@ -21,11 +21,7 @@ There are several ways to send test traffic to the staging environment:
 
 - Modify your DNS server to point your hostname to the CDN360 staging hostname ```staging.qtlcdn.com```. For example:
 
-```
-faster.mydomain.com CNAME staging.qtlcdn.com
-```
 
-If you use a smart DNS service, you can also direct a small portion of the production traffic to the staging hostname to have a more thorough test.
 - Modify the ```/etc/hosts``` file to hard code the hostname to be accelerated to one of the staging server's IP addresses. For example:
 
 
