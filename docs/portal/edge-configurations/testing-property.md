@@ -17,12 +17,17 @@ $ curl staging.qtlcdn.com
 ]
 ```
 
-When selecting the staging IP address, please note that you should not select the IP address from the location started with "CN." (China) if your property hostname does not have an ICP BeiAn.  Fail to do so will result in an HTTP 451 Unavailable For Legal Reasons status error.
+Pick one of the IP addresses.  The corresponding location field indicates the ISO 3166 country code along with the state or province of the IP address.  If your property hostname does not have an ICP Beian license, do not use a location beginning with "CN" which represents China. Otherwise, requests for the content will result in an HTTP 451 'Unavailable for Legal Reasons' status error.
 
-Once obtained the staging IP, there are different ways to send test traffic to the staging environment:
+Once you have selected a staging IP address, use one of the following ways to send test traffic to the staging environment:
 
-- Modify the ```/etc/hosts``` file to hard code the hostname to be accelerated to one of the staging server's IP addresses. For example:
+- Modify the ```hosts``` file to hard code the hostname to be accelerated to one of the staging server's IP addresses. 
 
+  On Windows based systems, edit ```%SystemRoot%\System32\drivers\etc\hosts```
+  
+  On Unix based systems, edit ```/etc/hosts```
+  
+  For example:
 
 ```
 163.171.230.47 faster.mydomain.com
