@@ -9,15 +9,15 @@ CDN360 provides a staging environment for you to test your property configuratio
 ```bash
 $ curl staging.qtlcdn.com
 [
-  { "ip":"163.171.230.47", "location":"US.GA" },
-  { "ip":"115.223.12.247", "location":"CN.ZJ" },
-  { "ip":"163.171.228.89", "location":"US.VA" },
-  { "ip":"112.240.57.248", "location":"CN.SD" },
-  { "ip":"183.240.58.102", "location":"CN.GD" }
+  { "ip":"163.171.230.47", "code":"US.GA", "location":"United States" },
+  { "ip":"115.223.12.247", "code":"CN.ZJ", "location":"China" },
+  { "ip":"163.171.228.89", "code":"US.VA", "location":"United States" },
+  { "ip":"112.240.57.248", "code":"CN.SD", "location":"China" },
+  { "ip":"183.240.58.102", "code":"CN.GD", "location":"China" }
 ]
 ```
 
-Pick one of the IP addresses.  The corresponding location field indicates the ISO 3166 country code along with the state or province of the IP address.  If your property hostname does not have an ICP Beian license, do not use a location beginning with "CN" which represents China. Otherwise, requests for the content will result in an HTTP 451 'Unavailable for Legal Reasons' status error.
+Pick one of the IP addresses. The corresponding ```location``` field indicates its country. If your property hostname has an ICP Beian license, you can use an IP address in China. Otherwise, choose an IP address in another country to avoid getting an HTTP 451 'Unavailable for Legal Reasons' status error.
 
 Once you have selected a staging IP address, use one of the following ways to send test traffic to the staging environment:
 
