@@ -61,6 +61,20 @@ if ($arg_debug = cache_status) {
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 ```
 
+### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
+
+<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+
+**Syntax:** `add_trailer name value [always];`<br/>
+**Default:** `-` <br/>
+**Context:** server, location, if in location
+
+Adds the specified field to the end of a response provided that the response code equals 200, 201, 206, 301, 302, 303, 307, or 308. When "always" is specified, the trailer is added regardless of the status code. Parameter value can contain variables. We made the following changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer):
+
+1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
+
+2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client.
+
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
 <span class="badge">standard</span>
