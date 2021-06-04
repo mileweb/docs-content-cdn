@@ -23682,7 +23682,7 @@
                       "edgeHostnames": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
+                        "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
                       },
                       "validations": {
                         "type": "boolean",
@@ -23718,7 +23718,7 @@
                       "apiPermissions": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
+                        "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
                       },
                       "systemConfigs": {
                         "type": "boolean",
