@@ -20081,7 +20081,7 @@
                   },
                   "allowProduction": {
                     "type": "boolean",
-                    "default": "false",
+                    "default": false,
                     "description": "Indicates if deployment to production servers is permitted. Deployment to staging servers is always permitted."
                   },
                   "advancedFeatures": {
@@ -23671,22 +23671,22 @@
                     "properties": {
                       "certificates": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
                       },
                       "properties": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
                       },
                       "edgeHostnames": {
                         "type": "boolean",
-                        "default": "false",
+                        "default": false,
                         "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
                       },
                       "validations": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
                       },
                       "deploymentTasks": {
@@ -23702,47 +23702,47 @@
                       },
                       "purges": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
                       },
                       "prefetches": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
                       },
                       "annotations": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
                       },
                       "apiPermissions": {
                         "type": "boolean",
-                        "default": "false",
+                        "default": true,
                         "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
                       },
                       "systemConfigs": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
                       },
                       "reports": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the report (/cdn/reports) endpoints."
                       },
                       "serviceQuotas": {
                         "type": "boolean",
-                        "default": "false",
-                        "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
+                        "default": true,
+                        "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
                       },
                       "hostnames": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
                       },
                       "webhooks": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the webhooks (/cdn/webhooks) endpoints."
                       }
                     }
@@ -23820,22 +23820,22 @@
                       "properties": {
                         "certificates": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
                         },
                         "properties": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
                         },
                         "edgeHostnames": {
                           "type": "boolean",
-                          "default": "false",
-                          "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
+                          "default": true,
+                          "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
                         },
                         "validations": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
                         },
                         "deploymentTasks": {
@@ -23851,47 +23851,47 @@
                         },
                         "purges": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
                         },
                         "prefetches": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
                         },
                         "annotations": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
                         },
                         "apiPermissions": {
                           "type": "boolean",
-                          "default": "false",
-                          "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
+                          "default": true,
+                          "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
                         },
                         "systemConfigs": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
                         },
                         "reports": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the report (/cdn/reports) endpoints."
                         },
                         "serviceQuotas": {
                           "type": "boolean",
-                          "default": "false",
-                          "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints. By default, read-only API accounts can call the endpoints using the HTTP GET method while the operator API accounts do not have access."
+                          "default": true,
+                          "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
                         },
                         "hostnames": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
                         },
                         "webhooks": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the webhooks (/cdn/webhooks) endpoints."
                         }
                       }
@@ -23955,22 +23955,22 @@
                       "properties": {
                         "certificates": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
                         },
                         "properties": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
                         },
                         "edgeHostnames": {
                           "type": "boolean",
-                          "default": "false",
+                          "default": true,
                           "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
                         },
                         "validations": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
                         },
                         "deploymentTasks": {
@@ -23986,42 +23986,42 @@
                         },
                         "purges": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
                         },
                         "prefetches": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
                         },
                         "annotations": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
                         },
                         "apiPermissions": {
                           "type": "boolean",
-                          "default": "false",
+                          "default": true,
                           "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
                         },
                         "systemConfigs": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
                         },
                         "reports": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the report (/cdn/reports) endpoints."
                         },
                         "serviceQuotas": {
                           "type": "boolean",
-                          "default": "false",
+                          "default": true,
                           "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
                         },
                         "hostnames": {
                           "type": "boolean",
-                          "default": "true",
+                          "default": true,
                           "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.                    \n"
                         }
                       },
@@ -24176,22 +24176,22 @@
                     "properties": {
                       "certificates": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
                       },
                       "properties": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
                       },
                       "edgeHostnames": {
                         "type": "boolean",
-                        "default": "false",
+                        "default": true,
                         "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
                       },
                       "validations": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
                       },
                       "deploymentTasks": {
@@ -24207,47 +24207,47 @@
                       },
                       "purges": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
                       },
                       "prefetches": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
                       },
                       "annotations": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
                       },
                       "apiPermissions": {
                         "type": "boolean",
-                        "default": "false",
+                        "default": true,
                         "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
                       },
                       "systemConfigs": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
                       },
                       "reports": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the report (/cdn/reports) endpoints."
                       },
                       "serviceQuotas": {
                         "type": "boolean",
-                        "default": "false",
+                        "default": false,
                         "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
                       },
                       "hostnames": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
                       },
                       "webhooks": {
                         "type": "boolean",
-                        "default": "true",
+                        "default": true,
                         "description": "Whether the API account can access the webhooks (/cdn/webhooks) endpoints."
                       }
                     }
@@ -25181,7 +25181,7 @@
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. You have the option of deploying to a <i>staging</i> environment to test your configurations before deploying to <i>production</i>. <h2>Testing a staged property</h2>If you have deployed to staging, you can send traffic to our staging servers to ensure the property behaves as you intended. The staging servers can be found through a special hostname <i>staging.qtlcdn.com</i>. You can get IP addresses of staging servers using the Unix/Linux dig command.  For example:\n<pre> <code> $ dig staging.qtlcdn.com <br/> ... <br /> ;; ANSWER SECTION:<br/> staging.qtlcdn.com.    59      IN      A       163.171.228.89<br/> staging.qtlcdn.com.    59      IN      A       163.171.230.47<br/> </code> </pre> You can also call the <a href=\"#operation/getStagingServers\">Query list of staging servers API</a> to get IP addresses you can use. You have several ways to set up your system to test against staging: <ol> <li>Modify your DNS server to point your deployed property's hostname to the CDN360 staging hostname <i>staging.qtlcdn.com</i>.</li> <li>Modify your HOSTS file (/etc/hosts on Linux) to hard code the property's hostname to one of the staging servers' IP addresses.</li> <li> If the cURL command is used, the --resolve option can be used to directly map the property's hostname to an IP address of a CDN360 staging server.</li> </ol> Once you have done the setup, you can access your content via the hostname. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our staging environment to test your configurations</a> before deploying to production. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
