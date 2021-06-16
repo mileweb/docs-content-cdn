@@ -280,7 +280,7 @@
                         },
                         "disableHttp2": {
                           "type": "boolean",
-                          "default": "false",
+                          "default": false,
                           "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                         },
                         "schemeInCacheKey": {
@@ -458,7 +458,7 @@
                         "disableCertAutomation": {
                           "type": "boolean",
                           "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
-                          "default": "false"
+                          "default": false
                         },
                         "cacheKeyUri": {
                           "type": "string",
@@ -633,7 +633,7 @@
             }
           }
         },
-        "summary": "Query a property version",
+        "summary": "Get a property version",
         "parameters": [
           {
             "schema": {
@@ -938,7 +938,7 @@
                   },
                   "disableHttp2": {
                     "type": "boolean",
-                    "default": "false",
+                    "default": false,
                     "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                   },
                   "schemeInCacheKey": {
@@ -1116,7 +1116,7 @@
                   "disableCertAutomation": {
                     "type": "boolean",
                     "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
-                    "default": "false"
+                    "default": false
                   },
                   "cacheKeyUri": {
                     "type": "string",
@@ -1164,7 +1164,7 @@
                           "mydomain.info"
                         ],
                         "name": "my_origin_1572403819776",
-                        "verifyOrigin": null,
+                        "verifyOrigin": false,
                         "directConnection": "auto"
                       }
                     ]
@@ -1281,7 +1281,7 @@
         }
       ],
       "get": {
-        "summary": "Query a property",
+        "summary": "Get a property",
         "tags": [
           "Property Management"
         ],
@@ -1680,7 +1680,6 @@
                           }
                         },
                         "required": [
-                          "apiAccountId",
                           "apiName",
                           "operation",
                           "time",
@@ -1734,6 +1733,7 @@
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
+                                "isp": "all",
                                 "action": {
                                   "type": "deliver",
                                   "by": [
@@ -1819,7 +1819,7 @@
                                   "enableIPv6": {
                                     "type": "boolean",
                                     "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
-                                    "default": "true"
+                                    "default": true
                                   }
                                 },
                                 "required": [
@@ -1841,10 +1841,7 @@
                           "type": "string",
                           "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                         }
-                      },
-                      "required": [
-                        "edge hostname"
-                      ]
+                      }
                     }
                   }
                 },
@@ -2093,6 +2090,7 @@
                       "x-examples": {
                         "example-1": {
                           "region": "all",
+                          "isp": "all",
                           "action": {
                             "type": "deliver",
                             "by": [
@@ -2178,7 +2176,7 @@
                             "enableIPv6": {
                               "type": "boolean",
                               "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
-                              "default": "true"
+                              "default": true
                             }
                           },
                           "required": [
@@ -2212,6 +2210,7 @@
                     "clientZones": [
                       {
                         "region": "all",
+                        "isp": "all",
                         "action": {
                           "type": "deliver",
                           "by": [
@@ -2342,6 +2341,7 @@
                       "x-examples": {
                         "example-1": {
                           "region": "all",
+                          "isp": "all",
                           "action": {
                             "type": "deliver",
                             "by": [
@@ -2427,7 +2427,7 @@
                             "enableIPv6": {
                               "type": "boolean",
                               "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
-                              "default": "true"
+                              "default": true
                             }
                           },
                           "required": [
@@ -2478,7 +2478,7 @@
       "get": {
         "description": "Get a list of all property versions. A summary of each version including its status and associated hostnames is returned.",
         "operationId": "getPropertyVersions",
-        "summary": "Query property version list",
+        "summary": "Get list of property versions",
         "tags": [
           "Property Management"
         ],
@@ -2668,7 +2668,7 @@
               "type": "integer",
               "maximum": 200,
               "minimum": 1,
-              "default": "100"
+              "default": 100
             },
             "in": "query",
             "name": "limit",
@@ -2678,7 +2678,7 @@
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": "0"
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -2992,7 +2992,7 @@
                   },
                   "disableHttp2": {
                     "type": "boolean",
-                    "default": "false",
+                    "default": false,
                     "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                   },
                   "schemeInCacheKey": {
@@ -3170,7 +3170,7 @@
                   "disableCertAutomation": {
                     "type": "boolean",
                     "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
-                    "default": "false"
+                    "default": false
                   },
                   "cacheKeyUri": {
                     "type": "string",
@@ -3316,6 +3316,12 @@
                     "value": {
                       "code": "InvalidDirective",
                       "message": "An invalid directive 'ORIGIN_set_header' was found in your edge logic. Please refer to the API documentation for a list of supported directives."
+                    }
+                  },
+                  "Invalid hostname": {
+                    "value": {
+                      "code": "InvalidHostname",
+                      "message": "The hostname 'mytesthostname.com' is already in your property."
                     }
                   }
                 }
@@ -3583,7 +3589,7 @@
                       },
                       "disableHttp2": {
                         "type": "boolean",
-                        "default": "false",
+                        "default": false,
                         "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
                       },
                       "schemeInCacheKey": {
@@ -3761,7 +3767,7 @@
                       "disableCertAutomation": {
                         "type": "boolean",
                         "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
-                        "default": "false"
+                        "default": false
                       },
                       "cacheKeyUri": {
                         "type": "string",
@@ -3889,7 +3895,7 @@
         ]
       },
       "get": {
-        "summary": "Query property list",
+        "summary": "Get list of properties",
         "tags": [
           "Property Management"
         ],
@@ -4062,7 +4068,7 @@
             }
           },
           "400": {
-            "description": "This response is returned if there are errors in the API call.",
+            "description": "The request was invalid. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4125,7 +4131,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value for the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'. \n\nSearches for values of numeric or boolean fields require an exact match. However, partial matches are supported for string fields. For example, <code>hasConfig=hostnames:domain</code> returns all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a non-empty value for the field will be returned.\n\nSpecify multiple <i>hasConfig</i> parameters to filter on multiple conditions. Example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\nSubfields of a property version can be specified by using the period symbol as a separator. Refer to additional examples below.\n\nIf matching against values with spaces or special characters, remember to encode them in the URL.\n\nAdditional examples:\n\n<table>\n<tr><th>Value</th><th>Description</th></tr>\n<tr><td>hasConfig=disableHttp2:true</td><td>Return properties that don't support HTTP2</td></tr>\n<tr><td>hasConfig=extraServicePorts.http:85</td><td>Return properties supporting port 85 for HTTP requests.</td></tr>\n<tr><td>hasConfig=origins.servers:myorigin.com</td>\n<td>Return properties using myorigin.com as an origin server.</td></tr></table>\n\n"
+            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value for the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'. \n\nSearches for values of numeric or boolean fields require an exact match. However, partial matches are supported for string fields. For example, <code>hasConfig=hostnames:domain</code> returns all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a non-empty value for the field will be returned.\n\nSpecify multiple <i>hasConfig</i> parameters to filter on multiple conditions. Example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\nSubfields of a property version can be specified by using the period symbol as a separator. Refer to additional examples below.\n\nIf matching against values with spaces or special characters, remember to encode them in the URL.\n\nAdditional examples:\n\n<table>\n<tr><th>Value</th><th>Description</th></tr>\n<tr><td>hasConfig=disableHttp2:true</td><td>Return properties that don't support HTTP2</td></tr>\n<tr><td>hasConfig=extraServicePorts.http:85</td><td>Return properties supporting port 85 for HTTP requests.</td></tr>\n<tr><td>hasConfig=origins.servers:myorigin.com</td>\n<td>Return properties using myorigin.com as an origin server.</td></tr></table>\n"
           },
           {
             "schema": {
@@ -4144,7 +4150,7 @@
           {
             "schema": {
               "type": "number",
-              "default": "0"
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -4153,7 +4159,7 @@
           {
             "schema": {
               "type": "number",
-              "default": "100",
+              "default": 100,
               "maximum": 200
             },
             "in": "query",
@@ -4376,6 +4382,7 @@
                       "x-examples": {
                         "example-1": {
                           "region": "all",
+                          "isp": "all",
                           "action": {
                             "type": "deliver",
                             "by": [
@@ -4461,7 +4468,7 @@
                             "enableIPv6": {
                               "type": "boolean",
                               "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
-                              "default": "true"
+                              "default": true
                             }
                           },
                           "required": [
@@ -4685,7 +4692,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "minimum": 0
             },
             "in": "query",
@@ -4695,7 +4702,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "100",
+              "default": 100,
               "maximum": 200
             },
             "in": "query",
@@ -5077,7 +5084,7 @@
         ]
       },
       "get": {
-        "summary": "Query certificate list",
+        "summary": "Get list of certificates",
         "tags": [
           "Certificate Management"
         ],
@@ -5255,7 +5262,7 @@
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": "0"
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -5264,7 +5271,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "100",
+              "default": 100,
               "maximum": 200
             },
             "in": "query",
@@ -6126,7 +6133,7 @@
         }
       ],
       "get": {
-        "summary": "Query a certificate version's details",
+        "summary": "Get a certificate version's details",
         "tags": [
           "Certificate Management"
         ],
@@ -6294,7 +6301,7 @@
     },
     "/cdn/validations": {
       "get": {
-        "summary": "Query property validation task list",
+        "summary": "Get list of property validation tasks",
         "tags": [
           "Property Validation"
         ],
@@ -6311,62 +6318,65 @@
                       "description": "Total number of validation tasks"
                     },
                     "validations": {
-                      "type": "object",
+                      "type": "array",
                       "description": "Summarizes validation tasks. Further details about a validation task can be obtained by calling the <a href=\"#operation/queryValidationTask\">Query a property validation task API</a>.",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "ID of the validation task."
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID of the validation task."
+                          },
+                          "propertyId": {
+                            "type": "string",
+                            "description": "ID of the property that was validated."
+                          },
+                          "version": {
+                            "type": "integer",
+                            "description": "Version of the property that was validated.",
+                            "minimum": 1
+                          },
+                          "submissionTime": {
+                            "type": "string",
+                            "description": "An RFC 3339 format string indicating when the validation task was submitted. Example: \"2019-11-12T03:09:26Z\""
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Status of the validation task.",
+                            "enum": [
+                              "waiting",
+                              "in progress",
+                              "succeeded",
+                              "failed"
+                            ]
+                          },
+                          "cacheVersion": {
+                            "type": "string",
+                            "description": "Identifies the internal cache version on which the property was validated."
+                          },
+                          "apiRequestId": {
+                            "type": "string",
+                            "description": "Indicates the associated API request."
+                          },
+                          "apiAccountId": {
+                            "type": "integer",
+                            "description": "An API account that generated the validation task."
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "ID of the customer who owns the property will be returned to a reseller using the Report-Range header with a value of self+children or children-only."
+                          }
                         },
-                        "propertyId": {
-                          "type": "string",
-                          "description": "ID of the property that was validated."
-                        },
-                        "version": {
-                          "type": "integer",
-                          "description": "Indicates the version of the property that was validated.",
-                          "minimum": 1
-                        },
-                        "submissionTime": {
-                          "type": "string",
-                          "description": "An RFC 3339 format string indicating when the validation task was submitted. Example: \"2019-11-12T03:09:26Z\"\n"
-                        },
-                        "status": {
-                          "type": "string",
-                          "description": "Indicates the status of the validation task.",
-                          "enum": [
-                            "waiting",
-                            "in progress",
-                            "succeeded",
-                            "failed"
-                          ]
-                        },
-                        "cacheVersion": {
-                          "type": "string",
-                          "description": "Identifies the internal cache version on which the property was validated."
-                        },
-                        "apiRequestId": {
-                          "type": "string",
-                          "description": "Indicates the associated API request.\n"
-                        },
-                        "apiAccountId": {
-                          "type": "integer",
-                          "description": "Refers to an API account that generated the validation task."
-                        },
-                        "customerId": {
-                          "type": "integer",
-                          "description": "ID of the customer who owns the property will be returned to a reseller using the Report-Range header with a value of self+children or children-only."
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "propertyId",
-                        "version",
-                        "submissionTime",
-                        "status",
-                        "cacheVersion",
-                        "apiRequestId"
-                      ]
+                        "required": [
+                          "id",
+                          "propertyId",
+                          "version",
+                          "submissionTime",
+                          "status",
+                          "cacheVersion",
+                          "apiRequestId"
+                        ]
+                      }
                     }
                   }
                 },
@@ -6480,7 +6490,7 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 200,
-              "default": "100"
+              "default": 100
             },
             "in": "query",
             "name": "limit",
@@ -6489,7 +6499,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "minimum": 0
             },
             "in": "query",
@@ -6656,7 +6666,7 @@
                 "example-1": {
                   "value": {
                     "propertyId": "b8ce50a9cb84242c39f07066",
-                    "version": "1"
+                    "version": 1
                   }
                 }
               }
@@ -6688,7 +6698,7 @@
         }
       ],
       "get": {
-        "summary": "Query property validation task",
+        "summary": "Get property validation task",
         "tags": [
           "Property Validation"
         ],
@@ -6866,7 +6876,7 @@
     },
     "/cdn/deploymentTasks": {
       "get": {
-        "summary": "Query deployment task list",
+        "summary": "Get list of deployment tasks",
         "tags": [
           "Deployment Management"
         ],
@@ -7013,7 +7023,7 @@
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": "0",
+              "default": 0,
               "exclusiveMaximum": true
             },
             "in": "query",
@@ -7023,7 +7033,7 @@
           {
             "schema": {
               "type": "number",
-              "default": "100",
+              "default": 100,
               "maximum": 200
             },
             "in": "query",
@@ -7415,7 +7425,7 @@
         }
       ],
       "get": {
-        "summary": "Query deployment task",
+        "summary": "Get deployment task",
         "tags": [
           "Deployment Management"
         ],
@@ -7629,7 +7639,7 @@
     },
     "/cdn/stagingServers": {
       "get": {
-        "summary": "Query list of staging servers",
+        "summary": "Get list of staging servers",
         "tags": [
           "Deployment Management"
         ],
@@ -7693,7 +7703,7 @@
     },
     "/cdn/hostnames": {
       "get": {
-        "summary": "Get a list of hostnames that have been deployed",
+        "summary": "Get list of hostnames that have been deployed",
         "tags": [
           "Hostnames"
         ],
@@ -7864,7 +7874,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "minimum": 0
             },
             "in": "query",
@@ -7876,7 +7886,7 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 200,
-              "default": "100"
+              "default": 100
             },
             "in": "query",
             "name": "limit",
@@ -7935,7 +7945,7 @@
         }
       ],
       "get": {
-        "summary": "Gets information about a specific hostname",
+        "summary": "Get information about a specific hostname",
         "tags": [
           "Hostnames"
         ],
@@ -8177,7 +8187,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "minimum": 0
             },
             "in": "query",
@@ -8187,7 +8197,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "100",
+              "default": 100,
               "maximum": 200,
               "minimum": 1
             },
@@ -12499,7 +12509,7 @@
         }
       },
       "get": {
-        "summary": "Query purge request list",
+        "summary": "Get list of purge requests",
         "responses": {
           "200": {
             "description": "The response contains a list of purge requests.",
@@ -12708,9 +12718,8 @@
           {
             "schema": {
               "type": "integer",
-              "maximum": "",
               "minimum": 0,
-              "default": "0"
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -12775,7 +12784,7 @@
     },
     "/cdn/annotationsList": {
       "post": {
-        "summary": "Query annotation list",
+        "summary": "Get list of annotations",
         "tags": [
           "Annotations for Reports"
         ],
@@ -12972,7 +12981,7 @@
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": "0"
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -13458,7 +13467,7 @@
         }
       ],
       "get": {
-        "summary": "Query purge request status",
+        "summary": "Get purge request status",
         "tags": [
           "Content Management"
         ],
@@ -13660,9 +13669,9 @@
         ]
       }
     },
-    "/cdn/purgeSummary": {
+    "/cdn/purges/purgeSummary": {
       "get": {
-        "summary": "Query purge summary",
+        "summary": "Get purge summary",
         "tags": [
           "Content Management"
         ],
@@ -13797,7 +13806,8 @@
             "description": "Indicates the environment."
           }
         ]
-      }
+      },
+      "parameters": []
     },
     "/cdn/report/volSummary": {
       "post": {
@@ -14509,7 +14519,7 @@
         ]
       },
       "get": {
-        "summary": "Get portal user accounts",
+        "summary": "Get list of portal user accounts",
         "tags": [
           "Portal User Management"
         ],
@@ -14584,8 +14594,7 @@
                           "loginName",
                           "emailAddress",
                           "status",
-                          "creationTime",
-                          "lastLoginTime"
+                          "creationTime"
                         ]
                       }
                     }
@@ -14693,7 +14702,7 @@
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": "0"
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -15696,7 +15705,7 @@
         }
       ],
       "get": {
-        "summary": "Query a portal user",
+        "summary": "Get a portal user",
         "tags": [
           "Portal User Management"
         ],
@@ -15739,7 +15748,7 @@
                       "description": "Contains additional information about the user account including when the user last logged in.",
                       "properties": {
                         "customerId": {
-                          "type": "string",
+                          "type": "integer",
                           "description": "ID of the customer to which this user belongs."
                         },
                         "creationtime": {
@@ -15876,6 +15885,7 @@
                   "example-1": {
                     "value": {
                       "firstName": "John",
+                      "lastName": "Doe",
                       "loginName": "johndoe",
                       "timeZone": "auto",
                       "language": "en",
@@ -16603,8 +16613,11 @@
                             "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
                           },
                           "data": {
-                            "type": "number",
-                            "description": "Data value. The units of measurement are determined by the dataUnit field."
+                            "type": "array",
+                            "description": "Data value. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
                           }
                         }
                       }
@@ -17150,9 +17163,7 @@
                       "title": "customerConfigs",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
-                      "x-examples": {
-                        "example-1": {}
-                      },
+                      "x-examples": {},
                       "properties": {
                         "apiRate": {
                           "type": "integer",
@@ -17323,6 +17334,7 @@
                     "value": {
                       "customerId": 123456,
                       "apiName": "myadminapilogin",
+                      "apiKey": "abc12345678",
                       "name": "The Company",
                       "address": {
                         "line1": "The CompanyCorporation",
@@ -17471,9 +17483,7 @@
                       "title": "customerConfigs",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
-                      "x-examples": {
-                        "example-1": {}
-                      },
+                      "x-examples": {},
                       "properties": {
                         "apiRate": {
                           "type": "integer",
@@ -17895,9 +17905,7 @@
                     "title": "customerConfigs",
                     "type": "object",
                     "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
-                    "x-examples": {
-                      "example-1": {}
-                    },
+                    "x-examples": {},
                     "properties": {
                       "apiRate": {
                         "type": "integer",
@@ -18176,9 +18184,7 @@
                       "title": "customerConfigs",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
-                      "x-examples": {
-                        "example-1": {}
-                      },
+                      "x-examples": {},
                       "properties": {
                         "apiRate": {
                           "type": "integer",
@@ -18528,9 +18534,7 @@
                     "title": "customerConfigs",
                     "type": "object",
                     "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
-                    "x-examples": {
-                      "example-1": {}
-                    },
+                    "x-examples": {},
                     "properties": {
                       "apiRate": {
                         "type": "integer",
@@ -18695,9 +18699,9 @@
                   "value": {
                     "configs": {
                       "regionalOffice": "US",
-                      "apiRate": "64",
+                      "apiRate": 64,
                       "description": "my new customer",
-                      "apiAccountLimit": "10",
+                      "apiAccountLimit": 10,
                       "type": "regular",
                       "status": "active"
                     },
@@ -18711,12 +18715,12 @@
                       "line2": "Suite 456",
                       "line1": "123 Main St."
                     },
-                    "phone": 123456789,
+                    "phone": "123456789",
                     "name": "Nata Inc.",
                     "portalSettings": {
-                      "logoutIdleTime": "355",
+                      "logoutIdleTime": 355,
                       "enforce2fa": true,
-                      "passwordExpirationDays": "41"
+                      "passwordExpirationDays": 41
                     }
                   }
                 }
@@ -18781,7 +18785,7 @@
                             "type": "string",
                             "description": "RFC 3339 date indicating when the customer account was created."
                           },
-                          "lastUpdatTime": {
+                          "lastUpdateTime": {
                             "type": "string",
                             "description": "RFC 3339 date indicating when the customer account was last updated."
                           },
@@ -18820,7 +18824,7 @@
                           "name",
                           "status",
                           "creationTime",
-                          "lastUpdatTime",
+                          "lastUpdateTime",
                           "type",
                           "phone",
                           "regionalOffice",
@@ -18976,7 +18980,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "minimum": 0
             },
             "in": "query",
@@ -19185,7 +19189,7 @@
     },
     "/ngadmin/apicalls": {
       "get": {
-        "summary": "Retrieve a list of API calls that have been made",
+        "summary": "Get a list of API calls",
         "tags": [
           "API Call History"
         ],
@@ -19352,7 +19356,7 @@
           }
         },
         "operationId": "get-ngadmin-apicalls",
-        "description": "Retrieve a list of recent API calls that have been made by you or on your behalf. API calls triggered by portal users are included as well. Query parameters allow you to filter results.",
+        "description": "Retrieve a list of recent API calls that have been made by you or on your behalf. API calls triggered by portal users are included as well. Query parameters allow you to filter results. By default, API calls made in the last 30 days will be returned if the startdate and enddate parameters are unspecified.",
         "parameters": [
           {
             "schema": {
@@ -19427,7 +19431,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339 format date indicating the beginning of the time period when API calls were made. Example: <code>startdate=2019-10-30T00:00:00Z</code> "
+            "description": "RFC 3339 format date indicating the beginning of the time period when API calls were made. Example: <code>startdate=2019-10-30T00:00:00Z</code>. This field should be specified in conjunction with the enddate parameter or left empty."
           },
           {
             "schema": {
@@ -19435,7 +19439,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period when API calls were made. Example: <code>enddate=2019-10-30T00:00:00Z</code> "
+            "description": "RFC 3339 date indicating the end of the time period when API calls were made. Example: <code>enddate=2019-10-30T00:00:00Z</code>. This field should be specified in conjunction with the startdate parameter or left empty."
           },
           {
             "schema": {
@@ -20159,23 +20163,23 @@
               "examples": {
                 "example-1": {
                   "value": {
-                    "customerId": "12345678",
+                    "customerId": 12345678,
                     "status": "active",
                     "contractId": "",
-                    "hostnameLimit": "10",
-                    "edgeHostnameLimit": "10",
-                    "propertyLimit": "10",
-                    "certificateLimit": "100",
-                    "logConfigLimit": "10",
-                    "filePurgeQuotaInStaging": "10",
-                    "dirPurgeQuotaInStaging": "10",
-                    "filePurgeQuotaInProduction": "10",
-                    "dirPurgeQuotaInProduction": "10",
-                    "prefetchQuota": "10",
+                    "hostnameLimit": 10,
+                    "edgeHostnameLimit": 10,
+                    "propertyLimit": 10,
+                    "certificateLimit": 100,
+                    "logConfigLimit": 10,
+                    "filePurgeQuotaInStaging": 10,
+                    "dirPurgeQuotaInStaging": 10,
+                    "filePurgeQuotaInProduction": 10,
+                    "dirPurgeQuotaInProduction": 10,
+                    "prefetchQuota": 10,
                     "allowProduction": true,
                     "accountManagerEmail": "manager@somecompany.com",
-                    "usageLimitDays": "50",
-                    "usageLimitDollar": "100",
+                    "usageLimitDays": 50,
+                    "usageLimitDollar": 100,
                     "allowedCacheDirectives": [
                       "proxy_cookie_path"
                     ],
@@ -20239,7 +20243,7 @@
                             "description": "This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period.\n"
                           },
                           "usageLimitDollar": {
-                            "type": "string",
+                            "type": "integer",
                             "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n"
                           }
                         },
@@ -20389,7 +20393,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "minimum": 0
             },
             "in": "query",
@@ -20399,7 +20403,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "100",
+              "default": 100,
               "minimum": 1,
               "maximum": 200
             },
@@ -20471,7 +20475,7 @@
                       "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
                     },
                     "customerId": {
-                      "type": "string",
+                      "type": "integer",
                       "description": "ID of the customer."
                     },
                     "contractId": {
@@ -21693,7 +21697,7 @@
                       "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
                     },
                     "customerId": {
-                      "type": "string",
+                      "type": "integer",
                       "description": "ID of the customer."
                     },
                     "contractId": {
@@ -21972,7 +21976,7 @@
                       "description": "An ID for the service quota settings. This is omitted when returning results for a customer who does not have an explicitly defined service quota."
                     },
                     "customerId": {
-                      "type": "string",
+                      "type": "integer",
                       "description": "ID of the customer."
                     },
                     "contractId": {
@@ -22170,7 +22174,8 @@
                       "allowProduction": false,
                       "usageLimitDays": 0,
                       "usageLimitDollar": 0,
-                      "allowDeploymentInChina": false
+                      "allowDeploymentInChina": false,
+                      "billUsingStripe": false
                     }
                   }
                 }
@@ -22875,11 +22880,6 @@
                         },
                         {
                           "customerId": 123456,
-                          "deploymentDate": "2021-01-29T09:38:22Z",
-                          "undeploymentDate": "2021-02-13T08:06:12Z"
-                        },
-                        {
-                          "customerId": 123456,
                           "propertyId": "8453f93ad91fd4338eb87516",
                           "deploymentDate": "2021-02-13T08:06:12Z"
                         }
@@ -23110,7 +23110,7 @@
         }
       },
       "get": {
-        "summary": "Query prefetch request list",
+        "summary": "Get list of prefetch requests",
         "tags": [
           "Content Management"
         ],
@@ -23362,7 +23362,7 @@
             },
             "in": "header",
             "name": "On-Behalf-Of",
-            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.\n\n\n"
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.\n"
           }
         ]
       }
@@ -23380,7 +23380,7 @@
         }
       ],
       "get": {
-        "summary": "Query prefetch request status",
+        "summary": "Get prefetch request status",
         "tags": [
           "Content Management"
         ],
@@ -23644,7 +23644,7 @@
           }
         },
         "operationId": "post-cdn-apiPermissions",
-        "description": "Control what CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work in conjunction with the API's account type, <i>operator</i> or <i>read-only</i>. For example, for security you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs.",
+        "description": "Control which CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work in conjunction with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs.",
         "parameters": [
           {
             "schema": {
@@ -23681,7 +23681,7 @@
                       },
                       "edgeHostnames": {
                         "type": "boolean",
-                        "default": false,
+                        "default": true,
                         "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
                       },
                       "validations": {
@@ -23782,7 +23782,7 @@
         }
       ],
       "get": {
-        "summary": "Query an API permission",
+        "summary": "Get an API permission",
         "tags": [
           "API Access Control"
         ],
@@ -23965,7 +23965,7 @@
                         },
                         "edgeHostnames": {
                           "type": "boolean",
-                          "default": true,
+                          "default": false,
                           "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
                         },
                         "validations": {
@@ -24001,7 +24001,7 @@
                         },
                         "apiPermissions": {
                           "type": "boolean",
-                          "default": true,
+                          "default": false,
                           "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
                         },
                         "systemConfigs": {
@@ -24016,7 +24016,7 @@
                         },
                         "serviceQuotas": {
                           "type": "boolean",
-                          "default": true,
+                          "default": false,
                           "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
                         },
                         "hostnames": {
@@ -24237,7 +24237,7 @@
                       },
                       "serviceQuotas": {
                         "type": "boolean",
-                        "default": false,
+                        "default": true,
                         "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
                       },
                       "hostnames": {
@@ -24727,7 +24727,7 @@
           {
             "schema": {
               "type": "integer",
-              "default": "100",
+              "default": 100,
               "minimum": 1,
               "maximum": 200
             },
@@ -24843,7 +24843,7 @@
                     "maxLength": 250,
                     "description": "That URL that will be called when the asynchronous task has completed. The HTTP POST method will be used. The body will in JSON format:\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
                   },
-                  "credential": {
+                  "credentials": {
                     "type": "object",
                     "description": "Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href=\"#section/Authentication\">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.",
                     "properties": {
@@ -24922,7 +24922,7 @@
                       "description": "That URL that will be called when the asynchronous task has completed. The HTTP POST method will be used. The body will in JSON format:\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\n",
                       "maxLength": 250
                     },
-                    "credential": {
+                    "credentials": {
                       "type": "object",
                       "description": "Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href=\"#section/Authentication\">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.",
                       "properties": {
@@ -24940,7 +24940,7 @@
                         "secretKey"
                       ]
                     },
-                    "metadata": {
+                    "metaData": {
                       "type": "object",
                       "properties": {
                         "creationTime": {
@@ -24977,11 +24977,11 @@
                       "name": "test_purge",
                       "description": "purge notification",
                       "url": "http://www.abc.gogogoch1234.co.uk",
-                      "credential": {
+                      "credentials": {
                         "user": "aaaetest",
                         "secretKey": "adqwefqfrferw"
                       },
-                      "metadata": {
+                      "metaData": {
                         "creationTime": "2021-04-20T13:18:49Z",
                         "totalCalls": 0
                       }
@@ -25154,6 +25154,102 @@
           }
         ]
       }
+    },
+    "/cdn/purges/purgeTokens": {
+      "get": {
+        "summary": "Get available purge requests",
+        "tags": [
+          "Content Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response indicates the number of available purge requests.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "filePurgeTokens": {
+                      "type": "integer",
+                      "description": "Number of file URL purge requests available.",
+                      "minimum": 0
+                    },
+                    "dirPurgeTokens": {
+                      "type": "integer",
+                      "description": " Number of directory URL purge requests available.",
+                      "minimum": 0
+                    }
+                  },
+                  "required": [
+                    "filePurgeTokens",
+                    "dirPurgeTokens"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "filePurgeTokens": 200,
+                      "dirPurgeTokens": 200
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid Target": {
+                    "value": {
+                      "code": "InvalidTarget",
+                      "message": "An invalid target was specified. It must be either 'staging' or 'production' or left empty."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-purges-purgeTokens",
+        "description": "This API indicates the number of directory and file purge requests you can make in the staging or production environments. Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> specifies a daily limit on file and directory purges for production and staging environments. You can temporarily exceed the limit during a day, but it will reduce the number of purges available during the next day.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "staging",
+                "production"
+              ],
+              "default": "production"
+            },
+            "in": "query",
+            "name": "target",
+            "required": true,
+            "description": "Indicates the environment."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -25181,7 +25277,7 @@
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our staging environment to test your configurations</a> before deploying to production. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
