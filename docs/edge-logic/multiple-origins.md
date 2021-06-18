@@ -43,4 +43,11 @@ location / {
 }
 ```
 *   Not all directives can be used in an `if` block. This is specified in the "Context" of each directive. For the ones not allowed in an `if` block, if they support variable as parameter, you can still control their behavior based on `if` conditions using the [`set`](</docs/edge-logic/supported-directives.md#set>) directive. For example: [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>), [`proxy_redirect`](</docs/edge-logic/supported-directives.md#proxy_redirect>) and [`proxy_cookie_domain`](</docs/edge-logic/supported-directives.md#proxy_cookie_domain>).
-*   Another way to manipulate the request and response headers conditionally is to use the proprietary `if()` parameter introduced to the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>), [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>), and [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) directives. When the condition involves the response from the origin, this is actually the only way to achieve it.
+*   Another way to manipulate the request and response headers conditionally is to use the proprietary `if()` parameter introduced to the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>), [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>), and [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) directives. When the condition involves the response from the origin, this is actually the only way to achieve it. Here is another way to rewrite the example above:
+```nginx
+location / {
+  add_header has-header-a 1 if($http_header_a != '');
+  add_header has-header-b 1 if($http_header_b != '');
+  ...
+}
+```
