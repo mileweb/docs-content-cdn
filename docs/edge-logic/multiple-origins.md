@@ -27,8 +27,8 @@ location / {
   ...
 }
 ```
-When both `header-a` and `header-b` are present in the request, only `has-header-b` will be added to the response. This can be confusing to new NGINX users.
-*   Due to the issue mentioned above, we strongly suggest not to use any declarative directive in `if` blocks, unless there is no other way around. This makes the code more readable, especially to people who are not NGINX expert. The example above can be re-written in the way below to achieve the desired result:
+When both `header-a` and `header-b` are present in the request, only `has-header-b` will be added to the response. This is not a bug, just how NGINX works. But it can be confusing to new users.
+*   Due to the issue mentioned above, you are recommended to refrain from using any declarative directive in `if` blocks, unless there is no other way around. This makes the configuration more readable, especially to people who are not NGINX expert. The example above can be rewritten in the way below to achieve the desired result:
 ```nginx
 location / {
   if ($http_header_a != '') {
