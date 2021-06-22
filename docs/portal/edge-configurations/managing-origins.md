@@ -5,7 +5,7 @@ Origins are your web servers containing the content you want CDN360 to accelerat
 
 ## Adding, Editing, or Removing Origins in a Property
 
-1. In the left pane, click **Edge Configurations**.
+1. In the left pane, click **Edge Configurations**, and then select **Property**.
 2. From the Properties page, click the ID of the property you want to edit, and then select the version from the **Version Number** drop-down list. 
 3. Click the **Edit** or **Clone** button to make changes.
 4. Edit or remove an existing origin or add a new one:
