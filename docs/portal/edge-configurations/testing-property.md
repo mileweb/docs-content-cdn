@@ -38,10 +38,10 @@ Once you have selected a staging IP address, use one of the following ways to se
   For example:
 
 ```
-163.171.230.47 faster.mydomain.com
+163.171.230.47 cdn360.mydomain.com
 ```
 - If you use the cURL command, you can add ```--resolve``` to directly map the hostname to be accelerated to the IP address of the CDN360 staging server(s). For example:
 
 ```bash
-$ curl -v https://faster.mydomain.com/index.html --resolve faster.mydomain.com:443:163.171.230.47
+$ curl -v https://cdn360.mydomain.com/index.html --resolve cdn360.mydomain.com:443:163.171.230.47
 ```
