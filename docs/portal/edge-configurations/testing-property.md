@@ -9,10 +9,14 @@ CDN360 provides a staging environment for you to test your property configuratio
 ```bash
 $ curl staging.qtlcdn.com
 [
-  { "ip":"163.171.230.47", "ipVersion":4, "code":"US.GA", "location":"United States" },
-  { "ip":"115.223.12.247", "ipVersion":4, "code":"CN.ZJ", "location":"China" },
-  { "ip":"163.171.228.89", "ipVersion":4, "code":"US.VA", "location":"United States" },
-  { "ip":"112.240.57.248", "ipVersion":4, "code":"CN.SD", "location":"China" },
+  { "ip":"163.171.230.47", "ipVersion":4,
+    "code":"US.GA", "location":"United States" },
+  { "ip":"115.223.12.247", "ipVersion":4,
+    "code":"CN.ZJ", "location":"China" },
+  { "ip":"163.171.228.89", "ipVersion":4,
+    "code":"US.VA", "location":"United States" },
+  { "ip":"112.240.57.248", "ipVersion":4, 
+    "code":"CN.SD", "location":"China" },
   { "ip": "2401:c500:fd00:0002:1c7b:a470:f69b:6e2a", "ipVersion":6,
     "code": "RO.B", "location": "Romania" },
   { "ip": "2409:8c54:2000:060b:c35f:367c:72f3:6274", "ipVersion":6,
