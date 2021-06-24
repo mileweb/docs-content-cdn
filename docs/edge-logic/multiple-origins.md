@@ -12,10 +12,10 @@ location / {
   }
 }
 ```
-<a id="ifcaution"></a>This example uses the [`if` directive in the rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) to check the value in the request header `x-origin` and define different behaviors. However, `if` is a tricky directive due to the conflict of the "[declarative](https://tylermcginnis.com/imperative-vs-declarative-programming/)" nature of NGINX configuration and the "imperative" nature of the rewrite module. If you need to use `if` in your Edge Logic, observe the following rules:
+<a id="ifcaution"></a>This example uses the [`if` directive in the rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) to check the value in the request header `x-origin` and define different behaviors. However, `if` is a tricky directive due to the conflict of the "[declarative](https://tylermcginnis.com/imperative-vs-declarative-programming/)" nature of the NGINX configuration and the "imperative" nature of the rewrite module. If you need to use `if` in your Edge Logic, observe the following rules:
 
-*   Read the [documentation of the rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) carefully. For example, try to understand why the `break` parameter is necessary for the `rewrite` directive in the example above.
-*   Keep in mind that only the directives in the rewrite module ([`if`](</docs/edge-logic/supported-directives.md#if>), [`set`](</docs/edge-logic/supported-directives.md#set>), [`rewrite`](</docs/edge-logic/supported-directives.md#rewrite>), [`return`](</docs/edge-logic/supported-directives.md#return>), [`break`](</docs/edge-logic/supported-directives.md#break>), [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>), etc.) are executed in the order they appear (imperatively) in the location block. They are executed in an early phase which is before most other actions defined by the declarative directives. In the edge logic editor on the portal, the imperative directives are colored in blue while the declarative ones are colored in red so you can easily tell them apart. When there are declarative directives enclosed in `if` blocks, only the ones in the **last** matching `if` block will take effect. For example, with the configuration below:
+*   Read the [documentation of the rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) carefully. In particular, try to understand why the `break` parameter is necessary for the `rewrite` directive in the example above.
+*   Keep in mind that only the directives in the rewrite module ([`if`](</docs/edge-logic/supported-directives.md#if>), [`set`](</docs/edge-logic/supported-directives.md#set>), [`rewrite`](</docs/edge-logic/supported-directives.md#rewrite>), [`return`](</docs/edge-logic/supported-directives.md#return>), [`break`](</docs/edge-logic/supported-directives.md#break>), [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>), etc.) are executed in the order they appear (imperatively) in the location block. They are executed in an early phase which precedes most other actions defined by the declarative directives. In the edge logic editor on the portal, the imperative directives are colored in blue while the declarative ones are colored in red so you can tell them apart easily. When there are declarative directives enclosed in `if` blocks, only the ones in the **last** matching `if` block will take effect. For example, consider the following configuration:
 ```nginx
 location / {
   if ($http_header_a != '') {
@@ -27,8 +27,8 @@ location / {
   ...
 }
 ```
-When both `header-a` and `header-b` are present in the request, only `has-header-b` will be added to the response. This is not a bug, just how NGINX works. But it can be confusing to new users.
-*   Due to the issue mentioned above, you are recommended to refrain from using any declarative directive in `if` blocks, unless there is no other way around. This makes the configuration more readable, especially to people who are not NGINX expert. The example above can be rewritten in the way below to achieve the desired result:
+When both `header-a` and `header-b` are present in the request, only `has-header-b` will be added to the response. This is not a bug, just how NGINX works. However, this behavior can be confusing to new users.
+*   Due to the issue mentioned above, you are recommended to refrain from using any declarative directive in `if` blocks, unless there is no other way around. This makes the configuration more readable, especially to people who are not NGINX experts. The example above can be rewritten as follows to achieve the desired result:
 ```nginx
 location / {
   if ($http_header_a != '') {
