@@ -15,7 +15,7 @@ To create a secret, complete the Create a Secret form with required information.
 
 | **Fields**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
-| Secret Name             | Enter a unique name that helps you identify this secret. The name is case sensitive and can be 30 characters long, and must not contain special characters such as ^ " ~ , . # $ %|
+| Secret Name             | Enter a unique name that helps you identify this secret. The name is case sensitive and can be 30 characters long. You can include spaces between non-space characters; however, if you add spaces at the beginning or end of the secret, the spaces will be removed. The secret name must not contain special characters such as ^ " ~ , . # $ %|
 | Secret     | Enter the secret. The secret must be 8 to 3,600 characters long. It can contain printable ASCII characters, tabs (0x09), new lines (0x0a), and returns (0x0d). |
 | Description               | Add a description to associate with this secret. |
 
