@@ -1,10 +1,10 @@
 # Overview of Secrets
 
-A secret usually is a password that you intend to share. For example, a secret might be the secret key that is used to access your origin on AWS or an HMAC key that is used to authenticate client requests. 
+Typically, a secret is a password that you share with CDNetworks in order for the CDN configuration to work.
 
 ## Secrets Page 
 
-Secrets are managed from the Secrets page. To display this page, click **Edge Configurations** in the left pane, and then select **Secret**. 
+Secrets are managed from the Secrets page. To display this page, click **Edge Configurations** in the left pane, and then select **Secrets**. 
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 

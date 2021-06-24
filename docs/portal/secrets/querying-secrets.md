@@ -1,9 +1,7 @@
 
 # Querying Secrets
 
-**Note:** Secrets can be queried only by their owner or parent.
-
-1. In the left pane, click **Edge Configurations**, and then select **Secret**.
+1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
 
 2. On the Secrets page, click the ID of a secret. A form similar to the following appears. For security, asterisks mask the middle of the secret.
 

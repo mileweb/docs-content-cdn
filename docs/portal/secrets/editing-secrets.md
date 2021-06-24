@@ -1,9 +1,7 @@
 
 # Editing Secrets
 
-**Note:** Secrets can be edited only by their owner.
-
-1. In the left pane, click **Edge Configurations**, and then select **Secret**.
+1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
 
 2. On the Secrets page, click the ID of the secret you want to edit, and then click the **Change Secret** button. 
    <br><U>OR </u></br>

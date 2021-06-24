@@ -4,7 +4,7 @@ To create a property, complete the Create a Property form with required informat
 
 ## Getting Started
 
-1. In the left pane, click **Edge Configurations**, and then select **Property**.
+1. In the left pane, click **Edge Configurations**, and then select **Properties**.
 2. At the top right of the Properties page, click the **Create Property** button. 
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="900"></p>
