@@ -4,7 +4,7 @@ To create a property, complete the Create a Property form with required informat
 
 ## Getting Started
 
-1. In the left pane, click **Edge Configurations**.
+1. In the left pane, click **Edge Configurations**, and then select **Properties**.
 2. At the top right of the Properties page, click the **Create Property** button. 
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="900"></p>
@@ -66,5 +66,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
  **Certificate Renew Automation:** By default, CDN360 takes control of the contents under the ``/.well-known/{acme-challenge, pki-validation}`` directories to support [certificate auto-renew](</docs/portal/certificates/auto-renewal.md>) for properties. If you need to manage these two directories by yourself on the origin (for example, to implement your own certificate auto-renew mechanism), you can use this configuration option to disable the default behavior. <ul><li>If **Support** is selected, CDN360 takes control of the two "special" directories to support auto-renewing of the property's certificate. This is the default setting.</ul></li> <ul><li>If **Disable** is selected, CDN360 releases control of these special directories to the origin.</ul></li>
 
  **HTTP/2:** Use the radio buttons to enable or disable the HTTP/2 protocol. HTTP/2 is enabled by default. If disabled, HTTP/1.1 is used. 
+
+ **Video Seeking:** This parameter supports seeking in a video using the following fields to specify the starting and ending positions. <ul><li>In the **Start Parameter** field, enter the beginning position of a video segment in bytes. </ul></li><ul><li>In the **End Parameter** field, enter the ending position of the video segment in bytes, or leave this field empty to play the video to the end.</ul></li>
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.png" alt="Property Advanced Settings" width="700"></p>
