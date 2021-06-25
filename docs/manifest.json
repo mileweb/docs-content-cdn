@@ -110,10 +110,9 @@
               {
                 "title": "Delete a Secret",
                 "path": "/docs/portal/secrets/deleting-secret.md"
-              },
+              }
             ]
           },
-
           {
             "title": "Traffic Management",
             "routes": [
