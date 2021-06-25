@@ -100,15 +100,15 @@
                 "path": "/docs/portal/secrets/overview.md"
               },
               {
-                "title": "Create a Secret
+                "title": "Create a Secret"
                 "path": "/docs/portal/secrets/creating-secret.md"
               },
               {
-                "title": "Edit a Secret
+                "title": "Edit a Secret"
                 "path": "/docs/portal/secrets/editing-secrets.md"
               },
               {
-                "title": "Delete a Secret
+                "title": "Delete a Secret"
                 "path": "/docs/portal/secrets/deleting-secret.md"
               },
             ]
