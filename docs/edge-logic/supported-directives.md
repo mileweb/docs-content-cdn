@@ -831,7 +831,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** `-` <br/>
 **Contexts:** server, location
 
-Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the main setting is not overridden. An invalid value in the variable results in a factor of 100.
+Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the main setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor).
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -1034,4 +1034,4 @@ Specifies the “Referer” request header field values that will cause the embe
 **Default:** `-` <br/>
 **Contexts:** server
 
-This is a directive to reduce the amount of local access log entries. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. It has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to avoid properties with large request volume to overload the log processing system.
+Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to avoid properties with large request volume to overload the log processing system.
