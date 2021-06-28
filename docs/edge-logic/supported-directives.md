@@ -1034,5 +1034,4 @@ Specifies the “Referer” request header field values that will cause the embe
 **Default:** `-` <br/>
 **Contexts:** server
 
-This is a directive to optimize our internal operations. If a property's hostnames receive such a large number of requests that its access log may overload our log processing system, we use this directive to reduce the amount of log entries. A `factor` of N means one log entry for every N requests. It has no effect on the edge behavior, including the real-time log. However, you will see reduced number of entries if you download the access log from the portal or through the API.
-
+This is a directive to reduce the amount of local access log entries. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. It has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to avoid properties with large request volume to overload the log processing system.
