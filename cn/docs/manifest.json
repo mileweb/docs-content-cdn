@@ -101,7 +101,7 @@
               },
               {
                 "title": "Create a Secret",
-                "path": "/docs/portal/secrets/creating-secret.md"
+                "path": "/docs/portal/secrets/creating-secrets.md"
               },
               {
                 "title": "Edit a Secret",
@@ -109,7 +109,7 @@
               },
               {
                 "title": "Delete a Secret",
-                "path": "/docs/portal/secrets/deleting-secret.md"
+                "path": "/docs/portal/secrets/deleting-secrets.md"
               }
             ]
           },
