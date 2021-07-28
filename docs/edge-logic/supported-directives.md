@@ -811,7 +811,7 @@ proxy_cache_valid $cache_time;
 proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
 add_header version-number $version_number;
 # do not cache status codes 301 and 302 from the origin
-proxt_set $no_store 1 if ($upstream_response_status ~ 30[12]);
+proxy_set $no_store 1 if ($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
