@@ -102,7 +102,7 @@
 
 ### API updates
 * Enhanced the property search to allow direct matches including prefacing with ‘^’ to match text at the beginning of fields.
-* Fixed a problem with enabling the HDT product for a reseller's customer.
+* Fixed a problem with enabling the [HDT (High Speed Data Transmission)](<https://www.cdnetworks.com/high-speed-data-transmission/>) product for a reseller's customer.
 * Fixed an error when deploying a property using a certificate without SANs.
 
 
@@ -543,7 +543,7 @@
 * Fixed use of redirectHttpToHttps with multiple hostnames.
 
 ### Portal updates
-* Fixed issues switching between our Edge Computing Platform (ECP) and CDN360 products.
+* Fixed issues switching between our [Edge Computing Platform (ECP)](<https://www.cdnetworks.com/edge-computing/>) and CDN360 products.
 * Allowed selection of ISPs when defining client region rules for edge hostnames.
 * Added support for ‘group by’ to traffic summary report.
 
@@ -679,7 +679,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## October 21, 2019
 ### API updates
-* Fixed issues issues in report API calls.
+* Improved report API calls.
 * Supported sorting of certificates.
 * Allowed resellers to use the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>).
 * Improved [status code details](</apidocs#operation/getEdgeStatusCodeDetails>) and [origin status code details](</apidocs#operation/getOriginStatusCodeDetails>) reports.
