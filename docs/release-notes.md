@@ -3,7 +3,7 @@
 ## July 28, 2021
 ### API updates
 * Fixed [portal user list API](</apidocs#operation/getContacts>)'s handling of the ids query parameter.
-* Ensured an operator API account of a reseller can [create an API permission](</apidocs#operation/post-cdn-apiPermissions>) for a child account.
+* Ensured an operator API account of a reseller can [create an API permission](</apidocs#operation/post-cdn-apiPermissions>) for an API account of their customer.
 * Allowed a single task to deploy a new certificate version along with the property using it instead of requiring separate deployment tasks.
 * Improved edge logic validation to ensure that nested location blocks have a content handler.
 * Improved handling of customer deletion when the customer is still using resources.
@@ -43,7 +43,7 @@
 
 ### API updates
 
-* Added new [Secret Management](</apidocs#tag/Secret-Management>) you can use to improve security by preventing sensitive text from being exposed in edge logic.
+* Added [secret management](</apidocs#tag/Secret-Management>) APIs you can use to improve security by preventing sensitive text from being exposed in edge logic.
 * Allowed you to show [report annotations](</apidocs#tag/Annotations-for-Reports>) for property deployments, certificate deployments, and edge hostname updates.
 * Added “proxy_next_upstream off;” in NGINX configuration to avoid latency related to using the [real-time log feature](</docs/portal/edge-configurations/creating-property#real-time-log>).
 
@@ -60,7 +60,7 @@
 ## June 14, 2021
 
 ### API updates
-* Updated child customers’ [list of users](</apidocs#operation/getContacts>) to indicate if the users have full access to all products.
+* Updated customers’ [list of users](</apidocs#operation/getContacts>) to indicate if the users have full access to all products.
 * Ensured an error is returned if one tries to create a property with duplicate hostnames.
 * Updated [API calls](</apidocs#operation/get-ngadmin-apicalls>) to return data from the last 30 days by default.
 * Improved the latency associated with real-time log implementation.
@@ -102,7 +102,7 @@
 
 ### API updates
 * Enhanced the property search to allow direct matches including prefacing with ‘^’ to match text at the beginning of fields.
-* Fixed a problem with enabling the HDT product for a child of a reseller.
+* Fixed a problem with enabling the HDT product for a reseller's customer.
 * Fixed an error when deploying a property using a certificate without SANs.
 
 
@@ -248,8 +248,8 @@
 * Added a limit on the number of API accounts.
 * Removed deleted service quota from API’s results.
 * Added a limit on the number of portal users.
-* Added support for 6 new [directives](</docs/edge-logic/supported-directives>):
-[origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>), [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), and [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) for you to manage communications with your origin servers and  [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) and [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>), and [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) for you to manage communications with the clients.
+* Added support for 6 new edge logic directives:
+[origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>), [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), and [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) for you to manage communications with your origin servers and  [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>), [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>), and [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) for you to manage communications with the clients.
 * Limited the [realtime_log_downsample](</docs/edge-logic/supported-directives#realtime_log_downsample>) directive to the server block of edge logic.
 * Required the isp field to be specified in a client zone rule when [creating an edge hostname](</apidocs#operation/createEdgeHostname>).
 
@@ -270,7 +270,7 @@
 ### API updates
 * Removed apiAccountId from responses of API calls directly made by you.
 * Limited an edge hostname’s client zone rule to a maximum of 10 ISPs.
-* Added impersonatingParentCustomerId to identify the reseller (or parent) customer performing an action like purge, validation, or deployment on behalf of a child customer.
+* Added impersonatingParentCustomerId to identify the reseller (or parent) customer performing an action like purge, validation, or deployment on behalf of their customer.
 * Removed redundant target field returned in the purge summary response.
 * Improved [querying for API calls](</apidocs#operation/get-ngadmin-apicalls>) when using a path parameter with an asterisk character.
 * Returned customerId field in [API calls](</apidocs#operation/get-ngadmin-apicalls-id>) and [portal users](</apidocs#operation/getContacts>) APIs.
@@ -333,8 +333,8 @@
 ### API updates
 * The [traffic volume summary report](</apidocs#operation/getVolSummary>) now supports grouping of results by customerIds.
 * Improved error message when the user uses an unauthorized or unsupported directive.
-* If a reseller performs a validation, deployment, or purge on behalf of a child customer, we track the caller’s API account.
-* Added 3 new edge logic directives: [proxy_cache_lock](</docs/edge-logic/supported-directives#proxy_cache_lock>) to better control traffic to the origin servers, [proxy_cache_lock_age](</docs/edge-logic/supported-directives#proxy_cache_lock_age>) to specify a time after another request may be made, and [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>) to set a timeout for proxy_cache_lock.
+* If a reseller performs a validation, deployment, or purge on behalf of their customer, we track the caller’s API account.
+* Added 3 new edge logic directives: [proxy_cache_lock](</docs/edge-logic/supported-directives#proxy_cache_lock>) to better control traffic to the origin servers, [proxy_cache_lock_age](</docs/edge-logic/supported-directives#proxy_cache_lock_age>) to specify a time after which another request may be made, and [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>) to set a timeout for proxy_cache_lock.
 * Prevented an acceleration hostname from matching the origin server to avoid a loop.
 * Added a property configuration field, disableCertAutomation, which should be set to true if you manage certificate renewals yourself instead of using our certificate auto-renewal via Let’s Encrypt.
 * Improved real-time log support.
@@ -349,7 +349,7 @@
 ## October 7, 2020
 ### API updates
 * Added [CPU time report](</apidocs#operation/post-cdn-report-cpuTime>) to display CPU time used to handle requests for your content.
-* Updated [API calls](</apidocs#operation/get-ngadmin-apicalls>) to support ‘Report-Range: children-only’ header.
+* Allowed resellers to use the ‘Report-Range: children-only’ header in [API calls](</apidocs#operation/get-ngadmin-apicalls>) to get a summary of API calls made in their customers' accounts.
 * Enabled the [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) to support the "Host" header.
 * Allowed query of [fast route request](</apidocs#operation/post-cdn-report-fastOriginReq>) and [fast route traffic](</apidocs#operation/post-cdn-report-fastOriginVol>) reports for domain names with wildcard "*".
 * Improved error checking of [portal user list](</apidocs#operation/post-cdn-report-fastOriginVol>) and [API account list](</apidocs#operation/get-ngadmin-apiAccounts>).
@@ -396,7 +396,7 @@
 * Added support for origin_host in the realtime log feature.
 * Allowed everyone to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>) to remove some query parameters; [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) to disable processing of certain cache-control directives in the response from the origin; [slice](</docs/edge-logic/supported-directives#slice>) to set the size of the slices when fetching large files from the origin; and [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) to add, delete, or overwrite the response header fields from the origin before any other processing.
 * Added [slice_ignore_etag directive](</docs/edge-logic/supported-directives#slice_ignore_etag>) to disable ETag consistency check of sliced files.
-* Made it easier for a reseller to purge a directory or file on behalf of a child.
+* Made it easier for a reseller to purge a directory or file on behalf of their customer.
 * Added [fast route origin request report API](</apidocs#operation/post-cdn-report-fastOriginReq>) to show the origin requests accelerated by the High-Speed Data Transmission product.
 * Added [fast route origin traffic report API](</apidocs#operation/post-cdn-report-fastOriginVol>) to show the origin traffic accelerated by the High-Speed Data Transmission product.
 * Updated report APIs to support UTC+13 and UTC+14 time zones.
@@ -442,7 +442,7 @@
 
 ## July 16, 2020
 ### API updates
-* Updated resellers' creation of child customers.
+* Updated resellers' creation of customer accounts.
 * Used qtlcdn.com domain for new edge hostnames.
 
 ### Portal updates
@@ -667,7 +667,7 @@
 
 ## November 1, 2019
 ### API updates
-* Ensured child customers of resellers could have the same products.
+* Ensured customers of resellers can have any of the products available to the reseller.
 * Added apiName to the edge hostname deployment history
 * Added apiName to the [API calls](</apidocs#operation/get-ngadmin-apicalls-id>) response.
 Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) directive allowing you to disable processing of certain cache control directives in the response from the origin.
