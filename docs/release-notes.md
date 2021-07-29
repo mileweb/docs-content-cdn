@@ -3,7 +3,7 @@
 ## July 28, 2021
 ### API updates
 * Fixed [portal user list API](</apidocs#operation/getContacts>)'s handling of the ids query parameter.
-* Ensured an operator API account of a reseller can create an API permission for a child account.
+* Ensured an operator API account of a reseller can [create an API permission](</apidocs#operation/post-cdn-apiPermissions>) for a child account.
 * Allowed a single task to deploy a new certificate version along with the property using it instead of requiring separate deployment tasks.
 * Improved edge logic validation to ensure that nested location blocks have a content handler.
 * Improved handling of customer deletion when the customer is still using resources.
@@ -13,7 +13,7 @@
 * Ensured that query strings of URLs that are purged are respected.
 
 ### Portal updates
-* Fixed bugs in report range date picker.
+* Improved report range date picker.
 * Added tooltips for Direct Connection origin setting.
 * Improved appearance of client zone rules table.
 * Added initial Russian language support.
@@ -141,7 +141,7 @@
 ### API updates
 * Added [prefetch APIs](</apidocs#operation/post-cdn-prefetches>) allowing you to warm up the cache in advance of visitor requests for your content.
 * Fixed the [customer list API’s](</apidocs#operation/get-ngadmin-customers>) response to include products used by each customer.
-* Added support for the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>) for resellers to use.
+* Allowed resellers to use the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>).
 
 ### Portal updates
 * Added support for disabling HTTP2.
@@ -153,7 +153,7 @@
 
 * Added support for [custom API account permissions](</apidocs#tag/API-Account-Management>) giving you more control over who can access or update your configurations.
 * Fixed the validation of contactLimit and apiAccountLimit when resellers create and update customers.
-* Added support for Report-Range header in [deploymentTasks](</apidocs#operation/queryDeploymentTaskList>), [validations](</apidocs#operation/queryPropertyValidationList>), [edge hostnames](</apidocs#operation/getEdgeHostnames>), [hostnames](</apidocs#operation/listhostnames>), and [service quotas](</apidocs#operation/get-cdn-serviceQuotas>) APIs for resellers.
+* Allowed resellers to use the Report-Range header in [deploymentTasks](</apidocs#operation/queryDeploymentTaskList>), [validations](</apidocs#operation/queryPropertyValidationList>), [edge hostnames](</apidocs#operation/getEdgeHostnames>), [hostnames](</apidocs#operation/listhostnames>), and [service quotas](</apidocs#operation/get-cdn-serviceQuotas>) APIs.
 * Added support for overriding the sample rate of real-time log in CS.
 * Added a check for Beian status when deploying a property to staging.
 * Added tlsCertificateId in [property list API](</apidocs#operation/getPropertyList>).
@@ -171,7 +171,7 @@
 ### API updates
 * Prevented resellers from deleting a suspended customer who still has access to a product like CDN360.
 * Fixed an issue affecting generation of a Sectigo DCV file.
-* Added support for the Report-Range header in [property list API](</apidocs#operation/getPropertyList>) for resellers to use.
+* Allowed resellers to use the Report-Range header in [property list API](</apidocs#operation/getPropertyList>).
 
 ### Portal updates
 * Fixed the display of property and certificate name in standby task.
@@ -249,8 +249,7 @@
 * Removed deleted service quota from API’s results.
 * Added a limit on the number of portal users.
 * Added support for 6 new [directives](</docs/edge-logic/supported-directives>):
-** [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>),  [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), and [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) to manage communications with your origin servers.
-**  [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>), [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>), and [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) to manage communications with the clients.
+[origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>), [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), and [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) for you to manage communications with your origin servers and  [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) and [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>), and [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) for you to manage communications with the clients.
 * Limited the [realtime_log_downsample](</docs/edge-logic/supported-directives#realtime_log_downsample>) directive to the server block of edge logic.
 * Required the isp field to be specified in a client zone rule when [creating an edge hostname](</apidocs#operation/createEdgeHostname>).
 
@@ -294,7 +293,7 @@
 * Prevented deletion of a property whose deployment is still in progress.
 * Supported querying validation history of a deleted property.
 * Enhanced [property list API](</apidocs#operation/getPropertyList>) to support searching for a value that is not present in the configuration.
-* Updated [list API accounts](</apidocs#operation/get-ngadmin-apiAccounts>) to support Report-Range header for resellers.
+* Allowed resellers to use the Report-Range header in [API account list](</apidocs#operation/get-ngadmin-apiAccounts>).
 * Updated [traffic volume summary report](</apidocs#operation/getVolSummary>) to support the protocol parameter.
 * Modified property validation to allow the 'if' parameter in edge logic.
 
@@ -311,7 +310,7 @@
 * Updated [edge requests report](</apidocs#operation/getEdgeRequests>) to support Accept header with quality values.
 * Improved validation of edge logic using [eval_func](</docs/edge-logic/supported-directives#eval_func>).
 * Improved [hostnames API](</apidocs#operation/listhostnames>).
-* Added the [origin_selection_algorithm directive](</docs/edge-logic/supported-directives#origin_selection_algorithm>).
+* Added the [origin_selection_algorithm directive](</docs/edge-logic/supported-directives#origin_selection_algorithm>) so you can control the selection of an IP address if an origin resolves to muliple IP addresses.
 
 ### Portal updates
 * Provided date range selectors in the portal for validation and deployment tasks.
@@ -321,21 +320,21 @@
 
 ## November 6, 2020
 ### API updates
-* Updated [get property validation task](</apidocs#operation/queryValidationTask>) API to return cache version as well.
+* Updated [get property validation task API](</apidocs#operation/queryValidationTask>) to return cache version as well.
 * Allowed a wildcard hostname to overlap with another hostname owned by the same customer.
 
 ### Portal updates
 * Allow a client zone to support multiple ISPs. (These are specified when creating an edge hostname.)
 * Added a banner at the top of the dashboard pointing to the ‘Quick Start’ help.
 * Fixed pagination issues.
-* Improved display of three edge logic directives ([proxy_cache_lock](</docs/edge-logic/supported-directives#proxy_cache_lock>), [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>), and [proxy_cache_lock_age](</docs/edge-logic/supported-directives#proxy_cache_lock_age>).
+* Improved display of three edge logic directives: [proxy_cache_lock](</docs/edge-logic/supported-directives#proxy_cache_lock>), [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>), and [proxy_cache_lock_age](</docs/edge-logic/supported-directives#proxy_cache_lock_age>).
 
 ## October 22, 2020
 ### API updates
 * The [traffic volume summary report](</apidocs#operation/getVolSummary>) now supports grouping of results by customerIds.
 * Improved error message when the user uses an unauthorized or unsupported directive.
 * If a reseller performs a validation, deployment, or purge on behalf of a child customer, we track the caller’s API account.
-* Added 3 new edge logic directives: ([proxy_cache_lock](</docs/edge-logic/supported-directives#proxy_cache_lock>) to better control traffic to the origin servers, [proxy_cache_lock_age](</docs/edge-logic/supported-directives#proxy_cache_lock_age>), and [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>) to set a timeout for proxy_cache_lock.
+* Added 3 new edge logic directives: [proxy_cache_lock](</docs/edge-logic/supported-directives#proxy_cache_lock>) to better control traffic to the origin servers, [proxy_cache_lock_age](</docs/edge-logic/supported-directives#proxy_cache_lock_age>) to specify a time after another request may be made, and [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>) to set a timeout for proxy_cache_lock.
 * Prevented an acceleration hostname from matching the origin server to avoid a loop.
 * Added a property configuration field, disableCertAutomation, which should be set to true if you manage certificate renewals yourself instead of using our certificate auto-renewal via Let’s Encrypt.
 * Improved real-time log support.
@@ -351,7 +350,7 @@
 ### API updates
 * Added [CPU time report](</apidocs#operation/post-cdn-report-cpuTime>) to display CPU time used to handle requests for your content.
 * Updated [API calls](</apidocs#operation/get-ngadmin-apicalls>) to support ‘Report-Range: children-only’ header.
-* Enabled [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) to support the "Host" header.
+* Enabled the [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) to support the "Host" header.
 * Allowed query of [fast route request](</apidocs#operation/post-cdn-report-fastOriginReq>) and [fast route traffic](</apidocs#operation/post-cdn-report-fastOriginVol>) reports for domain names with wildcard "*".
 * Improved error checking of [portal user list](</apidocs#operation/post-cdn-report-fastOriginVol>) and [API account list](</apidocs#operation/get-ngadmin-apiAccounts>).
 
@@ -395,7 +394,7 @@
 * Added support for filtering the [region list](</apidocs#operation/get-cdn-edgeHostnames-clientRegions>) by ISP.
 * Added support for multiple ISPs in a client zone rule.
 * Added support for origin_host in the realtime log feature.
-* Allowed everyone to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>), [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>), [slice](</docs/edge-logic/supported-directives#slice>), [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>).
+* Allowed everyone to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>) to remove some query parameters; [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) to disable processing of certain cache-control directives in the response from the origin; [slice](</docs/edge-logic/supported-directives#slice>) to set the size of the slices when fetching large files from the origin; and [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) to add, delete, or overwrite the response header fields from the origin before any other processing.
 * Added [slice_ignore_etag directive](</docs/edge-logic/supported-directives#slice_ignore_etag>) to disable ETag consistency check of sliced files.
 * Made it easier for a reseller to purge a directory or file on behalf of a child.
 * Added [fast route origin request report API](</apidocs#operation/post-cdn-report-fastOriginReq>) to show the origin requests accelerated by the High-Speed Data Transmission product.
@@ -414,11 +413,11 @@
 ## August 12, 2020
 
 ### API updates
-* Added several advanced edge logic directives: [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>), [origin_follow_redirect](</docs/edge-logic/supported-directives#origin_follow_redirect>), and [custom_log_field](</docs/edge-logic/supported-directives#custom_log_field>).
+* Added several advanced edge logic directives: [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>) allowing you to use our High-Speed Data Transmission (HDT)-powered solution to provide a more reliable connection with reduced latency; [origin_follow_redirect](</docs/edge-logic/supported-directives#origin_follow_redirect>) if you wish us to follow 30X redirects from the origin; and [custom_log_field](</docs/edge-logic/supported-directives#custom_log_field>) allowing you to add fields to the access logs.
 * Fixed error handling when purging files with multiple copies due to the Vary header.
 * Added support for access control rules to properties to let you restrict access by IP or regions.
 * Improved validation of EC certificates.
-* Added support for kilobytes in [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>).
+* Added support for kilobytes in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>).
 * Allowed the redirectHttpToHttps property configuration field to support return codes 302, 307, and 308.
 * enableIPv6 is supported only by the deliver action in client zone rules.
 * Made 512 kilobytes the minimum value of the [slice directive](</docs/edge-logic/supported-directives#slice>).
@@ -472,29 +471,29 @@
 ### API updates
 * Updated property validation to show the line number if an error is found in the edge logic.
 * Added optional tlsSessionTimeout field to the property configuration to control the TLS session ticket timeout.
-* Updated report APIs for edge hostnames, [edge hostname request report](</apidocs#operation/post-cdn-report-edgeHostnameReq>) and [edge hostname request summary](</apidocs#operation/post-cdn-report-edgeHostnameReqSummary>).
+* Updated [edge hostname request report](</apidocs#operation/post-cdn-report-edgeHostnameReq>) and [edge hostname request summary](</apidocs#operation/post-cdn-report-edgeHostnameReqSummary>) report APIs.
 
 ### Portal Updates
 * Fixed purge request progress dialog.
-* Improved edge logic editor to highlight NGINX directives and make it more useful.
+* Improved edge logic editor to highlight directives and make it more useful.
 
 
 ## June 5, 2020
 ### API updates
 * Improved purge performance.
-* Enabled support for the edge logic directive, [proxy_cache_methods](</docs/edge-logic/supported-directives#proxy_cache_methods>).
+* Enabled support for the edge logic directive, [proxy_cache_methods](</docs/edge-logic/supported-directives#proxy_cache_methods>) so you can specify the HTTP methods whose responses are cached.
 
 
 ## May 22, 2020
 ### API updates
 * Updated limit on purge reuests to a maximum of 1000 files and 5 directories at a time.
 * Improved [property list API's](</apidocs#operation/getPropertyList>) filtering.
-* Introduced [origin_limit_rate directive](</docs/edge-logic/supported-directives#origin_limit_rate>).
-* Introduced [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>).
-* Introduced advanced directive [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>).
-* Introduced [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>).
-* Introduced [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>).
-* Introduced [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>).
+* Introduced [origin_limit_rate directive](</docs/edge-logic/supported-directives#origin_limit_rate>) allowing you to limit the speed at which the response is read from the origin server.
+* Introduced [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) allowing you to redefine or append fields to the request header passed to the origin server.
+* Introduced advanced directive [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) allowing you to add, delete, or overwrite the response header fields from the origin before any other processing.
+* Introduced [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) allowing you to define a timeout for establishing a connection with the origin server.
+* Introduced [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) allowing you to define a timeout for reading a response from the origin server.
+* Introduced [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) allowing you to set a timeout for transmitting a request to the origin server. 
 
 ### Portal updates
 * Updated access control.
@@ -506,7 +505,7 @@
 * Fixed the [report APIs’](</apidocs#tag/Reports>) support for wildcards in the hostname filter.
 * Implemented a service to monitor Beian status of domains served by PoPs in China. 
 * Allowed disabling of  support for IPv6 within a client zone rule.
-* Ensured that non-printable characters can only appear in Edge Logic if quoted.
+* Ensured that non-printable characters can only appear in edge logic if quoted.
 * Improved [property list API](</apidocs#operation/getPropertyList>)'s filtering support.
 
 ### Portal updates
@@ -518,13 +517,13 @@
 * Allowed notifications to be sent to extra recipients.
 * Implemented [CDN product management APIs](</apidocs#tag/CDN-Product-Management>).
 * Updated support for trials.
-* Fixed validation of EdgeLogic to allow non-Latin characters.
+* Fixed validation of edge logic to allow non-Latin characters.
 
 ### Portal updates
 * Added ‘Load Balancer Hash Key’ field to Advanced Settings of properties.
 * Improved error handling for client zone rules.
 * Fixed listing pages’ display issue for screens of different sizes.
-* Fixed Forgot Password functionality.
+* Improved forgotten password functionality.
 
 ## April 10, 2020
 ### API updates
@@ -544,13 +543,13 @@
 * Fixed use of redirectHttpToHttps with multiple hostnames.
 
 ### Portal updates
-* Fixed issues switching between our ECP product and CDN360.
+* Fixed issues switching between our Edge Computing Platform (ECP) and CDN360 products.
 * Allowed selection of ISPs when defining client region rules for edge hostnames.
 * Added support for ‘group by’ to traffic summary report.
 
 ## March 10, 2020
 ### API updates
-* Ensured email address is required when creating an API account.
+* Ensured email address is required when [creating an API account](</apidocs#operation/post-ngadmin-apiAccounts>).
 * Enhanced [ISP list API](</apidocs#operation/get-cdn-edgeHostnames-isps>) to support search by keyword and sorting of results.
 * Improved certificate expiration notice.
 
@@ -563,7 +562,7 @@
 ## February 26, 2020
 ### API updates
 * Allowed filtering by Beian status in [edge hostnames list API](</apidocs#operation/getEdgeHostnames>).
-* Enhanced [API call history](</apidocs#operation/get-ngadmin-apicalls>) to support getting calls on behalf of a customer, by someone impersonating one, as well as the HTTP response status of the call.
+* Enhanced [API call history](</apidocs#operation/get-ngadmin-apicalls>) for resellers. We also updated it to return HTTP response statuses of API calls.
 * Enabled [portal user list API](</apidocs#operation/getContacts>) to return results based on status of the user accounts.
 * Allowed users of [customer list API](</apidocs#operation/get-ngadmin-customers>) to search by ‘regional offices’.
 
@@ -573,9 +572,9 @@
 
 ## February 13, 2020
 ### API updates
-* Fixed [PATCH customer API](</apidocs#operation/patch-ngadmin-customers-id>) to properly handle null fields.
+* Fixed [customer update API](</apidocs#operation/patch-ngadmin-customers-id>) to properly handle null fields.
 * Improved security of [Get API Account](</apidocs#operation/get-ngadmin-apiAccounts-id>). 
-* Enhanced [Get edge hostname API](</apidocs#operation/getEdgeHostname>)'s response.
+* Enhanced [get edge hostname API](</apidocs#operation/getEdgeHostname>)'s response.
 
 ### Portal updates
 * Fixed sorting of results on the pages which contain lists of items.
@@ -599,7 +598,7 @@
 
 ## January 10, 2020
 ### API updates
-* Enhanced [API calls function](</apidocs#operation/get-ngadmin-apicalls>) to support the Report-Range header for resellers and improve search.
+* Allowed resellers to use the Report-Range header in the [API calls function](</apidocs#operation/get-ngadmin-apicalls>) to further customize their search of API call history.
 
 ### Portal updates
 * Fixed sorting on Roles page.
@@ -608,20 +607,20 @@
 
 ## January 3, 2020
 ### API updates
-* Enhanced [Customer List API](</apidocs#operation/get-ngadmin-customers>)'s filtering.
+* Enhanced [customer list API](</apidocs#operation/get-ngadmin-customers>)'s filtering.
 * Limited API request body size.
-* Updated [Get Service Quota](</apidocs#operation/get-cdn-serviceQuotas-customer-customerId>) to support 'me' as a parameter value.
+* Updated [get service quota API](</apidocs#operation/get-cdn-serviceQuotas-customer-customerId>) to support 'me' as a parameter value allowing you to see your own settings.
 * Updated summary report APIs' responses to include a special group __all__ which consists of total traffic or requests of all groups.
 
 ### Portal updates
 * Added validate link to check Real Time Logging URL.
-* Fixed issue with forgot password functionality.
+* Improved forgotten password functionality.
 
 ## December 11, 2019
 ### API updates
 * Supported getting expiration times of certificates deployed to production and staging.
 * Changed certificate number from decimal to hexadecimal value for consistency with browsers and other tools.
-* Added support for Report-Range header when retrieving lists of API accounts and portal users. This is useful for resellers.
+* Allowed resellers to filter results using the Report-Range header when retrieving [API accounts](</apidocs#operation/get-ngadmin-apiAccounts>) and [portal users](</apidocs#operation/getContacts>).
 * Supported auto-renewal of certificates.
 * Sorted validation task list by submission time by default.
 * Ensured that read-only API accounts can make calls to report APIs.
@@ -635,11 +634,11 @@
 ## December 2, 2019
 ### API updates
 * Fixed support for protocol downgrade to only apply if the property has a certificate.
-* Added support for ISPs in edge hostname's client zone rules.
+* Added support for ISPs in an edge hostname's client zone rules.
 * Supported [search of purge tasks](</apidocs#operation/getPurgeRequestList>) by ID.
 * Supported hasConfig query parameter when getting a [list of properties](</apidocs#operation/getPropertyList>).
 * Added [system configuration API](</apidocs#operation/get-cdn-systemConfigs>).
-* Supported Report-Range header for filtering [list of properties](</apidocs#operation/getPropertyList>).
+* Allowed resellers to use the Report-Range header to filter the [list of properties](</apidocs#operation/getPropertyList>).
 * Added [portal user management APIs](</apidocs#tag/Portal-User-Management>) to allow callers to create, update, query, and delete users.
 
 ### Portal updates
@@ -651,8 +650,8 @@
 
 ## November 14, 2019
 ### API updates
-* Added [staging servers API](</apidocs#operation/getStagingServers>) to get the IP addresses of staging servers.
-* Fixed impersonation support of apicalls endpoint.
+* Added [staging servers API](</apidocs#operation/getStagingServers>) to get the IP addresses of staging servers you can use to test your properties before deploying to production.
+* Fixed impersonation support of [API calls](</apidocs#operation/get-ngadmin-apicalls>).
 * Ensure certificates must be <=36kB to avoid problems with IE browser.
 * Enhanced [customer list API](</apidocs#operation/post-ngadmin-customers>) to support new filters.
 * Updated [customer management API](</apidocs#tag/Customer-Management>) to support portalSettings field which includes enabling two factor authentication, password expiration, session logout, and IP whitelist.
@@ -661,7 +660,7 @@
 ### Portal updates
 * Improved security of notifications.
 * Improved signup invitation.
-* Added support for authentication of Amazon S3 servers used as the origin.
+* Added support for authentication of [Amazon S3 servers used as the origin](</docs/recipes/aws-bucket>).
 * Added support for real-time log.
 * Improved appearance of the property comparison page.
 * Allowed customer administrators to change the session logout time.
@@ -671,7 +670,7 @@
 * Ensured child customers of resellers could have the same products.
 * Added apiName to the edge hostname deployment history
 * Added apiName to the [API calls](</apidocs#operation/get-ngadmin-apicalls-id>) response.
-Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) directive.
+Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) directive allowing you to disable processing of certain cache control directives in the response from the origin.
 
 ### Portal updates
 * Updated property version comparison user interface.
@@ -682,7 +681,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ### API updates
 * Fixed issues issues in report API calls.
 * Supported sorting of certificates.
-* Supported Report-Range header in [certificate list API](</apidocs#operation/getCertificates>) for resellers.
+* Allowed resellers to use the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>).
 * Improved [status code details](</apidocs#operation/getEdgeStatusCodeDetails>) and [origin status code details](</apidocs#operation/getOriginStatusCodeDetails>) reports.
 * Allowed everyone to use the [proxy_buffering](</docs/edge-logic/supported-directives#proxy_buffering>) directive.
 
@@ -695,8 +694,8 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## October 7, 2019
 ### API updates
 * Added support for sorting of properties, tasks, edge hostnames, accounts, and customers returned by APIs.
-* Improved randomness of property ID.
-* Improved stripping of comments in Edge Logic.
+* Improved randomness of property IDs.
+* Improved stripping of comments in edge logic.
 * Allowed the cacheKeyHostname field to support NGINX variables.
 * Moved API account limits to the customers API.
 
@@ -705,7 +704,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 * Supported passing headers in file and directory purges.
 * Saved preferred language for each portal user.
-* Added “operator” role which can administer CDN functions but not manage users and roles.
+* Added “operator” role that you can give to users who are permitted to administer CDN functions but not manage users and roles.
 
 ## September 23, 2019
 ### API updates
@@ -723,7 +722,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ### API updates
 * Added support for real time logs (also known as download notification).
 * Improved error handling.
-* Added API support for enabling and resetting two factor authentication (2FA).
+* Added API support for [enabling two factor authentication (2FA)](</apidocs#operation/patch-ngadmin-customers-id>) and [resetting a user](</apidocs#operation/patch-ngadmin-contacts-id>) which is useful if they change phones.
 
 ### Portal updates
 
@@ -783,7 +782,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## July 2, 2019
 ### API updates
 * Added products, emailAddress, and responsiblePerson fields to the customer resource.
-* Validated [slice](</docs/edge-logic/supported-directives#slice>), [limit_rate](</docs/edge-logic/supported-directives#limit_rate>), and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) NGINX directives.
+* Validated [slice](</docs/edge-logic/supported-directives#slice>), [limit_rate](</docs/edge-logic/supported-directives#limit_rate>), and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) edge logic directives.
 * Added [CDN Product Management APIs](</apidocs#tag/CDN-Product-Management>).
 
 ### Portal updates
@@ -804,28 +803,28 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ### API updates
 * Supported pagination and searches in [account list API](</apidocs#operation/get-ngadmin-apiAccounts>).
 * Updated support for testing deployments to staging.
-* Supported Gzip compression in API responses.
+* Supported gzip compression in API responses.
 * Supported longer origin timeouts.
 * Allowed bandwidth and volume reports to be filtered by server groups.
 * Ensured that properties can be validated if a shared certificate it is using is no longer shared.
-* Added two directives: [proxy_cache_vary](/cdn/docs/edge-logic/supported-directives#proxy_cache_vary>) and [eval_func](</docs/edge-logic/supported-directives#eval_func>).
+* Added two directives [proxy_cache_vary](/cdn/docs/edge-logic/supported-directives#proxy_cache_vary>), allowing you to control how the 'Vary' response header from the origin is handled, and [eval_func](</docs/edge-logic/supported-directives#eval_func>), allowing you to run some common algorithms in your edge logic.
 
 ### Portal updates
 * Added a link to the Edge Computing Platform portal.
-* Added support for two directives, [proxy_cache_min_age](</docs/edge-logic/supported-directives#proxy_cache_min_age>) and [gzip_types](</docs/edge-logic/supported-directives#gzip_types>).
+* Added two directives [proxy_cache_min_age](</docs/edge-logic/supported-directives#proxy_cache_min_age>), allowing you to specify the minimum cache time, and [gzip_types](</docs/edge-logic/supported-directives#gzip_types>), allowing you to enable gzip compression on additional MIME types.
 * Updated password reset functionality.
 
 
 ## May 16, 2019
 ### API updates
-* Added support for searching purge history by hostname.
-* Updated supported edge logic directives.
-* Updated certificate API.
+* Added support for [searching purge history by hostname](</apidocs#operation/getPurgeRequestList>).
+* Updated [supported edge logic directives](</docs/edge-logic/supported-directives>).
+* Updated certificate APIs.
 * Fixed purge issues.
 * Changed edge hostname TTL to 60 seconds.
 
 ### Portal updates
-* Allowed removing customers’ use of a shared certificate.
+* Allowed resellers to disable customers’ use of a shared certificate.
 * Enhanced usability.
 
 ## April 16, 2019
@@ -834,7 +833,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 * Enhanced [get customer API](/cdn/apidocs#operation/get-ngadmin-customers-ID>).
 * Fixed directory purge.
 * Supported retrieving the identities of properties and domains using a certificate in staging and production.
-* Supported querying multiple customers by their IDs.
+* Allowed resellers to [search for multiple customers by their IDs](</apidocs#operation/get-ngadmin-customers>).
 
 ### Portal updates
 * Let users confirm changes before deploying a property.
@@ -844,9 +843,9 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## March 31, 2019
 ### API updates
-* Improved validation of the server script field.
+* Improved validation of the edge logic.
 * Added support for getting the customer ID which owns various resources.
-* Updated the list of supported NGINX directives.
+* Updated the list of [supported NGINX directives](</docs/edge-logic/supported-directives>).
 * Fixed purge of URLs with special characters.
 * Separated file and directory purge quotas.
 * Improved cache key hostname.
@@ -875,9 +874,9 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## February 19, 2019
 ### API updates
-* Improved validation when creating a customer account.
+* Improved validation when [creating a customer account](</apidocs#operation/post-ngadmin-customers>).
 * Fixed issues with the property converter.
-* Improved the [get property version](</apidocs#operation/getPropertyVersion>) API.
+* Improved the [get property version API](</apidocs#operation/getPropertyVersion>).
 * Encoded URI and query string in purge requests.
 * Improved purge APIs further.
 
@@ -891,7 +890,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## January 31, 2019
 ### API updates
-* Saved NGINX configurations during the validation step to help with future deployment.
+* Saved NGINX configurations during the validation step to help with future deployments.
 * Supported purge with file headers.
 * Improved purge APIs.
 * Enhanced report APIs.
@@ -912,10 +911,10 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## January 8, 2019
 ### API updates
-* Supported folder purge.
+* Supported folder [purge](<apidocs#operation/createPurge>).
 * Fixed [historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>).
 * Improved security.
-* Improved client zone rules.
+* Improved client zone rules of edge hostnames.
 
 ## December 20, 2018
 ### API updates.
@@ -923,7 +922,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 * Updated [historical hostname API](</apidocs#operation/getHistoricalHostnames>).
 * Improved encryption of certificate keys.
 * Added APIs for [logs](</apidocs#operation/getLogfiles>) and [intermediate traffic](</apidocs#operation/getIntermediateTraffic>).
-* Added [Get property version list](</apidocs#operation/getPropertyVersions>) API.
+* Added [Get property version list API](</apidocs#operation/getPropertyVersions>).
 * Improved error handling.
 
 ## December 3, 2018
@@ -936,7 +935,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## November 19, 2018
 ### API updates
 * Added allowedCacheDirectives to control access to resource intensive NGINX directives.
-* Updated edge hostname API.
+* Updated [edge hostname API](</apidocs#operation/createEdgeHostname>).
 
 ## November 6, 2018
 ### API updates
@@ -946,13 +945,13 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## October 22, 2018
 ### API updates
-* Updated output of [Get an Account API](</apidocs#operation/get-ngadmin-apiAccounts-id>).
+* Updated output of [Get API Account](</apidocs#operation/get-ngadmin-apiAccounts-id>).
 * Improved validation of edge hostnames' clientZones.
 
 ## September 21, 2018
 ### API updates
 * Updated property validation and conversion.
-* Enhanced [get customers API](</apidocs#operation/get-ngadmin-customers>).
+* Enhanced [customer list API](</apidocs#operation/get-ngadmin-customers>).
 
 ## September 13, 2018
 ### API updates
@@ -1010,5 +1009,5 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## January 26, 2018
 ### API updates
-* Fixed issues [API account list](</apidocs#operation/post-ngadmin-apiAccounts>) and [update API account](</apidocs#operation/patch-ngadmin-apiAccounts-id>).
+* Fixed issues in [API account list](</apidocs#operation/post-ngadmin-apiAccounts>) and [update API account](</apidocs#operation/patch-ngadmin-apiAccounts-id>).
 * Improved error handling of property validations.
