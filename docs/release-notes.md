@@ -52,7 +52,7 @@
 
 * Added reminder to use directory purge for files with multiple variations.
 * Fixed display of IP addresses available for [testing deployments to staging](</docs/portal/edge-configurations/testing-property>).
-* Added "Secret Management" feature so you can hide sensitive text from being exposed in edge logic. To access, click “Secrets” under the “Edge Configurations” menu item.
+* Added the "Secret Management" feature so you can hide sensitive text from being exposed in edge logic. To access, click “Secrets” under the “Edge Configurations” menu item.
 * Improved the cache settings dialog shown when creating a new property by clicking Wizard.
 * Improved the display of the property comparison page.
 * Added a Video Seeking section to the Advanced Settings of property configurations allowing you to specify parameters related to video content.
@@ -60,10 +60,10 @@
 ## June 14, 2021
 
 ### API updates
-* Updated customers’ [list of users](</apidocs#operation/getContacts>) to indicate if the users have full access to all products.
-* Ensured an error is returned if one tries to create a property with duplicate hostnames.
+* Updated a customer's [list of users](</apidocs#operation/getContacts>) to indicate whether the users have full access to all products.
+* Ensured an error is returned if you try to create a property with duplicate hostnames.
 * Updated [API calls](</apidocs#operation/get-ngadmin-apicalls>) to return data from the last 30 days by default.
-* Improved the latency associated with real-time log implementation.
+* Reduced the latency associated with real-time log implementation.
 
 ### Portal updates
 * Improved the standby task's interface.
@@ -72,14 +72,14 @@
 * Added text explaining the ICP Beian setting.
 * Improved the sidebar menu icons.
 * Fixed the appearance of a long edge hostname in the reports page.
-* Ensured the portal shows a property version as frozen once it is deployed.
+* Ensured the portal shows a property version is frozen once the property is deployed.
 
 ## June 4, 2021
 ### API updates
 
 * Fixed prefetch quota enforcement.
 * Added a check for traffic when you try to delete a hostname or edge hostname. This helps reduce accidental deletion of actively used hostnames and edge hostnames.
-* Made /ngadmin API query parameters case insensitive for ease of use.
+* Made /ngadmin API query parameters case-insensitive for ease of use.
 
 
 ### Portal updates
@@ -151,7 +151,7 @@
 ## March 26, 2021
 ### API updates
 
-* Added support for [custom API account permissions](</apidocs#tag/API-Account-Management>) giving you more control over who can access or update your configurations.
+* Added support for [custom API account permissions](</apidocs#tag/API-Account-Management>), giving you more control over who can access or update your configurations.
 * Fixed the validation of contactLimit and apiAccountLimit when resellers create and update customers.
 * Allowed resellers to use the Report-Range header in [deploymentTasks](</apidocs#operation/queryDeploymentTaskList>), [validations](</apidocs#operation/queryPropertyValidationList>), [edge hostnames](</apidocs#operation/getEdgeHostnames>), [hostnames](</apidocs#operation/listhostnames>), and [service quotas](</apidocs#operation/get-cdn-serviceQuotas>) APIs.
 * Added support for overriding the sample rate of real-time log in CS.
@@ -189,7 +189,7 @@
 * Improved the user interface for creating and updating certificates.
 * Fixed the timezone in the deployment and validation list's time range selection interface.
 * Reset the time if you clear the date range fields in validation, report, and deployment list pages.
-* Allowed validation of a frozen property. This may be necessary due to cache version changes which obsolete previously validated properties.
+* Allowed validation of a frozen property. This may be necessary due to cache version changes that obsolete previously validated properties.
 
 ## February 11, 2021
 
@@ -205,7 +205,7 @@
 * Updated user invitation emails to come from sender ‘CDN360 Admin’.
 * Put search and filter parameters into the URLs of the list pages (i.e., property, edge hostname, certificate, purge) .
 * Made the certificate creation user interface more consistent with property creation.
-* Prevented certificates with the same names from being created.
+* Prevented certificates with the same name from being created.
 * Fixed display of version when creating a new version of a certificate.
 * Fixed display of certificate and property lists.
 * Added a link to create a property to help new CDN360 users.
@@ -251,7 +251,7 @@
 * Added support for 6 new edge logic directives:
 [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>), [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), and [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) for you to manage communications with your origin servers and  [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>), [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>), and [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) for you to manage communications with the clients.
 * Limited the [realtime_log_downsample](</docs/edge-logic/supported-directives#realtime_log_downsample>) directive to the server block of edge logic.
-* Required the isp field to be specified in a client zone rule when [creating an edge hostname](</apidocs#operation/createEdgeHostname>).
+* We now require the isp field to be specified in a client zone rule when [creating an edge hostname](</apidocs#operation/createEdgeHostname>).
 
 
 ### Portal updates
@@ -289,7 +289,7 @@
 ## December 7, 2020
 
 ### API updates
-* Added support for non-standard HTTP and HTTPS ports by specifying them in a extraServicePorts field of a property configuration. Also return extraServicePorts in the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). Please contact us if you require a port which isn't yet allowed.
+* Added support for non-standard HTTP and HTTPS ports by specifying them in a extraServicePorts field of a property configuration. Also return extraServicePorts in the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). Please contact us if you require a port that isn't yet allowed.
 * Prevented deletion of a property whose deployment is still in progress.
 * Supported querying validation history of a deleted property.
 * Enhanced [property list API](</apidocs#operation/getPropertyList>) to support searching for a value that is not present in the configuration.
@@ -307,7 +307,7 @@
 ### API updates
 * Added disableHttp2 property configuration option to allow you to disable support for HTTP/2 and use HTTP 1.1 only.
 * Added cacheKeyUri property configuration option to control when the URL is incorporated into the cache key.
-* Updated [edge requests report](</apidocs#operation/getEdgeRequests>) to support Accept header with quality values.
+* Updated [edge requests report](</apidocs#operation/getEdgeRequests>) to support the Accept HTTP header with quality values.
 * Improved validation of edge logic using [eval_func](</docs/edge-logic/supported-directives#eval_func>).
 * Improved [hostnames API](</apidocs#operation/listhostnames>).
 * Added the [origin_selection_algorithm directive](</docs/edge-logic/supported-directives#origin_selection_algorithm>) so you can control the selection of an IP address if an origin resolves to muliple IP addresses.
@@ -394,7 +394,7 @@
 * Added support for filtering the [region list](</apidocs#operation/get-cdn-edgeHostnames-clientRegions>) by ISP.
 * Added support for multiple ISPs in a client zone rule.
 * Added support for origin_host in the realtime log feature.
-* Allowed everyone to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>) to remove some query parameters; [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) to disable processing of certain cache-control directives in the response from the origin; [slice](</docs/edge-logic/supported-directives#slice>) to set the size of the slices when fetching large files from the origin; and [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) to add, delete, or overwrite the response header fields from the origin before any other processing.
+* Allowed all customers to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>) to remove some query parameters; [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) to disable processing of certain cache-control directives in the response from the origin; [slice](</docs/edge-logic/supported-directives#slice>) to set the size of the slices when fetching large files from the origin; and [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) to add, delete, or overwrite the response header fields from the origin before any other processing.
 * Added [slice_ignore_etag directive](</docs/edge-logic/supported-directives#slice_ignore_etag>) to disable ETag consistency check of sliced files.
 * Made it easier for a reseller to purge a directory or file on behalf of their customer.
 * Added [fast route origin request report API](</apidocs#operation/post-cdn-report-fastOriginReq>) to show the origin requests accelerated by the High-Speed Data Transmission product.
@@ -461,7 +461,7 @@
 * Added the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>) to return system settings.
 
 ### Portal updates
-* Updated portal's links to help pages.
+* Updated the portal links to help pages.
 * Allowed the escape key to be used to cancel operations and close windows.
 * Added support for trial accounts.
 * Improved the edge logic editor to highlight some syntax errors and support auto-completion of directive and variable names.
@@ -509,7 +509,7 @@
 * Improved [property list API](</apidocs#operation/getPropertyList>)'s filtering support.
 
 ### Portal updates
-* Changed real time logging format field to make it easier to use.
+* Changed real-time logging format field to make it easier to use.
 
 ## April 23, 2020
 
@@ -522,7 +522,7 @@
 ### Portal updates
 * Added ‘Load Balancer Hash Key’ field to Advanced Settings of properties.
 * Improved error handling for client zone rules.
-* Fixed listing pages’ display issue for screens of different sizes.
+* Fixed list display issue for screens of different sizes.
 * Improved forgotten password functionality.
 
 ## April 10, 2020
@@ -555,7 +555,7 @@
 
 ### Portal updates
 * Improved security.
-* Added fields to the edge hostname listing.
+* Added fields to the edge hostname list.
 * Improved display of lists.
 * Added “Has ICP Beian” option for edge hostnames.
 
@@ -613,7 +613,7 @@
 * Updated summary report APIs' responses to include a special group __all__ which consists of total traffic or requests of all groups.
 
 ### Portal updates
-* Added validate link to check Real Time Logging URL.
+* Added "Validate" link below "Real Time Logging URL".
 * Improved forgotten password functionality.
 
 ## December 11, 2019
@@ -626,14 +626,14 @@
 * Ensured that read-only API accounts can make calls to report APIs.
 
 ### Portal updates
-* Fixed missing information on View Certificate page.
-* Improved validation for real time logging settings.
-* Changed label of certificate hash to “Fingerprint”.
-* Fixed display of cache hit ratio when origin traffic is larger than edge.
+* Fixed missing information on the View Certificate page.
+* Improved validation of real-time logging settings.
+* Changed the label of certificate hash to “Fingerprint”.
+* Fixed the display of cache hit ratio when origin traffic is larger than edge traffic.
 
 ## December 2, 2019
 ### API updates
-* Fixed support for protocol downgrade to only apply if the property has a certificate.
+* Fixed support for protocol downgrade to apply only if the property has a certificate.
 * Added support for ISPs in an edge hostname's client zone rules.
 * Supported [search of purge tasks](</apidocs#operation/getPurgeRequestList>) by ID.
 * Supported hasConfig query parameter when getting a [list of properties](</apidocs#operation/getPropertyList>).
@@ -645,8 +645,8 @@
 * Auto-populated form fields when creating a new certificate version.
 * Fixed search function on Content Management page.
 * Displayed the purge quota on the purge creation page.
-* Updated the display of the property listing page.
-* Updated portal documentation to describe real time logging feature and AWS authentication support.
+* Updated the display of the property list page.
+* Updated portal documentation to describe real-time logging feature and AWS authentication support.
 
 ## November 14, 2019
 ### API updates
@@ -683,7 +683,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 * Supported sorting of certificates.
 * Allowed resellers to use the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>).
 * Improved [status code details](</apidocs#operation/getEdgeStatusCodeDetails>) and [origin status code details](</apidocs#operation/getOriginStatusCodeDetails>) reports.
-* Allowed everyone to use the [proxy_buffering](</docs/edge-logic/supported-directives#proxy_buffering>) directive.
+* Allowed all customers to use the [proxy_buffering](</docs/edge-logic/supported-directives#proxy_buffering>) directive.
 
 ### Portal updates
 * Improved portal security.
@@ -693,7 +693,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## October 7, 2019
 ### API updates
-* Added support for sorting of properties, tasks, edge hostnames, accounts, and customers returned by APIs.
+* Added support for sorting properties, tasks, edge hostnames, accounts, and customers returned by APIs.
 * Improved randomness of property IDs.
 * Improved stripping of comments in edge logic.
 * Allowed the cacheKeyHostname field to support NGINX variables.
@@ -704,23 +704,23 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 * Supported passing headers in file and directory purges.
 * Saved preferred language for each portal user.
-* Added “operator” role that you can give to users who are permitted to administer CDN functions but not manage users and roles.
+* Added “operator” role you can assign to users who are permitted to administer CDN functions but not manage users and roles.
 
 ## September 23, 2019
 ### API updates
 * Supported origin server authentication.
 * Supported searching for customer by ID.
 * Added support for certificate expiration and auto-renewal.
-* Made self signed certificate expire in 10 days.
+* Made self-signed certificate expire in 10 days.
 
 ### Portal updates
-* Updated role listing page.
+* Updated role list page.
 * Supported search in the Roles tab.
 * Ensured customers have at least one administrator account.
 
 ## September 16, 2019
 ### API updates
-* Added support for real time logs (also known as download notification).
+* Added support for real-time logs (also known as download notification).
 * Improved error handling.
 * Added API support for [enabling two factor authentication (2FA)](</apidocs#operation/patch-ngadmin-customers-id>) and [resetting a user](</apidocs#operation/patch-ngadmin-contacts-id>) which is useful if they change phones.
 
@@ -836,7 +836,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 * Allowed resellers to [search for multiple customers by their IDs](</apidocs#operation/get-ngadmin-customers>).
 
 ### Portal updates
-* Let users confirm changes before deploying a property.
+* Required users to confirm changes before deploying a property.
 * Improved the create property page.
 * Supported several additional NGINX directives.
 * Improved login page.
@@ -844,7 +844,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## March 31, 2019
 ### API updates
 * Improved validation of the edge logic.
-* Added support for getting the customer ID which owns various resources.
+* Added support for getting the customer ID that owns various resources.
 * Updated the list of [supported NGINX directives](</docs/edge-logic/supported-directives>).
 * Fixed purge of URLs with special characters.
 * Separated file and directory purge quotas.
@@ -934,7 +934,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## November 19, 2018
 ### API updates
-* Added allowedCacheDirectives to control access to resource intensive NGINX directives.
+* Added allowedCacheDirectives to control access to resource-intensive NGINX directives.
 * Updated [edge hostname API](</apidocs#operation/createEdgeHostname>).
 
 ## November 6, 2018
