@@ -8,7 +8,7 @@
 * Improved edge logic validation to ensure that nested location blocks have a content handler.
 * Improved handling of customer deletion when the customer is still using resources.
 * Improved validation of hostnames used in a property.
-* Updated [deployment](</apidocs#operation/createDeployment>) to support the Check-Certificate header to bypass checking of expired certificates and hostnames missing from the certificate’s SAN. This may be useful in some circumstances for testing though it should not normally be used in production since visitors would be discouraged by their browsers from accessing your content.
+* Updated [deployment](</apidocs#operation/createDeployment>) to support the Check-Certificate header to bypass checking of expired certificates and hostnames missing from the certificate’s SAN. This may be useful in some circumstances for testing, though it should not normally be used in production, since browsers would discourage visitors from accessing your content.
 * Improved certificate verification.
 * Ensured that query strings of URLs that are purged are respected.
 
@@ -26,8 +26,8 @@
 
 * Improved validation of API calls made by resellers.
 * Improved error handling of [secret management APIs](</apidocs#tag/Secret-Management>).
-* Added support for “operation” report annotations which CDNetworks may use to identify operational changes. We expect these to be infrequent.
-* Made API query parameters case insensitive for ease of use.
+* Added support for “operation” report annotations that CDNetworks may use to identify operational changes. We expect these to be infrequent.
+* Made API query parameters case-insensitive for ease of use.
 * Fixed [annotation list](</apidocs#operation/queryAnnotationList>) to include recently updated annotations.
 * Fixed [search for secret by its ID](</apidocs#operation/get-cdn-secrets>).
 
@@ -191,7 +191,7 @@
 * Reset the time if you clear the date range fields in validation, report, and deployment list pages.
 * Allowed validation of a frozen property. This may be necessary due to cache version changes which obsolete previously validated properties.
 
-## Feburary 11, 2021
+## February 11, 2021
 
 ### API updates
 * Improved an error message in [portal user creation API](</apidocs#operation/createContact>).
@@ -486,7 +486,7 @@
 
 ## May 22, 2020
 ### API updates
-* Updated limit on purge reuests to a maximum of 1000 files and 5 directories at a time.
+* Updated limit on purge requests to a maximum of 1000 files and 5 directories at a time.
 * Improved [property list API's](</apidocs#operation/getPropertyList>) filtering.
 * Introduced [origin_limit_rate directive](</docs/edge-logic/supported-directives#origin_limit_rate>) allowing you to limit the speed at which the response is read from the origin server.
 * Introduced [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) allowing you to redefine or append fields to the request header passed to the origin server.
