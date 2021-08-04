@@ -123,7 +123,7 @@
 * Fixed responses for the [customer list API](</apidocs#operation/get-ngadmin-customers>) when filtering using the regionalOffice parameter.
 * Improved management of purge quotas.
 * Improved efficiency of [realtime_log_downsample](</docs/edge-logic/supported-directives#realtime_log_downsample>).
-* Trimmed realtime log format string.
+* Trimmed real-time log format string.
 * Extended [property list API](</apidocs#operation/getPropertyList>)'s hasConfig filter to allow searching subfields of property version.
 * Added support for "children-only" Report-Range header in [API account list](</apidocs#operation/get-ngadmin-apiAccounts>) API for resellers.
 * Added support for "children-only" Report-Range header in [portal user list](</apidocs#operation/getContacts>) API for resellers.
@@ -393,7 +393,7 @@
 * Added support for filtering the [ISPs list](</apidocs#operation/get-cdn-edgeHostnames-isps>) by region.
 * Added support for filtering the [region list](</apidocs#operation/get-cdn-edgeHostnames-clientRegions>) by ISP.
 * Added support for multiple ISPs in a client zone rule.
-* Added support for origin_host in the realtime log feature.
+* Added support for origin_host in the real-time log feature.
 * Allowed all customers to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>) to remove some query parameters; [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) to disable processing of certain cache-control directives in the response from the origin; [slice](</docs/edge-logic/supported-directives#slice>) to set the size of the slices when fetching large files from the origin; and [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) to add, delete, or overwrite the response header fields from the origin before any other processing.
 * Added [slice_ignore_etag directive](</docs/edge-logic/supported-directives#slice_ignore_etag>) to disable ETag consistency check of sliced files.
 * Made it easier for a reseller to purge a directory or file on behalf of their customer.
