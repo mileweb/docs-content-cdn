@@ -6,26 +6,26 @@
       "showOnMainPage": true,
       "links": [
         {
-          "title": "Quick Start",
-          "caption": "Getting started with CDN360",
+          "title": "快速开始",
+          "caption": "开始使用CDN360",
           "icon": "bolt",
           "path": "docs/intro"
         },
         {
-          "title": "Portal Reference",
-          "caption": "CDN360 Portal reference",
+          "title": "Portal参考文档",
+          "caption": "CDN360 Portal参考文档",
           "icon": "book",
           "path": "docs/portal/accessing-portal/logging-in"
         },
         {
-          "title": "API Reference",
-          "caption": "CDN360 API reference",
+          "title": "API参考文档",
+          "caption": "CDN360 API参考文档",
           "icon": "gear",
           "path": "apidocs"
         },
         {
-          "title": "Edge Logic Reference",
-          "caption": "Learn CDN360 Edge Logic",
+          "title": "边缘逻辑参考文档",
+          "caption": "学习CDN360的边缘逻辑",
           "icon": "cli",
           "path": "docs/edge-logic/intro"
         }
@@ -39,64 +39,64 @@
         "heading": true,
         "routes": [
           {
-            "title": "Accessing the Portal",
+            "title": "开始使用Portal",
             "routes": [
               {
-                "title": "Logging-In",
+                "title": "如何登录",
                 "path": "/docs/portal/accessing-portal/logging-in.md"
               },
               {
-                "title": "Forgot Password",
+                "title": "忘记密码",
                 "path": "/docs/portal/accessing-portal/forgot-password.md"
               },
               {
-                "title": "Navigating UI",
+                "title": "页面切换",
                 "path": "/docs/portal/accessing-portal/navigating-ui.md"
               }
             ]
           },
           {
-            "title": "Edge Configurations",
+            "title": "边缘配置",
             "routes": [
               {
-                "title": "Overview",
+                "title": "概览",
                 "path": "/docs/portal/edge-configurations/managing-properties.md"
               },
               {
-                "title": "Create a Property",
+                "title": "创建加速项",
                 "path": "/docs/portal/edge-configurations/creating-property.md"
               },
               {
-                "title": "Edit a Property",
+                "title": "编辑加速项",
                 "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
-                "title": "Deploy/Undeploy a Property",
+                "title": "部署或卸载加速项",
                 "path": "/docs/portal/edge-configurations/deploying-property.md"
               },
               {
-                "title": "Test a Property",
+                "title": "测试加速项",
                 "path": "/docs/portal/edge-configurations/testing-property.md"
               },
               {
-                "title": "Delete a Property",
+                "title": "删除加速项",
                 "path": "/docs/portal/edge-configurations/deleting-property.md"
               },
               {
-                "title": "Compare Property Versions",
+                "title": "比较加速项版本",
                 "path": "/docs/portal/edge-configurations/comparing-properties.md"
               },
               {
-                "title": "Manage Origins",
+                "title": "管理源站配置",
                 "path": "/docs/portal/edge-configurations/managing-origins.md"
               }
             ]
           },
           {
-            "title": "Secrets",
+            "title": "保密信息",
             "routes": [
               {
-                "title": "Overview",
+                "title": "概览",
                 "path": "/docs/portal/secrets/overview.md"
               },
               {
@@ -114,10 +114,10 @@
             ]
           },
           {
-            "title": "Traffic Management",
+            "title": "流量管理",
             "routes": [
               {
-                "title": "Overview",
+                "title": "概览",
                 "path": "/docs/portal/traffic-management/overview.md"
               },
               {
@@ -135,10 +135,10 @@
             ]
           },
           {
-            "title": "Certificates",
+            "title": "证书管理",
             "routes": [
               {
-                "title": "Overview",
+                "title": "概览",
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
@@ -163,25 +163,25 @@
               }
             ]
           },
-          { "title": "Reports", "path": "/docs/portal/reports.md" },
-          { "title": "Content Management", "path": "/docs/portal/content-management.md" },
-          { "title": "Tasks",
+          { "title": "报表查看", "path": "/docs/portal/reports.md" },
+          { "title": "内容管理", "path": "/docs/portal/content-management.md" },
+          { "title": "异步任务",
             "routes": [
               {
-                "title": "Validations",
+                "title": "配置验证",
                 "path": "/docs/portal/tasks/validations.md"
               },
               {
-                "title": "Deployments",
+                "title": "配置部署",
                 "path": "/docs/portal/tasks/deployments.md"
               }
             ]
           },
           {
-            "title": "Identities and Access",
+            "title": "身份和权限",
             "routes": [
               {
-                "title": "Overview",
+                "title": "概览",
                 "path": "/docs/portal/identities-and-access/overview.md"
               },
               {
@@ -197,11 +197,11 @@
         ]
       },
       { 
-        "title": "Edge Logic",
+        "title": "边缘逻辑",
         "heading": true,
         "routes": [
           {
-            "title": "Introduction",
+            "title": "简介",
             "path": "/docs/edge-logic/intro.md"
           },
           {
@@ -209,45 +209,45 @@
             "path": "/docs/edge-logic/hello-world.md"
           },
           {
-            "title": "Simple Caching",
+            "title": "简单缓存",
             "path": "/docs/edge-logic/simple-caching.md"
           },
           {
-            "title": "Multiple Origins with 'if'",
+            "title": "用'if'来选择多个源站",
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
-            "title": "Staging Environment",
+            "title": "演练环境",
             "path": "/docs/edge-logic/staging-environment.md"
           },
           {
-            "title": "Supported Directives",
+            "title": "支持的指令",
             "path": "/docs/edge-logic/supported-directives.md"
           },
           {
-            "title": "Built-in Variables",
+            "title": "内置变量",
             "path": "/docs/edge-logic/built-in-variables.md"
           },
           {
-            "title": "FAQ",
+            "title": "常见问题",
             "path": "/docs/edge-logic/faq.md"
           }
         ]
       },
       { 
-        "title": "Recipes",
+        "title": "实现案例",
         "heading": true,
         "routes": [
           {
-            "title": "AWS Bucket Acceleration",
+            "title": "加速一个AWS Bucket",
             "path": "/docs/recipes/aws-bucket.md"
           },
           {
-            "title": "REST API Acceleration",
+            "title": "加速REST API",
             "path": "/docs/recipes/api-acceleration.md"
           },
           {
-            "title": "Secure Content Delivery",
+            "title": "安全地加速和分发",
             "path": "/docs/recipes/secure-delivery.md"
           }
         ]
