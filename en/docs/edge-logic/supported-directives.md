@@ -222,6 +222,9 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
 | integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
 | string<br>manipulation | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
+| string<br>manipulation | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>Convert the input string to upper case.|
+| string<br>manipulation | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>Convert the input string to lower case.|
+| string<br>manipulation | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>Get a sub-string of ```<length>``` from position ```<start>``` of the input. ```<start``` can be negative, same as [substr()](https://www.w3schools.com/jsref/jsref_substr.asp) of Javascript.|
 
 **NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
 
