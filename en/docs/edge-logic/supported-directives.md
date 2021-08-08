@@ -224,7 +224,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | string<br>manipulation | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 | string<br>manipulation | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>Convert the input string to upper case.|
 | string<br>manipulation | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>Convert the input string to lower case.|
-| string<br>manipulation | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>Get a sub-string of ```<length>``` from position ```<start>``` of the input. ```<start``` can be negative, same as [substr()](https://www.w3schools.com/jsref/jsref_substr.asp) of Javascript.|
+| string<br>manipulation | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>Get a sub-string of ```<length>``` from position ```<start>``` of the input. ```<start>``` can be negative, same as [substr()](https://www.w3schools.com/jsref/jsref_substr.asp) of Javascript.|
 
 **NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
 
