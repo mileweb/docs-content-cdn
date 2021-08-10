@@ -12261,6 +12261,12 @@
                       "code": "InvalidServerRegion",
                       "message": "Invalid server region 'invalid'."
                     }
+                  },
+                  "Invalid comments": {
+                    "value": {
+                      "code": "InvalidComments",
+                      "message": "The comments field is required."
+                    }
                   }
                 }
               }
@@ -12865,7 +12871,8 @@
                         "required": [
                           "id",
                           "time",
-                          "type"
+                          "type",
+                          "comments"
                         ]
                       }
                     }
@@ -13225,7 +13232,8 @@
                   "required": [
                     "id",
                     "time",
-                    "type"
+                    "type",
+                    "comments"
                   ]
                 },
                 "examples": {
@@ -13356,7 +13364,7 @@
                   "Invalid comments": {
                     "value": {
                       "code": "InvalidComments",
-                      "message": "The comments can be up to 250 characters."
+                      "message": "The comments cannot be empty and can be up to 250 characters."
                     }
                   }
                 }
@@ -14853,6 +14861,13 @@
                     "customerId": {
                       "type": "integer",
                       "description": "ID of the customer that owns the API account."
+                    },
+                    "ipWhiteList": {
+                      "type": "array",
+                      "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -15088,6 +15103,13 @@
                     "type": "string",
                     "format": "email",
                     "description": "Email address of the primary user of the API account."
+                  },
+                  "ipWhiteList": {
+                    "type": "array",
+                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -15420,6 +15442,13 @@
                       "read-only",
                       "operator"
                     ]
+                  },
+                  "ipWhiteList": {
+                    "type": "array",
+                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
@@ -17096,7 +17125,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Specify the ID of a child customer."
+          "description": "Specify the ID of a child customer. The value can be <i>me</i> if you wish to retrieve or update your own settings. However, you cannot modify your own <i>configs</i> and <i>chinaBizInfo</i> fields."
         }
       ],
       "get": {
@@ -17113,6 +17142,7 @@
                   "title": "customerresponse",
                   "type": "object",
                   "description": "Customer account details",
+                  "examples": [],
                   "properties": {
                     "customerId": {
                       "type": "integer",
@@ -17307,7 +17337,7 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -17358,8 +17388,7 @@
                     "apiName",
                     "name",
                     "apiKey"
-                  ],
-                  "examples": []
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -17449,6 +17478,7 @@
                   "title": "customerresponse",
                   "type": "object",
                   "description": "Customer account details",
+                  "examples": [],
                   "properties": {
                     "customerId": {
                       "type": "integer",
@@ -17643,7 +17673,7 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company.\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -17694,8 +17724,7 @@
                     "apiName",
                     "name",
                     "apiKey"
-                  ],
-                  "examples": []
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -17795,7 +17824,7 @@
             }
           },
           "403": {
-            "description": "Forbidden. Refer to the response body for details.",
+            "description": "The API call was forbidden. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -17813,6 +17842,12 @@
                   "Invalid self update": {
                     "value": {
                       "code": "InvalidSelfUpdateConfig",
+                      "message": "You are not authorized to make this change. Please contact your account representative for further instructions."
+                    }
+                  },
+                  "Invalid self update of china business info": {
+                    "value": {
+                      "code": "InvalidSelfUpdateChinaBizInfo",
                       "message": "You are not authorized to make this change. Please contact your account representative for further instructions."
                     }
                   }
@@ -17848,7 +17883,7 @@
           }
         },
         "operationId": "patch-ngadmin-customers-id",
-        "description": "Update a customer account. Settings within the <i>configs</i> field can only be set by a reseller on behalf of a child customer. A child customer's access to a product can only be removed if they are not using resources. For example, the child should not have deployed properties.",
+        "description": "Update a customer account. Settings within the <i>configs</i> field can only be set by a reseller on behalf of a child customer. A child customer's access to a product can only be removed if they are not currently using resources. For example, the child should not have any remaining deployed properties.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -18047,7 +18082,7 @@
                     "default": [
                       "0.0.0.0/0"
                     ],
-                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n ",
                     "items": {
                       "type": "string"
                     }
@@ -18540,7 +18575,7 @@
             }
           }
         },
-        "description": "Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the phone, address, responsiblePerson, and chinaBizInfo fields for the customer before enabling deployment to China.",
+        "description": "Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the <i>phone</i>, <i>address</i>, <i>responsiblePerson</i>, and <i>chinaBizInfo</i> fields for the customer before enabling deployment to China.",
         "tags": [
           "Customer Management"
         ],
@@ -18569,7 +18604,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using API accounts are permitted.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.\n",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
                     "items": {
                       "type": "string"
                     }
