@@ -8,7 +8,7 @@ Based on regularly updated rules, the firewall rejects suspicious packets that m
 
 ### Access Control at the Edge
 Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN360 supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
-* Client IP restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>): <span class="badge yellow">ETA: May. 2021</span>
+* Client IP restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>):
 ```nginx
 allow 123.0.0.1/8;
 allow 234.12.34.56;
@@ -77,9 +77,7 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
 
 ### Secret Management 
-<span class="badge yellow">ETA: May. 2021</span>
-
-As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The "secret management" feature allows you to manage and apply secret keys with minimal exposure.
+As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The [`secret management`](</docs/portal/secrets/overview>) feature allows you to manage and apply secret keys with minimal exposure.
 
 ### Bot Management
 Before the content is delivered to fulfill a request, there may be times when you want to make sure the request was made by a human using a browser instead of by a bot or crawler. The following Edge Logic code demonstrates how to prompt the users to click a button to receive the requested content:
