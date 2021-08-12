@@ -15,7 +15,7 @@
 * Added more help information when creating a new certificate version.
 * Ensured that the range picker filter is highlighted properly in the Content Management page.
 * Improved error handling when entering invalid date ranges in the Deployments page.
-* Ensured user can confirm they want to undeploy a property that has recent requests.
+* Ensured users can confirm they want to undeploy a property that has recent requests.
 * Fixed banner shown to self-signup customers.
 * Fixed button display in the property comparison page.
 
