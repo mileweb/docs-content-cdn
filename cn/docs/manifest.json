@@ -2,7 +2,7 @@
     "metadata": {
       "id": "cdn",
       "title": "CDN360",
-      "description": "CDN360 leads the evolution of content delivery networks (CDNs) by accelerating, securing, scaling, and delivering content to website visitors worldwide, regardless of their location.",
+      "description": "CDN360是一个引领内容分发网络(CDN)演进的下一代产品。她使内容拥有者可以随心所欲地配置分发的方式，也给遍布世界各地的终端用户带来安全，快速，稳定的服务和流畅的体验。",
       "showOnMainPage": true,
       "links": [
         {
@@ -32,8 +32,8 @@
       ]
     },
     "routes": [
-      { "title": "Introduction", "path": "/docs/intro.md" },
-      { "title": "Getting Started", "path": "/docs/getting-started.md" },
+      { "title": "概览", "path": "/docs/intro.md" },
+      { "title": "如何开始", "path": "/docs/getting-started.md" },
       {
         "title": "Portal",
         "heading": true,
@@ -100,15 +100,15 @@
                 "path": "/docs/portal/secrets/overview.md"
               },
               {
-                "title": "Create a Secret",
+                "title": "创建保密信息",
                 "path": "/docs/portal/secrets/creating-secrets.md"
               },
               {
-                "title": "Edit a Secret",
+                "title": "修改保密信息",
                 "path": "/docs/portal/secrets/editing-secrets.md"
               },
               {
-                "title": "Delete a Secret",
+                "title": "删除保密信息",
                 "path": "/docs/portal/secrets/deleting-secrets.md"
               }
             ]
@@ -121,15 +121,15 @@
                 "path": "/docs/portal/traffic-management/overview.md"
               },
               {
-                "title": "Create an Edge Hostname",
+                "title": "创建边缘域名",
                 "path": "/docs/portal/traffic-management/creating-edge-hostname.md"
               },
               {
-                "title": "Edit an Edge Hostname",
+                "title": "修改边缘域名",
                 "path": "/docs/portal/traffic-management/editing-edge-hostname.md"
               },
               {
-                "title": "Delete an Edge Hostname",
+                "title": "删除边缘域名",
                 "path": "/docs/portal/traffic-management/deleting-edge-hostname.md"
               }
             ]
@@ -142,23 +142,23 @@
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
-                "title": "Create a Certificate",
+                "title": "创建证书",
                 "path": "/docs/portal/certificates/creating-certificates.md"
               },
               {
-                "title": "Update a Certificate",
+                "title": "修改证书",
                 "path": "/docs/portal/certificates/updating-certificates.md"
               },
               {
-                "title": "Deploy a Certificate",
+                "title": "部署证书",
                 "path": "/docs/portal/certificates/deploying-certificates.md"
               },
               {
-                "title": "Auto-Renew a Certificate",
+                "title": "自动更新证书",
                 "path": "/docs/portal/certificates/auto-renewal.md"
               },
               {
-                  "title": "Delete a Certificate",
+                  "title": "删除证书",
                 "path": "/docs/portal/certificates/deleting-certificate.md"
               }
             ]
@@ -185,11 +185,11 @@
                 "path": "/docs/portal/identities-and-access/overview.md"
               },
               {
-                "title": "Managing Roles",
+                "title": "管理角色",
                 "path": "/docs/portal/identities-and-access/managing-roles.md"
               },
               {
-                "title": "Managing Users",
+                "title": "管理用户",
                 "path": "/docs/portal/identities-and-access/managing-users.md"
               }
             ]
@@ -247,7 +247,7 @@
             "path": "/docs/recipes/api-acceleration.md"
           },
           {
-            "title": "安全地加速和分发",
+            "title": "安全相关的配置",
             "path": "/docs/recipes/secure-delivery.md"
           }
         ]
