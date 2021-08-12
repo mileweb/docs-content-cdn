@@ -6,7 +6,7 @@
 * Enforced IP allow lists for API calls.
 * Improved validation of portal user configuration.
 * Allowed reseller to call [deployment management APIs](</apidocs#tag/Deployment-Management>) on behalf of customer if needed.
-* Fixed notification related bug.
+* Fixed notification-related bug.
 
 ### Portal updates
 * Improved button layout in the property edit page.
