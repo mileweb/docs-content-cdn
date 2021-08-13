@@ -1,5 +1,25 @@
 # Release Notes
 
+## August 11, 2021
+### API updates
+* Improved validation of report annotations.
+* Enforced IP allow lists for API calls.
+* Improved validation of portal user configuration.
+* Allowed reseller to call [deployment management APIs](</apidocs#tag/Deployment-Management>) on behalf of customer if needed.
+* Fixed notification-related bug.
+
+### Portal updates
+* Improved button layout in the property edit page.
+* Updated support for spaces in a ['secret'](</docs/portal/secrets/overview>).
+* Improved the certificate details page.
+* Added more help information when creating a new certificate version.
+* Ensured that the range picker filter is highlighted properly in the Content Management page.
+* Improved error handling when entering invalid date ranges in the Deployments page.
+* Ensured user can confirm they want to undeploy a property that has recent requests.
+* Fixed banner shown to self-signup customers.
+* Fixed button display in the property comparison page.
+
+
 ## July 28, 2021
 ### API updates
 * Fixed [portal user list API](</apidocs#operation/getContacts>)'s handling of the ids query parameter.
