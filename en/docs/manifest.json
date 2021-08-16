@@ -28,11 +28,10 @@
           "caption": "Learn CDN360 Edge Logic",
           "icon": "cli",
           "path": "docs/edge-logic/intro"
-        }
-        ,
+        },
         {
           "title": "Release Notes",
-          "caption": "Learn About Our Latest Release",
+          "caption": "Learn About Our Releases",
           "icon": "notes",
           "path": "docs/release-notes"
         }
