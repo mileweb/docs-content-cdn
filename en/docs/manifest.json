@@ -29,6 +29,13 @@
           "icon": "cli",
           "path": "docs/edge-logic/intro"
         }
+        ,
+        {
+          "title": "Release Notes",
+          "caption": "Learn About Our Latest Release",
+          "icon": "notes",
+          "path": "docs/release-notes"
+        }
       ]
     },
     "routes": [
@@ -249,6 +256,16 @@
           {
             "title": "Secure Content Delivery",
             "path": "/docs/recipes/secure-delivery.md"
+          }
+        ]
+      },
+      { 
+        "title": "Release Notes",
+        "heading": true,
+        "routes": [
+          {
+            "title": "Release Notes",
+            "path": "/docs/release-notes.md"
           }
         ]
       }

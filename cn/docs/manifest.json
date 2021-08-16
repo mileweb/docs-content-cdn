@@ -251,6 +251,16 @@
             "path": "/docs/recipes/secure-delivery.md"
           }
         ]
+      },
+      { 
+        "title": "Release Notes",
+        "heading": true,
+        "routes": [
+          {
+            "title": "Release Notes",
+            "path": "/docs/release-notes.md"
+          }
+        ]
       }
     ]
   }
