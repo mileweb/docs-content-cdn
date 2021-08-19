@@ -1,11 +1,14 @@
 # Creating a Property
 
-To create a property, complete the Create a Property form with required information. After creating a property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
+There are two ways to create a new property:<ul><li>Create a new property from scratch.</ul></li><ul><li> Clone an existing property whose settings are similar to the property you want to create, and then change the settings of the cloned property to suit your needs.</ul></li>
+
+After you create the new property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
 
 ## Getting Started
 
 1. In the left pane, click **Edge Configurations**, and then select **Properties**.
-2. At the top right of the Properties page, click the **Create Property** button. 
+2. To create a new property from scratch, click the **Create Property** button at the top right of the Properties page. <br><br><u>OR </u></br>
+   To clone an existing property, find the property you want to clone on the Properties page, and then click the vertical ellipsis under **Actions** and select **Clone**. Or click a property ID, and then click the horizontal ellipsis next to the **Edit** or **Clone** button and select **Clone**. 
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="900"></p>
 
