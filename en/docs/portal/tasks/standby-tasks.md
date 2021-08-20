@@ -2,9 +2,9 @@
 
 When you deploy and undeploy certificates and properties, you can perform  the action immediately or move it to a standby queue, where it will join other standby actions waiting to be run.
 
-Using the Standby Task page, you can view all standby actions in the queue and run them all at one time.
+Using the Standby Task form, you can view all standby actions in the queue and run them all at one time.
 
-## Displaying the Standby Task Page
+## Displaying the Standby Task Form
 You can display the Standby Task form from the Certificates, Edge Configurations, and Deployment pages.
 
 ### Displaying the Standby Task Form from the Certificate or Edge Configurations Page
@@ -43,5 +43,5 @@ To remove an individual standby action from a subqueue, click the trash icon on 
 ## Running Standby Actions
 To run all of the actions under **Destination: Staging** or **Destination: Production**, click the **Run** button for that subqueue. 
 **Note:** Running the actions in one subqueue does not run the actions in the other subqueue.
-##Exiting the Standby Task Page
+##Exiting the Standby Task Form
 At the top-right of the form, click the **< Back** button to exit the Standby Task form.

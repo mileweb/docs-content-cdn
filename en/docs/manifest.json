@@ -77,6 +77,10 @@
                 "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
+                "title": "Validating a Property",
+                "path": "/docs/portal/edge-configurations/validating-property.md"
+              },
+              {
                 "title": "Deploy/Undeploy a Property",
                 "path": "/docs/portal/edge-configurations/deploying-property.md"
               },
