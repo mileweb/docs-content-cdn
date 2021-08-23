@@ -423,12 +423,15 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
 ```nginx
-# when URI is not specified, $uri and query string will be appended by default
+# 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
-origin_pass my_origin$uri$is_args$args; #same as above
-origin_pass my_origin$uri; #to drop the query string
-origin_pass my_origin/abc$uri;
+eval_func $uri_uenc URL_ENCODE $uri;
+origin_pass my_origin$uri_uenc$is_args$args; #效果完全同上
+origin_pass my_origin$uri_uenc; #不带query string回源
+origin_pass my_origin/abc$uri_uenc;
 ```
+请注意nginx变量`$uri`的值是被URL解码过的，所以其有可能包含二进制格式，比如UTF-8。
+如果源站无法处理二进制的URL，您可以使用`eval_func`将其URL编码后再用来生成回源请求。
 
 ### `origin_read_timeout`
 

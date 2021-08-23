@@ -1,9 +1,9 @@
-## Built-in Variables
+## 内置变量
 
 The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
 If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
-| **Variable Name** | **Description** | **Edge Logic** | **[R-T Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
+| **变量名称** | **描述** | **边缘逻辑** | **[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="args"></span><span class="var">$args</span> | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -77,4 +77,4 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | <span id="upstream_response_time"></span><span class="var">$upstream_response_time</span> |<span class="badge small" title="numerical value">#</span> time spent in seconds with millisecond resolution receiving the complete response from a parent or origin server | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="upstream_server_type"></span><span class="var">$upstream_server_type</span> | 'O' for origin server; 'C' for parent cache server. | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="upstream_trailer_"></span><span class="var">$upstream\_trailer\_<em>name</em></span> | trailer with the specified name passed from the edge logic with the [add_trailer](/docs/edge-logic/supported-directives#add_trailer) directive. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="uri"></span><span class="var">$uri</span> | request $uri without query string. In Edge Logic, it may be modified by the "[rewrite](/docs/edge-logic/supported-directives#rewrite)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="uri"></span><span class="var">$uri</span> | [归一化的](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)请求uri，不包含query string。在边缘逻辑里，其值会被"[rewrite](/docs/edge-logic/supported-directives#rewrite)"指令修改。 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

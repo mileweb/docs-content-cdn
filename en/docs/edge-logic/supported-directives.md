@@ -423,12 +423,15 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
 ```nginx
-# when URI is not specified, $uri and query string will be appended by default
+# when URI is not specified, URL-encoded $uri and query string will be appended by default
 origin_pass my_origin;
-origin_pass my_origin$uri$is_args$args; #same as above
-origin_pass my_origin$uri; #to drop the query string
-origin_pass my_origin/abc$uri;
+eval_func $uri_uenc URL_ENCODE $uri;
+origin_pass my_origin$uri_uenc$is_args$args; #same as above
+origin_pass my_origin$uri_uenc; #to drop the query string
+origin_pass my_origin/abc$uri_uenc;
 ```
+Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8.
+If you know the origin can't handle it, use `eval_func` to encoded it to form the URL to origin.
 
 ### `origin_read_timeout`
 
