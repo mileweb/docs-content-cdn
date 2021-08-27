@@ -3,7 +3,7 @@
   "info": {
     "title": "CDN360 API Specification",
     "version": "1.0",
-    "description": "CDN360 APIs allow you to manage CDN360 services.",
+    "description": "CDN360 APIs allow you to manage the CDN360 service.",
     "contact": {
       "url": "https://www.cdnetworks.com"
     }
@@ -88,6 +88,9 @@
                       }
                     }
                   },
+                  "x-tags": [
+                    "Property Management"
+                  ],
                   "properties": {
                     "version": {
                       "type": "integer"
@@ -304,7 +307,7 @@
                           "maxLength": 100
                         },
                         "tlsCertificateId": {
-                          "type": "number",
+                          "type": "string",
                           "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                         },
                         "tlsMinVersion": {
@@ -502,7 +505,7 @@
                           "type": "string"
                         },
                         "frozen": {
-                          "type": "string"
+                          "type": "boolean"
                         },
                         "creationTime": {
                           "type": "string"
@@ -518,10 +521,7 @@
                         }
                       }
                     }
-                  },
-                  "x-tags": [
-                    "Property Management"
-                  ]
+                  }
                 },
                 "examples": {
                   "example-1": {
@@ -534,7 +534,7 @@
                         "tlsMinVersion": "1.1",
                         "tlsMaxVersion": "1.2",
                         "tlsCiphers": "ALL:-MD5",
-                        "syntaxVersion": "1",
+                        "syntaxVersion": 1,
                         "hasBeian": false,
                         "schemeInCacheKey": false,
                         "requestHandlers": {
@@ -962,7 +962,7 @@
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
-                    "type": "number",
+                    "type": "string",
                     "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                   },
                   "tlsMinVersion": {
@@ -1800,14 +1800,14 @@
                                   "by": {
                                     "type": "array",
                                     "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
-                                    "enum": [
-                                      "standard",
-                                      "premium",
-                                      "premium+",
-                                      "ultra"
-                                    ],
                                     "items": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "standard",
+                                        "premium",
+                                        "premium+",
+                                        "ultra"
+                                      ]
                                     }
                                   },
                                   "to": {
@@ -2156,14 +2156,14 @@
                             "by": {
                               "type": "array",
                               "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
-                              "enum": [
-                                "standard",
-                                "premium",
-                                "premium+",
-                                "ultra"
-                              ],
                               "items": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                  "standard",
+                                  "premium",
+                                  "premium+",
+                                  "ultra"
+                                ]
                               }
                             },
                             "to": {
@@ -2406,14 +2406,14 @@
                             "by": {
                               "type": "array",
                               "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
-                              "enum": [
-                                "standard",
-                                "premium",
-                                "premium+",
-                                "ultra"
-                              ],
                               "items": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                  "standard",
+                                  "premium",
+                                  "premium+",
+                                  "ultra"
+                                ]
                               }
                             },
                             "to": {
@@ -3013,7 +3013,7 @@
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
-                    "type": "number",
+                    "type": "string",
                     "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                   },
                   "tlsMinVersion": {
@@ -3610,7 +3610,7 @@
                         "maxLength": 100
                       },
                       "tlsCertificateId": {
-                        "type": "number",
+                        "type": "string",
                         "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                       },
                       "tlsMinVersion": {
@@ -4441,14 +4441,14 @@
                             "by": {
                               "type": "array",
                               "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
-                              "enum": [
-                                "standard",
-                                "premium",
-                                "premium+",
-                                "ultra"
-                              ],
                               "items": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                  "standard",
+                                  "premium",
+                                  "premium+",
+                                  "ultra"
+                                ]
                               }
                             },
                             "to": {
@@ -4921,7 +4921,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN360. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdnapi/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN360. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -7148,7 +7148,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The deployment task has been created. The Location header in the response contains a URL to the new task. You can call our <a href=\"#operation/queryDeploymentTask\">API to get the status of the deployment</a>.",
             "headers": {
               "Location": {
                 "schema": {
@@ -7159,7 +7159,7 @@
             }
           },
           "400": {
-            "description": "The request was invalid. Check the response body for details.",
+            "description": "The request was invalid. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7202,6 +7202,12 @@
                     "value": {
                       "code": "InvalidCertificateVersion",
                       "message": "The specified version 100 of certificate 5c65d18197146f000148511f does not exist."
+                    }
+                  },
+                  "Certificate mismatch": {
+                    "value": {
+                      "code": "CertificateMismatch",
+                      "message": "The domain(s) mytestdomain.domain.info are not included in the Subject Alternative Name field of the deployed version of certificate c5fbb345a24615f2a7ea0791."
                     }
                   }
                 }
@@ -7744,7 +7750,10 @@
                             "description": "A hostname whose property has been deployed to production or staging."
                           },
                           "propertyInProduction": {
-                            "type": "object",
+                            "type": [
+                              "object",
+                              "null"
+                            ],
                             "description": "Describes the property deployed to production. It can be 'null' if the property is not deployed to production.",
                             "properties": {
                               "propertyId": {
@@ -7766,7 +7775,10 @@
                             }
                           },
                           "propertyInStaging": {
-                            "type": "object",
+                            "type": [
+                              "object",
+                              "null"
+                            ],
                             "description": "Describes the property deployed to staging. It can be 'null' if the property is not deployed to staging.",
                             "properties": {
                               "propertyId": {
@@ -7980,7 +7992,10 @@
                       "description": "A hostname whose property has been deployed to production or staging."
                     },
                     "propertyInProduction": {
-                      "type": "object",
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "description": "Describes the property deployed to production. It can be 'null' if the property is not deployed to production.",
                       "properties": {
                         "propertyId": {
@@ -8002,7 +8017,10 @@
                       }
                     },
                     "propertyInStaging": {
-                      "type": "object",
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "description": "Describes the property deployed to staging. It can be 'null' if the property is not deployed to staging.",
                       "properties": {
                         "propertyId": {
@@ -13169,7 +13187,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The response contains details about the annotation.",
             "content": {
               "application/json": {
                 "schema": {
@@ -13422,6 +13440,7 @@
                   "hostnames": {
                     "type": "array",
                     "description": "List of applicable hostnames. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, the annotation applies to data for all hostnames.",
+                    "nullable": true,
                     "items": {
                       "type": "string"
                     }
@@ -13439,11 +13458,8 @@
               "examples": {
                 "example-1": {
                   "value": {
-                    "comments": null,
-                    "hostnames": null,
                     "time": "2019-11-20T12:02:18Z",
-                    "type": "operation",
-                    "clientRegions": null
+                    "type": "operation"
                   }
                 }
               }
@@ -14435,13 +14451,14 @@
                       },
                       "products": {
                         "type": "array",
-                        "enum": [
-                          "ECP",
-                          "CDN"
-                        ],
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent the CDN360 product or \"ECP\" for the Edge Computing Platform product.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "CDN",
+                            "ECP",
+                            "HDT"
+                          ]
                         }
                       },
                       "canImpersonate": {
@@ -14703,7 +14720,7 @@
                   "Invalid Ids": {
                     "value": {
                       "code": "InvalidIds",
-                      "message": "At least one of the specified ID in the 'ids' parameter is not a valid integer."
+                      "message": "At least one of the specified IDs in the 'ids' parameter is not a valid integer."
                     }
                   }
                 }
@@ -14809,7 +14826,7 @@
             },
             "in": "query",
             "name": "ids",
-            "description": "Comma separated list of user IDs to return"
+            "description": "Comma separated list of user IDs to return."
           }
         ]
       }
@@ -14848,9 +14865,14 @@
                     },
                     "products": {
                       "type": "array",
-                      "description": "Products that the API account has access to.  Supported products are \"CDN\" and \"ECP\".",
+                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                       "items": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "CDN",
+                          "ECP",
+                          "HDT"
+                        ]
                       }
                     },
                     "emailAddress": {
@@ -14975,14 +14997,15 @@
                     },
                     "products": {
                       "type": "array",
-                      "description": "Products that the API account has access to.  Supported products are \"CDN\" and \"ECP\".",
+                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                       "items": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "CDN",
+                          "ECP",
+                          "HDT"
+                        ]
                       }
-                    },
-                    "apiKey": {
-                      "type": "string",
-                      "description": "API key used to authenticate API calls. This field is only returned if the request included  <code>\"apiKey\":\"reset\"</code>."
                     }
                   },
                   "required": [
@@ -14993,6 +15016,20 @@
                     "emailAddress",
                     "products"
                   ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "apiName": "myAPIAccount",
+                      "type": "read-only",
+                      "customerId": 12345678,
+                      "responsiblePerson": "Jane Doe",
+                      "emailAddress": "jane.doe@company.com",
+                      "products": [
+                        "CDN"
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -15094,9 +15131,14 @@
                   },
                   "products": {
                     "type": "array",
-                    "description": "Products that the API account has access to.  Supported products are CDN and ECP.",
+                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                     "items": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "CDN",
+                        "ECP",
+                        "HDT"
+                      ]
                     }
                   },
                   "emailAddress": {
@@ -15430,9 +15472,14 @@
                   },
                   "products": {
                     "type": "array",
-                    "description": "Products that the API account has access to.  Supported products are \"CDN\" and \"ECP\".",
+                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                     "items": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "CDN",
+                        "ECP",
+                        "HDT"
+                      ]
                     }
                   },
                   "type": {
@@ -15832,13 +15879,14 @@
                         },
                         "products": {
                           "type": "array",
-                          "enum": [
-                            "ECP",
-                            "CDN"
-                          ],
-                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent the CDN360 product or \"ECP\" for the Edge Computing Platform product.",
+                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                           "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                              "CDN",
+                              "ECP",
+                              "HDT"
+                            ]
                           }
                         },
                         "canImpersonate": {
@@ -15939,7 +15987,9 @@
                       "address": {},
                       "configs": {
                         "isMaster": false,
-                        "products": [],
+                        "products": [
+                          "CDN"
+                        ],
                         "canImpersonate": "all",
                         "status": "active"
                       },
@@ -16196,13 +16246,14 @@
                       },
                       "products": {
                         "type": "array",
-                        "enum": [
-                          "ECP",
-                          "CDN"
-                        ],
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent the CDN360 product or \"ECP\" for the Edge Computing Platform product.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "CDN",
+                            "ECP",
+                            "HDT"
+                          ]
                         }
                       },
                       "canImpersonate": {
@@ -17142,7 +17193,52 @@
                   "title": "customerresponse",
                   "type": "object",
                   "description": "Customer account details",
-                  "examples": [],
+                  "examples": [
+                    {
+                      "customerId": 0,
+                      "apiName": "string",
+                      "name": "string",
+                      "apiKey": "string",
+                      "phone": "string",
+                      "address": {
+                        "line1": "string",
+                        "line2": "string",
+                        "city": "string",
+                        "state": "string",
+                        "zipCode": "string",
+                        "country": "string"
+                      },
+                      "configs": {
+                        "apiRate": 64,
+                        "apiAccountLimit": 3,
+                        "type": "regular",
+                        "products": [
+                          "CDN"
+                        ],
+                        "status": "suspended",
+                        "description": "string",
+                        "regionalOffice": "string",
+                        "parentId": "string",
+                        "contactLimit": 20
+                      },
+                      "portalSettings": {
+                        "enforce2fa": false,
+                        "passwordExpirationDays": 90,
+                        "logoutIdleTime": 900,
+                        "ipWhiteList": [
+                          "0.0.0.0/0"
+                        ]
+                      },
+                      "ipWhiteList": [
+                        "0.0.0.0/0"
+                      ],
+                      "chinaBizInfo": {
+                        "category": 1,
+                        "idType": 1,
+                        "idNumber": "string"
+                      }
+                    }
+                  ],
                   "properties": {
                     "customerId": {
                       "type": "integer",
@@ -17210,6 +17306,21 @@
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
+                      "examples": [
+                        {
+                          "apiRate": 64,
+                          "apiAccountLimit": 3,
+                          "type": "regular",
+                          "products": [
+                            "CDN"
+                          ],
+                          "status": "suspended",
+                          "description": "string",
+                          "regionalOffice": "string",
+                          "parentId": "string",
+                          "contactLimit": 20
+                        }
+                      ],
                       "properties": {
                         "apiRate": {
                           "type": "integer",
@@ -17234,13 +17345,14 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360 and \"ECP\" representing Edge Computing Platform are supported. ",
-                          "enum": [
-                            "CDN",
-                            "ECP"
-                          ],
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                              "CDN",
+                              "HDT",
+                              "ECP"
+                            ]
                           }
                         },
                         "status": {
@@ -17262,7 +17374,7 @@
                           "description": "Regional sales office name that satisfies the regular expression [0-9a-zA-Z_-]{1,28}. "
                         },
                         "parentId": {
-                          "type": "string",
+                          "type": "integer",
                           "description": "ID of the parent customer.  Resellers can omit this field when creating a customer. It will be filled in automatically."
                         },
                         "contactLimit": {
@@ -17275,21 +17387,6 @@
                       },
                       "required": [
                         "regionalOffice"
-                      ],
-                      "examples": [
-                        {
-                          "apiRate": 64,
-                          "apiAccountLimit": 3,
-                          "type": "regular",
-                          "products": [
-                            "CDN"
-                          ],
-                          "status": "suspended",
-                          "description": "string",
-                          "regionalOffice": "string",
-                          "parentId": "string",
-                          "contactLimit": 20
-                        }
                       ]
                     },
                     "portalSettings": {
@@ -17478,7 +17575,52 @@
                   "title": "customerresponse",
                   "type": "object",
                   "description": "Customer account details",
-                  "examples": [],
+                  "examples": [
+                    {
+                      "customerId": 0,
+                      "apiName": "string",
+                      "name": "string",
+                      "apiKey": "string",
+                      "phone": "string",
+                      "address": {
+                        "line1": "string",
+                        "line2": "string",
+                        "city": "string",
+                        "state": "string",
+                        "zipCode": "string",
+                        "country": "string"
+                      },
+                      "configs": {
+                        "apiRate": 64,
+                        "apiAccountLimit": 3,
+                        "type": "regular",
+                        "products": [
+                          "CDN"
+                        ],
+                        "status": "suspended",
+                        "description": "string",
+                        "regionalOffice": "string",
+                        "parentId": "string",
+                        "contactLimit": 20
+                      },
+                      "portalSettings": {
+                        "enforce2fa": false,
+                        "passwordExpirationDays": 90,
+                        "logoutIdleTime": 900,
+                        "ipWhiteList": [
+                          "0.0.0.0/0"
+                        ]
+                      },
+                      "ipWhiteList": [
+                        "0.0.0.0/0"
+                      ],
+                      "chinaBizInfo": {
+                        "category": 1,
+                        "idType": 1,
+                        "idNumber": "string"
+                      }
+                    }
+                  ],
                   "properties": {
                     "customerId": {
                       "type": "integer",
@@ -17546,6 +17688,21 @@
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
+                      "examples": [
+                        {
+                          "apiRate": 64,
+                          "apiAccountLimit": 3,
+                          "type": "regular",
+                          "products": [
+                            "CDN"
+                          ],
+                          "status": "suspended",
+                          "description": "string",
+                          "regionalOffice": "string",
+                          "parentId": "string",
+                          "contactLimit": 20
+                        }
+                      ],
                       "properties": {
                         "apiRate": {
                           "type": "integer",
@@ -17570,13 +17727,14 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360 and \"ECP\" representing Edge Computing Platform are supported. ",
-                          "enum": [
-                            "CDN",
-                            "ECP"
-                          ],
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                              "CDN",
+                              "HDT",
+                              "ECP"
+                            ]
                           }
                         },
                         "status": {
@@ -17598,7 +17756,7 @@
                           "description": "Regional sales office name that satisfies the regular expression [0-9a-zA-Z_-]{1,28}. "
                         },
                         "parentId": {
-                          "type": "string",
+                          "type": "integer",
                           "description": "ID of the parent customer.  Resellers can omit this field when creating a customer. It will be filled in automatically."
                         },
                         "contactLimit": {
@@ -17611,21 +17769,6 @@
                       },
                       "required": [
                         "regionalOffice"
-                      ],
-                      "examples": [
-                        {
-                          "apiRate": 64,
-                          "apiAccountLimit": 3,
-                          "type": "regular",
-                          "products": [
-                            "CDN"
-                          ],
-                          "status": "suspended",
-                          "description": "string",
-                          "regionalOffice": "string",
-                          "parentId": "string",
-                          "contactLimit": 20
-                        }
                       ]
                     },
                     "portalSettings": {
@@ -17995,6 +18138,21 @@
                     "type": "object",
                     "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                     "x-examples": {},
+                    "examples": [
+                      {
+                        "apiRate": 64,
+                        "apiAccountLimit": 3,
+                        "type": "regular",
+                        "products": [
+                          "CDN"
+                        ],
+                        "status": "suspended",
+                        "description": "string",
+                        "regionalOffice": "string",
+                        "parentId": "string",
+                        "contactLimit": 20
+                      }
+                    ],
                     "properties": {
                       "apiRate": {
                         "type": "integer",
@@ -18019,13 +18177,14 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "Products enabled for the customer. \"CDN\" representing CDN360 and \"ECP\" representing Edge Computing Platform are supported. ",
-                        "enum": [
-                          "CDN",
-                          "ECP"
-                        ],
+                        "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "CDN",
+                            "HDT",
+                            "ECP"
+                          ]
                         }
                       },
                       "status": {
@@ -18047,7 +18206,7 @@
                         "description": "Regional sales office name that satisfies the regular expression [0-9a-zA-Z_-]{1,28}. "
                       },
                       "parentId": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "ID of the parent customer.  Resellers can omit this field when creating a customer. It will be filled in automatically."
                       },
                       "contactLimit": {
@@ -18060,21 +18219,6 @@
                     },
                     "required": [
                       "regionalOffice"
-                    ],
-                    "examples": [
-                      {
-                        "apiRate": 64,
-                        "apiAccountLimit": 3,
-                        "type": "regular",
-                        "products": [
-                          "CDN"
-                        ],
-                        "status": "suspended",
-                        "description": "string",
-                        "regionalOffice": "string",
-                        "parentId": "string",
-                        "contactLimit": 20
-                      }
                     ]
                   },
                   "ipWhiteList": {
@@ -18289,6 +18433,21 @@
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
+                      "examples": [
+                        {
+                          "apiRate": 64,
+                          "apiAccountLimit": 3,
+                          "type": "regular",
+                          "products": [
+                            "CDN"
+                          ],
+                          "status": "suspended",
+                          "description": "string",
+                          "regionalOffice": "string",
+                          "parentId": "string",
+                          "contactLimit": 20
+                        }
+                      ],
                       "properties": {
                         "apiRate": {
                           "type": "integer",
@@ -18313,13 +18472,14 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360 and \"ECP\" representing Edge Computing Platform are supported. ",
-                          "enum": [
-                            "CDN",
-                            "ECP"
-                          ],
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                              "CDN",
+                              "HDT",
+                              "ECP"
+                            ]
                           }
                         },
                         "status": {
@@ -18341,7 +18501,7 @@
                           "description": "Regional sales office name that satisfies the regular expression [0-9a-zA-Z_-]{1,28}. "
                         },
                         "parentId": {
-                          "type": "string",
+                          "type": "integer",
                           "description": "ID of the parent customer.  Resellers can omit this field when creating a customer. It will be filled in automatically."
                         },
                         "contactLimit": {
@@ -18354,21 +18514,6 @@
                       },
                       "required": [
                         "regionalOffice"
-                      ],
-                      "examples": [
-                        {
-                          "apiRate": 64,
-                          "apiAccountLimit": 3,
-                          "type": "regular",
-                          "products": [
-                            "CDN"
-                          ],
-                          "status": "suspended",
-                          "description": "string",
-                          "regionalOffice": "string",
-                          "parentId": "string",
-                          "contactLimit": 20
-                        }
                       ]
                     },
                     "portalSettings": {
@@ -18437,7 +18582,7 @@
                       "apiName": "TestCustomer",
                       "apiKey": "uwo8mikJ1PkSzgxDjs1i6ohsrd8Tad",
                       "name": "Nata Inc.",
-                      "phone": 123456789,
+                      "phone": "123456789",
                       "address": {
                         "line1": "123 Main St.",
                         "line2": "Suite 456",
@@ -18654,6 +18799,21 @@
                     "type": "object",
                     "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                     "x-examples": {},
+                    "examples": [
+                      {
+                        "apiRate": 64,
+                        "apiAccountLimit": 3,
+                        "type": "regular",
+                        "products": [
+                          "CDN"
+                        ],
+                        "status": "suspended",
+                        "description": "string",
+                        "regionalOffice": "string",
+                        "parentId": "string",
+                        "contactLimit": 20
+                      }
+                    ],
                     "properties": {
                       "apiRate": {
                         "type": "integer",
@@ -18678,13 +18838,14 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "Products enabled for the customer. \"CDN\" representing CDN360 and \"ECP\" representing Edge Computing Platform are supported. ",
-                        "enum": [
-                          "CDN",
-                          "ECP"
-                        ],
+                        "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "CDN",
+                            "HDT",
+                            "ECP"
+                          ]
                         }
                       },
                       "status": {
@@ -18706,7 +18867,7 @@
                         "description": "Regional sales office name that satisfies the regular expression [0-9a-zA-Z_-]{1,28}. "
                       },
                       "parentId": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "ID of the parent customer.  Resellers can omit this field when creating a customer. It will be filled in automatically."
                       },
                       "contactLimit": {
@@ -18719,21 +18880,6 @@
                     },
                     "required": [
                       "regionalOffice"
-                    ],
-                    "examples": [
-                      {
-                        "apiRate": 64,
-                        "apiAccountLimit": 3,
-                        "type": "regular",
-                        "products": [
-                          "CDN"
-                        ],
-                        "status": "suspended",
-                        "description": "string",
-                        "regionalOffice": "string",
-                        "parentId": "string",
-                        "contactLimit": 20
-                      }
                     ]
                   },
                   "phone": {
@@ -19410,7 +19556,7 @@
                         {
                           "apiRequestId": "94d2b2168fabccb7",
                           "requestTimestamp": "2020-04-24T20:09:06Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/certificates?offset=0&limit=10&search=&sortOrder=desc",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdn/certificates?offset=0&limit=10&search=&sortOrder=desc",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -19419,7 +19565,7 @@
                         {
                           "apiRequestId": "97f8af300ff5a982",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -19428,7 +19574,7 @@
                         {
                           "apiRequestId": "f291e3014bd06216",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname2",
@@ -19437,7 +19583,7 @@
                         {
                           "apiRequestId": "f03ca108dd17d342",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdnapi/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
+                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -19747,7 +19893,7 @@
                         "connection:Keep-Alive"
                       ],
                       "requestBody": "",
-                      "requestURL": "https://ngapi.cdnetworks.com/cdnapi/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
+                      "requestURL": "https://ngapi.cdnetworks.com/cdn/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
                       "requestMethod": "GET",
                       "requestTimestamp": "2020-04-24T15:21:17Z",
                       "responseHeaders": [
@@ -25591,9 +25737,9 @@
               "examples": {
                 "example-1": {
                   "value": {
-                    "name": "string",
-                    "description": "string",
-                    "secret": "string"
+                    "name": "theCredential",
+                    "description": "password used to authenticate to our origin server",
+                    "secret": "abcdefghijklmnopqrstuvwxz"
                   }
                 }
               }
@@ -26297,14 +26443,14 @@
       "APIKey": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdnapi/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
       }
     }
   },
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If you are a reseller, you may share your certificates with your child customers. They would be able to use the certificates but not modify them. "
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If you are a reseller, you may share your certificates with your child customers who can then use the certificates but not modify them."
     },
     {
       "name": "Property Management",
