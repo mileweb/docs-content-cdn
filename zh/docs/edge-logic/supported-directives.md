@@ -1,6 +1,6 @@
-## Supported Directives
+## 支持的指令
 
-This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives.
+这一页列出了你可以在CDN360的边缘逻辑里使用的全部指令. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
@@ -216,15 +216,15 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | BASE64<br>codec | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
 | URL<br>codec | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
-| AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key``` and ```$iv``` should both be binary strings of 32 bytes.|
+| AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串. |
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
 | integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
 | integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
-| string<br>manipulation | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
-| string<br>manipulation | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>Convert the input string to upper case.|
-| string<br>manipulation | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>Convert the input string to lower case.|
-| string<br>manipulation | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>Get a sub-string of ```<length>``` from position ```<start>``` of the input. ```<start>``` can be negative, same as [substr()](https://www.w3schools.com/jsref/jsref_substr.asp) of Javascript.|
+| 字符串<br>修改 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
+| 字符串<br>修改 | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>把输入字符串转成大写。|
+| 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
+| 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
 
 **NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
 
@@ -423,15 +423,15 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
 ```nginx
-# when URI is not specified, URL-encoded $uri and query string will be appended by default
+# 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
 eval_func $uri_uenc URL_ENCODE $uri;
-origin_pass my_origin$uri_uenc$is_args$args; #same as above
-origin_pass my_origin$uri_uenc; #to drop the query string
+origin_pass my_origin$uri_uenc$is_args$args; #效果完全同上
+origin_pass my_origin$uri_uenc; #不带query string回源
 origin_pass my_origin/abc$uri_uenc;
 ```
-Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8.
-If you know the origin can't handle it, use `eval_func` to encoded it to form the URL to origin.
+请注意nginx变量`$uri`的值是被URL解码过的，所以其有可能包含二进制格式，比如UTF-8。
+如果源站无法处理二进制的URL，您可以使用`eval_func`将其URL编码后再用来生成回源请求。
 
 ### `origin_read_timeout`
 
