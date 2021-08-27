@@ -2,10 +2,10 @@
 
 ## August 25, 2021
 ### API updates
-* Allowed [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>), and [origin_connect_timeout](< /docs/edge-logic/supported-directives#origin_connect_timeout>) Edge Logic directives to be used in location blocks. Previously, they were only supported in server blocks.
+* Allowed [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>), and [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) Edge Logic directives to be used in location blocks. Previously, they were only supported in server blocks.
 * Fixed reseller [creation of a service quota for a child customer](</apidocs#operation/post-cdn-serviceQuotas>) if the reseller has no explicit usage limits.
 * Improved error message for the InvalidIds code which can be returned by our [portal user list API](</apidocs#operation/getContacts>).
-* Improved error message for CertificateMismatch which can be returned when [creating a deployment task](</apidocs#operation/createDeployment>).
+* Improved error message for the CertificateMismatch code which can be returned when [creating a deployment task](</apidocs#operation/createDeployment>) if the certificate's Subject Alternative Name does not include the hostnames in your property.
 
 ### Portal updates
 * Added pie charts to the origin status code details and status code details reports allowing you to see the percentages of status codes that are returned.
