@@ -2,19 +2,19 @@
 
 ## August 25, 2021
 ### API updates
-* Allowed [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>), and [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) Edge Logic directives to be used in location blocks. Previously, they were only supported in server blocks.
+* Allowed [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>), and [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) Edge Logic directives to be used in location blocks. Previously, they were supported only in server blocks.
 * Fixed reseller [creation of a service quota for a child customer](</apidocs#operation/post-cdn-serviceQuotas>) if the reseller has no explicit usage limits.
-* Improved error message for the InvalidIds code which can be returned by our [portal user list API](</apidocs#operation/getContacts>).
+* Improved error message for the InvalidIds code that can be returned by our [portal user list API](</apidocs#operation/getContacts>).
 * Improved error message for the CertificateMismatch code which can be returned when [creating a deployment task](</apidocs#operation/createDeployment>) if the certificate's Subject Alternative Name does not include the hostnames in your property.
 
 ### Portal updates
-* Added pie charts to the origin status code details and status code details reports allowing you to see the percentages of status codes that are returned.
+* Added pie charts to the origin status code details and status code details reports, allowing you to see the percentages of returned status codes.
 * Improved the CDN360 self-signup page to mention our special offers.
 * Ensured the Start Purge button is enabled after the user does a directory purge. It allows the user to create additional purge requests without leaving the page.
-* Allowed you to bypass our check of certificates and hostname activity when deploying and undeploying. We warn if a certificate's SAN does not contain the hostnames you are deploying in the property using the certificate, if the certificate is already expired which would cause vistors to get browser warnings, and if the deployment affects hostnames that recently accessed by visitors.
+* Allowed administrators to force a deployment, overriding warnings from our check of certificates and hostname activity. We warn if a certificate's Subject Alternative Name field does not contain the hostnames specified in the property, if the certificate already expired and would cause visitors to get browser warnings, and if the deployment affects hostnames that were recently accessed by visitors.
 * Translated additional text that appears in the portal.
 * Supported accelerating the CDN360 portal and API through our CDN to improve performance.
-* Fixed display issues in certificate details page.
+* Fixed display issues in the certificate details page.
 
 ## August 11, 2021
 ### API updates
