@@ -1,17 +1,17 @@
-# Quick Start
+# 快速开始
 
-Using CDN360 to accelerate and distribute your content involves the following steps:
+请依照以下步骤来加速分发您的内容:
 
-1. [Log in](</docs/portal/accessing-portal/logging-in.md>) to the portal.
-2. [Create a property](</docs/portal/edge-configurations/managing-properties.md>), which is the configuration to be deployed to the proxy server(s).
-3. [Edit the property](</docs/portal/edge-configurations/editing-properties.md>) if necessary.
-4. [Validate the property](</docs/portal/tasks/validations.md>).
-5. Optionally [deploy the property to staging servers](</docs/portal/edge-configurations/deploying-property.md>) and make sure the cache behaves as expected.
-6. [Deploy the property to production servers](</docs/portal/edge-configurations/deploying-property.md>) and make sure the cache behaves as expected. If you began your free trial of CDN360, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production.
-7. [Create an edge hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) for the service hostname(s) in the property.
-8. Modify your DNS to add a CNAME record to point your service hostname(s) to the edge hostname.
+1. [登录](</docs/portal/accessing-portal/logging-in.md>)到控制台。
+2. [创建一个加速项](</docs/portal/edge-configurations/managing-properties.md>)，包含所有需要部署到边缘服务器的配置。
+3. [修改优化加速项](</docs/portal/edge-configurations/editing-properties.md>)，结合测试确保其行为符合您的预期。
+4. [验证加速项](</docs/portal/tasks/validations.md>)。
+5. [把加速项部署到演练环境](</docs/portal/edge-configurations/deploying-property.md>)，测试其行为符合您的预期。
+6. [把加速项部署到生产环境](</docs/portal/edge-configurations/deploying-property.md>)，测试其行为符合您的预期。如果您是自助上线的客户，系统起初会禁止部署到生产环境。一旦您在演练环境的测试请求数超过10条，系统会自动解禁。
+7. [创建一个边缘域名](</docs/portal/traffic-management/creating-edge-hostname.md>)用于牵引流量到我们的平台。
+8. 修改您的DNS服务配置，将服务域名通过一条CNAME记录引导到上面创建的边缘域名。
 
-The following figure shows the steps to follow when using CDN360 to accelerate your content.
+请参考下面的服务开启流程图：
 
 ![null](</docs/resources/images/getting-started-flowchart.png>)
 
