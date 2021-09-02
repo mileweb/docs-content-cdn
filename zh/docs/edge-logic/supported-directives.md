@@ -486,6 +486,7 @@ This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_ht
 *   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
 
 使用此指令需要注意以下事项：
+
 1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
