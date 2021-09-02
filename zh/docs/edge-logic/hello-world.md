@@ -1,6 +1,6 @@
 ## Hello World
 
-Let’s get started with the following simple configuration:
+让我们以以下的简单样例开始：
 
 ```nginx
 location / {
