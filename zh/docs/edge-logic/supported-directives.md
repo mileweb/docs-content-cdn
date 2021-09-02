@@ -477,14 +477,16 @@ When an origin is resolved into multiple IP addresses (peers), this directive sp
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
-1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
-2. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
+1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
+2. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
+3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
 *   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
 
-Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
+使用此指令需要注意以下事项：
+1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
 *   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
@@ -492,9 +494,18 @@ Because of the hierarchical cache structure, the built-in variables $scheme and 
 
 For example:
 ```nginx
-origin_set_header X-Forwarded-For $client_real_ip;
+origin_set_header X-Client-IP $client_real_ip;
 ```
-One thing to notice is that if you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
+2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
+3. 我们的边缘服务器默认会将大多数客户端的请求头部原样传递给父服务器或者源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的内容，服务器在回源的时候会根据需要自动生成这些头部。对于不可缓存的内容，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例里的配置：
+```nginx
+proxy_no_cache 1;
+proxy_cache_bypass 1;
+# 将客户端的If-Modified-Since请求头传递给源站
+origin_set_header If-Modified-Since $http_if_modified_since;
+origin_pass My-Dynamic-Origin;
+```
+您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。因为这个指令对发往父节点的请求不生效，会导致这些请求头部丢失.
 
 ### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
 

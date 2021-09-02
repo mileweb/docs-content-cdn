@@ -477,14 +477,16 @@ When an origin is resolved into multiple IP addresses (peers), this directive sp
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
-1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
-2. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
+1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
+2. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
+3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
 *   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
 
-Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
+There are a few things to note when using this directive:
+1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
 *   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
@@ -492,9 +494,18 @@ Because of the hierarchical cache structure, the built-in variables $scheme and 
 
 For example:
 ```nginx
-origin_set_header X-Forwarded-For $client_real_ip;
+origin_set_header X-Client-IP $client_real_ip;
 ```
-One thing to notice is that if you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
+2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
+3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable contents, the servers will automatically regenerate those header fields, if necessary, when fetching from the origin. For non-cacheable contents, if you want to pass any of these fields to the origin, you need to use this directive as in this example:
+```nginx
+proxy_no_cache 1;
+proxy_cache_bypass 1;
+# pass the client request header field to the origin
+origin_set_header If-Modified-Since $http_if_modified_since;
+origin_pass My-Dynamic-Origin;
+```
+You need to set the origin's "direct connection" option to "always direct" to make sure the edge servers fetch directly from the origin. Because this directive does not work when fetching from parent servers and the header field will be lost.
 
 ### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
 
