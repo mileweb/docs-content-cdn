@@ -1,6 +1,6 @@
 ## Hello World
 
-让我们以以下的简单样例开始：
+让我们以下面的简单样例开始：
 
 ```nginx
 location / {
