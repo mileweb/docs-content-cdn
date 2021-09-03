@@ -1,7 +1,6 @@
 ## 内置变量
 
-下表列出了 CDN360 服务器支持的所有内置变量。您可以在 Edge Logic 或实时日志中使用它们。但请注意，并非所有变量都支持配置在这两个地方。 The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
-If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
+下表列出了 CDN360 服务器支持的所有内置变量。您可以在 Edge Logic 或实时日志中使用它们，但请注意并非所有变量都支持配置在这两个地方。 其中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的格式为数字型。当您在调试Edge Logic的过程中需要使用到内置变量时，您可以输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
 | **变量名称** | **描述** | **边缘逻辑** | **[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
