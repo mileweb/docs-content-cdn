@@ -1,21 +1,21 @@
-## Multiple Origins with `if`
+## 用`if`来选择多个源站
 
-This section describes a use case that is a little bit more complicated than the previous one. Assume a domain needs to load content from two different origins based on the value of a request header `x-origin`. For origin #2, you want to modify the URI by adding an extra root folder "/images" for all the images, HTML, and CSS objects. You need to send a header `x-msg2origin` to the origin, but the value is different for the two origins. The Edge Logic should resemble the following:
+在这一节里，我们将介绍一个比前面更复杂一点的用例。需求描述：一个加速域名需要从两个不同的源站来加载内容，具体用哪一个由请求里的`x-origin`头部来决定。对于源站2，当请求对象是图片，HTML或者CSS文件时，需要在URI之前加上"/images"用来回源。需要在回源请求里携带一个`x-msg2origin`头部，其值根据不同的源站有所不同。根据这个需求，我们可以写出如下的边缘逻辑:
 ```nginx
 location / {
-  origin_pass origin1; # the default origin
-  origin_set_header x-msg2origin "message for origin 1";
-  if ($http_x_origin = "origin2") { # check the request header
-    origin_pass origin2; # the alternate origin
+  origin_pass origin1; # 默认回源站1
+  origin_set_header x-msg2origin "message for origin 1;
+  if ($http_x_origin = "origin2") { # 检查请求头x-origin
+    origin_pass origin2; # 回源站2
     origin_set_header x-msg2origin "message for origin 2";
     rewrite /.*\.(html?|css|png|js|jpe?g) /image$uri break;
   }
 }
 ```
-<a id="ifcaution"></a>This example uses the [`if` directive in the rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) to check the value in the request header `x-origin` and define different behaviors. However, `if` is a tricky directive due to the conflict between the "[declarative](https://tylermcginnis.com/imperative-vs-declarative-programming/)" nature of the NGINX configuration and the "imperative" nature of the rewrite module. If you need to use `if` in your Edge Logic, observe the following rules:
+<a id="ifcaution"></a>这个例子里我们用到了[rewrite模块里的`if`指令](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)来检查请求头`x-origin`的值，定义不同的行为。但是，由于rewrite模块和其他模块在执行时序上的差异，我们在使用`if`指令的时候需要格外的小心。如果您需要在边缘逻辑里使用该指令，请务必遵循以下原则:
 
-*   Read the [documentation of the rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) carefully. In particular, try to understand why the `break` parameter is necessary for the `rewrite` directive in the example above.
-*   Keep in mind that only the directives in the rewrite module ([`if`](</docs/edge-logic/supported-directives.md#if>), [`set`](</docs/edge-logic/supported-directives.md#set>), [`rewrite`](</docs/edge-logic/supported-directives.md#rewrite>), [`return`](</docs/edge-logic/supported-directives.md#return>), [`break`](</docs/edge-logic/supported-directives.md#break>), [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>), etc.) are executed in the order they appear (imperatively) in the location block. They are executed in an early phase which precedes most other actions defined by the declarative directives. In the edge logic editor on the portal, the imperative directives are colored in blue while the declarative ones are colored in red so you can tell them apart easily. The declarative directives are executed at different stages of the request processing as needed. When there are declarative directives enclosed in `if` blocks, only the ones in the **last** matching `if` block will take effect. For example, consider the following configuration:
+*   仔细阅读开源版本的[rewrite模块文档](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。比如您需要理解为什么在上面的例子里，`rewrite`指令最后需要加上`break`参数。
+*   请记住：只有rewrite模块里的指令([`if`]（</docs/edge-logic/supported-directives.md#if>), [`set`](</docs/edge-logic/supported-directives.md#set>), [`rewrite`](</docs/edge-logic/supported-directives.md#rewrite>), [`return`](</docs/edge-logic/supported-directives.md#return>), [`break`](</docs/edge-logic/supported-directives.md#break>), [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>)）会按照他们在location配置块里出现的顺序被执行（imperatively）。而且执行时间发生在请求处理的早期阶段，早于几乎所有其他的`定义型`（declarative）指令。在控制台的边缘逻辑编辑器里，为了让用户能简单地区分两类指令，顺序型指令呈蓝色而定义型指令为红色。不同的定义型指令在请求处理的不同阶段按需要被执行。如果有定义型指令被包含在多个`if`配置块里，只有**最后**一个满足条件的配置块里的指令会生效。一个例子如下：
 ```nginx
 location / {
   if ($http_header_a != '') {
