@@ -11,14 +11,14 @@
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的数据大小（包含header） | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="cache_misc"></span><span class="var">$cache_misc</span> | 添加到缓存key中的参数 | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="client_country_code"></span><span class="var">$client_country_code</span> | 客户端的国家码（ISO 3166 格式） | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_http_version"></span><span class="var">$client_http_version</span> | client's HTTP version, like "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> client's IP version: 4 for IPv4; 6 for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_isp"></span><span class="var">$client_isp</span> | client's ISP information | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_province_code"></span><span class="var">$client_province_code</span> | client's China province code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | client's IP address | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> current number of requests in the connection | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> request's Content-Length header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="content_type"></span><span class="var">$content_type</span> | request's Content-Type header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_http_version"></span><span class="var">$client_http_version</span> | 客户端请求的HTTP协议版本，例如 "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> 客户端IP 版本：4代表IPv4；6代表IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_isp"></span><span class="var">$client_isp</span> | 客户端的ISP运营商信息 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | 客户端IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次connection中包含的请求次数 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> 请求中 Content-Length 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="content_type"></span><span class="var">$content_type</span> | 请求中 Content-Type 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | cookie with the specified name received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="dollar_sign"></span><span class="var">$dollar_sign</span> | a literal dollar sign | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="error_code"></span><span class="var">$error_code</span> | error about client and origin | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
