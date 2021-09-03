@@ -500,13 +500,13 @@ origin_set_header X-Client-IP $client_real_ip;
 2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
 3. 我们的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
-proxy_no_cache 1;
+proxy_no_cache 1;      # 不要缓存
 proxy_cache_bypass 1;
 # 将客户端的If-Modified-Since请求头传递给源站
 origin_set_header If-Modified-Since $http_if_modified_since;
 origin_pass My-Dynamic-Origin;
 ```
-在这个情况下您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。这是因为本指令对发往父节点的请求不生效，会导致这些请求头部丢失。
+由于本指令对发往父节点的请求不生效，您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。否则发往父节点的请求仍会缺失这些头部。
 
 ### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
 

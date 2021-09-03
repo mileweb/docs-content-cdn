@@ -500,13 +500,13 @@ origin_set_header X-Client-IP $client_real_ip;
 2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
 3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For non-cacheable requests, if you need to pass any of these fields to the origin, use this directive as in the example below:
 ```nginx
-proxy_no_cache 1;
+proxy_no_cache 1;      # do not cache
 proxy_cache_bypass 1;
-# pass the client request header field to the origin
+# pass the If-Modified-Since field from client to the origin
 origin_set_header If-Modified-Since $http_if_modified_since;
 origin_pass My-Dynamic-Origin;
 ```
-In this case, you need to set the origin's "direct connection" option to "always direct" to make sure the edge servers contact the origin directly. This is because this directive does not work on requests to parent servers and the header field will be lost.
+Because this directive does not affect the requests to parent servers, you need to set the origin's "direct connection" option to "always direct" to make sure the edge servers contact the origin directly. Otherwise the header field will be missing in any requests sent to the parent servers.
 
 ### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
 
