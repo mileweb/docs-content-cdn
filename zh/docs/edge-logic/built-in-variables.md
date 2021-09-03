@@ -19,14 +19,14 @@
 | <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次connection中包含的请求次数 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> 请求中 Content-Length 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="content_type"></span><span class="var">$content_type</span> | 请求中 Content-Type 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | cookie with the specified name received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="dollar_sign"></span><span class="var">$dollar_sign</span> | a literal dollar sign | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | 客户端请求中指定的cookie参数值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="dollar_sign"></span><span class="var">$dollar_sign</span> | 代表“$”字段 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="error_code"></span><span class="var">$error_code</span> | error about client and origin | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="host"></span><span class="var">$host</span> | host header, same as $http_host | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="hostname"></span><span class="var">$hostname</span> | server's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="http_"></span><span class="var">$http_<em>name</em></span> | request header with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="http_host"></span><span class="var">$http_host</span> | request's Host header | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="invalid_referer"></span><span class="var">$invalid_referer</span> | empty string if the “Referer” request header field value is considered valid; otherwise “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="host"></span><span class="var">$host</span> | 请求的host头部，和$http_host有相同含义 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="hostname"></span><span class="var">$hostname</span> | CDN服务器别名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="http_"></span><span class="var">$http_<em>name</em></span> | 客户端请求中指定的请求头参数值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="http_host"></span><span class="var">$http_host</span> | 请求的host头部，和$host有相同含义 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="invalid_referer"></span><span class="var">$invalid_referer</span> | 用于标记请求Referer的合法性，如“Referer”被判定为合法则值为空; 否则值为 “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="is_args"></span><span class="var">$is_args</span> | empty or "?", when query string exists | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="msec"></span><span class="var">$msec</span> |<span class="badge small" title="numerical value">#</span> current time in seconds with milliseconds resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="sec"></span><span class="var">$sec</span> |<span class="badge small" title="numerical value">#</span> current unix time in integer seconds | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
