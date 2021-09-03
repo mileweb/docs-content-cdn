@@ -4,13 +4,13 @@
 
 | **变量名称** | **描述** | **边缘逻辑** | **[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
-| <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="args"></span><span class="var">$args</span> | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="bytes_received"></span><span class="var">$bytes_received</span> |<span class="badge small" title="numerical value">#</span> bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="body_bytes_sent"></span><span class="var">$body_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="cache_misc"></span><span class="var">$cache_misc</span> | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
-| <span id="client_country_code"></span><span class="var">$client_country_code</span> | client’s ISO 3166 country code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | URL问号后参数中的指定参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="args"></span><span class="var">$args</span> | 请求URL中所有问号后参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="bytes_received"></span><span class="var">$bytes_received</span> |<span class="badge small" title="numerical value">#</span> 收到的客户端请求大小 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="body_bytes_sent"></span><span class="var">$body_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的文件body大小 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的数据大小（包含header） | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="cache_misc"></span><span class="var">$cache_misc</span> | 添加到缓存key中的参数 | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
+| <span id="client_country_code"></span><span class="var">$client_country_code</span> | 客户端的国家码（ISO 3166 格式） | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | client's HTTP version, like "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> client's IP version: 4 for IPv4; 6 for IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_isp"></span><span class="var">$client_isp</span> | client's ISP information | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
