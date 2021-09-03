@@ -485,7 +485,7 @@ This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_ht
 *   Comparison of a variable with a string using the "=" and "!=" operators.
 *   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
 
-使用此指令需要注意以下事项：
+使用本指令需要注意以下事项：
 
 1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
@@ -498,7 +498,7 @@ For example:
 origin_set_header X-Client-IP $client_real_ip;
 ```
 2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
-3. 我们的边缘服务器默认会将大多数客户端的请求头部原样传递给父服务器或者源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的内容，服务器在回源的时候会根据需要自动生成这些头部。对于不可缓存的内容，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例里的配置：
+3. 我们的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
 proxy_no_cache 1;
 proxy_cache_bypass 1;
@@ -506,7 +506,7 @@ proxy_cache_bypass 1;
 origin_set_header If-Modified-Since $http_if_modified_since;
 origin_pass My-Dynamic-Origin;
 ```
-您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。因为这个指令对发往父节点的请求不生效，会导致这些请求头部丢失.
+在这个情况下您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。这是因为本指令对发往父节点的请求不生效，会导致这些请求头部丢失。
 
 ### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
 
