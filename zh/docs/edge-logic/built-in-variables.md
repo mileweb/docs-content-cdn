@@ -34,7 +34,7 @@
 | <span id="origin_ip"></span><span class="var">$origin_ip</span> | 源站IP和端口，格式为IP:端口号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="origin_status_code"></span><span class="var">$origin_status_code</span> | 回源状态码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="pid"></span><span class="var">$pid</span> | CDN进程ID号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="pipe"></span><span class="var">$pipe</span> | "p" if request is pipelined, or "." otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="pipe"></span><span class="var">$pipe</span> | 如果请求来自管道通信，值为“p”，否则为“.” | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="property_ver"></span><span class="var">$property_ver</span> |<span class="badge small" title="numerical value">#</span> 配置版本号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 请求的唯一标识ID | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | [缓存状态](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
