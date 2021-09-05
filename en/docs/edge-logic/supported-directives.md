@@ -634,7 +634,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 means cache the response and treat it as expired. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
-### proxy_cache_vary
+### `proxy_cache_vary`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
