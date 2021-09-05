@@ -1,14 +1,14 @@
 ## 支持的指令
 
-这一页列出了你可以在CDN360的边缘逻辑里使用的全部指令. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives.
+这一页列出了你可以在CDN360的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>指令来完善开源版本作为CDN服务器的不足。
 
-Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
+我们为每一个非特有的指令都提供了到开源版本的公开文档的直接链接。如果是被修改增强过的指令，我们也提供了详细的描述，包括新增的功能，参数，以及对参数取值的限制。
 
-In the following list, the <span class="badge">标准</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">高级</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
+在下面的列表里，标记为<span class="badge">标准</span>的指令对所有的客户都开放。他们应该可以满足绝大部分常见的CDN配置需求。标记为<span class="badge dark">高级</span>的指令通常会消耗更多的资源。对于这些指令，我们需要逐一审核明确需求。如果您需要用到这些指令，请联系客服。您有可能需要为它们额外付费。
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `add_header name value [policy=...] [if(...)] [always];`<br/>
 **默认设置：** `-` <br/>
@@ -63,7 +63,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 ### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `add_trailer name value [always];`<br/>
 **默认设置：** `-` <br/>
@@ -77,7 +77,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `allow address | CIDR | all;`<br/>
 **默认设置：** `-` <br/>
@@ -121,7 +121,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 ### `client_body_timeout`
 
-<span class="badge dark">高级</span> <span class="badge green">CDN360增强</span>
+<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `client_body_timeout time;`<br/>
 **默认设置：** matches `origin_send_timeout` if it is set, or 20s <br/>
@@ -131,7 +131,7 @@ This directive sets the maximum idle time when receiving the request body from t
 
 ### `client_header_timeout`
 
-<span class="badge dark">高级</span> <span class="badge green">CDN360增强</span>
+<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `client_header_timeout time;`<br/>
 **默认设置：** `client_header_timeout 10;`<br/>
@@ -141,7 +141,7 @@ This directive sets the maximum wait time for the complete request header from t
 
 ### `client_send_timeout`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `client_send_timeout time;`<br/>
 **默认设置：** matches `origin_read_timeout` if it is set, or 20s <br/>
@@ -151,7 +151,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 ### `custom_log_field`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `custom_log_field {custom log field id} {value or variable};`<br/>
 **默认设置：** `-`<br/>
@@ -161,7 +161,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `deny address | CIDR | all;`<br/>
 **默认设置：** `—`<br/>
@@ -171,7 +171,7 @@ Denies access from the specified network or address. Usually used together with 
 
 ### `enable_websocket`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `enable_websocket;`<br/>
 **默认设置：** `-`<br/>
@@ -202,7 +202,7 @@ location @return404 {
 
 ### `eval_func`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `eval_func $result {function name} {parameters};` <br/>
 **默认设置：** `-` <br/>
@@ -255,7 +255,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
-<span class="badge dark">高级</span> <span class="badge green">CDN360增强</span>
+<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `gzip_types mime-type ...;` <br/>
 **默认设置：** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
@@ -265,7 +265,7 @@ CDN360 always uses gzip and applies it to the default MIME types above. In addit
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `if (condition) { ... }`<br/>
 **默认设置：** `—`<br/>
@@ -336,7 +336,7 @@ Sets configuration depending on the request URI without query string. No change 
 
 ### `origin_connect_timeout`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_connect_timeout time;` <br/>
 **默认设置：** `origin_connect_timeout 5s;` <br/>
@@ -346,7 +346,7 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 
 ### `origin_fast_route`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_fast_route on|off;` <br/>
 **默认设置：** `origin_fast_route off;` <br/>
@@ -356,7 +356,7 @@ This directive enables a fast route to be used to access the origin. It is power
 
 ### `origin_follow_redirect`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_follow_redirect;` <br/>
 **默认设置：** - <br/>
@@ -367,7 +367,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 ### `origin_header_modify`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_header_modify field value policy=value if(condition);` <br/>
 **默认设置：**  - <br/>
@@ -405,7 +405,7 @@ Although CDN360 has a hierarchical cache structure, the directive changes the he
 
 ### `origin_limit_rate`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_limit_rate rate;`<br>
 **默认设置：** `origin_limit_rate 0;`<br>
@@ -415,7 +415,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 
 ### `origin_pass`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_pass _origin_name[URI];`<br>
 **默认设置：** none <br>
@@ -435,7 +435,7 @@ origin_pass my_origin/abc$uri_uenc;
 
 ### `origin_read_timeout`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_read_timeout time;` <br/>
 **默认设置：**  `origin_read_timeout 20s;` <br/>
@@ -445,7 +445,7 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 
 ### `origin_send_timeout`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_send_timeout time;` <br/>
 **默认设置：** `origin_send_timeout 20s;` <br/>
@@ -455,7 +455,7 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 ### `origin_selection_algorithm`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_selection_algorithm {algorithm name};` <br/>
 **默认设置：** `origin_selection_algorithm round_robin;` <br/>
@@ -469,7 +469,7 @@ When an origin is resolved into multiple IP addresses (peers), this directive sp
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：**  `origin_set_header field value if(condition);` <br/>
 **默认设置：** `origin_set_header host $host;` <br/>
@@ -586,7 +586,7 @@ If the client request method is listed in this directive, the response will be c
 
 ### proxy_cache_min_age 
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `proxy_cache_min_age time;` <br/>
 **默认设置：** `proxy_cache_min_age 0s;` <br/>
@@ -626,7 +626,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `proxy_cache_valid [code ...] time;` <br/>
 **默认设置：** — <br/>
@@ -636,7 +636,7 @@ Sets caching time for different response codes. We enhanced the [open-source ver
 
 ### proxy_cache_vary
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `proxy_cache_vary on | off;` <br/>
 **默认设置：** `proxy_cache_vary off;` <br/>
@@ -682,7 +682,7 @@ Sets response header fields that will not be passed to the client. No change to 
 
 ### `proxy_ignore_cache_control`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `proxy_ignore_cache_control directives…;` <br/>
 **默认设置：** none <br/>
@@ -813,7 +813,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 
 ### `proxy_set`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `proxy_set $variable value [if(...)];`<br>
 **默认设置：** none <br>
@@ -892,7 +892,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 
 ### `sanitize_accept_encoding`
 
-<span class="badge dark">高级</span> <span class="badge primary">CDN360特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `sanitize_accept_encoding enc1 enc2 … ;` <br/>
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
@@ -964,7 +964,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
-<span class="badge">标准</span> <span class="badge green">CDN360增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：**	`slice size;` <br/>
 **默认设置：** `slice 0;` <br/>
@@ -977,7 +977,7 @@ Sets the size of the slices when fetching large files from the origin. The valid
 
 ### `slice_ignore_etag`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `slice_ignore_etag on/off;` <br/>
 **默认设置：** `slice_ignore_etag off;` <br/>
@@ -987,7 +987,7 @@ This directive can be used to disable the ETag consistency check of sliced files
 
 ### `sorted_querystring_filter_parameter`
 
-<span class="badge">标准</span> <span class="badge primary">CDN360特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `sorted_querystring_filter_parameter {param1} {param2} … ;` <br/>
 **默认设置：** `-` <br/>

@@ -1,6 +1,6 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN360 Edge Logic. Although most of them are unmodified from the open-source version of nginx, many have been modified to better suit the needs of a CDN proxy server. CDNetworks also introduced some proprietary directives.
+This section lists all the directives you can use in the CDN360 Edge Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
@@ -8,7 +8,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `add_header name value [policy=...] [if(...)] [always];`<br/>
 **Default:** `-` <br/>
@@ -63,7 +63,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 ### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `add_trailer name value [always];`<br/>
 **Default:** `-` <br/>
@@ -77,7 +77,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `allow address | CIDR | all;`<br/>
 **Default:** `-` <br/>
@@ -121,7 +121,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 ### `client_body_timeout`
 
-<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `client_body_timeout time;`<br/>
 **Default:** matches `origin_send_timeout` if it is set, or 20s <br/>
@@ -131,7 +131,7 @@ This directive sets the maximum idle time when receiving the request body from t
 
 ### `client_header_timeout`
 
-<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `client_header_timeout time;`<br/>
 **Default:** `client_header_timeout 10;`<br/>
@@ -141,7 +141,7 @@ This directive sets the maximum wait time for the complete request header from t
 
 ### `client_send_timeout`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `client_send_timeout time;`<br/>
 **Default:** matches `origin_read_timeout` if it is set, or 20s <br/>
@@ -151,7 +151,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 ### `custom_log_field`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `custom_log_field {custom log field id} {value or variable};`<br/>
 **Default:** `-`<br/>
@@ -161,7 +161,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `deny address | CIDR | all;`<br/>
 **Default:** `—`<br/>
@@ -171,7 +171,7 @@ Denies access from the specified network or address. Usually used together with 
 
 ### `enable_websocket`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `enable_websocket;`<br/>
 **Default:** `-`<br/>
@@ -202,7 +202,7 @@ location @return404 {
 
 ### `eval_func`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `eval_func $result {function name} {parameters};` <br/>
 **Default:** `-` <br/>
@@ -255,7 +255,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
-<span class="badge dark">advanced</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `gzip_types mime-type ...;` <br/>
 **Default:** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
@@ -265,7 +265,7 @@ CDN360 always uses gzip and applies it to the default MIME types above. In addit
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `if (condition) { ... }`<br/>
 **Default:** `—`<br/>
@@ -336,7 +336,7 @@ Sets configuration depending on the request URI without query string. No change 
 
 ### `origin_connect_timeout`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_connect_timeout time;` <br/>
 **Default:** `origin_connect_timeout 5s;` <br/>
@@ -346,7 +346,7 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 
 ### `origin_fast_route`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_fast_route on|off;` <br/>
 **Default:** `origin_fast_route off;` <br/>
@@ -356,7 +356,7 @@ This directive enables a fast route to be used to access the origin. It is power
 
 ### `origin_follow_redirect`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_follow_redirect;` <br/>
 **Default:** - <br/>
@@ -367,7 +367,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 ### `origin_header_modify`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_header_modify field value policy=value if(condition);` <br/>
 **Default:**  - <br/>
@@ -405,7 +405,7 @@ Although CDN360 has a hierarchical cache structure, the directive changes the he
 
 ### `origin_limit_rate`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_limit_rate rate;`<br>
 **Default:** `origin_limit_rate 0;`<br>
@@ -415,7 +415,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 
 ### `origin_pass`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_pass _origin_name[URI];`<br>
 **Default:** none <br>
@@ -435,7 +435,7 @@ If you know the origin can't handle it, use `eval_func` to encoded it to form th
 
 ### `origin_read_timeout`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_read_timeout time;` <br/>
 **Default:**  `origin_read_timeout 20s;` <br/>
@@ -445,7 +445,7 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 
 ### `origin_send_timeout`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_send_timeout time;` <br/>
 **Default:** `origin_send_timeout 20s;` <br/>
@@ -455,7 +455,7 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 ### `origin_selection_algorithm`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_selection_algorithm {algorithm name};` <br/>
 **Default:** `origin_selection_algorithm round_robin;` <br/>
@@ -469,7 +469,7 @@ When an origin is resolved into multiple IP addresses (peers), this directive sp
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:**  `origin_set_header field value if(condition);` <br/>
 **Default:** `origin_set_header host $host;` <br/>
@@ -586,7 +586,7 @@ If the client request method is listed in this directive, the response will be c
 
 ### proxy_cache_min_age 
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_cache_min_age time;` <br/>
 **Default:** `proxy_cache_min_age 0s;` <br/>
@@ -626,7 +626,7 @@ Determines in which cases a stale cached response can be used during communicati
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `proxy_cache_valid [code ...] time;` <br/>
 **Default:** — <br/>
@@ -636,7 +636,7 @@ Sets caching time for different response codes. We enhanced the [open-source ver
 
 ### proxy_cache_vary
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_cache_vary on | off;` <br/>
 **Default:** `proxy_cache_vary off;` <br/>
@@ -682,7 +682,7 @@ Sets response header fields that will not be passed to the client. No change to 
 
 ### `proxy_ignore_cache_control`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_ignore_cache_control directives…;` <br/>
 **Default:** none <br/>
@@ -813,7 +813,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 
 ### `proxy_set`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_set $variable value [if(...)];`<br>
 **Default:** none <br>
@@ -892,7 +892,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 
 ### `sanitize_accept_encoding`
 
-<span class="badge dark">advanced</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `sanitize_accept_encoding enc1 enc2 … ;` <br/>
 **Default:** `sanitize_accept_encoding gzip;` <br/>
@@ -964,7 +964,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
-<span class="badge">standard</span> <span class="badge green">CDN360 Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:**	`slice size;` <br/>
 **Default:** `slice 0;` <br/>
@@ -977,7 +977,7 @@ Sets the size of the slices when fetching large files from the origin. The valid
 
 ### `slice_ignore_etag`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `slice_ignore_etag on/off;` <br/>
 **Default:** `slice_ignore_etag off;` <br/>
@@ -987,7 +987,7 @@ This directive can be used to disable the ETag consistency check of sliced files
 
 ### `sorted_querystring_filter_parameter`
 
-<span class="badge">standard</span> <span class="badge primary">CDN360 Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `sorted_querystring_filter_parameter {param1} {param2} … ;` <br/>
 **Default:** `-` <br/>
