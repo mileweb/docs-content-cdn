@@ -846,7 +846,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 ### `realtime_log_downsample`
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge primary">proprietary</span>
 
 **Syntax:** `realtime_log_downsample factor;` <br/>
 **Default:** `-` <br/>
@@ -1049,7 +1049,7 @@ Specifies the “Referer” request header field values that will cause the embe
 
 ### `access_log_downsample`
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge primary">proprietary</span>
 
 **Syntax:** `access_log_downsample factor;` <br/>
 **Default:** `-` <br/>

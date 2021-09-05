@@ -846,7 +846,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 
 ### `realtime_log_downsample`
 
-<span class="badge">标准</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `realtime_log_downsample factor;` <br/>
 **默认设置：** `-` <br/>
@@ -1049,7 +1049,7 @@ Specifies the “Referer” request header field values that will cause the embe
 
 ### `access_log_downsample`
 
-<span class="badge">标准</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `access_log_downsample factor;` <br/>
 **默认设置：** `-` <br/>
