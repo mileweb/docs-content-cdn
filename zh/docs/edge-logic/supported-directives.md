@@ -876,9 +876,9 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-Rewrite the request URI when a regular expression pattern is matched. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite). 
+当请求URI匹配正则表达式`regex`，则改写请求URI为`replacement`的值。没有修改[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)。 请注意该指令匹配的对象是变量$uri，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给$uri.
 
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于nginx的[rewrite模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
 
 ### [`satisfy`](http://nginx.org/en/docs/http/ngx_http_core_module.html#satisfy)
 

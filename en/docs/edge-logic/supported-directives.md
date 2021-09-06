@@ -876,7 +876,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default:** `-` <br/>
 **Contexts:** server, location, if
 
-Rewrite the request URI when a regular expression pattern is matched. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite). 
+Rewrite the request URI when a regular expression pattern is matched. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite). Please note that this directive tries to match the `regex` pattern to the variable $uri, which is a normalized](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) request URI without query string. A successful match assigns the value of `replacement` to $uri.
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
