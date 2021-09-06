@@ -2,11 +2,8 @@
 
 ### CDN如何判定一个文件能否缓存，缓存多久?
 
-在边缘逻辑（Edge Logic）中，我们提供了多个配置项用于设置文件是否应被CDN缓存（如[proxy_no_cache](/docs/edge-logic/supported-directives#proxy_no_cache)/[proxy_ignore_cache_control](/docs/edge-logic/supported-directives#proxy_ignore_cache_control)/[proxy_ignore_headers](/docs/edge-logic/supported-directives#proxy_ignore_headers)等等）。如果所有相关配置项都没有在加速项中被使用到，那么CDN360节点的默认行为是“遵循源站”，即按照源站响应头中的`Cache-Control`和`Expires` 头来判断文件是否可以缓存以及缓存时长。另外需要注意的是，如果源站给的响应头中有`Set-Cookie`头，CDN360将不会对该文件进行缓存。
+在边缘逻辑（Edge Logic）中，我们提供了多个配置项用于设置文件是否应被CDN缓存（如[proxy_no_cache](/docs/edge-logic/supported-directives#proxy_no_cache)/[proxy_ignore_cache_control](/docs/edge-logic/supported-directives#proxy_ignore_cache_control)/[proxy_ignore_headers](/docs/edge-logic/supported-directives#proxy_ignore_headers)等等）。如果所有相关配置项都没有在加速项中被使用到，那么CDN360节点的默认行为是“遵循源站”，即按照源站响应头中的`Cache-Control`和`Expires` 头来判断文件是否可以缓存以及缓存时长。需要注意的是，如果源站给的响应头中有`Set-Cookie`头，CDN360将不会对该文件进行缓存。
 
-There are many directives you can use in the Edge Logic to control the cache time. If none of them is configured, the default behavior of CDN360 edge servers is to "honor the origin". That is, the instructions in the `Cache-Control` and `Expires` header fields are followed. If these two fields are not present in a response from the origin, the response is not cached. The presence of the `Set-Cookie` header field also prevents caching of the response. 
-
-We modified the open-source NGINX to strictly follow the HTTP standard regarding 'zero-time cache'. When `no-cache` or `max-age=0` is present in the `Cache-Control` header field, the response is still cached but expires immediately. Any subsequent request for this object will result in a revalidation request to the origin with the `If-Modified-Since` header. If `no-store` is in the `Cache-Control` header field, the response will not be cached.
 
 By default, the `Date` header field is [passed all the way](</docs/edge-logic/supported-directives.md#proxy_pass_header>) from the origin to the edge servers. Efforts have also been made to ensure the `Age` header field reflects the time since the response is retrieved from the origin, even when parent cache is used.
 
