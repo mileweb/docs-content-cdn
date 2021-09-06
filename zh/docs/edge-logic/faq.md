@@ -4,7 +4,11 @@
 
 在边缘逻辑（Edge Logic）中，我们提供了多个配置项用于设置文件是否应被CDN缓存（如[proxy_no_cache](/docs/edge-logic/supported-directives#proxy_no_cache)/[proxy_ignore_cache_control](/docs/edge-logic/supported-directives#proxy_ignore_cache_control)/[proxy_ignore_headers](/docs/edge-logic/supported-directives#proxy_ignore_headers)等等）。如果所有相关配置项都没有在加速项中被使用到，那么CDN360节点的默认行为是“遵循源站”，即按照源站响应头中的`Cache-Control`和`Expires` 头来判断文件是否可以缓存以及缓存时长。需要注意的是，如果源站给的响应头中有`Set-Cookie`头，CDN360将不会对该文件进行缓存。
 
+同时我们优化了开源 NGINX 从而让CDN360严格遵循有关“零时缓存”的 HTTP 标准：
+如果源站的 Cache-Control 响应头中存在 no-cache 或 max-age=0 ，则文件仍会被CDN360缓存但CDN360会判断其立即过期，对该对象的后续请求将触发CDN360携带 If-Modified-Since 头部对源发起重新验证。
+如果源站的 Cache-Control 响应头中为 no-store，则该文件不会被缓存。
 
+在缓存时间上，CDN360同样遵循上述规则。默认情况下 CDN360 节点会缓存并提供源站的 `Date` 以及 `Age` 头部值给客户端，因此即便是采用了多层级Cache架构，CDN360也可以做到全平台缓存时间一致。
 By default, the `Date` header field is [passed all the way](</docs/edge-logic/supported-directives.md#proxy_pass_header>) from the origin to the edge servers. Efforts have also been made to ensure the `Age` header field reflects the time since the response is retrieved from the origin, even when parent cache is used.
 
 If the default behavior mentioned above does not meet your requirement, use the following directives to alter it.
