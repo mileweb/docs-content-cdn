@@ -9,28 +9,27 @@
 如果源站的 Cache-Control 响应头中为 no-store，则该文件不会被缓存。
 
 在缓存时间上，CDN360同样遵循上述规则。默认情况下 CDN360 节点会缓存并提供源站的 `Date` 以及 `Age` 头部值给客户端，因此即便是采用了多层级Cache架构，CDN360也可以做到全平台缓存时间一致。
-By default, the `Date` header field is [passed all the way](</docs/edge-logic/supported-directives.md#proxy_pass_header>) from the origin to the edge servers. Efforts have also been made to ensure the `Age` header field reflects the time since the response is retrieved from the origin, even when parent cache is used.
 
-If the default behavior mentioned above does not meet your requirement, use the following directives to alter it.
+如果上述关于是否缓存、缓存时间的默认缓存规则并不是您期待的，那么您也可以使用本文开头的那些配置项来进行缓存规则改写。
 
-* To ignore one or more of the three special header fields above, you can use the [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) directive. For example:
+* 配置项[`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>)用于让 CDN360 强制忽略源站的 Cache-Control\Expire\Set-Cookie 三个头部。例如：
 ```nginx
 proxy_ignore_headers Set-Cookie;
 ```
-In this case, the servers will behave as if the `Set-Cookie` header does not exist.
-* [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) can be used to set a cache time if the three special header fields are not present or ignored. You can use it multiple times to set different cache times for different status codes. For example:
+这种情况下，CDN360 将按照源未提供`Set-Cookie` 响应头来判断文件是否可以缓存以及缓存时间。
+* 配置项[`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) 用于设置当源未提供或者CDN360忽略源的 Cache-Control\Expire\Set-Cookie 三个头部时 CDN360 的缓存时长，该配置项支持针对不同状态码的文件设置不同缓存时长。例如：
 ```nginx
-location / { # the default location
-    proxy_cache_valid 5m; # cache 200, 301 and 302 for 5 minutes
-    proxy_cache_valid 404 2m; # cache 404 for 2 minutes
+location / { # 默认 location
+    proxy_cache_valid 5m; # 针对200、301、302状态码请求缓存5分钟
+    proxy_cache_valid 404 2m; # 针对404状态码请求缓存2分钟
 }
 location /no-cache {
-    proxy_cache_valid 200 0; # cache 200 response, but revalidate every time.
+    proxy_cache_valid 200 0; # 针对200状态码进行缓存，但是该立即过期
 }
 ```
-* While [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) ignores the specified header fields altogether, [`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>) can be used to ignore specific directives in the `Cache-Control` header field. For example:
+* 配置项[`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>)的功能与[`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>)十分相似，两者的区别在于[`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>)仅可用于设置 CDN360 忽略源 Cache-Control 头中的指定参数值。例如：
 ```nginx
-proxy_ignore_cache_control no-cache no-store;
+proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control 响应头中的 no-cache 和 no-store
 ```
 * The CDN360 proprietary directive [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) can be used to override the `max-age` in the `Cache-Control` header field to enforce a minimum cache time.
 * If you don't want a request to be served from the cache, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive. [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) can be used to prevent a response from being cached.
