@@ -33,8 +33,8 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control �
 ```
 * 配置项[`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) 用于改写源站给的 `Cache-Control` 响应头中的 `max-age` 参数值，从而让 CDN360 按改写后的`max-age` 值进行缓存
 * 配置项 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 用于设置 CDN360 不响应缓存文件给客户端，而是每次都从源站获取文件。该配置项经常与[`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>)一起使用来达到“强制文件不缓存”的效果。
-* [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 用于设置 CDN360 从源站拿去到文件后不缓存到本地。该配置项经常与 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 一起使用来达到“强制文件不缓存”的效果。
-鉴于您对 CDN360 的缓存行为感兴趣，您可能同时也对[如何设置自定义缓存Key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) 和 [CDN360 对 `Vary` 头部的处理方式](#the-support-and-non-support-of-vary) 感兴趣
+* 配置项[`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 用于设置 CDN360 从源站拿去到文件后不缓存到本地。该配置项经常与 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 一起使用来达到“强制文件不缓存”的效果。
+鉴于您对 CDN360 的缓存行为感兴趣，您可能同时也对[如何设置自定义缓存Key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) 和 [CDN360 对 `Vary` 头部的处理方式](#the-support-and-non-support-of-vary) 感兴趣。
 
 ### 如何将问号后参数或者请求头加入到缓存Key中?
 
