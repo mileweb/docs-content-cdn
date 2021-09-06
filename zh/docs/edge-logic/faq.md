@@ -32,12 +32,11 @@ location /no-cache {
 proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control 响应头中的 no-cache 和 no-store
 ```
 * 配置项[`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) 用于改写源站给的 `Cache-Control` 响应头中的 `max-age` 参数值，从而让 CDN360 按改写后的`max-age` 值进行缓存
-* The CDN360 proprietary directive [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) can be used to override the `max-age` in the `Cache-Control` header field to enforce a minimum cache time.
-* If you don't want a request to be served from the cache, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive. [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) can be used to prevent a response from being cached.
+* 配置项 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 用于设置 CDN360 不响应缓存文件给客户端，而是每次都从源站获取文件。该配置项经常与[`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>)一起使用来达到“强制文件不缓存”的效果。
+* [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 用于设置 CDN360 从源站拿去到文件后不缓存到本地。该配置项经常与 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 一起使用来达到“强制文件不缓存”的效果。
+鉴于您对 CDN360 的缓存行为感兴趣，您可能同时也对[如何设置自定义缓存Key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) 和 [CDN360 对 `Vary` 头部的处理方式](#the-support-and-non-support-of-vary) 感兴趣
 
-Since you are interested in the caching behavior of CDN360, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
-
-### How to include query parameters and/or request headers in the cache key?
+### 如何将问号后参数或者请求头加入到缓存Key中?
 
 By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
