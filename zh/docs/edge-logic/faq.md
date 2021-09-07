@@ -34,6 +34,7 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control �
 * 配置项[`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) 用于改写源站给的 `Cache-Control` 响应头中的 `max-age` 参数值，从而让 CDN360 按改写后的`max-age` 值进行缓存
 * 配置项 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 用于设置 CDN360 不响应缓存文件给客户端，而是每次都从源站获取文件。该配置项经常与[`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>)一起使用来达到“强制文件不缓存”的效果。
 * 配置项[`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 用于设置 CDN360 从源站拿去到文件后不缓存到本地。该配置项经常与 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 一起使用来达到“强制文件不缓存”的效果。
+
 鉴于您对 CDN360 的缓存行为感兴趣，您可能同时也对[如何设置自定义缓存Key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) 和 [CDN360 对 `Vary` 头部的处理方式](#the-support-and-non-support-of-vary) 感兴趣。
 
 ### 如何将问号后参数或者请求头加入到缓存Key中?
@@ -86,19 +87,19 @@ origin_header_modify Vary "" policy=preserve;
 # Cache不对 `Vary` 做任何操作，仅透传给客户端
 proxy_ignore_headers Vary; 
 ```
-在这种情况下，CDN360 将按照响应头 `Vary` 完全不存在来处理缓存。如果仅配置了 `origin_header_modify Vary "" policy=preserve` 而没有配置 `proxy_ignore_headers Vary` ，那么由于默认生效的配置 [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) ，您的文件将不会被缓存在 CDN360 平台上。如果您的业务需要 CDN360 按照响应头 `Vary` 来区分不同缓存版本，请联系网宿（CDNetworks）技术支持为您开通配置`proxy_cache_vary on` 的权限。
+在这种情况下，CDN360 将按照响应头 `Vary` 完全不存在来处理缓存。如果仅配置了 `origin_header_modify Vary "" policy=preserve` 而没有配置 `proxy_ignore_headers Vary` ，那么由于默认生效的配置 [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) ，您的文件将不会被缓存在 CDN360 平台上。如果您的业务的确需要 CDN360 按照响应头 `Vary` 来区分不同缓存版本，请联系网宿（CDNetworks）技术支持为您开通配置`proxy_cache_vary on` 的权限。
 
 ### 如何遵循源站的跳转请求（301、302等）?
 
-当源站响应 30x 并携带一个Location重定向地址时，您或许需要 CDN360 按照源的这个跳转地址来获取最终文件并缓存。您可以使用配置项 [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) 来实现这个需求。需要注意的是，遵循源站的跳转请求将会给回源请求带来额外的跳转时间消耗。
+当源站响应 30x 并携带一个Location重定向地址时，您或许需要 CDN360 按照源的这个跳转地址来获取最终文件并缓存。这时候您可以使用配置项 [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) 来实现这个需求。需要注意的是，遵循源站的跳转请求将会给回源请求带来额外的跳转时间消耗。
 
 ### 中国大陆加速以及备案相关
 
-按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN360 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被封锁。客户有责任为需要在中国大陆进行本地分发的域申请并和获取 Beian。当然，在这个过程中 CDN360 可以提供相应的咨询服务来进行协助。在您的域名取的备案之前，CDN360 可以使用临近中国大陆（例如香港、韩国或者日本等等）的服务器向中大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
+按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN360 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被关停。作为客户，您需要提前为计划在中国大陆进行本地分发的域申请并和获取备案。当然，在这个过程中 CDN360 将提供相应的咨询服务来进行协助。在您的域名取的备案之前，CDN360 可以使用临近中国大陆（例如香港、韩国或者日本等等）的服务器向中大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
 
 如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（CDNetworks）技术支持以便我们能够获取到关于您业务的所有必要信息。这些信息确认无误后，CDN360 就将为您开启中国大陆节点的使用权限。然后，您就可以按以下步骤来启用这些中国大陆节点：
 
-1. 在该域名的 [加速项](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成是。这样做可确保将加速项上的配置部署到中国大陆服务器，并且当这些服务器接收客户端请求时会正常响应文件。否则它们将返回状态代码 451。
+1. 在该域名的 [加速项](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成是。这样做可使加速项上的配置部署到中国大陆服务器，当这些服务器接收客户端请求时会正常响应文件。否则它们将返回状态代码 451。
 
 2. 创建携带“有ICP备案”为是的 [边缘域名](</docs/portal/traffic-management/creating-edge-hostname.md>) , 并将您的业务域名流量通过 CNAME 的方式解析到到此边缘域名上。这样GSLB调度系统就会将您的业务域名自动解析到上述1中描述的 CDN360 的中国大陆服务器上。
 
@@ -113,13 +114,13 @@ proxy_ignore_headers Vary;
 * 根据客户端输入的关键字进行搜索请求
 * 携带大量查询参数的 API 调用请求
 
-如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端请求获取到的响应性能可能会非常差。此时如何通过 CDN360 来加速这些动态内容？ 以下操作将极大提升此类动态响应性能:
+如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端请求获取到的响应性能可能会非常差。此时如何通过 CDN360 来加速这些动态内容？ 以下操作将极大提升此类动态响应性能：
 * **使用 CDN360 来为您的业务争取数秒的宝贵时间**
 
 当您使用 CDN360 时，您的客户端将会解析并与最近的边缘服务器建链。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连接到源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下， CDN360 与源站之间会保持长链接，您可以使用配置项 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用配置项[`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN360 上的延迟。
 * **将动态文件转换成可缓存文件**
 
-在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是如果期待客户端收到的响应会根据请求url中的问号后参数或者请求头部值而不同，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。
+在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是，如果客户端收到的响应需要根据请求url中的问号后参数或者请求头部值而不同的话，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。
 * **回源时开启HDT链路加速配置**
 
-CDN360 使用配置项 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速. 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN360 的服务器使用最优的回源链路，即使在某些极具挑战性的情况下也是如此。此配置项也可用于某些源站链路不佳，但是首次MISS请求性能又极其重要的可缓存业务上。但是通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
+CDN360 使用配置项 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速. 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN360 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此配置项奕可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
