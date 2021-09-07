@@ -49,7 +49,6 @@ set $cache_misc "?abc=$arg_abc&def=$arg_def";
 您也可以将部分请求 header 值加入到缓存 key :
 ```nginx
 set $cache_misc "ae=$http_accept_encoding";
-set $cache_misc $cache_misc."hdr1=$http_header1&hdr2=$http_header2";
 ```
 在配置的过程中，如果您想保留当前边缘逻辑中的 $cache_misc 值，那么您可以将新数据添加在 $cache_misc 后，这样新数据就会以附加的形式加入到 $cache_misc 中：
 ```nginx
