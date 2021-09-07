@@ -38,7 +38,8 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control �
 
 ### 如何将问号后参数或者请求头加入到缓存Key中?
 
-CDN360的默认行为是将域名和请求URI(不包含问号后参数）加载到缓存 key 中。By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+默认情况下，CDN360的默认行为是将域名和不包含问号后参数的请求URI加载到缓存 key 中。同时 CDN360 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。
+By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
