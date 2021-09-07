@@ -118,7 +118,7 @@ proxy_ignore_headers Vary;
 * **使用 CDN360 来为您的业务争取数秒的宝贵时间**
 
 当您使用 CDN360 时，您的客户端将会解析并与最近的边缘服务器建链。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连接到源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下， CDN360 与源站之间会保持长链接，您可以使用配置项 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用配置项[`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN360 上的延迟。
-* **将文件缓存下来!**
+* **将动态文件转换成可缓存文件**
 
 在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是如果期待客户端收到的响应会根据请求url中的问号后参数或者请求头部值而不同，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。
 * **回源时开启HDT链路加速配置**
