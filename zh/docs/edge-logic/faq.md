@@ -38,45 +38,43 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control �
 
 ### 如何将问号后参数或者请求头加入到缓存Key中?
 
-默认情况下，CDN360的默认行为是将域名和不包含问号后参数的请求URI加载到缓存 key 中。同时 CDN360 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。
-By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+默认情况下，CDN360的默认行为是将域名和不包含问号后参数的请求URI加载到缓存 key 中。同时 CDN360 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。因此您可以按照您的业务需求将关键参数加入到这个内置变量中。例如，将所有问号后参数加入到缓存 key ：
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
-If you want to include only some of the query parameters, the following example shows how to add parameters "abc" and "def" to the cache key:
+您也可以仅提取出问号后参数中的部分指定变量值加入到缓存 key ，以下示例显示如何将问号后参数中的 "abc" 和 "def" 加入到缓存 key ：
 ```nginx
 set $cache_misc "?abc=$arg_abc&def=$arg_def";
 ```
-Similarly, the following example shows how to include some request headers in cache key:
+您也可以将部分请求 header 值加入到缓存 key :
 ```nginx
 set $cache_misc "ae=$http_accept_encoding";
 set $cache_misc $cache_misc."hdr1=$http_header1&hdr2=$http_header2";
 ```
-If you want to keep any previously assigned value, you can append to this variable:
+在配置的过程中，如果您想保留当前边缘逻辑中的 $cache_misc 值，那么您可以将新数据添加在 $cache_misc 后，这样新数据就会以附加的形式加入到 $cache_misc 中：
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
 
-### HTTP Header Manipulation
+### HTTP 头部管理
 
-If you need to add, modify, or delete some header fields in the request to the origin, use the [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) directive. For example:
+当您需要 CDN360 在回源时添加，修改，或者删除某些头部值时，您可以使用配置项[`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) 。示例如下：
 ```nginx
 origin_set_header CDN-Name Quantil;
 ```
-In particular, this is the code to send the client's IP address to the origin server:
+另外一个典型的场景如下，它可以让 CDN360 把客户端 IP 添加到 Client-IP 这个头部中并发送给源站：
 ```nginx
 origin_set_header Client-IP $client_real_ip;
 ```
-In order to consolidate the responses from the origin to improve the cache hit ratio, we created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
+出于整合 cache 上文件编码格式从而提升缓存命中率的考虑，CDN360 开发并提供了配置项[`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>)。该配置项将在回源时修改客户端请求中的 `accept-encoding` 头部值，并携带修改后的值请求源站。
 
-If you need to add, modify, or delete some header fields in the response to clients, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. For example:
+当您需要 CDN360 在响应客户端时添加，修改，或者删除某些头部值时，您可以使用配置项[`add_header`](</docs/edge-logic/supported-directives.md#add_header>)。示例如下：
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from the origin prior to processing the response. This can be very useful if you need to override a header value (such as cache time) from the origin that may affect the CDN servers' behavior.
+同时 CDN360 开发并提供了配置项 [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) ，此配置项将在其他所有处理源站响应的操作之前修改掉源站的响应头。当您需要改写某些可能影响 CDN 服务器行为的源站响应头（例如缓存时间）时，这个配置项将非常有用。
 
-
-### The support (and non-support) of `Vary`
+### 关于 `Vary` 响应头的处理方式
 
 By default, CDN360 servers remove any `Vary` header in the response from origin servers. Therefore, every URL will have no more than one cached version. If you want to cache different versions based on a request header or cookie values, put them explicitly into the cache key by setting the `$cache_misc` variable mentioned above. For example:
 ```nginx
