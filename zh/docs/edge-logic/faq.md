@@ -99,28 +99,28 @@ proxy_ignore_headers Vary;
 
 如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（CDNetworks）技术支持以便我们能够获取到关于您业务的所有必要信息。这些信息确认无误后，CDN360 就将为您开启中国大陆节点的使用权限。然后，您就可以按以下步骤来启用这些中国大陆节点：
 
-1. 创建携带“有ICP备案”为是的 [边缘域名](</docs/portal/traffic-management/creating-edge-hostname.md>) , 并将您的业务域名流量通过 CNAME 的方式解析到到此边缘域名上。这样GSLB就会将您的业务域名解析到 CDN360 的中国大陆服务器上。
+1. 在该域名的 [加速项](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成是。这样做可确保将加速项上的配置部署到中国大陆服务器，并且当这些服务器接收客户端请求时会正常响应文件。否则它们将返回状态代码 451。
 
-2. 在该域名的 [加速项](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成是。这样做可确保将加速项上的配置部署到中国大陆服务器，并且这些服务器将处理对该域的客户端请求。否则，它们将返回状态代码 451。
+2. 创建携带“有ICP备案”为是的 [边缘域名](</docs/portal/traffic-management/creating-edge-hostname.md>) , 并将您的业务域名流量通过 CNAME 的方式解析到到此边缘域名上。这样GSLB调度系统就会将您的业务域名自动解析到上述1中描述的 CDN360 的中国大陆服务器上。
 
 ### 如何开启websocket功能?
 
 您可以在希望开启 WebSocket 协议的location下使用配置项[`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>)。需要确保客户端使用的是 HTTP/1.1（非 HTTP/2）协议来与服务器建链。该配置项默认会将读取和发送超时时间设置为21秒。你可以通过[`origin_read_timeout`](</docs/edge-logic/supported-directives.md#origin_read_timeout>) 和 [`origin_send_timeout`](</docs/edge-logic/supported-directives.md#origin_send_timeout>) 这两个配置项对其进行修改。
 
-### 动态请求的加速情况?
+### 动态文件的支持情况?
 
-Dynamic contents are usually generated on-the-fly for each request and are different for different visitors. Some examples are:
-* Realtime stock prices, sports game scores
-* Search results based on keywords entered by the visitor
-* API calls that have lots of query parameters
+动态内容通常是针对每个请求即时生成，并且对于不同的客户端的响应是不同的。部分示例如下：
+* 实时股价、体育比赛比分查询
+* 根据客户端输入的关键字进行搜索请求
+* 携带大量查询参数的 API 调用请求
 
-If you only have the origin server in a central data center or in the cloud, the performance can be quite poor if the visitor is far away from or does not have a good connection to the data center. How can we accelerate those contents through CDN360? Here are a few things you can do:
-* **Simply using CDN360 can shave off a few seconds**
+如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端请求获取到的响应性能可能会非常差。此时如何通过 CDN360 来加速这些动态内容？ 以下操作将极大提升此类动态响应性能:
+* **使用 CDN360 来为您的业务争取数秒的宝贵时间**
 
-If you use CDN360, your clients will connect to the PoP that is closest to them. The round trip time (RTT) can be a few hundred milliseconds faster than directly connecting to the origin server. The TCP and TLS handshakes usually take 3-4 RTTs which can be a second faster through the CDN. By default, the CDN360 servers maintain persistent connections to the origin. You can increase the [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) to up to 10 minutes in the origin configurations. In the meantime, if you know the content is not cacheable at all, use [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) and [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) to completely skip caching to minimize latency.
-* **Cache the response!**
+当您使用 CDN360 时，您的客户端将会解析并与最近的边缘服务器建链。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连接到源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下， CDN360 与源站之间会保持长链接，您可以使用配置项 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用配置项[`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN360 上的延迟。
+* **将文件缓存下来!**
 
-In many cases, "dynamic" does not mean the content is not cacheable. For example, end users will not experiance the difference if you cache the score of a basketball game for 1 second. If you have 10 requests per second to fetch the score, you can save 90% of the bandwidth and processing power. If the response depends on some query parameter or request header values, make sure those variables are [included in the cache key](#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key).
-* **Enable Fast Route to origin**
+在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是如果期待客户端收到的响应会根据请求url中的问号后参数或者请求头部值而不同，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。
+* **回源时开启HDT链路加速配置**
 
 CDN360 has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the ""Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN360 support team.
