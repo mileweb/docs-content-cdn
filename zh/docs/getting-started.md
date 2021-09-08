@@ -15,3 +15,4 @@
 
 ![null](</docs/resources/images/getting-started-flowchart.png>)
 
+帮您立刻了解上述分发开启步骤，请点击并观看在线[快速启动CDN360视频](<https://www.cdnetworks.com/wp-content/uploads/videos/cdn360_v1.mp4>)。

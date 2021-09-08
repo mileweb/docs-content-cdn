@@ -36,5 +36,5 @@ The CDN360 content delivery platform provides a rich [API](</apidocs>) that supp
 
 ## Where to Go from Here
 
-Perform the steps in the [CDN360 Quick Start](</docs/getting-started.md>).
+点击观看新手[快速启动CDN360视频](<https://www.cdnetworks.com/wp-content/uploads/videos/cdn360_v1.mp4>)，并执行[CDN360新手指南](</docs/getting-started.md>)文档描述的步骤。
 
