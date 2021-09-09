@@ -8,7 +8,7 @@
 如果源站的 Cache-Control 响应头中存在 no-cache 或 max-age=0 ，则文件仍会被CDN360缓存但CDN360会判断其立即过期。对该对象的后续请求将触发CDN360携带 If-Modified-Since 头部对源发起重新验证。
 如果源站的 Cache-Control 响应头中为 no-store，则该文件不会被缓存。
 
-默认情况下，来自源站的 `Date` 响应头会因为 [透传源站响应头的规则](</docs/edge-logic/supported-directives.md#proxy_pass_header>) 而透传至客户端。类似的规则也被运用到了对响应头 `Age` 的处理过程中，以确保即便是采用了多层级 Cache 架构的情况下， CDN360 平台上的 `Age` 也可正确代表对应文件从源上取回后经过了多长时间。
+HTTP协议规定Date响应头应保存源站生成响应的时间。因此在默认情况下，来自源站的 `Date` 响应头会被[一路透传](</docs/edge-logic/supported-directives.md#proxy_pass_header>) 至客户端。类似的原则也被运用到了对响应头 `Age` 的处理过程中。即便在采用了多层级 Cache 架构的情况下，CDN360 平台上的 `Age` 头也可正确反映文件从源上取回后经过了多长时间。
 
 如果上述关于是否缓存、缓存时间的默认缓存规则并不是您期待的，那么您也可以使用本文开头的那些指令来进行缓存规则改写。
 
@@ -123,4 +123,4 @@ proxy_ignore_headers Vary;
 在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是，如果客户端收到的响应需要根据请求url中的问号后参数或者请求头部值而不同的话，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。
 * **回源时开启HDT链路加速配置**
 
-CDN360 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN360 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令奕可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
+CDN360 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN360 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令亦可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
