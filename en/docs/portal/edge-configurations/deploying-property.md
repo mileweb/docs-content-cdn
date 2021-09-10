@@ -2,6 +2,8 @@
 
 After you create and validate a property version, you are ready to deploy it. Initially, we highly recommend that you always deploy the property to the staging environment to make sure the property is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
 
+**Note:** If you began your free trial of CDN360, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production.
+
 1. In the left pane, click **Edge Configurations**, and then select **Properties**. 
 
 2. On the Properties page, click the ID of the property you want to deploy.
