@@ -15,3 +15,4 @@ The following figure shows the steps to follow when using CDN360 to accelerate y
 
 ![null](</docs/resources/images/getting-started-flowchart.png>)
 
+To help you get started, check out the [Getting Started with CDN360 Video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdn360_v1.mp4>).

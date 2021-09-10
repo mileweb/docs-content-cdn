@@ -1,5 +1,50 @@
 # Release Notes
 
+## September 8, 2021
+### API updates
+* Returned error code InvalidApiAccountId if an incorrect API account ID is specified when calling [API permissions](</apidocs#tag/API-Access-Control>) endpoints.
+* Enforced the logConfigs API permission.
+* Added responsiblePerson and emailAddress fields to the [customer list API](</apidocs#operation/get-ngadmin-customers>)’s response.
+* Added support for nearChina in reports. “nearChina” is an advanced feature that can be enabled for those without ICP Beian who want to maximize performance for visitors in China. Please contact us if you require this feature.
+* Prevented the HDT product from being removed if the customer was still using resources.
+* Prevented property using a shared certificate from being deployed if the owner of the shared certificate stopped sharing it. The property must be updated to use another certificate or no certificate before it can be deployed.
+* Added support for advanced Edge Logic directive proxy_ignore_client_abort which is useful for our real-time log feature.
+* Fixed creation of API permission.
+* Fixed removal of the ECP product from a customer.
+* Fixed error handling when invalid values are specified for usageLimitDays and usageLimitDollars of the [serviceQuotas APIs](</apidocs#tag/CDN-Product-Management>).
+* Ensured that read-only API accounts can call [report APIs](</apidocs#tag/Reports>).
+* Ensured that [service quota creation](</apidocs#operation/post-cdn-serviceQuotas>) does not require specifying directiveParameterLimits. Defaults apply.
+
+### Portal updates
+* Improved the self-signup page to describe our promotional offes.
+* Made improvements to support translation from English to other languages.
+* Fixed display of certificate name when creating a property.
+* Pointed self-signup customers to our [“Getting Started” video](<https://www.cdnetworks.com/wp-content/uploads/2020/11/cdn360-introduction-video.mp4>).
+* Added tooltip for real-time log sample rate in property configuration.
+* Fixed display of dropdown lists in reports page.
+* Added support for TO_UPPER, TO_LOWER, and SUBSTR to our Edge Logic function [eval_func](</docs/edge-logic/supported-directives#eval_func>).
+* Added information icons for TLS Ciphers and Certificate auto-renew.
+* Added support for ENCRYPT_SYMM and DECRYPT_SYMM cipher functions that can be used in Edge Logic.
+* Improved certificate list display.
+* Ensured user can confirm deployment of property with a mismatched or expired certificate. This should not normally be done in production if you expect real visitors to access your content since their browsers will show warnings and prevent access.
+
+
+## August 25, 2021
+### API updates
+* Allowed [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>), and [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) Edge Logic directives to be used in location blocks. Previously, they were supported only in server blocks.
+* Fixed reseller [creation of a service quota for a child customer](</apidocs#operation/post-cdn-serviceQuotas>) if the reseller has no explicit usage limits.
+* Improved error message for the InvalidIds code that can be returned by our [portal user list API](</apidocs#operation/getContacts>).
+* Improved error message for the CertificateMismatch code which can be returned when [creating a deployment task](</apidocs#operation/createDeployment>) if the certificate's Subject Alternative Name does not include the hostnames in your property.
+
+### Portal updates
+* Added pie charts to the origin status code details and status code details reports, allowing you to see the percentages of returned status codes.
+* Improved the CDN360 self-signup page to mention our special offers.
+* Ensured the Start Purge button is enabled after the user does a directory purge. It allows the user to create additional purge requests without leaving the page.
+* Allowed administrators to force a deployment, overriding warnings from our check of certificates and hostname activity. We warn if a certificate's Subject Alternative Name field does not contain the hostnames specified in the property, if the certificate already expired and would cause visitors to get browser warnings, and if the deployment affects hostnames that were recently accessed by visitors.
+* Translated additional text that appears in the portal.
+* Supported accelerating the CDN360 portal and API through our CDN to improve performance.
+* Fixed display issues in the certificate details page.
+
 ## August 11, 2021
 ### API updates
 * Improved validation of report annotations.
