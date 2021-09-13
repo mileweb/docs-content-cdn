@@ -1,6 +1,6 @@
 ## Simple Caching
 
-A property that always returns a fixed string is not very interesting. A typical CDN configuration usually requires the proxy servers to fetch some content from some origin servers and cache the content for a certain period of time for end users to retrieve. Assume you need to accelerate the hostname "faster.cdnetworks.com" and that the origin server’s hostname is "[www.cdnetworks.com](https://www.cdnetworks.com)". By default, you want the CDN360’s proxy server to cache the content following the `cache-control` and `expires` headers from the origin. If the origin does not specify an object’s cache time, you want to cache for 10 minutes. Because you know that HTML, CSS, PNG, JS, and JPEG files won’t be updated frequently, you want to cache them for a day if the origin’s instruction is shorter than a day. The Edge Logic should resemble the following:
+在实际生产环境中，您对 CDN360 的需求或许不仅仅是生成一个固定字符串然后返回给客户端而已。一个典型的 CDN 需求通常是需要 CDN360 作为代理服务器从源站获取一些文件并保持一段时间的缓存，以供终端客户前来请求和检索该文件。假设您需要加速主机名“faster.cdnetworks.com”，此时源服务器的主机名是 "[www.cdnetworks.com](https://www.cdnetworks.com)" 。默认情况下，您希望 CDN360 作为代理服务器根据源站响应头中的 `cache-control` 和 `expires` 来缓存对应的文件。如果源没有指定该文件的缓存时间，则缓存 10 分钟。同时，由于您已经提前预知了 HTML、CSS、PNG、JS 和 JPEG 文件不会经常更新，因此您希望此类文件至少能够缓存1天（即便在源给的缓存规则小于1天的情况下）。此时， CDN360 上的边缘逻辑配置如下：
 ```nginx
 location / { # the default location
   proxy_cache_valid 10m; # cache for 10 min if no instruction from the origin
