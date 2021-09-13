@@ -1,40 +1,50 @@
-# Welcome to CDN360
+## CDN360 概述
 
-CDN360 is leading the next evolution of content delivery networks (CDN). 
+CDN360是引领CDN变革的新一代CDN产品。 CDN360的设计旨在帮助您和您的用户加速内容和应用不论在世界任何地方。 CDN360不仅加速内容，改进页面加载时间，还有更多的产品优势，可用来给您提供趋于完美的客户体验。
 
-CDN360 is designed to accelerate and deliver your applications to users worldwide, regardless of their location. It boosts content delivery, improves load times, and offers many more clear-cut advantages to deliver an unparalleled user experience.
+除了加速、保护和扩展应用之外，CDN360还可使您对内容分发和成本有精准的掌控。独特的自助服务功能，友好且功能强大的用户界面， 应用程序编程接口（API），使CDN360能顺利的与您的软件开发周期（SDLCs）集成在一起。
 
-In addition to accelerating, securing, and scaling your applications, CDN360 enables you to have granular control over your content delivery and costs. Unique self-service capabilities, along with a friendly, yet powerful user interface and application programming interface (API), provide for seamless integration into your SDLCs.
+## CDN360 主要功能
 
-## CDN360 Key Features
+CDN360的主要功能可以使没有CDN背景的用户轻松入门，同时也为高级用户提供了强大的功能：
 
-CDN360's key features make it easy for anyone with a minimum background in CDN to get started, while offering powerful features for advanced users as well.
-- A rich API, Edge Logic, and processing at the edge enable you to implement features at the CDN level without touching your application codebase.
-- You can configure CDN360, test its behavior in a dedicated staging environment, and then deploy to production in minutes, without long wait times to create and change configurations by email or phone calls. CDN360 also allows you to self-configure edge servers and customize GSLB service maps.
-- Flexible cost/performance management empowers you to self-customize service coverage to manage expenses according to the performance you need.
-- State-of-the-art load balancing dynamically monitors the Internet to direct traffic based on real-time performance metrics and system-load information.
-- Sophisticated access-control algorithms with Edge Logic process requests to protected content at the edge. Support for NGINX configuration scripts and JavaScript allow you to process requests and responses on the edge using familiar tools.
-- With points of presence deployed on every continent, CDN360 routes user requests to edge servers based on factors such as proximity and resource/content availability, reducing workloads on origin servers by more than 90%. Cached content on the edge remains available even if the origin server stops responding to requests.
-- CDN360 allows your content to reach customers in mainland China. CDNetworks can also help to secure all necessary permissions and licenses.
-- The CDN360 infrastructure provides a natural shield from a wide array of attacks against content providers and their users. Web Application Firewall (WAF) and DDoS mitigation afford even greater protection against serious threats.
-- As part of CDN360, you receive access to raw data and tools to obtain invaluable insight into your audience’s activity, location, devices, carriers, and more.
+- 丰富的API、边缘逻辑，和边缘处理使您能够在CDN上直接实现功能，而无需触及到应用程序代码。
 
-## CDN360 Graphical User Interface (GUI)
+- 您可以配置CDN360，在专用的演示环境中测试，并在几分钟内部署到生产环境。 无需再长时间等待通过电子邮件或电话创建和更改配置。CDN360还允许自行配置边缘服务器和自定义GSLB服务分布。
 
-The CDN360 content delivery platform makes it easy for anyone with a minimum CDN background to get started, yet is sufficiently powerful for advanced users as well.
+- 灵活的成本/绩效管理能够让您自行定制服务范围，根据需要的绩效来管理费用。
 
-The platform's customizable point-and-click user interface provides granular controls for:
+- 以最先进的负载平衡技术，基于实时性能指标和系统负载信息，动态监控网络，引导流量。
 
-- Self-configuring edge servers and service coverage to meet performance needs while reducing data transport costs and latencies.
-- Choosing the best way to fetch content from the origin and deciding where to store it on CDN360 servers.
-- Customizing global traffic management rules and selecting advanced settings for any edge hostname you create.
-- Testing behaviors in a dedicated staging environment and then deploying to production — in minutes! 
+- 精密的访问控制算法通过 Edge Logic 可直接在CDN边缘处理对受保护内容的请求。支持NGINX配置脚本和JavaScript，用户可使用熟悉的工具在边缘上处理请求和响应。
 
-## CDN360 Application Programming Interface (API)
+- CDN360将节点部署在世界各地，根据邻近性和资源/内容可用性等元素将用户请求传送到边缘服务器，使源服务器上的工作负载减少了90%以上。即使源服务器停止响应请求，边缘上的缓存内容仍然可以用来响应。
 
-The CDN360 content delivery platform provides a rich [API](</apidocs>) that supports the same functions as the CDN360 GUI, along with advanced configuration capabilities. Using the API, developers can have their applications interact with CDN360 by sending and receiving JavaScript Object Notation (JSON) data.
+- CDN360可以为中国大陆的终端客户提供内容加速服务。CDNetworks还可以帮助您获取必要的权限和许可证。
 
-## Where to Go from Here
+- CDN360基础架构为用户提供了一道天然屏障，可以抵御各种攻击。Web应用程序防火墙（WAF）和DDoS抵御功能针对严重威胁提供了更多的保护。
+
+- 作为CDN360提供服务的一部分，您可以通过访问原始数据和运行工具，来获取对终端用户的请求、位置、设备、运营商等信息的深入了解。
+
+## CDN360 GUI
+
+CDN360平台使任何没有CDN背景的人都可以轻松入门，同时也为高级用户提供了足够强大的功能。
+
+平台可定制的点击式用户界面为以下功能提供了进一步的可控粒度：
+
+- 可自助配置边缘服务器和服务覆盖率，来满足性能需求，同时降低数据传输成本和延迟。
+
+- 选择从源站获取内容的最佳方式，并决定将其存放在何处的CDN360服务器上。
+
+- 支持自定义全局流量管理规则，创建CNAME并开启高级设置。
+
+- 提供专用的演示环境测试CDN配置及性能，并只需几分钟即可部署到生产环境！
+
+## CDN360 API 
+
+CDN360 提供了丰富的[API](</apidocs>)，它支持与CDN360 GUI相同的功能以及高级配置功能。通过使用API，开发人员可以通过发送和接收JSON数据，使其应用程序与CDN360交互交流。
+
+## 下一步
 
 点击观看新手[快速启动CDN360视频](<https://www.cdnetworks.com/wp-content/uploads/videos/cdn360_v1.mp4>)，并执行[CDN360新手指南](</docs/getting-started.md>)文档描述的步骤。
 
