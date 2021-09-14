@@ -1729,7 +1729,7 @@
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
-                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -1780,7 +1780,7 @@
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1799,14 +1799,15 @@
                                   },
                                   "by": {
                                     "type": "array",
-                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                                     "items": {
                                       "type": "string",
                                       "enum": [
                                         "standard",
                                         "premium",
                                         "premium+",
-                                        "ultra"
+                                        "ultra",
+                                        "nearChina"
                                       ]
                                     }
                                   },
@@ -1910,7 +1911,7 @@
             }
           }
         },
-        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -2081,11 +2082,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2136,7 +2137,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -2155,14 +2156,15 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
                                   "premium+",
-                                  "ultra"
+                                  "ultra",
+                                  "nearChina"
                                 ]
                               }
                             },
@@ -2332,10 +2334,11 @@
                   },
                   "clientZones": {
                     "type": "array",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2386,7 +2389,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -2405,14 +2408,15 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
                                   "premium+",
-                                  "ultra"
+                                  "ultra",
+                                  "nearChina"
                                 ]
                               }
                             },
@@ -4366,11 +4370,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4421,7 +4425,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -4440,14 +4444,15 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
                                   "premium+",
-                                  "ultra"
+                                  "ultra",
+                                  "nearChina"
                                 ]
                               }
                             },
@@ -8513,7 +8518,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -8570,7 +8575,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -8946,7 +8951,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -9594,7 +9599,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -11580,7 +11585,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -11877,7 +11882,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -12310,16 +12315,16 @@
                       "type": "string"
                     }
                   },
-                  "serverGroups": {
+                  "serverRegions": {
                     "type": "array",
-                    "description": "One or more server groups (standard, premium, premium+, or ultra).",
+                    "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
                     "items": {
                       "type": "string"
                     }
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
+                    "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
                     "items": {
                       "type": "string"
                     }
@@ -12867,7 +12872,7 @@
                           },
                           "clientRegions": {
                             "type": "array",
-                            "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                            "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
                             "items": {
                               "type": "string"
                             }
@@ -12884,6 +12889,13 @@
                           "comments": {
                             "type": "string",
                             "description": "Text shown in the report on the CDN360 portal."
+                          },
+                          "serverRegions": {
+                            "type": "array",
+                            "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                            "items": {
+                              "type": "string"
+                            }
                           }
                         },
                         "required": [
@@ -13078,7 +13090,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -13228,7 +13240,7 @@
                     },
                     "clientRegions": {
                       "type": "array",
-                      "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                      "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
                       "items": {
                         "type": "string"
                       }
@@ -13245,6 +13257,13 @@
                     "comments": {
                       "type": "string",
                       "description": "Text shown in the report on the CDN360 portal."
+                    },
+                    "serverRegions": {
+                      "type": "array",
+                      "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -13448,6 +13467,20 @@
                   "comments": {
                     "type": "string",
                     "description": "Text describing the event. This will appear in the report."
+                  },
+                  "clientRegions": {
+                    "type": "array",
+                    "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "serverRegions": {
+                    "type": "array",
+                    "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
@@ -14165,16 +14198,17 @@
                           "type": "string"
                         }
                       },
-                      "servergroups": {
+                      "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
                             "premium+",
-                            "ultra"
+                            "ultra",
+                            "nearChina"
                           ]
                         }
                       },
@@ -14187,7 +14221,7 @@
                       }
                     }
                   },
-                  "groupby": {
+                  "groupBy": {
                     "type": "array",
                     "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
                     "items": {
@@ -19095,6 +19129,14 @@
                                 "ECP"
                               ]
                             }
+                          },
+                          "emailAddress": {
+                            "type": "string",
+                            "description": "Email address for the customer."
+                          },
+                          "responsiblePerson": {
+                            "type": "string",
+                            "description": "Name of a person responsible for the customer account."
                           }
                         },
                         "required": [
@@ -19108,7 +19150,8 @@
                           "type",
                           "phone",
                           "regionalOffice",
-                          "products"
+                          "products",
+                          "emailAddress"
                         ]
                       }
                     }
@@ -19134,7 +19177,8 @@
                           "regionalOffice": "East",
                           "products": [
                             "CDN"
-                          ]
+                          ],
+                          "emailAddress": "administrator@resellerchildcustomer.com"
                         },
                         {
                           "customerId": 20006185,
@@ -19149,7 +19193,9 @@
                           "regionalOffice": "West",
                           "products": [
                             "CDN"
-                          ]
+                          ],
+                          "emailAddress": "jane@resellerchildcustomer2.com",
+                          "responsiblePerson": "Jane Smith"
                         }
                       ],
                       "count": 2
@@ -20066,7 +20112,7 @@
                     },
                     "advancedFeaures": {
                       "type": "array",
-                      "description": "List of advanced features that could be enabled for customers via the service quota API. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "description": "List of advanced features that could be enabled for customers via the service quota API. \"realTimeLog\" is an advanced feature allowing a customer to monitor requests from visitors to the content as they come in. \"nearChina\" is an advanced feature allowing use of a special server group to provide better performance to visitors in China for domains without ICP Beian. Please contact our support team if you require an advanced feature.",
                       "items": {
                         "type": "string"
                       }
@@ -21911,7 +21957,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -24368,7 +24414,7 @@
                 "examples": {
                   "Invalid API account ID": {
                     "value": {
-                      "code": "InvalidAccountId",
+                      "code": "InvalidApiAccountId",
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   },
@@ -24463,9 +24509,9 @@
                   }
                 },
                 "examples": {
-                  "Invalid account ID": {
+                  "Invalid API account ID": {
                     "value": {
-                      "code": "InvalidAccountId",
+                      "code": "InvalidApiAccountId",
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   }
@@ -24606,9 +24652,9 @@
                   }
                 },
                 "examples": {
-                  "Invalid account ID": {
+                  "Invalid API account ID": {
                     "value": {
-                      "code": "InvalidAccountId",
+                      "code": "InvalidApiAccountId",
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   }
@@ -24832,16 +24878,17 @@
                           "type": "string"
                         }
                       },
-                      "servergroups": {
+                      "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
                             "premium+",
-                            "ultra"
+                            "ultra",
+                            "nearChina"
                           ]
                         }
                       },
@@ -24854,7 +24901,7 @@
                       }
                     }
                   },
-                  "groupby": {
+                  "groupBy": {
                     "type": "array",
                     "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
                     "items": {
