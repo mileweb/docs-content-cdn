@@ -1,19 +1,19 @@
 ## Hello World
 
-Let’s get started with the following simple configuration:
+让我们以下面的简单样例开始：
 
 ```nginx
 location / {
     return 200 "hello world!\n";
 }
 ```
-As you probably guessed, this configuration always returns a 200 status code with a body that says "hello world!". The "[location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)" directive indicates that everything within the curly braces is applied to all URIs that begin with "/" (basically every URI). The "[return](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)" directive generates a response with the status code value specified in the first parameter and the body specified in the second parameter. 
+正如您可能猜到的那样，此配置下 CDN360 将返回 200 状态代码并且响应主体为“hello world！”。 指令 "[location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)" 表示花括号内的所有配置内容都应用于以“/”开头的 URI（实际上，这等同于所有的请求）。指令 "[return](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)" 指令表示按配置生成一个响应给客户端，该响应的状态码为 return 的第一个参数值，该响应主体为 return 的第二个参数值。
 
-For more information about these two directives, refer to the NGINX documentation site. On the portal, enter only the code above into the "Edge Logic" text area:
+有关这两个指令的更多信息，请参阅 NGINX 文档站点。在 CDN360 的配置Portal页面上，您可以将上述代码放入到在边缘逻辑（edge logic）的文本区域中：
 
 <p align=center><img src="/docs/resources/images/edge-logic/helloworld.png" alt="hello world" width="500"></p>
 
-If you use the [API to create the property](</apidocs#operation/createProperty>), the following is the complete JSON of the property configuration:
+如果您希望[通过API来创建加速项](</apidocs#operation/createProperty>) ，您可以将对应的指令以如下格式放到如下面的JSON文件中：
 
 ```testdomain.json :```
 ```json
@@ -29,7 +29,7 @@ If you use the [API to create the property](</apidocs#operation/createProperty>)
 } 
 ```
 
-Note: You must enter the entire Edge Logic code in one line following the [JSON string escaping](https://www.freeformatter.com/json-escape.html) syntax. For example, if you configured the acceleration hostname to be `www.testdomain.com` as shown in the JSON above, and then deployed the property to the staging environment, you can use a cURL command to perform the following test:
+请注意：您必须按照 [JSON 字符串转义语法](https://www.freeformatter.com/json-escape.html)在同一行中输入整个 Edge Logic 代码。假设此时您想创建一个加速域名为 `www.testdomain.com` 的配置，然后将这个加速配置部署到演练环境，并且使用 cURL 命令来对其进行测试：
 
 ```bash
 $ curl -v http://www.testdomain.com/ --resolve www.testdomain.com:80:163.171.228.89
@@ -49,7 +49,6 @@ hello world!
 * Connection #0 to host www.testdomain.com left intact
 ```
 
-In this example, 163.171.228.89 is the IP address of one of the staging servers. For details about using the staging environment, refer to [this section](</docs/edge-logic/staging-environment.md>). 
+在此示例中，163.171.228.89 是 CDN360 演练环境中的某一个节点 IP 地址。有关演练环境的使用方法，您可以查阅 [演练环境相关信息](</docs/edge-logic/staging-environment.md>). 
 
-Under the hood, the CDN360 API server encloses the Edge Logic into an NGINX "[server block](http://nginx.org/en/docs/http/ngx_http_core_module.html#server)" generated for this property. The acceleration hostname "www.testdomain.com" specified in the property becomes the parameter to the "[server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name)" directive in this server block. As a result, all HTTP requests targeting www.testdomain.com are handled by this server block, and the server follows the behavior you defined in the Edge Logic.
-
+在后台程序中，CDN360 API 服务器会将上述边缘逻辑封装进 NGINX "[server控制块](http://nginx.org/en/docs/http/ngx_http_core_module.html#server)" 中。边缘逻辑中配置的的加速主机名 “www.testdomain.com” 将被转换成server控制块中的"[server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name)" 指令。所有指向 www.testdomain.com 的 HTTP 请求都将由该服务器模块处理，即遵循您在边缘逻辑中的配置规则。

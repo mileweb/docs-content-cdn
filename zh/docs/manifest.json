@@ -259,11 +259,11 @@
         ]
       },
       { 
-        "title": "Release Notes",
+        "title": "发布说明",
         "heading": true,
         "routes": [
           {
-            "title": "Release Notes",
+            "title": "发布说明",
             "path": "/docs/release-notes.md"
           }
         ]

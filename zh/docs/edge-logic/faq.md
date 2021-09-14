@@ -1,125 +1,126 @@
-## Frequently Asked Questions
+## 常见问题
 
-### How the cache time for an object is determined?
+### CDN如何判定一个文件能否缓存，缓存多久?
 
-There are many directives you can use in the Edge Logic to control the cache time. If none of them is configured, the default behavior of CDN360 edge servers is to "honor the origin". That is, the instructions in the `Cache-Control` and `Expires` header fields are followed. If these two fields are not present in a response from the origin, the response is not cached. The presence of the `Set-Cookie` header field also prevents caching of the response. 
+在边缘逻辑（Edge Logic）中，我们提供了多个指令用于设置文件是否应被CDN缓存（如[proxy_no_cache](/docs/edge-logic/supported-directives#proxy_no_cache)/[proxy_ignore_cache_control](/docs/edge-logic/supported-directives#proxy_ignore_cache_control)/[proxy_ignore_headers](/docs/edge-logic/supported-directives#proxy_ignore_headers)等等）。如果所有相关指令都没有在加速项中被使用到，那么CDN360节点的默认行为是“遵循源站”，即按照源站响应头中的`Cache-Control`和`Expires` 头来判断文件是否可以缓存以及缓存时长。需要注意的是，如果源站给的响应头中有`Set-Cookie`头，CDN360将不会对该文件进行缓存。
 
-We modified the open-source NGINX to strictly follow the HTTP standard regarding 'zero-time cache'. When `no-cache` or `max-age=0` is present in the `Cache-Control` header field, the response is still cached but expires immediately. Any subsequent request for this object will result in a revalidation request to the origin with the `If-Modified-Since` header. If `no-store` is in the `Cache-Control` header field, the response will not be cached.
+与此同时我们优化了开源 NGINX 从而让CDN360严格遵循有关“零时缓存”的 HTTP 标准：
+如果源站的 Cache-Control 响应头中存在 no-cache 或 max-age=0 ，则文件仍会被CDN360缓存但CDN360会判断其立即过期。对该对象的后续请求将触发CDN360携带 If-Modified-Since 头部对源发起重新验证。
+如果源站的 Cache-Control 响应头中为 no-store，则该文件不会被缓存。
 
-By default, the `Date` header field is [passed all the way](</docs/edge-logic/supported-directives.md#proxy_pass_header>) from the origin to the edge servers. Efforts have also been made to ensure the `Age` header field reflects the time since the response is retrieved from the origin, even when parent cache is used.
+HTTP协议规定Date响应头应保存源站生成响应的时间。因此在默认情况下，来自源站的 `Date` 响应头会被[一路透传](</docs/edge-logic/supported-directives.md#proxy_pass_header>) 至客户端。类似的原则也被运用到了对响应头 `Age` 的处理过程中。即便在采用了多层级 Cache 架构的情况下，CDN360 平台上的 `Age` 头也可正确反映文件从源上取回后经过了多长时间。
 
-If the default behavior mentioned above does not meet your requirement, use the following directives to alter it.
+如果上述关于是否缓存、缓存时间的默认缓存规则并不是您期待的，那么您也可以使用本文开头的那些指令来进行缓存规则改写。
 
-* To ignore one or more of the three special header fields above, you can use the [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) directive. For example:
+* 指令[`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>)用于让 CDN360 强制忽略源站的 Cache-Control\Expire\Set-Cookie 三个头部。例如：
 ```nginx
 proxy_ignore_headers Set-Cookie;
 ```
-In this case, the servers will behave as if the `Set-Cookie` header does not exist.
-* [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) can be used to set a cache time if the three special header fields are not present or ignored. You can use it multiple times to set different cache times for different status codes. For example:
+这种情况下，CDN360 将按照源未提供`Set-Cookie` 响应头来判断文件是否可以缓存以及缓存时间。
+* 指令[`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) 用于设置当源未提供或者CDN360忽略源的 Cache-Control\Expire\Set-Cookie 三个头部时 CDN360 的缓存时长，该指令支持针对不同状态码的文件设置不同缓存时长。例如：
 ```nginx
-location / { # the default location
-    proxy_cache_valid 5m; # cache 200, 301 and 302 for 5 minutes
-    proxy_cache_valid 404 2m; # cache 404 for 2 minutes
+location / { # 默认 location
+    proxy_cache_valid 5m; # 针对200、301、302状态码请求缓存5分钟
+    proxy_cache_valid 404 2m; # 针对404状态码请求缓存2分钟
 }
 location /no-cache {
-    proxy_cache_valid 200 0; # cache 200 response, but revalidate every time.
+    proxy_cache_valid 200 0; # 针对200状态码进行缓存，但是该立即过期
 }
 ```
-* While [`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>) ignores the specified header fields altogether, [`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>) can be used to ignore specific directives in the `Cache-Control` header field. For example:
+* 指令[`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>)的功能与[`proxy_ignore_headers`](</docs/edge-logic/supported-directives.md#proxy_ignore_headers>)十分相似，两者的区别在于[`proxy_ignore_cache_control`](</docs/edge-logic/supported-directives.md#proxy_ignore_cache_control>)仅可用于设置 CDN360 忽略源 Cache-Control 头中的指定参数值。例如：
 ```nginx
-proxy_ignore_cache_control no-cache no-store;
+proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control 响应头中的 no-cache 和 no-store
 ```
-* The CDN360 proprietary directive [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) can be used to override the `max-age` in the `Cache-Control` header field to enforce a minimum cache time.
-* If you don't want a request to be served from the cache, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive. [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) can be used to prevent a response from being cached.
+* 指令 [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) 用于设置 CDN360 文件缓存时间的最小值。当源站给的 Cache-Control 头中的 max-age 值小于指令 proxy_cache_min_age 的配置值时，该 max-age 将被 CDN360 忽略，同时 CDN360 将以该指令配置值作为文件的可缓存时间。
+* 指令 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 用于设置 CDN360 不响应缓存文件给客户端，而是每次都从源站获取文件。该指令经常与[`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>)一起使用来达到“强制文件不缓存”的效果。
+* 指令 [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 用于设置 CDN360 从源站拿去到文件后不缓存到本地。该指令经常与 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 一起使用来达到“强制文件不缓存”的效果。
 
-Since you are interested in the caching behavior of CDN360, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
+鉴于您对 CDN360 的缓存行为感兴趣，您可能同时也对[如何设置自定义缓存Key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) 和 [CDN360 对 `Vary` 头部的处理方式](#the-support-and-non-support-of-vary) 感兴趣。
 
-### How to include query parameters and/or request headers in the cache key?
+### 如何将问号后参数或者请求头加入到缓存Key中?
 
-By default, the CDN360 cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+默认情况下，CDN360的默认行为是将域名和不包含问号后参数的请求URI加载到缓存 key 中。同时 CDN360 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。因此您可以按照您的业务需求将关键参数加入到这个内置变量中。例如，将所有问号后参数加入到缓存 key ：
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
-If you want to include only some of the query parameters, the following example shows how to add parameters "abc" and "def" to the cache key:
+您也可以仅提取出问号后参数中的部分指定变量值加入到缓存 key ，以下示例显示如何将问号后参数中的 "abc" 和 "def" 加入到缓存 key ：
 ```nginx
 set $cache_misc "?abc=$arg_abc&def=$arg_def";
 ```
-Similarly, the following example shows how to include some request headers in cache key:
+您也可以将部分请求 header 值加入到缓存 key :
 ```nginx
 set $cache_misc "ae=$http_accept_encoding";
-set $cache_misc $cache_misc."hdr1=$http_header1&hdr2=$http_header2";
 ```
-If you want to keep any previously assigned value, you can append to this variable:
+在配置的过程中，如果您想保留当前边缘逻辑中的 $cache_misc 值，那么您可以将新数据添加在 $cache_misc 后，这样新数据就会以附加的形式加入到 $cache_misc 中：
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
 
-### HTTP Header Manipulation
+### HTTP 头部管理
 
-If you need to add, modify, or delete some header fields in the request to the origin, use the [`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) directive. For example:
+当您需要 CDN360 在回源时添加，修改，或者删除某些头部值时，您可以使用指令[`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) 。示例如下：
 ```nginx
 origin_set_header CDN-Name Quantil;
 ```
-In particular, this is the code to send the client's IP address to the origin server:
+另外一个典型的场景如下，它可以让 CDN360 把客户端 IP 添加到 Client-IP 这个头部中并发送给源站：
 ```nginx
 origin_set_header Client-IP $client_real_ip;
 ```
-In order to consolidate the responses from the origin to improve the cache hit ratio, we created a dedicated directive [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>) to modify the `accept-encoding` request header received from the client.
+出于整合 cache 上文件编码格式从而提升缓存命中率的考虑，CDN360 开发并提供了指令 [`sanitize_accept_encoding`](</docs/edge-logic/supported-directives.md#sanitize_accept_encoding>)。该指令将在回源时修改客户端请求中的 `accept-encoding` 头部值，并携带修改后的值请求源站。
 
-If you need to add, modify, or delete some header fields in the response to clients, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. For example:
+当您需要 CDN360 在响应客户端时添加，修改，或者删除某些头部值时，您可以使用指令 [`add_header`](</docs/edge-logic/supported-directives.md#add_header>)。示例如下：
 ```nginx
 add_header CDN-Name Quantil;
 ```
-We also created a proprietary directive [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) to manipulate the response header from the origin prior to processing the response. This can be very useful if you need to override a header value (such as cache time) from the origin that may affect the CDN servers' behavior.
+同时 CDN360 开发并提供了指令 [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) ，此指令将在其他所有处理源站响应的操作之前修改掉源站的响应头。当您需要改写某些可能影响 CDN 服务器行为的源站响应头（例如缓存时间）时，这个指令将非常有用。
 
+### 关于 `Vary` 响应头的处理方式
 
-### The support (and non-support) of `Vary`
-
-By default, CDN360 servers remove any `Vary` header in the response from origin servers. Therefore, every URL will have no more than one cached version. If you want to cache different versions based on a request header or cookie values, put them explicitly into the cache key by setting the `$cache_misc` variable mentioned above. For example:
+默认情况下， CDN360 会将删掉所有来自源站的 `Vary` 响应头，因此所有的URL在 CDN360 的服务器上仅保留一份缓存版本。如果您希望 CDN360 按照请求头或者请求cookie值来缓存不同的缓存版本，您可以将这些请求头或者cookie头加入到变量 `$cache_misc` 中。示例如下：
 ```nginx
 set $cache_misc "ae=$http_accept_encoding";
 ```
-If you want to send a `Vary` header to the clients to make sure they cache different variations properly, use the [`add_header`](</docs/edge-logic/supported-directives.md#add_header>) directive. If you have to pass the `Vary` header from the origin to the client, use the following configuration to "undo" the default removal of the header:
+如果您期望发送 `Vary` 响应头给客户端以便客户端按照这个头部值来区分缓存，您可以使用指令 [`add_header`](</docs/edge-logic/supported-directives.md#add_header>)。如果您需要将源站的 `Vary` 响应头透传给客户端，您可以使用以下配置来让默认的行为（删掉所有来自源站的 `Vary` 响应头）失效：
 ```nginx
-# preserve the Vary header from origin
+# 保留源站提供的响应头 `Vary` 
 origin_header_modify Vary "" policy=preserve;
-# ignore the Vary header, just pass it to the client
+# Cache不对 `Vary` 做任何操作，仅透传给客户端
 proxy_ignore_headers Vary; 
 ```
-In this case, the servers cache the content as if the `Vary` header does not exist. Without `proxy_ignore_headers Vary`, the preserved `Vary` header would prevent the response from being cached because [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) is configured by default. If it is absolutely important for the CDN360 servers to cache multiple versions based on the `Vary` header, contact CDNetworks customer support to obtain permission to set `proxy_cache_vary on`.
+在这种情况下，CDN360 将按照响应头 `Vary` 完全不存在来处理缓存。如果仅配置了 `origin_header_modify Vary "" policy=preserve` 而没有配置 `proxy_ignore_headers Vary` ，那么由于默认生效的配置 [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) ，您的文件将不会被缓存在 CDN360 平台上。如果您的业务的确需要 CDN360 按照响应头 `Vary` 来区分不同缓存版本，请联系网宿（CDNetworks）技术支持为您开通配置`proxy_cache_vary on` 的权限。
 
-### How to follow redirections from origin?
+### 如何遵循源站的跳转请求（301、302等）?
 
-When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn on this feature, use the directive [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) in the location where it is needed.
+当源站响应 30x 并携带一个Location重定向跳转时，您或许不希望 CDN360 仅是将该 30x 状态码以及跳转地址缓存并响应给客户端，而是希望 CDN360 继续对这个 Location 重定向跳转地址发起请求直至获取到实际的响应文件后再进行缓存和客户端响应。这时您可以使用指令 [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) 来开启此“拉取跳转后的文件”功能。需要注意的是，开启该功能可能会给此类回源请求带来额外的时间消耗。
 
-### China Delivery and Beian
+### 中国大陆加速以及备案相关
 
-The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, CDNetworks cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, CDNetworks can use servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
+按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN360 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被关停。作为客户，您需要提前为计划在中国大陆进行本地分发的域申请并和获取备案。当然，在这个过程中 CDN360 将提供相应的咨询服务来进行协助。在您的域名取的备案之前，CDN360 可以使用临近中国大陆（例如香港、韩国或者日本等等）的服务器向中大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
 
-If you have one or more domains with ICP Beian and want them to be accelerated in China, contact customer service to ensure we have all the required information on file about your business. After confirming that we have the necessary information, your China Delivery service will be enabled. You can then perform the following steps to enable local delivery of domains in Mainland China: 
+如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（CDNetworks）技术支持以便我们能够获取到关于您业务的所有必要信息。这些信息确认无误后，CDN360 就将为您开启中国大陆节点的使用权限。然后，您就可以按以下步骤来启用这些中国大陆节点：
 
-1. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
+1. 在该域名的 [加速项](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成是。这样做可使加速项上的配置部署到中国大陆服务器，当这些服务器接收客户端请求时会正常响应文件。否则它们将返回状态代码 451。
 
-2. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. Otherwise, they will return status code 451.
+2. 创建携带“有ICP备案”为是的 [边缘域名](</docs/portal/traffic-management/creating-edge-hostname.md>) , 并将您的业务域名流量通过 CNAME 的方式解析到到此边缘域名上。这样GSLB调度系统就会将您的业务域名自动解析到上述1中描述的 CDN360 的中国大陆服务器上。
 
-### How to support WebSocket?
+### 如何开启websocket功能?
 
-Use the directive [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>) in the location where the WebSocket protocol is needed. Make sure the client uses HTTP/1.1 (not HTTP/2) to connect. This directive also sets the read and send timeouts to 21s by default. They can be changed using the [`origin_read_timeout`](</docs/edge-logic/supported-directives.md#origin_read_timeout>) or [`origin_send_timeout`](</docs/edge-logic/supported-directives.md#origin_send_timeout>) directives.
+您可以在希望开启 WebSocket 协议的location下使用指令 [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>)。需要确保客户端使用的是 HTTP/1.1（非 HTTP/2）协议来与服务器建连。该指令默认会将读取和发送超时时间设置为21秒。你可以通过[`origin_read_timeout`](</docs/edge-logic/supported-directives.md#origin_read_timeout>) 和 [`origin_send_timeout`](</docs/edge-logic/supported-directives.md#origin_send_timeout>) 这两个指令对其进行修改。
 
-### What about dynamic content?
+### 动态文件的支持情况?
 
-Dynamic contents are usually generated on-the-fly for each request and are different for different visitors. Some examples are:
-* Realtime stock prices, sports game scores
-* Search results based on keywords entered by the visitor
-* API calls that have lots of query parameters
+动态内容通常是针对每个请求即时生成，并且对于不同的客户端的响应是不同的。部分示例如下：
+* 实时股价、体育比赛比分查询
+* 根据客户端输入的关键字进行搜索请求
+* 携带大量查询参数的 API 调用请求
 
-If you only have the origin server in a central data center or in the cloud, the performance can be quite poor if the visitor is far away from or does not have a good connection to the data center. How can we accelerate those contents through CDN360? Here are a few things you can do:
-* **Simply using CDN360 can shave off a few seconds**
+如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端请求获取到的响应性能可能会非常差。此时如何通过 CDN360 来加速这些动态内容？ 以下操作将极大提升此类动态响应性能：
+* **使用 CDN360 来为您的业务争取数秒的宝贵时间**
 
-If you use CDN360, your clients will connect to the PoP that is closest to them. The round trip time (RTT) can be a few hundred milliseconds faster than directly connecting to the origin server. The TCP and TLS handshakes usually take 3-4 RTTs which can be a second faster through the CDN. By default, the CDN360 servers maintain persistent connections to the origin. You can increase the [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) to up to 10 minutes in the origin configurations. In the meantime, if you know the content is not cacheable at all, use [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) and [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) to completely skip caching to minimize latency.
-* **Cache the response!**
+当您使用 CDN360 时，您的客户端将会解析并与最近的边缘服务器建链。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连接到源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下， CDN360 与源站之间会保持长链接，您可以使用指令 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN360 上的延迟。
+* **将动态文件转换成可缓存文件**
 
-In many cases, "dynamic" does not mean the content is not cacheable. For example, end users will not experiance the difference if you cache the score of a basketball game for 1 second. If you have 10 requests per second to fetch the score, you can save 90% of the bandwidth and processing power. If the response depends on some query parameter or request header values, make sure those variables are [included in the cache key](#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key).
-* **Enable Fast Route to origin**
+在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是，如果客户端收到的响应需要根据请求url中的问号后参数或者请求头部值而不同的话，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。
+* **回源时开启HDT链路加速配置**
 
-CDN360 has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the ""Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN360 support team.
+CDN360 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN360 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令亦可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
