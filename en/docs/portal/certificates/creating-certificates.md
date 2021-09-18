@@ -64,6 +64,6 @@ To upload the files as a new certificate:
 
 <p align="center"><img src="/docs/resources/images/certificates/create-certificate-upload.png" alt="Upload Certificate" width="600"></p>
 
-1. Click the **Save Certificate** button followed by **OK**. 
+4. Click the **Save Certificate** button followed by **OK**. 
 
 Your certificate is saved and can now be used with any properties you create. 
