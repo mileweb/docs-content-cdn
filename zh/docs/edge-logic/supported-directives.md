@@ -193,7 +193,7 @@ This directive enables the modification of the response based on the status code
 ```nginx
 location /abc {
   origin_pass my-origin;
-  error_page 403 @return404;
+  error_page 403 = @return404;
 }
 location @return404 {
   return 404;
