@@ -22,7 +22,7 @@ location ~ /.*\.(html?|css|png|js|jpe?g) { # 静态文件
 *   第二个是正则匹配模式
 
 根据 [NGINX 官方文档](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) 中对 location 指令的描述，相比前缀匹配模式正则模式有更高的优先级。因此，所有匹配到第二个location中的静态文件都将按照第二个 location 块中的逻辑来处理，而其他文件类型则由第一个 location 块处理。
-*   [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) – 该指令是 NGINX 的标准指令，用于在源站没有给缓存指示时，指定 CDN360 的缓存时间。默认情况下，成功获得200/301/302状态码的文件将按指定时间进行缓存（在本例中静态文件缓存1天，其余文件缓存10分钟）。同时，您也可以按照 [NGINX 官方文档](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 中的描述设置其他状态码的缓存规则。
-*   [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>)  – 这是需要一个携带一个参数的 CDN360 专有指令。如果来自源站的 "max-age" 值小于指定值，则确保内容至少按照该指令的参数值进行缓存。
+*   [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>) – 该指令是 NGINX 的标准指令，用于在源站没有给缓存指示时，指定 CDN360 的缓存时间。默认情况下，源站响应的 200/301/302 状态码的文件将按指定时间进行缓存（在本例中静态文件缓存1天，其余文件缓存10分钟）。同时，您也可以按照 [NGINX 官方文档](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 中的描述设置其他状态码的缓存规则。
+*   [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>)  – 这是需要一个携带一个参数的 CDN360 专有指令。如果来自源站的 "max-age" 值小于指定值，则确保 CDN360 按照该指令的参数值对内容进行缓存。
 *   [`origin_pass`](</docs/edge-logic/supported-directives.md#origin_pass>) – 这是标记源站的专有指令。该指令封装自 NGINX 的 "[proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)", "[proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)", "[proxy_ssl_name](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_name)" 以及一些其他代理缓存指令。
 *   `www_origin` – 这是您分配给原点的名称，该名称需要事先在加速项的“源站”配置中进行设置。
