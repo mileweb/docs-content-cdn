@@ -1,5 +1,21 @@
 # Release Notes
 
+## September 21, 2021
+
+### API updates
+* Disallowed update of the edgeHostname field in edge hostnames because it can interrupt service.
+* Disallowed update of the hasBeian field in edge hostnames because of planned changes to edge hostnames to use different suffixes for those with ICP Beian versus those without.
+
+### Portal updates
+* Fixed display of plan page for self-signup trial users.
+* Updated warning text about pending standby task if the user tries to log out before deploying.
+* Improved response to erroneous input in the report page.
+* Improved display of lengthy tooltips in the property configuration page.
+* Fixed issues supporting Russian translation.
+* Added clarification for trial users that deployment to production is enabled only after they’ve performed some tests against staging.
+* Supported soft wrap in the Edge Logic editor.
+* Allowed Edge Logic hint text to be translated. Directive names are keywords that must remain in English.
+
 ## September 8, 2021
 ### API updates
 * Returned error code InvalidApiAccountId if an incorrect API account ID is specified when calling [API permissions](</apidocs#tag/API-Access-Control>) endpoints.
