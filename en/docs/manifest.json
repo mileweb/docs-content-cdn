@@ -7,7 +7,7 @@
       "links": [
         {
           "title": "Quick Start",
-          "caption": "Getting started with CDN360",
+          "caption": "Getting started with {{productNameCDN}}",
           "icon": "bolt",
           "path": "docs/intro"
         },
