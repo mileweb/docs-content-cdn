@@ -1,6 +1,6 @@
 # Logging In
 
-1. Visit our login page at https://console.cdnetworks.com.
+1. Visit our login page at {{consoleUrl}}.
 
 <p align=center><img src="/docs/resources/images/accessing-portal/portal-login.png" alt="login page" width="900"></p>
 
