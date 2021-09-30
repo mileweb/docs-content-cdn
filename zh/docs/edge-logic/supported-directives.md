@@ -14,23 +14,23 @@
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-This directive modifies the response headers to the client. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
+本指令的功能是修改发往客户端的响应头部。CDNetworks在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大修改:
 
-1. A parameter "policy=" has been introduced to control the behavior more precisely:
+1. 引入了一个"policy="参数以便更精确地控制指令的行为:
 ```nginx
 add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```
-```overwrite```: If the header being added exists in the upstream response, the local configuration overrides the header value. If you want to remove a header, set the value to an empty string.
+```overwrite```: 添加一个头部。如果该头部名称已经存在，则覆盖原有的值。如果value是空字符串‘’，则会将该头部删除。
 
-```preserve```: If the header being added exists in the upstream response, the header value is not changed;
+```preserve```: 如果头部名称不存在，则添加。否则不做任何操作，保留原头部不变。
 
-```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response.
+```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则覆新增一条。
 
-The policy parameter also supports variables; the value must be one of the three above.
+这个policy支持变量，其取值必须是上面3者之一.
 
-**Limitation:** For the following "built-in" headers, the behavior is always fixed, regardless of the configured policy:
+**局限：** 对于下面这几个“内置”头部，本指令的行为是固定的，不受policy参数的控制：
 
-| **"built-in" Header Name** | **Behavior** |
+| **"内置"头部名称** | **行为** |
 | ---- | ---- |
 | ```Cache-Control``` | ```repeat``` |
 | ```Link``` | ```repeat``` |
@@ -38,7 +38,7 @@ The policy parameter also supports variables; the value must be one of the three
 | ```ETag``` | ```overwrite``` |
 
 
-If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
+如果需要的话，可以使用[proxy_hide_header](#proxy_hide_header)指令来删除从源站收到的 "Cache-Control"或"Link"响应头部。
 
 2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
 
@@ -829,7 +829,7 @@ proxy_cache_valid $cache_time;
 proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
 add_header version-number $version_number;
 # do not cache status codes 301 and 302 from the origin
-proxy_set $no_store 1 if ($upstream_response_status ~ 30[12]);
+proxy_set $no_store 1 if($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
