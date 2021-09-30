@@ -39,16 +39,7 @@ The policy parameter also supports variables; the value must be one of the three
 
 
 If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
-
-2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
-
-*   A variable name; false if the value of a variable is an empty string.
-*   Comparison of a variable with a string using the "=" and "!=" operators.
-*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
-
-3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
-
- Example configurations:
+Example configurations:
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
 ```
@@ -60,6 +51,18 @@ if ($arg_debug = cache_status) {
 }
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 ```
+
+2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
+
+*   A variable name; false if the value of a variable is an empty string.
+*   Comparison of a variable with a string using the "=" and "!=" operators.
+*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
+Example:
+```nginx
+add_header X-Upstream-Status-OK 1 if($upstream_response_status = 200);
+```
+
+3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
 
 ### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
 

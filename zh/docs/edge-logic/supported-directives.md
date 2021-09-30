@@ -14,23 +14,23 @@
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-本指令的功能是修改发往客户端的响应头部。CDNetworks在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大修改:
+本指令的功能是修改发往客户端的响应头部。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
 
-1. 引入了一个"policy="参数以便更精确地控制指令的行为:
+1. 引入```policy=```参数来更精确地控制指令的行为:
 ```nginx
 add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```
-```overwrite```: 添加一个头部。如果该头部名称已经存在，则覆盖原有的值。如果value是空字符串‘’，则会将该头部删除。
+```overwrite```: 添加一个头部。如果该头部名称已经存在，则覆盖原有的值。如果value是空字符串，则会将该头部删除。
 
 ```preserve```: 如果头部名称不存在，则添加。否则不做任何操作，保留原头部不变。
 
-```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则覆新增一条。
+```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则新增一条。
 
-这个policy支持变量，其取值必须是上面3者之一.
+该参数支持变量，其取值必须是上面3者之一.
 
-**局限：** 对于下面这几个“内置”头部，本指令的行为是固定的，不受policy参数的控制：
+**局限：** 对于下面这几个“特殊”头部，本指令的行为是固定的，不受policy参数的控制：
 
-| **"内置"头部名称** | **行为** |
+| **"特殊"头部名称** | **行为** |
 | ---- | ---- |
 | ```Cache-Control``` | ```repeat``` |
 | ```Link``` | ```repeat``` |
@@ -39,20 +39,11 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 
 如果需要的话，可以使用[proxy_hide_header](#proxy_hide_header)指令来删除从源站收到的 "Cache-Control"或"Link"响应头部。
-
-2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
-
-*   A variable name; false if the value of a variable is an empty string.
-*   Comparison of a variable with a string using the "=" and "!=" operators.
-*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
-
-3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
-
- Example configurations:
+使用举例:
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
 ```
-Example with variable:
+使用变量的例子:
 ```nginx
 set $cache_status_method "preserve";  
 if ($arg_debug = cache_status) {
@@ -60,6 +51,18 @@ if ($arg_debug = cache_status) {
 }
 add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 ```
+
+2. 引入了```if(condition)```参数来控制本指令生效的条件。只有当条件为真的时候，本指令才会修改发往客户端的头部，否则完全不起作用。这个```if()```参数必须出现在本指令的末尾。```condition```可以是如下条件表达式:
+
+*   一个变量名：如果该变量不存在，或者其值为‘0’或空，则条件不成立，否则条件为真；
+*   用"="或者"!="来比较一个变量是否等于一个字符串；
+*   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
+使用举例:
+```nginx
+add_header X-Upstream-Status-OK 1 if($upstream_response_status = 200);
+```
+
+3. 针对该指令的另一个改进是支持合并不同层级(server/location/if)里的配置。但是如果同一个头部名称出现在了不同的层级里，则只有最内层的配置会生效。
 
 ### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
 
