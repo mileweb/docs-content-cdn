@@ -16,7 +16,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 This directive modifies the response headers to the client. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
-1. A parameter "policy=" has been introduced to control the behavior more precisely:
+1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx
 add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```
@@ -39,6 +39,7 @@ The policy parameter also supports variables; the value must be one of the three
 
 
 If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
+
 Example configurations:
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
@@ -57,6 +58,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
 *   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
+
 Example:
 ```nginx
 add_header X-Upstream-Status-OK 1 if($upstream_response_status = 200);

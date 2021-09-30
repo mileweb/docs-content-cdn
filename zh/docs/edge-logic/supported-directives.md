@@ -16,7 +16,7 @@
 
 本指令的功能是修改发往客户端的响应头部。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
 
-1. 引入```policy=```参数来更精确地控制指令的行为:
+1. 引入了```policy=```参数来更精确地控制指令的行为:
 ```nginx
 add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```
@@ -26,7 +26,7 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 ```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则新增一条。
 
-该参数支持变量，其取值必须是上面3者之一.
+该参数支持变量，其取值必须是上面3者之一。
 
 **局限：** 对于下面这几个“特殊”头部，本指令的行为是固定的，不受policy参数的控制：
 
@@ -39,6 +39,7 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 
 如果需要的话，可以使用[proxy_hide_header](#proxy_hide_header)指令来删除从源站收到的 "Cache-Control"或"Link"响应头部。
+
 使用举例:
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
@@ -57,6 +58,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 *   一个变量名：如果该变量不存在，或者其值为‘0’或空，则条件不成立，否则条件为真；
 *   用"="或者"!="来比较一个变量是否等于一个字符串；
 *   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
+
 使用举例:
 ```nginx
 add_header X-Upstream-Status-OK 1 if($upstream_response_status = 200);
