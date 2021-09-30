@@ -62,6 +62,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 使用举例:
 ```nginx
 add_header X-Upstream-Status-OK 1 if($upstream_response_status = 200);
+add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 ```
 
 3. 针对该指令的另一个改进是支持合并不同层级(server/location/if)里的配置。但是如果同一个头部名称出现在了不同的层级里，则只有最内层的配置会生效。

@@ -62,6 +62,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 Example:
 ```nginx
 add_header X-Upstream-Status-OK 1 if($upstream_response_status = 200);
+add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 ```
 
 3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
