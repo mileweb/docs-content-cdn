@@ -10,7 +10,7 @@
 * Ensured that default usage limits for a child customer are properly set.
 * Ensured edge hostnames begin with at least 10 characters before the suffix.
 * Ensured proper cache key is set even if the [auth_request directive](</docs/edge-logic/supported-directives#auth_request>) overrides $uri.
-* Enhanced [purge](</apidocs#operation/createPurge>) to support prefix purges (for example, http://test.domain2.com/mydir/a* to purge files starting with “a” and  "http://test.domain2.com/mydir/a** “ to purge all files and subdirs starting with 'a')
+* Enhanced [purge](</apidocs#operation/createPurge>) to support prefix purges (for example, http://test.domain2.com/mydir/a* to purge files starting with “a” and  "http://test.domain2.com/mydir/a** “ to purge all files and subdirectories starting with 'a')
 
 ### Portal updates
 * Fixed some Russian translation issues.
