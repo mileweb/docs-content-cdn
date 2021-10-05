@@ -1775,7 +1775,7 @@
                             "properties": {
                               "region": {
                                 "type": "string",
-                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                               },
                               "weight": {
                                 "type": "integer",
@@ -2006,13 +2006,13 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid redirect destination": {
                     "value": {
                       "code": "InvalidRedirectDst",
                       "message": "The field 'to' must contain either one hostname or multiple IPs."
                     }
                   },
-                  "example-2": {
+                  "Invalid weight code": {
                     "value": {
                       "code": "InvalidWeightCode",
                       "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
@@ -2047,6 +2047,32 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "The edgeHostname field cannot be changed because it may cause a service interruption.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "EdgeHostnameChangeForbidden": {
+                    "value": {
+                      "code": "EdgeHostnameChangeForbidden",
+                      "message": "The edge hostname cannot be changed."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "updateEdgeHostname",
@@ -2062,7 +2088,7 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "The edge hostname"
+                    "description": "The edge hostname. It cannot be modified."
                   },
                   "description": {
                     "type": "string",
@@ -2071,10 +2097,6 @@
                   "pciRequired": {
                     "type": "boolean",
                     "description": "Whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
-                  },
-                  "hasBeian": {
-                    "type": "boolean",
-                    "description": "Indicate whether you have a Beian license for service in China.  If you do, content can be served by servers located within mainland China."
                   },
                   "gdprCompliant": {
                     "type": "boolean",
@@ -2132,7 +2154,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -2304,6 +2326,32 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "The edgeHostname field cannot be changed because it may cause a service interruption.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Edge Hostname Change Forbidden": {
+                    "value": {
+                      "code": "EdgeHostnameChangeForbidden",
+                      "message": "The edge hostname cannot be changed."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "This API allows you to update an edge hostname by sending only the fields that are changing.",
@@ -2323,10 +2371,6 @@
                   "pciRequired": {
                     "type": "boolean",
                     "description": "Whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
-                  },
-                  "hasBeian": {
-                    "type": "boolean",
-                    "description": "Indicate whether you have a Beian license for service in China.  If you do, content can be served by servers located within mainland China."
                   },
                   "grprCompliant": {
                     "type": "boolean",
@@ -2384,7 +2428,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -4222,7 +4266,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The edge hostname was created. The Location header has a reference to the new edge hostname.",
             "headers": {
               "Location": {
                 "schema": {
@@ -4267,7 +4311,7 @@
                       "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
                     }
                   },
-                  "Invalid Edge Hostname": {
+                  "Invalid edge hostname": {
                     "value": {
                       "code": "InvalidEdgeHostname",
                       "message": "Invalid edge hostname 'abcdef'. The edge hostname must be a valid domain name string."
@@ -4336,7 +4380,7 @@
             }
           }
         },
-        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to an edge hostname created using this API in order for CDN360 to handle your content.",
+        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to an edge hostname created using this API in order for the CDN to handle your content.",
         "operationId": "createEdgeHostname",
         "requestBody": {
           "content": {
@@ -4346,8 +4390,8 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "An edge hostname you wish to use. It should end with \".qtlcdn.com\".",
-                    "example": "test.123.qtlcdn.com"
+                    "description": "A hostname to use in your DNS server settings. When your property has been deployed to production, you should modify your DNS server so that the CNAME records of the property's hostnames refer to this value. The edge hostname should consist of at least ten characters followed by a permitted suffix such as \".qtlcdn.com\" (for example, abcdefg123.qtlcdn.com). Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> may include an <i>edgeHostnameZones</i> field. If it does, the suffix used for your edge hostname should be one of the listed values. ",
+                    "example": "testabcde.123.qtlcdn.com"
                   },
                   "description": {
                     "type": "string",
@@ -4420,7 +4464,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -4496,7 +4540,7 @@
                 },
                 "example-2": {
                   "value": {
-                    "edgeHostname": "test.123.qtlcdn.com",
+                    "edgeHostname": "testabcd.123.qtlcdn.com",
                     "clientZones": [
                       {
                         "region": "eu",
@@ -14481,7 +14525,7 @@
                       "isMaster": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Indicates whether or not this portal user has full access to all subscribed products."
+                        "description": "Indicates whether this portal user has full access to all subscribed products."
                       },
                       "products": {
                         "type": "array",
@@ -14498,7 +14542,7 @@
                       "canImpersonate": {
                         "type": "string",
                         "default": "all",
-                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers or not. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
                         "enum": [
                           "all",
                           "none"
@@ -14625,7 +14669,7 @@
                           },
                           "isMaster": {
                             "type": "boolean",
-                            "description": "Indicates whether or not this portal user has full access to all subscribed products.",
+                            "description": "Indicates whether this portal user has full access to all subscribed products.",
                             "default": false
                           },
                           "status": {
@@ -15909,7 +15953,7 @@
                         "isMaster": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Indicates whether or not this portal user has full access to all subscribed products."
+                          "description": "Indicates whether this portal user has full access to all subscribed products."
                         },
                         "products": {
                           "type": "array",
@@ -15926,7 +15970,7 @@
                         "canImpersonate": {
                           "type": "string",
                           "default": "all",
-                          "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers or not. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                          "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
                           "enum": [
                             "all",
                             "none"
@@ -16276,7 +16320,7 @@
                       "isMaster": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Indicates whether or not this portal user has full access to all subscribed products."
+                        "description": "Indicates whether this portal user has full access to all subscribed products."
                       },
                       "products": {
                         "type": "array",
@@ -16293,7 +16337,7 @@
                       "canImpersonate": {
                         "type": "string",
                         "default": "all",
-                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers or not. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
                         "enum": [
                           "all",
                           "none"
@@ -20478,13 +20522,30 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, then you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
                   },
                   "secretLimit": {
                     "type": "integer",
                     "description": "Total number of secrets that can be created.",
                     "default": 100,
                     "minimum": 0
+                  },
+                  "edgeHostnameZones": {
+                    "type": "array",
+                    "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "A domain to use for edge hostnames."
+                        },
+                        "hasBeian": {
+                          "type": "boolean",
+                          "description": "Whether the domain has ICP Beian, which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                        }
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -20984,6 +21045,23 @@
                       "minimum": 0,
                       "default": 100,
                       "description": "Total number of secrets that can be created."
+                    },
+                    "edgeHostnameZones": {
+                      "type": "array",
+                      "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "A domain to use for edge hostnames."
+                          },
+                          "hasBeian": {
+                            "type": "boolean",
+                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -21335,7 +21413,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, then you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -21348,6 +21426,23 @@
                     "default": 100,
                     "minimum": 0,
                     "description": "Total number of secrets that can be created."
+                  },
+                  "edgeHostnameZones": {
+                    "type": "array",
+                    "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "A domain to use for edge hostnames."
+                        },
+                        "hasBeian": {
+                          "type": "boolean",
+                          "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -22221,6 +22316,23 @@
                       "minimum": 0,
                       "default": 100,
                       "description": "Total number of secrets that can be created."
+                    },
+                    "edgeHostnameZones": {
+                      "type": "array",
+                      "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "A domain to use for edge hostnames."
+                          },
+                          "hasBeian": {
+                            "type": "boolean",
+                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -22509,6 +22621,23 @@
                       "minimum": 0,
                       "default": 100,
                       "description": "Total number of secrets that can be created."
+                    },
+                    "edgeHostnameZones": {
+                      "type": "array",
+                      "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "A domain to use for edge hostnames."
+                          },
+                          "hasBeian": {
+                            "type": "boolean",
+                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -22774,7 +22903,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, then you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -22787,6 +22916,23 @@
                     "default": 100,
                     "minimum": 0,
                     "description": "Total number of secrets that can be created."
+                  },
+                  "edgeHostnameZones": {
+                    "type": "array",
+                    "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "A domain to use for edge hostnames."
+                        },
+                        "hasBeian": {
+                          "type": "boolean",
+                          "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -23834,7 +23980,7 @@
                         },
                         "apiName": {
                           "type": "string",
-                          "description": "Name of API account which created this prefetch request. If a reseller does it on behalf of a child customer, then it is the API account name of the reseller."
+                          "description": "Name of API account which created this prefetch request. If a reseller created the request on behalf of a child customer, it is the API account name of the reseller."
                         },
                         "customerId": {
                           "type": "string",
@@ -23842,7 +23988,7 @@
                         },
                         "impersonatingParentCustomerId": {
                           "type": "string",
-                          "description": "If a reseller performs a prefetch on behalf of a child customer, then this field will be present and indicate the reseller's ID."
+                          "description": "If a reseller performs a prefetch on behalf of a child customer, this field will be present and indicate the reseller's ID."
                         },
                         "apiAccountId": {
                           "type": "string",
@@ -25009,7 +25155,7 @@
                           },
                           "hasCredentials": {
                             "type": "boolean",
-                            "description": "Whether or not the webhook requires credentials to access."
+                            "description": "Whether the webhook requires credentials to access."
                           }
                         },
                         "required": [
@@ -26501,7 +26647,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
