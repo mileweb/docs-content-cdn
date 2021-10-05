@@ -1,5 +1,21 @@
 # Release Notes
 
+## October 1, 2021
+### API updates
+* Allowed resellers to use a different domain for [edge hostnames](</apidocs#operation/createEdgeHostname>) instead of our defaults. Resellers need to contact us for more information.
+* Fixed error message when [creating a deployment task](</apidocs#operation/createDeployment>) with an invalid property ID.
+* Prevented suspended customer from making calls to an API.
+* Ensured child customer cannot have higher limits than a reseller.
+* Fixed error handling when a reseller tries to [update a customer](</apidocs#operation/patch-ngadmin-customers-id>) with invalid configs field.
+* Ensured that default usage limits for a child customer are properly set.
+* Ensured edge hostnames begin with at least 10 characters before the suffix.
+* Ensured proper cache key is set even if the [auth_request directive](</docs/edge-logic/supported-directives#auth_request>) overrides $uri.
+* Enhanced [purge](</apidocs#operation/createPurge>) to support prefix purges (for example, http://test.domain2.com/mydir/a* to purge files starting with “a” and  "http://test.domain2.com/mydir/a** “ to purge all files and subdirs starting with 'a')
+
+### Portal updates
+* Fixed some Russian translation issues.
+* Updated the Create Edge Hostname page to support multiple suffixes.
+
 ## September 21, 2021
 
 ### API updates
