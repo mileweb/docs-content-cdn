@@ -40,17 +40,18 @@ If the content on your origin web server has changed, request a purge to have CD
 
 CDN360 supports prefix purging. Using this feature, you can purge directories by entering values in the <strong>Add a directory to be purged</strong> field. The following table shows examples of using prefix purging.
 
-**Note:** Files can have multiple variations if custom cache keys are used.
+**Note:** Files can have multiple variations if custom cache keys are used. In addition, a URL such as <code>/pictures/</code> or <code>/picture.jpg</code> can have many variations stored in the cache due to the Vary header or cache key customization. As a result, performing a folder purge without an asterisk will clear all variations except subdirectories or files. For this reason, performing folder purges of <code>/pictures/</code>, <code>/pictures/*</code>, and <code>/pictures/**</code> behave differently.
 
 |**Example**|**Description**|
 |----------|---------------|
+| http://test.domain2.com/mydir       | Purge a single directory.                               |
 | http://test.domain2.com/mydir/**    | Purge all files and subdirectories.                               |
 | http://test.domain2.com/mydir2/*    | Purge all files only.                                             |
 | http://test.domain2.com/mydir/*.jpg | Purge all *jpg files.                                             |
 | http://test.domain2.com/mydir/a*    | Purge all files that start with the letter "a".                   |
 | http://test.domain2.com/mydir/a**   | Purge all files and subdirectories that start with the letter "a".|
 | http://test.domain2.com/mydir/a.jpg | Purge all variations of "a.jpg".                                  |
-| http://test.domain1.com/mydir/**    | Folder does not purge query strings.                              |
+| http://test.domain1.com/mydir/**    | Folder does not purge query strings.                              |                             |
 
 
 ## Viewing Purge Details
