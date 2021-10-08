@@ -12517,7 +12517,7 @@
                   },
                   "dirUrls": {
                     "type": "array",
-                    "description": "URLs of directories to purge. The '\\*' character can be used to purge multiple files or directories. \n<table><tr><th>Example</th><th>Description</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>Purge a single directory.</td></tr><t.r><td>http://test.domain2.com/mydir/**</td><td>Purge all files and subdirectories.</td></tr>\n<tr><td>http://test.domain2.com/mydir2/*</td><td>Purge all files within a directory.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>Purge all files ending with the .jpg file extension.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>Purge all files that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>Purge all files and subdirectories that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>Purge all variations of \"a.jpg\". Variations may exist if custom cache keys are used.</td></tr>\n</table>\nIf a directory or filename in a URL includes a percent character, '%', be sure to encode it.",
+                    "description": "URLs of directories to purge. Use the '\\*' character to purge multiple files or directories. \n<table><tr><th>Example</th><th>Description</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>Purge a single directory.</td></tr><t.r><td>http://test.domain2.com/mydir/**</td><td>Purge all files and subdirectories.</td></tr>\n<tr><td>http://test.domain2.com/mydir2/*</td><td>Purge all files within a directory.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>Purge all files ending with the .jpg file extension.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>Purge all files that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>Purge all files and subdirectories that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>Purge all variations of \"a.jpg\". Variations may exist if custom cache keys are used.</td></tr>\n</table>\nIf a directory or filename in a URL includes a percent character, '%', be sure to encode it.",
                     "items": {
                       "type": "string"
                     }
@@ -12580,7 +12580,7 @@
               }
             }
           },
-          "description": "The request body is used to specify which files and directories are purged, the type of purge to perform, and what environment is affected. To ensure that all variations of a file are purged, put the file path into the <i>dirUrls</i> list. If a file has multiple copies cached due to the origin's Vary header, you must also purge it by putting the file path into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
+          "description": "The request body is used to specify which files and directories are purged, the type of purge to perform, and what environment is affected. To ensure that all variations of a file are purged, place the file path into the <i>dirUrls</i> list. If a file has multiple copies cached due to the origin's Vary header, you must also purge it by placing the file path into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
         }
       },
       "get": {
