@@ -90,6 +90,8 @@ Adds the specified field to the end of a response provided that the response cod
 **可用位置：** server, location
 
 Allows access from the specified network or address. Usually used together with [`deny`](#deny). Enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) to make it work with the hierarchical cache structure.
+允许来自指定的网址或者网段的客户访问，该指令通常会和 [`deny`](#deny) 指令一起使用。
+CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好适配与 CDN 分层缓存结构。
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -100,8 +102,7 @@ Allows access from the specified network or address. Usually used together with 
 **默认设置：** `auth_request off;`<br/>
 **可用位置：** server, location
 
-Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
-
+指定某个URI路径，CDN Pro 将发起针对该 URI 的子请求，并根据该子请求的结果进行相应的访问控制。码基于 Nginx 开源版本，无改动。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
