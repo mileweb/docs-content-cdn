@@ -89,7 +89,6 @@ Adds the specified field to the end of a response provided that the response cod
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Allows access from the specified network or address. Usually used together with [`deny`](#deny). Enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) to make it work with the hierarchical cache structure.
 允许来自指定的网址或者网段的客户访问，该指令通常会和 [`deny`](#deny) 指令一起使用。
 CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好适配与 CDN 分层缓存结构。
 
@@ -102,7 +101,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `auth_request off;`<br/>
 **可用位置：** server, location
 
-指定某个URI路径，CDN Pro 将发起针对该 URI 的子请求，并根据该子请求的结果进行相应的访问控制。码基于 Nginx 开源版本，无改动。
+指定某个URI路径，CDN Pro 将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -112,7 +111,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-Sets the request variable to the given value after the authorization request completes. No change to the public version. 
+通常与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将子请求中的相关数据值（如响应头，响应状态码等）赋值给变量。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 
@@ -122,9 +121,8 @@ Sets the request variable to the given value after the authorization request com
 **默认设置：** `—`<br/>
 **可用位置：** server, location, if
 
-Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
-
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+终止当前针对的 ngx_http_rewrite_module 指令集的处理。代码逻辑源自 Nginx 开源版本，无改动。
+该指令属于 nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### `client_body_timeout`
 
@@ -134,7 +132,8 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** matches `origin_send_timeout` if it is set, or 20s <br/>
 **可用位置：** server
 
-This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+该指令用于设置 CDN Pro 从客户端接收请求正文时的最大空闲时间。如果您需要在加速项中更改它的默认值，请联系我们的既是支持团队。可设最大值为 60 秒。
+
 
 ### `client_header_timeout`
 
@@ -144,7 +143,8 @@ This directive sets the maximum idle time when receiving the request body from t
 **默认设置：** `client_header_timeout 10;`<br/>
 **可用位置：** server
 
-This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s. Please notice that if the `Host` header is not received within the default 10s, the server will close the connection and the setting in the Edge Logic will not take effect.
+该指令设置 CDN Pro 从客户端接收完整请求标头的最长等待时间。如果您需要在加速项中更改它的默认值，请联系我们的既是支持团队。可设最大值为 60 秒。请注意，如果在默认的 10s 内没有收到来自客户端的 `Host` 头，服务器将关闭连接。 Edge Logic 中针对 `Host` 请求头的等待时间设置无法生效。
+
 
 ### `client_send_timeout`
 
