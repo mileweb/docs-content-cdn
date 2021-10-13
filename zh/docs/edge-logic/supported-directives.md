@@ -358,7 +358,7 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 **可用位置：** server
 
 This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
-该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。我们已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDB Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
 
 
 ### `origin_fast_route`
@@ -429,7 +429,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 **可用位置：** server, location
 
 This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
-该指令是在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行优化提升，用于限制了从源服务器读取正文的速度。
+该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制了从源服务器读取正文的速度。
 
 
 ### `origin_pass`
@@ -441,7 +441,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **可用位置：** location, if in location
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
-该指令指定从指定的源站中获取内容。它是在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行优化。该指令携带的参数一个参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例子：
+该指令指定从指定的源站中获取内容。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数一个参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例子：
 ```nginx
 # 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
@@ -461,7 +461,7 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：**  `origin_read_timeout 20s;` <br/>
 **可用位置：** server
 
-This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level. 
+该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
 
 ### `origin_send_timeout`
 
@@ -472,6 +472,8 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 **可用位置：** server
 
 This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
+该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了回源请求从 CDN Pro 节点发到源站之间的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+
 
 ### `origin_selection_algorithm`
 
@@ -482,9 +484,12 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 **可用位置：** server, location
 
 When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
-* round_robin : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
-* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL.
-* sorted_list : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
+当源的解析为多个 IP 地址时，该指令用于设置使用哪个算法来决策最终的源站IP。有效值为：
+
+* round_robin : 轮询回源，默认设置，它将尝试将回源流量均匀分配到所有的源站IP上。
+* consistent_hash : 一致性哈希回源，另一种分配回源流量的方法，基于回源 URL 的哈希值。
+* sorted_list : 优选回源，按照源站的链路质量状况优先回指令最优的源IP。当源站的策略为根据地理位置设置不同解析IP（例如源为另一个 CDN）时，此回源方式有助于确保回源性能稳定。
+Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
