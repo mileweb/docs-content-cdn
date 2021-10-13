@@ -282,28 +282,29 @@ CDN Pro 默认支持上述默认 MIME 类型文件（匹配不区分大小写）
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
-*  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
+根据指定条件控制 CDN Pro 的节点行为。请确保您完全了解 [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) 控制流的工作原理。为此我们还编写了 [使用指导](</docs/edge-logic/multiple-origins.md#ifcaution>) ，并在其中记录关于该指令的最佳实践。同时 CDN Pro 对该指令进行了一些重大改进：
+
+*  支持`&&` 运算符，用于执行子条件的逻辑“与”判断。例如：
 
 ```nginx
 if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
-*  Support the `||` operator, which performs logical OR of two sub-conditions. For example:
+*  支持`||` 运算符，用于执行子条件的逻辑“与”判断。例如：
 ```nginx
 if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
 ```
-Please notice that when used together, `&&` has higher precedence than `||` and using parentheses to group sub-conditions is not supported.
-We support up to 9 sub-conditions and the evaluation logic automatically skips the ones that are not affecting the final result.
-*  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
-*  Support of integer value comparison with `<`, `<=`, `>`, `>=`. Make sure both operands are valid integers; otherwise, the result will be `false`. A valid integer can be either decimal or hexadecimal with a leading '0x'.
-*  Support multiple `elseif` and a final `else` after an `if` block. For example:
+请注意，当被一起使用时，`&&` 的优先级高于`||`，并且不支持使用多重括号对子条件进行分组。
+我们最多支持 9 个子条件的判断，edgelogic的执行逻辑会智能跳过不影响最终结果的子条件。
+*  支持字符串前缀匹配。 如果变量`$s1` 的值以 `$s2`开始，那么判断条件 `$s1 ^ $s2` 将会返回 true 。 `$s1 !^ $s2` 将会返回 false.
+*  支持 `<`、`<=`、`>`、`>=` 的整数值比较。请确保两个操作数都是有效整数；否则结果将是 `false`。有效整数可以是带十进制数字或者是前缀为“0x”的十六进制数字。
+*  支持多个 `elseif` 和 `else` 语法。例如：
 ```nginx
 if ($http_x = 1) { ... }
 elseif ($http_x = 2) { ... }
 elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于 nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -313,7 +314,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `—` <br/>
 **可用位置：** location <br/>
 
-Specifies that a given location can be used for internal requests only. No change to the public version. 
+指定某个 location 块内的逻辑只能用于内部请求，无法被客户端直接访问。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
@@ -324,6 +325,8 @@ Specifies that a given location can be used for internal requests only. No chang
 **可用位置：** server, location, if in location
 
 Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
+限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
+
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -334,6 +337,7 @@ Limits the rate of response transmission to a client, in bytes/sec. Valid values
 **可用位置：** server, location, if in location
 
 Sets the initial amount of traffic (in bytes) after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
+响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制。可配范围为 [1-8]m 。
 
 ### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
@@ -343,7 +347,7 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
+按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。
 
 ### `origin_connect_timeout`
 
@@ -354,6 +358,8 @@ Sets configuration depending on the request URI without query string. No change 
 **可用位置：** server
 
 This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。我们已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+
 
 ### `origin_fast_route`
 
@@ -363,7 +369,8 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 **默认设置：** `origin_fast_route off;` <br/>
 **可用位置：** server, location, if in location
 
-This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
+该指令用于在访问源站时开启使用快速路由功能。快速路有功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过快速路由传输的回源流量可能会被收取比边缘流量更高的费率。
+
 
 ### `origin_follow_redirect`
 
@@ -374,7 +381,7 @@ This directive enables a fast route to be used to access the origin. It is power
 **可用位置：** location
 
 When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
-
+当源以 30x 重定向响应时，您可能希望 CDN Pro 服务器继续追踪它，直到重定向停止。将重定向传递给客户端需要更多时间来获取最终内容。如果要打开它，可以在使用 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) 访问源的位置块中使用此指令。
 
 ### `origin_header_modify`
 
