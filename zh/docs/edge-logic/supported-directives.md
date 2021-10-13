@@ -90,7 +90,7 @@ Adds the specified field to the end of a response provided that the response cod
 **可用位置：** server, location
 
 允许来自指定的网址或者网段的客户访问，该指令通常会和 [`deny`](#deny) 指令一起使用。
-CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好适配与 CDN 分层缓存结构。
+CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好适配 CDN 分层缓存结构。
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -132,7 +132,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** matches `origin_send_timeout` if it is set, or 20s <br/>
 **可用位置：** server
 
-该指令用于设置 CDN Pro 从客户端接收请求正文时的最大空闲时间。如果您需要在加速项中更改它的默认值，请联系我们的既是支持团队。可设最大值为 60 秒。
+该指令用于设置 CDN Pro 从客户端接收请求正文时的最大空闲时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
 
 
 ### `client_header_timeout`
@@ -143,7 +143,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `client_header_timeout 10;`<br/>
 **可用位置：** server
 
-该指令设置 CDN Pro 从客户端接收完整请求标头的最长等待时间。如果您需要在加速项中更改它的默认值，请联系我们的既是支持团队。可设最大值为 60 秒。请注意，如果在默认的 10s 内没有收到来自客户端的 `Host` 头，服务器将关闭连接。 Edge Logic 中针对 `Host` 请求头的等待时间设置无法生效。
+该指令设置 CDN Pro 从客户端接收完整请求标头的最长等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，如果在默认的 10s 内没有收到来自客户端的 `Host` 头，服务器将关闭连接。 Edge Logic 中针对 `Host` 请求头的等待时间设置无法生效。
 
 
 ### `client_send_timeout`
@@ -154,7 +154,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** matches `origin_read_timeout` if it is set, or 20s <br/>
 **可用位置：** server
 
-This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+该指令与开源版本的 [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) 指令非常相似，用于设置向客户端发送响应时的最大等待空闲时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
 
 ### `custom_log_field`
 
@@ -164,7 +164,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
+该指令允许您将最多 2 个自定义字段添加到访问日志中。该指令生效后，当您配置自定义日志下载的格式或使用我们的高级流量分析工具时，可以通过关键字段 “custom1” 和 “custom2” 来引用它们。如果您需要开启此功能，请联系我们的技术支持团队。
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -174,7 +174,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-Denies access from the specified network or address. Usually used together with [`allow`](#allow). Enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny) to make it work with the hierarchical cache structure.
+拒绝（返回 403）来自指定网络或地址的访问请求。该指令通常与 [`allow`](#allow) 一起使用。 CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny) 基础上上进行了部分代码优化，使其能更好适配 CDN 分层缓存结构。
 
 ### `enable_websocket`
 
@@ -184,7 +184,7 @@ Denies access from the specified network or address. Usually used together with 
 **默认设置：** `-`<br/>
 **可用位置：** server, location
 
-This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The default read and send timeouts are set to 21s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
+该指令用于开启 WebSocket 协议。客户端必须确保不使用 HTTP/2。默认读取和发送超时设置为 21 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -194,9 +194,9 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also respond to status codes returned from the origin.
+当此次请求的处理结果为配置的参数一 （状态码）之一时，重定向跳转到配置的参数二 （URI）。代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) ，因此该指令奕可将源的响应状态码作为判断条件。
 
-This directive enables the modification of the response based on the status code received from the origin. For example, this is how to use it to change the status code 403 to 404:
+该指令允许您将源的响应状态码作为条件进行自定义修改。例如，下述指令可用于将原状态码 403 更改为 404：
 ```nginx
 location /abc {
   origin_pass my-origin;
@@ -216,6 +216,7 @@ location @return404 {
 **可用位置：** server, location, if
 
 This is a directive to perform some common encoding, decoding, hash, hash-mac, encryption, decryption and comparison algorithms. It is added to the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html).  Supported functions are:
+这是一个用于执行一些常见的编码、解码、散列、hash-mac、加密、解密和比较算法的指令。它被添加到[重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。目前支持的功能有：
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
@@ -233,9 +234,9 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
 | 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
 
-**NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
+**注意:** 使用**加粗字体** 标记的函数的输出值是一个可能无法打印的二进制字符串。因此您需要使用 BASE64_ENCODE、URL_ENCODE 或 HEX_ENCODE 将其转换为可打印格式。
 
-Examples:
+样例：
 ```nginx
     eval_func $secret_key SHA256 "mySecret123!";
     eval_func $text HEX_ENCODE $secret_key;
@@ -246,7 +247,7 @@ Examples:
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
     #$hmacout and $hmacout1 should be equal
 ```
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于 nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
 
@@ -258,7 +259,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **可用位置：** server, location, if in location
 
 Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
-
+用于控制 CDN Pro 是否根据所配时长，在响应客户端的请求中添并修改“ Expires ”和“ Cache-Control ”的响应头。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身内容的缓存时间。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -269,6 +270,9 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **可用位置：** server, location
 
 CDN360 always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
+CDN Pro 默认支持上述默认 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应，但仅当响应正文大小大于 1000 字节时才压缩功能才会生效，该默认行为应该适用于大多数用户。
+该指令奕可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以便支持包括 `text/*` 和 `*javascript` 在内的20+个模糊匹配。
+
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
