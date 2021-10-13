@@ -380,8 +380,7 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 **默认设置：** - <br/>
 **可用位置：** location
 
-When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
-当源以 30x 重定向响应时，您可能希望 CDN Pro 服务器继续追踪它，直到重定向停止。将重定向传递给客户端需要更多时间来获取最终内容。如果要打开它，可以在使用 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) 访问源的位置块中使用此指令。
+当源站响应 30x 并携带一个Location重定向跳转时，您或许希望 CDN360 继续对这个 Location 重定向跳转地址发起请求直至获取到实际的响应文件后再进行缓存和客户端响应。将重定向内容传递给客户端需要更多时间来获取最终内容。如果需要实现上述需求，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location块中使用此指令。
 
 ### `origin_header_modify`
 
@@ -391,35 +390,35 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **默认设置：**  - <br/>
 **可用位置：** server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream\_http\_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
+该指令可用于在所有其他处理**之前**对源站的响应头进行添加、删除或者改写。换句话说，其他指令看到的任何一个源站响应头部和值都可能受到该指令的影响。该指令支持使用 nginx 变量作为配置值。
 
-Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
+policy 的可能值是 ```repeat,overwrite,``` 以及 ```preserve。``` policy 参数同样支持使用变量作为值。默认的策略是```repeat```。
 
-*   The ```repeat``` policy always adds the header and the value into the upstream response.
-*   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response.
-*   The ```preserve``` policy adds the header and the value into the upstream response only if the header does not exist in the upstream response.
+*   ```repeat``` 不管指定响应头原先是否存在，强制加响应头部和值添加到上游响应中。
+*   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写。如果指定响应头不存在，则将配置响应头和值添加到上游响应中。
+*   ```preserve``` 仅当指定响应头不存在时，才将配置的响应头和值加到上游响应中。
 
-The parameter ```if``` is introduced to add the header based on the condition. A condition can be one of the following:
+指令后半部分的参数 ```if``` 可用于设置该指令的生效条件。条件可以是以下之一：
 
-*   A variable name; false if the value of a variable is an empty string.
-*   A comparison of a variable with a string using the "=" and "!=" operators.
-*   The matching of a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
+*   变量名；如果变量的值为空字符串，则为 false。
+*   使用“=”和“!=”运算符将变量与字符串进行比较。
+*   使用匹配符“\~”（区分大小写匹配）和“\~\*”（区分大小写匹配）将变量与正则表达式进行匹配。另外反向匹配符 "!\~" 和 "!\~\*" 也可在此用。如果正则表达式包含“}”或“;”字符，请注意将整个表达式括在单引号或双引号中以免出现语法错误。
 
-Examples: 
+示例: 
 
-Added a header ```X-Status``` based on origin's status code:
+根据源站的响应状态码，添加一个响应头 ```X-Status```
 ```nginx
 origin_header_modify X-Status Good if($upstream_response_status ~ "^[23]");
 origin_header_modify X-Status ClientErr if($upstream_response_status ~ "^4");
 origin_header_modify X-Status ServerErr if($upstream_response_status ~ "^5");
 ```
-Delete the ```Cache-Control``` header in the origin's response:
+删除源站响应的 ```Cache-Control```响应头
 ```nginx
 origin_header_modify Cache-Control "" policy=overwrite;
 ```
-The directive is merged across different levels (http/server/location/location if). If the same header name exists in different levels, the configuration for that header name in the innermost level takes effect.
+该指令可跨不同级别（http/server/location/location if）合并。如果不同级别存在针对相同的响应头 origin_header_modify 配置，则最内层的origin_header_modify配置生效。
 
-Although CDN360 has a hierarchical cache structure, the directive changes the header only in the origin response. 
+尽管 CDN360 具有分层缓存结构，但该指令仅更改源站响应中的标头（不会更改来自中间节点的响应头）。
 
 ### `origin_limit_rate`
 
@@ -430,6 +429,8 @@ Although CDN360 has a hierarchical cache structure, the directive changes the he
 **可用位置：** server, location
 
 This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
+该指令是在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行优化提升，用于限制了从源服务器读取正文的速度。
+
 
 ### `origin_pass`
 
@@ -440,6 +441,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **可用位置：** location, if in location
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
+该指令指定从指定的源站中获取内容。它是在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行优化。该指令携带的参数一个参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例子：
 ```nginx
 # 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
