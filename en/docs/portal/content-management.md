@@ -51,7 +51,6 @@ CDN360 supports prefix purging. Using this feature, you can purge directories by
 | http://test.domain2.com/mydir/a*    | Purge all files that start with the letter "a".                   |
 | http://test.domain2.com/mydir/a**   | Purge all files and subdirectories that start with the letter "a".|
 | http://test.domain2.com/mydir/a.jpg | Purge all variations of "a.jpg".                                  |
-| http://test.domain1.com/mydir/**    | Folder does not purge query strings.                              |
 
 
 ## Viewing Purge Details
