@@ -194,7 +194,11 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-当此次请求的处理结果为配置的参数一 （状态码）之一时，重定向跳转到配置的参数二 （URI）。代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) ，因此该指令奕可将源的响应状态码作为判断条件。
+指令可携带3个参数：
+参数1 作为判定条件的原始状态码，格式为 "400 401 402 403 404 406 501 502 503 504"，每个状态码以空格隔开，必填项。
+参数2 设置新的响应状态码，格式为 "=200" 。非必填项，如有配则参数1中的原始状态码将被替换为新状态码进行响应。
+参数3 设置新的响应正文，格式为 URI 或者一个完整的 URL。必填项，当值为完整 URL 时，即便参数2没有设置也将会把响应状态码改为301或者302，默认302。
+代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) ，因此该指令亦可将源的响应状态码作为判断条件。
 
 该指令允许您将源的响应状态码作为条件进行自定义修改。例如，下述指令可用于将原状态码 403 更改为 404：
 ```nginx
