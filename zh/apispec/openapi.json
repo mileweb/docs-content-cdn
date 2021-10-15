@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "CDN360 API Specification",
+    "title": "CDN Pro API Specification",
     "version": "1.0",
-    "description": "CDN360 APIs allow you to manage the CDN360 service.",
+    "description": "CDN Pro APIs allow you to manage the CDN Pro service.",
     "contact": {
       "url": "https://www.cdnetworks.com"
     }
@@ -380,7 +380,7 @@
                           "items": {
                             "title": "accessControlRule",
                             "type": "object",
-                            "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                            "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -460,7 +460,7 @@
                         },
                         "disableCertAutomation": {
                           "type": "boolean",
-                          "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                          "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                           "default": false
                         },
                         "cacheKeyUri": {
@@ -1035,7 +1035,7 @@
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
-                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                       "properties": {
                         "id": {
                           "type": "string",
@@ -1115,7 +1115,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -3134,7 +3134,7 @@
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
-                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                       "properties": {
                         "id": {
                           "type": "string",
@@ -3214,7 +3214,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -3429,7 +3429,7 @@
             }
           }
         },
-        "description": "Creates a property to define the configuration of one or more hostnames (domains) to deploy to the CDN360 servers.",
+        "description": "Creates a property to define the configuration of one or more hostnames (domains) to deploy to the CDN servers.",
         "operationId": "createProperty",
         "requestBody": {
           "content": {
@@ -3731,7 +3731,7 @@
                         "items": {
                           "title": "accessControlRule",
                           "type": "object",
-                          "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                          "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                           "properties": {
                             "id": {
                               "type": "string",
@@ -3811,7 +3811,7 @@
                       },
                       "disableCertAutomation": {
                         "type": "boolean",
-                        "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                        "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                         "default": false
                       },
                       "cacheKeyUri": {
@@ -3923,7 +3923,7 @@
               }
             }
           },
-          "description": "The request body includes the name of the property and all configurations that must be deployed to the CDN360 cache servers."
+          "description": "The request body includes the name of the property and all configurations that must be deployed to the CDN cache servers."
         },
         "tags": [
           "Property Management"
@@ -4970,7 +4970,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN360. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -5757,7 +5757,7 @@
           }
         },
         "operationId": "updateCertificate",
-        "description": "Update a certificate using this API. The fields are the same as those in the <a href=\"#operation/createCertificate\">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href=\"#operation/createDeployment\">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN360 may still serve content using an older version of the certificate.",
+        "description": "Update a certificate using this API. The fields are the same as those in the <a href=\"#operation/createCertificate\">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href=\"#operation/createDeployment\">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN Pro may still serve content using an older version of the certificate.",
         "tags": [
           "Certificate Management"
         ],
@@ -6803,7 +6803,7 @@
                     },
                     "cacheVersion": {
                       "type": "string",
-                      "description": "CDN360 cache version used when validating the property."
+                      "description": "CDN cache version used when validating the property."
                     },
                     "impersonatingParentCustomerId": {
                       "type": "integer",
@@ -8235,7 +8235,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN360."
+            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN Pro."
           },
           {
             "schema": {
@@ -9246,7 +9246,7 @@
             }
           }
         },
-        "description": "Gets the number of requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Gets the number of requests to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9604,7 +9604,7 @@
           }
         },
         "operationId": "getEdgeBandwidth",
-        "description": "Get the bandwidth in Mbps to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get the bandwidth in Mbps to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10180,7 +10180,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11517,7 +11517,7 @@
           }
         },
         "operationId": "getIntermediateTraffic",
-        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN360 servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN Pro servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "parameters": [
           {
             "schema": {
@@ -12284,7 +12284,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The annotation was created and will appear in the CDN360 portal reports under the conditions you specified. The Location response header will include a URL to the object.",
+            "description": "The annotation was created and will appear in the CDN Pro portal reports under the conditions you specified. The Location response header will include a URL to the object.",
             "headers": {
               "Location": {
                 "schema": {
@@ -12340,7 +12340,7 @@
             }
           }
         },
-        "description": "This API allows you to create an annotation for a report shown in the CDN360 portal. The request body lets you specify the conditions under which the annotation appears along with the text to show.",
+        "description": "This API allows you to create an annotation for a report shown in the CDN Pro portal. The request body lets you specify the conditions under which the annotation appears along with the text to show.",
         "operationId": "createAnnotation",
         "requestBody": {
           "content": {
@@ -12479,7 +12479,7 @@
             }
           }
         },
-        "description": "Create a purge request to force a refresh of the content stored in the CDN360 cache servers.  You may wish to do this if you just updated content on your origin server and want visitors to see the changes right away rather than wait for the updates to propagate according to the schedule defined in your property configuration.",
+        "description": "Create a purge request to force a refresh of the content stored in the CDN Pro cache servers.  You may wish to do this if you just updated content on your origin server and want visitors to see the changes right away rather than wait for the updates to propagate according to the schedule defined in your property configuration.",
         "operationId": "createPurge",
         "requestBody": {
           "content": {
@@ -12529,7 +12529,7 @@
                       "delete",
                       "invalidate"
                     ],
-                    "description": "This controls whether cached files and directories should be removed altogether from the CDN360 servers (delete) or flagged as invalid (invalidate)."
+                    "description": "This controls whether cached files and directories should be removed altogether from the CDN Pro servers (delete) or flagged as invalid (invalidate)."
                   },
                   "target": {
                     "type": "string",
@@ -12896,7 +12896,7 @@
                             "comments": "A major release"
                           }
                         },
-                        "description": "This describes an annotation to reports shown on the CDN360 portal.",
+                        "description": "This describes an annotation to reports shown on the CDN Pro portal.",
                         "properties": {
                           "id": {
                             "type": "string",
@@ -12932,7 +12932,7 @@
                           },
                           "comments": {
                             "type": "string",
-                            "description": "Text shown in the report on the CDN360 portal."
+                            "description": "Text shown in the report on the CDN Pro portal."
                           },
                           "serverRegions": {
                             "type": "array",
@@ -13095,7 +13095,7 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ],
-        "description": "Obtain a list of annotations you have created. Annotations appear in the CDN360 portal's reports based on the conditions defined for each annotation. Filter results using the query parameters and request body.",
+        "description": "Obtain a list of annotations you have created. Annotations appear in the CDN Pro portal's reports based on the conditions defined for each annotation. Filter results using the query parameters and request body.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13264,7 +13264,7 @@
                       "comments": "A major release"
                     }
                   },
-                  "description": "This describes an annotation to reports shown on the CDN360 portal.",
+                  "description": "This describes an annotation to reports shown on the CDN Pro portal.",
                   "properties": {
                     "id": {
                       "type": "string",
@@ -13300,7 +13300,7 @@
                     },
                     "comments": {
                       "type": "string",
-                      "description": "Text shown in the report on the CDN360 portal."
+                      "description": "Text shown in the report on the CDN Pro portal."
                     },
                     "serverRegions": {
                       "type": "array",
@@ -13393,7 +13393,7 @@
           }
         },
         "operationId": "getAnnotation",
-        "description": "Retrieve details about a report annotation including the conditions in which it will appear in a CDN360 report.",
+        "description": "Retrieve details about a report annotation including the conditions in which it will appear in a CDN Pro report.",
         "parameters": [
           {
             "schema": {
@@ -13479,7 +13479,7 @@
             }
           }
         },
-        "description": "Update a report annotation. It will appear within CDN360 portal reports when its conditions are met.",
+        "description": "Update a report annotation. It will appear within CDN Pro portal reports when its conditions are met.",
         "operationId": "updateAnnotation",
         "requestBody": {
           "content": {
@@ -13650,7 +13650,7 @@
                         "delete",
                         "invalidate"
                       ],
-                      "description": "This controls whether cached files and directories should be removed altogether from the CDN360 servers (delete) or flagged as invalid (invalidate)."
+                      "description": "This controls whether cached files and directories should be removed altogether from the CDN Pro servers (delete) or flagged as invalid (invalidate)."
                     },
                     "finishTime": {
                       "type": "string",
@@ -14414,7 +14414,7 @@
             }
           }
         },
-        "description": "Create a CDN360 portal user account. The loginName field must be unique. If you delete a user, you cannot reuse the old loginName.",
+        "description": "Create a CDN Pro portal user account. The loginName field must be unique. If you delete a user, you cannot reuse the old loginName.",
         "operationId": "createContact",
         "requestBody": {
           "content": {
@@ -14529,7 +14529,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -14807,7 +14807,7 @@
           }
         },
         "operationId": "getContacts",
-        "description": "Get a list of CDN360 portal users. Use the query parameters to filter the results. If you are a reseller you may use the <i>Report-Range</i> request header to get a list of user accounts from child customers as well, or use the On-Behalf-Of header to get results from a single child customer.",
+        "description": "Get a list of CDN Pro portal users. Use the query parameters to filter the results. If you are a reseller you may use the <i>Report-Range</i> request header to get a list of user accounts from child customers as well, or use the On-Behalf-Of header to get results from a single child customer.",
         "parameters": [
           {
             "schema": {
@@ -14943,7 +14943,7 @@
                     },
                     "products": {
                       "type": "array",
-                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                       "items": {
                         "type": "string",
                         "enum": [
@@ -15075,7 +15075,7 @@
                     },
                     "products": {
                       "type": "array",
-                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                       "items": {
                         "type": "string",
                         "enum": [
@@ -15209,7 +15209,7 @@
                   },
                   "products": {
                     "type": "array",
-                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                     "items": {
                       "type": "string",
                       "enum": [
@@ -15527,7 +15527,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN360 APIs.  You can give <i>read-only</i> access which permits calling API endpoints using the HTTP GET method only OR <i>operator</i> access which also allows creating, updating, and deleting objects like properties. You can further customize which endpoints the API account can access by <a href=\"#tag/API-Access-Control\">creating custom API permissions</a> for it.",
+        "description": "Create an API account that can be used to call CDN Pro APIs.  You can give <i>read-only</i> access which permits calling API endpoints using the HTTP GET method only OR <i>operator</i> access which also allows creating, updating, and deleting objects like properties. You can further customize which endpoints the API account can access by <a href=\"#tag/API-Access-Control\">creating custom API permissions</a> for it.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -15550,7 +15550,7 @@
                   },
                   "products": {
                     "type": "array",
-                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                     "items": {
                       "type": "string",
                       "enum": [
@@ -15957,7 +15957,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
+                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -16111,7 +16111,7 @@
           }
         },
         "operationId": "get-ngadmin-contacts-id",
-        "description": "Return information about a CDN360 portal user.",
+        "description": "Return information about a CDN Pro portal user.",
         "parameters": [
           {
             "schema": {
@@ -16160,7 +16160,7 @@
           }
         },
         "operationId": "delete-ngadmin-contacts-id",
-        "description": "Delete a CDN360 portal user account using this API.",
+        "description": "Delete a CDN Pro portal user account using this API.",
         "parameters": [
           {
             "schema": {
@@ -16215,7 +16215,7 @@
           }
         },
         "operationId": "patch-ngadmin-contacts-id",
-        "description": "Update a CDN360 portal user account. Only fields in the request body will be updated.",
+        "description": "Update a CDN Pro portal user account. Only fields in the request body will be updated.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -16324,7 +16324,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -17423,7 +17423,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -17470,7 +17470,7 @@
                     "portalSettings": {
                       "title": "customerPortalSettings",
                       "type": "object",
-                      "description": "These settings apply to your users accessing the CDN360 portal.",
+                      "description": "These settings apply to your users accessing the CDN Pro portal.",
                       "x-tags": [
                         "Customer Management"
                       ],
@@ -17805,7 +17805,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -17852,7 +17852,7 @@
                     "portalSettings": {
                       "title": "customerPortalSettings",
                       "type": "object",
-                      "description": "These settings apply to your users accessing the CDN360 portal.",
+                      "description": "These settings apply to your users accessing the CDN Pro portal.",
                       "x-tags": [
                         "Customer Management"
                       ],
@@ -18174,7 +18174,7 @@
                   "portalSettings": {
                     "title": "customerPortalSettings",
                     "type": "object",
-                    "description": "These settings apply to your users accessing the CDN360 portal.",
+                    "description": "These settings apply to your users accessing the CDN Pro portal.",
                     "x-tags": [
                       "Customer Management"
                     ],
@@ -18255,7 +18255,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                        "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -18550,7 +18550,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -18597,7 +18597,7 @@
                     "portalSettings": {
                       "title": "customerPortalSettings",
                       "type": "object",
-                      "description": "These settings apply to your users accessing the CDN360 portal.",
+                      "description": "These settings apply to your users accessing the CDN Pro portal.",
                       "x-tags": [
                         "Customer Management"
                       ],
@@ -18835,7 +18835,7 @@
                   "portalSettings": {
                     "title": "customerPortalSettings",
                     "type": "object",
-                    "description": "These settings apply to your users accessing the CDN360 portal.",
+                    "description": "These settings apply to your users accessing the CDN Pro portal.",
                     "x-tags": [
                       "Customer Management"
                     ],
@@ -18916,7 +18916,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                        "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -19400,7 +19400,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma-separated list of products which can include 'CDN' representing CDN360, 'HDT' representing High-Speed Data Transmission', and 'ECP' representing Edge Computing Platform. Only customers with access to the specified products will be returned."
+            "description": "Comma-separated list of products which can include 'CDN' representing CDN Pro, 'HDT' representing High-Speed Data Transmission', and 'ECP' representing Edge Computing Platform. Only customers with access to the specified products will be returned."
           },
           {
             "schema": {
@@ -19607,7 +19607,7 @@
                           },
                           "onBehalfOf": {
                             "type": "string",
-                            "description": "A non-empty value indicates that an API call was made on your behalf. For example, the CDN360 support team may have helped you with configuration."
+                            "description": "A non-empty value indicates that an API call was made on your behalf. For example, the CDN Pro support team may have helped you with configuration."
                           },
                           "apiName": {
                             "type": "string",
@@ -19856,7 +19856,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls</a>."
+          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN Pro API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls</a>."
         }
       ],
       "get": {
@@ -20344,7 +20344,7 @@
           }
         },
         "operationId": "post-cdn-serviceQuotas",
-        "description": "A reseller can use this API to define CDN360 service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. ",
+        "description": "A reseller can use this API to define CDN Pro service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -20364,7 +20364,7 @@
                       "trial",
                       "suspended"
                     ],
-                    "description": "Indicates the status of the customer's access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. "
+                    "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. "
                   },
                   "contractId": {
                     "type": "string",
@@ -20387,7 +20387,7 @@
                   },
                   "usageLimitDollar": {
                     "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing. A value of 0 means there is no limit on the customer.",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN Pro's default pricing. A value of 0 means there is no limit on the customer.",
                     "minimum": 0,
                     "default": 0
                   },
@@ -20621,7 +20621,7 @@
                           },
                           "status": {
                             "type": "string",
-                            "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status."
+                            "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status."
                           },
                           "allowProduction": {
                             "type": "boolean",
@@ -20637,7 +20637,7 @@
                           },
                           "usageLimitDollar": {
                             "type": "integer",
-                            "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n"
+                            "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n"
                           }
                         },
                         "required": [
@@ -20826,7 +20826,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains the service quotas for a CDN360 customer.",
+            "description": "The response contains the service quotas for a CDN Pro customer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -20934,7 +20934,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -20948,7 +20948,7 @@
                     },
                     "usageLimitDollar": {
                       "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                       "minimum": 0
                     },
                     "usageLimitDays": {
@@ -20972,7 +20972,7 @@
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -21323,7 +21323,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "description": "Indicates the status of a customer's access to the CDN Pro product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                     "enum": [
                       "active",
                       "suspended",
@@ -21337,7 +21337,7 @@
                   },
                   "usageLimitDollar": {
                     "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                     "minimum": 0
                   },
                   "usageLimitDays": {
@@ -22097,7 +22097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains the service quotas for a CDN360 customer.",
+            "description": "The response contains the service quotas for a CDN Pro customer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -22205,7 +22205,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -22219,7 +22219,7 @@
                     },
                     "usageLimitDollar": {
                       "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                       "minimum": 0
                     },
                     "usageLimitDays": {
@@ -22243,7 +22243,7 @@
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -22510,7 +22510,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -22524,7 +22524,7 @@
                     },
                     "usageLimitDollar": {
                       "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                       "minimum": 0
                     },
                     "usageLimitDays": {
@@ -22548,7 +22548,7 @@
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -22813,7 +22813,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "description": "Indicates the status of a customer's access to the CDN Pro product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                     "enum": [
                       "active",
                       "suspended",
@@ -22827,7 +22827,7 @@
                   },
                   "usageLimitDollar": {
                     "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                     "minimum": 0
                   },
                   "usageLimitDays": {
@@ -23439,7 +23439,7 @@
               "type": "string"
             },
             "in": "query",
-            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN360.",
+            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN Pro.",
             "name": "startdate"
           },
           {
@@ -23532,7 +23532,7 @@
           }
         },
         "operationId": "post-cdn-prefetches",
-        "description": "Create a prefetch request to warm up the CDN360 cache with contents from your origin in anticipation of visitors. This is helpful to prevent a sudden influx of requests to your origin servers. The URLs you prefetch must be for hostnames of properties deployed to production.\n",
+        "description": "Create a prefetch request to warm up the CDN Pro cache with contents from your origin in anticipation of visitors. This is helpful to prevent a sudden influx of requests to your origin servers. The URLs you prefetch must be for hostnames of properties deployed to production.\n",
         "parameters": [
           {
             "schema": {
@@ -23588,7 +23588,7 @@
                   },
                   "regions": {
                     "type": "array",
-                    "description": "A list of ISO 3166-2 country codes representing the locations of CDN360 servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                    "description": "A list of ISO 3166-2 country codes representing the locations of CDN Pro servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                     "items": {
                       "type": "string"
                     }
@@ -24006,7 +24006,7 @@
                     },
                     "regions": {
                       "type": "array",
-                      "description": "A list of ISO 3166-2 country codes representing the locations of CDN360 servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                      "description": "A list of ISO 3166-2 country codes representing the locations of CDN Pro servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                       "items": {
                         "type": "string"
                       }
@@ -26636,7 +26636,7 @@
       "APIKey": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
       }
     }
   },
@@ -26647,7 +26647,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
@@ -26655,19 +26655,19 @@
     },
     {
       "name": "Secret Management",
-      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN360 portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN360 portal or fetching it using the CDN360 API."
+      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
-      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
+      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
     },
     {
       "name": "Edge Hostname Management",
-      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360. Different properties' hostnames may point to the same edge hostname if the same rules apply."
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN Pro. Different properties' hostnames may point to the same edge hostname if the same rules apply."
     },
     {
       "name": "Reports",
@@ -26675,7 +26675,7 @@
     },
     {
       "name": "Annotations for Reports",
-      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.cdnetworks.com/cdn\">CDN360 portal</a> when you look at the reports."
+      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a> when you look at the reports."
     },
     {
       "name": "Content Management",
@@ -26683,11 +26683,11 @@
     },
     {
       "name": "Portal User Management",
-      "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN360 portal</a>."
+      "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a>."
     },
     {
       "name": "API Account Management",
-      "description": "Create and manage additional API accounts used to call the CDN360 APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/#tag/API-Access-Control\">API permissions</a>."
+      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/#tag/API-Access-Control\">API permissions</a>."
     },
     {
       "name": "Customer Management",
@@ -26703,7 +26703,7 @@
     },
     {
       "name": "API Access Control",
-      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN360 API account</a> can do. The permissions work in conjunction with the API account type (read-only and operator)."
+      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN Pro API account</a> can do. The permissions work in conjunction with the API account type (read-only and operator)."
     },
     {
       "name": "Webhooks",

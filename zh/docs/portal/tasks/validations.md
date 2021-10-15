@@ -1,8 +1,6 @@
 # Check Property Validation Results
 
-A property version must be validated before it can be deployed to staging and/or production environments. CDN360 sends the compiled property and associated certificate(s) to a validation environment and performs basic tests, such as making sure the server does not crash and running artificial traffic to the hostnames associated with the property. The validation process usually takes less than a minute. For more information, see the [CDN360 API](</apidocs#tag/Property-Validation>). 
-
-You can check the status of all property validations using the Tasks.
+To check the status of all property validations:
 
 1. In the left pane, click **Tasks** > **Validation**.
 
