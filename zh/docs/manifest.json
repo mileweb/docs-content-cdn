@@ -1,31 +1,31 @@
 {
     "metadata": {
       "id": "cdn",
-      "title": "CDN360",
-      "description": "CDN360是一个引领内容分发网络(CDN)演进的下一代产品。她使内容拥有者可以随心所欲地配置分发的方式，也给遍布世界各地的终端用户带来安全，快速，稳定的服务和流畅的体验。",
+      "title": "CDN Pro",
+      "description": "CDN Pro是一个引领内容分发网络(CDN)演进的下一代产品。她使内容拥有者可以随心所欲地配置分发的方式，也给遍布世界各地的终端用户带来安全，快速，稳定的服务和流畅的体验。",
       "showOnMainPage": true,
       "links": [
         {
           "title": "快速开始",
-          "caption": "开始使用CDN360",
+          "caption": "开始使用CDN Pro",
           "icon": "bolt",
           "path": "docs/intro"
         },
         {
           "title": "Portal参考文档",
-          "caption": "CDN360 Portal参考文档",
+          "caption": "CDN Pro Portal参考文档",
           "icon": "book",
           "path": "docs/portal/accessing-portal/logging-in"
         },
         {
           "title": "API参考文档",
-          "caption": "CDN360 API参考文档",
+          "caption": "CDN Pro API参考文档",
           "icon": "gear",
           "path": "apidocs"
         },
         {
           "title": "边缘逻辑参考文档",
-          "caption": "学习CDN360的边缘逻辑",
+          "caption": "学习CDN Pro的边缘逻辑",
           "icon": "cli",
           "path": "docs/edge-logic/intro"
         },

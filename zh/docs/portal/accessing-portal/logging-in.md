@@ -12,4 +12,4 @@
 
 ## Where to Go from Here
 
-After you log in to the portal, review the [CDN360 interface](</docs/portal/accessing-portal/navigating-ui.md>).
+After you log in to the portal, review the [CDN Pro interface](</docs/portal/accessing-portal/navigating-ui.md>).

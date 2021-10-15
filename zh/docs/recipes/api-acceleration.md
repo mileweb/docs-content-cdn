@@ -3,7 +3,7 @@
 API calls are usually considered dynamic HTTP requests since the responses are generated
 by the server in real time based on some input parameters supplied in the request. As we
 mentioned in the [FAQ](/docs/edge-logic/faq#what-about-dynamic-content), dynamic requests
-such as REST API calls can be very effectively accelerated by CDN360. For example, the user
+such as REST API calls can be very effectively accelerated by CDN Pro. For example, the user
 of a mobile or web app may repeatedly reload the same page generating lots of 
 duplicate API calls in a short period of time. Some caching using a CDN can significantly 
 improve the performance. In this article, we are going to use an example to illustrate how
@@ -17,24 +17,24 @@ and `1.1.1.2`
 * The API server uses the standard HTTP methods: GET, POST, PUT, DELETE, PATCH.
 * The client is using the `Authorization` request header to pass the credential to the
 server following the **format** of [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
-This makes it easy for the CDN360 servers to obtain the API user name with the built-in
+This makes it easy for the CDN Pro servers to obtain the API user name with the built-in
 variable `$remote_user`. Please notice that you don't have to use the actual basic
 authentication algorithm which transfers the secret password in clear text. You are free 
-to use a more sophisticated algorithm like the one for [CDN360 API](https://docs.quantil.com/cdn/apidocs#section/Authentication)
+to use a more sophisticated algorithm like the one for [CDN Pro API](https://docs.quantil.com/cdn/apidocs#section/Authentication)
 to generate a signature to put after the colon.
 * All the input parameters to the API server are specified in the request query string.
 
-To use CDN360 to accelerate this service:
+To use CDN Pro to accelerate this service:
 * Create a new DNS record `api-origin.company.com` to point to the two IP addresses. The 
-CDN360 servers need to use it to reach the origin. The name `api.company.com` can
-no longer be used because we will later CNAME it to a CDN360 edge hostname to direct
+CDN Pro servers need to use it to reach the origin. The name `api.company.com` can
+no longer be used because we will later CNAME it to a CDN Pro edge hostname to direct
 client's traffic to the platform to be accelerated.
 * No API service should be running without the protection of TLS encryption. You need to
-upload the certificate for `api.company.com` to the CDN360 platform. We recommend using 
+upload the certificate for `api.company.com` to the CDN Pro platform. We recommend using 
 [Let's Encrypt](/docs/portal/certificates/auto-renewal) to automatically renew the certificate.
 <p align=center><img src="/docs/resources/images/recipes/api/upload-certificate.png" alt="upload certificate" width="700"></p>
 
-* Go to the CDN360 portal to create a property to accelerate this API service. It is important
+* Go to the CDN Pro portal to create a property to accelerate this API service. It is important
 to enter the correct hostname to be accelerated: `api.company.com`.
 <p align=center><img src="/docs/resources/images/recipes/api/create-property.png" alt="create property" width="720"></p>
 
@@ -42,7 +42,7 @@ to enter the correct hostname to be accelerated: `api.company.com`.
 is specified with the new DNS record we just created. We are enforcing the HTTPS protocol
 to reach the origin to ensure security. The `Host` header is set to the value
 required by the origin. In this case, we can actually leave it empty because, by
-default, CDN360 will pass the `Host` header value received from the client to the origin. We also
+default, CDN Pro will pass the `Host` header value received from the client to the origin. We also
 chose "Always Direct" to reach the origin without going through a parent cache because we want to
 minimize latency and know there will not be any cache hit across different servers.
 <p align=center><img src="/docs/resources/images/recipes/api/origin.png" alt="create origin" width="600"></p>
@@ -54,7 +54,7 @@ with HTTPS and the short cache time of 1 minute, this should be reasonably safe 
 applications in the industry. By default, only responses to `GET` method are cached. 
 You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses.
 Another thing to notice is that we allow the
-clients to use the `Cache-Control: no-cache` header field to bypass the cache. When a CDN360
+clients to use the `Cache-Control: no-cache` header field to bypass the cache. When a CDN Pro
 server sees this field value, it will go directly to the origin without looking up the cache.
 Lastly, we enabled the [Fast Route to origin](/docs/edge-logic/supported-directives#origin_fast_route)
 to ensure stable connections to the origin.
@@ -88,10 +88,10 @@ and then deploy to production.
 destination and performance/cost requirement. Then update the DNS record of `api.company.com`
 to CNAME to this edge hostname.
 
-Any request to `api.company.com` will now be routed to the CDN360 platform. Every cache miss
+Any request to `api.company.com` will now be routed to the CDN Pro platform. Every cache miss
 or expiration will be forwarded to the origin to validate the credential and fetch the latest content.
 If the same request comes again from the same user and the same IP address before the 
-cached copy expires, the content will be served immediately by the CDN360 server with
+cached copy expires, the content will be served immediately by the CDN Pro server with
 much a smaller turnaround time. The end user will experience improved performance and 
 the origin server will not have to generate the same content repeatedly in a 
 short period of time. 

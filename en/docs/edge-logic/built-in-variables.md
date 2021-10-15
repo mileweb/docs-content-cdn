@@ -1,7 +1,7 @@
 ## Built-in Variables
 
-The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
-If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
+The table below lists all the built-in variables supported by the CDN Pro servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
+If you use the CDN Pro portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
 | **Variable Name** | **Description** | **Edge Logic** | **[R-T Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
