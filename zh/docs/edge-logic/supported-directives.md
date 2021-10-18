@@ -441,8 +441,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **默认设置：** none <br>
 **可用位置：** location, if in location
 
-This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
-该指令指定从指定的源站中获取内容。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例子：
+该指令指定从指定的源站中获取内容。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例如：
 ```nginx
 # 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
