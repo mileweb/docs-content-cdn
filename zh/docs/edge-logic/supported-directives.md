@@ -55,7 +55,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 2. 引入了```if(condition)```参数来控制本指令生效的条件。只有当条件为真的时候，本指令才会修改发往客户端的头部，否则完全不起作用。这个```if()```参数必须出现在本指令的末尾。```condition```可以是如下条件表达式:
 
-*   一个变量名：如果该变量不存在，或者其值为‘0’或空，则条件不成立，否则条件为真；
+*   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
 *   用"="或者"!="来比较一个变量是否等于一个字符串；
 *   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
 
@@ -497,33 +497,34 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：** `origin_set_header host $host;` <br/>
 **可用位置：** server, location, if in location
 
-This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
+该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于在修改（覆盖）或者增加对应的回源请求头。 CDN Pro 对开源版本代码进行了以下提升：
 
-1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
-2. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
-3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
+1. 该指令可配置于 edgelogic 的不同位置中（server/location/if 中）。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最底层的指令才会生效。
+2. CDN Pro 采用了分层缓存结构，我们仍确保此指令设置的回源请求头仅在回源站时（而不是回上传父节点时）才会被修改/添加。
+3. 使用新参数 ```if(判定条件)``` 来根据指定条件设置回源请求头。如果条件为真，则该指令生效。 ```if``` 参数需要配置在该指令配置的末尾。条件可能是以下之一：
 
-*   A variable name; false if the value of a variable is an empty string.
-*   Comparison of a variable with a string using the "=" and "!=" operators.
-*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
+*   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
+*   用"="或者"!="来比较一个变量是否等于一个字符串；
+*   用"~"(区分大小写)或者"~*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!~"或者"!~*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
 
 使用本指令需要注意以下事项：
 
 1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
+2. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的方案或 IP 地址传递给源服务器，请使用以下变量：
 
-*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
-*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
-*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  client’s ISO 3166 country code
+*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
+*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
+*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
 
-For example:
+示例如下:
 ```nginx
-origin_set_header X-Client-IP $client_real_ip;
+origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
-2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
+2. 如果要使用该指令将 `Host` 标头设置为 origin，则需要确保 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“源站详情-》host请求头”字段配置为空。否则在系统校验环节将出现校验失败。
 3. 我们的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
 proxy_no_cache 1;      # 不要缓存
-proxy_cache_bypass 1;
+proxy_cache_bypass 1;  # 不使用缓存文件响应客户
 # 将客户端的If-Modified-Since请求头传递给源站
 origin_set_header If-Modified-Since $http_if_modified_since;
 origin_pass My-Dynamic-Origin;
@@ -538,7 +539,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_buffering on;` <br/>
 **可用位置：** server, location
 
-Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
+启用或禁用来CDN Pro的响应缓冲功能。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)，无变更。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -548,7 +549,7 @@ Enables or disables buffering of responses from the proxied server. No change to
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. 
+该指令用于允许 CDN Pro 优先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -558,13 +559,13 @@ Turning it on allows a background subrequest to be fired to update an expired ca
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Defines conditions under which the response will not be taken from cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be taken from the cache. This should be used if you know the content is not cacheable according to the conditions above. Examples:
+该指令用于设置 CDN Pro 不使用已有缓存（意味着必须回源）来响应符合条件的请求。如果字符串参数中至少有一个值不为空且不等于“0”，则 CDN Pro 不会从缓存中取出响应。您可以使用它来强制某些请求回源获取最新的响应，样例如下：
+
 ```nginx
 proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
 proxy_cache_bypass $http_pragma    $http_authorization;
 ```
-This directive does not prevent the response from being saved in the cache.
-That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
+该指令不会阻止将源站给的响应保存在 Cache 缓存中。这个 "保存"行为是由另一个指令 [`proxy_no_cache`](#proxy_no_cache) 控制，一般情况下这两个配置项会同时使用来实现某些文件不缓存。
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
