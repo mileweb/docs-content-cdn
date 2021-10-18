@@ -219,7 +219,6 @@ location @return404 {
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-This is a directive to perform some common encoding, decoding, hash, hash-mac, encryption, decryption and comparison algorithms. It is added to the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html).  Supported functions are:
 该指令用于执行一些常见的编码、解码、散列哈希计算、HMAC算法、加解密和变量对比操作。CDN Pro将其添加到[重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) 的处理阶段中。目前支持的功能有：
 
 | **Type** | **Name** | **Syntax** |
@@ -262,8 +261,8 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 **默认设置：** `expires off;` <br/>
 **可用位置：** server, location, if in location
 
-Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
-用于控制 CDN Pro 是否根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身内容的缓存时间。
+
+该指令用于控制 CDN Pro 是否根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身内容的缓存时间。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -273,7 +272,6 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **默认设置：** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **可用位置：** server, location
 
-CDN360 always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应，但仅当响应正文大小大于 1000 字节时才压缩功能才会生效，该默认行为应该适用于大多数用户。
 该指令亦可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以便支持包括 `text/*` 和 `*javascript` 在内的20+个模糊匹配。
 
