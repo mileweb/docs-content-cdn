@@ -359,7 +359,6 @@ else { ... }
 **默认设置：** `origin_connect_timeout 5s;` <br/>
 **可用位置：** server
 
-This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
 
 
