@@ -195,12 +195,12 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **可用位置：** server, location, if in location
 
 指令可携带3个参数：
-参数1 作为判定条件的原始状态码，格式为 "400 401 402 403 404 406 501 502 503 504"，每个状态码以空格隔开，必填项。
-参数2 设置新的响应状态码，格式为 "=200" 。非必填项，如有配则参数1中的原始状态码将被替换为新状态码进行响应。
-参数3 设置新的响应正文，格式为 URI 或者一个完整的 URL。必填项，当值为完整 URL 时，即便参数2没有设置也将会把响应状态码改为301或者302，默认302。
+参数1 作为判定条件的原始状态码，格式为 "400 401 402 403 404 406 501 502 503 504"，每个状态码以空格隔开，必填项；
+参数2 设置新的响应状态码，格式为 "=200" 。如有配，则参数1中的原始状态码将被替换为新状态码进行响应，非必填项；
+参数3 设置新的响应正文，格式为 URI 或者一个完整的 URL，格式为 "@error"(URI)或"http://www.abc.com"(完整URL)。当参数3的值为完整 URL 时，即便参数2没有设置也将会把响应状态码改为302（此时如参数2为 "=301" ，则新响应状态码为301，其余情况下皆为302）。必填项；
 代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) ，因此该指令亦可将源的响应状态码作为判断条件。
 
-该指令允许您将源的响应状态码作为条件进行自定义修改。例如，下述指令可用于将原状态码 403 更改为 404：
+该指令允许您将源的响应状态码作为条件来执行某些操作。例如，下述指令可用于将原状态码 403 更改为 404：
 ```nginx
 location /abc {
   origin_pass my-origin;
@@ -220,7 +220,7 @@ location @return404 {
 **可用位置：** server, location, if
 
 This is a directive to perform some common encoding, decoding, hash, hash-mac, encryption, decryption and comparison algorithms. It is added to the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html).  Supported functions are:
-这是一个用于执行一些常见的编码、解码、散列、hash-mac、加密、解密和比较算法的指令。它被添加到[重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。目前支持的功能有：
+该指令用于执行一些常见的编码、解码、散列哈希计算、HMAC算法、加解密和变量对比操作。CDN Pro将其添加到[重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) 的处理阶段中。目前支持的功能有：
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
@@ -263,7 +263,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 **可用位置：** server, location, if in location
 
 Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
-用于控制 CDN Pro 是否根据所配时长，在响应客户端的请求中添并修改“ Expires ”和“ Cache-Control ”的响应头。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身内容的缓存时间。
+用于控制 CDN Pro 是否根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身内容的缓存时间。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -274,8 +274,8 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **可用位置：** server, location
 
 CDN360 always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
-CDN Pro 默认支持上述默认 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应，但仅当响应正文大小大于 1000 字节时才压缩功能才会生效，该默认行为应该适用于大多数用户。
-该指令奕可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以便支持包括 `text/*` 和 `*javascript` 在内的20+个模糊匹配。
+CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应，但仅当响应正文大小大于 1000 字节时才压缩功能才会生效，该默认行为应该适用于大多数用户。
+该指令亦可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以便支持包括 `text/*` 和 `*javascript` 在内的20+个模糊匹配。
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
@@ -293,14 +293,14 @@ CDN Pro 默认支持上述默认 MIME 类型文件（匹配不区分大小写）
 ```nginx
 if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
-*  支持`||` 运算符，用于执行子条件的逻辑“与”判断。例如：
+*  支持`||` 运算符，用于执行子条件的逻辑“或”判断。例如：
 ```nginx
 if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
 ```
 请注意，当被一起使用时，`&&` 的优先级高于`||`，并且不支持使用多重括号对子条件进行分组。
 我们最多支持 9 个子条件的判断，edgelogic的执行逻辑会智能跳过不影响最终结果的子条件。
 *  支持字符串前缀匹配。 如果变量`$s1` 的值以 `$s2`开始，那么判断条件 `$s1 ^ $s2` 将会返回 true 。 `$s1 !^ $s2` 将会返回 false.
-*  支持 `<`、`<=`、`>`、`>=` 的整数值比较。请确保两个操作数都是有效整数；否则结果将是 `false`。有效整数可以是带十进制数字或者是前缀为“0x”的十六进制数字。
+*  支持 `<`、`<=`、`>`、`>=` 的整数值比较。请确保两个操作数都是有效整数；否则结果将是 `false`。有效整数可以是十进制数字或者是前缀为“0x”的十六进制数字。
 *  支持多个 `elseif` 和 `else` 语法。例如：
 ```nginx
 if ($http_x = 1) { ... }
@@ -328,7 +328,6 @@ else { ... }
 **默认设置：** `limit_rate 4m;` <br/>
 **可用位置：** server, location, if in location
 
-Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
 限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
 
 
@@ -340,8 +339,7 @@ Limits the rate of response transmission to a client, in bytes/sec. Valid values
 **默认设置：** `limit_rate_after 4m;` <br/>
 **可用位置：** server, location, if in location
 
-Sets the initial amount of traffic (in bytes) after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
-响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制。可配范围为 [1-8]m 。
+响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制，单位为字节。可配范围为 [1-8]m 。
 
 ### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
@@ -362,7 +360,7 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 **可用位置：** server
 
 This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
-该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDB Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
 
 
 ### `origin_fast_route`
@@ -373,7 +371,7 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 **默认设置：** `origin_fast_route off;` <br/>
 **可用位置：** server, location, if in location
 
-该指令用于在访问源站时开启使用快速路由功能。快速路有功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过快速路由传输的回源流量可能会被收取比边缘流量更高的费率。
+该指令用于在访问源站时开启使用快速路由功能。快速路由功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过快速路由传输的回源流量可能会被收取比边缘流量更高的费率。
 
 
 ### `origin_follow_redirect`
@@ -445,7 +443,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **可用位置：** location, if in location
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
-该指令指定从指定的源站中获取内容。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数一个参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例子：
+该指令指定从指定的源站中获取内容。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例子：
 ```nginx
 # 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
@@ -475,7 +473,6 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：** `origin_send_timeout 20s;` <br/>
 **可用位置：** server
 
-This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了回源请求从 CDN Pro 节点发到源站之间的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
 
 
@@ -487,13 +484,11 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 **默认设置：** `origin_selection_algorithm round_robin;` <br/>
 **可用位置：** server, location
 
-When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
 当源的解析为多个 IP 地址时，该指令用于设置使用哪个算法来决策最终的源站IP。有效值为：
 
 * round_robin : 轮询回源，默认设置，它将尝试将回源流量均匀分配到所有的源站IP上。
 * consistent_hash : 一致性哈希回源，另一种分配回源流量的方法，基于回源 URL 的哈希值。
-* sorted_list : 优选回源，按照源站的链路质量状况优先回指令最优的源IP。当源站的策略为根据地理位置设置不同解析IP（例如源为另一个 CDN）时，此回源方式有助于确保回源性能稳定。
-Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
+* sorted_list : 优选回源，按照源站的链路质量状况优先回最优的源IP。当源站的策略为根据地理位置设置不同解析IP（例如源为另一个 CDN）时，此回源方式有助于确保回源性能稳定。
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
