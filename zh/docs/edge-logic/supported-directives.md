@@ -575,7 +575,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_lock on;` <br/>
 **可用位置：** server, location
 
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN360 turns it on to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
+当该指令被启用时，当多个客户端请求一个缓存中不存在的文件（或称之为一个MISS），只有这些请求中的第一个被允许发送至服务器。其他请求在第一个请求得到满意结果之后在缓存中得到文件，或者直到 [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) 指令设置的时间后才会被处理。代码源自公共版本没有变化。默认情况下，出于减少对源站带宽消耗的考虑，CDN360 将该指令设置为开启。但是，由于该"锁定"会在大部分内容不可缓存时引入不必要的延迟，因此我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了部分内容是可缓存的，您可以将其设置为更高的值以减少原始流量。同时，如果您事先预知了某些不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作并尽可能减少延迟。
 
 ### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
 
@@ -585,7 +585,7 @@ When enabled, only one request at a time will be allowed to populate a new cache
 **默认设置：** `proxy_cache_lock_age 15s;` <br/>
 **可用位置：** server, location
 
-If the last request passed to the proxied server for populating a new cache element has not completed for the specified time, one more request may be passed to the proxied server. No change to the public version.
+如果第一个进入的请求，没有在该指令设置的时间内完成，则 CDN Pro 将会放行下一个请求，并以此生成缓存。代码源自开源公共版本，无变更
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -595,7 +595,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **默认设置：** `proxy_cache_lock_timeout 0s;` <br/>
 **可用位置：** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+该指令为 `proxy_cache_lock` 指令设置一个超时时间，如果在该时间内缓存没有生成，则 CDN Pro 将开始处理该缓存所对应的等待请求。但相应的数据不会被生成缓存。 （`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）代码源自公共版本，无变更。出于优化延迟的考虑默认值 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少原始流量，则可以将其更改为更高的值。
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
