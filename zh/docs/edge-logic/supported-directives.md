@@ -606,6 +606,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **可用位置：** server, location
 
 If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
+该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods) ，无变更。
 
 ### proxy_cache_min_age 
 
@@ -617,25 +618,27 @@ If the client request method is listed in this directive, the response will be c
 
 Description:
 
-This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
+该指令允许您为响应文件配置最小缓存时间。如果源给的 Cache-Control 响应头中 max-age 小于该配置项所指定的参数值，则将 max-age 值将被覆盖改写为该指令值。例如，如果源的 Cache-Contrl 响应头中的max-age值为100s，而该指令配置的最小age值为200s，则内容的有效缓存时间为200s。
 
-nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
+nginx 将根据上游提供的响应头或按照以下顺序从对应的 nginx 指令计算缓存时间：
 
 X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
 
  When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
+当 nginx 根据 Cache-Control 头中的 max-age 值计算缓存时间时，它将该值与 proxy_cache_min_age 中配置的值进行比较，并按照两者的最大值进行内容缓存。
+当 nginx 不根据 Cache-Control 头中的 max-age 值计算缓存时间时（例如通过 proxy_ignore_headers 忽略了 Cache-Control 响应头 ）， proxy_cache_min_age 指令中的值将会被。
 
- Note: The time variable in this directive can have a number with one of the following suffixes or a combination of the following suffixes:
+注意：该指令中的时间变量可以是带有以下后缀之一的数字，或以下后缀组合而成的数字：
 
-*   s = seconds (default, example: 10s)
-*   m = minutes (example: 5m)
-*   h = hours (example: 1h)
-*   d = days (example: 1d)
-*   w = weeks (example: 1w)
-*   M = months (example: 2M)
-*   y = years (example: 1y)
+*   s = 秒 (默认值, 例如: 10s)
+*   m = 分 (例如: 5m)
+*   h = 小时 (例如: 1h)
+*   d = 天 (例如: 1d)
+*   w = 周 (例如: 1w)
+*   M = 月 (例如: 2M)
+*   y = 年 (例如: 1y)
 
-If there is no suffix in the time, the configured value is considered in seconds.
+如果配置的时间参数没有后缀，则该配置项的单位会被视为秒。
 
 ### [`proxy_cache_use_stale`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale)
 
@@ -645,7 +648,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 **默认设置：** `proxy_cache_use_stale error timeout;` <br/>
 **可用位置：** server, location
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN360 edge server would return stale cached content if there is any problem establishing connection to the origin.
+该指令用于确定 CDN Pro 在哪些情况下可以响应陈旧的缓存给客户端。 代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale) ，没有变化。根据默认设置，当 CDN Pro 与源建立连接时出现问题时，CDN Pro 边缘服务器将响应陈旧的缓存内容。
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -655,7 +658,7 @@ Determines in which cases a stale cached response can be used during communicati
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 means cache the response and treat it as expired. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+该配置项用于给不同的响应状态码设置缓存时间。 CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。参数值 0 表示缓存响应并将其视为已过期。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 
