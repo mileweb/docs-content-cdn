@@ -427,7 +427,6 @@ origin_header_modify Cache-Control "" policy=overwrite;
 **默认设置：** `origin_limit_rate 0;`<br>
 **可用位置：** server, location
 
-This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
 该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制了从源服务器读取正文的速度。
 
 
@@ -507,8 +506,7 @@ origin_pass my_origin/abc$uri_uenc;
 
 使用本指令需要注意以下事项：
 
-1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
-2. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的方案或 IP 地址传递给源服务器，请使用以下变量：
+1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的方案或 IP 地址传递给源服务器，请使用以下变量：
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
 *   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
@@ -519,7 +517,7 @@ origin_pass my_origin/abc$uri_uenc;
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
 2. 如果要使用该指令将 `Host` 标头设置为 origin，则需要确保 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“源站详情-》host请求头”字段配置为空。否则在系统校验环节将出现校验失败。
-3. 我们的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
+3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
 proxy_no_cache 1;      # 不要缓存
 proxy_cache_bypass 1;  # 不使用缓存文件响应客户
@@ -603,7 +601,6 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_methods GET HEAD;` <br/>
 **可用位置：** server, location
 
-If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
 该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods) ，无变更。
 
 ### proxy_cache_min_age 
