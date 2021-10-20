@@ -2,7 +2,7 @@
 
 # Checking Deployment and Undeployment Results
 
-When a property and its associated certificates are deployed, CDN360 sends the configurations to thousands of edge servers around the world, and then checks that the servers loaded the configurations properly. The undeployment procedure goes through a similar process. The time to complete a deployment and undeployment task can take from 2 to 5 minutes. If you close the deployment or undeployment progress dialog box after you start the task, you can return to the task list to check the status.
+When a property and its associated certificates are deployed, CDN Pro sends the configurations to thousands of edge servers around the world, and then checks that the servers loaded the configurations properly. The undeployment procedure goes through a similar process. The time to complete a deployment and undeployment task can take from 2 to 5 minutes. If you close the deployment or undeployment progress dialog box after you start the task, you can return to the task list to check the status.
 
 1. In the left pane, click **Tasks** > **Deployment**.
 

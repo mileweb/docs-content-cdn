@@ -1,6 +1,6 @@
 # Deploying and Undeploying Certificates
 
-After you create or update a certificate, you must deploy it to either the staging or production environment before it can be used by any properties. If a certificate is no longer used by any property in those environments, you should undeploy it. Undeploying a certificate is also a prerequisite if you want to delete a certificate from the CDN360 platform.
+After you create or update a certificate, you must deploy it to either the staging or production environment before it can be used by any properties. If a certificate is no longer used by any property in those environments, you should undeploy it. Undeploying a certificate is also a prerequisite if you want to delete a certificate from the CDN Pro platform.
 
 **Note**: To deploy a certificate to, or undeploy a certificate from, the staging or production environment, you must be the owner of the certificate.
 

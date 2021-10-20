@@ -11,7 +11,7 @@
    
 4. From the **Version Number** drop-down list, choose the property version you want to edit. If the **Edit** button is enabled, you can click it to start editing.
 
-**Note:** A lock icon next to the version number means the version has been deployed. Editing this version is not permitted to ensure that CDN360 can reliably roll back to any version that has been deployed. If you want to make any changes on top of this version, click the **Clone** button to create a new version to edit.
+**Note:** A lock icon next to the version number means the version has been deployed. Editing this version is not permitted to ensure that CDN Pro can reliably roll back to any version that has been deployed. If you want to make any changes on top of this version, click the **Clone** button to create a new version to edit.
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-versions.png" alt="Upload Certificate Version" width="700"></p>
 
