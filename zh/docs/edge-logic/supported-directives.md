@@ -662,11 +662,12 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** `proxy_cache_vary off;` <br/>
 **可用位置：** server, location
 
-If `proxy_cache_vary` is "on", the CDN360 cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents must be purged using "directory purge". An error will be returned if "file purge" is used for varied contents.
+如果该指令的参数值为“on”，则 CDN360 将遵循源站的 `Vary` 响应头来区分和缓存不同版本的响应正文。请注意，只有“目录推送”方式才能推掉开启了该配置项后的对应缓存，如果此时您使用“文件推送"方式，系统将返回报错提示。
 
-If `proxy_cache_vary` is "off", the CDN360 cache servers do not cache any response with the `Vary` header.
+如果该指令的参数值为“off”，则 CDN360 将忽视站的 `Vary` 响应头,不会据此来区分和缓存不同版本的响应正文。
 
-Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq.md#the-support-and-non-support-of-vary>).
+相关信息请查阅：[关于 Vary 响应头的处理方式](</docs/edge-logic/faq.md#the-support-and-non-support-of-vary>)。
+
 
 ### [`proxy_cookie_domain`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_domain)
 
@@ -677,7 +678,7 @@ Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq
 **默认设置：** `proxy_cookie_domain off;` <br/>
 **可用位置：** server, location
 
-Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+该指令用于转换response的set-cookie header中的domain选项，将其中原本设置的域名（参数1）转换成更新后的域名（参数2）。代码源自NGINX 开源版本，无变更。
 
 ### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)
 
@@ -688,7 +689,7 @@ Sets a text that should be changed in the domain attribute of the `Set-Cookie` h
 **默认设置：** `proxy_cookie_path off;` <br/>
 **可用位置：** server, location
 
-Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+该指令用于转换response的set-cookie header中的 path 选项，将其中原本设置的path（参数1）转换成更新后的path（参数2）。代码源自NGINX 开源版本，无变更。
 
 ### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)
 
@@ -698,7 +699,8 @@ Sets a text that should be changed in the path attribute of the `Set-Cookie` hea
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Sets response header fields that will not be passed to the client. No change to the public version. Use this directive multiple times to hide multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+该指令用于隐藏掉某些响应头，从而让这些信息对客户端“无感”。代码源自NGINX 开源版本，无变更。您可以使用该指令来隐藏掉多个响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中
+
 
 ### `proxy_ignore_cache_control`
 
@@ -708,7 +710,7 @@ Sets response header fields that will not be passed to the client. No change to 
 **默认设置：** none <br/>
 **可用位置：** server, location, if in location
 
-Disables processing of certain `cache-control` directives in the response from the origin. The following directives can be ignored:
+该指令用于设置 CDN Pro 忽略掉来自源的 `cache-control` 响应头中的某些参数。可以忽略以下指令：
 
 *   no-cache
 *   no-store
@@ -718,11 +720,11 @@ Disables processing of certain `cache-control` directives in the response from t
 *   stale-while-revalidate
 *   stale-if-error
 
-Examples: ignore the no-cache and no-store directives:
+示例：忽略掉来自源响应头中的 no-cache 和 no-store：
 ```nginx
 proxy_ignore_cache_control no-cache no-store;
 ```
-Note: This directive does not modify the "Cache-Control" header from the origin.
+注意：该指令并不会修改或者重写 `cache-control` 响应头。
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -732,7 +734,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
+该指令用于设置 CDN Pro 忽略掉来自源的某些响应头。最常用的情景是用于设置 CDN Pro 忽略缓存相关标记，例如来自源的 “Cache-Control” 或 “Expires” 响应头。 代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 没有变化。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -743,6 +745,8 @@ Disables processing of certain response header fields in the response from the o
 **可用位置：** server, location
 
 Specifies the HTTP method to use in requests forwarded to the proxied server instead of the method from the client request. Parameter value can contain variables.
+指定在转发到代理服务器的请求中使用的 HTTP 方法，而不是来自客户端请求的方法。参数值可以包含变量。
+
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
