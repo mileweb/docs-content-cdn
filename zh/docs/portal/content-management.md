@@ -1,6 +1,6 @@
 # Managing Content
 
-CDN360 supports a content management purge function that allows you to override the cache time. This feature is handy when the content on your web server has changed and you want CDN360 to update its servers with your changes. For example, if your website has a cache time of one week, but you want your website visitors to see a new update to one of your pages, you can use the purge option to flush the cache and enable your visitors to view the new content.
+CDN Pro supports a content management purge function that allows you to override the cache time. This feature is handy when the content on your web server has changed and you want CDN Pro to update its servers with your changes. For example, if your website has a cache time of one week, but you want your website visitors to see a new update to one of your pages, you can use the purge option to flush the cache and enable your visitors to view the new content.
 
 Content management purge activities are performed from the Content Management page. To display this page, click **Content Management** in the left pane.
 
@@ -17,7 +17,7 @@ The following figure shows the key elements on the page, and the table following
 
 ## Creating a Purge Request
 
-If the content on your origin web server has changed, request a purge to have CDN360 distribute those changes.
+If the content on your origin web server has changed, request a purge to have CDN Pro distribute those changes.
 
 1. In the left pane, click **Content Management**.
 2. At the top right of the page, click the **Create Purge** button. 
@@ -28,11 +28,11 @@ If the content on your origin web server has changed, request a purge to have CD
 |**Fields**|**Description**|
 |----------|---------------|
 | Target Environment | Select whether the purge will occur in the staging or production environment. Default is staging.|
-| Purge Action | Select whether you want the content deleted or invalidated.  <br><ul><li><strong>Delete</strong> = removes the object from the cache of edge servers. The next time the edge server receives a request for the removed content, it retrieves the current version from your origin server. (*default*)</li><li><strong>Invalidate</strong> = this is the default setting and marks the cached content as invalid. However, the content is not removed from cache and objects are not retrieved from your origin unless they are newer than the cached versions. With this setting, CDN360 edge servers can continue serving stale content to your end users if the origin cannot be reached.</li></ul> |
+| Purge Action | Select whether you want the content deleted or invalidated.  <br><ul><li><strong>Delete</strong> = removes the object from the cache of edge servers. The next time the edge server receives a request for the removed content, it retrieves the current version from your origin server. (*default*)</li><li><strong>Invalidate</strong> = this is the default setting and marks the cached content as invalid. However, the content is not removed from cache and objects are not retrieved from your origin unless they are newer than the cached versions. With this setting, CDN Pro edge servers can continue serving stale content to your end users if the origin cannot be reached.</li></ul> |
 | Purge Type | Select whether you want to purge a file or a directory. Default is file.|
 | Add a file to be purged | If **Purge Type** is set to **File**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge. If you decide not to purge one or more files that you added, click the **x** icon at the right side of the file name.|
 | Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge one or more request headers that you added, click the **x** icon at the right side of the header name.|
-| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to purge one or more directories that you added, click the **x** icon at the right side of the directory name. </br><br><strong>Note:</strong> CDN360 also supports purging based on URL prefixes. For more information, see Prefix Purging, below.</br>|
+| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to purge one or more directories that you added, click the **x** icon at the right side of the directory name. </br><br><strong>Note:</strong> CDN Pro also supports purging based on URL prefixes. For more information, see Prefix Purging, below.</br>|
 
 4. Click **Start Purge**.
 
@@ -40,7 +40,7 @@ If the content on your origin web server has changed, request a purge to have CD
 
 ## Prefix Purging
 
-CDN360 supports prefix purging. Using this feature, you can purge directories by entering values in the <strong>Add a directory to be purged</strong> field. The following table shows examples of using prefix purging.
+CDN Pro supports prefix purging. Using this feature, you can purge directories by entering values in the <strong>Add a directory to be purged</strong> field. The following table shows examples of using prefix purging.
 
 **Note:** Files can have multiple variations if custom cache keys are used. In addition, a URL such as <code>/pictures/</code> or <code>/picture.jpg</code> can have many variations stored in the cache due to the Vary header or cache key customization. As a result, performing a folder purge without an asterisk will clear all variations except subdirectories or files. For this reason, folder purges of <code>/pictures/</code>, <code>/pictures/*</code>, and <code>/pictures/**</code> result in different behaviors.
 

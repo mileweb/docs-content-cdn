@@ -1,6 +1,6 @@
 ## 内置变量
 
-下表列出了 CDN360 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或实时日志（Real-Time Log）中使用它们，但请注意并非所有变量都支持配置在这两个地方。 另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
+下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或实时日志（Real-Time Log）中使用它们，但请注意并非所有变量都支持配置在这两个地方。 另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
 | **变量名称** | **描述** | **边缘逻辑** | **[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
@@ -38,6 +38,7 @@
 | <span id="property_ver"></span><span class="var">$property_ver</span> |<span class="badge small" title="numerical value">#</span> 加速项版本号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 请求的唯一标识 ID | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | [缓存状态](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="random_N"></span><span class="var">$random_N</span> |<span class="badge small" title="numerical value">#</span> 一个[0, N-1]之内的随机整数，N范围是[2,1e9]| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样参数，值为 N 代表每N个请求会生产1条实时日志| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样率， $realtime_log_ds_factor 的倒数，值为介于0~1之间的小数。 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="remote_user"></span><span class="var">$remote_user</span> | 当使用[基础鉴权](https://datatracker.ietf.org/doc/html/rfc7617)时，从Authorization请求头中提取的用户名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

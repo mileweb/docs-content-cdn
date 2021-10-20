@@ -5,7 +5,7 @@ The Identity & Access Management page defines the users allowed to access the p
 
 ## What are Users?
 
-Anyone who can log in to and be authenticated by the CDN360 portal is a user.
+Anyone who can log in to and be authenticated by the CDN Pro portal is a user.
 
 
 ## What are Permissions?

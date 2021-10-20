@@ -9,6 +9,6 @@ If you forgot your password:
 
 3. Click the **Submit** button.
 
-CDN360 will send you an email message with a verification code to enter to reset your password.
+CDN Pro will send you an email message with a verification code to enter to reset your password.
 
 **Note**: Occasionally, an email application may misidentify the message as spam. If you do not see the message in your Inbox, check your junk or spam folder.

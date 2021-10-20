@@ -1,5 +1,37 @@
 # Release Notes
 
+## October 1, 2021
+### API updates
+* Allowed resellers to use a different domain for [edge hostnames](</apidocs#operation/createEdgeHostname>) instead of our defaults. Resellers need to contact us for more information.
+* Fixed error message when [creating a deployment task](</apidocs#operation/createDeployment>) with an invalid property ID.
+* Prevented suspended customer from making calls to an API.
+* Ensured child customer cannot have higher limits than a reseller.
+* Fixed error handling when a reseller tries to [update a customer](</apidocs#operation/patch-ngadmin-customers-id>) with invalid configs field.
+* Ensured that default usage limits for a child customer are set properly.
+* Ensured edge hostnames begin with at least 10 characters before the suffix.
+* Ensured proper cache key is set even if the [auth_request directive](</docs/edge-logic/supported-directives#auth_request>) overrides $uri.
+* Enhanced [purge](</apidocs#operation/createPurge>) to support prefix purges (for example, http://test.domain2.com/mydir/a* to purge files starting with “a” and  "http://test.domain2.com/mydir/a** “ to purge all files and subdirectories starting with 'a')
+
+### Portal updates
+* Fixed some Russian translation issues.
+* Updated the Create Edge Hostname page to support multiple suffixes.
+
+## September 21, 2021
+
+### API updates
+* Disallowed update of the edgeHostname field in edge hostnames because it can interrupt service.
+* Disallowed update of the hasBeian field in edge hostnames because of planned changes to edge hostnames to use different suffixes for those with ICP Beian versus those without.
+
+### Portal updates
+* Fixed display of plan page for self-signup trial users.
+* Updated warning text about pending standby task if the user tries to log out before deploying.
+* Improved response to erroneous input in the report page.
+* Improved display of lengthy tooltips in the property configuration page.
+* Fixed issues supporting Russian translation.
+* Added clarification for trial users that deployment to production is enabled only after they’ve performed some tests against staging.
+* Supported soft wrap in the Edge Logic editor.
+* Allowed Edge Logic hint text to be translated. Directive names are keywords that must remain in English.
+
 ## September 8, 2021
 ### API updates
 * Returned error code InvalidApiAccountId if an incorrect API account ID is specified when calling [API permissions](</apidocs#tag/API-Access-Control>) endpoints.
@@ -38,11 +70,11 @@
 
 ### Portal updates
 * Added pie charts to the origin status code details and status code details reports, allowing you to see the percentages of returned status codes.
-* Improved the CDN360 self-signup page to mention our special offers.
+* Improved the CDN Pro self-signup page to mention our special offers.
 * Ensured the Start Purge button is enabled after the user does a directory purge. It allows the user to create additional purge requests without leaving the page.
 * Allowed administrators to force a deployment, overriding warnings from our check of certificates and hostname activity. We warn if a certificate's Subject Alternative Name field does not contain the hostnames specified in the property, if the certificate already expired and would cause visitors to get browser warnings, and if the deployment affects hostnames that were recently accessed by visitors.
 * Translated additional text that appears in the portal.
-* Supported accelerating the CDN360 portal and API through our CDN to improve performance.
+* Supported accelerating the CDN Pro portal and API through our CDN to improve performance.
 * Fixed display issues in the certificate details page.
 
 ## August 11, 2021
@@ -183,7 +215,7 @@
 ## April 21, 2021
 
 ### API updates
-* Added the [requests summary report](</apidocs#operation/post-cdn-report-reqSummary>) to summarize requests to the CDN360 edge servers.
+* Added the [requests summary report](</apidocs#operation/post-cdn-report-reqSummary>) to summarize requests to the CDN Pro edge servers.
 * Ensured the ‘latestVersion’ field is returned when [getting a property’s details](</apidocs#operation/queryProperty>).
 * Fixed responses for the [customer list API](</apidocs#operation/get-ngadmin-customers>) when filtering using the regionalOffice parameter.
 * Improved management of purge quotas.
@@ -234,7 +266,7 @@
 
 ## March 12, 2021
 ### API updates
-* Prevented resellers from deleting a suspended customer who still has access to a product like CDN360.
+* Prevented resellers from deleting a suspended customer who still has access to a product like CDN Pro.
 * Fixed an issue affecting generation of a Sectigo DCV file.
 * Allowed resellers to use the Report-Range header in [property list API](</apidocs#operation/getPropertyList>).
 
@@ -267,13 +299,13 @@
 * Added tracking of recent validation and deployment times of a property.
 
 ### Portal updates
-* Updated user invitation emails to come from sender ‘CDN360 Admin’.
+* Updated user invitation emails to come from sender ‘CDN Pro Admin’.
 * Put search and filter parameters into the URLs of the list pages (i.e., property, edge hostname, certificate, purge) .
 * Made the certificate creation user interface more consistent with property creation.
 * Prevented certificates with the same name from being created.
 * Fixed display of version when creating a new version of a certificate.
 * Fixed display of certificate and property lists.
-* Added a link to create a property to help new CDN360 users.
+* Added a link to create a property to help new CDN Pro users.
 * Improved the appearance of the validation and deployment pages while they are loading.
 
 ## January 25, 2021
@@ -340,7 +372,7 @@
 * Improved [querying for API calls](</apidocs#operation/get-ngadmin-apicalls>) when using a path parameter with an asterisk character.
 * Returned customerId field in [API calls](</apidocs#operation/get-ngadmin-apicalls-id>) and [portal users](</apidocs#operation/getContacts>) APIs.
 * Returned an error if the user tries to deploy a certificate with an invalid certificate version.
-* Added support for advancedFeauresList and directiveParameterLimits in CDN360 [service quota object](</apidocs#operation/post-cdn-serviceQuotas>). These manage access to advanced CDN360 features and specification of limits on some Edge Logic directives.
+* Added support for advancedFeauresList and directiveParameterLimits in CDN Pro [service quota object](</apidocs#operation/post-cdn-serviceQuotas>). These manage access to advanced CDN Pro features and specification of limits on some Edge Logic directives.
 
 ### Portal updates
 * Improved error handling in the property creation and edit pages when an invalid edge hostname is specified.
@@ -608,7 +640,7 @@
 * Fixed use of redirectHttpToHttps with multiple hostnames.
 
 ### Portal updates
-* Fixed issues switching between our [Edge Computing Platform (ECP)](<https://www.cdnetworks.com/edge-computing/>) and CDN360 products.
+* Fixed issues switching between our [Edge Computing Platform (ECP)](<https://www.cdnetworks.com/edge-computing/>) and CDN Pro products.
 * Allowed selection of ISPs when defining client region rules for edge hostnames.
 * Added support for ‘group by’ to traffic summary report.
 

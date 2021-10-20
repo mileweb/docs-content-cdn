@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "CDN360 API Specification",
+    "title": "CDN Pro API Specification",
     "version": "1.0",
-    "description": "CDN360 APIs allow you to manage the CDN360 service.",
+    "description": "CDN Pro APIs allow you to manage the CDN Pro service.",
     "contact": {
       "url": "https://www.cdnetworks.com"
     }
@@ -380,7 +380,7 @@
                           "items": {
                             "title": "accessControlRule",
                             "type": "object",
-                            "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                            "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -460,7 +460,7 @@
                         },
                         "disableCertAutomation": {
                           "type": "boolean",
-                          "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                          "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                           "default": false
                         },
                         "cacheKeyUri": {
@@ -1035,7 +1035,7 @@
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
-                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                       "properties": {
                         "id": {
                           "type": "string",
@@ -1115,7 +1115,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -1729,7 +1729,7 @@
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
-                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -1775,12 +1775,12 @@
                             "properties": {
                               "region": {
                                 "type": "string",
-                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                               },
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1799,14 +1799,15 @@
                                   },
                                   "by": {
                                     "type": "array",
-                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                                     "items": {
                                       "type": "string",
                                       "enum": [
                                         "standard",
                                         "premium",
                                         "premium+",
-                                        "ultra"
+                                        "ultra",
+                                        "nearChina"
                                       ]
                                     }
                                   },
@@ -1910,7 +1911,7 @@
             }
           }
         },
-        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -2005,13 +2006,13 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid redirect destination": {
                     "value": {
                       "code": "InvalidRedirectDst",
                       "message": "The field 'to' must contain either one hostname or multiple IPs."
                     }
                   },
-                  "example-2": {
+                  "Invalid weight code": {
                     "value": {
                       "code": "InvalidWeightCode",
                       "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
@@ -2046,6 +2047,32 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "The edgeHostname field cannot be changed because it may cause a service interruption.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "EdgeHostnameChangeForbidden": {
+                    "value": {
+                      "code": "EdgeHostnameChangeForbidden",
+                      "message": "The edge hostname cannot be changed."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "updateEdgeHostname",
@@ -2061,7 +2088,7 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "The edge hostname"
+                    "description": "The edge hostname. It cannot be modified."
                   },
                   "description": {
                     "type": "string",
@@ -2071,21 +2098,17 @@
                     "type": "boolean",
                     "description": "Whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
                   },
-                  "hasBeian": {
-                    "type": "boolean",
-                    "description": "Indicate whether you have a Beian license for service in China.  If you do, content can be served by servers located within mainland China."
-                  },
                   "gdprCompliant": {
                     "type": "boolean",
                     "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2131,12 +2154,12 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -2155,14 +2178,15 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
                                   "premium+",
-                                  "ultra"
+                                  "ultra",
+                                  "nearChina"
                                 ]
                               }
                             },
@@ -2302,6 +2326,32 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "The edgeHostname field cannot be changed because it may cause a service interruption.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Edge Hostname Change Forbidden": {
+                    "value": {
+                      "code": "EdgeHostnameChangeForbidden",
+                      "message": "The edge hostname cannot be changed."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "This API allows you to update an edge hostname by sending only the fields that are changing.",
@@ -2322,20 +2372,17 @@
                     "type": "boolean",
                     "description": "Whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
                   },
-                  "hasBeian": {
-                    "type": "boolean",
-                    "description": "Indicate whether you have a Beian license for service in China.  If you do, content can be served by servers located within mainland China."
-                  },
                   "grprCompliant": {
                     "type": "boolean",
                     "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
                   },
                   "clientZones": {
                     "type": "array",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2381,12 +2428,12 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -2405,14 +2452,15 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
                                   "premium+",
-                                  "ultra"
+                                  "ultra",
+                                  "nearChina"
                                 ]
                               }
                             },
@@ -3086,7 +3134,7 @@
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
-                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                      "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                       "properties": {
                         "id": {
                           "type": "string",
@@ -3166,7 +3214,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                    "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -3381,7 +3429,7 @@
             }
           }
         },
-        "description": "Creates a property to define the configuration of one or more hostnames (domains) to deploy to the CDN360 servers.",
+        "description": "Creates a property to define the configuration of one or more hostnames (domains) to deploy to the CDN servers.",
         "operationId": "createProperty",
         "requestBody": {
           "content": {
@@ -3683,7 +3731,7 @@
                         "items": {
                           "title": "accessControlRule",
                           "type": "object",
-                          "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN360's Edge Logic.",
+                          "description": "This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.",
                           "properties": {
                             "id": {
                               "type": "string",
@@ -3763,7 +3811,7 @@
                       },
                       "disableCertAutomation": {
                         "type": "boolean",
-                        "description": "By default, CDN360 takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
+                        "description": "By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a>.",
                         "default": false
                       },
                       "cacheKeyUri": {
@@ -3875,7 +3923,7 @@
               }
             }
           },
-          "description": "The request body includes the name of the property and all configurations that must be deployed to the CDN360 cache servers."
+          "description": "The request body includes the name of the property and all configurations that must be deployed to the CDN cache servers."
         },
         "tags": [
           "Property Management"
@@ -4218,7 +4266,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "The edge hostname was created. The Location header has a reference to the new edge hostname.",
             "headers": {
               "Location": {
                 "schema": {
@@ -4263,7 +4311,7 @@
                       "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
                     }
                   },
-                  "Invalid Edge Hostname": {
+                  "Invalid edge hostname": {
                     "value": {
                       "code": "InvalidEdgeHostname",
                       "message": "Invalid edge hostname 'abcdef'. The edge hostname must be a valid domain name string."
@@ -4332,7 +4380,7 @@
             }
           }
         },
-        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to an edge hostname created using this API in order for CDN360 to handle your content.",
+        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to an edge hostname created using this API in order for the CDN to handle your content.",
         "operationId": "createEdgeHostname",
         "requestBody": {
           "content": {
@@ -4342,8 +4390,8 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "An edge hostname you wish to use. It should end with \".qtlcdn.com\".",
-                    "example": "test.123.qtlcdn.com"
+                    "description": "A hostname to use in your DNS server settings. When your property has been deployed to production, you should modify your DNS server so that the CNAME records of the property's hostnames refer to this value. The edge hostname should consist of at least ten characters followed by a permitted suffix such as \".qtlcdn.com\" (for example, abcdefg123.qtlcdn.com). Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> may include an <i>edgeHostnameZones</i> field. If it does, the suffix used for your edge hostname should be one of the listed values. ",
+                    "example": "testabcde.123.qtlcdn.com"
                   },
                   "description": {
                     "type": "string",
@@ -4366,11 +4414,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of all of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4416,12 +4464,12 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, then a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"akamai.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -4440,14 +4488,15 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>, and <i>ultra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
                                   "premium+",
-                                  "ultra"
+                                  "ultra",
+                                  "nearChina"
                                 ]
                               }
                             },
@@ -4491,7 +4540,7 @@
                 },
                 "example-2": {
                   "value": {
-                    "edgeHostname": "test.123.qtlcdn.com",
+                    "edgeHostname": "testabcd.123.qtlcdn.com",
                     "clientZones": [
                       {
                         "region": "eu",
@@ -4921,7 +4970,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN360. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -5708,7 +5757,7 @@
           }
         },
         "operationId": "updateCertificate",
-        "description": "Update a certificate using this API. The fields are the same as those in the <a href=\"#operation/createCertificate\">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href=\"#operation/createDeployment\">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN360 may still serve content using an older version of the certificate.",
+        "description": "Update a certificate using this API. The fields are the same as those in the <a href=\"#operation/createCertificate\">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href=\"#operation/createDeployment\">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN Pro may still serve content using an older version of the certificate.",
         "tags": [
           "Certificate Management"
         ],
@@ -6754,7 +6803,7 @@
                     },
                     "cacheVersion": {
                       "type": "string",
-                      "description": "CDN360 cache version used when validating the property."
+                      "description": "CDN cache version used when validating the property."
                     },
                     "impersonatingParentCustomerId": {
                       "type": "integer",
@@ -8186,7 +8235,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN360."
+            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN Pro."
           },
           {
             "schema": {
@@ -8513,7 +8562,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -8570,7 +8619,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -8946,7 +8995,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -9197,7 +9246,7 @@
             }
           }
         },
-        "description": "Gets the number of requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Gets the number of requests to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9555,7 +9604,7 @@
           }
         },
         "operationId": "getEdgeBandwidth",
-        "description": "Get the bandwidth in Mbps to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get the bandwidth in Mbps to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9594,7 +9643,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -10131,7 +10180,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to CDN360 edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets a summary of HTTP status codes returned in requests to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11468,7 +11517,7 @@
           }
         },
         "operationId": "getIntermediateTraffic",
-        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN360 servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN Pro servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "parameters": [
           {
             "schema": {
@@ -11580,7 +11629,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -11877,7 +11926,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -12235,7 +12284,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The annotation was created and will appear in the CDN360 portal reports under the conditions you specified. The Location response header will include a URL to the object.",
+            "description": "The annotation was created and will appear in the CDN Pro portal reports under the conditions you specified. The Location response header will include a URL to the object.",
             "headers": {
               "Location": {
                 "schema": {
@@ -12291,7 +12340,7 @@
             }
           }
         },
-        "description": "This API allows you to create an annotation for a report shown in the CDN360 portal. The request body lets you specify the conditions under which the annotation appears along with the text to show.",
+        "description": "This API allows you to create an annotation for a report shown in the CDN Pro portal. The request body lets you specify the conditions under which the annotation appears along with the text to show.",
         "operationId": "createAnnotation",
         "requestBody": {
           "content": {
@@ -12310,16 +12359,16 @@
                       "type": "string"
                     }
                   },
-                  "serverGroups": {
+                  "serverRegions": {
                     "type": "array",
-                    "description": "One or more server groups (standard, premium, premium+, or ultra).",
+                    "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
                     "items": {
                       "type": "string"
                     }
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
+                    "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
                     "items": {
                       "type": "string"
                     }
@@ -12430,7 +12479,7 @@
             }
           }
         },
-        "description": "Create a purge request to force a refresh of the content stored in the CDN360 cache servers.  You may wish to do this if you just updated content on your origin server and want visitors to see the changes right away rather than wait for the updates to propagate according to the schedule defined in your property configuration.",
+        "description": "Create a purge request to force a refresh of the content stored in the CDN Pro cache servers.  You may wish to do this if you just updated content on your origin server and want visitors to see the changes right away rather than wait for the updates to propagate according to the schedule defined in your property configuration.",
         "operationId": "createPurge",
         "requestBody": {
           "content": {
@@ -12468,7 +12517,7 @@
                   },
                   "dirUrls": {
                     "type": "array",
-                    "description": "URLs of directories to purge. End a directory URL with '\\*\\*' to purge all files and subdirectories. End a directory URL with '\\*' to purge all files only. End a directory URL with '\\*.ext' to purge all files ending with a file extension, 'ext'. For example, <code>https://domain.com/*.jpg</code> purges all JPEG files.  Otherwise, the asterisk character, '*', should not appear in a directory URL. If a directory or filename in a URL includes a percent character, '%', be sure to encode it.",
+                    "description": "URLs of directories to purge. Use the '\\*' character to purge multiple files or directories. \n<table><tr><th>Example</th><th>Description</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>Purge a single directory.</td></tr><t.r><td>http://test.domain2.com/mydir/**</td><td>Purge all files and subdirectories.</td></tr>\n<tr><td>http://test.domain2.com/mydir2/*</td><td>Purge all files within a directory.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>Purge all files ending with the .jpg file extension.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>Purge all files that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>Purge all files and subdirectories that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>Purge all variations of \"a.jpg\". Variations may exist if custom cache keys are used.</td></tr>\n</table>\nIf a directory or filename in a URL includes a percent character, '%', be sure to encode it.",
                     "items": {
                       "type": "string"
                     }
@@ -12480,7 +12529,7 @@
                       "delete",
                       "invalidate"
                     ],
-                    "description": "This controls whether cached files and directories should be removed altogether from the CDN360 servers (delete) or flagged as invalid (invalidate)."
+                    "description": "This controls whether cached files and directories should be removed altogether from the CDN Pro servers (delete) or flagged as invalid (invalidate)."
                   },
                   "target": {
                     "type": "string",
@@ -12531,7 +12580,7 @@
               }
             }
           },
-          "description": "The request body is used to specify which files and directories are purged, the type of purge to do, and what environment is affected. To ensure that all variations of a file are purged, put the file path into the <i>dirUrls</i> list. If a file has multiple copies cached to to the origin's Vary header, you must also purge it by putting the file path into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
+          "description": "The request body is used to specify which files and directories are purged, the type of purge to perform, and what environment is affected. To ensure that all variations of a file are purged, place the file path into the <i>dirUrls</i> list. If a file has multiple copies cached due to the origin's Vary header, you must also purge it by placing the file path into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
         }
       },
       "get": {
@@ -12847,7 +12896,7 @@
                             "comments": "A major release"
                           }
                         },
-                        "description": "This describes an annotation to reports shown on the CDN360 portal.",
+                        "description": "This describes an annotation to reports shown on the CDN Pro portal.",
                         "properties": {
                           "id": {
                             "type": "string",
@@ -12867,7 +12916,7 @@
                           },
                           "clientRegions": {
                             "type": "array",
-                            "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                            "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
                             "items": {
                               "type": "string"
                             }
@@ -12883,7 +12932,14 @@
                           },
                           "comments": {
                             "type": "string",
-                            "description": "Text shown in the report on the CDN360 portal."
+                            "description": "Text shown in the report on the CDN Pro portal."
+                          },
+                          "serverRegions": {
+                            "type": "array",
+                            "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                            "items": {
+                              "type": "string"
+                            }
                           }
                         },
                         "required": [
@@ -13039,7 +13095,7 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ],
-        "description": "Obtain a list of annotations you have created. Annotations appear in the CDN360 portal's reports based on the conditions defined for each annotation. Filter results using the query parameters and request body.",
+        "description": "Obtain a list of annotations you have created. Annotations appear in the CDN Pro portal's reports based on the conditions defined for each annotation. Filter results using the query parameters and request body.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13078,7 +13134,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -13208,7 +13264,7 @@
                       "comments": "A major release"
                     }
                   },
-                  "description": "This describes an annotation to reports shown on the CDN360 portal.",
+                  "description": "This describes an annotation to reports shown on the CDN Pro portal.",
                   "properties": {
                     "id": {
                       "type": "string",
@@ -13228,7 +13284,7 @@
                     },
                     "clientRegions": {
                       "type": "array",
-                      "description": "One or more client regions. Refer to the information about client regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                      "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
                       "items": {
                         "type": "string"
                       }
@@ -13244,7 +13300,14 @@
                     },
                     "comments": {
                       "type": "string",
-                      "description": "Text shown in the report on the CDN360 portal."
+                      "description": "Text shown in the report on the CDN Pro portal."
+                    },
+                    "serverRegions": {
+                      "type": "array",
+                      "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an edge hostname API</a>.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -13330,7 +13393,7 @@
           }
         },
         "operationId": "getAnnotation",
-        "description": "Retrieve details about a report annotation including the conditions in which it will appear in a CDN360 report.",
+        "description": "Retrieve details about a report annotation including the conditions in which it will appear in a CDN Pro report.",
         "parameters": [
           {
             "schema": {
@@ -13416,7 +13479,7 @@
             }
           }
         },
-        "description": "Update a report annotation. It will appear within CDN360 portal reports when its conditions are met.",
+        "description": "Update a report annotation. It will appear within CDN Pro portal reports when its conditions are met.",
         "operationId": "updateAnnotation",
         "requestBody": {
           "content": {
@@ -13448,6 +13511,20 @@
                   "comments": {
                     "type": "string",
                     "description": "Text describing the event. This will appear in the report."
+                  },
+                  "clientRegions": {
+                    "type": "array",
+                    "description": "One or more client regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "serverRegions": {
+                    "type": "array",
+                    "description": "One or more server regions. Refer to the information about regions in the <a href=\"#operation/createEdgeHostname\">Create an Edge Hostname API</a>.",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
@@ -13573,7 +13650,7 @@
                         "delete",
                         "invalidate"
                       ],
-                      "description": "This controls whether cached files and directories should be removed altogether from the CDN360 servers (delete) or flagged as invalid (invalidate)."
+                      "description": "This controls whether cached files and directories should be removed altogether from the CDN Pro servers (delete) or flagged as invalid (invalidate)."
                     },
                     "finishTime": {
                       "type": "string",
@@ -14165,16 +14242,17 @@
                           "type": "string"
                         }
                       },
-                      "servergroups": {
+                      "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
                             "premium+",
-                            "ultra"
+                            "ultra",
+                            "nearChina"
                           ]
                         }
                       },
@@ -14187,7 +14265,7 @@
                       }
                     }
                   },
-                  "groupby": {
+                  "groupBy": {
                     "type": "array",
                     "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
                     "items": {
@@ -14336,7 +14414,7 @@
             }
           }
         },
-        "description": "Create a CDN360 portal user account. The loginName field must be unique. If you delete a user, you cannot reuse the old loginName.",
+        "description": "Create a CDN Pro portal user account. The loginName field must be unique. If you delete a user, you cannot reuse the old loginName.",
         "operationId": "createContact",
         "requestBody": {
           "content": {
@@ -14447,11 +14525,11 @@
                       "isMaster": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Indicates whether or not this portal user has full access to all subscribed products."
+                        "description": "Indicates whether this portal user has full access to all subscribed products."
                       },
                       "products": {
                         "type": "array",
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -14464,7 +14542,7 @@
                       "canImpersonate": {
                         "type": "string",
                         "default": "all",
-                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers or not. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
                         "enum": [
                           "all",
                           "none"
@@ -14591,7 +14669,7 @@
                           },
                           "isMaster": {
                             "type": "boolean",
-                            "description": "Indicates whether or not this portal user has full access to all subscribed products.",
+                            "description": "Indicates whether this portal user has full access to all subscribed products.",
                             "default": false
                           },
                           "status": {
@@ -14729,7 +14807,7 @@
           }
         },
         "operationId": "getContacts",
-        "description": "Get a list of CDN360 portal users. Use the query parameters to filter the results. If you are a reseller you may use the <i>Report-Range</i> request header to get a list of user accounts from child customers as well, or use the On-Behalf-Of header to get results from a single child customer.",
+        "description": "Get a list of CDN Pro portal users. Use the query parameters to filter the results. If you are a reseller you may use the <i>Report-Range</i> request header to get a list of user accounts from child customers as well, or use the On-Behalf-Of header to get results from a single child customer.",
         "parameters": [
           {
             "schema": {
@@ -14865,7 +14943,7 @@
                     },
                     "products": {
                       "type": "array",
-                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                       "items": {
                         "type": "string",
                         "enum": [
@@ -14997,7 +15075,7 @@
                     },
                     "products": {
                       "type": "array",
-                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                      "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                       "items": {
                         "type": "string",
                         "enum": [
@@ -15131,7 +15209,7 @@
                   },
                   "products": {
                     "type": "array",
-                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                     "items": {
                       "type": "string",
                       "enum": [
@@ -15449,7 +15527,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN360 APIs.  You can give <i>read-only</i> access which permits calling API endpoints using the HTTP GET method only OR <i>operator</i> access which also allows creating, updating, and deleting objects like properties. You can further customize which endpoints the API account can access by <a href=\"#tag/API-Access-Control\">creating custom API permissions</a> for it.",
+        "description": "Create an API account that can be used to call CDN Pro APIs.  You can give <i>read-only</i> access which permits calling API endpoints using the HTTP GET method only OR <i>operator</i> access which also allows creating, updating, and deleting objects like properties. You can further customize which endpoints the API account can access by <a href=\"#tag/API-Access-Control\">creating custom API permissions</a> for it.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -15472,7 +15550,7 @@
                   },
                   "products": {
                     "type": "array",
-                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
+                    "description": "Products that the API account has access to.  Supported products are \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission.",
                     "items": {
                       "type": "string",
                       "enum": [
@@ -15875,11 +15953,11 @@
                         "isMaster": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Indicates whether or not this portal user has full access to all subscribed products."
+                          "description": "Indicates whether this portal user has full access to all subscribed products."
                         },
                         "products": {
                           "type": "array",
-                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
+                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -15892,7 +15970,7 @@
                         "canImpersonate": {
                           "type": "string",
                           "default": "all",
-                          "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers or not. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                          "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
                           "enum": [
                             "all",
                             "none"
@@ -16033,7 +16111,7 @@
           }
         },
         "operationId": "get-ngadmin-contacts-id",
-        "description": "Return information about a CDN360 portal user.",
+        "description": "Return information about a CDN Pro portal user.",
         "parameters": [
           {
             "schema": {
@@ -16082,7 +16160,7 @@
           }
         },
         "operationId": "delete-ngadmin-contacts-id",
-        "description": "Delete a CDN360 portal user account using this API.",
+        "description": "Delete a CDN Pro portal user account using this API.",
         "parameters": [
           {
             "schema": {
@@ -16137,7 +16215,7 @@
           }
         },
         "operationId": "patch-ngadmin-contacts-id",
-        "description": "Update a CDN360 portal user account. Only fields in the request body will be updated.",
+        "description": "Update a CDN Pro portal user account. Only fields in the request body will be updated.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -16242,11 +16320,11 @@
                       "isMaster": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Indicates whether or not this portal user has full access to all subscribed products."
+                        "description": "Indicates whether this portal user has full access to all subscribed products."
                       },
                       "products": {
                         "type": "array",
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN360, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, \"ECP\" for Edge Computing Platform, and \"HDT\" for High-Speed Data Transmission.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -16259,7 +16337,7 @@
                       "canImpersonate": {
                         "type": "string",
                         "default": "all",
-                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers or not. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
                         "enum": [
                           "all",
                           "none"
@@ -17345,7 +17423,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -17392,7 +17470,7 @@
                     "portalSettings": {
                       "title": "customerPortalSettings",
                       "type": "object",
-                      "description": "These settings apply to your users accessing the CDN360 portal.",
+                      "description": "These settings apply to your users accessing the CDN Pro portal.",
                       "x-tags": [
                         "Customer Management"
                       ],
@@ -17727,7 +17805,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -17774,7 +17852,7 @@
                     "portalSettings": {
                       "title": "customerPortalSettings",
                       "type": "object",
-                      "description": "These settings apply to your users accessing the CDN360 portal.",
+                      "description": "These settings apply to your users accessing the CDN Pro portal.",
                       "x-tags": [
                         "Customer Management"
                       ],
@@ -18096,7 +18174,7 @@
                   "portalSettings": {
                     "title": "customerPortalSettings",
                     "type": "object",
-                    "description": "These settings apply to your users accessing the CDN360 portal.",
+                    "description": "These settings apply to your users accessing the CDN Pro portal.",
                     "x-tags": [
                       "Customer Management"
                     ],
@@ -18177,7 +18255,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                        "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -18472,7 +18550,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -18519,7 +18597,7 @@
                     "portalSettings": {
                       "title": "customerPortalSettings",
                       "type": "object",
-                      "description": "These settings apply to your users accessing the CDN360 portal.",
+                      "description": "These settings apply to your users accessing the CDN Pro portal.",
                       "x-tags": [
                         "Customer Management"
                       ],
@@ -18757,7 +18835,7 @@
                   "portalSettings": {
                     "title": "customerPortalSettings",
                     "type": "object",
-                    "description": "These settings apply to your users accessing the CDN360 portal.",
+                    "description": "These settings apply to your users accessing the CDN Pro portal.",
                     "x-tags": [
                       "Customer Management"
                     ],
@@ -18838,7 +18916,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "Products enabled for the customer. \"CDN\" representing CDN360, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                        "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, \"ECP\" representing Edge Computing Platform, and \"HDT\" representing High-Speed Data Transmission are supported. ",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -19095,6 +19173,14 @@
                                 "ECP"
                               ]
                             }
+                          },
+                          "emailAddress": {
+                            "type": "string",
+                            "description": "Email address for the customer."
+                          },
+                          "responsiblePerson": {
+                            "type": "string",
+                            "description": "Name of a person responsible for the customer account."
                           }
                         },
                         "required": [
@@ -19108,7 +19194,8 @@
                           "type",
                           "phone",
                           "regionalOffice",
-                          "products"
+                          "products",
+                          "emailAddress"
                         ]
                       }
                     }
@@ -19134,7 +19221,8 @@
                           "regionalOffice": "East",
                           "products": [
                             "CDN"
-                          ]
+                          ],
+                          "emailAddress": "administrator@resellerchildcustomer.com"
                         },
                         {
                           "customerId": 20006185,
@@ -19149,7 +19237,9 @@
                           "regionalOffice": "West",
                           "products": [
                             "CDN"
-                          ]
+                          ],
+                          "emailAddress": "jane@resellerchildcustomer2.com",
+                          "responsiblePerson": "Jane Smith"
                         }
                       ],
                       "count": 2
@@ -19310,7 +19400,7 @@
             },
             "in": "query",
             "name": "products",
-            "description": "Comma-separated list of products which can include 'CDN' representing CDN360, 'HDT' representing High-Speed Data Transmission', and 'ECP' representing Edge Computing Platform. Only customers with access to the specified products will be returned."
+            "description": "Comma-separated list of products which can include 'CDN' representing CDN Pro, 'HDT' representing High-Speed Data Transmission', and 'ECP' representing Edge Computing Platform. Only customers with access to the specified products will be returned."
           },
           {
             "schema": {
@@ -19517,7 +19607,7 @@
                           },
                           "onBehalfOf": {
                             "type": "string",
-                            "description": "A non-empty value indicates that an API call was made on your behalf. For example, the CDN360 support team may have helped you with configuration."
+                            "description": "A non-empty value indicates that an API call was made on your behalf. For example, the CDN Pro support team may have helped you with configuration."
                           },
                           "apiName": {
                             "type": "string",
@@ -19766,7 +19856,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN360 API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls</a>."
+          "description": "The ID is a value returned in the Qtl-Request-Id header when making a CDN Pro API call. It is also available when <a href=\"#operation/get-ngadmin-apicalls\">getting a list of API calls</a>."
         }
       ],
       "get": {
@@ -20066,7 +20156,7 @@
                     },
                     "advancedFeaures": {
                       "type": "array",
-                      "description": "List of advanced features that could be enabled for customers via the service quota API. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "description": "List of advanced features that could be enabled for customers via the service quota API. \"realTimeLog\" is an advanced feature allowing a customer to monitor requests from visitors to the content as they come in. \"nearChina\" is an advanced feature allowing use of a special server group to provide better performance to visitors in China for domains without ICP Beian. Please contact our support team if you require an advanced feature.",
                       "items": {
                         "type": "string"
                       }
@@ -20254,7 +20344,7 @@
           }
         },
         "operationId": "post-cdn-serviceQuotas",
-        "description": "A reseller can use this API to define CDN360 service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. ",
+        "description": "A reseller can use this API to define CDN Pro service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -20274,7 +20364,7 @@
                       "trial",
                       "suspended"
                     ],
-                    "description": "Indicates the status of the customer's access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. "
+                    "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. "
                   },
                   "contractId": {
                     "type": "string",
@@ -20297,7 +20387,7 @@
                   },
                   "usageLimitDollar": {
                     "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing. A value of 0 means there is no limit on the customer.",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN Pro's default pricing. A value of 0 means there is no limit on the customer.",
                     "minimum": 0,
                     "default": 0
                   },
@@ -20432,13 +20522,30 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, then you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
                   },
                   "secretLimit": {
                     "type": "integer",
                     "description": "Total number of secrets that can be created.",
                     "default": 100,
                     "minimum": 0
+                  },
+                  "edgeHostnameZones": {
+                    "type": "array",
+                    "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "A domain to use for edge hostnames."
+                        },
+                        "hasBeian": {
+                          "type": "boolean",
+                          "description": "Whether the domain has ICP Beian, which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                        }
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -20514,7 +20621,7 @@
                           },
                           "status": {
                             "type": "string",
-                            "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status."
+                            "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status."
                           },
                           "allowProduction": {
                             "type": "boolean",
@@ -20530,7 +20637,7 @@
                           },
                           "usageLimitDollar": {
                             "type": "integer",
-                            "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n"
+                            "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n"
                           }
                         },
                         "required": [
@@ -20719,7 +20826,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains the service quotas for a CDN360 customer.",
+            "description": "The response contains the service quotas for a CDN Pro customer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -20827,7 +20934,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -20841,7 +20948,7 @@
                     },
                     "usageLimitDollar": {
                       "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                       "minimum": 0
                     },
                     "usageLimitDays": {
@@ -20865,7 +20972,7 @@
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -20938,6 +21045,23 @@
                       "minimum": 0,
                       "default": 100,
                       "description": "Total number of secrets that can be created."
+                    },
+                    "edgeHostnameZones": {
+                      "type": "array",
+                      "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "A domain to use for edge hostnames."
+                          },
+                          "hasBeian": {
+                            "type": "boolean",
+                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -21199,7 +21323,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "description": "Indicates the status of a customer's access to the CDN Pro product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                     "enum": [
                       "active",
                       "suspended",
@@ -21213,7 +21337,7 @@
                   },
                   "usageLimitDollar": {
                     "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                     "minimum": 0
                   },
                   "usageLimitDays": {
@@ -21289,7 +21413,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, then you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -21302,6 +21426,23 @@
                     "default": 100,
                     "minimum": 0,
                     "description": "Total number of secrets that can be created."
+                  },
+                  "edgeHostnameZones": {
+                    "type": "array",
+                    "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "A domain to use for edge hostnames."
+                        },
+                        "hasBeian": {
+                          "type": "boolean",
+                          "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -21911,7 +22052,7 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string"
                         }
@@ -21956,7 +22097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains the service quotas for a CDN360 customer.",
+            "description": "The response contains the service quotas for a CDN Pro customer.",
             "content": {
               "application/json": {
                 "schema": {
@@ -22064,7 +22205,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -22078,7 +22219,7 @@
                     },
                     "usageLimitDollar": {
                       "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                       "minimum": 0
                     },
                     "usageLimitDays": {
@@ -22102,7 +22243,7 @@
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -22175,6 +22316,23 @@
                       "minimum": 0,
                       "default": 100,
                       "description": "Total number of secrets that can be created."
+                    },
+                    "edgeHostnameZones": {
+                      "type": "array",
+                      "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "A domain to use for edge hostnames."
+                          },
+                          "hasBeian": {
+                            "type": "boolean",
+                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -22352,7 +22510,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN360 product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                       "enum": [
                         "active",
                         "suspended",
@@ -22366,7 +22524,7 @@
                     },
                     "usageLimitDollar": {
                       "type": "integer",
-                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                      "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                       "minimum": 0
                     },
                     "usageLimitDays": {
@@ -22390,7 +22548,7 @@
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN360 service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -22463,6 +22621,23 @@
                       "minimum": 0,
                       "default": 100,
                       "description": "Total number of secrets that can be created."
+                    },
+                    "edgeHostnameZones": {
+                      "type": "array",
+                      "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "A domain to use for edge hostnames."
+                          },
+                          "hasBeian": {
+                            "type": "boolean",
+                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -22638,7 +22813,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN360 product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "description": "Indicates the status of a customer's access to the CDN Pro product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
                     "enum": [
                       "active",
                       "suspended",
@@ -22652,7 +22827,7 @@
                   },
                   "usageLimitDollar": {
                     "type": "integer",
-                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN360's default pricing.\n",
+                    "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period. The dollar value is based on CDN Pro's default pricing.\n",
                     "minimum": 0
                   },
                   "usageLimitDays": {
@@ -22728,7 +22903,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, then you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -22741,6 +22916,23 @@
                     "default": 100,
                     "minimum": 0,
                     "description": "Total number of secrets that can be created."
+                  },
+                  "edgeHostnameZones": {
+                    "type": "array",
+                    "description": "List of zones specifying the domains that can be used for <a href=\"#tag/Edge-Hostname-Management\">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain's authoritative DNS to us.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "A domain to use for edge hostnames."
+                        },
+                        "hasBeian": {
+                          "type": "boolean",
+                          "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -23247,7 +23439,7 @@
               "type": "string"
             },
             "in": "query",
-            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN360.",
+            "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN Pro.",
             "name": "startdate"
           },
           {
@@ -23340,7 +23532,7 @@
           }
         },
         "operationId": "post-cdn-prefetches",
-        "description": "Create a prefetch request to warm up the CDN360 cache with contents from your origin in anticipation of visitors. This is helpful to prevent a sudden influx of requests to your origin servers. The URLs you prefetch must be for hostnames of properties deployed to production.\n",
+        "description": "Create a prefetch request to warm up the CDN Pro cache with contents from your origin in anticipation of visitors. This is helpful to prevent a sudden influx of requests to your origin servers. The URLs you prefetch must be for hostnames of properties deployed to production.\n",
         "parameters": [
           {
             "schema": {
@@ -23396,7 +23588,7 @@
                   },
                   "regions": {
                     "type": "array",
-                    "description": "A list of ISO 3166-2 country codes representing the locations of CDN360 servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                    "description": "A list of ISO 3166-2 country codes representing the locations of CDN Pro servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                     "items": {
                       "type": "string"
                     }
@@ -23788,7 +23980,7 @@
                         },
                         "apiName": {
                           "type": "string",
-                          "description": "Name of API account which created this prefetch request. If a reseller does it on behalf of a child customer, then it is the API account name of the reseller."
+                          "description": "Name of API account which created this prefetch request. If a reseller created the request on behalf of a child customer, it is the API account name of the reseller."
                         },
                         "customerId": {
                           "type": "string",
@@ -23796,7 +23988,7 @@
                         },
                         "impersonatingParentCustomerId": {
                           "type": "string",
-                          "description": "If a reseller performs a prefetch on behalf of a child customer, then this field will be present and indicate the reseller's ID."
+                          "description": "If a reseller performs a prefetch on behalf of a child customer, this field will be present and indicate the reseller's ID."
                         },
                         "apiAccountId": {
                           "type": "string",
@@ -23814,7 +24006,7 @@
                     },
                     "regions": {
                       "type": "array",
-                      "description": "A list of ISO 3166-2 country codes representing the locations of CDN360 servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                      "description": "A list of ISO 3166-2 country codes representing the locations of CDN Pro servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                       "items": {
                         "type": "string"
                       }
@@ -24368,7 +24560,7 @@
                 "examples": {
                   "Invalid API account ID": {
                     "value": {
-                      "code": "InvalidAccountId",
+                      "code": "InvalidApiAccountId",
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   },
@@ -24463,9 +24655,9 @@
                   }
                 },
                 "examples": {
-                  "Invalid account ID": {
+                  "Invalid API account ID": {
                     "value": {
-                      "code": "InvalidAccountId",
+                      "code": "InvalidApiAccountId",
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   }
@@ -24606,9 +24798,9 @@
                   }
                 },
                 "examples": {
-                  "Invalid account ID": {
+                  "Invalid API account ID": {
                     "value": {
-                      "code": "InvalidAccountId",
+                      "code": "InvalidApiAccountId",
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   }
@@ -24832,16 +25024,17 @@
                           "type": "string"
                         }
                       },
-                      "servergroups": {
+                      "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, or ultra).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
                             "premium+",
-                            "ultra"
+                            "ultra",
+                            "nearChina"
                           ]
                         }
                       },
@@ -24854,7 +25047,7 @@
                       }
                     }
                   },
-                  "groupby": {
+                  "groupBy": {
                     "type": "array",
                     "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
                     "items": {
@@ -24962,7 +25155,7 @@
                           },
                           "hasCredentials": {
                             "type": "boolean",
-                            "description": "Whether or not the webhook requires credentials to access."
+                            "description": "Whether the webhook requires credentials to access."
                           }
                         },
                         "required": [
@@ -26443,7 +26636,7 @@
       "APIKey": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN360 API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
       }
     }
   },
@@ -26454,7 +26647,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN360 servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
@@ -26462,19 +26655,19 @@
     },
     {
       "name": "Secret Management",
-      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN360 portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN360 portal or fetching it using the CDN360 API."
+      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN360 cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
-      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN360. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
+      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
     },
     {
       "name": "Edge Hostname Management",
-      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN360. Different properties' hostnames may point to the same edge hostname if the same rules apply."
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN Pro. Different properties' hostnames may point to the same edge hostname if the same rules apply."
     },
     {
       "name": "Reports",
@@ -26482,7 +26675,7 @@
     },
     {
       "name": "Annotations for Reports",
-      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.cdnetworks.com/cdn\">CDN360 portal</a> when you look at the reports."
+      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a> when you look at the reports."
     },
     {
       "name": "Content Management",
@@ -26490,11 +26683,11 @@
     },
     {
       "name": "Portal User Management",
-      "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN360 portal</a>."
+      "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a>."
     },
     {
       "name": "API Account Management",
-      "description": "Create and manage additional API accounts used to call the CDN360 APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/#tag/API-Access-Control\">API permissions</a>."
+      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/#tag/API-Access-Control\">API permissions</a>."
     },
     {
       "name": "Customer Management",
@@ -26510,7 +26703,7 @@
     },
     {
       "name": "API Access Control",
-      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN360 API account</a> can do. The permissions work in conjunction with the API account type (read-only and operator)."
+      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN Pro API account</a> can do. The permissions work in conjunction with the API account type (read-only and operator)."
     },
     {
       "name": "Webhooks",

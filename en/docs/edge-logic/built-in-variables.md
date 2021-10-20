@@ -1,7 +1,7 @@
 ## Built-in Variables
 
-The table below lists all the built-in variables supported by the CDN360 servers. You can use them in Edge Logic or the real-time log. Please notice that not all variables are supported in both places. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
-If you use the CDN360 portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
+The table below lists all the built-in variables supported by the CDN Pro servers. You can use them in Edge Logic or the real-time log. Not all variables are supported in both places. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
+If you use the CDN Pro portal to edit the property, the autocompletion feature will list all the supported variables if you type `$` at a position where a variable is allowed.
 
 | **Variable Name** | **Description** | **Edge Logic** | **[R-T Log](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
@@ -39,6 +39,7 @@ If you use the CDN360 portal to edit the property, the autocompletion feature wi
 | <span id="property_ver"></span><span class="var">$property_ver</span> |<span class="badge small" title="numerical value">#</span> the property version number | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | a unique ID for the request | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | [cache status](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="random_N"></span><span class="var">$random_N</span> |<span class="badge small" title="numerical value">#</span> A random integer in [0, N-1]. N can be an integer in [2,1e9].| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> RT log downsample factor. A value N means one log entry for every N requests| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> RT log downsample ratio, the reciprocal of $realtime_log_ds_factor. The value should be a decimal number between 0 and 1. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="remote_user"></span><span class="var">$remote_user</span> | user name extracted from the Authorization header if [Basic authentication](https://datatracker.ietf.org/doc/html/rfc7617) is used. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

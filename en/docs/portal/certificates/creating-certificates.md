@@ -25,9 +25,9 @@ The following procedure describes how to generate self-signed certificates. Self
 || **Options at the top of the Create a Certificate Form**                                      |
 |Certificate Name|Enter a name that helps you identify this certificate.|
 |Certificate Description|Add a description about this certificate.|
-|Auto Renew|Select whether you want CDN360 to [renew the certificate automatically](/docs/portal/certificates/auto-renewal.md) through Let's Encrypt (**LE**).|
+|Auto Renew|Select whether you want CDN Pro to [renew the certificate automatically](/docs/portal/certificates/auto-renewal.md) through Let's Encrypt (**LE**).|
 |Share With|This field is available to resellers only. It allows resellers to select the child customers with whom they want to share the certificate.|
-|Creation Method|Specify whether you want to upload a certificate you already have or generate a certificate using CDN360.|
+|Creation Method|Specify whether you want to upload a certificate you already have or generate a certificate using CDN Pro.|
 || **Auto-Generate Options**                                      |
 |Template|Populates the form fields with settings from a template. A template is a collection of frequently used settings. Before you use this option, you must save at least one template (see step 4 below). After the fields are populated with the settings from a template, you can change them in the fields below to suit your requirements, and then save the settings in a new template.|
 |Public Key Algorithm|Select a public key algorithm for this certificate: RSA2048 or ECC256.|
