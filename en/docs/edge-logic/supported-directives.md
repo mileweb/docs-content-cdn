@@ -469,7 +469,7 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
 * round_robin : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
-* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL.
+* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL. If the origin server has cache, this option should help with the hit ratio.
 * sorted_list : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
 
 
@@ -578,7 +578,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -602,9 +602,9 @@ Description:
 
 This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
 
-nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
+CDN Pro calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
+X-Accel-Expires > Cache-Control (max-age), proxy_cache_min_age > Expires > proxy_cache_valid (nginx directive)
 
  When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
 
@@ -638,7 +638,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default:** — <br/>
 **Context:** server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 means cache the response and treat it as expired. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+Sets caching time for different response codes. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
 ### `proxy_cache_vary`
 
@@ -648,7 +648,7 @@ Sets caching time for different response codes. We enhanced the [open-source ver
 **Default:** `proxy_cache_vary off;` <br/>
 **Context:** server, location
 
-If `proxy_cache_vary` is "on", the CDN Pro cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents must be purged using "directory purge". An error will be returned if "file purge" is used for varied contents.
+If `proxy_cache_vary` is "on", the CDN Pro cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents should be purged using "directory purge".
 
 If `proxy_cache_vary` is "off", the CDN Pro cache servers do not cache any response with the `Vary` header.
 
@@ -738,7 +738,7 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 **Default:** `proxy_next_upstream error timeout;` <br/>
 **Context:** server, location
 
-Specifies in which cases a request should be passed to the next origin server. No change to the public version. 
+Specifies in which cases a request should be passed to the next server in the origin configuration. No change to the public version. 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
@@ -748,7 +748,7 @@ Specifies in which cases a request should be passed to the next origin server. N
 **Default:** `proxy_next_upstream_timeout 0;` <br/>
 **Context:** server, location
 
-Limits the time during which a request can be passed to the next upstream server. No change to the public version.
+Limits the time during which a request can be passed to the next server in the origin configuration. A value of "0" disables the limit. No change to the public version.
 
 ### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
 
@@ -758,7 +758,7 @@ Limits the time during which a request can be passed to the next upstream server
 **Default:** `proxy_next_upstream_tries 0;` <br/>
 **Context:** server, location
 
-Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
+Limits the number of possible tries for passing a request to the next server in the origin configuration. A value of "0" disables the limit. No change to the public version. 
 
 ### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
 
