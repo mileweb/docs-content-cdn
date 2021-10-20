@@ -23,8 +23,8 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 | -------------------- |---------------------------------- |
 | Role Name            | Enter a name for this role.       |
 | Description          | Enter a description for this role.|
-| Role Status          | Select between **Local** and **Global**: <br><ul><li><strong>Local</strong> = only this customer account can use this role.</br></ul></li><ul><li><strong>Global</strong> = all customers can use this role.</ul></li> |
-| Permissions          | By default, new roles have no permissions. Therefore, when you create a role, you must add the appropriate permissions for that role. Click **+ Add Permissions**. In the dialog box, select the check boxes for the permissions you want to grant to this role and click **Save**.<br>**Note:** Selecting a check box in the **All features** row at the top selects all the check boxes in that column.|
+| Permissions          | To assign one or more permissions to this role, click **+ Add Permissions**, check one or more permissions in the Add Permissions dialog box, and then click **Save**. If you decide not to add one or more permissions to this role, check them, and then click the **Delete** button in the **Permissions** section.|
+| Users                | To assign users to this role, click **+ Assign Users**, check one or more users in the Assign Users dialog box, and then click **Assign**. If you decide not to add one or more users to this role, check them, and then click the **Delete** button in the **Users** section.               |
 
 5. Click **Save**.
 
@@ -71,3 +71,45 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 <ul><ul><li>To see the details of a role before deleting it, click the role name. To delete the role, click <strong>Delete</strong> at the top right of the Role Details page.</ul></ul>
 
 4. If the role has no assigned users, click **Yes, delete!** to delete the role. If the role has one or more assigned users, click **Un-assign from all users and delete** to delete the role.
+
+## Permissions That Can Be Assigned to Roles
+
+| **This Permission...**                         | Allows the Role to...|
+| ---------------------------------------------- | ---------------------- |
+| certificate.create                             | Create certificates    |
+| certificate.delete                             | Delete certificates    |
+| certificate.deployment.production              | Deploy certificates to production environment |
+| certificate.deployment.staging                 | Deploy certificates to staging environment    |
+| certificate.download.csr                       | Download CSRs          |
+| certificate.read                               | Read certificates      |
+| certificate.update                             | Update certificates    |
+| dashboard.read                                 | Read the dashboard     |
+| edgeHostnames.create                           | Create  edge hostnames |
+| edgeHostnames.delete                           | Delete  edge hostnames |
+| edgeHostnames.read                             | Read  edge hostnames   |
+| edgeHostnames.update                           | Update  edge hostnames |
+| notification.create                            | Create notifications   |
+| notification.delete                            | Delete notifications   |
+| notification.read                              | Read notifications     |
+| property.create                                | Create properties      |
+| property.delete                                | Delete properties      |
+| property.deployment.production                 | Deploy properties to production environment   |
+| property.deployment.read                       | Read property deployments |
+| property.deployment.staging                    | Deploy properties to staging environment      |
+| property.read                                  | Read properties        |
+| property.update                                | Update properties      |
+| property.validation                            | Validate properties    |
+| property.validation.read                       | Read property validations  |
+| purge.create                                   | Create purge requests  |
+| purge.read                                     | Read purge requests    |
+| report.read                                    | Read reports           |
+| role.create                                    | Create roles           |
+| role.delete                                    | Delete roles           |
+| role.read                                      | Read roles             |
+| role.update                                    | Update roles           |
+| user.create                                    | Create users           |
+| user.delete                                    | Delete users           |
+| user.read                                      | Read users             |
+| user.suspend                                   | Suspend users or reactivate suspended users  |
+| user.update                                    | Update users           |
+
