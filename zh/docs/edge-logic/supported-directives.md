@@ -571,7 +571,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_lock on;` <br/>
 **可用位置：** server, location
 
-当该指令被启用时，当多个客户端请求一个缓存中不存在的文件（或称之为一个MISS），只有这些请求中的第一个被允许发送至服务器。其他请求在第一个请求得到满意结果之后在缓存中得到文件，或者直到 [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) 指令设置的时间后才会被处理。代码源自公共版本没有变化。默认情况下，出于减少对源站带宽消耗的考虑，CDN360 将该指令设置为开启。但是，由于该"锁定"会在大部分内容不可缓存时引入不必要的延迟，因此我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了部分内容是可缓存的，您可以将其设置为更高的值以减少原始流量。同时，如果您事先预知了某些不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作并尽可能减少延迟。
+当该指令被启用时，如果有多个客户端同时请求同一个缓存中不存在，或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并填充缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。但是如果等待时间超过 [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) 指令设置的时间后也会被“放行”至源站。默认情况下，出于减少对源站带宽消耗的考虑，CDN Pro 将该指令设置为开启。同时为了避免该功能在大部分内容不可缓存时引入不必要的延迟，我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时的值来降低源站负载。如果您可以通过请求里的变量来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作并尽可能降低处理延迟。
 
 ### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
 
@@ -581,7 +581,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_lock_age 15s;` <br/>
 **可用位置：** server, location
 
-如果第一个进入的请求，没有在该指令设置的时间内完成，则 CDN Pro 将会放行下一个请求，并以此生成缓存。代码源自开源公共版本，无变更
+前一个“放行”至源站的请求，没有在该指令设置的时间内完成，则 CDN Pro 将会放行下一个请求用来填充缓存。逻辑源自开源[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)，无变更。
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -591,7 +591,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_lock_timeout 0s;` <br/>
 **可用位置：** server, location
 
-该指令为 `proxy_cache_lock` 指令设置一个超时时间，如果在该时间内缓存没有生成，则 CDN Pro 将开始处理该缓存所对应的等待请求。但相应的数据不会被生成缓存。 （`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）代码源自公共版本，无变更。出于优化延迟的考虑默认值 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少原始流量，则可以将其更改为更高的值。
+该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -601,7 +601,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_methods GET HEAD;` <br/>
 **可用位置：** server, location
 
-该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods) ，无变更。
+该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods) ，无变更。
 
 ### proxy_cache_min_age 
 
@@ -613,14 +613,14 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 Description:
 
-该指令允许您为响应文件配置最小缓存时间。如果源给的 Cache-Control 响应头中 max-age 小于该配置项所指定的参数值，则将 max-age 值将被覆盖改写为该指令值。例如，如果源的 Cache-Contrl 响应头中的max-age值为100s，而该指令配置的最小age值为200s，则内容的有效缓存时间为200s。
+该指令允许您为响应文件配置最小缓存时间。如果源给的 Cache-Control 响应头中的 max-age 小于所指定的参数值，则使用指定的参数值作为缓存时间。例如，如果源站的 Cache-Control 响应头中的max-age值为100s，而该指令配置的值为200s，则内容的有效缓存时间为200s。
 
-nginx 将根据上游提供的响应头或按照以下顺序从对应的 nginx 指令计算缓存时间：
+CDN Pro服务器将根据源站提供的响应头以及 nginx 指令按照以下优先顺序确定缓存时间：
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
+X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > proxy_cache_valid
 
 当 nginx 根据 Cache-Control 头中的 max-age 值计算缓存时间时，它将该值与 proxy_cache_min_age 中配置的值进行比较，并按照两者的最大值进行内容缓存。
-当 nginx 不根据 Cache-Control 头中的 max-age 值计算缓存时间时（例如通过 proxy_ignore_headers 忽略了 Cache-Control 响应头 ）， proxy_cache_min_age 指令中的值将会被。
+当 nginx 不根据 Cache-Control 头中的 max-age 值计算缓存时间时（例如通过 proxy_ignore_headers 忽略了 Cache-Control 响应头 ）， proxy_cache_min_age 指令中的值将不起作用。
 
 注意：该指令中的时间变量可以是带有以下后缀之一的数字，或以下后缀组合而成的数字：
 
@@ -642,7 +642,7 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** `proxy_cache_use_stale error timeout;` <br/>
 **可用位置：** server, location
 
-该指令用于确定 CDN Pro 在哪些情况下可以响应陈旧的缓存给客户端。 代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale) ，没有变化。根据默认设置，当 CDN Pro 与源建立连接时出现问题时，CDN Pro 边缘服务器将响应陈旧的缓存内容。
+该指令用于确定 CDN Pro 在哪些情况下可以响应过期的缓存给客户端。 逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale) ，没有变化。根据默认设置，当 CDN Pro 与源建立连接时出现问题时，会响应过期的缓存内容。
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -652,7 +652,7 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-该配置项用于给不同的响应状态码设置缓存时间。 CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。参数值 0 表示缓存响应并将其视为已过期。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+该指令用于给不同的响应状态码设置缓存时间。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 
@@ -662,11 +662,11 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** `proxy_cache_vary off;` <br/>
 **可用位置：** server, location
 
-如果该指令的参数值为“on”，则 CDN360 将遵循源站的 `Vary` 响应头来区分和缓存不同版本的响应正文。请注意，只有“目录推送”方式才能推掉开启了该配置项后的对应缓存，如果此时您使用“文件推送"方式，系统将返回报错提示。
+如果该指令的参数值为“on”，则 CDN360 将遵循源站的 `Vary` 响应头来区分缓存不同版本的响应正文。请注意，开启了该配置项后的对应缓存需使用“目录刷新”方式来清除。
 
-如果该指令的参数值为“off”，则 CDN360 将忽视站的 `Vary` 响应头,不会据此来区分和缓存不同版本的响应正文。
+如果该指令的参数值为“off”，则 CDN360 将忽视站的 `Vary` 响应头，不会据此来区分缓存不同版本的响应正文。
 
-相关信息请查阅：[关于 Vary 响应头的处理方式](</docs/edge-logic/faq.md#the-support-and-non-support-of-vary>)。
+相关信息请查阅：[关于 Vary 响应头的处理方式](</zh/cdn/docs/edge-logic/faq#关于-vary-响应头的处理方式>)。
 
 
 ### [`proxy_cookie_domain`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_domain)
@@ -678,7 +678,7 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** `proxy_cookie_domain off;` <br/>
 **可用位置：** server, location
 
-该指令用于转换response的set-cookie header中的domain选项，将其中原本设置的域名（参数1）转换成更新后的域名（参数2）。代码源自NGINX 开源版本，无变更。
+该指令用于转换源站 set-cookie 响应头中的 domain 选项，将其中原本设置的域名（参数1）转换成更新后的域名（参数2）。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)
 
@@ -689,7 +689,7 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** `proxy_cookie_path off;` <br/>
 **可用位置：** server, location
 
-该指令用于转换response的set-cookie header中的 path 选项，将其中原本设置的path（参数1）转换成更新后的path（参数2）。代码源自NGINX 开源版本，无变更。
+该指令用于转换源站 set-cookie 响应头中的 path 选项，将其中原本设置的path（参数1）转换成更新后的path（参数2）。源自NGINX 开源版本，无变更。
 
 ### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)
 
@@ -699,7 +699,7 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于隐藏掉某些响应头，从而让这些信息对客户端“无感”。代码源自NGINX 开源版本，无变更。您可以使用该指令来隐藏掉多个响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中
+该指令用于隐藏掉某些响应头，从而让这些信息对客户端不可见。源自NGINX 开源版本，无变更。您可以使用该指令来隐藏掉多个响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
 
 
 ### `proxy_ignore_cache_control`
@@ -710,7 +710,7 @@ X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx d
 **默认设置：** none <br/>
 **可用位置：** server, location, if in location
 
-该指令用于设置 CDN Pro 忽略掉来自源的 `cache-control` 响应头中的某些参数。可以忽略以下指令：
+该指令用于设置 CDN Pro 忽略来自源站 `cache-control` 响应头中的某些参数。可以忽略以下指令：
 
 *   no-cache
 *   no-store
@@ -734,7 +734,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 忽略掉来自源的某些响应头。最常用的情景是用于设置 CDN Pro 忽略缓存相关标记，例如来自源的 “Cache-Control” 或 “Expires” 响应头。 代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 没有变化。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
+该指令用于设置 CDN Pro 忽略掉来自源站的某些响应头。最常用的情景是用于忽略缓存相关标记，例如 “Cache-Control” 或 “Expires” 响应头。 源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 无修改。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -744,7 +744,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 向源站发起回源请求时的 HTTP 协议方法，其参数值可以包含变量。
+该指令用于设置 CDN Pro 向源站发起回源请求时的 HTTP 协议方法，其参数值可以包含变量。对 [开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method) 无修改。
 
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
@@ -755,7 +755,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 在哪些情况下向下一个中间层节点/源站发起回源重试请求。代码源自 NGINX 公共版本没有变化。
+该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。源自 NGINX 公共版本没有变化。
 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
@@ -766,8 +766,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `proxy_next_upstream_timeout 0;` <br/>
 **可用位置：** server, location
 
-Limits the time during which a request can be passed to the next upstream server. No change to the public version.
-该指令用于设置 CDN Pro 向下一个中间层节点/源站发起回源重试请求超时时间。代码源自 NGINX 公共版本没有变化。
+该指令用于设置 CDN Pro 向源站配置里的下一个服务器发起重试请求的超时时间。默认配置‘0’表示没有超时限制。源自 NGINX 公共版本没有变化。
 
 
 ### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
@@ -778,7 +777,7 @@ Limits the time during which a request can be passed to the next upstream server
 **默认设置：** `proxy_next_upstream_tries 0;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 向下一个中间层节点/源站发起回源重试请求尝试次数。代码源自 NGINX 公共版本没有变化。
+该指令用于设置 CDN Pro 向源站配置里的下一个服务器发起重试请求的尝试次数。默认配置‘0’表示没有次数限制。源自 NGINX 公共版本没有变化。
 
 ### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
 
