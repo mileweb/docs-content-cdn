@@ -90,7 +90,7 @@ Adds the specified field to the end of a response provided that the response cod
 **可用位置：** server, location
 
 允许来自指定的网址或者网段的客户访问，该指令通常会和 [`deny`](#deny) 指令一起使用。
-CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好适配 CDN 分层缓存结构。
+CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好地适配 CDN 分层缓存结构。
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -101,7 +101,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `auth_request off;`<br/>
 **可用位置：** server, location
 
-指定某个URI路径，CDN Pro 将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。代码逻辑源自 Nginx 开源版本，无改动。
+本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)，无改动。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -111,7 +111,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-通常与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将子请求中的相关数据值（如响应头，响应状态码等）赋值给变量。代码逻辑源自 Nginx 开源版本，无改动。
+须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 
@@ -121,18 +121,18 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `—`<br/>
 **可用位置：** server, location, if
 
-终止当前针对的 ngx_http_rewrite_module 指令集的处理。代码逻辑源自 Nginx 开源版本，无改动。
-该指令属于 nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
+终止执行当前 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)的指令。代码逻辑源自 Nginx 开源版本，无改动。
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### `client_body_timeout`
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `client_body_timeout time;`<br/>
-**默认设置：** matches `origin_send_timeout` if it is set, or 20s <br/>
+**默认设置：** 匹配 `origin_send_timeout` 的设置（如果存在），或 20s<br/>
 **可用位置：** server
 
-该指令用于设置 CDN Pro 从客户端接收请求正文时的最大空闲时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
+该指令用于设置 CDN Pro 边缘服务器从客户端接收请求正文时的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
 
 
 ### `client_header_timeout`
@@ -143,7 +143,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `client_header_timeout 10;`<br/>
 **可用位置：** server
 
-该指令设置 CDN Pro 从客户端接收完整请求标头的最长等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，如果在默认的 10s 内没有收到来自客户端的 `Host` 头，服务器将关闭连接。 Edge Logic 中针对 `Host` 请求头的等待时间设置无法生效。
+该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，服务器将关闭连接。
 
 
 ### `client_send_timeout`
@@ -154,7 +154,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** matches `origin_read_timeout` if it is set, or 20s <br/>
 **可用位置：** server
 
-该指令与开源版本的 [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) 指令非常相似，用于设置向客户端发送响应时的最大等待空闲时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
+该指令与开源版本的 [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) 指令非常相似，用于设置向客户端发送响应时的最大空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
 
 ### `custom_log_field`
 
@@ -164,7 +164,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。该指令生效后，当您配置自定义日志下载的格式或使用我们的高级流量分析工具时，可以通过关键字段 “custom1” 和 “custom2” 来引用它们。如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。该指令生效后，当您配置自定义日志下载的格式或使用我们的高级流量分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用它们。如果您需要开启此功能，请联系我们的技术支持团队。
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -174,7 +174,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-拒绝（返回 403）来自指定网络或地址的访问请求。该指令通常与 [`allow`](#allow) 一起使用。 CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny) 基础上上进行了部分代码优化，使其能更好适配 CDN 分层缓存结构。
+拒绝（返回 403）来自指定网络或地址的访问请求。该指令通常与 [`allow`](#allow) 一起使用。 CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny) 基础上进行了部分代码优化，使其能更好适配 CDN 分层缓存结构。
 
 ### `enable_websocket`
 
@@ -194,20 +194,20 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-指令可携带3个参数：
-参数1 作为判定条件的原始状态码，格式为 "400 401 402 403 404 406 501 502 503 504"，每个状态码以空格隔开，必填项；
-参数2 设置新的响应状态码，格式为 "=200" 。如有配，则参数1中的原始状态码将被替换为新状态码进行响应，非必填项；
-参数3 设置新的响应正文，格式为 URI 或者一个完整的 URL，格式为 "@error"(URI)或"http://www.abc.com"(完整URL)。当参数3的值为完整 URL 时，即便参数2没有设置也将会把响应状态码改为302（此时如参数2为 "=301" ，则新响应状态码为301，其余情况下皆为302）。必填项；
-代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) ，因此该指令亦可将源的响应状态码作为判断条件。
+本指令允许您将源站的响应状态码作为条件来跳转到一个指定的URI。本指令可依照以下顺序，携带3组参数：
+第一组：（必填项）作为判定条件的一个或多个原始状态码，以空格隔开。比如 "400 401 402 403 404 406 501 502 503 504"；
+第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。如有配，则原始状态码将被替换为新状态码响应客户端；
+第三组：（必填项）设置新的响应正文，格式为 URI 或者一个完整的 URL。比如 "@error"(named URI) 或 "http://www.abc.com" (完整URL)。当使用完整 URL 时，会把响应状态码改为302（除非第二组参数为 "=301"，则新响应状态码为301，其余情况下皆为302）。；
+代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) 来支持将源的响应状态码作为判断条件。
 
-该指令允许您将源的响应状态码作为条件来执行某些操作。例如，下述指令可用于将原状态码 403 更改为 404：
+例如，下述指令可以在第一个源站返回状态码 403 时尝试第二个源站：
 ```nginx
 location /abc {
-  origin_pass my-origin;
-  error_page 403 = @return404;
+  origin_pass my-origin1;
+  error_page 403 = @try_origin1;
 }
-location @return404 {
-  return 404;
+location @try_origin1 {
+  origin_pass my-origin2;
 }
 ```
 
@@ -219,7 +219,7 @@ location @return404 {
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-该指令用于执行一些常见的编码、解码、散列哈希计算、HMAC算法、加解密和变量对比操作。CDN Pro将其添加到[重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) 的处理阶段中。目前支持的功能有：
+该指令用于执行一些常见的编码、解码、哈希计算、HMAC、加解密和变量对比操作。CDN Pro将其添加到了[rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) 中。目前支持的功能有：
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
@@ -250,7 +250,7 @@ location @return404 {
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
     #$hmacout and $hmacout1 should be equal
 ```
-该指令属于 nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
 
@@ -262,7 +262,7 @@ location @return404 {
 **可用位置：** server, location, if in location
 
 
-该指令用于控制 CDN Pro 是否根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身内容的缓存时间。
+该指令用于控制 CDN Pro 根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身对内容的缓存时间。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -272,8 +272,8 @@ location @return404 {
 **默认设置：** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **可用位置：** server, location
 
-CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应，但仅当响应正文大小大于 1000 字节时才压缩功能才会生效，该默认行为应该适用于大多数用户。
-该指令亦可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以便支持包括 `text/*` 和 `*javascript` 在内的20+个模糊匹配。
+CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1000 字节时才压缩功能才会生效）。该默认行为应该适用于大多数用户。
+该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持形如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。该指令最多支持20个模糊匹配参数。
 
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
@@ -284,7 +284,7 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-根据指定条件控制 CDN Pro 的节点行为。请确保您完全了解 [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) 控制流的工作原理。为此我们还编写了 [使用指导](</docs/edge-logic/multiple-origins.md#ifcaution>) ，并在其中记录关于该指令的最佳实践。同时 CDN Pro 对该指令进行了一些重大改进：
+根据指定条件控制 CDN Pro 配置的执行流程。使用之前请确保您完全了解 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) 控制流的工作原理。为此我们还编写了[使用指导](</docs/edge-logic/multiple-origins.md#ifcaution>)，并在其中推荐了关于该指令的最佳使用方式。同时 CDN Pro 对该指令进行了一些重大改进：
 
 *  支持`&&` 运算符，用于执行子条件的逻辑“与”判断。例如：
 
@@ -295,10 +295,10 @@ if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```nginx
 if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
 ```
-请注意，当被一起使用时，`&&` 的优先级高于`||`，并且不支持使用多重括号对子条件进行分组。
-我们最多支持 9 个子条件的判断，edgelogic的执行逻辑会智能跳过不影响最终结果的子条件。
+请注意，当被一起使用时，`&&` 的优先级高于`||`。该指令不支持使用括号对子条件进行分组。
+我们最多支持 9 个子条件的判断，edge logic的执行逻辑会智能跳过不影响最终结果的子条件。
 *  支持字符串前缀匹配。 如果变量`$s1` 的值以 `$s2`开始，那么判断条件 `$s1 ^ $s2` 将会返回 true 。 `$s1 !^ $s2` 将会返回 false.
-*  支持 `<`、`<=`、`>`、`>=` 的整数值比较。请确保两个操作数都是有效整数；否则结果将是 `false`。有效整数可以是十进制数字或者是前缀为“0x”的十六进制数字。
+*  支持用 `<`、`<=`、`>`、`>=` 进行整数值比较。请确保两个操作数都是有效整数，否则结果将是 `false`。有效整数可以是十进制数字或者是前缀为“0x”的十六进制数字。
 *  支持多个 `elseif` 和 `else` 语法。例如：
 ```nginx
 if ($http_x = 1) { ... }
@@ -306,7 +306,7 @@ elseif ($http_x = 2) { ... }
 elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
-该指令属于 nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
