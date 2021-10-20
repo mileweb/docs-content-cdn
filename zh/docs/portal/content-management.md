@@ -36,6 +36,8 @@ If the content on your origin web server has changed, request a purge to have CD
 
 4. Click **Start Purge**.
 
+**Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
+
 ## Prefix Purging
 
 CDN360 supports prefix purging. Using this feature, you can purge directories by entering values in the <strong>Add a directory to be purged</strong> field. The following table shows examples of using prefix purging.
