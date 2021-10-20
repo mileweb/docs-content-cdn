@@ -316,7 +316,7 @@ else { ... }
 **默认设置：** `—` <br/>
 **可用位置：** location <br/>
 
-指定某个 location 块内的逻辑只能用于内部请求，无法被客户端直接访问。代码逻辑源自 Nginx 开源版本，无改动。
+指定某个 location 块内的逻辑只能用于内部请求，不允许被客户端直接访问。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
@@ -337,7 +337,7 @@ else { ... }
 **默认设置：** `limit_rate_after 4m;` <br/>
 **可用位置：** server, location, if in location
 
-响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制，单位为字节。可配范围为 [1-8]m 。
+响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制。可配范围为 [1-8]m，单位为字节。
 
 ### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
@@ -357,7 +357,7 @@ else { ... }
 **默认设置：** `origin_connect_timeout 5s;` <br/>
 **可用位置：** server
 
-该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。该指令不能出现在 location 配置块中。
 
 
 ### `origin_fast_route`
@@ -368,7 +368,7 @@ else { ... }
 **默认设置：** `origin_fast_route off;` <br/>
 **可用位置：** server, location, if in location
 
-该指令用于在访问源站时开启使用快速路由功能。快速路由功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过快速路由传输的回源流量可能会被收取比边缘流量更高的费率。
+该指令用于在访问源站时开启使用**快速路由**功能。此功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过**快速路由**传输的回源流量可能会被收取比边缘流量更高的费率。
 
 
 ### `origin_follow_redirect`
@@ -379,7 +379,7 @@ else { ... }
 **默认设置：** - <br/>
 **可用位置：** location
 
-当源站响应 30x 并携带一个Location重定向跳转时，您或许希望 CDN360 继续对这个 Location 重定向跳转地址发起请求直至获取到实际的响应文件后再进行缓存和客户端响应。将重定向内容传递给客户端需要更多时间来获取最终内容。如果需要实现上述需求，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location块中使用此指令。
+当源站响应 30x 状态码并携带一个 Location 跳转地址时，您或许希望 CDN360 继续对这个地址发起请求直至获取到实际的响应文件，然后再进行缓存和客户端响应。如果将跳转地址传递给客户端来发起新请求会导致更长的时间来获取最终内容。如果需要实现上述行为，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location 块中使用本指令。
 
 ### `origin_header_modify`
 
@@ -389,17 +389,17 @@ else { ... }
 **默认设置：**  - <br/>
 **可用位置：** server, location, if in location
 
-该指令可用于在所有其他处理**之前**对源站的响应头进行添加、删除或者改写。换句话说，其他指令看到的任何一个源站响应头部和值都可能受到该指令的影响。该指令支持使用 nginx 变量作为配置值。
+该指令可用于在所有其他处理**之前**对源站的响应头进行添加、删除或者改写。换句话说，其他指令看到的源站响应头部和值都可能受到该指令的影响。该指令支持使用 nginx 变量作为配置值。
 
-policy 的可能值是 ```repeat,overwrite,``` 以及 ```preserve。``` policy 参数同样支持使用变量作为值。默认的策略是```repeat```。
+policy 的可能取值是 ```repeat,overwrite,``` 以及 ```preserve。``` policy 参数同样支持使用变量作为值。默认的策略是```repeat```。
 
-*   ```repeat``` 不管指定响应头原先是否存在，强制加响应头部和值添加到上游响应中。
-*   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写。如果指定响应头不存在，则将配置响应头和值添加到上游响应中。
+*   ```repeat``` 不管指定响应头原先是否存在，强制添加响应头部和值到上游响应中。
+*   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写；否则将配置响应头和值添加到上游响应中。
 *   ```preserve``` 仅当指定响应头不存在时，才将配置的响应头和值加到上游响应中。
 
-指令后半部分的参数 ```if``` 可用于设置该指令的生效条件。条件可以是以下之一：
+指令后最后的参数 ```if``` 可用于设置该指令的生效条件。条件可以是以下之一：
 
-*   变量名；如果变量的值为空字符串，则为 false。
+*   变量名；如果变量的值为空字符串或"0"，则为 false。
 *   使用“=”和“!=”运算符将变量与字符串进行比较。
 *   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
 
@@ -415,9 +415,9 @@ origin_header_modify X-Status ServerErr if($upstream_response_status ~ "^5");
 ```nginx
 origin_header_modify Cache-Control "" policy=overwrite;
 ```
-该指令可跨不同级别（http/server/location/location if）合并。如果不同级别存在针对相同的响应头 origin_header_modify 配置，则最内层的origin_header_modify配置生效。
+该指令可跨不同层级（http/server/location/location if）合并。如果不同层级存在针对相同的响应头的配置，则最内层的配置生效。
 
-尽管 CDN360 具有分层缓存结构，但该指令仅更改源站响应中的标头（不会更改来自中间节点的响应头）。
+尽管 CDN360 具有分层缓存结构，该指令仅更改源站响应中的头部（不会更改来自中间节点的响应头）。
 
 ### `origin_limit_rate`
 
@@ -427,7 +427,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 **默认设置：** `origin_limit_rate 0;`<br>
 **可用位置：** server, location
 
-该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制了从源服务器读取正文的速度。
+该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制从源服务器读取正文的速度。
 
 
 ### `origin_pass`
@@ -438,7 +438,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 **默认设置：** none <br>
 **可用位置：** location, if in location
 
-该指令指定从指定的源站中获取内容。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源名称后可以选择一个 配置URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例如：
+该指令用于指定获取内容的源站以及URI。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源站名后可以选择配置一个 URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例如：
 ```nginx
 # 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
@@ -458,7 +458,7 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：**  `origin_read_timeout 20s;` <br/>
 **可用位置：** server
 
-该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
 
 ### `origin_send_timeout`
 
@@ -468,7 +468,7 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：** `origin_send_timeout 20s;` <br/>
 **可用位置：** server
 
-该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了回源请求从 CDN Pro 节点发到源站之间的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此配置无法被单独设置于 location {}中。
+该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了将回源请求从 CDN Pro 节点发送到源站的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
 
 
 ### `origin_selection_algorithm`
@@ -479,11 +479,11 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：** `origin_selection_algorithm round_robin;` <br/>
 **可用位置：** server, location
 
-当源的解析为多个 IP 地址时，该指令用于设置使用哪个算法来决策最终的源站IP。有效值为：
+当源站的域名解析为多个 IP 地址时，该指令用于设置使用哪个算法来选择源站IP。有效值为：
 
-* round_robin : 轮询回源，默认设置，它将尝试将回源流量均匀分配到所有的源站IP上。
-* consistent_hash : 一致性哈希回源，另一种分配回源流量的方法，基于回源 URL 的哈希值。
-* sorted_list : 优选回源，按照源站的链路质量状况优先回最优的源IP。当源站的策略为根据地理位置设置不同解析IP（例如源为另一个 CDN）时，此回源方式有助于确保回源性能稳定。
+* round_robin : 轮询回源，默认设置，它尝试将回源流量均匀分配到所有的源站IP上。
+* consistent_hash : 一致性哈希回源，基于回源 URL 的哈希值。如果源站有缓存，可以提高其命中率。
+* sorted_list : 优选回源，按照源站的链路质量状况回最优的源IP。当源站IP地理分布广泛时，此回源方式有助于确保回源性能稳定。
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
@@ -494,11 +494,11 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：** `origin_set_header host $host;` <br/>
 **可用位置：** server, location, if in location
 
-该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于在修改（覆盖）或者增加对应的回源请求头。 CDN Pro 对开源版本代码进行了以下提升：
+该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于增、删、改回源请求头。CDN Pro 对开源版本代码进行了以下提升：
 
-1. 该指令可配置于 edgelogic 的不同位置中（server/location/if 中）。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最底层的指令才会生效。
-2. CDN Pro 采用了分层缓存结构，我们仍确保此指令设置的回源请求头仅在回源站时（而不是回上传父节点时）才会被修改/添加。
-3. 使用新参数 ```if(判定条件)``` 来根据指定条件设置回源请求头。如果条件为真，则该指令生效。 ```if``` 参数需要配置在该指令配置的末尾。条件可能是以下之一：
+1. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
+2. CDN Pro 采用了分层缓存结构，我们确保此指令设置仅在回源站时（而不是回上传父节点时）才会生效。
+3. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
 
 *   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
 *   用"="或者"!="来比较一个变量是否等于一个字符串；
@@ -506,7 +506,7 @@ origin_pass my_origin/abc$uri_uenc;
 
 使用本指令需要注意以下事项：
 
-1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的方案或 IP 地址传递给源服务器，请使用以下变量：
+1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的协议或 IP 地址传递给源服务器，请使用以下变量：
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
 *   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
@@ -516,7 +516,7 @@ origin_pass my_origin/abc$uri_uenc;
 ```nginx
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
-2. 如果要使用该指令将 `Host` 标头设置为 origin，则需要确保 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“源站详情-》host请求头”字段配置为空。否则在系统校验环节将出现校验失败。
+2. 如果要使用该指令修改传给源站的 `Host` 请求头，则需要确保 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段配置为空。否则在配置校验环节将出现校验失败。
 3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
 proxy_no_cache 1;      # 不要缓存
@@ -535,7 +535,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_buffering on;` <br/>
 **可用位置：** server, location
 
-启用或禁用来CDN Pro的响应缓冲功能。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)，无变更。
+启用或禁用 CDN Pro 的响应缓冲功能。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)，无变更。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -545,7 +545,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-该指令用于允许 CDN Pro 优先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
+该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -561,7 +561,7 @@ origin_pass My-Dynamic-Origin;
 proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
 proxy_cache_bypass $http_pragma    $http_authorization;
 ```
-该指令不会阻止将源站给的响应保存在 Cache 缓存中。这个 "保存"行为是由另一个指令 [`proxy_no_cache`](#proxy_no_cache) 控制，一般情况下这两个配置项会同时使用来实现某些文件不缓存。
+该指令不会阻止将源站给的响应保存在 cache 缓存中。这个 "保存"行为是由另一个指令 [`proxy_no_cache`](#proxy_no_cache) 控制的。一般情况下这两个配置项会同时使用来实现某些文件不缓存。
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
