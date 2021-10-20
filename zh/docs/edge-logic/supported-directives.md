@@ -744,8 +744,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Specifies the HTTP method to use in requests forwarded to the proxied server instead of the method from the client request. Parameter value can contain variables.
-指定在转发到代理服务器的请求中使用的 HTTP 方法，而不是来自客户端请求的方法。参数值可以包含变量。
+该指令用于设置 CDN Pro 向源站发起回源请求时的 HTTP 协议方法，其参数值可以包含变量。
 
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
@@ -756,7 +755,8 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
 **可用位置：** server, location
 
-Specifies in which cases a request should be passed to the next origin server. No change to the public version. 
+该指令用于设置 CDN Pro 在哪些情况下向下一个中间层节点/源站发起回源重试请求。代码源自 NGINX 公共版本没有变化。
+
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
@@ -767,6 +767,8 @@ Specifies in which cases a request should be passed to the next origin server. N
 **可用位置：** server, location
 
 Limits the time during which a request can be passed to the next upstream server. No change to the public version.
+该指令用于设置 CDN Pro 向下一个中间层节点/源站发起回源重试请求超时时间。代码源自 NGINX 公共版本没有变化。
+
 
 ### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
 
@@ -776,7 +778,7 @@ Limits the time during which a request can be passed to the next upstream server
 **默认设置：** `proxy_next_upstream_tries 0;` <br/>
 **可用位置：** server, location
 
-Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
+该指令用于设置 CDN Pro 向下一个中间层节点/源站发起回源重试请求尝试次数。代码源自 NGINX 公共版本没有变化。
 
 ### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
 
