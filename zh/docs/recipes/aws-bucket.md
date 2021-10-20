@@ -51,11 +51,11 @@ We'll start by creating and accessing the public AWS bucket, and then we'll look
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-uploaded-file-info.png" alt="create bucket" width="500"></p>
 
-Amazon S3 uses the following URI syntax to access bucket names: `<BUCKET_NAME>.<REGION>.amazonaws.com`. Instead of returning the region, Amazon S3 returns `s3`. Regardless, we can use the bucket domain name to set up CDN360.
+Amazon S3 uses the following URI syntax to access bucket names: `<BUCKET_NAME>.<REGION>.amazonaws.com`. Instead of returning the region, Amazon S3 returns `s3`. Regardless, we can use the bucket domain name to set up CDN Pro.
 
-### Setting Up CDN360
+### Setting Up CDN Pro
 
-Log in to the CDN360 management console at https://console.cdnetworks.com.
+Log in to the CDN Pro management console at https://console.cdnetworks.com.
 
 #### Traffic Management 
 1. In the Traffic Management page, create an edge hostname.
@@ -240,11 +240,11 @@ server: QTL_Cache/1.2.03
 accept-ranges: bytes
 ```
 
-Congratulations. You've just accelerated the Amazon S3 bucket with **CDN360**!
+Congratulations. You've just accelerated the Amazon S3 bucket with **CDN Pro**!
 
 ### Accessing Private Buckets
 
-Now let's block the public access to our bucket and set up CDN360 to access it.
+Now let's block the public access to our bucket and set up CDN Pro to access it.
 
 #### Block Public Access
 

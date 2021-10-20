@@ -1,10 +1,10 @@
 # Testing a Property
 
-Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN360 has a dedicated staging environment for this purpose. To deploy the property to the staging environment, perform the steps in [Deploying Your Property](</docs/portal/edge-configurations/deploying-property.md>).
+Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN Pro has a dedicated staging environment for this purpose. To deploy the property to the staging environment, perform the steps in [Deploying Your Property](</docs/portal/edge-configurations/deploying-property.md>).
 
 ## Testing Your Property in Staging
 
-CDN360 provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlcdn.com`. You can also see their IP addresses by issuing the following command:
+CDN Pro provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlcdn.com`. You can also see their IP addresses by issuing the following command:
 
 ```bash
 $ curl staging.qtlcdn.com
@@ -38,10 +38,10 @@ Once you have selected a staging IP address, use one of the following ways to se
   For example:
 
 ```
-163.171.230.47 cdn360.mydomain.com
+163.171.230.47 cdnpro.mydomain.com
 ```
-- If you use the cURL command, you can add ```--resolve``` to directly map the hostname to be accelerated to the IP address of the CDN360 staging server(s). For example:
+- If you use the cURL command, you can add ```--resolve``` to directly map the hostname to be accelerated to the IP address of the CDN Pro staging server(s). For example:
 
 ```bash
-$ curl -v https://cdn360.mydomain.com/index.html --resolve cdn360.mydomain.com:443:163.171.230.47
+$ curl -v https://cdnpro.mydomain.com/index.html --resolve cdnpro.mydomain.com:443:163.171.230.47
 ```
