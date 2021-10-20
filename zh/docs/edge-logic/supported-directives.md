@@ -1,6 +1,6 @@
 ## 支持的指令
 
-这一页列出了你可以在CDN360的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
+这一页列出了你可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
 
 在下面的文档里，我们为所有非特有的指令提供了到开源版公开文档的直接链接。每一个被修改增强过的指令，我们都提供了详细的描述，包括新增的功能，参数，以及对参数取值范围的限制。
 
@@ -55,7 +55,7 @@ add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 
 2. 引入了```if(condition)```参数来控制本指令生效的条件。只有当条件为真的时候，本指令才会修改发往客户端的头部，否则完全不起作用。这个```if()```参数必须出现在本指令的末尾。```condition```可以是如下条件表达式:
 
-*   一个变量名：如果该变量不存在，或者其值为‘0’或空，则条件不成立，否则条件为真；
+*   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
 *   用"="或者"!="来比较一个变量是否等于一个字符串；
 *   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
 
@@ -89,7 +89,8 @@ Adds the specified field to the end of a response provided that the response cod
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Allows access from the specified network or address. Usually used together with [`deny`](#deny). Enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) to make it work with the hierarchical cache structure.
+允许来自指定的网址或者网段的客户访问，该指令通常会和 [`deny`](#deny) 指令一起使用。
+CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow) 基础上上进行了部分代码优化，使其能更好地适配 CDN 分层缓存结构。
 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
@@ -100,8 +101,7 @@ Allows access from the specified network or address. Usually used together with 
 **默认设置：** `auth_request off;`<br/>
 **可用位置：** server, location
 
-Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
-
+本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)，无改动。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -111,7 +111,7 @@ Enables authorization based on the result of a subrequest and sets the URI to wh
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-Sets the request variable to the given value after the authorization request completes. No change to the public version. 
+须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 
@@ -121,19 +121,19 @@ Sets the request variable to the given value after the authorization request com
 **默认设置：** `—`<br/>
 **可用位置：** server, location, if
 
-Stops processing the current set of ngx_http_rewrite_module directives. No change to the public version. 
-
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+终止执行当前 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)的指令。代码逻辑源自 Nginx 开源版本，无改动。
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### `client_body_timeout`
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `client_body_timeout time;`<br/>
-**默认设置：** matches `origin_send_timeout` if it is set, or 20s <br/>
+**默认设置：** 匹配 `origin_send_timeout` 的设置（如果存在），或 20s<br/>
 **可用位置：** server
 
-This directive sets the maximum idle time when receiving the request body from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+该指令用于设置 CDN Pro 边缘服务器从客户端接收请求正文时的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
+
 
 ### `client_header_timeout`
 
@@ -143,7 +143,8 @@ This directive sets the maximum idle time when receiving the request body from t
 **默认设置：** `client_header_timeout 10;`<br/>
 **可用位置：** server
 
-This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s. Please notice that if the `Host` header is not received within the default 10s, the server will close the connection and the setting in the Edge Logic will not take effect.
+该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，服务器将关闭连接。
+
 
 ### `client_send_timeout`
 
@@ -153,7 +154,7 @@ This directive sets the maximum wait time for the complete request header from t
 **默认设置：** matches `origin_read_timeout` if it is set, or 20s <br/>
 **可用位置：** server
 
-This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+该指令与开源版本的 [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) 指令非常相似，用于设置向客户端发送响应时的最大空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
 
 ### `custom_log_field`
 
@@ -163,7 +164,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
+该指令允许您将最多 2 个自定义字段添加到访问日志中。该指令生效后，当您配置自定义日志下载的格式或使用我们的高级流量分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用它们。如果您需要开启此功能，请联系我们的技术支持团队。
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -173,7 +174,7 @@ This directive allows you to add up to 2 customized fields into the access log. 
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-Denies access from the specified network or address. Usually used together with [`allow`](#allow). Enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny) to make it work with the hierarchical cache structure.
+拒绝（返回 403）来自指定网络或地址的访问请求。该指令通常与 [`allow`](#allow) 一起使用。 CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny) 基础上进行了部分代码优化，使其能更好适配 CDN 分层缓存结构。
 
 ### `enable_websocket`
 
@@ -183,7 +184,7 @@ Denies access from the specified network or address. Usually used together with 
 **默认设置：** `-`<br/>
 **可用位置：** server, location
 
-This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The default read and send timeouts are set to 21s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
+该指令用于开启 WebSocket 协议。客户端必须确保不使用 HTTP/2。默认读取和发送超时设置为 21 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -193,16 +194,20 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also respond to status codes returned from the origin.
+本指令允许您将源站的响应状态码作为条件来跳转到一个指定的URI。本指令可依照以下顺序，携带3组参数：
+第一组：（必填项）作为判定条件的一个或多个原始状态码，以空格隔开。比如 "400 401 402 403 404 406 501 502 503 504"；
+第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。如有配，则原始状态码将被替换为新状态码响应客户端；
+第三组：（必填项）设置新的响应正文，格式为 URI 或者一个完整的 URL。比如 "@error"(named URI) 或 "http://www.abc.com" (完整URL)。当使用完整 URL 时，会把响应状态码改为302（除非第二组参数为 "=301"，则新响应状态码为301，其余情况下皆为302）。；
+代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) 来支持将源的响应状态码作为判断条件。
 
-This directive enables the modification of the response based on the status code received from the origin. For example, this is how to use it to change the status code 403 to 404:
+例如，下述指令可以在第一个源站返回状态码 403 时尝试第二个源站：
 ```nginx
 location /abc {
-  origin_pass my-origin;
-  error_page 403 = @return404;
+  origin_pass my-origin1;
+  error_page 403 = @try_origin1;
 }
-location @return404 {
-  return 404;
+location @try_origin1 {
+  origin_pass my-origin2;
 }
 ```
 
@@ -214,7 +219,7 @@ location @return404 {
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-This is a directive to perform some common encoding, decoding, hash, hash-mac, encryption, decryption and comparison algorithms. It is added to the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html).  Supported functions are:
+该指令用于执行一些常见的编码、解码、哈希计算、HMAC、加解密和变量对比操作。CDN Pro将其添加到了[rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html) 中。目前支持的功能有：
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
@@ -232,9 +237,9 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
 | 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
 
-**NOTE:** The output value of the functions in **bold** is a binary string that may not be printable. You need to use the BASE64_ENCODE, URL_ENCODE, or HEX_ENCODE to convert it to a printable format.
+**注意:** 使用**加粗字体** 标记的函数的输出值是一个可能无法打印的二进制字符串。因此您需要使用 BASE64_ENCODE、URL_ENCODE 或 HEX_ENCODE 将其转换为可打印格式。
 
-Examples:
+样例：
 ```nginx
     eval_func $secret_key SHA256 "mySecret123!";
     eval_func $text HEX_ENCODE $secret_key;
@@ -245,7 +250,7 @@ Examples:
     eval_func $hmacout1 HMAC_HEXKEY $text $message SHA256;
     #$hmacout and $hmacout1 should be equal
 ```
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### [`expires`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires)
 
@@ -256,8 +261,8 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `expires off;` <br/>
 **可用位置：** server, location, if in location
 
-Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
 
+该指令用于控制 CDN Pro 根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身对内容的缓存时间。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -267,7 +272,8 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **默认设置：** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **可用位置：** server, location
 
-CDN360 always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
+CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1000 字节时才压缩功能才会生效）。该默认行为应该适用于大多数用户。
+该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持形如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。该指令最多支持20个模糊匹配参数。
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
@@ -277,28 +283,29 @@ CDN360 always uses gzip and applies it to the default MIME types above. In addit
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-Control the server behavior based on the specified condition. Make sure you fully understand how the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) control flow works. We also wrote [some guidelines](</docs/edge-logic/multiple-origins.md#ifcaution>) about the best practices with this directive. We made some significant improvements to this directive:
-*  Support the `&&` operator, which performs logical AND of two sub-conditions. For example:
+根据指定条件控制 CDN Pro 配置的执行流程。使用之前请确保您完全了解 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if) 控制流的工作原理。为此我们还编写了[使用指导](</docs/edge-logic/multiple-origins.md#ifcaution>)，并在其中推荐了关于该指令的最佳使用方式。同时 CDN Pro 对该指令进行了一些重大改进：
+
+*  支持`&&` 运算符，用于执行子条件的逻辑“与”判断。例如：
 
 ```nginx
 if ($http_x = 1 && $http_y != 2abc && $http_z) { ... }
 ```
-*  Support the `||` operator, which performs logical OR of two sub-conditions. For example:
+*  支持`||` 运算符，用于执行子条件的逻辑“或”判断。例如：
 ```nginx
 if ($http_x = 1 || $http_y != 2abc && $http_z) { ... }
 ```
-Please notice that when used together, `&&` has higher precedence than `||` and using parentheses to group sub-conditions is not supported.
-We support up to 9 sub-conditions and the evaluation logic automatically skips the ones that are not affecting the final result.
-*  Support of string prefix check. The condition `$s1 ^ $s2` returns `true` if `$s1` begins with `$s2`. `$s1 !^ $s2` does the opposite.
-*  Support of integer value comparison with `<`, `<=`, `>`, `>=`. Make sure both operands are valid integers; otherwise, the result will be `false`. A valid integer can be either decimal or hexadecimal with a leading '0x'.
-*  Support multiple `elseif` and a final `else` after an `if` block. For example:
+请注意，当被一起使用时，`&&` 的优先级高于`||`。该指令不支持使用括号对子条件进行分组。
+我们最多支持 9 个子条件的判断，edge logic的执行逻辑会智能跳过不影响最终结果的子条件。
+*  支持字符串前缀匹配。 如果变量`$s1` 的值以 `$s2`开始，那么判断条件 `$s1 ^ $s2` 将会返回 true 。 `$s1 !^ $s2` 将会返回 false.
+*  支持用 `<`、`<=`、`>`、`>=` 进行整数值比较。请确保两个操作数都是有效整数，否则结果将是 `false`。有效整数可以是十进制数字或者是前缀为“0x”的十六进制数字。
+*  支持多个 `elseif` 和 `else` 语法。例如：
 ```nginx
 if ($http_x = 1) { ... }
 elseif ($http_x = 2) { ... }
 elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -308,7 +315,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `—` <br/>
 **可用位置：** location <br/>
 
-Specifies that a given location can be used for internal requests only. No change to the public version. 
+指定某个 location 块内的逻辑只能用于内部请求，不允许被客户端直接访问。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
@@ -318,7 +325,8 @@ Specifies that a given location can be used for internal requests only. No chang
 **默认设置：** `limit_rate 4m;` <br/>
 **可用位置：** server, location, if in location
 
-Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
+限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
+
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -328,7 +336,7 @@ Limits the rate of response transmission to a client, in bytes/sec. Valid values
 **默认设置：** `limit_rate_after 4m;` <br/>
 **可用位置：** server, location, if in location
 
-Sets the initial amount of traffic (in bytes) after which the further transmission of a response to a client will be rate limited. We limit the value to an integer in [1-8] followed by ‘m’.
+响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制。可配范围为 [1-8]m，单位为字节。
 
 ### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
@@ -338,7 +346,7 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
+按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。
 
 ### `origin_connect_timeout`
 
@@ -348,7 +356,8 @@ Sets configuration depending on the request URI without query string. No change 
 **默认设置：** `origin_connect_timeout 5s;` <br/>
 **可用位置：** server
 
-This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。该指令不能出现在 location 配置块中。
+
 
 ### `origin_fast_route`
 
@@ -358,7 +367,8 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 **默认设置：** `origin_fast_route off;` <br/>
 **可用位置：** server, location, if in location
 
-This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
+该指令用于在访问源站时开启使用**快速路由**功能。此功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过**快速路由**传输的回源流量可能会被收取比边缘流量更高的费率。
+
 
 ### `origin_follow_redirect`
 
@@ -368,8 +378,7 @@ This directive enables a fast route to be used to access the origin. It is power
 **默认设置：** - <br/>
 **可用位置：** location
 
-When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
-
+当源站响应 30x 状态码并携带一个 Location 跳转地址时，您或许希望 CDN360 继续对这个地址发起请求直至获取到实际的响应文件，然后再进行缓存和客户端响应。如果将跳转地址传递给客户端来发起新请求会导致更长的时间来获取最终内容。如果需要实现上述行为，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location 块中使用本指令。
 
 ### `origin_header_modify`
 
@@ -379,35 +388,35 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 **默认设置：**  - <br/>
 **可用位置：** server, location, if in location
 
-Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream\_http\_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
+该指令可用于在所有其他处理**之前**对源站的响应头进行添加、删除或者改写。换句话说，其他指令看到的源站响应头部和值都可能受到该指令的影响。该指令支持使用 nginx 变量作为配置值。
 
-Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
+policy 的可能取值是 ```repeat,overwrite,``` 以及 ```preserve。``` policy 参数同样支持使用变量作为值。默认的策略是```repeat```。
 
-*   The ```repeat``` policy always adds the header and the value into the upstream response.
-*   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response.
-*   The ```preserve``` policy adds the header and the value into the upstream response only if the header does not exist in the upstream response.
+*   ```repeat``` 不管指定响应头原先是否存在，强制添加响应头部和值到上游响应中。
+*   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写；否则将配置响应头和值添加到上游响应中。
+*   ```preserve``` 仅当指定响应头不存在时，才将配置的响应头和值加到上游响应中。
 
-The parameter ```if``` is introduced to add the header based on the condition. A condition can be one of the following:
+指令后最后的参数 ```if``` 可用于设置该指令的生效条件。条件可以是以下之一：
 
-*   A variable name; false if the value of a variable is an empty string.
-*   A comparison of a variable with a string using the "=" and "!=" operators.
-*   The matching of a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
+*   变量名；如果变量的值为空字符串或"0"，则为 false。
+*   使用“=”和“!=”运算符将变量与字符串进行比较。
+*   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
 
-Examples: 
+示例: 
 
-Added a header ```X-Status``` based on origin's status code:
+根据源站的响应状态码，添加一个响应头 ```X-Status```
 ```nginx
 origin_header_modify X-Status Good if($upstream_response_status ~ "^[23]");
 origin_header_modify X-Status ClientErr if($upstream_response_status ~ "^4");
 origin_header_modify X-Status ServerErr if($upstream_response_status ~ "^5");
 ```
-Delete the ```Cache-Control``` header in the origin's response:
+删除源站响应的 ```Cache-Control```响应头
 ```nginx
 origin_header_modify Cache-Control "" policy=overwrite;
 ```
-The directive is merged across different levels (http/server/location/location if). If the same header name exists in different levels, the configuration for that header name in the innermost level takes effect.
+该指令可跨不同层级（http/server/location/location if）合并。如果不同层级存在针对相同的响应头的配置，则最内层的配置生效。
 
-Although CDN360 has a hierarchical cache structure, the directive changes the header only in the origin response. 
+尽管 CDN360 具有分层缓存结构，该指令仅更改源站响应中的头部（不会更改来自中间节点的响应头）。
 
 ### `origin_limit_rate`
 
@@ -417,7 +426,8 @@ Although CDN360 has a hierarchical cache structure, the directive changes the he
 **默认设置：** `origin_limit_rate 0;`<br>
 **可用位置：** server, location
 
-This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
+该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制从源服务器读取正文的速度。
+
 
 ### `origin_pass`
 
@@ -427,7 +437,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **默认设置：** none <br>
 **可用位置：** location, if in location
 
-This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
+该指令用于指定获取内容的源站以及URI。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源站名后可以选择配置一个 URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例如：
 ```nginx
 # 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
 origin_pass my_origin;
@@ -447,7 +457,7 @@ origin_pass my_origin/abc$uri_uenc;
 **默认设置：**  `origin_read_timeout 20s;` <br/>
 **可用位置：** server
 
-This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level. 
+该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
 
 ### `origin_send_timeout`
 
@@ -457,7 +467,8 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 **默认设置：** `origin_send_timeout 20s;` <br/>
 **可用位置：** server
 
-This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
+该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了将回源请求从 CDN Pro 节点发送到源站的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
+
 
 ### `origin_selection_algorithm`
 
@@ -467,10 +478,11 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 **默认设置：** `origin_selection_algorithm round_robin;` <br/>
 **可用位置：** server, location
 
-When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
-* round_robin : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
-* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL.
-* sorted_list : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
+当源站的域名解析为多个 IP 地址时，该指令用于设置使用哪个算法来选择源站IP。有效值为：
+
+* round_robin : 轮询回源，默认设置，它尝试将回源流量均匀分配到所有的源站IP上。
+* consistent_hash : 一致性哈希回源，基于回源 URL 的哈希值。如果源站有缓存，可以提高其命中率。
+* sorted_list : 优选回源，按照源站的链路质量状况回最优的源IP。当源站IP地理分布广泛时，此回源方式有助于确保回源性能稳定。
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
@@ -481,33 +493,34 @@ When an origin is resolved into multiple IP addresses (peers), this directive sp
 **默认设置：** `origin_set_header host $host;` <br/>
 **可用位置：** server, location, if in location
 
-This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
+该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于增、删、改回源请求头。CDN Pro 对开源版本代码进行了以下提升：
 
-1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
-2. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
-3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
-*   A variable name; false if the value of a variable is an empty string.
-*   Comparison of a variable with a string using the "=" and "!=" operators.
-*   Matching a variable against a regular expression using the operators "\~" (for case-sensitive matching) and "\~\*" (for case-insensitive matching). Negative operators "!\~" and "!\~\*" are also available. If a regular expression includes the "}" or ";" characters, enclose the whole expression in single or double quotes.
+1. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
+2. CDN Pro 采用了分层缓存结构，我们确保此指令设置仅在回源站时（而不是回上传父节点时）才会生效。
+3. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
+
+*   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
+*   用"="或者"!="来比较一个变量是否等于一个字符串；
+*   用"\~"(区分大小写)或者"\~\*"(不区分大小写)来对一个变量进行正则匹配。也支持用"!\~"或者"!\~\*"来进行反向匹配。请注意如果正则表达式包含‘}’或‘;’字符，则需要用引号来包裹该表达式。
 
 使用本指令需要注意以下事项：
 
-1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
+1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的协议或 IP 地址传递给源服务器，请使用以下变量：
 
-*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
-*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
-*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  client’s ISO 3166 country code
+*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
+*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
+*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
 
-For example:
+示例如下:
 ```nginx
-origin_set_header X-Client-IP $client_real_ip;
+origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
-2. If you want to use this directive to set the `Host` header to origin, you need to make sure the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion) is left empty. Otherwise you will get validation error.
-3. 我们的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
+2. 如果要使用该指令修改传给源站的 `Host` 请求头，则需要确保 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段配置为空。否则在配置校验环节将出现校验失败。
+3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
 proxy_no_cache 1;      # 不要缓存
-proxy_cache_bypass 1;
+proxy_cache_bypass 1;  # 不使用缓存文件响应客户
 # 将客户端的If-Modified-Since请求头传递给源站
 origin_set_header If-Modified-Since $http_if_modified_since;
 origin_pass My-Dynamic-Origin;
@@ -522,7 +535,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_buffering on;` <br/>
 **可用位置：** server, location
 
-Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
+启用或禁用 CDN Pro 的响应缓冲功能。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)，无变更。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -532,7 +545,7 @@ Enables or disables buffering of responses from the proxied server. No change to
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. 
+该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -542,13 +555,13 @@ Turning it on allows a background subrequest to be fired to update an expired ca
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Defines conditions under which the response will not be taken from cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be taken from the cache. This should be used if you know the content is not cacheable according to the conditions above. Examples:
+该指令用于设置 CDN Pro 不使用已有缓存（意味着必须回源）来响应符合条件的请求。如果字符串参数中至少有一个值不为空且不等于“0”，则 CDN Pro 不会从缓存中取出响应。您可以使用它来强制某些请求回源获取最新的响应，样例如下：
+
 ```nginx
 proxy_cache_bypass $cookie_nocache $arg_nocache$arg_comment;
 proxy_cache_bypass $http_pragma    $http_authorization;
 ```
-This directive does not prevent the response from being saved in the cache.
-That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
+该指令不会阻止将源站给的响应保存在 cache 缓存中。这个 "保存"行为是由另一个指令 [`proxy_no_cache`](#proxy_no_cache) 控制的。一般情况下这两个配置项会同时使用来实现某些文件不缓存。
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
@@ -558,7 +571,7 @@ That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_ca
 **默认设置：** `proxy_cache_lock on;` <br/>
 **可用位置：** server, location
 
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN360 turns it on to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
+当该指令被启用时，如果有多个客户端同时请求同一个缓存中不存在，或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并填充缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。但是如果等待时间超过 [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) 指令设置的时间后也会被“放行”至源站。默认情况下，出于减少对源站带宽消耗的考虑，CDN Pro 将该指令设置为开启。同时为了避免该功能在大部分内容不可缓存时引入不必要的延迟，我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时的值来降低源站负载。如果您可以通过请求里的变量来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作并尽可能降低处理延迟。
 
 ### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
 
@@ -568,7 +581,7 @@ When enabled, only one request at a time will be allowed to populate a new cache
 **默认设置：** `proxy_cache_lock_age 15s;` <br/>
 **可用位置：** server, location
 
-If the last request passed to the proxied server for populating a new cache element has not completed for the specified time, one more request may be passed to the proxied server. No change to the public version.
+前一个“放行”至源站的请求，没有在该指令设置的时间内完成，则 CDN Pro 将会放行下一个请求用来填充缓存。逻辑源自开源[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)，无变更。
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -578,7 +591,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **默认设置：** `proxy_cache_lock_timeout 0s;` <br/>
 **可用位置：** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -588,7 +601,7 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 **默认设置：** `proxy_cache_methods GET HEAD;` <br/>
 **可用位置：** server, location
 
-If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
+该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods) ，无变更。
 
 ### proxy_cache_min_age 
 
@@ -600,25 +613,26 @@ If the client request method is listed in this directive, the response will be c
 
 Description:
 
-This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
+该指令允许您为响应文件配置最小缓存时间。如果源给的 Cache-Control 响应头中的 max-age 小于所指定的参数值，则使用指定的参数值作为缓存时间。例如，如果源站的 Cache-Control 响应头中的max-age值为100s，而该指令配置的值为200s，则内容的有效缓存时间为200s。
 
-nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
+CDN Pro服务器将根据源站提供的响应头以及 nginx 指令按照以下优先顺序确定缓存时间：
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
+X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > proxy_cache_valid
 
- When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
+当 nginx 根据 Cache-Control 头中的 max-age 值计算缓存时间时，它将该值与 proxy_cache_min_age 中配置的值进行比较，并按照两者的最大值进行内容缓存。
+当 nginx 不根据 Cache-Control 头中的 max-age 值计算缓存时间时（例如通过 proxy_ignore_headers 忽略了 Cache-Control 响应头 ）， proxy_cache_min_age 指令中的值将不起作用。
 
- Note: The time variable in this directive can have a number with one of the following suffixes or a combination of the following suffixes:
+注意：该指令中的时间变量可以是带有以下后缀之一的数字，或以下后缀组合而成的数字：
 
-*   s = seconds (default, example: 10s)
-*   m = minutes (example: 5m)
-*   h = hours (example: 1h)
-*   d = days (example: 1d)
-*   w = weeks (example: 1w)
-*   M = months (example: 2M)
-*   y = years (example: 1y)
+*   s = 秒 (默认值, 例如: 10s)
+*   m = 分 (例如: 5m)
+*   h = 小时 (例如: 1h)
+*   d = 天 (例如: 1d)
+*   w = 周 (例如: 1w)
+*   M = 月 (例如: 2M)
+*   y = 年 (例如: 1y)
 
-If there is no suffix in the time, the configured value is considered in seconds.
+如果配置的时间参数没有后缀，则该配置项的单位会被视为秒。
 
 ### [`proxy_cache_use_stale`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale)
 
@@ -628,7 +642,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 **默认设置：** `proxy_cache_use_stale error timeout;` <br/>
 **可用位置：** server, location
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN360 edge server would return stale cached content if there is any problem establishing connection to the origin.
+该指令用于确定 CDN Pro 在哪些情况下可以响应过期的缓存给客户端。 逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale) ，没有变化。根据默认设置，当 CDN Pro 与源建立连接时出现问题时，会响应过期的缓存内容。
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -638,7 +652,7 @@ Determines in which cases a stale cached response can be used during communicati
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 means cache the response and treat it as expired. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+该指令用于给不同的响应状态码设置缓存时间。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 
@@ -648,11 +662,11 @@ Sets caching time for different response codes. We enhanced the [open-source ver
 **默认设置：** `proxy_cache_vary off;` <br/>
 **可用位置：** server, location
 
-If `proxy_cache_vary` is "on", the CDN360 cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents must be purged using "directory purge". An error will be returned if "file purge" is used for varied contents.
+如果该指令的参数值为“on”，则 CDN Pro 将遵循源站的 `Vary` 响应头来区分缓存不同版本的响应正文。请注意，开启了该配置项后的对应缓存需使用“目录刷新”方式来清除。
 
-If `proxy_cache_vary` is "off", the CDN360 cache servers do not cache any response with the `Vary` header.
+如果该指令的参数值为“off”，则 CDN Pro 将不会缓存任何携带 Vary 头的响应。
 
-Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq.md#the-support-and-non-support-of-vary>).
+相关信息请查阅：[关于 Vary 响应头的处理方式](</zh/cdn/docs/edge-logic/faq#关于-vary-响应头的处理方式>)。
 
 ### [`proxy_cookie_domain`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_domain)
 
@@ -663,7 +677,7 @@ Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq
 **默认设置：** `proxy_cookie_domain off;` <br/>
 **可用位置：** server, location
 
-Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+该指令用于转换源站 set-cookie 响应头中的 domain 选项，将其中原本设置的域名（参数1）转换成更新后的域名（参数2）。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)
 
@@ -674,7 +688,7 @@ Sets a text that should be changed in the domain attribute of the `Set-Cookie` h
 **默认设置：** `proxy_cookie_path off;` <br/>
 **可用位置：** server, location
 
-Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+该指令用于转换源站 set-cookie 响应头中的 path 选项，将其中原本设置的path（参数1）转换成更新后的path（参数2）。源自NGINX 开源版本，无变更。
 
 ### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)
 
@@ -684,7 +698,8 @@ Sets a text that should be changed in the path attribute of the `Set-Cookie` hea
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Sets response header fields that will not be passed to the client. No change to the public version. Use this directive multiple times to hide multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+该指令用于隐藏掉某些响应头，从而让这些信息对客户端不可见。源自NGINX 开源版本，无变更。您可以使用该指令来隐藏掉多个响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
+
 
 ### `proxy_ignore_cache_control`
 
@@ -694,7 +709,7 @@ Sets response header fields that will not be passed to the client. No change to 
 **默认设置：** none <br/>
 **可用位置：** server, location, if in location
 
-Disables processing of certain `cache-control` directives in the response from the origin. The following directives can be ignored:
+该指令用于设置 CDN Pro 忽略来自源站 `cache-control` 响应头中的某些参数。可以忽略以下指令：
 
 *   no-cache
 *   no-store
@@ -704,11 +719,11 @@ Disables processing of certain `cache-control` directives in the response from t
 *   stale-while-revalidate
 *   stale-if-error
 
-Examples: ignore the no-cache and no-store directives:
+示例：忽略掉来自源响应头中的 no-cache 和 no-store：
 ```nginx
 proxy_ignore_cache_control no-cache no-store;
 ```
-Note: This directive does not modify the "Cache-Control" header from the origin.
+注意：该指令并不会修改或者重写 `cache-control` 响应头。
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -718,7 +733,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
+该指令用于设置 CDN Pro 忽略掉来自源站的某些响应头。最常用的情景是用于忽略缓存相关标记，例如 “Cache-Control” 或 “Expires” 响应头。 源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 无修改。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -728,7 +743,8 @@ Disables processing of certain response header fields in the response from the o
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Specifies the HTTP method to use in requests forwarded to the proxied server instead of the method from the client request. Parameter value can contain variables.
+该指令用于设置 CDN Pro 向源站发起回源请求时的 HTTP 协议方法，其参数值可以包含变量。对 [开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method) 无修改。
+
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
@@ -738,7 +754,8 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
 **可用位置：** server, location
 
-Specifies in which cases a request should be passed to the next origin server. No change to the public version. 
+该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。源自 NGINX 公共版本没有变化。
+
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
@@ -748,7 +765,8 @@ Specifies in which cases a request should be passed to the next origin server. N
 **默认设置：** `proxy_next_upstream_timeout 0;` <br/>
 **可用位置：** server, location
 
-Limits the time during which a request can be passed to the next upstream server. No change to the public version.
+该指令用于设置 CDN Pro 向源站配置里的下一个服务器发起重试请求的超时时间。默认配置‘0’表示没有超时限制。源自 NGINX 公共版本没有变化。
+
 
 ### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
 
@@ -758,7 +776,7 @@ Limits the time during which a request can be passed to the next upstream server
 **默认设置：** `proxy_next_upstream_tries 0;` <br/>
 **可用位置：** server, location
 
-Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
+该指令用于设置 CDN Pro 向源站配置里的下一个服务器发起重试请求的尝试次数。默认配置‘0’表示没有次数限制。源自 NGINX 公共版本没有变化。
 
 ### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
 
@@ -904,7 +922,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN360 edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN Pro edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
 
 For example: if the configuration is:
 ```nginx
@@ -978,7 +996,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
-* CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
+* CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
 
 ### `slice_ignore_etag`

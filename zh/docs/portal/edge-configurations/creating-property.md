@@ -1,11 +1,14 @@
 # Creating a Property
 
-To create a property, complete the Create a Property form with required information. After creating a property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
+There are two ways to create a new property:<ul><li>Create a new property from scratch.</ul></li><ul><li> Clone an existing property whose settings are similar to the property you want to create, and then change the settings of the cloned property to suit your needs.</ul></li>
+
+After you create the new property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
 
 ## Getting Started
 
 1. In the left pane, click **Edge Configurations**, and then select **Properties**.
-2. At the top right of the Properties page, click the **Create Property** button. 
+2. To create a new property from scratch, click the **Create Property** button at the top right of the Properties page. <br><br><u>OR </u></br>
+   To clone an existing property, find the property you want to clone on the Properties page, and then click the vertical ellipsis under **Actions** and select **Clone**. Or click a property ID, and then click the horizontal ellipsis next to the **Edit** or **Clone** button and select **Clone**. 
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="900"></p>
 
@@ -20,8 +23,8 @@ To create a property, complete the Create a Property form with required informat
 | Configuration Version     | Read-only field that shows the version number of this property. By default, your first property configuration is Version 1. |
 | Description               | Add a description for this first property version. |
 | Hostnames                 | Enter one or more hostnames to be accelerated and which your end users will access. |
-| Origins                   | Origins are your servers that CDN360 accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
-| Edge Logic                | Write NGINX configuration code to specify how you want CDN360 to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Cache Settings dialog box. For more information, refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>).</li> 
+| Origins                   | Origins are your servers that CDN Pro accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
+| Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Cache Settings dialog box. For more information, refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>).</li> 
 | TLS Settings              | Select the [TLS client certificate settings](#tls-settings) for your property.|
 | Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact CDNetworks.|
 | Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache sharing, China ICP Beian, and a load balancer hash key.|
@@ -61,9 +64,9 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 **Note:** You can set **Has ICP Beian** to **Yes** without contacting CDNetworks; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from CDNetworks.
 
-**Load Balancer Hash Key:** CDN360 uses multiple tiers of load balancing to distribute client requests to different servers, with  consistent hashing used in many of these places. By default, the URL is used as the hash key, which should be satisfactory in most cases. However, you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header field to indicate different resources. In general, the variable(s) specified here should be a subset of the variables you enter [into the cache key](</docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key>). Only the following variables are supported: `$http_*`, `$cookie_*`, `$arg_*`.
+**Load Balancer Hash Key:** CDN Pro uses multiple tiers of load balancing to distribute client requests to different servers, with  consistent hashing used in many of these places. By default, the URL is used as the hash key, which should be satisfactory in most cases. However, you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header field to indicate different resources. In general, the variable(s) specified here should be a subset of the variables you enter [into the cache key](</docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key>). Only the following variables are supported: `$http_*`, `$cookie_*`, `$arg_*`.
 
- **Certificate Renew Automation:** By default, CDN360 takes control of the contents under the ``/.well-known/{acme-challenge, pki-validation}`` directories to support [certificate auto-renew](</docs/portal/certificates/auto-renewal.md>) for properties. If you need to manage these two directories by yourself on the origin (for example, to implement your own certificate auto-renew mechanism), you can use this configuration option to disable the default behavior. <ul><li>If **Support** is selected, CDN360 takes control of the two "special" directories to support auto-renewing of the property's certificate. This is the default setting.</ul></li> <ul><li>If **Disable** is selected, CDN360 releases control of these special directories to the origin.</ul></li>
+ **Certificate Renew Automation:** By default, CDN Pro takes control of the contents under the ``/.well-known/{acme-challenge, pki-validation}`` directories to support [certificate auto-renew](</docs/portal/certificates/auto-renewal.md>) for properties. If you need to manage these two directories by yourself on the origin (for example, to implement your own certificate auto-renew mechanism), you can use this configuration option to disable the default behavior. <ul><li>If **Support** is selected, CDN Pro takes control of the two "special" directories to support auto-renewing of the property's certificate. This is the default setting.</ul></li> <ul><li>If **Disable** is selected, CDN Pro releases control of these special directories to the origin.</ul></li>
 
  **HTTP/2:** Use the radio buttons to enable or disable the HTTP/2 protocol. HTTP/2 is enabled by default. If disabled, HTTP/1.1 is used. 
 

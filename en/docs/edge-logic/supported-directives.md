@@ -1,6 +1,6 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN360 Edge Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
+This section lists all the directives you can use in the CDN Pro Edge Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
@@ -195,14 +195,14 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 
 Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also respond to status codes returned from the origin.
 
-This directive enables the modification of the response based on the status code received from the origin. For example, this is how to use it to change the status code 403 to 404:
+For example, the following configuration would try a second origin when the first one returns 403:
 ```nginx
 location /abc {
-  origin_pass my-origin;
-  error_page 403 = @return404;
+  origin_pass my-origin1;
+  error_page 403 = @try_origin2;
 }
-location @return404 {
-  return 404;
+location @try_origin2 {
+  origin_pass my-origin2;
 }
 ```
 
@@ -267,7 +267,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **Default:** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context:** server, location
 
-CDN360 always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
+CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
 ### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
@@ -407,7 +407,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same header name exists in different levels, the configuration for that header name in the innermost level takes effect.
 
-Although CDN360 has a hierarchical cache structure, the directive changes the header only in the origin response. 
+Although CDN Pro has a hierarchical cache structure, the directive changes the header only in the origin response. 
 
 ### `origin_limit_rate`
 
@@ -469,7 +469,7 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
 * round_robin : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
-* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL.
+* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL. If the origin server has cache, this option should help with the hit ratio.
 * sorted_list : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
 
 
@@ -484,7 +484,7 @@ When an origin is resolved into multiple IP addresses (peers), this directive sp
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
 1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
-2. Because CDN360 has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
+2. Because CDN Pro has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
 3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
@@ -558,7 +558,7 @@ That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_ca
 **Default:** `proxy_cache_lock on;` <br/>
 **Context:** server, location
 
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN360 turns it on to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
+When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN Pro enables it to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
 
 ### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
 
@@ -578,7 +578,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -602,9 +602,9 @@ Description:
 
 This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
 
-nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
+CDN Pro calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
+X-Accel-Expires > Cache-Control (max-age), proxy_cache_min_age > Expires > proxy_cache_valid (nginx directive)
 
  When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
 
@@ -628,7 +628,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 **Default:** `proxy_cache_use_stale error timeout;` <br/>
 **Context:** server, location
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN360 edge server would return stale cached content if there is any problem establishing connection to the origin.
+Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN Pro edge server would return stale cached content if there is any problem establishing connection to the origin.
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -638,7 +638,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default:** — <br/>
 **Context:** server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 means cache the response and treat it as expired. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+Sets caching time for different response codes. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
 ### `proxy_cache_vary`
 
@@ -648,9 +648,9 @@ Sets caching time for different response codes. We enhanced the [open-source ver
 **Default:** `proxy_cache_vary off;` <br/>
 **Context:** server, location
 
-If `proxy_cache_vary` is "on", the CDN360 cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents must be purged using "directory purge". An error will be returned if "file purge" is used for varied contents.
+If `proxy_cache_vary` is "on", the CDN Pro cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents should be purged using "directory purge".
 
-If `proxy_cache_vary` is "off", the CDN360 cache servers do not cache any response with the `Vary` header.
+If `proxy_cache_vary` is "off", the CDN Pro cache servers do not cache any response with the `Vary` header.
 
 Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq.md#the-support-and-non-support-of-vary>).
 
@@ -738,7 +738,7 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 **Default:** `proxy_next_upstream error timeout;` <br/>
 **Context:** server, location
 
-Specifies in which cases a request should be passed to the next origin server. No change to the public version. 
+Specifies in which cases a request should be passed to the next server in the origin configuration. No change to the public version. 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
@@ -748,7 +748,7 @@ Specifies in which cases a request should be passed to the next origin server. N
 **Default:** `proxy_next_upstream_timeout 0;` <br/>
 **Context:** server, location
 
-Limits the time during which a request can be passed to the next upstream server. No change to the public version.
+Limits the time during which a request can be passed to the next server in the origin configuration. A value of "0" disables the limit. No change to the public version.
 
 ### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
 
@@ -758,7 +758,7 @@ Limits the time during which a request can be passed to the next upstream server
 **Default:** `proxy_next_upstream_tries 0;` <br/>
 **Context:** server, location
 
-Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
+Limits the number of possible tries for passing a request to the next server in the origin configuration. A value of "0" disables the limit. No change to the public version. 
 
 ### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
 
@@ -904,7 +904,7 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 **Default:** `sanitize_accept_encoding gzip;` <br/>
 **Contexts:** server
 
-This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN360 edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN Pro edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
 
 For example: if the configuration is:
 ```nginx
@@ -978,7 +978,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
-* CDN360 requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
+* CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
 
 ### `slice_ignore_etag`

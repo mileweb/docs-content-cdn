@@ -1,6 +1,6 @@
 # Using Properties to Configure the Edge
 
-A "property" is a configuration of one or more hostnames (domains) that need to be deployed to the CDN360 edge servers. A property determines how you want the servers to obtain, cache, modify, and distribute your content to end users. The key elements of a property include:
+A "property" is a configuration of one or more hostnames (domains) that need to be deployed to the CDN Pro edge servers. A property determines how you want the servers to obtain, cache, modify, and distribute your content to end users. The key elements of a property include:
 - Service hostname(s) to be accelerated
 - One or more origin servers
 - Caching rules for different types of contents
@@ -9,7 +9,7 @@ A "property" is a configuration of one or more hostnames (domains) that need to 
 
 ## Managing Properties
 
-On the CDN360 platform, each property is versioned to track the history of changes and allow rollback if needed. Each version can be deployed independently to the staging or production environment. 
+On the CDN Pro platform, each property is versioned to track the history of changes and allow rollback if needed. Each version can be deployed independently to the staging or production environment. 
 
 Using the Properties page, you can create, modify, validate, and deploy properties. You can also undeploy and delete properties if needed. To display the Properties page, click **Edge Configurations** in the left pane, and then select **Properties**. The following figure shows the key elements on the page, and the table following the figure describes them.
 
@@ -34,4 +34,3 @@ Each property has a vertical ellipsis in the **Actions** column. Clicking the el
 - **Deployment History**: [View](</docs/portal/edge-configurations/deploying-property.md>) the deployment history of the selected property.
 - **Clone**: [Copy](</docs/portal/edge-configurations/creating-property.md>) settings into the Create a Property form to create a new property.
 - **Report**: [Run](</docs/portal/reports.md>) a report using the hostnames of the deployed property. This action is available only for properties that have been deployed to production.
-

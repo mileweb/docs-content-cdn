@@ -1,11 +1,11 @@
 ---
-description: Get to know more about CDN360 with the frequently asked questions.
+description: Get to know more about CDN Pro with the frequently asked questions.
 ---
 
 # Frequently Asked Questions
 
 <details>
-  <summary>How i can use CDN360?</summary>
+  <summary>How i can use CDN Pro?</summary>
   <p>I'm baby glossier bespoke semiotics lo-fi. Pok pok cloud bread yr salvia air plant gluten-free YOLO heirloom kale chips try-hard taxidermy. Intelligentsia venmo brooklyn wayfarers occupy.</p>
 
   <p>It is very easy and cool.</p>

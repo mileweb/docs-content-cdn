@@ -1,14 +1,14 @@
-# Navigating the CDN360 User Interface
+# Navigating the CDN Pro User Interface
 
-When you first log in to the CDN360 portal, menus and submenus appear in the left pane and the dashboard appears in the workspace to the right.
+When you first log in to the CDN Pro portal, menus and submenus appear in the left pane and the dashboard appears in the workspace to the right.
 
-The default menu lists the CDN360 activities you can perform.
+The default menu lists the CDN Pro activities you can perform.
 
 <p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
 
 ## Dashboard
 
-The dashboard is the default page that appears when you log in to the CDN360 portal. It contains charts that show a snapshot of your account traffic over a recent period of time. For detailed information, hover your mouse over the data entry points. For example:
+The dashboard is the default page that appears when you log in to the CDN Pro portal. It contains charts that show a snapshot of your account traffic over a recent period of time. For detailed information, hover your mouse over the data entry points. For example:
 
 <p align=center><img src="/docs/resources/images/accessing-portal/total-bandwidth.png" alt="total bandwidth" width="1000"></p>
 
@@ -32,11 +32,11 @@ The [Reports page](</docs/portal/reports.md>) allows you to generate reports abo
 
 ## Edge Configurations
 
-In CDN360, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, and then validate, test, deploy, and upgrade it -- all conveniently from the CDN360 portal. **Edge Configurations** also provides a page where you can create and manage a [secret](</docs/portal/secrets/overview.md>) that you share with CDNetworks in order for the CDN configuration to work.
+In CDN Pro, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, and then validate, test, deploy, and upgrade it -- all conveniently from the CDN Pro portal. **Edge Configurations** also provides a page where you can create and manage a [secret](</docs/portal/secrets/overview.md>) that you share with CDNetworks in order for the CDN configuration to work.
 
 ## Traffic Management
 
-CDN360 gives you full control of its Global Service Load Balancing (GSLB) system through the [Traffic Management page](</docs/portal/traffic-management/overview.md>). Using this page, you create edge hostnames that will be used in CNAME records to map your service hostnames. The rules you specify for each edge hostname control where each end user's request is routed.
+CDN Pro gives you full control of its Global Service Load Balancing (GSLB) system through the [Traffic Management page](</docs/portal/traffic-management/overview.md>). Using this page, you create edge hostnames that will be used in CNAME records to map your service hostnames. The rules you specify for each edge hostname control where each end user's request is routed.
 
 ## Certificates
 
