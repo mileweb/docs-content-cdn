@@ -196,15 +196,15 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 本指令允许您将源站的响应状态码作为条件来跳转到一个指定的URI。本指令可依照以下顺序，携带3组参数：
 第一组：（必填项）作为判定条件的一个或多个原始状态码，以空格隔开。比如 "400 401 402 403 404 406 501 502 503 504"；
-第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。如有配，则原始状态码将被替换为新状态码响应客户端；
+第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。也可以用 "=" 使用新的URI返回的状态码；
 第三组：（必填项）设置新的响应正文，格式为 URI 或者一个完整的 URL。比如 "@error"(named URI) 或 "http://www.abc.com" (完整URL)。当使用完整 URL 时，会把响应状态码改为302（除非第二组参数为 "=301"，则新响应状态码为301，其余情况下皆为302）。；
 代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) 来支持将源的响应状态码作为判断条件。
 
-例如，下述指令可以在第一个源站返回状态码 403 时尝试第二个源站：
+例如，下述指令可以在第一个源站返回状态码 401或403 时尝试第二个源站：
 ```nginx
 location /abc {
   origin_pass my-origin1;
-  error_page 403 = @try_origin1;
+  error_page 401 403 = @try_origin1;
 }
 location @try_origin1 {
   origin_pass my-origin2;
