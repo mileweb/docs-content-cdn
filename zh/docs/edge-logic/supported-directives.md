@@ -787,11 +787,13 @@ proxy_ignore_cache_control no-cache no-store;
 **可用位置：** server, location
 
 Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be saved:
+该指令用于设置 CDN Pro 不将源站的响应正文缓存到节点上。如果字符串参数中至少有一个值不为空且不等于“0”，则此次请求的正文不会保存响应：
+
 ```nginx
 proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-Since the content is not saved, usually there is no point in looking up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
+由于该请求的正文没有被保存，在节点上寻找该正文一般是没有意义的。因此，该指令通常与 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
@@ -801,7 +803,7 @@ Since the content is not saved, usually there is no point in looking up the cach
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+该指令与 [](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 指令作用相反，用于设置将某些原本被 nginx 默认隐藏掉的响应头传递给客户端。与原生 nginx 不同的是， CDN Pro 默认允许将源站的 `Date` 响应头传递给客户端，这个响应头携带了对应正文从源站检索获取的时间点。该指令支持重复配置，用于设置传递多个指定的响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -811,7 +813,7 @@ Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_p
 **默认设置：** `proxy_pass_request_body on;` <br/>
 **可用位置：** server, location
 
-Enables of disables passing request body from client to upstream. No change to the public version.
+该指令用于允许或禁止将来自客户端请求正文传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)
 
@@ -821,7 +823,7 @@ Enables of disables passing request body from client to upstream. No change to t
 **默认设置：** `proxy_pass_request_headers on;` <br/>
 **可用位置：** server, location
 
-Enables of disables passing request headers from client to upstream. No change to the public version.
+该指令用于允许或禁止将来自客户端请求头传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
 
@@ -833,7 +835,7 @@ Enables of disables passing request headers from client to upstream. No change t
 **默认设置：** `proxy_redirect default;` <br/>
 **可用位置：** server, location
 
-Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
+该指令用于修改从被代理服务器传来的应答头中的"Location"和"Refresh"字段内容。源自 NGINX 开源版本，无变更。
 
 ### `proxy_set`
 
@@ -843,20 +845,20 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **默认设置：** none <br>
 **可用位置：** server, location, if in location
 
-This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While this directive looks very similar to the [`set`](#set) directive, it differs in when it is executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore, the `value` can have information contained in the response header (after being modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
+该指令将参数 `value` 的值赋值给变量 `$variable` ， `value` 可以是另一个变量或变量和文字的组合。虽然该指令看起来与 [`set`](#set) 指令非常相似，但它们的执行时间并不相同。 `set` 指令在非常早的 “rewrite” 阶段执行——这几乎是在从客户端收到请求之后。相反，`proxy_set` 在 CDN Pro 从源接收到响应头（在缓存未命中的情况下）或从缓存中读取后执行的。因此，使用 proxy_set 指令可以给`value` 赋值响应头中的信息（ 如果同时有使用 [`origin_header_modify`](#origin_header_modify) 指令，则取到的header值为 [`origin_header_modify`](#origin_header_modify) 指令修改后）。此外，该指令支持 `if()` 参数，当满足判定条件时才进行变量赋值。示例如下：
 ```nginx
-set $cache_time 1d; # by default, cache for 1 day
-# if origin responds with a "cachetime" header, use it to override the default
+set $cache_time 1d; # 设置cache_time变量的默认值为 1d
+# 如果源站的响应中有 “cachetime” 响应头，则使用该响应头覆盖掉上述默认值
 proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
 proxy_cache_valid $cache_time;
-# extract a part from the origin's response header and send to client
+# 截取源站响应头 “version” 中的一段，并发送给客户端
 proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
 add_header version-number $version_number;
-# do not cache status codes 301 and 302 from the origin
+# 如果源站响应了 301 或者 302 ，则不缓存响应 
 proxy_set $no_store 1 if($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
-The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
+该指令可跨不同层级（http/server/location/location if）合并。如果不同层级存在针对相同的响应头的配置，则最内层的配置生效。
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -866,7 +868,7 @@ The directive is merged across different levels (http/server/location/location i
 **默认设置：** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;` <br/>
 **可用位置：** server, location
 
-Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+该指令用于设置 CDN Pro 回源时的握手协议。源自 Nginx 开源版本，无变更。
 
 ### `realtime_log_downsample`
 
@@ -876,7 +878,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the main setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor).
+该指令用于改写加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 中指定的主要“采样率”。 其参数 `factor` 可以是 [0, 65535] 中的整数或变量。值 0 表示关闭实时日志功能； 1 表示不进行实施日志采样采样； N>1 表示每 N 个请求将生成一条实施日志。如果变量值为空字符串，则该指令不生效；如果参数值无法被正常解析（如非整数的字符串），则该参数将被视为100。实际的采样率可通过参数 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -889,8 +891,10 @@ Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/
 **可用位置：** server, location, if
 
 Stops processing and returns the specified code to a client. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return). 
+停止当前的代码处理，并将指定的响应状态码返回给客户端。 源自 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有变化。
 
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于nginx的 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
+
 
 ### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
 
