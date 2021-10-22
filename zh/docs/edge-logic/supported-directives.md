@@ -803,7 +803,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-该指令与 [](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 指令作用相反，用于设置将某些原本被 nginx 默认隐藏掉的响应头传递给客户端。与原生 nginx 不同的是， CDN Pro 默认允许将源站的 `Date` 响应头传递给客户端，这个响应头携带了对应正文从源站检索获取的时间点。该指令支持重复配置，用于设置传递多个指定的响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
+该指令与 [](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 指令作用相反，用于设置将某些原本被 nginx 默认隐藏掉的响应头传递给客户端。与原生 nginx 不同的是， CDN Pro 默认允许将源站的 `Date` 响应头传递给客户端，这个响应头携带了 CDN Pro 从源站获取对应响应正文的时间点。该指令支持重复配置，用于设置传递多个指定的响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -835,7 +835,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_redirect default;` <br/>
 **可用位置：** server, location
 
-该指令用于修改从被代理服务器传来的应答头中的"Location"和"Refresh"字段内容。源自 NGINX 开源版本，无变更。
+该指令用于修改 CDN Pro 传给客户端的响应答头中的"Location"和"Refresh"内容。源自 NGINX 开源版本，无变更。
 
 ### `proxy_set`
 
@@ -845,7 +845,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** none <br>
 **可用位置：** server, location, if in location
 
-该指令将参数 `value` 的值赋值给变量 `$variable` ， `value` 可以是另一个变量或变量和文字的组合。虽然该指令看起来与 [`set`](#set) 指令非常相似，但它们的执行时间并不相同。 `set` 指令在非常早的 “rewrite” 阶段执行——这几乎是在从客户端收到请求之后。相反，`proxy_set` 在 CDN Pro 从源接收到响应头（在缓存未命中的情况下）或从缓存中读取后执行的。因此，使用 proxy_set 指令可以给`value` 赋值响应头中的信息（ 如果同时有使用 [`origin_header_modify`](#origin_header_modify) 指令，则取到的header值为 [`origin_header_modify`](#origin_header_modify) 指令修改后）。此外，该指令支持 `if()` 参数，当满足判定条件时才进行变量赋值。示例如下：
+该指令将参数 `value` 的值赋值给变量 `$variable` ， `value` 可以是另一个变量或变量和文字的组合。虽然该指令看起来与 [`set`](#set) 指令非常相似，但它们的执行时间并不相同。 `set` 指令在非常早的 “rewrite” 阶段执行——这几乎是在从客户端收到请求之后。相反，`proxy_set` 在 CDN Pro 从源接收到响应头（在缓存未命中的情况下）或从缓存中读取后执行的。因此，使用 proxy_set 指令可以给`value` 赋值响应头中的信息（如果同时有使用 [`origin_header_modify`](#origin_header_modify) 指令，则取到的header值为 [`origin_header_modify`](#origin_header_modify) 指令修改后）。此外，该指令支持 `if()` 参数，当满足判定条件时才进行变量赋值。示例如下：
 ```nginx
 set $cache_time 1d; # 设置cache_time变量的默认值为 1d
 # 如果源站的响应中有 “cachetime” 响应头，则使用该响应头覆盖掉上述默认值
