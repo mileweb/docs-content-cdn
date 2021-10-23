@@ -786,7 +786,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果带的nocache参数值至少有一个不为空或者为0，则此次响应将不被缓存：
+该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果携带的参数值至少有一个不为空且不为0，则此次响应将不被缓存：
 
 ```nginx
 proxy_no_cache $cookie_nocache $arg_nocache$arg_comment; 
