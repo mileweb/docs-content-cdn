@@ -877,7 +877,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于改写加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 中指定的“采样率”。 其参数 `factor` 可以是 [0, 65535] 中的整数或变量。值 0 表示关闭实时日志功能； 1 表示不对实时日志进行采样； N>1 表示每 N 个请求将生成一条实时日志。如果该指令的参数值为空字符串，则指令不生效；如果该指令的参数值无法被正常解析（如非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
+该指令用于覆盖掉加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 中设置的“采样率”。 其参数 `factor` 可以是 [0, 65535] 中的整数或变量。值 0 表示关闭实时日志功能； 1 表示不对实时日志进行采样； N>1 表示每 N 个请求将生成一条实时日志。如果该指令的参数值为空字符串，则指令不生效；如果该指令的参数值无法被正常解析（如非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
