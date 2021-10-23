@@ -802,7 +802,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。CDN Pro 默认配置将源站提供的的 `Date` 响应头传递给客户端，该响应头携带了 CDN Pro 从源站获取对应响应的时间点。该指令支持多次配置，可用于设置 CDN Pro 传递多个不同的响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
+该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。CDN Pro 默认将源站提供的的 `Date` 响应头传递给客户端，该响应头携带了 CDN Pro 从源站获取对应响应的时间点。该指令支持多次配置，可用于设置 CDN Pro 传递多个不同的响应头给客户端。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
