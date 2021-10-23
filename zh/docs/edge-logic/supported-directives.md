@@ -786,14 +786,13 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be saved:
-该指令用于设置 CDN Pro 不将源站的响应正文缓存到节点上。如果字符串参数中至少有一个值不为空且不等于“0”，则此次请求的正文不会保存响应：
+该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果带的nocache参数值至少有一个不为空或者为0，则此次响应将不被缓存：
 
 ```nginx
-proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
+proxy_no_cache $cookie_nocache $arg_nocache$arg_comment; 
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-由于该请求的正文没有被保存，在节点上寻找该正文一般是没有意义的。因此，该指令通常与 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
+由于响应没有被保存，所以在节点上检索该响应也是无意义的行为。因此，该指令通常搭配 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
@@ -803,7 +802,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-该指令与 [](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 指令作用相反，用于设置将某些原本被 nginx 默认隐藏掉的响应头传递给客户端。与原生 nginx 不同的是， CDN Pro 默认允许将源站的 `Date` 响应头传递给客户端，这个响应头携带了 CDN Pro 从源站获取对应响应正文的时间点。该指令支持重复配置，用于设置传递多个指定的响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
+该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。CDN Pro 默认配置将源站提供的的 `Date` 响应头传递给客户端，该响应头携带了 CDN Pro 从源站获取对应响应的时间点。该指令支持多次配置，可用于设置 CDN Pro 传递多个不同的响应头。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -813,7 +812,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_pass_request_body on;` <br/>
 **可用位置：** server, location
 
-该指令用于允许或禁止将来自客户端请求正文传递给源站。源自 NGINX 开源版本，无变更。
+该指令用于允许或禁止将客户端的请求正文传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)
 
@@ -823,7 +822,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_pass_request_headers on;` <br/>
 **可用位置：** server, location
 
-该指令用于允许或禁止将来自客户端请求头传递给源站。源自 NGINX 开源版本，无变更。
+该指令用于允许或禁止将客户端的请求头传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
 
@@ -845,7 +844,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** none <br>
 **可用位置：** server, location, if in location
 
-该指令将参数 `value` 的值赋值给变量 `$variable` ， `value` 可以是另一个变量或变量和文字的组合。虽然该指令看起来与 [`set`](#set) 指令非常相似，但它们的执行时间并不相同。 `set` 指令在非常早的 “rewrite” 阶段执行——这几乎是在从客户端收到请求之后。相反，`proxy_set` 在 CDN Pro 从源接收到响应头（在缓存未命中的情况下）或从缓存中读取后执行的。因此，使用 proxy_set 指令可以给`value` 赋值响应头中的信息（如果同时有使用 [`origin_header_modify`](#origin_header_modify) 指令，则取到的header值为 [`origin_header_modify`](#origin_header_modify) 指令修改后）。此外，该指令支持 `if()` 参数，当满足判定条件时才进行变量赋值。示例如下：
+该指令将参数 `value` 的值赋值给变量 `$variable` ， `value` 可以是另一个变量或变量和字符的组合。该指令与另一个 [`set`](#set) 指令非常相似，两者的区别是它们位于 CDN Pro 的不同处理阶段中。 `set` 指令是在流程早期的的 “rewrite” 阶段中被执行——几乎是在 CDN Pro 接收到客户端请求之后就立即执行。相反，`proxy_set` 是在 CDN Pro 从源接收到响应头（在缓存未命中的情况下）或从缓存中检索完毕后才被执行。因此，proxy_set 指令可以将响应头中的信息赋值给目标变量参数（如果使用了 [`origin_header_modify`](#origin_header_modify) 指令，则取到的header值为 [`origin_header_modify`](#origin_header_modify) 指令修改后的新值）。此外，该指令支持 `if()` 参数，用于指定该指令生效的条件。示例如下：
 ```nginx
 set $cache_time 1d; # 设置cache_time变量的默认值为 1d
 # 如果源站的响应中有 “cachetime” 响应头，则使用该响应头覆盖掉上述默认值
@@ -854,11 +853,11 @@ proxy_cache_valid $cache_time;
 # 截取源站响应头 “version” 中的一段，并发送给客户端
 proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
 add_header version-number $version_number;
-# 如果源站响应了 301 或者 302 ，则不缓存响应 
+# 如果源站响应了 301 或者 302 ，则该响应不缓存 
 proxy_set $no_store 1 if($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
-该指令可跨不同层级（http/server/location/location if）合并。如果不同层级存在针对相同的响应头的配置，则最内层的配置生效。
+该指令可跨不同层级（http/server/location/location if）合并。如果不同层级中使用该指令对同一个变量进行了赋值，则最内层的配置生效。
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -878,7 +877,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于改写加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 中指定的“采样率”。 其参数 `factor` 可以是 [0, 65535] 中的整数或变量。值 0 表示关闭实时日志功能； 1 表示不进行实施日志采样采样； N>1 表示每 N 个请求将生成一条实施日志。如果变量值为空字符串，则该指令不生效；如果参数值无法被正常解析（如非整数的字符串），则该参数将被视为100。最终生效的采样因子可通过参数 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
+该指令用于改写加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 中指定的“采样率”。 其参数 `factor` 可以是 [0, 65535] 中的整数或变量。值 0 表示关闭实时日志功能； 1 表示不对实时日志进行采样； N>1 表示每 N 个请求将生成一条实时日志。如果该指令的参数值为空字符串，则指令不生效；如果该指令的参数值无法被正常解析（如非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -890,7 +889,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-停止当前的代码处理，并将指定的响应状态码返回给客户端。 源自 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有变化。
+停止当前的代码处理，并将指定的响应状态码以及响应正文（如有配置text或URL）返回给客户端。 源自 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有变化。
 
 该指令属于nginx的 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
 
