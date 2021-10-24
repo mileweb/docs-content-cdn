@@ -786,12 +786,13 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be saved:
+该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果携带的参数值至少有一个不为空且不为0，则此响应将不被缓存：
+
 ```nginx
-proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
+proxy_no_cache $cookie_nocache $arg_nocache$arg_comment; 
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-Since the content is not saved, usually there is no point in looking up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
+由于响应没有被保存，所以在相同条件下也没有必要检索缓存。因此，该指令通常搭配 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
@@ -801,7 +802,7 @@ Since the content is not saved, usually there is no point in looking up the cach
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。默认设置会将源站返回的 `Date` 响应头传递给客户端。该响应头携带了 CDN Pro 从源站获取响应的时间点。该指令支持多次配置以传递多个不同的响应头给客户端。只有当一个 location 配置块中没有该指令时，上一层（server 层）的配置才会被继承到 location 中，否则上层的配置会被忽略。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -811,7 +812,7 @@ Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_p
 **默认设置：** `proxy_pass_request_body on;` <br/>
 **可用位置：** server, location
 
-Enables of disables passing request body from client to upstream. No change to the public version.
+该指令用于允许或禁止将客户端的请求正文传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)
 
@@ -821,7 +822,7 @@ Enables of disables passing request body from client to upstream. No change to t
 **默认设置：** `proxy_pass_request_headers on;` <br/>
 **可用位置：** server, location
 
-Enables of disables passing request headers from client to upstream. No change to the public version.
+该指令用于允许或禁止将客户端的请求头传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
 
@@ -833,7 +834,7 @@ Enables of disables passing request headers from client to upstream. No change t
 **默认设置：** `proxy_redirect default;` <br/>
 **可用位置：** server, location
 
-Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
+该指令用于修改 CDN Pro 传给客户端的"Location"和"Refresh"响应头中的内容。源自 NGINX 开源版本，无变更。
 
 ### `proxy_set`
 
@@ -843,20 +844,20 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **默认设置：** none <br>
 **可用位置：** server, location, if in location
 
-This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While this directive looks very similar to the [`set`](#set) directive, it differs in when it is executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore, the `value` can have information contained in the response header (after being modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
+该指令将参数 `value` 的值赋值给变量 `$variable`。`value` 可以是另一个变量或变量和字符串的组合。该指令与 [`set`](#set) 指令非常相似，但是它们在请求处理的不同阶段被执行。`set` 指令是在收到请求后很早的 “rewrite” 阶段中被执行。而 `proxy_set` 是在从源接收到响应头（在缓存未命中的情况下）或从缓存中读取完毕后才被执行。因此，proxy_set 指令可以将响应头中的信息赋值给目标变量。请注意，响应头有可能被 [`origin_header_modify`](#origin_header_modify) 指令修改过。此外，该指令支持 `if()` 参数，用于指定该指令生效的条件。示例如下：
 ```nginx
-set $cache_time 1d; # by default, cache for 1 day
-# if origin responds with a "cachetime" header, use it to override the default
+set $cache_time 1d; # 设置cache_time变量的默认值为 1d
+# 如果源站的响应中有 “cachetime” 响应头，则使用该响应头覆盖掉上述默认值
 proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
 proxy_cache_valid $cache_time;
-# extract a part from the origin's response header and send to client
+# 截取源站响应头 “version” 中的一段，并发送给客户端
 proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
 add_header version-number $version_number;
-# do not cache status codes 301 and 302 from the origin
+# 如果源站响应了 301 或者 302 ，则该响应不缓存 
 proxy_set $no_store 1 if($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
-The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
+该指令会跨不同层级（server/location/location if）合并。如果不同层级中使用该指令试图对同一个变量进行赋值，则只有最内层的配置生效。
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -866,7 +867,7 @@ The directive is merged across different levels (http/server/location/location i
 **默认设置：** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;` <br/>
 **可用位置：** server, location
 
-Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+该指令用于设置 CDN Pro 回源时的握手协议。源自 Nginx 开源版本，无变更。
 
 ### `realtime_log_downsample`
 
@@ -876,7 +877,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the main setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor).
+该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -888,9 +889,10 @@ Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-Stops processing and returns the specified code to a client. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return). 
+停止当前的请求处理，并将指定的响应状态码以及正文（如有配置text或URL）返回给客户端。 对 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有修改。
 
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于nginx的 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
+
 
 ### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
 
@@ -900,7 +902,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-如果请求URI匹配正则表达式`regex`，则将其改写为`replacement`的值。功能上和[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)完全一致。 请注意该指令匹配的对象是变量`$uri`，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给`$uri`.
+如果请求URI匹配正则表达式`regex`，则将其改写为`replacement`的值。功能上和[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)完全一致。请注意该指令匹配的对象是变量`$uri`，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给变量`$uri`.
 
 该指令属于nginx的[rewrite模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
 
@@ -912,7 +914,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `satisfy all;` <br/>
 **可用位置：** server, location
 
-Allows access if all (all) or at least one (any) of the ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) modules allows access. No change to the public version.
+该指令用于设置 CDN Pro 对多个访问控制功能的校验方式。当配置值为 all 时，只有当边缘逻辑中所有的 [`allow`](#allow), [`deny`](#deny) 以及 [`auth_request`](#auth_request) 的结果都为 pass 时，请求才会通过校验。配置值为 any 时，只要上述指令结果有一个为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
 
 ### `sanitize_accept_encoding`
 
@@ -922,13 +924,13 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN Pro edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+该指令用于将请求头“Accept-Encoding”的值映射到不超过5个可能的组合上。您最多可以在此指令后指定四个参数，每个参数都是一个或多个（以逗号为分隔符）“内容编码格式”的组合，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的“Accept-Encoding”值与本指令的配置组合逐个进行匹配。如果某个组合里的所有格式都出现在了此请求头里，则用该组合值替换掉请求头的值。如果未找到匹配的组合，则将请求的值设置为“identity”。
 
-For example: if the configuration is:
+示例如下：如果边缘逻辑中的配置是：
 ```nginx
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
-The processing logic will be:
+那么处理逻辑将是：
 ```php
 if (A-E-header.contains("gzip") && A-E-header.contains("br"))
     A-E-header="gzip,br";
@@ -937,9 +939,10 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
-It is not hard to see that the default setting of this directive rewrites the header value to either "gzip" or "identity". Combined with the default caching policy, each server would [cache the response in only one of the two encoded formats](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary). If a client's request is asking for the other format, the server would compress or decompress the cached version on-the-fly to fulfill it.
+不难看出，该指令的默认设置会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的默认缓存策略，服务器将 [仅缓存这两种编码格式中的一种](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)。如果客户端请求两者中的另一种，服务器将通过在线压缩或解压缩缓存的方式来响应。
 
-If you use this directive and override the default setting, most likely you also want to cache the response in different encodings separately. You can achieve this by adding the header field value into the cache key:
+如果您使用了此指令，那么很可能您还希望 CDN Pro 能区别缓存不同编码格式的响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
+
 ```nginx
 set $cache_misc $cache_misc."ae=$http_accept_encoding";
 ```
