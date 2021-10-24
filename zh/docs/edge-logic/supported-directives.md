@@ -914,7 +914,7 @@ proxy_no_cache $no_store;
 **默认设置：** `satisfy all;` <br/>
 **可用位置：** server, location
 
-Allows access if all (all) or at least one (any) of the ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) modules allows access. No change to the public version.
+该指令用于设置 CDN Pro 对access模块的校验方式。配置值为 all 时，当边缘逻辑中所有的 ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) 指令结果都为 pass 时，请求才会通过校验；配置值为 any 时，只要边缘逻辑中有一个 ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) 指令结果为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
 
 ### `sanitize_accept_encoding`
 
@@ -925,12 +925,13 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 **可用位置：** server
 
 This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN Pro edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+该指令将请求头“Accept-Encoding”映射到配置的编码格式组合上。您最多可以在此指令后指定四个参数。每个参数都是一个或多个（以逗号为分隔符）的“内容编码格式”组合，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会尝试把接收到的“Accept-Encoding”请求头值，按照从左到右的顺序与本指令的配置组合进行匹配。如果在配置的编码组合中找到了请求头值，则用该组合值替换掉请求头值。如果未找到匹配的组合，则将标头值设置为“identity”。
 
-For example: if the configuration is:
+示例如下：如果边缘逻辑中的配置是：
 ```nginx
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
-The processing logic will be:
+那么处理逻辑将是：
 ```php
 if (A-E-header.contains("gzip") && A-E-header.contains("br"))
     A-E-header="gzip,br";
@@ -939,9 +940,10 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
-It is not hard to see that the default setting of this directive rewrites the header value to either "gzip" or "identity". Combined with the default caching policy, each server would [cache the response in only one of the two encoded formats](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary). If a client's request is asking for the other format, the server would compress or decompress the cached version on-the-fly to fulfill it.
+不难看出，该指令的默认设置会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的默认缓存策略，每个服务器将 [仅以这两种编码格式其中的一种进行缓存响应](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)。如果客户端的请求要求其他格式，服务器将通过即时压缩或即时解压缩缓存的方式来实现它。
 
-If you use this directive and override the default setting, most likely you also want to cache the response in different encodings separately. You can achieve this by adding the header field value into the cache key:
+如果您使用此指令覆盖掉了默认设置，那么很可能您还希望 CDN Pro 分别以不同的编码区分缓存和响应。您可以通过将请求头值添加到缓存键中的方式来实现此目的：
+
 ```nginx
 set $cache_misc $cache_misc."ae=$http_accept_encoding";
 ```
