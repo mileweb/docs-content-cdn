@@ -786,13 +786,13 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果携带的参数值至少有一个不为空且不为0，则此次响应将不被缓存：
+该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果携带的参数值至少有一个不为空且不为0，则此响应将不被缓存：
 
 ```nginx
 proxy_no_cache $cookie_nocache $arg_nocache$arg_comment; 
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-由于响应没有被保存，所以在节点上检索该响应也是无意义的行为。因此，该指令通常搭配 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
+由于响应没有被保存，所以在相同条件下也没有必要检索缓存。因此，该指令通常搭配 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
@@ -802,7 +802,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。CDN Pro 默认将源站提供的的 `Date` 响应头传递给客户端，该响应头携带了 CDN Pro 从源站获取对应响应的时间点。该指令支持多次配置，可用于设置 CDN Pro 传递多个不同的响应头给客户端。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。
+该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。默认设置会将源站返回的 `Date` 响应头传递给客户端。该响应头携带了 CDN Pro 从源站获取响应的时间点。该指令支持多次配置以传递多个不同的响应头给客户端。只有当一个 location 配置块中没有该指令时，上一层（server 层）的配置才会被继承到 location 中，否则上层的配置会被忽略。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -834,7 +834,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** `proxy_redirect default;` <br/>
 **可用位置：** server, location
 
-该指令用于修改 CDN Pro 传给客户端的响应答头中的"Location"和"Refresh"内容。源自 NGINX 开源版本，无变更。
+该指令用于修改 CDN Pro 传给客户端的"Location"和"Refresh"响应头中的内容。源自 NGINX 开源版本，无变更。
 
 ### `proxy_set`
 
@@ -844,7 +844,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置：** none <br>
 **可用位置：** server, location, if in location
 
-该指令将参数 `value` 的值赋值给变量 `$variable` ， `value` 可以是另一个变量或变量和字符的组合。该指令与另一个 [`set`](#set) 指令非常相似，两者的区别是它们位于 CDN Pro 的不同处理阶段中。 `set` 指令是在流程早期的的 “rewrite” 阶段中被执行——几乎是在 CDN Pro 接收到客户端请求之后就立即执行。相反，`proxy_set` 是在 CDN Pro 从源接收到响应头（在缓存未命中的情况下）或从缓存中检索完毕后才被执行。因此，proxy_set 指令可以将响应头中的信息赋值给目标变量参数（如果使用了 [`origin_header_modify`](#origin_header_modify) 指令，则取到的header值为 [`origin_header_modify`](#origin_header_modify) 指令修改后的新值）。此外，该指令支持 `if()` 参数，用于指定该指令生效的条件。示例如下：
+该指令将参数 `value` 的值赋值给变量 `$variable`。`value` 可以是另一个变量或变量和字符串的组合。该指令与 [`set`](#set) 指令非常相似，但是它们在请求处理的不同阶段被执行。`set` 指令是在收到请求后很早的 “rewrite” 阶段中被执行。而 `proxy_set` 是在从源接收到响应头（在缓存未命中的情况下）或从缓存中读取完毕后才被执行。因此，proxy_set 指令可以将响应头中的信息赋值给目标变量。请注意，响应头有可能被 [`origin_header_modify`](#origin_header_modify) 指令修改过。此外，该指令支持 `if()` 参数，用于指定该指令生效的条件。示例如下：
 ```nginx
 set $cache_time 1d; # 设置cache_time变量的默认值为 1d
 # 如果源站的响应中有 “cachetime” 响应头，则使用该响应头覆盖掉上述默认值
@@ -857,7 +857,7 @@ add_header version-number $version_number;
 proxy_set $no_store 1 if($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
-该指令可跨不同层级（http/server/location/location if）合并。如果不同层级中使用该指令对同一个变量进行了赋值，则最内层的配置生效。
+该指令会跨不同层级（server/location/location if）合并。如果不同层级中使用该指令试图对同一个变量进行赋值，则只有最内层的配置生效。
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -877,7 +877,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于覆盖掉加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 中设置的“采样率”。 其参数 `factor` 可以是 [0, 65535] 中的整数或变量。值 0 表示关闭实时日志功能； 1 表示不对实时日志进行采样； N>1 表示每 N 个请求将生成一条实时日志。如果该指令的参数值为空字符串，则指令不生效；如果该指令的参数值无法被正常解析（如非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
+该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -889,7 +889,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-停止当前的代码处理，并将指定的响应状态码以及响应正文（如有配置text或URL）返回给客户端。 源自 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有变化。
+停止当前的请求处理，并将指定的响应状态码以及正文（如有配置text或URL）返回给客户端。 对 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有修改。
 
 该指令属于nginx的 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
 
@@ -902,7 +902,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-如果请求URI匹配正则表达式`regex`，则将其改写为`replacement`的值。功能上和[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)完全一致。 请注意该指令匹配的对象是变量`$uri`，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给`$uri`.
+如果请求URI匹配正则表达式`regex`，则将其改写为`replacement`的值。功能上和[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)完全一致。请注意该指令匹配的对象是变量`$uri`，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给变量`$uri`.
 
 该指令属于nginx的[rewrite模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
 
@@ -914,7 +914,7 @@ proxy_no_cache $no_store;
 **默认设置：** `satisfy all;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 对access模块的校验方式。配置值为 all 时，当边缘逻辑中所有的 ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) 指令结果都为 pass 时，请求才会通过校验；配置值为 any 时，只要边缘逻辑中有一个 ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) 指令结果为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
+该指令用于设置 CDN Pro 对多个访问控制功能的校验方式。当配置值为 all 时，只有当边缘逻辑中所有的 [`allow`](#allow), [`deny`](#deny) 以及 [`auth_request`](#auth_request) 的结果都为 pass 时，请求才会通过校验。配置值为 any 时，只要上述指令结果有一个为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
 
 ### `sanitize_accept_encoding`
 
@@ -924,7 +924,7 @@ proxy_no_cache $no_store;
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-该指令将请求头“Accept-Encoding”映射到配置的编码格式组合上。您最多可以在此指令后指定四个参数。每个参数都是一个或多个（以逗号为分隔符）的“内容编码格式”组合，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会尝试把接收到的“Accept-Encoding”请求头值，按照从左到右的顺序与本指令的配置组合进行匹配。如果在配置的编码组合中找到了请求头值，则用该组合值替换掉请求头值。如果未找到匹配的组合，则将标头值设置为“identity”。
+该指令用于将请求头“Accept-Encoding”的值映射到不超过5个可能的组合上。您最多可以在此指令后指定四个参数，每个参数都是一个或多个（以逗号为分隔符）“内容编码格式”的组合，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的“Accept-Encoding”值与本指令的配置组合逐个进行匹配。如果某个组合里的所有格式都出现在了此请求头里，则用该组合值替换掉请求头的值。如果未找到匹配的组合，则将请求的值设置为“identity”。
 
 示例如下：如果边缘逻辑中的配置是：
 ```nginx
@@ -939,9 +939,9 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
-不难看出，该指令的默认设置会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的默认缓存策略，每个服务器将 [仅以这两种编码格式其中的一种进行缓存响应](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)。如果客户端的请求要求其他格式，服务器将通过即时压缩或即时解压缩缓存的方式来实现它。
+不难看出，该指令的默认设置会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的默认缓存策略，服务器将 [仅缓存这两种编码格式中的一种](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)。如果客户端请求两者中的另一种，服务器将通过在线压缩或解压缩缓存的方式来响应。
 
-如果您使用此指令覆盖掉了默认设置，那么很可能您还希望 CDN Pro 分别以不同的编码区分缓存和响应。您可以通过将请求头值添加到缓存键中的方式来实现此目的：
+如果您使用了此指令，那么很可能您还希望 CDN Pro 能区别缓存不同编码格式的响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
 
 ```nginx
 set $cache_misc $cache_misc."ae=$http_accept_encoding";
