@@ -79,7 +79,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
 
-2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。
+2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。本指令添加的尾部并不会出现在发给客户的响应里。
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 

@@ -79,7 +79,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
 
-2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client.
+2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the `Transfer-Encoding` to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client. The added trailer won't appear in the response to the client.
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
