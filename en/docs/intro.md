@@ -1,8 +1,8 @@
 # Welcome to CDN Pro (previously known as CDN360)
 
-CDN Pro is a platform we architected from scratch based on the latest technology and our 20+ years of practice in the content delivery industry. It is designed to give the users unprecedented flexibility to deliver digital assets to consumers globally with the best possible performance and security. Under the hood, we also made sure the system is well structured and easy to maintain. These factors are important to keep the cost down and outages away.
+CDN Pro is a platform we architected from scratch based on the latest technology and our 20+ years of practice in the content delivery industry. It is designed to give you unprecedented flexibility to deliver digital assets to consumers globally with the best possible performance and security. Under the hood, we made sure the system has a very clean structure that is easy to operate and extend in the future. These factors are important to keep the cost down and outages away.
 
-The platform comes with a friendly yet powerful user interface that allows 100% self-service of even the most complicated delivery rules. Its application programming interface (API) enables seamless integration of CDN into the entire development lifecycle of your applications. We also extended the concept of 100% self-service to the business side. CDN Pro has a unique price model that allows you to explore for the best trade-off between performance and cost. We truly believe this is a product that will change the industry!
+The platform comes with a friendly yet powerful user interface that allows 100% self-service of even the most complicated delivery configurations. Its application programming interface (API) enables seamless integration of CDN into the entire development lifecycle of your applications. We also extended the concept of 100% self-service to the business side. CDN Pro has a unique price model that allows you to explore for the best trade-off between performance and cost. We truly believe this is a product that will change the industry!
 
 ## CDN Pro Key Features
 
