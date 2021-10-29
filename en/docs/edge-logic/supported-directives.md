@@ -159,11 +159,19 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:** `custom_log_field {custom log field id} {value or variable};`<br/>
+**Syntax:** `custom_log_field id value;`<br/>
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
+This directive allows you to add up to 2 customized fields into the access log. The id can be either 1 or 2. The value can contain variables. The 2 fields can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced analytical tool. If you require this feature, contact our support team.
+
+Examples:
+```nginx
+location / {
+  custom_log_field 1 $http_x_data; # save the request header value X-Data to custom1
+  custom_log_field 2 $cookie_abc; # save the value of cookie abc to custom2
+}
+```
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
