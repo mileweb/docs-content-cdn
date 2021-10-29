@@ -170,6 +170,7 @@ Examples:
 location / {
   custom_log_field 1 $http_x_data; # save the request header value X-Data to custom1
   custom_log_field 2 $cookie_abc; # save the value of cookie abc to custom2
+  ...
 }
 ```
 

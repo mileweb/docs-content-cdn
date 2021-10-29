@@ -171,6 +171,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 location / {
   custom_log_field 1 $http_x_data; # 将请求头X-Data的值保存到custom1
   custom_log_field 2 $cookie_abc; # 将cookie abc的值保存到custom2
+  ...
 }
 ```
 
