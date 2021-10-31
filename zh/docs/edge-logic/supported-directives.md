@@ -999,10 +999,11 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：** `slice 0;` <br/>
 **可用位置：** server
 
-Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
-* We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
-* CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
-* When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
+该指令用于设置 CDN Pro 从源获取大文件时切片的大小。有效值为 0（即禁用切片），或介于 512k 和 512m 之间（含）的[nginx 度量单位](http://nginx.org/en/docs/syntax.html) 。源必须支持 range 请求并响应 206 状态码。如果需要将对应的响应进行缓存，请使用指令 `proxy_cache_valid 206 ...` 来启用 206 状态码缓存。同时我们在开源版本的基础上对该指令进行了以下更改：
+* 我们禁止在任何 location 模块中使用此指令，以确保整个域名具有相同的切片大小设置。这是为了避免某些请求需要在不同 location 层级内进行处理而造成的潜在问题。
+* CDN Pro 要求所有缓存的切片都携带相同的 ETag 值，以确保这些切片归属于同一个原始文件。当从源站新获取的切片与先前已缓存切片有不同的 Etag 值时，当前与客户端的传输响应将被终止，并且所有已缓存的切片都会立即清除。因此在文件内容未发生变更的情况下，请确保源站上每个文件的 ETag 值不会更改。当然您也可以使用 `slice_ignore_etag on;` 指令来禁用此校验。
+* 启用切片功能后，CDN Pro 会自动删除回请求头 “Accept-Encoding” 来禁用获取压缩响应。如果此行为被其他指令覆盖，例如，通过 `origin_set_header Accept-Encoding ...` 指令来强行保留回源头  “Accept-Encoding” ，那么客户端可能会收到损坏的响应。
+
 
 ### `slice_ignore_etag`
 
@@ -1012,7 +1013,8 @@ Sets the size of the slices when fetching large files from the origin. The valid
 **默认设置：** `slice_ignore_etag off;` <br/>
 **可用位置：** server
 
-This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
+该指令用于关闭切片文件的 ETag 一致性检查。如果源无法确保为同一文件生成相同的 ETag 值时，可用该指令作为临时解决方案。
+
 
 ### `sorted_querystring_filter_parameter`
 
@@ -1022,8 +1024,9 @@ This directive can be used to disable the ETag consistency check of sliced files
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-Removes some query parameters from the variable ```$sorted_querystring_args```.
-This feature is implemented on top of this [open-source project](https://github.com/wandenberg/nginx-sorted-querystring-module).
+从变量```$sorted_querystring_args``` 中删除一些查询参数。
+此功能是基于 [Nginx nginx-sorted-querystring-module 模块](https://github.com/wandenberg/nginx-sorted-querystring-module) 之上实现的。
+
 
 ### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)
 
@@ -1033,7 +1036,8 @@ This feature is implemented on top of this [open-source project](https://github.
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Sets a string to replace in the response and a replacement string. No change to the public version. Note that when the response is compressed, the search and replace may not work as desired.
+该指令用于实现响应内容的替换，其中参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。代码源 NGINX开源版本无变更。请注意，当响应被压缩时，搜索和替换操作可能无法按预期工作。
+
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
 
@@ -1043,7 +1047,8 @@ Sets a string to replace in the response and a replacement string. No change to 
 **默认设置：** `sub_filter_last_modified off;` <br/>
 **可用位置：** server, location
 
-Allows preserving the “Last-Modified” header field from the original response during replacement to facilitate response caching. No change to the public version.
+该指令允许在替换期间保留原始响应中的“Last-Modified”头字段，以便于响应缓存。代码源自NGINX开源版本，无变更。
+
 
 ### [`sub_filter_once`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_once)
 
@@ -1053,7 +1058,7 @@ Allows preserving the “Last-Modified” header field from the original respons
 **默认设置：** `sub_filter_once on;` <br/>
 **可用位置：** server, location
 
-Indicates whether to look for each string to replace once or repeatedly. No change to the public version.
+该指令表示只替换第一次匹配的字符串。代码源自NGINX开源版本，无变更。
 
 ### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)
 
@@ -1063,8 +1068,7 @@ Indicates whether to look for each string to replace once or repeatedly. No chan
 **默认设置：** `sub_filter_types text/html;` <br/>
 **可用位置：** server, location
 
-Enables string replacement in responses with the specified MIME types in addition to “text/html”. No change to the public version.
-
+该指令表示允许替换的文件类型，默认值为 “text/html” 。您可以使用该指令添加除 “text/html” 以外其他需要执行替换操作的MIME类型。代码源自NGINX开源版本，无变更。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
@@ -1074,7 +1078,8 @@ Enables string replacement in responses with the specified MIME types in additio
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
+该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求的 referer 不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
+
 
 ### `access_log_downsample`
 
@@ -1084,4 +1089,4 @@ Specifies the “Referer” request header field values that will cause the embe
 **默认设置：** `-` <br/>
 **可用位置：** server
 
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to avoid properties with large request volume to overload the log processing system.
+该指令用于设置对访问日志进行采样的采样“因子”。 值 N 的“因子”意味着每 N 个请求一个日志条目。它可用于减少从 Portal 或 API 下载的访问日志量。日志中的“%samplerate”字段可用于记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在某些极端情况下，我们可能使用该指令来避免由于某些大请求量域名导致日志系统过载。
