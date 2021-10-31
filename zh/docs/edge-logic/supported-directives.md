@@ -955,7 +955,8 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Defines a string with variables from which the checksum value and lifetime of a link will be extracted. No change to the public version.
+该指令定义一个带有变量的字符串，CDN Pro 将从中提取该请求校验链的校验值和生存期。代码逻辑源自 Nginx 开源版本，无改动。
+
 
 ### [`secure_link_md5`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5)
 
@@ -965,7 +966,7 @@ Defines a string with variables from which the checksum value and lifetime of a 
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Defines an expression for which the MD5 hash value will be computed and compared with the value passed in a request. No change to the public version.
+该指令定义一个用于进行 md5 哈希计算的表达式，计算出的 MD5 哈希值将与请求中传递的值进行比较。
 
 ### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)
 
@@ -975,7 +976,7 @@ Defines an expression for which the MD5 hash value will be computed and compared
 **默认设置：** `—` <br/>
 **可用位置：** location
 
-Defines a secret word used to check authenticity of requested links. No change to the public version.
+该指令定义了检查请求链接的真实性的安全关键字。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
 
@@ -985,9 +986,10 @@ Defines a secret word used to check authenticity of requested links. No change t
 **默认设置：**	`-` <br/>
 **可用位置：** server, location, if
 
-Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
+该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。一个典型的使用场景：可以通过该指令给 `$cache_misc` 变量赋值，从而 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存键。
 
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于 nginx [重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段与同一模块中的其他指令“强制”执行。
+
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
