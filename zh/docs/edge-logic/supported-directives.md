@@ -1089,4 +1089,4 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：** `-` <br/>
 **可用位置：** server
 
-该指令用于设置对访问日志进行采样的采样“因子”。 值 N 的“因子”意味着每 N 个请求将会生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。日志中的“%samplerate”字段可用于记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在某些极端情况下，我们可能使用该指令来避免由于某些大请求量域名导致日志系统过载。
+该指令用于设置对访问日志进行采样的采样“因子”。 值 N 的“因子”意味着每 N 个请求将会生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。日志中的“%samplerate”字段可用于记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在某些极端情况下，我们可能使用该指令来避免由于某些大请求量域名导致的日志系统过载。
