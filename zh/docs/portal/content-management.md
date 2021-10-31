@@ -34,7 +34,9 @@ If the content on your origin web server has changed, request a purge to have CD
 | Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge one or more request headers that you added, click the **x** icon at the right side of the header name.|
 | Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to purge one or more directories that you added, click the **x** icon at the right side of the directory name. </br><br><strong>Note:</strong> CDN Pro also supports purging based on URL prefixes. For more information, see Prefix Purging, below.</br>|
 
-4. Click **Start Purge**.
+4. Click **Start Purge**.<br><br> 
+   
+   **Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
 
 ## Prefix Purging
 
