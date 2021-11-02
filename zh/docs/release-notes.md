@@ -11,7 +11,7 @@
 
 ### Portal updates
 * Updated role management to provide precise control over role permissions.
-* Added “Purge Again” button to the purge details page allowing you to resubmit a purge request.
+* Added “Purge Again” button to the purge details page, allowing you to resubmit a purge request.
 * Allowed deployment of property with expired certificate. This isn’t a configuration normally used in production since visitors’ browsers will show warnings.
 * Changed product name to “CDN Pro”. 
 
