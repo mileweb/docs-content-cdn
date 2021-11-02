@@ -1,5 +1,20 @@
 # Release Notes
 
+## October 22, 2021
+### API updates
+* Fixed issue with deleting edge hostnames.
+* Relaxed ICP Beian check to support more domain suffixes.
+* Disallowed specification of our default edge hostnames in a service quota’s edgeHostnameZones field.
+* Ensured that TLS1.3 can be specified as the minimum TLS version in a property.
+* Fixed scenario where reseller is creating a service quota for a customer.
+* Updated our cache key handling to support prefix purge.
+
+### Portal updates
+* Updated role management to provide precise control over role permissions.
+* Added “Purge Again” button to the purge details page allowing you to resubmit a purge request.
+* Allowed deployment of property with expired certificate. This isn’t a configuration normally used in production since visitors’ browsers will show warnings.
+* Changed product name to “CDN Pro”. 
+
 ## October 1, 2021
 ### API updates
 * Allowed resellers to use a different domain for [edge hostnames](</apidocs#operation/createEdgeHostname>) instead of our defaults. Resellers need to contact us for more information.
