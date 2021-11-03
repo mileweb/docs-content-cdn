@@ -12266,7 +12266,7 @@
                   },
                   "dirUrls": {
                     "type": "array",
-                    "description": "URLs to purge. URLs must begin with <i>http://</i> or <i>https://</i>. Use the '\\*' character to purge multiple files or directories. If a URL has multiple sets of asterisk characters, only the last '\\*' or '\\*\\*' will be treated as a wildcard. Other instances of '\\*' earlier in the URL will be treated as the literal character '*'.\n<table><tr><th>Example</th><th>Description</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>Purge a single directory.</td></tr>\n<tr><td>http://test.domain2.com/mydir/**</td><td>Purge all files and subdirectories whose cache key begins with <i>http://test.domain2.com/mydir/</i>.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*</td><td>Purge all files, but not subdirectories, within a directory.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>Purge all cache entries ending with the .jpg file extension. Subdirectories of http://test.domain2.com/mydir/ are not purged. </td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>Purge all files, but not subdirectories, that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>Purge all files and subdirectories that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>Purge all variations of \"a.jpg\". Variations may exist if custom cache keys are used.</td></tr>\n<tr><td>http://test.domain2.com/my**jpg</td><td>Purge all entries whose cache key begins with <i>http://test.domain2.com/my</i> and ends with the suffix <i>jpg</i>. The \"**\" can match anything in the path including additional subdirectories. For example, http://test.domain2.com/mydirectory/picture.jpg would be purged.</td></tr>\n</table>\nIf a directory or filename in a URL includes a percent character, '%', be sure to encode it.",
+                    "description": "URLs to purge. URLs must begin with <i>http://</i> or <i>https://</i>. Use the '\\*' character to purge multiple files or directories. If a URL has multiple sets of asterisk characters, only the last '\\*' or '\\*\\*' will be treated as a wildcard. Other instances of '\\*' earlier in the URL will be treated as the literal character '*'.\n<table><tr><th>Example</th><th>Description</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>Purge all variations of a single directory, but not its subdirectories or files. Variations may exist if custom cache keys are used.</td></tr>\n<tr><td>http://test.domain2.com/mydir/**</td><td>Purge all files and subdirectories whose cache key begins with <i>http://test.domain2.com/mydir/</i>.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*</td><td>Purge all files, but not subdirectories, within a directory.</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>Purge all cache entries ending with the .jpg file extension. Subdirectories of http://test.domain2.com/mydir/ are not purged. </td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>Purge all files, but not subdirectories, that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>Purge all files and subdirectories that start with the letter 'a'.</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>Purge all variations of \"a.jpg\". Variations may exist if custom cache keys are used.</td></tr>\n<tr><td>http://test.domain2.com/my**jpg</td><td>Purge all entries whose cache key begins with <i>http://test.domain2.com/my</i> and ends with the suffix <i>jpg</i>. The \"**\" can match anything in the path including additional subdirectories. For example, http://test.domain2.com/mydirectory/picture.jpg would be purged.</td></tr>\n</table>\nIf a directory or filename in a URL includes a percent character, '%', be sure to encode it.",
                     "maxItems": 20,
                     "items": {
                       "type": "string"
@@ -26408,7 +26408,7 @@
                           },
                           "hostnames": {
                             "type": "array",
-                            "description": "A list of hostnames that the log configuration applies to. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wild card domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames.",
+                            "description": "A list of hostnames to which the log configuration applies. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wildcard domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames.",
                             "items": {
                               "type": "string"
                             }
@@ -26639,7 +26639,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "A list of hostnames that the log configuration applies to. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wild card domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
+                    "description": "A list of hostnames to which the log configuration applies. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wildcard domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
                     "items": {
                       "type": "string"
                     }
@@ -26670,6 +26670,19 @@
                       480,
                       1440
                     ]
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "description": "Our log configuration",
+                    "hostnames": [
+                      "domain.com"
+                    ],
+                    "logDownloadFormat": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime",
+                    "logDownloadStorageDays": 14,
+                    "logDownloadFileSpanMinutes": 30
                   }
                 }
               }
@@ -26721,7 +26734,7 @@
                         },
                         "hostnames": {
                           "type": "array",
-                          "description": "A list of hostnames that the log configuration applies to. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wild card domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
+                          "description": "A list of hostnames to which the log configuration applies. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wildcard domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
                           "items": {
                             "type": "string"
                           }
@@ -26924,7 +26937,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "A list of hostnames that the log configuration applies to. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wild card domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
+                    "description": "A list of hostnames to which the log configuration applies. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wildcard domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
                     "items": {
                       "type": "string"
                     }
@@ -26984,7 +26997,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "A list of hostnames that the log configuration applies to. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wild card domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
+                    "description": "A list of hostnames to which the log configuration applies. A hostname should be a fully qualified domain name like <i>domain.com</i>, a wildcard domain name with a leading '\\*' like <i>\\*.domain.com</i>, or '\\*' if you want the log configuration to apply to all hostnames. You should ensure that only one log configuration applies to each hostname.",
                     "items": {
                       "type": "string"
                     }
@@ -27271,6 +27284,17 @@
                     "required": [
                       "hostnames"
                     ]
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.com"
+                      ]
+                    }
                   }
                 }
               }
