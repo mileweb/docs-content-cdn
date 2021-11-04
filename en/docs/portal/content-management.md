@@ -30,29 +30,30 @@ If the content on your origin web server has changed, request a purge to have CD
 | Target Environment | Select whether the purge will occur in the staging or production environment. Default is staging.|
 | Purge Action | Select whether you want the content deleted or invalidated.  <br><ul><li><strong>Delete</strong> = removes the object from the cache of edge servers. The next time the edge server receives a request for the removed content, it retrieves the current version from your origin server. (*default*)</li><li><strong>Invalidate</strong> = this is the default setting and marks the cached content as invalid. However, the content is not removed from cache and objects are not retrieved from your origin unless they are newer than the cached versions. With this setting, CDN Pro edge servers can continue serving stale content to your end users if the origin cannot be reached.</li></ul> |
 | Purge Type | Select whether you want to purge a file or a directory. Default is file.|
-| Add a file to be purged | If **Purge Type** is set to **File**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge (up to 1,000). If you decide not to purge one or more files that you added, click the **x** icon at the right side of the file name.|
+| Add a file to be purged | If **Purge Type** is set to **File**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge. If you decide not to purge one or more files that you added, click the **x** icon at the right side of the file name.|
 | Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge one or more request headers that you added, click the **x** icon at the right side of the header name.|
-| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to purge one or more directories that you added, click the **x** icon at the right side of the directory name. </br><br><strong>Note:</strong> CDN Pro also supports purging based on URL prefixes. For more information, see Prefix Purging, below.</br>|
+| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to purge one or more directories that you added, click the **x** icon at the right side of the directory name. </br><br><strong>Note:</strong> CDN Pro also supports purging based on URL prefixes. For more information, see Examples of Directory Purging below.</br>|
 
-4. Click **Start Purge**.<br><br> 
-   
-   **Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
+4. Click **Start Purge**.
 
-## Prefix Purging
+**Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
 
-CDN Pro supports prefix purging. Using this feature, you can purge directories by entering up to 20 URLs in the <strong>Add a directory to be purged</strong> field. The following table shows examples of using prefix purging.
+## Examples of Directory Purging
+
+CDN Pro allows you to purge directories by entering URLs in the <strong>Add a directory to be purged</strong> field. The following table shows examples of purging directories.
 
 **Note:** Files can have multiple variations if custom cache keys are used. In addition, a URL such as <code>/pictures/</code> or <code>/picture.jpg</code> can have many variations stored in the cache due to the Vary header or cache key customization. As a result, performing a folder purge without an asterisk will clear all variations except subdirectories or files. For this reason, folder purges of <code>/pictures/</code>, <code>/pictures/*</code>, and <code>/pictures/**</code> result in different behaviors.
 
 |**Example**|**Description**|
 |----------|---------------|
-| http://test.domain2.com/mydir       | Purge a single directory.                               |
-| http://test.domain2.com/mydir/**    | Purge all files and subdirectories.                               |
-| http://test.domain2.com/mydir2/*    | Purge all files only.                                             |
-| http://test.domain2.com/mydir/*.jpg | Purge all *jpg files.                                             |
-| http://test.domain2.com/mydir/a*    | Purge all files that start with the letter "a".                   |
+| http://test.domain2.com/mydir       | Purge all variations of a single directory, but not its subdirectories or files. Variations may exist if custom cache keys are used.                               |
+| http://test.domain2.com/mydir/**    | Purge all files and subdirectories whose cache key begins with http://test.domain2.com/mydir/.                               |
+| http://test.domain2.com/mydir/*    | Purge all files, but not subdirectories, within a directory.                                             |
+| http://test.domain2.com/mydir/*.jpg | Purge all cache entries ending with the .jpg file extension. Subdirectories of http://test.domain2.com/mydir/ are not purged.                                             |
+| http://test.domain2.com/mydir/a*    | Purge all files, but not subdirectories, that start with the letter "a".                   |
 | http://test.domain2.com/mydir/a**   | Purge all files and subdirectories that start with the letter "a".|
-| http://test.domain2.com/mydir/a.jpg | Purge all variations of "a.jpg".                                  |
+| http://test.domain2.com/mydir/a.jpg | Purge all variations of "a.jpg". Variations may exist if custom cache keys are used.                                  |
+| http://test.domain2.com/my**jpg | Purge all entries whose cache key begins with http://test.domain2.com/my and ends with the suffix jpg. The "**" can match anything in the path including additional subdirectories. For example, http://test.domain2.com/mydirectory/picture.jpg would be purged.                                  |                                  |
 
 
 ## Viewing Purge Details
