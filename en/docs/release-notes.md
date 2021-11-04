@@ -1,5 +1,20 @@
 # Release Notes
 
+## November 3, 2021
+### API updates
+* Revised the access log implementation. You must [create a log configuration](</apidocs#operation/post-cdn-report-logConfigs>) to obtain logs for your hostnames. A log configuration is essentially a custom format you define to meet your needs.
+* Fixed error getting a long [list of properties](</apidocs#operation/getPropertyList>).
+* Fixed an error that occurred if [creating](</apidocs#operation/createContact>) or [updating a portal user](</apidocs#operation/patch-ngadmin-contacts-id>) with an email address more than 74 characters long.
+* Allowed more flexible use of the wildcard character, ‘*’, in [purge requests](</apidocs#operation/createPurge>).
+* Allowed up to 20 URLs to be specified in a [directory purge](</apidocs#operation/createPurge>).
+
+### Portal updates
+* Improved error handling if an invalid cache time is entered in the origin configuration.
+* Improved warning if deploying a property with an expired certificate.
+* Improved Russian, Korean, and Japanese translations of Edge Logic hints.
+* Fixed custom role so it can access reports.
+
+
 ## October 22, 2021
 ### API updates
 * Fixed issue with deleting edge hostnames.
