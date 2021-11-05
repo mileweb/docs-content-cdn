@@ -49,6 +49,6 @@ hello world!
 * Connection #0 to host www.testdomain.com left intact
 ```
 
-在此示例中，163.171.228.89 是 CDN Pro 演练环境中的一个节点 IP 地址。有关演练环境的使用方法，您可以查阅 [演练环境相关信息](</zh/docs/edge-logic/staging-environment.md>). 
+在此示例中，163.171.228.89 是 CDN Pro 演练环境中的一个节点 IP 地址。有关演练环境的使用方法，您可以查阅 [演练环境相关信息](</zh/cdn/docs/edge-logic/staging-environment>).
 
-CDN Pro 的 API 后台服务器会将上述边缘逻辑代码封装进一个 NGINX 的 "[server 控制块](http://nginx.org/en/docs/http/ngx_http_core_module.html#server)" 中。边缘逻辑中配置的加速主机名 “www.testdomain.com” 将被转换成 server 控制块中 "[server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name)" 指令的参数。所有指向 www.testdomain.com 的 HTTP 请求都将由该 server 控制块处理，即遵循您在边缘逻辑中的配置规则。
+CDN Pro 的 API 后台服务器会将上述边缘逻辑代码封装进一个 NGINX 的 "[server 配置块](http://nginx.org/en/docs/http/ngx_http_core_module.html#server)" 中。边缘逻辑中配置的加速主机名 “www.testdomain.com” 将被转换成 server 配置块中 "[server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name)" 指令的参数。所有指向 www.testdomain.com 的 HTTP 请求都将由该 server 配置块处理，即遵循您在边缘逻辑中的配置规则。
