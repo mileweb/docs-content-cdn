@@ -1,5 +1,35 @@
 # Release Notes
 
+## November 3, 2021
+### API updates
+* Revised the access log implementation. You must [create a log configuration](</apidocs#operation/post-cdn-report-logConfigs>) to obtain logs for your hostnames. A log configuration is essentially a custom format you define to meet your needs.
+* Fixed error getting a long [list of properties](</apidocs#operation/getPropertyList>).
+* Fixed an error that occurred if [creating](</apidocs#operation/createContact>) or [updating a portal user](</apidocs#operation/patch-ngadmin-contacts-id>) with an email address more than 74 characters long.
+* Allowed more flexible use of the wildcard character, ‘*’, in [purge requests](</apidocs#operation/createPurge>).
+* Allowed up to 20 URLs to be specified in a [directory purge](</apidocs#operation/createPurge>).
+
+### Portal updates
+* Improved error handling if an invalid cache time is entered in the origin configuration.
+* Improved warning if deploying a property with an expired certificate.
+* Improved Russian, Korean, and Japanese translations of Edge Logic hints.
+* Fixed custom role so it can access reports.
+
+
+## October 22, 2021
+### API updates
+* Fixed issue with deleting edge hostnames.
+* Relaxed ICP Beian check to support more domain suffixes.
+* Disallowed specification of our default edge hostnames in a service quota’s edgeHostnameZones field.
+* Ensured that TLS1.3 can be specified as the minimum TLS version in a property.
+* Fixed scenario where reseller is creating a service quota for a customer.
+* Updated our cache key handling to support prefix purge.
+
+### Portal updates
+* Updated role management to provide precise control over role permissions.
+* Added “Purge Again” button to the purge details page, allowing you to resubmit a purge request.
+* Allowed deployment of property with expired certificate. This isn’t a configuration normally used in production since visitors’ browsers will show warnings.
+* Changed product name to “CDN Pro”. 
+
 ## October 1, 2021
 ### API updates
 * Allowed resellers to use a different domain for [edge hostnames](</apidocs#operation/createEdgeHostname>) instead of our defaults. Resellers need to contact us for more information.
