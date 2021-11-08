@@ -1,12 +1,10 @@
-# Welcome to CDN Pro
+# 欢迎使用 CDN Pro (又名：CDN360)
 
-CDN Pro is leading the next evolution of content delivery networks (CDN). 
+CDN Pro 是我们用最新的技术，基于我们20多年的行业经验从头开始构建的一个全新平台。它的一个重要设计目标是赋予用户对所有使用环节完全的掌控，从而将数字内容最安全、快速地分发给全球任意角落的消费者。在系统底层，我们致力于确保整个平台有一个最清晰合理，稳定健壮，易于维护的架构。这使得我们可以有效降地低成本并避免事故的发生。
 
-CDN Pro is designed to accelerate and deliver your applications to users worldwide, regardless of their location. It boosts content delivery, improves load times, and offers many more clear-cut advantages to deliver an unparalleled user experience.
+我们的平台提供了一个友好并十分强大的客户界面，使得每一个用户可以100%自助实现哪怕是最复杂的分发配置。它的应用编程接口（API）让用户可以将CDN服务无缝地整合到应用的整个开发生命周期里。我们还把”100%自助“的理念延伸到了商务层面。CDN Pro 独特的计费模型使得用户可以自由地在成本和性能之间选择最佳的平衡点。我们相信这是一个将要改变整个行业的革命性产品。
 
-In addition to accelerating, securing, and scaling your applications, CDN Pro enables you to have granular control over your content delivery and costs. Unique self-service capabilities, along with a friendly, yet powerful user interface and application programming interface (API), provide for seamless integration into your SDLCs.
-
-## CDN Pro Key Features
+## CDN Pro 的主要特点
 
 CDN Pro's key features make it easy for anyone with a minimum background in CDN to get started, while offering powerful features for advanced users as well.
 - A rich API, Edge Logic, and processing at the edge enable you to implement features at the CDN level without touching your application codebase.
