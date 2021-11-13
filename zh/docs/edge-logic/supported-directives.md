@@ -14,7 +14,7 @@
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-本指令的功能是修改发往客户端的响应头部。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
+本指令的功能是修改发往客户端的响应头部。默认只在状态码为200, 201, 204, 206, 301-304, 307 或 308时生效。当配置了'always'参数时，则对全部状态码生效。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
 
 1. 引入了```policy=```参数来更精确地控制指令的行为:
 ```nginx
@@ -661,7 +661,7 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-该指令用于给不同的响应状态码设置缓存时间。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 
