@@ -18,11 +18,12 @@ Using the Properties page, you can create, modify, validate, and deploy properti
 
 | **Fields**   | **Description**                                                                           |
 | :----------: | ----------------------------------------------------------------------------------------- |
-| 1            | A search box that you can enter any keyword to filter the property list.                  |
-| 2            | The list of all properties that are available to you.  |
-| 3            | Icons to filter properties by Staging Version and Production Version.                            |
-| 4            | Drop-down lists to take actions on each property.       |
-| 5            | The button to [create new properties](</docs/portal/edge-configurations/creating-property.md>).    |
+| 1            | A search box for filtering properties by ID, name, description, or hostname. Multiple search strings can be separated by a tab or carriage return. Typing the carat character at the beginning of a search string narrows matches to properties whose name, description, or hostnames fields start with the text following the <b>^</b>. For example, <b>^domain</b> matches the hostnames domain.com and domain123.com, but not abc.123domain.com.<br><br><b>Note:</b> When searching for a property by ID, specify the entire ID, not just a portion of it.</br>                 |
+| 2            | Check to display the children associated with the properties.  |
+| 3            | The list of all properties that are available to you.  |
+| 4            | Icons to filter properties by Staging Version and Production Version.                            |
+| 5            | Drop-down lists to take actions on each property.       |
+| 6            | The button to [create new properties](</docs/portal/edge-configurations/creating-property.md>).    |
 
 ## Property Actions
 Each property has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected property.

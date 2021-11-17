@@ -39,8 +39,16 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 
 ## Edge Logic Wizard
 
-This wizard can be used to create an initial version of the Edge Logic. It supports some of the most basic cache configurations. You can modify the generated Edge Logic code to add complicated behaviors to suit your requirements. You can also set cache behavior for multiple locations.
-<p align=center><img src="/docs/resources/images/edge-configurations/property-edge-logic-wizard.png" alt="Edge Logic Wizard" width="600"></p>
+Use the Edge Logic wizard to create an initial version of the Edge Logic. The wizard supports some of the most basic cache configurations. You can set cache behavior for multiple locations. You can also modify the generated Edge Logic code to add complicated behaviors to suit your requirements. 
+
+When you click the <b>Wizard</b> button, a prompt appears with the following choices. <ul><li><b>Start with a baseline setting for website acceleration</b>. Initializes settings for a typical website. </ul></li><ul><li><b>Start with a baseline setting for download or VoD acceleration</b>. Initializes settings to accelerate downloads and Video on Demand (VOD). </ul></li><ul><li><b>Start with a clean slate</b> Select this choice if your content does not fit one of the other choices, or if  you want to set up all the settings manually. </ul></li>
+
+
+<p align=center><img src="/docs/resources/images/edge-configurations/Edge-Logic-Wizard-Prompt.png" alt="wizard prompt" width="900"></p>
+
+After making your selection, complete the settings in the Edge Logic Wizard page, and then click <b>OK</b> to display the Edge Logic code in the <b>Edge Logic</b> field. You can then edit the code shown in the field as necessary or click the <b>Wizard</b> button to change your selections. 
+
+<b>Note:</b> If the code in the <b>Edge Logic</b> field is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
 
 ## TLS Settings
 
