@@ -18,22 +18,27 @@ Using the Properties page, you can create, modify, validate, and deploy properti
 
 | **Fields**   | **Description**                                                                           |
 | :----------: | ----------------------------------------------------------------------------------------- |
-| 1            | A search box for filtering properties by ID, name, description, or hostname. Multiple search strings can be separated by a tab or carriage return. For more information, see Filtering Properties below.</br>                 |
+| 1            | A search box for filtering properties by ID, name, description, or hostname using one or more search strings. If you enter multiple search strings, separate each one with a carriage return. For more information, see Filtering Properties below.</br>                 |
 | 2            | Check to display the children associated with the properties.  |
 | 3            | The list of all properties that are available to you.  |
 | 4            | Icons to filter properties by Staging Version and Production Version.                            |
 | 5            | Drop-down lists to take actions on each property.       |
 | 6            | The button to [create new properties](</docs/portal/edge-configurations/creating-property.md>).    |
 
-##Filtering Properties
+## Filtering Properties
 CDN Pro provides robust filtering capabilities that allow you to find properties that meet certain criteria.
 
-###Using the Carat
+### Using the Carat
 Typing the carat character at the beginning of a search string narrows matches to properties whose name, description, or hostnames fields start with the text following the <b>^</b>. For example, <b>^domain</b> matches the hostnames domain.com and domain123.com, but not abc.123domain.com.<br><br><b>Note:</b> When searching for a property by ID, specify the entire ID, not just a portion of it.
 
-###Using hasConfig
-Using <b>hasConfig=<i><'value'></i></b>, you can filter properties whose configurations match a specified value. Observe the following guidelines:<ul><li>Searches on numeric and Boolean fields return an exact match.</ul></li><ul><li>Searches on strings return full and partial matches.</ul></li><ul><li>If you omit the colon and value, CDN Pro returns all properties that have a non-empty value for the field. </ul></li><ul><li>If a property has multiple versions, the property is included in the matched results if any of its versions matches the <b>hasConfig</b> value.</ul></li><ul><li>You can specify the subfields of a property version by using the period (<b>.</b>) as a separator.</ul></li>
-The following table shows examples of using <b>hasConfig=<i><'value'></i></b>
+### Performing Advanced Searches
+If you have many properties, use <b>hasConfig=<i><'value'></i></b> to find properties that match a specific configuration. In this advanced search string, <b><i><'value'></b></i> is a keyword supported by the CDN Pro API. For more information, refer to the CDN Pro API Reference.<br>
+
+You can enter multiple <b>hasConfig=<i><'value'></i></b> search strings  in the search box. Type the first one and press the Carriage Return key, and then repeat this sequence for each additional advanced search string you want to enter in the search box.
+
+Observe the following guidelines when performing advanced searches:<ul><li>Searches on numeric and Boolean fields return an exact match.</ul></li><ul><li>Searches on strings return full and partial matches.</ul></li><ul><li>If you omit the colon and value, CDN Pro returns all properties that have a non-empty value for the field. </ul></li><ul><li>If a property has multiple versions, the property is included in the matched results if any of its versions matches the <b>hasConfig</b> value.</ul></li><ul><li>You can specify the subfields of a property version by using the period (<b>.</b>) as a separator.</ul></li>
+
+The following table shows examples of using <b>hasConfig=<i><'value'></i></b> to perform advanced searches.
 | **Example**   | **Description**                                                                          |
 | :----------: | ----------------------------------------------------------------------------------------- |
 | hasConfig=hasBeian:true       | Returns properties whose <b>Has ICP Beian</b> setting is Yes.</br>                                                                |
@@ -42,7 +47,6 @@ The following table shows examples of using <b>hasConfig=<i><'value'></i></b>
 | hasConfig=disableHttp2:true	| Returns  properties that do not support HTTP2.                                                                                    |
 | hasConfig=extraServicePorts.http:85	         | Returns properties that support port 85 for HTTP requests.
 | hasConfig=origins.servers:myorigin.com	     | Returns properties that use myorigin.com as an origin server.    |
-| hasConfig=hasBeian:true&hasConfig=realTimeLog	 | Returns only the properties that match all the values (<b>Has ICP Beian</b> setting is Yes and have real-time log is enabled).    |
 
 ## Property Actions
 Each property has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected property.
