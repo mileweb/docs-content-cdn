@@ -8,10 +8,10 @@
 * Improved error handling in [portal user management APIs](</apidocs#tag/Portal-User-Management>).
 * Fixed versions in response to the [property list API](</apidocs#operation/getPropertyList>).
 * Updated links to refer to CDN Pro on our website.
-* Added [bandwidth summary report API](</apidocs#operation/post-cdn-report-bandwidthSummary>) allowing you to get summary of traffic bandwidth during a timespan.
+* Added [bandwidth summary report API](</apidocs#operation/post-cdn-report-bandwidthSummary>), allowing you to get summary of traffic bandwidth during a timespan.
 
 ### Portal updates
-* Enhanced property search to support search by configurations.
+* Enhanced property search to support searching by configurations.
 * Removed extraneous whitespace in property name.
 * Improved Edge Logic Wizard to provide recommended settings for websites and download or VOD (video on demand) content as well as continuing to allow full self-configuration.
 * Enhanced property search to allow resellers to search child customers’ properties.
