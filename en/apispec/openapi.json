@@ -13692,7 +13692,7 @@
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "The response can contain up to 10000 groups. If there are actually more groups, <i>isComplete</i> will be <i>false</i>."
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
                         },
                         "dataNames": {
                           "type": "array",
@@ -13969,7 +13969,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to only return data for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -16511,7 +16511,7 @@
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "The response can contain up to 10000 groups. If there are actually more groups, <i>isComplete</i> will be <i>false</i>."
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
                         },
                         "dataNames": {
                           "type": "array",
@@ -24603,7 +24603,7 @@
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "The response can contain up to 10000 groups. If there are actually more groups, <i>isComplete</i> will be <i>false</i>."
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
                         },
                         "dataNames": {
                           "type": "array",
@@ -24751,7 +24751,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to only return data for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -27331,7 +27331,7 @@
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "The response can contain up to 10000 groups. If there are actually more groups, <i>isComplete</i> will be <i>false</i>."
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
                         },
                         "dataNames": {
                           "type": "array",
@@ -27505,7 +27505,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to only return data for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
