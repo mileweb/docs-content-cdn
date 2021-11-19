@@ -2,7 +2,7 @@
 
 ## November 17, 2021
 ### API updates
-* Fixed error handling when querying for an invalid prefetch’s status.
+* Fixed error handling when querying the status of an invalid, non-existent prefetch.
 * Fixed error handling when [creating a prefetch](</apidocs#operation/post-cdn-prefetches>) with an invalid start time.
 * Fixed [log configuration creation](</apidocs#operation/post-cdn-report-logConfigs>) to respect limit.
 * Improved error handling in [portal user management APIs](</apidocs#tag/Portal-User-Management>).
@@ -14,7 +14,7 @@
 * Enhanced property search to support searching by configurations.
 * Removed extraneous whitespace in property name.
 * Improved Edge Logic Wizard to provide recommended settings for websites and download or VOD (video on demand) content as well as continuing to allow full self-configuration.
-* Enhanced property search to allow resellers to search child customers’ properties.
+* Enhanced property search to allow resellers to search for properties of their child customers.
 * Fixed filtering on certificate list page.
 * Fixed portal user suspension.
 
