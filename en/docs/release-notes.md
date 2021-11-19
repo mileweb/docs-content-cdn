@@ -1,5 +1,24 @@
 # Release Notes
 
+## November 17, 2021
+### API updates
+* Fixed error handling when querying the status of an invalid, non-existent prefetch.
+* Fixed error handling when [creating a prefetch](</apidocs#operation/post-cdn-prefetches>) with an invalid start time.
+* Fixed [log configuration creation](</apidocs#operation/post-cdn-report-logConfigs>) to respect limit.
+* Improved error handling in [portal user management APIs](</apidocs#tag/Portal-User-Management>).
+* Fixed versions in response to the [property list API](</apidocs#operation/getPropertyList>).
+* Updated links to refer to CDN Pro on our website.
+* Added [bandwidth summary report API](</apidocs#operation/post-cdn-report-bandwidthSummary>), allowing you to get summary of traffic bandwidth during a timespan.
+
+### Portal updates
+* Enhanced property search to support searching by configurations.
+* Removed extraneous whitespace in property name.
+* Improved Edge Logic Wizard to provide recommended settings for websites and download or VOD (video on demand) content as well as continuing to allow full self-configuration.
+* Enhanced property search to allow resellers to search for properties of their child customers.
+* Fixed filtering on certificate list page.
+* Fixed portal user suspension.
+
+
 ## November 3, 2021
 ### API updates
 * Revised the access log implementation. You must [create a log configuration](</apidocs#operation/post-cdn-report-logConfigs>) to obtain logs for your hostnames. A log configuration is essentially a custom format you define to meet your needs.
