@@ -32,7 +32,7 @@ CDN Pro provides robust filtering capabilities that allow you to find properties
 Typing the carat character at the beginning of a search string narrows matches to properties whose name, description, or hostnames fields start with the text following the <b>^</b>. For example, <b>^domain</b> matches the hostnames domain.com and domain123.com, but not abc.123domain.com.<br><br><b>Note:</b> When searching for a property by ID, specify the entire ID, not just a portion of it.
 
 ### Performing Advanced Searches
-If you have many properties, use <b>hasConfig=<i><'configuration'></i></b> to find properties that match a specific configuration. In an advanced search string, <b><i><'configuration'></b></i> is a keyword supported by the CDN Pro API. For more information, refer to the [CDN Pro API Specification](</en/apispec/openapi.json>).<br>
+If you have many properties, use <b>hasConfig=<i><'configuration'></i></b> to find properties that match a specific configuration. In an advanced search string, <b><i><'configuration'></b></i> is a keyword supported by the CDN Pro API. For more information, refer to the [CDN Pro API Specification](</apidocs#operation/createPropertyVersion>).<br>
 
 You can search for properties matching multiple settings by entering more than one <b>hasConfig=<i><'configuration'></i></b> search string in the search box. Type the first one and press the Carriage Return key, and then repeat this sequence for each additional advanced search string you want to enter in the search box.
 
