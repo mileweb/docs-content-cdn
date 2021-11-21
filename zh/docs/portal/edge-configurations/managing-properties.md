@@ -40,14 +40,14 @@ Observe the following guidelines when performing advanced searches:<ul><li>Searc
 
 The following table shows examples of using <b>hasConfig=<i><'configuration'></i></b> to perform advanced searches.
 
-| **Example**   | **Description**                                                                           |
-| :----------:  | ----------------------------------------------------------------------------------------- |
-| hasConfig=hasBeian:true       | Returns properties whose <b>Has ICP Beian</b> setting is Yes.</br>                                                                |
-| hasConfig=edgeLogic!sorted    | Returns properties for which the <b>Edge Logic</b> field does not include the configuration keyword <b>sorted</b>.                                |
-| hasConfig=hostnames:domain    | Returns all properties with a hostname containing the string <b>domain</b> such as <b>mydomain.com</b> and <b>thedomains.com</b>. |
-| hasConfig=disableHttp2:true	| Returns  properties that do not support HTTP2.                                                                                    |
-| hasConfig=extraServicePorts.http:85	         | Returns properties that support port 85 for HTTP requests.
-| hasConfig=origins.servers:myorigin.com	     | Returns properties that use myorigin.com as an origin server.    |
+| **Example**                           | **Description**                                                                                                        |
+| --------------------------------------| -----------------------------------------------------------------------------------------------------------------------|
+| hasConfig=hasBeian:true               | Returns properties whose <b>Has ICP Beian</b> setting is Yes.                                                          |
+| hasConfig=edgeLogic!sorted            | Returns properties for which the <b>Edge Logic</b> field does not include the configuration keyword <b>sorted</b>.     |
+| hasConfig=hostnames:domain            | Returns all properties with a hostname containing the string <b>domain</b> such as <b>mydomain.com</b> and <b>thedomains.com</b>. |
+| hasConfig=disableHttp2:true           | Returns properties that do not support HTTP2.                                                                          |
+| hasConfig=extraServicePorts.http:85   | Returns properties that support port 85 for HTTP requests.                                                             |
+| hasConfig=origins.servers:myorigin.com| Returns properties that use myorigin.com as an origin server.                                                          |
 
 ## Property Actions
 Each property has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected property.
