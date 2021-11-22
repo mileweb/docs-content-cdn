@@ -14,7 +14,7 @@
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-本指令的功能是修改发往客户端的响应头部。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
+本指令的功能是修改发往客户端的响应头部。默认只在状态码为200, 201, 204, 206, 301-304, 307 或 308时生效。当配置了'always'参数时，则对全部状态码生效。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
 
 1. 引入了```policy=```参数来更精确地控制指令的行为:
 ```nginx
@@ -238,6 +238,7 @@ location @try_origin1 {
 | HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>加解密 | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串。|
 | 计算<br>HMAC | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` 可以是 ```MD5```, ```SHA1```, ```SHA256``` |
+| RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 目前只支持 ```SHA256```。|
 | 比较<br>整数 | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```当 ```$data1 > $data2```时 $output``` 的值为 "1"，相等时为 "0"，小于时为 “-1”。|
 | 整数<br>计算器 | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>计算这个表达式并把结果赋予 ```$output```. 仅支持整数的 +, -, *, / 操作。非法的输入表达式会导致结果为 "NAN"。|
 | 整数<br>绝对值 | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` 会被赋予 ```$integer``` 的绝对值。非法输入会导致结果为空。|
@@ -661,7 +662,7 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-该指令用于给不同的响应状态码设置缓存时间。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 

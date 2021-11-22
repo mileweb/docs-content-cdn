@@ -14,7 +14,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 **Default:** `-` <br/>
 **Context:** server, location, if in location
 
-This directive modifies the response headers to the client. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
+This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
 1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx
@@ -233,6 +233,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key``` and ```$iv``` should both be binary strings of 32 bytes.|
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
+| RSA<br>signature | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` can only be ```SHA256```.|
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
 | integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
 | integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
@@ -647,7 +648,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default:** — <br/>
 **Context:** server, location
 
-Sets caching time for different response codes. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+Sets caching time for different response codes. If no code is explicitly specified, the default is 200, 301 and 302. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
 ### `proxy_cache_vary`
 
