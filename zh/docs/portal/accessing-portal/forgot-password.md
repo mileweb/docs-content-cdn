@@ -1,14 +1,14 @@
-# Forgot Your Password
+# 重置密码
 
-If you forgot your password:
+如果您不小心遗忘了登录密码，您可以常识以下操作:
 
-1. Click the **Forgot password** link at the bottom of the login page.
-2. In the Password Reset page, enter your username and click the **I'm not a robot** check box to complete the reCAPTCHA requirement.
+1. 点击位于登录页面底部的 **Forgot password** 按钮.
+2. 在重置密码页面，输入您的登录账号并点击 **I'm not a robot** 按钮并按要求完成验证码操作.
 
 <p align=center><img src="/docs/resources/images/accessing-portal/password-reset.png" alt="forgot password" width="900"></p>
 
-3. Click the **Submit** button.
+3. 点击 **Submit** 按钮.
 
-CDN Pro will send you an email message with a verification code to enter to reset your password.
+CDN Pro 将向您发送一封带有验证码的电子邮件，输入邮件中的验证码即可完成密码的重置。
 
-**Note**: Occasionally, an email application may misidentify the message as spam. If you do not see the message in your Inbox, check your junk or spam folder.
+**Note**: 有些情况下，您的邮件收发程序可能会将 CDN Pro 的验证码邮件误认为垃圾邮件。因此如果您在收件箱中没有看到该邮件，请检查您的垃圾邮件或垃圾邮件文件夹。
