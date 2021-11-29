@@ -46,8 +46,7 @@
 | <span id="remote_user"></span><span class="var">$remote_user</span> | 当使用[基础鉴权](https://datatracker.ietf.org/doc/html/rfc7617)时，从Authorization请求头中提取的用户名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request"></span><span class="var">$request</span> | 完整的 http 请求行 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_cpu_time"></span><span class="var">$request_cpu_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时所消耗的CPU时间, 在Edge Logic 中被使用时仅包含 Cache 层的执行消耗，不包含负载均衡层（Load Balancer） 的分发消耗），当在实时日志中被使用时仅包含负载均衡层的总执行消耗。单位为纳秒。(ETA: 2021年10月)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="request_end_time"></span><span class="var">$request_end_time</span> | 
-CDN Pro "全量" 接收来自客户端的请求并准备好处理/转发它所需的时间，单位为秒  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="request_end_time"></span><span class="var">$request_end_time</span> |CDN Pro "全量" 接收来自客户端的请求并准备好处理/转发它所需的时间，单位为秒  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="request_length"></span><span class="var">$request_length</span> |<span class="badge small" title="numerical value">#</span> 请求的长度 (包括请求的地址, http 请求头和请求主体) | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_method"></span><span class="var">$request_method</span> | HTTP 请求方法，例如 ：GET, POST | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_scheme"></span><span class="var">$request_scheme</span> | 请求协议，值为"http" 或者 "https" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
