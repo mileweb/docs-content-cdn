@@ -1,36 +1,35 @@
-# Navigating the CDN Pro User Interface
+# CDN Pro 用户导航
 
-When you first log in to the CDN Pro portal, menus and submenus appear in the left pane and the dashboard appears in the workspace to the right.
+当您第一次登录 CDN Pro 门户时，菜单和子菜单将出现在浏览器左侧窗格中，仪表板将出现在浏览器右侧的工作区中。
 
-The default menu lists the CDN Pro activities you can perform.
+默认菜单列出了您可以执行的 CDN Pro 活动。
 
 <p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
 
-## Dashboard
+## 仪表盘
 
-The dashboard is the default page that appears when you log in to the CDN Pro portal. It contains charts that show a snapshot of your account traffic over a recent period of time. For detailed information, hover your mouse over the data entry points. For example:
+仪表板是您登录 CDN Pro 门户时显示的默认页面。它包含了一份展示您近期通过 CDN Pro 进行加速的流量快照图表。您可以将鼠标悬停在各个数据点上以获取更详细的信息。例如：
 
 <p align=center><img src="/docs/resources/images/accessing-portal/total-bandwidth.png" alt="total bandwidth" width="1000"></p>
 
-From the dashboard, you can view:
+通过仪表盘，您可以获取到：
 
-- Traffic volume, traffic bandwidth, and traffic requests information for all properties.
-- Status codes for all properties.
+- 所有加速项的流量、流量带宽和流量请求信息。
+- 所有加速项的业务状态码信息。
 
-A legend below each chart shows the names of the data entry points in the chart. Clicking a data entry point in the legend removes that data entry point from the chart. Clicking it again redisplays the data entry point. Clicking **View Full Report** below a chart displays the [Reports page](</docs/portal/reports.md>), where you can define report parameters and view a graph that compares the current 5-Minute Edge to the option selected in the drop-down list (Traffic Volume, Traffic Bandwidth, and so on) at the top left of the dashboard chart.
+每个报表下方的图例说明标记了报表的各项数据指标。单击图例说明中的某个数据指标可以将其从报表中移除。再次点击该指标， CDN Pro 将重新展示该指标。单击报表下方的**查看完整报告**， CDN Pro 将会展示具体的[报告页面](</docs/portal/reports.md>)，您可以在其中填入报告参数并查看在当前时间 5 分钟之前的报表数据，您可以在仪表板图表左上角的下拉列表中选择的报表类型（流量、流量带宽等）。
 
 <p align=center><img src="/docs/resources/images/traffic-volume.png" alt="traffic volume" width="1000"></p>
 
-## Reports
+## 报表
+[报表页面](</docs/portal/reports.md>) 允许您生成以下报表:
 
-The [Reports page](</docs/portal/reports.md>) allows you to generate reports about:
+- 您的加速域名的流量和带宽。
+- 访问您的加速项的客户请求数。
+- 通过 CDN Pro 进行加速后的各业务 HTTP 状态码以及比例。
+- 请求 URL 、请求时间、客户端 IP 地址、客户端 UA 请求头以及响应正文的大小。
 
-- Traffic volume and bandwidth to your hostnames.
-- Number of requests made to the files of your property.
-- Percentage of each HTTP status code returned as a result of requests to your content.
-- Content that has been requested and when, the IP address from which requests were made, the value of the User-Agent HTTP request header, and the size of the content requested.
-
-## Edge Configurations
+## 边缘配置
 
 In CDN Pro, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, and then validate, test, deploy, and upgrade it -- all conveniently from the CDN Pro portal. **Edge Configurations** also provides a page where you can create and manage a [secret](</docs/portal/secrets/overview.md>) that you share with CDNetworks in order for the CDN configuration to work.
 
