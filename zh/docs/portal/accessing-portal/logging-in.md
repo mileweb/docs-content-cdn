@@ -1,4 +1,4 @@
-# 登录Portal
+# 如何登陆
 
 1. 访问 CDN Pro 登录页面 https://console.cdnetworks.com.
 
