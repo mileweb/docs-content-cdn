@@ -14,7 +14,7 @@
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-本指令的功能是修改发往客户端的响应头部。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
+本指令的功能是修改发往客户端的响应头部。默认只在状态码为200, 201, 204, 206, 301-304, 307 或 308时生效。当配置了'always'参数时，则对全部状态码生效。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
 
 1. 引入了```policy=```参数来更精确地控制指令的行为:
 ```nginx
@@ -75,11 +75,11 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-Adds the specified field to the end of a response provided that the response code equals 200, 201, 206, 301, 302, 303, 307, or 308. When "always" is specified, the trailer is added regardless of the status code. Parameter value can contain variables. We made the following changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer):
+该指令可用于在响应正文之后添加一个尾部（trailer）。默认只在状态码为200, 201, 206, 301, 302, 303, 307或308时生效。当携带 “always” 参数时，则对所有状态码生效。参数 value 可以是变量。CDN Pro 在 [开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) 的基础上做了如下修改和增强：
 
-1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
+1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
 
-2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client.
+2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。本指令添加的尾部并不会出现在发给客户的响应里。
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
@@ -160,11 +160,20 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `custom_log_field {custom log field id} {value or variable};`<br/>
+**使用语法：** `custom_log_field id value;`<br/>
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。该指令生效后，当您配置自定义日志下载的格式或使用我们的高级流量分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用它们。如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用这两个字段。如果您需要开启此功能，请联系我们的技术支持团队。
+
+示例:
+```nginx
+location / {
+  custom_log_field 1 $http_x_data; # 将请求头X-Data的值保存到custom1
+  custom_log_field 2 $cookie_abc; # 将cookie abc的值保存到custom2
+  ...
+}
+```
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -196,15 +205,15 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 本指令允许您将源站的响应状态码作为条件来跳转到一个指定的URI。本指令可依照以下顺序，携带3组参数：
 第一组：（必填项）作为判定条件的一个或多个原始状态码，以空格隔开。比如 "400 401 402 403 404 406 501 502 503 504"；
-第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。如有配，则原始状态码将被替换为新状态码响应客户端；
+第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。也可以用 "=" 使用新的URI返回的状态码；
 第三组：（必填项）设置新的响应正文，格式为 URI 或者一个完整的 URL。比如 "@error"(named URI) 或 "http://www.abc.com" (完整URL)。当使用完整 URL 时，会把响应状态码改为302（除非第二组参数为 "=301"，则新响应状态码为301，其余情况下皆为302）。；
 代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) 来支持将源的响应状态码作为判断条件。
 
-例如，下述指令可以在第一个源站返回状态码 403 时尝试第二个源站：
+例如，下述指令可以在第一个源站返回状态码 401或403 时尝试第二个源站：
 ```nginx
 location /abc {
   origin_pass my-origin1;
-  error_page 403 = @try_origin1;
+  error_page 401 403 = @try_origin1;
 }
 location @try_origin1 {
   origin_pass my-origin2;
@@ -223,16 +232,17 @@ location @try_origin1 {
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
-| hash | **SHA256**, **MD5** | ```eval_func $output SHA256 $input;``` |
-| BASE64<br>codec | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
-| URL<br>codec | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
-| HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
-| AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串. |
-| HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
-| integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
-| integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
-| integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
-| 字符串<br>修改 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
+| 计算哈希值 | **SHA256**, **MD5** | ```eval_func $output SHA256 $input;``` |
+| BASE64<br>编解码 | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
+| URL<br>编解码 | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
+| HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
+| AES<br>加解密 | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串。|
+| 计算<br>HMAC | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` 可以是 ```MD5```, ```SHA1```, ```SHA256``` |
+| RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 目前只支持 ```SHA256```。|
+| 比较<br>整数 | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```当 ```$data1 > $data2```时 $output``` 的值为 "1"，相等时为 "0"，小于时为 “-1”。|
+| 整数<br>计算器 | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>计算这个表达式并把结果赋予 ```$output```. 仅支持整数的 +, -, *, / 操作。非法的输入表达式会导致结果为 "NAN"。|
+| 整数<br>绝对值 | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` 会被赋予 ```$integer``` 的绝对值。非法输入会导致结果为空。|
+| 字符串<br>替换 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 | 字符串<br>修改 | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>把输入字符串转成大写。|
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
 | 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
@@ -652,7 +662,7 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-该指令用于给不同的响应状态码设置缓存时间。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 
@@ -924,9 +934,9 @@ proxy_no_cache $no_store;
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-该指令用于将请求头“Accept-Encoding”的值映射到不超过5个可能的组合上。您最多可以在此指令后指定四个参数，每个参数都是一个或多个（以逗号为分隔符）“内容编码格式”的组合，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的“Accept-Encoding”值与本指令的配置组合逐个进行匹配。如果某个组合里的所有格式都出现在了此请求头里，则用该组合值替换掉请求头的值。如果未找到匹配的组合，则将请求的值设置为“identity”。
+该指令用于修改 `Accept-Encoding` 请求头，确保其可能的取值不超过5个以提高缓存的利用率。此指令最多可以携带4个参数，每个参数都是一个或多个（以逗号为分隔的）“内容编码格式”，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的 `Accept-Encoding` 请求头与本指令的参数从左至右逐个进行匹配。如果一个参数里的所有格式都出现在了此请求头里，则用该参数值替换掉请求头的值。如果没有能匹配的参数，则将请求头的值改写为“identity”。
 
-示例如下：如果边缘逻辑中的配置是：
+示例如下：假设边缘逻辑中的配置是：
 ```nginx
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
@@ -939,9 +949,9 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
-不难看出，该指令的默认设置会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的默认缓存策略，服务器将 [仅缓存这两种编码格式中的一种](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)。如果客户端请求两者中的另一种，服务器将通过在线压缩或解压缩缓存的方式来响应。
+不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
 
-如果您使用了此指令，那么很可能您还希望 CDN Pro 能区别缓存不同编码格式的响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
+如果您使用了此指令，那么很可能您还希望 CDN Pro 能根据 `Accept-Encoding` 请求头的值来区别缓存响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
 
 ```nginx
 set $cache_misc $cache_misc."ae=$http_accept_encoding";

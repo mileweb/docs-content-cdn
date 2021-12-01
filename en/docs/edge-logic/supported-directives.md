@@ -14,7 +14,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 **Default:** `-` <br/>
 **Context:** server, location, if in location
 
-This directive modifies the response headers to the client. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
+This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
 1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx
@@ -79,7 +79,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
 
-2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client.
+2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the `Transfer-Encoding` to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client. The added trailer won't appear in the response to the client.
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
@@ -159,11 +159,20 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:** `custom_log_field {custom log field id} {value or variable};`<br/>
+**Syntax:** `custom_log_field id value;`<br/>
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
+This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom1" and "custom2" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). If you require this feature, contact our support team.
+
+Examples:
+```nginx
+location / {
+  custom_log_field 1 $http_x_data; # save the request header value X-Data to custom1
+  custom_log_field 2 $cookie_abc; # save the value of cookie abc to custom2
+  ...
+}
+```
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -195,11 +204,11 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 
 Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also respond to status codes returned from the origin.
 
-For example, the following configuration would try a second origin when the first one returns 403:
+For example, the following configuration would try a second origin when the first one returns 401 or 403:
 ```nginx
 location /abc {
   origin_pass my-origin1;
-  error_page 403 = @try_origin2;
+  error_page 401 403 = @try_origin2;
 }
 location @try_origin2 {
   origin_pass my-origin2;
@@ -224,6 +233,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key``` and ```$iv``` should both be binary strings of 32 bytes.|
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
+| RSA<br>signature | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` can only be ```SHA256```.|
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
 | integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
 | integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
@@ -469,7 +479,7 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
 * round_robin : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
-* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL.
+* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL. If the origin server has cache, this option should help with the hit ratio.
 * sorted_list : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
 
 
@@ -578,7 +588,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server and the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -602,9 +612,9 @@ Description:
 
 This directive allows you to configure the minimum cache time. If the received max-age from the origin is less than the specified minimum age, the max-age value is set to the configured minimum age value. For example, if the max-age value in the received HTTP header is 100s and the configured minimum age value is 200s, the effective cache time will be 200s. 
 
-nginx calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
+CDN Pro calculates the cache time from the headers in the upstream response or from the nginx directives in the following order:
 
-X-Accel-Expires > Cache-Control (max-age) > Expires > proxy_cache_valid (nginx directive)
+X-Accel-Expires > Cache-Control (max-age), proxy_cache_min_age > Expires > proxy_cache_valid (nginx directive)
 
  When nginx calculates the cache time from max-age value in the Cache-Control header, it compares the value with the value configured in the  proxy_cache_min_age and updates the cache time accordingly. Otherwise, nginx ignores the value in the proxy_cache_min_age directive.
 
@@ -638,7 +648,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default:** — <br/>
 **Context:** server, location
 
-Sets caching time for different response codes. We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. A value of 0 means cache the response and treat it as expired. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+Sets caching time for different response codes. If no code is explicitly specified, the default is 200, 301 and 302. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
 ### `proxy_cache_vary`
 
@@ -648,7 +658,7 @@ Sets caching time for different response codes. We enhanced the [open-source ver
 **Default:** `proxy_cache_vary off;` <br/>
 **Context:** server, location
 
-If `proxy_cache_vary` is "on", the CDN Pro cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents must be purged using "directory purge". An error will be returned if "file purge" is used for varied contents.
+If `proxy_cache_vary` is "on", the CDN Pro cache servers honor the `Vary` response header from the origin and cache different variations separately. However, the varied contents should be purged using "directory purge".
 
 If `proxy_cache_vary` is "off", the CDN Pro cache servers do not cache any response with the `Vary` header.
 
@@ -738,7 +748,7 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 **Default:** `proxy_next_upstream error timeout;` <br/>
 **Context:** server, location
 
-Specifies in which cases a request should be passed to the next origin server. No change to the public version. 
+Specifies in which cases a request should be passed to the next server in the origin configuration. No change to the public version. 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
@@ -748,7 +758,7 @@ Specifies in which cases a request should be passed to the next origin server. N
 **Default:** `proxy_next_upstream_timeout 0;` <br/>
 **Context:** server, location
 
-Limits the time during which a request can be passed to the next upstream server. No change to the public version.
+Limits the time during which a request can be passed to the next server in the origin configuration. A value of "0" disables the limit. No change to the public version.
 
 ### [`proxy_next_upstream_tries`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_tries)
 
@@ -758,7 +768,7 @@ Limits the time during which a request can be passed to the next upstream server
 **Default:** `proxy_next_upstream_tries 0;` <br/>
 **Context:** server, location
 
-Limits the number of possible tries for passing a request to the next upstream server. No change to the public version. 
+Limits the number of possible tries for passing a request to the next server in the origin configuration. A value of "0" disables the limit. No change to the public version. 
 
 ### [`proxy_no_cache`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache)
 
