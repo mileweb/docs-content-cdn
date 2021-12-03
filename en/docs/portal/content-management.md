@@ -29,10 +29,10 @@ If the content on your origin web server has changed, request a purge to have CD
 |----------|---------------|
 | Target Environment | Select whether the purge will occur in the staging or production environment. Default is staging.|
 | Purge Action | Select whether you want the content deleted or invalidated.  <br><ul><li><strong>Delete</strong> = removes the object from the cache of edge servers. The next time the edge server receives a request for the removed content, it retrieves the current version from your origin server. (*default*)</li><li><strong>Invalidate</strong> = this is the default setting and marks the cached content as invalid. However, the content is not removed from cache and objects are not retrieved from your origin unless they are newer than the cached versions. With this setting, CDN Pro edge servers can continue serving stale content to your end users if the origin cannot be reached.</li></ul> |
-| Purge Type | Select whether you want to purge a file or a directory. Default is file.|
-| Add a file to be purged | If **Purge Type** is set to **File**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the file to be purged, and then click **Add File**. Repeat this step for each additional file you want to purge. If you decide not to purge one or more files that you added, click the **x** icon at the right side of the file name.|
-| Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge one or more request headers that you added, click the **x** icon at the right side of the header name.|
-| Add a directory to be purged | If **Purge Type** is set to **Directory**, select **https://** (*default*) or **http://** from the drop-down list, enter the name of the directory to be purged, and then click **Add Directory**. Note that subdirectories of the directory will also be purged. Repeat this step for each additional directory you want to purge. If you decide not to purge one or more directories that you added, click the **x** icon at the right side of the directory name. </br><br><strong>Note:</strong> CDN Pro also supports purging based on URL prefixes. For more information, see Examples of Directory Purging below.</br>|
+| Purge Type | Select whether you want to purge a file or a wildcard. Default is file. <br><br><strong>Note:</strong> If the file has multiple variations due to a custom cache key, select **Wildcard**.</br>|
+| Add files to purge | If **Purge Type** is set to **File**, enter the complete URL of the file to be purged and press Enter. Repeat this step for each additional file you want to purge. If you decide not to purge a file, delete it from this field.|
+| Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge a request header, click the **x** icon at the right side of the header name.|
+| Add directories to purge | If **Purge Type** is set to **Wildcard**, enter the complete URL of the directory you want to purge, including optional wildcards, and press Enter. Repeat this step for each additional directory you want to purge. If you decide not to purge a directory, delete it from this field. </br><br><strong>Note:</strong> Observe the following guidelines:</br><ul><li>Purging a directory also purges its subdirectories.</br></ul></li><ul><li>CDN Pro supports purging based on URL prefixes. For more information, see Examples of Directory Purging below.</ul></li>|
 
 4. Click **Start Purge**.
 
@@ -40,9 +40,12 @@ If the content on your origin web server has changed, request a purge to have CD
 
 ## Examples of Directory Purging
 
-CDN Pro allows you to purge directories by entering URLs in the <strong>Add a directory to be purged</strong> field. The following table shows examples of purging directories.
+CDN Pro allows you to purge directories by entering URLs in the <strong>Add directories to purge</strong> field. The URLs you enter can include wildcards.
+<ul><li>Ending a subdirectory with a single asterisk <b>*</b> purges all files only.</ul></li><ul><li>Ending a directory with two asterisks purges all files and subdirectories.</ul></li><ul><li>Ending the URL with <b>*ext</b> purges all files that have a specific extension.</ul></li><ul><li>If the URL includes a percent character <b>%</b>, encode it to <b>%25</b>.</ul></li>
 
-**Note:** Files can have multiple variations if custom cache keys are used. In addition, a URL such as <code>/pictures/</code> or <code>/picture.jpg</code> can have many variations stored in the cache due to the Vary header or cache key customization. As a result, performing a folder purge without an asterisk will clear all variations except subdirectories or files. For this reason, folder purges of <code>/pictures/</code>, <code>/pictures/*</code>, and <code>/pictures/**</code> result in different behaviors.
+The following table shows examples of purging directories with and without using wildcards.
+
+**Note:** Files can have multiple variations if custom cache keys are used. In addition, a URL such as <code>/pictures/</code> or <code>/picture.jpg</code> can have many variations stored in the cache due to the Vary header or cache key customization. As a result, performing a folder purge without an asterisk clears all variations except subdirectories or files. For this reason, folder purges of <code>/pictures/</code>, <code>/pictures/*</code>, and <code>/pictures/**</code> result in different behaviors.
 
 |**Example**|**Description**|
 |----------|---------------|
