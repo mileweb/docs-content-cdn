@@ -13,7 +13,7 @@
 ### Portal updates
 * Fixed pagination of portal user list page.
 * Ensured list of secrets is updated after one is created or deleted.
-* Correct unit of measurement for cache hit ratio in traffic report.
+* Corrected unit of measurement for cache hit ratio in traffic report.
 * Improved purge interface to allow easy entry of multiple files or paths.
 * Showed notifications in the correct language.
 * Emphasized Beian Content Type must be selected if the user indicates property has ICP Beian.
