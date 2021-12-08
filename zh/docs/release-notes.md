@@ -1,5 +1,27 @@
 # Release Notes
 
+## December 1, 2021
+### API updates
+* Fixed error message when a prefetch request is created with an invalid header value.
+* Improved error handling of the [webhooks list API](</apidocs#operation/get-cdn-webhooks>).
+* Improved error handling of the filter in [annotation list API](</apidocs#operation/queryAnnotationList>).
+* Fixed status code when attempting to update an edge hostname’s Beian status.
+* Fixed salutation in email notifications of account changes.
+* Fixed [traffic volume summary](</apidocs#operation/getVolSummary>)’s response to account for a special situation of domain served from the local IP address 127.0.0.1.
+* Added loadBalancerLogic field to property definition allowing custom code to be inserted into the NGINX LB block. A field, loadBalancerDirectives, was added to the [systemConfigs API](</apidocs#operation/get-cdn-systemConfigs>) to indicate the directives that can be used. These updates allow code to be added to reject DDoS requests.
+
+### Portal updates
+* Fixed pagination of portal user list page.
+* Ensured list of secrets is updated after one is created or deleted.
+* Corrected unit of measurement for cache hit ratio in traffic report.
+* Improved purge interface to allow easy entry of multiple files or paths.
+* Showed notifications in the correct language.
+* Emphasized Beian Content Type must be selected if the user indicates property has ICP Beian.
+* Added support for RSA_SIGN and RSA_verify in the [eval_func](</docs/edge-logic/supported-directives#eval_func>) of Edge Logic.
+* Updated error handling when cloning edge hostname with Beian support.
+* Fixed initialization of radio buttons when repeating a purge.
+
+
 ## November 17, 2021
 ### API updates
 * Fixed error handling when querying the status of an invalid, non-existent prefetch.
