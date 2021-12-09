@@ -1,8 +1,9 @@
-# Creating a New Certificate
+# 创建证书
 
-There are two ways to create a new certificate: 
+目前有两种方式进行证书的创建: 
 
-1. **Auto-generate a self-signed certificate**. Use this method if you need a certificate signing request (CSR) to apply for a certificate from a certificate authority (CA). You can then download the CSR of the new self-signed certificate and submit it to the CA. When you receive the CA-signed certificate and chain certificate(s), you can upload them as a new version.
+1. **自动生成自签名证书**. Use this method if you need a certificate signing request (CSR) to apply for a certificate from a certificate authority (CA). You can then download the CSR of the new self-signed certificate and submit it to the CA. When you receive the CA-signed certificate and chain certificate(s), you can upload them as a new version.
+此方式将为您生成一份证书签名请求 (CSR) ，您可以用该证书签名请求以证书颁发机构 (CA) 申请证书。然后，您可以下载新的自签名证书的 CSR 并将其提交给 CA。当您收到 CA 签署的证书和链式证书时，您可以将它们作为新版本上传。
 
 2. **Upload the private key, certificate, and chain certificate(s)**.
 
