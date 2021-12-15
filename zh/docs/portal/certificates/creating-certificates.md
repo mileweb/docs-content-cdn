@@ -2,8 +2,7 @@
 
 目前有两种方式进行证书的创建: 
 
-1. **自动生成自签名证书**. Use this method if you need a certificate signing request (CSR) to apply for a certificate from a certificate authority (CA). You can then download the CSR of the new self-signed certificate and submit it to the CA. When you receive the CA-signed certificate and chain certificate(s), you can upload them as a new version.
-此方式将为您生成一份证书签名请求 (CSR) ，您可以用该证书签名请求以证书颁发机构 (CA) 申请证书。然后，您可以下载新的自签名证书的 CSR 并将其提交给 CA。当您收到 CA 签署的证书和链式证书时，您可以将它们作为新版本上传。
+1. **自动生成自签名证书** 使用本方式可以生成一份自签名证书给您的加速项目临时使用，或用于测试。它的另一个重要用途是生成一份新的证书签名请求（CSR）来向证书颁发机构（CA）申请正式证书。在自签名证书生成以后，您可以下载它对应的 CSR 并将其提交给 CA。当您收到 CA 签署的正式证书和链证书时，您可以将它们作为新版本上传并部署。
 
 2. **Upload the private key, certificate, and chain certificate(s)**.
 
