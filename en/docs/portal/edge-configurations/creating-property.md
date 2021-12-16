@@ -61,7 +61,34 @@ This section allows you to enable HTTPS for this property by attaching a TLS cer
 
 ## Real-Time Log
 
-If you signed an agreement with CDNetworks for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using NGINX variables. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+If you signed an agreement with CDNetworks for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the NGINX variables shown in the following table; they will be replaced with the actual values in the notifications.. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+
+| **Variable**                | **Description**                                    |
+| --------------------------| ---------------------------------------------------|
+| $body_bytes_sent             | Size of the response body.|
+| $bytes_sent                  | Size of the response, including body, headers, and response line.|
+| $client_country_code         | ISO 3166-1 country code representing the country of the client request (for example, <b>US</b>). If the country is unknown, <b>ZZ</B> is returned.|
+| $client_real_ip              | IP address of the client request.|
+| $cookie_x                    | Obtains any cookie named <i>x</i>. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
+| $http_x                      | Obtains any HTTP header named <i>x</i> from the original request. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$http_user_agent</b> fetches the value of User-Agent. |
+| $msec                        | Current Unix time in seconds with millisecond precision. |
+| $qtl_req_id                  | Unique identifier representing the request. |
+| $request_uri                 | HTTP request URI. |
+| $request_method              | HTTP request method used to access the origin. |
+| $request_time                | Response time in milliseconds. This is the time between receiving the request's first byte and serving the last byte of the response. |
+| $sc_completed                | 1 = last byte of the object was served to the user.<br>Otherwise, 0.</br> |
+| $sc_initial                  | 1 = first byte of the object was served to the user. <br>Otherwise, 0.</br> |
+| $scheme                      | Protocol of the user's request (either <b>http</b> or <b>https</b>).</br> |
+| $sent_http_content_length    | Original file size. |
+| $sent_http_x                 | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
+| $server_addr                 | IP address of the edge node serving the user's request. |
+| $server_protocol             | Version of HTTP used in the user's request (<b>HTTP/1.0</b>, <b>HTTP/1.1</b>, or <b>HTTP/2.0</b>). |
+| $ssl_cipher                  | Cipher suite used for the TLS (SSL) connection. |
+| $ssl_server_name             | Hostname to which a client initiating a TLS (SSL) connection is attempting to connect. It is sent only by clients supporting Server Name Indication (SNI). |
+| $ssl_protocol                | TLS version used for the TLS (SSL) connection. Example versions include <b>SSLv3</b>, <b> TLSv1</b>, <b>TLSv1.1</b>, <b>TLSv1.2</b>, and <b>unknown</b>. |
+| $status                      | HTTP response code for the user's request. |
+| $tcpinfo_rtt                 | Time in microseconds taken by a packet to travel to the destination and return. |
+
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="900"></p>
 
 ## Advanced Settings
