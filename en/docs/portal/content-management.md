@@ -29,7 +29,7 @@ If the content on your origin web server has changed, request a purge to have CD
 |----------|---------------|
 | Target Environment | Select whether the purge will occur in the staging or production environment. Default is staging.|
 | Purge Action | Select whether you want the content deleted or invalidated.  <br><ul><li><strong>Delete</strong> = removes the object from the cache of edge servers. The next time the edge server receives a request for the removed content, it retrieves the current version from your origin server. (*default*)</li><li><strong>Invalidate</strong> = this is the default setting and marks the cached content as invalid. However, the content is not removed from cache and objects are not retrieved from your origin unless they are newer than the cached versions. With this setting, CDN Pro edge servers can continue serving stale content to your end users if the origin cannot be reached.</li></ul> |
-| Purge Type | Select whether you want to purge a file, wildcard, or regular expression pattern used to match character combinations in strings ([0-9a-zA-Z_-]{1,28}). Default is file. <br><br><strong>Note:</strong> If the file has multiple variations due to a custom cache key, select **Wildcard**.</br>|
+| Purge Type | Select whether you want to purge a single file, multiple cache entries that match a wildcard, or all entries that match a regular expression. Default is file. For more information about purging using regular expressions, see Purging Entries That Match a Regular Expression below.<br><br><strong>Note:</strong> If the file has multiple variations due to a custom cache key, select **Wildcard**.</br>|
 | Add files to purge | If **Purge Type** is set to **File**, enter the complete URL of the file to be purged and press Enter. Repeat this step for each additional file you want to purge. If you decide not to purge a file, delete it from this field.|
 | Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge a request header, click the **x** icon at the right side of the header name.|
 | Add directories to purge | If **Purge Type** is set to **Wildcard**, enter the complete URL of the directory you want to purge, including optional wildcards, and press Enter. Repeat this step for each additional directory you want to purge. If you decide not to purge a directory, delete it from this field. </br><br><strong>Note:</strong> Observe the following guidelines:</br><ul><li>Purging a directory also purges its subdirectories.</br></ul></li><ul><li>CDN Pro supports purging based on URL prefixes. For more information, see Examples of Directory Purging below.</ul></li>|
@@ -37,6 +37,36 @@ If the content on your origin web server has changed, request a purge to have CD
 4. Click **Start Purge**.
 
 **Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
+
+## Purging Entries That Match a Regular Expression
+
+CDN Pro supports purges that use a regular expression (or "regex") pattern to match a cache key. The pattern must begin with <code>{scheme}: //{hostname}/</code> where <code>{scheme}</code> is http, https, or other entry that matches any scheme. For example: <br><br><code>https://test.domain.com/my.*\.(jpg|png)\?q= </code></br></br>
+
+For performance considerations, observe the following guidelines:
+<ul><li>The regex pattern following the hostname should be less than 126.</ul></li><ul><li>The pattern can contain up to two unlimited quantifiers ("*", "+" or ",}")</ul></li><ul><li>The upper limit of any quantifier cannot exceed 59.</ul></li>
+
+By default, CDN Pro allows 1,000 entries in the <code>fileUrls</code> list, 20 entries in the <code>dirUrls</code> list, and 2 entries in the <code>regexPatterns</code> list in each purge. The per-request and total number of allowed purges are subject to customer-specific quotas. CDN Pro also limits the size of the API request body.
+
+When <code>tags</code> is specified, cached content with an Edge-Cache-Tag header whose value contains one of the tags will be purged.
+
+If <code>webhook</code> is provided, the following notification body is sent to the endpoint:
+
+<code>{ "subject": "CDN360 Task Event",
+&nbsp;&nbsp;&nbsp;"taskType": "purge",
+&nbsp;&nbsp;&nbsp;"taskList": [{"taskId": "d213-123e",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"successRate": 100,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"variedFiles": 156, //[NCAS-2625] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "free text no more than 250 characters"
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;{"taskId": "d213-456e",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"successRate": 100,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"variedFiles": 156, //[NCAS-2625] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message": "free text no more than 250 characters"
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;]
+&nbsp;}</code>
+
+**Note:** A parent can purge a child's domain without impersonation and should use the parent's purge quota.
 
 ## Examples of Directory Purging
 

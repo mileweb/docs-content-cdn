@@ -61,7 +61,7 @@ This section allows you to enable HTTPS for this property by attaching a TLS cer
 
 ## Real-Time Log
 
-If you signed an agreement with CDNetworks for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the NGINX variables shown in the following table; they will be replaced with the actual values in the notifications.. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+If you signed an agreement with CDNetworks for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the NGINX variables shown in the following table; they will be replaced with the actual values in the notifications. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
 
 | **Variable**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
