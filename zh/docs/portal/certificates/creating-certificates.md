@@ -2,47 +2,45 @@
 
 目前有两种方式进行证书的创建: 
 
-1. **自动生成自签名证书**. 如果您是通过证书签名请求 (CSR)来向证书颁发机构 (CA)申请证书，那么您可以使用此类方式。此方式将为您生成一份证书签名请求 (CSR) ，您可以下载该证书签名请求然后提交给证书颁发机构 (CA) 申请证书。当您收到 CA 签署的证书和证书链 (CA) 时，您可以将它们作为证书的新版本上传。
+1. **自动生成自签名证书** 使用本方式可以生成一份自签名证书给您的加速项目临时使用，或用于测试。它的另一个重要用途是生成一份新的证书签名请求（CSR）来向证书颁发机构（CA）申请正式证书。在自签名证书生成以后，您可以下载它对应的 CSR 并将其提交给 CA。当您收到 CA 签署的正式证书和链证书时，您可以将它们作为新版本上传并部署。
 
-2. **上传私钥、证书和链证书**.
+2. **Upload the private key, certificate, and chain certificate(s)**.
 
-## 自动生成自签名证书
+## Auto-Generating a Self-Signed Certificate 
 
-以下过程描述了如何生成自签名证书。在将正式证书部署到生产环境之前，自签名证书可用于测试目的或内部使用。如果您需要一份 CSR 以便从 CA 获取签名证书，请先创建自签名证书。
+The following procedure describes how to generate self-signed certificates. Self-signed certificates can be used for testing purposes or internal use before deploying the certificate into the production environment. If you need a CSR to obtain a signed certificate from a CA, create a self-signed certificate first.
 
-
-1. 在左侧菜单栏，点击 **证书**.
-2. 在证书页面的右上角, 点击 **创建证书** 按钮. 
+1. In the left pane, click **Certificates**.
+2. At the top right of the Certificates page, click the **Create Certificate** button. 
 
 <p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="create new cert button menu" width="900"></p>
 
-填写“创建证书”表单顶部的字段。
 
-3. 填写“创建证书”页面顶部的字段。 在 **创建方法** 选项中，配置  **自动生成** 并完成附加字段的信息录入。必填字段用星号 (\*) 表示。
+3. Complete the fields at the top of the Create a Certificate form. Next to **Creation Method**, click  **Auto-Generate** and complete the additional fields. Required fields are denoted by an asterisk (\*).
 
 <p align=center><img src="/docs/resources/images/certificates/create-certificate-autogenerate.png" alt="auto generate cert" width="650"></p>
 
-| **字段**|**描述**|
+| **Fields**|**Description**|
 |-|-|
-|| **创建证书页面的顶部字段**                                      |
-|证书名称|输入可帮助您识别此证书的名称。|
-|证书说明|添加有关此证书的说明。|
-|自动更新|选择您是否希望 CDN Pro 通过 Let's Encrypt (**LE**) [自动更新证书](/docs/portal/certificates/auto-renewal.md) 。|
-|与下列客户共享|此字段仅供代理商账号使用。它允许代理商选择他们想要共享证书的子客户。|
-|创建方式|指定新增证书方式：是要上传已有的证书还是使用 CDN Pro 生成证书。|
-|| **自动生成方式下所需字段**                                      |
-|模板|使用模板中的设置填充表单字段。模板是常用设置的集合。在使用此选项之前，您必须至少保存一个模板（请参阅下面的第 4 步）。使用模板中的设置填充字段后，您可以在下面的字段中修改它们内容以满足您的实际要求，也可将当前设置保存在新模板中。|
-|公钥算法|为该证书选择一个公钥算法：RSA2048 或 ECC256。|
-|Common Name|输入要用于证书的公用名（可以是任何文本）。|
-|SAN|输入一个或多个域名 (SAN)，这将是您希望此证书涵盖的域名。|
-|国家|输入两个字母的国家名称 [ISO-3166 国家码](<https://www.iso.org/obp/ui/#search>) 。|
-|State|输入State名称。|
-|城市|输入城市名称。|
-|街道|输入街道名称。|
-|公司|输入公司名称。|
-|部门|输入部门名称。|
-|Email|输入邮箱地址。|
-|注释|输入有关此初始证书版本的一些备注。|
+|| **Options at the top of the Create a Certificate Form**                                      |
+|Certificate Name|Enter a name that helps you identify this certificate.|
+|Certificate Description|Add a description about this certificate.|
+|Auto Renew|Select whether you want CDN Pro to [renew the certificate automatically](/docs/portal/certificates/auto-renewal.md) through Let's Encrypt (**LE**).|
+|Share With|This field is available to resellers only. It allows resellers to select the child customers with whom they want to share the certificate.|
+|Creation Method|Specify whether you want to upload a certificate you already have or generate a certificate using CDN Pro.|
+|| **Auto-Generate Options**                                      |
+|Template|Populates the form fields with settings from a template. A template is a collection of frequently used settings. Before you use this option, you must save at least one template (see step 4 below). After the fields are populated with the settings from a template, you can change them in the fields below to suit your requirements, and then save the settings in a new template.|
+|Public Key Algorithm|Select a public key algorithm for this certificate: RSA2048 or ECC256.|
+|Common Name|Enter a common name you want to use for the certificate (can be any text).|
+|SAN|Enter one or more subject alternative names (SANs), which will be the hostnames you want this certificate to cover.|
+|Country|Enter the name of a country in two letter [ISO-3166 country code](<https://www.iso.org/obp/ui/#search>) format.|
+|State|Enter the name of a state.|
+|City|Enter the name of a city.|
+|Street|Enter the name of a street.|
+|Company|Enter a company name.|
+|Department|Enter a department name.|
+|Email|Enter an email address.|
+|Comments|Enter some comments about this initial version.|
 
 4. To save these settings in a template that you can select at a later time using the **Template** drop-down list mentioned above, click the **Save as a Template** button. When the popup message appears, enter a name for the template and click **OK**. 
 5. Click the **Save Certificate** button followed by **OK**.
