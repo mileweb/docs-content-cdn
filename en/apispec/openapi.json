@@ -195,7 +195,7 @@
                         },
                         "edgeLogic": {
                           "type": "string",
-                          "maxLength": 200000,
+                          "maxLength": 65530,
                           "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                         },
                         "hasBeian": {
@@ -209,7 +209,7 @@
                             "string"
                           ],
                           "default": false,
-                          "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                          "description": "This field can be set to either a boolean value or a string. If the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                         },
                         "origins": {
                           "type": "array",
@@ -225,7 +225,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -284,7 +284,7 @@
                         "disableHttp2": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
+                          "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
                         },
                         "schemeInCacheKey": {
                           "type": "boolean",
@@ -329,11 +329,11 @@
                         "allowProtocolDowngrade": {
                           "type": "boolean",
                           "default": false,
-                          "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
+                          "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                         },
                         "tlsCertificateId1": {
                           "type": "number",
-                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                         },
                         "videoSeek": {
                           "type": "object",
@@ -376,7 +376,7 @@
                         },
                         "accessControlRules": {
                           "type": "array",
-                          "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                          "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using Edge Logic. These access control rules take precedence over Edge Logic if both are defined.",
                           "items": {
                             "title": "accessControlRule",
                             "type": "object",
@@ -470,7 +470,7 @@
                             "postRewrite"
                           ],
                           "default": "preRewrite",
-                          "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                          "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's Edge Logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                         },
                         "extraServicePorts": {
                           "type": "object",
@@ -495,6 +495,11 @@
                               }
                             }
                           }
+                        },
+                        "loadBalancerLogic ": {
+                          "type": "string",
+                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                          "maxLength": 65530
                         }
                       }
                     },
@@ -850,7 +855,7 @@
                   },
                   "edgeLogic": {
                     "type": "string",
-                    "maxLength": 200000,
+                    "maxLength": 65530,
                     "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                   },
                   "hasBeian": {
@@ -864,7 +869,7 @@
                       "string"
                     ],
                     "default": false,
-                    "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                    "description": "This field can be set to either a boolean value or a string. If the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -880,7 +885,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -939,7 +944,7 @@
                   "disableHttp2": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -984,11 +989,11 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
+                    "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -1031,7 +1036,7 @@
                   },
                   "accessControlRules": {
                     "type": "array",
-                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using Edge Logic. These access control rules take precedence over Edge Logic if both are defined.",
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
@@ -1125,7 +1130,7 @@
                       "postRewrite"
                     ],
                     "default": "preRewrite",
-                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's Edge Logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                   },
                   "extraServicePorts": {
                     "type": "object",
@@ -1150,6 +1155,11 @@
                         }
                       }
                     }
+                  },
+                  "loadBalancerLogic ": {
+                    "type": "string",
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "maxLength": 65530
                   }
                 }
               },
@@ -2807,7 +2817,7 @@
                   "Invalid directive": {
                     "value": {
                       "code": "InvalidDirective",
-                      "message": "An invalid directive 'ORIGIN_set_header' was found in your edge logic. Please refer to the API documentation for a list of supported directives."
+                      "message": "An invalid directive 'ORIGIN_set_header' was found in your Edge Logic. Please refer to the API documentation for a list of supported directives."
                     }
                   }
                 }
@@ -2949,7 +2959,7 @@
                   },
                   "edgeLogic": {
                     "type": "string",
-                    "maxLength": 200000,
+                    "maxLength": 65530,
                     "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                   },
                   "hasBeian": {
@@ -2963,7 +2973,7 @@
                       "string"
                     ],
                     "default": false,
-                    "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                    "description": "This field can be set to either a boolean value or a string. If the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                   },
                   "origins": {
                     "type": "array",
@@ -2979,7 +2989,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -3038,7 +3048,7 @@
                   "disableHttp2": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -3083,11 +3093,11 @@
                   "allowProtocolDowngrade": {
                     "type": "boolean",
                     "default": false,
-                    "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
+                    "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -3130,7 +3140,7 @@
                   },
                   "accessControlRules": {
                     "type": "array",
-                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                    "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using Edge Logic. These access control rules take precedence over Edge Logic if both are defined.",
                     "items": {
                       "title": "accessControlRule",
                       "type": "object",
@@ -3224,7 +3234,7 @@
                       "postRewrite"
                     ],
                     "default": "preRewrite",
-                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                    "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's Edge Logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                   },
                   "extraServicePorts": {
                     "type": "object",
@@ -3249,6 +3259,11 @@
                         }
                       }
                     }
+                  },
+                  "loadBalancerLogic ": {
+                    "type": "string",
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "maxLength": 65530
                   }
                 }
               },
@@ -3360,7 +3375,7 @@
                   "Invalid directive": {
                     "value": {
                       "code": "InvalidDirective",
-                      "message": "An invalid directive 'ORIGIN_set_header' was found in your edge logic. Please refer to the API documentation for a list of supported directives."
+                      "message": "An invalid directive 'ORIGIN_set_header' was found in your Edge Logic. Please refer to the API documentation for a list of supported directives."
                     }
                   },
                   "Invalid hostname": {
@@ -3546,7 +3561,7 @@
                       },
                       "edgeLogic": {
                         "type": "string",
-                        "maxLength": 200000,
+                        "maxLength": 65530,
                         "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
                       },
                       "hasBeian": {
@@ -3560,7 +3575,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "This field can be set to either a boolean value or a string. When the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
+                        "description": "This field can be set to either a boolean value or a string. If the value is set to <i>true</i>, the server will redirect all HTTP requests to HTTPS using status code 301. You can also specify string values \"302\", \"307\", or \"308\" instead if you wish to return a different status code when a request is redirected."
                       },
                       "origins": {
                         "type": "array",
@@ -3576,7 +3591,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven when the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -3635,7 +3650,7 @@
                       "disableHttp2": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Set to <i>true</i> to disable support for HTTP/2 and only support HTTP 1.1."
+                        "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
                       },
                       "schemeInCacheKey": {
                         "type": "boolean",
@@ -3680,11 +3695,11 @@
                       "allowProtocolDowngrade": {
                         "type": "boolean",
                         "default": false,
-                        "description": "This setting only applies when the property has an attached certificate allowing client requests to use HTTPS. When the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. When the value is <i>true</i>, we allow origins that only support HTTP; this setting reduces security.\n"
+                        "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                       },
                       "tlsCertificateId1": {
                         "type": "number",
-                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n\n"
+                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                       },
                       "videoSeek": {
                         "type": "object",
@@ -3727,7 +3742,7 @@
                       },
                       "accessControlRules": {
                         "type": "array",
-                        "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using edge logic. These access control rules take precedence over edge logic if both are defined.",
+                        "description": "Specify one or more access control rules to restrict access to your content. More advanced configuration can be done using Edge Logic. These access control rules take precedence over Edge Logic if both are defined.",
                         "items": {
                           "title": "accessControlRule",
                           "type": "object",
@@ -3821,7 +3836,7 @@
                           "postRewrite"
                         ],
                         "default": "preRewrite",
-                        "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's edge logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
+                        "description": "This setting controls how the URI of the incoming request is incorporated into the cache key if you use a \"rewrite\" directive in the property's Edge Logic. The default value, \"preRewrite\", puts the unmodified URI into the cache key while \"postRewrite\" uses the modified URI. If your rewrite directive converts multiple different URIs into the same value, using \"postRewrite\" may result in a higher cache hit ratio."
                       },
                       "extraServicePorts": {
                         "type": "object",
@@ -3846,6 +3861,11 @@
                             }
                           }
                         }
+                      },
+                      "loadBalancerLogic ": {
+                        "type": "string",
+                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                        "maxLength": 65530
                       }
                     }
                   }
@@ -4790,7 +4810,7 @@
             },
             "in": "query",
             "name": "hasBeian",
-            "description": "Specify <i>true</i> to obtain a list of edge hostnames flagged for use with hostnames that have a Beian license allowing them to be served by servers in mainland China. Specify <i>false</i> to only retrieve those edge hostnames without the Beian flag. By default, all edge hostnames are returned."
+            "description": "Specify <i>true</i> to obtain a list of edge hostnames flagged for use with hostnames that have a Beian license, allowing them to be served by servers in mainland China. Specify <i>false</i> to retrieve only those edge hostnames without the Beian flag. By default, all edge hostnames are returned."
           },
           {
             "schema": {
@@ -6988,8 +7008,10 @@
                     },
                     "count": {
                       "type": "integer",
-                      "minimum": 0,
-                      "description": "Total number of deployment tasks."
+                      "description": "Total number of deployment tasks.",
+                      "exclusiveMaximum": false,
+                      "exclusiveMinimum": false,
+                      "minimum": 0
                     }
                   },
                   "required": [
@@ -7264,7 +7286,7 @@
             }
           }
         },
-        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to the <a href=\"#operation/getStagingServers\">Query list of staging servers API</a> for more information.",
+        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to <a href=\"/cdn/docs/portal/edge-configurations/testing-property\">testing a property</a> for more information.",
         "operationId": "createDeployment",
         "requestBody": {
           "content": {
@@ -7682,70 +7704,6 @@
         },
         "operationId": "queryDeploymentTask",
         "description": "Get details about a deployment task including the associated actions, when it was submitted, its status, and additional details if the deployment failed.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "On-Behalf-Of",
-            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
-          }
-        ]
-      }
-    },
-    "/cdn/stagingServers": {
-      "get": {
-        "summary": "Get list of staging servers",
-        "tags": [
-          "Deployment Management"
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of staging servers is returned.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "stagingServers": {
-                      "type": "array",
-                      "description": "A list of staging servers.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "ip": {
-                            "type": "string",
-                            "description": "an IP address of a staging server.\n"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "stagingServers": [
-                        {
-                          "ip": "163.171.230.47"
-                        },
-                        {
-                          "ip": "163.171.228.89"
-                        },
-                        {
-                          "ip": "163.171.233.53"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "description": "This API returns a list of staging servers. Use these to test your deployments to staging before you deploy to production. (You can also get the IP addresses using this command on a Linux/Unix based system:  <code>dig staging.qtlcdn.com</code>).\n\nUse one of the following methods to test a property deployed to staging:\n\n<ol>\n<li>Modify your DNS server's CNAME record to point the property's hostname to staging.qtlcdn.com.</li>\n<li>Modify your hosts file (/etc/hosts on a Unix or Linux based system) to point your property's hostname to one of the staging servers' IP addresses.</li>\n<li>Use the curl utility's --resolve option to map the property's hostname to one of the staging servers' IP addresses.</li></ol>\n\nAlthough we do not expect the IP addresses to change often, they may change without notice. If you use options 2 or 3 above, you should periodically check if the IP address is still valid using this API.",
-        "operationId": "getStagingServers",
         "parameters": [
           {
             "schema": {
@@ -12178,7 +12136,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The purge request was created. The <i>Location</i> header includes a reference to the task.  Call the <a href=\"#operation/queryPurgeStatus\">Query Purge Request status API</a> to check its status.",
+            "description": "The purge request was created. The <i>Location</i> header includes a reference to the task.  Call the <a href=\"#operation/queryPurgeStatus\">Get Purge Request status API</a> to check its status.",
             "headers": {
               "Location": {
                 "schema": {
@@ -12292,6 +12250,14 @@
                   "webhook": {
                     "type": "string",
                     "description": "ID of a webhook to call when the purge task completes."
+                  },
+                  "regexPatterns": {
+                    "type": "array",
+                    "description": "Regular expression patterns used to match the cache key. Each must begin with the following format: \n <i>{scheme}://{hostname}/</i>. {scheme} can be <i>http</i>, <i>https</i>, or <i>any</i>, which matches any scheme.\nExample: \n<code>https://test.domain.com/my.*\\.(jpg|png)\\?q=</code>\n<br/>\nFor performance considerations, the following restrictions apply:\n<ul>\n<li>The regular expression pattern following the hostname can be up to 126 characters.\n</li>\n<li>It can consist of up to two unlimited quantifiers (\"*\", \"+\", or \",}\").</li>\n<li>The upper limit on a quantifier cannot be more than 59, for example, <code>{1,59}</code></li>\n</ul>",
+                    "maxItems": 2,
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
@@ -12415,6 +12381,16 @@
                           "apiAccountId": {
                             "type": "string",
                             "description": "ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>."
+                          },
+                          "regexEntries": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "description": "Number of regex patterns that were part of the purge request."
+                          },
+                          "variedFiles": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "description": "Number of files with multiple copies cached to the origin's Vary header. Purges of such files are automatically converted to <i>directory</i> purges and count against the directory purge quota."
                           }
                         },
                         "required": [
@@ -13444,6 +13420,14 @@
                     "webhook": {
                       "type": "string",
                       "description": "ID of a webhook to call when the purge task completes."
+                    },
+                    "regexPatterns": {
+                      "type": "array",
+                      "description": "Regular expression patterns used to match the cache key. Each must begin with the following format: \n <i>{scheme}://{hostname}/</i>. {scheme} can be <i>http</i>, <i>https</i>, or <i>any</i> which matches any scheme.\nExample: \n<code>https://test.domain.com/my.*\\.(jpg|png)\\?q=</code>\n<br/>\nFor performance considerations, the following restrictions apply:\n<ul>\n<li>The regular expression pattern following the hostname can be up to 126 characters.\n</li>\n<li>It can consist of up to two unlimited quantifiers (\"*\", \"+\", or \",}\").</li>\n<li>The upper limit on a quantifier cannot be more than 59, for example, <code>{1,59}</code></li>\n</ul>",
+                      "maxItems": 2,
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -13557,12 +13541,22 @@
                     "fileEntries": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "Total number of fileUrls entries in purge requests."
+                      "description": "Total number of fileUrls' entries in purge requests."
                     },
                     "dirEntries": {
                       "type": "integer",
-                      "description": "Total number of dirUrls entries in purge requests.",
+                      "description": "Total number of dirUrls' entries in purge requests.",
                       "minimum": 0
+                    },
+                    "regexRequests": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "Number of purge API requests with non-empty regexPatterns."
+                    },
+                    "regexEntries": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "Total number of regexPatterns' entries in purge requests."
                     }
                   }
                 },
@@ -13573,7 +13567,9 @@
                       "fileRequests": 1,
                       "dirRequests": 1,
                       "fileEntries": 2,
-                      "dirEntries": 2
+                      "dirEntries": 2,
+                      "regexRequests": 0,
+                      "regexEntries": 0
                     }
                   }
                 }
@@ -16126,7 +16122,7 @@
                   },
                   "reset2fa": {
                     "type": "boolean",
-                    "description": "Set to <i>true</i> to force the user to go through the two factor authentication setup process when logging in. This only applies if you have chosen to require two factor authentication for improved security. You can enable the feature by setting <i>enforce2fa</i> to <i>true</i> when <a href=\"#operation/patch-ngadmin-customers-id\">updating your account</a>. A common reason to use <i>reset2fa</i> is when the user switches to a new phone."
+                    "description": "Set to <i>true</i> to force the user to go through the two factor authentication setup process when logging in. This applies only if you have chosen to require two factor authentication for improved security. You can enable the feature by setting <i>enforce2fa</i> to <i>true</i> when <a href=\"#operation/patch-ngadmin-customers-id\">updating your account</a>. A common reason to use <i>reset2fa</i> is when the user switches to a new phone."
                   }
                 }
               },
@@ -19530,7 +19526,7 @@
             },
             "in": "query",
             "name": "onbehalfof",
-            "description": "The value can be a customer ID to return API calls made on behalf of that customer, <i>none</i> to fetch API calls made directly or through the portal,  or <i>any</i> to fetch calls made on behalf of any customer.  The last option would only apply if you are a reseller."
+            "description": "The value can be a customer ID to return API calls made on behalf of that customer, <i>none</i> to fetch API calls made directly or through the portal, or <i>any</i> to fetch calls made on behalf of any customer. The last option would apply only if you are a reseller."
           },
           {
             "schema": {
@@ -19829,14 +19825,14 @@
                     },
                     "baseDirectives": {
                       "type": "array",
-                      "description": "A list of edge logic directives that are available to everyone.",
+                      "description": "A list of Edge Logic directives that are available to everyone.",
                       "items": {
                         "type": "string"
                       }
                     },
                     "advancedDirectives": {
                       "type": "array",
-                      "description": "A list of advanced edge logic directives that can be enabled by contacting our support team.",
+                      "description": "A list of advanced Edge Logic directives that can be enabled by contacting our support team.",
                       "items": {
                         "type": "string"
                       }
@@ -19917,6 +19913,13 @@
                     "oldestPropertyValidationTime": {
                       "type": "string",
                       "description": "RFC 3339 date indicating the oldest validated property that can be deployed. Properties validated before this date must be re-validated before you can deploy them. Example: \"2021-02-05T00:00:00Z\""
+                    },
+                    "loadBalancerDirectives": {
+                      "type": "array",
+                      "description": "List of Edge Logic directives that can be used in the  <i>loadBalancerLogic</i> field of a property. This list may include advanced Edge Logic directives that are not enabled for your account. If you require one, please contact our support team.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -20012,8 +20015,19 @@
                           65535
                         ]
                       },
+                      "loadBalancerDirectives": [
+                        "if",
+                        "set",
+                        "return",
+                        "eval_func",
+                        "add_header",
+                        "client_max_body_size",
+                        "deny",
+                        "allow"
+                      ],
                       "advancedFeatures": [
-                        "realTimeLog"
+                        "realTimeLog",
+                        "nearChina"
                       ],
                       "oldestPropertyValidationTime": "2021-02-05T00:00:00Z"
                     }
@@ -20024,7 +20038,7 @@
           }
         },
         "operationId": "get-cdn-systemConfigs",
-        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">edge logic directives</a>, advanced edge logic directives, the default pricing for traffic and HTTPS requests, and nonstandard ports which can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced directives. Please contact our support team if you require access to a particular directive or port which is not listed."
+        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a>, advanced Edge Logic directives, the default pricing for traffic and HTTPS requests, and nonstandard ports which can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed."
       }
     },
     "/cdn/serviceQuotas": {
@@ -20201,7 +20215,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of advanced <a href=\"/cdn/docs/edge-logic/supported-directives\">edge logic directives</a> that are permitted to be used in addition to standard ones.",
+                    "description": "A list of advanced <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a> that are permitted to be used in addition to standard ones.",
                     "items": {
                       "type": "string"
                     }
@@ -20224,7 +20238,7 @@
                     "x-tags": [
                       "CDN Product Management"
                     ],
-                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                    "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
@@ -20299,6 +20313,18 @@
                         }
                       }
                     }
+                  },
+                  "maxFilePurgeEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of file URLs that can be included in the fileUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                    "default": 1000
+                  },
+                  "maxDirPurgeEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                    "default": 20
                   }
                 },
                 "required": [
@@ -20526,7 +20552,7 @@
             },
             "in": "query",
             "name": "allowedCacheDirectives",
-            "description": "Return service quotas of customers permitted to use an advanced <a href=\"/cdn/docs/edge-logic/supported-directives#expires\">edge logic directive</a> specified by this parameter."
+            "description": "Return service quotas of customers permitted to use an advanced <a href=\"/cdn/docs/edge-logic/supported-directives#expires\">Edge Logic directive</a> specified by this parameter."
           },
           {
             "schema": {
@@ -20680,7 +20706,7 @@
                     },
                     "allowedCacheDirectives": {
                       "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "description": "A list of advanced Edge Logic directives that are permitted to be used.",
                       "items": {
                         "type": "string"
                       }
@@ -20740,7 +20766,7 @@
                       "x-tags": [
                         "CDN Product Management"
                       ],
-                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                      "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
@@ -20811,10 +20837,26 @@
                           },
                           "hasBeian": {
                             "type": "boolean",
-                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                            "description": "Whether the domain has ICP Beian, which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
                           }
                         }
                       }
+                    },
+                    "maxFilePurgeEntries": {
+                      "type": "integer",
+                      "description": "Maximum number of file URLs that can be included in the fileUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                      "minimum": 1,
+                      "default": 1000
+                    },
+                    "maxDirPurgeEntries": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                      "default": 20
+                    },
+                    "accountManagerEmail": {
+                      "type": "string",
+                      "description": "An email address representing the account manager."
                     }
                   },
                   "required": [
@@ -20850,7 +20892,9 @@
                       "advancedFeatures": [],
                       "billUsingStripe": false,
                       "secretLimit": 100,
-                      "webhookLimit": 100
+                      "webhookLimit": 100,
+                      "maxFilePurgeEntries": 100,
+                      "maxDirPurgeEntries": 100
                     }
                   }
                 }
@@ -21069,7 +21113,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
+                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced Edge Logic directives</a> that are permitted to be used.",
                     "items": {
                       "type": "string"
                     }
@@ -21121,7 +21165,7 @@
                     "x-tags": [
                       "CDN Product Management"
                     ],
-                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                    "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
@@ -21196,6 +21240,22 @@
                         }
                       }
                     }
+                  },
+                  "maxFilePurgeEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of file URLs that can be included in the fileUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                    "default": 1000
+                  },
+                  "maxDirPurgeEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                    "default": 20
+                  },
+                  "accountManagerEmail": {
+                    "type": "string",
+                    "description": "An email address representing the account manager."
                   }
                 }
               },
@@ -21951,7 +22011,7 @@
                     },
                     "allowedCacheDirectives": {
                       "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "description": "A list of advanced Edge Logic directives that are permitted to be used.",
                       "items": {
                         "type": "string"
                       }
@@ -22011,7 +22071,7 @@
                       "x-tags": [
                         "CDN Product Management"
                       ],
-                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                      "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
@@ -22082,10 +22142,26 @@
                           },
                           "hasBeian": {
                             "type": "boolean",
-                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                            "description": "Whether the domain has ICP Beian, which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
                           }
                         }
                       }
+                    },
+                    "maxFilePurgeEntries": {
+                      "type": "integer",
+                      "description": "Maximum number of file URLs that can be included in the fileUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                      "minimum": 1,
+                      "default": 1000
+                    },
+                    "maxDirPurgeEntries": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                      "default": 20
+                    },
+                    "accountManagerEmail": {
+                      "type": "string",
+                      "description": "An email address representing the account manager."
                     }
                   },
                   "required": [
@@ -22121,7 +22197,9 @@
                       "billUsingStripe": false,
                       "advancedFeatures": [],
                       "secretLimit": 100,
-                      "webhookLimit": 100
+                      "webhookLimit": 100,
+                      "maxFilePurgeEntries": 100,
+                      "maxDirPurgeEntries": 100
                     }
                   }
                 }
@@ -22256,7 +22334,7 @@
                     },
                     "allowedCacheDirectives": {
                       "type": "array",
-                      "description": "A list of advanced edge logic directives that are permitted to be used.",
+                      "description": "A list of advanced Edge Logic directives that are permitted to be used.",
                       "items": {
                         "type": "string"
                       }
@@ -22316,7 +22394,7 @@
                       "x-tags": [
                         "CDN Product Management"
                       ],
-                      "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                      "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
@@ -22387,10 +22465,26 @@
                           },
                           "hasBeian": {
                             "type": "boolean",
-                            "description": "Whether the domain has ICP Beian which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
+                            "description": "Whether the domain has ICP Beian, which is required for content to be hosted on servers in China. If set to true, every property's hostname that points to an edge hostname using this domain must have ICP Beian."
                           }
                         }
                       }
+                    },
+                    "maxFilePurgeEntries": {
+                      "type": "integer",
+                      "description": "Maximum number of file URLs that can be included in the fileUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                      "minimum": 1,
+                      "default": 1000
+                    },
+                    "maxDirPurgeEntries": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                      "default": 20
+                    },
+                    "accountManagerEmail": {
+                      "type": "string",
+                      "description": "An email address representing the account manager."
                     }
                   },
                   "required": [
@@ -22559,7 +22653,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced edge logic directives</a> that are permitted to be used.",
+                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced Edge Logic directives</a> that are permitted to be used.",
                     "items": {
                       "type": "string"
                     }
@@ -22611,7 +22705,7 @@
                     "x-tags": [
                       "CDN Product Management"
                     ],
-                    "description": "Contains limits on values of edge logic directives. These override the default maximums.",
+                    "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
@@ -22686,6 +22780,22 @@
                         }
                       }
                     }
+                  },
+                  "maxFilePurgeEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of file URLs that can be included in the fileUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                    "default": 1000
+                  },
+                  "maxDirPurgeEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
+                    "default": 20
+                  },
+                  "accountManagerEmail": {
+                    "type": "string",
+                    "description": "An email address representing the account manager."
                   }
                 }
               },
@@ -25553,7 +25663,7 @@
           }
         },
         "operationId": "post-cdn-secrets",
-        "description": "Create a secret to protect sensitive text from being exposed in a property's edge logic. Refer to the secret in your property's edge logic using the <code>$SECRET(secretName)</code> syntax. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
+        "description": "Create a secret to protect sensitive text from being exposed in a property's Edge Logic. Refer to the secret in your property's Edge Logic using the <code>$SECRET(secretName)</code> syntax. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -25562,7 +25672,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "The name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your edge logic using the <code>$SECRET(secretName)</code> syntax.",
+                    "description": "The name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax.",
                     "maxLength": 30,
                     "minLength": 1,
                     "pattern": "^[A-Za-z0-9_.-]+"
@@ -25574,7 +25684,7 @@
                   },
                   "secret": {
                     "type": "string",
-                    "description": "The sensitive text you want to protect. When you deploy your property, references to <code>$SECRET(secretName)</code> in your edge logic will be replaced by this text. The secret can consist of printable ASCII characters along with the tab, newline, and return characters.",
+                    "description": "The sensitive text you want to protect. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by this text. The secret can consist of printable ASCII characters along with the tab, newline, and return characters.",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -25638,7 +25748,7 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your edge logic as <code>$SECRET(secretName)</code>.",
+                            "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic as <code>$SECRET(secretName)</code>.",
                             "minLength": 1,
                             "pattern": "^[A-Za-z0-9_.-]+",
                             "maxLength": 30
@@ -25939,7 +26049,7 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your edge logic using the <code>$SECRET(secretName)</code> syntax.",
+                      "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax.",
                       "minLength": 1,
                       "maxLength": 30,
                       "pattern": "^[A-Za-z0-9_.-]+"
@@ -25951,7 +26061,7 @@
                     },
                     "secret": {
                       "type": "string",
-                      "description": "The value of the secret. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. For security, we will not show all the characters. The middle of it will be masked out by asterisk characters. References to <code>$SECRET(secretName)</code> in your edge logic will be replaced by the value.",
+                      "description": "The value of the secret. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. For security, we will not show all the characters. The middle of the secret will be masked out by asterisk characters. References to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by the value.",
                       "minLength": 8,
                       "maxLength": 3599
                     },
@@ -26241,7 +26351,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your edge logic using the <code>$SECRET(secretName)</code> syntax. If you change the name, property versions referring to the old name will not pass future validation.",
+                    "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax. If you change the name, property versions referring to the old name will not pass future validation.",
                     "minLength": 1,
                     "maxLength": 30,
                     "pattern": "^[A-Za-z0-9_.-]+"
@@ -26253,7 +26363,7 @@
                   },
                   "secret": {
                     "type": "string",
-                    "description": "The sensitive text you want to protect. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. When you deploy your property, references to <code>$SECRET(secretName)</code> in your edge logic will be replaced by this text. Once the property is deployed, it will use the value of the secret at that time. If you change the secret's value and want your property to use the new value, you must revalidate and redeploy the property.",
+                    "description": "The sensitive text you want to protect. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by this text. Once the property is deployed, it will use the value of the secret at that time. If you change the secret's value and want your property to use the new value, you must revalidate and redeploy the property.",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -26416,10 +26526,20 @@
                           "description": {
                             "type": "string",
                             "description": "A description of the log configuration."
+                          },
+                          "lastUpdateTime": {
+                            "type": "string",
+                            "description": "RFC 3339 date indicating when the log configuration was last updated."
+                          },
+                          "creationTime": {
+                            "type": "string",
+                            "description": "RFC 3339 date indicating when the log configuration was created."
                           }
                         },
                         "required": [
-                          "logConfigId"
+                          "logConfigId",
+                          "lastUpdateTime",
+                          "creationTime"
                         ]
                       }
                     },
@@ -26441,7 +26561,9 @@
                           "hostnames": [
                             "domain1.com"
                           ],
-                          "description": "Special log configuration"
+                          "description": "Special log configuration",
+                          "creationTime": "2021-12-14T22:48:08Z",
+                          "lastUpdateTime": "2021-12-14T22:48:08Z"
                         },
                         {
                           "logConfigId": 2,
@@ -26449,7 +26571,9 @@
                             "domain2.com",
                             "domain3.com"
                           ],
-                          "description": "another log configuration"
+                          "description": "another log configuration",
+                          "creationTime": "2021-12-13T12:48:08Z",
+                          "lastUpdateTime": "2021-13-15T22:48:08Z"
                         }
                       ],
                       "count": 2
@@ -26539,14 +26663,7 @@
         "operationId": "post-cdn-report-logConfigs",
         "responses": {
           "201": {
-            "description": "The log configuration was created. The Location header contains a reference to the new configuration.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
+            "description": "The log configuration was created. The Location header contains a reference to the new log configuration.",
             "headers": {
               "Location": {
                 "schema": {
@@ -26671,7 +26788,10 @@
                       1440
                     ]
                   }
-                }
+                },
+                "required": [
+                  "hostnames"
+                ]
               },
               "examples": {
                 "example-1": {
@@ -26724,9 +26844,9 @@
                       "minimum": 1
                     },
                     "configs": {
-                      "title": "logConfiguration.v1",
+                      "title": "logConfigurationResponse",
                       "type": "object",
-                      "description": "Log configuration format.",
+                      "description": "Describes a log configuration",
                       "properties": {
                         "description": {
                           "type": "string",
@@ -26741,15 +26861,14 @@
                         },
                         "logDownloadFormat": {
                           "type": "string",
-                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used.</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry.</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200.</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
-                          "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
+                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used.</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry.</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200.</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
                         },
                         "logDownloadStorageDays": {
                           "type": "integer",
                           "description": "Number of days to store the logs.",
+                          "default": 14,
                           "minimum": 1,
-                          "maximum": 30,
-                          "default": 14
+                          "maximum": 30
                         },
                         "logDownloadFileSpanMinutes": {
                           "type": "integer",
@@ -26765,8 +26884,25 @@
                             480,
                             1440
                           ]
+                        },
+                        "lastUpdateTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the log configuration was last updated."
+                        },
+                        "creationTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the log configuration was created."
                         }
-                      }
+                      },
+                      "required": [
+                        "description",
+                        "hostnames",
+                        "logDownloadFormat",
+                        "logDownloadStorageDays",
+                        "logDownloadFileSpanMinutes",
+                        "lastUpdateTime",
+                        "creationTime"
+                      ]
                     }
                   },
                   "required": [
@@ -26785,7 +26921,9 @@
                         ],
                         "logDownloadFormat": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime",
                         "logDownloadStorageDays": 14,
-                        "logDownloadFileSpanMinutes": 30
+                        "logDownloadFileSpanMinutes": 30,
+                        "creationTime": "2021-12-14T22:48:08Z",
+                        "lastUpdateTime": "2021-12-14T22:48:08Z"
                       }
                     }
                   }
@@ -26969,7 +27107,10 @@
                       1440
                     ]
                   }
-                }
+                },
+                "required": [
+                  "hostnames"
+                ]
               },
               "examples": {
                 "example-1": {
@@ -27029,7 +27170,10 @@
                       1440
                     ]
                   }
-                }
+                },
+                "required": [
+                  "hostnames"
+                ]
               }
             }
           },
