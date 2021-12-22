@@ -87,7 +87,7 @@ The following table shows examples of purging directories with and without using
    <li>Date and time when the purge request was submitted and completed.<br>
    <li>A success rate indicator that shows a completion percentage from 0 to 100%.</ul>
 
-<p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers.png>" alt="purge form no numbers" width="900"></p>
+<p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers.png" alt="purge form no numbers" width="900"></p>
 
 3. To specify the exact content you want to purge, create a purge request.
 
