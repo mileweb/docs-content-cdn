@@ -1,5 +1,29 @@
 # Release Notes
 
+## December 21, 2021
+### API updates
+* Corrected error message for ResponsiblePersonTooLong code when a reseller creates or updates a customer.
+* Ensured that a reseller's operator API account can request a [reset of a child customer’s API key](</apidocs#operation/patch-ngadmin-customers-id>).
+* Ensured that a child customer can request the parent’s name.
+* Improved error message when a deployment task is created with an empty property ID.
+* Ensured that a [report annotation](</apidocs#operation/createAnnotation>) can be created for wildcard hostname *.com.
+* Added maxFilePurgeEntries and maxDirPurgeEntries to [service quota](</apidocs#operation/post-cdn-serviceQuotas>) to limit the number of entries that can be submitted in a single purge request.
+* Added support for a new Edge Logic directive, http2_max_concurrent_streams, with a default of 64 and maximum of 512 to support domains with small objects requiring higher levels of concurrency.
+* Added support for regular expression [purge](</apidocs#operation/createPurge>).
+* Ensured that logConfigLimit specified in the service quota is properly enforced.
+* Ensured that reseller can perform actions like querying or updating a suspended child customer.
+
+### Portal updates
+* Prevented deletion of role that is in use.
+* Fixed user list page to show roles belong to each user.
+* Added support for regular expression purge.
+* Fixed purge quota warning’s appearance.
+* Fixed property search so that filters work as expected.
+* Fixed page numbers on the property list page.
+* Fixed edge hostname page to properly reflect the status of Mainland China support.
+* Replaced “Directory” with “Wildcard” as purge type when creating a purge request. This better reflects what you can do with this option.
+* Ensured that a role can be deleted after users using it have been deleted.
+
 ## December 1, 2021
 ### API updates
 * Fixed error message when a prefetch request is created with an invalid header value.
