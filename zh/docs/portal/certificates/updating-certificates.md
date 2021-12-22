@@ -2,7 +2,7 @@
 
 在 CDN Pro 系统中每个证书都是版本化的，每个版本一旦保存就不可编辑。您可以将每个版本部署到演练和生产环境中。在同一时间，每个环境中只允许部署一个版本。部署新版本会自动替换旧版本。因此，如果您需要在生产环境中更新即将过期的证书，请创建该证书的新版本并将其部署到生产以替换掉旧证书。在生产环境中使用旧证书版本的所有加速项都会自动选择新证书版本。
 
-当生产中使用的证书接近其到期日期时，CDN Pro 会发送电子邮件通知。为方便起见，CDN Pro 支持通过 [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/> ) 来实现证书的 [自动更新](</docs/portal/certificates/auto-renewal.md>) )，因此您无需担心证书会过期。如果您更喜欢手动更新证书，请选择以下两个操作步骤之一。
+当生产中使用的证书接近其到期日期时，CDN Pro 会发送电子邮件通知。为方便起见，CDN Pro 支持通过 [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/> ) 来实现证书的 [自动更新](</docs/portal/certificates/auto-renewal.md>) ，因此您无需担心证书会过期。如果您更喜欢手动更新证书，请选择以下两个操作步骤之一。
 
 ## 如果您已经有一个带有私钥和链证书的新 CA 签名证书
 1. 在左边菜单栏，单击 **证书** 按钮。
