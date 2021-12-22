@@ -40,8 +40,8 @@ If the content on your origin web server has changed, request a purge to have CD
 
 **Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
 
-
-## <a id="purgingentries"></a>Purging Entries That Match a Regular Expression
+<a id="purgingentries"></a>
+## Purging Entries That Match a Regular Expression
 
 CDN Pro supports purges that use a regular expression (or "regex") pattern to match a cache key. The pattern must begin with <code>{scheme}: //{hostname}/</code> where <code>{scheme}</code> is http, https, or other entry that matches any scheme. For example: <br><br><code>https://test.domain.com/my.*\.(jpg|png)\?q= </code></br></br>
 
@@ -52,7 +52,8 @@ By default, CDN Pro allows 1,000 entries in the <code>fileUrls</code> list, 20 e
 
 **Note:** If you are a reseller, you can purge a child customer's domain. Your purge quota will apply.
 
-## <a id="dirpurging"></a>Examples of Directory Purging
+<a id="dirpurging"></a>
+## Examples of Directory Purging
 
 CDN Pro allows you to purge directories by entering URLs in the <strong>Add directories to purge</strong> field. The URLs you enter can include wildcards.
 <ul><li>Ending a subdirectory with a single asterisk <b>*</b> purges all files only.</ul></li><ul><li>Ending a directory with two asterisks purges all files and subdirectories.</ul></li><ul><li>Ending the URL with <b>*ext</b> purges all files that have a specific extension.</ul></li><ul><li>If the URL includes a percent character <b>%</b>, encode it to <b>%25</b>.</ul></li>
