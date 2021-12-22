@@ -6,7 +6,7 @@ Content management purge activities are performed from the Content Management pa
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/content-management/content-management-w-numbers.png>" alt="purge form numbers" width="900"></p>
+![null](</docs/resources/images/content-management/content-management-w-numbers.png>)
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
