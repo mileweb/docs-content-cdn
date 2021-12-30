@@ -1,5 +1,26 @@
 # Release Notes
 
+## December 29, 2021
+### API updates
+* Improved error handling of portal user creation and updates.
+* Improved error handling of edge hostname creation and updates.
+* Improved error handling of unauthorized request for customer details.
+* Improved error handling of invalid input when [creating an API permission](</apidocs#operation/post-cdn-apiPermissions>).
+* Ensured [prefetch list](</apidocs#operation/getPurgeRequestList>) only contains unique URLs.
+* Improved error handling of ICP Beian status check.
+* Allowed access to secrets to be limited by API permissions.
+* Ensured permissions are respected for annotations API.
+* Added target, action, and maxSuccessRate query parameters to the [purge request list API](</apidocs#operation/getPurgeRequestList>).
+* Improve error code and message when deploying a property using a secret that has been updated.
+* Added Get public IPs API.
+* Improved the InvalidContentType error message for API calls.
+
+### Portal updates
+* Improved display of Getting Started video banner.
+* Fixed handling of role deletion.
+* Made staging IP addresses accessible in the property list page.
+
+
 ## December 21, 2021
 ### API updates
 * Corrected error message for ResponsiblePersonTooLong code when a reseller creates or updates a customer.
