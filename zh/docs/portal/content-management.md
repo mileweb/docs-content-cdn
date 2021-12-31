@@ -40,7 +40,7 @@ If the content on your origin web server has changed, request a purge to have CD
 
 ## Purging Entries That Match a Regular Expression
 
-CDN Pro supports purges that use a regular expression (or "regex") pattern to match a cache key. The pattern must begin with <code>{scheme}: //{hostname}/</code> where <code>{scheme}</code> is http, https, or other entry that matches any scheme. For example: <br><br><code>https://test.domain.com/my.*\.(jpg|png)\?q= </code></br></br>
+CDN Pro supports purges that use a regular expression (or "regex") pattern to match a cache key. The pattern must begin with `{scheme}://{hostname}` where <code>{scheme}</code> is http, https, or other entry that matches any scheme. For example: <br><br><code>https://test.domain.com/my.*\.(jpg|png)\?q= </code></br></br>
 
 For performance considerations, observe the following guidelines:
 <ul><li>The regex pattern following the hostname should be less than 126.</ul></li><ul><li>The pattern can contain up to two unlimited quantifiers ("*", "+" or ",}")</ul></li><ul><li>The upper limit of any quantifier cannot exceed 59.</ul></li>
