@@ -7280,6 +7280,12 @@
                       "code": "CertificateMismatch",
                       "message": "The domain(s) mytestdomain.domain.info are not included in the Subject Alternative Name field of the deployed version of certificate c5fbb345a24615f2a7ea0791."
                     }
+                  },
+                  "Outdated secret": {
+                    "value": {
+                      "code": "OutdatedSecret",
+                      "message": "Property a2334bc12345 versionId 1 is using an outdated secret. Please validate the property again before deploying it."
+                    }
                   }
                 }
               }
@@ -12577,6 +12583,40 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "production",
+                "staging"
+              ]
+            },
+            "in": "query",
+            "name": "target",
+            "description": "The target environment of the purge request.  By default, all are returned."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "invalidate",
+                "delete"
+              ]
+            },
+            "in": "query",
+            "name": "action",
+            "description": "The type of purge request. By default, all are returned."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "maxSuccessRate",
+            "description": "A decimal value indicating the maximum success rate of purge requests to return. By default, all are returned."
           }
         ],
         "tags": [
@@ -20176,27 +20216,27 @@
                   "filePurgeQuotaInStaging": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24-hour rolling window."
                   },
                   "dirPurgeQuotaInStaging": {
                     "type": "integer",
                     "default": 20,
-                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in staging."
                   },
                   "filePurgeQuotaInProduction": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    "description": "Maximum number of file purges allowed in the production environment in a 24-hour rolling window."
                   },
                   "dirPurgeQuotaInProduction": {
                     "type": "integer",
                     "default": 20,
-                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in production."
                   },
                   "prefetchQuota": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                    "description": "Maximum number of prefetch requests in a 24-hour window."
                   },
                   "propertyLimit": {
                     "type": "integer",
@@ -20677,27 +20717,27 @@
                     "filePurgeQuotaInStaging": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24-hour rolling window."
                     },
                     "dirPurgeQuotaInStaging": {
                       "type": "integer",
                       "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in staging."
                     },
                     "filePurgeQuotaInProduction": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                      "description": "Maximum number of file purges allowed in the production environment in a 24-hour rolling window."
                     },
                     "dirPurgeQuotaInProduction": {
                       "type": "integer",
                       "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in production."
                     },
                     "prefetchQuota": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                      "description": "Maximum number of prefetch requests in a 24-hour window."
                     },
                     "logConfigLimit": {
                       "type": "integer",
@@ -21084,27 +21124,27 @@
                   "filePurgeQuotaInStaging": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24-hour rolling window."
                   },
                   "dirPurgeQuotaInStaging": {
                     "type": "integer",
                     "default": 20,
-                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in staging."
                   },
                   "filePurgeQuotaInProduction": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    "description": "Maximum number of file purges allowed in the production environment in a 24-hour rolling window."
                   },
                   "dirPurgeQuotaInProduction": {
                     "type": "integer",
                     "default": 20,
-                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in production."
                   },
                   "prefetchQuota": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                    "description": "Maximum number of prefetch requests in a 24-hour window."
                   },
                   "logConfigLimit": {
                     "type": "integer",
@@ -21982,27 +22022,27 @@
                     "filePurgeQuotaInStaging": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24-hour rolling window."
                     },
                     "dirPurgeQuotaInStaging": {
                       "type": "integer",
                       "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in staging."
                     },
                     "filePurgeQuotaInProduction": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                      "description": "Maximum number of file purges allowed in the production environment in a 24-hour rolling window."
                     },
                     "dirPurgeQuotaInProduction": {
                       "type": "integer",
                       "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in production."
                     },
                     "prefetchQuota": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                      "description": "Maximum number of prefetch requests in a 24-hour window."
                     },
                     "logConfigLimit": {
                       "type": "integer",
@@ -22305,27 +22345,27 @@
                     "filePurgeQuotaInStaging": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                      "description": "Maximum number of file purges allowed in the staging environment in a 24-hour rolling window."
                     },
                     "dirPurgeQuotaInStaging": {
                       "type": "integer",
                       "default": 20,
-                      "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                      "description": "Maximum number of directory purges allowed in the staging environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in staging."
                     },
                     "filePurgeQuotaInProduction": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                      "description": "Maximum number of file purges allowed in the production environment in a 24-hour rolling window."
                     },
                     "dirPurgeQuotaInProduction": {
                       "type": "integer",
                       "default": 20,
-                      "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                      "description": "Maximum number of directory purges allowed in the production environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in production."
                     },
                     "prefetchQuota": {
                       "type": "integer",
                       "default": 5000,
-                      "description": "Maximum number of prefetch requests in a 24 hour window."
+                      "description": "Maximum number of prefetch requests in a 24-hour window."
                     },
                     "logConfigLimit": {
                       "type": "integer",
@@ -22624,27 +22664,27 @@
                   "filePurgeQuotaInStaging": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of file purges allowed in the staging environment in a 24 hour rolling window."
+                    "description": "Maximum number of file purges allowed in the staging environment in a 24-hour rolling window."
                   },
                   "dirPurgeQuotaInStaging": {
                     "type": "integer",
                     "default": 20,
-                    "description": "Maximum number of directory purges allowed in the staging environment in a 24 hour rolling window."
+                    "description": "Maximum number of directory purges allowed in the staging environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in staging."
                   },
                   "filePurgeQuotaInProduction": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of file purges allowed in the production environment in a 24 hour rolling window."
+                    "description": "Maximum number of file purges allowed in the production environment in a 24-hour rolling window."
                   },
                   "dirPurgeQuotaInProduction": {
                     "type": "integer",
                     "default": 20,
-                    "description": "Maximum number of directory purges allowed in the production environment in a 24 hour rolling window."
+                    "description": "Maximum number of directory purges allowed in the production environment in a 24-hour rolling window. This limit is also used as the maximum number of regular expression purges allowed in production."
                   },
                   "prefetchQuota": {
                     "type": "integer",
                     "default": 5000,
-                    "description": "Maximum number of prefetch requests in a 24 hour window."
+                    "description": "Maximum number of prefetch requests in a 24-hour window."
                   },
                   "logConfigLimit": {
                     "type": "integer",
@@ -24049,78 +24089,83 @@
                       "certificates": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints."
                       },
                       "properties": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints."
                       },
                       "edgeHostnames": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints."
                       },
                       "validations": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints."
                       },
                       "deploymentTasks": {
                         "type": "string",
                         "default": "staging",
                         "enum": [
-                          "false",
+                          false,
                           "staging",
                           "production",
                           "both"
                         ],
-                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints."
                       },
                       "purges": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints."
                       },
                       "prefetches": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints."
                       },
                       "annotations": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints."
                       },
                       "apiPermissions": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permission</a>  (/cdn/apiPermissions) endpoints."
                       },
                       "systemConfigs": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                        "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint."
                       },
                       "reports": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/reports) endpoints."
                       },
                       "serviceQuotas": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints."
                       },
                       "hostnames": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
+                        "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
                       },
                       "webhooks": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the webhooks (/cdn/webhooks) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints."
+                      },
+                      "secrets": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
                       }
                     }
                   }
@@ -24192,84 +24237,90 @@
                         "reports",
                         "serviceQuotas",
                         "hostnames",
-                        "webhooks"
+                        "webhooks",
+                        "secrets"
                       ],
                       "properties": {
                         "certificates": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints."
                         },
                         "properties": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints."
                         },
                         "edgeHostnames": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints."
                         },
                         "validations": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation </a> (/cdn/validations) endpoints."
                         },
                         "deploymentTasks": {
                           "type": "string",
                           "default": "staging",
                           "enum": [
-                            "false",
+                            false,
                             "staging",
                             "production",
                             "both"
                           ],
-                          "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                          "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints."
                         },
                         "purges": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints."
                         },
                         "prefetches": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints."
                         },
                         "annotations": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints."
                         },
                         "apiPermissions": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a> (/cdn/apiPermissions) endpoints."
                         },
                         "systemConfigs": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                          "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint."
                         },
                         "reports": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/reports) endpoints."
                         },
                         "serviceQuotas": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints."
                         },
                         "hostnames": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
+                          "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
                         },
                         "webhooks": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the webhooks (/cdn/webhooks) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints."
+                        },
+                        "secrets": {
+                          "type": "boolean",
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
                         }
                       }
                     }
@@ -24299,7 +24350,8 @@
                         "serviceQuotas": true,
                         "hostnames": true,
                         "blockCommands": true,
-                        "webhooks": true
+                        "webhooks": true,
+                        "secrets": true
                       }
                     }
                   }
@@ -24554,78 +24606,83 @@
                       "certificates": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints."
                       },
                       "properties": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints."
                       },
                       "edgeHostnames": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints."
                       },
                       "validations": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints."
                       },
                       "deploymentTasks": {
                         "type": "string",
                         "default": "staging",
                         "enum": [
-                          "false",
+                          false,
                           "staging",
                           "production",
                           "both"
                         ],
-                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
+                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints."
                       },
                       "purges": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints."
                       },
                       "prefetches": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints."
                       },
                       "annotations": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints."
                       },
                       "apiPermissions": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a>  (/cdn/apiPermissions) endpoints."
                       },
                       "systemConfigs": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
+                        "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint."
                       },
                       "reports": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/reports) endpoints."
                       },
                       "serviceQuotas": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints."
                       },
                       "hostnames": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.\n"
+                        "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
                       },
                       "webhooks": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the webhooks (/cdn/webhooks) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints."
+                      },
+                      "secrets": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
                       }
                     }
                   }
@@ -27725,6 +27782,96 @@
           },
           "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
         }
+      }
+    },
+    "/cdn/publicIpList": {
+      "get": {
+        "summary": "Get IP addresses of the CDN",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the IP addresses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "lastUpdated": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the list of IP addresses was last updated."
+                    },
+                    "effectiveDate": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the IP address list became effective."
+                    },
+                    "ipV4": {
+                      "type": "array",
+                      "description": "IPv4 addresses used by CDN Pro.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "ipV6": {
+                      "type": "array",
+                      "description": "IPv6 addresses used by CDN Pro.",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "lastUpdated": "2021-11-01T09:09:49Z",
+                      "effectiveDate": "2021-11-1T09:09:49Z",
+                      "ipV4": [
+                        "183.134.12.0/24",
+                        "112.47.27.0/24",
+                        "221.15.46. 128/27",
+                        "163.171.241.0/24",
+                        "111.6.241.128/25",
+                        "115.223.12.0/24",
+                        "163.171.230.0/24",
+                        "183.240.58.0/24",
+                        "112.240.57.0/24",
+                        "120.39.211. 0/24",
+                        "220.249.134.192/27",
+                        "163.171.243.0/24",
+                        "14.0.39.0/24",
+                        "163.171.236.0/25",
+                        "163.171.242.0/24",
+                        "221.182.23.0/24",
+                        "138.113.77.0/ 24",
+                        "174.35.74.0/24",
+                        "219.157.125.0/24",
+                        "58.220.72.0/24"
+                      ],
+                      "ipV6": [
+                        "240e:00f7:4f00:1a00:0000:0000:0000:0000/56",
+                        "2606:1980:0004:ffff :0000:0000:0000:0000/64",
+                        "2409:8c54:2000:060b:0000:0000:0000:0000/64",
+                        "2408:8722:9000:0000:0000:0000:0000:0000/64",
+                        "2409:8c62:0e10: 0048:0000:0000:0000:0000/65",
+                        "2409:8c34:4400:0700:0000:0002:8000:0000/97",
+                        "240e:00f7:c010:0503:0000:0000:0000:0000/64",
+                        "2401:8700:f f03:0001:0000:0000:0000:0000/64",
+                        "2606:1980:0000:ffff:0000:0000:0000:0000/64",
+                        "2a01:53c0:ff03:ffff:0000:0000:0000:0000/64",
+                        "240e:09 78:0902:0000:0000:0000:0000:0000/50",
+                        "2a01:53c0:ffe5:ffff:0000:0000:0000:0000/64"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-publicIpList",
+        "description": "Get a list of IP addresses used by CDN Pro. If your property configuration's directConnection setting is 'noDirect' and your origin servers are protected by IP access restrictions, update your allow lists with these IP addresses. IP addresses can periodically change. We recommend that you check once a day and update your allow lists."
       }
     }
   },
