@@ -1,5 +1,50 @@
 # Release Notes
 
+## December 29, 2021
+### API updates
+* Improved error handling of portal user creation and updates.
+* Improved error handling of edge hostname creation and updates.
+* Improved error handling of unauthorized request for customer details.
+* Improved error handling of invalid input when [creating an API permission](</apidocs#operation/post-cdn-apiPermissions>).
+* Ensured [prefetch list](</apidocs#operation/getPurgeRequestList>) only contains unique URLs.
+* Improved error handling of ICP Beian status check.
+* Allowed access to secrets to be limited by API permissions.
+* Ensured permissions are respected for annotations API.
+* Added target, action, and maxSuccessRate query parameters to the [purge request list API](</apidocs#operation/getPurgeRequestList>).
+* Improve error code and message when deploying a property using a secret that has been updated.
+* Added Get public IPs API.
+* Improved the InvalidContentType error message for API calls.
+
+### Portal updates
+* Improved display of Getting Started video banner.
+* Fixed handling of role deletion.
+* Made staging IP addresses accessible in the property list page.
+
+
+## December 21, 2021
+### API updates
+* Corrected error message for ResponsiblePersonTooLong code when a reseller creates or updates a customer.
+* Ensured that a reseller's operator API account can request a [reset of a child customer’s API key](</apidocs#operation/patch-ngadmin-customers-id>).
+* Ensured that a child customer can request the parent’s name.
+* Improved error message when a deployment task is created with an empty property ID.
+* Ensured that a [report annotation](</apidocs#operation/createAnnotation>) can be created for wildcard hostname *.com.
+* Added maxFilePurgeEntries and maxDirPurgeEntries to [service quota](</apidocs#operation/post-cdn-serviceQuotas>) to limit the number of entries that can be submitted in a single purge request.
+* Added support for a new Edge Logic directive, http2_max_concurrent_streams, with a default of 64 and maximum of 512 to support domains with small objects requiring higher levels of concurrency.
+* Added support for regular expression [purge](</apidocs#operation/createPurge>).
+* Ensured that logConfigLimit specified in the service quota is properly enforced.
+* Ensured that reseller can perform actions like querying or updating a suspended child customer.
+
+### Portal updates
+* Prevented deletion of role that is in use.
+* Fixed user list page to show roles belong to each user.
+* Added support for regular expression purge.
+* Fixed purge quota warning’s appearance.
+* Fixed property search so that filters work as expected.
+* Fixed page numbers on the property list page.
+* Fixed edge hostname page to properly reflect the status of Mainland China support.
+* Replaced “Directory” with “Wildcard” as purge type when creating a purge request. This better reflects what you can do with this option.
+* Ensured that a role can be deleted after users using it have been deleted.
+
 ## December 1, 2021
 ### API updates
 * Fixed error message when a prefetch request is created with an invalid header value.
