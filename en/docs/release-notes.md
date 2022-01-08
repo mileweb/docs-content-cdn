@@ -5,7 +5,7 @@
 * Added createTime and updateTime fields to the response of the [Get a log configuration API](</apidocs#operation/get-cdn-report-logConfigs-id>). 
 * Fixed role name limit enforcement to match specification (128 character maximum).
 * Fixed error handling of purge task with null value for fileUrls, /regexPatterns, or dirUrls.
-* Removed the API key from the response of the Get customer API. For security, the key will be returned only when creating a customer or resetting their key.
+* Removed the API key from the response of the Get customer API. For security, the key will be returned only when creating a customer or resetting the customer's key.
 * Fixed generation of NGINX configuration when Edge Logic includes regular expression.
 * Fixed property configuration when an additional TLS certificate is removed.
 
