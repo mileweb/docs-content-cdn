@@ -1,42 +1,43 @@
-# Updating a Certificate
+# 更新证书
 
-On CDN Pro, each certificate is versioned, and each version is not editable once saved. You can deploy each version independently to the staging and production environments. There can be only one version deployed in each environment at any time. Deploying a new version replaces the old one automatically. Therefore, if you need to update an expiring certificate in production, create a new version of that certificate and deploy to production to replace the old one. All properties using the old certificate in production pick up the new version automatically.
+在 CDN Pro 系统中每个证书都是版本化的，每个版本一旦保存就不可编辑。您可以将每个版本部署到演练和生产环境中。在同一时间，每个环境中只允许部署一个版本。部署新版本会自动替换旧版本。因此，如果您需要在生产环境中更新即将过期的证书，请创建该证书的新版本并将其部署到生产以替换掉旧证书。在生产环境中使用旧证书版本的所有加速项都会自动选择新证书版本。
 
-CDN Pro sends an email notification when a certificate used in production is close to its expiration date. For convenience, CDN Pro supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>), so you never need to worry about the expiration of your certificates. If you prefer to renew your certificates manually, perform one of the following procedures.
+当生产中使用的证书接近其到期日期时，CDN Pro 会发送电子邮件通知。为方便起见，CDN Pro 支持通过 [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/> ) 来实现证书的 [自动更新](</docs/portal/certificates/auto-renewal.md>) ，因此您无需担心证书会过期。如果您更喜欢手动更新证书，请选择以下两个操作步骤之一。
 
-## If you already have a new CA-signed certificate with private key and chain certificate
-1. In the left pane, click **Certificates**.
-2. Click a certificate name.
-    <br><u>OR </u></br>
-  In the **Actions** column, click the vertical ellipsis for the certificate you want to edit, and then select **Edit**.
-3. To change the name of the certificate, move your mouse to the right of the certificate name at the top of the form. When the pencil icon appears, click it and enter the new name. When done, click the checkmark at the bottom right of the field in which you typed the name.
-4. Edit the **Share With** setting now or after step 5 if desired.
-5. Click **Create Version**.
+## 如果您已经有一个带有私钥和链证书的新 CA 签名证书
+1. 在左边菜单栏，单击 **证书** 按钮。
+2. 选中目标证书名.
+    <br><u>或者 </u></br>
+  在 **操作** 列中，单击要编辑的证书的垂直省略号，然后选择 **编辑**。
+3. 如果您需要更改证书名称，请将鼠标移至页面顶部证书名称的右侧。当铅笔图标出现时，单击它并输入新名称。完成后，单击新名称字段右下角的**√**。
+4. 如果需要修改证书共享权限，您可以现在或在第 5 步之后编辑 **与下列客户共享** 设置。
+5. 单击 **创建新版本**.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions.png" alt="Upload Certificate Version" width="700"></p>
 
-5. Set the **Creation Method** setting to **Upload**. Then upload the private key, certificate, and chain certificate files. Click **Save Version** followed by **OK** at the confirmation pop-up.
+5. 将 **创建方法** 设置为 **上传**。然后上传私钥、证书和 CA 证书文件。在确认弹出窗口中单击**保存版本**，然后单击**确定**。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-upload.png" alt="Upload Certificate Version" width="700"></p>
 
-6. Scroll down to the <strong>Deployment</strong> section, and then select <strong>Production</strong> from the <strong>Deployment Destination</strong> drop-down list to deploy the new version to production.<br>
-<strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deployment History</strong> button.</br></br>
-7. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>).
+6. 在证书详情页面，单击 <strong>部署</strong> 按钮，然后在 <strong>部署目标</strong> 消息框中选择 <strong>生产环境</strong> 将此新版本部署到生产上。<br>
+<strong>注意：</strong> 要在部署之前查看证书的部署历史，请单击 <strong>部署历史</strong> 按钮。</br></br>
+7. 如果您需要立即部署证书，请点击 <strong>立即部署</strong> 按钮。如果您需要稍后再部署它，请点击 <strong>添加到待命任务</strong> 来将此证书版本的部署存放到 [待命列表](</docs/portal/managing-standby-tasks.md>)中。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
 
-## If you need a CSR to apply for the new certificate from a CA
-If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, perform the following procedure to create a self-signed version. Otherwise, skip steps 3 and 4.
+## 如果您需要 CSR 来向 CA 机构申请新证书
 
-1. In the left pane, click **Certificates**.
-2. Click a certificate name.
-3. To change the name of the certificate, move your mouse to the right of the certificate name at the top of the form. When the pencil icon appears, click it and enter the new name. When done, click the checkmark at the bottom right of the field in which you typed the name.
-4. Edit the **Share With** setting now or after step 5 if desired.
-5. Click **Create Version**.
-6. Set the **Creation Method** setting to **Auto-Generate**. Then complete the required fields (refer to [details here](</docs/portal/certificates/creating-certificates.md#auto-generating-a-self-signed-certificate>)) and click **Save Version**.
+如果贵公司的安全策略要求新证书具有与过期证书不同的新私钥，请执行以下过程以创建自签名版本。否则，您可以跳过步骤 3 和 4。
+
+1. 在左边菜单栏，单击 **证书** 按钮。
+2. 选中目标证书名。
+3. 如果您需要更改证书名称，请将鼠标移至页面顶部证书名称的右侧。当铅笔图标出现时，单击它并输入新名称。完成后，单击新名称字段右下角的**√**。
+4. 如果需要修改证书共享权限，您可以现在或在第 5 步之后编辑 **与下列客户共享** 设置。
+5. 单击 **创建新版本**.
+6. 将 **创建方法** 设置为 **自动生产**。然后填写必填字段（请参阅 [详细信息](</docs/portal/certificates/creating-certificates.md#auto-genating-a-self-signed-certificate>)）并单击**保存**。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-autogenerate.png" alt="Certificate New Self-Signed Version" width="700"></p>
 
-7. Click the **Download CSR** button at the top of the Certificate Details page to generate the CSR from the latest version.
-8. Send the downloaded CSR to the CA to apply for a new certificate.
-9. When you receive the new CA-signed certificate, return to the same Certificate Details page and click **Create Version**.
-10. With **Creation Method** set  to **Upload**, upload the new certificate and, optionally, the chain certificate. Click **Save Version**. Do not worry about the private key because it will be the same one as the last version.
-11. Scroll down to the **Deployment** section, and then select **Production** from the **Deployment Destination** drop-down list to deploy the new version to production.<br><br><strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button.</br></br>
-12. To deploy the certificate now, click **Deploy Now**. To deploy it at a later time, click **Add to Standby task** to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>).</br>
-**Note**: To update a certificate, you must be the owner of the certificate.
+7. 单击“证书详细信息”页面顶部的**下载 CSR** 按钮以便从最新版本上生成 CSR。
+8. 将下载的CSR发送给 CA 申请新的证书。
+9. 当您收到新的 CA 签名证书时，返回到相同的证书详细信息页面并单击**创建新版本**。
+10. 将 **创建方法** 设置为 **上传**，上传新证书和链证书（可选）。单击**保存**。不必担心私钥，因为它将与上一个版本相同。
+11. 在证书详情页面，单击 **Deployment** 按钮，然后在 **部署目标** 消息框中选择 **生产环境** 将此新版本部署到生产上。<br><br><strong>注意：</strong> 要在部署之前查看证书的部署历史，请单击 **部署历史** 按钮。</br></br>
+12. 如果您需要立即部署证书，请点击 **立即部署**。如果您需要稍后再部署它，请点击 **添加到待命任务** 来将此证书版本的部署存放到 [待命列表](</docs/portal/managing-standby-tasks.md>)。</br>
+**注意**: 只有证书的所有者才有权限修改证书。

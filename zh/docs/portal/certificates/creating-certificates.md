@@ -1,69 +1,73 @@
-# Creating a New Certificate
+# 创建证书
 
-There are two ways to create a new certificate: 
+目前有两种方式进行证书的创建: 
 
-1. **Auto-generate a self-signed certificate**. Use this method if you need a certificate signing request (CSR) to apply for a certificate from a certificate authority (CA). You can then download the CSR of the new self-signed certificate and submit it to the CA. When you receive the CA-signed certificate and chain certificate(s), you can upload them as a new version.
+1. **自动生成自签名证书** 使用本方式可以生成一份自签名证书给您的加速项目临时使用，或用于测试。它的另一个重要用途是生成一份新的证书签名请求（CSR）来向证书颁发机构（CA）申请正式证书。在自签名证书生成以后，您可以下载它对应的 CSR 并将其提交给 CA。当您收到 CA 签署的正式证书和链证书时，您可以将它们作为新版本上传并部署。
 
-2. **Upload the private key, certificate, and chain certificate(s)**.
+2. **上传私钥内容、证书内容以及CA内容**.
 
-## Auto-Generating a Self-Signed Certificate 
 
-The following procedure describes how to generate self-signed certificates. Self-signed certificates can be used for testing purposes or internal use before deploying the certificate into the production environment. If you need a CSR to obtain a signed certificate from a CA, create a self-signed certificate first.
+## 自动生成自签名证书
 
-1. In the left pane, click **Certificates**.
-2. At the top right of the Certificates page, click the **Create Certificate** button. 
+以下过程描述了如何生成自签名证书。在将证书部署到生产环境之前，自签名证书可用于测试或内部使用。如果您需要使用 CSR 从 CA 申请签名，您需要先创建一份自签名证书。
+
+
+1. 在左边菜单栏，单击 **证书** 按钮。
+2. 在证书页面的右上方，点击 **创建证书** 按钮。
 
 <p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="create new cert button menu" width="900"></p>
 
 
-3. Complete the fields at the top of the Create a Certificate form. Next to **Creation Method**, click  **Auto-Generate** and complete the additional fields. Required fields are denoted by an asterisk (\*).
+3. 填写“创建证书”页面顶部的必填信息。在 **创建方法** 旁边，单击 **自动生成** 并填写其他字段。必填字段用星号 (\*)进行了标注。
 
 <p align=center><img src="/docs/resources/images/certificates/create-certificate-autogenerate.png" alt="auto generate cert" width="650"></p>
 
-| **Fields**|**Description**|
+| **字段**|**描述**|
 |-|-|
-|| **Options at the top of the Create a Certificate Form**                                      |
-|Certificate Name|Enter a name that helps you identify this certificate.|
-|Certificate Description|Add a description about this certificate.|
-|Auto Renew|Select whether you want CDN Pro to [renew the certificate automatically](/docs/portal/certificates/auto-renewal.md) through Let's Encrypt (**LE**).|
-|Share With|This field is available to resellers only. It allows resellers to select the child customers with whom they want to share the certificate.|
-|Creation Method|Specify whether you want to upload a certificate you already have or generate a certificate using CDN Pro.|
-|| **Auto-Generate Options**                                      |
-|Template|Populates the form fields with settings from a template. A template is a collection of frequently used settings. Before you use this option, you must save at least one template (see step 4 below). After the fields are populated with the settings from a template, you can change them in the fields below to suit your requirements, and then save the settings in a new template.|
-|Public Key Algorithm|Select a public key algorithm for this certificate: RSA2048 or ECC256.|
-|Common Name|Enter a common name you want to use for the certificate (can be any text).|
-|SAN|Enter one or more subject alternative names (SANs), which will be the hostnames you want this certificate to cover.|
-|Country|Enter the name of a country in two letter [ISO-3166 country code](<https://www.iso.org/obp/ui/#search>) format.|
-|State|Enter the name of a state.|
-|City|Enter the name of a city.|
-|Street|Enter the name of a street.|
-|Company|Enter a company name.|
-|Department|Enter a department name.|
-|Email|Enter an email address.|
-|Comments|Enter some comments about this initial version.|
+|| **创建证书页面上方的字段**                                      |
+|证书名称|输入证书名称，该名称用于标识不同证书。|
+|证书说明|为该证书添加说明信息。|
+|自动更新|请选择您是否需要CDN Pro 通过Let's Encrypt (**LE**) [自动更新证书](/docs/portal/certificates/auto-renewal.md)。|
+|与下列客户共享|此字段仅供经销商类型客户使用。它允许经销商类客户将该证书共享给指定的子客户。|
+|创建方式|指定是要上传已有的证书还是使用 CDN Pro 生成自签名证书。
+|| **选择自动生成后展示的字段**                                      |
+|模板|使用所选模板的预设内容来填充后续表单字段。模板是常用设置的集合。在使用此选项之前，您必须至少保存一个模板（请参阅下面的第 4 步）。使用模板中的设置填充后续表单字段后，您可以按您的实际要求对在字段中的值进行修改，然后将设置保存到新模板中。|
+|公钥算法|为该证书选择一个公钥算法： RSA2048 或者 ECC256.|
+|通用名|输入要用于证书的通用名（可以是任何文本）。|
+|多域名信息|输入一个或多个域名名称 (SAN)，这将是您希望关联该证书的加速域名。|
+|国家|输入 [ISO-3166 国家代码](<https://www.iso.org/obp/ui/#search>) 格式的国家/地区名称，通常值格式为两个字母。|
+|州|输入省、州名。|
+|城市|输入城市名。|
+|街道|输入街道名|
+|公司|输入公司名。|
+|部门|输入部门名。|
+|Email|输入邮箱地址。|
+|注释|为这个证书版本添加必要的注释信息。|
 
-4. To save these settings in a template that you can select at a later time using the **Template** drop-down list mentioned above, click the **Save as a Template** button. When the popup message appears, enter a name for the template and click **OK**. 
-5. Click the **Save Certificate** button followed by **OK**.
+4. 如果您想将这些设置保存到模板中（以便后续可以使用上面提到的 **模板** 下拉快速选择功能进行内容填充），请单击 **另存为模板** 按钮。当弹出确认提示时，输入模板的名称并单击**确定**。
 
-Your certificate is saved and appears on the Certificates page. You can now use the certificate with any properties you create, and deploy it to staging and production environments. You can also download the CSR to apply for a signed certificate from a CA, and then upload it to create a [new version](</docs/portal/certificates/updating-certificates.md>) of this certificate.
+5. 点击 **保存** 按钮。
 
-## Uploading an Existing Certificate
+此时您的证书已成功保存并显示在了证书页面上。您现在可以将此证书与您创建的对应加速项一起使用，并将其部署到演练和生产环境。您也可以下载 CSR 以此向 CA 申请签名证书，然后将收到的签名证书上传并创建一个[新证书版本](</docs/portal/certificates/updating-certificates.md>)。
 
-If you already have a certificate with the private key and the CA chain certificate, you can upload them so they can be used by properties. Before performing the following procedure, make sure the certificate and associated files are in Privacy Enhanced Mail (**PEM**) format. The files' content should be plain text and begins with five equals signs (`=====`).
 
-To upload the files as a new certificate:
+## 上传一本已有证书
 
-1. In the left pane, click **Certificates**.<br>
-2. At the top right of the Certificates page, click the **Create Certificate** button. 
+如果您已经拥有包含私钥和 CA 链证书的证书，您可以直接上传它们以便在加速项中使用它们。在执行以下步骤之前，请确保证书和相关文件采用隐私增强邮件 (**PEM**) 格式。文件的内容应该是纯文本，并以五个等号 (`======`) 开头。
+
+上传文件并保存为新证书:
+
+1. 在左侧菜单栏，单击 **证书**.<br>
+2. 在证书页面的右上方，点击 **创建证书** 按钮。 
 
 <p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certi button" width="900"></p>
 
-3. Complete the fields at the top of the Create a Certificate form (see the table above). Next to **Creation Method**, click  **Upload** and upload the private key, certificate, and chain certificate. Required fields are denoted by an asterisk (\*).
+3. 填写“创建证书”页面顶部的必填信息。在 **创建方法** 旁边，单击 **上传** 并选择上传的私钥文件、证书文件以及CA文件。必填字段用星号 (\*)进行了标注。
    
-**Note:** Upload only the files you need to change on top of the current latest version.
+**注意：** 仅上传您在当前最新版本基础上需更改的文件。
 
 <p align="center"><img src="/docs/resources/images/certificates/create-certificate-upload.png" alt="Upload Certificate" width="600"></p>
 
-4. Click the **Save Certificate** button followed by **OK**. 
+4. 点击 **保存** 按钮。
 
-Your certificate is saved and can now be used with any properties you create. 
+此时您的证书已成功保存，该证书可被用在您创建的对应加速项中。
