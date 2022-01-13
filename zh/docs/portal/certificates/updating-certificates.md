@@ -24,14 +24,14 @@
 
 ## 如果您需要 CSR 来向 CA 机构申请新证书
 
-如果贵公司的安全策略要求新证书具有与过期证书不同的新私钥，请执行以下过程以创建自签名版本。否则，您可以跳过步骤 3 和 4。
+如果贵公司的安全策略要求新证书具有与过期证书不同的新私钥，请执行以下过程以创建自签名版本。否则，您可以跳过步骤 5 和 6。
 
 1. 在左边菜单栏，单击 **证书** 按钮。
 2. 选中目标证书名。
 3. 如果您需要更改证书名称，请将鼠标移至页面顶部证书名称的右侧。当铅笔图标出现时，单击它并输入新名称。完成后，单击新名称字段右下角的**√**。
 4. 如果需要修改证书共享权限，您可以现在或在第 5 步之后编辑 **与下列客户共享** 设置。
 5. 单击 **创建新版本**.
-6. 将 **创建方法** 设置为 **自动生产**。然后填写必填字段（请参阅 [详细信息](</docs/portal/certificates/creating-certificates.md#auto-genating-a-self-signed-certificate>)）并单击**保存**。
+6. 将 **创建方法** 设置为 **自动生成**。然后填写必填字段（请参阅 [详细信息](</docs/portal/certificates/creating-certificates.md#auto-genating-a-self-signed-certificate>)）并单击**保存**。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-autogenerate.png" alt="Certificate New Self-Signed Version" width="700"></p>
 
 7. 单击“证书详细信息”页面顶部的**下载 CSR** 按钮以便从最新版本上生成 CSR。
