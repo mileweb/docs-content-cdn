@@ -1,5 +1,5 @@
-# Deleting a Certificate
+# 删除证书
 
-1. In the left pane, click **Certificates**.
-2. In the **Actions** column on the Certificates page, click the vertical ellipsis of the certificate you want to delete, and then select **Delete**.
-3. When prompted to confirm the deletion, click **OK** to delete the certificate.
+1. 在左侧菜单栏中，点击 **证书**.
+2. 在证书页面的 **操作** 列中，点击目标证书目标对应的垂直省略符标志，点后选择**删除**。
+3. 系统会提示您进行确认删除确认，点击 **确认** 确定删除。

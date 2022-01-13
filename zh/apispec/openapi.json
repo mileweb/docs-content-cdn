@@ -8605,7 +8605,7 @@
               }
             }
           },
-          "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames is included."
         },
         "parameters": [
           {
@@ -9258,7 +9258,7 @@
               }
             }
           },
-          "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames is included."
         },
         "operationId": "getEdgeRequests",
         "parameters": [
@@ -12594,7 +12594,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "The target environment of the purge request.  By default, all are returned."
+            "description": "The target environment of the purge request. By default, all are returned."
           },
           {
             "schema": {
@@ -13972,7 +13972,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-10-30T00:00:00Z</code> ",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-10-30T00:00:00Z</code>. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
             "required": true
           },
           {
@@ -13985,7 +13985,7 @@
             },
             "in": "query",
             "name": "scheme",
-            "description": "Limits the results to the specified scheme."
+            "description": "Limit the results to the specified scheme."
           },
           {
             "schema": {
@@ -16721,7 +16721,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code>",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code>. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
             "required": true
           }
         ],
@@ -17065,7 +17065,6 @@
                       "customerId": 0,
                       "apiName": "string",
                       "name": "string",
-                      "apiKey": "string",
                       "phone": "string",
                       "address": {
                         "line1": "string",
@@ -17118,10 +17117,6 @@
                     "name": {
                       "type": "string",
                       "description": "Customer name."
-                    },
-                    "apiKey": {
-                      "type": "string",
-                      "description": "API key corresponding to the admin API login."
                     },
                     "phone": {
                       "type": "string",
@@ -17350,8 +17345,7 @@
                   "required": [
                     "customerId",
                     "apiName",
-                    "name",
-                    "apiKey"
+                    "name"
                   ]
                 },
                 "examples": {
@@ -17359,7 +17353,6 @@
                     "value": {
                       "customerId": 123456,
                       "apiName": "myadminapilogin",
-                      "apiKey": "abc12345678",
                       "name": "The Company",
                       "address": {
                         "line1": "The CompanyCorporation",
@@ -17447,7 +17440,6 @@
                       "customerId": 0,
                       "apiName": "string",
                       "name": "string",
-                      "apiKey": "string",
                       "phone": "string",
                       "address": {
                         "line1": "string",
@@ -17500,10 +17492,6 @@
                     "name": {
                       "type": "string",
                       "description": "Customer name."
-                    },
-                    "apiKey": {
-                      "type": "string",
-                      "description": "API key corresponding to the admin API login."
                     },
                     "phone": {
                       "type": "string",
@@ -17732,8 +17720,7 @@
                   "required": [
                     "customerId",
                     "apiName",
-                    "name",
-                    "apiKey"
+                    "name"
                   ]
                 },
                 "examples": {
@@ -24046,7 +24033,7 @@
                   "Invalid input": {
                     "value": {
                       "code": "InvalidInput",
-                      "message": "The value for 'deploymentTasks' invalid. Use one of false, 'staging', 'production', or 'both'."
+                      "message": "The value of 'deploymentTasks' is invalid. Use one of false, 'staging', 'production', or 'both'."
                     }
                   },
                   "Invalid API account ID": {
@@ -24107,7 +24094,10 @@
                         "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints."
                       },
                       "deploymentTasks": {
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "boolean"
+                        ],
                         "default": "staging",
                         "enum": [
                           false,
@@ -24262,7 +24252,10 @@
                           "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation </a> (/cdn/validations) endpoints."
                         },
                         "deploymentTasks": {
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
                           "default": "staging",
                           "enum": [
                             false,
@@ -24624,7 +24617,10 @@
                         "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints."
                       },
                       "deploymentTasks": {
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "boolean"
+                        ],
                         "default": "staging",
                         "enum": [
                           false,
@@ -24883,7 +24879,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
             "required": true
           },
           {
@@ -24898,7 +24894,7 @@
             },
             "in": "query",
             "name": "scheme",
-            "description": "Limits the results to the specified scheme. By default, data from HTTPS and HTTP requests are returned."
+            "description": "Limit the results to the specified scheme. By default, data from HTTPS and HTTP requests is returned."
           },
           {
             "schema": {
@@ -26941,14 +26937,6 @@
                             480,
                             1440
                           ]
-                        },
-                        "lastUpdateTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating when the log configuration was last updated."
-                        },
-                        "creationTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating when the log configuration was created."
                         }
                       },
                       "required": [
@@ -26956,15 +26944,23 @@
                         "hostnames",
                         "logDownloadFormat",
                         "logDownloadStorageDays",
-                        "logDownloadFileSpanMinutes",
-                        "lastUpdateTime",
-                        "creationTime"
+                        "logDownloadFileSpanMinutes"
                       ]
+                    },
+                    "lastUpdateTime": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the log configuration was last updated."
+                    },
+                    "creationTime": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the log configuration was created."
                     }
                   },
                   "required": [
                     "id",
-                    "configs"
+                    "configs",
+                    "lastUpdateTime",
+                    "creationTime"
                   ]
                 },
                 "examples": {
@@ -26978,10 +26974,10 @@
                         ],
                         "logDownloadFormat": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime",
                         "logDownloadStorageDays": 14,
-                        "logDownloadFileSpanMinutes": 30,
-                        "creationTime": "2021-12-14T22:48:08Z",
-                        "lastUpdateTime": "2021-12-14T22:48:08Z"
-                      }
+                        "logDownloadFileSpanMinutes": 30
+                      },
+                      "creationTime": "2021-12-14T22:48:08Z",
+                      "lastUpdateTime": "2021-12-14T22:48:08Z"
                     }
                   }
                 }
@@ -27680,7 +27676,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z."
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
           },
           {
             "schema": {
@@ -27694,7 +27690,7 @@
             },
             "in": "query",
             "name": "scheme",
-            "description": "Limits the results to the specified scheme. By default, all traffic is returned."
+            "description": "Limit the results to the specified scheme. By default, all traffic is returned."
           }
         ],
         "requestBody": {
