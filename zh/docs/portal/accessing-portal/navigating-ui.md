@@ -1,23 +1,23 @@
 # 页面切换
 
-当您第一次登录 CDN Pro 门户时，菜单和子菜单将出现在浏览器左侧窗格中，仪表板将出现在浏览器右侧的工作区中。
+当您第一次登录 CDN Pro 门户时，菜单和子菜单将出现在浏览器左侧窗格中，信息中心将出现在浏览器右侧的工作区中。
 
-默认菜单列出了您可以执行的 CDN Pro 活动。
+默认菜单列出了您可以操作的 CDN Pro 活动。
 
 <p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
 
-## 仪表盘
+## 信息中心
 
-仪表板是您登录 CDN Pro 门户时显示的默认页面。它包含了一份展示您近期通过 CDN Pro 进行加速的流量快照报表。您可以将鼠标悬停在各个数据点上以获取更详细的信息。例如：
+信息中心是您登录 CDN Pro 门户时显示的默认页面。它包含了一份展示您近期通过 CDN Pro 进行加速的流量快照报表。您可以将鼠标悬停在各个数据点上以获取更详细的信息。例如：
 
 <p align=center><img src="/docs/resources/images/accessing-portal/total-bandwidth.png" alt="total bandwidth" width="1000"></p>
 
-通过仪表盘，您可以获取到：
+通过信息中心，您可以获取到：
 
 - 所有加速项的流量、流量带宽和流量请求信息。
 - 所有加速项的业务状态码信息。
 
-每个报表下方的图例说明标记了报表的各项数据指标。单击图例说明中的某个数据指标可以将其从报表中移除。再次点击该指标， CDN Pro 将重新展示该指标数据。单击报表下方的**查看完整报告**， CDN Pro 将会展示具体的[报表页面](</docs/portal/reports.md>)，您可以在其中填入报告参数并查看在当前时间 5 分钟之前的报表数据，您可以在仪表板图表左上角的下拉列表中选择的报表类型（流量、流量带宽等）。
+每个报表下方的图例说明标记了报表的各项数据指标。单击图例说明中的某个数据指标可以将其从报表中移除。再次点击该指标， CDN Pro 将重新展示该指标数据。单击报表下方的**查看完整报告**， CDN Pro 将会展示具体的[报表页面](</docs/portal/reports.md>)，您可以在其中填入报告参数并查看在当前时间 5 分钟之前的报表数据，您可以在信息中心图表左上角的下拉列表中选择的报表类型（流量、流量带宽等）。
 
 <p align=center><img src="/docs/resources/images/traffic-volume.png" alt="traffic volume" width="1000"></p>
 
