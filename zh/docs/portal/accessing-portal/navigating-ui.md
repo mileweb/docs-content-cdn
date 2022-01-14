@@ -2,7 +2,7 @@
 
 当您第一次登录 CDN Pro 门户时，菜单和子菜单将出现在浏览器左侧窗格中，信息中心将出现在浏览器右侧的工作区中。
 
-默认菜单列出了您可以操作的 CDN Pro 活动。
+默认菜单列出了您在 CDN Pro 上可以进行的操作。
 
 <p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
 
