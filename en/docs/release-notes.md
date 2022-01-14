@@ -431,7 +431,7 @@
 
 ### Portal updates
 * Updated user invitation emails to come from sender ‘CDN Pro Admin’.
-* Put search and filter parameters into the URLs of the list pages (i.e., property, edge hostname, certificate, content management). .
+* Put search and filter parameters into the URLs of the list pages (i.e., property, edge hostname, certificate, content management).
 * Made the certificate creation user interface more consistent with property creation.
 * Prevented certificates with the same name from being created.
 * Fixed display of version when creating a new version of a certificate.
@@ -486,7 +486,7 @@
 * Added the edge hostname request report.
 * Added the CPU time report.
 * Enhanced the date picker in reports page.
-* Added support for [High Speed Data Transmission (HDT)](<https://www.cdnetworks.com/high-speed-data-transmission/>) in the product selection menu allowing you to switch to the HDT portal.
+* Added support for [High Speed Data Transmission (HDT)](<https://www.cdnetworks.com/high-speed-data-transmission/>) in the product selection menu, allowing you to switch to the HDT portal.
 * Fixed password expiration email’s appearance.
 * Implemented notification message when a deployment is added to the standby task.
 * Fixed text of standby task confirmation.
