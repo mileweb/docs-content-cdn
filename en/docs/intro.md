@@ -34,5 +34,5 @@ The CDN Pro content delivery platform provides a rich [API](</apidocs>) that sup
 
 ## Where to Go from Here
 
-Check the [Getting Started with CDN Pro Video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdn360_v1.mp4>) and perform the steps in the [CDN Pro Quick Start](</docs/getting-started.md>).
+Check the [Getting Started with CDN Pro Video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>) and perform the steps in the [CDN Pro Quick Start](</docs/getting-started.md>).
 

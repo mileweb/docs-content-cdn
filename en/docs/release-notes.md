@@ -182,7 +182,7 @@
 * Improved the self-signup page to describe our promotional offers.
 * Made improvements to support translation from English to other languages.
 * Fixed display of certificate name when creating a property.
-* Pointed self-signup customers to our [“Getting Started” video](<https://www.cdnetworks.com/wp-content/uploads/2020/11/cdn360-introduction-video.mp4>).
+* Pointed self-signup customers to our [“Getting Started” video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>).
 * Added tooltip for real-time log sample rate in property configuration.
 * Fixed display of dropdown lists in reports page.
 * Added support for TO_UPPER, TO_LOWER, and SUBSTR to our Edge Logic function [eval_func](</docs/edge-logic/supported-directives#eval_func>).
