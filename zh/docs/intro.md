@@ -34,5 +34,5 @@ The CDN Pro content delivery platform provides a rich [API](</apidocs>) that sup
 
 ## Where to Go from Here
 
-点击观看新手[快速启动CDN Pro视频](<https://www.cdnetworks.com/wp-content/uploads/videos/cdn360_v1.mp4>)，并执行[CDN Pro新手指南](</docs/getting-started.md>)文档描述的步骤。
+点击观看新手[快速启动CDN Pro视频](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>)，并执行[CDN Pro新手指南](</docs/getting-started.md>)文档描述的步骤。
 

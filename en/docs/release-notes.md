@@ -21,7 +21,7 @@
 * Improved error handling of edge hostname creation and updates.
 * Improved error handling of unauthorized request for customer details.
 * Improved error handling of invalid input when [creating an API permission](</apidocs#operation/post-cdn-apiPermissions>).
-* Ensured [prefetch list](</apidocs#operation/getPurgeRequestList>) only contains unique URLs.
+* Ensured [prefetch list](</apidocs#operation/getPurgeRequestList>) contains only unique URLs.
 * Improved error handling of ICP Beian status check.
 * Allowed access to secrets to be limited by API permissions.
 * Ensured permissions are respected for annotations API.
@@ -47,7 +47,7 @@
 * Added support for a new Edge Logic directive, http2_max_concurrent_streams, with a default of 64 and maximum of 512 to support domains with small objects requiring higher levels of concurrency.
 * Added support for regular expression [purge](</apidocs#operation/createPurge>).
 * Ensured that logConfigLimit specified in the service quota is properly enforced.
-* Ensured that reseller can perform actions like querying or updating a suspended child customer.
+* Ensured that reseller can perform actions such as querying or updating a suspended child customer.
 
 ### Portal updates
 * Prevented deletion of role that is in use.
@@ -68,11 +68,11 @@
 * Fixed status code when attempting to update an edge hostname’s Beian status.
 * Fixed salutation in email notifications of account changes.
 * Fixed [traffic volume summary](</apidocs#operation/getVolSummary>)’s response to account for a special situation of domain served from the local IP address 127.0.0.1.
-* Added loadBalancerLogic field to property definition allowing custom code to be inserted into the NGINX LB block. A field, loadBalancerDirectives, was added to the [systemConfigs API](</apidocs#operation/get-cdn-systemConfigs>) to indicate the directives that can be used. These updates allow code to be added to reject DDoS requests.
+* Added loadBalancerLogic field to property definition, allowing custom code to be inserted into the NGINX LB block. A field, loadBalancerDirectives, was added to the [systemConfigs API](</apidocs#operation/get-cdn-systemConfigs>) to indicate the directives that can be used. These updates allow code to be added to reject DDoS requests.
 
 ### Portal updates
 * Fixed pagination of portal user list page.
-* Ensured list of secrets is updated after one is created or deleted.
+* Ensured list of secrets is updated after a secret is created or deleted.
 * Corrected unit of measurement for cache hit ratio in traffic report.
 * Improved purge interface to allow easy entry of multiple files or paths.
 * Showed notifications in the correct language.
@@ -179,10 +179,10 @@
 * Ensured that [service quota creation](</apidocs#operation/post-cdn-serviceQuotas>) does not require specifying directiveParameterLimits. Defaults apply.
 
 ### Portal updates
-* Improved the self-signup page to describe our promotional offes.
+* Improved the self-signup page to describe our promotional offers.
 * Made improvements to support translation from English to other languages.
 * Fixed display of certificate name when creating a property.
-* Pointed self-signup customers to our [“Getting Started” video](<https://www.cdnetworks.com/wp-content/uploads/2020/11/cdn360-introduction-video.mp4>).
+* Pointed self-signup customers to our [“Getting Started” video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>).
 * Added tooltip for real-time log sample rate in property configuration.
 * Fixed display of dropdown lists in reports page.
 * Added support for TO_UPPER, TO_LOWER, and SUBSTR to our Edge Logic function [eval_func](</docs/edge-logic/supported-directives#eval_func>).
@@ -330,7 +330,7 @@
 
 ### API updates
 * Enhanced the property search to allow direct matches including prefacing with ‘^’ to match text at the beginning of fields.
-* Fixed a problem with enabling the [HDT (High Speed Data Transmission)](<https://www.cdnetworks.com/high-speed-data-transmission/>) product for a reseller's customer.
+* Fixed a problem with enabling the [High Speed Data Transmission (HDT)](<https://www.cdnetworks.com/high-speed-data-transmission/>) product for a reseller's customer.
 * Fixed an error when deploying a property using a certificate without SANs.
 
 
@@ -425,13 +425,13 @@
 * Improved an error message in [portal user creation API](</apidocs#operation/createContact>).
 * Improved property validation.
 * Fixed error handling when using invalid or unauthorized Edge Logic directives.
-* Fixed enforcement of limits used in timeout related directives such as [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>).
+* Fixed enforcement of limits used in timeout-related directives such as [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>).
 * Fixed CDN serviceQuota's “advancedFeatures” setting.
 * Added tracking of recent validation and deployment times of a property.
 
 ### Portal updates
 * Updated user invitation emails to come from sender ‘CDN Pro Admin’.
-* Put search and filter parameters into the URLs of the list pages (i.e., property, edge hostname, certificate, purge) .
+* Put search and filter parameters into the URLs of the list pages (i.e., property, edge hostname, certificate, content management).
 * Made the certificate creation user interface more consistent with property creation.
 * Prevented certificates with the same name from being created.
 * Fixed display of version when creating a new version of a certificate.
@@ -443,7 +443,7 @@
 ### API updates
 * Improved validation of Edge Logic in properties.
 * Fixed error handling when invalid or unauthorized directives are used in a property.
-* Improved validation of timeout related settings in a service quota’s directiveParameterLimits.
+* Improved validation of timeout-related settings in a service quota’s directiveParameterLimits.
 * Updated [service quota creation](</apidocs#operation/post-cdn-serviceQuotas>) to support the advancedFeatures field.
 
 ### Portal updates
@@ -486,7 +486,7 @@
 * Added the edge hostname request report.
 * Added the CPU time report.
 * Enhanced the date picker in reports page.
-* Added support for [HDT (High Speed Data Transmission)](<https://www.cdnetworks.com/high-speed-data-transmission/>) in the product selection menu allowing you to switch to the HDT portal.
+* Added support for [High Speed Data Transmission (HDT)](<https://www.cdnetworks.com/high-speed-data-transmission/>) in the product selection menu, allowing you to switch to the HDT portal.
 * Fixed password expiration email’s appearance.
 * Implemented notification message when a deployment is added to the standby task.
 * Fixed text of standby task confirmation.
@@ -538,7 +538,7 @@
 * Updated [edge requests report](</apidocs#operation/getEdgeRequests>) to support the Accept HTTP header with quality values.
 * Improved validation of Edge Logic using [eval_func](</docs/edge-logic/supported-directives#eval_func>).
 * Improved [hostnames API](</apidocs#operation/listhostnames>).
-* Added the [origin_selection_algorithm directive](</docs/edge-logic/supported-directives#origin_selection_algorithm>) so you can control the selection of an IP address if an origin resolves to muliple IP addresses.
+* Added the [origin_selection_algorithm directive](</docs/edge-logic/supported-directives#origin_selection_algorithm>) so you can control the selection of an IP address if an origin resolves to multiple IP addresses.
 
 ### Portal updates
 * Provided date range selectors in the portal for validation and deployment tasks.
