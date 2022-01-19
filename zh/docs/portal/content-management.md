@@ -17,7 +17,7 @@ CDN Pro 提供的缓存刷新功能可以让您快速更新缓存文件。此功
 | 3 | 按提交日期过滤缓存刷新任务的图标。|
 | 4 | 创建缓存刷新任务请求的按钮。|
 
-## 新建刷新任务
+## 创建刷新任务
 
 如果 Web 服务器（源站）上的内容已更改，您可以新建刷新任务以便 CDN Pro 分发这些更改。
 
@@ -46,56 +46,59 @@ CDN Pro 提供的缓存刷新功能可以让您快速更新缓存文件。此功
    **请注意：** 刷新任务完成后，刷新任务详情页面右下角的 **再次刷新** 按钮可让您重复执行此次刷新任务。
 
 
-## 使用正则刷新任务
+## 创建正则刷新任务
 
-CDN Pro supports purges that use a regular expression (or "regex") pattern to match a cache key. The pattern must begin with `{scheme}://{hostname}` where <code>{scheme}</code> is http, https, or other entry that matches any scheme. For example: <br><br><code>https://test.domain.com/my.*\.(jpg|png)\?q= </code></br></br> 
+CDN Pro 支持使用正则表达式（或“正则表达式”）模式来匹配缓存键的清除。模式必须以 `{scheme}://{hostname}` 开头，其中 <code>{scheme}</code> 是 http、https 或其他请求协议的条目。例如：<br><br><code>https://test.domain.com/my.*\.(jpg|png)\?q= </code></br></br>
 
-For performance considerations, observe the following guidelines:
-<ul><li>The regex pattern following the hostname should be less than 126.</ul></li><ul><li>The pattern can contain up to two unlimited quantifiers ("*", "+" or ",}")</ul></li><ul><li>The upper limit of any quantifier cannot exceed 59.</ul></li>
+出于性能考虑，请遵守以下准则：
+<ul><li>域名后面的正则表达式长度应小于 126字符。</ul></li><ul><li>该模式最多可以包含两个无限量词（“*”、“+”或",}")</ul></li><ul><li>任何量词的上限不能超过59。</ul></li>
 
-By default, CDN Pro allows 1,000 entries in the <code>fileUrls</code> list, 20 entries in the <code>dirUrls</code> list, and 2 entries in the <code>regexPatterns</code> list in each purge. The per-request and total number of allowed purges are subject to customer-specific quotas. CDN Pro also limits the size of the API request body.
+默认情况下，CDN Pro 允许您一次性提交1000条 <code>fileUrls</code> 文件刷新，20条<code>dirUrls</code> 通配符（目录）刷新 20 个条目，以及2条 <code>regexPatterns</code> 列表中的 2 个正则刷新。每个请求可携带条数和每日允许的刷新总数取决于每个客户账号特定的配额。 除此以外 CDN Pro 还限制了 API 请求正文的大小。
 
-**Note:** If you are a reseller, you can purge a child customer's domain. Your purge quota will apply.
 
-## Examples of Directory Purging
+**注意：** 如果您是代理商客户，您将有权限对子客户的域名进行刷新。此时刷新将消耗您自身账号的额度。
 
-CDN Pro allows you to purge directories by entering URLs in the <strong>Add directories to purge</strong> field. The URLs you enter can include wildcards.
-<ul><li>Ending a subdirectory with a single asterisk <b>*</b> purges all files only.</ul></li><ul><li>Ending a directory with two asterisks purges all files and subdirectories.</ul></li><ul><li>Ending the URL with <b>*ext</b> purges all files that have a specific extension.</ul></li><ul><li>If the URL includes a percent character <b>%</b>, encode it to <b>%25</b>.</ul></li>
+## 通配符（目录）推送示例
 
-The following table shows examples of purging directories with and without using wildcards.
+CDN Pro 允许您通过<strong>将目标目录添加到刷新</strong> 字段中的方式来刷新整个目录下的文件。您输入的 URL 可以包含通配符。
+<ul><li>以单个星号结束子目录 <b>*</b> 仅清除本层级下所有文件。</ul></li><ul><li>以两个星号结束目录将清除本层级下所有文件以及所有子层级中的文件</ul></li><ul><li>以 <b>*ext</b> 结束 URL 会清除所有具有特定扩展名的文件。</ul></li><ul>< li>如果目标 URL 包含百分比字符 <b>%</b>，则将其编码为 <b>%25</b>。</ul></li>
 
-**Note:** Files can have multiple variations if custom cache keys are used. In addition, a URL such as <code>/pictures/</code> or <code>/picture.jpg</code> can have many variations stored in the cache due to the Vary header or cache key customization. As a result, performing a folder purge without an asterisk clears all variations except subdirectories or files. For this reason, folder purges of <code>/pictures/</code>, <code>/pictures/*</code>, and <code>/pictures/**</code> result in different behaviors.
+下表显示了使用和不使用通配符刷新目录的示例。
 
-|**Example**|**Description**|
+
+**注意：** 如果您在边缘逻辑中使用了自定义缓存键，那么同一个 URL 文件可以有多个缓存版本。此外，如果开启了 Vary 缓存功能，诸如 <code>/pictures/</code> 或 <code>/picture.jpg</code> 之类的 URL 便可以在缓存中存储许多缓存版本。因此，执行不带星号的文件夹刷新会刷新掉除子目录或文件之外的所有变体。<code>/pictures/</code>、<code>/pictures/*</code> 和 <code>/pictures/**</code> 的文件夹刷新任务将会最终导致不同的刷新结果。
+
+
+
+|**示例**|**描述**|
 |----------|---------------|
-| http://test.domain2.com/mydir       | Purge all variations of a single directory, but not its subdirectories or files. Variations may exist if custom cache keys are used.                               |
-| http://test.domain2.com/mydir/**    | Purge all files and subdirectories whose cache key begins with http://test.domain2.com/mydir/.                               |
-| http://test.domain2.com/mydir/*    | Purge all files, but not subdirectories, within a directory.                                             |
-| http://test.domain2.com/mydir/*.jpg | Purge all cache entries ending with the .jpg file extension. Subdirectories of http://test.domain2.com/mydir/ are not purged.                                             |
-| http://test.domain2.com/mydir/a*    | Purge all files, but not subdirectories, that start with the letter "a".                   |
-| http://test.domain2.com/mydir/a**   | Purge all files and subdirectories that start with the letter "a".|
-| http://test.domain2.com/mydir/a.jpg | Purge all variations of "a.jpg". Variations may exist if custom cache keys are used.                                  |
-| http://test.domain2.com/my**jpg | Purge all entries whose cache key begins with http://test.domain2.com/my and ends with the suffix jpg. The "**" can match anything in the path including additional subdirectories. For example, http://test.domain2.com/mydirectory/picture.jpg would be purged.                                  |                                  |
+| http://test.domain2.com/mydir       | 刷新单个目录的所有缓存版本，但不刷新其子目录或文件。如果您在配置中使用了自定义缓存键，则同一个URL可能存在不同缓存版本。                               |
+| http://test.domain2.com/mydir/**    | 刷新所有以缓存键 http://test.domain2.com/mydir/ 开头的文件和子目录。                               |
+| http://test.domain2.com/mydir/*    | 刷新mydir目录下的所有文件，但不刷新其子目录。                                             |
+| http://test.domain2.com/mydir/*.jpg | 刷新所有以 .jpg 文件扩展名结尾的缓存条目。 http://test.domain2.com/mydir/ 的子目录不会被清除。                                             |
+| http://test.domain2.com/mydir/a*    | 刷新所有以字母“a”开头的文件，但不清除子目录。                   |
+| http://test.domain2.com/mydir/a**   | 刷新所有以字母“a”开头的文件和子目录。|
+| http://test.domain2.com/mydir/a.jpg | 刷新“a.jpg”的所有缓存版本。如果您在配置中使用了自定义缓存键，则同一个URL可能存在不同缓存版本。                                  |
+| http://test.domain2.com/my**jpg | 刷新缓存键以 http://test.domain2.com/my 开头并以后缀 jpg 结尾的所有条目。 “**”可以匹配路径中的任何内容，包括其他子目录。例如，http://test.domain2.com/mydirectory/picture.jpg 将被清除。                                  |                                  |
 
 
-## Viewing Purge Details
+## 查看刷新任务详细信息
 
-1. In the left pane, click **Content Management**.
-2. Click the ID associated with the purge operation. A Purge Details form provides details about the selected purge operation.
+1. 在左侧窗格中，单击**内容管理**。
+2. 单击与刷新任务关联的 ID。刷新任务详细表单将展示有关所选刷新操作的详细信息。
 
-## Purge History
+## 查看刷新历史任务
 
-1. In the left pane, click **Content Management**.
-2. A **Purge** tab on the Content Management page shows details similar to those in the following figure:
+1. 在左侧窗格中，单击**内容管理**。
+2. 内容管理页面将显示类似于下图的详细信息：
 
-   <ul><li> ID associated with the purge request.<br>
-   <li>Hostname of the property associated with the purge request.<br><li>Target environment where the purge occurred (either Staging or Production).<br>
-   <li>Action that was performed (either Delete or Invalidate).<br>
-   <li>Number of files and directories purged.<br>
-   <li>Date and time when the purge request was submitted and completed.<br>
-   <li>A success rate indicator that shows a completion percentage from 0 to 100%.</ul>
+   <ul><li> 与刷新任务关联的 ID。<br>
+   <li>与刷新请求关联的域名。<br><li>刷新任务下发的的目标环境（演练或生产环境）。<br>
+   <li>刷新方式（删除或者强制过期）。<br>
+   <li>刷新的文件和目录数。<br>
+   <li>刷新任务的提交时间和完成时间<br>
+   <li>显示该刷新任务的成功率（比例从 0 到 100%）</ul>
 
 <p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers.png" alt="purge form no numbers" width="900"></p>
 
-3. To specify the exact content you want to purge, create a purge request.
 
