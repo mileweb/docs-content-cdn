@@ -60,7 +60,7 @@ CDN Pro 允许您通过<strong>指定目标目录</strong> 的方式来刷新整
 下表显示了使用和不使用通配符刷新目录的示例。
 
 
-**注意：** 如果您在边缘逻辑中使用了自定义缓存键，那么同一个 URL 文件可以有多个缓存版本。此外，如果开启了 Vary 缓存功能，诸如 <code>/pictures/</code> 或 <code>/picture.jpg</code> 之类的 URL 便可以在缓存中存储许多缓存版本。因此，执行不带星号的文件夹刷新会刷新掉除子目录或文件之外的所有变体。<code>/pictures/</code>、<code>/pictures/*</code> 和 <code>/pictures/**</code> 的文件夹刷新任务将会最终导致不同的刷新结果。
+**注意：** 如果您在边缘逻辑中使用了自定义缓存键，那么同一个 URL 文件可以有多个缓存版本。此外，如果开启了 Vary 缓存功能，诸如 <code>/pictures/</code> 或 <code>/picture.jpg</code> 之类的 URL 便可以在缓存中存储许多缓存版本。因此，执行不带星号的文件夹刷新会刷新掉除子目录或文件之外的所有缓存版本。<code>/pictures/</code>、<code>/pictures/*</code> 和 <code>/pictures/**</code> 的文件夹刷新任务将会最终导致不同的刷新结果。
 
 
 
