@@ -34,9 +34,7 @@ If the content on your origin web server has changed, request a purge to have CD
 | Add a file purge header | If **Purge Type** is set to **File**, specify the name and value of the HTTP request header included in the cache key, and then click **Add Header**. Repeat this step for each additional request header you want to purge. If you decide not to purge a request header, click the **x** icon at the right side of the header name.|
 | Add directories to purge | If **Purge Type** is set to **Wildcard**, enter the complete URL of the directory you want to purge, including optional wildcards, and press Enter. Repeat this step for each additional directory you want to purge. If you decide not to purge a directory, delete it from this field. </br><br><strong>Note:</strong> Observe the following guidelines:</br><ul><li>Purging a directory also purges its subdirectories.</br></ul></li><ul><li>CDN Pro supports purging based on URL prefixes. For more information, see [Examples of Directory Purging](#examples-of-directory-purging) below.</ul></li>|
 
-4. Click **Start Purge**.<br><br> 
-   
-   **Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
+4. Click **Start Purge**.
 
 **Note:** When the purge completes, a **Purge Again** button at the bottom right allows you to repeat a purge.
 
@@ -92,4 +90,3 @@ The following table shows examples of purging directories with and without using
 <p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers.png" alt="purge form no numbers" width="900"></p>
 
 3. To specify the exact content you want to purge, create a purge request.
-
