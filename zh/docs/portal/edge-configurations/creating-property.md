@@ -46,9 +46,9 @@ When you click the <b>Wizard</b> button, a prompt appears with the following cho
 
 <p align=center><img src="/docs/resources/images/edge-configurations/Edge-Logic-Wizard-Prompt.png" alt="wizard prompt" width="900"></p>
 
-After making your selection, complete the settings in the Edge Logic Wizard page, and then click <b>OK</b> to display the Edge Logic code in the <b>Edge Logic</b> field. You can then edit the code shown in the field as necessary or click the <b>Wizard</b> button to change your selections. 
+After making your selection, complete the settings in the Edge Logic Wizard page, and then click <b>OK</b> to display the Edge Logic code. You can then edit the code shown in the field as necessary or click the <b>Wizard</b> button to change your selections. 
 
-<b>Note:</b> If the code in the <b>Edge Logic</b> field is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
+<b>Note:</b> If the Edge Logic code is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
 
 ## TLS Settings
 
@@ -98,6 +98,12 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 **Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. You can then contact CDNetworks to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
 
 **Note:** You can set **Has ICP Beian** to **Yes** without contacting CDNetworks; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from CDNetworks.
+
+**Load Balancer Logic:** Enter Edge Logic to customize load balancing. You can use a subset of the directives, including `if`, `set`, `return`, `eval_func`, `add_header`, `client_max_body_size`, `deny`, and `allow`. For the list of directives allowed in this field, refer to the `loadBalancerDirectives` field in the response to the [system configuration API](</zh/cdn/apidocs>). This list can include advanced Edge Logic directives that have not been enabled for your account.
+Example:  `if ($http_user_agent = bot) { return 403;}` 
+
+**Note:** If the Edge Logic code is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
+
 
 **Load Balancer Hash Key:** CDN Pro uses multiple tiers of load balancing to distribute client requests to different servers, with  consistent hashing used in many of these places. By default, the URL is used as the hash key, which should be satisfactory in most cases. However, you can define additional variables to be added to the hash key to distribute the requests more evenly. One typical use case is when all requests carry the same URL, but use a particular header field to indicate different resources. In general, the variable(s) specified here should be a subset of the variables you enter [into the cache key](</docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key>). Only the following variables are supported: `$http_*`, `$cookie_*`, `$arg_*`.
 
