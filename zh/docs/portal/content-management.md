@@ -95,4 +95,3 @@ CDN Pro 允许您通过<strong>指定目标目录</strong> 的方式来刷新整
 
 <p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers.png" alt="purge form no numbers" width="900"></p>
 
-
