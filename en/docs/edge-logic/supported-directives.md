@@ -125,7 +125,7 @@ Stops processing the current set of ngx_http_rewrite_module directives. No chang
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-**NOTE:** If "break" appears in a location block, the contained directive must be [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>).
+**NOTE:** If this directive appears in a [location](#location) block, any "[return](#return)" directive after it may not be executed. Hence we require the location block to directly contain an [origin_pass](<#origin_pass>) directive.
 
 ### `client_body_timeout`
 
@@ -350,7 +350,7 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 **Default:** `-` <br/>
 **Context:** server, location
 
-Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
+Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location). We require each location block to directly (not in a nested if or location block) contain a "[return](#return)" and/or "[origin_pass](#origin_pass)" directive to generate the response. When a location contains a "[break](#break)" directive, "[origin_pass](#origin_pass)" is required.
 
 ### `origin_connect_timeout`
 
