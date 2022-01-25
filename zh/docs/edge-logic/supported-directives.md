@@ -124,7 +124,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 终止执行当前 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)的指令。代码逻辑源自 Nginx 开源版本，无改动。
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
-**注意:** 如果您需要在 location 中使用 break 指令时，请确保该 location 至少配置了一个 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>)。
+**注意:** 如果一个 [location](#location) 中包含了 break 指令，它有可能使之后的"[return](#return)"指令失效。因此我们要求该 location 必须直接包含一个 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) 指令来确保正确生成响应。
 
 ### `client_body_timeout`
 
@@ -358,7 +358,7 @@ else { ... }
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。
+按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。为了确保服务器能正确生成响应，我们要求每个 [locaiton](#location) 里须直接（不在嵌套的if或location里）包含一个 [return](#return) 或者 [origin_pass](#origin_pass) 指令。如果一个 location 里包含了 [break](#break) 指令，则其必须直接包含 origin_pass。
 
 ### `origin_connect_timeout`
 
