@@ -124,6 +124,8 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 终止执行当前 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)的指令。代码逻辑源自 Nginx 开源版本，无改动。
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
+**注意:** 如果您需要在 location 中使用 break 指令时，请确保该 location 至少配置了一个 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>)。
+
 ### `client_body_timeout`
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
