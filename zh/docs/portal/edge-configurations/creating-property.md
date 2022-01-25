@@ -99,7 +99,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 **Note:** You can set **Has ICP Beian** to **Yes** without contacting CDNetworks; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from CDNetworks.
 
-**Load Balancer Logic:** Enter Edge Logic to customize load balancing. You can use a subset of the directives, including `if`, `set`, `return`, `eval_func`, `add_header`, `client_max_body_size`, `deny`, and `allow`. For the list of directives allowed in this field, refer to the `loadBalancerDirectives` field in the response to the [system configuration API](</zh/cdn/apidocs#operation/get-cdn-systemConfigs>). This list can include advanced Edge Logic directives that have not been enabled for your account.
+**Load Balancer Logic:** Enter Edge Logic to customize load balancing. You can use a subset of the directives, including `if`, `set`, `return`, `eval_func`, `add_header`, `client_max_body_size`, `deny`, and `allow`. For the list of directives allowed in this field, refer to the `loadBalancerDirectives` field in the response to the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). This list can include advanced Edge Logic directives that have not been enabled for your account.
 Example:  `if ($http_user_agent = bot) { return 403;}` 
 
 **Note:** If the Edge Logic code is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
