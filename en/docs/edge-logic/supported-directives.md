@@ -125,6 +125,9 @@ Stops processing the current set of ngx_http_rewrite_module directives. No chang
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
+**NOTE:** If "break" appears in a location block, the contained directive must be [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>).
+
+
 ### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
