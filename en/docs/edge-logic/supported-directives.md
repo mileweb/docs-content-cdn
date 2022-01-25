@@ -127,7 +127,6 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 **NOTE:** If "break" appears in a location block, the contained directive must be [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>).
 
-
 ### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
