@@ -1,5 +1,31 @@
 # Release Notes
 
+## January 21, 2022
+### API updates
+* Support hostname filter in query string of the [log download API](</apidocs#operation/get-cdn-report-logDownload>).
+* Improved error handling when a user tries to [create an edge hostname](</apidocs#operation/createEdgeHostname>) using illegal characters.
+* Added support for Report-Range header in the [purge list](</apidocs#operation/getPurgeRequestList>) and [prefetch list](</apidocs#operation/get-cdn-prefetches>) APIs.
+* Allowed the billUsingStripe serviceQuota field to be set to null.
+* Allowed groupBy to be used in the query string of summary reports. This is useful when calling the report APIs using the GET method.
+* Added [edge status summary API](</apidocs#operation/get-cdn-reports-edgeStatusSummary>) to summarize status codes returned by edge servers.
+* Added [origin status summary API]</apidocs#operation/get-cdn-reports-originStatusSummary>) to summarize status codes returned by origin servers.
+* Prevented duplicate certificate and property versions from being created if multiple requests were received at the same time.
+* Improved error handling for invalid impersonation attempts.
+* Improved error message for invalid maxSuccessRate filter passed to the [purge list](</apidocs#operation/getPurgeRequestList>) API.
+* Fixed response of [edge hostname request summary](</apidocs#operation/get-cdn-report-edgeHostnameReqSummary>) API.
+* Supported access_log_sampling directive in loadBalancerLogic.
+* Added support for several variables (%cltregion, %cltisp, %cltport, and %reqrange) to the [log configuration format](<apidocs#operation/post-cdn-report-logConfigs>).
+
+### Portal updates
+* Improved handling of user with limited permissions to access role management in the portal.
+* Improved display of edge hostnames and secrets.
+* Improved emails notifying users of changes to their accounts.
+* Prevented use of the special nearChina server group from including other server groups in a client zone rule.
+* Fixed a tooltip for regular expression purge.
+* Allowed users to specify load balancer logic via a new input field.
+* Updated the getting started video for new users.
+
+
 ## January 7, 2022
 ### API updates
 * Added createTime and updateTime fields to the response of the [Get a log configuration API](</apidocs#operation/get-cdn-report-logConfigs-id>). 
