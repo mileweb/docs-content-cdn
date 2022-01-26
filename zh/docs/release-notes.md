@@ -21,7 +21,7 @@
 * Improved display of edge hostnames and secrets.
 * Improved emails notifying users of changes to their accounts.
 * Prevented use of the special nearChina server group from including other server groups in a client zone rule.
-* Fixed a tooltip for regular expression purge..
+* Fixed a tooltip for regular expression purge.
 * Allowed users to specify load balancer logic via a new input field.
 * Updated the getting started video for new users.
 
