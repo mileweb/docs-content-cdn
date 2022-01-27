@@ -4,18 +4,18 @@
 
 ## 新增一个角色
 
-管理员通过用户和权限管理页面上的**角色**页面添加角色。作为此过程的一部分，管理员可以将创建好的角色分配给用户，这些角色定义了目标用户可以在 Portal 中执行的活动。
+管理员通过用户和权限管理页面上的 **角色** 页面添加角色。作为此过程的一部分，管理员可以将创建好的角色分配给用户，这些角色定义了目标用户可以在 Portal 中执行的活动。
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
     <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
 
-2. 在页面顶部，单击**角色**。
+2. 在页面顶部，单击 **角色**。
 3. 在页面右侧，单击 **+ Add Role** 按钮。
 
 ![null](</docs/resources/images/identities-and-access/iam-roles.png>)
 
-4. 填写“添加角色”表单中的字段。必填字段将会以星号 (\*) 表示。
+4. 填写“添加角色”页面的信息内容。必填字段将会以星号 (\*) 表示。
 
 ![null](</docs/resources/images/identities-and-access/iam-add-role.png>)
 
