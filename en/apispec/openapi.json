@@ -1838,7 +1838,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                               }
                             },
                             "required": [
@@ -2217,7 +2217,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -2491,7 +2491,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -3974,6 +3974,7 @@
                   "properties": {
                     "properties": {
                       "type": "array",
+                      "description": "List of properties.",
                       "items": {
                         "title": "propertyListEntry",
                         "type": "object",
@@ -4080,8 +4081,9 @@
                       }
                     },
                     "count": {
-                      "type": "number",
-                      "description": "number of properties\n"
+                      "type": "integer",
+                      "description": "Number of properties.\n",
+                      "minimum": 0
                     }
                   },
                   "required": [
@@ -4537,7 +4539,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -4607,6 +4609,7 @@
                   "properties": {
                     "edgeHostnames": {
                       "type": "array",
+                      "description": "List of edge hostnames.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -5158,7 +5161,8 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "Total number of available certificates. The actual number returned depends on the query parameters."
+                      "description": "Total number of available certificates. The actual number returned depends on the query parameters.",
+                      "minimum": 0
                     },
                     "certificates": {
                       "type": "array",
@@ -6375,7 +6379,8 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "Total number of validation tasks"
+                      "description": "Total number of validation tasks",
+                      "minimum": 0
                     },
                     "validations": {
                       "type": "array",
@@ -6947,11 +6952,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "description": "Contains deployment task list.",
+                  "description": "Deployment task list.",
                   "properties": {
                     "deploy": {
                       "type": "array",
-                      "description": "Contains a list of deployment task summaries.",
+                      "description": "List of deployment task summaries.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -7739,6 +7744,7 @@
                   "properties": {
                     "hostnames": {
                       "type": "array",
+                      "description": "List of hostnames.",
                       "items": {
                         "title": "hostnamesummary",
                         "type": "object",
@@ -8115,7 +8121,8 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "Total number of historical hostnames. This may be larger than number actually returned."
+                      "description": "Total number of historical hostnames. This may be larger than number actually returned.",
+                      "minimum": 0
                     },
                     "hostnames": {
                       "type": "array",
@@ -8486,7 +8493,7 @@
             }
           }
         },
-        "description": "Get the edge traffic volume in megabytes for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The network overhead at all layers such as various protocol headers, TCP and TLS handshakes, and TCP retransmission is not included in this API's results. We will add 8% to account for the overhead when generating the \"billing volume\" on your invoice.\n",
+        "description": "Get the edge traffic volume in megabytes during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n",
         "operationId": "getEdgeTrafficVolume",
         "requestBody": {
           "content": {
@@ -8917,7 +8924,7 @@
           }
         },
         "operationId": "getOriginTrafficVolume",
-        "description": "Gets the origin traffic volume in megabytes for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the origin traffic volume in megabytes during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "tags": [
           "Reports"
         ],
@@ -9210,7 +9217,7 @@
             }
           }
         },
-        "description": "Gets the number of requests to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Gets the number of requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9568,7 +9575,7 @@
           }
         },
         "operationId": "getEdgeBandwidth",
-        "description": "Get the bandwidth in Mbps to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results. We will add 4.56% (66 bytes of overhead per 1448 bytes of payload) to generate the \"billing volume\" on your invoice.",
+        "description": "Get the bandwidth in Mbps to CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10144,7 +10151,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to CDN Pro edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets details about HTTP status codes returned by requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period, scheme, and granularity so you can monitor changes during the period. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10501,7 +10508,7 @@
           }
         },
         "operationId": "getOriginRequests",
-        "description": "Get the number of requests to your origin servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "description": "Get the number of requests to your origin servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11124,7 +11131,7 @@
           }
         },
         "operationId": "getOriginStatusCodeDetails",
-        "description": "Gets a summary of HTTP status codes returned in requests to your origin servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "description": "Gets details about HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and granularity so you can monitor changes during the period. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11481,7 +11488,7 @@
           }
         },
         "operationId": "getIntermediateTraffic",
-        "description": "Get the intermediate traffic volume in megabytes for a time period. Intermediate traffic is traffic between CDN Pro servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Get the intermediate traffic volume in megabytes during a time period. Intermediate traffic is traffic between CDN Pro servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n",
         "parameters": [
           {
             "schema": {
@@ -11850,7 +11857,7 @@
             }
           }
         },
-        "description": "Gets the traffic volume in megabytes uploaded to edge servers for a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
+        "description": "Gets the traffic volume in megabytes uploaded to edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "operationId": "getEdgeUploadTrafficVolume",
         "requestBody": {
           "content": {
@@ -12397,6 +12404,11 @@
                             "type": "integer",
                             "minimum": 0,
                             "description": "Number of files with multiple copies cached to the origin's Vary header. Purges of such files are automatically converted to <i>directory</i> purges and count against the directory purge quota."
+                          },
+                          "ownerCustomerId": {
+                            "type": "integer",
+                            "description": "ID of the customer that made the purge request. This field is present only if the Report-Range header is children-only or self+children.",
+                            "minimum": 1
                           }
                         },
                         "required": [
@@ -12582,7 +12594,7 @@
             },
             "in": "header",
             "name": "On-Behalf-Of",
-            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.  Only requests from that customer will be returned. "
           },
           {
             "schema": {
@@ -12617,6 +12629,20 @@
             "in": "query",
             "name": "maxSuccessRate",
             "description": "A decimal value indicating the maximum success rate of purge requests to return. By default, all are returned."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ],
+              "default": "self-only"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include purge requests by the caller only.</td></tr><tr><td>children-only</td><td>Include purge requests by children customers only.</td></tr><tr><td>self+children</td><td>Include purge requests by both the caller and children customers.</td></tr></table>"
           }
         ],
         "tags": [
@@ -13656,7 +13682,7 @@
           }
         },
         "operationId": "queryPurgeSummary",
-        "description": "Returns a summary of purge requests that were made during a period of time. Query parameters let you specify the timeframe and target environment.",
+        "description": "Returns a summary of purge requests that were made during a time period. Query parameters let you specify the timeframe and target environment.",
         "parameters": [
           {
             "schema": {
@@ -13713,18 +13739,93 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "trafficVolumeSummaryResponse",
                   "type": "object",
+                  "description": "The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2019-09-01T12:35:00Z",
+                        "endTime": "2019-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "metaData": {
+                        "startTime": "2020-01-05T12:35:00Z",
+                        "endTime": "2020-01-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning."
+                          "description": "RFC 3339 date indicating the beginning of the period."
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end of the period."
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -13741,27 +13842,21 @@
                           "type": "string",
                           "description": "Indicates the unit of measurement of the returned values."
                         }
-                      },
-                      "required": [
-                        "isComplete"
-                      ]
+                      }
                     },
                     "groups": {
-                      "type": "array",
-                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "group": {
-                            "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
-                          },
-                          "data": {
-                            "type": "array",
-                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
-                            "items": {
-                              "type": "number"
-                            }
+                      "type": "object",
+                      "description": "This object contains the breakdown of traffic by group. ",
+                      "properties": {
+                        "group": {
+                          "type": "string",
+                          "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                        },
+                        "data": {
+                          "type": "array",
+                          "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                          "items": {
+                            "type": "number"
                           }
                         }
                       }
@@ -13955,7 +14050,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "Get a summary of traffic volume during a timespan. You can group results by hostnames or server groups. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.\n",
+        "description": "Get a summary of traffic volume during a timespan. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.\n",
         "parameters": [
           {
             "schema": {
@@ -14005,7 +14100,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -14056,7 +14151,8 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
@@ -14099,7 +14195,381 @@
           "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
         }
       },
-      "parameters": []
+      "parameters": [],
+      "get": {
+        "summary": "Get a summary of traffic volume",
+        "operationId": "get-cdn-report-volSummary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "trafficVolumeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2019-09-01T12:35:00Z",
+                        "endTime": "2019-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "metaData": {
+                        "startTime": "2020-01-05T12:35:00Z",
+                        "endTime": "2020-01-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \"edge response\" represents edge traffic. \"fast route response\" refers to traffic from your origin accelerated through the HDT product. \"fast route request\" refers to traffic to your origin accelerated through the HDT product. The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      }
+                    },
+                    "groups": {
+                      "type": "object",
+                      "description": "This object contains the breakdown of traffic by group. ",
+                      "properties": {
+                        "group": {
+                          "type": "string",
+                          "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                        },
+                        "data": {
+                          "type": "array",
+                          "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Total traffic": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2019-09-01T12:35:00Z",
+                        "endTime": "2019-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Traffic grouped by hostnames": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-01-05T12:35:00Z",
+                        "endTime": "2020-01-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Traffic grouped by server groups": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-01-05T12:35:00Z",
+                        "endTime": "2020-01-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301838.57147,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "standard",
+                          "data": [
+                            1338301838.57147,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Traffic grouped by server groups and customer IDs": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-08-01T12:35:00Z",
+                        "endTime": "2020-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            4400.65621,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "premium,123456",
+                          "data": [
+                            2200.29969,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            2200.35652,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\" and \"serverGroups\"."
+                    }
+                  },
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "description": "Get a summary of traffic volume during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-10-30T00:00:00Z</code>. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ]
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limit the results to the specified scheme."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      }
     },
     "/ngadmin/contacts": {
       "post": {
@@ -14693,7 +15163,7 @@
             },
             "in": "query",
             "name": "ids",
-            "description": "Comma separated list of user IDs to return."
+            "description": "Comma-separated list of user IDs to return."
           }
         ]
       }
@@ -16436,7 +16906,7 @@
           }
         },
         "operationId": "post-cdn-report-edgeHostnameReq",
-        "description": "Get the number of DNS requests to resolve your edge hostnames.",
+        "description": "Get the number of DNS requests to resolve your edge hostnames during a time period.",
         "parameters": [
           {
             "schema": {
@@ -16532,18 +17002,21 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "edgeHostnameSummaryResponse",
                   "type": "object",
+                  "description": "The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
                   "properties": {
                     "metaData": {
                       "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning."
+                          "description": "RFC 3339 date indicating the beginning of the period."
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end of the period."
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -16567,7 +17040,7 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
+                      "description": "This object contains the breakdown of DNS requests by group. Groups are determined by the request body.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -16585,7 +17058,64 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2020-01-28T12:35:00Z",
+                        "endTime": "2020-01-29T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edgeHostname dns request"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            18
+                          ]
+                        },
+                        {
+                          "group": "report1580294661282.qtlcdn.com.",
+                          "data": [
+                            10
+                          ]
+                        },
+                        {
+                          "group": "report1580297455005.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        },
+                        {
+                          "group": "report1580299885881.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282270963.qtlcdn.com.",
+                          "data": [
+                            1
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282275253.qtlcdn.com.",
+                          "data": [
+                            1
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282280011.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 },
                 "examples": {
                   "Summary of total requests": {
@@ -16704,7 +17234,7 @@
           }
         },
         "operationId": "post-cdn-report-edgeHostnameReqSummary",
-        "description": "Obtain a summary of DNS requests for one or more edge hostnames. This API allows you to see the actual number of requests for each edge hostname.",
+        "description": "Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.",
         "parameters": [
           {
             "schema": {
@@ -16723,6 +17253,14 @@
             "name": "enddate",
             "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code>. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ],
         "requestBody": {
@@ -16746,9 +17284,12 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "Specify an array containing \"edgeHostnames\" to get data for each edge hostname.",
+                    "description": "Specify an array containing \"edgeHostnames\" to get data for each edge hostname. Omit to get only a cumulative total.",
                     "items": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "edgeHostnames"
+                      ]
                     }
                   }
                 }
@@ -16777,7 +17318,285 @@
           "description": "You can request a breakdown of requests by edge hostname."
         }
       },
-      "parameters": []
+      "parameters": [],
+      "get": {
+        "summary": "Get edge hostname summary statistics",
+        "operationId": "get-cdn-report-edgeHostnameReqSummary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "edgeHostnameSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned: \"edgeHostname dns request\"",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of DNS requests by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data value. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2020-01-28T12:35:00Z",
+                        "endTime": "2020-01-29T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edgeHostname dns request"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            18
+                          ]
+                        },
+                        {
+                          "group": "report1580294661282.qtlcdn.com.",
+                          "data": [
+                            10
+                          ]
+                        },
+                        {
+                          "group": "report1580297455005.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        },
+                        {
+                          "group": "report1580299885881.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282270963.qtlcdn.com.",
+                          "data": [
+                            1
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282275253.qtlcdn.com.",
+                          "data": [
+                            1
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282280011.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "Summary of total requests": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-01-01T12:35:00Z",
+                        "endTime": "2020-01-29T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edgeHostname dns request"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            3692
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Summary broken down by edge hostname": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2020-01-28T12:35:00Z",
+                        "endTime": "2020-01-29T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edgeHostname dns request"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            18
+                          ]
+                        },
+                        {
+                          "group": "report1580294661282.qtlcdn.com.",
+                          "data": [
+                            10
+                          ]
+                        },
+                        {
+                          "group": "report1580297455005.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        },
+                        {
+                          "group": "report1580299885881.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282270963.qtlcdn.com.",
+                          "data": [
+                            1
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282275253.qtlcdn.com.",
+                          "data": [
+                            1
+                          ]
+                        },
+                        {
+                          "group": "test.t1580282280011.qtlcdn.com.",
+                          "data": [
+                            2
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"abc\". We only support grouping by \"edgeHostnames\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.",
+        "tags": [
+          "Reports"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code>",
+            "name": "startdate",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": true,
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code>. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "edgeHostnames"
+              ]
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "Specify \"edgeHostnames\" to get data for each edge hostname. Omit to get only a cumulative total."
+          }
+        ]
+      }
     },
     "/cdn/edgeHostnames/isps": {
       "get": {
@@ -19349,7 +20168,8 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "Total number of available API calls. This may be larger than the number actually returned."
+                      "description": "Total number of available API calls. This may be larger than the number actually returned.",
+                      "minimum": 0
                     },
                     "apiCalls": {
                       "type": "array",
@@ -20156,9 +20976,10 @@
                     "enum": [
                       "active",
                       "trial",
-                      "suspended"
+                      "suspended",
+                      "terminated"
                     ],
-                    "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. "
+                    "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access but may return to use the service. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. A <i>terminated</i> customer no longer has access."
                   },
                   "contractId": {
                     "type": "string",
@@ -20408,7 +21229,8 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "Total number of service quota entries available. The number returned in serviceQuotaList may be fewer as it is limited to 200 entries."
+                      "description": "Total number of service quota entries available. The number returned in serviceQuotaList may be fewer as it is limited to 200 entries.",
+                      "minimum": 0
                     },
                     "serviceQuotaList": {
                       "type": "array",
@@ -20546,7 +21368,8 @@
               "enum": [
                 "active",
                 "suspended",
-                "trial"
+                "trial",
+                "terminated"
               ]
             },
             "in": "query",
@@ -20740,11 +21563,12 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access but may return to use the service. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. A <i>terminated</i> customer no longer has access.",
                       "enum": [
                         "active",
                         "suspended",
-                        "trial"
+                        "trial",
+                        "terminated"
                       ]
                     },
                     "allowProduction": {
@@ -20884,6 +21708,10 @@
                     "accountManagerEmail": {
                       "type": "string",
                       "description": "An email address representing the account manager."
+                    },
+                    "terminationDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
                     }
                   },
                   "required": [
@@ -21147,11 +21975,12 @@
                   },
                   "status": {
                     "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN Pro product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access but may return to use the service. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. A <i>terminated</i> customer no longer has access.",
                     "enum": [
                       "active",
                       "suspended",
-                      "trial"
+                      "trial",
+                      "terminated"
                     ]
                   },
                   "allowProduction": {
@@ -22045,11 +22874,12 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access but may return to use the service. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. A <i>terminated</i> customer no longer has access.",
                       "enum": [
                         "active",
                         "suspended",
-                        "trial"
+                        "trial",
+                        "terminated"
                       ]
                     },
                     "allowProduction": {
@@ -22189,6 +23019,10 @@
                     "accountManagerEmail": {
                       "type": "string",
                       "description": "An email address representing the account manager."
+                    },
+                    "terminationDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
                     }
                   },
                   "required": [
@@ -22368,11 +23202,12 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "Indicates the status of access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                      "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access but may return to use the service. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. A <i>terminated</i> customer no longer has access.",
                       "enum": [
                         "active",
                         "suspended",
-                        "trial"
+                        "trial",
+                        "terminated"
                       ]
                     },
                     "allowProduction": {
@@ -22512,6 +23347,10 @@
                     "accountManagerEmail": {
                       "type": "string",
                       "description": "An email address representing the account manager."
+                    },
+                    "terminationDate": {
+                      "type": "string",
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
                     }
                   },
                   "required": [
@@ -22687,11 +23526,12 @@
                   },
                   "status": {
                     "type": "string",
-                    "description": "Indicates the status of a customer's access to the CDN Pro product. An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status.",
+                    "description": "Indicates the status of the customer's access to the CDN Pro product.  An <i>active</i> customer has full access. A <i>suspended</i> customer no longer has access but may return to use the service. A <i>trial</i> customer is one with trial settings which may be more limited than those of a customer with the <i>active</i> status. A <i>terminated</i> customer no longer has access.",
                     "enum": [
                       "active",
                       "suspended",
-                      "trial"
+                      "trial",
+                      "terminated"
                     ]
                   },
                   "allowProduction": {
@@ -23533,6 +24373,7 @@
                     },
                     "prefetchRequests": {
                       "type": "array",
+                      "description": "List of prefetch requests.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -23586,6 +24427,11 @@
                           "apiAccountId": {
                             "type": "string",
                             "description": "ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>."
+                          },
+                          "ownerCustomerId": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "ID of the customer that made the prefetch request. This field is present only if the Report-Range header is children-only or self+children."
                           }
                         },
                         "required": [
@@ -23766,7 +24612,21 @@
             },
             "in": "header",
             "name": "On-Behalf-Of",
-            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.\n"
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer. Only requests from that customer will be returned. "
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include prefetch requests by the caller only.</td></tr><tr><td>children-only</td><td>Include prefetch requests by children customers only.</td></tr><tr><td>self+children</td><td>Include prefetch requests by both the caller and children customers.</td></tr></table>"
           }
         ]
       }
@@ -24751,18 +25611,44 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "requestSummaryResponse",
                   "type": "object",
+                  "description": "The response contains a summary of requests by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2021-04-01T12:35:00Z",
+                        "endTime": "2021-04-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            865,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning."
+                          "description": "RFC 3339 date indicating the beginning of the period."
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end of the period."
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -24786,7 +25672,7 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
+                      "description": "This object contains the breakdown of requests by group.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -24795,11 +25681,8 @@
                             "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
-                            "type": "array",
-                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
-                            "items": {
-                              "type": "number"
-                            }
+                            "type": "number",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field."
                           }
                         }
                       }
@@ -24835,7 +25718,7 @@
             }
           },
           "400": {
-            "description": "Invalid request. Refer to the response body for details",
+            "description": "Invalid request. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -24853,7 +25736,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                      "message": "Invalid group name(s): \"serverGroups1\". We  support grouping by \"hostnames\",\"serverGroups\",\" nconlyustomerIds\"."
                     }
                   }
                 }
@@ -24862,7 +25745,7 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
-        "description": "Get a summary of requests during a timespan. You can group results by hostnames or server groups. If you are a reseller, you can also group by customerIds to distinguish your child customers' requests.",
+        "description": "Get a summary of requests during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' requests.",
         "parameters": [
           {
             "schema": {
@@ -24914,7 +25797,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -24965,7 +25848,8 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
@@ -25008,6 +25892,177 @@
           },
           "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
         }
+      },
+      "get": {
+        "summary": "Get a summary of requests",
+        "operationId": "get-cdn-report-reqSummary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of requests by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "requestSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of requests by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2021-04-01T12:35:00Z",
+                        "endTime": "2021-04-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            865,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \"edge response\" represents edge traffic. \"fast route response\" refers to traffic from your origin accelerated through the HDT product. The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of requests by group.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"serverGroups1\". We  support grouping by \"hostnames\",\"serverGroups\",\" nconlyustomerIds\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a summary of requests during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' requests.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "description": "Limit the results to the specified scheme. By default, data from HTTPS and HTTP requests is returned.",
+            "name": "scheme"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+          }
+        ],
+        "tags": [
+          "Reports"
+        ]
       }
     },
     "/cdn/webhooks": {
@@ -25033,6 +26088,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
+                        "description": "List of webhooks.",
                         "properties": {
                           "customerId": {
                             "type": "integer",
@@ -25794,6 +26850,7 @@
                       "description": "A list of secrets.",
                       "items": {
                         "type": "object",
+                        "description": "List of secrets.",
                         "properties": {
                           "id": {
                             "type": "string",
@@ -26562,6 +27619,7 @@
                   "properties": {
                     "logConfigs": {
                       "type": "array",
+                      "description": "List of log configurations.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -26598,7 +27656,8 @@
                     },
                     "count": {
                       "type": "integer",
-                      "description": "Number of log configurations."
+                      "description": "Number of log configurations.",
+                      "minimum": 0
                     }
                   },
                   "required": [
@@ -26816,7 +27875,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used.</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry.</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200.</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -26914,7 +27973,7 @@
                         },
                         "logDownloadFormat": {
                           "type": "string",
-                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used.</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry.</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200.</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
+                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
                         },
                         "logDownloadStorageDays": {
                           "type": "integer",
@@ -27135,7 +28194,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used.</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry.</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200.</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -27198,7 +28257,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used.</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry.</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200.</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -27321,7 +28380,7 @@
     },
     "/cdn/report/logDownload": {
       "post": {
-        "summary": "Get access logs for hostnames",
+        "summary": "Get access logs for a hostname",
         "tags": [
           "Reports"
         ],
@@ -27458,7 +28517,7 @@
             "required": true
           }
         ],
-        "description": "Get access logs representing requests to one or more hostnames in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nIn order to obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a>. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\"logs\":[{\"dateFrom\":\"2021-10-31T00:00:00Z\",\"dateTo\":\"2021-10-31T00:29:59Z\",\"fileSize\":105878,\"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\"}]}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nIn order to obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a>. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\"logs\":[{\"dateFrom\":\"2021-10-31T00:00:00Z\",\"dateTo\":\"2021-10-31T00:29:59Z\",\"fileSize\":105878,\"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\"}]}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -27470,17 +28529,14 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "Specify the hostnames you are interested in.",
-                        "minItems": 1,
-                        "maxItems": 20,
+                        "description": "Specify the hostname you are interested in.",
+                        "maxItems": 1,
+                        "minItems": 0,
                         "items": {
                           "type": "string"
                         }
                       }
-                    },
-                    "required": [
-                      "hostnames"
-                    ]
+                    }
                   }
                 }
               },
@@ -27497,8 +28553,157 @@
               }
             }
           },
-          "description": "Indicates the hostnames whose logs you want."
+          "description": "Indicates the hostname whose logs you want."
         }
+      },
+      "get": {
+        "summary": "Get access logs for a hostname",
+        "operationId": "get-cdn-report-logDownload",
+        "responses": {
+          "200": {
+            "description": "The response contains an array of log file URLs. Each log file is compressed using gzip.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "logs": {
+                      "type": "array",
+                      "description": "List of objects describing logs you can download.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "dateFrom": {
+                            "type": "string",
+                            "description": "An RFC 3339 date indicate the beginning of the log file."
+                          },
+                          "dateTo": {
+                            "type": "string",
+                            "description": "An RFC 3339 date indicating the end of the log file."
+                          },
+                          "fileSize": {
+                            "type": "integer",
+                            "description": "Size of log file in megabytes.",
+                            "minimum": 0
+                          },
+                          "logUrl": {
+                            "type": "string",
+                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format."
+                          }
+                        },
+                        "required": [
+                          "dateFrom",
+                          "dateTo",
+                          "fileSize",
+                          "logUrl"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "logs": [
+                        {
+                          "dateFrom": "2021-10-12T12:00:00Z",
+                          "dateTo": "2021-10-12T12:29:59Z",
+                          "fileSize": 304,
+                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211012-000000-235959/myreports.domain.info/20211012-120000-122959_52b8e3ed_myreports.domain.info.log.gz?wskey=8f8aaac672514b73465761c8d856ba435afd02ddc8dc241c38fedea3b2e416fa"
+                        },
+                        {
+                          "dateFrom": "2021-10-18T08:30:00Z",
+                          "dateTo": "2021-10-18T08:59:59Z",
+                          "fileSize": 300,
+                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211018-000000-235959/myreports.domain.info/20211018-083000-085959_aecac869_myreports.domain.info.log.gz?wskey=e527ff274cc684824935ab6dfed2b2a05afd02ddc8dc241c38fedea3b2e416fc"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid time span": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The max time span must be no more than 30 days."
+                    }
+                  },
+                  "Invalid hostnames": {
+                    "value": {
+                      "code": "InvalidHostnames",
+                      "message": "Please specify the hostname(s)."
+                    }
+                  },
+                  "Invalid date": {
+                    "value": {
+                      "code": "InvalidDate",
+                      "message": "Parameter 'startdate' is required."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nIn order to obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a>. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\"logs\":[{\"dateFrom\":\"2021-10-31T00:00:00Z\",\"dateTo\":\"2021-10-31T00:29:59Z\",\"fileSize\":105878,\"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\"}]}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. It should be within the past 14 days. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2021-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-11-14T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "hostname",
+            "required": true,
+            "description": "Hostname whose logs you want. "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "tags": [
+          "Reports"
+        ]
       }
     },
     "/cdn/report/bandwidthSummary": {
@@ -27513,14 +28718,61 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "bandwidthSummaryResponse",
                   "type": "object",
+                  "description": "This describes the response to the bandwidth summary report APIs.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge bandwidth"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
+                          ]
+                        }
+                      ]
+                    }
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning."
+                          "description": "RFC 3339 date indicating the beginning of the period."
                         },
                         "endTime": {
                           "type": "string",
@@ -27652,7 +28904,7 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthSummary",
-        "description": "Get a summary of traffic bandwidth during a timespan. You can group results by hostnames or server groups. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.",
+        "description": "Get a summary of traffic bandwidth during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.",
         "parameters": [
           {
             "schema": {
@@ -27668,7 +28920,8 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> "
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
           },
           {
             "schema": {
@@ -27676,7 +28929,8 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
           },
           {
             "schema": {
@@ -27702,7 +28956,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to summary report API calls to filter the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
+                "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -27753,7 +29007,8 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can choose to group results by \"hostnames\", \"serverGroups\", and \"customerIds\".",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
@@ -27778,6 +29033,667 @@
           },
           "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
         }
+      },
+      "get": {
+        "summary": "Get a summary of traffic bandwidth",
+        "operationId": "get-cdn-report-bandwidthSummary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of traffic bandwidth by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "bandwidthSummaryResponse",
+                  "type": "object",
+                  "description": "This describes the response to the bandwidth summary report APIs.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge bandwidth"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                    }
+                  },
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "description": "Get a summary of traffic bandwidth during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "required": true,
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> "
+          },
+          {
+            "name": "enddate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "required": true,
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limit the results to the specified scheme. By default, all traffic is returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+          }
+        ]
+      }
+    },
+    "/cdn/reports/edgeStatusSummary": {
+      "post": {
+        "summary": "Get a summary of status codes returned by edge servers",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of status codes returned by the CDN Pro edge servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "originStatusCodeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2022-01-01T00:00:00Z",
+                        "endTime": "2022-02-01T01:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "200",
+                          "404"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "A list of HTTP status codes represented as strings. The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of requests by group.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2022-01-01T00:00:00Z",
+                        "endTime": "2022-02-01T01:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "200",
+                          "404"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-reports-edgeStatusSummary",
+        "description": "Gets a summary of HTTP status codes returned by requests to the CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2021-09-05T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code> Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limit the results to the specified scheme. By default, data from HTTPS and HTTP requests is returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "maxItems": 2,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "hostnames",
+                        "serverGroups",
+                        "customerIds"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    },
+                    "groupBy": [
+                      "serverGroups",
+                      "customerIds"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include options to customize the results."
+        }
+      },
+      "get": {
+        "summary": "Get a summary of status codes returned by edge servers",
+        "operationId": "get-cdn-reports-edgeStatusSummary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of status codes returned by the CDN Pro edge servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "originStatusCodeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2022-01-01T00:00:00Z",
+                        "endTime": "2022-02-01T01:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "200",
+                          "404"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "A list of HTTP status codes represented as strings. The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of requests by group.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Gets a summary of HTTP status codes returned by requests to the CDN Pro edge servers during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. This report's data has a latency of up to thirty minutes.",
+        "tags": [
+          "Reports"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "required": true,
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2021-09-05T00:00:00Z</code> "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code>  Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ]
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limit the results to the specified scheme. By default, data from HTTPS and HTTP requests is returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+          }
+        ]
       }
     },
     "/cdn/publicIpList": {
@@ -27868,6 +29784,462 @@
         },
         "operationId": "get-cdn-publicIpList",
         "description": "Get a list of IP addresses used by CDN Pro. If your property configuration's directConnection setting is 'noDirect' and your origin servers are protected by IP access restrictions, update your allow lists with these IP addresses. IP addresses can periodically change. We recommend that you check once a day and update your allow lists."
+      }
+    },
+    "/cdn/reports/originStatusSummary": {
+      "post": {
+        "summary": "Get a summary of status codes returned by origin servers",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "originStatusCodeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2022-01-01T00:00:00Z",
+                        "endTime": "2022-02-01T01:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "200",
+                          "404"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "A list of HTTP status codes represented as strings. The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of requests by group.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2022-01-01T00:00:00Z",
+                        "endTime": "2022-02-01T01:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "200",
+                          "404"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-reports-originStatusSummary",
+        "description": "Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2021-09-05T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code> Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limit the results to the specified scheme. By default, data from HTTPS and HTTP requests is returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "maxItems": 2,
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "hostnames",
+                        "serverGroups",
+                        "customerIds"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "filters": {
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    },
+                    "groupBy": [
+                      "serverGroups",
+                      "customerIds"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include options to filter and group the results."
+        }
+      },
+      "get": {
+        "summary": "Get a summary of status codes returned by origin servers",
+        "operationId": "get-cdn-reports-originStatusSummary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "originStatusCodeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2022-01-01T00:00:00Z",
+                        "endTime": "2022-02-01T01:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "200",
+                          "404"
+                        ],
+                        "dataUnit": "counts"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        },
+                        {
+                          "group": "standard,123456",
+                          "data": [
+                            87,
+                            141
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "A list of HTTP status codes represented as strings. The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of requests by group.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid group by": {
+                    "value": {
+                      "code": "InvalidGroupBy",
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. This report's data has a latency of up to thirty minutes.",
+        "tags": [
+          "Reports"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2021-09-05T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code> Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ]
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "Limit the results to the specified scheme. By default, data from HTTPS and HTTP requests is returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+          }
+        ]
       }
     }
   },
