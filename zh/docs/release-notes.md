@@ -14,7 +14,7 @@
 * Improved error message for invalid maxSuccessRate filter passed to the [purge list](</apidocs#operation/getPurgeRequestList>) API.
 * Fixed response of [edge hostname request summary](</apidocs#operation/get-cdn-report-edgeHostnameReqSummary>) API.
 * Supported access_log_sampling directive in loadBalancerLogic.
-* Added support for several variables (%cltregion, %cltisp, %cltport, and %reqrange) to the [log configuration format](<apidocs#operation/post-cdn-report-logConfigs>).
+* Added support for several variables (%cltregion, %cltisp, %cltport, and %reqrange) to the [log configuration format](</apidocs#operation/post-cdn-report-logConfigs>).
 
 ### Portal updates
 * Improved handling of user with limited permissions to access role management in the portal.
