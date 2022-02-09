@@ -1,5 +1,29 @@
 # Release Notes
 
+## February 4, 2022
+### API updates
+* Improved customer creation error handling when attempting to recreate a customer.
+* Added support for peerFailureTimeout field in property’s origin settings to control retries when an origin server is inaccessible.
+* Improved [webhook creation](</apidocs#operation/post-cdn-webhooks>) error handling when invalid credentials are specified.
+* Added support for Report-Range header in the [log configuration list API](</apidocs#operation/get-cdn-report-logConfigs>).
+* Added edge request, intermediate response, intermediate request, origin response, origin request to the [traffic volume summary report](</apidocs#operation/get-cdn-report-volSummary>).
+* Fixed error that occurred if a regular expression purge passed a URL ending with  “\?”
+* Improved efficiency of checking for recent traffic to hostnames  when deploying or undeploying properties.
+* Ensured that variedFields field is returned in the response of the [purge list API](</apidocs#operation/getPurgeRequestList>).
+* Fixed response to API called after service has been suspended.
+* Sorted the dataNames in [edge status summary](</apidocs#operation/get-cdn-reports-edgeStatusSummary>) and [origin status summary](</apidocs#operation/get-cdn-reports-originStatusSummary>) APIs.
+* Ensured that groupBy in the summary report APIs supports up to two items.
+
+
+### Portal updates
+* Ensured that edge hostname list is refreshed after filtering using “Has Beian”.
+* Made improvements to realtime log UI in the property configuration page.
+* Added length restriction to purge name.
+* Added support for automatic check of ICP Beian for new properties.
+* Improved Russian language text.
+*Fixed display of title in Update Secret page.
+
+
 ## January 21, 2022
 ### API updates
 * Support hostname filter in query string of the [log download API](</apidocs#operation/get-cdn-report-logDownload>).
