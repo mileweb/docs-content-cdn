@@ -21,7 +21,7 @@
 * Added length restriction to purge name.
 * Added support for automatic check of ICP Beian for new properties.
 * Improved Russian language text.
-*Fixed display of title in Update Secret page.
+* Fixed display of title in Update Secret page.
 
 
 ## January 21, 2022
