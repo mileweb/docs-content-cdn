@@ -272,6 +272,32 @@
                                 "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
                                 "minimum": 5,
                                 "maximum": 600
+                              },
+                              "peerFailureTimeout": {
+                                "type": [
+                                  "string",
+                                  "object"
+                                ],
+                                "enum": [
+                                  "off"
+                                ],
+                                "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                                "properties": {
+                                  "failureThreshold": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 999,
+                                    "default": 6,
+                                    "description": "Number of attempts to connect to a peer before it is considered unavailable."
+                                  },
+                                  "timeout": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 1200,
+                                    "default": 1,
+                                    "description": "Timeout in seconds."
+                                  }
+                                }
                               }
                             }
                           }
@@ -295,9 +321,9 @@
                           "type": "string",
                           "default": 1.3,
                           "enum": [
-                            "1.1",
-                            "1.2",
-                            "1.3"
+                            1.1,
+                            1.2,
+                            1.3
                           ],
                           "description": "Maximum supported TLS version."
                         },
@@ -315,10 +341,10 @@
                           "default": 1,
                           "description": "Minimum required TLS version.",
                           "enum": [
-                            "1.1",
-                            "1.2",
-                            "1.3",
-                            "1"
+                            1.1,
+                            1.2,
+                            1.3,
+                            1
                           ]
                         },
                         "tlsCiphers": {
@@ -932,6 +958,32 @@
                           "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
                           "minimum": 5,
                           "maximum": 600
+                        },
+                        "peerFailureTimeout": {
+                          "type": [
+                            "string",
+                            "object"
+                          ],
+                          "enum": [
+                            "off"
+                          ],
+                          "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                          "properties": {
+                            "failureThreshold": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 999,
+                              "default": 6,
+                              "description": "Number of attempts to connect to a peer before it is considered unavailable."
+                            },
+                            "timeout": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 1200,
+                              "default": 1,
+                              "description": "Timeout in seconds."
+                            }
+                          }
                         }
                       }
                     }
@@ -955,9 +1007,9 @@
                     "type": "string",
                     "default": 1.3,
                     "enum": [
-                      "1.1",
-                      "1.2",
-                      "1.3"
+                      1.1,
+                      1.2,
+                      1.3
                     ],
                     "description": "Maximum supported TLS version."
                   },
@@ -975,10 +1027,10 @@
                     "default": 1,
                     "description": "Minimum required TLS version.",
                     "enum": [
-                      "1.1",
-                      "1.2",
-                      "1.3",
-                      "1"
+                      1.1,
+                      1.2,
+                      1.3,
+                      1
                     ]
                   },
                   "tlsCiphers": {
@@ -3036,6 +3088,32 @@
                           "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
                           "minimum": 5,
                           "maximum": 600
+                        },
+                        "peerFailureTimeout": {
+                          "type": [
+                            "string",
+                            "object"
+                          ],
+                          "enum": [
+                            "off"
+                          ],
+                          "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                          "properties": {
+                            "failureThreshold": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 999,
+                              "default": 6,
+                              "description": "Number of attempts to connect to a peer before it is considered unavailable."
+                            },
+                            "timeout": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 1200,
+                              "default": 1,
+                              "description": "Timeout in seconds."
+                            }
+                          }
                         }
                       }
                     }
@@ -3059,9 +3137,9 @@
                     "type": "string",
                     "default": 1.3,
                     "enum": [
-                      "1.1",
-                      "1.2",
-                      "1.3"
+                      1.1,
+                      1.2,
+                      1.3
                     ],
                     "description": "Maximum supported TLS version."
                   },
@@ -3079,10 +3157,10 @@
                     "default": 1,
                     "description": "Minimum required TLS version.",
                     "enum": [
-                      "1.1",
-                      "1.2",
-                      "1.3",
-                      "1"
+                      1.1,
+                      1.2,
+                      1.3,
+                      1
                     ]
                   },
                   "tlsCiphers": {
@@ -3638,6 +3716,32 @@
                               "description": "Timeout in seconds during which an idle keepalive connection to an upstream server will stay open. A service quota setting of <i>maxUpstreamKeepaliveTimeOut</i> can change the maximum permitted value.",
                               "minimum": 5,
                               "maximum": 600
+                            },
+                            "peerFailureTimeout": {
+                              "type": [
+                                "string",
+                                "object"
+                              ],
+                              "enum": [
+                                "off"
+                              ],
+                              "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                              "properties": {
+                                "failureThreshold": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 999,
+                                  "default": 6,
+                                  "description": "Number of attempts to connect to a peer before it is considered unavailable."
+                                },
+                                "timeout": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 1200,
+                                  "default": 1,
+                                  "description": "Timeout in seconds."
+                                }
+                              }
                             }
                           }
                         }
@@ -3661,9 +3765,9 @@
                         "type": "string",
                         "default": 1.3,
                         "enum": [
-                          "1.1",
-                          "1.2",
-                          "1.3"
+                          1.1,
+                          1.2,
+                          1.3
                         ],
                         "description": "Maximum supported TLS version."
                       },
@@ -3681,10 +3785,10 @@
                         "default": 1,
                         "description": "Minimum required TLS version.",
                         "enum": [
-                          "1.1",
-                          "1.2",
-                          "1.3",
-                          "1"
+                          1.1,
+                          1.2,
+                          1.3,
+                          1
                         ]
                       },
                       "tlsCiphers": {
@@ -12434,6 +12538,7 @@
                           "apiRequestId": "a104b7ad6ab2e91f",
                           "fileEntries": 1,
                           "dirEntries": 0,
+                          "variedFiles": 0,
                           "successRate": 100,
                           "hostnames": [
                             "mydomain.com"
@@ -12449,6 +12554,7 @@
                           "apiRequestId": "049ee33603dc1aab",
                           "fileEntries": 1,
                           "dirEntries": 0,
+                          "variedFiles": 0,
                           "successRate": 100,
                           "hostnames": [
                             "dana2.com"
@@ -12464,6 +12570,7 @@
                           "apiRequestId": "646163723701dbfc",
                           "fileEntries": 1,
                           "dirEntries": 0,
+                          "variedFiles": 0,
                           "successRate": 100,
                           "hostnames": [
                             "mydomain.com"
@@ -13494,6 +13601,13 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "variedFiles": {
+                      "type": "array",
+                      "description": "Files with multiple copies cached due to the origin's Vary header. ",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -13833,7 +13947,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \"edge response\" represents edge traffic. \"fast route response\" refers to traffic from your origin accelerated through the HDT product. \"fast route request\" refers to traffic to your origin accelerated through the HDT product. The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge response</td><td>edge traffic to visitors</td></tr>\n<tr><td>edge request</td><td>traffic from visitors to edge servers</td></tr>\n<tr><td>intermediate response</td><td>traffic from intermediate CDN Pro servers to other CDN Pro servers</td></tr>\n<tr><td>intermediate request</td><td>traffic of requests to intermediate CDN Pro servers</td></tr>\n<tr><td>origin response</td><td>traffic from origin servers</td></tr>\n<tr><td>origin request</td><td>traffic to origin servers</td></tr>\n<tr><td>fast route response</td><td>traffic from your origin accelerated through the HDT product</td></tr>\n<tr><td>fast route request</td><td>traffic to your origin accelerated through the HDT product</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
                           "items": {
                             "type": "string"
                           }
@@ -13867,11 +13981,16 @@
                   "Total traffic": {
                     "value": {
                       "metaData": {
-                        "startTime": "2019-09-01T12:35:00Z",
-                        "endTime": "2019-09-12T12:40:00Z",
+                        "startTime": "2022-01-29T12:35:00Z",
+                        "endTime": "2022-02-02T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -13882,6 +14001,11 @@
                           "group": "__all__",
                           "data": [
                             214.57945,
+                            12,
+                            50.9876,
+                            4,
+                            13.56,
+                            5,
                             0,
                             0
                           ]
@@ -13892,11 +14016,16 @@
                   "Traffic grouped by hostnames": {
                     "value": {
                       "metaData": {
-                        "startTime": "2020-01-05T12:35:00Z",
-                        "endTime": "2020-01-12T12:40:00Z",
+                        "startTime": "2022-01-05T12:35:00Z",
+                        "endTime": "2022-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -13907,6 +14036,11 @@
                           "group": "__all__",
                           "data": [
                             1338301885.66941,
+                            500000,
+                            900000,
+                            1000,
+                            123456,
+                            1234,
                             0,
                             0
                           ]
@@ -13915,6 +14049,11 @@
                           "group": "domain1.com",
                           "data": [
                             798516559.66809,
+                            300000,
+                            600000,
+                            200,
+                            100000,
+                            40,
                             0,
                             0
                           ]
@@ -13923,6 +14062,11 @@
                           "group": "domain2.com",
                           "data": [
                             2.72993,
+                            1,
+                            2,
+                            1,
+                            2,
+                            1,
                             0,
                             0
                           ]
@@ -13931,6 +14075,11 @@
                           "group": "domain3.com",
                           "data": [
                             539785323.27139,
+                            199999,
+                            299998,
+                            799,
+                            23454,
+                            1193,
                             0,
                             0
                           ]
@@ -13941,11 +14090,16 @@
                   "Traffic grouped by server groups": {
                     "value": {
                       "metaData": {
-                        "startTime": "2020-01-05T12:35:00Z",
-                        "endTime": "2020-01-12T12:40:00Z",
+                        "startTime": "2022-01-05T12:35:00Z",
+                        "endTime": "2022-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -13956,6 +14110,11 @@
                           "group": "__all__",
                           "data": [
                             1338301838.57147,
+                            456778,
+                            23456701,
+                            32662,
+                            987650,
+                            35566,
                             0,
                             0
                           ]
@@ -13964,6 +14123,11 @@
                           "group": "standard",
                           "data": [
                             1338301838.57147,
+                            456778,
+                            23456701,
+                            32662,
+                            987650,
+                            35566,
                             0,
                             0
                           ]
@@ -13974,11 +14138,16 @@
                   "Traffic grouped by server groups and customer IDs": {
                     "value": {
                       "metaData": {
-                        "startTime": "2020-08-01T12:35:00Z",
-                        "endTime": "2020-09-12T12:40:00Z",
+                        "startTime": "2022-01-01T12:35:00Z",
+                        "endTime": "2022-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -13989,6 +14158,11 @@
                           "group": "__all__",
                           "data": [
                             4400.65621,
+                            123,
+                            100,
+                            50,
+                            79,
+                            12,
                             0,
                             0
                           ]
@@ -13997,6 +14171,11 @@
                           "group": "premium,123456",
                           "data": [
                             2200.29969,
+                            23,
+                            25,
+                            10,
+                            20,
+                            5,
                             0,
                             0
                           ]
@@ -14005,6 +14184,11 @@
                           "group": "standard,123456",
                           "data": [
                             2200.35652,
+                            100,
+                            75,
+                            40,
+                            59,
+                            7,
                             0,
                             0
                           ]
@@ -14050,7 +14234,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "Get a summary of traffic volume during a timespan. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.\n",
+        "description": "Get a summary of edge, intermediate (between CDN Pro servers), and origin traffic volume during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.\n",
         "parameters": [
           {
             "schema": {
@@ -14299,7 +14483,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \"edge response\" represents edge traffic. \"fast route response\" refers to traffic from your origin accelerated through the HDT product. \"fast route request\" refers to traffic to your origin accelerated through the HDT product. The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge response</td><td>edge traffic to visitors</td></tr>\n<tr><td>edge request</td><td>traffic from visitors to edge servers</td></tr>\n<tr><td>intermediate response</td><td>traffic from intermediate CDN Pro servers to other CDN Pro servers</td></tr>\n<tr><td>intermediate request</td><td>traffic of requests to intermediate CDN Pro servers</td></tr>\n<tr><td>origin response</td><td>traffic from origin servers</td></tr>\n<tr><td>origin request</td><td>traffic to origin servers</td></tr>\n<tr><td>fast route response</td><td>traffic from your origin accelerated through the HDT product</td></tr>\n<tr><td>fast route request</td><td>traffic to your origin accelerated through the HDT product</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
                           "items": {
                             "type": "string"
                           }
@@ -14333,11 +14517,16 @@
                   "Total traffic": {
                     "value": {
                       "metaData": {
-                        "startTime": "2019-09-01T12:35:00Z",
-                        "endTime": "2019-09-12T12:40:00Z",
+                        "startTime": "2022-01-29T12:35:00Z",
+                        "endTime": "2022-02-02T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -14348,6 +14537,11 @@
                           "group": "__all__",
                           "data": [
                             214.57945,
+                            12,
+                            50.9876,
+                            4,
+                            13.56,
+                            5,
                             0,
                             0
                           ]
@@ -14358,11 +14552,16 @@
                   "Traffic grouped by hostnames": {
                     "value": {
                       "metaData": {
-                        "startTime": "2020-01-05T12:35:00Z",
-                        "endTime": "2020-01-12T12:40:00Z",
+                        "startTime": "2022-01-05T12:35:00Z",
+                        "endTime": "2022-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -14373,6 +14572,11 @@
                           "group": "__all__",
                           "data": [
                             1338301885.66941,
+                            500000,
+                            900000,
+                            1000,
+                            123456,
+                            1234,
                             0,
                             0
                           ]
@@ -14381,6 +14585,11 @@
                           "group": "domain1.com",
                           "data": [
                             798516559.66809,
+                            300000,
+                            600000,
+                            200,
+                            100000,
+                            40,
                             0,
                             0
                           ]
@@ -14389,6 +14598,11 @@
                           "group": "domain2.com",
                           "data": [
                             2.72993,
+                            1,
+                            2,
+                            1,
+                            2,
+                            1,
                             0,
                             0
                           ]
@@ -14397,6 +14611,11 @@
                           "group": "domain3.com",
                           "data": [
                             539785323.27139,
+                            199999,
+                            299998,
+                            799,
+                            23454,
+                            1193,
                             0,
                             0
                           ]
@@ -14407,11 +14626,16 @@
                   "Traffic grouped by server groups": {
                     "value": {
                       "metaData": {
-                        "startTime": "2020-01-05T12:35:00Z",
-                        "endTime": "2020-01-12T12:40:00Z",
+                        "startTime": "2022-01-05T12:35:00Z",
+                        "endTime": "2022-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -14422,6 +14646,11 @@
                           "group": "__all__",
                           "data": [
                             1338301838.57147,
+                            456778,
+                            23456701,
+                            32662,
+                            987650,
+                            35566,
                             0,
                             0
                           ]
@@ -14430,6 +14659,11 @@
                           "group": "standard",
                           "data": [
                             1338301838.57147,
+                            456778,
+                            23456701,
+                            32662,
+                            987650,
+                            35566,
                             0,
                             0
                           ]
@@ -14440,11 +14674,16 @@
                   "Traffic grouped by server groups and customer IDs": {
                     "value": {
                       "metaData": {
-                        "startTime": "2020-08-01T12:35:00Z",
-                        "endTime": "2020-09-12T12:40:00Z",
+                        "startTime": "2022-01-01T12:35:00Z",
+                        "endTime": "2022-01-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
                           "edge response",
+                          "edge request",
+                          "intermediate response",
+                          "intermediate request",
+                          "origin response",
+                          "origin request",
                           "fast route response",
                           "fast route request"
                         ],
@@ -14455,6 +14694,11 @@
                           "group": "__all__",
                           "data": [
                             4400.65621,
+                            123,
+                            100,
+                            50,
+                            79,
+                            12,
                             0,
                             0
                           ]
@@ -14463,6 +14707,11 @@
                           "group": "premium,123456",
                           "data": [
                             2200.29969,
+                            23,
+                            25,
+                            10,
+                            20,
+                            5,
                             0,
                             0
                           ]
@@ -14471,6 +14720,11 @@
                           "group": "standard,123456",
                           "data": [
                             2200.35652,
+                            100,
+                            75,
+                            40,
+                            59,
+                            7,
                             0,
                             0
                           ]
@@ -14518,7 +14772,7 @@
         "tags": [
           "Reports"
         ],
-        "description": "Get a summary of traffic volume during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic.",
+        "description": "Get a summary of edge, intermediate (between CDN Pro servers), and origin traffic volume during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' traffic and requests.",
         "parameters": [
           {
             "schema": {
@@ -26291,6 +26545,12 @@
                       "code": "InvalidURL",
                       "message": "The entered value for URL is invalid or longer than 250 characters."
                     }
+                  },
+                  "Invalid credential": {
+                    "value": {
+                      "code": "InvalidCredential",
+                      "message": "The username or secretKey contains non-printable characters."
+                    }
                   }
                 }
               }
@@ -27645,6 +27905,11 @@
                           "creationTime": {
                             "type": "string",
                             "description": "RFC 3339 date indicating when the log configuration was created."
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "description": "ID of a child customer if a reseller calls the API with Report-Range header value of <i>self+children</i> or <i>children-only</i>."
                           }
                         },
                         "required": [
@@ -27766,6 +28031,14 @@
             "in": "query",
             "name": "limit",
             "description": "Maximum number of log configurations to return."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include log configurations from the caller.</td></tr><tr><td>children-only</td><td>Only log configurations owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include log configurations of both the caller and children customers.</td></tr></table>"
           }
         ]
       },
