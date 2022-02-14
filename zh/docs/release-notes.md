@@ -32,7 +32,7 @@
 * Allowed the billUsingStripe serviceQuota field to be set to null.
 * Allowed groupBy to be used in the query string of summary reports. This is useful when calling the report APIs using the GET method.
 * Added [edge status summary API](</apidocs#operation/get-cdn-reports-edgeStatusSummary>) to summarize status codes returned by edge servers.
-* Added [origin status summary API]</apidocs#operation/get-cdn-reports-originStatusSummary>) to summarize status codes returned by origin servers.
+* Added [origin status summary API](</apidocs#operation/get-cdn-reports-originStatusSummary>) to summarize status codes returned by origin servers.
 * Prevented duplicate certificate and property versions from being created if multiple requests were received at the same time.
 * Improved error handling for invalid impersonation attempts.
 * Improved error message for invalid maxSuccessRate filter passed to the [purge list](</apidocs#operation/getPurgeRequestList>) API.
