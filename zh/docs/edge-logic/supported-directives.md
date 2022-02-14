@@ -215,9 +215,9 @@ location / {
 ```nginx
 location /abc {
   origin_pass my-origin1;
-  error_page 401 403 = @try_origin1;
+  error_page 401 403 = @try_origin2;
 }
-location @try_origin1 {
+location @try_origin2 {
   origin_pass my-origin2;
 }
 ```
