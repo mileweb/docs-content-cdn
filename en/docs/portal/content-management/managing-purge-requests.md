@@ -1,8 +1,8 @@
-# Managing Content
+# Managing Purge Requests
 
-CDN Pro supports a content management purge function that allows you to override the cache time. This feature is handy when the content on your web server has changed and you want CDN Pro to update its servers with your changes. For example, if your website has a cache time of one week, but you want your website visitors to see a new update to one of your pages, you can use the purge option to flush the cache and enable your visitors to view the new content.
+CDN Pro supports a purge function that allows you to override the cache time. This feature is handy when the content on your web server has changed and you want CDN Pro to update its servers with your changes. For example, if your website has a cache time of one week, but you want your website visitors to see a new update to one of your pages, you can use the purge option to flush the cache and enable your visitors to view the new content.
 
-Content management purge activities are performed from the Content Management page. To display this page, click **Content Management** in the left pane.
+Purge activities are performed from the following page. To display this page, click **Content Management** > **Purge** in the left pane.
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
@@ -19,7 +19,7 @@ The following figure shows the key elements on the page, and the table following
 
 If the content on your origin web server has changed, request a purge to have CDN Pro distribute those changes.
 
-1. In the left pane, click **Content Management**.
+1. In the left pane, click **Content Management**, and then select **Purge**.
 2. At the top right of the page, click the **Create Purge** button. 
 3. Complete the fields in the Purge form. Required fields are denoted by an asterisk (```*```). The top of the form shows the percentage of the daily purge quota that has been used.
 
@@ -72,12 +72,12 @@ The following table shows examples of purging directories with and without using
 
 ## Viewing Purge Details
 
-1. In the left pane, click **Content Management**.
+1. In the left pane, click **Content Management**, and then select **Purge**.
 2. Click the ID associated with the purge operation. A Purge Details form provides details about the selected purge operation.
 
 ## Purge History
 
-1. In the left pane, click **Content Management**.
+1. In the left pane, click **Content Management**, and then select **Purge**.
 2. A **Purge** tab on the Content Management page shows details similar to those in the following figure:
 
    <ul><li> ID associated with the purge request.<br>

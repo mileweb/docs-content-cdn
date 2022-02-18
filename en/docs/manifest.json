@@ -174,7 +174,19 @@
             ]
           },
           { "title": "Reports", "path": "/docs/portal/reports.md" },
-          { "title": "Content Management", "path": "/docs/portal/content-management.md" },
+{
+            "title": "Content Management",
+            "routes": [
+              {
+                "title": "Managing Purge Requests",
+                "path": "/docs/portal/content-management/managing-purge-requests.md"
+              },
+              {
+                "title": "Creating Prefetches",
+                "path": "/docs/portal/content-management/creating-prefetches.md"
+              }
+            ]
+          },
           { "title": "Tasks",
             "routes": [
               {
