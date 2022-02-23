@@ -10,7 +10,7 @@ The following figure shows the key elements on the page, and the table following
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
-| 1 | To filter purges, type characters in this field and then press the Enter key. All purges that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field. |
+| 1 | To filter purges, type characters in this field and then press the Enter key. Only purges containing the typed characters will be shown. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field. |
 | 2 | Each purge appears on its own row. Clicking an ID shows detailed information about the purge.|
 | 3 | Icon to filter purges by their submission date.|
 | 4 | The button to create purge requests.|

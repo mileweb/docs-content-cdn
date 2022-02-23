@@ -182,8 +182,8 @@
                 "path": "/docs/portal/content-management/managing-purge-requests.md"
               },
               {
-                "title": "Creating Prefetches",
-                "path": "/docs/portal/content-management/creating-prefetches.md"
+                "title": "Managing Prefetch Requests",
+                "path": "/docs/portal/content-management/managing-prefetch-requests.md"
               }
             ]
           },
