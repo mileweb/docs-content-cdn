@@ -19,7 +19,7 @@
 * Fixed display of buttons in edge hostname creation and update pages.
 * Fixed enforcement of upper limit on property versions.
 * Fixed display of button and excess space in report page.
-*Fixed spacing between fields in Edit Certificate page.
+* Fixed spacing between fields in Edit Certificate page.
 
 
 ## February 4, 2022
