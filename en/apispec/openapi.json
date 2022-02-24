@@ -524,7 +524,7 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                           "maxLength": 65530
                         }
                       }
@@ -1210,7 +1210,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -3340,7 +3340,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -3968,7 +3968,7 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used, including \"if\", \"set\", \"return\", \"eval_func\", \"add_header\", \"client_max_body_size\", \"deny\", and \"allow\". Refer to the <i>loadBalancerDirectives</i> field in the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a> for the current list of directives permitted in this field. This list may include advanced Edge Logic directives that have not been enabled for your account.<br/> Example: <code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                         "maxLength": 65530
                       }
                     }
@@ -21015,9 +21015,16 @@
                       "type": "string",
                       "description": "RFC 3339 date indicating the oldest validated property that can be deployed. Properties validated before this date must be re-validated before you can deploy them. Example: \"2021-02-05T00:00:00Z\""
                     },
-                    "loadBalancerDirectives": {
+                    "baseLbDirectives": {
                       "type": "array",
-                      "description": "List of Edge Logic directives that can be used in the  <i>loadBalancerLogic</i> field of a property. This list may include advanced Edge Logic directives that are not enabled for your account. If you require one, please contact our support team.",
+                      "description": "List of Edge Logic directives that can be used in the <i>loadBalancerLogic</i> field of a property by everyone.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "advancedLbDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced Edge Logic directives that can be enabled for use in the <i>loadBalancerLogic</i> field of a property. If you require one that is not enabled for your account, please contact our support team.",
                       "items": {
                         "type": "string"
                       }
@@ -21116,15 +21123,23 @@
                           65535
                         ]
                       },
-                      "loadBalancerDirectives": [
+                      "baseLbDirectives": [
                         "if",
+                        "else",
+                        "elseif",
                         "set",
                         "return",
-                        "eval_func",
                         "add_header",
-                        "client_max_body_size",
+                        "allow",
                         "deny",
-                        "allow"
+                        "access_log_sampling",
+                        "proxy_set_header"
+                      ],
+                      "advancedLbDirectives": [
+                        "eval_func",
+                        "client_max_body_size",
+                        "http2_max_concurrent_streams",
+                        "proxy_ignore_client_abort"
                       ],
                       "advancedFeatures": [
                         "realTimeLog",
@@ -21427,6 +21442,13 @@
                     "minimum": 1,
                     "description": "Maximum number of directory URLs that can be included in the dirUrls field of a <a href=\"#operation/createPurge\">purge request</a>.",
                     "default": 20
+                  },
+                  "allowedLbDirectives": {
+                    "type": "array",
+                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": [
@@ -21966,6 +21988,13 @@
                     "terminationDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
+                    },
+                    "allowedLbDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -21993,6 +22022,7 @@
                       "allowedCacheDirectives": [
                         "secure_link"
                       ],
+                      "allowedLbDirectives": [],
                       "status": "active",
                       "allowProduction": true,
                       "usageLimitDays": 0,
@@ -22366,6 +22396,13 @@
                   "accountManagerEmail": {
                     "type": "string",
                     "description": "An email address representing the account manager."
+                  },
+                  "allowedLbDirectives": {
+                    "type": "array",
+                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -23277,6 +23314,13 @@
                     "terminationDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
+                    },
+                    "allowedLbDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -23605,6 +23649,13 @@
                     "terminationDate": {
                       "type": "string",
                       "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
+                    },
+                    "allowedLbDirectives": {
+                      "type": "array",
+                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -23917,6 +23968,13 @@
                   "accountManagerEmail": {
                     "type": "string",
                     "description": "An email address representing the account manager."
+                  },
+                  "allowedLbDirectives": {
+                    "type": "array",
+                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -28148,7 +28206,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28246,7 +28304,7 @@
                         },
                         "logDownloadFormat": {
                           "type": "string",
-                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
+                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
                         },
                         "logDownloadStorageDays": {
                           "type": "integer",
@@ -28467,7 +28525,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28530,7 +28588,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28744,10 +28802,10 @@
                       "message": "The max time span must be no more than 30 days."
                     }
                   },
-                  "Invalid hostnames": {
+                  "Invalid hostname": {
                     "value": {
-                      "code": "InvalidHostnames",
-                      "message": "Please specify the hostname(s)."
+                      "code": "InvalidHostname",
+                      "message": "Please specify the hostname."
                     }
                   },
                   "Invalid date": {
@@ -28919,10 +28977,10 @@
                       "message": "The max time span must be no more than 30 days."
                     }
                   },
-                  "Invalid hostnames": {
+                  "Invalid hostname": {
                     "value": {
-                      "code": "InvalidHostnames",
-                      "message": "Please specify the hostname(s)."
+                      "code": "InvalidHostname",
+                      "message": "Please specify the hostname."
                     }
                   },
                   "Invalid date": {
