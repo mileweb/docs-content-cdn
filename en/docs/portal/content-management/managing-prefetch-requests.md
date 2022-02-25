@@ -6,7 +6,7 @@ Prefetch activities are performed from the following page. To display this page,
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<!-- ![null](</docs/resources/images/content-management/prefetch1.png>) -->
+![null](</docs/resources/images/content-management/prefetch1.png>)
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
@@ -22,8 +22,8 @@ To create a prefetch request:
 2. At the top right of the page, click the **Create Prefetch** button. 
 3. Complete the fields in the Prefetch form. Required fields are denoted by an asterisk (```*```). The top of the form shows the percentage of the daily prefetch quota that has been used.
 
-<!-- <p align=center><img src="/docs/resources/images/content-management/prefetch2.png" alt="purge form" width="900"></p> -->
-<!-- Test -->
+<p align=center><img src="/docs/resources/images/content-management/prefetch2.png" alt="purge form" width="900"></p>
+
 |**Fields**|**Description**|
 |----------|---------------|
 | URLs     | Enter the URLs you want to prefetch. The URLs you prefetch must be for hostnames of properties deployed to production. Separate multiple URLs with a carriage return.|
