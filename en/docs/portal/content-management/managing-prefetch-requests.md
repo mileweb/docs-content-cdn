@@ -6,7 +6,7 @@ Prefetch activities are performed from the following page. To display this page,
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-![null](</docs/resources/images/content-management/prefetch1.png>)
+<!-- ![null](</docs/resources/images/content-management/prefetch1.png>) -->
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
