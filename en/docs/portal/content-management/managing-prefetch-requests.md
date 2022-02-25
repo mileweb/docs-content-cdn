@@ -23,7 +23,7 @@ To create a prefetch request:
 3. Complete the fields in the Prefetch form. Required fields are denoted by an asterisk (```*```). The top of the form shows the percentage of the daily prefetch quota that has been used.
 
 <!-- <p align=center><img src="/docs/resources/images/content-management/prefetch2.png" alt="purge form" width="900"></p> -->
-
+<!-- Test -->
 |**Fields**|**Description**|
 |----------|---------------|
 | URLs     | Enter the URLs you want to prefetch. The URLs you prefetch must be for hostnames of properties deployed to production. Separate multiple URLs with a carriage return.|
