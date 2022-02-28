@@ -524,7 +524,7 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                           "maxLength": 65530
                         }
                       }
@@ -1210,7 +1210,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -3340,7 +3340,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -3968,7 +3968,7 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"set\", \"return\",  \"add_header\", \"deny\", and \"allow\". In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                         "maxLength": 65530
                       }
                     }
@@ -24630,7 +24630,7 @@
                   },
                   "regions": {
                     "type": "array",
-                    "description": "A list of ISO 3166-2 country codes representing the locations of CDN Pro servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                    "description": "A list of ISO 3166-2 country codes representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                     "items": {
                       "type": "string"
                     }
@@ -25068,7 +25068,7 @@
                     },
                     "regions": {
                       "type": "array",
-                      "description": "A list of ISO 3166-2 country codes representing the locations of CDN Pro servers in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                      "description": "A list of ISO 3166-2 country codes representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                       "items": {
                         "type": "string"
                       }
