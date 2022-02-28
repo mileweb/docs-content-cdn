@@ -1,5 +1,27 @@
 # Release Notes
 
+## February 22, 2022
+### API updates
+* Fixed error handling for invalid search of customers.
+* Fixed consistency issues in tracking edge hostnames.
+* Improved error code for log download API.
+* Allowed log configuration update to clear the description field.
+* Updated loadBalancerLogic to allow use of system configuration API’s baseLbDirectives along with a customer’s allowedLbDirectives.
+* Fixed error handling querying historical API calls.
+* Fixed report API response when there is no data.
+
+### Portal updates
+* Added support for creating prefetch requests.
+* Fixed issues with Russian translation.
+* Fixed issue in report page with scroll bars.
+* Fixed display of Staging version column in properties list affecting some languages.
+* Improved Edge Logic hint text.
+* Fixed display of buttons in edge hostname creation and update pages.
+* Fixed enforcement of upper limit on property versions.
+* Fixed display of button and excess space in report page.
+* Fixed spacing between fields in Edit Certificate page.
+
+
 ## February 4, 2022
 ### API updates
 * Improved customer creation error handling when attempting to recreate a customer.
@@ -32,7 +54,7 @@
 * Allowed the billUsingStripe serviceQuota field to be set to null.
 * Allowed groupBy to be used in the query string of summary reports. This is useful when calling the report APIs using the GET method.
 * Added [edge status summary API](</apidocs#operation/get-cdn-reports-edgeStatusSummary>) to summarize status codes returned by edge servers.
-* Added [origin status summary API]</apidocs#operation/get-cdn-reports-originStatusSummary>) to summarize status codes returned by origin servers.
+* Added [origin status summary API](</apidocs#operation/get-cdn-reports-originStatusSummary>) to summarize status codes returned by origin servers.
 * Prevented duplicate certificate and property versions from being created if multiple requests were received at the same time.
 * Improved error handling for invalid impersonation attempts.
 * Improved error message for invalid maxSuccessRate filter passed to the [purge list](</apidocs#operation/getPurgeRequestList>) API.
