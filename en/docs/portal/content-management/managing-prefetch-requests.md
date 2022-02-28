@@ -27,7 +27,7 @@ To create a prefetch request:
 |**Fields**|**Description**|
 |----------|---------------|
 | URLs     | Enter the URLs you want to prefetch. The URLs you prefetch must be for hostnames of properties deployed to production. Separate multiple URLs with a carriage return.|
-| Regions  | Select the locations of CDN Pro servers on which the prefetch will be performed. Omitting a location means the prefetch will be done by all servers in all regions.                       |
+| Regions  | Select the regions in which the prefetch will be performed. Omitting a location means the prefetch will be performed by all servers in all regions.                       |
 | Start Time | Specify the date and time when the prefetch should be conducted. The time is specified in UTC format (for example, **2021-03-06T00:00:00Z**). <br>**Note:** Start time can be left empty to request an immediate prefetch.</br>|
 
 4. Click **Start Prefetch**.
