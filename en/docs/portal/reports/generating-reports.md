@@ -2,7 +2,7 @@
 
 CDN Pro provides reporting capabilities that allow you to analyze the traffic to your properties, identify trends over time, and pinpoint times when visitors are most likely to land on your site.
 
-Reports are generated from the Reports page. To display this page, click **Reports** in the left pane.
+Reports are generated from the Reports page. To display this page, click **Reports** > **Charts** in the left pane.
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
@@ -33,7 +33,7 @@ The following report types are supported:
 
 ## Generating Reports
 
-1. In the left pane, click **Reports**. 
+1. In the left pane, click **Reports**, and then select **Charts**. 
 2. Complete the fields in the Reports page:
 
 <p align=center><img src="/docs/resources/images/reports-wo-numbers.png" alt="report page" width="900"></p>
@@ -41,15 +41,12 @@ The following report types are supported:
 | **Fields**      | **Description**                                       |
 | --------------- | ----------------------------------------------------- |
 | Report Type     | Select the type of report you want to generate.       | 
-| Date Range      | Select the start and end dates and the time for the report. |
-| Hostname | For Access Log Download reports, select a property hostname. Logs of visitors to the hostname will be generated for you to view and download.
-| Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
-| Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties.         |
-| Edge Hostnames  | For Edge Hostname Request, select one or more edge hostnames.         |
-| Scheme        | For all reports except Edge Hostname Request, select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.
+| Date Range      | Select the start and end dates and the time for the report. |
+| Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
+| Hostnames       | Select one or more hostnames defined in your properties.         |
+| Scheme        | Select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
 | Server Groups        | By default Traffic Volume Summary reports on all server groups. To choose specific server groups, select them from the available choices.<li><strong>Standard</strong></li><li><strong>Premium</strong>.</li><li><strong>Premium+</strong>.</li><li><strong>Ultra</strong>.|
-| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.|
 | Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group the results according to one or more of the following choices. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Customer Ids</strong>.</li> |
 
 **Note:** All volume and bandwidth report data pertains to the HTTP payload only. It does not include the overhead from TCP, IP, and MAC headers. CDNetworks adds 4.56% (66 bytes) of overhead to each 1448-byte payload to generate the "billing volume" on your invoice.
