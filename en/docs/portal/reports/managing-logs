@@ -1,6 +1,6 @@
 # Managing Logs
 
-CDN Pro allows you to export logs that contain data from requests made to one or more hosts. Before you export logs, you must specify the format of the logs by creating a log configuration. Otherwise, no logs will be available for exporting.
+CDN Pro allows you to export logs that show requests made to a hostname. Before you export logs, you must specify the format of the logs by creating a log configuration for the hostname. Otherwise, no logs will be available for exporting.
 
 ## Creating a Log Configuration
 To create a log configuration:
@@ -57,21 +57,22 @@ After you create a log configuration, use the following procedure to export logs
 
 1. In the left pane, click **Reports**, and then select **Access Log**.
 <p align=center><img src="/docs/resources/images/reports/configure-log3.png" alt="configure log2" width="900"></p>
-2. In the top field, select one ore more hostnames. Separate multiple hostnames with a space or carriage return.
-3. In the bottom field, specify the date range and time 
-4. Click **Export Logs**. 
-<strong>Note:</strong> If no configurations match the specified hostname, a message asks whether you want to create a log configuration for the host name.
+
+2. In the top field, select a hostname.
+3. In the bottom field, specify the date range and time.
+4. Click <strong>Export Logs</strong>. 
+<strong>Note:</strong> If no configurations match the specified hostname, a message asks whether you want to create a log configuration for the hostname.
 
 ## Editing Log Configurations
 
 1. In the left pane, click **Reports**, and then select **Access Log**.
 2. At the top right, click **Configuration**.
-3. To edit a log configuration without viewing it first, click the ellipsis to the right of the log configuration, and then select **Edit**.<br>OR</br>To see a log before you edit it, click the log ID in the left column. Then click the **Edit** button at the bottom-right side.
+3. To edit a log configuration, either click the ellipses to the right of the log configuration and choose **Edit** or open the log configuration and click the **Edit** button.
 4. Make your changes in the Edit Log Configuration form.
 5. Click **Save**.
 
 ## Deleting Log Configurations
 1. In the left pane, click **Reports**, and then select **Access Log**.
 2. At the top right, click **Configuration**.
-3. To delete a log configuration without viewing it first, click the ellipsis to the right of the log configuration, and then select **Delete**.<br>OR</br>To see a log before you delete it, click the log ID in the left column. Then click the **Delete** button at the bottom-right side.
+3. To delete a log configuration, either click the ellipses to the right of the log configuration and choose **Delete** or open the log configuration and click the **Delete** button.
 4. When prompted to confirm the deletion, click **Yes, delete** to delete the log configuration.

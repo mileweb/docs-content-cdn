@@ -178,12 +178,12 @@
             "title": "Reports",
             "charts": [
               {
-                "title": "Managing Purge Requests",
+                "title": "Generating Reports",
                 "path": "/docs/portal/reports/generating-reports.md"
               },
               {
                 "title": "Managing Logs",
-                "path": "/docs/portal/content-management/managing-logs.md"
+                "path": "/docs/portal/reports/managing-logs.md"
               }
             ]
           },

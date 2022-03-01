@@ -1,4 +1,4 @@
-# Reports
+# Generating Reports
 
 CDN Pro provides reporting capabilities that allow you to analyze the traffic to your properties, identify trends over time, and pinpoint times when visitors are most likely to land on your site.
 
@@ -29,12 +29,12 @@ The following report types are supported:
 | Traffic Volume Summary| Summarizes the edge traffic volume.                               |
 | CPU Time| Reports the CPU time consumed in each time interval to serve your properties. You can toggle the unit between **seconds** and **number of cores**. For example, if 3000 seconds of CPU time are reported in a 5-minute interval, it means your properties are maxing out an average of 10 (=3000s/5m) physical CPU cores during that period.                               |
 | Edge Hostname Request| Shows the number of requests made to your [edge hostnames](</docs/portal/traffic-management/creating-edge-hostname.md>) over a period of time.                               |
-| Access Log Download| Shows what content has been requested and when it was requested, the IP address from which requests were made, the value of the User-Agent HTTP request header, and the size of the content requested.                    |
+
 
 ## Generating Reports
 
 1. In the left pane, click **Reports**, and then select **Charts**. 
-2. Complete the fields in the Reports page:
+2. Complete the fields in the Reports page.
 
 <p align=center><img src="/docs/resources/images/reports-wo-numbers.png" alt="report page" width="900"></p>
 
@@ -44,8 +44,8 @@ The following report types are supported:
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.
 | Date Range      | Select the start and end dates and the time for the report. |
 | Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
-| Hostnames       | Select one or more hostnames defined in your properties.         |
-| Scheme        | Select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
+| Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties.         |
+| Scheme        | For all reports except Edge Hostname Request, select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
 | Server Groups        | By default Traffic Volume Summary reports on all server groups. To choose specific server groups, select them from the available choices.<li><strong>Standard</strong></li><li><strong>Premium</strong>.</li><li><strong>Premium+</strong>.</li><li><strong>Ultra</strong>.|
 | Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group the results according to one or more of the following choices. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Customer Ids</strong>.</li> |
 
