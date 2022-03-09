@@ -170,11 +170,10 @@
               {
                   "title": "Delete a Certificate",
                 "path": "/docs/portal/certificates/deleting-certificate.md"
-              }
-            ]
+            }
+           ]
           },
-          { "title": "Reports", "path": "/docs/portal/reports.md" },
-{
+           {
             "title": "Reports",
             "charts": [
               {
@@ -187,7 +186,7 @@
               }
             ]
           },
-{
+             {
             "title": "Content Management",
             "routes": [
               {
