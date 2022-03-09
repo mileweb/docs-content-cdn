@@ -175,6 +175,19 @@
           },
           { "title": "Reports", "path": "/docs/portal/reports.md" },
 {
+            "title": "Reports",
+            "charts": [
+              {
+                "title": "Generating Reports",
+                "path": "/docs/portal/reports/generating-reports.md"
+              },
+              {
+                "title": "Managing Logs",
+                "path": "/docs/portal/reports/managing-logs.md"
+              }
+            ]
+          },
+{
             "title": "Content Management",
             "routes": [
               {
