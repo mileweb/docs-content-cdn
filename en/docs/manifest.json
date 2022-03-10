@@ -175,7 +175,7 @@
           },
            {
             "title": "Reports",
-            "charts": [
+            "routes": [
               {
                 "title": "Generating Reports",
                 "path": "/docs/portal/reports/generating-reports.md"
