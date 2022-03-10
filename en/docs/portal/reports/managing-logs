@@ -23,6 +23,7 @@ To create a log configuration:
 
 ## Using Variables to Format Logs
 The following table shows the variables you can use in the **Log Format** field to customize the format of logs.
+
 |**Variable**  |**Description**                          |
 |--------------|-----------------------------------------|
 | %cachestate  | HIT, MISS, or REVALIDATE                |
