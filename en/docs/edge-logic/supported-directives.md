@@ -14,7 +14,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 **Default:** `-` <br/>
 **Context:** server, location, if in location
 
-This directive modifies the response headers to the client. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
+This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
 1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx
@@ -79,7 +79,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
 
-2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client.
+2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the `Transfer-Encoding` to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client. The added trailer won't appear in the response to the client.
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
@@ -125,6 +125,8 @@ Stops processing the current set of ngx_http_rewrite_module directives. No chang
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
+**NOTE:** If this directive appears in a [location](#location) block, any "[return](#return)" directive after it may not be executed. Hence we require the location block to directly contain an [origin_pass](<#origin_pass>) directive.
+
 ### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
@@ -159,11 +161,20 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:** `custom_log_field {custom log field id} {value or variable};`<br/>
+**Syntax:** `custom_log_field id value;`<br/>
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to 2 customized fields into the access log. They can be referred to by the keywords "custom1" and "custom2" when you configure the format of the download log or when using our advanced traffic analysis tool. If you require this feature, contact our support team.
+This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom1" and "custom2" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). If you require this feature, contact our support team.
+
+Examples:
+```nginx
+location / {
+  custom_log_field 1 $http_x_data; # save the request header value X-Data to custom1
+  custom_log_field 2 $cookie_abc; # save the value of cookie abc to custom2
+  ...
+}
+```
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -195,11 +206,11 @@ This directive enables proxying the WebSocket protocol. The client must make sur
 
 Defines the URI to redirect to when the current processing results in one of the specified status codes. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page). We configured [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) to make it also respond to status codes returned from the origin.
 
-For example, the following configuration would try a second origin when the first one returns 403:
+For example, the following configuration would try a second origin when the first one returns 401 or 403:
 ```nginx
 location /abc {
   origin_pass my-origin1;
-  error_page 403 = @try_origin2;
+  error_page 401 403 = @try_origin2;
 }
 location @try_origin2 {
   origin_pass my-origin2;
@@ -224,6 +235,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key``` and ```$iv``` should both be binary strings of 32 bytes.|
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
+| RSA<br>signature | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` can only be ```SHA256```.|
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
 | integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
 | integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
@@ -338,7 +350,7 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 **Default:** `-` <br/>
 **Context:** server, location
 
-Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location).
+Sets configuration depending on the request URI without query string. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_core_module.html#location). We require each location block to directly (not in a nested if or location block) contain a "[return](#return)" and/or "[origin_pass](#origin_pass)" directive to generate the response. When a location contains a "[break](#break)" directive, "[origin_pass](#origin_pass)" is required.
 
 ### `origin_connect_timeout`
 
@@ -427,7 +439,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **Default:** none <br>
 **Context:** location, if in location
 
-This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) directive. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can be optionally followed by a URI. Variables can be used in the URI. If an URI is not specified, the full normalized request URI (which may have been changed by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
+This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) and a few other directives. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can optionally be followed by a URI which is allowed to contain variables. If no URI is specified, the full normalized request URI (which may have been modified by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
 ```nginx
 # when URI is not specified, URL-encoded $uri and query string will be appended by default
 origin_pass my_origin;
@@ -437,7 +449,7 @@ origin_pass my_origin$uri_uenc; #to drop the query string
 origin_pass my_origin/abc$uri_uenc;
 ```
 Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8.
-If you know the origin can't handle it, use `eval_func` to encoded it to form the URL to origin.
+If you know the origin can't handle it, use `eval_func` to URL-encode it to form the URL to the origin.
 
 ### `origin_read_timeout`
 
@@ -638,7 +650,7 @@ Determines in which cases a stale cached response can be used during communicati
 **Default:** — <br/>
 **Context:** server, location
 
-Sets caching time for different response codes. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+Sets caching time for different response codes. If no code is explicitly specified, the default is 200, 301 and 302. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
 
 ### `proxy_cache_vary`
 

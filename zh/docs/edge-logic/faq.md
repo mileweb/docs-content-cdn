@@ -1,6 +1,6 @@
 ## 常见问题
 
-### CDN如何判定一个文件能否缓存，缓存多久?
+### CDN Pro 如何决定一个文件能否缓存，缓存多久?
 
 在边缘逻辑（Edge Logic）中，我们提供了多个指令用于设置文件是否应被CDN缓存（如[proxy_no_cache](/docs/edge-logic/supported-directives#proxy_no_cache)/[proxy_ignore_cache_control](/docs/edge-logic/supported-directives#proxy_ignore_cache_control)/[proxy_ignore_headers](/docs/edge-logic/supported-directives#proxy_ignore_headers)等等）。如果所有相关指令都没有在加速项中被使用到，那么CDN Pro节点的默认行为是“遵循源站”，即按照源站响应头中的`Cache-Control`和`Expires` 头来判断文件是否可以缓存以及缓存时长。需要注意的是，如果源站给的响应头中有`Set-Cookie`头，CDN Pro将不会对该文件进行缓存。
 
@@ -39,7 +39,7 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源给的 Cache-Control �
 
 ### 如何将问号后参数或者请求头加入到缓存Key中?
 
-默认情况下，CDN Pro的默认行为是将域名和不包含问号后参数的请求URI加载到缓存 key 中。同时 CDN Pro 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。因此您可以按照您的业务需求将关键参数加入到这个内置变量中。例如，将所有问号后参数加入到缓存 key ：
+CDN Pro 的默认行为是将域名和不包含问号后参数的请求URI加到缓存 key 中。同时 CDN Pro 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。因此您可以通过这个内置变量将关键参数加入缓存 Key。例如，将所有问号后参数加入到缓存 key ：
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
@@ -51,7 +51,7 @@ set $cache_misc "?abc=$arg_abc&def=$arg_def";
 ```nginx
 set $cache_misc "ae=$http_accept_encoding";
 ```
-在配置的过程中，如果您想保留当前边缘逻辑中的 $cache_misc 值，那么您可以将新数据添加在 $cache_misc 后，这样新数据就会以附加的形式加入到 $cache_misc 中：
+在配置的过程中，如果您想保留当前边缘逻辑中的 $cache_misc 值，可以将新数据添加在 $cache_misc 末尾，例如：
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
@@ -95,9 +95,9 @@ proxy_ignore_headers Vary;
 
 ### 中国大陆加速以及备案相关
 
-按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN Pro 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被关停。作为客户，您需要提前为计划在中国大陆进行本地分发的域申请并和获取备案。当然，在这个过程中 CDN Pro 将提供相应的咨询服务来进行协助。在您的域名取的备案之前，CDN Pro 可以使用临近中国大陆（例如香港、韩国或者日本等等）的服务器向中大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
+按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN Pro 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被关停。作为客户，您需要提前为计划在中国大陆进行本地分发的域申请并和获取备案。当然，在这个过程中 CDN Pro 可以供相应的咨询服务来进行协助。在您的域名取得备案之前，CDN Pro 可以使用临近中国大陆（例如香港、韩国或者日本等等）的服务器向中大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
 
-如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（CDNetworks）技术支持以便我们能够获取到关于您业务的所有必要信息。这些信息确认无误后，CDN Pro 就将为您开启中国大陆节点的使用权限。然后，您就可以按以下步骤来启用这些中国大陆节点：
+如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（CDNetworks）技术支持提交关于您业务的所有必要信息。我们将这些信息确认无误后，CDN Pro 就将为您开启中国大陆节点的使用权限。然后您可以按以下步骤来启用这些中国大陆节点：
 
 1. 在该域名的 [加速项](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成是。这样做可使加速项上的配置部署到中国大陆服务器，当这些服务器接收客户端请求时会正常响应文件。否则它们将返回状态代码 451。
 
@@ -114,10 +114,10 @@ proxy_ignore_headers Vary;
 * 根据客户端输入的关键字进行搜索请求
 * 携带大量查询参数的 API 调用请求
 
-如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端请求获取到的响应性能可能会非常差。此时如何通过 CDN Pro 来加速这些动态内容？ 以下操作将极大提升此类动态响应性能：
+如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端得到的响应性能可能会非常差。此时该如何通过 CDN Pro 来加速这些动态内容呢？ 以下操作将极大提升此类动态响应性能：
 * **使用 CDN Pro 来为您的业务争取数秒的宝贵时间**
 
-当您使用 CDN Pro 时，您的客户端将会解析并与最近的边缘服务器建链。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连接到源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下， CDN Pro 与源站之间会保持长链接，您可以使用指令 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN Pro 上的延迟。
+当您使用 CDN Pro 时，您的客户端将会被全局调度系统（GSLB）引导与最近的边缘服务器建连。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下， CDN Pro 与源站之间会保持长链接，您可以使用指令 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN Pro 上的延迟。
 * **将动态文件转换成可缓存文件**
 
 在许多情况下，“动态文件”并不意味着内容不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，那么客户端将不会体验到差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和CDN执行损耗。需要注意的是，如果客户端收到的响应需要根据请求url中的问号后参数或者请求头部值而不同的话，请确保[关键字段或者请求头已被添加到缓存 key 中](#如何将问号后参数或者请求头加入到缓存Key中)。

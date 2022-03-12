@@ -5,7 +5,7 @@ CDN Pro supports a prefetch function that warms the CDN Pro cache with new conte
 Prefetch activities are performed from the following page. To display this page, click **Content Management** > **Prefetch** in the left pane.
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
-
+<!-- test -->
 ![null](</docs/resources/images/content-management/prefetch1.png>)
 
 | **Fields** | **Description** |

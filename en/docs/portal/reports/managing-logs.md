@@ -68,6 +68,7 @@ After you create a log configuration, use the following procedure to export logs
 2. In the top field, select a hostname.
 3. In the bottom field, specify the date range and time.
 4. Click <strong>Export Logs</strong>. 
+
 <strong>Note:</strong> If no configurations match the specified hostname, a message asks whether you want to create a log configuration for the hostname.
 
 ## Editing Log Configurations

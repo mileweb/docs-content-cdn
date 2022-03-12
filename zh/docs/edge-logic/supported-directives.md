@@ -14,7 +14,7 @@
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-本指令的功能是修改发往客户端的响应头部。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
+本指令的功能是修改发往客户端的响应头部。默认只在状态码为200, 201, 204, 206, 301-304, 307 或 308时生效。当配置了'always'参数时，则对全部状态码生效。我们在[开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)的基础上做了如下重大改进:
 
 1. 引入了```policy=```参数来更精确地控制指令的行为:
 ```nginx
@@ -75,11 +75,11 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-Adds the specified field to the end of a response provided that the response code equals 200, 201, 206, 301, 302, 303, 307, or 308. When "always" is specified, the trailer is added regardless of the status code. Parameter value can contain variables. We made the following changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer):
+该指令可用于在响应正文之后添加一个尾部（trailer）。默认只在状态码为200, 201, 206, 301, 302, 303, 307或308时生效。当携带 “always” 参数时，则对所有状态码生效。参数 value 可以是变量。CDN Pro 在 [开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) 的基础上做了如下修改和增强：
 
-1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
+1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
 
-2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the Transfer-Encoding to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client.
+2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。本指令添加的尾部并不会出现在发给客户的响应里。
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
@@ -124,6 +124,8 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 终止执行当前 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)的指令。代码逻辑源自 Nginx 开源版本，无改动。
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
+**注意:** 如果一个 [location](#location) 中包含了 break 指令，它有可能使之后的"[return](#return)"指令失效。因此我们要求该 location 必须直接包含一个 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) 指令来确保正确生成响应。
+
 ### `client_body_timeout`
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
@@ -160,11 +162,20 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `custom_log_field {custom log field id} {value or variable};`<br/>
+**使用语法：** `custom_log_field id value;`<br/>
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。该指令生效后，当您配置自定义日志下载的格式或使用我们的高级流量分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用它们。如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用这两个字段。如果您需要开启此功能，请联系我们的技术支持团队。
+
+示例:
+```nginx
+location / {
+  custom_log_field 1 $http_x_data; # 将请求头X-Data的值保存到custom1
+  custom_log_field 2 $cookie_abc; # 将cookie abc的值保存到custom2
+  ...
+}
+```
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -196,17 +207,17 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 本指令允许您将源站的响应状态码作为条件来跳转到一个指定的URI。本指令可依照以下顺序，携带3组参数：
 第一组：（必填项）作为判定条件的一个或多个原始状态码，以空格隔开。比如 "400 401 402 403 404 406 501 502 503 504"；
-第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。如有配，则原始状态码将被替换为新状态码响应客户端；
+第二组：（非必填）设置一个新的响应状态码，格式为 "=200"。也可以用 "=" 使用新的URI返回的状态码；
 第三组：（必填项）设置新的响应正文，格式为 URI 或者一个完整的 URL。比如 "@error"(named URI) 或 "http://www.abc.com" (完整URL)。当使用完整 URL 时，会把响应状态码改为302（除非第二组参数为 "=301"，则新响应状态码为301，其余情况下皆为302）。；
 代码逻辑源自 [Nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)无改动。 同时 CDN Pro 默认开启了 [`proxy_intercept_errors on`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_intercept_errors) 来支持将源的响应状态码作为判断条件。
 
-例如，下述指令可以在第一个源站返回状态码 403 时尝试第二个源站：
+例如，下述指令可以在第一个源站返回状态码 401或403 时尝试第二个源站：
 ```nginx
 location /abc {
   origin_pass my-origin1;
-  error_page 403 = @try_origin1;
+  error_page 401 403 = @try_origin2;
 }
-location @try_origin1 {
+location @try_origin2 {
   origin_pass my-origin2;
 }
 ```
@@ -223,16 +234,17 @@ location @try_origin1 {
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
-| hash | **SHA256**, **MD5** | ```eval_func $output SHA256 $input;``` |
-| BASE64<br>codec | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
-| URL<br>codec | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
-| HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
-| AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串. |
-| HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
-| integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
-| integer<br>calculator | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>The expression will be evaluated and the result be assigned to ```$output``` . The expression only supports +, -, *, / of integers. Invalid input results in "NAN" in the output variable.|
-| integer<br>absolute value | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` will be the absolute value of ```$integer```. Invalid input results in empty string. |
-| 字符串<br>修改 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
+| 计算哈希值 | **SHA256**, **MD5** | ```eval_func $output SHA256 $input;``` |
+| BASE64<br>编解码 | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
+| URL<br>编解码 | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
+| HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
+| AES<br>加解密 | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串。|
+| 计算<br>HMAC | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` 可以是 ```MD5```, ```SHA1```, ```SHA256``` |
+| RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 目前只支持 ```SHA256```。|
+| 比较<br>整数 | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```当 ```$data1 > $data2```时 $output``` 的值为 "1"，相等时为 "0"，小于时为 “-1”。|
+| 整数<br>计算器 | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>计算这个表达式并把结果赋予 ```$output```. 仅支持整数的 +, -, *, / 操作。非法的输入表达式会导致结果为 "NAN"。|
+| 整数<br>绝对值 | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` 会被赋予 ```$integer``` 的绝对值。非法输入会导致结果为空。|
+| 字符串<br>替换 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 | 字符串<br>修改 | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>把输入字符串转成大写。|
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
 | 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
@@ -346,7 +358,7 @@ else { ... }
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。
+按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。为了确保服务器能正确生成响应，我们要求每个 [locaiton](#location) 里须直接（不在嵌套的if或location里）包含一个 [return](#return) 或者 [origin_pass](#origin_pass) 指令。如果一个 location 里包含了 [break](#break) 指令，则其必须直接包含 origin_pass。
 
 ### `origin_connect_timeout`
 
@@ -652,7 +664,7 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-该指令用于给不同的响应状态码设置缓存时间。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
 
 ### `proxy_cache_vary`
 
@@ -786,12 +798,13 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Defines conditions under which the response will not be saved to a cache. If at least one value of the string parameters is not empty and is not equal to “0”, the response will not be saved:
+该指令用于设置 CDN Pro 不对响应进行缓存的条件。如果携带的参数值至少有一个不为空且不为0，则此响应将不被缓存：
+
 ```nginx
-proxy_no_cache $cookie_nocache $arg_nocache$arg_comment;
+proxy_no_cache $cookie_nocache $arg_nocache$arg_comment; 
 proxy_no_cache $http_pragma    $http_authorization;
 ```
-Since the content is not saved, usually there is no point in looking up the cache under the same conditions. Therefore, this directive is commonly used together with the [`proxy_cache_bypass`](#proxy_cache_bypass) directive.
+由于响应没有被保存，所以在相同条件下也没有必要检索缓存。因此，该指令通常搭配 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令一起使用。
 
 ### [`proxy_pass_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_header)
 
@@ -801,7 +814,7 @@ Since the content is not saved, usually there is no point in looking up the cach
 **默认设置：** `proxy_pass_header Date;` <br/>
 **可用位置：** server, location
 
-Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+该指令用于设置 CDN Pro 将指定的某个 [Nginx 默认隐藏的响应头](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) 传递给客户端。默认设置会将源站返回的 `Date` 响应头传递给客户端。该响应头携带了 CDN Pro 从源站获取响应的时间点。该指令支持多次配置以传递多个不同的响应头给客户端。只有当一个 location 配置块中没有该指令时，上一层（server 层）的配置才会被继承到 location 中，否则上层的配置会被忽略。
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -811,7 +824,7 @@ Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_p
 **默认设置：** `proxy_pass_request_body on;` <br/>
 **可用位置：** server, location
 
-Enables of disables passing request body from client to upstream. No change to the public version.
+该指令用于允许或禁止将客户端的请求正文传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_pass_request_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_headers)
 
@@ -821,7 +834,7 @@ Enables of disables passing request body from client to upstream. No change to t
 **默认设置：** `proxy_pass_request_headers on;` <br/>
 **可用位置：** server, location
 
-Enables of disables passing request headers from client to upstream. No change to the public version.
+该指令用于允许或禁止将客户端的请求头传递给源站。源自 NGINX 开源版本，无变更。
 
 ### [`proxy_redirect`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
 
@@ -833,7 +846,7 @@ Enables of disables passing request headers from client to upstream. No change t
 **默认设置：** `proxy_redirect default;` <br/>
 **可用位置：** server, location
 
-Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
+该指令用于修改 CDN Pro 传给客户端的"Location"和"Refresh"响应头中的内容。源自 NGINX 开源版本，无变更。
 
 ### `proxy_set`
 
@@ -843,20 +856,20 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **默认设置：** none <br>
 **可用位置：** server, location, if in location
 
-This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While this directive looks very similar to the [`set`](#set) directive, it differs in when it is executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore, the `value` can have information contained in the response header (after being modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
+该指令将参数 `value` 的值赋值给变量 `$variable`。`value` 可以是另一个变量或变量和字符串的组合。该指令与 [`set`](#set) 指令非常相似，但是它们在请求处理的不同阶段被执行。`set` 指令是在收到请求后很早的 “rewrite” 阶段中被执行。而 `proxy_set` 是在从源接收到响应头（在缓存未命中的情况下）或从缓存中读取完毕后才被执行。因此，proxy_set 指令可以将响应头中的信息赋值给目标变量。请注意，响应头有可能被 [`origin_header_modify`](#origin_header_modify) 指令修改过。此外，该指令支持 `if()` 参数，用于指定该指令生效的条件。示例如下：
 ```nginx
-set $cache_time 1d; # by default, cache for 1 day
-# if origin responds with a "cachetime" header, use it to override the default
+set $cache_time 1d; # 设置cache_time变量的默认值为 1d
+# 如果源站的响应中有 “cachetime” 响应头，则使用该响应头覆盖掉上述默认值
 proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
 proxy_cache_valid $cache_time;
-# extract a part from the origin's response header and send to client
+# 截取源站响应头 “version” 中的一段，并发送给客户端
 proxy_set $version_number $1 if($upstream_http_version ~ "Version:(.*)$");
 add_header version-number $version_number;
-# do not cache status codes 301 and 302 from the origin
+# 如果源站响应了 301 或者 302 ，则该响应不缓存 
 proxy_set $no_store 1 if($upstream_response_status ~ 30[12]);
 proxy_no_cache $no_store;
 ```
-The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
+该指令会跨不同层级（server/location/location if）合并。如果不同层级中使用该指令试图对同一个变量进行赋值，则只有最内层的配置生效。
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -866,7 +879,7 @@ The directive is merged across different levels (http/server/location/location i
 **默认设置：** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;` <br/>
 **可用位置：** server, location
 
-Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+该指令用于设置 CDN Pro 回源时的握手协议。源自 Nginx 开源版本，无变更。
 
 ### `realtime_log_downsample`
 
@@ -876,7 +889,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the main setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor).
+该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -888,9 +901,10 @@ Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-Stops processing and returns the specified code to a client. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return). 
+停止当前的请求处理，并将指定的响应状态码以及正文（如有配置text或URL）返回给客户端。 对 [开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return) 没有修改。
 
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于nginx的 [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
+
 
 ### [`rewrite`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)
 
@@ -900,7 +914,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if
 
-如果请求URI匹配正则表达式`regex`，则将其改写为`replacement`的值。功能上和[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)完全一致。 请注意该指令匹配的对象是变量`$uri`，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给`$uri`.
+如果请求URI匹配正则表达式`regex`，则将其改写为`replacement`的值。功能上和[开源版本](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite)完全一致。请注意该指令匹配的对象是变量`$uri`，一个经过[归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，不带query string的请求URI。如果匹配成功，则会把`replacement`的值赋给变量`$uri`.
 
 该指令属于nginx的[rewrite模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段同该模块里的其他指令一道被顺序（imperatively）执行。
 
@@ -912,7 +926,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `satisfy all;` <br/>
 **可用位置：** server, location
 
-Allows access if all (all) or at least one (any) of the ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) modules allows access. No change to the public version.
+该指令用于设置 CDN Pro 对多个访问控制功能的校验方式。当配置值为 all 时，只有当边缘逻辑中所有的 [`allow`](#allow), [`deny`](#deny) 以及 [`auth_request`](#auth_request) 的结果都为 pass 时，请求才会通过校验。配置值为 any 时，只要上述指令结果有一个为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
 
 ### `sanitize_accept_encoding`
 
@@ -922,13 +936,13 @@ Allows access if all (all) or at least one (any) of the ngx_http_access_module (
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-This directive processes the incoming `Accept-Encoding` header field to consolidate its value. You can specify up to four parameters after this directive. Each parameter is a comma-separated combination of one or more `content-encoding` algorithms, such as "gzip,br" or "br". For each request from the clients, the CDN Pro edge server tries to match the received `Accept-Encoding` header field value with the specified combinations from left to right. If all the algorithms in a combination are found in the header, the header value is replaced with that combination. If no match is found, the header value is set to "identity".
+该指令用于修改 `Accept-Encoding` 请求头，确保其可能的取值不超过5个以提高缓存的利用率。此指令最多可以携带4个参数，每个参数都是一个或多个（以逗号为分隔的）“内容编码格式”，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的 `Accept-Encoding` 请求头与本指令的参数从左至右逐个进行匹配。如果一个参数里的所有格式都出现在了此请求头里，则用该参数值替换掉请求头的值。如果没有能匹配的参数，则将请求头的值改写为“identity”。
 
-For example: if the configuration is:
+示例如下：假设边缘逻辑中的配置是：
 ```nginx
 sanitize_accept_encoding "gzip,br" "gzip" "deflate" "br";
 ```
-The processing logic will be:
+那么处理逻辑将是：
 ```php
 if (A-E-header.contains("gzip") && A-E-header.contains("br"))
     A-E-header="gzip,br";
@@ -937,9 +951,10 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else A-E-header="identity";
 ```
-It is not hard to see that the default setting of this directive rewrites the header value to either "gzip" or "identity". Combined with the default caching policy, each server would [cache the response in only one of the two encoded formats](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary). If a client's request is asking for the other format, the server would compress or decompress the cached version on-the-fly to fulfill it.
+不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
 
-If you use this directive and override the default setting, most likely you also want to cache the response in different encodings separately. You can achieve this by adding the header field value into the cache key:
+如果您使用了此指令，那么很可能您还希望 CDN Pro 能根据 `Accept-Encoding` 请求头的值来区别缓存响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
+
 ```nginx
 set $cache_misc $cache_misc."ae=$http_accept_encoding";
 ```
@@ -952,7 +967,8 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Defines a string with variables from which the checksum value and lifetime of a link will be extracted. No change to the public version.
+该指令定义一个带有变量的字符串，CDN Pro 将从中提取该请求链接的校验值和生存期。代码逻辑源自 Nginx 开源版本，无改动。
+
 
 ### [`secure_link_md5`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_md5)
 
@@ -962,7 +978,7 @@ Defines a string with variables from which the checksum value and lifetime of a 
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Defines an expression for which the MD5 hash value will be computed and compared with the value passed in a request. No change to the public version.
+该指令定义一个用于进行 MD5 哈希计算的表达式，计算出的哈希值将与请求中传递的值进行比较。源自 Nginx 开源版本，无改动。
 
 ### [`secure_link_secret`](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link_secret)
 
@@ -972,7 +988,7 @@ Defines an expression for which the MD5 hash value will be computed and compared
 **默认设置：** `—` <br/>
 **可用位置：** location
 
-Defines a secret word used to check authenticity of requested links. No change to the public version.
+该指令定义了检查请求合法性的秘钥。代码逻辑源自 Nginx 开源版本，无改动。
 
 ### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
 
@@ -982,9 +998,9 @@ Defines a secret word used to check authenticity of requested links. No change t
 **默认设置：**	`-` <br/>
 **可用位置：** server, location, if
 
-Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
+该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存键。
 
-This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段与同一模块中的其他指令一道被顺序（imperatively）执行。
 
 ### [`slice`](http://nginx.org/en/docs/http/ngx_http_slice_module.html#slice)
 
@@ -994,10 +1010,11 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **默认设置：** `slice 0;` <br/>
 **可用位置：** server
 
-Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
-* We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
-* CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
-* When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
+该指令用于设置 CDN Pro 从源获取大文件时切片的大小。合法的参数值可以是 0（禁用切片），或一个介于 512k 和 512m 之间（含）的[nginx 尺寸](http://nginx.org/en/docs/syntax.html) 。源站必须支持 range 请求并响应 206 状态码。如果需要将切片的响应进行缓存，请使用指令 `proxy_cache_valid 206 ...` 来启用对 206 状态码缓存。同时我们在开源版本的基础上对该指令进行了以下修改和增强：
+* 我们禁止在任何 location 模块中使用此指令，以确保整个域名具有相同的切片大小设置。这是为了避免某些请求需要在不同 location 配置块内进行处理而造成的潜在问题。
+* CDN Pro 要求所有缓存的切片都携带相同的 ETag 值，以确保这些切片归属于同一个原始文件。当从源站新获取的切片与先前已缓存切片有不同的 Etag 值时，当前与客户端的响应传输将被终止，并且所有已缓存的切片都会立即清除。因此源站在一个文件内容未发生变更的情况下，请务必确保该文件的 ETag 值不会变化。在确实必要的情况下，您可以使用 `slice_ignore_etag on;` 指令来禁用此校验。
+* 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到损坏的响应。
+
 
 ### `slice_ignore_etag`
 
@@ -1007,7 +1024,8 @@ Sets the size of the slices when fetching large files from the origin. The valid
 **默认设置：** `slice_ignore_etag off;` <br/>
 **可用位置：** server
 
-This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
+该指令用于关闭切片文件的 ETag 一致性检查。如果源无法确保为同一文件生成相同的 ETag 值时，可用该指令作为临时解决方案。
+
 
 ### `sorted_querystring_filter_parameter`
 
@@ -1017,8 +1035,9 @@ This directive can be used to disable the ETag consistency check of sliced files
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-Removes some query parameters from the variable ```$sorted_querystring_args```.
-This feature is implemented on top of this [open-source project](https://github.com/wandenberg/nginx-sorted-querystring-module).
+从变量```$sorted_querystring_args``` 中删除一些查询参数。
+此功能是基于这个 [开源模块](https://github.com/wandenberg/nginx-sorted-querystring-module) 实现的。
+
 
 ### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)
 
@@ -1028,7 +1047,8 @@ This feature is implemented on top of this [open-source project](https://github.
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Sets a string to replace in the response and a replacement string. No change to the public version. Note that when the response is compressed, the search and replace may not work as desired.
+该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。对 NGINX 开源版本无变更。请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。
+
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
 
@@ -1038,7 +1058,7 @@ Sets a string to replace in the response and a replacement string. No change to 
 **默认设置：** `sub_filter_last_modified off;` <br/>
 **可用位置：** server, location
 
-Allows preserving the “Last-Modified” header field from the original response during replacement to facilitate response caching. No change to the public version.
+该指令允许在替换期的同时保留原始响应中的 `Last-Modified` 头字段，以便于响应缓存。代码源自NGINX开源版本，无变更。
 
 ### [`sub_filter_once`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_once)
 
@@ -1048,7 +1068,7 @@ Allows preserving the “Last-Modified” header field from the original respons
 **默认设置：** `sub_filter_once on;` <br/>
 **可用位置：** server, location
 
-Indicates whether to look for each string to replace once or repeatedly. No change to the public version.
+该指用于配置只替换第一次匹配的字符串，还是反复匹配替换。代码源自NGINX开源版本，无变更。
 
 ### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)
 
@@ -1058,8 +1078,7 @@ Indicates whether to look for each string to replace once or repeatedly. No chan
 **默认设置：** `sub_filter_types text/html;` <br/>
 **可用位置：** server, location
 
-Enables string replacement in responses with the specified MIME types in addition to “text/html”. No change to the public version.
-
+该指令表示允许替换的文件类型，默认值为 “text/html” 。您可以使用该指令添加除 “text/html” 以外其他需要执行替换操作的MIME类型。代码源自NGINX开源版本，无变更。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
@@ -1069,7 +1088,8 @@ Enables string replacement in responses with the specified MIME types in additio
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
+该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
+
 
 ### `access_log_downsample`
 
@@ -1079,4 +1099,4 @@ Specifies the “Referer” request header field values that will cause the embe
 **默认设置：** `-` <br/>
 **可用位置：** server
 
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to avoid properties with large request volume to overload the log processing system.
+该指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该指令来避免日志系统过载。

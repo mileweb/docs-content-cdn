@@ -23,7 +23,7 @@ CDN Pro sends an email notification when a certificate used in production is clo
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
 
 ## If you need a CSR to apply for the new certificate from a CA
-If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, perform the following procedure to create a self-signed version. Otherwise, skip steps 3 and 4.
+If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, perform the following procedure to create a self-signed version. Otherwise, skip steps 5 and 6.
 
 1. In the left pane, click **Certificates**.
 2. Click a certificate name.
