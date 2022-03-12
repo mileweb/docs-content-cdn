@@ -1,5 +1,29 @@
 # Release Notes
 
+## March 11, 2022
+### API updates
+* Fixed PATCH webhook API to allow credential to be updated.
+* Improved error handling to be more user friendly.
+* Allowed childCustomerLimit to be updated for a suspended parent customer.
+* Fixed syntax checking for directives used in loadBalancerLogic field of properties.
+* Improved error handling when null values are passed.
+* Fixed response to APIs when offset exceeds the total number of records.
+* Ensured that a child customer can check the API call made on behalf of them.
+* Updated the [certificate details API](</apidocs#operation/queryCertificateVersion>) to show the issuer of the certificate.
+* Fixed error returning [certificate list](</apidocs#operation/getCertificates>).
+
+### Portal updates
+* Added support for log configuration in the portal. Users must create a log configuration that applies to a hostname in order to download access logs for it.
+* Improved handling of duplicate self-signup attempts.
+* Improved edit user page for unconfirmed users.
+* Asked users to confirm cloning of property version not yet deployed to production.
+* Improved display of text when user changes browser window size.
+* Improved display of property version list.
+* Fixed display issues in edge hostname request report.
+* Fixed display issue in report page when enter key is pressed.
+* Updated translated text.
+* Showed issuer of certificate and improved layout.
+
 ## February 22, 2022
 ### API updates
 * Fixed error handling for invalid search of customers.
