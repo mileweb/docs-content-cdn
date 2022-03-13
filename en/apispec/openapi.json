@@ -741,6 +741,12 @@
                       "code": "OriginHostnameConflict",
                       "message": "At least one of the hostnames is equal to an origin's server name."
                     }
+                  },
+                  "Invalid input": {
+                    "value": {
+                      "code": "InvalidInput",
+                      "message": "Invalid field 'nonexistentfield'."
+                    }
                   }
                 }
               }
@@ -6386,9 +6392,17 @@
                           "signatureAlgo": {
                             "type": "string",
                             "description": "Algorithm of the certificate."
+                          },
+                          "issuer": {
+                            "type": "string",
+                            "description": "Issuer of the chain certificate."
                           }
                         }
                       }
+                    },
+                    "issuer": {
+                      "type": "string",
+                      "description": "Issuer of the certificate."
                     }
                   },
                   "required": [
@@ -6413,7 +6427,8 @@
                       "subjectAlternativeNames": [
                         "a.domain.com",
                         "b.domain.com"
-                      ]
+                      ],
+                      "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA"
                     }
                   }
                 }

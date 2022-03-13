@@ -170,11 +170,23 @@
               {
                   "title": "Delete a Certificate",
                 "path": "/docs/portal/certificates/deleting-certificate.md"
+            }
+           ]
+          },
+           {
+            "title": "Reports",
+            "routes": [
+              {
+                "title": "Generating Reports",
+                "path": "/docs/portal/reports/generating-reports.md"
+              },
+              {
+                "title": "Managing Logs",
+                "path": "/docs/portal/reports/managing-logs.md"
               }
             ]
           },
-          { "title": "Reports", "path": "/docs/portal/reports.md" },
-{
+             {
             "title": "Content Management",
             "routes": [
               {
