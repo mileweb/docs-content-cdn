@@ -298,6 +298,10 @@
                                     "description": "Timeout in seconds."
                                   }
                                 }
+                              },
+                              "tlsCertificateId": {
+                                "type": "string",
+                                "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
                               }
                             }
                           }
@@ -990,6 +994,10 @@
                               "description": "Timeout in seconds."
                             }
                           }
+                        },
+                        "tlsCertificateId": {
+                          "type": "string",
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
                         }
                       }
                     }
@@ -3120,6 +3128,10 @@
                               "description": "Timeout in seconds."
                             }
                           }
+                        },
+                        "tlsCertificateId": {
+                          "type": "string",
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
                         }
                       }
                     }
@@ -3748,6 +3760,10 @@
                                   "description": "Timeout in seconds."
                                 }
                               }
+                            },
+                            "tlsCertificateId": {
+                              "type": "string",
+                              "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
                             }
                           }
                         }
@@ -5662,6 +5678,13 @@
                             "items": {
                               "type": "string"
                             }
+                          },
+                          "origins": {
+                            "type": "array",
+                            "description": "Names of the property's origins which use the certificate.",
+                            "items": {
+                              "type": "string"
+                            }
                           }
                         },
                         "required": [
@@ -5693,6 +5716,13 @@
                           "hostnames": {
                             "type": "array",
                             "description": "List of hostnames using the certificate.",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "origins": {
+                            "type": "array",
+                            "description": "Names of the property's origins which use the certificate.",
                             "items": {
                               "type": "string"
                             }
@@ -7409,6 +7439,32 @@
                     "value": {
                       "code": "OutdatedSecret",
                       "message": "Property a2334bc12345 versionId 1 is using an outdated secret. Please validate the property again before deploying it."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The deployment task could not be created. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Certificate not deployed yet": {
+                    "value": {
+                      "code": "CertificateNotDeployed",
+                      "message": "The required certificate 879aba3828341232 has not been deployed to the target yet."
                     }
                   }
                 }
@@ -30602,7 +30658,7 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If you are a reseller, you may share your certificates with your child customers who can then use the certificates but not modify them."
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates but not modify them."
     },
     {
       "name": "Property Management",
