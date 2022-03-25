@@ -1,5 +1,26 @@
 # Release Notes
 
+## March 24, 2022
+### API updates
+* Cleaned up database to ensure edge hostnames can be created.
+* Prevented termination of a parent customer if it has a child customer.
+* Added support for authentication to origin using a certificate. The certificate must be created and deployed.
+* Ensured ['origin_pass'](</docs/edge-logic/supported-directives#origin_pass>) works correctly with ['if' blocks](</docs/edge-logic/supported-directives#if>) in Edge Logic.
+* Improved error handling for API call without proper authentication.
+* Ensured that parent can get details of an API call that had been performed on behalf of a child customer.
+* Ensured real-time log sample rate works as expected in the presence of [return directives](</docs/edge-logic/supported-directives#return>).
+
+### Portal updates
+* Fixed error related to attempted re-use of deleted portal user.
+* Fixed role creation when choosing “All permissions”.
+* Improved confirmation message when creating a property with hostnames that have ICP Beian.
+* Improved translated text.
+* Fixed display of prefetch region in list when user enters a region.
+* Fixed issue affecting display of portal user’s status when editing a user.
+* Ensured a reseller can create and manage roles with self+children scope.
+* Added confirming if user clicks away while creating a prefetch or purge request.
+* Improved efficiency of displaying dashboard reports.
+
 ## March 11, 2022
 ### API updates
 * Fixed PATCH webhook API to allow credential to be updated.
