@@ -5681,7 +5681,7 @@
                           },
                           "origins": {
                             "type": "array",
-                            "description": "Names of the property's origins which use the certificate.",
+                            "description": "Names of the property's origins that use the certificate.",
                             "items": {
                               "type": "string"
                             }
@@ -5722,7 +5722,7 @@
                           },
                           "origins": {
                             "type": "array",
-                            "description": "Names of the property's origins which use the certificate.",
+                            "description": "Names of the property's origins that use the certificate.",
                             "items": {
                               "type": "string"
                             }
@@ -30658,7 +30658,7 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version which is immutable. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates but not modify them."
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version that is immutable. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates but not modify them."
     },
     {
       "name": "Property Management",
