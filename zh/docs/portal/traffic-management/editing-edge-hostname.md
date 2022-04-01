@@ -6,7 +6,7 @@
   In the **Actions** column, click the vertical ellipsis for the edge hostname you want to edit, and then select **Edit**.
 3. At the top right of the page, click the **Edit** button.
 
-The Edge Hostname form appears for creating, editing, and deleting client zone rules and changing advanced settings. For more information, refer to the topics below.
+The Edge Hostname form appears for creating, editing, and deleting client zone rules. For more information, refer to the topics below.
 <p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form"></p>
 
 4. To create one or more client zone rules, perform the following steps.
@@ -43,15 +43,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
-7. To change the ICP Beian setting, expand **Advanced Settings** and make your change.
-
-<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-advanced-settings.png" alt="edge hostname advanced settings" width="700"></p>
-
-| **Fields**      | **Description**                                              |
-| --------------- | ------------------------------------------------------------ |
-| Has ICP Beian   |   This setting determines whether end user requests will be directed to and served by PoPs inside mainland China. <br><ul><li><strong>No</strong> = this edge hostname will be used by a service hostname that does not have ICP Beian. It will not resolve to any server IP address in mainland China. Only server IP addresses outside China will be returned. (*default*) <li><strong>Yes</strong> = all service hostnames using this edge hostname have ICP Beian. Visitors in mainland China can be served by local servers in China.</li></br></ul>|  
-
-8. Click **Update**.
-9. When a message confirms that the edge hostname was updated, click **OK**.
-10.  Click **Close** to return to the main page.
+7. Click **Update**.
+8. When a message confirms that the edge hostname was updated, click **OK**.
+9.  Click **Close** to return to the main page.
 
