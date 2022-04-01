@@ -46,7 +46,7 @@ The Advanced Filter icon next to the search box allows you to search specific co
 | **Fields/Buttons**   | **Description**                                                                           |
 | :----------: | ----------------------------------------------------------------------------------------- |
 | Keywords     | To search by keywords, enter one or more keywords associated with the property you want to find. A keyword can be a property ID, name, or description. To enter multiple keywords, separate each one with a carriage return. For more information, refer to the [CDN Pro API Specification](</apidocs#operation/createPropertyVersion>).<br>                                   |
-| Add New +    | To search based on conditions, click **Add New +**. Select a field name and operand from the first two lists. If a value is required, enter it in the rightmost field. Click **Add New +**. Repeat these steps for each additional filter condition you want to add.               |
+| Add New +    | To search based on conditions, click **Add New +**. Select a field name and operator from the first two lists. If a value is required, enter it in the rightmost field. Click **Add New +**. Repeat these steps for each additional filter condition you want to add.               |
 
 3. After specifying your search criteria, click **Search**. 
 
