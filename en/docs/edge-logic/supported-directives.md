@@ -229,7 +229,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
-| hash | **SHA256**, **MD5**<br>CRC32 | ```eval_func $output SHA256 $input;``` |
+| hash | **SHA256**, **MD5**<br>CRC32 | ```eval_func $output SHA256 $input;```<br>SHA256 and MD5 return a binary string; CRC32 returns a text string |
 | BASE64<br>codec | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
 | URL<br>codec | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |

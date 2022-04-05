@@ -234,7 +234,7 @@ location @try_origin2 {
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
-| 计算哈希值 | **SHA256**, **MD5**<br>CRC32 | ```eval_func $output SHA256 $input;``` |
+| 计算哈希值 | **SHA256**, **MD5**<br>CRC32 | ```eval_func $output SHA256 $input;```<br>SHA256 和 MD5 返回二进制串; CRC32 返回文本串|
 | BASE64<br>编解码 | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
 | URL<br>编解码 | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
