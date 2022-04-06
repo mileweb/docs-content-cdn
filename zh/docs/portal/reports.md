@@ -52,8 +52,6 @@ The following report types are supported:
 | Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.|
 | Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group the results according to one or more of the following choices. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Customer Ids</strong>.</li> |
 
-**Note:** All volume and bandwidth report data pertains to the HTTP payload only. It does not include the overhead from TCP, IP, and MAC headers. CDNetworks adds 4.56% (66 bytes) of overhead to each 1448-byte payload to generate the "billing volume" on your invoice.
-
 3. Click the **Generate Report** button to generate the report.
 4. After the report is generated, you can:
 
