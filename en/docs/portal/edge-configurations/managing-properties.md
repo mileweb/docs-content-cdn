@@ -38,9 +38,11 @@ You can access the advanced search using either the Advanced Filter icon next to
 
 #### Using the Advanced Filter Icon
 The Advanced Filter icon next to the search box allows you to search specific configurations by entering keywords and conditions in an Advanced Filter dialog box.
+
 1. Click the Advanced Filter icon.
    
    <p align=center><img src="/docs/resources/images/edge-configurations/advanced-filter-icon.png" alt="advfilter icon" width="900"></p>
+   
 2. When the dialog box appears, complete the following fields.
 
 | **Fields/Buttons**   | **Description**                                                                           |
