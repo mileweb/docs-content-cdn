@@ -1798,10 +1798,11 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Indicate whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China.\n"
+                          "description": "Indicates whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China using the ChinaBase or ChinaUltra server group.\n"
                         },
                         "clientZones": {
                           "type": "array",
+                          "description": "Rules control how requests from client zones are handled. By default, a rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
@@ -1875,7 +1876,7 @@
                                   },
                                   "by": {
                                     "type": "array",
-                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
+                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                                     "items": {
                                       "type": "string",
                                       "enum": [
@@ -1883,7 +1884,9 @@
                                         "premium",
                                         "premium+",
                                         "ultra",
-                                        "nearChina"
+                                        "nearChina",
+                                        "ChinaBase",
+                                        "ChinaUltra"
                                       ]
                                     }
                                   },
@@ -1987,7 +1990,7 @@
             }
           }
         },
-        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -2180,7 +2183,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -2254,7 +2257,7 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -2262,7 +2265,9 @@
                                   "premium",
                                   "premium+",
                                   "ultra",
-                                  "nearChina"
+                                  "nearChina",
+                                  "ChinaBase",
+                                  "ChinaUltra"
                                 ]
                               }
                             },
@@ -2454,7 +2459,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -2528,7 +2533,7 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -2536,7 +2541,9 @@
                                   "premium",
                                   "premium+",
                                   "ultra",
-                                  "nearChina"
+                                  "nearChina",
+                                  "ChinaBase",
+                                  "ChinaUltra"
                                 ]
                               }
                             },
@@ -4528,7 +4535,7 @@
             }
           }
         },
-        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must modify your DNS records to point your properties' hostnames to an edge hostname created using this API in order for the CDN to handle your content.",
+        "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must create CNAME DNS records to point your properties' hostnames to an edge hostname created using this API in order for the CDN to handle your content.",
         "operationId": "createEdgeHostname",
         "requestBody": {
           "content": {
@@ -4550,11 +4557,6 @@
                     "default": false,
                     "description": "Indicates whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
                   },
-                  "hasBeian": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Indicate whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China.\n"
-                  },
                   "gdprCompliant": {
                     "type": "boolean",
                     "default": false,
@@ -4562,7 +4564,7 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
@@ -4636,7 +4638,7 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, and <i>nearChina</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require it. ",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -4644,7 +4646,9 @@
                                   "premium",
                                   "premium+",
                                   "ultra",
-                                  "nearChina"
+                                  "nearChina",
+                                  "ChinaBase",
+                                  "ChinaUltra"
                                 ]
                               }
                             },
@@ -8708,9 +8712,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -8765,9 +8778,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -9141,9 +9163,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -9789,9 +9820,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -11775,9 +11815,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -12072,9 +12121,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -13106,9 +13164,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -14383,7 +14450,7 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -14391,7 +14458,9 @@
                             "premium",
                             "premium+",
                             "ultra",
-                            "nearChina"
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
                           ]
                         }
                       },
@@ -15514,8 +15583,10 @@
                     },
                     "apiName": {
                       "type": "string",
-                      "description": "API login name.",
-                      "maxLength": 60
+                      "description": "API account name.",
+                      "maxLength": 60,
+                      "minLength": 1,
+                      "pattern": "^[a-zA-Z0-9\\-\\_\\.@]+"
                     },
                     "type": {
                       "type": "string",
@@ -15635,7 +15706,7 @@
                   "properties": {
                     "apiName": {
                       "type": "string",
-                      "description": "API login name."
+                      "description": "API account name."
                     },
                     "type": {
                       "type": "string",
@@ -15668,6 +15739,11 @@
                           "HDT"
                         ]
                       }
+                    },
+                    "apikey": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "API key used to authenticate API calls. This field is returned only if the call requested a reset of the API key."
                     }
                   },
                   "required": [
@@ -15777,11 +15853,17 @@
                   },
                   "apiName": {
                     "type": "string",
-                    "description": "API login name."
+                    "description": "API account name.",
+                    "minLength": 1,
+                    "maxLength": 60,
+                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                   },
                   "apiKey": {
                     "type": "string",
-                    "description": "If specified, the field's value must be <i>reset</i>. A new random API key will be generated for the API account."
+                    "description": "If specified, the field's value must be <i>reset</i>. A new random API key will be generated for the API account.",
+                    "enum": [
+                      "reset"
+                    ]
                   },
                   "type": {
                     "type": "string",
@@ -15918,7 +16000,7 @@
                   "properties": {
                     "apiName": {
                       "type": "string",
-                      "description": "API login name."
+                      "description": "API account name."
                     },
                     "apiKey": {
                       "type": "string",
@@ -16124,8 +16206,10 @@
                   },
                   "apiName": {
                     "type": "string",
-                    "description": "API login name.",
-                    "maxLength": 60
+                    "description": "API account name.",
+                    "maxLength": 60,
+                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+",
+                    "minLength": 1
                   },
                   "emailAddress": {
                     "type": "string",
@@ -16229,7 +16313,10 @@
                           },
                           "apiName": {
                             "type": "string",
-                            "description": "API login name."
+                            "description": "API account name.",
+                            "pattern": "^[a-zA-Z0-9\\-_\\.@]+",
+                            "maxLength": 60,
+                            "minLength": 1
                           },
                           "type": {
                             "type": "string",
@@ -18256,7 +18343,10 @@
                     },
                     "apiName": {
                       "type": "string",
-                      "description": "Admin API login name."
+                      "description": "Administrator API account name.",
+                      "minLength": 1,
+                      "maxLength": 60,
+                      "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                     },
                     "name": {
                       "type": "string",
@@ -18631,7 +18721,10 @@
                     },
                     "apiName": {
                       "type": "string",
-                      "description": "Admin API login name."
+                      "description": "Administrator API account name.",
+                      "minLength": 1,
+                      "maxLength": 60,
+                      "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                     },
                     "name": {
                       "type": "string",
@@ -19037,11 +19130,14 @@
                   },
                   "apiName": {
                     "type": "string",
-                    "description": "Admin API login name. "
+                    "description": "Administrator API account name. ",
+                    "minLength": 1,
+                    "maxLength": 60,
+                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                   },
                   "apiKey": {
                     "type": "string",
-                    "description": "If specified, the value must be \"reset\". A new key will be generated for the admin API account and must be used for all future API calls using that account.",
+                    "description": "If specified, the value must be \"reset\". A new key will be generated for the administrator API account and must be used for all future API calls using the account.",
                     "enum": [
                       "reset"
                     ]
@@ -19371,11 +19467,11 @@
                     },
                     "apiName": {
                       "type": "string",
-                      "description": "Admin API login name."
+                      "description": "Administrator API account name."
                     },
                     "apiKey": {
                       "type": "string",
-                      "description": "API key ccorresponding to the admin API account."
+                      "description": "API key corresponding to the API account."
                     },
                     "name": {
                       "type": "string",
@@ -19730,7 +19826,10 @@
                 "properties": {
                   "apiName": {
                     "type": "string",
-                    "description": "Administrative API account name."
+                    "description": "Administrator API account name.",
+                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+",
+                    "minLength": 1,
+                    "maxLength": 60
                   },
                   "name": {
                     "type": "string",
@@ -20045,7 +20144,10 @@
                           },
                           "apiName": {
                             "type": "string",
-                            "description": "Administrator API account name."
+                            "description": "Administrator API account name.",
+                            "minLength": 1,
+                            "maxLength": 60,
+                            "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                           },
                           "name": {
                             "type": "string",
@@ -20690,7 +20792,7 @@
             },
             "in": "query",
             "name": "caller",
-            "description": "Filter results by specifying the API login name or API  account ID. You can get IDs by obtaining a <a href=\"#operation/get-ngadmin-apiAccounts\">list of your API accounts</a>."
+            "description": "Filter results by specifying the API account name or API account ID. You can get IDs by obtaining a <a href=\"#operation/get-ngadmin-apiAccounts\">list of your API accounts</a>."
           },
           {
             "schema": {
@@ -23083,9 +23185,18 @@
                           "premium+",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "premium+",
+                            "ultra",
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
+                          ]
                         }
                       }
                     }
@@ -26208,7 +26319,7 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -26216,7 +26327,9 @@
                             "premium",
                             "premium+",
                             "ultra",
-                            "nearChina"
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
                           ]
                         }
                       },
@@ -29386,7 +29499,7 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -29394,7 +29507,9 @@
                             "premium",
                             "premium+",
                             "ultra",
-                            "nearChina"
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
                           ]
                         }
                       },
@@ -29874,7 +29989,9 @@
                             "premium",
                             "premium+",
                             "ultra",
-                            "nearChina"
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
                           ]
                         }
                       }
@@ -30420,7 +30537,9 @@
                             "premium",
                             "premium+",
                             "ultra",
-                            "nearChina"
+                            "nearChina",
+                            "ChinaBase",
+                            "ChinaUltra"
                           ]
                         }
                       }
@@ -30651,14 +30770,14 @@
       "APIKey": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API login name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
       }
     }
   },
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new version that is immutable. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates but not modify them."
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new immutable version. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates, but not modify them."
     },
     {
       "name": "Property Management",

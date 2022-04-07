@@ -1,5 +1,24 @@
 # Release Notes
 
+## April 6, 2022
+### API updates
+* Improved notification of changes made to a customer account or API account on behalf of the customer.
+* Introduced two new server groups, ChinaBase and ChinaUltra. These can be used by customers with ICP Beian to deploy to servers in China. Formerly, they were an inherent part of the other server groups.
+* Improved validation of the API login name. It can consist of only alphanumeric characters along with the underscore, ampersand, hyphen, and period characters.
+
+### Portal updates
+* Used our CDN to accelerate the portal.
+* Improved property search by adding a dialog for configuring search criteria.
+* Added warning about regex pattern limit when creating a purge request.
+* Fixed problem with display of edit edge hostname page.
+* Ensured the correct report type is used after navigating between different reports.
+* Improved display of warning in edge hostname creation page.
+* Improved message about Edge Logic configuration format.
+* Fixed Korean language text on Purge page.
+* Modified edge hostname page to support the two new server groups, ChinaBase and ChinaUltra.
+* Escaped the period in the Edge Logic wizard’s default location.
+
+
 ## March 24, 2022
 ### API updates
 * Cleaned up database to ensure edge hostnames can be created.
