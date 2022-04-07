@@ -7,7 +7,7 @@
 * Improved validation of the API login name. It can consist of only alphanumeric characters along with the underscore, ampersand, hyphen, and period characters.
 
 ### Portal updates
-* Use our CDN to accelerate the portal.
+* Used our CDN to accelerate the portal.
 * Improved property search by adding a dialog for configuring search criteria.
 * Added warning about regex pattern limit when creating a purge request.
 * Fixed problem with display of edit edge hostname page.
