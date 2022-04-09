@@ -593,6 +593,18 @@ If the last request passed to the proxied server for populating a new cache elem
 
 Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
+### proxy_cache_max_stale
+
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `proxy_cache_max_stale if_error=$time while_revalidate=$time;` <br/>
+**Default:** `-` <br/>
+**Context:** server, location
+
+This directive has the same functionality as parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
+
+The goal is allow the edge to serve staled content if it has not expired for too long to give the end user a better experience. When [`proxy_cache_use_stale`](#proxy_cache_use_stale) is off, this directive is ignored.
+
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
 <span class="badge">standard</span>
