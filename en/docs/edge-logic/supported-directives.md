@@ -1078,11 +1078,11 @@ Enables string replacement in responses with the specified MIME types in additio
 
 Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
 
-### `access_log_downsample`
+### `access_log_sampling`
 
-<span class="badge">standard</span> <span class="badge primary">proprietary</span>
+<span class="badge">standard</span> <span class="badge">LBlogic</span> <span class="badge primary">proprietary</span>
 
-**Syntax:** `access_log_downsample factor;` <br/>
+**Syntax:** `access_log_sampling factor;` <br/>
 **Default:** `-` <br/>
 **Contexts:** server
 

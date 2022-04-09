@@ -1104,11 +1104,11 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
 
 
-### `access_log_downsample`
+### `access_log_sampling`
 
-<span class="badge">标准</span> <span class="badge primary">全新特有</span>
+<span class="badge">标准</span> <span class="badge">LBLogic</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `access_log_downsample factor;` <br/>
+**使用语法：** `access_log_sampling factor;` <br/>
 **默认设置：** `-` <br/>
 **可用位置：** server
 
