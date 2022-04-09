@@ -147,6 +147,17 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，服务器将关闭连接。
 
+### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
+
+<span class="badge dark">高级</span>
+
+**使用语法:** `client_max_body_size size;`<br/>
+**默认设置:** `client_header_timeout 1m;`<br/>
+**可用位置:** server, location
+
+设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
+
+一把来说，你需要在 Load Balancer 和 Edge 同时配置本指令。
 
 ### `client_send_timeout`
 

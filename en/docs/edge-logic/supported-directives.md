@@ -147,6 +147,16 @@ This directive sets the maximum idle time when receiving the request body from t
 
 This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s. Please notice that if the `Host` header is not received within the default 10s, the server will close the connection and the setting in the Edge Logic will not take effect.
 
+### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
+
+<span class="badge dark">advanced</span>
+
+**Syntax:** `client_max_body_size size;`<br/>
+**Default:** `client_header_timeout 1m;`<br/>
+**Context:** server, location
+
+Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of client request body size. Usually you will need to configure this directive in both the load balancer and edge logics.
+
 ### `client_send_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
