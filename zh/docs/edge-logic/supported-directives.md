@@ -761,6 +761,16 @@ proxy_ignore_cache_control no-cache no-store;
 ```
 注意：该指令并不会修改或者重写 `cache-control` 响应头。
 
+### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
+
+<span class="badge">高级</span> <span class="badge">LB logic</span>
+
+**使用语法:** `proxy_ignore_client_abort on | off;` <br/>
+**默认设置:** `proxy_ignore_client_abort off;` <br/>
+**可用位置:** server, location
+
+设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续与源站的连接和数据传输。本指令只能在 load balancer logic 里使用。
+
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
 <span class="badge">标准</span>
