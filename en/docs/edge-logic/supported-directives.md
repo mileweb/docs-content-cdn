@@ -747,7 +747,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 ### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
 
-<span class="badge">advanced</span>
+<span class="badge">advanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `proxy_ignore_client_abort on | off;` <br/>
 **Default:** `proxy_ignore_client_abort off;` <br/>
@@ -1100,7 +1100,7 @@ Specifies the “Referer” request header field values that will cause the embe
 
 ### `access_log_sampling`
 
-<span class="badge">standard</span> <span class="badge">LBlogic</span> <span class="badge primary">proprietary</span>
+<span class="badge">standard</span> <span class="badge">LB logic</span> <span class="badge primary">proprietary</span>
 
 **Syntax:** `access_log_sampling factor;` <br/>
 **Default:** `-` <br/>
