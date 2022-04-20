@@ -1,5 +1,25 @@
 # Release Notes
 
+## April 19, 2022
+
+### API updates
+* Improved validation of Edge Logic.
+* Ensured that properties and certificates are undeployed after a customer’s service quota status becomes suspended.
+* Limited the maximum number of certificate versions that can be created to 500, after which a new certificate should be created.
+* Relaxed Edge Logic validation to ensure valid case passes.
+* Ensured proper response when customer is created with responsiblePerson field.
+* Permitted 0 as a value of the [limit_rate_after Edge Logic directive](</docs/edge-logic/supported-directives#limit_rate_after>). This may be useful for blocking attacks. 
+
+### Portal updates
+* Improved error handling for report APIs if report service is unavailable.
+* Improved display of property comparison page.
+* Fixed appearance of property versions with very long descriptions.
+* Fixed Korean translations.
+* Updated origin configuration to support authentication certificate to connect to the origin server.
+* Improved certificate details layout.
+* Ensured that a client zone rule can be configured to deliver using server groups inside and outside of China.
+
+
 ## April 6, 2022
 ### API updates
 * Improved notification of changes made to a customer account or API account on behalf of the customer.
