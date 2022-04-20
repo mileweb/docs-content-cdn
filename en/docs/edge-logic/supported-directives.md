@@ -6,6 +6,16 @@ Each non-proprietary directive includes a direct link to the official nginx docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
+### `access_log_sampling`
+
+<span class="badge">standard</span> <span class="badge">LB logic</span> <span class="badge primary">proprietary</span>
+
+**Syntax:** `access_log_sampling factor;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server
+
+Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
+
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
@@ -1098,12 +1108,3 @@ Enables string replacement in responses with the specified MIME types in additio
 
 Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
 
-### `access_log_sampling`
-
-<span class="badge">standard</span> <span class="badge">LB logic</span> <span class="badge primary">proprietary</span>
-
-**Syntax:** `access_log_sampling factor;` <br/>
-**Default:** `-` <br/>
-**Contexts:** server
-
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
