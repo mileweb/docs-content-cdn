@@ -1,6 +1,6 @@
 ## 支持的指令
 
-这一页列出了你可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
+这一页列出了您可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
 
 在下面的文档里，我们为所有非特有的指令提供了到开源版公开文档的直接链接。每一个被修改增强过的指令，我们都提供了详细的描述，包括新增的功能，参数，以及对参数取值范围的限制。
 
@@ -147,6 +147,17 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，服务器将关闭连接。
 
+### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
+
+<span class="badge dark">高级</span>
+
+**使用语法:** `client_max_body_size size;`<br/>
+**默认设置:** `client_header_timeout 1m;`<br/>
+**可用位置:** server, location
+
+设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
+
+一般来说，您需要在 Load Balancer 和 Edge Logic 里同时配置本指令。
 
 ### `client_send_timeout`
 
@@ -606,6 +617,18 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
 
+### proxy_cache_max_stale
+
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `proxy_cache_max_stale if_error=$time while_revalidate=$time;` <br/>
+**默认设置:** `-` <br/>
+**可用位置:** server, location
+
+本指令的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
+
+其目的是允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。如果 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 被配置成 `off`, 则本指令不生效。
+
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
 <span class="badge">标准</span>
@@ -737,6 +760,16 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 proxy_ignore_cache_control no-cache no-store;
 ```
 注意：该指令并不会修改或者重写 `cache-control` 响应头。
+
+### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
+
+<span class="badge">高级</span> <span class="badge">LB logic</span>
+
+**使用语法:** `proxy_ignore_client_abort on | off;` <br/>
+**默认设置:** `proxy_ignore_client_abort off;` <br/>
+**可用位置:** server, location
+
+设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。本指令只能在 load balancer logic 里使用。
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -1092,12 +1125,12 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
 
 
-### `access_log_downsample`
+### `access_log_sampling`
 
-<span class="badge">标准</span> <span class="badge primary">全新特有</span>
+<span class="badge">标准</span> <span class="badge">LBLogic</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `access_log_downsample factor;` <br/>
+**使用语法：** `access_log_sampling factor;` <br/>
 **默认设置：** `-` <br/>
 **可用位置：** server
 
-该指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该指令来避免日志系统过载。
+本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。

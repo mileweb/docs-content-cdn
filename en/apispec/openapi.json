@@ -5866,7 +5866,7 @@
             }
           },
           "400": {
-            "description": "This response indicates the request was incorrectly formatted. Please refer to the response body for more details.",
+            "description": "This response indicates the request was invalid. Please refer to the response body for more details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5881,16 +5881,22 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid certificate": {
                     "value": {
                       "code": "InvalidCert",
                       "message": "The certificate body cannot be empty."
                     }
                   },
-                  "example-2": {
+                  "Invalid sharing method": {
                     "value": {
                       "code": "InvalidSharingMethod",
                       "message": "An invalid value for sharingMethod was given. Only 'all', 'none', or 'some' is permitted."
+                    }
+                  },
+                  "Too many versions": {
+                    "value": {
+                      "code": "TooManyVersions",
+                      "message": "You have created the maximum number of versions allowed in a certificate. You need to create a new certificate to replace the existing one in all properties that refer to it."
                     }
                   }
                 }
@@ -7243,8 +7249,7 @@
             "schema": {
               "type": "integer",
               "minimum": 0,
-              "default": 0,
-              "exclusiveMaximum": true
+              "default": 0
             },
             "in": "query",
             "name": "offset",
@@ -14097,18 +14102,21 @@
                       }
                     },
                     "groups": {
-                      "type": "object",
+                      "type": "array",
                       "description": "This object contains the breakdown of traffic by group. ",
-                      "properties": {
-                        "group": {
-                          "type": "string",
-                          "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
-                        },
-                        "data": {
-                          "type": "array",
-                          "description": "Data values. The units of measurement are determined by the dataUnit field.",
-                          "items": {
-                            "type": "number"
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of the group. \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
                           }
                         }
                       }
@@ -14635,18 +14643,21 @@
                       }
                     },
                     "groups": {
-                      "type": "object",
+                      "type": "array",
                       "description": "This object contains the breakdown of traffic by group. ",
-                      "properties": {
-                        "group": {
-                          "type": "string",
-                          "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
-                        },
-                        "data": {
-                          "type": "array",
-                          "description": "Data values. The units of measurement are determined by the dataUnit field.",
-                          "items": {
-                            "type": "number"
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of the group. \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
                           }
                         }
                       }
@@ -15703,6 +15714,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "description": "Updated API account.",
                   "properties": {
                     "apiName": {
                       "type": "string",
@@ -15840,7 +15852,7 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ],
-        "description": "Update an API account's settings.",
+        "description": "Update an API account's settings. If you need to change the default permissions of the API account, call our API to <a href=\"#operation/post-cdn-apiPermissions\">create a custom API permission object</a>.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -15997,6 +16009,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "description": "API account details.",
                   "properties": {
                     "apiName": {
                       "type": "string",
@@ -16193,7 +16206,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN Pro APIs.  You can give <i>read-only</i> access which permits calling API endpoints using the HTTP GET method only OR <i>operator</i> access which also allows creating, updating, and deleting objects like properties. You can further customize which endpoints the API account can access by <a href=\"#tag/API-Access-Control\">creating custom API permissions</a> for it.",
+        "description": "Create an API account that can be used to call CDN Pro APIs in addition to your administrator API account. You can grant <i>read-only</i> access, which permits calling API endpoints using the HTTP GET method only, OR <i>operator</i> access, which also allows creating, updating, and deleting objects like properties and certificates. \n<br/><br/>To restrict the endpoints accessible to the new API account, call our <a \nhref=\"#operation/post-cdn-apiPermissions\">API to create custom permissions</a> for it. After that, you can make additional changes by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a>.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -19137,7 +19150,7 @@
                   },
                   "apiKey": {
                     "type": "string",
-                    "description": "If specified, the value must be \"reset\". A new key will be generated for the administrator API account and must be used for all future API calls using the account.",
+                    "description": "If specified, the value must be \"reset\". A new key will be generated for the administrator API account and must be used for all future API calls using that account.",
                     "enum": [
                       "reset"
                     ]
@@ -19471,7 +19484,7 @@
                     },
                     "apiKey": {
                       "type": "string",
-                      "description": "API key corresponding to the API account."
+                      "description": "API key corresponding to the administrator API account."
                     },
                     "name": {
                       "type": "string",
@@ -25402,7 +25415,7 @@
           }
         },
         "operationId": "post-cdn-apiPermissions",
-        "description": "Control which CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work in conjunction with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs.",
+        "description": "Control which CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security, you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs. \n\nAfter you create a custom API permission for the API account, you can update it further by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">update permission API</a>.",
         "parameters": [
           {
             "schema": {
@@ -25707,7 +25720,7 @@
             }
           },
           "404": {
-            "description": "If the request is for a valid API account without any custom permissions, the default permissions will be returned in the response. Otherwise, if the API account ID is invalid, a message will indicate that.",
+            "description": "If the request is for a valid API account without any custom permissions, the default permissions will be returned in the response. To change the default behavior, you must <a href=\"#operation/post-cdn-apiPermissions\">create an API permission</a> with custom permissions, after which you can <a href=\"#operation/patch-cdn-apiPermissions-id\">modify the API permissions further</a>. Otherwise, if the API account ID is invalid, a message will indicate that.",
             "content": {
               "application/json": {
                 "schema": {
@@ -25854,7 +25867,7 @@
           }
         },
         "operationId": "get-cdn-apiPermissions-id",
-        "description": "Return an API account's permissions, both custom ones as well as the defaults.",
+        "description": "Return an API account's permissions, both custom ones as well as the defaults. If you have never customized the API account's permissions, you will get a 404 HTTP response whose body consists of the default settings for the API account. To change the permissions of an API account, you must first <a href=\"#operation/post-cdn-apiPermissions\">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a> further if needed.",
         "parameters": [
           {
             "schema": {
@@ -25939,7 +25952,7 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ],
-        "description": "Update permissions for an API account.",
+        "description": "Update permissions for an API account. If you have not yet customized the permissions of an API account, you must first <a href=\"#operation/post-cdn-apiPermissions\">create a custom API permission</a>. Otherwise, this API will return a 404 response.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -26175,8 +26188,11 @@
                             "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
-                            "type": "number",
-                            "description": "Data values. The units of measurement are determined by the dataUnit field."
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
                           }
                         }
                       }
@@ -26468,8 +26484,11 @@
                             "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
-                            "type": "number",
-                            "description": "Data values. The units of measurement are determined by the dataUnit field."
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
                           }
                         }
                       }
@@ -29721,13 +29740,9 @@
             "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> "
           },
           {
-            "name": "enddate"
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
             "name": "enddate",
             "required": true,
             "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
@@ -30821,11 +30836,11 @@
     },
     {
       "name": "API Account Management",
-      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/#tag/API-Access-Control\">API permissions</a>."
+      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/API-Access-Control\">API permissions</a>."
     },
     {
       "name": "Customer Management",
-      "description": "These APIs allow you to update customer level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts."
+      "description": "These APIs allow you to update customer-level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts."
     },
     {
       "name": "API Call History",
@@ -30837,7 +30852,7 @@
     },
     {
       "name": "API Access Control",
-      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN Pro API account</a> can do. The permissions work in conjunction with the API account type (read-only and operator)."
+      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN Pro API account</a> can do by specifying the categories of accessible endpoints."
     },
     {
       "name": "Webhooks",

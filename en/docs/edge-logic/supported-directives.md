@@ -6,6 +6,16 @@ Each non-proprietary directive includes a direct link to the official nginx docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
+### `access_log_sampling`
+
+<span class="badge">standard</span> <span class="badge">LB logic</span> <span class="badge primary">proprietary</span>
+
+**Syntax:** `access_log_sampling factor;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server
+
+Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
+
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
@@ -77,7 +87,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 Adds the specified field to the end of a response provided that the response code equals 200, 201, 206, 301, 302, 303, 307, or 308. When "always" is specified, the trailer is added regardless of the status code. Parameter value can contain variables. We made the following changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer):
 
-1. This directive is intended to be used in the edge logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
+1. This directive is intended to be used in the Edge Logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
 
 2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the `Transfer-Encoding` to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client. The added trailer won't appear in the response to the client.
 
@@ -146,6 +156,16 @@ This directive sets the maximum idle time when receiving the request body from t
 **Context:** server
 
 This directive sets the maximum wait time for the complete request header from the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s. Please notice that if the `Host` header is not received within the default 10s, the server will close the connection and the setting in the Edge Logic will not take effect.
+
+### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
+
+<span class="badge dark">advanced</span>
+
+**Syntax:** `client_max_body_size size;`<br/>
+**Default:** `client_header_timeout 1m;`<br/>
+**Context:** server, location
+
+Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of the client request body size. Usually you will need to configure this directive in both the load balancer and Edge Logic.
 
 ### `client_send_timeout`
 
@@ -593,6 +613,18 @@ If the last request passed to the proxied server for populating a new cache elem
 
 Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
+### proxy_cache_max_stale
+
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `proxy_cache_max_stale if_error=$time while_revalidate=$time;` <br/>
+**Default:** `-` <br/>
+**Context:** server, location
+
+This directive has the same functionality as parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
+
+The goal is allow the edge to serve staled content if it has not expired for too long to give the end user a better experience. When [`proxy_cache_use_stale`](#proxy_cache_use_stale) is off, this directive is ignored.
+
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
 <span class="badge">standard</span>
@@ -722,6 +754,16 @@ Examples: ignore the no-cache and no-store directives:
 proxy_ignore_cache_control no-cache no-store;
 ```
 Note: This directive does not modify the "Cache-Control" header from the origin.
+
+### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
+
+<span class="badge">advanced</span> <span class="badge">LB logic</span>
+
+**Syntax:** `proxy_ignore_client_abort on | off;` <br/>
+**Default:** `proxy_ignore_client_abort off;` <br/>
+**Context:** server, location
+
+Determines whether the connection with a proxied server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the proxied server. This directive is supported only in the load balancer logic.
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -1066,12 +1108,3 @@ Enables string replacement in responses with the specified MIME types in additio
 
 Specifies the “Referer” request header field values that will cause the embedded $invalid_referer variable to be set to an empty string. No change to the public version.
 
-### `access_log_downsample`
-
-<span class="badge">standard</span> <span class="badge primary">proprietary</span>
-
-**Syntax:** `access_log_downsample factor;` <br/>
-**Default:** `-` <br/>
-**Contexts:** server
-
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to avoid properties with large request volume to overload the log processing system.
