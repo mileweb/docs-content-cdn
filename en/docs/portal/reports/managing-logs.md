@@ -42,7 +42,7 @@ The following table shows the variables you can use in the **Log Format** field 
 | %hostname    | Host header|
 | %method      | HTTP method used to access the content (for example, GET)|
 | %protocol    | HTTP/1.0, HTTP/1.1, or HTTP2.0|
-| %querystr    | Arguments passed along with the UR|
+| %querystr    | Query string|
 | %referer     | Referer request header|
 | %reqrange    | Range header in requests from client|
 | %reqhdrsize  | Request header length|
