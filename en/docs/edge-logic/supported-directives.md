@@ -112,7 +112,7 @@ Allows access from the specified network or address. Usually used together with 
 
 Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. We have enhanced this directive to allow variables in the parameter. This enables you to pass the query parameters to the authorization logic:
 ```nginx
-auth_request /auth?$is_args$args;
+auth_request /auth$is_args$args;
 ```
 
 

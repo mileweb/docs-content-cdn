@@ -103,7 +103,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。我们对 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)做了改进以允参数里包含变量。这使得用户可以把URL里的参数传递给鉴权逻辑：
 ```nginx
-auth_request /auth?$is_args$args;
+auth_request /auth$is_args$args;
 ```
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
