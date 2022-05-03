@@ -3,8 +3,14 @@
 Security and privacy protection have raised increasing concerns over the last few years — and for good reason. Hardly a day goes by when the headlines aren't filled with another major security breach. With these concerns in mind, CDN Pro has adopted several features to help you achieve your security goals with smooth and uninterrupted service for your clients. This article describes these features, along with a few best practices to help you optimize security.
 
 ### Layer 4 DDoS Mitigation
-At the entry point of every CDN Pro Point of Presence (PoP) is a high-performance Layer 4 distributed denial-of-service (DDoS) firewall. The firewall consists of a group of machines that analyze incoming traffic at line speed.
-Based on regularly updated rules, the firewall rejects suspicious packets that may endanger services and forwards only the "safe" packets to the servers located behind the firewall. This feature is enabled by default and is transparent to all the users.
+CDN Pro is built upon our Edge Computing Platform. At the entry point of every edge Point of Presence (PoP) is a high-performance Layer 4 distributed denial-of-service (DDoS) firewall. The firewall consists of a group of machines that analyze incoming traffic at line speed.
+Based on regularly updated rules, the firewall rejects suspicious packets that may endanger services and forwards only the "safe" packets to the servers located behind the firewall. This feature is enabled by default for all edge services and is transparent to all the users.
+
+### Layer 7 DDoS Mitigation
+The CDN Pro platform monitors the traffic in real-time to detect unusual behaviors at layer 7.
+Once an attack is identified, defense strategies will be deployed in both layer 4 and layer 7 to
+most effectively mitigate the impact to normal traffic. Since its inception, CDN Pro has successfully handled
+some of the world's largest DDoS attacks with bandwidth reaching 1.2Tbps and request rate as high as 35Mrps.
 
 ### Access Control at the Edge
 Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN Pro supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
@@ -118,3 +124,6 @@ location /credit-card-info {
 }
 ```
 This is particularly important when meeting privacy standards such as PCI-DSS and HIPAA.
+
+### Web Application firewall (WAF)
+CDN Pro can work seamlessly with CDNetworks' WAF platform to protect your origin servers from any malicious requests. It also works well with any 3rd party WAF solutions.
