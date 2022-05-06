@@ -628,9 +628,9 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置:** `-` <br/>
 **可用位置:** server, location
 
-本指令的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
+本指令允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
 
-其目的是允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。如果 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 被配置成 `off`, 则本指令不生效。
+其中的 'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’. 参数 'while_revalidate=' 必须和 [`proxy_cache_background_update on;`](#proxy_cache_background_update) 一同配置, 同时要求 `proxy_cache_use_stale` 的配置里包含 'updating'.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
