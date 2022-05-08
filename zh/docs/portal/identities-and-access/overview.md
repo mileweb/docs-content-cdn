@@ -10,14 +10,14 @@
 
 ## 什么是“权限”
 
-用户在门户中可执行操作都由权限控制。每个权限都有一个直观的名称来描述其用途。例如，certificate.create 代表允许进行证书创建操作，certificate.remove代表允许进行证书删除操作。每个用户都应被授予其期待执行操作所相应的权限。
+用户在 Portal 中可执行操作都由权限控制。每个权限都有一个直观的名称来描述其用途。例如，certificate.create 代表允许进行证书创建操作，certificate.remove代表允许进行证书删除操作。每个用户都应被授予其期待执行操作所相应的权限。
 
 
 ## 什么是“角色”？
 
 将单独的权限直接分配给每个用户是一个重复且繁琐的操作，因此 CDN Pro 定义了角色这个概念。角色是一群拥有相同权限的用户的集合。在添加角色时，您需要指定角色的名称、选择与角色关联的权限，角色创建完毕后您即可将目标用户关联到该角色上。
 
-默认情况下，门户提供三个初始角色：Admin、Operator 以及 Viewer.
+默认情况下，Portal 提供三个初始角色：Admin、Operator 以及 Viewer.
 
 - Admin 可以查看和更改 Portal 中的所有配置。
 - Operator 可以查看和更改除了用户和角色管理页面外的所有 Portal 配置。
@@ -41,4 +41,3 @@
 | 3 | 每一行都代表一个用户或者角色。|
 | 4 | 可对该用户或者角色进行的操作下拉列表。|
 | 5 | **用户** 页面中有一个 **+ Add User** 按钮， Admin 用户可通过此按钮来 [创建一个新用户](</docs/portal/identities-and-access/managing-users.md>)。 类似地， **角色** 页面中有一个 **+ Add Role** 按钮，Admin 用户可以通过此按钮来 [创建一个新角色](</docs/portal/identities-and-access/managing-roles.md>)。只有可读权限的用户将无法看到这两个按钮。
-
