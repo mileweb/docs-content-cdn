@@ -1,5 +1,28 @@
 # Release Notes
 
+## May 6, 2022
+### API updates
+
+* Renamed “premium+” server group to “deluxe” and added ChinaStandard and ChinaPremium groups to distribute content using servers in Mainland China.
+* Improved validation of API names.
+* Ensured that email notifications are sent to all portal users identified as ‘master’.
+* Improved description of undeployment task when a customer is suspended.
+* Relaxed validation of the [access_log_sampling directive](</docs/edge-logic/supported-directives#access_log_sampling>) to permit variables.
+* Added support for three [log configuration](</apidocs#operation/post-cdn-report-logConfigs>) fields: %querystr, %reqhdrsize, %reqsize.
+
+
+### Portal updates
+* Improved validation of role names.
+* Improved validation when a user tries to modify the server header using the add_header directive.
+* Improved Korean-language translation.
+* Improved display of self-signup page.
+* Updated prefetch to support continents rather than countries.
+* Improved display of task menu.
+* Improved display of property comparison page.
+* Added support for new log configuration fields: : %querystr, %reqhdrsize, %reqsize.
+* Supported renaming of server groups.
+
+
 ## April 19, 2022
 
 ### API updates
