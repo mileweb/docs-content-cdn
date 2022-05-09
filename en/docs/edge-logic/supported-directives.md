@@ -104,13 +104,16 @@ Allows access from the specified network or address. Usually used together with 
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
 
-<span class="badge dark">advanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `auth_request uri | off`;<br/>
 **Default:** `auth_request off;`<br/>
 **Context:** server, location
 
-Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. No change to the public version. 
+Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. We have enhanced this directive to allow variables in the parameter. This enables you to pass the query parameters to the authorization logic:
+```nginx
+auth_request /auth$is_args$args;
+```
 
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
@@ -621,9 +624,9 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 **Default:** `-` <br/>
 **Context:** server, location
 
-This directive has the same functionality as parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
+This directive allows serving of stale content that did not expire too long ago to give the end user a better experience. It has the same functionality as the parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
 
-The goal is allow the edge to serve staled content if it has not expired for too long to give the end user a better experience. When [`proxy_cache_use_stale`](#proxy_cache_use_stale) is off, this directive is ignored.
+The parameter 'if_error=' requires 'error' to be specified in the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive. The parameter 'while_revalidate=' only works with [`proxy_cache_background_update on;`](#proxy_cache_background_update), which needs 'updating' to be specified in `proxy_cache_use_stale`.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -950,6 +953,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Context:** server, location
 
 Allows access if all (all) or at least one (any) of the ngx_http_access_module ([`allow`](#allow), [`deny`](#deny)), ngx_http_auth_request_module ([`auth_request`](#auth_request)) modules allows access. No change to the public version.
+Please note that all these directives are executed after the ones in the rewrite module.
 
 ### `sanitize_accept_encoding`
 

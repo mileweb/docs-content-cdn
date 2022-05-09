@@ -95,13 +95,16 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
 
-<span class="badge dark">高级</span>
+<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `auth_request uri | off`;<br/>
 **默认设置：** `auth_request off;`<br/>
 **可用位置：** server, location
 
-本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)，无改动。
+本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。我们对 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)做了改进以允参数里包含变量。这使得用户可以把URL里的参数传递给鉴权逻辑：
+```nginx
+auth_request /auth$is_args$args;
+```
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -625,9 +628,9 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置:** `-` <br/>
 **可用位置:** server, location
 
-本指令的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
+本指令允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
 
-其目的是允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。如果 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 被配置成 `off`, 则本指令不生效。
+其中的 'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’。参数 'while_revalidate=' 必须和 [`proxy_cache_background_update on;`](#proxy_cache_background_update) 一同配置，同时要求 `proxy_cache_use_stale` 的配置里包含 'updating'。
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
@@ -961,6 +964,7 @@ proxy_no_cache $no_store;
 **可用位置：** server, location
 
 该指令用于设置 CDN Pro 对多个访问控制功能的校验方式。当配置值为 all 时，只有当边缘逻辑中所有的 [`allow`](#allow), [`deny`](#deny) 以及 [`auth_request`](#auth_request) 的结果都为 pass 时，请求才会通过校验。配置值为 any 时，只要上述指令结果有一个为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
+请注意，所有这些校验指令都在 rewrite 模块指令之后才被执行。
 
 ### `sanitize_accept_encoding`
 

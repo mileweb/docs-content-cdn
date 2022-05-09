@@ -1,10 +1,18 @@
 ## 用CDN Pro安全地进行分发
 
-Security and privacy protection have raised increasing concerns over the last few years — and for good reason. Hardly a day goes by when the headlines aren't filled with another major security breach. With these concerns in mind, CDN Pro has adopted several features to help you achieve your security goals with smooth and uninterrupted service for your clients. This article describes these features, along with a few best practices to help you optimize security.
+安全和隐私保护在近年来得到了社会各界的广泛关注。每过一段时间都能在新闻里看到关于互联网安全信息泄露的消息。
+为了实现您的数据安全目标，CDN Pro提供了大量有效的功能和特性来保护您的业务不受任何侵扰。本文将对这些特性
+做一个简要的介绍，并提供一些关于提高安全性的最佳实践。
 
 ### 第4层DDoS防护
-At the entry point of every CDN Pro Point of Presence (PoP) is a high-performance Layer 4 distributed denial-of-service (DDoS) firewall. The firewall consists of a group of machines that analyze incoming traffic at line speed.
-Based on regularly updated rules, the firewall rejects suspicious packets that may endanger services and forwards only the "safe" packets to the servers located behind the firewall. This feature is enabled by default and is transparent to all the users.
+CDN Pro是搭建在我们边缘计算平台之上的。在每一个边缘节点的网络入口都部署有我们的高性能4层DDoS防火墙。
+这些设备可以在物理线路的传输速率下分析每一个报文，并根据定期更新的规则来判断它们是否会对上层服务造成侵害。
+只有安全的报文才会被转发到后端，包括CDN Pro以及所有的边缘业务。这项服务是默认开启，并对所有客户透明的。
+
+### 第7层DDoS防护
+CDN Pro对平台上的7层流量进行实时监控并通过大数据分析及时发现任何异常的行为。一旦发现攻击行为，会迅速把防护策略同时下发到
+4层和7层以最有效地消除对正常服务的影响。自平台运行以来，CDN Pro已经成功防御了多次世界级的超大型攻击。最大攻击带宽高达1.2Tbps，
+攻击请求速率更是达到了史无前例的35Mrps！
 
 ### 在边缘上进行访问控制
 Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN Pro supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
@@ -118,3 +126,6 @@ location /credit-card-info {
 }
 ```
 This is particularly important when meeting privacy standards such as PCI-DSS and HIPAA.
+
+### Web应用防火墙 (WAF)
+CDN Pro can work seamlessly with CDNetworks' WAF platform to protect your origin servers from any malicious requests. It also works well with any 3rd party WAF solutions.

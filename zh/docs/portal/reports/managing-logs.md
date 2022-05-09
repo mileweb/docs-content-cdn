@@ -42,11 +42,8 @@ The following table shows the variables you can use in the **Log Format** field 
 | %hostname    | Host header|
 | %method      | HTTP method used to access the content (for example, GET)|
 | %protocol    | HTTP/1.0, HTTP/1.1, or HTTP2.0|
-| %querystr    | Query string|
 | %referer     | Referer request header|
 | %reqrange    | Range header in requests from client|
-| %reqhdrsize  | Request header length|
-| %reqsize     | Request length (including request line, header, and request body)|
 | %rmtuser     | User name extracted from the Authorization header when basic authentication is used|
 | %rspsize     | HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC|
 | %rsptime     | Response time in milliseconds|
