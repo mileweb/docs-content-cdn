@@ -624,7 +624,7 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 **Default:** `-` <br/>
 **Context:** server, location
 
-This directive allows the edge to serve staled content if it has not expired for too long to give the end user a better experience. It has the same functionality as the parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
+This directive allows serving of stale content that did not expire too long ago to give the end user a better experience. It has the same functionality as the parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
 
 The parameter 'if_error=' requires 'error' to be specified in the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive. The parameter 'while_revalidate=' only works with [`proxy_cache_background_update on;`](#proxy_cache_background_update), which needs 'updating' to be specified in `proxy_cache_use_stale`.
 
