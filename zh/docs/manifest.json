@@ -171,11 +171,11 @@
           },
           {
                 "title": "报表查看", 
-                "path": "/docs/portal/reports.md" }, 
+                "path": "/docs/portal/reports/generating-reports.md" }, 
               },
               {
                 "title": "内容管理", 
-                "path": "/docs/portal/content-management.md" },
+                "path": "/docs/portal/reports/managing-logs.md" },
               },
               {
                "title": "异步任务",
