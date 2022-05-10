@@ -169,10 +169,18 @@
               }
             ]
           },
-          { "title": "报表查看", "path": "/docs/portal/reports.md" }, 
-          { "title": "内容管理", "path": "/docs/portal/content-management.md" },
-          { "title": "异步任务",
-            "routes": [
+          {
+                "title": "报表查看", 
+                "path": "/docs/portal/reports.md" }, 
+              },
+              {
+                "title": "内容管理", 
+                "path": "/docs/portal/content-management.md" },
+              },
+              {
+               "title": "异步任务",
+               "routes": [
+              },
               {
                 "title": "配置验证",
                 "path": "/docs/portal/tasks/validations.md"
