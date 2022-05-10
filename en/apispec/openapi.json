@@ -1798,15 +1798,15 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Indicates whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China using the ChinaBase or ChinaUltra server group.\n"
+                          "description": "Indicates whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China using the ChinaStandard or ChinaPremium server group.\n"
                         },
                         "clientZones": {
                           "type": "array",
-                          "description": "Rules control how requests from client zones are handled. By default, a rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                          "description": "Rules control how requests from client zones are handled. By default, a rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
-                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
+                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -1825,7 +1825,7 @@
                                   "by": [
                                     "standard",
                                     "premium",
-                                    "premium+"
+                                    "deluxe"
                                   ]
                                 }
                               },
@@ -1857,7 +1857,7 @@
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
@@ -1876,17 +1876,17 @@
                                   },
                                   "by": {
                                     "type": "array",
-                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium. If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                                     "items": {
                                       "type": "string",
                                       "enum": [
                                         "standard",
                                         "premium",
-                                        "premium+",
+                                        "deluxe",
                                         "ultra",
                                         "nearChina",
-                                        "ChinaBase",
-                                        "ChinaUltra"
+                                        "ChinaStandard",
+                                        "ChinaPremium"
                                       ]
                                     }
                                   },
@@ -1990,7 +1990,7 @@
             }
           }
         },
-        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. ",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. <p>(Deluxe was previously referred to as \"premium+\")</p>",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -2183,11 +2183,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. (Deluxe was previously referred to as \"premium+\")",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2206,7 +2206,7 @@
                             "by": [
                               "standard",
                               "premium",
-                              "premium+"
+                              "deluxe"
                             ]
                           }
                         },
@@ -2238,7 +2238,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -2257,17 +2257,17 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium. If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
-                                  "premium+",
+                                  "deluxe",
                                   "ultra",
                                   "nearChina",
-                                  "ChinaBase",
-                                  "ChinaUltra"
+                                  "ChinaStandard",
+                                  "ChinaPremium"
                                 ]
                               }
                             },
@@ -2459,11 +2459,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. (Deluxe was previously referred to as \"premium+\")",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2482,7 +2482,7 @@
                             "by": [
                               "standard",
                               "premium",
-                              "premium+"
+                              "deluxe"
                             ]
                           }
                         },
@@ -2514,7 +2514,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -2533,17 +2533,17 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium. If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
-                                  "premium+",
+                                  "deluxe",
                                   "ultra",
                                   "nearChina",
-                                  "ChinaBase",
-                                  "ChinaUltra"
+                                  "ChinaStandard",
+                                  "ChinaPremium"
                                 ]
                               }
                             },
@@ -4564,11 +4564,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"premium+\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\" is available if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. Please contact our support team if you require that.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created which allows use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. An additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4587,7 +4587,7 @@
                             "by": [
                               "standard",
                               "premium",
-                              "premium+"
+                              "deluxe"
                             ]
                           }
                         },
@@ -4619,7 +4619,7 @@
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"premium+\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                          "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
@@ -4638,17 +4638,17 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>premium+</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaBase</i>, <i>ChinaUltra</i>) to control what servers can be used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaBase\" and \"ChinaUltra.\" Please contact our support team if you require nearChina, ChinaBase, or ChinaUltra. If an edge hostname is not initially configured to use ChinaBase or ChinaUltra, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. \"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium. If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
                                   "standard",
                                   "premium",
-                                  "premium+",
+                                  "deluxe",
                                   "ultra",
                                   "nearChina",
-                                  "ChinaBase",
-                                  "ChinaUltra"
+                                  "ChinaStandard",
+                                  "ChinaPremium"
                                 ]
                               }
                             },
@@ -4769,7 +4769,7 @@
                             "enum": [
                               "standard",
                               "premium",
-                              "premium+",
+                              "deluxe",
                               "ultra"
                             ]
                           },
@@ -8714,20 +8714,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -8780,20 +8780,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -9165,20 +9165,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -9822,20 +9822,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -11817,20 +11817,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -12123,20 +12123,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -13166,20 +13166,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -14458,17 +14458,17 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       },
@@ -21138,7 +21138,7 @@
                           "required": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra"
                           ],
                           "properties": {
@@ -21150,9 +21150,9 @@
                               "type": "number",
                               "description": "Price in US dollars per gigabyte of traffic using the premium server group."
                             },
-                            "premium+": {
+                            "deluxe": {
                               "type": "number",
-                              "description": "Price in US dollars per gigabyte of traffic using the premium+ server group."
+                              "description": "Price in US dollars per gigabyte of traffic using the deluxe server group, formerly referred to as \"premium+\""
                             },
                             "ultra": {
                               "type": "number",
@@ -21293,8 +21293,8 @@
                         "perGB": {
                           "standard": 0.057,
                           "premium": 0.112,
-                          "ultra": 0.279,
-                          "premium+": 0.197
+                          "deluxe": 0.197,
+                          "ultra": 0.279
                         },
                         "perMHttpsReq": 0.99
                       },
@@ -23195,20 +23195,20 @@
                         "enum": [
                           "standard",
                           "premium",
-                          "premium+",
+                          "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -26335,17 +26335,17 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       },
@@ -28384,7 +28384,7 @@
             }
           }
         },
-        "description": "Create a log configuration used to format the <a href=\"#operation/post-cdn-report-logDownload\">access logs</a>. ",
+        "description": "Create a log configuration used to format the <a href=\"#operation/post-cdn-report-logDownload\">access logs</a> for one or more hostnames. An applicable log configuration must exist for you to obtain logs for a hostname.",
         "tags": [
           "Log Configuration Management"
         ],
@@ -28409,7 +28409,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28507,7 +28507,7 @@
                         },
                         "logDownloadFormat": {
                           "type": "string",
-                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
+                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>\n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>      \n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
                         },
                         "logDownloadStorageDays": {
                           "type": "integer",
@@ -28728,7 +28728,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28791,7 +28791,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%custom2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>      \n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28948,6 +28948,10 @@
                           "logUrl": {
                             "type": "string",
                             "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format."
+                          },
+                          "hostname": {
+                            "type": "string",
+                            "description": "The log file contains entries for this hostname."
                           }
                         },
                         "required": [
@@ -28968,13 +28972,15 @@
                           "dateFrom": "2021-10-12T12:00:00Z",
                           "dateTo": "2021-10-12T12:29:59Z",
                           "fileSize": 304,
-                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211012-000000-235959/myreports.domain.info/20211012-120000-122959_52b8e3ed_myreports.domain.info.log.gz?wskey=8f8aaac672514b73465761c8d856ba435afd02ddc8dc241c38fedea3b2e416fa"
+                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211012-000000-235959/myreports.domain.info/20211012-120000-122959_52b8e3ed_myreports.domain.info.log.gz?wskey=8f8aaac672514b73465761c8d856ba435afd02ddc8dc241c38fedea3b2e416fa",
+                          "hostname": "myreports.domain.info"
                         },
                         {
                           "dateFrom": "2021-10-18T08:30:00Z",
                           "dateTo": "2021-10-18T08:59:59Z",
                           "fileSize": 300,
-                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211018-000000-235959/myreports.domain.info/20211018-083000-085959_aecac869_myreports.domain.info.log.gz?wskey=e527ff274cc684824935ab6dfed2b2a05afd02ddc8dc241c38fedea3b2e416fc"
+                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211018-000000-235959/myreports.domain.info/20211018-083000-085959_aecac869_myreports.domain.info.log.gz?wskey=e527ff274cc684824935ab6dfed2b2a05afd02ddc8dc241c38fedea3b2e416fc",
+                          "hostname": "myreports.domain.info"
                         }
                       ]
                     }
@@ -29051,7 +29057,7 @@
             "required": true
           }
         ],
-        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nIn order to obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a>. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\"logs\":[{\"dateFrom\":\"2021-10-31T00:00:00Z\",\"dateTo\":\"2021-10-31T00:29:59Z\",\"fileSize\":105878,\"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\"}]}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs for a hostname, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"domain-abc.com\"\n          }\n        ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -29063,8 +29069,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "Specify the hostname you are interested in.",
-                        "maxItems": 1,
+                        "description": "Specify the hostname that interests you.",
                         "minItems": 0,
                         "items": {
                           "type": "string"
@@ -29079,7 +29084,7 @@
                   "value": {
                     "filters": {
                       "hostnames": [
-                        "domain.com"
+                        "myreports.domain.info"
                       ]
                     }
                   }
@@ -29197,7 +29202,7 @@
             }
           }
         },
-        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nIn order to obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a>. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\"logs\":[{\"dateFrom\":\"2021-10-31T00:00:00Z\",\"dateTo\":\"2021-10-31T00:29:59Z\",\"fileSize\":105878,\"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\"}]}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2021-10-31T00:00:00Z\",\n            \"dateTo\":\"2021-10-31T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n            \"hostname\":\"domain-abc.com\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
         "parameters": [
           {
             "schema": {
@@ -29518,17 +29523,17 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, nearChina, ChinaBase, or ChinaUltra).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       },
@@ -29996,17 +30001,17 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
+                            "deluxe",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium"
                           ]
                         }
                       }
@@ -30544,17 +30549,17 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "Indicates one or more server groups (standard, premium, premium+, ultra, or nearChina).",
+                        "description": "Indicates one or more server groups.",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
-                            "premium+",
                             "ultra",
                             "nearChina",
-                            "ChinaBase",
-                            "ChinaUltra"
+                            "ChinaStandard",
+                            "ChinaPremium",
+                            "deluxe"
                           ]
                         }
                       }
@@ -30860,7 +30865,7 @@
     },
     {
       "name": "Log Configuration Management",
-      "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/getLogfiles\">our API</a>."
+      "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/getLogfiles\">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname."
     }
   ]
 }
