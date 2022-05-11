@@ -21,8 +21,8 @@ CDN Pro 的边缘网络包含遍布全球的数百个节点。每个节点中都
 LB7 被响应，可以节省将其传递给 ES 所需的开销。为了实现这一目标，我们允许
 用户通过加速项配置里的 “loadBalancerLogic” 字段将处理逻辑插入 LB7 中。
 loadBalancerLogic 中允许的所有指令都在 [支持的指令集](supported-directives) 页面上带有
-<span class="badge">LB logic</span> 标签。为了支持在 LB7 中有效地构建响应，rewrite 
-模块中的大部分指令和访问控制指令都可以使用。
+<span class="badge">LB logic</span> 标签。为了支持在 LB7 中有效地构建响应，大部分的访问控制指令
+以及 rewrite 模块中的指令都可以在其中使用。
 
 此外，由于客户端的 TCP 和 TLS 连接在 LB7 中完成，一些
 客户端信息仅在 LB7 中可用。例如，如果您的处理逻辑依赖
