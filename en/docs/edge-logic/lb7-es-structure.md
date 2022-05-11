@@ -12,7 +12,8 @@ We end up with the following logical structure in each edge node:
 Each request admitted by the router first goes through the layer 4 firewall and load balancer and reaches
 a layer 7 load balancer (LB7). The LB7 terminates the TLS tunnel, performs some initial processing of the
 HTTP request, then distribute it to an edge server (ES) for further processing. The distribution is
-based on a consistent hash algorithm and the hash key involves the request URI and a customizable
+based on a consistent hash algorithm and the hash key involves the request URI and a
+[customizable](/docs/portal/edge-configurations/creating-property#advanced-settings)
 variable to make sure the ES are evenly loaded. ES does most of the processing of the requests including
 everything we put in the edge logic. It also launches requests to contact the origin, parent or 
 external servers to obtain necessary data. Any cacheable objects are stored in the ES.
