@@ -77,7 +77,7 @@
                 "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
-                "title": "Validating a Property",
+                "title": "验证加速项",
                 "path": "/docs/portal/edge-configurations/validating-property.md"
               },
               {
@@ -174,7 +174,7 @@
             ]
           },
           {
-            "title": "Reports",
+            "title": "报表",
             "routes": [
               {
                 "title": "报表查看",
@@ -187,14 +187,14 @@
             ]
           },
           {
-            "title": "Content Management",
+            "title": "内容管理",
             "routes": [
               {
-                "title": "Managing Purge Requests",
+                "title": "管理刷新请求",
                 "path": "/docs/portal/content-management/managing-purge-requests.md"
               },
               {
-                "title": "Managing Prefetch Requests",
+                "title": "管理预取请求",
                 "path": "/docs/portal/content-management/managing-prefetch-requests.md"
               }
             ]
