@@ -13,8 +13,6 @@
 
 **Note:** A lock icon next to the version number means the version has been deployed. Editing this version is not permitted to ensure that CDN Pro can reliably roll back to any version that has been deployed. If you want to make any changes on top of this version, click the **Clone** button to create a new version to edit.
 
-<p align="center"><img src="/docs/resources/images/edge-configurations/property-versions.png" alt="Upload Certificate Version" width="700"></p>
-
 5. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*) and described in [Creating a Property](</docs/portal/edge-configurations/creating-property.md>).
 **Note:** You can perform step 3 if you want to change the name of the property after editing or cloning it.
 6. Save and [validate](</docs/portal/tasks/validations.md>) the new version before you deploy it.

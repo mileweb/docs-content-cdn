@@ -117,6 +117,11 @@
                 "title": "修改保密信息",
                 "path": "/docs/portal/secrets/editing-secrets.md"
               },
+            },
+            {
+              "title": "查询机密信息",
+              "path": "/docs/portal/secrets/querying-secrets.md"
+            },
               {
                 "title": "删除保密信息",
                 "path": "/docs/portal/secrets/deleting-secrets.md"

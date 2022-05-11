@@ -8,16 +8,16 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info-zh.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**. 
 3. At the right side of the page, click the **+ Add Role** button.
 
-![null](</docs/resources/images/identities-and-access/iam-roles.png>)
+![null](</docs/resources/images/identities-and-access/iam-roles-zh.png>)
 
 4. Complete the fields in the Add Role form. Required fields are denoted by an asterisk (\*).
 
-![null](</docs/resources/images/identities-and-access/iam-add-role.png>)
+![null](</docs/resources/images/identities-and-access/iam-add-role-zh.png>)
 
 | **Fields**           | **Description**                   |
 | -------------------- |---------------------------------- |
@@ -34,7 +34,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info-zh.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**.
 
@@ -43,6 +43,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
    In the **Actions** column, click the vertical ellipsis for the role you want to edit, and then select **Edit**.
 
 4. At the top right, click the **Edit** button.
+   
 5. Make your changes in the Edit Role form (for assistance, see the table above). Required fields are denoted by an asterisk (\*).
 
 6. Click **Save**.
@@ -53,7 +54,7 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info-zh.png" alt="select identity management page" width="400"></p>
 
 2. At the top of the page, click **Roles**.
 

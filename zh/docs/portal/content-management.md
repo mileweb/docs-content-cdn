@@ -6,7 +6,7 @@ CDN Pro 提供的缓存刷新功能可以让您快速更新缓存文件。此功
 
 下图显示了该页面上的关键元素，图后面的表格描述了它们内容。
 
-![null](</docs/resources/images/content-management/content-management-w-numbers.png>)
+![null](</docs/resources/images/content-management/content-management-w-numbers-zh.png>)
 
 | **字段** | **描述** |
 | :----------: | --------------- |
@@ -24,7 +24,7 @@ CDN Pro 提供的缓存刷新功能可以让您快速更新缓存文件。此功
 3. 填写刷新任务表单中的字段。必填字段由星号 (```*```) 表示。表格顶部显示当前可用的每日文件刷新额度。
 
 
-<p align=center><img src="/docs/resources/images/content-management/purge-form.png" alt="purge form" width="900"></p>
+<p align=center><img src="/docs/resources/images/content-management/purge-form-zh.png" alt="purge form" width="900"></p>
 
 |**字段**|**描述**|
 |----------|---------------|
@@ -93,5 +93,5 @@ CDN Pro 允许您通过<strong>指定目标目录</strong> 的方式来刷新整
    <li>刷新任务的提交时间和完成时间<br>
    <li>显示该刷新任务的成功率（比例从 0 到 100%）</ul>
 
-<p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers.png" alt="purge form no numbers" width="900"></p>
+<p align=center><img src="/docs/resources/images/content-management/content-management-wo-numbers-zh.png" alt="purge form no numbers" width="900"></p>
 

@@ -13,7 +13,7 @@ After you create and validate a property version, you are ready to deploy it. In
 3. To deploy the property, click the horizontal ellipsis next to the **Edit** button, and then select **Deploy**.
 4. When the Deployment Target dialog box appears, select whether to deploy to staging (default) or production, and then click **Deploy Now**. Or click **Add to Standby task** to move this action to the [standby queue](<docs/../../tasks/standby-tasks.md>). Clicking **Cancel** cancels deployment.</ul></li> 
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment.png" alt="deployment selections and button" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-zh.png" alt="deployment selections and button" width="900"></p>
 
 5. If you clicked the **Deploy Now** button, click **OK** when the confirmation pop-up appears. Usually, the deployment process finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment at any time.
 
@@ -23,7 +23,7 @@ After you create and validate a property version, you are ready to deploy it. In
 
 1. In the **Actions** column on the Properties page, click the vertical ellipsis of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
-<p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="900"></p>
+<p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy-zh.png" alt="property undeployment" width="900"></p>
 
 2. When the confirmation pop-up appears, click the appropriate button:<ul><li>To undeploy the property now, click **OK** and proceed to the next step.</ul></li><ul><li>To undeploy the property at a later time, click <strong>Add to Standby task</strong> to move this action to the [standby queue](<docs/../../tasks/standby-tasks.md>).</ul></li>   
 3. If you clicked **OK**, you can either wait with the progress dialog box, or close it to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the status of the undeployment at any time.
