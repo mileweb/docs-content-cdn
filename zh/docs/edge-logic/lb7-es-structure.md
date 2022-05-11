@@ -9,7 +9,8 @@ CDN Pro 的边缘网络包含遍布全球的数百个节点。每个节点中都
 
 我们在每个边缘节点中设计了以下逻辑架构：
 <p align=center><img src="/docs/edge-logic/lb7-es-structure.png" alt="节点逻辑架构" width="600"></p>
-路由器接纳的每个请求首先经过四层防火墙和负载均衡器到达
+
+路由器收到的每个请求首先经过四层防火墙和负载均衡器到达
 第 7 层负载均衡器 (LB7)。 LB7 完成 TLS 连接，并对 HTTP 请求进行一些初始处理
 ，然后将其分发到边缘服务器 (ES) 进行进一步处理。”分发“是
 基于一致性哈希算法，哈希键包括请求 URI 和[可自定义的](/docs/portal/edge-configurations/creating-property#advanced-settings)
