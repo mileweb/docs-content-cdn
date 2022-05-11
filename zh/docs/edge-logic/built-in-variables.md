@@ -1,8 +1,8 @@
 ## 内置变量
 
-下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或实时日志（Real-Time Log）中使用它们，但请注意并非所有变量都支持配置在这两个地方。 另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
+下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
-| **变量名称** | **描述** | **边缘逻辑** | **[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)** |
+| **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | URL 问号后参数中的指定参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="args"></span><span class="var">$args</span> | 请求 URL 中所有问号后参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
