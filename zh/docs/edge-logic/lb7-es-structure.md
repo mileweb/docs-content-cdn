@@ -7,7 +7,7 @@ CDN Pro 的边缘网络包含遍布全球的数百个节点。每个节点中都
 2. 对于可缓存的内容，避免在同一个节点中重复缓存。
 
 为了以上目标，我们在每个边缘节点中设计了以下逻辑架构：
-<p align=center><img src="lb7-es-structure.png" alt="节点逻辑架构" width="600"></p>
+<p align=center><img src="/docs/edge-logic/lb7-es-structure.png" alt="节点逻辑架构" width="600"></p>
 路由器接纳的每个请求首先经过四层防火墙和负载均衡器到达
 第 7 层负载均衡器 (LB7)。 LB7 完成 TLS 连接，并对 HTTP 请求进行一些初始处理
 ，然后将其分发到边缘服务器 (ES) 进行进一步处理。”分发“是

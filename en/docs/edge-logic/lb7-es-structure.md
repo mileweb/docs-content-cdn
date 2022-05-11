@@ -7,7 +7,7 @@ node is a farm of physical servers. To most efficiently utilize these servers, w
 2. For cacheable objects, avoid caching duplicated copies in the same farm.
 
 We end up with the following logical structure in each edge node:
-<p align=center><img src="lb7-es-structure.png" alt="Node Logical Structure" width="600"></p>
+<p align=center><img src="/docs/edge-logic/lb7-es-structure.png" alt="Node Logical Structure" width="600"></p>
 Each request admitted by the router first goes through the layer 4 firewall and load balancer and reaches
 a layer 7 load balancer (LB7). The LB7 terminates the TLS tunnel, performs some initial processing of the
 HTTP request, then distribute it to an edge server (ES) for further processing. The distribution is
