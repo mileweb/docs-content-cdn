@@ -77,6 +77,10 @@
                 "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
+                "title": "Validating a Property",
+                "path": "/docs/portal/edge-configurations/validating-property.md"
+              },
+              {
                 "title": "部署或卸载加速项",
                 "path": "/docs/portal/edge-configurations/deploying-property.md"
               },
@@ -169,8 +173,32 @@
               }
             ]
           },
-          { "title": "报表查看", "path": "/docs/portal/reports.md" },
-          { "title": "内容管理", "path": "/docs/portal/content-management.md" },
+          {
+            "title": "Reports",
+            "routes": [
+              {
+                "title": "报表查看",
+                "path": "/docs/portal/reports/generating-reports.md"
+              },
+              {
+                "title": "内容管理",
+                "path": "/docs/portal/reports/managing-logs.md"
+              }
+            ]
+          },
+          {
+            "title": "Content Management",
+            "routes": [
+              {
+                "title": "Managing Purge Requests",
+                "path": "/docs/portal/content-management/managing-purge-requests.md"
+              },
+              {
+                "title": "Managing Prefetch Requests",
+                "path": "/docs/portal/content-management/managing-prefetch-requests.md"
+              }
+            ]
+          },
           { "title": "异步任务",
             "routes": [
               {
