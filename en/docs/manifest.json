@@ -251,6 +251,10 @@
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
+            "title": "Edge Node Structure",
+            "path": "/docs/edge-logic/lb7-es-structure.md"
+          },
+          {
             "title": "Staging Environment",
             "path": "/docs/edge-logic/staging-environment.md"
           },

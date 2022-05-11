@@ -251,6 +251,10 @@
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
+            "title": "边缘节点架构",
+            "path": "/docs/edge-logic/lb7-es-structure.md"
+          },
+          {
             "title": "演练环境",
             "path": "/docs/edge-logic/staging-environment.md"
           },
