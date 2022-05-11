@@ -2,6 +2,7 @@
 
 The edge network of CDN Pro consists of hundreds of nodes around the world and in each
 node is a farm of physical servers. To most efficiently utilize these servers, we need the design to meet the following criteria:
+
 1. The service load needs to be distributed as evenly as possible across all servers. The 
 'load' includes network bandwidth, CPU power and disk usage.
 2. For cacheable objects, avoid caching duplicated copies in the same farm.
