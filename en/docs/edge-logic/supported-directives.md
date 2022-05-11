@@ -766,7 +766,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **Default:** `proxy_ignore_client_abort off;` <br/>
 **Context:** server, location
 
-Determines whether the connection with a proxied server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the proxied server. This directive is supported only in the load balancer logic.
+Determines whether the connection with a proxied server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the proxied server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continue. This directive is supported only in the [load balancer logic](lb7-es-structure).
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
