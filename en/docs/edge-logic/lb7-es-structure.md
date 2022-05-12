@@ -1,7 +1,6 @@
 ## The Layer 7 Load Balancer - Edge Server Structure
 
-The edge network of CDN Pro consists of hundreds of nodes around the world and in each
-node is a farm of physical servers. To most efficiently utilize these servers, we need our design to meet the following criteria:
+CDN Pro's edge network consists of hundreds of nodes around the world, each of which is a farm of physical servers. To most efficiently utilize these servers, we need our design to meet the following criteria:
 
 1. The service load needs to be distributed as evenly as possible across all servers. The 
 'load' includes network bandwidth, CPU power and disk usage.
@@ -20,14 +19,10 @@ external servers to obtain necessary data. Any cacheable objects are stored in t
 
 Based on this structure, we can see that some tasks will be more efficiently performed in
 the LB7 than in the ES. If a request can be responded in
-the LB7, the overhead to pass it to the ES can be saved. To achieve this goal, we allow the
-users to insert processing logics into the LB7 through the field "loadBalancerLogic" of
+the LB7, the overhead to pass it to the ES can be saved. To achieve this goal, we allow the users to insert processing logic into the LB7 through the "loadBalancerLogic" field of
 the property configuration. All the directives allowed in the load balancer logic are labeled
 with <span class="badge">LB logic</span> on the [Supported Directives](supported-directives) page.
 In particular, most access control directives and the directives in the rewrite module
-are allowed to enable efficient building of responses in the LB7.
+can be used to enable efficient building of responses in the LB7.
 
-In addition, since the client's connection and TLS tunnel is terminated in the LB7, some of the
-client's information is available only in the LB7. For example, if your processing logic depends on 
-the [TLS cipher](built-in-variables#ssl_cipher) or the [server protocol](built-in-variables#server_protocol), 
-it can only be done in the LB7.
+In addition, since the client's connection and TLS tunnel are terminated in the LB7, some of the client's information is available only in the LB7. For example, if your processing logic depends on the [TLS cipher](built-in-variables#ssl_cipher) or the [server protocol](built-in-variables#server_protocol), it can be done only in the LB7.
