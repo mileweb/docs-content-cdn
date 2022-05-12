@@ -7,11 +7,11 @@ To create a secret, complete the Create a Secret form with required information.
 1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
 2. At the top right of the Secrets page, click the **Create Secret** button. 
 
-<p align=center><img src="/docs/resources/images/secrets/secrets-create-secret.png" alt="create secret" width="900"></p>
+<p align=center><img src="/docs/resources/images/secrets/secrets-create-secret-zh.png" alt="create secret" width="900"></p>
 
 3. Complete the fields in the Create a Secret form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/secrets/create-a-secret.png" alt="edit secret" width="800"></p>
+<p align=center><img src="/docs/resources/images/secrets/create-a-secret-zh.png" alt="edit secret" width="800"></p>
 
 | **Fields**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|

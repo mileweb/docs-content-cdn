@@ -1,6 +1,6 @@
 ## 支持的指令
 
-这一页列出了您可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
+这一页列出了你可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
 
 在下面的文档里，我们为所有非特有的指令提供了到开源版公开文档的直接链接。每一个被修改增强过的指令，我们都提供了详细的描述，包括新增的功能，参数，以及对参数取值范围的限制。
 
@@ -95,16 +95,13 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 
 ### [`auth_request`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)
 
-<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
+<span class="badge dark">高级</span>
 
 **使用语法：** `auth_request uri | off`;<br/>
 **默认设置：** `auth_request off;`<br/>
 **可用位置：** server, location
 
-本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。我们对 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)做了改进以允参数里包含变量。这使得用户可以把URL里的参数传递给鉴权逻辑：
-```nginx
-auth_request /auth$is_args$args;
-```
+本指令支持指定一个URI路径来进行访问控制。CDN Pro 服务器将发起针对该 URI 的鉴权子请求，并根据该子请求的结果对原始请求进行访问控制。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request)，无改动。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -150,17 +147,6 @@ auth_request /auth$is_args$args;
 
 该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，服务器将关闭连接。
 
-### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
-
-<span class="badge dark">高级</span>
-
-**使用语法:** `client_max_body_size size;`<br/>
-**默认设置:** `client_header_timeout 1m;`<br/>
-**可用位置:** server, location
-
-设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
-
-一般来说，您需要在 Load Balancer 和 Edge Logic 里同时配置本指令。
 
 ### `client_send_timeout`
 
@@ -248,7 +234,7 @@ location @try_origin2 {
 
 | **Type** | **Name** | **Syntax** |
 |----------|----------|------------| 
-| 计算哈希值 | **SHA256**, **MD5**<br>CRC32 | ```eval_func $output SHA256 $input;```<br>SHA256 和 MD5 返回二进制串; CRC32 返回文本串|
+| 计算哈希值 | **SHA256**, **MD5** | ```eval_func $output SHA256 $input;``` |
 | BASE64<br>编解码 | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
 | URL<br>编解码 | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
@@ -262,7 +248,6 @@ location @try_origin2 {
 | 字符串<br>修改 | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>把输入字符串转成大写。|
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
 | 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
-| 一日之内<br>的时间| DAY_PERIOD| ```eval_func $out DAY_PERIOD 19:00+0800 12h CN-night;```<br>如果时间在19:00+0800之后的12小时内，则返回'CN-night'|
 
 **注意:** 使用**加粗字体** 标记的函数的输出值是一个可能无法打印的二进制字符串。因此您需要使用 BASE64_ENCODE、URL_ENCODE 或 HEX_ENCODE 将其转换为可打印格式。
 
@@ -620,18 +605,6 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
 
-### proxy_cache_max_stale
-
-<span class="badge">标准</span> <span class="badge primary">全新特有</span>
-
-**使用语法:** `proxy_cache_max_stale if_error=$time while_revalidate=$time;` <br/>
-**默认设置:** `-` <br/>
-**可用位置:** server, location
-
-本指令允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
-
-其中的 'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’。参数 'while_revalidate=' 必须和 [`proxy_cache_background_update on;`](#proxy_cache_background_update) 一同配置，同时要求 `proxy_cache_use_stale` 的配置里包含 'updating'。
-
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
 <span class="badge">标准</span>
@@ -763,16 +736,6 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 proxy_ignore_cache_control no-cache no-store;
 ```
 注意：该指令并不会修改或者重写 `cache-control` 响应头。
-
-### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
-
-<span class="badge">高级</span> <span class="badge">LB logic</span>
-
-**使用语法:** `proxy_ignore_client_abort on | off;` <br/>
-**默认设置:** `proxy_ignore_client_abort off;` <br/>
-**可用位置:** server, location
-
-设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。`off` 意味着中止从源站接收数据，如果数据是不可缓存的。可缓存的数据会继续完成传输，不受本指令影响。本指令只能在 [load balancer logic](lb7-es-structure) 里使用。
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -964,7 +927,6 @@ proxy_no_cache $no_store;
 **可用位置：** server, location
 
 该指令用于设置 CDN Pro 对多个访问控制功能的校验方式。当配置值为 all 时，只有当边缘逻辑中所有的 [`allow`](#allow), [`deny`](#deny) 以及 [`auth_request`](#auth_request) 的结果都为 pass 时，请求才会通过校验。配置值为 any 时，只要上述指令结果有一个为 pass ，请求就可通过校验。代码逻辑源自 NGINX 开源版本，无变更。
-请注意，所有这些校验指令都在 rewrite 模块指令之后才被执行。
 
 ### `sanitize_accept_encoding`
 
@@ -1129,12 +1091,12 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
 
 
-### `access_log_sampling`
+### `access_log_downsample`
 
-<span class="badge">标准</span> <span class="badge">LBLogic</span> <span class="badge primary">全新特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `access_log_sampling factor;` <br/>
+**使用语法：** `access_log_downsample factor;` <br/>
 **默认设置：** `-` <br/>
 **可用位置：** server
 
-本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。
+该指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该指令来避免日志系统过载。

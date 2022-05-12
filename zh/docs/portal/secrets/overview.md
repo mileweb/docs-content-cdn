@@ -8,7 +8,7 @@ Secrets are managed from the Secrets page. To display this page, click **Edge Co
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align="center"><img src="/docs/resources/images/secrets/secrets-w-numbers.png" alt="Secret List" width="900"></p>
+<p align="center"><img src="/docs/resources/images/secrets/secrets-w-numbers-zh.png" alt="Secret List" width="900"></p>
 
 | **Fields**   | **Description**                                                                                           |
 | :----------: | --------------------------------------------------------------------------------------------------------- |
@@ -21,7 +21,7 @@ The following figure shows the key elements on the page, and the table following
 
 ## Secret Actions
 Each secret has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected secret.
-<p align="center"><img src="/docs/resources/images/secrets/secrets-actions.png" alt="Secret Actions" width="900"></p>
+<p align="center"><img src="/docs/resources/images/secrets/secrets-actions-zh.png" alt="Secret Actions" width="900"></p>
 The actions are:
 
 - **Edit**: [Update](</docs/portal/secrets/editing-secrets.md>) the selected secret.

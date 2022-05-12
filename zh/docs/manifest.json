@@ -77,7 +77,7 @@
                 "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
-                "title": "验证加速项",
+                "title": "Validating a Property",
                 "path": "/docs/portal/edge-configurations/validating-property.md"
               },
               {
@@ -117,6 +117,11 @@
                 "title": "修改保密信息",
                 "path": "/docs/portal/secrets/editing-secrets.md"
               },
+            },
+            {
+              "title": "查询机密信息",
+              "path": "/docs/portal/secrets/querying-secrets.md"
+            },
               {
                 "title": "删除保密信息",
                 "path": "/docs/portal/secrets/deleting-secrets.md"
@@ -174,7 +179,7 @@
             ]
           },
           {
-            "title": "报表",
+            "title": "Reports",
             "routes": [
               {
                 "title": "报表查看",
@@ -187,14 +192,14 @@
             ]
           },
           {
-            "title": "内容管理",
+            "title": "Content Management",
             "routes": [
               {
-                "title": "管理刷新请求",
+                "title": "Managing Purge Requests",
                 "path": "/docs/portal/content-management/managing-purge-requests.md"
               },
               {
-                "title": "管理预取请求",
+                "title": "Managing Prefetch Requests",
                 "path": "/docs/portal/content-management/managing-prefetch-requests.md"
               }
             ]
@@ -249,10 +254,6 @@
           {
             "title": "用'if'来选择多个源站",
             "path": "/docs/edge-logic/multiple-origins.md"
-          },
-          {
-            "title": "边缘节点架构",
-            "path": "/docs/edge-logic/lb7-es-structure.md"
           },
           {
             "title": "演练环境",

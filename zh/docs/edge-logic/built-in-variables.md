@@ -1,8 +1,8 @@
 ## 内置变量
 
-下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
+下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或实时日志（Real-Time Log）中使用它们，但请注意并非所有变量都支持配置在这两个地方。 另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
-| **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
+| **变量名称** | **描述** | **边缘逻辑** | **[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)** |
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | URL 问号后参数中的指定参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="args"></span><span class="var">$args</span> | 请求 URL 中所有问号后参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -23,7 +23,7 @@
 | <span id="dollar_sign"></span><span class="var">$dollar_sign</span> | 代表 “$” 字段 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="download_time"></span><span class="var">$download_time</span> |<span class="badge small" title="numerical value">#</span> CDN Pro从接收到客户请求到将响应正文发送到操作系统buffer的时间，其值为$request_end_time/$turn_around_time/$transfer_time 的总和，单位为秒。同时支持毫秒单位的变量download_times_ms。 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="error_code"></span><span class="var">$error_code</span> | 记录客户端与CDN，以及CDN与源站之间的异常信息 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="extra_deliver_time_ms"></span><span class="var">$extra_deliver_time_ms</span> |<span class="badge small" title="numerical value">#</span> CDN Pro 将发送缓冲区的剩余数据传输完的大致时间，单位为毫秒 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="extra_deliver_time_ms"></span><span class="var">$extra_deliver_time_ms</span> |<span class="badge small" title="numerical value">#</span> CDN Pro将缓冲区正文发送到客户端的预估时间，单位为毫秒 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="host"></span><span class="var">$host</span> | 请求的 host 头部，和 $http_host 有相同含义 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="hostname"></span><span class="var">$hostname</span> | CDN 服务器别名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="http_"></span><span class="var">$http_<em>name</em></span> | 客户端请求中指定的请求头参数值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -38,7 +38,6 @@
 | <span id="pid"></span><span class="var">$pid</span> | CDN 进程 ID 号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="pipe"></span><span class="var">$pipe</span> | 如果请求属于“流水线”（pipelined），值为“p”，否则为“.” | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="property_ver"></span><span class="var">$property_ver</span> |<span class="badge small" title="numerical value">#</span> 加速项版本号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="qtl_cpu_cycle"></span><span class="var">$qtl_cpu_cycle</span> |<span class="badge small" title="numerical value">#</span> LB7里全部，以及ES里传输响应正文之前的CPU时间，单位为纳秒（1e-9s) | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 请求的唯一标识 ID | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | [缓存状态](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="random_N"></span><span class="var">$random_N</span> |<span class="badge small" title="numerical value">#</span> 一个[0, N-1]之内的随机整数，N范围是[2,1e9]| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -46,13 +45,13 @@
 | <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样率， $realtime_log_ds_factor 的倒数，值为介于0~1之间的小数。 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="remote_user"></span><span class="var">$remote_user</span> | 当使用[基础鉴权](https://datatracker.ietf.org/doc/html/rfc7617)时，从Authorization请求头中提取的用户名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request"></span><span class="var">$request</span> | 完整的 http 请求行 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="request_cpu_time"></span><span class="var">$request_cpu_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时所消耗的CPU时间, 在Edge Logic 中被使用时仅包含 Cache 层的执行消耗，不包含负载均衡层（Load Balancer） 的分发消耗），当在实时日志中被使用时仅包含负载均衡层的总执行消耗。单位为纳秒。| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_cpu_time"></span><span class="var">$request_cpu_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时所消耗的CPU时间, 在Edge Logic 中被使用时仅包含 Cache 层的执行消耗，不包含负载均衡层（Load Balancer） 的分发消耗），当在实时日志中被使用时仅包含负载均衡层的总执行消耗。单位为纳秒。(ETA: 2021年10月)| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_end_time"></span><span class="var">$request_end_time</span> |<span class="badge small" title="numerical value">#</span> CDN Pro "全量" 接收来自客户端的请求并准备好处理/转发它所需的时间，单位为秒。同时支持毫秒单位的变量request_end_time_ms。  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="request_length"></span><span class="var">$request_length</span> |<span class="badge small" title="numerical value">#</span> 请求的长度 (包括请求的地址, http 请求头和请求主体) | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_method"></span><span class="var">$request_method</span> | HTTP 请求方法，例如 ：GET, POST | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_scheme"></span><span class="var">$request_scheme</span> | 请求协议，值为"http" 或者 "https" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_time"></span><span class="var">$request_time</span> |<span class="badge small" title="numerical value">#</span> 以毫秒为单位的请求处理时间，标记从客户端读取第一个字节以来经过的时间 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="request_uri"></span><span class="var">$request_uri</span> | 从'/'开始，包含问号后参数的客户端请求 URI | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="request_uri"></span><span class="var">$request_uri</span> | 包含问号后参数的客户端请求 URI | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="sc_completed"></span><span class="var">$sc_completed</span> |<span class="badge small" title="numerical value">#</span> 如果本次请求的所有数据都已响应给客户端则值为1，否则值为0  | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="sc_initial"></span><span class="var">$sc_initial</span> |<span class="badge small" title="numerical value">#</span> 如果本次请求的第一个字节已响应给客户端则值为1，否则值为0| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="sent_http_"></span><span class="var">$sent\_http\_<em>name</em></span> | 响应给客户端的指定参数值 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
@@ -64,7 +63,7 @@
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘节点端口号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该配置项进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_cpu_time"></span><span class="var">$ssl_cpu_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_cpu_time"></span><span class="var">$ssl_cpu_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒 (ETA: 2021年10月)| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="status"></span><span class="var">$status</span> | 响应给客户端的 HTTP 状态码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -84,4 +83,4 @@
 | <span id="upstream_response_time"></span><span class="var">$upstream_response_time</span> |<span class="badge small" title="numerical value">#</span> 从中间层或者源站获取完整响应数据所消耗的时间，单位为毫秒 | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="upstream_server_type"></span><span class="var">$upstream_server_type</span> | 'O' 代表回源站; 'C' 代表回中间层节点. | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="upstream_trailer_"></span><span class="var">$upstream\_trailer\_<em>name</em></span> | 由上层添加的尾部（trailer） 值。通常该值会通过上层的[add_trailer](/docs/edge-logic/supported-directives#add_trailer) 指令设置 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="uri"></span><span class="var">$uri</span> | [归一化的](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)请求 uri ，从'/'开始且不包含 query string 。其值会被边缘逻辑里的"[rewrite](/docs/edge-logic/supported-directives#rewrite)"指令修改。| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="uri"></span><span class="var">$uri</span> | [归一化的](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)请求 uri ，不包含 query string 。在边缘逻辑里，其值会被"[rewrite](/docs/edge-logic/supported-directives#rewrite)"指令修改。| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

@@ -7,7 +7,7 @@
 3. At the top right of the page, click the **Edit** button.
 
 The Edge Hostname form appears for creating, editing, and deleting client zone rules. For more information, refer to the topics below.
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname-zh.png" alt="edit cname form"></p>
 
 4. To create one or more client zone rules, perform the following steps.
 
@@ -15,7 +15,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 <ul>b. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button.</ul>
 <ul>c. To add more client zone rules, repeat this step for each additional rule.</ul>
 
-<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="create client region rule"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule-zh.png" alt="create client region rule"></p>
 
 | **Fields**        | **Description**   |
 | ----------------- | ----------------- |
@@ -37,7 +37,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 
 <ul>a. Click the <strong>Actions</strong> drop-down list next to the rule you want to delete, and then select <strong>Delete</strong>.</ul>
 
-<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-delete-zone-rule.png" alt="zone rule delete"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/edge-hostname-delete-zone-rule-zh.png" alt="zone rule delete"></p>
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</ul>
 

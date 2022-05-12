@@ -9,13 +9,13 @@ To create a log configuration:
 1. In the left pane, click **Reports**, and then select **Access Log**.
 2. At the top right, click **Configuration**.
 
-<p align=center><img src="/docs/resources/images/reports/configure-log1.png" alt="configure log1" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports/configure-log1-zh.png" alt="configure log1" width="900"></p>
 
 3. To search for a hostname, enter the name in the <strong>Search for a hostname</strong> field.
 4. Click <strong>+Create Log Configuration</strong>.
 5. Complete the fields in the next form that appears, and then click <strong>+Create Log Configuration</strong>.
 
-<p align=center><img src="/docs/resources/images/reports/configure-log2.png" alt="configure log2" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports/configure-log2-zh.png" alt="configure log2" width="900"></p>
 
 |**Fields**|**Description**|
 |----------|---------------|
@@ -42,8 +42,11 @@ The following table shows the variables you can use in the **Log Format** field 
 | %hostname    | Host header|
 | %method      | HTTP method used to access the content (for example, GET)|
 | %protocol    | HTTP/1.0, HTTP/1.1, or HTTP2.0|
+| %querystr    | Query string|
 | %referer     | Referer request header|
 | %reqrange    | Range header in requests from client|
+| %reqhdrsize  | Request header length|
+| %reqsize     | Request length (including request line, header, and request body)|
 | %rmtuser     | User name extracted from the Authorization header when basic authentication is used|
 | %rspsize     | HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC|
 | %rsptime     | Response time in milliseconds|
@@ -63,7 +66,7 @@ After you create a log configuration, use the following procedure to export logs
 
 1. In the left pane, click **Reports**, and then select **Access Log**.
 
-<p align=center><img src="/docs/resources/images/reports/configure-log3.png" alt="configure log2" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports/configure-log3-zh.png" alt="configure log2" width="900"></p>
 
 2. In the top field, select a hostname.
 3. In the bottom field, specify the date range and time.

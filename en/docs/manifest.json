@@ -117,6 +117,11 @@
                 "title": "Edit a Secret",
                 "path": "/docs/portal/secrets/editing-secrets.md"
               },
+            },
+            {
+              "title": "Querying Secrets",
+              "path": "/docs/portal/secrets/querying-secrets.md"
+            },
               {
                 "title": "Delete a Secret",
                 "path": "/docs/portal/secrets/deleting-secrets.md"
@@ -249,10 +254,6 @@
           {
             "title": "Multiple Origins with 'if'",
             "path": "/docs/edge-logic/multiple-origins.md"
-          },
-          {
-            "title": "Edge Node Structure",
-            "path": "/docs/edge-logic/lb7-es-structure.md"
           },
           {
             "title": "Staging Environment",
