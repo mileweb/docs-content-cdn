@@ -504,9 +504,9 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 **Context:** server, location
 
 When an origin is resolved into multiple IP addresses (peers), this directive specifies the algorithm to choose which one to use. The valid values are:
-* round_robin : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
-* consistent_hash : Another way to distribute the origin traffic, based on hash value of the URL. If the origin server has cache, this option should help with the hit ratio.
-* sorted_list : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
+* `round_robin` : Rotate all the peers sequentially. This is the default setting which tries to evenly distribute the origin traffic on all the peers.
+* `consistent_hash` : Another way to distribute the origin traffic, based on hash value of the URL. If the origin server has cache, this option should help with the hit ratio.
+* `sorted_list` : Select the peer based on the probed network quality. When the origin peers are geographically distributed (such as another CDN), this option should be helpful to ensure consistent performance.
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
