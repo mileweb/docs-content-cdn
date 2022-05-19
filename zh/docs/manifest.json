@@ -251,6 +251,10 @@
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
+            "title": "声明型与顺序型指令",
+            "path": "/docs/edge-logic/declarative-imperative.md"
+          },
+          {
             "title": "边缘节点架构",
             "path": "/docs/edge-logic/lb7-es-structure.md"
           },
