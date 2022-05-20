@@ -1,12 +1,12 @@
 ## Declarative and Imperative Directives
 
-Declarative and imperative are two different programming paradigms. Many good articles can [be found on the internet](https://www.google.com/search?q=imperative+declarative) about this topic. In summary, a declarative program describes the desired end result whereas a imperative program describes the exact steps to achieve the result. Both paradigms have pros and cons and their respective suitable scenarios. A common use case of the declarative programming is configuring some well defined workflow with multiple parameters. For example, when you order in a coffee shop, you may just tell the waiter "bring me a cup of coffee with sugar and milk". You don't need to give step-by-step instructions on how to make the coffee including when to add sugar and milk because you are pretty sure the staff knows the detailed procedure.
+Declarative and imperative are two different programming paradigms. Many good articles can [be found on the internet](https://www.google.com/search?q=imperative+declarative) about this topic. In summary, a declarative program describes the desired end result whereas a imperative program describes the exact steps to achieve the result. Both paradigms have pros and cons and their respective suitable scenarios. A common use case of the declarative program is setting the parameters of some well defined workflow. For example, when you order in a coffee shop, you may just tell the waiter "bring me a cup of coffee with sugar and milk". You don't need to give step-by-step instructions on how to make the coffee including when to add sugar and milk because you are pretty sure the staff knows the detailed procedure.
 
 Serving and proxying content through HTTP is also a workflow well defined by the protocols. Therefore, the configuration of nginx is mostly declarative and you don't need to worry about how or when each directive is executed. For example, the directive `add_header X-My-Data abc always;` simply ensures the field `X-My-Data: abc` appears in the response header; `proxy_pass https://www.my-upstream.com;` tells the server to fetch the content from a designated upstream. These all seem quite straightforward but things get interesting when we need to configure the workflow differently based on some conditions.
 
 ### Configurations based on conditions
 
-Let's get back to the coffee ordering example, where you also tell the waiter "if the milk is not from brand WBM, don't add it". A capable waiter should know the milk inventory and based on the availability of brand WBM, give a "flat" instruction "make a cup of coffee with suger and milk" or "make a cup of coffee with suger only" to the staff behind the counter. The instructions may even be as simple as "do code #1" or "do code #2" if they have predefined code names for different processes.
+Let's get back to the coffee ordering example, where you also tell the waiter "if the milk is not from brand M, don't add it". A capable waiter should know the milk inventory and based on the availability of brand M, give a "flat" instruction "make a cup of coffee with suger and milk" or "make a cup of coffee with suger only" to the staff behind the counter. The instructions may even be as simple as "do code #1" or "do code #2" if they have predefined code names for different coffee-making processes.
 
 Nginx supports conditions to be specified by the `location` and `if` directives. In addition, CDN Pro introduced `elseif` and `else` for more flexibility. The pair of curly braces following each of these directives defines a "context", which may be nested in an upper level context. The declarative directives in each context can be merged with the upper levels' to obtain a "flat" configuration. When nginx parses the configuration files at load time, it builds a lookup table of all the contexts and the corresponding flat configurations. When a client request comes in, nginx first tries to determine a context for request, then apply the corresponding flat configuration to the remaining processing workflow, just like what the waiter does. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
 
@@ -19,13 +19,32 @@ Rule #1 above is probably the most confusing nginx behavior to new users since i
 
 ### Timing of the declarative directives
 
-In principle, users do not need to care about the time when each declarative directive is executed. But having some knowledge about the timing can help you to avoid a few common mistakes. For example, as we mentioned before, the `if` directive is executed very early in the request processing pipeline. At that time, only the variables extracted from the request are available. In particular, all the `$upstream_*` variable values are empty because the upstream request has not been sent. As a result, the `if` condition should not depend any of those variables. Another example is using the response header to return the request processing time:
+In principle, users do not need to care about the time when each declarative directive is executed. But having some knowledge about the timing can help you to avoid some common mistakes. In fact, the execution time of most directives can be easily figured out by their functionalities in the request processing pipeline, which is roughly sketched below.
+<p align=center src=“https://docs.google.com/drawings/d/1XC9P8Y4bd_M876iiAUUYkijocV_y21S8YT3rg3ACh2E/edit”><img src="/docs/edge-logic/request-workflow.png" alt="Request Processing Workflow" width="600"></p>
+For example, `add_header` is executed when building the response header to the client in stage 7, and `proxy_set_header` is executed when building the request header to the upstream in stage 5. All the access control directives are executed in stage 3 and the rewrite module directives in stage 2.
+
+For people familiar with imperative programming, it is easy to forget that the place of a declarative directive in the configuration does not change its execution time. Consider this example logic:
+```nginx
+allow 1.2.3.4;
+denay all;
+location /hello {
+  return 200 'Hello World!';
+}
+location / {
+  origin_pass my_origin;
+}
+```
+Although you put the access control directives `allow` and `deny` at the server level before the location blocks, they are still executed after the location context is determined for the request, which is after all the rewrite module directives including `return`. Therefore, any request to "/hello" always receives the status code 200 and the access control directives are not executed.
+
+One mistake often made by new users is including `$upstream_*` variables in the conditions of an `if` directive, hoping to alter the behavior based on origin's response. As mentioned before, the `if` directive is executed very early in the request processing pipeline. At that time, only the variables extracted from the request are available. All the `$upstream_*` variable values are empty because the upstream request has not been sent yet. The correct way to control behavior based on origin's response is to use the `if()` parameter we introduced to many directives. The condition is evaluated when the directive is about to be executed. If this happens after the response is received (stages 6 and 7 in the flowchart), the condition can include the `$upstream_*` variables. For example, this is how to force remove the "Cache-Control" header field of status code 404 and cache the response for 1 hour:
+```nginx
+origin_header_modify Cache-Control '' policy=overwrite if($upstream_status = 404);
+proxy_cache_valid 404 1h;
+
+```
+
+Another case we wish to bring to your attention is using the response header to return the request processing time:
 ```nginx
 add_header X-request-time $request_time;
 ```
-We need to be aware that `add_header` is executed when building the response header. Therefore the value added to the header is the processing time up until that moment not including the time to transfer the response body. This is probably accurate enough if the response body is small, but when you have a big response that takes long time to transfer, the value in the header can be significantly smaller than the overall processing time.
-
-Like `add_header`, the execution time of most directives can be figured out by their functionality. One thing people often forget is that the place of a declarative directive in the configuration does not change its execution time. For example, although you can put the access control directives like `allow` and `deny` at the server level before all the locations blocks, they are still executed after the location context is determined for the request, which is after all the rewrite module directives. Therefore if you have a `return 200;` in the matching location, the access control directives will not be executed and the client would always receive the 200 status code.
-
-### The `proxy_set` directive and `if()` parameter
-
+We need to be aware that `add_header` is executed when building the response header to the client. Therefore the value added to the header is the processing time up until that moment, not including the time to transfer the response body. This is probably accurate enough if the response body is small, but when you have a big response that takes long time to transfer, the value in the header can be significantly smaller than the overall processing time.
