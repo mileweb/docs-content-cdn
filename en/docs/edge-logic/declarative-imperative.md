@@ -8,7 +8,34 @@ Serving and proxying content through HTTP is also a workflow well defined by the
 
 Let's get back to the coffee ordering example, where you also tell the waiter "if the milk is not from brand M, don't add it". An experienced waiter should know the milk inventory and based on the availability of brand M, give a "flat" instruction "make a cup of coffee with suger and milk" or "make a cup of coffee with suger only" to the staff behind the counter. The instructions may even be as simple as "do code #1" or "do code #2" if they have predefined code names for different coffee-making processes.
 
-Nginx supports conditions to be specified by the `location` and `if` directives. In addition, CDN Pro introduced `elseif` and `else` for more flexibility. The pair of curly braces following each of these directives defines a "context", which may be nested in an upper level context. The declarative directives in each context can be merged with the upper levels' to obtain a "flat" configuration. When nginx parses the configuration files at load time, it builds a lookup table of all the contexts and the corresponding flat configurations. When a client request comes in, nginx first tries to determine a context for request, then apply the corresponding flat configuration to the remaining processing workflow, just like what the waiter does. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
+Nginx supports conditions to be specified by the `location` and `if` directives. In addition, CDN Pro introduced `elseif` and `else` for more flexibility. The pair of curly braces following each of these directives defines a "context", which may be nested in an upper level context. The declarative directives in each context can be merged with the upper levels' to obtain a "flat" configuration. When nginx parses the configuration files at load time, it builds a lookup table of all the contexts and the corresponding flat configurations. For example, in case of the following configuration:
+```nginx
+server {
+  CONFIG_0
+  location /a { # context 1
+    CONFIG_1
+  }
+  location / { # context 2
+    CONFIG_2
+    if ($http_x_my_hdr) {  # context 3
+      CONFIG_3
+    }
+    location /b {  # context 4
+      CONFIG_4
+    }
+  }
+}
+```
+The lookup table would resemble the following:
+
+| **Context** | **Configuration** |
+| ---- | ---- |
+| 1 | CONFIG_0+CONFIG_1 |
+| 2 | CONFIG_0+CONFIG_2 |
+| 3 | CONFIG_0+CONFIG_2+CONFIG_3 |
+| 4 | CONFIG_0+CONFIG_2+CONFIG_4 |
+
+When a client request comes in, nginx first tries to determine a context for request, then apply the corresponding flat configuration to the remaining processing workflow, just like what the waiter does. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
 
 1. Among all the matching `if` blocks, the last one is picked. Nginx does not merge configurations dynamically so the declarative directives in the other `if` blocks are ignored;
 2. Among all the matching `location` blocks, one is picked based on this [precedence](http://nginx.org/en/docs/http/ngx_http_core_module.html#location);
@@ -19,7 +46,7 @@ Rule #1 above is probably the most confusing nginx behavior to new users since i
 
 ### Timing of the declarative directives
 
-In principle, users do not need to care about the time when each declarative directive is executed. But having some knowledge about the timing can help you to avoid some common mistakes. In fact, the execution time of most directives can be easily figured out by their functionalities in the request processing pipeline, which is roughly sketched below.
+In principle, users do not need to care about the time when each declarative directive is executed. But having some knowledge about the timing can help you to avoid some common mistakes. In fact, the execution time of most directives can be easily figured out by their functionalities in the request processing pipeline, which is roughly sketched below with 7 stages.
 <p align=center src=“https://docs.google.com/drawings/d/1XC9P8Y4bd_M876iiAUUYkijocV_y21S8YT3rg3ACh2E/edit”><img src="/docs/edge-logic/request-workflow.png" alt="Request Processing Workflow" width="600"></p>
 
 For example, the directive `add_header` is executed when building the response header to the client in stage 7, and `proxy_set_header` is executed when building the request header to the upstream in stage 5. All the access control directives are executed in stage 3 and the rewrite module directives in stage 2.
@@ -41,7 +68,6 @@ A mistake often made by new users is attempting to put `$upstream_*` variables i
 ```nginx
 origin_header_modify Cache-Control '' policy=overwrite if($upstream_status = 404);
 proxy_cache_valid 404 1h;
-
 ```
 
 Another case we want to mention is using the response header to return the request processing time:

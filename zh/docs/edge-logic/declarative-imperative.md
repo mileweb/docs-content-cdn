@@ -19,7 +19,7 @@ Rule #1 above is probably the most confusing nginx behavior to new users since i
 
 ### Timing of the declarative directives
 
-In principle, users do not need to care about the time when each declarative directive is executed. But having some knowledge about the timing can help you to avoid some common mistakes. In fact, the execution time of most directives can be easily figured out by their functionalities in the request processing pipeline, which is roughly sketched below.
+In principle, users do not need to care about the time when each declarative directive is executed. But having some knowledge about the timing can help you to avoid some common mistakes. In fact, the execution time of most directives can be easily figured out by their functionalities in the request processing pipeline, which is roughly sketched below with 7 stages.
 <p align=center src=“https://docs.google.com/drawings/d/1XC9P8Y4bd_M876iiAUUYkijocV_y21S8YT3rg3ACh2E/edit”><img src="/docs/edge-logic/request-workflow.png" alt="Request Processing Workflow" width="600"></p>
 
 For example, the directive `add_header` is executed when building the response header to the client in stage 7, and `proxy_set_header` is executed when building the request header to the upstream in stage 5. All the access control directives are executed in stage 3 and the rewrite module directives in stage 2.
