@@ -27,7 +27,7 @@ location / {
   ...
 }
 ```
-When both `header-a` and `header-b` are present in the request, only `has-header-b` will be added to the response. This is not a bug, just how NGINX works. However, this behavior can be counterintuitive to new users.
+When both `header-a` and `header-b` are present in the request, only `has-header-b` will be added to the response. This is not a bug, just how NGINX works. However, this behavior can be counterintuitive to new users. Refer to [this page](declarative-imperative) for more technical details.
 *   Not all directives can be used in an `if` block. This is documented in the "Context" of each directive. For the ones not allowed in an `if` block, if they support variable as parameter, you can still control their behavior based on `if` conditions using the [`set`](</docs/edge-logic/supported-directives.md#set>) directive. For example: [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>), [`proxy_redirect`](</docs/edge-logic/supported-directives.md#proxy_redirect>) and [`proxy_cookie_domain`](</docs/edge-logic/supported-directives.md#proxy_cookie_domain>).
 *   Due to the issues mentioned above, you are recommended to refrain from using any declarative directive in `if` blocks, unless there is no other way around. This makes the configuration more readable, especially to people who are new to NGINX. The example above can be rewritten as follows to achieve the desired result:
 ```nginx
