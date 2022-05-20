@@ -35,13 +35,13 @@ The lookup table would resemble the following:
 | 3 | CONFIG_0+CONFIG_2+CONFIG_3 |
 | 4 | CONFIG_0+CONFIG_2+CONFIG_4 |
 
-When a client request comes in, nginx first tries to determine a context for request, then apply the corresponding flat configuration to the remaining processing workflow, just like what the waiter does. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
+When a client request comes in, nginx first tries to determine a context for request, then apply the corresponding flat configuration to the remaining processing workflow, just like how the waiter converts your conditional order to a flat order. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
 
 1. Among all the matching `if` blocks, the last one is picked. Nginx does not merge configurations dynamically so the declarative directives in the other `if` blocks are ignored;
 2. Among all the matching `location` blocks, one is picked based on this [precedence](http://nginx.org/en/docs/http/ngx_http_core_module.html#location);
 3. `location` blocks have higher precedence than the "if" blocks.
 
-Rule #1 above is probably the most confusing nginx behavior to new users since it is different from most other programming languages. We have some suggestions [on this page](multiple-origins) regarding how to deal with it.
+Rule #1 above is probably the most confusing nginx behavior to new users since it is different from most other programming languages. We have some suggestions [on this page](multiple-origins) regarding how to deal with it. 
 
 
 ### Timing of the declarative directives
