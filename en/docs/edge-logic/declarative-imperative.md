@@ -28,8 +28,8 @@ server {
 ```
 The lookup table would resemble the following:
 
-| **Context** | **Configuration** |
-| ---- | ---- |
+| **Context** | **Merged "Flat" Configuration** |
+| :----: | ---- |
 | 1 | CONFIG_0+CONFIG_1 |
 | 2 | CONFIG_0+CONFIG_2 |
 | 3 | CONFIG_0+CONFIG_2+CONFIG_3 |
