@@ -30,10 +30,10 @@ The lookup table would resemble the following:
 
 | **Context** | **Merged "Flat" Configuration** |
 | :----: | ---- |
-| 1 | CONFIG_0+CONFIG_1 |
-| 2 | CONFIG_0+CONFIG_2 |
-| 3 | CONFIG_0+CONFIG_2+CONFIG_3 |
-| 4 | CONFIG_0+CONFIG_2+CONFIG_4 |
+| 1 | Merge(CONFIG_0, CONFIG_1) |
+| 2 | Merge(CONFIG_0, CONFIG_2) |
+| 3 | Merge(CONFIG_0, CONFIG_2, CONFIG_3) |
+| 4 | Merge(CONFIG_0, CONFIG_2, CONFIG_4) |
 
 When a client request comes in, nginx first tries to determine a context for request, then apply the corresponding flat configuration to the remaining processing workflow, just like how the waiter converts your conditional order to a flat order. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
 
