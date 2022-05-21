@@ -64,14 +64,16 @@ location / {
 ```
 Although the access control directives `allow` and `deny` are placed at the server level before the `location` blocks, they are still executed after the location context is determined for the request, which is after all the rewrite module directives including `return`. Therefore, any request to "/hello" always receives the status code 200 and the access control directives are not executed.
 
-A mistake often made by new users is attempting to put `$upstream_*` variables in the condition of an `if` directive, hoping to alter the behavior based on the origin's response. However, the `if` directive is executed very early in the request processing pipeline, way before the upstream request is even sent to the origin. At that time, only the variables extracted from the request are available and all the `$upstream_*` variable values are empty. The correct way to control behavior based on origin's response is to use the proprietary `if()` parameter we introduced to many directives. The condition in this parameter is evaluated when the directive is about to be executed. If this happens after the response is received (stages 6 and 7 in the flowchart), the condition can include the `$upstream_*` variables. For example, this is how to force remove the "Cache-Control" header field of a response with status code 404 and cache for 1 hour:
+A mistake often made by new users is attempting to put `$upstream_*` variables in the condition of an `if` directive, hoping to alter the behavior based on the origin's response. However, the `if` directive is executed very early in the request processing pipeline, way before the upstream request is even sent to the origin. At that time, only the variables extracted from the request are available and all the `$upstream_*` variable values are empty. The correct way to control behavior based on origin's response is to use the proprietary `if()` parameter we introduced to many directives. The condition in this parameter is evaluated when the directive is about to be executed. If this happens after the response is received (stages 6 and 7 in the flowchart), it can be useful to include the `$upstream_*` variables in the condition. For example, this is how to force remove the "Cache-Control" header field of responses with status code 404 and cache for 1 hour:
 ```nginx
 origin_header_modify Cache-Control '' policy=overwrite if($upstream_status = 404);
 proxy_cache_valid 404 1h;
 ```
 
-Another case we want to mention is using the response header to return the request processing time:
+The support of variables is a powerful feature of nginx. Some of the variables are continuously updated during the request processing workflow. The value seen by each directive depends on its execution time. The most notable example is the variable `$request_time`, which returns the time elapsed since the request is received. Consider the following code snippet:
 ```nginx
-add_header X-request-time $request_time;
+set $req_time $request_time;
+add_header X-req-time-1 $req_time;
+add_header X-req-time-2 $request_time;
 ```
-Because `add_header` is executed while building the response header to the client, the value added to the header is a snapshot of the variable at that moment, not including the time spent later to transfer the response body. This is probably accurate enough when the response body is small, but in case of a big response that takes long time to transfer, the value in the header can be significantly smaller than the overall processing time.
+New users may be surprised to see different values in the two response header fields. This is because `set` is executed early in the workflow so it gets an earlier snapshot of `$request_time` and saves to the variable `$req_time`. `add_header` is executed later while building the response header to the client so the value added to the header field `X-req-time-2` will be larger. But do not expect it to be total processing time of the request, because more time may be spent later to transfer the response body. In case of a large response, the value in the header can be significantly smaller than the total processing time.
