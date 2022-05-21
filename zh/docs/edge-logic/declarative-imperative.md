@@ -54,7 +54,7 @@ For example, the directive `add_header` is executed when building the response h
 People who are familiar with imperative programming often forget that the place a declarative directive appears in the configuration does not affect its execution time. Consider the following configuration:
 ```nginx
 allow 1.2.3.4;
-denay all;
+deny all;
 location /hello {
   return 200 'Hello World!';
 }
