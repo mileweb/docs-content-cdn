@@ -27,9 +27,9 @@ location / {
   ...
 }
 ```
-如果`header-a`和`header-b`同时出现在请求头部里，只有`has-header-b`会被添加到响应头里。对于 nginx 来说这是符合预期的行为，不是一个bug。只不过，这个行为与大多数编程语言不一样而已。如果您希望了解更多技术细节，请参阅 [此页面](declarative-imperative)。
+如果`header-a`和`header-b`同时出现在请求头部里，只有`has-header-b`会被添加到响应头里。对于 Nginx 来说这是符合预期的行为，不是一个bug。只不过，这个行为与大多数编程语言不一样而已。如果您希望了解更多技术细节，请参阅 [此页面](declarative-imperative)。
 *   不是所有的指令都可以用在`if`配置块里。每条指令可用的位置都描述在了文档的“可用位置”里。对于那些不能在`if`配置块里使用的指令，如果他们支持变量参数，我们仍然可以通过在`if`配置块用[`set`](</docs/edge-logic/supported-directives.md#set>)指令设置变量来控制他们的行为。比如这些指令: [`proxy_cache_valid`](</docs/edge-logic/supported-directives.md#proxy_cache_valid>), [`proxy_redirect`](</docs/edge-logic/supported-directives.md#proxy_redirect>)以及 [`proxy_cookie_domain`](</docs/edge-logic/supported-directives.md#proxy_cookie_domain>).
-*   基于以上提到的原因，我们建议用户应尽可能避免在`if`配置块里使用声明型指令。这将大大提高配置的可读性，特别是对于 nginx 的新用户来说。前面的例子如果用如下方式来重写，其结果可能更符合用户的期望：
+*   基于以上提到的原因，我们建议用户应尽可能避免在`if`配置块里使用声明型指令。这将大大提高配置的可读性，特别是对于 Nginx 的新用户来说。前面的例子如果用如下方式来重写，其结果可能更符合用户的期望：
 ```nginx
 location / {
   # 根据客户端请求来定义变量的取值

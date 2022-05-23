@@ -37,7 +37,7 @@ The lookup table would resemble the following:
 
 When a client request comes in, nginx first tries to determine a context for the request, then applies the corresponding flat configuration to the remaining processing workflow, just like how the waiter converts your conditional order to a flat order. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
 
-1. If there are mutiple matching `if` blocks, pick the last one. Nginx does not merge configurations dynamically so the declarative directives in the other `if` blocks are ignored;
+1. If there are multiple matching `if` blocks, pick the last one. Nginx does not merge configurations dynamically so the declarative directives in the other `if` blocks are ignored;
 2. If there are multiple matching `location` blocks, pick one based on this [precedence](http://nginx.org/en/docs/http/ngx_http_core_module.html#location);
 3. `location` blocks have higher precedence than the `if` blocks.
 
