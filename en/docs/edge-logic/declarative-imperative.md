@@ -41,8 +41,12 @@ When a client request comes in, nginx first tries to determine a context for the
 2. If there are multiple matching `location` blocks, pick one based on this [precedence](http://nginx.org/en/docs/http/ngx_http_core_module.html#location);
 3. `location` blocks have higher precedence than the `if` blocks.
 
-Rule #1 above is probably the most confusing nginx behavior to new users since it is different from most other programming languages. We have some suggestions [on this page](multiple-origins) regarding how to deal with it. 
+Rule #1 above is probably the most confusing nginx behavior to new users since it is different from most other programming languages. Therefore, we highly recommend the users not to put declarative directives in the `if` blocks and use the alternative methods described [on this page](multiple-origins) if possible.
 
+### The "imperative" directives of the rewrite module
+The `if` directive mentioned above is provided by the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). This module also supports a few important features like URL rewrite and variable creation and assignment. We have made some significant enhancements to the open source version and introduced a few new directives. Here is the list of directives from this module that can be used in CDN Pro: `if`, `else`, `elseif`, `break`, `return`, `rewrite`, `set`, and `eval_func`. The most important characteristic of the rewrite module is that its directives are executed sequentially - by the order they appear in the code like the imperative languages. However, they are all executed very early in the request processing workflow, before almost all the other directives except `location`. We are going to talk about some implecations of this fact in the next section.
+
+The directives `set` and `eval_func` provide means to assign values to variables. They can work with the `if` directive to set different values based on conditions. Given that most declarative directives support variables in their parameters, this provides a good way to alter the server's behavior based on conditions.
 
 ### Timing of the declarative directives
 

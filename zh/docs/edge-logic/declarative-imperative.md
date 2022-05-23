@@ -1,10 +1,10 @@
-## 声明型与顺序型指令
+## 声明式与强制式指令
 
 Declarative and imperative are two different programming paradigms. Many good articles can [be found on the internet](https://www.google.com/search?q=imperative+declarative) about this topic. In summary, a declarative program describes the desired end result whereas an imperative program describes the exact steps to achieve the result. Both paradigms have pros and cons and their respective suitable scenarios. A common use case of declarative programming is setting the parameters of some well defined workflow. For example, when you order in a coffee shop, you may just tell the waiter "bring me a cup of coffee with sugar and milk". You don't need to give step-by-step instructions on how to make the coffee including when to add sugar and milk because you are pretty sure the staff knows the detailed procedure.
 
 Serving and proxying content through HTTP is also a workflow well defined by the protocols. Therefore, the configuration of nginx is mostly declarative and you don't need to worry about how or when each directive is executed. For example, the directive `add_header X-My-Data abc always;` simply ensures the field `X-My-Data: abc` appears in the response header; `proxy_pass https://www.my-upstream.com;` tells the server to fetch the content from a designated upstream. These all seem quite straightforward, but things get interesting when we need to configure the workflow differently based on some conditions.
 
-### Configurations based on conditions
+### 基于条件的配置
 
 Let's return to the coffee ordering example. Suppose you also tell the waiter "add milk only if it's from brand M." An experienced waiter should know the milk inventory and based on the availability of brand M, give a "flat" instruction "make a cup of coffee with sugar and milk" or "make a cup of coffee with sugar only" to the staff behind the counter. The instructions may even be as simple as "do code #1" or "do code #2" if they have predefined code names for different coffee-making processes.
 
@@ -41,10 +41,14 @@ When a client request comes in, nginx first tries to determine a context for the
 2. If there are multiple matching `location` blocks, pick one based on this [precedence](http://nginx.org/en/docs/http/ngx_http_core_module.html#location);
 3. `location` blocks have higher precedence than the `if` blocks.
 
-Rule #1 above is probably the most confusing nginx behavior to new users since it is different from most other programming languages. We have some suggestions [on this page](multiple-origins) regarding how to deal with it. 
+Rule #1 above is probably the most confusing nginx behavior to new users since it is different from most other programming languages. Therefore, we highly recommend the users not to put declarative directives in the `if` blocks and use the alternative methods described [on this page](multiple-origins) if possible.
 
+### Rewrite 模块里的”强制式“指令
+The `if` directive mentioned above is provided by the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). This module also supports a few important features like URL rewrite and variable creation and assignment. We have made some significant enhancements to the open source version and introduced a few new directives. Here is the list of directives from this module that can be used in CDN Pro: `if`, `else`, `elseif`, `break`, `return`, `rewrite`, `set`, and `eval_func`. The most important characteristic of the rewrite module is that its directives are executed sequentially - by the order they appear in the code like the imperative languages. However, they are all executed very early in the request processing workflow, before almost all the other directives except `location`. We are going to talk about some implecations of this fact in the next section.
 
-### Timing of the declarative directives
+The directives `set` and `eval_func` provide means to assign values to variables. They can work with the `if` directive to set different values based on conditions. Given that most declarative directives support variables in their parameters, this provides a good way to alter the server's behavior based on conditions.
+
+### 声明式指令的执行时间点
 
 In principle, users do not need to care about the time when each declarative directive is executed, but having some knowledge about the timing can help you to avoid some common mistakes. In fact, the execution time of most directives can be easily figured out by their functionalities in the request processing pipeline, which is roughly sketched below with 7 stages.
 <p align=center src=“https://docs.google.com/drawings/d/1XC9P8Y4bd_M876iiAUUYkijocV_y21S8YT3rg3ACh2E/edit”><img src="/docs/edge-logic/request-workflow.png" alt="Request Processing Workflow" width="600"></p>
