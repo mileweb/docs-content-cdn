@@ -288,7 +288,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 <span class="badge">standard</span>
 
 **Syntax:** `expires time;
-       expires epoch | max | off;` <br/>
+           expires epoch | max | off;` <br/>
 **Default:** `expires off;` <br/>
 **Context:** server, location, if in location
 
@@ -305,11 +305,13 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
-### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
+### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
-**Syntax:** `if (condition) { ... }`<br/>
+**Syntax:** `if (condition) { ... }
+             elseif (condition) { ... }
+             else {...}`<br/>
 **Default:** `—`<br/>
 **Context:** server, location
 

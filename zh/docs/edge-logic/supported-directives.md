@@ -284,7 +284,7 @@ location @try_origin2 {
 <span class="badge">标准</span>
 
 **使用语法：** `expires time;
-       expires epoch | max | off;` <br/>
+          expires epoch | max | off;` <br/>
 **默认设置：** `expires off;` <br/>
 **可用位置：** server, location, if in location
 
@@ -302,11 +302,13 @@ location @try_origin2 {
 CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1000 字节时才压缩功能才会生效）。该默认行为应该适用于大多数用户。
 该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持形如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。该指令最多支持20个模糊匹配参数。
 
-### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
+### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span>
 
-**使用语法：** `if (condition) { ... }`<br/>
+**使用语法：** `if (condition) { ... }
+              elseif (condition) { ... }
+              else {...}`<br/>
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
