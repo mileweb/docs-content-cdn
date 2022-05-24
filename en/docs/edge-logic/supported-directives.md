@@ -288,7 +288,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 <span class="badge">standard</span>
 
 **Syntax:** `expires time;
-           expires epoch | max | off;` <br/>
+        expires epoch | max | off;` <br/>
 **Default:** `expires off;` <br/>
 **Context:** server, location, if in location
 
@@ -310,8 +310,8 @@ CDN Pro always uses gzip and applies it to the default MIME types above. In addi
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `if (condition) { ... }
-             elseif (condition) { ... }
-             else {...}`<br/>
+        elseif (condition) { ... }
+        else {...}`<br/>
 **Default:** `—`<br/>
 **Context:** server, location
 

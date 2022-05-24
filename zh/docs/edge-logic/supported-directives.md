@@ -284,7 +284,7 @@ location @try_origin2 {
 <span class="badge">标准</span>
 
 **使用语法：** `expires time;
-          expires epoch | max | off;` <br/>
+           expires epoch | max | off;` <br/>
 **默认设置：** `expires off;` <br/>
 **可用位置：** server, location, if in location
 
@@ -307,8 +307,8 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 <span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `if (condition) { ... }
-              elseif (condition) { ... }
-              else {...}`<br/>
+           elseif (condition) { ... }
+           else {...}`<br/>
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
