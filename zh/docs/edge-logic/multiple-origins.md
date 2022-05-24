@@ -15,7 +15,7 @@ location / {
 <a id="ifcaution"></a>这个例子里我们用到了[rewrite模块里的`if`指令](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)来检查请求头`x-origin`的值，定义不同的行为。但是，由于rewrite模块和其他模块在执行时序上的差异，我们在使用`if`指令的时候需要格外的小心。如果您需要在边缘逻辑里使用该指令，请务必遵循以下原则:
 
 *   仔细阅读开源版本的 [rewrite 模块文档](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。比如您需要理解在上面的例子里，为什么`rewrite`指令最后需要加上`break`参数。
-*   请记住：只有rewrite模块里的指令（[`if`](</docs/edge-logic/supported-directives.md#if>), [`set`](</docs/edge-logic/supported-directives.md#set>), [`rewrite`](</docs/edge-logic/supported-directives.md#rewrite>), [`return`](</docs/edge-logic/supported-directives.md#return>), [`break`](</docs/edge-logic/supported-directives.md#break>), [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>)）会按照他们在location配置块里出现的顺序被执行。这些指令也被称为`顺序型`（imperative）指令。它们的执行时间发生在请求处理的早期阶段，早于几乎所有其他的`声明型`（declarative）指令。在控制台的边缘逻辑编辑器里，为了让用户能方便地区分两类指令，顺序型指令呈蓝色而声明型指令为红色。不同的声明型指令在请求处理的不同阶段按需要被执行。如果有声明型指令被包含在多个`if`配置块里，只有**最后**一个满足条件的配置块里的指令会生效。一个例子如下：
+*   请记住：只有rewrite模块里的指令（[`if`](</docs/edge-logic/supported-directives.md#if>), [`set`](</docs/edge-logic/supported-directives.md#set>), [`rewrite`](</docs/edge-logic/supported-directives.md#rewrite>), [`return`](</docs/edge-logic/supported-directives.md#return>), [`break`](</docs/edge-logic/supported-directives.md#break>), [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>)）会按照他们在location配置块里出现的顺序被执行。这些指令也被称为`强制型`（imperative）指令。它们的执行时间发生在请求处理的早期阶段，早于几乎所有其他的`声明型`（declarative）指令。在控制台的边缘逻辑编辑器里，为了让用户能方便地区分两类指令，强制型指令呈蓝色而声明型指令为红色。不同的声明型指令在请求处理的不同阶段按需要被执行。如果有声明型指令被包含在多个`if`配置块里，只有**最后**一个满足条件的配置块里的指令会生效。一个例子如下：
 ```nginx
 location / {
   if ($http_header_a != '') {

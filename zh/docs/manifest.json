@@ -251,7 +251,7 @@
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
-            "title": "声明型与顺序型指令",
+            "title": "声明式与强制式指令",
             "path": "/docs/edge-logic/declarative-imperative.md"
           },
           {
