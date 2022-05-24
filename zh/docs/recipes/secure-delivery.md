@@ -37,7 +37,7 @@ if ($http_my_token != 'authorized' && $arg_my_token != 'authorized') {
     return 403;
 }
 ```
-* Based on a remote authorization server's response, with [`auth_request`](</docs/edge-logic/supported-directives.md#auth_request>):
+* 通过 [`auth_request`](</docs/edge-logic/supported-directives.md#auth_request>) 指令实现用远端服务器鉴权:
 ```nginx
 location /protected/ {
     auth_request /auth; # 2xx to grant access, 401 or 403 to reject
@@ -53,7 +53,7 @@ location = /auth { # calls a remote server to authenticate the request
     origin_set_header X-Original-URI $request_uri;
 }
 ```
-* Use the NGINX built-in [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) algorithm. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official NGINX documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
+* 使用 Nginx 内置的 [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) 鉴权算法. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official NGINX documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
 
 * Even more complex algorithms can be achieved with the proprietary directive [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>). Here is an example of how to implement the validation of an HMAC authentication code
 with SHA256:
