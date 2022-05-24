@@ -7,7 +7,7 @@ CDN Pro 的边缘网络包含遍布全球的数百个节点。每个节点中都
 里的“负载”包括网络带宽、CPU 功率和磁盘的使用。
 2. 对于可缓存的内容，避免在同一个节点中重复缓存。
 
-我们在每个边缘节点中设计了以下逻辑架构：
+基于以上目标，我们为每个边缘节点设计了以下逻辑架构：
 <p align=center src=”https://docs.google.com/drawings/d/1Q-UdhK7w5Yzkjg53NTlzYAzKOOBmW_Rou5IgdGvl7-s/edit“><img src="/docs/edge-logic/lb7-es-structure.png" alt="节点逻辑架构" width="600"></p>
 
 路由器收到的每个请求首先经过四层防火墙和负载均衡器到达

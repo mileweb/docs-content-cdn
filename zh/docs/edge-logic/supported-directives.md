@@ -507,9 +507,9 @@ origin_pass my_origin/abc$uri_uenc;
 
 当源站的域名解析为多个 IP 地址时，该指令用于设置使用哪个算法来选择源站IP。有效值为：
 
-* round_robin : 轮询回源，默认设置，它尝试将回源流量均匀分配到所有的源站IP上。
-* consistent_hash : 一致性哈希回源，基于回源 URL 的哈希值。如果源站有缓存，可以提高其命中率。
-* sorted_list : 优选回源，按照源站的链路质量状况回最优的源IP。当源站IP地理分布广泛时，此回源方式有助于确保回源性能稳定。
+* `round_robin` : 轮询回源，默认设置，它尝试将回源流量均匀分配到所有的源站IP上。
+* `consistent_hash` : 一致性哈希回源，基于回源 URL 的哈希值。如果源站有缓存，可以提高其命中率。
+* `sorted_list` : 优选回源，按照源站的链路质量状况回最优的源IP。当源站IP地理分布广泛时，此回源方式有助于确保回源性能稳定。
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)

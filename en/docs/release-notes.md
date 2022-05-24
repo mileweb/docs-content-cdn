@@ -1,5 +1,24 @@
 # Release Notes
 
+## May 20, 2022
+### API updates
+* Added allowedServerGroups field to service quota to control the server groups a customer can access.
+* Added CPU summary report.
+* Improved error handling of PATCH API permissions to suggest creating an API permission if it does not yet exist.
+* Added support for multiple hostnames in the report download API.
+* Improved error handling if a user specifies an invalid server group in an edge hostname's configuration.
+* Ensured consistent naming of server groups in the service quota APIs.
+* Ensured default server groups are used if none are specified when creating an edge hostname.
+
+### Portal updates
+* Added support for report annotations to highlight interesting events.
+* Improved error handling when missing a semicolon in a property’s Edge Logic.
+* Added support for saving hostnames as a group in the report form to allow easier reuse.
+* Fixed display issue in access log download page when the user clicks the browser's back button.
+* Fixed an error in the log configuration creation page when a $ character is entered.
+* Fixed an error preventing deletion of a log configuration.
+
+
 ## May 6, 2022
 ### API updates
 

@@ -41,13 +41,13 @@ The following report types are supported:
 | **Fields**      | **Description**                                       |
 | --------------- | ----------------------------------------------------- |
 | Report Type     | Select the type of report you want to generate.       | 
-| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.
+| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.|
 | Date Range      | Select the start and end dates and the time for the report. |
-| Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>
-| Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties.         |
+| Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>|
+| Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties. <br><br>**Tip:** If you select two or more hostnames, you can save them as a group by clicking **+Save selected hostnames as a group** at the bottom of the dropdown list. The next time you want to use the same hostnames, just select the group instead of selecting the hostnames individually.          |
 | Edge Hostnames       | For Edge Hostname Request, select one or more edge hostnames.         |
 | Scheme        | For all reports except Edge Hostname Request, select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
-| Server Groups        | By default Traffic Volume Summary reports on all server groups. To choose specific server groups, select them from the available choices.<li><strong>Standard</strong></li><li><strong>Premium</strong>.</li><li><strong>Premium+</strong>.</li><li><strong>Ultra</strong>.|
+| Server Groups        | By default Traffic Volume Summary reports on all server groups. To choose specific server groups, select them from the available choices.<li><strong>Standard</strong>.</li><li><strong>Premium</strong>.</li><li><strong>Premium+</strong>.</li><li><strong>Ultra</strong>.|
 | Group By       | If **Report Type** is set to **Traffic Volume Summary**, use this field to group the results according to one or more of the following choices. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Customer Ids</strong>.</li> |
 
 3. Click the **Generate Report** button to generate the report.
@@ -55,4 +55,33 @@ The following report types are supported:
 
 <ul><li>Mouse over data points in the report to view detailed information.<br>
 <li>Drag over the chart to magnify areas, and then use the <strong>Reset zoom</strong> button to return to the default zoom level.<br>
-<li>Use the <strong>Download Options</strong> button at the top right of the report to download raw data in comma-separated-value (CSV) format.
+<li>Use the <strong>Download Options</strong> button at the top right of the report to download raw data in comma-separated-value (CSV) format, create annotations (described below), or hide annotations.</ul>
+
+## Creating Annotations
+
+After you generate a report, you can create text annotations to highlight events related to traffic going to your hostnames.
+
+1. Click the **Download Options** button at the top right of the report and select **Create Annotation**.
+2. Complete the fields in the Create an annotation dialog box.
+
+   <p align=center><img src="/docs/resources/images/reports/create_annotation.png" alt="report page" width="900"></p>
+
+| **Fields**      | **Description**                                       |
+| --------------- | ----------------------------------------------------- |
+| Annotation Type | Select the type of annotation you want to add.<ul><li> <strong>Client</strong> = an event affecting clients, such as the release of a popular game.</ul></li><ul><li><strong>Configuration</strong> = an event related to a configuration change.</ul></li> **Note:** Annotations created by CDNetworks to indicate operations events may also appear in your reports.  |
+| Time            | Select an RFC 3339 date indicating when the annotation applies. |
+| Comments        | Enter a description about the event. The comments will appear in the report. 
+| Hostnames       | Select one or more hostnames. You can use wildcard domains such as <strong>*.abc.com</strong>, <strong>\*.com</strong>, or <strong>\*</strong>. If left blank, the annotation will apply to all hostnames. || Hostnames       | Select one or more hostnames. You can use wildcard domains such as <strong>*.abc.com</strong>, <strong>\*.com</strong>, or <strong>\*</strong>. If left blank, the annotation will apply to all hostnames. |
+| Server Regions  | Select one or more CDN Pro server regions affected by the event.         |
+| Client Regions  | Select one or more end-user regions affected by the event.         |
+
+3. Click **Create**.
+   
+After you create annotations, you can hide them or redisplay them by clicking the **Download Options** button and selecting **Hide Annotations** or **Show Annotations**.
+
+ The following figure shows an example of two annotations.
+
+ <p align=center><img src="/docs/resources/images/reports/two_annotations.png" alt="report page" width="900"></p>
+____
+
+
