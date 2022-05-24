@@ -6,10 +6,8 @@
 
 ### 基于条件的配置
 
-Let's return to the coffee ordering example. Suppose you also tell the waiter "add milk only if it's from brand M." An experienced waiter should know the milk inventory and, based on the availability of brand M, give a "flat" instruction "make a cup of coffee with sugar and milk" or "make a cup of coffee with sugar only" to the staff behind the counter. The instructions may even be as simple as "do code #1" or "do code #2" if they have predefined code names for different coffee-making processes.
 让我们回到点咖啡的例子，你告诉服务员“如果你店里的牛奶不是M 牌的就别加”。一个经验丰富的服务员会了解店里牛奶的库存，然后根据是否有M 牌牛奶向后台的店员下发”标准”的指示：“做一杯加糖加奶的咖啡”，或者“做一杯只加糖的咖啡”。如果咖啡店为不同的做咖啡流程预先编了码，指示可能会更简单，比如“做 1 号”或“做 2 号”。
 
-Nginx supports conditions to be specified by the `location` and `if` directives. In addition, CDN Pro introduced `elseif` and `else` for more flexibility. The pair of curly braces following each of these directives defines a "context", which may be nested in an upper level context. The declarative directives in each context can be merged with the ones in the upper levels to obtain a "flat" configuration. When Nginx parses the configuration files at load time, it builds a lookup table of all the contexts and the corresponding flat configurations. For example, in the case of the following configuration:
 Nginx支持由 `location` 和 `if` 指令为配置设定条件。CDN Pro 还引入了 `elseif` 和 `else` 指令来实现更为灵活的配置。这些指令后面的一对花括号定义了一个“上下文”，而且它们可以多重嵌套。每个上下文里的声明型指令可以和上层上下文里的指令合并以生成一个“标准”的配置。当 nginx在加载和解析配置文件时会建立一个查找表，其中包括所有上下文和相应的标准配置。比如下面的配置:
 
 ```nginx
@@ -44,7 +42,6 @@ server {
 2. 在所有能匹配的 `location` 指令块里, 根据[规则](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)选择优先级最高的;
 3. `location` 指令块比 `if` 块的优先级更高。
 
-Rule #1 above is probably the most confusing Nginx behavior to new users since it is different from most other programming languages. Therefore, we highly recommend the users not to put declarative directives in the `if` blocks and use the alternative methods described [on this page](multiple-origins) if possible.
 上面的规则 1 可能是 nginx 行为里新用户最难理解的，因为它和绝大部分编程语言都不一样。在[这里](multiple-origins)我们对于怎么处理这个行为有一些建议。
 
 ### Rewrite 模块里的”强制式“指令
