@@ -1,61 +1,66 @@
 ## 声明式与强制式指令
 
-Declarative and imperative are two different programming paradigms. Many articles can [be found on the internet](https://www.google.com/search?q=imperative+declarative) about these paradigms. In summary, a declarative program describes the desired end result whereas an imperative program describes the exact steps to achieve the result. Both paradigms have pros and cons and their respective suitable scenarios. A common use case of declarative programming is setting the parameters of some well-defined workflow. For example, when you order in a coffee shop, you may just tell the waiter "bring me a cup of coffee with sugar and milk." You don't need to give step-by-step instructions on how to make the coffee, including when to add sugar and milk, because you are pretty sure the staff knows the detailed procedure.
+声明式（declarative）和强制式（imperative，也常被翻译成”命令式“）是两种不同的编程方式。关于这个主题网上有很多[好文章](https://www.google.com/search?q=imperative+declarative)。总的来说，声明式程序描述想要的结果，而强制式程序描述为了达到某个结果所需要采取的每一个准确步骤。两种方式都有各自的优缺点和最适用的场景。声明式编程的一个常见用例是为一些定义明确的工作流设置参数。比如说，在咖啡馆点单，你可以只告诉服务员“我要一杯加糖和奶的咖啡”。你不需要给出怎么做咖啡的一步一步的指示，包括什么时候加糖什么时候加奶，因为你确定店员知道做咖啡的详细流程。
 
-Serving and proxying content through HTTP is also a workflow well-defined by the network protocols. Therefore, the configuration of Nginx is mostly declarative and you don't need to care about how or when each directive is executed. For example, the directive `add_header X-My-Data abc always;` simply ensures the field `X-My-Data: abc` appears in the response header; `proxy_pass https://www.my-upstream.com;` tells the server to fetch the content from a designated upstream. These all seem quite straightforward, but things get interesting when you need to configure the workflow differently based on some conditions.
+通过 HTTP 提供和代理内容服务也是一个被技术协议明确定义的工作流。因此，nginx 的配置绝大部分是声明式的，你不需要关心每一条指令是怎么被执行的，以及什么时候被执行的。例如，这条指令 `add_header X-My-Data abc always;` 只是保证 `X-My-Data: abc` 出现在 HTTP 响应报文的头部里；`proxy_pass https://www.my-upstream.com;` 告诉服务器从指定的上游把内容取下来。这些指令看起来很直接，但是当我们需要基于不同的条件对工作流进行不同配置的时候，事情就变得有趣了。
 
 ### 基于条件的配置
 
 Let's return to the coffee ordering example. Suppose you also tell the waiter "add milk only if it's from brand M." An experienced waiter should know the milk inventory and, based on the availability of brand M, give a "flat" instruction "make a cup of coffee with sugar and milk" or "make a cup of coffee with sugar only" to the staff behind the counter. The instructions may even be as simple as "do code #1" or "do code #2" if they have predefined code names for different coffee-making processes.
+让我们回到点咖啡的例子，你告诉服务员“如果你店里的牛奶不是M 牌的就别加”。一个经验丰富的服务员会了解店里牛奶的库存，然后根据是否有M 牌牛奶向后台的店员下发”标准”的指示：“做一杯加糖加奶的咖啡”，或者“做一杯只加糖的咖啡”。如果咖啡店为不同的做咖啡流程预先编了码，指示可能会更简单，比如“做 1 号”或“做 2 号”。
 
 Nginx supports conditions to be specified by the `location` and `if` directives. In addition, CDN Pro introduced `elseif` and `else` for more flexibility. The pair of curly braces following each of these directives defines a "context", which may be nested in an upper level context. The declarative directives in each context can be merged with the ones in the upper levels to obtain a "flat" configuration. When Nginx parses the configuration files at load time, it builds a lookup table of all the contexts and the corresponding flat configurations. For example, in the case of the following configuration:
+Nginx支持由 `location` 和 `if` 指令为配置设定条件。CDN Pro 还引入了 `elseif` 和 `else` 指令来实现更为灵活的配置。这些指令后面的一对花括号定义了一个“上下文”，而且它们可以多重嵌套。每个上下文里的声明型指令可以和上层上下文里的指令合并以生成一个“标准”的配置。当 nginx在加载和解析配置文件时会建立一个查找表，其中包括所有上下文和相应的标准配置。比如下面的配置:
+
 ```nginx
 server {
   CONFIG_0
-  location /a { # context 1
+  location /a { # 上下文 1
     CONFIG_1
   }
-  location / { # context 2
+  location / { # 上下文 2
     CONFIG_2
-    if ($http_x_my_hdr) {  # context 3
+    if ($http_x_my_hdr) {  # 上下文 3
       CONFIG_3
     }
-    location /b {  # context 4
+    location /b {  # 上下文 4
       CONFIG_4
     }
   }
 }
 ```
-The lookup table would resemble the following:
+生成的查找表大概是这个样子:
 
-| **Context** | **Merged "Flat" Configuration** |
+| **上下文** | **合并 "标准" 配置** |
 | :----: | ---- |
-| 1 | Merge(CONFIG_0, CONFIG_1) |
-| 2 | Merge(CONFIG_0, CONFIG_2) |
-| 3 | Merge(CONFIG_0, CONFIG_2, CONFIG_3) |
-| 4 | Merge(CONFIG_0, CONFIG_2, CONFIG_4) |
+| 1 | 合并(CONFIG_0, CONFIG_1) |
+| 2 | 合并(CONFIG_0, CONFIG_2) |
+| 3 | 合并(CONFIG_0, CONFIG_2, CONFIG_3) |
+| 4 | 合并(CONFIG_0, CONFIG_2, CONFIG_4) |
 
-When a client request comes in, Nginx first tries to determine a context for the request, then applies the corresponding flat configuration to the remaining processing workflow, in a way similar to how the waiter converts your conditional order to a flat order. If the request matches multiple sibling contexts, the following rules ensure only one is selected:
+收到客户请求后，nginx 首先会确定处理这个请求的上下文，然后把对应的标准配置应用于接下来的处理流程，这就像服务员把你带有条件的订单转化为一个标准的订单。如果请求匹配多个相同级别的上下文，下面的规则保证只有一个被选中:
 
-1. If there are multiple matching `if` blocks, pick the last one. Nginx does not merge configurations dynamically so the declarative directives in the other `if` blocks are ignored;
-2. If there are multiple matching `location` blocks, pick one based on this [precedence](http://nginx.org/en/docs/http/ngx_http_core_module.html#location);
-3. `location` blocks have higher precedence than the `if` blocks.
+1. 在所有匹配的 `if` 指令块中, 选最后一个。Nginx 不会动态合并配置，所以其它 `if` 指令块里面的声明式指令被忽略;
+2. 在所有能匹配的 `location` 指令块里, 根据[规则](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)选择优先级最高的;
+3. `location` 指令块比 `if` 块的优先级更高。
 
 Rule #1 above is probably the most confusing Nginx behavior to new users since it is different from most other programming languages. Therefore, we highly recommend the users not to put declarative directives in the `if` blocks and use the alternative methods described [on this page](multiple-origins) if possible.
+上面的规则 1 可能是 nginx 行为里新用户最难理解的，因为它和绝大部分编程语言都不一样。在[这里](multiple-origins)我们对于怎么处理这个行为有一些建议。
 
 ### Rewrite 模块里的”强制式“指令
-The `if` directive mentioned above is provided by the [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). This module also supports a few important features like URL rewrite and variable creation and assignment. We have made some significant enhancements to the open source version and introduced a few new directives. Here is the list of directives from this module that can be used in CDN Pro: `if`, `else`, `elseif`, `break`, `return`, `rewrite`, `set`, and `eval_func`. The most important characteristic of the rewrite module is that its directives are executed sequentially - by the order they appear in the code like the imperative languages. However, they are all executed very early in the request processing workflow, before almost all the other directives except `location`. We are going to talk about some implecations of this fact in the next section.
 
-The directives `set` and `eval_func` provide means to assign values to variables. They can work with the `if` directive to set different values based on conditions. Given that most declarative directives support variables in their parameters, this provides a good way to alter the server's behavior based on conditions.
+上面提到的 `if` 指令是由[重写模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)提供的。这个模块也支持一些重要的功能，像 URL 重写，变量创建和赋值。我们基于开源版本做了一些重要的改进，引入了一些新的指令。下面是此模块中可以用于 CDN Pro的命令：`if`, `else`, `elseif`, `break`, `return`, `rewrite`, `set`, 和 `eval_func`。重写模块最重要的特点是它的指令是顺序执行的，按照它们在代码里面出现的顺序执行，就像强制式语言一样。然而，它们是在请求处理流程的早期执行的，早于除了 `location` 之外的所有指令。我们会在下一部分讨论由此引起的一些问题。
+
+`set` 和 `eval_func` 指令可以用来为变量赋值。它们可以和 `if` 指令一起，基于不同的条件赋于变量不同的值。由于绝大部分声明式指令在参数里支持变量，这就提供了一个基于条件来改变服务器行为的好方法。
 
 ### 声明式指令的执行时间点
 
-In principle, users do not need to care about the time when each declarative directive is executed, but having some knowledge about the timing can help you avoid a few common mistakes. In fact, the execution time of most directives can be easily determined by their functionalities in the request processing pipeline, which is sketched below with 7 stages.
+原则上，用户不需要关心每一条声明式指令是什么时候执行的。但是了解一下执行时间的相关知识有助于避免一些常见错误。事实上，绝大部分指令的执行时间点都不难通过它们在请求处理流程上的功能分析出来。在下面的示意图里，我们将这个流程分为7个阶段。
 <p align=center src=“https://docs.google.com/drawings/d/1XC9P8Y4bd_M876iiAUUYkijocV_y21S8YT3rg3ACh2E/edit”><img src="/docs/edge-logic/request-workflow.png" alt="Request Processing Workflow" width="600"></p>
 
-For example, the directive `add_header` is executed when building the response header to the client in stage 7, and `proxy_set_header` is executed when building the request header to the upstream in stage 5. All the access control directives are executed in stage 3 and the rewrite module directives in stage 2.
+例如，指令 `add_header` 是在第 7 个阶段，为响应添加头部的时候执行的，`proxy_set_header` 是在第 5 个阶段，为发给上游的请求添加头部的时候执行的。所有的访问控制指令都是在第 3 阶段执行的，重写模块的指令是在第 2 阶段执行的。
 
-Engineers familiar with imperative programming might forget that the location where a declarative directive appears in the configuration does not affect its execution time. Consider the following configuration:
+熟悉命令式编程的人常常会忘记，声明式指令在配置里面的位置并不影响它的执行时间点。来看下面的配置：
 ```nginx
 allow 1.2.3.4;
 deny all;
@@ -66,18 +71,19 @@ location / {
   origin_pass my_origin;
 }
 ```
-Although the access control directives `allow` and `deny` are placed at the server level before the `location` blocks, they are executed after the location context is determined for the request, following all the rewrite module directives including `return`. Therefore, any request to "/hello" always receives the status code 200 and the access control directives are not executed.
+尽管访问控制指令 `allow` 和 `deny` 被放在 server 层，在 `location` 区块之前，它们仍然会在请求完成匹配 location 之后执行，也在所有的重写模块指令（包括 `return`）执行之后。因此，任何对 "/hello" 的请求都会收到状态码 200 并且访问控制指令不会执行。
 
-A mistake often made by new users is attempting to put `$upstream_*` variables in the condition of an `if` directive, hoping to alter the behavior based on the origin's response. However, the `if` directive is executed very early in the request processing pipeline, way before the upstream request is even sent to the origin. At that time, only the variables extracted from the request are available and all the `$upstream_*` variable values are empty. The correct way to control behavior based on origin's response is to use the proprietary `if()` parameter we introduced to many directives. The condition in this parameter is evaluated when the directive is about to be executed. If this happens after the response is received (stages 6 and 7 in the flowchart), it can be useful to include the `$upstream_*` variables in the condition. For example, this is how to force removal of the "Cache-Control" header field from responses with status code 404 and cache for 1 hour:
+新用户常犯的一个错误是试图把 `$upstream_*` 变量放进 `if` 指令的条件里，希望根据源站的回复改变 nginx 的行为。然而， `if` 指令是在请求处理流程的早期执行的，此时上游请求还没有被送往源站，所以只有从请求里面提取的变量有值，所有的 `$upstream_*` 变量都是空的。想根据源站的响应来控制 nginx 的行为，正确的做法是使用我们为很多指令新增的 `if()` 参数。这个参数里面的条件是在指令即将被执行的时候才判定的。如果指令的执行时间点是在收到响应之后（流程图里面阶段 6 和 7），`$upstream_*` 变量就可以用在条件里。比如下面这个配置，当状态码是 404时，强制移除 "Cache-Control" 头并且缓存1 个小时：
+
 ```nginx
 origin_header_modify Cache-Control '' policy=overwrite if($upstream_status = 404);
 proxy_cache_valid 404 1h;
 ```
 
-Support of variables is a powerful feature of Nginx. Some variables are updated continuously during the request processing workflow. The value seen by each directive depends on its execution time. The most notable example is the variable `$request_time`, which returns the time elapsed since the request was received. Consider the following code snippet:
+nginx 的一个强大的功能是支持变量。一些变量在请求处理的流程中持续地被更新。每个指令得到的变量值取决于这条指令执行的时间点。最典型的例子是变量 `$request_time`，它返回从请求收到那一刻起到当前的时间差。考虑下面的这段代码：
 ```nginx
 set $req_time $request_time;
 add_header X-req-time-1 $req_time;
 add_header X-req-time-2 $request_time;
 ```
-New users may be surprised to see different values in the two response header fields. This is because `set` is executed early in the workflow, so it gets an earlier snapshot of `$request_time` and saves to the variable `$req_time`. `add_header` is executed later while building the response header to the client, so the value added to the header field `X-req-time-2` will be larger. But do not expect it to be the total processing time of the request, because more time may be spent later to transfer the response body. In case of a large response, the value in the header can be significantly smaller than the total processing time.
+新用户可能会惊讶地发现两个响应头里面的值不相同。这是因为 `set` 是在流程的早期执行的，所以它得到的是 `$request_time` 的一个早期的值并将其存在变量 `$req_time` 中。`add_header` 是在构造给客户端的响应头部的时候执行的，要晚一些，所以头 `X-req-time-2` 得到的值就大一些。但是这个值并不是请求的全部处理时间，因为随后传输响应正文要再花一定的时间。当响应很大时，用这种方式在头部里记录的时间值可能比整个处理时间小得多。
