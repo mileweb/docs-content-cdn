@@ -15,14 +15,14 @@ CDN Pro对平台上的7层流量进行实时监控并通过大数据分析及时
 攻击请求速率更是达到了史无前例的35Mrps！
 
 ### 在边缘上进行访问控制
-Access control is essential for protecting content from unauthorized users. It also plays an important role in mitigating some common Layer 7 attacks. CDN Pro supports several access control methods. Many of them are based on enhanced features of the open-source NGINX. We also introduced a proprietary [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to support customized algorithms.
-* Client IP restrictions with [`allow`](</docs/edge-logic/supported-directives.md#allow>) and [`deny`](</docs/edge-logic/supported-directives.md#deny>):
+访问控制是一项十分重要的功能，以保护内容不会被未授权的用户访问。它也可以用于防御某些常见的7层攻击。CDN Pro 支持多种访问控制机制。除了对原生 Nginx 相应功能的增强以外，我们还新增了 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来支持更加复杂的定制算法。
+* 使用[`allow`](</docs/edge-logic/supported-directives.md#allow>) 和 [`deny`](</docs/edge-logic/supported-directives.md#deny>) 来限制客户端IP地址:
 ```nginx
 allow 123.0.0.1/8;
 allow 234.12.34.56;
 deny all;
 ```
-* Check the `Referer` request header with [`valid_referers`](</docs/edge-logic/supported-directives.md#valid_referers>):
+* 使用 [`valid_referers`](</docs/edge-logic/supported-directives.md#valid_referers>) 来检查合法的 `Referer` 取值:
 ```nginx
 valid_referers none blocked server_names
                *.example.com example.* www.example.org/galleries/
@@ -31,7 +31,7 @@ if ($invalid_referer) {
     return 403;
 }
 ```
-* Based on any request header or query parameter value using the enhanced [`if`](</docs/edge-logic/supported-directives.md#if>) directive:
+* 使用增强的 [`if`](</docs/edge-logic/supported-directives.md#if>) 指令来实现基于请求头或者 URL 参数的判断:
 ```nginx
 if ($http_my_token != 'authorized' && $arg_my_token != 'authorized') {
     return 403;
@@ -53,10 +53,9 @@ location = /auth { # calls a remote server to authenticate the request
     origin_set_header X-Original-URI $request_uri;
 }
 ```
-* 使用 Nginx 内置的 [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) 鉴权算法. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official NGINX documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
+* 使用 Nginx 内置的 [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) 鉴权算法. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official Nginx documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
 
-* Even more complex algorithms can be achieved with the proprietary directive [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>). Here is an example of how to implement the validation of an HMAC authentication code
-with SHA256:
+* 通过 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令 来实现几乎任意的定制鉴权算法. 下面这个例子描述了如何验证一个基于 SHA256 的 HMAC（哈希验证码）:
 ```nginx
 eval_func $binhash HMAC $secret_key $request_uri SHA256;
 eval_func $b64hash BASE64_ENCODE $binhash;
@@ -88,7 +87,7 @@ origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The [`保密信息`](</docs/portal/secrets/overview>) feature allows you to manage and apply secret keys with minimal exposure.
 
 ### 爬虫防护
-Before the content is delivered to fulfill a request, there may be times when you want to make sure the request was made by a human using a browser instead of by a bot or crawler. The following Edge Logic code demonstrates how to prompt the users to click a button to receive the requested content:
+在把某些内容发送给客户端之前，有时候您可能希望确定对方是一个人类在使用一个正常的浏览器，而不是某种机器爬虫。下面这段 Edge Logic 代码展示了如何实现一个机制让终端用户点击一个按钮之后才能获取文件内容，同时也验证了他至少是在使用一个支持 Javascript 和 Cookie 的客户端:
 ```nginx
 location /protected/ {
     if ($cookie_validated = '') { #check the existence of the cookie 'validated'
@@ -106,7 +105,7 @@ location /protected/ {
     origin_pass my_origin;
 }
 ```
-More sophisticated methods can be adopted in this way to block more advanced bots.
+这只是一个简单例子。我们可以通过更复杂的 Javascript 代码来防御更聪明的机器爬虫。
 
 ### TLS相关配置
 * CDN Pro supports TLS certificates with both RSA and ECDSA algorithms. You can even configure two certificates with different algorithms in the same property and have the server pick one based on the client's capability and preference.
