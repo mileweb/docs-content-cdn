@@ -303,7 +303,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 **Default:** `expires on;` <br/>
 **Context:** server, location, if in location
 
-Enables or disables gzipping of responses. No change to the [public version]
+Enables or disables gzipping of responses. No change to the [public version](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
 
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
