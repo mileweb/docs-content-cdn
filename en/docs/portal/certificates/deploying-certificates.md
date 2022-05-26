@@ -8,8 +8,11 @@ After you create or update a certificate, you must deploy it to either the stagi
 
 1. In the left pane, click **Certificates**. 
 2. On the Certificates page, click the name of the certificate you want to deploy.
-3. Scroll down to the **Deployment** section.
-4. To deploy the certificate now, select **Staging** or **Production** from the **Deployment Destination** drop-down list, and then click the **Deploy Now** button. When the confirmation pop-up appears, click **OK**. <br><br><u><p>OR</br></br></u></li>To deploy the certificate at a later time, click the **Add to Standby task** button in the confirmation pop-up to move this action to the [standby queue](<docs/../../tasks/standby-tasks.md>).<br><br><li>If you clicked **Deploy Now**, it will take about 5 minutes to complete the deployment process. You can watch the progress and wait for it to finish, click the **Go to Dashboard** button in the pop-up to go to the Dashboard, or close the pop-up to perform other tasks while deployment continues in the background. You can always click **Tasks** in the left pane to check the status of the deployment.</br></br></li>
+3. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
+
+<strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button followed by <strong>History</strong>.</br></br>
+
+4. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>). If you clicked **Deploy Now**, it will take about 5 minutes to complete the deployment process. You can watch the progress and wait for it to finish, click the **Go to Dashboard** button in the pop-up to go to the Dashboard, or close the pop-up to perform other tasks while deployment continues in the background. You can always click **Tasks** in the left pane to check the status of the deployment.</br></br></li>
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="700"></p>
 
 <strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button. 
