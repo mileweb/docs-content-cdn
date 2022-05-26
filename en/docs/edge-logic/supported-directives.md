@@ -295,6 +295,17 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
 
 
+### [`gzip`](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
+
+<span class="badge">standard</span>
+
+**Syntax:** `gzip on|off;` <br/>
+**Default:** `expires on;` <br/>
+**Context:** server, location, if in location
+
+Enables or disables gzipping of responses. No change to the [public version]
+
+
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
