@@ -15,7 +15,7 @@ CDN Pro对平台上的7层流量进行实时监控并通过大数据分析及时
 攻击请求速率更是达到了史无前例的35Mrps！
 
 ### 在边缘上进行访问控制
-访问控制是一项十分重要的功能，以保护内容不会被未授权的用户访问。它也可以用于防御某些常见的7层攻击。CDN Pro 支持多种访问控制机制。除了对原生 Nginx 相应功能的增强以外，我们还新增了 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来支持更加复杂的定制算法。
+访问控制是一项十分重要的功能，以保护内容不会被未授权的用户所获取。它也可以用于防御某些常见的7层攻击。CDN Pro 支持多种访问控制机制。除了对原生 Nginx 相应功能的增强以外，我们还新增了 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来支持更加复杂的定制算法。
 * 使用[`allow`](</docs/edge-logic/supported-directives.md#allow>) 和 [`deny`](</docs/edge-logic/supported-directives.md#deny>) 来限制客户端IP地址:
 ```nginx
 allow 123.0.0.1/8;
@@ -66,7 +66,7 @@ if ($b64hash != $http_x_hash) {
 ```
 
 ### 实现回源站的鉴权
-It is always a good idea to set up some ACL rules on the origin to avoid spamming. In this case, the [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive can also be used to generate the required token for accessing the origin. Here is an example of how to implement the [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html):
+很多源站都会配置一些鉴权规则来避免服务被滥用。在这种情况下，您可以使用 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来方便的生成访问源站所需要的 token。下面这个例子展示了如何实现 [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html) 算法:
 ```nginx
 ## required input variables: $awskey $awsseckey $awsbucket/$s3key
 
