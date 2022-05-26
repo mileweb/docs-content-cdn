@@ -44,7 +44,7 @@ The [Certificates page](</docs/portal/certificates/overview.md>) allows you to m
 
 ## Content Management
 
-The [Content Management page](</docs/portal/content-management.md>) allows you to create purge requests and check the status of previously submitted requests. A purge request is used to flush cached contents before they expire in order to make the updated version available to the end users sooner.
+The Content Management page allows you to manage [purge requests](docs/portal/content-management/managing-purge-requests.md) and [prefetch requests](docs/portal/content-management/managing-prefetch-requests.md). A purge request is used to flush cached contents before they expire in order to make the updated version available to the end users sooner. A prefetch request warms the CDN Pro cache with new content from your origin server to accelerate content delivery to users.
 
 ## Tasks
 
