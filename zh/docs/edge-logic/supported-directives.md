@@ -291,6 +291,16 @@ location @try_origin2 {
 
 该指令用于控制 CDN Pro 根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身对内容的缓存时间。
 
+### [`gzip`](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
+
+<span class="badge">标准</span>
+
+**使用语法:** `gzip on|off;` <br/>
+**可用位置:** `gzip on;` <br/>
+**可用位置:** server, location, if in location
+
+该指令用于开启或者关闭 CDN Pro 的自动压缩响应功能。代码源自 [NGINX 开源版本](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)，无改动
+
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
