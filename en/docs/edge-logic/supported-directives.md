@@ -300,7 +300,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 <span class="badge">standard</span>
 
 **Syntax:** `gzip on|off;` <br/>
-**Default:** `expires on;` <br/>
+**Default:** `gzip on;` <br/>
 **Context:** server, location, if in location
 
 Enables or disables gzipping of responses. No change to the [public version](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
@@ -1046,10 +1046,9 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 **Syntax:**	`slice size;` <br/>
 **Default:** `slice 0;` <br/>
-**Contexts:** server
+**Contexts:** server, location
 
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
-* We disallowed this directive in any "location" block to ensure the entire domain has the same slice size. This is to avoid potential problems when a request needs to be processed in multiple locations with different slice sizes.
 * CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
 

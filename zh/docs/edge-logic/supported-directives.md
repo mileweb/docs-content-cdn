@@ -296,10 +296,10 @@ location @try_origin2 {
 <span class="badge">标准</span>
 
 **使用语法:** `gzip on|off;` <br/>
-**可用位置:** `gzip on;` <br/>
+**默认设置:** `gzip on;` <br/>
 **可用位置:** server, location, if in location
 
-该指令用于开启或者关闭 CDN Pro 的自动压缩响应功能。代码源自 [NGINX 开源版本](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)，无改动
+该指令用于开启或者关闭 CDN Pro 的自动压缩响应功能。源自 [NGINX 开源版本](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)，无改动。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -1058,10 +1058,9 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 **使用语法：**	`slice size;` <br/>
 **默认设置：** `slice 0;` <br/>
-**可用位置：** server
+**可用位置：** server, location
 
 该指令用于设置 CDN Pro 从源获取大文件时切片的大小。合法的参数值可以是 0（禁用切片），或一个介于 512k 和 512m 之间（含）的[nginx 尺寸](http://nginx.org/en/docs/syntax.html) 。源站必须支持 range 请求并响应 206 状态码。如果需要将切片的响应进行缓存，请使用指令 `proxy_cache_valid 206 ...` 来启用对 206 状态码缓存。同时我们在开源版本的基础上对该指令进行了以下修改和增强：
-* 我们禁止在任何 location 模块中使用此指令，以确保整个域名具有相同的切片大小设置。这是为了避免某些请求需要在不同 location 配置块内进行处理而造成的潜在问题。
 * CDN Pro 要求所有缓存的切片都携带相同的 ETag 值，以确保这些切片归属于同一个原始文件。当从源站新获取的切片与先前已缓存切片有不同的 Etag 值时，当前与客户端的响应传输将被终止，并且所有已缓存的切片都会立即清除。因此源站在一个文件内容未发生变更的情况下，请务必确保该文件的 ETag 值不会变化。在确实必要的情况下，您可以使用 `slice_ignore_etag on;` 指令来禁用此校验。
 * 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到损坏的响应。
 
