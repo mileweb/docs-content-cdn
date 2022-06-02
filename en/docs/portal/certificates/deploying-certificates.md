@@ -27,4 +27,4 @@ If you no longer need a certificate in a staging or production environment, you 
 2. In the **Actions** column on the Certificates page, click the vertical ellipsis of the certificate you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-actions.png" alt="Certificate Actions" width="900"></p>
 
-3. When the confirmation pop-up appears, undeploy the certificate now by clicking <strong>OK</strong> (the undeployment process takes about 5 minutes).<br><br><u>OR</u> <br><br>Undeploy the certificate at a later time by clicking the **Add to Standby task** button to move this action to the [standby queue](<docs/../../tasks/standby-tasks.md>).</br></br>
+3. When the confirmation pop-up appears, undeploy the certificate now by clicking <strong>OK</strong> (the undeployment process takes about 5 minutes).<br><br><u>OR</u> <br><br>Undeploy the certificate at a later time by clicking the **Add to Standby task** button to move this action to the [standby queue](</docs/portal/managing-standby-tasks.md>).</br></br>
