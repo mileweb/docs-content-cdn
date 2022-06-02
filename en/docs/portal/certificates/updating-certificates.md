@@ -14,14 +14,15 @@ CDN Pro sends an email notification when a certificate used in production is clo
 5. Click **Create Version**.
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions.png" alt="Upload Certificate Version" width="700"></p>
 
-5. Set the **Creation Method** setting to **Upload**. Then upload the private key, certificate, and chain certificate files. Click **Save Version** followed by **OK** at the confirmation pop-up.
+6. Set the **Creation Method** setting to **Upload**. Then upload the private key, certificate, and chain certificate files. Click **Save Version** followed by **OK** at the confirmation pop-up.
+
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-upload.png" alt="Upload Certificate Version" width="700"></p>
 
-6. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
+7. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
 
 <strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button and select <strong>History</strong>.</br></br>
 
-7. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
+8. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
 
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
 
