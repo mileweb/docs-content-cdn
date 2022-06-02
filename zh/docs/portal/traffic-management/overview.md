@@ -19,4 +19,4 @@ Each edge hostname has a vertical ellipsis in the **Actions** column. Clicking t
 - **Edit**: [Update](</docs/portal/traffic-management/editing-edge-hostname.md>) the selected edge hostname.
 - **Delete**: [Delete](</docs/portal/traffic-management/deleting-edge-hostname.md>) the selected edge hostname.
 - **Clone**: [Copy](</docs/portal/traffic-management/creating-edge-hostname.md>) settings into the Create an Edge Hostname form to create a new edge hostname.
-- **Report**: [Display](</docs/portal/reports.md>) the Reports page to run an Edge Hostname Request report on the selected edge hostname.
+- **Report**: [Display](</docs/portal/reports/generating-reports.md>) the Reports page to run an Edge Hostname Request report on the selected edge hostname.

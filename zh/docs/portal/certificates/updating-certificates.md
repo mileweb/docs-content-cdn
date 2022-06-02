@@ -19,7 +19,7 @@
 
 6. 在证书详情页面，单击 <strong>部署</strong> 按钮，然后在 <strong>部署目标</strong> 消息框中选择 <strong>生产环境</strong> 将此新版本部署到生产上。<br>
 <strong>注意：</strong> 要在部署之前查看证书的部署历史，请单击 <strong>部署历史</strong> 按钮。</br></br>
-7. 如果您需要立即部署证书，请点击 <strong>立即部署</strong> 按钮。如果您需要稍后再部署它，请点击 <strong>添加到待命任务</strong> 来将此证书版本的部署存放到 [待命列表](</docs/portal/managing-standby-tasks.md>)中。
+1. 如果您需要立即部署证书，请点击 <strong>立即部署</strong> 按钮。如果您需要稍后再部署它，请点击 <strong>添加到待命任务</strong> 来将此证书版本的部署存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>)中。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
 
 ## 如果您需要 CSR 来向 CA 机构申请新证书
@@ -39,5 +39,5 @@
 9. 当您收到新的 CA 签名证书时，返回到相同的证书详细信息页面并单击**创建新版本**。
 10. 将 **创建方法** 设置为 **上传**，上传新证书和链证书（可选）。单击**保存**。不必担心私钥，因为它将与上一个版本相同。
 11. 在证书详情页面，单击 **Deployment** 按钮，然后在 **部署目标** 消息框中选择 **生产环境** 将此新版本部署到生产上。<br><br><strong>注意：</strong> 要在部署之前查看证书的部署历史，请单击 **部署历史** 按钮。</br></br>
-12. 如果您需要立即部署证书，请点击 **立即部署**。如果您需要稍后再部署它，请点击 **添加到待命任务** 来将此证书版本的部署存放到 [待命列表](</docs/portal/managing-standby-tasks.md>)。</br>
+12. 如果您需要立即部署证书，请点击 **立即部署**。如果您需要稍后再部署它，请点击 **添加到待命任务** 来将此证书版本的部署存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>)。</br>
 **注意**: 只有证书的所有者才有权限修改证书。

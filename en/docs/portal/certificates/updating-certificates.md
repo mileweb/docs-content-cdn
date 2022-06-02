@@ -21,7 +21,7 @@ CDN Pro sends an email notification when a certificate used in production is clo
 
 <strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button and select <strong>History</strong>.</br></br>
 
-7. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>).
+7. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
 
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
 
@@ -44,5 +44,5 @@ If your company's security policy requires the new certificate to have a new pri
 
 <strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button and select <strong>History</strong>.</br></br>
 
-12. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/managing-standby-tasks.md>).
+12. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
 **Note**: To update a certificate, you must be the owner of the certificate.

@@ -13,7 +13,7 @@ The following figure shows the key elements on the page, and the table following
 | **Fields**   | **Description**                                                                                           |
 | :----------: | --------------------------------------------------------------------------------------------------------- |
 | 1            | A search box that you can enter any keyword to filter the secret list.                               |
-| 2            | The list of all secrets that have been created. Click an Id to [query](</docs/portal/secrets/querying-secrets.md>) a secret.  |
+| 2            | The list of all secrets that have been created. Click an Id to query a secret.  |
 | 3            | Drop-down lists to take actions on each secret.                      |
 | 4            | The button to [create new secrets](</docs/portal/secrets/creating-secrets.md>).            |
 
