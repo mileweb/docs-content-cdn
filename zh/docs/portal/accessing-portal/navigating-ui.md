@@ -22,7 +22,7 @@
 <p align=center><img src="/docs/resources/images/traffic-volume.png" alt="traffic volume" width="1000"></p>
 
 ## 报表查看
-[报表查看页面](</docs/portal/reports.md>) 允许您生成以下报表:
+[报表查看页面](<(</docs/portal/reports/generating-reports.md>) 允许您生成以下报表:
 
 - 您的加速域名的流量和带宽。
 - 访问您的加速项的客户请求数。
