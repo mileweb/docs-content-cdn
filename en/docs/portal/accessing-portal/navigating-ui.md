@@ -23,7 +23,7 @@ A legend below each chart shows the names of the data entry points in the chart.
 
 ## Reports
 
-The Reports page allows you to [generate reports](</docs/portal/reports/generating-reports.md>) and manage [logs]](</docs/portal/reports/managing-logs.md>).
+The Reports page allows you to [generate reports](</docs/portal/reports/generating-reports.md>) and manage [logs](</docs/portal/reports/managing-logs.md>).
 
 ## Edge Configurations
 
