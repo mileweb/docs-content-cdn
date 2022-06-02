@@ -3,7 +3,7 @@
 
 1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
 
-2. On the Secrets page, click the ID of the secret you want to edit, and then click the **Change Secret** button. 
+2. On the Secrets page, click the ID of the secret you want to edit, and then click the **Update Secret** button. 
    <br><U>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the secret you want to edit, and then select **Edit**.
 
