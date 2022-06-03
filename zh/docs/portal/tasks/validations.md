@@ -1,4 +1,4 @@
-# Check Property Validation Results
+# Checking Property Validations
 
 To check the status of all property validations:
 
@@ -12,6 +12,6 @@ To check the status of all property validations:
 
 <p align="center"><img src="/docs/resources/images/tasks/validation_time_range_filter.png" alt="Validation Tasks" width="900"></p>
 
-3. To display details about a validation result, click an ID or task name.
+3. To display details about a validation, click an ID or task name.
 
 
