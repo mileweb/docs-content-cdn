@@ -30,7 +30,7 @@
           "path": "docs/edge-logic/intro"
         },
         {
-          "title": "新版本发布文档",
+          "title": "新版本发布说明",
           "caption": "了解新版本的功能和变化",
           "icon": "notes",
           "path": "docs/release-notes"
@@ -303,7 +303,7 @@
         "heading": true,
         "routes": [
           {
-            "title": "发布说明",
+            "title": "新版本发布说明",
             "path": "/docs/release-notes.md"
           }
         ]
