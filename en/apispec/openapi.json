@@ -18499,7 +18499,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works in conjunction with apiRate as a limit on the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -18887,7 +18887,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works in conjunction with apiRate as a limit on the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -19349,7 +19349,7 @@
                         "type": "integer",
                         "default": 60,
                         "maximum": 240,
-                        "description": "This value works in conjunction with apiRate as a limit on the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                         "minimum": 1
                       }
                     },
@@ -19653,7 +19653,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works in conjunction with apiRate as a limit on the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -20031,7 +20031,7 @@
                         "type": "integer",
                         "default": 60,
                         "maximum": 240,
-                        "description": "This value works in conjunction with apiRate as a limit on the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                         "minimum": 1
                       }
                     },
