@@ -155,7 +155,7 @@ auth_request /auth$is_args$args;
 <span class="badge dark">高级</span>
 
 **使用语法:** `client_max_body_size size;`<br/>
-**默认设置:** `client_header_timeout 1m;`<br/>
+**默认设置:** `client_max_body_size 128m;`<br/>
 **可用位置:** server, location
 
 设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
