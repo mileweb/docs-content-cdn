@@ -165,7 +165,7 @@ This directive sets the maximum wait time for the complete request header from t
 <span class="badge dark">advanced</span>
 
 **Syntax:** `client_max_body_size size;`<br/>
-**Default:** `client_header_timeout 1m;`<br/>
+**Default:** `client_max_body_size 128m;`<br/>
 **Context:** server, location
 
 Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of the client request body size. Usually you will need to configure this directive in both the load balancer and Edge Logic.

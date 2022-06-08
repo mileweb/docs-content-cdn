@@ -14,6 +14,5 @@ When a property and its associated certificates are deployed, CDN Pro sends the 
 
 <p align="center"><img src="/docs/resources/images/tasks/validation_time_range_filter.png" alt="Validation Tasks" width="900"></p>
 
-3. To display details about a validation result, click an ID or task name.
-4. To view standby tasks, click the [**Standby Task** button](<docs/../../tasks/standby-tasks.md>) at the top right.
+3. To display details about a deployment, click an ID or task name.
 

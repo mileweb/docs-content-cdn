@@ -18433,8 +18433,10 @@
                       "properties": {
                         "apiRate": {
                           "type": "integer",
-                          "default": 64,
-                          "description": "Maximum number of API requests permitted in any rolling 1-minute window."
+                          "default": 30,
+                          "description": "Maximum number of API requests the customer can make  in any rolling 1-minute window. If the customer has multiple API accounts, they share this limit. Their combined requests cannot exceed the limit. ",
+                          "maximum": 120,
+                          "minimum": 1
                         },
                         "apiAccountLimit": {
                           "type": "integer",
@@ -18492,6 +18494,13 @@
                           "description": "Number of portal user accounts the customer is permitted to have.",
                           "minimum": 1,
                           "maximum": 100
+                        },
+                        "apiMaxBurst": {
+                          "type": "integer",
+                          "default": 60,
+                          "maximum": 240,
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "minimum": 1
                         }
                       },
                       "required": [
@@ -18619,10 +18628,11 @@
                           "CDN"
                         ],
                         "status": "active",
-                        "apiRate": 64,
+                        "apiRate": 30,
                         "apiAccountLimit": 3,
                         "regionalOffice": "US",
-                        "contactLimit": 20
+                        "contactLimit": 20,
+                        "apiMaxBurst": 60
                       },
                       "portalSettings": {
                         "enforce2fa": false,
@@ -18811,8 +18821,10 @@
                       "properties": {
                         "apiRate": {
                           "type": "integer",
-                          "default": 64,
-                          "description": "Maximum number of API requests permitted in any rolling 1-minute window."
+                          "default": 30,
+                          "description": "Maximum number of API requests the customer can make  in any rolling 1-minute window. If the customer has multiple API accounts, they share this limit. Their combined requests cannot exceed the limit. ",
+                          "maximum": 120,
+                          "minimum": 1
                         },
                         "apiAccountLimit": {
                           "type": "integer",
@@ -18870,6 +18882,13 @@
                           "description": "Number of portal user accounts the customer is permitted to have.",
                           "minimum": 1,
                           "maximum": 100
+                        },
+                        "apiMaxBurst": {
+                          "type": "integer",
+                          "default": 60,
+                          "maximum": 240,
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "minimum": 1
                         }
                       },
                       "required": [
@@ -18989,10 +19008,11 @@
                           "CDN"
                         ],
                         "status": "active",
-                        "apiRate": 64,
+                        "apiRate": 30,
                         "apiAccountLimit": 3,
                         "regionalOffice": "US",
-                        "contactLimit": 20
+                        "contactLimit": 20,
+                        "apiMaxBurst": 60
                       },
                       "portalSettings": {
                         "enforce2fa": false,
@@ -19263,8 +19283,10 @@
                     "properties": {
                       "apiRate": {
                         "type": "integer",
-                        "default": 64,
-                        "description": "Maximum number of API requests permitted in any rolling 1-minute window."
+                        "default": 30,
+                        "description": "Maximum number of API requests the customer can make  in any rolling 1-minute window. If the customer has multiple API accounts, they share this limit. Their combined requests cannot exceed the limit. ",
+                        "maximum": 120,
+                        "minimum": 1
                       },
                       "apiAccountLimit": {
                         "type": "integer",
@@ -19322,6 +19344,13 @@
                         "description": "Number of portal user accounts the customer is permitted to have.",
                         "minimum": 1,
                         "maximum": 100
+                      },
+                      "apiMaxBurst": {
+                        "type": "integer",
+                        "default": 60,
+                        "maximum": 240,
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "minimum": 1
                       }
                     },
                     "required": [
@@ -19558,8 +19587,10 @@
                       "properties": {
                         "apiRate": {
                           "type": "integer",
-                          "default": 64,
-                          "description": "Maximum number of API requests permitted in any rolling 1-minute window."
+                          "default": 30,
+                          "description": "Maximum number of API requests the customer can make  in any rolling 1-minute window. If the customer has multiple API accounts, they share this limit. Their combined requests cannot exceed the limit. ",
+                          "maximum": 120,
+                          "minimum": 1
                         },
                         "apiAccountLimit": {
                           "type": "integer",
@@ -19617,6 +19648,13 @@
                           "description": "Number of portal user accounts the customer is permitted to have.",
                           "minimum": 1,
                           "maximum": 100
+                        },
+                        "apiMaxBurst": {
+                          "type": "integer",
+                          "default": 60,
+                          "maximum": 240,
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "minimum": 1
                         }
                       },
                       "required": [
@@ -19927,8 +19965,10 @@
                     "properties": {
                       "apiRate": {
                         "type": "integer",
-                        "default": 64,
-                        "description": "Maximum number of API requests permitted in any rolling 1-minute window."
+                        "default": 30,
+                        "description": "Maximum number of API requests the customer can make  in any rolling 1-minute window. If the customer has multiple API accounts, they share this limit. Their combined requests cannot exceed the limit. ",
+                        "maximum": 120,
+                        "minimum": 1
                       },
                       "apiAccountLimit": {
                         "type": "integer",
@@ -19986,6 +20026,13 @@
                         "description": "Number of portal user accounts the customer is permitted to have.",
                         "minimum": 1,
                         "maximum": 100
+                      },
+                      "apiMaxBurst": {
+                        "type": "integer",
+                        "default": 60,
+                        "maximum": 240,
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "minimum": 1
                       }
                     },
                     "required": [
@@ -20090,6 +20137,7 @@
                     "configs": {
                       "regionalOffice": "US",
                       "apiRate": 64,
+                      "apiMaxBurst": 100,
                       "description": "my new customer",
                       "apiAccountLimit": 10,
                       "type": "regular",
@@ -26047,7 +26095,7 @@
                   "Create API permission first": {
                     "value": {
                       "code": "CreateApiPermission",
-                      "message": "Create a customer API permission for the API account using POST /cdn/apiPermissions"
+                      "message": "Create a custom API permission for the API account using POST /cdn/apiPermissions."
                     }
                   }
                 }

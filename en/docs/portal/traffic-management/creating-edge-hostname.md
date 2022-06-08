@@ -34,7 +34,9 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 
 5. Click the **Create Edge Hostname** button.
 6. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created edge hostname.
+
 ## About Server Groups
+
 When selecting a server group for the first time, we recommend that you create client zone rules that use the **Standard** server group, and then change to another server group if needed later.
 
 If you create a client zone rule and select **Premium**, **Deluxe**, or **Ultra**, all the lower priced groups will be included automatically and can be used to deliver content. For example, if you live in North America and want the best possible performance for your users, regardless of cost, choose **Ultra**. <p>When a user requests your content, the CDN Pro load balancer makes an intelligent routing decision based on the user's location and current network traffic, and then chooses an appropriate server to handle the request. The server that handles this request is located at any of the CDN Pro PoPs around the world and might be one listed as **Standard**, **Premium**, **Deluxe**, or **Ultra**. Traffic used by different server groups is reflected in the [Traffic Volume Summary report](</docs/portal/reports/generating-reports.md>) as well as in monthly invoices.

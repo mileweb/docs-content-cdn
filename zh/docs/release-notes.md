@@ -1,5 +1,23 @@
 # Release Notes
 
+## June 2, 2022
+### API updates
+* Updated support for API rate limiting. Each customer has an apiRate and apiMaxBurst setting that limits the number of API calls that can be made in a short period of time.
+* Added regexEntries field in the [purge list API’s response](</apidocs#operation/getPurgeRequestList>).
+* Prevented duplicate server groups from being added to a client zone rule of an edge hostname.
+* Improved error handling when requesting the service quota of a customer without the CDN Pro service.
+* Improved management of server groups for customers with child customers.
+
+### Portal updates
+* Fixed count of hostnames in the Edge Hostname Request report.
+* Updated inactivity email.
+* Updated link to documentation in the access log download page.
+* Updated the traffic volume summary report to support the ChinaStandard and ChinaPremium server groups.
+* Fixed a hint in the load balancer logic editor.
+* Fixed loading of reports for some users.
+* Ensured users can create purge requests with regular expressions.
+
+
 ## May 20, 2022
 ### API updates
 * Added allowedServerGroups field to service quota to control the server groups a customer can access.

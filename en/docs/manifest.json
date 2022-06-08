@@ -208,6 +208,10 @@
               {
                 "title": "Deployments",
                 "path": "/docs/portal/tasks/deployments.md"
+              },
+              {
+                "title": "Managing Standby Actions",
+                "path": "/docs/portal/tasks/standby-tasks.md"
               }
             ]
           },
