@@ -21603,32 +21603,32 @@
                       "maxOriginConnectTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
                       },
                       "maxOriginReadTimeOut": {
                         "type": "integer",
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
                         "minimum": 1
                       },
                       "maxOriginSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
                       },
                       "maxClientHeaderTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
                       },
                       "maxClientSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
                       },
                       "maxClientBodyTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                       }
                     }
                   },
@@ -22157,32 +22157,32 @@
                         "maxOriginConnectTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
                         },
                         "maxOriginReadTimeOut": {
                           "type": "integer",
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
                           "minimum": 1
                         },
                         "maxOriginSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
                         },
                         "maxClientHeaderTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
                         },
                         "maxClientSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
                         },
                         "maxClientBodyTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                         }
                       }
                     },
@@ -22591,32 +22591,32 @@
                       "maxOriginConnectTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
                       },
                       "maxOriginReadTimeOut": {
                         "type": "integer",
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
                         "minimum": 1
                       },
                       "maxOriginSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
                       },
                       "maxClientHeaderTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
                       },
                       "maxClientSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
                       },
                       "maxClientBodyTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                       }
                     }
                   },
@@ -23530,32 +23530,32 @@
                         "maxOriginConnectTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
                         },
                         "maxOriginReadTimeOut": {
                           "type": "integer",
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
                           "minimum": 1
                         },
                         "maxOriginSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
                         },
                         "maxClientHeaderTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
                         },
                         "maxClientSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
                         },
                         "maxClientBodyTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                         }
                       }
                     },
@@ -23887,32 +23887,32 @@
                         "maxOriginConnectTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
                         },
                         "maxOriginReadTimeOut": {
                           "type": "integer",
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
                           "minimum": 1
                         },
                         "maxOriginSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
                         },
                         "maxClientHeaderTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
                         },
                         "maxClientSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
                         },
                         "maxClientBodyTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                         }
                       }
                     },
@@ -24226,32 +24226,32 @@
                       "maxOriginConnectTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
                       },
                       "maxOriginReadTimeOut": {
                         "type": "integer",
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
                         "minimum": 1
                       },
                       "maxOriginSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
                       },
                       "maxClientHeaderTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
                       },
                       "maxClientSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
                       },
                       "maxClientBodyTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
                       }
                     }
                   },
