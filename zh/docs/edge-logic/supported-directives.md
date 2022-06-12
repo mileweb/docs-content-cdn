@@ -897,6 +897,18 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 该指令用于修改 CDN Pro 传给客户端的"Location"和"Refresh"响应头中的内容。源自 NGINX 开源版本，无变更。
 
+### `proxy_request_body_in_cache_key`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `proxy_request_body_in_cache_key on/off;` <br/>
+**默认设置:** `proxy_request_body_in_cache_key off` <br/>
+**可用位置:** server, location, if in location
+
+当参数值是 'on'（支持变量）时，服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
+
+此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
+
 ### `proxy_set`
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>

@@ -28,6 +28,7 @@
 | <span id="hostname"></span><span class="var">$hostname</span> | CDN 服务器别名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="http_"></span><span class="var">$http_<em>name</em></span> | 客户端请求中指定的请求头参数值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="http_host"></span><span class="var">$http_host</span> | 请求的 host 头部，和 $host 有相同含义 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ignored_body_in_cache_key"></span><span class="var">$ignored_body_in_cache_key</span> | 空字符串，当 [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives#proxy_request_body_in_cache_key) 被设为 `off`, 或者 '0' 当请求正文的哈希值被加到了缓存key, 否则值为 '1'。| <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="invalid_referer"></span><span class="var">$invalid_referer</span> | 用于标记请求 Referer 的合法性，如“ Referer ”被判定为合法则值为空 ; 否则值为 “1” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="is_args"></span><span class="var">$is_args</span> | 当客户端请求携带问号后参数时，值为 "?" ；否则值为空 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="msec"></span><span class="var">$msec</span> |<span class="badge small" title="numerical value">#</span> 当前 unix 时间戳，精度到毫秒 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
