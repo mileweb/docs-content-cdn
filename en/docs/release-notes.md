@@ -1,5 +1,29 @@
 # Release Notes
 
+## June 15, 2022
+### API updates
+* Ensured parent customers can create an edge hostname on behalf of a child customer.
+* Fixed an issue affecting purge requests.
+* Ensured that allowedServerGroups are properly saved.
+* Ensured the lists of server groups in an edge hostname and a service quota appear in a consistent order.
+* Fixed an issue with deleting a parent customer’s service quota.
+* Ensured that server groups cannot be removed if they are still in use.
+* Improved the API rate restriction implementation.
+
+### Portal updates
+* Ensured expired trial customers can upgrade.
+* Ensured the number of regular expression purges appears in the Content Management page.
+* Improved error handling when deleting a role in use.
+* Improved error message when the report date range is exceeded.
+* Updated the copyright year in emails.
+* Added caller information in purge and prefetch details.
+* Added a box to show load balancer logic in property comparison.
+* Ensured a button's text is correctly translated to Chinese.
+* Ensured the viewer role has appropriate visibility of annotations.
+* Ensured a domain group can be deleted.
+* Ensured proper display of server groups available to a customer.
+
+
 ## June 2, 2022
 ### API updates
 * Updated support for API rate limiting. Each customer has an apiRate and apiMaxBurst setting that limits the number of API calls that can be made in a short period of time.
