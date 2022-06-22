@@ -25658,7 +25658,7 @@
                       "reports": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/reports) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
                       },
                       "serviceQuotas": {
                         "type": "boolean",
@@ -25816,7 +25816,7 @@
                         "reports": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/reports) endpoints."
+                          "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
                         },
                         "serviceQuotas": {
                           "type": "boolean",
@@ -25957,7 +25957,7 @@
                         "reports": {
                           "type": "boolean",
                           "default": true,
-                          "description": "Whether the API account can access the report (/cdn/reports) endpoints."
+                          "description": "Whether the API account can access the report (/cdn/report) endpoints."
                         },
                         "serviceQuotas": {
                           "type": "boolean",
@@ -26187,7 +26187,7 @@
                       "reports": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/reports) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
                       },
                       "serviceQuotas": {
                         "type": "boolean",
@@ -29945,7 +29945,7 @@
         ]
       }
     },
-    "/cdn/reports/edgeStatusSummary": {
+    "/cdn/report/edgeStatusSummary": {
       "post": {
         "summary": "Get a summary of status codes returned by edge servers",
         "tags": [
@@ -30493,7 +30493,7 @@
         "description": "Get a list of IP addresses used by CDN Pro. If your property configuration's directConnection setting is 'noDirect' and your origin servers are protected by IP access restrictions, update your allow lists with these IP addresses. IP addresses can periodically change. We recommend that you check once a day and update your allow lists."
       }
     },
-    "/cdn/reports/originStatusSummary": {
+    "/cdn/report/originStatusSummary": {
       "post": {
         "summary": "Get a summary of status codes returned by origin servers",
         "tags": [
