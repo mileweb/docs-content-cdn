@@ -34,9 +34,9 @@ proxy_ignore_cache_control no-cache no-store;
 
 Since you are interested in the caching behavior of CDN Pro, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
 
-### How to include query parameters and/or request headers in the cache key?
+### How to include query parameters, request headers and body in the cache key?
 
-By default, the CDN Pro cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+By default, the CDN Pro cache key includes only the hostname and URI without the query string. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
@@ -53,6 +53,9 @@ If you want to keep any previously assigned value, you can append to this variab
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
+The POST method is often used today to query information with complex or long parameters. A prominent example is the [GraphQL](https://en.wikipedia.org/wiki/GraphQL). In these cases, the POST requests are idempotent and safe as the GET requests, and the response are well cacheable. The only question is how to include the parameters in the request body to the cache key. CDN Pro created the proprietary directive [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) for this exact purpose. When this feature is turned on, our server would calculate an MD5 hash from the request body and append it to the cache key. Due to performance considerations, this only happens when the body size is less than 4kB, otherwise the cache key is not appended and the variable $ignored_body_in_cache_key is set to 1 to indicate this fact. You can use this variable with [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass) to avoid serving incorrect cached content. If you really need to include larger request body in the cache key, you are advised to calculate a hash of the request body in the client and pass it through the request header. You can then use the method introduced earlier to include it in the cache key via $cache_misc.
+
+Last but not least, don't forget to use the [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) directive to enable the caching of POST requests.
 
 ### HTTP Header Manipulation
 

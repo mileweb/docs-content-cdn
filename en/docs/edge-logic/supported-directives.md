@@ -888,6 +888,18 @@ Enables of disables passing request headers from client to upstream. No change t
 
 Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
 
+### `proxy_request_body_in_cache_key`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `proxy_request_body_in_cache_key on/off;` <br/>
+**Default:** `proxy_request_body_in_cache_key off` <br/>
+**Context:** server, location, if in location
+
+When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests.
+
+A restriction of this directive is that it works only when body size is less than 4kB. When the request body size is greater than this threshold, no hash value is appended to the cache key and this fact is indicated by a value '1' of the variable [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key). You can use this variable with [`proxy_cache_bypass`](#proxy_cache_bypass) to bypass caching of these requests. If it is really important to include large request body in the cache key, you are advised to calculate the hash value in the client and pass it in the request header, then include it in the $cache_misc variable.
+
 ### `proxy_set`
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
