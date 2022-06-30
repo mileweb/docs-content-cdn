@@ -604,7 +604,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 ### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
 
-<span class="badge dark">高级</span>
+<span class="badge dark">标准</span>
 
 **使用语法：** `proxy_cache_lock on/off;` <br/>
 **默认设置：** `proxy_cache_lock on;` <br/>
