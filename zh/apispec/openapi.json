@@ -28518,7 +28518,7 @@
                   "Invalid format": {
                     "value": {
                       "code": "InvalidFormat",
-                      "message": "Invalid variable name: %referer12. It supports: referer, rmtuser, scheme, cltport, ua, cltregion, statuscode, reqsize, protocol, hostname, custom1, cachestate, custom2, reqhdrsize, uniqueid, samplerate, querystr, cltisp, method, utctime, tcprtt, cpu_ns, url, rspsize, svrnode, cltip, rsptime, reqrange."
+                      "message": "Invalid variable name: %referer12. It supports: referer, rmtuser, scheme, cltport, ua, cltregion, statuscode, reqsize, protocol, hostname, custom1, cachestate, custom2, reqhdrsize, svrip, uniqueid, samplerate, querystr, cltisp, method, utctime, tcprtt, cpu_ns, url, rspsize, svrnode, cltip, rsptime, reqrange."
                     }
                   }
                 }

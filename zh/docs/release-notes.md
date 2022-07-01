@@ -1,5 +1,33 @@
 # Release Notes
 
+## June 30, 2022
+### API updates
+* Improved cleanup of customer accounts.
+* Ensured notification emails are correctly sent to CDN Pro customers only.
+* Fixed an error when the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) is used.
+* Updated load balancer logic to support the [custom_log_field Edge Logic directive](</docs/edge-logic/supported-directives#custom_log_field>).
+* Ensured appropriate setting of child customers’ API limits.
+* Added support for the %srvip setting in the [log configuration](</apidocs#operation/post-cdn-report-logConfigs>) format to show the IP address of the CDN server handling a request.
+* Prevented client request headers from being passed to a real-time log server.
+
+### Portal updates
+* Added support for Chinese in the self-signup page.
+* Added a support office field in the self-signup page to allow regional staff to help customers.
+* Improved error handling in the property creation page.
+* Fixed display of edge configuration’s secret after it is updated.
+* Improved report annotation creation.
+* Prevented an invalid hostname from being added to a group in the reports page.
+* Improved the appearance of the task details page.
+* Improved accessibility of our portal by hosting third-party CSS/JS files ourselves.
+* Translated more text.
+* Fixed issue affecting removal of a role from a user.
+* Improved display of the self-signup page.
+* Fixed error in the property version comparison page affecting the new load balancer logic field.
+* Improved the appearance of the customer list page for resellers.
+* Fixed report’s handling of the end of the date range to round up, making it consistent with our API.
+
+
+
 ## June 15, 2022
 ### API updates
 * Ensured parent customers can create an edge hostname on behalf of a child customer.
