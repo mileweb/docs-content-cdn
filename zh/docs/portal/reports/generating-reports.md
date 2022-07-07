@@ -29,8 +29,8 @@ The following report types are supported:
 | CPU Time| Reports the CPU time consumed in each time interval to serve your properties. You can toggle the unit between **seconds** and **number of cores**. For example, if 3000 seconds of CPU time are reported in a 5-minute interval, it means your properties are maxing out an average of 10 (=3000s/5m) physical CPU cores during that period.                               |
 | Edge Hostname Request| Shows the number of requests made to your [edge hostnames](</docs/portal/traffic-management/creating-edge-hostname.md>) over a period of time.                               |
 | Traffic Volume Summary| Summarizes the edge traffic volume. Mousing over slices in the pie chart shows detailed information about the traffic volume.                              |
-| Request Summary| Summarizes all requests by group, including edge requests and fast route requests. Mousing over slices in the pie chart shows detailed information about the request.                              |
-| CPU Time Summary| Summarizes the CPU time by group, including total edge CPU time and total intermediate CPU time. Mousing over slices in the pie chart shows detailed information about the request.                              |
+| Request Summary| Summarizes all requests by group, including edge requests and fast route requests. Mousing over slices in the pie charts shows detailed information about the requests.                              |
+| CPU Time Summary| Summarizes the CPU time by group, including total edge CPU time and total intermediate CPU time. Mousing over slices in the pie charts shows detailed information about the CPU time.                              |
 
 **Note:** The selections you choose for the Traffic Volume Summary, Request Summary, or CPU Time Summary report persist as you switch among these three reports using the **Report Type** dropdown.
 
