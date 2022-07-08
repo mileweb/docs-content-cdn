@@ -59,7 +59,8 @@ The following report types are supported:
 <ul><li>Mouse over data points in the report to view detailed information.<br>
 <li>Drag over the chart to magnify areas, and then use the <strong>Reset zoom</strong> button to return to the default zoom level.<br>
 <li>Use the Download Options icon at the top right of the report to download raw data in comma-separated-value (CSV) format, create annotations (described below), or hide annotations.</ul>
-<p align=center><img src="/docs/resources/images/reports/download-options-icon.png" alt="dload options" width="900"></p>
+
+<p><img src="/docs/resources/images/reports/download-options-icon.png" alt="dload options" width="250"></p>
 
 
 ## Creating Annotations
