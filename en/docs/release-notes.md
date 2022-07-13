@@ -1,5 +1,27 @@
 # Release Notes
 
+## July 13, 2022
+### API updates
+* Improved error handling of logins.
+* Improved the appearance of account update notification emails.
+* Limited prefetch and purge URLs to 2048 characters.
+* Ensured lower level server groups are included with higher ones. (For example, access to ultra includes access to standard, premium, and deluxe.)
+
+### Portal updates
+* Updated self-signup page to support other languages. Currently, English and Chinese are supported.
+* Improved appearance of reports page.
+* Improved appearance of suspended status on users page.
+* Improved error message for access log date range.
+* Updated date/time display in report annotations to match mockups.
+* Changed report menu to image to match mockups.
+* Ensured tooltips in report annotations match mockups.
+* Improved appearance of longer report annotation comment.
+* Updated edge hostname user interface to ensure that lower server groups are enabled with higher ones.
+* Improved display of Secret Details page.
+* Ensured language of message when deleting a role matches the user’s preference.
+* Added support for request and CPU summary reports.
+* Fixed display of login page for self-signup users.
+
 ## June 30, 2022
 ### API updates
 * Improved cleanup of customer accounts.
