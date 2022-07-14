@@ -907,7 +907,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 当参数值是 'on'（支持变量）时，服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
 
-此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
+此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
 
 ### `proxy_set`
 
@@ -998,7 +998,7 @@ proxy_no_cache $no_store;
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-该指令用于修改 `Accept-Encoding` 请求头，确保其可能的取值不超过5个以提高缓存的利用率。此指令最多可以携带4个参数，每个参数都是一个或多个（以逗号为分隔的）“内容编码格式”，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的 `Accept-Encoding` 请求头与本指令的参数从左至右逐个进行匹配。如果一个参数里的所有格式都出现在了此请求头里，则用该参数值替换掉请求头的值。如果没有能匹配的参数，则将请求头的值改写为“identity”。
+该指令用于修改 `Accept-Encoding` 请求头，确保其可能的取值不超过5个以提高缓存的利用率。此指令最多可以携带4个参数，每个参数都是一个或多个（以逗号为分隔的）“内容编码格式”，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的 `Accept-Encoding` 请求头与本指令的参数从左至右逐个进行匹配。如果一个参数里的所有格式都出现在了此请求头里，则用该参数值替换掉请求头的值。如果没有能匹配的参数，则将该请求头删除，表示只接受无压缩的版本。
 
 示例如下：假设边缘逻辑中的配置是：
 ```nginx
@@ -1011,9 +1011,9 @@ if (A-E-header.contains("gzip") && A-E-header.contains("br"))
 else if (A-E-header.contains("gzip")) A-E-header="gzip";
 else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
-else A-E-header="identity";
+else remove A-E-header;
 ```
-不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
+不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或删除。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
 
 如果您使用了此指令，那么很可能您还希望 CDN Pro 能根据 `Accept-Encoding` 请求头的值来区别缓存响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
 
