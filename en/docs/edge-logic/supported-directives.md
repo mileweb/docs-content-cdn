@@ -1,6 +1,6 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN Pro Edge Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
+This section lists all the directives you can use in the CDN Pro Edge Logic and Load Balancer Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
@@ -12,13 +12,13 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 **Syntax:** `access_log_sampling factor;` <br/>
 **Default:** `-` <br/>
-**Contexts:** server
+**Contexts:** server (LB only)
 
 Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `add_header name value [policy=...] [if(...)] [always];`<br/>
 **Default:** `-` <br/>
@@ -93,7 +93,7 @@ Adds the specified field to the end of a response provided that the response cod
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `allow address | CIDR | all;`<br/>
 **Default:** `-` <br/>
@@ -162,7 +162,7 @@ This directive sets the maximum wait time for the complete request header from t
 
 ### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
 
-<span class="badge dark">advanced</span>
+<span class="badge dark">advanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `client_max_body_size size;`<br/>
 **Default:** `client_max_body_size 128m;`<br/>
@@ -182,13 +182,13 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 
 ### `custom_log_field`
 
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
 
 **Syntax:** `custom_log_field id value;`<br/>
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom1" and "custom2" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). If you require this feature, contact our support team.
+This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom1" and "custom2" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). In case the same field is assigned in both LB7 and ES, the LB7 has the precedence. If you require this feature, contact our support team.
 
 Examples:
 ```nginx
@@ -201,7 +201,7 @@ location / {
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `deny address | CIDR | all;`<br/>
 **Default:** `—`<br/>
@@ -242,7 +242,7 @@ location @try_origin2 {
 
 ### `eval_func`
 
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
 
 **Syntax:** `eval_func $result {function name} {parameters};` <br/>
 **Default:** `-` <br/>
@@ -318,7 +318,7 @@ CDN Pro always uses gzip and applies it to the default MIME types above. In addi
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `if (condition) { ... }
         elseif (condition) { ... }
@@ -777,7 +777,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 **Syntax:** `proxy_ignore_client_abort on | off;` <br/>
 **Default:** `proxy_ignore_client_abort off;` <br/>
-**Context:** server, location
+**Context:** server, location (LB only)
 
 Determines whether the connection with a proxied server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the proxied server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
 
@@ -923,6 +923,16 @@ proxy_no_cache $no_store;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
 
+### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
+
+**Syntax:**  `proxy_set_header field value if(condition);` <br/>
+**Default:** `-` <br/>
+**Contexts:** server (LB only)
+
+This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES.
+
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
 <span class="badge dark">advanced</span>
@@ -945,7 +955,7 @@ Overrides the main "Sample Rate" specified for the [Real-Time Log](/docs/portal/
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge">LB logic</span>
 
 **Syntax:** `return code [text];
        return code URL;
@@ -1042,7 +1052,7 @@ Defines a secret word used to check authenticity of requested links. No change t
 
 ### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge">LB logic</span>
 
 **Syntax:**	`set $variable value;` <br/>
 **Default:**	`-` <br/>
