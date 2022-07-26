@@ -1,5 +1,80 @@
 # Release Notes
 
+## July 25, 2022
+### API updates
+* Allowed variables in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
+* Fixed issue with copying limits to child customers.
+* Ensured that less expensive server groups are shown in the edge hostname API when a customer uses the higher level group.
+* Ensured that the Report-Range header is consistently implemented among our APIs.
+* Added support for the prefetchLevel field when requesting a [prefetch](</apidocs#operation/post-cdn-prefetches>). It defaults to Parent and can be set to Edge if necessary.
+* Improved error handling if creating a validation task for a property with an incorrectly terminated directive in "loadBalancerLogic".
+* Ensured that updating customer configs works as expected.
+* Ensured that API rate limits are set correctly for child customers.
+* Ensured that child customer limits are correct.
+* Updated API server to ensure that nearChina must be in a client zone rule without other server groups.
+* Ensured that company name supports non-Latin characters.
+
+### Portal updates
+* Ensured that upgrade button text is in the correct language.
+* Ensured action menu items are disabled for users with read-only access.
+* Allowed deployment of property with expired certificate for testing.
+* Ensured prefetch timezone is correct.
+* Improved the layout of property search when many fields are specified.
+* Ensured that the hostnames field in annotations page is filled with current hostnames of the displayed report.
+* Fixed CPU time report’s behavior.
+* Allowed MacOS users to create an annotation by clicking "Command" + "Left click".
+
+
+## July 13, 2022
+### API updates
+* Improved error handling of logins.
+* Improved the appearance of account update notification emails.
+* Limited prefetch and purge URLs to 2048 characters.
+* Ensured lower level server groups are included with higher ones. (For example, access to ultra includes access to standard, premium, and deluxe.)
+
+### Portal updates
+* Updated self-signup page to support other languages. Currently, English and Chinese are supported.
+* Improved appearance of reports page.
+* Improved appearance of suspended status on users page.
+* Improved error message for access log date range.
+* Updated date/time display in report annotations to match mockups.
+* Changed report menu to image to match mockups.
+* Ensured tooltips in report annotations match mockups.
+* Improved appearance of longer report annotation comment.
+* Updated edge hostname user interface to ensure that lower server groups are enabled with higher ones.
+* Improved display of Secret Details page.
+* Ensured language of message when deleting a role matches the user’s preference.
+* Added support for request and CPU summary reports.
+* Fixed display of login page for self-signup users.
+
+## June 30, 2022
+### API updates
+* Improved cleanup of customer accounts.
+* Ensured notification emails are correctly sent to CDN Pro customers only.
+* Fixed an error when the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) is used.
+* Updated load balancer logic to support the [custom_log_field Edge Logic directive](</docs/edge-logic/supported-directives#custom_log_field>).
+* Ensured appropriate setting of child customers’ API limits.
+* Added support for the %srvip setting in the [log configuration](</apidocs#operation/post-cdn-report-logConfigs>) format to show the IP address of the CDN server handling a request.
+* Prevented client request headers from being passed to a real-time log server.
+
+### Portal updates
+* Added support for Chinese in the self-signup page.
+* Added a support office field in the self-signup page to allow regional staff to help customers.
+* Improved error handling in the property creation page.
+* Fixed display of edge configuration’s secret after it is updated.
+* Improved report annotation creation.
+* Prevented an invalid hostname from being added to a group in the reports page.
+* Improved the appearance of the task details page.
+* Improved accessibility of our portal by hosting third-party CSS/JS files ourselves.
+* Translated more text.
+* Fixed issue affecting removal of a role from a user.
+* Improved display of the self-signup page.
+* Fixed error in the property version comparison page affecting the new load balancer logic field.
+* Improved the appearance of the customer list page for resellers.
+* Fixed report’s handling of the end of the date range to round up, making it consistent with our API.
+
+
+
 ## June 15, 2022
 ### API updates
 * Ensured parent customers can create an edge hostname on behalf of a child customer.
