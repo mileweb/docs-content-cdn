@@ -356,6 +356,16 @@ else { ... }
 
 指定某个 location 块内的逻辑只能用于内部请求，不允许被客户端直接访问。代码逻辑源自 Nginx 开源版本，无改动。
 
+### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
+
+<span class="badge dark">高级</span> <span class="badge">LB logic</span>
+
+**Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
+**Default:** `keepalive_timeout 30s;`<br/>
+**Context:** server (仅限在LB7)
+
+第一个参数设置每个 keep-alive 连接的最长空闲时间。服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同。
+
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
 <span class="badge">标准</span>
@@ -365,7 +375,6 @@ else { ... }
 **可用位置：** server, location, if in location
 
 限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
-
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 

@@ -12,7 +12,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 **Syntax:** `access_log_sampling factor;` <br/>
 **Default:** `-` <br/>
-**Contexts:** server (LB only)
+**Contexts:** server (LB-only)
 
 Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
 
@@ -357,7 +357,17 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default:** `—` <br/>
 **Context:** location <br/>
 
-Specifies that a given location can be used for internal requests only. No change to the public version. 
+Specifies that a given location can be used for internal requests only. No change to the public version.
+
+### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
+
+<span class="badge dark">advanced</span> <span class="badge">LB logic</span>
+
+**Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
+**Default:** `keepalive_timeout 30s;`<br/>
+**Context:** server (LB-only)
+
+The first parameter sets a timeout during which a keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. The optional second parameter sets a value in the “Keep-Alive: timeout=time” response header field. Two parameters may differ.
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
