@@ -1,5 +1,30 @@
 # Release Notes
 
+## July 25, 2022
+### API updates
+* Allowed variables in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) and [limit_rate_after](</edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
+* Fixed issue with copying limits to child customers.
+* Ensured that less expensive server groups are shown in the edge hostname API when a customer uses the higher level group.
+* Ensured that the Report-Range header is consistently implemented among our APIs.
+* Added support for the prefetchLevel field when requesting a [prefetch](</apidocs#operation/post-cdn-prefetches>). It defaults to Parent and can be set to Edge if necessary.
+* Improved error handling if creating a validation task for a property with an incorrectly terminated directive in "loadBalancerLogic".
+* Ensured that updating customer configs works as expected.
+* Ensured that API rate limits are set correctly for child customers.
+* Ensured that child customer limits are correct.
+* Updated API server to ensure that nearChina must be in a client zone rule without other server groups.
+* Ensured that company name supports non-Latin characters.
+
+### Portal updates
+* Ensured that upgrade button text is in the correct language.
+* Ensured action menu items are disabled for users with read-only access.
+* Allowed deployment of property with expired certificate for testing.
+* Ensured prefetch timezone is correct.
+* Improved the layout of property search when many fields are specified.
+* Ensured that the hostnames field in annotations page is filled with current hostnames of the displayed report.
+* Fixed CPU time report’s behavior.
+* Allowed MacOS users to create an annotation by clicking "Command" + "Left click".
+
+
 ## July 13, 2022
 ### API updates
 * Improved error handling of logins.
