@@ -2,7 +2,7 @@
 
 ## July 25, 2022
 ### API updates
-* Allowed variables in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) and [limit_rate_after](</edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
+* Allowed variables in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
 * Fixed issue with copying limits to child customers.
 * Ensured that less expensive server groups are shown in the edge hostname API when a customer uses the higher level group.
 * Ensured that the Report-Range header is consistently implemented among our APIs.
