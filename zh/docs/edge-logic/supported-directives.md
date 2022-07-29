@@ -364,7 +364,7 @@ else { ... }
 **Default:** `keepalive_timeout 30s;`<br/>
 **Context:** server (仅限在LB7)
 
-第一个参数设置每个 keep-alive 连接的最长空闲时间。服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同。
+第一个参数设置每个 keep-alive 连接的最长空闲时间。服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同，但皆不能超过300s。
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 

@@ -367,7 +367,7 @@ Specifies that a given location can be used for internal requests only. No chang
 **Default:** `keepalive_timeout 30s;`<br/>
 **Context:** server (LB-only)
 
-The first parameter sets a timeout during which a keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. The optional second parameter sets a value in the “Keep-Alive: timeout=time” response header field. Two parameters may differ.
+The first parameter sets a timeout during which a keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. The optional second parameter sets a value in the “Keep-Alive: timeout=time” response header field. The two parameters may differ, but they should be no greater than 300s.
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
