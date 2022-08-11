@@ -697,7 +697,7 @@
           "name": "version",
           "in": "path",
           "required": true,
-          "description": "A property version. It must be an integer value >=1 or the word \"latest\", in which case the most recent version is returned."
+          "description": "A property version. It must be an integer value >=1. The Get a property version API also permits you to specify the word 'latest' to obtain the most recent version."
         }
       ],
       "patch": {
@@ -13139,21 +13139,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
-                "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  }
-                },
                 "x-tags": [
                   "Reports"
                 ],
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -13164,29 +13155,16 @@
                         "items": {
                           "type": "string"
                         }
-                      },
-                      "serverGroups": {
-                        "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
-                        "description": "Indicates one or more server groups.",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "standard",
-                            "premium",
-                            "deluxe",
-                            "ultra",
-                            "nearChina",
-                            "ChinaStandard",
-                            "ChinaPremium"
-                          ]
-                        }
                       }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
                     }
                   }
                 }
@@ -14380,6 +14358,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  },
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The customerId should be a valid positive integer."
                     }
                   }
                 }
@@ -19114,13 +19098,13 @@
                   }
                 },
                 "examples": {
-                  "Invalid self update": {
+                  "Invalid self-update": {
                     "value": {
                       "code": "InvalidSelfUpdateConfig",
                       "message": "You are not authorized to make this change. Please contact your account representative for further instructions."
                     }
                   },
-                  "Invalid self update of china business info": {
+                  "Invalid self-update of China business info": {
                     "value": {
                       "code": "InvalidSelfUpdateChinaBizInfo",
                       "message": "You are not authorized to make this change. Please contact your account representative for further instructions."
@@ -25265,7 +25249,7 @@
               ]
             },
             "in": "query",
-            "name": "sortby",
+            "name": "sortBy",
             "description": "Controls the order in which prefetch requests are returned. The default is to return the most recently submitted request first."
           },
           {
@@ -25277,7 +25261,7 @@
               ]
             },
             "in": "query",
-            "name": "sortorder",
+            "name": "sortOrder",
             "description": "Order of prefetch requests. The default is to return the most recent prefetch request first. Enter 'asc' for ascending order or 'desc' for descending order."
           },
           {
@@ -26449,6 +26433,12 @@
                     "value": {
                       "code": "InvalidGroupBy",
                       "message": "Invalid group name(s): \"serverGroups1\". We  support grouping by \"hostnames\",\"serverGroups\",\" nconlyustomerIds\"."
+                    }
+                  },
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The customerId should be a valid positive integer."
                     }
                   }
                 }
@@ -29638,6 +29628,12 @@
                       "code": "InvalidTimeSpan",
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
+                  },
+                  "Invalid customer ID": {
+                    "value": {
+                      "code": "InvalidCustomerId",
+                      "message": "The customerId should be a valid positive integer."
+                    }
                   }
                 }
               }
@@ -30524,7 +30520,7 @@
           }
         },
         "operationId": "get-cdn-publicIpList",
-        "description": "Get a list of IP addresses used by CDN Pro. If your property configuration's directConnection setting is 'noDirect' and your origin servers are protected by IP access restrictions, update your allow lists with these IP addresses. IP addresses can periodically change. We recommend that you check once a day and update your allow lists."
+        "description": "Get a list of IP addresses used by CDN Pro. If your property's origin configuration uses the directConnection setting 'noDirect', and its Edge Logic does not use the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">origin fast route directive</a>, you can restrict access to your origin servers by updating your allow lists with these IP addresses. Since the CDN's IP addresses can periodically change, we recommend that you check once a day and update your allow lists."
       }
     },
     "/cdn/report/originStatusSummary": {
@@ -31422,6 +31418,45 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ]
+      }
+    },
+    "/cdn/prefetches/prefetchTokens": {
+      "get": {
+        "summary": "Get available prefetch requests",
+        "tags": [
+          "Content Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response indicates the number of prefetches available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "prefetchTokens": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "Number of prefetch requests that can be made."
+                    }
+                  },
+                  "required": [
+                    "prefetchTokens"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "prefetchTokens": 200
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-prefetches-prefetchTokens",
+        "description": "This API indicates the number of prefetch requests you can make. Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> specifies a daily limit on prefetch requests. You can temporarily exceed the limit during a day, but it will reduce the number of prefetches available during the next day."
       }
     }
   },
