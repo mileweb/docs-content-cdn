@@ -12,14 +12,14 @@
 * Improved the create and update service quota APIs to handle null values.
 * Fixed the [property list API](</apidocs#operation/getPropertyList>)’s hasConfig filter to support the keepAliveTimeout field.
 * Increased notification limit from 2000 to 4000 characters.
-* Ensured that the Beian status check sends out emails to customers.
+* Ensured that the Beian status check sends emails to customers warning of expired Beian licenses which affects use of PoPs in China.
 * Corrected enforcement of values of the [limit_rate Edge Logic directive](</docs/edge-logic/supported-directives#limit_rate>).
 * Fixed error handling for updating customer limits.
 * Ensured InvalidSelfUpdateChinaBizInfo error is returned when appropriate.
 * Allowed an edgeHostname with redirect or reject actions to be created in the qtlcdn.com zone.
 
 ### Portal updates
-* Added more help information to the portal.
+* Added help information to the portal.
 * Corrected display of the role details.
 * Displayed an appropriate message when the user tries to access a deleted certificate.
 * Improved error handling of self-signup page.
