@@ -1,5 +1,34 @@
 # Release Notes
 
+## August 11, 2022
+### API updates
+* Improved error handling when summary report APIs are called with invalid customer IDs.
+* Improved error handling when [creating service quotas](</apidocs#operation/post-cdn-serviceQuotas>) with invalid settings.
+* Ensured updates to a customer's portalSettings work correctly.
+* Improved error handling for invalid references to a certificate.
+* Added the customerId field to the [annotations list API](</apidocs#operation/queryAnnotationList>)’s response.
+* Fixed filter support in the [annotation list API](</apidocs#operation/queryAnnotationList>).
+* Improved assignment of default limits for a child customer.
+* Improved the create and update service quota APIs to handle null values.
+* Fixed the [property list API](</apidocs#operation/getPropertyList>)’s hasConfig filter to support the keepAliveTimeout field.
+* Increased notification limit from 2000 to 4000 characters.
+* Ensured that the Beian status check sends emails to customers warning of expired Beian licenses which affects use of PoPs in China.
+* Corrected enforcement of values of the [limit_rate Edge Logic directive](</docs/edge-logic/supported-directives#limit_rate>).
+* Fixed error handling for updating customer limits.
+* Ensured InvalidSelfUpdateChinaBizInfo error is returned when appropriate.
+* Allowed an edgeHostname with redirect or reject actions to be created in the qtlcdn.com zone.
+
+### Portal updates
+* Added help information to the portal.
+* Corrected display of the role details.
+* Displayed an appropriate message when the user tries to access a deleted certificate.
+* Improved error handling of self-signup page.
+* Supported scrolling of hostnames in the report page.
+* Improved display of hostnames in the report page.
+* Removed button in the property version comparison page.
+* Improved display of purge list.
+
+
 ## July 25, 2022
 ### API updates
 * Allowed variables in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
