@@ -6,7 +6,6 @@
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | URL 问号后参数中的指定参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="args"></span><span class="var">$args</span> | 请求 URL 中所有问号后参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="bytes_received"></span><span class="var">$bytes_received</span> |<span class="badge small" title="numerical value">#</span> 收到的客户端请求大小 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="body_bytes_sent"></span><span class="var">$body_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的文件 body 大小 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的数据大小（包含 header ） | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="cache_misc"></span><span class="var">$cache_misc</span> | 添加到缓存 key 中的参数 | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |

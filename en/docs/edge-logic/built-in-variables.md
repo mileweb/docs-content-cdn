@@ -7,7 +7,6 @@ If you use the CDN Pro portal to edit the property, typing `$` at a position whe
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="args"></span><span class="var">$args</span> | the full query string from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="bytes_received"></span><span class="var">$bytes_received</span> |<span class="badge small" title="numerical value">#</span> bytes received from client | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="body_bytes_sent"></span><span class="var">$body_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> body bytes sent to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> total response bytes to client | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="cache_misc"></span><span class="var">$cache_misc</span> | parameters to add to the cache key | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
