@@ -110,11 +110,11 @@ Allows access from the specified network or address. Usually used together with 
 **Default:** `auth_request off;`<br/>
 **Context:** server, location
 
-Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. We have enhanced this directive to allow variables in the parameter. This enables you to pass the query parameters to the authorization logic:
+Enables authorization based on the result of a subrequest and sets the URI to which the subrequest will be sent. We have enhanced this directive on top of the [open-source version](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request) to allow variables in the parameter. This enables you to pass the query parameters to the authorization logic:
 ```nginx
 auth_request /auth$is_args$args;
 ```
-
+The request will be granted if the auth response returns a 2xx status code, and rejected in case of a 401 or 403. All other status codes is considered an error and 500 "internal error" will be returned to the client.
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -124,7 +124,18 @@ auth_request /auth$is_args$args;
 **Default:** `—`<br/>
 **Context:** server, location
 
-Sets the request variable to the given value after the authorization request completes. No change to the public version. 
+Sets the request variable to the given value after the authorization request completes. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set). Here is an example to add something returned from the remote auth server to the cache key:
+```nginx
+auth_request /auth$is_args$args;
+auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
+
+location = /auth {
+  internal;
+  proxy_method HEAD;
+  origin_pass remote_auth_server/auth-req$is_args$args; #specify auth server and URI
+  origin_set_header client-req-uri $request_uri; #send the request URI to the auth server
+}
+```
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 

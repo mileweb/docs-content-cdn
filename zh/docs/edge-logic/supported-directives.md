@@ -105,6 +105,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 ```nginx
 auth_request /auth$is_args$args;
 ```
+如果鉴权响应 2xx 状态码，则认为请求合法，如果响应 401 或者 403 则请求会被拒绝。其它状态码会被认为是错误，导致客户端收到 500 "internal error"。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -114,7 +115,18 @@ auth_request /auth$is_args$args;
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。
+须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。下面的例子展示了如何将远端鉴权服务器返回的 etag 值加入到 cache key 里：
+```nginx
+auth_request /auth$is_args$args;
+auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
+
+location = /auth {
+  internal;
+  proxy_method HEAD;
+  origin_pass remote_auth_server/auth-req$is_args$args; #配置鉴权服务器和URI
+  origin_set_header client-req-uri $request_uri; #将客户端请求URI发给鉴权服务器
+}
+```
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 
