@@ -123,8 +123,10 @@ auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
 location = /auth {
   internal;
   proxy_method HEAD;
-  origin_pass remote_auth_server/auth-req$is_args$args; #配置鉴权服务器和URI
-  origin_set_header client-req-uri $request_uri; #将客户端请求URI发给鉴权服务器
+  # 配置鉴权服务器和URI
+  origin_pass remote_auth_server/auth-req$is_args$args;
+  # 将客户端请求URI发给鉴权服务器
+  origin_set_header client-request-uri $request_uri;
 }
 ```
 

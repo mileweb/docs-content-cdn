@@ -132,8 +132,10 @@ auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
 location = /auth {
   internal;
   proxy_method HEAD;
-  origin_pass remote_auth_server/auth-req$is_args$args; #specify auth server and URI
-  origin_set_header client-req-uri $request_uri; #send the request URI to the auth server
+  # specify remote auth server and URI
+  origin_pass remote_auth_server/auth-req$is_args$args;
+  # send the request URI to the auth server
+  origin_set_header client-request-uri $request_uri;
 }
 ```
 
