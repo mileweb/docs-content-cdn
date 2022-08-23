@@ -114,7 +114,7 @@ Enables authorization based on the result of a subrequest and sets the URI to wh
 ```nginx
 auth_request /auth$is_args$args;
 ```
-The request will be granted if the auth response returns a 2xx status code, and rejected in case of a 401 or 403. All other status codes is considered an error and 500 "internal error" will be returned to the client.
+The request will be granted if the auth response returns a 2xx status code or rejected if the auth response returns a 401 or 403 status code. Other status codes are considered an error and return a 500 "internal error" to the client.
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
