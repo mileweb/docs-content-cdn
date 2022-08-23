@@ -9304,35 +9304,114 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "reportfiltershostnamesonly",
+                  "title": "reportResponse",
                   "type": "object",
-                  "x-tags": [
-                    "Reports"
-                  ],
-                  "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
                   "properties": {
-                    "filters": {
-                      "type": "object",
-                      "properties": {
-                        "hostnames": {
-                          "type": "array",
-                          "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
-                          "items": {
-                            "type": "string"
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
                           }
                         }
                       }
                     }
                   },
-                  "x-examples": {
-                    "filter by a specific hostname": {
-                      "filters": {
-                        "hostnames": [
-                          "domain.info"
-                        ]
-                      }
-                    }
-                  }
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -31665,7 +31744,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "The order of shields returned in the response.  \"lastUpdated\" returns shields in the order in which they were last updated. \"effectiveDate\" returns shields in the order in which they became active."
+            "description": "Returns shields sorted by when they were last updated or when they became active."
           },
           {
             "schema": {
@@ -31674,11 +31753,11 @@
                 "asc",
                 "desc"
               ],
-              "default": "des"
+              "default": "desc"
             },
             "in": "query",
-            "name": "sortDir",
-            "description": "Returns results in sorted order."
+            "name": "sortOrder",
+            "description": "Returns shields in sorted order, either \"asc\" for ascending or \"desc\" for descending. The default is to return the last shield updated first."
           }
         ]
       }

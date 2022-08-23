@@ -3,7 +3,7 @@
 ## August 22, 2022
 ### API updates
 
-* Added support for timezones offset by :30 or :45 minutes in reports.
+* Added support for timezones offset by :30 or :45 minutes in portal user's setting.
 * Prevented sharing of a certificate with a non-existent customer.
 * Added support for originShield as an advanced feature, allowing you to add an extra layer between the CDN Pro edge servers and your origin servers.
 * Supported filtering of [requests](</apidocs#operation/getEdgeRequests>) by serverGroups.
