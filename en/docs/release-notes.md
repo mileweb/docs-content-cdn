@@ -5,7 +5,7 @@
 
 * Added support for timezones offset by :30 or :45 minutes in reports.
 * Prevented sharing of a certificate with a non-existent customer.
-* Added support for originShield as an advanced feature allowing you to add an extra layer between the CDN Pro edge servers and your origin servers.
+* Added support for originShield as an advanced feature, allowing you to add an extra layer between the CDN Pro edge servers and your origin servers.
 * Supported filtering of [requests](</apidocs#operation/getEdgeRequests) by serverGroups.
 * Fixed maximum value of childCustomerLimit to match specification.
 * Improved validation of Edge Logic, in particular, the [keepalive_timeout](</docs/edge-logic/supported-directives#keepalive_timeout>) and [custom_log_field](</docs/edge-logic/supported-directives#keepalive_timeout>) directives.
@@ -17,11 +17,11 @@
 * Fixed display of report when timezone is changed.
 * Improved appearance of copyright.
 * Added support for origin shield as an advanced feature.
-* Fixed test environment issue in which version wasn’t property displayed in the Add Tasks page.
+* Fixed test environment issue in which version wasn’t properly displayed in the Add Tasks page.
 * Improved appearance of the identity and access management menu.
 * Improved appearance of top bar.
 * Fixed display of timezone in annotation creation’s dropdown menu.
-* Ensured that the user selected timezone applies to a report’s time range.
+* Ensured that the user-selected timezone applies to a report’s time range.
 
 
 ## August 11, 2022
