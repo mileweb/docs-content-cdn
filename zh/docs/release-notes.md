@@ -1,5 +1,29 @@
 # Release Notes
 
+## August 22, 2022
+### API updates
+
+* Added support for timezones offset by :30 or :45 minutes in portal user's setting.
+* Prevented sharing of a certificate with a non-existent customer.
+* Added support for originShield as an advanced feature, allowing you to add an extra layer between the CDN Pro edge servers and your origin servers.
+* Supported filtering of [requests](</apidocs#operation/getEdgeRequests>) by serverGroups.
+* Fixed maximum value of childCustomerLimit to match specification.
+* Improved validation of Edge Logic, in particular, the [keepalive_timeout](</docs/edge-logic/supported-directives#keepalive_timeout>) and [custom_log_field](</docs/edge-logic/supported-directives#keepalive_timeout>) directives.
+* Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>)’s handling of edge cases.
+* Improved message for invalid apiMaxBurst value.
+* Improved handling of default service quota for child customers.
+
+### Portal updates
+* Fixed display of report when timezone is changed.
+* Improved appearance of copyright.
+* Added support for origin shield as an advanced feature.
+* Fixed test environment issue in which version wasn’t properly displayed in the Add Tasks page.
+* Improved appearance of the identity and access management menu.
+* Improved appearance of top bar.
+* Fixed display of timezone in annotation creation’s dropdown menu.
+* Ensured that the user-selected timezone applies to a report’s time range.
+
+
 ## August 11, 2022
 ### API updates
 * Improved error handling when summary report APIs are called with invalid customer IDs.

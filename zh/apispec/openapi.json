@@ -302,6 +302,10 @@
                               "tlsCertificateId": {
                                 "type": "string",
                                 "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
+                              },
+                              "shield": {
+                                "type": "string",
+                                "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
                               }
                             }
                           }
@@ -371,13 +375,13 @@
                           "properties": {
                             "startParameter": {
                               "type": "string",
-                              "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                              "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                               "minLength": 1,
                               "maxLength": 31
                             },
                             "endParameter": {
                               "type": "string",
-                              "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                              "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                               "minLength": 0,
                               "maxLength": 31
                             }
@@ -998,6 +1002,10 @@
                         "tlsCertificateId": {
                           "type": "string",
                           "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
+                        },
+                        "shield": {
+                          "type": "string",
+                          "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
                         }
                       }
                     }
@@ -1067,13 +1075,13 @@
                     "properties": {
                       "startParameter": {
                         "type": "string",
-                        "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                        "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                         "minLength": 1,
                         "maxLength": 31
                       },
                       "endParameter": {
                         "type": "string",
-                        "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                        "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                         "minLength": 0,
                         "maxLength": 31
                       }
@@ -3139,6 +3147,10 @@
                         "tlsCertificateId": {
                           "type": "string",
                           "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
+                        },
+                        "shield": {
+                          "type": "string",
+                          "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
                         }
                       }
                     }
@@ -3208,13 +3220,13 @@
                     "properties": {
                       "startParameter": {
                         "type": "string",
-                        "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                        "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                         "minLength": 1,
                         "maxLength": 31
                       },
                       "endParameter": {
                         "type": "string",
-                        "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                        "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                         "minLength": 0,
                         "maxLength": 31
                       }
@@ -3771,6 +3783,10 @@
                             "tlsCertificateId": {
                               "type": "string",
                               "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a> used to authenticate with the origin server. This certificate must also be deployed."
+                            },
+                            "shield": {
+                              "type": "string",
+                              "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
                             }
                           }
                         }
@@ -3840,13 +3856,13 @@
                         "properties": {
                           "startParameter": {
                             "type": "string",
-                            "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                            "description": "Name of the query parameter indicating the starting offset in bytes of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                             "minLength": 1,
                             "maxLength": 31
                           },
                           "endParameter": {
                             "type": "string",
-                            "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, a-Z) and may be followed by up to 30 letters and numbers.",
+                            "description": "Name of the query parameter indicating the ending offset of the content to fetch. The parameter name should begin with a letter (a-z, A-Z) and may be followed by up to 30 letters and numbers.",
                             "minLength": 0,
                             "maxLength": 31
                           }
@@ -9288,35 +9304,114 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "reportfiltershostnamesonly",
+                  "title": "reportResponse",
                   "type": "object",
-                  "x-tags": [
-                    "Reports"
-                  ],
-                  "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
                   "properties": {
-                    "filters": {
-                      "type": "object",
-                      "properties": {
-                        "hostnames": {
-                          "type": "array",
-                          "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
-                          "items": {
-                            "type": "string"
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
                           }
                         }
                       }
                     }
                   },
-                  "x-examples": {
-                    "filter by a specific hostname": {
-                      "filters": {
-                        "hostnames": [
-                          "domain.info"
-                        ]
-                      }
-                    }
-                  }
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -9433,12 +9528,21 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
+                "title": "reportfilters",
                 "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  }
+                },
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -9449,16 +9553,29 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "enum": [
+                          "standard",
+                          "premium",
+                          "deluxe",
+                          "ultra"
+                        ],
+                        "description": "Indicates one or more server groups.",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
+                        }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -21232,7 +21349,7 @@
                     },
                     "advancedFeaures": {
                       "type": "array",
-                      "description": "List of advanced features that could be enabled for customers via the service quota API. \"realTimeLog\" is an advanced feature allowing a customer to monitor requests from visitors to the content as they come in. \"nearChina\" is an advanced feature allowing use of a special server group to provide better performance to visitors in China for domains without ICP Beian. Please contact our support team if you require an advanced feature.",
+                      "description": "List of advanced features that can be enabled for customers via the service quota API. \"realTimeLog\" is an advanced feature allowing a customer to monitor requests from visitors to the content as they are received. \"nearChina\" is an advanced feature allowing use of a special server group to provide better performance to visitors in China for domains without ICP Beian. \"originShield\" allows use of an extra layer of servers in front of a property's origin servers. Please contact our support team if you require an advanced feature.",
                       "items": {
                         "type": "string"
                       }
@@ -21266,42 +21383,59 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "minimumSupportedCacheVersion": "1.16.1.1.1.11-20",
+                      "minimumSupportedCacheVersion": "1.18.0.1.2.07",
                       "baseDirectives": [
-                        "origin_pass",
-                        "add_header",
-                        "expires",
+                        "access_log_downsample",
+                        "add_trailer",
                         "allow",
+                        "add_header",
                         "deny",
+                        "expires",
                         "limit_rate",
                         "limit_rate_after",
                         "location",
                         "set",
                         "if",
+                        "elseif",
+                        "else",
                         "return",
                         "break",
                         "rewrite",
                         "satisfy",
+                        "proxy_buffering",
+                        "proxy_cache_background_update",
                         "proxy_cache_bypass",
                         "proxy_cache_valid",
+                        "proxy_cache_lock",
+                        "proxy_cache_lock_age",
+                        "proxy_cache_lock_timeout",
+                        "proxy_cache_methods",
+                        "proxy_cache_min_age",
+                        "proxy_cache_use_stale",
+                        "proxy_ignore_cache_control",
                         "proxy_ignore_headers",
                         "proxy_hide_header",
+                        "proxy_method",
                         "proxy_no_cache",
                         "proxy_pass_header",
+                        "proxy_pass_request_headers",
+                        "proxy_pass_request_body",
+                        "proxy_set",
                         "valid_referers",
+                        "origin_header_modify",
                         "origin_limit_rate",
-                        "proxy_cache_min_age",
+                        "origin_pass",
                         "origin_set_header",
-                        "proxy_buffering",
-                        "proxy_cache_methods"
+                        "sorted_querystring_filter_parameter",
+                        "slice",
+                        "slice_ignore_etag",
+                        "realtime_log_downsample"
                       ],
                       "advancedDirectives": [
                         "internal",
                         "auth_request",
                         "auth_request_set",
                         "gzip_types",
-                        "proxy_cache_min_uses",
-                        "proxy_cache_use_stale",
                         "proxy_cookie_domain",
                         "proxy_cookie_path",
                         "proxy_next_upstream",
@@ -21316,18 +21450,38 @@
                         "sub_filter_last_modified",
                         "sub_filter_once",
                         "sub_filter_types",
-                        "slice",
                         "error_page",
                         "origin_connect_timeout",
                         "origin_read_timeout",
                         "origin_send_timeout",
                         "proxy_cache_vary",
                         "eval_func",
-                        "realtime_log_switch",
-                        "proxy_ignore_cache_control",
-                        "origin_header_modify",
                         "enable_websocket",
-                        "sorted_querystring_filter_parameter"
+                        "origin_fast_route",
+                        "custom_log_field",
+                        "origin_follow_redirect",
+                        "sanitize_accept_encoding",
+                        "origin_selection_algorithm",
+                        "client_header_timeout",
+                        "client_body_timeout",
+                        "client_send_timeout",
+                        "generate_content",
+                        "client_max_body_size",
+                        "proxy_request_body_in_cache_key",
+                        "proxy_max_body_in_cache_key",
+                        "ignore_invalid_range",
+                        "VVVVVVVVVVVVVV_Experimental_Below_VVVVVVVVVVVVVVVV",
+                        "gzip_comp_level",
+                        "proxy_set_body",
+                        "mirror",
+                        "mirror_request_body",
+                        "client_body_buffer_size",
+                        "proxy_max_temp_file_size",
+                        "proxy_set_header",
+                        "proxy_request_buffering",
+                        "proxy_cache_convert_head",
+                        "gzip",
+                        "include"
                       ],
                       "publishedPrice": {
                         "perGB": {
@@ -21340,13 +21494,21 @@
                       },
                       "extraServicePorts": {
                         "http": [
-                          85,
-                          1999,
-                          8080
+                          8000,
+                          8080,
+                          8062,
+                          6382,
+                          3000,
+                          9200,
+                          7778
                         ],
                         "https": [
-                          2000,
-                          65535
+                          8443,
+                          4443,
+                          5850,
+                          9443,
+                          6443,
+                          9210
                         ]
                       },
                       "baseLbDirectives": [
@@ -21365,13 +21527,18 @@
                         "eval_func",
                         "client_max_body_size",
                         "http2_max_concurrent_streams",
-                        "proxy_ignore_client_abort"
+                        "proxy_ignore_client_abort",
+                        "proxy_request_buffering",
+                        "custom_log_field",
+                        "proxy_cache_convert_head",
+                        "keepalive_timeout"
                       ],
                       "advancedFeatures": [
                         "realTimeLog",
-                        "nearChina"
+                        "nearChina",
+                        "originShield"
                       ],
-                      "oldestPropertyValidationTime": "2021-02-05T00:00:00Z"
+                      "oldestPropertyValidationTime": "2021-10-23T00:00:00Z"
                     }
                   }
                 }
@@ -21380,7 +21547,7 @@
           }
         },
         "operationId": "get-cdn-systemConfigs",
-        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a>, advanced Edge Logic directives, the default pricing for traffic and HTTPS requests, and nonstandard ports which can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed."
+        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a>, advanced Edge Logic directives, the default pricing for traffic, and nonstandard ports that can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed."
       }
     },
     "/cdn/serviceQuotas": {
@@ -21570,7 +21737,7 @@
                   },
                   "advancedFeatures": {
                     "type": "array",
-                    "description": "List of advanced features available to the customer. Currently, the only supported feature is \"realTimeLog\", which allows a customer to monitor requests from their client as they occur. Please contact our support team if you require this feature.",
+                    "description": "List of advanced features available to the customer.\nAvailable features can be found in the response of the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently supported features include: \"realTimeLog\", which allows a customer to monitor requests from their client as they occur; \"nearChina\" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and \"originShield\", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.",
                     "items": {
                       "type": "string"
                     }
@@ -21671,7 +21838,7 @@
                   },
                   "allowedLbDirectives": {
                     "type": "array",
-                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.",
                     "items": {
                       "type": "string"
                     }
@@ -22124,7 +22291,7 @@
                     },
                     "advancedFeatures": {
                       "type": "array",
-                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "description": "List of advanced features that are available to the customer. Currently supported features include: \"realTimeLog\", which allows a customer to monitor requests from their client as they are received; \"nearChina\" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and \"originShield\", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.",
                       "items": {
                         "type": "string"
                       }
@@ -22233,7 +22400,7 @@
                     },
                     "allowedLbDirectives": {
                       "type": "array",
-                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.",
                       "items": {
                         "type": "string"
                       }
@@ -22558,7 +22725,7 @@
                   },
                   "advancedFeatures": {
                     "type": "array",
-                    "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                    "description": "List of advanced features that are available to the customer. Currently supported features include: \"realTimeLog\", which allows a customer to monitor requests from their client as they are received; \"nearChina\" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and \"originShield\", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.",
                     "items": {
                       "type": "string"
                     }
@@ -22663,7 +22830,7 @@
                   },
                   "allowedLbDirectives": {
                     "type": "array",
-                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.",
                     "items": {
                       "type": "string"
                     }
@@ -23497,7 +23664,7 @@
                     },
                     "advancedFeatures": {
                       "type": "array",
-                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "description": "List of advanced features that are available to the customer. Currently supported features include: \"realTimeLog\", which allows a customer to monitor requests from their client as they are received; \"nearChina\" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and \"originShield\", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.",
                       "items": {
                         "type": "string"
                       }
@@ -23606,7 +23773,7 @@
                     },
                     "allowedLbDirectives": {
                       "type": "array",
-                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.",
                       "items": {
                         "type": "string"
                       }
@@ -23854,7 +24021,7 @@
                     },
                     "advancedFeatures": {
                       "type": "array",
-                      "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                      "description": "List of advanced features that are available to the customer. Currently supported features include: \"realTimeLog\", which allows a customer to monitor requests from their client as they are received; \"nearChina\" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and \"originShield\", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.",
                       "items": {
                         "type": "string"
                       }
@@ -23963,7 +24130,7 @@
                     },
                     "allowedLbDirectives": {
                       "type": "array",
-                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                      "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.",
                       "items": {
                         "type": "string"
                       }
@@ -24193,7 +24360,7 @@
                   },
                   "advancedFeatures": {
                     "type": "array",
-                    "description": "List of advanced features that are available to the customer. Currently, \"realTimeLog\" is the only supported option. It allows a customer to monitor requests from visitors to the content as they come in. Please contact our support team if you require this feature.",
+                    "description": "List of advanced features that are available to the customer. Currently supported features include: \"realTimeLog\", which allows a customer to monitor requests from their client as they are received; \"nearChina\" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and \"originShield\", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.",
                     "items": {
                       "type": "string"
                     }
@@ -24298,7 +24465,7 @@
                   },
                   "allowedLbDirectives": {
                     "type": "array",
-                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configs API</a>. If you require an advanced load balancer directive, please contact our support team.",
+                    "description": "A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.",
                     "items": {
                       "type": "string"
                     }
@@ -31457,6 +31624,142 @@
         },
         "operationId": "get-cdn-prefetches-prefetchTokens",
         "description": "This API indicates the number of prefetch requests you can make. Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> specifies a daily limit on prefetch requests. You can temporarily exceed the limit during a day, but it will reduce the number of prefetches available during the next day."
+      }
+    },
+    "/cdn/shields": {
+      "get": {
+        "summary": "Get a list of origin shields",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a list of shield servers. You may configure a property  to use one of the origin shields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "shields": {
+                      "type": "array",
+                      "description": "A list of shields that can be used in a property.",
+                      "items": {
+                        "type": "object",
+                        "description": "Describes a shield",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the shield."
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "A unique identifier representing the shield. This ID is referenced in properties using the shield."
+                          },
+                          "region": {
+                            "type": "string",
+                            "description": "Indicates the region of the origin shield. It is typically an ISO-3166-1 code representing a country. When choosing an origin shield for your property, it is best to select one closer to your origin servers.\nUse of a shield located in the \"cn\" region (China) requires your property to have 'hasBeian' set to true which means all of its hostnames have an ICP Beian license required by the Chinese government."
+                          },
+                          "ipv4": {
+                            "type": "array",
+                            "description": "A list of IPv4 addresses used by the shield. If your origin server has an access control list, include these IP addresses.",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "ipv6": {
+                            "type": "array",
+                            "description": "A list of IPv6 addresses used by the shield. If your origin server has an access control list, include these IP addresses.",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "lastUpdated": {
+                            "type": "string",
+                            "description": "An RFC 3339 date indicating when the shield was last updated."
+                          },
+                          "effectiveDate": {
+                            "type": "string",
+                            "description": "An RFC 3339 date indicating when the shield became active."
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "id",
+                          "region",
+                          "ipv4",
+                          "ipv6",
+                          "lastUpdated",
+                          "effectiveDate"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "shields": [
+                        {
+                          "name": "China_int",
+                          "id": "originShieldID-123",
+                          "region": "cn",
+                          "ipV4": [
+                            "61.161.1.0/24",
+                            "117.157.243.0/25"
+                          ],
+                          "ipV6": [
+                            "2409:8c74:f100:0124:0000:0000:0000:0000/64",
+                            "2408:8736:40 0b:0001:c000:0000:0000:0000/66"
+                          ],
+                          "lastUpdated": "2022-07-25T09:15:44.000+0000",
+                          "effectiveDate": "2022-07-25T09:15:44.000+0000"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-shields",
+        "description": "Get a list of shields that can be used as an extra layer between the CDN Pro edge servers and your origin servers. A shield can further reduce the number of requests to your origin and limit the requests to a smaller set of servers. \nThis is an advanced feature. If you require this feature, please contact our support team.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "The value of the search parameter is matched on the shields' name, id, regions, ipV4 , and ipV6 fields. Only those shields that match will be returned in the response."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "lastUpdated",
+                "effectiveDate"
+              ],
+              "default": "lastUpdated"
+            },
+            "in": "query",
+            "name": "sortBy",
+            "description": "Returns shields sorted by when they were last updated or when they became active."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            },
+            "in": "query",
+            "name": "sortOrder",
+            "description": "Returns shields in sorted order, either \"asc\" for ascending or \"desc\" for descending. The default is to return the last shield updated first."
+          }
+        ]
       }
     }
   },

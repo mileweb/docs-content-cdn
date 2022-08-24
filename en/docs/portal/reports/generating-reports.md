@@ -58,7 +58,7 @@ The following report types are supported:
 
 <ul><li>Mouse over data points in the report to view detailed information.<br>
 <li>Drag over the chart to magnify areas, and then use the <strong>Reset zoom</strong> button to return to the default zoom level.<br>
-<li>Use the Download Options icon at the top right of the report to download raw data in comma-separated-value (CSV) format, create annotations (described below), or hide annotations.</ul>
+<li>Use the three vertical buttons at the top right of the report to download raw data in comma-separated-value (CSV) format, create annotations (described below), or hide annotations.</ul>
 
 <p><img src="/docs/resources/images/reports/download-options-icon.png" alt="dload options" width="250"></p>
 
@@ -66,7 +66,7 @@ The following report types are supported:
 
 After you generate a report, you can create text annotations to highlight events related to traffic going to your hostnames.
 
-1. Click the Download Options icon at the top right of the report and select **Create Annotation**.
+1. Click the three vertical buttons at the top right of the report and select **Create Annotation**.
 2. Complete the fields in the Create an annotation dialog box.
 
    <p align=center><img src="/docs/resources/images/reports/create_annotation.png" alt="report page" width="900"></p>
@@ -82,7 +82,7 @@ After you generate a report, you can create text annotations to highlight events
 
 3. Click **Create**.
    
-After you create annotations, you can hide them or redisplay them by clicking the Download Options icon and selecting **Hide Annotations** or **Show Annotations**.
+After you create annotations, you can hide them or redisplay them by clicking the three vertical buttons at the top right of the report and selecting **Hide Annotations** or **Show Annotations**.
 
  The following figure shows an example of two annotations.
 
