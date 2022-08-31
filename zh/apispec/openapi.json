@@ -28015,7 +28015,7 @@
         ]
       },
       "patch": {
-        "summary": "Update a secret",
+        "summary": "更新保密信息",
         "responses": {
           "204": {
             "description": "保密信息已成功更新。"
@@ -31536,6 +31536,18 @@
       "description": "内容管理 API 允许您在由属性配置确定的计划之前请求更新（或刷新）缓存的内容。您可以刷新文件或目录。刷新请求是异步的。您可以使用 API 来检查刷新请求的状态。您还可以预取 URL，以便在访问者发出请求之前预热缓存。这允许您管理到源站的流量。"
     },
     {
+      "name": "CDN Pro 服务配置",
+      "description": "这些接口可用来查看CDN Pro的一些系统配置信息。"
+    },
+    {
+      "name": "Webhooks",
+      "description": "这些API可用来定义webhook接口（或回调接口）。当某个异步任务完成时，如配置部署，内容刷新或内容预取，可触发webhook接口调用。"
+    },
+    {
+      "name": "日志配置管理",
+      "description": "这些接口可用来自定义访问日志的输出格式。每个日志配置可用于一个或多个加速域名。日志配置仅对配置生效后的请求有效。"
+    },
+    {
       "name": "Portal User Management",
       "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a>."
     },
@@ -31552,23 +31564,12 @@
       "description": "Obtain a summary of API calls that have been made by you or on your behalf."
     },
     {
-      "name": "CDN Pro 服务配置",
-      "description": "这些接口可用来查看CDN Pro的一些系统配置信息。"
-    },
-    {
-      "name": "CDN Product Management"
+      "name": "CDN Product Management",
+      "description": "If you are a reseller, you can use APIs to manage the service quotas of your child customers."
     },
     {
       "name": "API Access Control",
       "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN Pro API account</a> can do by specifying the categories of accessible endpoints."
-    },
-    {
-      "name": "Webhooks",
-      "description": "这些API可用来定义webhook接口（或回调接口）。当某个异步任务完成时，如配置部署，内容刷新或内容预取，可触发webhook接口调用。"
-    },
-    {
-      "name": "日志配置管理",
-      "description": "这些接口可用来自定义访问日志的输出格式。每个日志配置可用于一个或多个加速域名。日志配置仅对配置生效后的请求有效。"
     }
   ]
 }
