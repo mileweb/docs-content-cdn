@@ -6529,7 +6529,7 @@
       "get": {
         "summary": "获取加速项目验证任务列表",
         "tags": [
-          "Property Validation"
+          "加速项目配置验证"
         ],
         "responses": {
           "200": {
@@ -6805,9 +6805,9 @@
       },
       "parameters": [],
       "post": {
-        "summary": "Create a validation task",
+        "summary": "创建加速项目验证任务",
         "tags": [
-          "Property Validation"
+          "加速项目配置验证"
         ],
         "responses": {
           "201": {
@@ -6924,7 +6924,7 @@
       "get": {
         "summary": "获取配置验证任务的详细信息",
         "tags": [
-          "Property Validation"
+          "加速项目配置验证"
         ],
         "responses": {
           "200": {
@@ -8154,7 +8154,6 @@
       "get": {
         "summary": "获取加速域名详细信息",
         "tags": [
-          "Hostnames",
           "加速域名管理"
         ],
         "responses": {
@@ -8434,9 +8433,7 @@
       "post": {
         "summary": "查询边缘流量",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -9116,9 +9113,7 @@
         "operationId": "getOriginTrafficVolume",
         "description": "获取一段时间内的回源流量（以MB为单位）。您可以在查询参数时指定时间段和方案。通过在请求中传递filters对象来进一步过滤结果。此报表的数据延迟小于两分钟。\n\n注意：此API的结果中不包括TCP、IP和MAC报头的开销。",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "requestBody": {
           "content": {
@@ -9266,9 +9261,7 @@
       "post": {
         "summary": "查询边缘请求数",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -9542,9 +9535,7 @@
       "post": {
         "summary": "查询边缘带宽",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -9919,9 +9910,7 @@
       "post": {
         "summary": "查询边缘状态码详细信息",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -10480,9 +10469,7 @@
       "post": {
         "summary": "查询回源请求数",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -10835,9 +10822,7 @@
       "post": {
         "summary": "查询回源状态码详细信息",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -11456,9 +11441,7 @@
       "post": {
         "summary": "查询中间层流量",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -11833,9 +11816,7 @@
       "post": {
         "summary": "查询边缘上传流量",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -12857,7 +12838,7 @@
           }
         ],
         "tags": [
-          "Content Management"
+          "内容管理"
         ]
       },
       "parameters": []
@@ -12866,7 +12847,7 @@
       "post": {
         "summary": "获取报表注释列表",
         "tags": [
-          "Annotations for Reports"
+          "报表注释"
         ],
         "responses": {
           "200": {
@@ -13161,7 +13142,7 @@
       "delete": {
         "summary": "删除报表注释",
         "tags": [
-          "Annotations for Reports"
+          "报表注释"
         ],
         "responses": {
           "100": {
@@ -13238,7 +13219,7 @@
       "get": {
         "summary": "获取报表注释详情",
         "tags": [
-          "Annotations for Reports"
+          "报表注释"
         ],
         "responses": {
           "200": {
@@ -13408,7 +13389,7 @@
       "patch": {
         "summary": "更新报表注释",
         "tags": [
-          "Annotations for Reports"
+          "报表注释"
         ],
         "responses": {
           "204": {
@@ -13573,7 +13554,7 @@
       "get": {
         "summary": "获取刷新请求状态",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "200": {
@@ -13798,7 +13779,7 @@
       "get": {
         "summary": "获取刷新摘要",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "200": {
@@ -13951,9 +13932,7 @@
       "post": {
         "summary": "查询流量汇总信息",
         "tags": [
-          "报表",
-          "Reports",
-          "报表注释"
+          "报表"
         ],
         "responses": {
           "200": {
@@ -24838,7 +24817,7 @@
       "post": {
         "summary": "创建预取请求",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "201": {
@@ -25011,7 +24990,7 @@
       "get": {
         "summary": "获取预取请求列表",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "200": {
@@ -25295,7 +25274,7 @@
       "get": {
         "summary": "获取预取请求状态",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "200": {
@@ -27371,7 +27350,7 @@
       "post": {
         "summary": "创建保密信息",
         "tags": [
-          "Secret Management"
+          "保密信息管理"
         ],
         "responses": {
           "201": {
@@ -27530,7 +27509,7 @@
       "get": {
         "summary": "获取保密信息列表",
         "tags": [
-          "Secret Management"
+          "保密信息管理"
         ],
         "responses": {
           "200": {
@@ -27738,7 +27717,7 @@
       "get": {
         "summary": "获取可用的刷新请求",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "200": {
@@ -27846,7 +27825,7 @@
       "get": {
         "summary": "获取保密信息详情",
         "tags": [
-          "Secret Management"
+          "保密信息管理"
         ],
         "responses": {
           "200": {
@@ -28037,9 +28016,6 @@
       },
       "patch": {
         "summary": "Update a secret",
-        "tags": [
-          "Secret Management"
-        ],
         "responses": {
           "204": {
             "description": "保密信息已成功更新。"
@@ -28204,12 +28180,15 @@
             },
             "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
           }
+        ],
+        "tags": [
+          "保密信息管理"
         ]
       },
       "delete": {
         "summary": "删除保密信息",
         "tags": [
-          "Secret Management"
+          "保密信息管理"
         ],
         "responses": {
           "204": {
@@ -29979,9 +29958,6 @@
     "/cdn/report/edgeStatusSummary": {
       "post": {
         "summary": "查询边缘Cache响应状态码汇总信息",
-        "tags": [
-          "Reports"
-        ],
         "responses": {
           "200": {
             "description": "响应包含CDN Pro边缘服务器返回的状态码汇总。它最多可以包含10000个组。如果有超过10000个组，“isComplete”的值将为false。特殊组“\\__all\\_”包含所有组的总数，包括超过10000限制的组。当“isComplete”为真时，总数是所有其他组返回汇总数的总和。",
@@ -30250,7 +30226,10 @@
             }
           },
           "description": "请求主体可以包括自定义结果的选项。"
-        }
+        },
+        "tags": [
+          "报表"
+        ]
       },
       "get": {
         "summary": "Get a summary of status codes returned by edge servers",
@@ -31431,7 +31410,7 @@
       "get": {
         "summary": "获取可用的预取请求",
         "tags": [
-          "Content Management"
+          "内容管理"
         ],
         "responses": {
           "200": {
@@ -31575,6 +31554,9 @@
     {
       "name": "CDN Pro 服务配置",
       "description": "这些接口可用来查看CDN Pro的一些系统配置信息。"
+    },
+    {
+      "name": "CDN Product Management"
     },
     {
       "name": "API Access Control",
