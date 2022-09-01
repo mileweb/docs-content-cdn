@@ -10,7 +10,9 @@
       "altText": "CDNetworks logo"
     },
     "contact": {
-      "url": "https://www.cdnetworks.com"
+      "url": "https://www.cdnetworks.com",
+      "email": "support@cdnetworks.com",
+      "name": "N/A"
     }
   },
   "servers": [
@@ -682,7 +684,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -1475,7 +1477,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -1608,7 +1610,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -1710,7 +1712,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -2009,7 +2011,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -2056,7 +2058,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -2347,7 +2349,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -2607,7 +2609,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -2826,7 +2828,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -3411,7 +3413,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -4099,7 +4101,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -4405,7 +4407,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "name": "Report-Range",
@@ -4414,7 +4416,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ],
         "tags": [
@@ -4727,7 +4729,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -4941,7 +4943,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -4958,7 +4960,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ],
         "tags": [
@@ -5271,7 +5273,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "x-internal": false,
@@ -5530,7 +5532,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "name": "Report-Range",
@@ -5539,7 +5541,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ],
         "tags": [
@@ -5842,7 +5844,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -6103,7 +6105,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -6179,7 +6181,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -6307,7 +6309,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -6517,7 +6519,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -6774,7 +6776,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -6799,7 +6801,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ]
       },
@@ -6904,7 +6906,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -7094,7 +7096,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -7341,7 +7343,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -7366,7 +7368,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ]
       },
@@ -7665,7 +7667,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -7900,7 +7902,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -8110,7 +8112,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "name": "Report-Range",
@@ -8119,7 +8121,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "schema": {
@@ -8275,7 +8277,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -8424,7 +8426,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -8807,24 +8809,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -8834,26 +8839,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -8862,7 +8865,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -8871,7 +8874,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -9188,24 +9191,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -9215,26 +9221,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -9243,7 +9247,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -9252,7 +9256,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -9462,24 +9466,27 @@
         "operationId": "getEdgeRequests",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -9489,26 +9496,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。",
-            "required": true
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -9517,7 +9522,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -9526,7 +9531,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -9837,24 +9842,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -9864,26 +9872,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -9892,7 +9898,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -9901,7 +9907,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -10396,24 +10402,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -10423,26 +10432,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -10451,7 +10458,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -10460,7 +10467,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -10749,24 +10756,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -10776,26 +10786,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -10804,7 +10812,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -10813,7 +10821,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -11368,24 +11376,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -11395,26 +11406,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -11423,7 +11432,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -11432,7 +11441,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -11672,24 +11681,27 @@
         "description": "获取一段时间内的中间层流量（以MB为单位）。中间层流量是CDN Pro服务器之间的流量。您可以在查询参数中指定时间段和协议。通过在请求中传递filters对象来进一步过滤结果。此报表的数据延迟小于两分钟。",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -11699,26 +11711,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -11727,7 +11737,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -11736,7 +11746,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -12118,24 +12128,27 @@
         },
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -12145,26 +12158,24 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时间中定义的日期。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
-              "default": "all",
-              "maxLength": 5,
               "enum": [
                 "http",
                 "https",
                 "all"
               ],
-              "minLength": 0
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包括两种类型的流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "Report-Range",
@@ -12173,7 +12184,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -12182,7 +12193,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -12248,8 +12259,8 @@
             }
           }
         },
-        "description": "此API允许您为CDN Pro门户中显示的报表创建注释。请求正文允许您指定注释出现的条件以及要显示的文本。",
-        "operationId": "创建报表",
+        "description": "此API允许您为CDN Pro控制台中显示的报表创建注释。请求正文允许您指定注释出现的条件以及要显示的文本。",
+        "operationId": "createAnnotation",
         "requestBody": {
           "content": {
             "application/json": {
@@ -12324,7 +12335,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -12791,7 +12802,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -12834,7 +12845,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ],
         "tags": [
@@ -13074,7 +13085,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -13083,7 +13094,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "description": "获取已创建的注释列表。基于为每个注释定义的条件，注释出现在CDN Pro门户的报表中。使用查询参数和请求体筛选结果。",
@@ -13145,7 +13156,7 @@
           "报表注释"
         ],
         "responses": {
-          "100": {
+          "200": {
             "description": "删除注释成功。"
           },
           "403": {
@@ -13211,7 +13222,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "x-internal": false
@@ -13382,7 +13393,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -13533,7 +13544,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -13770,7 +13781,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -13909,7 +13920,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -14369,7 +14380,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -17291,24 +17302,27 @@
             "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
           },
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例： <code>startdate=2019-11-14T00:00:00Z</code>",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>enddate=2019-11-14T00:00:00Z</code>",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "enum": [
@@ -17318,10 +17332,7 @@
                 "monthly"
               ]
             },
-            "in": "query",
-            "name": "type",
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一天的开始。如果您希望使用与UTC不同的起始位置，可以附加-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如：<code>type=daily+8</code>表示UTC+8时间中定义的日期。",
-            "required": true
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           }
         ],
         "requestBody": {
@@ -17611,22 +17622,22 @@
         "description": "获取一段时间内一个或多个调度域名名的DNS解析请求总数。此API允许您查看每个调度域名的实际请求数。",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例： <code>startdate=2019-11-14T00:00:00Z</code>",
-            "required": true
-          },
-          {
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>",
+            "required": true,
             "schema": {
               "type": "string"
-            },
+            }
+          },
+          {
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：  <code>enddate=2019-11-14T00:00:00Z</code>由于新的数据流的延迟的关系，enddate应不晚于当前时间的五分钟。这会确保您获得最准确的结果。",
-            "required": true
+            "required": true,
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>由于数据存在延迟，指定的结束时间必须至少比当前时间早5分钟。这能确保您获取到准确的数据。",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "schema": {
@@ -22944,7 +22955,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -22953,42 +22964,57 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-10-30T00:00:00Z</code>根据 <i>type</i>参数，您的开始日期可以四舍五入到最接近的分钟，小时，或天。例如, 如果您输入<code>startdate=2019-09-05T03:14:01Z&type=hourly</code> 则响应从2019-09-05T03:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+          },
+          {
             "name": "enddate",
+            "in": "query",
             "required": true,
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code>根据 <i>type</i>参数，您的结束日期可以四舍五入到最接近的分钟，小时，或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T04:00:00Z结尾的数据"
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
             "name": "type",
+            "in": "query",
             "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一条的开始。如果您希望使用与UTC不同的起始位置，可以附加-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  例如, <code>type=daily+8</code> 表示 UTC+8 时间中定义的日期"
+            "schema": {
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
+            },
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包含两种类型的流量"
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
+            },
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           }
         ],
         "requestBody": {
@@ -23168,7 +23194,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -23177,42 +23203,57 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-10-30T00:00:00Z</code>根据 <i>type</i>参数，您的开始日期可以四舍五入到最接近的分钟，小时，或天。例如, 如果您输入<code>startdate=2019-09-05T03:14:01Z&type=hourly</code> 则响应从2019-09-05T03:00:00Z开始的数据。",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+          },
+          {
             "name": "enddate",
+            "in": "query",
             "required": true,
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code>根据 <i>type</i>参数，您的结束日期可以四舍五入到最接近的分钟，小时，或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T04:00:00Z结尾的数据"
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+          },
+          {
             "name": "type",
+            "in": "query",
             "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一条的开始。如果您希望使用与UTC不同的起始位置，可以附加-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  例如, <code>type=daily+8</code> 表示 UTC+8 时间中定义的日期"
+            "schema": {
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
+            },
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包含两种类型的流量"
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
+            },
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           }
         ],
         "requestBody": {
@@ -24557,7 +24598,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -24566,43 +24607,57 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "startdate",
+            "in": "query",
             "required": true,
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-10-30T00:00:00Z</code>根据 <i>type</i>参数，您的开始日期可以四舍五入到最接近的分钟，小时，或天。例如, 如果您输入<code>startdate=2019-09-05T03:14:01Z&type=hourly</code> 则响应从2019-09-05T03:00:00Z开始的数据。"
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+          },
+          {
             "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code>根据 <i>type</i>参数，您的结束日期可以四舍五入到最接近的分钟，小时，或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T04:00:00Z结尾的数据",
-            "required": true
-          },
-          {
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "description": "指示返回数据的粒度。默认情况下，UTC中的00:00:00用作一条的开始。如果您希望使用与UTC不同的起始位置，可以附加-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14.  例如, <code>type=daily+8</code> 表示 UTC+8 时间中定义的日期"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
           },
           {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
+            },
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+          },
+          {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "http",
+                "https",
+                "all"
+              ],
+              "minLength": 0,
+              "maxLength": 5,
               "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "选择是否在结果中包括HTTP和HTTPS流量。默认的“all”包含两种类型的流量"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           }
         ],
         "description": "获取CPU用于处理请求内容的时间（以秒为单位）。",
@@ -24668,7 +24723,8 @@
           },
           "name": "hostname",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "加速域名"
         }
       ],
       "get": {
@@ -24808,7 +24864,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -24893,7 +24949,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -25245,7 +25301,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "name": "Report-Range",
@@ -25254,7 +25310,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ]
       }
@@ -25488,7 +25544,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -26410,24 +26466,27 @@
         "description": "获取一段时间内请求的汇总数。您可以按（加速）域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按CustomerID进行筛选和分组，以区分您的子客户的请求。",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-10-30T00:00:00Z</code> ",
-            "required": true
-          },
-          {
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>",
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code>根据 <i>type</i>参数，您的结束日期可以四舍五入到最接近的分钟，小时，或天。例如，如果您输入 <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T04:00:00Z结尾的数据。由于新的数据流的延迟的关系，enddate应不晚于当前时间的五分钟。这会确保您获得最准确的结果。",
             "required": true
           },
           {
+            "in": "query",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-11-14T00:00:00Z</code>由于数据存在延迟，所指定的结束时间必须比当前时间至少早5分钟。这能确保您获得更准确的数据。",
+            "schema": {
+              "type": "string"
+            },
+            "name": "enddate",
+            "required": true
+          },
+          {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
               "enum": [
@@ -26435,11 +26494,11 @@
                 "https",
                 "all"
               ],
+              "minLength": 0,
+              "maxLength": 5,
               "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "将结果限制为指定的方案。默认情况下，返回来自HTTPS和HTTP请求的数据。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "On-Behalf-Of",
@@ -26448,7 +26507,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -26898,7 +26957,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "name": "On-Behalf-Of",
@@ -26907,7 +26966,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -27007,7 +27066,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -27216,7 +27275,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -27243,7 +27302,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -27341,7 +27400,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -27502,7 +27561,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -27690,7 +27749,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "name": "Report-Range",
@@ -27699,7 +27758,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           },
           {
             "schema": {
@@ -27805,7 +27864,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -28010,7 +28069,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -28178,7 +28237,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -28282,7 +28341,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "description": "根据保密信息ID进行删除。如果保密信息已经被已部署的加速项目引用，则无法删除。如果保密信息已废弃，则您必须先删除其在加速项目中、重新验证、重新部署中的引用之后，才能删除该保密信息。"
@@ -28428,7 +28487,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
             "schema": {
@@ -28463,7 +28522,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
           }
         ]
       },
@@ -28801,7 +28860,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "tags": [
@@ -28998,7 +29057,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       },
@@ -29074,7 +29133,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ]
       }
@@ -29201,25 +29260,17 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "required": true,
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-10-30T00:00:00Z</code>"
+            "description": "查询范围的开始时间。必须以UTC时区指定开始时间，且不得早于14天前。 示例：<code>startdate=2021-10-30T00:00:00Z</code>"
           },
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code>",
-            "required": true
+            "description": "查询范围的结束时间。必须以UTC时区指定结束时间。 示例：<code>startdate=2021-11-14T00:00:00Z</code>"
           }
         ],
         "description": "获取对已部署中的一个或多个（加速）域名的请求的访问日志。这些日志包含2小时或更长时间前发出的请求的数据。默认情况下，只有过去14天内的日志可用，并且一天的被分为不同部分的日志。\n\n要获取加速（域名）的日志，必须首先通过创建适用于（加速）域名的记录配置来指定日志格式。在创建了适用的日志配置后，将记录对内容的请求。否则，将无法下载任何日志。\n例如，假设您定义了如下日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n此API将返回可用日志列表，如:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nlogUrl字段包含指向gzip压缩日志文件的URL，该文件由以下行组成：:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
@@ -29623,27 +29674,30 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           },
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-10-30T00:00:00Z</code>",
-            "required": true
-          },
-          {
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true,
             "schema": {
               "type": "string"
-            },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code>根据 <i>type</i>参数，您的结束日期可以四舍五入到最接近的分钟，小时，或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T04:00:00Z结尾的数据。由于新的数据流的延迟的关系，enddate应不晚于当前时间的五分钟。这会确保您获得最准确的结果。",
-            "required": true
+            }
           },
           {
+            "in": "query",
+            "name": "enddate",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-11-14T00:00:00Z</code> 由于数据存在延迟，所指定的结束时间必须至少比当前时间早5分钟。这能确保您获得更准确的数据。",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
               "enum": [
@@ -29651,11 +29705,11 @@
                 "https",
                 "all"
               ],
+              "minLength": 0,
+              "maxLength": 5,
               "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "将结果限制为指定的方案。默认情况下，返回所有流量。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           }
         ],
         "requestBody": {
@@ -30118,24 +30172,27 @@
         "description": "获取一段时间内请求CDN Pro边缘服务器返回的HTTP状态代码的汇总信息。查询参数用于指定时间段和方案。通过在请求中传递 <i>filters</i>对象来进一步过滤结果。此报告的数据延迟最长可达30分钟。",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2021-09-05T00:00:00Z</code> ",
-            "required": true
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2021-09-05T10:00:00Z</code> 由于新的数据流的延迟的关系，enddate应不晚于当前时间的五分钟。这会确保您获得最准确的结果。",
-            "required": true
+            "required": true,
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> "
           },
           {
+            "in": "query",
+            "name": "enddate",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-11-14T00:00:00Z</code> 由于数据存在延迟，所指定的结束时间必须至少比当前时间早5分钟。这能确保您获得更准确的数据。",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
               "enum": [
@@ -30143,11 +30200,11 @@
                 "https",
                 "all"
               ],
+              "minLength": 0,
+              "maxLength": 5,
               "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "将结果限制为指定的方案。默认情况下，返回来自HTTPS和HTTP请求的数据。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "On-Behalf-Of",
@@ -30156,7 +30213,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -30667,24 +30724,27 @@
         "description": "获取一段时间内请求返回到源服务器的HTTP状态代码的汇总。查询参数用于指定时间段和方案。通过在请求中传递 <i>filters</i>对象来进一步过滤结果。此报表的数据延迟最长可达30分钟。",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例： <code>startdate=2021-09-05T00:00:00Z</code> ",
-            "required": true
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例： <code>enddate=2021-09-05T10:00:00Z</code>  由于新的数据流的延迟的关系，enddate应不晚于当前时间的五分钟。这会确保您获得最准确的结果。",
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> ",
             "required": true
           },
           {
+            "in": "query",
+            "name": "enddate",
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-11-14T00:00:00Z</code> 由于数据存在延迟，所指定的结束时间必须至少比当前时间早5分钟。这能确保您获得更准确的数据。",
+            "required": true
+          },
+          {
+            "name": "scheme",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string",
               "enum": [
@@ -30692,11 +30752,11 @@
                 "https",
                 "all"
               ],
+              "minLength": 0,
+              "maxLength": 5,
               "default": "all"
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "将结果限制为指定的方案。默认情况下，返回来自HTTPS和HTTP请求的数据。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "On-Behalf-Of",
@@ -30705,7 +30765,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -31093,36 +31153,37 @@
         "description": "获取边缘服务器和中间服务器的CPU使用情况汇总。",
         "parameters": [
           {
-            "schema": {
-              "type": "string"
-            },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>startdate=2019-11-14T00:00:00Z</code>",
-            "required": true
-          },
-          {
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2021-09-05T10:00:00Z</code> 由于新的数据流的延迟的关系，enddate应不晚于当前时间的五分钟。这会确保您获得最准确的结果。",
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> ",
             "required": true
           },
           {
+            "in": "query",
+            "name": "enddate",
+            "schema": {
+              "type": "string"
+            },
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-11-14T00:00:00Z</code> 由于数据存在延迟，所指定的结束时间必须至少比当前时间早5分钟。这能确保您获得更准确的数据。",
+            "required": true
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
-              "default": "all",
               "enum": [
-                "all",
-                "http",
-                "https"
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
               ]
             },
-            "in": "query",
-            "name": "scheme",
-            "description": "将结果限制为指定的方案。默认情况下，返回来自HTTPS和HTTP请求的数据。"
+            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
           },
           {
             "name": "On-Behalf-Of",
@@ -31131,7 +31192,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
           }
         ],
         "requestBody": {
@@ -31463,7 +31524,7 @@
         "schema": {
           "type": "string"
         },
-        "description": "如果你是代理商，可使用该请求头指定代理客户的ID"
+        "description": "如果您是代理商，可使用该请求头指定代理客户的ID"
       },
       "Report-Range": {
         "name": "Report-Range",
@@ -31472,7 +31533,7 @@
         "schema": {
           "type": "string"
         },
-        "description": "如果你是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
+        "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据</td></tr><tr><td>children-only</td><td>只查询调用者子客户账号下的数据</td></tr><tr><td>self+children</td><td>查询调用者及其子客户账号下的数据</td></tr></table>"
       },
       "offset": {
         "name": "offset",
@@ -31491,6 +31552,56 @@
           "type": "string"
         },
         "description": "每次查询的最大条数"
+      },
+      "startdate": {
+        "name": "startdate",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+      },
+      "enddate": {
+        "name": "enddate",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+      },
+      "type": {
+        "name": "type",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "fiveminutes",
+            "hourly",
+            "daily",
+            "monthly"
+          ]
+        },
+        "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+      },
+      "scheme": {
+        "name": "scheme",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "http",
+            "https",
+            "all"
+          ],
+          "minLength": 0,
+          "maxLength": 5,
+          "default": "all"
+        },
+        "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
       }
     }
   },
@@ -31546,6 +31657,10 @@
     {
       "name": "日志配置管理",
       "description": "这些接口可用来自定义访问日志的输出格式。每个日志配置可用于一个或多个加速域名。日志配置仅对配置生效后的请求有效。"
+    },
+    {
+      "name": "Reports",
+      "description": "Call our report APIs to get information about your visitors including edge and origin traffic, requests, status code details, and log files."
     },
     {
       "name": "Portal User Management",
