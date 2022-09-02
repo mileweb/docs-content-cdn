@@ -440,7 +440,7 @@
                                   },
                                   "uri": {
                                     "type": "string",
-                                    "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                                    "description": "The URI begins with \"/\" and can end with \"*\" for prefix matching. ",
                                     "maxLength": 500
                                   },
                                   "serverRegions": {
@@ -1140,7 +1140,7 @@
                             },
                             "uri": {
                               "type": "string",
-                              "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                              "description": "The URI begins with \"/\" and can end with \"*\" for prefix matching. ",
                               "maxLength": 500
                             },
                             "serverRegions": {
@@ -3285,7 +3285,7 @@
                             },
                             "uri": {
                               "type": "string",
-                              "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                              "description": "The URI begins with \"/\" and can end with \"*\" for prefix matching. ",
                               "maxLength": 500
                             },
                             "serverRegions": {
@@ -3921,7 +3921,7 @@
                                 },
                                 "uri": {
                                   "type": "string",
-                                  "description": "The URI begins with \"/ and can end with \"*\" for prefix matching. ",
+                                  "description": "The URI begins with \"/\" and can end with \"*\" for prefix matching. ",
                                   "maxLength": 500
                                 },
                                 "serverRegions": {
@@ -13301,7 +13301,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "ID of annotation to delete."
+          "description": "ID of an annotation."
         }
       ],
       "delete": {
