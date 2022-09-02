@@ -23,6 +23,16 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 5. The user clicks the **Join Now!** button in the invitation, enters the required information on the Join CDNetworks Portal page, and then clicks the **Save & Join** button.
 6. The user can now sign in to the portal.
 
+## Resending or Canceling Invitations
+
+If a user has been invited to create a portal user account, the user's initial status is pending. You can select the pending user to resend or cancel the invitation.
+
+1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
+
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+
+2. With the **Users** tab of the Identity & Access Management page displayed, click the vertical ellipsis for the user whose invitation you want to resend or cancel, and then select **Resend Invitation** or **Cancel Invitation**. When prompted to resend or cancel the invitation, click **OK**.
+
 ## Editing a User
 
 Administrators edit users from the **Users** tab on the Identity & Access Management page.

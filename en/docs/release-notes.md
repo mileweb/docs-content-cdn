@@ -1,5 +1,23 @@
 # Release Notes
 
+## September 1, 2022
+### API updates
+* Ensured that only customers with access to a shared certificate can deploy it.
+* Ensured that required customer fields cannot be set to null.
+* Ensured a child customer’s service quota limits are set to appropriate values based on the  parent’s limits.
+* Ensured appropriate handling of reductions in a parent customer’s limits.
+
+### Portal updates
+* Allowed administrators to resend or cancel a portal user invitation by choosing the appropriate menu item of the pending user in the identity and access management page.
+* Improved appearance of dropdown menu in the reports page.
+* Improved appearance of the self-signup page.
+* Improved appearance of the account creation page for self-signup customers.
+* Improved appearance of the purge details page.
+* Updated the CDN Pro upgrade page to reflect the current price plan.
+* Update the user information page to support :30 and :45 timezones.
+* Allowed purges of URLs with encoded special symbols.
+
+
 ## August 22, 2022
 ### API updates
 
