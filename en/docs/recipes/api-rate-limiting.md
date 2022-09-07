@@ -44,15 +44,16 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 	    	 {filters: {hostnames: [$domain]}}
 ```
 
-	Instead, use the following recommended approach:
+   Instead, use the following recommended approach:
 
 ```
 	POST /report/volSummary 
 	     {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
 ```
 
-	Another example is purging multiple files in one request instead of making an API call for each purge URL.
-	If there are thousands of purge URLs that follow a certain pattern, use directory or regex purge by specifying the `dirUrls` or `regexPatterns` fields when [creating a purge request](</apidocs#operation/createPurge>). The number of requests should not scale as you acquire more domains, properties, and other resources.
+   Another example is purging multiple files in one request instead of making an API call for each purge URL.
+   If there are thousands of purge URLs that follow a certain pattern, use directory or regex purge by specifying
+   the `dirUrls` or `regexPatterns` fields when [creating a purge request](</apidocs#operation/createPurge>). The number of requests should not scale as you acquire more domains, properties, and other resources.
 
 3. If you call the API through scripts, it should be resilient to intermittent or non-specific errors. The script
 should honor the `x-rate-limit-retry-after-seconds` header and retry the request after a delay. Consider including a
