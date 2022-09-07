@@ -14,7 +14,7 @@ is not a sufficient number of tokens available, the request is blocked, with an 
 has been exceeded during the 1-minute sliding window.
 
 The capacity of the bucket and the filling rate are controlled by the `configs.apiMaxBurst` and `configs.apiRate` fields
-in the [customer management API](https://docs.cdnetworks.com/en/cdn/apidocs#operation/patch-ngadmin-customers-id). For example,
+in the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>). For example,
 if the customer has `configs.apiMaxBurst = 45` and `configs.apiRate = 120`, tokens are added to the bucket at a
 fixed rate of 120 tokens per minute, and the total capacity of the bucket is 45. The bucket is refilled in a
 “greedy” manner. CDN Pro tries to add tokens to the bucket as soon as possible. For example, refilling at
@@ -31,7 +31,7 @@ response header `x-rate-limit-retry-after-seconds: Y` to tell the client to retr
 
 ### Best Practices for Avoiding Rate Limiting Errors
 
-1. Check the API request history. [“GET /ngadmin/apicalls”](https://docs.cdnetworks.com/en/cdn/apidocs#operation/get-ngadmin-apicalls)
+1. Check the API request history. [“GET /ngadmin/apicalls”](</apidocs#operation/get-ngadmin-apicalls>)
 shows the API calls you have made.  (The customer admin API credential is required to call this API.)
 Carefully check the records for potential abuses.
 
@@ -44,17 +44,15 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 	    	 {filters: {hostnames: [$domain]}}
 ```
 
-Instead, use the following recommended approach:
+	Instead, use the following recommended approach:
 
 ```
 	POST /report/volSummary 
 	     {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
 ```
 
-   Another example is purging multiple files in one request instead of making an API call for each purge URL.
-   If there are thousands of purge URLs that follow a certain pattern, use directory or regex purge by specifying
-   the `dirUrls` or `regexPatterns` fields when [creating a purge request](https://docs.cdnetworks.com/en/cdn/apidocs#operation/createPurge).
-   The number of requests should not scale as you acquire more domains, properties, and other resources.
+	Another example is purging multiple files in one request instead of making an API call for each purge URL.
+	If there are thousands of purge URLs that follow a certain pattern, use directory or regex purge by specifying the `dirUrls` or `regexPatterns` fields when [creating a purge request](</apidocs#operation/createPurge>). The number of requests should not scale as you acquire more domains, properties, and other resources.
 
 3. If you call the API through scripts, it should be resilient to intermittent or non-specific errors. The script
 should honor the `x-rate-limit-retry-after-seconds` header and retry the request after a delay. Consider including a
@@ -65,10 +63,10 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 ### Notes
 
-1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The children rate limits for reseller or partner customers are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
+1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The rate limits of children of resellers are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
 
-2. Because the portal calls the API, operations in the portal UI also consume the API rate limit tokens. 
+2. Because the CDN Pro portal calls the APIs, operations in the portal UI also consume the API rate limit tokens. 
 
 3. Unauthorized API calls such as signups and login attempts consume tokens from the bucket corresponding to the client’s IP address. This bucket has a default capacity of 30 tokens and a refill rate of 60 per minute.
 
-4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](https://docs.cdnetworks.com/en/cdn/apidocs#operation/patch-ngadmin-customers-id) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
+4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
