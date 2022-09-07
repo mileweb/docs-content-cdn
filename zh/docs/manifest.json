@@ -295,7 +295,11 @@
           {
             "title": "安全相关的配置",
             "path": "/docs/recipes/secure-delivery.md"
-          }
+          },
+          {
+            "title": "API Rate Limiting",
+            "path": "/docs/recipes/api-rate-limiting.md"
+          }	    
         ]
       },
       { 
