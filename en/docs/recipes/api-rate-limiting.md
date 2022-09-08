@@ -40,14 +40,14 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 
 ```
 	for domain in domain_list:
-	    call GET /report/vol 
+	    call GET /cdn/report/vol 
 	    	 {filters: {hostnames: [$domain]}}
 ```
 
    Instead, use the following recommended approach:
 
 ```
-	POST /report/volSummary 
+	POST /cdn/report/volSummary 
 	     {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
 ```
 
@@ -64,7 +64,7 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 ### Notes
 
-1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The rate limits of children of resellers are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
+1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The rate limits of a reseller's children are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
 
 2. Because the CDN Pro portal calls the APIs, operations in the portal UI also consume the API rate limit tokens. 
 
