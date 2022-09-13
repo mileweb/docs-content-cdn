@@ -965,7 +965,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -974,7 +976,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -1018,7 +1022,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -1587,7 +1597,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -1596,7 +1608,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -4904,7 +4918,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -4913,7 +4929,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -4966,7 +4984,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -5467,7 +5491,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -5476,7 +5502,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -5547,7 +5575,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -6727,7 +6761,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -6736,7 +6772,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -6804,7 +6842,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -7258,7 +7302,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -7267,7 +7313,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -7371,7 +7419,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -8097,7 +8151,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -8106,7 +8162,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -8124,7 +8182,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -8411,7 +8475,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -8420,7 +8486,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -8868,7 +8936,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -9250,7 +9324,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -9604,7 +9684,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -9980,7 +10066,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -10540,7 +10632,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -10894,7 +10992,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -11514,7 +11618,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -11819,7 +11929,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -12266,7 +12382,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -12832,7 +12954,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -12841,7 +12965,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -12927,7 +13053,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -13146,7 +13278,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -13155,7 +13289,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -13164,7 +13300,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -14028,7 +14170,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含分组的汇总流量。它最多可以包含10000个分组。如果超过10000个分组，“isComplete”的值将为false。特殊分组“_all_”包含所有分组，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含按分组汇总的流量信息。它最多可以包含10000个分组。如果超过10000个分组，“isComplete”的值将为false。特殊分组“__all__”包含所有分组，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -17372,7 +17514,7 @@
           }
         },
         "operationId": "post-cdn-report-edgeHostnameReq",
-        "description": "获取一段时间内请求DNS解析调度域名的数量。",
+        "description": "获取一段时间内对调度域名发起的DNS解析请求数。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -17465,7 +17607,7 @@
         "summary": "查询调度域名汇总统计信息",
         "responses": {
           "200": {
-            "description": "响应包含按调度域名分组的DNS请求汇总数。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含按调度域名分组汇总的DNS请求数。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -23036,7 +23178,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -23275,7 +23423,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -24679,7 +24833,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -24929,7 +25089,7 @@
               "type": "string"
             },
             "in": "query",
-            "description": "用RFC 3339格式的时间段指示开始日期。必须使用UTC时区指定时间；它不能是偏移量。示例：＜code＞startdate=2019-11-14T00:00:00Z＜/code＞默认情况下，该值是您开始使用CDN Pro时的值。",
+            "description": "用RFC 3339格式的时间段指示开始日期。必须使用UTC时区指定时间；它不能是偏移量。示例：<code>startdate=2019-11-14T00:00:00Z</code>默认情况下，该值是您开始使用CDN Pro时的值。",
             "name": "startdate"
           },
           {
@@ -25332,7 +25492,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -25341,7 +25503,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -25391,7 +25555,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -26399,7 +26569,7 @@
         "summary": "查询请求数汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含分组的请求数汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含按分组汇总的请求数信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -26546,7 +26716,7 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
-        "description": "获取一段时间内请求的汇总数。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户的请求。",
+        "description": "获取一段时间内的请求数汇总信息。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户的请求。",
         "parameters": [
           {
             "name": "startdate",
@@ -26980,7 +27150,7 @@
             }
           },
           "400": {
-            "description": "无效请求。请查看响应体中的错误信息",
+            "description": "无效请求。请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27020,7 +27190,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -27029,7 +27201,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -27038,7 +27212,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -27839,7 +28019,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           },
@@ -28528,7 +28714,7 @@
             }
           },
           "400": {
-            "description": "无效请求。请查看响应体中的错误信息。",
+            "description": "请求无效。请参考响应正文了解详情。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28585,7 +28771,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             },
             "description": "查询起始位置。"
           },
@@ -28594,7 +28782,9 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "default": 100,
+              "maximum": 200
             },
             "description": "每次查询的最大条数。"
           },
@@ -28603,7 +28793,13 @@
             "in": "header",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "\"self-only\"",
+                "\"self+children\"",
+                "\"children-only\""
+              ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
@@ -28952,9 +29148,6 @@
       },
       "patch": {
         "summary": "更新日志配置",
-        "tags": [
-          "日志配置管理。"
-        ],
         "responses": {
           "204": {
             "description": "日志配置更新成功。"
@@ -29142,13 +29335,13 @@
             },
             "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
+        ],
+        "tags": [
+          "日志配置管理"
         ]
       },
       "delete": {
-        "summary": "删除日志配置。",
-        "tags": [
-          "日志配置管理。"
-        ],
+        "summary": "删除日志配置",
         "responses": {
           "204": {
             "description": "日志配置删除成功。"
@@ -29218,6 +29411,9 @@
             },
             "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
+        ],
+        "tags": [
+          "日志配置管理"
         ]
       }
     },
@@ -29560,7 +29756,7 @@
         "summary": "查询带宽汇总统计信息",
         "responses": {
           "200": {
-            "description": "响应包含分组的流量带宽汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含按分组汇总的流量带宽信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -29756,7 +29952,7 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthSummary",
-        "description": "获取一段时间内的流量带宽汇总数。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户流量。",
+        "description": "获取一段时间内的流量带宽统计信息。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户流量。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -30105,7 +30301,7 @@
         "summary": "查询边缘Cache响应状态码汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含CDN Pro边缘服务器返回的状态码汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含CDN Pro边缘服务器返回的状态码汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -30657,7 +30853,7 @@
         "summary": "查询源站响应状态码汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含源站服务器返回的状态码汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含源站服务器返回的状态码汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -30785,7 +30981,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "请求无效。请参考响应正文了解详情。",
             "content": {
               "application/json": {
                 "schema": {
@@ -31122,7 +31318,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含分组的CPU使用情况汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "响应包含按分组汇总的CPU使用时间信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -31241,7 +31437,7 @@
           }
         },
         "operationId": "post-cdn-report-cpuSummary",
-        "description": "获取边缘服务器和中间层服务器的CPU使用情况汇总。",
+        "description": "获取边缘服务器和中间层服务器的CPU使用时间汇总信息。",
         "parameters": [
           {
             "name": "startdate",
@@ -31622,7 +31818,13 @@
         "in": "header",
         "required": false,
         "schema": {
-          "type": "string"
+          "type": "string",
+          "default": "self-only",
+          "enum": [
+            "\"self-only\"",
+            "\"self+children\"",
+            "\"children-only\""
+          ]
         },
         "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
       },
@@ -31631,7 +31833,9 @@
         "in": "query",
         "required": false,
         "schema": {
-          "type": "integer"
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
         },
         "description": "查询起始位置。"
       },
@@ -31640,7 +31844,9 @@
         "in": "query",
         "required": false,
         "schema": {
-          "type": "string"
+          "type": "number",
+          "default": 100,
+          "maximum": 200
         },
         "description": "每次查询的最大条数。"
       },
