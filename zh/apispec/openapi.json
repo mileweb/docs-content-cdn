@@ -31,7 +31,7 @@
         "summary": "创建加速项目",
         "responses": {
           "201": {
-            "description": "加速项目创建成功。返回Location标头，携带加速项目的URL。例如，<code>Location: http://ngapi.cdnetworks.com/cdn/properties/8fdc9c949e986564cc24b149</code>",
+            "description": "加速项目创建成功。返回Location请求头，携带加速项目的URL。例如，<code>Location: http://ngapi.cdnetworks.com/cdn/properties/8fdc9c949e986564cc24b149</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -111,7 +111,7 @@
             }
           },
           "403": {
-            "description": "禁止访问。请参阅响应正文了解详情。",
+            "description": "禁止访问，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -227,14 +227,14 @@
                       },
                       "hostnames": {
                         "type": "array",
-                        "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名，如 www.domain.com，或通配符域名，如 *.domain.com。同一个加速域名在同一时间只能存在于一个已部署的加速项目中。但是，通配符域名可以与完全限定域名一同部署。",
+                        "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名（如 www.domain.com），或泛域名（如*.domain.com）。\n同一个加速域名在同一时间只能存在于一个已部署的加速项目中，但泛域名可以与关联的完全限定域名一同部署。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "realTimeLog": {
                         "type": "object",
-                        "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知发送。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
+                        "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
                         "properties": {
                           "logUrl": {
                             "type": "string",
@@ -253,15 +253,15 @@
                               "json",
                               "none"
                             ],
-                            "description": "指定<i>json</i>以启用变量中的json字符转义，或指定<i>none</i>，以禁用转义。"
+                            "description": "指定<i>json</i>以开启变量中的json字符转义。如果要禁用转义则指定<i>none</i>。"
                           },
                           "format": {
                             "type": "string",
-                            "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、标头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>这允许您获取任何名为x的cookie。例如，$cookie_account将获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取任何名为x的HTTP头。标头名称将转换为小写，并用下划线替换连字符。例如，指定$http_user_agent以获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收请求的第一个字节到服务响应的最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中名为x的HTTP响应头的值。标头名称将转换为小写，并用下划线替换连字符。例如，$sent_http_etag将为您提供ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>发起TLS（SSL）连接的客户端试图连接到的域名。它仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。示例版本包括“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
+                            "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、响应头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>获取某个cookie。例如，指定$cookie_account可获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取某个HTTP请求头。请求头名称需转换为小写，并用下划线替换连字符。例如，指定$http_user_agent来获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收到请求的第一个字节到服务端响应最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中某个HTTP响应头的值。响应头名称需转换为小写，并用下划线替换连字符。例如，$sent_http_etag可获取ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>客户端发起TLS（SSL）连接所要连接的域名。仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。例如，“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
                           },
                           "headers": {
                             "type": "array",
-                            "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符。它还可以包含realTimeLog对象的<i>format</i>字段中支持的任何内置变量。",
+                            "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符，也可以使用realTimeLog对象<i>format</i>字段中支持的任何内置变量。",
                             "items": {
                               "type": "object",
                               "properties": {
@@ -289,7 +289,7 @@
                       "hasBeian": {
                         "type": "boolean",
                         "default": false,
-                        "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。这是使用中国大陆节点服务所必需的条件。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
+                        "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。只有获取备案的域名才能使用中国大陆节点来提供服务。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
                       },
                       "redirectHttpToHttps": {
                         "type": [
@@ -297,7 +297,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则服务器将使用状态码301将所有HTTP请求重定向到HTTPS。如果您希望在重定向请求时返回不同的状态码，也可以指定字符串值“302”、“307”或“308”。"
+                        "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则CDN Pro服务器会将所有HTTP请求重定向到HTTPS，并返回301状态码。如果您希望在重定向请求时返回不同的状态码，可在此处指定需要的状态码，如“302”、“307”或“308”。"
                       },
                       "origins": {
                         "type": "array",
@@ -313,7 +313,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "源站服务器列表。每个条目应该是一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值为“https”，也必须指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数为“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器，其权重为1:4，这意味着第一个服务器将获得约20%的回源请求，而另一个将获得约80%。此外，还指定了一个备份服务器。",
+                              "description": "源站服务器列表。每个条目为一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值设为“https”，也必须在此处指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数包括“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器和一个备份服务器，其中，主服务器的权重为1:4，表示第一个服务器将获得约20%的回源请求，而另一个将获得约80%。",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -331,21 +331,21 @@
                             "directConnection": {
                               "type": "string",
                               "default": "auto",
-                              "description": "此可选字段表示边缘节点是否需要直接回源。这些值可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
+                              "description": "此可选字段用来指定回源方式，可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
                             },
                             "hostHeader": {
                               "type": "string",
-                              "description": "可选。必须是有效的域名。它也将在连接HTTPS源站时作为SNI域名。它还可以是一个nginx变量，以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n有一个约束条件是，如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                              "description": "可选，用来指定回源HOST头部。必须是有效的域名。当连接HTTPS源站时，该值也作为SNI域名。可以用nginx变量来指定，变量以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n注意：如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，而必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                               "format": "hostname"
                             },
                             "verifyOrigin": {
                               "type": "boolean",
                               "default": false,
-                              "description": "可选。用来控制缓存节点是否验证源站证书。"
+                              "description": "可选。用来设定CDN缓存节点是否验证源站证书。"
                             },
                             "authentication": {
                               "type": "object",
-                              "description": "可选。用于指定参数（如密码）与源服务器进行身份验证（回源鉴权）。必须至少有“methodName”（字符串）字段，用来指定预定义的身份验证方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                              "description": "可选。用于指定与源服务器进行身份验证（回源鉴权）的相关参数（如密码）。必须至少有“methodName”（字符串）字段，用来指定预定义的鉴权方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                               "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                               "properties": {
                                 "methodName": {
@@ -357,7 +357,7 @@
                             "keepAliveTimeout": {
                               "type": "integer",
                               "default": 60,
-                              "description": "用于配置CDN Pro和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。",
+                              "description": "该字段用于指定CDN Pro服务器和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。如果需要调整最大值，请联系我们的技术支持。",
                               "minimum": 5,
                               "maximum": 600
                             },
@@ -407,7 +407,7 @@
                       "schemeInCacheKey": {
                         "type": "boolean",
                         "default": false,
-                        "description": "指定缓存键（Cache key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
+                        "description": "指定缓存键（Cache Key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
                       },
                       "tlsMaxVersion": {
                         "type": "string",
@@ -421,12 +421,12 @@
                       },
                       "loadBalancerHashKey": {
                         "type": "string",
-                        "description": "我们的CDN使用了多层负载均衡架构，以将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这适用于大多数情况。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的标头来区分资源。\n\n这是一个可选字段。默认值为空字符串。有效值必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
+                        "description": "我们的CDN使用了多层负载均衡架构，将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这对于大多数情况都适用。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的请求头来区分资源。\n\n这是一个可选字段，默认值为空字符串。必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
                         "maxLength": 100
                       },
                       "tlsCertificateId": {
                         "type": "string",
-                        "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
+                        "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
                       },
                       "tlsMinVersion": {
                         "type": "string",
@@ -451,7 +451,7 @@
                       },
                       "tlsCertificateId1": {
                         "type": "number",
-                        "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                        "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                       },
                       "videoSeek": {
                         "type": "object",
@@ -490,7 +490,7 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 24,
-                        "description": "如果您计划通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并指出您分发的内容类型。输入与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
+                        "description": "如果您的域名已获得备案，希望通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并说明您分发的内容类型。请选择与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
                       },
                       "accessControlRules": {
                         "type": "array",
@@ -578,7 +578,7 @@
                       },
                       "disableCertAutomation": {
                         "type": "boolean",
-                        "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。有关我们支持证书自动更新的更多信息，请参阅<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                        "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                         "default": false
                       },
                       "cacheKeyUri": {
@@ -596,7 +596,7 @@
                         "properties": {
                           "http": {
                             "type": "array",
-                            "description": "这是可用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                            "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -605,7 +605,7 @@
                           },
                           "https": {
                             "type": "array",
-                            "description": "这是可用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                            "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -766,15 +766,16 @@
                             "description": "加速项目的描述。"
                           },
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "加速项目名称。"
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339格式日期，指示创建加速项目的时间。"
+                            "description": "RFC 3339格式的日期，表示创建加速项目的时间。"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339格式日期，指示加速项目的最近更新时间。"
+                            "description": "RFC 3339格式的日期，表示加速项目的最近更新时间。"
                           },
                           "latestVersion": {
                             "type": "integer",
@@ -782,11 +783,11 @@
                           },
                           "stagingVersion": {
                             "type": "object",
-                            "description": "描述部署到演练的加速项目版本。",
+                            "description": "描述部署到演练环境的加速项目版本。",
                             "properties": {
                               "version": {
                                 "type": "integer",
-                                "description": "部署到演练的加速项目版本号。"
+                                "description": "部署到演练环境的加速项目版本号。"
                               },
                               "hostnames": {
                                 "type": "array",
@@ -800,11 +801,11 @@
                           },
                           "productionVersion": {
                             "type": "object",
-                            "description": "描述部署到生产的加速项目版本。",
+                            "description": "描述部署到生产环境的加速项目版本。",
                             "properties": {
                               "version": {
                                 "type": "integer",
-                                "description": "部署到生产的加速项目版本号。"
+                                "description": "部署到生产环境的加速项目版本号。"
                               },
                               "hostnames": {
                                 "type": "array",
@@ -818,7 +819,7 @@
                           },
                           "customerId": {
                             "type": "integer",
-                            "description": "如果您是作为代理商通过Report-Range标头获取加速项目列表，则该字段表示拥有该加速项目的子客户ID。"
+                            "description": "如果您是作为代理商通过Report-Range请求头获取加速项目列表，则该字段表示拥有该加速项目的子客户ID。"
                           }
                         },
                         "required": [
@@ -936,7 +937,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "根据搜索关键字匹配每个加速项目的<i>id</i>、<i>name</i>、<i>description</i>以及<i>hostnames</i>字段进行过滤。例如，“domain.com”将匹配到加速域名“domain.com”和“abc.123domain.com”。可以使用“^”字符限定只匹配以搜索关键字开头的值。例如，“^domain”将匹配到加速域名“domain.com”和“domain123.com”，但不会匹配到“abc.123domain.com”。由于URI仅允许有限数量的字符，当search参数包含^符号时，必须将“^”编码为“%5E”。例如，<code>curl -i --url 'https://ngapi.cdnetworks.com/cdn/properties?search=%5Edomain' ... </code>。注意，该搜索关键字将会对加速项目的所有未删除的版本进行匹配。此外，当通过ID搜索加速项目时，必须指定整个ID，不支持部分匹配。"
+            "description": "根据搜索关键字匹配每个加速项目的<i>id</i>、<i>name</i>、<i>description</i>以及<i>hostnames</i>字段进行过滤。例如，“domain.com”将匹配到加速域名“domain.com”和“abc.123domain.com”。可以使用“^”字符限定只匹配以搜索关键字开头的值。例如，“^domain”将匹配到加速域名“domain.com”和“domain123.com”，但不会匹配到“abc.123domain.com”。由于URI仅允许有限数量的字符，当search参数包含^符号时，必须将“^”编码为“%5E”。例如，<code>curl -i --url 'https://ngapi.cdnetworks.com/cdn/properties?search=%5Edomain' ... </code>。注意，该搜索关键字将会对加速项目的所有未删除的版本进行匹配。当通过ID搜索加速项目时，必须指定完整ID，不支持部分匹配。"
           },
           {
             "schema": {
@@ -944,7 +945,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "通过<i>hasConfig</i>字段过滤加速项目。支持使用加速项目版本的任何字段名，在字段名后跟上冒号和值（可选）进行过滤。例如：<code>hasConfig=hasBeian:true</code>。当指定冒号和值时，只返回匹配该字段值的加速项目。如果需要反向查询，可以在字段值前面加上感叹号“!”。例如：<code>hasConfig=edgeLogic!sorted</code>，这个查询将筛选出<i>edgeLogic</i>字段不包含值“sorted”的加速项目。查询数字或布尔类型字段的值时需要精确匹配，而字符串字段支持部分匹配。例如，<code>hasConfig=hostnames:domain</code>将返回加速域名包含字符串“domain”的所有加速项目，例如“mydomain.com”和“thedomains.com”。如果省略冒号和值，则将返回指定字段值为非空的所有加速项目。可以指定多个<i>hasConfig</i>参数在多个条件下进行查询。例如：<code>hasConfig=hasBeian:true&hasConfig=realTimeLog</code>，这个查询只返回与所有参数匹配的加速项目。如果一个加速项目有多个版本，只要该加速项目的任何版本与<i>hasConfig</i>参数匹配，则该加速项目将包含在该接口的响应中。可以使用句点符号作为分隔符来指定加速项目版本的子字段。如果要匹配的值带有空格或特殊字符，请在URL中对其进行编码。以下是一些示例： <table><tr><th>值</th><th>描述</th></tr><tr><td>hasConfig=disableHttp2:true</td><td>返回禁用HTTP2的加速项目。</td></tr><tr><td>hasConfig=extraServicePorts.http:85</td><td>返回支持HTTP请求端口85的加速项目。</td></tr><tr><td>hasConfig=origins.servers:myorigin.com</td><td>返回使用myorigin.com作为源站的加速项目。</td></tr></table>"
+            "description": "通过<i>hasConfig</i>参数指定字段来过滤加速项目。支持使用加速项目版本的任何字段名，在字段名后跟上冒号和值（可选）进行过滤。例如：<code>hasConfig=hasBeian:true</code>。当指定冒号和值时，只返回匹配该字段值的加速项目。如果需要反向查询，可以在字段值前面加上感叹号“!”。例如：<code>hasConfig=edgeLogic!sorted</code>，这个查询将筛选出<i>edgeLogic</i>字段不包含值“sorted”的加速项目。查询数字或布尔类型字段的值时需要精确匹配，而字符串字段支持部分匹配。例如，<code>hasConfig=hostnames:domain</code>将返回加速域名包含字符串“domain”的所有加速项目，例如“mydomain.com”和“thedomains.com”。如果省略冒号和值，则将返回指定字段值为非空的所有加速项目。可以指定多个<i>hasConfig</i>参数使用多个条件进行查询。例如：<code>hasConfig=hasBeian:true&hasConfig=realTimeLog</code>，这个查询只返回与所有参数匹配的加速项目。如果一个加速项目有多个版本，只要该加速项目的任何版本与<i>hasConfig</i>参数匹配，则该加速项目将包含在该接口的响应中。可以使用点号作为分隔符来指定某个字段的子字段。如果要匹配的值带有空格或特殊字符，请在URL中对其进行编码。以下是一些示例： <table><tr><th>值</th><th>描述</th></tr><tr><td>hasConfig=disableHttp2:true</td><td>返回禁用HTTP2的加速项目。</td></tr><tr><td>hasConfig=extraServicePorts.http:85</td><td>返回支持HTTP请求端口85的加速项目。</td></tr><tr><td>hasConfig=origins.servers:myorigin.com</td><td>返回使用myorigin.com作为源站的加速项目。</td></tr></table>"
           },
           {
             "schema": {
@@ -958,7 +959,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "根据加速项目的部署环境过滤。该值可以是“all”, “staging”, 或“production”。"
+            "description": "根据加速项目的部署环境过滤。该值可以是“all”, “staging”, 或“production”，分别表示所有环境，演练环境和生产环境。"
           },
           {
             "name": "offset",
@@ -976,7 +977,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -993,7 +994,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "返回加速项目的顺序。默认按最后更新时间降序。"
+            "description": "返回结果的顺序。默认按最后更新时间降序。"
           },
           {
             "schema": {
@@ -1025,9 +1026,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -1092,7 +1093,7 @@
                     },
                     "versionInStaging": {
                       "type": "integer",
-                      "description": "部署到演练的加速项目版本。如果尚未部署加速项目，则将省略该字段。"
+                      "description": "部署到演练环境的加速项目版本。如果尚未部署加速项目，则将省略该字段。"
                     },
                     "creationTime": {
                       "type": "string",
@@ -1255,7 +1256,7 @@
             }
           }
         },
-        "description": "该接口用于更新加速项目的名称和描述。这种更新不影响加速项目的版本。\n如果要更改加速项目的配置，请调用<a href=\"#operation/updatePropertyVersion\">更新加速项目版本</a>接口。",
+        "description": "该接口用于更新加速项目的名称和描述。该操作不会创建加速项目新版本，也不会更新现有的加速项目版本。\n如果要更改加速项目的配置，请调用<a href=\"#operation/updatePropertyVersion\">更新加速项目版本</a>接口。",
         "operationId": "updateProperty",
         "requestBody": {
           "content": {
@@ -1364,7 +1365,7 @@
             }
           },
           "409": {
-            "description": "无法删除该加速项目，因为它当前已部署。",
+            "description": "无法删除已部署的加速项目，请先卸载加速项目。",
             "content": {
               "application/json": {
                 "schema": {
@@ -1441,7 +1442,7 @@
                           },
                           "hostnames": {
                             "type": "array",
-                            "description": "加速项目关联的加速域名。",
+                            "description": "加速项目下的加速域名。",
                             "items": {
                               "type": "string"
                             }
@@ -1449,7 +1450,7 @@
                           "frozen": {
                             "type": "boolean",
                             "default": false,
-                            "description": "表示加速项目版本是已冻结还是仍可以更新。加速项目版本在部署后即被冻结。"
+                            "description": "该加速项目版本是否处于冻结状态。当加速项目版本部署后即进入冻结状态，不可再更新该版本。"
                           },
                           "lastUpdateTime": {
                             "type": "string",
@@ -1463,7 +1464,7 @@
                               "Validated",
                               "Failed"
                             ],
-                            "description": "加速项目版本最近一次验证的状态。"
+                            "description": "加速项目版本最近一次验证的状态，包括未验证，验证中，已验证，验证失败等状态。"
                           }
                         },
                         "required": [
@@ -1590,14 +1591,14 @@
             },
             "in": "query",
             "name": "search",
-            "description": "用于匹配加速项目的描述字段以过滤结果。"
+            "description": "根据搜索关键字匹配加速项目版本的描述字段来过滤结果。"
           },
           {
             "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -1643,13 +1644,13 @@
         "summary": "创建加速项目版本",
         "responses": {
           "201": {
-            "description": "加速项目版本创建成功，返回<b>Location</b> HTTP标头，携带版本号。示例：\n<code>Location: http://ngapi.cdnetworks.com/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
+            "description": "加速项目版本创建成功，返回<b>Location</b> 响应头。示例：\n<code>Location: http://ngapi.cdnetworks.com/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "新版本号",
+                "description": "加速项目新版本号",
                 "required": true
               }
             }
@@ -1780,14 +1781,14 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名，如 www.domain.com，或通配符域名，如 *.domain.com。同一个加速域名在同一时间只能存在于一个已部署的加速项目中。但是，通配符域名可以与完全限定域名一同部署。",
+                    "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名（如 www.domain.com），或泛域名（如*.domain.com）。\n同一个加速域名在同一时间只能存在于一个已部署的加速项目中，但泛域名可以与关联的完全限定域名一同部署。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知发送。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
+                    "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
                     "properties": {
                       "logUrl": {
                         "type": "string",
@@ -1806,15 +1807,15 @@
                           "json",
                           "none"
                         ],
-                        "description": "指定<i>json</i>以启用变量中的json字符转义，或指定<i>none</i>，以禁用转义。"
+                        "description": "指定<i>json</i>以开启变量中的json字符转义。如果要禁用转义则指定<i>none</i>。"
                       },
                       "format": {
                         "type": "string",
-                        "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、标头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>这允许您获取任何名为x的cookie。例如，$cookie_account将获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取任何名为x的HTTP头。标头名称将转换为小写，并用下划线替换连字符。例如，指定$http_user_agent以获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收请求的第一个字节到服务响应的最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中名为x的HTTP响应头的值。标头名称将转换为小写，并用下划线替换连字符。例如，$sent_http_etag将为您提供ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>发起TLS（SSL）连接的客户端试图连接到的域名。它仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。示例版本包括“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
+                        "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、响应头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>获取某个cookie。例如，指定$cookie_account可获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取某个HTTP请求头。请求头名称需转换为小写，并用下划线替换连字符。例如，指定$http_user_agent来获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收到请求的第一个字节到服务端响应最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中某个HTTP响应头的值。响应头名称需转换为小写，并用下划线替换连字符。例如，$sent_http_etag可获取ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>客户端发起TLS（SSL）连接所要连接的域名。仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。例如，“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
                       },
                       "headers": {
                         "type": "array",
-                        "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符。它还可以包含realTimeLog对象的<i>format</i>字段中支持的任何内置变量。",
+                        "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符，也可以使用realTimeLog对象<i>format</i>字段中支持的任何内置变量。",
                         "items": {
                           "type": "object",
                           "properties": {
@@ -1842,7 +1843,7 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。这是使用中国大陆节点服务所必需的条件。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
+                    "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。只有获取备案的域名才能使用中国大陆节点来提供服务。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
                   },
                   "redirectHttpToHttps": {
                     "type": [
@@ -1850,7 +1851,7 @@
                       "string"
                     ],
                     "default": false,
-                    "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则服务器将使用状态码301将所有HTTP请求重定向到HTTPS。如果您希望在重定向请求时返回不同的状态码，也可以指定字符串值“302”、“307”或“308”。"
+                    "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则CDN Pro服务器会将所有HTTP请求重定向到HTTPS，并返回301状态码。如果您希望在重定向请求时返回不同的状态码，可在此处指定需要的状态码，如“302”、“307”或“308”。"
                   },
                   "origins": {
                     "type": "array",
@@ -1866,7 +1867,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "源站服务器列表。每个条目应该是一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值为“https”，也必须指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数为“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器，其权重为1:4，这意味着第一个服务器将获得约20%的回源请求，而另一个将获得约80%。此外，还指定了一个备份服务器。",
+                          "description": "源站服务器列表。每个条目为一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值设为“https”，也必须在此处指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数包括“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器和一个备份服务器，其中，主服务器的权重为1:4，表示第一个服务器将获得约20%的回源请求，而另一个将获得约80%。",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -1884,21 +1885,21 @@
                         "directConnection": {
                           "type": "string",
                           "default": "auto",
-                          "description": "此可选字段表示边缘节点是否需要直接回源。这些值可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
+                          "description": "此可选字段用来指定回源方式，可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
                         },
                         "hostHeader": {
                           "type": "string",
-                          "description": "可选。必须是有效的域名。它也将在连接HTTPS源站时作为SNI域名。它还可以是一个nginx变量，以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n有一个约束条件是，如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                          "description": "可选，用来指定回源HOST头部。必须是有效的域名。当连接HTTPS源站时，该值也作为SNI域名。可以用nginx变量来指定，变量以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n注意：如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，而必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
                         "verifyOrigin": {
                           "type": "boolean",
                           "default": false,
-                          "description": "可选。用来控制缓存节点是否验证源站证书。"
+                          "description": "可选。用来设定CDN缓存节点是否验证源站证书。"
                         },
                         "authentication": {
                           "type": "object",
-                          "description": "可选。用于指定参数（如密码）与源服务器进行身份验证（回源鉴权）。必须至少有“methodName”（字符串）字段，用来指定预定义的身份验证方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                          "description": "可选。用于指定与源服务器进行身份验证（回源鉴权）的相关参数（如密码）。必须至少有“methodName”（字符串）字段，用来指定预定义的鉴权方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                           "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                           "properties": {
                             "methodName": {
@@ -1910,7 +1911,7 @@
                         "keepAliveTimeout": {
                           "type": "integer",
                           "default": 60,
-                          "description": "用于配置CDN Pro和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。",
+                          "description": "该字段用于指定CDN Pro服务器和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。如果需要调整最大值，请联系我们的技术支持。",
                           "minimum": 5,
                           "maximum": 600
                         },
@@ -1960,7 +1961,7 @@
                   "schemeInCacheKey": {
                     "type": "boolean",
                     "default": false,
-                    "description": "指定缓存键（Cache key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
+                    "description": "指定缓存键（Cache Key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
                   },
                   "tlsMaxVersion": {
                     "type": "string",
@@ -1974,12 +1975,12 @@
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
-                    "description": "我们的CDN使用了多层负载均衡架构，以将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这适用于大多数情况。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的标头来区分资源。\n\n这是一个可选字段。默认值为空字符串。有效值必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
+                    "description": "我们的CDN使用了多层负载均衡架构，将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这对于大多数情况都适用。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的请求头来区分资源。\n\n这是一个可选字段，默认值为空字符串。必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
                     "type": "string",
-                    "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
+                    "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -2004,7 +2005,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -2043,7 +2044,7 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 24,
-                    "description": "如果您计划通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并指出您分发的内容类型。输入与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
+                    "description": "如果您的域名已获得备案，希望通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并说明您分发的内容类型。请选择与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
                   },
                   "accessControlRules": {
                     "type": "array",
@@ -2131,7 +2132,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。有关我们支持证书自动更新的更多信息，请参阅<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -2149,7 +2150,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "这是可用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -2158,7 +2159,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "这是可用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -2223,7 +2224,7 @@
         ],
         "responses": {
           "200": {
-            "description": "此响应包含加速项目版本的完整详细信息。",
+            "description": "返回加速项目版本的完整信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2336,14 +2337,14 @@
                         },
                         "hostnames": {
                           "type": "array",
-                          "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名，如 www.domain.com，或通配符域名，如 *.domain.com。同一个加速域名在同一时间只能存在于一个已部署的加速项目中。但是，通配符域名可以与完全限定域名一同部署。",
+                          "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名（如 www.domain.com），或泛域名（如*.domain.com）。\n同一个加速域名在同一时间只能存在于一个已部署的加速项目中，但泛域名可以与关联的完全限定域名一同部署。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "realTimeLog": {
                           "type": "object",
-                          "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知发送。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
+                          "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
                           "properties": {
                             "logUrl": {
                               "type": "string",
@@ -2362,15 +2363,15 @@
                                 "json",
                                 "none"
                               ],
-                              "description": "指定<i>json</i>以启用变量中的json字符转义，或指定<i>none</i>，以禁用转义。"
+                              "description": "指定<i>json</i>以开启变量中的json字符转义。如果要禁用转义则指定<i>none</i>。"
                             },
                             "format": {
                               "type": "string",
-                              "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、标头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>这允许您获取任何名为x的cookie。例如，$cookie_account将获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取任何名为x的HTTP头。标头名称将转换为小写，并用下划线替换连字符。例如，指定$http_user_agent以获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收请求的第一个字节到服务响应的最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中名为x的HTTP响应头的值。标头名称将转换为小写，并用下划线替换连字符。例如，$sent_http_etag将为您提供ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>发起TLS（SSL）连接的客户端试图连接到的域名。它仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。示例版本包括“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
+                              "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、响应头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>获取某个cookie。例如，指定$cookie_account可获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取某个HTTP请求头。请求头名称需转换为小写，并用下划线替换连字符。例如，指定$http_user_agent来获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收到请求的第一个字节到服务端响应最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中某个HTTP响应头的值。响应头名称需转换为小写，并用下划线替换连字符。例如，$sent_http_etag可获取ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>客户端发起TLS（SSL）连接所要连接的域名。仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。例如，“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
                             },
                             "headers": {
                               "type": "array",
-                              "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符。它还可以包含realTimeLog对象的<i>format</i>字段中支持的任何内置变量。",
+                              "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符，也可以使用realTimeLog对象<i>format</i>字段中支持的任何内置变量。",
                               "items": {
                                 "type": "object",
                                 "properties": {
@@ -2398,7 +2399,7 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。这是使用中国大陆节点服务所必需的条件。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
+                          "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。只有获取备案的域名才能使用中国大陆节点来提供服务。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
                         },
                         "redirectHttpToHttps": {
                           "type": [
@@ -2406,7 +2407,7 @@
                             "string"
                           ],
                           "default": false,
-                          "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则服务器将使用状态码301将所有HTTP请求重定向到HTTPS。如果您希望在重定向请求时返回不同的状态码，也可以指定字符串值“302”、“307”或“308”。"
+                          "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则CDN Pro服务器会将所有HTTP请求重定向到HTTPS，并返回301状态码。如果您希望在重定向请求时返回不同的状态码，可在此处指定需要的状态码，如“302”、“307”或“308”。"
                         },
                         "origins": {
                           "type": "array",
@@ -2422,7 +2423,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "源站服务器列表。每个条目应该是一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值为“https”，也必须指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数为“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器，其权重为1:4，这意味着第一个服务器将获得约20%的回源请求，而另一个将获得约80%。此外，还指定了一个备份服务器。",
+                                "description": "源站服务器列表。每个条目为一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值设为“https”，也必须在此处指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数包括“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器和一个备份服务器，其中，主服务器的权重为1:4，表示第一个服务器将获得约20%的回源请求，而另一个将获得约80%。",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -2440,21 +2441,21 @@
                               "directConnection": {
                                 "type": "string",
                                 "default": "auto",
-                                "description": "此可选字段表示边缘节点是否需要直接回源。这些值可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
+                                "description": "此可选字段用来指定回源方式，可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
                               },
                               "hostHeader": {
                                 "type": "string",
-                                "description": "可选。必须是有效的域名。它也将在连接HTTPS源站时作为SNI域名。它还可以是一个nginx变量，以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n有一个约束条件是，如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                                "description": "可选，用来指定回源HOST头部。必须是有效的域名。当连接HTTPS源站时，该值也作为SNI域名。可以用nginx变量来指定，变量以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n注意：如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，而必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                                 "format": "hostname"
                               },
                               "verifyOrigin": {
                                 "type": "boolean",
                                 "default": false,
-                                "description": "可选。用来控制缓存节点是否验证源站证书。"
+                                "description": "可选。用来设定CDN缓存节点是否验证源站证书。"
                               },
                               "authentication": {
                                 "type": "object",
-                                "description": "可选。用于指定参数（如密码）与源服务器进行身份验证（回源鉴权）。必须至少有“methodName”（字符串）字段，用来指定预定义的身份验证方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                                "description": "可选。用于指定与源服务器进行身份验证（回源鉴权）的相关参数（如密码）。必须至少有“methodName”（字符串）字段，用来指定预定义的鉴权方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                                 "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                                 "properties": {
                                   "methodName": {
@@ -2466,7 +2467,7 @@
                               "keepAliveTimeout": {
                                 "type": "integer",
                                 "default": 60,
-                                "description": "用于配置CDN Pro和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。",
+                                "description": "该字段用于指定CDN Pro服务器和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。如果需要调整最大值，请联系我们的技术支持。",
                                 "minimum": 5,
                                 "maximum": 600
                               },
@@ -2516,7 +2517,7 @@
                         "schemeInCacheKey": {
                           "type": "boolean",
                           "default": false,
-                          "description": "指定缓存键（Cache key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
+                          "description": "指定缓存键（Cache Key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
                         },
                         "tlsMaxVersion": {
                           "type": "string",
@@ -2530,12 +2531,12 @@
                         },
                         "loadBalancerHashKey": {
                           "type": "string",
-                          "description": "我们的CDN使用了多层负载均衡架构，以将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这适用于大多数情况。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的标头来区分资源。\n\n这是一个可选字段。默认值为空字符串。有效值必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
+                          "description": "我们的CDN使用了多层负载均衡架构，将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这对于大多数情况都适用。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的请求头来区分资源。\n\n这是一个可选字段，默认值为空字符串。必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
                           "maxLength": 100
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
+                          "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
                         },
                         "tlsMinVersion": {
                           "type": "string",
@@ -2560,7 +2561,7 @@
                         },
                         "tlsCertificateId1": {
                           "type": "number",
-                          "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                          "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                         },
                         "videoSeek": {
                           "type": "object",
@@ -2599,7 +2600,7 @@
                           "type": "integer",
                           "minimum": 1,
                           "maximum": 24,
-                          "description": "如果您计划通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并指出您分发的内容类型。输入与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
+                          "description": "如果您的域名已获得备案，希望通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并说明您分发的内容类型。请选择与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
                         },
                         "accessControlRules": {
                           "type": "array",
@@ -2687,7 +2688,7 @@
                         },
                         "disableCertAutomation": {
                           "type": "boolean",
-                          "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。有关我们支持证书自动更新的更多信息，请参阅<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                          "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                           "default": false
                         },
                         "cacheKeyUri": {
@@ -2705,7 +2706,7 @@
                           "properties": {
                             "http": {
                               "type": "array",
-                              "description": "这是可用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                              "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -2714,7 +2715,7 @@
                             },
                             "https": {
                               "type": "array",
-                              "description": "这是可用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                              "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -2846,7 +2847,7 @@
             }
           },
           "404": {
-            "description": "未找到加速项目。",
+            "description": "未找到加速项目或版本。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2902,14 +2903,14 @@
           "name": "version",
           "in": "path",
           "required": true,
-          "description": "加速项目版本。必须是大于等于1的整数值。对于“获取加速项目版本详细信息”接口，可以指定“latest”以查询最新版本。"
+          "description": "加速项目版本。必须是大于等于1的整数值。对于“获取加速项目版本详细信息”接口，可以指定“latest”来查询最新版本。"
         }
       ],
       "patch": {
         "summary": "更新加速项目版本",
         "responses": {
           "204": {
-            "description": "加速项目版本已成功被更新。"
+            "description": "加速项目版本更新成功。"
           },
           "400": {
             "description": "无效请求，请查看响应体中的错误信息。",
@@ -2962,7 +2963,7 @@
             }
           },
           "404": {
-            "description": "未找到加速项目。",
+            "description": "未找到加速项目或版本。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2988,7 +2989,7 @@
             }
           }
         },
-        "description": "该接口可用来更新加速项目版本。注意：已部署到生产或演练环境的加速项目处于“冻结”状态，无法再次被更新或验证，唯一可更新的字段是版本描述。",
+        "description": "该接口可用来更新加速项目版本。已部署到生产或演练环境的加速项目处于“冻结”状态，无法再次被更新或验证，该状态下的加速项目版本只有版本描述字段可被更新。",
         "operationId": "updatePropertyVersion",
         "requestBody": {
           "content": {
@@ -3037,14 +3038,14 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名，如 www.domain.com，或通配符域名，如 *.domain.com。同一个加速域名在同一时间只能存在于一个已部署的加速项目中。但是，通配符域名可以与完全限定域名一同部署。",
+                    "description": "与加速项目关联的加速域名。必须是FQDN完全限定域名（如 www.domain.com），或泛域名（如*.domain.com）。\n同一个加速域名在同一时间只能存在于一个已部署的加速项目中，但泛域名可以与关联的完全限定域名一同部署。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "realTimeLog": {
                     "type": "object",
-                    "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知发送。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
+                    "description": "此可选字段用来配置发送消息通知到您的远程服务器。当有客户端请求访问您的加速域名时，将触发通知。需要先开通<i>realtime_log_switch</i>指令，才能使用该功能。如果您需要此功能，请联系我们的技术支持。",
                     "properties": {
                       "logUrl": {
                         "type": "string",
@@ -3063,15 +3064,15 @@
                           "json",
                           "none"
                         ],
-                        "description": "指定<i>json</i>以启用变量中的json字符转义，或指定<i>none</i>，以禁用转义。"
+                        "description": "指定<i>json</i>以开启变量中的json字符转义。如果要禁用转义则指定<i>none</i>。"
                       },
                       "format": {
                         "type": "string",
-                        "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、标头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>这允许您获取任何名为x的cookie。例如，$cookie_account将获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取任何名为x的HTTP头。标头名称将转换为小写，并用下划线替换连字符。例如，指定$http_user_agent以获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收请求的第一个字节到服务响应的最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中名为x的HTTP响应头的值。标头名称将转换为小写，并用下划线替换连字符。例如，$sent_http_etag将为您提供ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>发起TLS（SSL）连接的客户端试图连接到的域名。它仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。示例版本包括“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
+                        "description": "该字段用来定义要发送到远程服务器的通知的格式。通知正文可以包括任何能在HTTP POST请求体中发送的可打印文本。这是必填字段。\n\n可以使用以下内置变量定义通知的格式。发送通知时，它们将被替换为实际值。\n<table>\n<tr><th>变量名称</th><th>描述</th></tr>\n<tr><td>$body_bytes_sent</td><td>响应体大小。</td></tr>\n<tr><td>$bytes_sent</td><td>响应的大小，包括响应体、响应头和响应行。</td></tr>\n<tr><td>$client_country_code</td><td>客户端请求来源国家，以ISO 3166-1国家代码表示。例如“US”。如果国家/地区未知，则返回“ZZ”。</td></tr>\n<tr><td>$client_real_ip</td><td>客户端请求的IP地址。</td></tr>\n<tr><td>$cookie_x</td><td>获取某个cookie。例如，指定$cookie_account可获取名为“account”的cookie值。</td></tr>\n<tr><td>$http_x</td><td>从原始请求中获取某个HTTP请求头。请求头名称需转换为小写，并用下划线替换连字符。例如，指定$http_user_agent来获取User-Agent的值。</td></tr>\n<tr><td>$msec</td><td>当前unix时间，以毫秒为单位。</td></tr>\n<tr><td>$qtl_req_id</td><td>请求的唯一标识符。</td></tr>\n<tr><td>$request_uri</td><td>HTTP请求URI。</td></tr>\n<tr><td>$request_method</td><td>用于访问源站的HTTP请求方法。</td></tr>\n<tr><td>$request_time</td><td>响应时间，以毫秒为单位。这是从接收到请求的第一个字节到服务端响应最后一个字节之间的时间。</td></tr>\n<tr><td>$sc_completed</td><td>1表示对象的最后一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$sc_initial</td><td>1表示对象的第一个字节已返回给用户，否则为0。</td></tr>\n<tr><td>$scheme</td><td>表示用户请求的协议（“http”或“https”）。</td></tr>\n<tr><td>$sent_http_content_length</td><td>原始文件大小。</td></tr>\n<tr><td>$sent_http_x</td><td>获取在对客户端响应中某个HTTP响应头的值。响应头名称需转换为小写，并用下划线替换连字符。例如，$sent_http_etag可获取ETag头的值。</td></tr>\n<tr><td>$server_addr</td><td>为用户请求提供服务的边缘节点的IP地址。</td></tr>\n<tr><td>$server_protocol</td><td>表示用户请求中使用的HTTP版本，可以是“HTTP/1.0”、“HTTP/1.1”或“HTTP/2.0”。</td></tr>\n<tr><td>$ssl_cipher</td><td>表示用于TLS（SSL）连接的加密算法套件。</td></tr>\n<tr><td>$ssl_server_name</td><td>客户端发起TLS（SSL）连接所要连接的域名。仅由支持SNI（Server Name Indication）的客户端发送。</td></tr>\n<tr><td>$ssl_protocol</td><td>表示用于TLS（SSL）连接的TLS版本。例如，“SSLv3”、“TLSv1”、“TLSv1.1”、“TLSv1.2”和“unknown”。</td></tr>\n<tr><td>$status</td><td>用户请求的HTTP状态码。</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>数据包往返目的地所用的时间，以微秒为单位。</td></tr>\n</table>"
                       },
                       "headers": {
                         "type": "array",
-                        "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符。它还可以包含realTimeLog对象的<i>format</i>字段中支持的任何内置变量。",
+                        "description": "需要发送到远程服务器的HTTP请求头名称和值。请求头名称可以包含任何字母，数字或连字符“-”。值可以包含任何可打印字符，也可以使用realTimeLog对象<i>format</i>字段中支持的任何内置变量。",
                         "items": {
                           "type": "object",
                           "properties": {
@@ -3099,7 +3100,7 @@
                   "hasBeian": {
                     "type": "boolean",
                     "default": false,
-                    "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。这是使用中国大陆节点服务所必需的条件。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
+                    "description": "此加速项目中的所有加速域名是否都已获得中国政府的ICP备案。只有获取备案的域名才能使用中国大陆节点来提供服务。如果值为<i>false</i>，则使用中国大陆以外的加速节点为中国大陆用户提供内容分发服务。如果设置为<i>true</i>，还必须在<i>beianContentType</i>字段中指定内容类型。"
                   },
                   "redirectHttpToHttps": {
                     "type": [
@@ -3107,7 +3108,7 @@
                       "string"
                     ],
                     "default": false,
-                    "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则服务器将使用状态码301将所有HTTP请求重定向到HTTPS。如果您希望在重定向请求时返回不同的状态码，也可以指定字符串值“302”、“307”或“308”。"
+                    "description": "此字段可以设置为布尔值或字符串。如果设置为<i>true</i>，则CDN Pro服务器会将所有HTTP请求重定向到HTTPS，并返回301状态码。如果您希望在重定向请求时返回不同的状态码，可在此处指定需要的状态码，如“302”、“307”或“308”。"
                   },
                   "origins": {
                     "type": "array",
@@ -3123,7 +3124,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "源站服务器列表。每个条目应该是一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值为“https”，也必须指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数为“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器，其权重为1:4，这意味着第一个服务器将获得约20%的回源请求，而另一个将获得约80%。此外，还指定了一个备份服务器。",
+                          "description": "源站服务器列表。每个条目为一个字符串，由一个地址与一个或多个参数组成，参数之间以空格分隔。地址可以采用以下三种形式之一：\n<ul>\n<li>{域名或IP地址}</li>\n<li>{域名或IP地址}:{HTTP端口}</li>\n<li>{域名或IP地址}:{HTTP端口},{HTTPS端口}</li>\n</ul>\nHTTP和HTTPS端口的值应为[1,65535]范围内的整数。\n即使<i>supportedProtocol</i>的值设为“https”，也必须在此处指定HTTPS端口。\n在第三种形式中，两个端口中的一个可以为空。\n\n支持的参数包括“backup”和“weight”。\n“backup”用于标识备份服务器。它将在主服务器不可用时使用。\n“weight”是范围[1,100]内的值，默认值为1，用来设置服务器权重，控制一台源站服务器相对于另一台被使用的可能性。\n每个源站应至少定义一个主服务器（即不带“backup”参数的服务器）。\n\n示例：\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\n此示例指定了两个主服务器和一个备份服务器，其中，主服务器的权重为1:4，表示第一个服务器将获得约20%的回源请求，而另一个将获得约80%。",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -3141,21 +3142,21 @@
                         "directConnection": {
                           "type": "string",
                           "default": "auto",
-                          "description": "此可选字段表示边缘节点是否需要直接回源。这些值可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
+                          "description": "此可选字段用来指定回源方式，可以是“noDirect”、“auto”、“alwaysDirect”。\n\n“noDirect”指总是通过至少一个中间缓存节点回源。对于特别关心源站负载的客户可以使用此选项。我们的调度程序将根据性能和资源可用性动态选择中间缓存节点。\n“alwaysDirect”指总是直接回源。\n“auto”指自动选择直接回源或通过中间缓存节点回源。调度程序将根据性能和资源可用性动态做出选择。该字段未指定时，采用此默认行为。"
                         },
                         "hostHeader": {
                           "type": "string",
-                          "description": "可选。必须是有效的域名。它也将在连接HTTPS源站时作为SNI域名。它还可以是一个nginx变量，以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n有一个约束条件是，如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                          "description": "可选，用来指定回源HOST头部。必须是有效的域名。当连接HTTPS源站时，该值也作为SNI域名。可以用nginx变量来指定，变量以“$”开头，后跟[a-z_]{3,60}。Nginx变量名不区分大小写，因此我们只允许小写字符。\n如果未指定，将使用请求中的HOST请求头的值。\n\n注意：如果指定了“awsS3”作为回源鉴权参数，则<i>hostHeader</i>的值不能为变量或为空，而必须是有效的Amazon S3主机名。参考：https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
                         "verifyOrigin": {
                           "type": "boolean",
                           "default": false,
-                          "description": "可选。用来控制缓存节点是否验证源站证书。"
+                          "description": "可选。用来设定CDN缓存节点是否验证源站证书。"
                         },
                         "authentication": {
                           "type": "object",
-                          "description": "可选。用于指定参数（如密码）与源服务器进行身份验证（回源鉴权）。必须至少有“methodName”（字符串）字段，用来指定预定义的身份验证方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                          "description": "可选。用于指定与源服务器进行身份验证（回源鉴权）的相关参数（如密码）。必须至少有“methodName”（字符串）字段，用来指定预定义的鉴权方法。目前仅支持源站为AWS S3的回源鉴权，因此唯一有效的值是“awsS3”。使用“awsS3”时，需要提供以下参数：\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n此外，<i>hostHeader</i>字段的值不能为变量或为空，必须是有效的Amazon S3主机名。\n\n示例：\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                           "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                           "properties": {
                             "methodName": {
@@ -3167,7 +3168,7 @@
                         "keepAliveTimeout": {
                           "type": "integer",
                           "default": 60,
-                          "description": "用于配置CDN Pro和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。",
+                          "description": "该字段用于指定CDN Pro服务器和源站建连的Keep-Alive超时时间，单位为秒。通过<i>maxUpstreamKeepaliveTimeOut</i> 该服务设置项可以更改允许的最大值。如果需要调整最大值，请联系我们的技术支持。",
                           "minimum": 5,
                           "maximum": 600
                         },
@@ -3217,7 +3218,7 @@
                   "schemeInCacheKey": {
                     "type": "boolean",
                     "default": false,
-                    "description": "指定缓存键（Cache key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
+                    "description": "指定缓存键（Cache Key）是否区分协议（“http”或“https”）。默认为</i>false</i>。如果不同协议响应的内容不同，则设置为<i>true</i>。"
                   },
                   "tlsMaxVersion": {
                     "type": "string",
@@ -3231,12 +3232,12 @@
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
-                    "description": "我们的CDN使用了多层负载均衡架构，以将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这适用于大多数情况。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的标头来区分资源。\n\n这是一个可选字段。默认值为空字符串。有效值必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
+                    "description": "我们的CDN使用了多层负载均衡架构，将客户端请求分发到不同的服务器。我们在架构中多处使用到一致性哈希。默认情况下，URL被用作哈希键，这对于大多数情况都适用。您可以在这里定义要添加到哈希键的其他变量，以更均匀地分配请求。一个典型的使用场景是，所有请求都携带相同的URL，但使用特定的请求头来区分资源。\n\n这是一个可选字段，默认值为空字符串。必须满足以下条件：\n<ol>\n<li>由字母、数字、下划线_、等号=、美元符号$和符号&组成。</li>\n<li>变量名只能采用以下格式之一：$http_name、$cookie_name、$arg_name。</li>\n<li>必须至少指定一个变量，不允许超过三个。</li>\n<li>总长度不得超过100个字符。</li>\n</ol>\n我们的配置验证器将把任何美元符号及其后的字符串（在任何=或&或$之前）视为变量。\n\n以下是一些有效值的示例：\n<table>\n<tr><td>$http_abc</td></tr>\n<tr><td>abc=$http_abc&def=$http_def&c_123=$cookie_123</td></tr>\n<tr><td>abc=$http_abc=$http_def</td></tr>\n<tr><td>$http_abc&$http_def</td></tr>\n<tr><td>=$http_abd&</td></tr>\n<tr><td>&&abc==$http_abc&&&===qwer</td></tr>\n</table>",
                     "maxLength": 100
                   },
                   "tlsCertificateId": {
                     "type": "string",
-                    "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
+                    "description": "该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。 "
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -3261,7 +3262,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。该功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -3300,7 +3301,7 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 24,
-                    "description": "如果您计划通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并指出您分发的内容类型。输入与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
+                    "description": "如果您的域名已获得备案，希望通过中国大陆的服务器分发内容，则需要将<i>hasBeian</i>字段设置为<i>true</i>，并说明您分发的内容类型。请选择与您的内容最匹配的值：\n\n<table>\n<tr><th>值</th><th>内容类型</th></tr>\n<tr><td>1</td><td>即时通信</td></tr>\n<tr><td>2</td><td>搜索引擎</td></tr>\n<tr><td>3</td><td>综合门户</td></tr>\n<tr><td>4</td><td>网上邮局</td></tr>\n<tr><td>5</td><td>网络新闻</td></tr>\n<tr><td>6</td><td>博客/个人空间</td></tr>\n<tr><td>7</td><td>网络广告</td></tr>\n<tr><td>8</td><td>单位门户网站</td></tr>\n<tr><td>9</td><td>网络购物</td></tr>\n<tr><td>10</td><td>网上支付</td></tr>\n<tr><td>11</td><td>网上银行</td></tr>\n<tr><td>12</td><td>网上炒股</td></tr>\n<tr><td>13</td><td>网络游戏</td></tr>\n<tr><td>14</td><td>网络音乐</td></tr>\n<tr><td>15</td><td>网络影视</td></tr>\n<tr><td>16</td><td>网络图片</td></tr>\n<tr><td>17</td><td>软件下载</td></tr>\n<tr><td>18</td><td>网上求职</td></tr>\n<tr><td>19</td><td>在线交友</td></tr>\n<tr><td>20</td><td>网上房产</td></tr>\n<tr><td>21</td><td>网络教育</td></tr>\n<tr><td>22</td><td>网站建设</td></tr>\n<tr><td>23</td><td>WAP</td></tr>\n<tr><td>24</td><td>其他</td></tr>\n</table>"
                   },
                   "accessControlRules": {
                     "type": "array",
@@ -3388,7 +3389,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。有关我们支持证书自动更新的更多信息，请参阅<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -3406,7 +3407,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "这是可用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -3415,7 +3416,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "这是可用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -3451,16 +3452,17 @@
               }
             }
           },
-          "description": "在请求头中指定要更新的加速项目配置。"
+          "description": "在请求体中指定要更新的加速项目配置。"
         },
         "parameters": [
           {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
             "schema": {
               "type": "string"
             },
-            "in": "header",
-            "name": "On-Behalf-Of",
-            "description": "如果您是代理商，则可以使用此标头指定子客户的ID。"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "tags": [
@@ -3474,7 +3476,7 @@
             "description": "加速项目版本删除成功。"
           },
           "404": {
-            "description": "未找到加速项目。",
+            "description": "未找到加速项目或版本。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3506,7 +3508,7 @@
             }
           },
           "409": {
-            "description": "加速项目版本无法被删除。请查看响应体中的错误信息。",
+            "description": "加速项目版本无法被删除，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3536,12 +3538,13 @@
         "description": "删除一个加速项目版本。",
         "parameters": [
           {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
             "schema": {
               "type": "string"
             },
-            "in": "header",
-            "name": "On-Behalf-Of",
-            "description": "如果您是代理商，则可以使用此标头指定子客户的ID。"
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "tags": [
@@ -4929,7 +4932,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -4987,9 +4990,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -5502,7 +5505,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -5578,9 +5581,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -6590,7 +6593,7 @@
                     },
                     "validations": {
                       "type": "array",
-                      "description": "验证任务摘要信息。通过调用<a href=\\\"#operation/queryValidationTask\\\">获取配置验证任务的详细信息</a>接口，可获得有关验证任务的更多详细信息。",
+                      "description": "验证任务摘要信息。通过调用<a href=\"#operation/queryValidationTask\">获取配置验证任务的详细信息</a>接口，可获得有关验证任务的详细信息。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -6609,7 +6612,7 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "RFC 3339日期格式，表示验证任务的提交时间。如：“2019-11-12T03:09:26Z”。"
+                            "description": "RFC 3339格式的日期，表示验证任务的提交时间。如：“2019-11-12T03:09:26Z”。"
                           },
                           "status": {
                             "type": "string",
@@ -6619,11 +6622,11 @@
                               "succeeded",
                               "failed"
                             ],
-                            "description": "验证任务的状态。"
+                            "description": "验证任务的执行状态，包括等待中，进行中，验证成功以及验证失败等状态。"
                           },
                           "cacheVersion": {
                             "type": "string",
-                            "description": "验证加速项目时使用的CDN cache服务器的版本。"
+                            "description": "验证加速项目时使用的CDN Pro cache服务器的版本。"
                           },
                           "apiRequestId": {
                             "type": "string",
@@ -6635,7 +6638,7 @@
                           },
                           "customerId": {
                             "type": "integer",
-                            "description": "当接口调用方为代理商，且传递了Report-Range请求头，值为self+children或children-only，通过该字段返回拥有该加速项目的客户账号ID。"
+                            "description": "当接口调用方为代理商，且传递了Report-Range请求头，值为self+children或children-only时，通过该字段返回拥有该加速项目的客户账号ID。"
                           }
                         },
                         "required": [
@@ -6738,7 +6741,7 @@
           }
         },
         "operationId": "queryPropertyValidationList",
-        "description": "获取加速项目验证任务列表，接口返回关联的加速项目ID，加速项目版本，提交时间以及任务状态等信息。可通过请求参数进行结果筛选。",
+        "description": "获取加速项目验证任务列表，接口返回关联的加速项目ID，加速项目版本，任务提交时间以及任务状态等信息。",
         "parameters": [
           {
             "schema": {
@@ -6746,7 +6749,7 @@
             },
             "in": "query",
             "name": "propertyId",
-            "description": "仅返回与特定加速项目ID关联的验证任务。"
+            "description": "指定加速项目ID，查询该加速项目相关的验证任务。"
           },
           {
             "schema": {
@@ -6754,14 +6757,14 @@
             },
             "in": "query",
             "name": "propertyVersion",
-            "description": "仅返回特定加速项目版本的验证任务。"
+            "description": "指定加速项目版本，查询该加速项目版本相关的验证任务。"
           },
           {
             "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -6784,7 +6787,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "根据该关键词匹配验证任务ID或者验证任务名称进行过滤。"
+            "description": "根据该关键字匹配验证任务的ID或者名称进行查询。"
           },
           {
             "schema": {
@@ -6797,7 +6800,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "查询结果根据验证任务的提交时间（submissionTime）或者完成时间（finishTime）进行排序返回。"
+            "description": "查询结果根据验证任务的提交时间（submissionTime）或者完成时间（finishTime）进行排序。"
           },
           {
             "schema": {
@@ -6827,7 +6830,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "指定RFC 3339格式日期，查询提交时间从该日期开始的的验证任务。"
+            "description": "指定RFC 3339格式的日期，查询提交时间晚于该日期的验证任务。"
           },
           {
             "schema": {
@@ -6835,7 +6838,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "指定RFC 3339格式日期，查询提交时间不晚于该日期的验证任务。"
+            "description": "指定RFC 3339格式的日期，查询提交时间早于该日期的验证任务。"
           },
           {
             "name": "Report-Range",
@@ -6845,9 +6848,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -6906,7 +6909,7 @@
             }
           }
         },
-        "description": "该接口用来创建任务，验证加速项目的某个版本。在您部署某个加速项目版本到演练环境或生产环境之前，必须先调用此接口验证加速项目中语法的准确性。",
+        "description": "该接口用来创建任务，验证加速项目的某个版本。在您部署某个加速项目版本到演练或生产环境之前，必须先调用此接口验证加速项目中语法的准确性。",
         "operationId": "createValidationTask",
         "requestBody": {
           "content": {
@@ -6916,7 +6919,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "验证任务名称。"
+                    "description": "验证任务的名称。"
                   },
                   "propertyId": {
                     "type": "string",
@@ -6979,7 +6982,7 @@
         ],
         "responses": {
           "200": {
-            "description": "返回验证任务的详细信息。验证任务的状态可能是等待中，进行中，成功或失败。",
+            "description": "返回验证任务的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -6995,11 +6998,11 @@
                     },
                     "submissionTime": {
                       "type": "string",
-                      "description": "RFC 3339日期格式，表示验证任务的提交时间。如：“2019-11-12T03:06:16Z”。"
+                      "description": "RFC 3339格式的日期，表示验证任务的提交时间。如：“2019-11-12T03:06:16Z”。"
                     },
                     "status": {
                       "type": "string",
-                      "description": "验证任务的状态。",
+                      "description": "验证任务的执行状态，包括等待中，进行中，验证成功，验证失败等状态。",
                       "enum": [
                         "waiting",
                         "failed",
@@ -7022,7 +7025,7 @@
                     },
                     "finishTime": {
                       "type": "string",
-                      "description": "RFC 3339日期格式，表示验证任务的完成时间。"
+                      "description": "RFC 3339格式的日期，表示验证任务的完成时间。"
                     },
                     "name": {
                       "type": "string",
@@ -7038,7 +7041,7 @@
                     },
                     "cacheVersion": {
                       "type": "string",
-                      "description": "验证加速项目时使用的CDN cache服务器的版本。"
+                      "description": "验证加速项目时使用的CDN Pro cache服务器的版本。"
                     },
                     "impersonatingParentCustomerId": {
                       "type": "integer",
@@ -7136,7 +7139,7 @@
           }
         },
         "operationId": "queryValidationTask",
-        "description": "该接口返回加速项目验证任务的详情。",
+        "description": "该接口返回加速项目验证任务的详细信息。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -7158,7 +7161,7 @@
         ],
         "responses": {
           "200": {
-            "description": "在响应主体中返回部署任务列表。",
+            "description": "返回部署任务列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7167,13 +7170,13 @@
                   "properties": {
                     "deploy": {
                       "type": "array",
-                      "description": "部署任务摘要列表。",
+                      "description": "部署任务列表。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "表示部署任务的ID。您可以通过调用<a href=“#operation/queryDeploymentTask”>查询API的部署任务</a>来获取有关任务的更多信息。"
+                            "description": "部署任务的ID。您可以通过调用<a href=“#operation/queryDeploymentTask”>获取部署任务的详细信息</a>接口来获取部署任务的更多信息。"
                           },
                           "name": {
                             "type": "string",
@@ -7181,15 +7184,15 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "使用RFC 3339日期格式来表示任务提交的时间。"
+                            "description": "RFC 3339格式的日期，表示任务的提交时间。"
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "使用RFC 3339日期格式来表示任务完成的时间。"
+                            "description": "RFC 3339格式的日期，表示任务的完成时间。"
                           },
                           "status": {
                             "type": "string",
-                            "description": "指示部署任务的状态。",
+                            "description": "部署任务的执行状态，包括等待中，执行中，部署失败，部署成功等状态。",
                             "enum": [
                               "waiting",
                               "in progress",
@@ -7199,7 +7202,7 @@
                           },
                           "target": {
                             "type": "string",
-                            "description": "指示部署将转到的位置。",
+                            "description": "部署任务对应的环境，即演练环境或生产环境。",
                             "enum": [
                               "staging",
                               "production"
@@ -7207,11 +7210,11 @@
                           },
                           "apiRequestId": {
                             "type": "string",
-                            "description": "指示关联API调用的内部ID。"
+                            "description": "API请求的ID。"
                           },
                           "customerId": {
                             "type": "integer",
-                            "description": "客户id部署后，会将使用值为self+children或childrenly的Report-Range头部返回给代理商。"
+                            "description": "当接口调用方为代理商，且指定了Report-Range请求头，值为self+children或children-only，通过该字段返回部署任务关联的子客户ID。"
                           }
                         },
                         "required": [
@@ -7256,7 +7259,7 @@
             }
           },
           "400": {
-            "description": "API调用无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7294,7 +7297,7 @@
             }
           }
         },
-        "description": "获取部署任务。使用查询参数筛选结果。如果指定多个查询参数，则只返回满足所有条件的任务。",
+        "description": "获取部署任务列表。可使用查询参数来过滤部署任务。",
         "operationId": "queryDeploymentTaskList",
         "parameters": [
           {
@@ -7313,7 +7316,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -7325,7 +7328,7 @@
             },
             "in": "query",
             "name": "propertyId",
-            "description": "仅返回与此加速项目相关的部署任务。"
+            "description": "指定加速项目ID，查询该加速项目相关的部署任务。"
           },
           {
             "schema": {
@@ -7333,7 +7336,7 @@
             },
             "in": "query",
             "name": "certificateId",
-            "description": "仅返回与此证书相关的部署任务。"
+            "description": "指定证书ID，查询该证书相关的部署任务。"
           },
           {
             "schema": {
@@ -7345,7 +7348,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "将部署任务返回到特定环境。默认情况下，返回所有任务。"
+            "description": "根据部署环境查询。默认情况下，查询所有环境的部署任务。"
           },
           {
             "schema": {
@@ -7353,7 +7356,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "根据部署名称或加速项目域名中的文本进行筛选。"
+            "description": "根据搜索关键字匹配部署任务名称及加速项目下的域名进行查询。"
           },
           {
             "schema": {
@@ -7361,7 +7364,7 @@
             },
             "in": "query",
             "name": "taskIds",
-            "description": "以逗号分隔的任务ID列表，指示要返回的任务ID。"
+            "description": "根据部署任务ID查询。可指定多个ID，以逗号分隔。"
           },
           {
             "schema": {
@@ -7374,7 +7377,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "返回按此值排序的结果。"
+            "description": "根据任务提交时间或完成时间进行排序。"
           },
           {
             "schema": {
@@ -7387,7 +7390,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "按此顺序返回结果。"
+            "description": "指定排序顺序。"
           },
           {
             "name": "On-Behalf-Of",
@@ -7404,7 +7407,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "输入RFC 3339格式的日期，以返回在此日期之后提交的部署。"
+            "description": "指定RFC 3339格式的日期，查询提交时间晚于该日期的部署任务。"
           },
           {
             "schema": {
@@ -7412,7 +7415,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "输入RFC 3339格式的日期，以返回在此日期之前提交的部署。"
+            "description": "指定RFC 3339格式的日期，查询提交时间早于该日期的部署任务。"
           },
           {
             "name": "Report-Range",
@@ -7422,9 +7425,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -7438,18 +7441,18 @@
         ],
         "responses": {
           "201": {
-            "description": "部署任务已创建。响应头部包含了新任务的URL。您可以调用我们的<a href=“#operation/queryDeploymentTask”>API来获取部署的状态</a>。",
+            "description": "部署任务创建成功，返回Location响应头。部署任务是异步操作，您可以调用<a href=“#operation/queryDeploymentTask”>获取部署任务详细信息</a>接口来查询任务执行状态。",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "这个头部的值将是新部署任务的URL。示例：<code>Location: http://ngapi.cdnetworks.com/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>"
+                "description": "部署任务的URL。示例：<code>Location: http://ngapi.cdnetworks.com/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>"
               }
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7511,7 +7514,7 @@
             }
           },
           "409": {
-            "description": "无法创建部署任务。有关详细信息，请参阅响应正文。",
+            "description": "无法创建部署任务，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7537,7 +7540,7 @@
             }
           }
         },
-        "description": "创建部署任务以将加速项目或证书部署到演练或生产环境，或删除加速项目或证书。\n演练环境允许去测试加速项目，以确保在交付给最终用户之前加速项目正确。有关详细信息，请参阅<a href=“/cdn/docs/portal/edge配置/测试属性”>测试属性</a>。\n",
+        "description": "创建部署任务将加速项目或证书部署到演练或生产环境，或将已部署的加速项目或证书卸载。\n建议先将加速项目部署到演练环境进行测试，以确保加速配置符合预期。更多详细信息，请参阅<a href=“/cdn/docs/portal/edge-configurations/testing-property”>测试加速项目</a>。\n",
         "operationId": "createDeployment",
         "requestBody": {
           "content": {
@@ -7555,12 +7558,12 @@
                       "staging",
                       "production"
                     ],
-                    "description": "指示是部署到演练还是部署到生产。"
+                    "description": "指定部署任务的环境，即演练或生产环境。"
                   },
                   "actions": {
                     "title": "deploymentActions",
                     "type": "array",
-                    "description": "此数组包含与部署相关的所有操作。它们可以对在生产环境和演练的任务进行部署和删除操作，这边的任务包括证书和加速项目。",
+                    "description": "部署任务所要执行的操作，可以包括加速项目和证书的部署或卸载操作。",
                     "x-examples": {
                       "example-1": [
                         {
@@ -7583,7 +7586,7 @@
                       "properties": {
                         "action": {
                           "type": "string",
-                          "description": "描述要采取的行动。您可以部署加速项目、删除加速项目、部署证书或删除证书。",
+                          "description": "指定操作类型，包括部署加速项目、卸载加速项目、部署证书以及卸载证书。",
                           "enum": [
                             "deploy_property",
                             "remove_property",
@@ -7593,15 +7596,15 @@
                         },
                         "propertyId": {
                           "type": "string",
-                          "description": "要从演练或生产环境中部署或删除的属性的ID。"
+                          "description": "指定要部署或卸载的加速项目ID。"
                         },
                         "certificateId": {
                           "type": "string",
-                          "description": "指示要从演练或生产环境中部署或删除的证书。"
+                          "description": "指定要部署或卸载的证书ID。"
                         },
                         "version": {
                           "type": "string",
-                          "description": "指示要部署或删除的证书或加速项目的版本。"
+                          "description": "指定要部署或卸载的证书或加速项目的版本。"
                         }
                       }
                     }
@@ -7716,7 +7719,7 @@
               }
             }
           },
-          "description": "标识要发布的加速项目和证书。"
+          "description": "在请求体中描述部署任务。"
         },
         "parameters": [
           {
@@ -7737,7 +7740,7 @@
             },
             "in": "header",
             "name": "Check-Certificate",
-            "description": "默认情况下，如果您部署加速项目时使用了证书，我们将检查加速项目中的域名是否被证书的主题替代名称（SAN）覆盖，以及证书是否未过期。出于测试目的，您可以通过在创建部署任务时传递＜i＞check Certificate:no</i＞头来绕过此检查。为内容的真实用户部署时不应使用此头部，因为他们的浏览器将警告无效证书，并阻止他们访问。"
+            "description": "如果您部署加速项目时使用了证书，默认情况下我们将检查加速项目中的域名是否在证书的SAN域名列表中，以及证书是否仍然有效。如果仅用于测试目的，您可以指定＜i＞check Certificate: no</i＞请求头来绕过该检查。非测试目的不推荐绕过该检查，否则当用户访问您的网站时，浏览器可能会警告证书无效，并阻止用户访问。"
           }
         ]
       },
@@ -7759,7 +7762,7 @@
         "summary": "获取部署任务详细信息",
         "responses": {
           "200": {
-            "description": "响应正文包含有关部署任务的详细信息。",
+            "description": "返回部署任务的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7771,12 +7774,12 @@
                     },
                     "submissionTime": {
                       "type": "string",
-                      "description": "使用RFC 3339日期格式来表示任务创建的时间。"
+                      "description": "RFC 3339格式的日期，表示任务的创建时间。"
                     },
                     "actions": {
                       "title": "deploymentActions",
                       "type": "array",
-                      "description": "此数组包含与部署相关的所有操作。它们可以对在生产环境和演练的任务进行部署和删除操作，这边的任务包括证书和加速项目。",
+                      "description": "部署任务所要执行的操作，可以包括加速项目和证书的部署或卸载操作。",
                       "x-examples": {
                         "example-1": [
                           {
@@ -7799,7 +7802,7 @@
                         "properties": {
                           "action": {
                             "type": "string",
-                            "description": "描述要采取的行动。您可以部署加速项目、删除加速项目、部署证书或删除证书。",
+                            "description": "指定操作类型，包括部署加速项目、卸载加速项目、部署证书以及卸载证书。",
                             "enum": [
                               "deploy_property",
                               "remove_property",
@@ -7809,15 +7812,15 @@
                           },
                           "propertyId": {
                             "type": "string",
-                            "description": "要从演练或生产环境中部署或删除的属性的ID。"
+                            "description": "指定要部署或卸载的加速项目ID。"
                           },
                           "certificateId": {
                             "type": "string",
-                            "description": "指示要从演练或生产环境中部署或删除的证书。"
+                            "description": "指定要部署或卸载的证书ID。"
                           },
                           "version": {
                             "type": "string",
-                            "description": "指示要部署或删除的证书或加速项目的版本。"
+                            "description": "指定要部署或卸载的证书或加速项目的版本。"
                           }
                         }
                       }
@@ -7828,11 +7831,11 @@
                         "staging",
                         "production"
                       ],
-                      "description": "指示受部署影响的环境。"
+                      "description": "部署任务对应的环境。"
                     },
                     "finishTime": {
                       "type": "string",
-                      "description": "使用RFC 3339日期格式来表示任务完成的时间。"
+                      "description": "RFC 3339格式的日期，表示任务完成的时间。"
                     },
                     "status": {
                       "type": "string",
@@ -7842,28 +7845,28 @@
                         "failed",
                         "succeeded"
                       ],
-                      "description": "指示部署任务的状态。\n"
+                      "description": "部署任务的执行状态，包括等待中，进行中，部署失败，部署成功等状态。\n"
                     },
                     "statusDetails": {
                       "type": "string",
-                      "description": "有关部署任务状态的其他信息。\n"
+                      "description": "部署任务执行状态的描述信息。\n"
                     },
                     "apiRequestId": {
                       "type": "string",
-                      "description": "用于创建部署任务的API调用的ID。"
+                      "description": "创建部署任务时的API请求ID。"
                     },
                     "apiAccountId": {
                       "type": "string",
-                      "description": "创建部署任务的API帐户的ID。"
+                      "description": "创建部署任务的API账号ID。"
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "此任务部署了其加速项目或证书的客户的ID。\n",
+                      "description": "拥有加速项目或证书的客户账号的ID。\n",
                       "minimum": 1
                     },
                     "impersonatingParentCustomerId": {
                       "type": "integer",
-                      "description": "如果代理商代表子客户部署加速项目或证书，则此字段将出现并指示代理商的ID。"
+                      "description": "如果代理商代表子客户部署加速项目或证书，则通过该字段返回代理商的账号ID。"
                     },
                     "webhook": {
                       "type": "string",
@@ -7899,7 +7902,7 @@
             }
           },
           "403": {
-            "description": "禁止访问",
+            "description": "禁止访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7925,7 +7928,7 @@
             }
           },
           "404": {
-            "description": "未找到",
+            "description": "未找到部署任务。",
             "content": {
               "application/json": {
                 "schema": {
@@ -7952,7 +7955,7 @@
           }
         },
         "operationId": "queryDeploymentTask",
-        "description": "获取有关部署任务的详细信息，包括相关操作、提交时间、状态以及部署失败时的其他详细信息。",
+        "description": "获取有关部署任务的详细信息，包括操作类型、提交时间、任务执行状态以及部署失败时的描述信息。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -8162,7 +8165,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -8185,9 +8188,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -8486,7 +8489,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -8939,9 +8942,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -9327,9 +9330,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -9687,9 +9690,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -10069,9 +10072,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -10635,9 +10638,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -10995,9 +10998,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -11621,9 +11624,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -11932,9 +11935,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -12385,9 +12388,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -12965,7 +12968,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -13056,9 +13059,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -13289,7 +13292,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -13303,9 +13306,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -23181,9 +23184,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -23426,9 +23429,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -24836,9 +24839,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -25503,7 +25506,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -25558,9 +25561,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -27201,7 +27204,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -27215,9 +27218,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -28022,9 +28025,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -28782,7 +28785,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "number",
+              "type": "integer",
               "default": 100,
               "maximum": 200
             },
@@ -28796,9 +28799,9 @@
               "type": "string",
               "default": "self-only",
               "enum": [
-                "\"self-only\"",
-                "\"self+children\"",
-                "\"children-only\""
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
             "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -31821,9 +31824,9 @@
           "type": "string",
           "default": "self-only",
           "enum": [
-            "\"self-only\"",
-            "\"self+children\"",
-            "\"children-only\""
+            "self-only",
+            "self+children",
+            "children-only"
           ]
         },
         "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
@@ -31844,7 +31847,7 @@
         "in": "query",
         "required": false,
         "schema": {
-          "type": "number",
+          "type": "integer",
           "default": 100,
           "maximum": 200
         },
@@ -31905,15 +31908,15 @@
   "tags": [
     {
       "name": "证书管理",
-      "description": "如果您的内容需要TLS加密，则必须创建证书，并将证书与关联的<a href=“#tag/加速项目管理”>加速项目</a>一起<a href=“#tag/部署任务管理”>部署<a/>。您可以创建自签名证书用于测试。您可以为每个证书创建多个版本。对证书的每次变更都会生成一个新的不可更新的版本。您可以选择将任何版本部署到演练环境或生产环境。如果您的源站要求使用证书进行鉴权，您也需要调用证书接口来创建所需的证书、上传证书并部署以使用证书。如果您是代理商，可以将证书共享给子客户，子客户可以使用证书，但不能修改证书。"
+      "description": "如果您的内容需要TLS加密，则必须创建证书，并将证书与关联的<a href=“#tag/加速项目管理”>加速项目</a>一起<a href=“#tag/部署任务管理”>部署</a>。您可以创建自签名证书用于测试。可以为每个证书创建多个版本。对证书的每次变更都会生成一个不可更新的新版本。您可以选择将任何版本部署到演练环境或生产环境。如果您的源站要求使用证书进行鉴权，也需要调用证书接口来创建所需的证书、上传证书并部署以使用证书。如果您是代理商，可以将证书共享给子客户，子客户可以使用证书，但不能修改证书。"
     },
     {
       "name": "加速项目管理",
-      "description": "加速项目是需要<a href=\"#tag/部署任务管理\">部署</a>到CDN Pro服务器的一个或多个加速域名的配置。一个加速项目可以有多个版本。已部署的加速项目版本无法被再次更新或<a href=\"#tag/加速项目配置验证\">验证</a>。您可以通过对现有版本进行克隆（复制）以<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "加速项目是需要<a href=\"#tag/部署任务管理\">部署</a>到CDN Pro服务器的一个或多个加速域名的配置。一个加速项目可以有多个版本。已部署的加速项目版本无法被再次更新或<a href=\"#tag/加速项目配置验证\">验证</a>。您可以通过克隆（复制）现有版本来<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "加速项目配置验证",
-      "description": "在您<a href=\"#operation/createProperty\">创建一个加速项目</a>后，必须先验证该加速项目的配置都是正确的，然后才能将其<a href=\"#tag/部署任务管理\">部署</a>到演练或生产环境中。验证过程是一个异步操作。以下接口可用于检查验证任务的状态。"
+      "description": "在<a href=\"#operation/createProperty\">创建一个加速项目</a>后，必须先验证该加速项目配置的准确性，然后才能将加速项目<a href=\"#tag/部署任务管理\">部署</a>到演练或生产环境中。验证过程是一个异步操作，创建验证任务后可调用以下接口查看任务的执行状态。"
     },
     {
       "name": "保密信息管理",
@@ -31921,7 +31924,7 @@
     },
     {
       "name": "部署任务管理",
-      "description": "部署是将加速项目和证书配置推送到CDN Pro的cache服务器的过程。我们强烈建议您<a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">部署到我们的<i>演练</i>环境，以在部署到<i>生产</i></a>之前<h2>测试您的配置</h2>，在你<a href=\"#operation/createEdgeHostname\">创建一个调度域名</a> 并将DNS服务器设置为将调度域名指向加速项目的域名后，您可以浏览该主机名下的内容"
+      "description": "部署是指将加速项目配置和证书推送到CDN Pro 缓存服务器的过程。我们强烈建议您<a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">先部署到演练环境进行测试</a>，测试通过后再部署到生产环境。当您完成部署后，可调用<a href=\"#operation/createEdgeHostname\">创建一个调度域名</a>接口创建调度域名（CNAME），然后修改DNS解析将加速域名指向该CNAME。DNS解析修改完成后，就可以开始使用CDN Pro加速。"
     },
     {
       "name": "加速域名管理",
