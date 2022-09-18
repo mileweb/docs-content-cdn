@@ -5035,19 +5035,19 @@
                   }
                 },
                 "examples": {
-                  "创建没有正确私钥的证书示例": {
+                  "私钥未加密": {
                     "value": {
                       "code": "InvalidKey",
                       "message": "Invalid private key cipher. To protect the private key, it must be encrypted with your API key and the timestamp before you upload."
                     }
                   },
-                  "将无效值传递给 autoRenew 字段的示例": {
+                  " autoRenew 字段无效": {
                     "value": {
                       "code": "InvalidAutoRenew",
                       "message": "The value 'yes' of autoRenew is invalid. Only 'LE' and 'Off' are allowed."
                     }
                   },
-                  "尝试创建自签名证书而不指定 IdentificationInfo 字段时的响应": {
+                  "尝试创建自签名证书但未指定 IdentificationInfo 字段": {
                     "value": {
                       "code": "InvalidIdentificationInfo",
                       "message": "IdentificationInfo can't be empty for self-signed certificate."
@@ -5129,7 +5129,7 @@
                   "sharingMethod": {
                     "type": "string",
                     "default": "none",
-                    "description": "指定证书共用方式。仅当您是代理商时，才能使用此字段。\n值“all”表示所有子客户都可以使用该证书。值“none”表示没有子客户可以使用该证书。\n值“some”表示部分子客户可以使用该证书，请在<i>shareWith</i>字段中指定要可共用证书的子客户ID。",
+                    "description": "指定证书共用方式。仅当您是代理商时，才能使用此字段。\n值“all”表示所有子客户都可以使用该证书。值“none”表示没有子客户可以使用该证书。\n值“some”表示部分子客户可以使用该证书，请在<i>shareWith</i>字段中指定可共用证书的子客户ID。",
                     "enum": [
                       "all",
                       "none",
@@ -5138,7 +5138,7 @@
                   },
                   "shareWith": {
                     "type": "array",
-                    "description": "指定证书共用范围。此字段仅限代理商使用。它与<i>sharingMethod</i>字段关联，仅当<i>SharingMethod</i>的值为“some”时才使用，用于指定可共用该证书的子客户ID。",
+                    "description": "指定证书共用范围。此字段仅限代理商使用。它与<i>sharingMethod</i>字段关联，仅当<i>SharingMethod</i>的值为“some”时才需要，用于指定可共用该证书的子客户ID。",
                     "items": {
                       "type": "integer"
                     }
@@ -5157,7 +5157,7 @@
                     "properties": {
                       "comments": {
                         "type": "string",
-                        "description": "有关证书版本的注释。"
+                        "description": "证书版本的描述。"
                       },
                       "privateKey": {
                         "type": "string",
@@ -5215,7 +5215,7 @@
                           },
                           "subjectAlternativeNames": {
                             "type": "array",
-                            "description": "此证书将要服务的加速域名。每个条目必须是有效的加速域名，例如 <i>domain.com</i>\n或者是以\"*\"开头的通配符域名，例如：<i>*.domain.com</i>。",
+                            "description": "此证书将要服务的加速域名。每个条目必须是有效的加速域名，例如 <i>domain.com</i>\n或者是以\"*\"开头的泛域名，例如：<i>*.domain.com</i>。",
                             "example": "domain.com, *.domain.com",
                             "items": {
                               "type": "string"
@@ -5440,7 +5440,7 @@
             }
           },
           "400": {
-            "description": "无效的请求。",
+            "description": "无效请求，请查看返回体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -5522,7 +5522,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "根据证书的部署环境过滤证书。 <table> <tr><th>取值</th><th>返回数据</th></tr> <tr><td></td><td>当该参数为空时，返回所有证书，无论证书是否已部署。</td></tr> <tr><td>all</td><td>返回所有已部署的证书，包括部署到演练环境和生产环境的证书。</td></tr> <tr><td>staging</td><td>只返回部署到演练环境的证书。</td></tr> <tr><td>production</td><td>只返回部署到生产环境的证书。</td></tr> </table>"
+            "description": "根据证书的部署环境查询证书。 <table> <tr><th>取值</th><th>返回数据</th></tr> <tr><td></td><td>当该参数为空时，返回所有证书，无论证书是否已部署。</td></tr> <tr><td>all</td><td>返回所有已部署的证书，包括部署到演练环境和生产环境的证书。</td></tr> <tr><td>staging</td><td>只返回部署到演练环境的证书。</td></tr> <tr><td>production</td><td>只返回部署到生产环境的证书。</td></tr> </table>"
           },
           {
             "schema": {
@@ -5534,7 +5534,7 @@
             },
             "in": "query",
             "name": "autoRenew",
-            "description": "根据是否自动更新过滤证书。默认情况下返回所有证书。"
+            "description": "根据是否设置自动更新来查询证书。默认情况下返回所有证书。"
           },
           {
             "schema": {
@@ -5617,7 +5617,8 @@
                   "type": "object",
                   "properties": {
                     "certificateId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "证书ID。"
                     },
                     "name": {
                       "type": "string",
@@ -5631,7 +5632,7 @@
                         "some",
                         "none"
                       ],
-                      "description": "指定证书共用方式。仅当您是代理商时，才能使用此字段。 值“all”表示所有子客户都可以使用该证书。值“none”表示没有子客户可以使用该证书。 值“some”表示部分子客户可以使用该证书，请在shareWith字段中指定要可共用证书的子客户ID。"
+                      "description": "指定证书共用方式。仅当您是代理商时，才能使用此字段。 值“all”表示所有子客户都可以使用该证书。值“none”表示没有子客户可以使用该证书。 值“some”表示部分子客户可以使用该证书，请在shareWith字段中指定可共用证书的子客户ID。"
                     },
                     "shareWith": {
                       "type": "array",
@@ -5652,7 +5653,7 @@
                     },
                     "versions": {
                       "type": "array",
-                      "description": "证书版本列表。您可以通过调用<a href=“#operation/queryCertificateVersion”>查询证书版本详情</a>接口来获取每个版本的更多详细信息。",
+                      "description": "证书版本列表。您可以通过调用<a href=“#operation/queryCertificateVersion”>获取证书版本详细信息</a>接口来获取每个版本的更多信息。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -5683,7 +5684,7 @@
                           },
                           "comments": {
                             "type": "string",
-                            "description": "关于证书版本的注释。"
+                            "description": "证书版本的描述。"
                           }
                         },
                         "required": [
@@ -5998,7 +5999,7 @@
                       "none",
                       "some"
                     ],
-                    "description": "指定证书共用方式。仅当您是代理商时，才能使用此字段。 值“all”表示所有子客户都可以使用该证书。值“none”表示没有子客户可以使用该证书。 值“some”表示部分子客户可以使用该证书，请在shareWith字段中指定要可共用证书的子客户ID。"
+                    "description": "指定证书共用方式。仅当您是代理商时，才能使用此字段。 值“all”表示所有子客户都可以使用该证书。值“none”表示没有子客户可以使用该证书。 值“some”表示部分子客户可以使用该证书，请在shareWith字段中指定可共用证书的子客户ID。"
                   },
                   "shareWith": {
                     "type": "array",
@@ -6076,7 +6077,7 @@
                           },
                           "subjectAlternativeNames": {
                             "type": "array",
-                            "description": "此证书将要服务的加速域名。每个条目必须是有效的加速域名，例如 <i>domain.com</i>\n或者是以\"*\"开头的通配符域名，例如：<i>*.domain.com</i>。",
+                            "description": "此证书将要服务的加速域名。每个条目必须是有效的加速域名，例如 <i>domain.com</i>\n或者是以\"*\"开头的泛域名，例如：<i>*.domain.com</i>。",
                             "example": "domain.com, *.domain.com",
                             "items": {
                               "type": "string"
@@ -6243,12 +6244,12 @@
           "name": "certificateID",
           "in": "path",
           "required": true,
-          "description": "证书ID"
+          "description": "证书id。"
         }
       ],
       "get": {
         "summary": "下载CSR",
-        "description": "获取证书签名请求 (CSR) 信息。您可以向证书颁发机构提交CSR，申请证书。申请到证书后，请调用<a href=\"#operation/updateCertificate\">更新证书</a>接口更新证书到CDN Pro。",
+        "description": "下载证书签名请求 (CSR) 。您可以向证书颁发机构提交CSR，申请证书。申请到证书后，请调用<a href=\"#operation/updateCertificate\">更新证书</a>接口更新证书到CDN Pro。",
         "operationId": "downloadCSR",
         "responses": {
           "200": {
@@ -6282,7 +6283,7 @@
                       "properties": {
                         "uri": {
                           "type": "string",
-                          "description": "通过您使用到该证书的加速域名可访问到的一个路径。该文件的内容由一个SHA-256哈希值和域名sectigo.com 组成。例如：\n\n<pre>\na6e96b23f9e2add3f79c2907ded1adc43961b05f6d702758a200a8ec8b4d7115\nsectigo.com\n</pre>"
+                          "description": "使用到该证书的加速域名可访问到的一个路径。该文件的内容由一个SHA-256哈希值和域名sectigo.com 组成。例如：\n\n<pre>\na6e96b23f9e2add3f79c2907ded1adc43961b05f6d702758a200a8ec8b4d7115\nsectigo.com\n</pre>"
                         },
                         "expirationTime": {
                           "type": "string",
@@ -6365,7 +6366,7 @@
             },
             "in": "query",
             "name": "dcv",
-            "description": "可选参数，用于请求域控制验证(DCV)文件。目前，我们支持证书颁发机构Sectigo，您可将“sectigo”指定为参数值。"
+            "description": "可选参数，用于获取域控制验证(DCV)文件。目前，我们支持证书颁发机构Sectigo，您可将“sectigo”指定为参数值。"
           }
         ],
         "tags": [
@@ -6392,7 +6393,7 @@
           "name": "certificateID",
           "in": "path",
           "required": true,
-          "description": "证书ID。"
+          "description": "证书id。"
         }
       ],
       "get": {
@@ -6412,7 +6413,7 @@
                     },
                     "comments": {
                       "type": "string",
-                      "description": "关于证书版本的注释。"
+                      "description": "证书版本的描述。"
                     },
                     "expirationTime": {
                       "type": "string",
@@ -7558,7 +7559,7 @@
                       "staging",
                       "production"
                     ],
-                    "description": "指定部署任务的环境，即演练或生产环境。"
+                    "description": "指定部署任务的目标环境，即演练或生产环境。"
                   },
                   "actions": {
                     "title": "deploymentActions",
@@ -7974,22 +7975,22 @@
     },
     "/cdn/hostnames": {
       "get": {
-        "summary": "获取已部署加速域名列表",
+        "summary": "获取已部署的加速域名列表",
         "tags": [
           "加速域名管理"
         ],
         "responses": {
           "200": {
-            "description": "响应包含已部署的域名列表。",
+            "description": "返回已部署的加速域名列表。",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "description": "汇总已部署的域名。",
+                  "description": "加速域名列表。",
                   "properties": {
                     "hostnames": {
                       "type": "array",
-                      "description": "域名列表。",
+                      "description": "加速域名列表。",
                       "items": {
                         "title": "hostnamesummary",
                         "type": "object",
@@ -8006,35 +8007,35 @@
                         "x-tags": [
                           "Deployment Management"
                         ],
-                        "description": "此对象汇总已部署的域名。",
+                        "description": "已部署的加速域名及其关联的加速项目。",
                         "properties": {
                           "hostname": {
                             "type": "string",
                             "format": "hostname",
-                            "description": "其加速项目已部署到生产或演练的域名。"
+                            "description": "加速域名。"
                           },
                           "propertyInProduction": {
                             "type": [
                               "object",
                               "null"
                             ],
-                            "description": "描述部署到生产的加速项目。如果加速项目未部署到生产环境，则该加速项目可以为“null”。",
+                            "description": "如果加速域名对应的加速项目已部署到生产环境，则该字段返回该加速项目的相关信息。如果加速项目未部署到生产环境，则该字段返回“null”。",
                             "properties": {
                               "propertyId": {
                                 "type": "string",
-                                "description": "部署到生产的加速项目的ID。"
+                                "description": "加速项目的ID。"
                               },
                               "version": {
                                 "type": "integer",
-                                "description": "部署到生产的加速项目版本。"
+                                "description": "加速项目版本。"
                               },
                               "certificateId": {
                                 "type": "string",
-                                "description": "部署到生产的证书的ID。"
+                                "description": "关联的证书的ID。"
                               },
                               "customerId": {
                                 "type": "integer",
-                                "description": "拥有该加速项目的客户的ID将返回给代理商，代理商将根据使用值为self+children或childrenly的Report-Range头部来获取域名列表。它不会在用于获取特定域名信息的API调用中返回。"
+                                "description": "当调用方为代理商，且请求中携带Report-Range请求头，值为self+children或childrenly，通过该字段返回拥有该加速项目的客户账号的ID。"
                               }
                             }
                           },
@@ -8043,7 +8044,7 @@
                               "object",
                               "null"
                             ],
-                            "description": "描述部署到演练的加速项目。如果加速项目未部署到演练，则该属性可以为“null”。",
+                            "description": "如果加速域名对应的加速项目已部署到演练环境，则该字段返回该加速项目的相关信息。如果加速项目未部署到演练环境，则该字段返回“null”。",
                             "properties": {
                               "propertyId": {
                                 "type": "string",
@@ -8051,15 +8052,15 @@
                               },
                               "version": {
                                 "type": "integer",
-                                "description": "部署到演练的加速项目的版本。"
+                                "description": "加速项目的版本。"
                               },
                               "certificateId": {
                                 "type": "string",
-                                "description": "部署到演练的证书的ID。"
+                                "description": "关联的证书的ID。"
                               },
                               "customerId": {
                                 "type": "integer",
-                                "description": "拥有该加速项目的客户的ID将返回给代理商，代理商将根据使用值为self+children或childrenly的Report-Range头部来获取域名列表。它不会在用于获取特定域名信息的API调用中返回。"
+                                "description": "当调用方为代理商，且请求中携带Report-Range请求头，值为self+children或childrenly，通过该字段返回拥有该加速项目的客户账号的ID。"
                               }
                             }
                           }
@@ -8072,7 +8073,7 @@
                     "count": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "域名数量。"
+                      "description": "加速域名总数。"
                     }
                   }
                 },
@@ -8108,7 +8109,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -8146,7 +8147,7 @@
             }
           }
         },
-        "description": "获取属于已部署到生产或演练的加速项目的域名列表。",
+        "description": "获取已部署到演练或生产环境的加速项目对应的加速域名列表。",
         "operationId": "listhostnames",
         "parameters": [
           {
@@ -8207,7 +8208,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "可以选择查看仅生产或者仅演练的已部署加速项目。默认情况下，将返回部署到生产或演练的加速项目中的所有域名。"
+            "description": "根据部署环境来查询加速域名。默认情况下，查询部署到演练和生产环境下的所有域名。"
           }
         ]
       },
@@ -8222,7 +8223,7 @@
           "name": "hostname",
           "in": "path",
           "required": true,
-          "description": "要获取有关信息的域名。"
+          "description": "加速域名。"
         }
       ],
       "get": {
@@ -8232,7 +8233,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含有关部署到生产和演练的关联加速项目版本的信息。如果域名不存在，则字段将为空。",
+            "description": "返回加速域名的详细信息。如果加速域名不存在，则返回空对象。",
             "content": {
               "application/json": {
                 "schema": {
@@ -8251,35 +8252,35 @@
                   "x-tags": [
                     "Deployment Management"
                   ],
-                  "description": "此对象汇总已部署的域名。",
+                  "description": "已部署的加速域名及其关联的加速项目。",
                   "properties": {
                     "hostname": {
                       "type": "string",
                       "format": "hostname",
-                      "description": "其加速项目已部署到生产或演练的域名。"
+                      "description": "加速域名。"
                     },
                     "propertyInProduction": {
                       "type": [
                         "object",
                         "null"
                       ],
-                      "description": "描述部署到生产的加速项目。如果加速项目未部署到生产环境，则该加速项目可以为“null”。",
+                      "description": "如果加速域名对应的加速项目已部署到生产环境，则该字段返回该加速项目的相关信息。如果加速项目未部署到生产环境，则该字段返回“null”。",
                       "properties": {
                         "propertyId": {
                           "type": "string",
-                          "description": "部署到生产的加速项目的ID。"
+                          "description": "加速项目的ID。"
                         },
                         "version": {
                           "type": "integer",
-                          "description": "部署到生产的加速项目版本。"
+                          "description": "加速项目版本。"
                         },
                         "certificateId": {
                           "type": "string",
-                          "description": "部署到生产的证书的ID。"
+                          "description": "关联的证书的ID。"
                         },
                         "customerId": {
                           "type": "integer",
-                          "description": "拥有该加速项目的客户的ID将返回给代理商，代理商将根据使用值为self+children或childrenly的Report-Range头部来获取域名列表。它不会在用于获取特定域名信息的API调用中返回。"
+                          "description": "当调用方为代理商，且请求中携带Report-Range请求头，值为self+children或childrenly，通过该字段返回拥有该加速项目的客户账号的ID。"
                         }
                       }
                     },
@@ -8288,7 +8289,7 @@
                         "object",
                         "null"
                       ],
-                      "description": "描述部署到演练的加速项目。如果加速项目未部署到演练，则该属性可以为“null”。",
+                      "description": "如果加速域名对应的加速项目已部署到演练环境，则该字段返回该加速项目的相关信息。如果加速项目未部署到演练环境，则该字段返回“null”。",
                       "properties": {
                         "propertyId": {
                           "type": "string",
@@ -8296,15 +8297,15 @@
                         },
                         "version": {
                           "type": "integer",
-                          "description": "部署到演练的加速项目的版本。"
+                          "description": "加速项目的版本。"
                         },
                         "certificateId": {
                           "type": "string",
-                          "description": "部署到演练的证书的ID。"
+                          "description": "关联的证书的ID。"
                         },
                         "customerId": {
                           "type": "integer",
-                          "description": "拥有该加速项目的客户的ID将返回给代理商，代理商将根据使用值为self+children或childrenly的Report-Range头部来获取域名列表。它不会在用于获取特定域名信息的API调用中返回。"
+                          "description": "当调用方为代理商，且请求中携带Report-Range请求头，值为self+children或childrenly，通过该字段返回拥有该加速项目的客户账号的ID。"
                         }
                       }
                     }
@@ -8339,7 +8340,7 @@
             }
           }
         },
-        "description": "此API返回已部署到生产或演练的加速项目的特定域名的信息。",
+        "description": "该接口可用来查询已部署的加速域名的详细信息。",
         "operationId": "queryOneHostname",
         "parameters": [
           {
@@ -8362,7 +8363,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应主体包含域名列表。",
+            "description": "返回加速域名列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -8370,12 +8371,12 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "历史域名的总数。这可能大于实际返回的数字。",
+                      "description": "历史加速域名的总数。",
                       "minimum": 0
                     },
                     "hostnames": {
                       "type": "array",
-                      "description": "在此时间段内部署的域名列表。",
+                      "description": "在指定时间段内部署过的加速域名列表。",
                       "items": {
                         "type": "string"
                       }
@@ -8408,7 +8409,7 @@
             }
           },
           "400": {
-            "description": "请求无效。响应主体包含有关错误的详细信息。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -8446,7 +8447,7 @@
             }
           }
         },
-        "description": "获取属于加速项目的域名列表，这些加速项目在特定时间段内成功部署到生产环境中。",
+        "description": "该接口用来查询在某段时间段内成功部署到生产环境中的加速域名列表。",
         "operationId": "getHistoricalHostnames",
         "parameters": [
           {
@@ -8455,7 +8456,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "用RFC 3339格式的时间段来表示开始。必须使用UTC时区指定时间；它不能是偏移量。示例：<code>startdate=2019-11-14T00:00:00Z</code>默认情况下，该值是您开始使用CDN Pro时的值。"
+            "description": "指定查询开始时间，以RFC 3339日期格式表示。必须使用UTC时区，不支持指定其它时区。示例：<code>startdate=2019-11-14T00:00:00Z</code>。如果开始时间未指定，则默认为您开通CDN Pro服务的时间。"
           },
           {
             "schema": {
@@ -8463,7 +8464,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "用RFC 3339格式的时间段来表示结束。必须使用UTC时区指定时间；它不能是偏移量。示例：<code>enddate=2019-11-14T00:00:00Z</code>默认为当前时间。"
+            "description": "指定查询结束时间，以RFC 3339日期格式表示。必须使用UTC时区，不支持指定其它时区。示例：<code>startdate=2019-12-14T00:00:00Z</code>。如果结束时间未指定，默认为当前时间。"
           },
           {
             "schema": {
@@ -8471,7 +8472,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "通过查找域名的开始部分进行筛选。"
+            "description": "通过搜索关键字匹配加速域名进行过滤。"
           },
           {
             "name": "offset",
@@ -8515,13 +8516,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -8600,11 +8601,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -8614,11 +8615,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -8706,7 +8707,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -8744,7 +8745,7 @@
             }
           }
         },
-        "description": "获取一段时间内的边缘流量（以MB为单位）。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。\n",
+        "description": "获取一段时间内的边缘流量数据（以MB为单位）。可以使用查询参数指定时间段和协议。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。该报表的数据延迟小于两分钟。\n",
         "operationId": "GetEdgeTrafficVolume",
         "requestBody": {
           "content": {
@@ -8752,7 +8753,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8771,7 +8772,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -8784,7 +8785,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -8818,7 +8819,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -8837,7 +8838,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -8850,7 +8851,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -8881,7 +8882,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器来定义查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -8891,7 +8892,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -8900,7 +8901,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -8915,7 +8916,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -8966,13 +8967,13 @@
         "summary": "查询回源流量",
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -9051,11 +9052,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -9065,11 +9066,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -9157,7 +9158,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -9196,7 +9197,7 @@
           }
         },
         "operationId": "getOriginTrafficVolume",
-        "description": "获取一段时间内的回源流量（以MB为单位）。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。\n\n注意：此API的结果中不包括TCP、IP和MAC报头的开销。",
+        "description": "获取一段时间内的回源流量数据（以MB为单位）。可以使用查询参数指定时间段和协议。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟小于两分钟。\n\n注意：该接口所返回的统计数据不包括TCP、IP和MAC报头的开销。",
         "tags": [
           "报表"
         ],
@@ -9206,7 +9207,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -9225,7 +9226,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -9238,7 +9239,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -9269,7 +9270,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -9279,7 +9280,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -9288,7 +9289,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -9303,7 +9304,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -9357,13 +9358,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -9442,11 +9443,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -9456,11 +9457,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -9548,7 +9549,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -9580,19 +9581,16 @@
             }
           }
         },
-        "description": "获取一段时间内的边缘请求数。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。",
+        "description": "获取一段时间内的边缘请求数数据。可以使用查询参数指定时间段和协议。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。该报表的数据延迟小于两分钟。",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
+                "title": "reportfilters",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
-                  "filter by a specific hostname": {
+                  "Filter by a specific hostname": {
                     "filters": {
                       "hostnames": [
                         "domain.info"
@@ -9600,15 +9598,40 @@
                     }
                   }
                 },
+                "x-tags": [
+                  "Reports"
+                ],
                 "properties": {
                   "filters": {
                     "type": "object",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "enum": [
+                          "standard",
+                          "premium",
+                          "deluxe",
+                          "ultra"
+                        ],
+                        "description": "指定serverGroups（节点组）进行查询。",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
                         }
                       }
                     }
@@ -9628,7 +9651,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "operationId": "getEdgeRequests",
         "parameters": [
@@ -9639,7 +9662,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -9648,7 +9671,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -9663,7 +9686,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -9717,13 +9740,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -9802,11 +9825,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -9816,11 +9839,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -9908,7 +9931,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -9941,14 +9964,14 @@
           }
         },
         "operationId": "getEdgeBandwidth",
-        "description": "获取一段时间内的边缘带宽（以Mbps为单位）。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。",
+        "description": "获取一段时间内的边缘带宽数据（以Mbps为单位）。可以使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟小于两分钟。",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -9967,7 +9990,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -9980,7 +10003,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -10011,7 +10034,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -10021,7 +10044,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -10030,7 +10053,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -10045,7 +10068,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -10093,13 +10116,13 @@
     },
     "/cdn/report/statusCodeDetails": {
       "post": {
-        "summary": "查询边缘状态码详细信息",
+        "summary": "查询边缘状态码统计信息",
         "tags": [
           "报表"
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
@@ -10108,7 +10131,7 @@
                   "x-tags": [
                     "Reports"
                   ],
-                  "description": "此对象由状态码详细信息报表API返回。",
+                  "description": "状态码统计信息。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge status code",
@@ -10279,24 +10302,24 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。对于状态码API，它将是“计数”，表示状态码出现的次数。",
+                      "description": "计量单位。对于状态码报表接口，单位为“次数”，表示某个状态码出现的次数。",
                       "enum": [
                         "counts"
                       ]
                     },
                     "dataSeries": {
                       "type": "array",
-                      "description": "包含不同时间点的状态码信息。",
+                      "description": "不同时间点的状态码统计信息。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "RFC 3339格式日期表示间隔的开始。"
+                            "description": "RFC 3339格式的日期，表示每个时间段的开始时间。"
                           },
                           "details": {
                             "type": "array",
@@ -10305,12 +10328,12 @@
                               "properties": {
                                 "statusCode": {
                                   "type": "string",
-                                  "description": "表示HTTP状态码，例如“200”。"
+                                  "description": "HTTP状态码，例如“200”。"
                                 },
                                 "data": {
                                   "type": "integer",
                                   "minimum": 0,
-                                  "description": "指示返回状态码的次数。"
+                                  "description": "状态码出现的次数。"
                                 }
                               }
                             }
@@ -10496,7 +10519,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -10529,7 +10552,7 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
-        "description": "获取一段时间内的边缘状态码详细信息。使用查询参数指定时间段、协议和粒度，以便您监视时间段内的变化。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟最长可达30分钟。",
+        "description": "获取一段时间内的边缘状态码统计信息。可以使用查询参数指定时间段、协议和数据粒度。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟最长可达30分钟。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10539,7 +10562,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "filter by a specific hostname": {
                     "filters": {
@@ -10555,7 +10578,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -10577,7 +10600,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -10587,7 +10610,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -10596,7 +10619,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -10611,7 +10634,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -10665,13 +10688,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -10750,11 +10773,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -10764,11 +10787,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -10856,7 +10879,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -10889,7 +10912,7 @@
           }
         },
         "operationId": "getOriginRequests",
-        "description": "获取一段时间内的回源请求数。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。",
+        "description": "获取一段时间内的回源请求数数据。可以使用查询参数指定时间段和协议。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟小于两分钟。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10899,7 +10922,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "filter by a specific hostname": {
                     "filters": {
@@ -10915,7 +10938,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -10937,7 +10960,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -10947,7 +10970,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -10956,7 +10979,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -10971,7 +10994,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -11019,13 +11042,13 @@
     },
     "/cdn/report/statusCodeDetailsOrigin": {
       "post": {
-        "summary": "查询回源状态码详细信息",
+        "summary": "查询回源状态码统计信息",
         "tags": [
           "报表"
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
@@ -11034,7 +11057,7 @@
                   "x-tags": [
                     "Reports"
                   ],
-                  "description": "此对象由状态码详细信息报表API返回。",
+                  "description": "状态码统计信息。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge status code",
@@ -11205,24 +11228,24 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。对于状态码API，它将是“计数”，表示状态码出现的次数。",
+                      "description": "计量单位。对于状态码报表接口，单位为“次数”，表示某个状态码出现的次数。",
                       "enum": [
                         "counts"
                       ]
                     },
                     "dataSeries": {
                       "type": "array",
-                      "description": "包含不同时间点的状态码信息。",
+                      "description": "不同时间点的状态码统计信息。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "RFC 3339格式日期表示间隔的开始。"
+                            "description": "RFC 3339格式的日期，表示每个时间段的开始时间。"
                           },
                           "details": {
                             "type": "array",
@@ -11231,12 +11254,12 @@
                               "properties": {
                                 "statusCode": {
                                   "type": "string",
-                                  "description": "表示HTTP状态码，例如“200”。"
+                                  "description": "HTTP状态码，例如“200”。"
                                 },
                                 "data": {
                                   "type": "integer",
                                   "minimum": 0,
-                                  "description": "指示返回状态码的次数。"
+                                  "description": "状态码出现的次数。"
                                 }
                               }
                             }
@@ -11482,7 +11505,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -11515,7 +11538,7 @@
           }
         },
         "operationId": "getOriginStatusCodeDetails",
-        "description": "获取一段时间内的回源状态码详细信息。使用查询参数指定时间段、协议和粒度，以便您监视时间段内的变化。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟最长可达30分钟。",
+        "description": "获取一段时间内的回源状态码统计信息。可以使用查询参数指定时间段、协议和数据粒度。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟最长可达30分钟。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -11525,7 +11548,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "filter by a specific hostname": {
                     "filters": {
@@ -11541,7 +11564,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -11563,7 +11586,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -11573,7 +11596,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -11582,7 +11605,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -11597,7 +11620,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -11651,13 +11674,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -11736,11 +11759,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -11750,11 +11773,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -11842,7 +11865,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -11875,7 +11898,7 @@
           }
         },
         "operationId": "getIntermediateTraffic",
-        "description": "获取一段时间内的中间层流量（以MB为单位）。中间层流量是CDN Pro服务器之间的流量。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。",
+        "description": "获取一段时间内的中间层流量数据（以MB为单位）。中间层流量是指CDN Pro缓存服务器之间的流量。可以使用查询参数指定时间段和协议。通过在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟小于两分钟。",
         "parameters": [
           {
             "name": "startdate",
@@ -11884,7 +11907,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -11893,7 +11916,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -11908,7 +11931,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -11958,7 +11981,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -11977,7 +12000,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -11990,7 +12013,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -12021,7 +12044,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         }
       }
     },
@@ -12033,13 +12056,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -12118,11 +12141,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -12132,11 +12155,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -12224,7 +12247,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -12256,7 +12279,7 @@
             }
           }
         },
-        "description": "获取一段时间内上传到边缘服务器的流量（以MB为单位）。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象进一步过滤结果。此报表的数据延迟小于两分钟。\n\n注意：此API的结果中不包括TCP、IP和MAC报头的开销。",
+        "description": "获取一段时间内上传到CDN Pro边缘服务器的流量数据（以MB为单位）。可以使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象可进一步指定查询范围。此报表的数据延迟小于两分钟。\n\n注意：该接口返回的数据中不包括TCP、IP和MAC报头的开销。",
         "operationId": "getEdgeUploadTrafficVolume",
         "requestBody": {
           "content": {
@@ -12264,7 +12287,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -12283,7 +12306,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -12296,7 +12319,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -12327,7 +12350,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "parameters": [
           {
@@ -12337,7 +12360,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -12346,7 +12369,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -12361,7 +12384,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -13244,7 +13267,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -13253,7 +13276,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "schema": {
@@ -13333,7 +13356,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "filter by a specific hostname": {
                     "filters": {
@@ -13349,7 +13372,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -14173,13 +14196,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含按分组汇总的流量信息。它最多可以包含10000个分组。如果超过10000个分组，“isComplete”的值将为false。特殊分组“__all__”包含所有分组，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的流量数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊的分组，包含所有数据，包括了超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值等于其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "trafficVolumeSummaryResponse",
                   "type": "object",
-                  "description": "响应包含分组的流量汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的流量数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“all”是一个特殊的分组，包含所有数据，包括了超出10000上限的那些分组的数据。当“isComplete”为true时，“all”分组的值等于其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -14259,19 +14282,19 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>值为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。<table><tr><th>数据名称</th><th>描述</th></tr><tr><td>edge response</td><td>边缘服务器的响应流量</td></tr><tr><td>edge request</td><td>从访客到边缘服务器的请求流量</td></tr><tr><td>intermediate response</td><td>CDN Pro中间层服务器之间的响应流量</td></tr><tr><td>intermediate request</td><td>发往CDN Pro中间层服务器的请求流量</td></tr><tr><td>origin response</td><td>来自源站服务器的响应流量</td></tr><tr><td>origin request</td><td>回源请求流量</td></tr><tr><td>fast route response</td><td>通过HDT产品加速的源站响应流量</td></tr><tr><td>fast route request</td><td>通过HDT产品加速的回源请求流量</td></tr></table>\n<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "返回的数据类型。<table><tr><th>数据名称</th><th>描述</th></tr><tr><td>edge response</td><td>边缘服务器的响应流量</td></tr><tr><td>edge request</td><td>从访客到边缘服务器的请求流量</td></tr><tr><td>intermediate response</td><td>CDN Pro中间层服务器的响应流量</td></tr><tr><td>intermediate request</td><td>发往CDN Pro中间层服务器的请求流量</td></tr><tr><td>origin response</td><td>源站的响应流量</td></tr><tr><td>origin request</td><td>回源的请求流量</td></tr><tr><td>fast route response</td><td>快速回源产生的响应流量</td></tr><tr><td>fast route request</td><td>快速回源产生的请求流量</td></tr></table>\n<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>数组返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
@@ -14284,17 +14307,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含分组的流量细分。",
+                      "description": "按分组汇总的流量数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包括其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "流量值。",
                             "items": {
                               "type": "number"
                             }
@@ -14528,7 +14551,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -14567,25 +14590,25 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "获取一段时间内的边缘、中间层（CDN Pro服务器之间）和回源流量的总和。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户流量。\n",
+        "description": "获取一段时间内的边缘、中间层（CDN Pro服务器之间）和回源流量的总和。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的流量。\n",
         "parameters": [
           {
+            "name": "startdate",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "startdate",
-            "description": "RFC 3339表示时间段开始的日期。必须使用UTC时区指定时间；它不能是起始位置。示例: <code>startdate=2019-10-30T00:00:00Z</code> 您的开始日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-08-05T0 3:00:00Z开始的数据。",
-            "required": true
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
+            "name": "enddate",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string"
             },
-            "in": "query",
-            "name": "enddate",
-            "description": "RFC 3339表示时间段结束的日期。必须使用UTC时区指定时间；它不能是起始位置。示例：<code>enddate=2019-11-14T00:00:00Z</code> 您的结束日期可以四舍五入到最接近的分钟、小时或天。例如，如果您输入<code>enddate=2019-09-05T03:14:01Z&type=hourly</code>则响应包括以2019-08-05T04:00:00Z结尾的数据。",
-            "required": true
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
             "schema": {
@@ -14597,7 +14620,7 @@
             },
             "in": "query",
             "name": "scheme",
-            "description": "将结果限制为指定的协议。"
+            "description": "指定协议进行查询。"
           },
           {
             "name": "On-Behalf-Of",
@@ -14618,7 +14641,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API的对象，用于过滤和分组结果。例如，您可以指定只返回特定加速域名的数据。代理商还可以根据客户ID进行过滤和分组，以区分其子客户。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -14639,14 +14662,14 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -14662,7 +14685,7 @@
                       },
                       "customerIds": {
                         "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来限制数据。",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
                         "items": {
                           "type": "integer"
                         }
@@ -14671,7 +14694,7 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "您可以使用以下项目的组合（最多两个）对结果进行分组：“hostnames”，“serverGroups”和“customerIds”。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -14681,9 +14704,6 @@
                         "customerIds"
                       ]
                     }
-                  },
-                  "": {
-                    "type": "string"
                   }
                 }
               },
@@ -14715,7 +14735,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         }
       },
       "parameters": [],
@@ -14730,7 +14750,7 @@
                 "schema": {
                   "title": "trafficVolumeSummaryResponse",
                   "type": "object",
-                  "description": "响应包含分组的流量汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的流量数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“all”是一个特殊的分组，包含所有数据，包括了超出10000上限的那些分组的数据。当“isComplete”为true时，“all”分组的值等于其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -14810,19 +14830,19 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>值为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。<table><tr><th>数据名称</th><th>描述</th></tr><tr><td>edge response</td><td>边缘服务器的响应流量</td></tr><tr><td>edge request</td><td>从访客到边缘服务器的请求流量</td></tr><tr><td>intermediate response</td><td>CDN Pro中间层服务器之间的响应流量</td></tr><tr><td>intermediate request</td><td>发往CDN Pro中间层服务器的请求流量</td></tr><tr><td>origin response</td><td>来自源站服务器的响应流量</td></tr><tr><td>origin request</td><td>回源请求流量</td></tr><tr><td>fast route response</td><td>通过HDT产品加速的源站响应流量</td></tr><tr><td>fast route request</td><td>通过HDT产品加速的回源请求流量</td></tr></table>\n<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "返回的数据类型。<table><tr><th>数据名称</th><th>描述</th></tr><tr><td>edge response</td><td>边缘服务器的响应流量</td></tr><tr><td>edge request</td><td>从访客到边缘服务器的请求流量</td></tr><tr><td>intermediate response</td><td>CDN Pro中间层服务器的响应流量</td></tr><tr><td>intermediate request</td><td>发往CDN Pro中间层服务器的请求流量</td></tr><tr><td>origin response</td><td>源站的响应流量</td></tr><tr><td>origin request</td><td>回源的请求流量</td></tr><tr><td>fast route response</td><td>快速回源产生的响应流量</td></tr><tr><td>fast route request</td><td>快速回源产生的请求流量</td></tr></table>\n<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>数组返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
@@ -14835,17 +14855,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含分组的流量细分。",
+                      "description": "按分组汇总的流量数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包括其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "流量值。",
                             "items": {
                               "type": "number"
                             }
@@ -17275,16 +17295,16 @@
     },
     "/cdn/report/edgeHostnameReq": {
       "post": {
-        "summary": "查询调度域名统计信息",
+        "summary": "查询调度域名请求数信息",
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -17363,11 +17383,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -17377,11 +17397,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -17477,7 +17497,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "headers": {},
             "content": {
               "application/json": {
@@ -17531,20 +17551,16 @@
           {
             "name": "startdate",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
-            "name": "enddate",
             "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "name": "enddate",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-11-14T00:00:00Z</code>。"
           },
           {
             "name": "type",
@@ -17559,7 +17575,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           }
         ],
         "requestBody": {
@@ -17570,7 +17586,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
-                    "description": "限制统计信息为具体的调度域名。",
+                    "description": "指定调度域名进行查询。",
                     "properties": {
                       "edgeHostnames": {
                         "type": "array",
@@ -17597,7 +17613,7 @@
               }
             }
           },
-          "description": "可指定具体调度域名来获取其统计信息。如果未指定，将返回账号中所有调度域名的统计数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有调度域名的数据。"
         },
         "tags": [
           "报表"
@@ -17855,7 +17871,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -17864,7 +17880,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "On-Behalf-Of",
@@ -23012,7 +23028,7 @@
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -23091,11 +23107,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -23105,11 +23121,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -23207,7 +23223,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -23216,7 +23232,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -23231,7 +23247,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -23260,7 +23276,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "filter by a specific hostname": {
                     "filters": {
@@ -23276,7 +23292,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -23452,7 +23468,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -23461,7 +23477,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -23476,7 +23492,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -23502,7 +23518,7 @@
               "schema": {
                 "title": "reportfilters",
                 "type": "object",
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -23521,7 +23537,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -23534,7 +23550,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -24666,7 +24682,7 @@
                 "schema": {
                   "title": "reportResponse",
                   "type": "object",
-                  "description": "包含报表返回的数据。",
+                  "description": "返回的报表数据。",
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge response volume",
@@ -24745,11 +24761,11 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
-                      "description": "计量单位。这将取决于报表API。"
+                      "description": "计量单位。不同报表类型计量单位不一样。"
                     },
                     "dataSeries": {
                       "type": "array",
@@ -24759,11 +24775,11 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "查询时间段的开始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "每个时间段的起始时间，以RFC 3339日期格式表示。始终采用UTC时区。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
                           },
                           "data": {
                             "type": "number",
-                            "description": "该时间戳的值。有关计量单位，请参阅<i>dataUnit</i>字段。"
+                            "description": "该时间段对应的值。计量单位，由<i>dataUnit</i>字段指定。"
                           }
                         }
                       }
@@ -24862,7 +24878,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -24871,7 +24887,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -24886,7 +24902,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "scheme",
@@ -24916,7 +24932,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API以过滤结果的对象。例如，您可以指定只返回特定加速域名的数据。",
+                "description": "在请求体中传递过滤器指定查询范围。例如，您可以指定只查询某些加速域名的数据。",
                 "x-examples": {
                   "filter by a specific hostname": {
                     "filters": {
@@ -24932,7 +24948,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -24970,17 +24986,17 @@
           "name": "hostname",
           "in": "path",
           "required": true,
-          "description": "加速域名"
+          "description": "加速域名。"
         }
       ],
       "get": {
-        "summary": "获取历史加速域名详细信息",
+        "summary": "获取加速域名历史部署信息",
         "tags": [
           "加速域名管理"
         ],
         "responses": {
           "200": {
-            "description": "响应主体包含域名的详细信息。",
+            "description": "返回加速域名的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -24988,29 +25004,29 @@
                   "properties": {
                     "hostname": {
                       "type": "string",
-                      "description": "在加速项目中定义的域名。"
+                      "description": "加速域名。"
                     },
                     "history": {
                       "type": "array",
-                      "description": "历史记录包含部署和取消部署日期。如果域名从未部署到生产环境，则为空。",
+                      "description": "加速域名部署到生产环境或从生产环境卸载的历史信息。如果加速域名从未部署到生产环境，则返回空对象。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "customerId": {
                             "type": "integer",
-                            "description": "使用域名的客户ID。"
+                            "description": "使用该加速域名的客户账号ID。"
                           },
                           "propertyId": {
                             "type": "string",
-                            "description": "包含域名的加速项目的ID。"
+                            "description": "加速域名对应的加速项目的ID。"
                           },
                           "deploymentDate": {
                             "type": "string",
-                            "description": "格式：RFC 3339日期和UTC时间。表示发布域名的加速项目的时间。示例：“2020-04-24T20:09:15Z”"
+                            "description": "RFC 3339格式的日期，表示加速项目的部署时间，采用UTC时区。示例：“2020-04-24T20:09:15Z”。"
                           },
                           "undeploymentDate": {
                             "type": "string",
-                            "description": "格式：RFC 3339日期和UTC时间。表示卸载域名加速项目的时间。示例：“2020-04-24T20:09:15Z”"
+                            "description": "RFC 3339格式的日期，表示加速项目的卸载时间，采用UTC时区。示例：“2020-04-24T20:09:15Z”。"
                           }
                         },
                         "required": [
@@ -25058,7 +25074,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -25085,14 +25101,14 @@
           }
         },
         "operationId": "get-cdn-hostnames-historical-hostname",
-        "description": "此API将域名的部署信息返回到生产。查询参数允许您指定要搜索的时间框架。",
+        "description": "该接口用来查询加速域名在生产环境的历史部署信息。可通过查询参数指定查询起止时间。",
         "parameters": [
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "description": "用RFC 3339格式的时间段指示开始日期。必须使用UTC时区指定时间；它不能是偏移量。示例：<code>startdate=2019-11-14T00:00:00Z</code>默认情况下，该值是您开始使用CDN Pro时的值。",
+            "description": "指定查询开始时间，以RFC 3339日期格式表示。必须使用UTC时区，不支持指定其它时区。示例：<code>startdate=2019-11-14T00:00:00Z</code>。如果开始时间未指定，则默认为您开通CDN Pro服务的时间。",
             "name": "startdate"
           },
           {
@@ -25101,7 +25117,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "用RFC 3339格式的时间段指示结束日期。必须使用UTC时区指定时间；它不能是偏移量。示例：<code>enddate=2019-11-14T00:00:00Z</code>默认为当前时间。"
+            "description": "指定查询结束时间，以RFC 3339日期格式表示。必须使用UTC时区，不支持指定其它时区。示例：<code>enddate=2019-12-14T00:00:00Z</code>。如果结束时间未指定，则默认为当前时间。"
           },
           {
             "name": "On-Behalf-Of",
@@ -26728,7 +26744,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -26737,7 +26753,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "scheme",
@@ -26775,7 +26791,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API的对象，用于过滤和分组结果。例如，您可以指定只返回特定加速域名的数据。代理商还可以根据客户ID进行过滤和分组，以区分其子客户。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -26796,14 +26812,14 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -26819,7 +26835,7 @@
                       },
                       "customerIds": {
                         "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来限制数据。",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
                         "items": {
                           "type": "integer"
                         }
@@ -26828,7 +26844,7 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "您可以使用以下项目的组合（最多两个）对结果进行分组：“hostnames”，“serverGroups”和“customerIds”。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -26838,9 +26854,6 @@
                         "customerIds"
                       ]
                     }
-                  },
-                  "": {
-                    "type": "string"
                   }
                 }
               },
@@ -27679,18 +27692,18 @@
         ],
         "responses": {
           "201": {
-            "description": "响应头Location中将返回保密信息ID的引用，比如：<code>Location: https://ngapi-cdnetworks.com/cdn/secrets/60d6707cca3e387d2a28fc9e</code>。您可以通过ID调用接口进行删除、查询或者更新保密信息。",
+            "description": "保密信息创建成功，返回Location响应头。",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "响应头Location中将返回保密信息ID的引用。"
+                "description": "指向保密信息的URL， 例如<code>Location: https://ngapi-cdnetworks.com/cdn/secrets/60d6707cca3e387d2a28fc9e</code>。"
               }
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请查看返回体中的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27722,7 +27735,7 @@
             }
           },
           "403": {
-            "description": "访问被拒绝。请检查您使用的凭证。",
+            "description": "无权访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27748,7 +27761,7 @@
             }
           },
           "409": {
-            "description": "该名称的保密信息已存在。",
+            "description": "保密信息已存在。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27775,7 +27788,7 @@
           }
         },
         "operationId": "post-cdn-secrets",
-        "description": "创建一个保密信息，用于保护敏感文本不被暴露在加速项目的边缘逻辑中。可以在边缘逻辑中使用<code>$SECRET(secretName)</code>语法来引用保密信息。当部署加速项目时，边缘逻辑中对 <code>$SECRET(secretName)</code> 的引用将被此文本替换。",
+        "description": "创建“保密信息”来存放敏感内容，避免敏感内容直接暴露在加速项目的边缘逻辑中。在边缘逻辑中使用<code>$SECRET(secretName)</code>语法来引用保密信息。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -27784,19 +27797,19 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "保密信息的名称。它可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 引用此项。",
+                    "description": "保密信息的名称。可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 语法来引用。",
                     "maxLength": 30,
                     "minLength": 1,
                     "pattern": "^[A-Za-z0-9_.-]+"
                   },
                   "description": {
                     "type": "string",
-                    "description": "保密信息的描述。这有助于记录保密信息的用途。",
+                    "description": "保密信息的描述。",
                     "maxLength": 250
                   },
                   "secret": {
                     "type": "string",
-                    "description": "填写你要保护的敏感文本。当你部署加速项目时，边缘逻辑中对 <code>$SECRET(secretName)</code> 的引用将被此文本替换。保密信息它可以包含可打印的ASCII字符、制表符(0x09)、换行符(0x0a) 和回车符(0x0d)。",
+                    "description": "需要被保护的敏感内容。当部署加速项目时，将对边缘逻辑中的 <code>$SECRET(secretName)</code>进行解析，提取出敏感内容。支持可打印的ASCII字符、制表符(0x09)、换行符(0x0a) 和回车符(0x0d)。",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -27817,7 +27830,7 @@
               }
             }
           },
-          "description": "接口请求包含保密信息名称以及要保护的敏感内容。"
+          "description": "在请求体中指定保密信息名称以及要保护的敏感内容。"
         },
         "parameters": [
           {
@@ -27838,7 +27851,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应内容为保密信息列表。",
+            "description": "返回保密信息列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27847,7 +27860,7 @@
                     "count": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "保密信息的总数。返回的实际数量取决于入参中的limit和offset参数的限制。"
+                      "description": "保密信息的总数。返回的实际数量取决于查询参数。"
                     },
                     "secrets": {
                       "type": "array",
@@ -27862,7 +27875,7 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "保密信息的名称。它可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 引用此项。",
+                            "description": "保密信息的名称。可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 语法引用。",
                             "minLength": 1,
                             "pattern": "^[A-Za-z0-9_.-]+",
                             "maxLength": 30
@@ -27874,15 +27887,15 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339日期，表示保密信息的创建时间。将采用UTC时间，例如，“2021-07-06T00:00:00Z”。"
+                            "description": "RFC 3339格式的日期，表示保密信息的创建时间，使用UTC时区。例如，“2021-07-06T00:00:00Z”。"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339日期，表示保密信息的最后一次更新时间。例如，”2021-07-06T00:00:00Z“。"
+                            "description": "RFC 3339格式的日期，表示保密信息的最后一次更新时间。例如，”2021-07-06T00:00:00Z“。"
                           },
                           "ownerCustomerId": {
                             "type": "integer",
-                            "description": "保密信息所有者的CustomerId。"
+                            "description": "拥有保密信息的客户账号的ID。"
                           }
                         },
                         "required": [
@@ -27920,7 +27933,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27958,7 +27971,7 @@
             }
           },
           "403": {
-            "description": "访问被拒绝。请检查您使用的凭证。",
+            "description": "无权访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27985,28 +27998,29 @@
           }
         },
         "operationId": "get-cdn-secrets",
-        "description": "获取已定义好的保密信息列表。列表将根据请求参数的信息进行过滤返回。",
+        "description": "获取保密信息列表。可使用查询参数筛选保密信息。",
         "parameters": [
           {
+            "name": "offset",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "integer",
-              "minimum": 0,
-              "default": 0
+              "default": 0,
+              "minimum": 0
             },
-            "in": "query",
-            "name": "offset",
-            "description": "表示保密信息列表查询的起始位置。"
+            "description": "查询起始位置。"
           },
           {
+            "name": "limit",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "integer",
               "default": 100,
-              "minimum": 1,
               "maximum": 200
             },
-            "in": "query",
-            "name": "limit",
-            "description": "返回保密信息的最大条数。"
+            "description": "每次查询的最大条数。"
           },
           {
             "name": "On-Behalf-Of",
@@ -28038,7 +28052,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "支持保密信息id，名称，描述字段的关键词查询。支持模糊查询。"
+            "description": "根据搜索关键字匹配保密信息的ID，名称和描述进行查询。"
           }
         ]
       },
@@ -28150,7 +28164,7 @@
           "name": "secretID",
           "in": "path",
           "required": true,
-          "description": "保密信息ID。"
+          "description": "保密信息id。"
         }
       ],
       "get": {
@@ -28172,7 +28186,7 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "保密信息的名称。它可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 引用此项。",
+                      "description": "保密信息的名称。可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 语法引用。",
                       "minLength": 1,
                       "maxLength": 30,
                       "pattern": "^[A-Za-z0-9_.-]+"
@@ -28184,25 +28198,25 @@
                     },
                     "secret": {
                       "type": "string",
-                      "description": "保密信息的值。保密信息它可以包含可打印的ASCII字符、制表符(0x09)、换行符(0x0a) 和回车符(0x0d)。为了安全起见，我们将不显示所有字符。保密信息的中间部分将用星号标记，当你部署加速项目时，边缘逻辑中对 <code>$SECRET(secretName)</code> 的引用将被此文本替换。",
+                      "description": "保密信息存放的敏感内容。可以包含可打印的ASCII字符、制表符(0x09)、换行符(0x0a) 和回车符(0x0d)。出于安全考虑，此处不显示所有字符，部分内容将用星号标记。",
                       "minLength": 8,
                       "maxLength": 3599
                     },
                     "ownerCustomerId": {
                       "type": "integer",
-                      "description": "保密信息所有者的CustomerId。"
+                      "description": "拥有保密信息的客户账号的ID。"
                     },
                     "lastUpdateTime": {
                       "type": "string",
-                      "description": "RFC 3339日期，表示保密信息的最后一次更新时间。比如，”2021-07-06T00:00:00Z“。"
+                      "description": "RFC 3339格式的日期，表示保密信息的最后一次更新时间。例如，”2021-07-06T00:00:00Z“。"
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "RFC 3339日期，表示保密信息的创建时间。将采用UTC时间，比如，“2021-07-06T00:00:00Z”。"
+                      "description": "RFC 3339格式的日期，表示保密信息的创建时间，使用UTC时区。例如，“2021-07-06T00:00:00Z”。"
                     },
                     "usageInProduction": {
                       "type": "array",
-                      "description": "生产环境中，引用此保密信息的加速项目。",
+                      "description": "保密信息在生产环境中的使用情况。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -28215,7 +28229,7 @@
                     },
                     "usageInStaging": {
                       "type": "array",
-                      "description": "演练环境中，引用此保密信息的加速项目。",
+                      "description": "保密信息在演练环境中的使用情况。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -28279,7 +28293,7 @@
             }
           },
           "403": {
-            "description": "访问被拒绝。请检查您使用的凭证。",
+            "description": "无权访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28349,10 +28363,10 @@
         "summary": "更新保密信息",
         "responses": {
           "204": {
-            "description": "保密信息已成功更新。"
+            "description": "保密信息更新成功。"
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应正文。",
+            "description": "无效请求，请参考响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28384,7 +28398,7 @@
             }
           },
           "403": {
-            "description": "请求被拒绝。请检查您使用的凭证。",
+            "description": "无权访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28410,7 +28424,7 @@
             }
           },
           "404": {
-            "description": "未找到该保密信息。",
+            "description": "未找到保密信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28463,7 +28477,7 @@
           }
         },
         "operationId": "patch-cdn-secrets-secretID",
-        "description": "使用此接口进行保密信息的更新。已部署的加速项目将继续使用部署时对应的原始值。如果你修改了保密信息名称，那么有引用到旧保密信息名称的加速项目版本将无法通过验证，除非这个加速项目移除掉对该保密名称的引用或者更新使用新的保密名称。如果修改了保密信息的内容，则使用该保密信息的加速项目在重新部署前必须进行重新验证。",
+        "description": "使用该接口更新保密信息。如果您修改了保密信息的名称，则以原有名称引用保密信息的加速项目版本将无法通过验证。此类加速项目版本必须移除对该保密信息的引用或者采用更新后的名称重新引用，才能通过验证。如果修改了保密信息存放的内容，则使用到该保密信息的加速项目在重新部署前必须进行重新验证。在保密信息更新前，在已部署加速项目中已引用的保密信息不会自动被更新。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -28472,19 +28486,19 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "保密信息的名称。它可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 引用此项。如果你修改了保密信息名称，那么有引用到旧保密信息名称的加速项目版本将无法通过验证。",
+                    "description": "保密信息的名称。可以由字母、数字、连字符、下划线和句点组成。在边缘逻辑中使用<code>$SECRET(secretName)</code> 语法引用。如果您修改了保密信息的名称，那么以原有名称引用保密信息的加速项目版本将无法通过验证。",
                     "minLength": 1,
                     "maxLength": 30,
                     "pattern": "^[A-Za-z0-9_.-]+"
                   },
                   "description": {
                     "type": "string",
-                    "description": "保密信息的描述。这有助于记录保密信息的用途。",
+                    "description": "保密信息的描述。",
                     "maxLength": 250
                   },
                   "secret": {
                     "type": "string",
-                    "description": "填写你要保护的敏感文本。保密信息它可以包含可打印的ASCII字符、制表符(0x09)、换行符(0x0a) 和回车符(0x0d)。当你部署加速项目时，边缘逻辑中对 <code>$SECRET(secretName)</code> 的引用将被此文本替换。一旦加速项目已经部署了，它将只能使用部署时保密信息对应的值。如果您修改了保密信息值，那您必须重新部署并且重新验证之后加速项目才能使用到最新的值。",
+                    "description": "保密信息存放的敏感内容。可以包含可打印的ASCII字符、制表符(0x09)、换行符(0x0a) 和回车符(0x0d)。在保密信息更新前，在已部署加速项目中已引用的保密信息不会自动被更新。如果您修改了保密信息存放的内容，必须重新验证并部署，加速项目才能使用到最新的值。",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -28523,10 +28537,10 @@
         ],
         "responses": {
           "204": {
-            "description": "保密信息已删除成功。"
+            "description": "保密信息删除成功。"
           },
           "403": {
-            "description": "访问被拒绝。",
+            "description": "无权访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28552,7 +28566,7 @@
             }
           },
           "404": {
-            "description": "未找到该保密信息。",
+            "description": "未找到保密信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28578,7 +28592,7 @@
             }
           },
           "409": {
-            "description": "该保密信息在生产环境或演练环境中被使用，不能删除。 你可以调用 <a href=\"#operation/get-cdn-secrets-secretID\">获取保密信息详情</a> 来识别该保密信息所部署的加速项目。",
+            "description": "该保密信息在生产环境或演练环境中被使用，不能删除。 您可以调用<a href=\"#operation/get-cdn-secrets-secretID\">获取保密信息详情</a>接口来查看使用到该保密信息的加速项目。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28616,7 +28630,7 @@
             "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
-        "description": "根据保密信息ID进行删除。如果保密信息已经被已部署的加速项目引用，则无法删除。如果保密信息已废弃，则您必须先删除其在加速项目中、重新验证、重新部署中的引用之后，才能删除该保密信息。"
+        "description": "删除保密信息。如果保密信息存放的内容已失效，在删除保密信息之前，必须先从加速项目中解除引用，重新验证和部署加速项目。"
       }
     },
     "/cdn/report/logConfigs": {
@@ -29551,7 +29565,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -29560,7 +29574,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           }
         ],
         "description": "获取已部署的一个或多个加速域名的访问日志。这些日志包含2小时或更长时间之前发起的请求的数据。默认情况下，只有近14天内的日志可用，并且它们会被分成多个文件，每个文件覆盖一天的一部分时间。\n要获取加速域名的日志，必须首先通过<a href=\\\"#operation/post-cdn-report-logConfigs\\\">创建日志配置</a>以指定应用于该加速域名的日志格式。完成创建日志配置后，对内容的请求将被记录。否则，将日志可供下载。\n例如，假设您定义了如下日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n此API将返回可用日志列表，如:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nlogUrl字段包含指向gzip压缩日志文件的URL，该文件由以下行组成：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
@@ -29973,7 +29987,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -29982,7 +29996,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "scheme",
@@ -30011,7 +30025,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API的对象，用于过滤和分组结果。例如，您可以指定只返回特定加速域名的数据。代理商还可以根据客户ID进行过滤和分组，以区分其子客户。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -30032,14 +30046,14 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -30055,7 +30069,7 @@
                       },
                       "customerIds": {
                         "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来限制数据。",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
                         "items": {
                           "type": "integer"
                         }
@@ -30064,7 +30078,7 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "您可以使用以下项目的组合（最多两个）对结果进行分组：“hostnames”，“serverGroups”和“customerIds”。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -30074,9 +30088,6 @@
                         "customerIds"
                       ]
                     }
-                  },
-                  "": {
-                    "type": "string"
                   }
                 }
               },
@@ -30468,7 +30479,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -30477,7 +30488,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "scheme",
@@ -31020,7 +31031,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -31029,7 +31040,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "scheme",
@@ -31449,7 +31460,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
           },
           {
             "name": "enddate",
@@ -31458,7 +31469,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
           },
           {
             "name": "type",
@@ -31473,7 +31484,7 @@
                 "monthly"
               ]
             },
-            "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
           },
           {
             "name": "On-Behalf-Of",
@@ -31494,7 +31505,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "可以传递给报表API的对象，用于过滤和分组结果。例如，您可以指定只返回特定加速域名的数据。代理商还可以根据客户ID进行过滤和分组，以区分其子客户。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -31515,14 +31526,14 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "指定一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -31538,7 +31549,7 @@
                       },
                       "customerIds": {
                         "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来限制数据。",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
                         "items": {
                           "type": "integer"
                         }
@@ -31547,7 +31558,7 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "您可以使用以下项目的组合（最多两个）对结果进行分组：“hostnames”，“serverGroups”和“customerIds”。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -31557,9 +31568,6 @@
                         "customerIds"
                       ]
                     }
-                  },
-                  "": {
-                    "type": "string"
                   }
                 }
               },
@@ -31860,7 +31868,7 @@
         "schema": {
           "type": "string"
         },
-        "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>则响应从2019-09-05T03:00:00Z开始的数据。"
+        "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
       },
       "enddate": {
         "name": "enddate",
@@ -31869,7 +31877,7 @@
         "schema": {
           "type": "string"
         },
-        "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>则响应截止到2019-09-05T04:00:00Z的数据。"
+        "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
       },
       "type": {
         "name": "type",
@@ -31884,7 +31892,7 @@
             "monthly"
           ]
         },
-        "description": "指定返回数据的粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定与UTC不同的起始位置，可以附加时区标识-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12、+13、+14。例如，<code>type=daily+8</code>表示UTC+8时区中一天的开始时间。"
+        "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
       },
       "scheme": {
         "name": "scheme",
@@ -31902,6 +31910,24 @@
           "default": "all"
         },
         "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+      },
+      "startdate(summary)": {
+        "name": "startdate",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
+      },
+      "enddate(summary)": {
+        "name": "enddate",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
       }
     }
   },
@@ -31920,7 +31946,7 @@
     },
     {
       "name": "保密信息管理",
-      "description": "这些API允许您定义用于隐藏敏感的保密信息，例如防止密码在API调用或CDN Pro控制台中可见。例如，一个保密信息可以是一个密钥，用于验证对源服务器的客户端请求。通过创建一个保密信息并通过语法`$secret（secretName）`在＜a href=“/cdn/docs/edge logic/intro”＞边缘逻辑</a>中引用它，当通过cdn Pro控制台查看加速项目或使用cdn Pro API获取加速项目时，密钥本身不会被暴露"
+      "description": "您可以通过创建“保密信息”来隐藏敏感信息，避免敏感信息在API调用时或在CDN Pro控制台中直接暴露。例如，您可以创建一个“保密信息”来存放回源鉴权需要用到的密钥。您创建的保密信息，可以在＜a href=“/cdn/docs/edge logic/intro”＞边缘逻辑</a>中以`$secret（secretName）`方式引用。当您通过CDN Pro控制台查看加速项目或使用CDN Pro API获取加速项目时，敏感信息不会直接暴露。"
     },
     {
       "name": "部署任务管理",
@@ -31928,7 +31954,7 @@
     },
     {
       "name": "加速域名管理",
-      "description": "您必须<a href=“#operation/createProperty”>创建加速项目</a>以管理CDN Pro上的配置。有几个API允许您获取有关已部署到生产或演练的加速项目的域名（或域）的汇总信息。"
+      "description": "通过<a href=“#operation/createProperty”>创建加速项目</a>来管理您的加速配置。当加速项目部署到CDN Pro后，可通过以下接口查询加速域名的相关信息。"
     },
     {
       "name": "调度域名管理",
@@ -31936,7 +31962,7 @@
     },
     {
       "name": "报表",
-      "description": "调用我们的报表API以获取有关访客的统计信息，包括边缘和回源流量、请求、状态码详细信息和日志文件。"
+      "description": "我们提供了一些报表接口，可用来获取边缘和回源流量、请求数、状态码等统计信息。我们也提供了下载日志的接口。"
     },
     {
       "name": "报表注释",
