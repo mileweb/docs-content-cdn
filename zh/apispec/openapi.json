@@ -183,6 +183,20 @@
                     "description": "加速项目的描述。",
                     "maxLength": 250
                   },
+                  "legacyType": {
+                    "type": "string",
+                    "title": "legacyType",
+                    "x-stoplight": {
+                      "id": "5kat9d5amjcp7"
+                    },
+                    "description": "服务类型，即全站加速，网页加速，点播加速及下载加速。",
+                    "enum": [
+                      "wsapro",
+                      "webpro",
+                      "vodpro",
+                      "downloadpro"
+                    ]
+                  },
                   "version": {
                     "title": "propertyConfiguration",
                     "type": "object",
@@ -284,7 +298,7 @@
                       "edgeLogic": {
                         "type": "string",
                         "maxLength": 65530,
-                        "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
+                        "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
                       },
                       "hasBeian": {
                         "type": "boolean",
@@ -389,7 +403,7 @@
                             },
                             "tlsCertificateId": {
                               "type": "string",
-                              "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
+                              "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
                             }
                           }
                         }
@@ -451,7 +465,7 @@
                       },
                       "tlsCertificateId1": {
                         "type": "number",
-                        "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                        "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                       },
                       "videoSeek": {
                         "type": "object",
@@ -578,7 +592,7 @@
                       },
                       "disableCertAutomation": {
                         "type": "boolean",
-                        "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                        "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
                         "default": false
                       },
                       "cacheKeyUri": {
@@ -596,7 +610,7 @@
                         "properties": {
                           "http": {
                             "type": "array",
-                            "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                            "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -605,7 +619,7 @@
                           },
                           "https": {
                             "type": "array",
-                            "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                            "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -616,7 +630,7 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                        "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                         "maxLength": 65530
                       }
                     }
@@ -624,6 +638,7 @@
                 },
                 "required": [
                   "name",
+                  "legacyType",
                   "version"
                 ]
               },
@@ -697,17 +712,7 @@
           },
           "description": "在请求体中定义加速项目的名称以及需要部署到CDN Pro服务器的所有配置。"
         },
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -728,7 +733,7 @@
                       "items": {
                         "title": "propertyListEntry",
                         "type": "object",
-                        "description": "表示从获取加速项目列表API返回的加速项目。",
+                        "description": "加速项目列表。",
                         "x-examples": {
                           "example-1": {
                             "value": {
@@ -781,6 +786,20 @@
                             "type": "integer",
                             "description": "加速项目的最新版本。"
                           },
+                          "legacyType": {
+                            "type": "string",
+                            "title": "legacyType",
+                            "x-stoplight": {
+                              "id": "5kat9d5amjcp7"
+                            },
+                            "description": "服务类型，即全站加速，网页加速，点播加速及下载加速。",
+                            "enum": [
+                              "wsapro",
+                              "webpro",
+                              "vodpro",
+                              "downloadpro"
+                            ]
+                          },
                           "stagingVersion": {
                             "type": "object",
                             "description": "描述部署到演练环境的加速项目版本。",
@@ -816,10 +835,6 @@
                                 }
                               }
                             }
-                          },
-                          "customerId": {
-                            "type": "integer",
-                            "description": "如果您是作为代理商通过Report-Range请求头获取加速项目列表，则该字段表示拥有该加速项目的子客户ID。"
                           }
                         },
                         "required": [
@@ -827,7 +842,8 @@
                           "name",
                           "creationTime",
                           "lastUpdateTime",
-                          "latestVersion"
+                          "latestVersion",
+                          "legacyType"
                         ]
                       }
                     },
@@ -1010,28 +1026,18 @@
             "description": "返回结果的排序依据。"
           },
           {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
             "schema": {
               "type": "string",
-              "default": "self-only",
               "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
+                "wsapro",
+                "webpro",
+                "vodpro",
+                "downloadpro"
               ]
             },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+            "in": "query",
+            "name": "legacyType",
+            "description": "根据服务类型查询加速项目。服务类型包括全站加速，网页加速，点播加速，下载加速。"
           }
         ],
         "tags": [
@@ -1083,10 +1089,6 @@
                       "type": "string",
                       "description": "加速项目的描述。"
                     },
-                    "ownerCustomerId": {
-                      "type": "integer",
-                      "description": "拥有此加速项目的客户ID。"
-                    },
                     "versionInProduction": {
                       "type": "integer",
                       "description": "部署到生产环境的加速项目版本。如果尚未部署加速项目，则将省略该字段。"
@@ -1106,6 +1108,20 @@
                     "versions": {
                       "type": "integer",
                       "description": "加速项目的版本数量。"
+                    },
+                    "legacyType": {
+                      "type": "string",
+                      "title": "legacyType",
+                      "x-stoplight": {
+                        "id": "5kat9d5amjcp7"
+                      },
+                      "description": "服务类型，即全站加速，网页加速，点播加速及下载加速。",
+                      "enum": [
+                        "wsapro",
+                        "webpro",
+                        "vodpro",
+                        "downloadpro"
+                      ]
                     }
                   },
                   "required": [
@@ -1156,17 +1172,7 @@
         },
         "description": "查询某个加速项目的信息，包括已创建的版本数以及哪些版本已部署等。",
         "operationId": "queryProperty",
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -1256,7 +1262,7 @@
             }
           }
         },
-        "description": "该接口用于更新加速项目的名称和描述。该操作不会创建加速项目新版本，也不会更新现有的加速项目版本。\n如果要更改加速项目的配置，请调用<a href=\"#operation/updatePropertyVersion\">更新加速项目版本</a>接口。",
+        "description": "该接口用于更新加速项目的名称和描述。该操作不会创建加速项目新版本，也不会更新现有的加速项目版本。\n如果要更改加速项目的配置，请调用“更新加速项目版本”接口。",
         "operationId": "updateProperty",
         "requestBody": {
           "content": {
@@ -1289,17 +1295,7 @@
           },
           "description": "指定加速项目的新名称或描述。"
         },
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -1391,17 +1387,7 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -1614,15 +1600,6 @@
               "minimum": 0
             },
             "description": "查询起始位置。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "tags": [
@@ -1838,7 +1815,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
+                    "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -1943,7 +1920,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
+                          "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
                         }
                       }
                     }
@@ -2005,7 +1982,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                    "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -2132,7 +2109,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -2150,7 +2127,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -2159,7 +2136,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -2170,7 +2147,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -2199,17 +2176,7 @@
           },
           "description": "在请求体中指定加速项目配置。"
         },
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -2394,7 +2361,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 65530,
-                          "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
+                          "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -2499,7 +2466,7 @@
                               },
                               "tlsCertificateId": {
                                 "type": "string",
-                                "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
+                                "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
                               }
                             }
                           }
@@ -2561,7 +2528,7 @@
                         },
                         "tlsCertificateId1": {
                           "type": "number",
-                          "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                          "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                         },
                         "videoSeek": {
                           "type": "object",
@@ -2688,7 +2655,7 @@
                         },
                         "disableCertAutomation": {
                           "type": "boolean",
-                          "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                          "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
                           "default": false
                         },
                         "cacheKeyUri": {
@@ -2706,7 +2673,7 @@
                           "properties": {
                             "http": {
                               "type": "array",
-                              "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                              "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -2715,7 +2682,7 @@
                             },
                             "https": {
                               "type": "array",
-                              "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                              "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -2726,7 +2693,7 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                          "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                           "maxLength": 65530
                         }
                       }
@@ -2874,17 +2841,7 @@
           }
         },
         "summary": "获取加速项目版本详细信息",
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ]
+        "parameters": []
       },
       "parameters": [
         {
@@ -3095,7 +3052,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
+                    "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -3200,7 +3157,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
+                          "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
                         }
                       }
                     }
@@ -3262,7 +3219,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                    "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -3389,7 +3346,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
+                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -3407,7 +3364,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -3416,7 +3373,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -3427,7 +3384,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -3454,17 +3411,7 @@
           },
           "description": "在请求体中指定要更新的加速项目配置。"
         },
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -3536,17 +3483,7 @@
         },
         "operationId": "delete-cdn-properties-propertyID-versions-version",
         "description": "删除一个加速项目版本。",
-        "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "加速项目管理"
         ]
@@ -8934,30 +8871,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -9322,30 +9235,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -9704,30 +9593,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -10086,30 +9951,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -10652,30 +10493,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -11012,30 +10829,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -11638,30 +11431,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -11949,30 +11718,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -12402,30 +12147,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -14590,7 +14311,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "获取一段时间内的边缘、中间层（CDN Pro服务器之间）和回源流量的总和。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的流量。\n",
+        "description": "获取一段时间内的边缘、中间层（CDN Pro服务器之间）和回源流量的总和。可以按加速域名或serverGroups（节点组）进行查询和分组。\n",
         "parameters": [
           {
             "name": "startdate",
@@ -14621,15 +14342,6 @@
             "in": "query",
             "name": "scheme",
             "description": "指定协议进行查询。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -14641,7 +14353,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -14682,26 +14394,18 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups",
-                        "customerIds"
+                        "serverGroups"
                       ]
                     }
                   }
@@ -17540,15 +17244,6 @@
         "description": "获取一段时间内对调度域名发起的DNS解析请求数。",
         "parameters": [
           {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
-          {
             "name": "startdate",
             "in": "query",
             "required": true,
@@ -17881,15 +17576,6 @@
               "type": "string"
             },
             "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -23190,32 +22876,8 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
-        "description": "查询通过<a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速回源</a>功能所产生的回源请求数。",
+        "description": "查询通过快速回源功能所产生的回源请求数。",
         "parameters": [
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
           {
             "name": "startdate",
             "in": "query",
@@ -23435,32 +23097,8 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
-        "description": "查询通过<a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速回源</a>功能传输的回源流量。",
+        "description": "查询通过快速回源功能传输的回源流量。",
         "parameters": [
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
           {
             "name": "startdate",
             "in": "query",
@@ -24847,30 +24485,6 @@
         },
         "operationId": "post-cdn-report-cpuTime",
         "parameters": [
-          {
-            "name": "Report-Range",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "self-only",
-              "enum": [
-                "self-only",
-                "self+children",
-                "children-only"
-              ]
-            },
-            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
           {
             "name": "startdate",
             "in": "query",
@@ -26735,7 +26349,7 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
-        "description": "获取一段时间内的请求数汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的请求数。",
+        "description": "获取一段时间内的请求数汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。",
         "parameters": [
           {
             "name": "startdate",
@@ -26771,15 +26385,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -26791,7 +26396,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -26832,26 +26437,18 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups",
-                        "customerIds"
+                        "serverGroups"
                       ]
                     }
                   }
@@ -29550,15 +29147,6 @@
         "operationId": "post-cdn-report-logDownload",
         "parameters": [
           {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
-          {
             "in": "query",
             "name": "startdate",
             "schema": {
@@ -29575,7 +29163,7 @@
             }
           }
         ],
-        "description": "获取已部署的一个或多个加速域名的访问日志。这些日志是2小时或更早时间之前客户端请求所产生的日志。默认情况下，只能查询近14天内的日志。这些日志被切割成多个文件供下载。\n\n要获取加速域名的日志，必须首先通过<a href=\"#operation/post-cdn-report-logConfigs\">创建日志配置</a>接口定义日志格式。注意：必须先创建日志配置，访问日志才会被收集。如未创建日志配置，则无法下载日志。\n\n假设您定义了如下的日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n调用该接口时，将返回如下的日志信息和下载链接:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\n其中，logUrl字段指向日志文件（经过gzip压缩）的下载链接。日志文件内容格式如下：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "获取已部署的一个或多个加速域名的访问日志。这些日志是2小时或更早时间之前客户端请求所产生的日志。默认情况下，只能查询近14天内的日志。这些日志被切割成多个文件供下载。\n\n要获取加速域名的日志，必须首先通过“创建日志配置”接口定义日志格式。注意：必须先创建日志配置，访问日志才会被收集。如未创建日志配置，则无法下载日志。\n\n假设您定义了如下的日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n调用该接口时，将返回如下的日志信息和下载链接:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\n其中，logUrl字段指向日志文件（经过gzip压缩）的下载链接。日志文件内容格式如下：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -29967,17 +29555,8 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthSummary",
-        "description": "获取一段时间内的带宽汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的带宽数据。",
+        "description": "获取一段时间内的带宽汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。",
         "parameters": [
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
-          },
           {
             "name": "startdate",
             "in": "query",
@@ -30023,7 +29602,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -30064,26 +29643,18 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups",
-                        "customerIds"
+                        "serverGroups"
                       ]
                     }
                   }
@@ -30504,15 +30075,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -30524,7 +30086,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -30565,26 +30127,18 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups",
-                        "customerIds"
+                        "serverGroups"
                       ]
                     }
                   }
@@ -31082,15 +30636,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -31102,7 +30647,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -31143,26 +30688,18 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups",
-                        "customerIds"
+                        "serverGroups"
                       ]
                     }
                   }
@@ -31537,15 +31074,6 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
-          },
-          {
-            "name": "On-Behalf-Of",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -31557,7 +31085,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -31598,26 +31126,18 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups",
-                        "customerIds"
+                        "serverGroups"
                       ]
                     }
                   }
@@ -31990,7 +31510,7 @@
     },
     {
       "name": "加速项目管理",
-      "description": "加速项目是需要<a href=\"#tag/部署任务管理\">部署</a>到CDN Pro服务器的一个或多个加速域名的配置。一个加速项目可以有多个版本。已部署的加速项目版本无法被再次更新或<a href=\"#tag/加速项目配置验证\">验证</a>。您可以通过克隆（复制）现有版本来<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "加速项目是需要部署到CDN Pro服务器的一个或多个加速域名的配置。一个加速项目可以有多个版本。已部署的加速项目版本无法被再次更新或验证。您可以通过克隆（复制）现有版本来创建加速项目的新版本。"
     },
     {
       "name": "加速项目配置验证",
