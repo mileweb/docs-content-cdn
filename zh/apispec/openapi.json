@@ -14595,7 +14595,7 @@
           {
             "name": "startdate",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "string"
             },
@@ -14604,7 +14604,7 @@
           {
             "name": "enddate",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "string"
             },
@@ -17551,7 +17551,7 @@
           {
             "name": "startdate",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "string"
             },
@@ -17623,10 +17623,10 @@
     },
     "/cdn/report/edgeHostnameReqSummary": {
       "post": {
-        "summary": "查询调度域名汇总统计信息",
+        "summary": "查询调度域名请求数汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含按调度域名分组汇总的DNS请求数。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的DNS请求数数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
@@ -17689,7 +17689,7 @@
                       ]
                     }
                   ],
-                  "description": "响应包含按调度域名分组的DNS请求汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的DNS请求数数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -17697,26 +17697,26 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个组。如果有更多组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>的值将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型：“edgeHostname dns request”",
+                          "description": "返回的数据类型，即调度域名DNS解析请求数。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -17725,17 +17725,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含分组的DNS请求的细分。分组由请求主体确定。",
+                      "description": "按调度域名分组汇总的数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "DNS解析请求数。",
                             "items": {
                               "type": "number"
                             }
@@ -17829,7 +17829,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -17862,7 +17862,7 @@
           }
         },
         "operationId": "post-cdn-report-edgeHostnameReqSummary",
-        "description": "获取一段时间内一个或多个调度域名的DNS解析请求总数。此API允许您查看每个调度域名的实际请求数。",
+        "description": "获取一段时间内一个或多个调度域名的DNS解析请求数汇总数据。可通过该接口查询每个调度域名的请求数数据。",
         "parameters": [
           {
             "name": "startdate",
@@ -17871,7 +17871,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
             "name": "enddate",
@@ -17880,7 +17880,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
             "name": "On-Behalf-Of",
@@ -17900,11 +17900,11 @@
                 "properties": {
                   "filters": {
                     "type": "object",
-                    "description": "限制统计信息为具体的调度域名。",
+                    "description": "指定查询范围。",
                     "properties": {
                       "edgeHostnames": {
                         "type": "array",
-                        "description": "一个或多个调度域名。",
+                        "description": "指定一个或多个调度域名进行查询。",
                         "items": {
                           "type": "string"
                         }
@@ -17913,7 +17913,7 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定一个包含“EdgeHostName”的数组，以获取每个调度域名的数据。省略将只获取汇总数。",
+                    "description": "指定调度域名，按调度域名分组汇总返回数据。如未指定，则只返回所有调度域名的汇总数据。",
                     "items": {
                       "type": "string",
                       "enum": [
@@ -17944,7 +17944,7 @@
               }
             }
           },
-          "description": "您可以使用调度域名对请求进行分组"
+          "description": "在请求体中指定查询范围和分组依据。"
         },
         "tags": [
           "报表"
@@ -18019,7 +18019,7 @@
                       ]
                     }
                   ],
-                  "description": "响应包含按调度域名分组的DNS请求汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的DNS请求数数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -18027,26 +18027,26 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个组。如果有更多组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>的值将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型：“edgeHostname dns request”",
+                          "description": "返回的数据类型，即调度域名DNS解析请求数。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -18055,17 +18055,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含分组的DNS请求的细分。分组由请求主体确定。",
+                      "description": "按调度域名分组汇总的数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "DNS解析请求数。",
                             "items": {
                               "type": "number"
                             }
@@ -23022,7 +23022,7 @@
         "summary": "查询快速回源请求数",
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
@@ -23157,7 +23157,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -23190,7 +23190,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
-        "description": "返回使用我们 <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速路由功能</a>（以使连接更快更可靠）的回源请求数。",
+        "description": "查询通过<a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速回源</a>功能所产生的回源请求数。",
         "parameters": [
           {
             "name": "Report-Range",
@@ -23314,7 +23314,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -23326,7 +23326,7 @@
         "summary": "查询快速回源流量",
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
@@ -23334,7 +23334,7 @@
                   "properties": {
                     "dataName": {
                       "type": "string",
-                      "description": "数据的简要描述。"
+                      "description": "对返回数据的简要描述。"
                     },
                     "dataUnit": {
                       "type": "string",
@@ -23343,24 +23343,24 @@
                     },
                     "dataSeries": {
                       "type": "array",
-                      "description": "该时间段的数据点，包括上传和下载流量。",
+                      "description": "指定时间段的流量，包括上行和下行流量。",
                       "items": {
                         "type": "object",
-                        "description": "特定时间戳的上载和下载流量的描述",
+                        "description": "每个时间段的流量数据。",
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "RFC 3339格式日期表示时间段的开始。它始终处于<b>UTC</b>时间。例如：<code>\"timestamp\":\"2019-10-29T01:00:00Z\"</code>"
+                            "description": "RFC 3339格式的日期，表示每个时间段的开始时间，始终采用<b>UTC</b>时间。例如：<code>\"timestamp\":\"2019-10-29T01:00:00Z\"</code>"
                           },
                           "dataUp": {
                             "type": "number",
-                            "description": "表示通过快速路由功能上传到源站的流量（以MB为单位）。",
+                            "description": "表示通过快速回源传输的上行流量（以MB为单位）。",
                             "default": 0,
                             "minimum": 0
                           },
                           "dataDown": {
                             "type": "number",
-                            "description": "表示通过快速路由功能从源站下载的流量（以MB为单位）。",
+                            "description": "表示通过快速回源传输的下行流量（以MB为单位）。",
                             "default": 0,
                             "minimum": 0
                           }
@@ -23402,7 +23402,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -23435,7 +23435,7 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
-        "description": "返回使用我们 <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速路由功能</a>（以使连接更快更可靠）的回源流量。",
+        "description": "查询通过<a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速回源</a>功能传输的回源流量。",
         "parameters": [
           {
             "name": "Report-Range",
@@ -23581,7 +23581,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -24676,7 +24676,7 @@
         "summary": "查询CPU使用时间",
         "responses": {
           "200": {
-            "description": "响应包含数据。请注意，它始终处于UTC时间。",
+            "description": "返回报表数据。注意：返回信息中总是采用UTC时间。",
             "content": {
               "application/json": {
                 "schema": {
@@ -24807,7 +24807,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -24922,7 +24922,7 @@
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           }
         ],
-        "description": "获取CPU用于处理请求内容的时间（以秒为单位）。",
+        "description": "查询处理用户请求所消耗的CPU时间（以秒为单位）。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -24970,7 +24970,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -26588,13 +26588,13 @@
         "summary": "查询请求数汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含按分组汇总的请求数信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的请求数数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "requestSummaryResponse",
                   "type": "object",
-                  "description": "响应包含分组的请求汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的请求数数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -26625,26 +26625,26 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。“edge response”表示边缘流量。“fast route response”是指通过HDT产品加速的源站响应流量。<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "表示返回的数据类型。“edge response”表示边缘请求数，“fast route response”表示快速回源请求数。<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -26653,17 +26653,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含请求按哪些组划分。",
+                      "description": "按分组返回数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "请求数。",
                             "items": {
                               "type": "number"
                             }
@@ -26702,7 +26702,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -26735,7 +26735,7 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
-        "description": "获取一段时间内的请求数汇总信息。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户的请求。",
+        "description": "获取一段时间内的请求数汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的请求数。",
         "parameters": [
           {
             "name": "startdate",
@@ -26744,7 +26744,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
             "name": "enddate",
@@ -26753,7 +26753,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
             "name": "scheme",
@@ -26886,7 +26886,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -26903,7 +26903,7 @@
                 "schema": {
                   "title": "requestSummaryResponse",
                   "type": "object",
-                  "description": "响应包含分组的请求汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的请求数数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -26934,26 +26934,26 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。“edge response”表示边缘流量。“fast route response”是指通过HDT产品加速的源站响应流量。<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "表示返回的数据类型。“edge response”表示边缘请求数，“fast route response”表示快速回源请求数。<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -26962,17 +26962,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含请求按哪些组划分。",
+                      "description": "按分组返回数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "请求数。",
                             "items": {
                               "type": "number"
                             }
@@ -29436,10 +29436,10 @@
     },
     "/cdn/report/logDownload": {
       "post": {
-        "summary": "查询加速域名访问日志。",
+        "summary": "获取加速域名的访问日志",
         "responses": {
           "200": {
-            "description": "响应包含日志文件URL的数组。每个日志文件使用gzip压缩。",
+            "description": "返回日志信息和下载链接。",
             "content": {
               "application/json": {
                 "schema": {
@@ -29447,17 +29447,17 @@
                   "properties": {
                     "logs": {
                       "type": "array",
-                      "description": "描述可下载日志的对象列表。",
+                      "description": "日志信息列表。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "dateFrom": {
                             "type": "string",
-                            "description": "RFC 3339格式日期表示日志文件的开始时间。"
+                            "description": "RFC 3339格式的日期，表示日志文件的开始时间。"
                           },
                           "dateTo": {
                             "type": "string",
-                            "description": "RFC 3339格式日期表示日志文件的结束时间。"
+                            "description": "RFC 3339格式的日期，表示日志文件的结束时间。"
                           },
                           "fileSize": {
                             "type": "integer",
@@ -29466,11 +29466,11 @@
                           },
                           "logUrl": {
                             "type": "string",
-                            "description": "日志文件的URL。该文件已使用gzip压缩。有关格式的详细信息，请参阅API说明。"
+                            "description": "日志文件的下载链接。该文件已使用gzip压缩。"
                           },
                           "hostname": {
                             "type": "string",
-                            "description": "日志文件包含的加速域名。"
+                            "description": "日志文件对应的加速域名。"
                           }
                         },
                         "required": [
@@ -29509,7 +29509,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -29559,25 +29559,23 @@
             "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           },
           {
-            "name": "startdate",
             "in": "query",
-            "required": true,
+            "name": "startdate",
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 查询开始时间不得早于14天之前。"
           },
           {
-            "name": "enddate",
             "in": "query",
-            "required": true,
+            "name": "enddate",
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。",
             "schema": {
               "type": "string"
-            },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            }
           }
         ],
-        "description": "获取已部署的一个或多个加速域名的访问日志。这些日志包含2小时或更长时间之前发起的请求的数据。默认情况下，只有近14天内的日志可用，并且它们会被分成多个文件，每个文件覆盖一天的一部分时间。\n要获取加速域名的日志，必须首先通过<a href=\\\"#operation/post-cdn-report-logConfigs\\\">创建日志配置</a>以指定应用于该加速域名的日志格式。完成创建日志配置后，对内容的请求将被记录。否则，将日志可供下载。\n例如，假设您定义了如下日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n此API将返回可用日志列表，如:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nlogUrl字段包含指向gzip压缩日志文件的URL，该文件由以下行组成：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "获取已部署的一个或多个加速域名的访问日志。这些日志是2小时或更早时间之前客户端请求所产生的日志。默认情况下，只能查询近14天内的日志。这些日志被切割成多个文件供下载。\n\n要获取加速域名的日志，必须首先通过<a href=\"#operation/post-cdn-report-logConfigs\">创建日志配置</a>接口定义日志格式。注意：必须先创建日志配置，访问日志才会被收集。如未创建日志配置，则无法下载日志。\n\n假设您定义了如下的日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n调用该接口时，将返回如下的日志信息和下载链接:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\n其中，logUrl字段指向日志文件（经过gzip压缩）的下载链接。日志文件内容格式如下：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -29589,7 +29587,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "指定具体的加速域名。",
+                        "description": "指定加速域名。",
                         "minItems": 0,
                         "items": {
                           "type": "string"
@@ -29612,7 +29610,7 @@
               }
             }
           },
-          "description": "指示您需要查询其访问日志的加速域名。"
+          "description": "在请求体中指定加速域名，获取访问日志信息。"
         },
         "tags": [
           "报表"
@@ -29770,16 +29768,16 @@
     },
     "/cdn/report/bandwidthSummary": {
       "post": {
-        "summary": "查询带宽汇总统计信息",
+        "summary": "查询带宽汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含按分组汇总的流量带宽信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的带宽数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "description": "这描述了对带宽汇总报表API的响应",
+                  "description": "带宽汇总数据。",
                   "examples": [
                     {
                       "metaData": {
@@ -29831,26 +29829,26 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "返回最多10000个分组的数据。如果实际组数超过10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。“edge bandwidth”表示边缘带宽流量。",
+                          "description": "表示返回的数据类型。“edge bandwidth”指边缘带宽。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "表示返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -29859,17 +29857,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含流量按哪些组划分。分组由请求主体确定。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "带宽值。",
                             "items": {
                               "type": "number"
                             }
@@ -29930,7 +29928,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -29969,7 +29967,7 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthSummary",
-        "description": "获取一段时间内的流量带宽统计信息。您可以按加速域名或服务器组对结果进行筛选和分组。如果您是代理商，您还可以按客户ID进行筛选和分组，以区分子客户流量。",
+        "description": "获取一段时间内的带宽汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的带宽数据。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -29987,7 +29985,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
             "name": "enddate",
@@ -29996,7 +29994,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
             "name": "scheme",
@@ -30102,7 +30100,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -30119,7 +30117,7 @@
                 "schema": {
                   "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "description": "这描述了对带宽汇总报表API的响应",
+                  "description": "带宽汇总数据。",
                   "examples": [
                     {
                       "metaData": {
@@ -30171,26 +30169,26 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "返回最多10000个分组的数据。如果实际组数超过10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。“edge bandwidth”表示边缘带宽流量。",
+                          "description": "表示返回的数据类型。“edge bandwidth”指边缘带宽。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "表示返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -30199,17 +30197,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含流量按哪些组划分。分组由请求主体确定。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "带宽值。",
                             "items": {
                               "type": "number"
                             }
@@ -30312,16 +30310,16 @@
     },
     "/cdn/report/edgeStatusSummary": {
       "post": {
-        "summary": "查询边缘Cache响应状态码汇总信息",
+        "summary": "查询边缘响应状态码汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含CDN Pro边缘服务器返回的状态码汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的状态码数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "originStatusCodeSummaryResponse",
                   "type": "object",
-                  "description": "响应包含源站服务器返回的状态码的汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的状态码数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -30359,19 +30357,19 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个组。如果有更多组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "返回最多10000个分组的数据。如果实际组数超过10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "以字符串表示的HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
@@ -30387,17 +30385,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含请求按哪些组分类。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "状态码数量。",
                             "items": {
                               "type": "number"
                             }
@@ -30443,7 +30441,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -30470,7 +30468,7 @@
           }
         },
         "operationId": "post-cdn-reports-edgeStatusSummary",
-        "description": "获取一段时间内请求CDN Pro边缘服务器返回的HTTP状态码的汇总信息。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象来进一步过滤结果。此报告的数据延迟最长可达30分钟。",
+        "description": "获取一段时间内CDN Pro边缘服务器返回的HTTP状态码的汇总数据。可以使用查询参数指定时间段和协议。在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报告的数据延迟最长可达30分钟。",
         "parameters": [
           {
             "name": "startdate",
@@ -30479,7 +30477,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
             "name": "enddate",
@@ -30488,7 +30486,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
             "name": "scheme",
@@ -30521,21 +30519,40 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "reportfiltersummary",
                 "type": "object",
+                "x-tags": [
+                  "Reports"
+                ],
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "表示一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -30548,12 +30565,19 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "您可以使用以下项目的组合（最多两个）对结果进行分组：“hostnames”,“serverGroups”，“customerIds”。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -30583,7 +30607,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -30600,7 +30624,7 @@
                 "schema": {
                   "title": "originStatusCodeSummaryResponse",
                   "type": "object",
-                  "description": "响应包含源站服务器返回的状态码的汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的状态码数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -30638,19 +30662,19 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个组。如果有更多组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "返回最多10000个分组的数据。如果实际组数超过10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "以字符串表示的HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
@@ -30666,17 +30690,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含请求按哪些组分类。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "状态码数量。",
                             "items": {
                               "type": "number"
                             }
@@ -30867,13 +30891,13 @@
         "summary": "查询源站响应状态码汇总信息",
         "responses": {
           "200": {
-            "description": "响应包含源站服务器返回的状态码汇总信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的状态码数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "originStatusCodeSummaryResponse",
                   "type": "object",
-                  "description": "响应包含源站服务器返回的状态码的汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的状态码数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -30911,19 +30935,19 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个组。如果有更多组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "返回最多10000个分组的数据。如果实际组数超过10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "以字符串表示的HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
@@ -30939,17 +30963,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含请求按哪些组分类。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "状态码数量。",
                             "items": {
                               "type": "number"
                             }
@@ -30995,7 +31019,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -31022,7 +31046,7 @@
           }
         },
         "operationId": "post-cdn-reports-originStatusSummary",
-        "description": "获取一段时间内源站响应的HTTP状态码的汇总信息。使用查询参数指定时间段和协议。通过在请求中传递<i>filters</i>对象来进一步过滤结果。此报表的数据延迟最长可达30分钟。",
+        "description": "获取一段时间内源站返回的HTTP状态码的汇总数据。可以使用查询参数指定时间段和协议。在请求体中传递<i>filters</i>对象可进一步指定查询范围。此报告的数据延迟最长可达30分钟。",
         "parameters": [
           {
             "name": "startdate",
@@ -31031,7 +31055,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
             "name": "enddate",
@@ -31040,7 +31064,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
             "name": "scheme",
@@ -31073,39 +31097,65 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "reportfiltersummary",
                 "type": "object",
+                "x-tags": [
+                  "Reports"
+                ],
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  },
+                  "Group results by hostnames": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "用于过滤的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "description": "指定加速域名进行查询。可使用泛域名，如*.domain.com。如果未指定，将返回所有加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
-                        "description": "表示一个或多个服务器组。",
+                        "description": "指定serverGroups（节点组）进行查询。",
                         "items": {
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
+                            "deluxe",
                             "ultra",
                             "nearChina",
                             "ChinaStandard",
-                            "ChinaPremium",
-                            "deluxe"
+                            "ChinaPremium"
                           ]
+                        }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
                         }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "您可以使用以下项目的组合（最多两个）对结果进行分组：“hostnames”,“serverGroups”，“customerIds”。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -31135,7 +31185,7 @@
               }
             }
           },
-          "description": "请求主体可以包括用于过滤和分组结果的选项。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         },
         "tags": [
           "报表"
@@ -31152,7 +31202,7 @@
                 "schema": {
                   "title": "originStatusCodeSummaryResponse",
                   "type": "object",
-                  "description": "响应包含源站服务器返回的状态码的汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的状态码数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -31190,19 +31240,19 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个组。如果有更多组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "返回最多10000个分组的数据。如果实际组数超过10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "以字符串表示的HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "HTTP状态码列表。<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
@@ -31218,17 +31268,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含请求按哪些组分类。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "状态码数量。",
                             "items": {
                               "type": "number"
                             }
@@ -31332,13 +31382,13 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含按分组汇总的CPU使用时间信息。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括那些超出10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+            "description": "返回分组汇总的CPU使用时间数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "cpuSummaryResponse",
                   "type": "object",
-                  "description": "响应包含CPU使用时间的汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的CPU使用时间数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -31365,30 +31415,30 @@
                   "properties": {
                     "metaData": {
                       "type": "object",
-                      "description": "此对象包含描述在groups对象中返回的数据的字段。",
+                      "description": "此对象包含的字段是对groups对象中返回数据的描述。",
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。\n<table>\n<tr><th>数据名称</th><th>描述</th></tr>\n<tr><td>edge cpu time</td><td>边缘服务器的CPU使用时间</td></tr>\n<tr><td>intermediate cpu time</td><td>CDN Pro中间层服务器的CPU使用时间</td></tr>\n</table>\n <i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "表示返回的数据类型。\n<table>\n<tr><th>数据名称</th><th>描述</th></tr>\n<tr><td>edge cpu time</td><td>边缘服务器的CPU使用时间</td></tr>\n<tr><td>intermediate cpu time</td><td>中间层服务器的CPU使用时间</td></tr>\n</table>\n<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "表示返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -31401,17 +31451,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含CPU使用情况按哪些组划分。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。\n"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "数据值。",
                             "items": {
                               "type": "number"
                             }
@@ -31451,7 +31501,7 @@
           }
         },
         "operationId": "post-cdn-report-cpuSummary",
-        "description": "获取边缘服务器和中间层服务器的CPU使用时间汇总信息。",
+        "description": "获取CPU使用时间汇总信息，包括边缘服务器和中间层服务器的数据。",
         "parameters": [
           {
             "name": "startdate",
@@ -31460,7 +31510,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
             "name": "enddate",
@@ -31469,22 +31519,24 @@
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
           },
           {
-            "name": "type",
+            "name": "scheme",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string",
               "enum": [
-                "fiveminutes",
-                "hourly",
-                "daily",
-                "monthly"
-              ]
+                "http",
+                "https",
+                "all"
+              ],
+              "minLength": 0,
+              "maxLength": 5,
+              "default": "all"
             },
-            "description": "指定返回数据的粒度，支持5分钟，小时，日，月粒度。默认情况下，我们以UTC 00:00:00作为一天的开始。如果您希望指定不同的时区，可以附加时区标识，即-12、-11、-10、-9、-8、-7、-6、-5、-4、-3、-2、-1、+1、+2、+3、+4、+5、+6、+7、+8、+9、+10、+11、+12。例如，<code>type=daily+8</code>表示使用UTC+8时区指定一天的开始时间。"
+            "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
           },
           {
             "name": "On-Behalf-Of",
@@ -31582,7 +31634,7 @@
               }
             }
           },
-          "description": "在请求主体中使用过滤器以自定义结果。默认情况下，将包括所有加速域名的数据。"
+          "description": "在请求体中使用过滤器指定查询范围。默认情况下，将查询所有加速域名的数据。"
         }
       },
       "parameters": [],
@@ -31599,7 +31651,7 @@
                 "schema": {
                   "title": "cpuSummaryResponse",
                   "type": "object",
-                  "description": "响应包含CPU使用时间的汇总。它最多可以包含10000个分组。如果分组超过10000个，“isComplete”的值将为false。特殊分组“__all__”包含所有分组的总数，包括超过10000限制的分组。当“isComplete”为true时，总数是所有其他返回分组的总和。",
+                  "description": "返回分组汇总的CPU使用时间数据，最多可包含10000个分组。如果超过10000个分组，则“isComplete”的值将为false。其中，“__all__”是一个特殊分组，包含所有数据，包括超出10000上限的那些分组的数据。当“isComplete”为true时，“__all__”分组的值是其他所有分组的数据之和。",
                   "examples": [
                     {
                       "metaData": {
@@ -31626,30 +31678,30 @@
                   "properties": {
                     "metaData": {
                       "type": "object",
-                      "description": "此对象包含描述在groups对象中返回的数据的字段。",
+                      "description": "此对象包含的字段是对groups对象中返回数据的描述。",
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示开始时间。"
+                          "description": "RFC 3339格式的日期，表示查询的起始时间。"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339格式日期表示结束时间。"
+                          "description": "RFC 3339格式的日期，表示查询的结束时间。"
                         },
                         "isComplete": {
                           "type": "boolean",
-                          "description": "响应最多可包含10000个分组。如果有更多分组，<i>isComplete</i>将为<i>false</i>。"
+                          "description": "该接口最多返回10000个分组的数据。如果实际分组数量大于10000，则<i>isComplete</i>将为<i>false</i>。"
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "指示返回的数据类型。\n<table>\n<tr><th>数据名称</th><th>描述</th></tr>\n<tr><td>edge cpu time</td><td>边缘服务器的CPU使用时间</td></tr>\n<tr><td>intermediate cpu time</td><td>CDN Pro中间层服务器的CPU使用时间</td></tr>\n</table>\n <i>dataNames</i>数组中条目的顺序与响应中<i>data</i>数组返回值的顺序对应。",
+                          "description": "表示返回的数据类型。\n<table>\n<tr><th>数据名称</th><th>描述</th></tr>\n<tr><td>edge cpu time</td><td>边缘服务器的CPU使用时间</td></tr>\n<tr><td>intermediate cpu time</td><td>中间层服务器的CPU使用时间</td></tr>\n</table>\n<i>dataNames</i>数组中条目的顺序与<i>groups[].data</i>中返回值的顺序一一对应。",
                           "items": {
                             "type": "string"
                           }
                         },
                         "dataUnit": {
                           "type": "string",
-                          "description": "指示返回值的计量单位。"
+                          "description": "表示返回值的计量单位。"
                         }
                       },
                       "required": [
@@ -31662,17 +31714,17 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "此对象包含CPU使用情况按哪些组划分。",
+                      "description": "分组汇总数据。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "分组名称。“__all__” 是一个包含所有分组的特殊分组。\n"
+                            "description": "分组名称。“__all__” 是一个特殊分组，包含其它所有分组的数据。"
                           },
                           "data": {
                             "type": "array",
-                            "description": "数据值。计量单位由dataUnit字段确定。",
+                            "description": "数据值。",
                             "items": {
                               "type": "number"
                             }
@@ -31914,7 +31966,7 @@
       "startdate(summary)": {
         "name": "startdate",
         "in": "query",
-        "required": false,
+        "required": true,
         "schema": {
           "type": "string"
         },
@@ -31923,7 +31975,7 @@
       "enddate(summary)": {
         "name": "enddate",
         "in": "query",
-        "required": false,
+        "required": true,
         "schema": {
           "type": "string"
         },
