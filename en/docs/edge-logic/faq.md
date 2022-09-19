@@ -1,20 +1,20 @@
 ## Frequently Asked Questions
 
-[How is the cache time for an object determined?](</docs/edge-logic/faq-determining-cache-time-for-an-object.md>)
+[How is the cache time for an object determined?](faq-determining-cache-time-for-an-object)
 
-[How do I include query parameters, request headers, and body in the cache key?](</docs/edge-logic/faq-including-queryparam-requestheaders-in-cache-key.md>)
+[How do I include query parameters, request headers, and body in the cache key?](faq-including-queryparam-requestheaders-in-cache-key)
 
-[How do I add, modify, or delete HTTP headers?](</docs/edge-logic/faq-http-header-manipulation.md>)
+[How do I add, modify, or delete HTTP headers?](faq-http-header-manipulation)
 
-[The support (and non-support) of `Vary`](</docs/edge-logic/faq-support-of-vary.md>)
+[The support (and non-support) of `Vary`](faq-support-of-vary)
 
-[How to follow redirections from origin?](</docs/edge-logic/faq-follow-redirections-from-origin.md>)
+[How to follow redirections from origin?](faq-follow-redirections-from-origin)
 
-[China Delivery and Beian](</docs/edge-logic/faq-china-delivery-beian.md>)
+[China Delivery and Beian](faq-china-delivery-beian)
 
-[How to support WebSocket?](</docs/edge-logic/faq-websocket.md>)
+[How to support WebSocket?](faq-websocket)
 
-[What about dynamic content?](</docs/edge-logic/faq-dynamic-content.md>)
+[What about dynamic content?](faq-dynamic-content)
 
-[How are CDN Pro API calls rate limited?](</docs/edge-logic/faq-api-rate-limiting.md>)
+[How are CDN Pro API calls rate limited?](faq-api-rate-limiting)
 
