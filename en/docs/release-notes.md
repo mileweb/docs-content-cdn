@@ -15,10 +15,10 @@
 * Fixed display of role status on role details page.
 * Improved appearance of staging version in the property list page.
 * Ensured that the Getting Started link points to the help in the user’s preferred language.
-* Ensured correct behavior of Has Beian setting the in property page.
+* Ensured correct behavior of Has Beian setting in the property page.
 * Updated the error message about the purge name.
 * Fixed appearance of the upgrade page for expired trial users.
-* Ensured our partner can share certiifcates with children customers.
+* Ensured our partner can share certificates with children customers.
 * Fixed issue with creating and editing edge hostnames.
 
 
