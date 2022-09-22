@@ -133,7 +133,7 @@ To prevent CDN Pro's API servers from being overwhelmed, the CDN Pro API enforce
 of requests that customers can send per minute. If a customer sends too many requests, API rate limiting
 throttles the customer by returning error messages with HTTP status code 429.
 
-** Token Bucket Algorithm **
+* **Token Bucket Algorithm**
 
 CDN Pro uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to enforce rate limiting.
 The token bucket algorithm is based on an analogy of a fixed capacity bucket into which tokens are added at a
@@ -150,7 +150,7 @@ fixed rate of 120 tokens per minute, and the total capacity of the bucket is 45.
 "120 tokens per minute" adds 1 token  every 500 milliseconds. In other words, the refill does not wait a full
 minute to regenerate a bunch of 120 tokens.
 
-** Indicator and Error Handling **
+* **Indicator and Error Handling**
 
 After the token gets consumed, an `x-rate-limit-remaining: X` header is added to the API call’s HTTP response,
 indicating the number of tokens remaining in the bucket. This header represents the remaining quota of API requests
@@ -158,7 +158,7 @@ a customer can make at this time. Failed or malformed requests consume one token
 If there is not a sufficient number of tokens in the bucket, the API gateway returns an HTTP 429 error with
 response header `x-rate-limit-retry-after-seconds: Y` to tell the client to retry after Y seconds.
 
-** Best Practices for Avoiding Rate Limiting Errors **
+* **Best Practices for Avoiding Rate Limiting Errors**
 
 1. Check the API request history. [“GET /ngadmin/apicalls”](</apidocs#operation/get-ngadmin-apicalls>)
 shows the API calls you have made.  (The customer admin API credential is required to call this API.)
@@ -191,7 +191,7 @@ process in your code that regulates the rate of your requests so that they are d
 4. If a problem persists, contact our [technical support team](mailto:support@cdnetworks.com).
 If there is a legitimate need to increase the rate limit or burst ceiling, the technical support team will evaluate your requirements and raise the threshold.
 
-** Notes **
+* **Notes**
 
 1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The rate limits of a reseller's children are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
 
