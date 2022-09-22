@@ -1,5 +1,27 @@
 # Release Notes
 
+## September 21, 2022
+### API updates
+* Ensured search for properties with keepAliveRequests returns results.
+* Prevented service quota from being created or updated with duplicate directives.
+* Fixed error handling when updating a child of a suspended parent customer.
+* Fixed limits of customers when the grandparent customer’s limits are decreased.
+* Fixed inheritance of customer limits.
+* Updated resource usage check to consider CPU Hour usage.
+* Fixed error handling when trying to update a customer’s type.
+
+### Portal updates
+* Ensured that user with multiple roles has expected access.
+* Fixed display of role status on role details page.
+* Improved appearance of staging version in the property list page.
+* Ensured that the Getting Started link points to the help in the user’s preferred language.
+* Ensured correct behavior of Has Beian setting the in property page.
+* Updated the error message about the purge name.
+* Fixed appearance of the upgrade page for expired trial users.
+* Ensured our partner can share certiifcates with children customers.
+* Fixed issue with creating and editing edge hostnames.
+
+
 ## September 1, 2022
 ### API updates
 * Ensured that only customers with access to a shared certificate can deploy it.
