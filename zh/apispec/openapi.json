@@ -1,6 +1,6 @@
 {
   "openapi": "3.0.0",
-  "info": {
+    "info": {
     "title": "CDN Pro API Specification",
     "version": "1.0",
     "description": "CDN Pro APIs allow you to manage the CDN Pro service.",
@@ -534,6 +534,11 @@
                           "type": "string",
                           "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                           "maxLength": 65530
+                        },
+                        "tls0Rtt": {
+                          "type": "boolean",
+                          "default": false,
+                          "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
                         }
                       }
                     },
@@ -1234,6 +1239,11 @@
                     "type": "string",
                     "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
+                  },
+                  "tls0Rtt": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
                   }
                 }
               },
@@ -3379,6 +3389,11 @@
                     "type": "string",
                     "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
+                  },
+                  "tls0Rtt": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
                   }
                 }
               },
@@ -4015,6 +4030,11 @@
                         "type": "string",
                         "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                         "maxLength": 65530
+                      },
+                      "tls0Rtt": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
                       }
                     }
                   }
@@ -18608,7 +18628,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -18996,7 +19016,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -19458,7 +19478,7 @@
                         "type": "integer",
                         "default": 60,
                         "maximum": 240,
-                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                         "minimum": 1
                       }
                     },
@@ -19762,7 +19782,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -20140,7 +20160,7 @@
                         "type": "integer",
                         "default": 60,
                         "maximum": 240,
-                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Leaky_bucket\">leaky bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                         "minimum": 1
                       }
                     },
@@ -31150,19 +31170,19 @@
     },
     "/cdn/report/cpuSummary": {
       "post": {
-        "summary": "Get a summary of CPU use",
+        "summary": "Get a summary of CPU usage",
         "tags": [
           "Reports"
         ],
         "responses": {
           "200": {
-            "description": "The response contains a summary of CPU use by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "description": "The response contains a summary of CPU usage by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "cpuSummaryResponse",
                   "type": "object",
-                  "description": "The response contains a summary of CPU use. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "description": "The response contains a summary of CPU usage. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -31182,7 +31202,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge cpu time</td><td>CPU used by edge servers</td></tr>\n<tr><td>intermediate cpu time</td><td>CPU use by intermediate CDN Pro servers</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge cpu time</td><td>CPU usage by edge servers</td></tr>\n<tr><td>intermediate cpu time</td><td>CPU usage by intermediate CDN Pro servers</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
                           "items": {
                             "type": "string"
                           }
@@ -31202,7 +31222,7 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "This object contains the breakdown of CPU use by group. ",
+                      "description": "This object contains the breakdown of CPU usage by group. ",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -31272,10 +31292,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'a'. The value of the scheme parameter must be 'http', 'https' or 'all'."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "post-cdn-report-cpuSummary",
-        "description": "Obtain a summary of CPU use by edge and intermediate servers.",
+        "description": "Obtain a summary of CPU usage by edge and intermediate servers.",
         "parameters": [
           {
             "schema": {
@@ -31409,19 +31455,19 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get a summary of CPU use",
+        "summary": "Get a summary of CPU usage",
         "tags": [
           "Reports"
         ],
         "responses": {
           "200": {
-            "description": "The response contains a summary of CPU use by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "description": "The response contains a summary of CPU usage by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
             "content": {
               "application/json": {
                 "schema": {
                   "title": "cpuSummaryResponse",
                   "type": "object",
-                  "description": "The response contains a summary of CPU use. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "description": "The response contains a summary of CPU usage. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -31441,7 +31487,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge cpu time</td><td>CPU used by edge servers</td></tr>\n<tr><td>intermediate cpu time</td><td>CPU use by intermediate CDN Pro servers</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge cpu time</td><td>CPU usage by edge servers</td></tr>\n<tr><td>intermediate cpu time</td><td>CPU usage by intermediate CDN Pro servers</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
                           "items": {
                             "type": "string"
                           }
@@ -31461,7 +31507,7 @@
                     },
                     "groups": {
                       "type": "array",
-                      "description": "This object contains the breakdown of CPU use by group. ",
+                      "description": "This object contains the breakdown of CPU usage by group. ",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -31531,10 +31577,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'a'. The value of the scheme parameter must be 'http', 'https' or 'all'."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "get-cdn-report-cpuSummary",
-        "description": "Obtain a summary of CPU use by edge and intermediate servers.",
+        "description": "Obtain a summary of CPU usage by edge and intermediate servers.",
         "parameters": [
           {
             "schema": {
@@ -31659,14 +31731,14 @@
                             "type": "string",
                             "description": "Indicates the region of the origin shield. It is typically an ISO-3166-1 code representing a country. When choosing an origin shield for your property, it is best to select one closer to your origin servers.\nUse of a shield located in the \"cn\" region (China) requires your property to have 'hasBeian' set to true which means all of its hostnames have an ICP Beian license required by the Chinese government."
                           },
-                          "ipv4": {
+                          "ipV4": {
                             "type": "array",
                             "description": "A list of IPv4 addresses used by the shield. If your origin server has an access control list, include these IP addresses.",
                             "items": {
                               "type": "string"
                             }
                           },
-                          "ipv6": {
+                          "ipV6": {
                             "type": "array",
                             "description": "A list of IPv6 addresses used by the shield. If your origin server has an access control list, include these IP addresses.",
                             "items": {
@@ -31686,8 +31758,8 @@
                           "name",
                           "id",
                           "region",
-                          "ipv4",
-                          "ipv6",
+                          "ipV4",
+                          "ipV6",
                           "lastUpdated",
                           "effectiveDate"
                         ]
