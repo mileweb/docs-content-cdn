@@ -183,20 +183,6 @@
                     "description": "加速项目的描述。",
                     "maxLength": 250
                   },
-                  "legacyType": {
-                    "type": "string",
-                    "title": "legacyType",
-                    "x-stoplight": {
-                      "id": "5kat9d5amjcp7"
-                    },
-                    "description": "服务类型，即全站加速，网页加速，点播加速及下载加速。",
-                    "enum": [
-                      "wsapro",
-                      "webpro",
-                      "vodpro",
-                      "downloadpro"
-                    ]
-                  },
                   "version": {
                     "title": "propertyConfiguration",
                     "type": "object",
@@ -298,7 +284,7 @@
                       "edgeLogic": {
                         "type": "string",
                         "maxLength": 65530,
-                        "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
+                        "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
                       },
                       "hasBeian": {
                         "type": "boolean",
@@ -403,7 +389,7 @@
                             },
                             "tlsCertificateId": {
                               "type": "string",
-                              "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
+                              "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
                             }
                           }
                         }
@@ -465,7 +451,7 @@
                       },
                       "tlsCertificateId1": {
                         "type": "number",
-                        "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                        "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                       },
                       "videoSeek": {
                         "type": "object",
@@ -592,7 +578,7 @@
                       },
                       "disableCertAutomation": {
                         "type": "boolean",
-                        "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
+                        "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                         "default": false
                       },
                       "cacheKeyUri": {
@@ -610,7 +596,7 @@
                         "properties": {
                           "http": {
                             "type": "array",
-                            "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                            "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -619,7 +605,7 @@
                           },
                           "https": {
                             "type": "array",
-                            "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                            "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -630,7 +616,7 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                        "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                         "maxLength": 65530
                       }
                     }
@@ -638,7 +624,6 @@
                 },
                 "required": [
                   "name",
-                  "legacyType",
                   "version"
                 ]
               },
@@ -712,7 +697,17 @@
           },
           "description": "在请求体中定义加速项目的名称以及需要部署到CDN Pro服务器的所有配置。"
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -733,7 +728,7 @@
                       "items": {
                         "title": "propertyListEntry",
                         "type": "object",
-                        "description": "加速项目列表。",
+                        "description": "表示从获取加速项目列表API返回的加速项目。",
                         "x-examples": {
                           "example-1": {
                             "value": {
@@ -786,20 +781,6 @@
                             "type": "integer",
                             "description": "加速项目的最新版本。"
                           },
-                          "legacyType": {
-                            "type": "string",
-                            "title": "legacyType",
-                            "x-stoplight": {
-                              "id": "5kat9d5amjcp7"
-                            },
-                            "description": "服务类型，即全站加速，网页加速，点播加速及下载加速。",
-                            "enum": [
-                              "wsapro",
-                              "webpro",
-                              "vodpro",
-                              "downloadpro"
-                            ]
-                          },
                           "stagingVersion": {
                             "type": "object",
                             "description": "描述部署到演练环境的加速项目版本。",
@@ -835,6 +816,10 @@
                                 }
                               }
                             }
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "description": "如果您是作为代理商通过Report-Range请求头获取加速项目列表，则该字段表示拥有该加速项目的子客户ID。"
                           }
                         },
                         "required": [
@@ -842,8 +827,7 @@
                           "name",
                           "creationTime",
                           "lastUpdateTime",
-                          "latestVersion",
-                          "legacyType"
+                          "latestVersion"
                         ]
                       }
                     },
@@ -1026,18 +1010,28 @@
             "description": "返回结果的排序依据。"
           },
           {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
             "schema": {
               "type": "string",
+              "default": "self-only",
               "enum": [
-                "wsapro",
-                "webpro",
-                "vodpro",
-                "downloadpro"
+                "self-only",
+                "self+children",
+                "children-only"
               ]
             },
-            "in": "query",
-            "name": "legacyType",
-            "description": "根据服务类型查询加速项目。服务类型包括全站加速，网页加速，点播加速，下载加速。"
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
           }
         ],
         "tags": [
@@ -1089,6 +1083,10 @@
                       "type": "string",
                       "description": "加速项目的描述。"
                     },
+                    "ownerCustomerId": {
+                      "type": "integer",
+                      "description": "拥有此加速项目的客户ID。"
+                    },
                     "versionInProduction": {
                       "type": "integer",
                       "description": "部署到生产环境的加速项目版本。如果尚未部署加速项目，则将省略该字段。"
@@ -1108,20 +1106,6 @@
                     "versions": {
                       "type": "integer",
                       "description": "加速项目的版本数量。"
-                    },
-                    "legacyType": {
-                      "type": "string",
-                      "title": "legacyType",
-                      "x-stoplight": {
-                        "id": "5kat9d5amjcp7"
-                      },
-                      "description": "服务类型，即全站加速，网页加速，点播加速及下载加速。",
-                      "enum": [
-                        "wsapro",
-                        "webpro",
-                        "vodpro",
-                        "downloadpro"
-                      ]
                     }
                   },
                   "required": [
@@ -1172,7 +1156,17 @@
         },
         "description": "查询某个加速项目的信息，包括已创建的版本数以及哪些版本已部署等。",
         "operationId": "queryProperty",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -1262,7 +1256,7 @@
             }
           }
         },
-        "description": "该接口用于更新加速项目的名称和描述。该操作不会创建加速项目新版本，也不会更新现有的加速项目版本。\n如果要更改加速项目的配置，请调用“更新加速项目版本”接口。",
+        "description": "该接口用于更新加速项目的名称和描述。该操作不会创建加速项目新版本，也不会更新现有的加速项目版本。\n如果要更改加速项目的配置，请调用<a href=\"#operation/updatePropertyVersion\">更新加速项目版本</a>接口。",
         "operationId": "updateProperty",
         "requestBody": {
           "content": {
@@ -1295,7 +1289,17 @@
           },
           "description": "指定加速项目的新名称或描述。"
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -1387,7 +1391,17 @@
             }
           }
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -1600,6 +1614,15 @@
               "minimum": 0
             },
             "description": "查询起始位置。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "tags": [
@@ -1815,7 +1838,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
+                    "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -1920,7 +1943,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
+                          "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
                         }
                       }
                     }
@@ -1982,7 +2005,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -2109,7 +2132,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
+                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -2127,7 +2150,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -2136,7 +2159,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -2147,7 +2170,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -2176,7 +2199,17 @@
           },
           "description": "在请求体中指定加速项目配置。"
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -2361,7 +2394,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 65530,
-                          "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
+                          "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -2466,7 +2499,7 @@
                               },
                               "tlsCertificateId": {
                                 "type": "string",
-                                "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
+                                "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
                               }
                             }
                           }
@@ -2528,7 +2561,7 @@
                         },
                         "tlsCertificateId1": {
                           "type": "number",
-                          "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                          "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                         },
                         "videoSeek": {
                           "type": "object",
@@ -2655,7 +2688,7 @@
                         },
                         "disableCertAutomation": {
                           "type": "boolean",
-                          "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
+                          "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                           "default": false
                         },
                         "cacheKeyUri": {
@@ -2673,7 +2706,7 @@
                           "properties": {
                             "http": {
                               "type": "array",
-                              "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                              "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -2682,7 +2715,7 @@
                             },
                             "https": {
                               "type": "array",
-                              "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                              "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -2693,7 +2726,7 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                          "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                           "maxLength": 65530
                         }
                       }
@@ -2841,7 +2874,17 @@
           }
         },
         "summary": "获取加速项目版本详细信息",
-        "parameters": []
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ]
       },
       "parameters": [
         {
@@ -3052,7 +3095,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "自定义边缘逻辑。参考边缘逻辑介绍。"
+                    "description": "自定义边缘逻辑。参考<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑介绍</a>。"
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -3157,7 +3200,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "用于验证源站服务器的证书，该证书同样必须被部署。"
+                          "description": "用于验证源站服务器的<a href=\"#tag/证书管理\">证书</a>，该证书同样必须被部署。"
                         }
                       }
                     }
@@ -3219,7 +3262,7 @@
                   },
                   "tlsCertificateId1": {
                     "type": "number",
-                    "description": "指该加速项目用到的证书ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
+                    "description": "指该加速项目用到的<a href=\"#tag/证书管理\">证书</a>ID。仅设置<i>tlsCertificateId1</i>字段而不设置<i>tlsCertificateId</i>字段是无效的。如果未设置<i>tlsCertificateId</i>，则不会为此加速项目启用HTTPS。此功能允许您指定两个不同类型的证书，即一个RSA，一个EC。如果指定了两个相同类型的证书，则将忽略<i>tlsCertificateId</i>指定的证书。"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -3346,7 +3389,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考“创建证书”接口中<i>autoRenew</i>字段的说明。",
+                    "description": "默认情况下，CDN Pro控制/.well-known/{acme-challenge, pki-validation}目录下的内容，以支持加速项目的证书自动更新功能。如果您需要自己在源站管理这两个目录，例如，为了实现您自己的证书自动更新机制，您可以将此字段设置为<i>true</i>来禁用默认行为。关于证书自动更新的更多信息，请参考<a href=\"#operation/createCertificate\">创建证书</a>接口中<i>autoRenew</i>字段的说明。",
                     "default": false
                   },
                   "cacheKeyUri": {
@@ -3364,7 +3407,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTP请求的端口列表（80端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -3373,7 +3416,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用“获取系统配置”接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
+                        "description": "指定用于处理HTTPS请求的端口列表（443端口除外）。可通过调用<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口来查询系统支持的端口。如果您需要开通其他端口，请联系技术支持。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -3384,7 +3427,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "此字段可用来自定义边缘逻辑，控制负载均衡器的行为。支持使用 边缘逻辑指令中的部分指令。请参考“获取系统配置”接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考“获取系统配置”接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
+                    "description": "此字段可用来自定义<a href=\"/cdn/docs/edge-logic/intro\">边缘逻辑</a>，控制负载均衡器的行为。支持使用<a href=\"/cdn/docs/edge-logic/supported-directives\"> 边缘逻辑指令</a>中的部分指令。请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>baseLbDirectives</i>字段所列出的负载均衡基础指令。目前，这些基础指令包括“if”、“else”、“elseif”、“set”、“return”、“add_header”、“deny”、“allow”、“access_log_sampling”和“proxy_set_headers”。此外，我们还支持一些高级指令，请参考<a href=\"#operation/get-cdn-systemConfigs\">获取系统配置</a>接口中<i>advancedLbDirectives</i>字段所列出的负载均衡高级指令。如果您需要使用这些高级指令，请联系技术支持。\n\n<br/>示例：<br/>\n<code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
                     "maxLength": 65530
                   }
                 }
@@ -3411,7 +3454,17 @@
           },
           "description": "在请求体中指定要更新的加速项目配置。"
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -3483,7 +3536,17 @@
         },
         "operationId": "delete-cdn-properties-propertyID-versions-version",
         "description": "删除一个加速项目版本。",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          }
+        ],
         "tags": [
           "加速项目管理"
         ]
@@ -8871,6 +8934,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -9235,6 +9322,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -9593,6 +9704,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -9951,6 +10086,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -10493,6 +10652,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -10829,6 +11012,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -11431,6 +11638,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -11718,6 +11949,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -12147,6 +12402,30 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ]
       }
@@ -12302,19 +12581,19 @@
         "summary": "创建一个刷新请求",
         "responses": {
           "201": {
-            "description": "刷新请求被创建。<i>Location</i>头部包含对任务的引用。调用<a href=\"#operation/queryPurgeStatus\">Get Purge Request status API</a> 来检查其状态。",
+            "description": "刷新请求创建成功，返回<i>Location</i>响应头。可调用<a href=\"#operation/queryPurgeStatus\">获取刷新请求详细信息</a>接口来查看任务执行状态。",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "Location头是一个表示新的刷新请求的URL，例如，<code>Location: http://ngapi.cdnetworks.com/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "description": "新创建的刷新请求的URL，例如，<code>Location: http://ngapi.cdnetworks.com/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
                 "required": true
               }
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -12352,7 +12631,7 @@
             }
           }
         },
-        "description": "创建刷新请求以强制刷新存储在CDN Pro缓存服务器中的内容。您可能希望这样做当您只是更新源服务器上的内容，并希望访问者立即看到更改，而不是根据属性配置中定义的时间表等待更新传播的时候。",
+        "description": "创建一个刷新请求来强制刷新存储在CDN Pro缓存服务器中的内容。当您更新了源站的内容，并希望访客立即看到更新后的内容，您可以创建一个刷新请求立即刷新内容。",
         "operationId": "createPurge",
         "requestBody": {
           "content": {
@@ -12362,11 +12641,11 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "刷新请求的说明"
+                    "description": "刷新请求的说明。"
                   },
                   "fileUrls": {
                     "type": "array",
-                    "description": "要刷新的文件的URL。文件URL不应该包含星号字符“*”。如果URL中的目录或文件名包含百分号'%'，请确保对其进行编码。URL长度不超过2048个字符。",
+                    "description": "要刷新的文件的URL。URL不能包含星号字符“*”。如果URL中的目录或文件名包含'%'等特殊符号，需要先进行URL编码。每个URL长度不能超过2048个字符。",
                     "items": {
                       "type": "string",
                       "maxLength": 2048,
@@ -12375,7 +12654,7 @@
                   },
                   "fileHeaders": {
                     "type": "array",
-                    "description": "如果文件的缓存键依赖于请求头，则可以指定用于刷新缓存文件的一个版本的头值。相同的头值集将应用于<i>fileUrls</i>中的所有条目。",
+                    "description": "如果文件的缓存键与请求头相关，则可以指定请求头和值来刷新相应的缓存文件。此处指定的请求头和值将应用于<i>fileUrls</i>中的所有条目。",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -12393,7 +12672,7 @@
                   "dirUrls": {
                     "type": "array",
                     "maxItems": 20,
-                    "description": "要刷新的URL。URL必须以<i>http://</i> 或者 <i>https://</i>开头并且最多可包含2048个字符。 使用'\\*'字符可以刷新多个文件或目录。如果一个URL有多个星号字符集，只有最后一个'\\*'或'\\*\\*'将被视为通配符。URL中更前面的'\\*'的其他实例将被视为文字字符'*'。\n<table><tr><th>例子</th><th>描述</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>刷新单个目录的所有变体，但不要刷新其子目录或文件。如果使用自定义缓存键，则可能存在变体。</td></tr>\n<tr><td>http://test.domain2.com/mydir/**</td><td>刷新缓存键以<i>http://test.domain2.com/mydir/</i>开头的所有文件和子目录</td></tr>\n<tr><td>http://test.domain2.com/mydir/*</td><td>刷新目录中的所有文件，但不包括子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>刷新所有以.jpg文件扩展名结尾的缓存条目。不会刷新http://test.domain2.com/mydir/ 的子目录。 </td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>刷新以字母“a”开头的所有文件，但不包括子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>刷新以字母“a”开头的所有文件和子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>刷新“a.jpg”的所有变体。如果使用自定义缓存键，则可能存在变体。</td></tr>\n<tr><td>http://test.domain2.com/my**jpg</td><td>刷新缓存键以 <i>http://test.domain2.com/my</i> 开头并以后缀 <i>jpg</i> 结尾的所有条目。“**”可以匹配路径中的任何内容，包括其他子目录。例如，http://test.domain2.com/mydirectory/picture.jpg 将被刷新。</td></tr>\n</table>\n如果URL中的目录或文件名包含百分号'%'，请确保对其进行编码。",
+                    "description": "要刷新的目录的URL。URL必须以<i>http://</i> 或者 <i>https://</i>开头，每条URL最多只能包含2048个字符。 在URL中使用'\\*'字符可以匹配多个文件或目录。如果一条URL中带有多组'\\*'，则只有最后一个'\\*'或'\\*\\*'会被当成通配符来进行匹配，其它的'\\*'只会被当成普通字符。\n<table><tr><th>示例</th><th>描述</th></tr>\n<tr><td>http://test.domain2.com/mydir</td><td>刷新单个目录的所有变体，但不包括其子目录或文件。当您自定义了缓存键时，则可能存在变体。</td></tr>\n<tr><td>http://test.domain2.com/mydir/**</td><td>刷新缓存键以<i>http://test.domain2.com/mydir/</i>开头的所有文件和子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/*</td><td>刷新目录中的所有文件，但不包括子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/*.jpg</td><td>刷新所有以.jpg文件扩展名结尾的缓存，但不会刷新http://test.domain2.com/mydir/ 的子目录。 </td></tr>\n<tr><td>http://test.domain2.com/mydir/a*</td><td>刷新以字母“a”开头的所有文件，但不包括子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/a**</td><td>刷新以字母“a”开头的所有文件和子目录。</td></tr>\n<tr><td>http://test.domain2.com/mydir/a.jpg</td><td>刷新“a.jpg”文件的所有变体。当您自定义了缓存键时，则可能存在变体。</td></tr>\n<tr><td>http://test.domain2.com/my**jpg</td><td>刷新缓存键以 <i>http://test.domain2.com/my</i> 开头并以后缀 <i>jpg</i> 结尾的所有条目。“**”可以匹配路径中的任何内容，包括其他子目录。例如，http://test.domain2.com/mydirectory/picture.jpg 将被刷新。</td></tr>\n</table>\n如果URL中的目录或文件名包含百分号'%'等特殊符号时，请确保先进行URL编码。",
                     "items": {
                       "type": "string",
                       "minLength": 10,
@@ -12407,7 +12686,7 @@
                       "delete",
                       "invalidate"
                     ],
-                    "description": "它控制缓存文件和目录是否应该从CDN Pro服务器中完全删除(delete)或标记为无效(invalidate)。"
+                    "description": "指定刷新类型，包括完全删除(delete)和标记为无效(invalidate)。"
                   },
                   "target": {
                     "type": "string",
@@ -12423,7 +12702,7 @@
                   },
                   "regexPatterns": {
                     "type": "array",
-                    "description": "用于匹配缓存键的正则表达式模式。\n每种格式必须以以下格式开头：\n<i>{scheme}://{hostname}/</i>. {scheme} can be <i>http</i>, <i>https</i>, or <i>any</i>, 匹配任何方案。\n示例：\n<code>https://test.domain.com/my.*\\.(jpg|png)\\？q=</code>\n<br />\n出于性能考虑，以下限制适用：\n<ul\n<li>（加速）域名后面的正则表达式模式最多可以包含126个字符。\n</li>\n<li>最多可包含两个无限制的量词(“*”、“+”或“，}”)。</li>\n<li>限定符的上限不能超过59，例如<code>{1，59}</code></li>\n</ul>",
+                    "description": "用于匹配缓存键的正则表达式。\n每个表达式必须以\n<i>{协议}://{域名}/</i> 格式开头。其中，{协议} 可以是 <i>http</i>, <i>https</i>，或<i>any</i>（表示不限协议）。\n示例：\n<code>https://test.domain.com/my.*\\.(jpg|png)\\？q=</code>\n<br/>\n出于性能考虑，使用正则表达式有以下限制：\n<ul>\n<li>在域名后面的正则表达式最多只能包含126个字符。\n</li>\n<li>最多只能包含两个限定符(“*”、“+”或“,}”)。</li>\n<li>限定符的上限不能超过59，例如<code>{1,59}</code></li>\n</ul>",
                     "maxItems": 2,
                     "items": {
                       "type": "string"
@@ -12464,7 +12743,7 @@
               }
             }
           },
-          "description": "请求体用于指定要刷新的文件和目录、执行刷新的类型以及受影响的环境。\n为了确保刷新文件的所有变体，请将URL放入<i>dirUrls</i>列表中。\n如果一个文件由于源站的Vary头而缓存了多个副本，您还必须通过将URL放入<i>dirUrls</i>列表中来刷新它。\n如果您是代理商，您可以使用此API帮助刷新子客户的文件或目录。"
+          "description": "在请求体中指定要刷新的文件和目录、刷新的类型以及部署环境。\n如果一个文件由于源站的Vary头而缓存了多个副本，需要通过目录方式进行刷新，即把文件URL放入<i>dirUrls</i>列表中来进行刷新。"
         },
         "tags": [
           "内容管理"
@@ -12474,7 +12753,7 @@
         "summary": "获取刷新请求列表",
         "responses": {
           "200": {
-            "description": "响应包含一个刷新请求列表。",
+            "description": "返回刷新请求列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -12482,7 +12761,7 @@
                   "properties": {
                     "count": {
                       "type": "integer",
-                      "description": "匹配查询参数中指定的条件的刷新请求的总数。如果指定了<limit>参数， <i>purgeRequests</i> 中的实际条目数可能会更少。",
+                      "description": "刷新请求的总数。该数值取决于查询参数。",
                       "minimum": 0
                     },
                     "purgeRequests": {
@@ -12493,15 +12772,15 @@
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "与刷新请求相关联的ID。你可以调用<a href=\"#operation/queryPurgeStatus\">Query purge request status API</a> 来获得关于它的更多信息。"
+                            "description": "刷新请求的ID。您可以调用<a href=\"#operation/queryPurgeStatus\">获取刷新请求详细信息</a>接口来获得更多信息。"
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "RFC 3339日期，表示刷新请求的创建时间。"
+                            "description": "RFC 3339格式的日期，表示刷新请求的创建时间。"
                           },
                           "hostnames": {
                             "type": "array",
-                            "description": "受刷新请求影响的（加速）域名。",
+                            "description": "刷新请求涉及的加速域名。",
                             "items": {
                               "type": "string"
                             }
@@ -12509,12 +12788,12 @@
                           "fileEntries": {
                             "type": "integer",
                             "minimum": 0,
-                            "description": "属于刷新请求的文件URL数量。"
+                            "description": "刷新请求中文件URL的数量。"
                           },
                           "dirEntries": {
                             "type": "integer",
                             "minimum": 0,
-                            "description": "属于刷新请求的目录URL数量。目录刷新请求数",
+                            "description": "刷新请求中目录URL的数量。",
                             "maximum": 20
                           },
                           "target": {
@@ -12523,11 +12802,11 @@
                               "staging",
                               "production"
                             ],
-                            "description": "指示刷新是在演练环境中还是在生产环境中。\n"
+                            "description": "刷新请求对应的环境，即演练环境或生产环境。"
                           },
                           "successRate": {
                             "type": "number",
-                            "description": "指示刷新请求完成的百分比。",
+                            "description": "刷新请求任务的成功率。",
                             "minimum": 0,
                             "maximum": 100
                           },
@@ -12538,33 +12817,33 @@
                               "inprogress",
                               "finished"
                             ],
-                            "description": "指示刷新请求的状态。"
+                            "description": "刷新请求的执行状态，包括等待中，进行中，已完成等状态。"
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "RFC 3339日期，指示刷新完成的时间。如果刷新还在进行，它可能是空的。"
+                            "description": "RFC 3339格式的日期，表示刷新完成的时间。如果刷新还在进行中，则返回空值。"
                           },
                           "apiRequestId": {
                             "type": "string",
-                            "description": "对应的API请求ID。"
+                            "description": "API请求ID。"
                           },
                           "apiAccountId": {
                             "type": "string",
-                            "description": "用于创建刷新请求的API接口的ID。\n该值仅当使用 <a href=\"#operation/post-ngadmin-apiAccounts\">our /ngadmin/apiAccounts endpoint</a>创建接口帐户时才设置。"
+                            "description": "调用接口创建刷新请求的API账号的ID。"
                           },
                           "regexEntries": {
                             "type": "integer",
                             "minimum": 0,
-                            "description": "作为刷新请求一部分的正则表达式模式数。"
+                            "description": "刷新请求中正则表达式的条数。"
                           },
                           "variedFiles": {
                             "type": "integer",
                             "minimum": 0,
-                            "description": "缓存到源站的Vary头部的具有多个副本的文件数量。此类文件的刷新将自动转换为<i>directory</i>刷新，并计入目录刷新配额。\n"
+                            "description": "刷新请求中，因源站Vary头部而缓存了多个副本的文件的数量。此类文件的刷新将按照目录方式刷新，并计入目录刷新配额。"
                           },
                           "ownerCustomerId": {
                             "type": "integer",
-                            "description": "发出刷新请求的客户ID。只有当Report-Range头部为children-only或self+children时，该字段才会出现。\n",
+                            "description": "发起刷新请求的客户账号的ID。只有当Report-Range请求头为children-only或self+children时，才返回该字段。\n",
                             "minimum": 1
                           }
                         },
@@ -12637,7 +12916,7 @@
             }
           },
           "400": {
-            "description": "无效请求。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -12676,7 +12955,7 @@
           }
         },
         "operationId": "getPurgeRequestList",
-        "description": "获取刷新请求列表。通过指定查询参数来过滤列表。",
+        "description": "获取刷新请求列表。",
         "parameters": [
           {
             "schema": {
@@ -12684,7 +12963,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339日期，表示时间段的开始。必须为UTC时间，如“2019-11-01T01:00:00Z”。"
+            "description": "RFC 3339格式的日期，表示查询的开始时间。必须为UTC时间，如“2019-11-01T01:00:00Z”。"
           },
           {
             "schema": {
@@ -12694,7 +12973,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339日期，表示时间段的结束。必须为UTC时间，如“2019-11-01T01:00:00Z”。"
+            "description": "RFC 3339格式的日期，表示查询的结束时间。必须为UTC时间，如“2019-11-01T01:00:00Z”。"
           },
           {
             "name": "offset",
@@ -12729,7 +13008,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "控制返回刷新请求的顺序。默认情况下，首先返回最近提交的请求。"
+            "description": "返回结果的排序依据。"
           },
           {
             "schema": {
@@ -12742,7 +13021,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "刷新请求的顺序。默认情况是首先返回最近的刷新请求。"
+            "description": "返回结果的排序顺序。默认按刷新请求的创建时间降序排序。"
           },
           {
             "schema": {
@@ -12750,7 +13029,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "该值将用于匹配（加速）域名和刷新任务ID，以限制返回的刷新请求。"
+            "description": "根据搜索关键字匹配加速域名和刷新任务的ID进行过滤。"
           },
           {
             "name": "On-Behalf-Of",
@@ -12771,7 +13050,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "刷新请求的目标环境。默认情况下，返回所有内容。"
+            "description": "根据部署环境来查询刷新请求。默认返回所有环境的刷新请求。"
           },
           {
             "schema": {
@@ -12783,7 +13062,7 @@
             },
             "in": "query",
             "name": "action",
-            "description": "刷新请求的类型。默认情况下，返回所有内容。"
+            "description": "刷新请求的类型。默认返回所有类型的刷新请求。"
           },
           {
             "schema": {
@@ -12793,7 +13072,7 @@
             },
             "in": "query",
             "name": "maxSuccessRate",
-            "description": "一个十进制值，指示刷新请求返回的最大成功率。默认情况下，返回所有内容。"
+            "description": "指定最大成功率来查询刷新任务，以十进制值表示。默认返回所有刷新请求。"
           },
           {
             "name": "Report-Range",
@@ -13533,13 +13812,13 @@
         }
       ],
       "get": {
-        "summary": "获取刷新请求状态",
+        "summary": "获取刷新请求详细信息",
         "tags": [
           "内容管理"
         ],
         "responses": {
           "200": {
-            "description": "响应包含关于刷新请求的详细信息。\n",
+            "description": "返回刷新请求的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13570,7 +13849,7 @@
                     },
                     "target": {
                       "type": "string",
-                      "description": "指示刷新是在演练环境中还是在生产环境中。",
+                      "description": "刷新任务对应的环境，即演练环境中或生产环境。",
                       "enum": [
                         "staging",
                         "production"
@@ -13578,34 +13857,34 @@
                     },
                     "submissionTime": {
                       "type": "string",
-                      "description": "指示刷新请求创建时间的RFC 3339日期。"
+                      "description": "RFC 3339格式的日期，表示刷新请求的创建时间。"
                     },
                     "successRate": {
                       "type": "number",
-                      "description": "指示刷新请求完成的百分比。",
+                      "description": "刷新请求任务的成功率。",
                       "minimum": 0,
                       "maximum": 100
                     },
                     "fileHeaders": {
                       "type": "array",
-                      "description": "如果文件的缓存键依赖于请求头，则可以指定用于刷新缓存文件的一个版本的头值。相同的头值集将应用于<i>fileUrls</i>中的所有条目。\n",
+                      "description": "如果文件的缓存键与请求头相关，则可以指定请求头和值来刷新相应的缓存文件。此处指定的请求头和值将应用于<i>fileUrls</i>中的所有条目。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "name": {
                             "type": "string",
-                            "description": "HTTP头部名称"
+                            "description": "HTTP头部名称。"
                           },
                           "value": {
                             "type": "string",
-                            "description": "HTTP头部值"
+                            "description": "HTTP头部值。"
                           }
                         }
                       }
                     },
                     "status": {
                       "type": "string",
-                      "description": "指示刷新请求的状态。",
+                      "description": "刷新请求的任务执行状态，包括等待中，执行中，已完成等状态。",
                       "enum": [
                         "waiting",
                         "inprogress",
@@ -13618,43 +13897,45 @@
                         "delete",
                         "invalidate"
                       ],
-                      "description": "它控制缓存文件和目录是否应该从CDN Pro服务器中完全删除(delete)或标记为无效(invalidate)。"
+                      "description": "刷新请求的类型，包括完全删除(delete)和标记为无效(invalidate)。"
                     },
                     "finishTime": {
                       "type": "string",
-                      "description": "RFC 3339日期，指示刷新完成的时间。如果刷新还在进行，它可能是空的。"
+                      "description": "RFC 3339格式的日期，表示刷新任务完成的时间。如果刷新还在进行中，则返回空值。"
                     },
                     "apiRequestId": {
                       "type": "string",
-                      "description": "对应的API请求ID。"
+                      "description": "API请求ID。"
                     },
                     "customerId": {
                       "type": "integer",
-                      "description": "被刷新文件或目录的客户ID。",
+                      "description": "被刷新的文件或目录所归属的的客户账号的ID。",
                       "minimum": 1
                     },
                     "dirHeaders": {
                       "type": "array",
-                      "description": "如果目录的缓存键依赖于请求头，则可以指定用于刷新缓存目录的一个版本的头值。同样一组报头值将应用于 <i>dirUrls</i>中的所有条目。",
+                      "description": "如果目录的缓存键与请求头相关，则可以指定请求头和值来刷新相应的缓存目录。此处指定的请求头和值将应用于<i>dirUrls</i>中的所有条目。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "HTTP头部名称。"
                           },
                           "value": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "HTTP头部值。"
                           }
                         }
                       }
                     },
                     "impersonatingParentCustomerId": {
                       "type": "integer",
-                      "description": "如果代理商代表子客户执行刷新，那么将出现此字段并指示代理商的ID。如果代理商代表子客户执行刷新，那么将出现此字段并指示代理商的ID。"
+                      "description": "如果代理商代表子客户执行刷新，则通过该字段返回代理商账号的ID。"
                     },
                     "apiAccountId": {
                       "type": "string",
-                      "description": "用于创建刷新请求的API帐户的ID。该值仅在API帐户使用our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>时设置。"
+                      "description": "调用接口创建刷新请求的API账号的ID。"
                     },
                     "webhook": {
                       "type": "string",
@@ -13715,7 +13996,7 @@
             }
           },
           "404": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13741,7 +14022,7 @@
             }
           }
         },
-        "description": "获取有关刷新请求的信息，包括关联的（加速）域名和状态。",
+        "description": "获取刷新请求的详细信息，包括涉及的加速域名和刷新任务的执行状态等。",
         "operationId": "queryPurgeStatus",
         "parameters": [
           {
@@ -13758,13 +14039,13 @@
     },
     "/cdn/purges/purgeSummary": {
       "get": {
-        "summary": "获取刷新摘要",
+        "summary": "获取刷新请求的汇总信息",
         "tags": [
           "内容管理"
         ],
         "responses": {
           "200": {
-            "description": "该响应总结了在该时间段内发出的刷新请求的数量。",
+            "description": "返回指定时间段内的刷新请求的汇总信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13777,33 +14058,33 @@
                     },
                     "fileRequests": {
                       "type": "integer",
-                      "description": "带有非空fileURL的purge API请求数。",
+                      "description": "包含了文件刷新类型的刷新请求的数量。",
                       "minimum": 0
                     },
                     "dirRequests": {
                       "type": "integer",
-                      "description": "带有非空dirURL的purge API请求数。",
+                      "description": "包含了目录刷新类型的刷新请求的数量。",
                       "minimum": 0
                     },
                     "fileEntries": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "刷新请求中fileURL条目的总数。"
+                      "description": "刷新请求中文件（fileURL）条目的总数。"
                     },
                     "dirEntries": {
                       "type": "integer",
-                      "description": "刷新请求中dirURL条目的总数。",
+                      "description": "刷新请求中目录（dirURL）条目的总数。",
                       "minimum": 0
                     },
                     "regexRequests": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "带有非空regexPatterns的刷新API请求的数量。"
+                      "description": "包含了正则表达式刷新类型的刷新请求的数量。"
                     },
                     "regexEntries": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "刷新请求中regexPatterns条目的总数。"
+                      "description": "刷新请求中正则表达式条目的总数。"
                     }
                   }
                 },
@@ -13824,7 +14105,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看返回体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13863,7 +14144,7 @@
           }
         },
         "operationId": "queryPurgeSummary",
-        "description": "返回在某个时间段内发出的刷新请求的摘要。查询参数允许您指定时间范围和目标环境。",
+        "description": "查询某个时间范围内的刷新请求的汇总信息。可通过查询参数指定时间范围和目标环境。",
         "parameters": [
           {
             "schema": {
@@ -13871,7 +14152,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339日期，表示时间段的开始。时间必须使用UTC时区指定；它不能是偏移量。例子：<code>startdate=2019-10-30T00:00:00Z</code>",
+            "description": "RFC 3339格式的日期，表示查询的开始时间。必须使用UTC时区，不能是其它时区。例如：<code>startdate=2019-10-30T00:00:00Z</code>",
             "required": true
           },
           {
@@ -13880,7 +14161,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339日期，表示时间框架的结束。时间必须使用UTC时区指定；它不能是偏移量。例子：<code>enddate=2019-10-30T00:00:00Z</code> ",
+            "description": "RFC 3339格式的日期，表示查询的结束时间。必须使用UTC时区，不能是其它时区。例如：<code>enddate=2019-10-30T00:00:00Z</code> ",
             "required": true
           },
           {
@@ -13903,7 +14184,7 @@
             },
             "in": "query",
             "name": "target",
-            "description": "表明环境。"
+            "description": "刷新请求对应的环境。"
           }
         ]
       },
@@ -14311,7 +14592,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "获取一段时间内的边缘、中间层（CDN Pro服务器之间）和回源流量的总和。可以按加速域名或serverGroups（节点组）进行查询和分组。\n",
+        "description": "获取一段时间内的边缘、中间层（CDN Pro服务器之间）和回源流量的总和。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的流量。\n",
         "parameters": [
           {
             "name": "startdate",
@@ -14342,6 +14623,15 @@
             "in": "query",
             "name": "scheme",
             "description": "指定协议进行查询。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -14353,7 +14643,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -14394,18 +14684,26 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups"
+                        "serverGroups",
+                        "customerIds"
                       ]
                     }
                   }
@@ -17244,6 +17542,15 @@
         "description": "获取一段时间内对调度域名发起的DNS解析请求数。",
         "parameters": [
           {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
+          {
             "name": "startdate",
             "in": "query",
             "required": true,
@@ -17576,6 +17883,15 @@
               "type": "string"
             },
             "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。由于数据处理存在延迟，所指定的结束时间必须至少比当前时间早5分钟，否则返回的数据可能不准确。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -21072,7 +21388,7 @@
                       "properties": {
                         "perGB": {
                           "type": "object",
-                          "description": "每个server group的流量单价，以GB计价。",
+                          "description": "每个server group（节点组）的流量单价，以GB计价。",
                           "required": [
                             "standard",
                             "premium",
@@ -21130,7 +21446,7 @@
                     },
                     "advancedFeaures": {
                       "type": "array",
-                      "description": "CDN Pro支持的高级功能列表。例如，“realTimeLog”日志可用于实时监控站点的流量。“nearChina”特别服务区域可用于服务来自中国大陆的用户。如果需要使用这些高级功能，请联系我们的技术支持团队开通。",
+                      "description": "CDN Pro支持的高级功能列表。例如，“realTimeLog”日志可用于实时回传日志。如果需要使用这些高级功能，请联系我们的技术支持团队开通。",
                       "items": {
                         "type": "string"
                       }
@@ -22876,8 +23192,32 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
-        "description": "查询通过快速回源功能所产生的回源请求数。",
+        "description": "查询通过<a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速回源</a>功能所产生的回源请求数。",
         "parameters": [
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
           {
             "name": "startdate",
             "in": "query",
@@ -23097,8 +23437,32 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
-        "description": "查询通过快速回源功能传输的回源流量。",
+        "description": "查询通过<a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">快速回源</a>功能传输的回源流量。",
         "parameters": [
+          {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
           {
             "name": "startdate",
             "in": "query",
@@ -24486,6 +24850,30 @@
         "operationId": "post-cdn-report-cpuTime",
         "parameters": [
           {
+            "name": "Report-Range",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "self+children",
+                "children-only"
+              ]
+            },
+            "description": "如果您是代理商，可用该请求头来指定查询范围是否包括子客户。 <table><tr><th>取值</th><th>查询范围</th></tr><tr><td>self-only</td><td>只查询调用者本身账号下的数据。</td></tr><tr><td>children-only</td><td>只查询调用者子客户下的数据。</td></tr><tr><td>self+children</td><td>查询调用者及其子客户下的数据。</td></tr></table>"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
+          {
             "name": "startdate",
             "in": "query",
             "required": true,
@@ -24747,25 +25135,25 @@
     },
     "/cdn/prefetches": {
       "post": {
-        "summary": "创建预取请求",
+        "summary": "创建一个预取请求",
         "tags": [
           "内容管理"
         ],
         "responses": {
           "201": {
-            "description": "预取请求已成功创建。\n<i>Location</i>标头包含对任务的引用。\n调用<a href=\"#operation/queryPrefetchStatus\">Query Prefetch Request status API</a> 查看预取请求状态。",
+            "description": "预取请求创建成功，返回\n<i>Location</i>响应头。\n可通过调用<a href=\"#operation/queryPrefetchStatus\">获取预取任务的详细信息</a>接口来查看预取请求的执行状态。",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "Location头是一个URL，表示新的预取请求，例如，<code>Location: http://ngapi.cdnetworks.com/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>。",
+                "description": "新的预取请求的URL，例如，<code>Location: http://ngapi.cdnetworks.com/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>",
                 "required": true
               }
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -24816,7 +25204,7 @@
           }
         },
         "operationId": "post-cdn-prefetches",
-        "description": "用来自您源站的内容预热CDN Pro缓存，创建一个预取请求，以应对预期的访问者。这有助于防止请求突然涌入原始服务器。预取的url必须是部署到生产的属性的（加速）域名。",
+        "description": "创建一个预取请求，从您的源站预取内容来预热CDN Pro的缓存。通过内容提前预取，可避免大量请求涌入源站服务器。发起预取之前，必须先将域名对应的加速项目部署到生产环境。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -24837,7 +25225,7 @@
                   "name": {
                     "type": "string",
                     "maxLength": 1000,
-                    "description": "输入预取任务的简短描述。"
+                    "description": "预取请求的简短描述。"
                   },
                   "fileList": {
                     "type": "array",
@@ -24846,13 +25234,13 @@
                       "properties": {
                         "url": {
                           "type": "string",
-                          "description": "预取的URL。它必须以“http”或“https”开头，长度不超过2048个字符。",
+                          "description": "预取的URL。必须以“http”或“https”开头，长度不超过2048个字符。",
                           "minLength": 10,
                           "maxLength": 2048
                         },
                         "headers": {
                           "type": "array",
-                          "description": "如果一个URL的缓存键依赖于请求的头部，则可以指定用于预取URL的一个版本的头部值。",
+                          "description": "如果需要在缓存键中加入请求头，可用该字段指定请求头。",
                           "items": {
                             "type": "object",
                             "properties": {
@@ -24875,14 +25263,14 @@
                   },
                   "regions": {
                     "type": "array",
-                    "description": "ISO 3166-2国家代码列表，表示执行预取的地区。省略该字段意味着预取将由所有区域的服务器完成。",
+                    "description": "指定需要预取内容的国家或区域，以ISO 3166-2国家代码表示。未指定时，表示预取内容到所有国家和区域的服务器。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "startTime": {
                     "type": "string",
-                    "description": "RFC 3339日期，表示开始预取的时间。必须使用UTC时间，例如“2021-03-06T00:00:00Z”。"
+                    "description": "RFC 3339格式的日期，表示开始预取的时间。必须使用UTC时间，例如“2021-03-06T00:00:00Z”。"
                   },
                   "webhook": {
                     "type": "string",
@@ -24895,7 +25283,7 @@
                       "Edge",
                       "Parent"
                     ],
-                    "description": "将执行预回迁的CDN Pro服务器。\n默认的<i>Parent</i>有CDN预热内容的父节点，而<i>Edge</i>有请求内容的边缘服务器。\n后者可能会导致对您的源站的更多请求。"
+                    "description": "指定预取的层级。默认只预取内容到CDN Pro父节点服务器，即<i>Parent</i>层级。如果需要预取内容到CDN Pro边缘节点服务器，则指定值为<i>Edge</i>。\n预取内容到边缘节点意味着将会有较多的源站请求。"
                   }
                 },
                 "required": [
@@ -24916,7 +25304,7 @@
               }
             }
           },
-          "description": "指定要预取的URL。"
+          "description": "指定要预取的URL以及相关策略。"
         }
       },
       "get": {
@@ -24926,7 +25314,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应包含一个预取请求列表。",
+            "description": "返回预取请求列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -24935,7 +25323,7 @@
                     "count": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "符合查询参数中指定条件的预取请求总数。如果指定了该参数，prefetchRequests中的实际条目数可能会更少。"
+                      "description": "预取请求的总数。该数量取决于查询参数。"
                     },
                     "prefetchRequests": {
                       "type": "array",
@@ -24945,15 +25333,15 @@
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "预取请求任务ID。\n"
+                            "description": "预取请求的ID。\n"
                           },
                           "name": {
                             "type": "string",
-                            "description": " 关于预取任务的简短描述。"
+                            "description": "预取请求的简短描述。"
                           },
                           "status": {
                             "type": "string",
-                            "description": "预取请求的状态。",
+                            "description": "预取请求的任务执行状态，包括等待中，进行中，已完成等状态。",
                             "enum": [
                               "waiting",
                               "inprogress",
@@ -24962,42 +25350,42 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "RFC 3339日期，表示提交预取请求的时间。"
+                            "description": "RFC 3339格式的日期，表示预取请求的提交时间。"
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "预取完成的RFC 3339日期。"
+                            "description": "RFC 3339格式的日期，表示预取任务的完成时间。"
                           },
                           "successRate": {
                             "type": "number",
                             "minimum": 0,
                             "maximum": 100,
-                            "description": "预取请求完成的百分比。"
+                            "description": "预取任务的成功率。"
                           },
                           "apiRequestId": {
                             "type": "string",
-                            "description": "对应的API请求ID。"
+                            "description": "API请求ID。"
                           },
                           "fileEntries": {
                             "type": "integer",
                             "minimum": 1,
-                            "description": "预取请求中的url数。"
+                            "description": "预取请求中的URL数量。"
                           },
                           "hostnames": {
                             "type": "array",
-                            "description": "预取的（加速）域名列表。",
+                            "description": "预取请求涉及的加速域名。",
                             "items": {
                               "type": "string"
                             }
                           },
                           "apiAccountId": {
                             "type": "string",
-                            "description": "用于创建预取请求的API接口帐户ID。该值仅在API帐户使用our /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>时设置。"
+                            "description": "调用接口创建预取请求的API帐户的ID。"
                           },
                           "ownerCustomerId": {
                             "type": "integer",
                             "minimum": 1,
-                            "description": "发出预取请求的客户ID。只有当Report-Range报头为children-only或self+children时，该字段才会出现。"
+                            "description": "发出预取请求的客户账号的ID。只有当Report-Range请求头为children-only或self+children时，才会返回该字段。"
                           }
                         },
                         "required": [
@@ -25051,7 +25439,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -25102,7 +25490,7 @@
           }
         },
         "operationId": "get-cdn-prefetches",
-        "description": "获取一个预取请求列表。通过指定查询参数过滤列表。",
+        "description": "获取预取请求列表。",
         "parameters": [
           {
             "schema": {
@@ -25110,7 +25498,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339日期，表示时间段的开始。必须为UTC时间，如“2021-03-01T01:00:00Z”。"
+            "description": "RFC 3339格式的日期，表示查询的开始时间。必须为UTC时间，如“2021-03-01T01:00:00Z”。"
           },
           {
             "schema": {
@@ -25118,7 +25506,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339日期，表示时间段的结束日期。必须为UTC时间，如“2021-03-01T01:00:00Z”。"
+            "description": "RFC 3339格式的日期，表示查询的结束时间。必须为UTC时间，如“2021-03-01T01:00:00Z”。"
           },
           {
             "name": "offset",
@@ -25152,7 +25540,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "控制预取请求的返回顺序。默认情况下，首先返回最近提交的请求。"
+            "description": "返回查询结果的排序依据。默认按预取请求的创建时间降序排序。"
           },
           {
             "schema": {
@@ -25164,7 +25552,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "预取请求顺序。默认情况下，首先返回最近的预取请求。输入'asc'表示升序，输入'desc'表示降序。"
+            "description": "返回查询结果的排序顺序。默认按预取请求的创建时间降序排序。"
           },
           {
             "schema": {
@@ -25172,7 +25560,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "该值将用于匹配预取请求名称、主机名和任务id，以限制返回的预取请求。"
+            "description": "根据搜索关键字匹配预取请求的名称、ID和相关的加速域名，过滤预取请求。"
           },
           {
             "name": "On-Behalf-Of",
@@ -25210,17 +25598,17 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "预取请求的 ID。"
+          "description": "预取请求的 id。"
         }
       ],
       "get": {
-        "summary": "获取预取请求状态",
+        "summary": "获取预取请求的详细信息",
         "tags": [
           "内容管理"
         ],
         "responses": {
           "200": {
-            "description": "响应主体包含预取请求的摘要。",
+            "description": "返回预取请求的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -25228,7 +25616,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "description": "关于预取任务的简短描述。",
+                      "description": "预取请求的简短描述。",
                       "maxLength": 1000
                     },
                     "fileList": {
@@ -25238,13 +25626,13 @@
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "预取的URL。它必须以“http”或“https”开头，长度不超过2048个字符。",
+                            "description": "预取的URL。必须以“http”或“https”开头，长度不超过2048个字符。",
                             "minLength": 10,
                             "maxLength": 2048
                           },
                           "headers": {
                             "type": "array",
-                            "description": "如果一个URL的缓存键依赖于请求的头部，则可以指定用于预取URL的一个版本的头部值。",
+                            "description": "如果需要在缓存键中加入请求头，可用该字段指定请求头。",
                             "items": {
                               "type": "object",
                               "properties": {
@@ -25275,17 +25663,17 @@
                         },
                         "submissionTime": {
                           "type": "string",
-                          "description": "RFC 3339日期，表示提交预取请求的时间。"
+                          "description": "RFC 3339格式的日期，表示预取请求的提交时间。"
                         },
                         "successRate": {
                           "type": "number",
-                          "description": "预取请求完成的百分比。",
+                          "description": "预取任务的成功率。",
                           "minimum": 0,
                           "maximum": 100
                         },
                         "status": {
                           "type": "string",
-                          "description": "预取请求的状态。",
+                          "description": "预取请求的任务执行状态，包括等待中，进行中，已完成等状态。",
                           "enum": [
                             "waiting",
                             "inprogress",
@@ -25294,27 +25682,27 @@
                         },
                         "finishTime": {
                           "type": "string",
-                          "description": "预取完成的RFC 3339日期。"
+                          "description": "RFC 3339格式的日期，表示预取完成的时间。"
                         },
                         "apiRequestId": {
                           "type": "string",
-                          "description": "对应的API请求ID。"
+                          "description": "API请求ID。"
                         },
                         "apiName": {
                           "type": "string",
-                          "description": "创建此预取请求的API帐户名。如果代理商代表子客户创建了该请求，那么该请求就是代理商的API帐户名称。"
+                          "description": "调用接口创建预取请求的API账号的名称。如果代理商代表子客户创建了该请求，则该字段返回代理商的API账号的名称。"
                         },
                         "customerId": {
                           "type": "string",
-                          "description": "被预取url的客户ID。"
+                          "description": "被预取的URL所归属的客户账号的ID。"
                         },
                         "impersonatingParentCustomerId": {
                           "type": "string",
-                          "description": "如果代理商代表子客户执行预取，则将出现此字段并指示代理商的ID。"
+                          "description": "如果代理商代表子客户执行预取，则通过该字段返回代理商的账号ID。"
                         },
                         "apiAccountId": {
                           "type": "string",
-                          "description": "用于创建预取请求的API接口帐户ID。该值仅在API帐户使用 <a href=\"#operation/post-ngadmin-apiAccounts\">endpoint</a>时设置。"
+                          "description": "调用接口创建预取请求的API账号的ID。"
                         }
                       },
                       "required": [
@@ -25328,14 +25716,14 @@
                     },
                     "regions": {
                       "type": "array",
-                      "description": "ISO 3166-2国家代码列表，表示执行预取的地区。省略该字段意味着预取将由所有区域的服务器完成。",
+                      "description": "需要预取内容的国家或区域，以ISO 3166-2国家代码表示。未指定时表示预取内容到所有国家和区域的服务器。",
                       "items": {
                         "type": "string"
                       }
                     },
                     "startTime": {
                       "type": "string",
-                      "description": "RFC 3339日期，表示开始预取的时间。必须使用UTC时间，例如“2021-03-06T00:00:00Z”。"
+                      "description": "RFC 3339格式的日期，表示开始预取的时间。必须使用UTC时间，例如“2021-03-06T00:00:00Z”。"
                     },
                     "webhook": {
                       "type": "string",
@@ -25343,7 +25731,7 @@
                     },
                     "prefetchLevel": {
                       "type": "string",
-                      "description": "执行预取的CDN Pro服务器。默认情况下，<i>Parent</i>表示CDN的父节点预取内容，<i>Edge</i> 表示边缘服务器请求内容。后者可能会导致对原始服务器的更多请求。\n",
+                      "description": "指定预取的层级。默认只预取内容到CDN Pro父节点服务器，即<i>Parent</i>层级。如果需要预取内容到CDN Pro边缘节点服务器，则指定值为<i>Edge</i>。\n预取内容到边缘节点意味着将会有较多的源站请求。",
                       "default": "Parent",
                       "enum": [
                         "Edge",
@@ -25394,7 +25782,7 @@
             }
           },
           "404": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -25421,7 +25809,7 @@
           }
         },
         "operationId": "get-cdn-prefetches-id",
-        "description": "获取预取请求的状态信息。",
+        "description": "获取预取请求的详细信息。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -26349,7 +26737,7 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
-        "description": "获取一段时间内的请求数汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。",
+        "description": "获取一段时间内的请求数汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的请求数。",
         "parameters": [
           {
             "name": "startdate",
@@ -26385,6 +26773,15 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -26396,7 +26793,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -26437,18 +26834,26 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups"
+                        "serverGroups",
+                        "customerIds"
                       ]
                     }
                   }
@@ -26688,7 +27093,7 @@
                         "properties": {
                           "customerId": {
                             "type": "integer",
-                            "description": "创建该webhook接口的账号ID。"
+                            "description": "创建该webhook接口的客户账号ID。"
                           },
                           "id": {
                             "type": "string",
@@ -26763,7 +27168,7 @@
             }
           },
           "400": {
-            "description": "无效请求。请查看响应体中的错误信息。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -26867,7 +27272,7 @@
             }
           },
           "400": {
-            "description": "无效请求。请查看响应体中的错误信息。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "headers": {},
             "content": {
               "application/json": {
@@ -26906,7 +27311,7 @@
             }
           },
           "402": {
-            "description": "无效请求。请查看返回体中的错误信息。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -26964,11 +27369,11 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "当关联的异步任务执行完成时，需触发webhook接口地址。CDN Pro将使用HTTP POST方法调用webhook接口，请求体为JSON格式。请求体示例：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
+                    "description": "当关联的异步任务执行完成时，需触发的webhook接口的地址。CDN Pro将使用HTTP POST方法调用webhook接口，请求体为JSON格式。请求体示例：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
                   },
                   "credentials": {
                     "type": "object",
-                    "description": "用于鉴权的账号信息。当您的服务器有鉴权要求时，需支持HTTP Basic鉴权方式。CDN Pro将用当前日期对secretKey进行加密，生成<i>密码</i>(password)。",
+                    "description": "用于鉴权的账号信息。当您的服务器有鉴权要求时，需支持HTTP Basic鉴权方式。CDN Pro将用当前日期对secretKey进行加密，生成<i>密码</i>(password)。加密方式，请参考<a href=\"#section/Authentication\">鉴权</a>部分的说明。",
                     "properties": {
                       "user": {
                         "type": "string",
@@ -27014,7 +27419,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "webhook接口ID。"
+          "description": "webhook接口id。"
         }
       ],
       "get": {
@@ -27042,7 +27447,7 @@
                     },
                     "url": {
                       "type": "string",
-                      "description": "当关联的异步任务执行完成时，需触发的webhook接口地址。CDN Pro将使用HTTP POST方法调webhook接口，请求体为JSON格式。请求体示例：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\n",
+                      "description": "当关联的异步任务执行完成时，需触发的webhook接口的地址。CDN Pro将使用HTTP POST方法调webhook接口，请求体为JSON格式。请求体示例：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\n",
                       "maxLength": 250
                     },
                     "credentials": {
@@ -27051,7 +27456,7 @@
                       "properties": {
                         "user": {
                           "type": "string",
-                          "description": "用于鉴权的用户名"
+                          "description": "用于鉴权的用户名。"
                         },
                         "secretKey": {
                           "type": "string",
@@ -27068,20 +27473,20 @@
                       "properties": {
                         "creationTime": {
                           "type": "string",
-                          "description": "webhook接口创建时间，以RFC 3339日期格式展示"
+                          "description": "webhook接口创建时间，以RFC 3339日期格式展示。"
                         },
                         "lastUpdatetime": {
                           "type": "string",
-                          "description": "webhook接口最近一次更新的时间，以RFC 3339日期格式展示"
+                          "description": "webhook接口最近一次更新的时间，以RFC 3339日期格式展示。"
                         },
                         "lastCallTime": {
                           "type": "string",
-                          "description": "webhook接口最近一次调用的时间，以RFC 3339日期格式展示"
+                          "description": "webhook接口最近一次调用的时间，以RFC 3339日期格式展示。"
                         },
                         "totalCalls": {
                           "type": "integer",
                           "minimum": 0,
-                          "description": "webhook接口累计被调用的次数"
+                          "description": "webhook接口累计被调用的次数。"
                         }
                       },
                       "required": [
@@ -27200,7 +27605,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "当关联的异步任务执行完成时，需触发的webhook接口地址。CDN Pro将使用HTTP POST方法调webhook接口，请求体为JSON格式。请求体示例：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
+                    "description": "当关联的异步任务执行完成时，需触发的webhook接口的地址。CDN Pro将使用HTTP POST方法调webhook接口，请求体为JSON格式。请求体示例：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
                   },
                   "credentials": {
                     "type": "object",
@@ -27657,13 +28062,13 @@
     },
     "/cdn/purges/purgeTokens": {
       "get": {
-        "summary": "获取可用的刷新请求",
+        "summary": "获取可用的刷新请求额度",
         "tags": [
           "内容管理"
         ],
         "responses": {
           "200": {
-            "description": "响应指示可用刷新请求的数量。\n",
+            "description": "返回刷新请求的额度。\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -27671,12 +28076,12 @@
                   "properties": {
                     "filePurgeTokens": {
                       "type": "integer",
-                      "description": "可用的文件URL刷新请求数。",
+                      "description": "文件刷新当前的可用额度。",
                       "minimum": 0
                     },
                     "dirPurgeTokens": {
                       "type": "integer",
-                      "description": "可用的目录URL刷新请求数。",
+                      "description": "目录刷新当前的可用额度。",
                       "minimum": 0
                     }
                   },
@@ -27697,7 +28102,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -27724,7 +28129,7 @@
           }
         },
         "operationId": "get-cdn-purges-purgeTokens",
-        "description": "此API指示您可以在演练或生产环境中执行的目录和文件刷新请求的数量。您的服务配额<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a>指定生产和演练环境的文件和目录刷新的每日限制。您可以在一天中临时超过该限制，但这会减少第二天可用的刷新次数。",
+        "description": "该接口返回您可以在演练或生产环境进行目录和文件刷新的额度。通过服务配额<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">serviceQuotas</a>可查询每日的限额。您可以临时超过该限额，但这会减少第二天可用的刷新额度。",
         "parameters": [
           {
             "schema": {
@@ -27738,7 +28143,7 @@
             "in": "query",
             "name": "target",
             "required": true,
-            "description": "指示环境。"
+            "description": "指定环境查询可用额度，即演练环境或生产环境。"
           },
           {
             "name": "On-Behalf-Of",
@@ -28328,7 +28733,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28436,7 +28841,7 @@
             }
           },
           "400": {
-            "description": "无效请求。请查看响应体中的错误信息。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28474,7 +28879,7 @@
             }
           },
           "403": {
-            "description": "您无权限执行此操作，请求被拒绝。",
+            "description": "无操作权限，请求被拒绝。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28525,7 +28930,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>每个日志条目对应的请求数量。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。",
+                    "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>采样率，即每几次请求输出一条日志。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28584,7 +28989,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "日志配置的ID。"
+          "description": "日志配置的id。"
         }
       ],
       "get": {
@@ -28620,7 +29025,7 @@
                         },
                         "logDownloadFormat": {
                           "type": "string",
-                          "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>每个日志条目对应的请求数量。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。"
+                          "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>采样率，即每几个请求输出一条日志。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。"
                         },
                         "logDownloadStorageDays": {
                           "type": "integer",
@@ -28691,7 +29096,7 @@
             }
           },
           "400": {
-            "description": "无效请求。请查看返回体中的错误信息。",
+            "description": "无效请求，请查看返回体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28744,7 +29149,7 @@
           }
         },
         "operationId": "get-cdn-report-logConfigs-id",
-        "description": "获取日志配置详细信息。",
+        "description": "获取日志配置的详细信息。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -28767,7 +29172,7 @@
             "description": "日志配置更新成功。"
           },
           "400": {
-            "description": "无效请求。请查看响应体中的错误信息。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -28842,7 +29247,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>每个日志条目对应的请求数量。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。",
+                    "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>采样率，即每几次请求输出一条日志。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28905,7 +29310,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>每个日志条目对应的请求数量。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。",
+                    "description": "日志格式。可使用以下变量来自定义日志输出格式：\n<table>\n<tr><th>变量</th><th>变量说明</th></tr>\n<tr><td>%cachestate</td><td>缓存状态，取值为HIT，MISS 或者 REVALIDATE。</td></tr>\n<tr><td>%cltip</td><td>客户端IP地址。</td></tr>\n<tr><td>%cltisp</td><td>客户端所属运营商。</td></tr>\n<tr><td>%cltport</td><td>客户端端口号。</td></tr>\n<tr><td>%cltregion</td><td>客户端所属区域。</td></tr>\n<tr><td>%cpu_ns</td><td>此次请求所消耗的CPU时间，以纳秒计算。</td></tr>\n<tr><td>%custom1</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=1的日志字段。</td></tr>      \n<tr><td>%custom2</td><td>通过<a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field 指令</a>自定义的ID=2的日志字段。</td></tr>      \n<tr><td>%hostname</td><td>Host 请求头。</td></tr>\n<tr><td>%method</td><td>HTTP请求方法，例如 GET。</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0，HTTP/1.1 或者 HTTP2.0协议。</td></tr>\n<tr><td>%querystr</td><td>查询参数字符串。</td></tr>      \n<tr><td>%referer</td><td>Referer 请求头。</td></tr>\n<tr><td>%reqhdrsize</td><td>请求头大小，单位为bytes。</td></tr>\n<tr><td>%reqrange</td><td>客户端请求所携带的Range请求头。</td></tr>\n<tr><td>%reqsize</td><td>请求的大小，单位为bytes。包括请求行，请求头和请求体。</td></tr>\n<tr><td>%rmtuser</td><td>从Authorization请求头解析出的用户名。仅适用于当使用HTTP basic进行鉴权时。</td></tr>\n<tr><td>%rspsize</td><td>HTTP响应的大小，单位为bytes。包括响应头和响应体，但不包括TCP/IP/MAC。</td></tr>\n<tr><td>%rsptime</td><td>响应时间，单位为毫秒。</td></tr>\n<tr><td>%samplerate</td><td>采样率，即每几次请求输出一条日志。</td></tr>\n<tr><td>%sheme</td><td>http或https协议。</td></tr>\n<tr><td>%statuscode</td><td>响应状态码，例如200。</td></tr>\n<tr><td>%srvip</td><td>处理此次请求的CDN服务器的IP地址。</td></tr>\n<tr><td>%svrnode</td><td>CDN服务器所在的节点名称。</td></tr>\n<tr><td>%tcprtt</td><td>服务器与客户端之间的RTT时长，单位为毫秒。</td></tr>      \n<tr><td>%ua</td><td>User-Agent 请求头。</td></tr>\n<tr><td>%uniqueid</td><td>此次请求的唯一标识，字符串类型。</td></tr>       \n<tr><td>%url</td><td>完整的URL，包括查询参数字符串。</td></tr>\n<tr><td>%utctime</td><td>响应时间，以RFC 3339格式表示，例如 2021-10-05T12:34:56Z。</td></tr>\n</table>\n\n变量如果包含了不可打印的字符（ASCII码<=0x1F 或 >=0x7F的字符），双引号或者反斜杆，则这些字符会被转义，用“\\xXX”的格式表示。例如，双引号以“\\x22”表示，反斜杆以“\\x5C”表示。需要注意的是，空格不会被转义。如果变量包含空格，则必须加上双引号，才能被正确解析。",
                     "default": "%cltip %rmtuser  [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -28961,7 +29366,7 @@
             "description": "日志配置删除成功。"
           },
           "403": {
-            "description": "无访问权限，请求被拒绝。",
+            "description": "无操作权限，请求被拒绝。",
             "content": {
               "application/json": {
                 "schema": {
@@ -29147,6 +29552,15 @@
         "operationId": "post-cdn-report-logDownload",
         "parameters": [
           {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
+          {
             "in": "query",
             "name": "startdate",
             "schema": {
@@ -29163,7 +29577,7 @@
             }
           }
         ],
-        "description": "获取已部署的一个或多个加速域名的访问日志。这些日志是2小时或更早时间之前客户端请求所产生的日志。默认情况下，只能查询近14天内的日志。这些日志被切割成多个文件供下载。\n\n要获取加速域名的日志，必须首先通过“创建日志配置”接口定义日志格式。注意：必须先创建日志配置，访问日志才会被收集。如未创建日志配置，则无法下载日志。\n\n假设您定义了如下的日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n调用该接口时，将返回如下的日志信息和下载链接:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\n其中，logUrl字段指向日志文件（经过gzip压缩）的下载链接。日志文件内容格式如下：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "获取已部署的一个或多个加速域名的访问日志。这些日志是2小时或更早时间之前客户端请求所产生的日志。默认情况下，只能查询近14天内的日志。这些日志被切割成多个文件供下载。\n\n要获取加速域名的日志，必须首先通过<a href=\"#operation/post-cdn-report-logConfigs\">创建日志配置</a>接口定义日志格式。注意：必须先创建日志配置，访问日志才会被收集。如未创建日志配置，则无法下载日志。\n\n假设您定义了如下的日志配置格式:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n调用该接口时，将返回如下的日志信息和下载链接:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\n其中，logUrl字段指向日志文件（经过gzip压缩）的下载链接。日志文件内容格式如下：<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -29555,8 +29969,17 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthSummary",
-        "description": "获取一段时间内的带宽汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。",
+        "description": "获取一段时间内的带宽汇总数据。可以按加速域名或serverGroups（节点组）进行查询和分组。如果您是代理商，您还可以按客户ID进行查询和分组，以区分子客户的带宽数据。",
         "parameters": [
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
+          },
           {
             "name": "startdate",
             "in": "query",
@@ -29602,7 +30025,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -29643,18 +30066,26 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups"
+                        "serverGroups",
+                        "customerIds"
                       ]
                     }
                   }
@@ -30075,6 +30506,15 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -30086,7 +30526,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -30127,18 +30567,26 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups"
+                        "serverGroups",
+                        "customerIds"
                       ]
                     }
                   }
@@ -30355,7 +30803,7 @@
         "summary": "获取CDN Pro服务IP地址",
         "responses": {
           "200": {
-            "description": "返回IP地址列表",
+            "description": "返回IP地址列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -30636,6 +31084,15 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -30647,7 +31104,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -30688,18 +31145,26 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups"
+                        "serverGroups",
+                        "customerIds"
                       ]
                     }
                   }
@@ -31074,6 +31539,15 @@
               "default": "all"
             },
             "description": "指定查询HTTP与/或HTTPS协议的数据。默认查询全部2种协议的数据。"
+          },
+          {
+            "name": "On-Behalf-Of",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
         "requestBody": {
@@ -31085,7 +31559,7 @@
                 "x-tags": [
                   "Reports"
                 ],
-                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。",
+                "description": "在请求体中传递过滤器来指定查询范围，传递groupBy参数对数据进行分组汇总。例如，您可以指定只返回某些加速域名的数据。如果您是代理商，可以根据客户ID进行查询和分组，以区分不同子客户的数据。",
                 "x-examples": {
                   "Filter by a specific hostname": {
                     "filters": {
@@ -31126,18 +31600,26 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "description": "代理商可以通过指定子客户的ID来指定查询范围。",
+                        "items": {
+                          "type": "integer"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”单独进行分组汇总，也支持同时指定这2个参数进行分组汇总。",
+                    "description": "指定分组依据对数据进行分组汇总。支持按“hostnames”，“serverGroups”和“customerIds”单独进行分组汇总，也支持同时指定其中任意2个进行分组汇总。",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "serverGroups"
+                        "serverGroups",
+                        "customerIds"
                       ]
                     }
                   }
@@ -31339,13 +31821,13 @@
     },
     "/cdn/prefetches/prefetchTokens": {
       "get": {
-        "summary": "获取可用的预取请求",
+        "summary": "获取可用的预取请求额度",
         "tags": [
           "内容管理"
         ],
         "responses": {
           "200": {
-            "description": "响应值表示可预取的次数。",
+            "description": "返回预取请求的可用额度。",
             "content": {
               "application/json": {
                 "schema": {
@@ -31354,7 +31836,7 @@
                     "prefetchTokens": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "可预取请求数。"
+                      "description": "预取请求当前的可用额度。"
                     }
                   },
                   "required": [
@@ -31373,7 +31855,7 @@
           }
         },
         "operationId": "get-cdn-prefetches-prefetchTokens",
-        "description": "该API表示用户可以进行的预取请求的数量。<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">表示每天预取请求的数量限制。</a>您可以在一天内临时超过该限制，但这会减少第二天可用的预取次数。"
+        "description": "该接口返回您当前内容预取的可用额度。通过服务配额<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">serviceQuotas</a>可查询每日的限额。您可以临时超过该限额，但这会减少第二天可用的预取额度。"
       }
     }
   },
@@ -31510,7 +31992,7 @@
     },
     {
       "name": "加速项目管理",
-      "description": "加速项目是需要部署到CDN Pro服务器的一个或多个加速域名的配置。一个加速项目可以有多个版本。已部署的加速项目版本无法被再次更新或验证。您可以通过克隆（复制）现有版本来创建加速项目的新版本。"
+      "description": "加速项目是需要<a href=\"#tag/部署任务管理\">部署</a>到CDN Pro服务器的一个或多个加速域名的配置。一个加速项目可以有多个版本。已部署的加速项目版本无法被再次更新或<a href=\"#tag/加速项目配置验证\">验证</a>。您可以通过克隆（复制）现有版本来<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "加速项目配置验证",
@@ -31542,7 +32024,7 @@
     },
     {
       "name": "内容管理",
-      "description": "内容管理 API 允许您在由属性配置确定的计划之前请求更新（或刷新）缓存的内容。您可以刷新文件或目录。刷新请求是异步的。您可以使用 API 来检查刷新请求的状态。您还可以预取 URL，以便在访问者发出请求之前预热缓存。这允许您管理到源站的流量。"
+      "description": "以下接口用于内容管理，包括刷新缓存和预取内容。您可以刷新文件或目录。您也可以进行内容预取，以便在访客发出请求之前预热缓存，通过这种方式可以帮助您管理到源站的流量。刷新和预取请求都是异步操作，以下提供了一些接口可用来查询异步请求的执行状态。"
     },
     {
       "name": "CDN Pro 服务配置",
@@ -31550,7 +32032,7 @@
     },
     {
       "name": "Webhooks",
-      "description": "这些API可用来定义webhook接口（或回调接口）。当某个异步任务完成时，如配置部署，内容刷新或内容预取，可触发webhook接口调用。"
+      "description": "这些接口可用来定义webhook接口（或回调接口）。当某个异步任务完成时（如配置部署，内容刷新或内容预取），可触发webhook接口调用。"
     },
     {
       "name": "日志配置管理",
