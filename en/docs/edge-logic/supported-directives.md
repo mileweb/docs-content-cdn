@@ -604,7 +604,7 @@ Enables or disables buffering of responses from the proxied server. No change to
 **Default:** `proxy_cache_background_update off;` <br/>
 **Context:** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. 
+Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. CDN Pro introduced the [`proxy_cache_max_stale`](#proxy_cache_max_stale) directive to set a maximum staleness to avoid serving too old objects to the clients.
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
