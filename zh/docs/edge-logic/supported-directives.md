@@ -123,8 +123,10 @@ auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
 location = /auth {
   internal;
   proxy_method HEAD;
-  origin_pass remote_auth_server/auth-req$is_args$args; #配置鉴权服务器和URI
-  origin_set_header client-req-uri $request_uri; #将客户端请求URI发给鉴权服务器
+  # 配置鉴权服务器和URI
+  origin_pass remote_auth_server/auth-req$is_args$args;
+  # 将客户端请求URI发给鉴权服务器
+  origin_set_header client-request-uri $request_uri;
 }
 ```
 
@@ -605,7 +607,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
+该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。CDN Pro 引入了 [`proxy_cache_max_stale`](#proxy_cache_max_stale) 指令来设置一个最大过期时间，以避免将过于陈旧的内容返回给客户端。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
