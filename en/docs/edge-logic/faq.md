@@ -109,7 +109,7 @@ If you have one or more domains with ICP Beian and want them to be accelerated i
 #### China Delivery without ICP Beian using the Near China Solution
 If your CDN domains do not have ICP Beian, but you want them to be accelerated in Mainland China, CDN Pro offers a Near China solution. This solution uses the CDN Pro special server group nearChina, with a robust network of servers located in Hong Kong, to effectively deliver your content with low latency and high performance for your websites and applications in China.
 
-CDN Pro's Near China solution is a value-added service. The traffic per GB cost for the server group will be more expensive than the regular server groups. Please contact the CDNetworks Support Team for details on the nearChina server group's price and to enable the service enabling.
+CDN Pro's Near China solution is a value-added service. The traffic per GB cost for the server group will be more expensive than the regular server groups. Please contact the CDNetworks Support Team for details on the nearChina server group's price and to enable the service.
 
 ### How to support WebSocket?
 
