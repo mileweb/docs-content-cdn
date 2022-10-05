@@ -3560,7 +3560,7 @@
         ],
         "responses": {
           "200": {
-            "description": "该响应体包含调度域名的详细信息。",
+            "description": "返回调度域名的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3568,17 +3568,17 @@
                   "properties": {
                     "history": {
                       "type": "array",
-                      "description": "操作历史",
+                      "description": "调度域名的操作记录。",
                       "items": {
                         "type": "object",
                         "properties": {
                           "apiAccountId": {
                             "type": "string",
-                            "description": "指明进行操作的API账户。"
+                            "description": "操作调度域名的API账号的ID。"
                           },
                           "apiName": {
                             "type": "string",
-                            "description": "API账户名称。"
+                            "description": "操作调度域名的API账号的名称。"
                           },
                           "operation": {
                             "type": "string",
@@ -3586,16 +3586,16 @@
                               "creation",
                               "update"
                             ],
-                            "description": "指明采取的操作。"
+                            "description": "操作类型，即创建或更新。"
                           },
                           "time": {
                             "type": "string",
-                            "description": "采用RFC3339格式的事件日期。",
+                            "description": "操作时间，以RFC 3339日期格式表示。",
                             "example": "\"2019-11-11T23:34:59Z"
                           },
                           "apiRequestId": {
                             "type": "string",
-                            "description": "表示API的调用ID。"
+                            "description": "API请求的ID。"
                           }
                         },
                         "required": [
@@ -3608,31 +3608,31 @@
                     },
                     "lastUpdateTime": {
                       "type": "string",
-                      "description": "RFC 3339日期格式，表示调度域名最后一次更新的时间。",
+                      "description": "RFC 3339格式的日期，表示调度域名最后一次更新的时间。",
                       "example": "2019-11-11T23:35:00Z"
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "RFC 3339日期格式，表示调度域名创建的时间。",
+                      "description": "RFC 3339格式的日期，表示调度域名的创建时间。",
                       "example": "2019-11-11T23:34:59Z"
                     },
                     "ownerCustomerId": {
                       "type": "integer",
-                      "description": "表明拥有这个调度域名的客户帐号。",
+                      "description": "拥有这个调度域名的客户账号的ID。",
                       "format": "int64"
                     },
                     "configs": {
                       "type": "object",
-                      "description": "包含可修改的设置。",
+                      "description": "调度域名的相关设置。",
                       "properties": {
                         "edgeHostname": {
                           "type": "string",
-                          "description": "调度域名"
+                          "description": "调度域名。"
                         },
                         "pciRequired": {
                           "type": "boolean",
                           "default": false,
-                          "description": "表明是否需要符合PCI规范。<i>true</i>意味着只提供经PCI认证节点的内容。"
+                          "description": "表示流量调度是否需要遵循PCI规范。当值为<i>true</i>时，表示只能使用已通过PCI认证的节点提供内容分发服务。"
                         },
                         "description": {
                           "type": "string",
@@ -3641,15 +3641,15 @@
                         "hasBeian": {
                           "type": "boolean",
                           "default": false,
-                          "description": "指明您是否拥有在中国提供服务的备案许可证。如果您拥有，内容可以由位于中国大陆的服务器使用ChinaStandard或ChinaPremium服务器组提供。"
+                          "description": "是否备案的标记。当值为true时，将使用包括中国大陆的服务器提供内容分发服务。"
                         },
                         "clientZones": {
                           "type": "array",
-                          "description": "这些规则用于控制如何处理访客分区中得请求。默认情况下，将创建一个规则，用来允许我们的服务器集群处理请求，并实现最佳性能： \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>\n您可以修改默认的规则，并根据需要自定义规则。",
+                          "description": "自定义规则来控制如何处理不同访客分区的请求。如果未指定，系统将创建一条默认的规则:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>\n您可以修改默认的规则，并根据需要自定义规则。",
                           "items": {
                             "title": "调度域名访客分区规则",
                             "type": "object",
-                            "description": "此对象描述如何处理来自区域的客户端请求。区域是地理区域和ISP的组合。如果未指定，则创建一个默认值规则，以允许我们的服务器集群来处理请求并实现最佳性能:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则并创建自定义规则以满足您的需求。\n\n如果您的域名缺少ICP备案，但您希望为中国用户提供最佳服务，则可以使用另一个服务器组“nearChina”。但使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。\n\n如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。\n\n如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。",
+                            "description": "该对象描述如何处理来自不同区域的客户端请求。每个区域是地理区域和运营商的组合。如果未指定，系统将创建一条默认规则:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则，并根据需要创建自定义规则。",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -3695,18 +3695,18 @@
                             "properties": {
                               "region": {
                                 "type": "string",
-                                "description": "此字段指明规则适用的区域。请参阅我们的API<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>以获取有效的区域编号。例如，如果您希望创建规则覆盖整个欧洲，只需指定“eu”为区域。 您可以指明具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n特殊的访客区域-“all”可用于指定适用于全球的规则。如果指定了重叠区域，则更具体的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将遵循“as.cn”的规则。"
+                                "description": "该规则适用的区域。可调用<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>接口来查看区域信息。例如，如果您希望创建规则覆盖整个欧洲，则指定“eu”为区域。 您可以指定具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n“all”是一个特殊的区域，可用于指定适用于全球的规则。如果不同规则指定的区域存在重叠，则以更细粒度的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将优先匹配“as.cn”的规则。"
                               },
                               "weight": {
                                 "type": "integer",
                                 "default": 100,
-                                "description": "当为访客分区指定多个操作时，权重用于调整访客分区规则应用到客户端请求的概率。\n可参考两个适用于\"as.cn\"的规则: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n“分发”的概率为100/(100+10)或0.909，而“跳转”的概率为10/(100+10)或0.091。\n \n",
+                                "description": "可以为同个访客分区指定多条规则。通过在规则中指定weight字段，可控制规则匹配的权重。\n以\"as.cn\"区域的2条规则为例: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n按照以上规则，客户端请求匹配规则1进行“分发”的比例为100/(100+10)，即0.909，匹配规则2进行“跳转”的比例为10/(100+10)，即0.091。\n \n",
                                 "minimum": 0,
                                 "maximum": 100
                               },
                               "action": {
                                 "type": "object",
-                                "description": "该对象描述请求匹配规则时的动作。",
+                                "description": "当规则匹配时执行的动作。",
                                 "properties": {
                                   "type": {
                                     "type": "string",
@@ -3715,11 +3715,11 @@
                                       "redirect",
                                       "reject"
                                     ],
-                                    "description": "定义请求对区域采取的操作。选项包括:使用一个或多个服务器组<i>分发</i>，<i>拒绝</i>全部请求，或<i>跳转</i>到另一个域。如果指定了\"拒绝\"，则客户端请求将跳转发送到服务器，服务器总是以表示\"Forbidden\"的 403 HTTP响应代码响应。每个访客分区最多允许一个“拒绝”操作。"
+                                    "description": "当规则匹配时，对客户端请求执行的动作的类型。包括<i>分发</i>，<i>拒绝</i>和<i>跳转</i>3个类型。如果指定了\"拒绝\"，则客户端请求将被调度到一台服务器，该服务器总是响应403状态码，表示\"Forbidden\"拒绝访问。每个访客分区最多只允许一个“拒绝”动作。"
                                   },
                                   "by": {
                                     "type": "array",
-                                    "description": "如果动作类型为“分发”，则使用此字段。指定一个或多个服务器组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 用来控制分发内容的服务器。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的服务器组，用于您的域名没有ICP备案，但您希望以最佳的性能服务中国访客的情况下。使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。<br/><br/>如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。\n<br/><br/>如果调度域名最初没有配置为使用chinstandard或chinpremium，您将无法修改它以使用这两个服务器组。相反，您需要创建一个新的调度域名，将访客分区规则下发到这些服务器组。",
+                                    "description": "如果动作类型为“分发”，则使用此字段指定一个或多个节点组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 来选择提供内容分发服务的缓存节点。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的节点组。如果您需要使用nearChina节点组，请联系我们的技术支持开通。不能在同一条规则中同时指定nearChina节点组和其他节点组。如果要使用其他节点组，需要创建单独的访客分区规则。<br/><br/>如果您的加速域名有ICP备案，希望由中国大陆的服务器提供内容分发服务，您可以选择使用“ChinaStandard”和“ChinaPremium”节点组。\n<br/><br/>如果调度域名创建时没有指定使用ChinaStandard或ChinaPremium节点组，则无法通过更新调度域名来使用这两个节点组。您需要创建一个新的调度域名，在新的调度域名中指定使用ChinaStandard或ChinaPremium，才能使用这2个节点组。",
                                     "items": {
                                       "type": "string",
                                       "enum": [
@@ -3735,12 +3735,12 @@
                                   },
                                   "to": {
                                     "type": "string",
-                                    "description": "如果动作类型为“跳转”，则使用此字段。表示(加速)域名或跳转的IP地址。这通常是源站服务器或另一个CDN提供商。",
+                                    "description": "如果动作类型为“跳转”，则通过该字段指定跳转的目标域名或IP地址。“跳转”目标通常是源站服务器或其它CDN厂商。",
                                     "example": "domain.com"
                                   },
                                   "enableIPv6": {
                                     "type": "boolean",
-                                    "description": "指明是否允许使用IPv6地址。仅当访客分区规则的操作类型为“分发”时才需要该值。",
+                                    "description": "指定是否允许使用IPv6地址进行内容分发。仅当动作类型为“分发”时该值才有效。",
                                     "default": true
                                   }
                                 },
@@ -3750,7 +3750,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "如果规则仅适用于来自特定运营商的请求，则指定表示运营商 (互联网服务提供商)的编号。可调用我们的API<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>。指定“all”表示所有运营商，而不是指定一个。如果希望规则应用于多个运营商，可用逗号分隔，最多包含10个运营商编号。"
+                                "description": "该规则适用的运营商。可调用我们的<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>接口查看运营商信息。指定“all”表示所有运营商。如果希望该规则应用于多个运营商，则可指定多个运营商，用逗号分隔，但最多只能包含10个运营商。"
                               }
                             },
                             "required": [
@@ -3761,7 +3761,7 @@
                         },
                         "estimatedBandwidth": {
                           "type": "string",
-                          "description": "使用这个调度域名提供内容服务所需要的带宽预计。测量单位应为Tbps、Gbps、Mbps或kbps。例子:100 Gbps"
+                          "description": "通过该调度域名进行CDN加速预计需要的带宽。单位应为Tbps、Gbps、Mbps或kbps。示例：100 Gbps。"
                         }
                       }
                     }
@@ -3807,7 +3807,7 @@
             }
           },
           "404": {
-            "description": "没有找到调度域名。",
+            "description": "未找到调度域名。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3833,7 +3833,7 @@
             }
           }
         },
-        "description": "这个API用于返回关于调度域名的信息，包含相关的访客分区规则和操作历史。如果你还没有创建自定义的访客分区规则，将创建一个默认的规则，以允许我们的服务器集群能够处理请求，并尽可能达到最佳性能：\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code><p>（豪华型以前称为“高级+”）</p>",
+        "description": "该接口返回调度域名的详细信息，包含相关的访客分区规则和调度域名的操作记录。如果您没有自定义访客分区规则，系统将创建一条默认的规则。\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -3851,10 +3851,10 @@
         "summary": "删除调度域名",
         "responses": {
           "204": {
-            "description": "删除调度域名成功。"
+            "description": "调度域名删除成功。"
           },
           "404": {
-            "description": "无法找到调度域名。",
+            "description": "未找到调度域名。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3881,7 +3881,7 @@
           }
         },
         "operationId": "deleteEdgeHostname",
-        "description": "使用此API用于删除调度域名。如果您已经配置DNS服务器关联了这个调度域名，那么您应该在删除调度域名之前更新您的DNS记录。否则，访问相关(加速)域名的访问者将会看到报错。",
+        "description": "使用该接口删除调度域名。如果您的DNS配置了CNAME记录指向该调度域名，那么您必须在删除调度域名之前更改DNS记录。否则，访问相关的加速域名将会报错。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -3905,17 +3905,17 @@
           "name": "edgeHostname",
           "in": "path",
           "required": true,
-          "description": "调度域名"
+          "description": "调度域名。"
         }
       ],
       "put": {
         "summary": "全量更新调度域名",
         "responses": {
           "204": {
-            "description": "更新调度域名。"
+            "description": "调度域名更新成功。"
           },
           "400": {
-            "description": "请求无效。详细信息请参见响应体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3947,7 +3947,7 @@
             }
           },
           "404": {
-            "description": "无法找到调度域名。",
+            "description": "未找到调度域名。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3973,7 +3973,7 @@
             }
           },
           "409": {
-            "description": "调度域名字段不能修改，可能导致业务中断。",
+            "description": "调度域名字段不能更改。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4000,7 +4000,7 @@
           }
         },
         "operationId": "updateEdgeHostname",
-        "description": "使用此API更新调度域名。确保输入所有描述调度域名的字段，包括那些未做更改的字段。",
+        "description": "使用该接口全量更新调度域名。请确保指定调度域名所有相关的字段，包括那些不需要更改的字段。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4009,7 +4009,7 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "调度域名。不可修改。"
+                    "description": "调度域名。该字段不可修改。"
                   },
                   "description": {
                     "type": "string",
@@ -4017,19 +4017,19 @@
                   },
                   "pciRequired": {
                     "type": "boolean",
-                    "description": "指明是否需要符合PCI规范。<i>true</i>意味着只提供经PCI认证节点的内容。"
+                    "description": "表示流量调度是否需要遵循PCI规范。当值为<i>true</i>时，表示只能使用已通过PCI认证的节点提供内容分发服务。"
                   },
                   "gdprCompliant": {
                     "type": "boolean",
-                    "description": "如果设置为'true'，来自欧洲经济区(EEA)国家的客户端将仅由EEA国家的IP地址提供服务。"
+                    "description": "表示流量调度是否需要遵循GDPR的规定。当值为'true'时，对于来自欧洲经济区(EEA)国家的请求，将仅使用归属EEA国家的IP地址提供服务。"
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "指定规则来控制如何处理访客分区中的请求。如果未指定，将创建一个默认的规则，以允许我们的服务器集群处理请求，并尽可能达到最佳性能:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认的规则，并根据需要自定义规则。(豪华级以前被称为“高级+”)",
+                    "description": "自定义规则来控制如何处理不同访客分区的请求。如果未指定，系统将创建一条默认的规则:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>\n您可以修改默认的规则，并根据需要自定义规则。",
                     "items": {
                       "title": "调度域名访客分区规则",
                       "type": "object",
-                      "description": "此对象描述如何处理来自区域的客户端请求。区域是地理区域和ISP的组合。如果未指定，则创建一个默认值规则，以允许我们的服务器集群来处理请求并实现最佳性能:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则并创建自定义规则以满足您的需求。\n\n如果您的域名缺少ICP备案，但您希望为中国用户提供最佳服务，则可以使用另一个服务器组“nearChina”。但使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。\n\n如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。\n\n如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。",
+                      "description": "该对象描述如何处理来自不同区域的客户端请求。每个区域是地理区域和运营商的组合。如果未指定，系统将创建一条默认规则:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则，并根据需要创建自定义规则。",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4075,18 +4075,18 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "此字段指明规则适用的区域。请参阅我们的API<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>以获取有效的区域编号。例如，如果您希望创建规则覆盖整个欧洲，只需指定“eu”为区域。 您可以指明具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n特殊的访客区域-“all”可用于指定适用于全球的规则。如果指定了重叠区域，则更具体的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将遵循“as.cn”的规则。"
+                          "description": "该规则适用的区域。可调用<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>接口来查看区域信息。例如，如果您希望创建规则覆盖整个欧洲，则指定“eu”为区域。 您可以指定具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n“all”是一个特殊的区域，可用于指定适用于全球的规则。如果不同规则指定的区域存在重叠，则以更细粒度的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将优先匹配“as.cn”的规则。"
                         },
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "当为访客分区指定多个操作时，权重用于调整访客分区规则应用到客户端请求的概率。\n可参考两个适用于\"as.cn\"的规则: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n“分发”的概率为100/(100+10)或0.909，而“跳转”的概率为10/(100+10)或0.091。\n \n",
+                          "description": "可以为同个访客分区指定多条规则。通过在规则中指定weight字段，可控制规则匹配的权重。\n以\"as.cn\"区域的2条规则为例: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n按照以上规则，客户端请求匹配规则1进行“分发”的比例为100/(100+10)，即0.909，匹配规则2进行“跳转”的比例为10/(100+10)，即0.091。\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
                         "action": {
                           "type": "object",
-                          "description": "该对象描述请求匹配规则时的动作。",
+                          "description": "当规则匹配时执行的动作。",
                           "properties": {
                             "type": {
                               "type": "string",
@@ -4095,11 +4095,11 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "定义请求对区域采取的操作。选项包括:使用一个或多个服务器组<i>分发</i>，<i>拒绝</i>全部请求，或<i>跳转</i>到另一个域。如果指定了\"拒绝\"，则客户端请求将跳转发送到服务器，服务器总是以表示\"Forbidden\"的 403 HTTP响应代码响应。每个访客分区最多允许一个“拒绝”操作。"
+                              "description": "当规则匹配时，对客户端请求执行的动作的类型。包括<i>分发</i>，<i>拒绝</i>和<i>跳转</i>3个类型。如果指定了\"拒绝\"，则客户端请求将被调度到一台服务器，该服务器总是响应403状态码，表示\"Forbidden\"拒绝访问。每个访客分区最多只允许一个“拒绝”动作。"
                             },
                             "by": {
                               "type": "array",
-                              "description": "如果动作类型为“分发”，则使用此字段。指定一个或多个服务器组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 用来控制分发内容的服务器。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的服务器组，用于您的域名没有ICP备案，但您希望以最佳的性能服务中国访客的情况下。使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。<br/><br/>如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。\n<br/><br/>如果调度域名最初没有配置为使用chinstandard或chinpremium，您将无法修改它以使用这两个服务器组。相反，您需要创建一个新的调度域名，将访客分区规则下发到这些服务器组。",
+                              "description": "如果动作类型为“分发”，则使用此字段指定一个或多个节点组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 来选择提供内容分发服务的缓存节点。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的节点组。如果您需要使用nearChina节点组，请联系我们的技术支持开通。不能在同一条规则中同时指定nearChina节点组和其他节点组。如果要使用其他节点组，需要创建单独的访客分区规则。<br/><br/>如果您的加速域名有ICP备案，希望由中国大陆的服务器提供内容分发服务，您可以选择使用“ChinaStandard”和“ChinaPremium”节点组。\n<br/><br/>如果调度域名创建时没有指定使用ChinaStandard或ChinaPremium节点组，则无法通过更新调度域名来使用这两个节点组。您需要创建一个新的调度域名，在新的调度域名中指定使用ChinaStandard或ChinaPremium，才能使用这2个节点组。",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -4115,12 +4115,12 @@
                             },
                             "to": {
                               "type": "string",
-                              "description": "如果动作类型为“跳转”，则使用此字段。表示(加速)域名或跳转的IP地址。这通常是源站服务器或另一个CDN提供商。",
+                              "description": "如果动作类型为“跳转”，则通过该字段指定跳转的目标域名或IP地址。“跳转”目标通常是源站服务器或其它CDN厂商。",
                               "example": "domain.com"
                             },
                             "enableIPv6": {
                               "type": "boolean",
-                              "description": "指明是否允许使用IPv6地址。仅当访客分区规则的操作类型为“分发”时才需要该值。",
+                              "description": "指定是否允许使用IPv6地址进行内容分发。仅当动作类型为“分发”时该值才有效。",
                               "default": true
                             }
                           },
@@ -4130,7 +4130,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "如果规则仅适用于来自特定运营商的请求，则指定表示运营商 (互联网服务提供商)的编号。可调用我们的API<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>。指定“all”表示所有运营商，而不是指定一个。如果希望规则应用于多个运营商，可用逗号分隔，最多包含10个运营商编号。"
+                          "description": "该规则适用的运营商。可调用我们的<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>接口查看运营商信息。指定“all”表示所有运营商。如果希望该规则应用于多个运营商，则可指定多个运营商，用逗号分隔，但最多只能包含10个运营商。"
                         }
                       },
                       "required": [
@@ -4141,7 +4141,7 @@
                   },
                   "estimatedBandwidth": {
                     "type": "string",
-                    "description": "使用这个调度域名提供内容服务所需要的带宽预计。测量单位应为Tbps、Gbps、Mbps或kbps。例子:100 Gbps"
+                    "description": "通过该调度域名进行CDN加速预计需要的带宽。单位应为Tbps、Gbps、Mbps或kbps。示例：100 Gbps。"
                   }
                 },
                 "required": [
@@ -4171,7 +4171,7 @@
               }
             }
           },
-          "description": "请求体完整地描述了调度域名。请您填写以下包含的所有字段，即使您不更改它们的值。"
+          "description": "在请求体中指定调度域名的相关配置。"
         },
         "parameters": [
           {
@@ -4196,7 +4196,7 @@
             "description": "调度域名更新成功。"
           },
           "400": {
-            "description": "请求无效。详细信息请参见响应体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4229,7 +4229,7 @@
             "headers": {}
           },
           "404": {
-            "description": "无法找到调度域名。详细信息请参见响应体。",
+            "description": "未找到调度域名。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4255,7 +4255,7 @@
             }
           },
           "409": {
-            "description": "调度域名字段不能修改，可能导致业务中断。",
+            "description": "调度域名字段不能更改。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4281,7 +4281,7 @@
             }
           }
         },
-        "description": "这个API允许您通过只发送以下需要更改的字段来更新调度域名。",
+        "description": "使用该接口对调度域名的部分字段进行更新。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4294,19 +4294,19 @@
                   },
                   "pciRequired": {
                     "type": "boolean",
-                    "description": "指明是否需要符合PCI规范。<i>true</i>意味着只提供经PCI认证节点的内容。"
+                    "description": "表示流量调度是否需要遵循PCI规范。当值为<i>true</i>时，表示只能使用已通过PCI认证的节点提供内容分发服务。"
                   },
                   "grprCompliant": {
                     "type": "boolean",
-                    "description": "如果设置为'true'，来自欧洲经济区(EEA)国家的客户端将仅由EEA国家的IP地址提供服务。"
+                    "description": "表示流量调度是否需要遵循GDPR的规定。当值为'true'时，对于来自欧洲经济区(EEA)国家的请求，将仅使用归属EEA国家的IP地址提供服务。"
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "指定规则来控制如何处理访客分区中的请求。如果未指定，将创建一个默认的规则，以允许我们的服务器集群处理请求，并尽可能达到最佳性能:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code> \n您可以修改默认的规则，并根据需要自定义规则。(豪华级以前被称为“高级+”)",
+                    "description": "自定义规则来控制如何处理不同访客分区的请求。如果未指定，系统将创建一条默认的规则:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>\n您可以修改默认的规则，并根据需要自定义规则。",
                     "items": {
                       "title": "调度域名访客分区规则",
                       "type": "object",
-                      "description": "此对象描述如何处理来自区域的客户端请求。区域是地理区域和ISP的组合。如果未指定，则创建一个默认值规则，以允许我们的服务器集群来处理请求并实现最佳性能:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则并创建自定义规则以满足您的需求。\n\n如果您的域名缺少ICP备案，但您希望为中国用户提供最佳服务，则可以使用另一个服务器组“nearChina”。但使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。\n\n如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。\n\n如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。",
+                      "description": "该对象描述如何处理来自不同区域的客户端请求。每个区域是地理区域和运营商的组合。如果未指定，系统将创建一条默认规则:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则，并根据需要创建自定义规则。",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4352,18 +4352,18 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "此字段指明规则适用的区域。请参阅我们的API<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>以获取有效的区域编号。例如，如果您希望创建规则覆盖整个欧洲，只需指定“eu”为区域。 您可以指明具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n特殊的访客区域-“all”可用于指定适用于全球的规则。如果指定了重叠区域，则更具体的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将遵循“as.cn”的规则。"
+                          "description": "该规则适用的区域。可调用<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>接口来查看区域信息。例如，如果您希望创建规则覆盖整个欧洲，则指定“eu”为区域。 您可以指定具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n“all”是一个特殊的区域，可用于指定适用于全球的规则。如果不同规则指定的区域存在重叠，则以更细粒度的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将优先匹配“as.cn”的规则。"
                         },
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "当为访客分区指定多个操作时，权重用于调整访客分区规则应用到客户端请求的概率。\n可参考两个适用于\"as.cn\"的规则: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n“分发”的概率为100/(100+10)或0.909，而“跳转”的概率为10/(100+10)或0.091。\n \n",
+                          "description": "可以为同个访客分区指定多条规则。通过在规则中指定weight字段，可控制规则匹配的权重。\n以\"as.cn\"区域的2条规则为例: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n按照以上规则，客户端请求匹配规则1进行“分发”的比例为100/(100+10)，即0.909，匹配规则2进行“跳转”的比例为10/(100+10)，即0.091。\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
                         "action": {
                           "type": "object",
-                          "description": "该对象描述请求匹配规则时的动作。",
+                          "description": "当规则匹配时执行的动作。",
                           "properties": {
                             "type": {
                               "type": "string",
@@ -4372,11 +4372,11 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "定义请求对区域采取的操作。选项包括:使用一个或多个服务器组<i>分发</i>，<i>拒绝</i>全部请求，或<i>跳转</i>到另一个域。如果指定了\"拒绝\"，则客户端请求将跳转发送到服务器，服务器总是以表示\"Forbidden\"的 403 HTTP响应代码响应。每个访客分区最多允许一个“拒绝”操作。"
+                              "description": "当规则匹配时，对客户端请求执行的动作的类型。包括<i>分发</i>，<i>拒绝</i>和<i>跳转</i>3个类型。如果指定了\"拒绝\"，则客户端请求将被调度到一台服务器，该服务器总是响应403状态码，表示\"Forbidden\"拒绝访问。每个访客分区最多只允许一个“拒绝”动作。"
                             },
                             "by": {
                               "type": "array",
-                              "description": "如果动作类型为“分发”，则使用此字段。指定一个或多个服务器组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 用来控制分发内容的服务器。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的服务器组，用于您的域名没有ICP备案，但您希望以最佳的性能服务中国访客的情况下。使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。<br/><br/>如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。\n<br/><br/>如果调度域名最初没有配置为使用chinstandard或chinpremium，您将无法修改它以使用这两个服务器组。相反，您需要创建一个新的调度域名，将访客分区规则下发到这些服务器组。",
+                              "description": "如果动作类型为“分发”，则使用此字段指定一个或多个节点组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 来选择提供内容分发服务的缓存节点。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的节点组。如果您需要使用nearChina节点组，请联系我们的技术支持开通。不能在同一条规则中同时指定nearChina节点组和其他节点组。如果要使用其他节点组，需要创建单独的访客分区规则。<br/><br/>如果您的加速域名有ICP备案，希望由中国大陆的服务器提供内容分发服务，您可以选择使用“ChinaStandard”和“ChinaPremium”节点组。\n<br/><br/>如果调度域名创建时没有指定使用ChinaStandard或ChinaPremium节点组，则无法通过更新调度域名来使用这两个节点组。您需要创建一个新的调度域名，在新的调度域名中指定使用ChinaStandard或ChinaPremium，才能使用这2个节点组。",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -4392,12 +4392,12 @@
                             },
                             "to": {
                               "type": "string",
-                              "description": "如果动作类型为“跳转”，则使用此字段。表示(加速)域名或跳转的IP地址。这通常是源站服务器或另一个CDN提供商。",
+                              "description": "如果动作类型为“跳转”，则通过该字段指定跳转的目标域名或IP地址。“跳转”目标通常是源站服务器或其它CDN厂商。",
                               "example": "domain.com"
                             },
                             "enableIPv6": {
                               "type": "boolean",
-                              "description": "指明是否允许使用IPv6地址。仅当访客分区规则的操作类型为“分发”时才需要该值。",
+                              "description": "指定是否允许使用IPv6地址进行内容分发。仅当动作类型为“分发”时该值才有效。",
                               "default": true
                             }
                           },
@@ -4407,7 +4407,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "如果规则仅适用于来自特定运营商的请求，则指定表示运营商 (互联网服务提供商)的编号。可调用我们的API<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>。指定“all”表示所有运营商，而不是指定一个。如果希望规则应用于多个运营商，可用逗号分隔，最多包含10个运营商编号。"
+                          "description": "该规则适用的运营商。可调用我们的<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>接口查看运营商信息。指定“all”表示所有运营商。如果希望该规则应用于多个运营商，则可指定多个运营商，用逗号分隔，但最多只能包含10个运营商。"
                         }
                       },
                       "required": [
@@ -4418,7 +4418,7 @@
                   },
                   "estimatedBandwidth": {
                     "type": "string",
-                    "description": "使用这个调度域名提供内容服务所需要的带宽预计。测量单位应为Tbps、Gbps、Mbps或kbps。例子:100 Gbps"
+                    "description": "通过该调度域名进行CDN加速预计需要的带宽。单位应为Tbps、Gbps、Mbps或kbps。示例：100 Gbps。"
                   }
                 }
               },
@@ -4431,7 +4431,7 @@
               }
             }
           },
-          "description": "请求体包含您希望修改的字段。"
+          "description": "在请求体中指定需要更新的字段。"
         },
         "parameters": [
           {
@@ -4454,19 +4454,19 @@
         "summary": "创建调度域名",
         "responses": {
           "201": {
-            "description": "创建一个调度域名。 该重定向头部指向这个新的调度域名。",
+            "description": "调度域名创建成功。",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "该值是指向新调度域名的URL。",
+                "description": "新创建的调度域名的URL。",
                 "required": true
               }
             }
           },
           "400": {
-            "description": "请求无效。详细信息请参见响应体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4516,7 +4516,7 @@
             }
           },
           "402": {
-            "description": "已经创建了太多调度域名。",
+            "description": "调度域名的数量超过上限。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4542,7 +4542,7 @@
             }
           },
           "409": {
-            "description": "由于冲突，无法创建调度域名。详细信息请参见响应体。",
+            "description": "存在冲突，无法创建调度域名。请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4568,7 +4568,7 @@
             }
           }
         },
-        "description": "这个API使您能够创建调度域名来控制如何处理来自不同访客分区的请求。您必须创建DNS的CNAME记录，将您的(加速)域名指向使用此API创建的调度域名，以便CDN处理您的内容。",
+        "description": "使用该接口创建调度域名，自定义规则处理不同访客分区的请求。您必须在DNS创建一条CNAME记录，将您的加速域名指向调度域名，以便CDN Pro按照您定义的规则进行流量调度。",
         "operationId": "createEdgeHostname",
         "requestBody": {
           "content": {
@@ -4578,7 +4578,7 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "您的DNS服务器设置中需要配置这个调度域名。当您的加速项目被部署到生产环境中，您应该修改您的DNS服务器配置，以便加速项目域名的CNAME记录能够指向这个值。调度域名至少由10个字符组成，可后面接着一个合法的后缀，如\".qtlcdn.com\"(例如， abcdefg123.qtlcdn.com)。您的<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">服务限额</a>中可能包含<i>edgeHostnameZones</i>字段。若如此，您的调度域名所使用的后缀应为其中列出之一。",
+                    "description": "当您部署加速项目到生产环境后，您应该修改DNS解析，添加一条CNAME记录，将您的加速域名指向该调度域名。每个调度域名由2部组成，即前缀和后缀（例如， abcdefg123.qtlcdn.com）。前缀可自定义，后缀为既定的DNS zone，如\".qtlcdn.com\"。如果您需要使用自定义的DNS zone，请联系我们的技术支持。",
                     "example": "testabcde.123.qtlcdn.com"
                   },
                   "description": {
@@ -4588,20 +4588,20 @@
                   "pciRequired": {
                     "type": "boolean",
                     "default": false,
-                    "description": "表明是否需要符合PCI规范。<i>true</i>意味着只提供经PCI认证节点的内容。"
+                    "description": "表示流量调度是否需要遵循PCI规范。当值为<i>true</i>时，表示只能使用已通过PCI认证的节点提供内容分发服务。"
                   },
                   "gdprCompliant": {
                     "type": "boolean",
                     "default": false,
-                    "description": "如果设置为'true'，来自欧洲经济区(EEA)国家的客户端将仅由EEA国家的IP地址提供服务。"
+                    "description": "表示流量调度是否需要遵循GDPR的规定。当值为'true'时，对于来自欧洲经济区(EEA)国家的请求，将仅使用归属EEA国家的IP地址提供服务。"
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "指定规则来控制如何处理访客分区中的请求。如果未指定，将创建一个默认的规则，以允许我们的服务器集群处理请求，并尽可能达到最佳性能:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>\n您可以修改默认的规则，并根据需要自定义规则。",
+                    "description": "自定义规则来控制如何处理不同访客分区的请求。如果未指定，系统将创建一条默认的规则:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>\n您可以修改默认的规则，并根据需要自定义规则。",
                     "items": {
                       "title": "调度域名访客分区规则",
                       "type": "object",
-                      "description": "此对象描述如何处理来自区域的客户端请求。区域是地理区域和ISP的组合。如果未指定，则创建一个默认值规则，以允许我们的服务器集群来处理请求并实现最佳性能:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则并创建自定义规则以满足您的需求。\n\n如果您的域名缺少ICP备案，但您希望为中国用户提供最佳服务，则可以使用另一个服务器组“nearChina”。但使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。\n\n如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。\n\n如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。",
+                      "description": "该对象描述如何处理来自不同区域的客户端请求。每个区域是地理区域和运营商的组合。如果未指定，系统将创建一条默认规则:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>您可以修改默认规则，并根据需要创建自定义规则。",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4647,18 +4647,18 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "此字段指明规则适用的区域。请参阅我们的API<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>以获取有效的区域编号。例如，如果您希望创建规则覆盖整个欧洲，只需指定“eu”为区域。 您可以指明具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n特殊的访客区域-“all”可用于指定适用于全球的规则。如果指定了重叠区域，则更具体的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将遵循“as.cn”的规则。"
+                          "description": "该规则适用的区域。可调用<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>接口来查看区域信息。例如，如果您希望创建规则覆盖整个欧洲，则指定“eu”为区域。 您可以指定具体的国家。例如，“na.us”代表“美国”，而“eu.fr”代表“法国”。\n\n“all”是一个特殊的区域，可用于指定适用于全球的规则。如果不同规则指定的区域存在重叠，则以更细粒度的区域优先。例如，如果您在一条规则中指定“as”，在另一条规则中指定“as.cn”，则来自中国的请求将优先匹配“as.cn”的规则。"
                         },
                         "weight": {
                           "type": "integer",
                           "default": 100,
-                          "description": "当为访客分区指定多个操作时，权重用于调整访客分区规则应用到客户端请求的概率。\n可参考两个适用于\"as.cn\"的规则: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n“分发”的概率为100/(100+10)或0.909，而“跳转”的概率为10/(100+10)或0.091。\n \n",
+                          "description": "可以为同个访客分区指定多条规则。通过在规则中指定weight字段，可控制规则匹配的权重。\n以\"as.cn\"区域的2条规则为例: <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n按照以上规则，客户端请求匹配规则1进行“分发”的比例为100/(100+10)，即0.909，匹配规则2进行“跳转”的比例为10/(100+10)，即0.091。\n \n",
                           "minimum": 0,
                           "maximum": 100
                         },
                         "action": {
                           "type": "object",
-                          "description": "该对象描述请求匹配规则时的动作。",
+                          "description": "当规则匹配时执行的动作。",
                           "properties": {
                             "type": {
                               "type": "string",
@@ -4667,11 +4667,11 @@
                                 "redirect",
                                 "reject"
                               ],
-                              "description": "定义请求对区域采取的操作。选项包括:使用一个或多个服务器组<i>分发</i>，<i>拒绝</i>全部请求，或<i>跳转</i>到另一个域。如果指定了\"拒绝\"，则客户端请求将跳转发送到服务器，服务器总是以表示\"Forbidden\"的 403 HTTP响应代码响应。每个访客分区最多允许一个“拒绝”操作。"
+                              "description": "当规则匹配时，对客户端请求执行的动作的类型。包括<i>分发</i>，<i>拒绝</i>和<i>跳转</i>3个类型。如果指定了\"拒绝\"，则客户端请求将被调度到一台服务器，该服务器总是响应403状态码，表示\"Forbidden\"拒绝访问。每个访客分区最多只允许一个“拒绝”动作。"
                             },
                             "by": {
                               "type": "array",
-                              "description": "如果动作类型为“分发”，则使用此字段。指定一个或多个服务器组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 用来控制分发内容的服务器。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的服务器组，用于您的域名没有ICP备案，但您希望以最佳的性能服务中国访客的情况下。使用nearChina的访客分区规则配置不能分发给其他服务器组，尽管您可以为这些服务器组创建单独的访客分区。<br/><br/>如果您拥有ICP备案许可证，并您希望由中国境内的服务器提供内容分发，您可以选择使用“ChinaStandard”和“ChinaPremium”。如果您需要nearChina、ChinaStandard或ChinaPremium，请联系我们的技术支持。\n<br/><br/>如果调度域名最初没有配置为使用chinstandard或chinpremium，您将无法修改它以使用这两个服务器组。相反，您需要创建一个新的调度域名，将访客分区规则下发到这些服务器组。",
+                              "description": "如果动作类型为“分发”，则使用此字段指定一个或多个节点组(<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) 来选择提供内容分发服务的缓存节点。如果未指定，则使用“standard”。<br/><br/>\"nearChina\"  是一个特殊的节点组。如果您需要使用nearChina节点组，请联系我们的技术支持开通。不能在同一条规则中同时指定nearChina节点组和其他节点组。如果要使用其他节点组，需要创建单独的访客分区规则。<br/><br/>如果您的加速域名有ICP备案，希望由中国大陆的服务器提供内容分发服务，您可以选择使用“ChinaStandard”和“ChinaPremium”节点组。\n<br/><br/>如果调度域名创建时没有指定使用ChinaStandard或ChinaPremium节点组，则无法通过更新调度域名来使用这两个节点组。您需要创建一个新的调度域名，在新的调度域名中指定使用ChinaStandard或ChinaPremium，才能使用这2个节点组。",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -4687,12 +4687,12 @@
                             },
                             "to": {
                               "type": "string",
-                              "description": "如果动作类型为“跳转”，则使用此字段。表示(加速)域名或跳转的IP地址。这通常是源站服务器或另一个CDN提供商。",
+                              "description": "如果动作类型为“跳转”，则通过该字段指定跳转的目标域名或IP地址。“跳转”目标通常是源站服务器或其它CDN厂商。",
                               "example": "domain.com"
                             },
                             "enableIPv6": {
                               "type": "boolean",
-                              "description": "指明是否允许使用IPv6地址。仅当访客分区规则的操作类型为“分发”时才需要该值。",
+                              "description": "指定是否允许使用IPv6地址进行内容分发。仅当动作类型为“分发”时该值才有效。",
                               "default": true
                             }
                           },
@@ -4702,7 +4702,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "如果规则仅适用于来自特定运营商的请求，则指定表示运营商 (互联网服务提供商)的编号。可调用我们的API<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>。指定“all”表示所有运营商，而不是指定一个。如果希望规则应用于多个运营商，可用逗号分隔，最多包含10个运营商编号。"
+                          "description": "该规则适用的运营商。可调用我们的<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>接口查看运营商信息。指定“all”表示所有运营商。如果希望该规则应用于多个运营商，则可指定多个运营商，用逗号分隔，但最多只能包含10个运营商。"
                         }
                       },
                       "required": [
@@ -4713,7 +4713,7 @@
                   },
                   "estimatedBandwidth": {
                     "type": "string",
-                    "description": "使用这个调度域名提供内容服务所需要的带宽预计。测量单位应为Tbps、Gbps、Mbps或kbps。例子:100 Gbps"
+                    "description": "通过该调度域名进行CDN加速预计需要的带宽。单位应为Tbps、Gbps、Mbps或kbps。示例：100 Gbps。"
                   }
                 }
               },
@@ -4744,7 +4744,7 @@
               }
             }
           },
-          "description": "该请求体包含了您的调度域名的一些规则。"
+          "description": "在请求头中指定调度域名和相关规则。"
         },
         "parameters": [
           {
@@ -4765,7 +4765,7 @@
         "summary": "获取调度域名列表",
         "responses": {
           "200": {
-            "description": "该响应报文包含符合匹配条件的调度域名。",
+            "description": "返回调度域名列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4787,19 +4787,19 @@
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC3339格式字符串，表示调度域名最后一次更新的时间。"
+                            "description": "RFC 3339格式的日期，表示调度域名最后一次更新的时间。"
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC3339格式字符串，表示调度域名创建的时间。"
+                            "description": "RFC 3339格式的日期，表示调度域名的创建时间。"
                           },
                           "hasBeian": {
                             "type": "boolean",
-                            "description": "<i>true</i> 具体指该正在加速的域名拥有备案许可证，允许由中国大陆的服务器提供内容加速服务。"
+                            "description": "是否备案的标记。当值为true时，将使用包括中国大陆的服务器提供内容加速服务。"
                           },
                           "highestServerGroup": {
                             "type": "string",
-                            "description": "具体指可用于提供服务此调度域名的最高级服务器集群组。当您在<a href=\"#operation/createEdgeHostname\">创建调度域名</a>中访客分区规则时，将指定这些服务器集群组. ",
+                            "description": "指该调度域名可使用的最高等级的节点组。当您在<a href=\"#operation/createEdgeHostname\">创建调度域名</a>中定义访客分区规则时，可指定节点组。 ",
                             "enum": [
                               "standard",
                               "premium",
@@ -4809,7 +4809,7 @@
                           },
                           "customerId": {
                             "type": "integer",
-                            "description": "拥有调度域名的客户ID将会使用值为self+children或children-only的Report-Range头部，在响应报文中返回给代理商。"
+                            "description": "当调用方为代理商，且指定了Report-Range请求头，值为self+children或children-only，通过该字段返回拥有该调度域名的客户账号的ID。"
                           }
                         },
                         "required": [
@@ -4825,7 +4825,7 @@
                     "count": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "该账号下的调度域名总数。如果指定了查询参数，则在<i>edgehostnames</i>字段中返回的实际调度域名数量可能会更小。"
+                      "description": "调度域名的总数。"
                     }
                   },
                   "required": [
@@ -4861,7 +4861,7 @@
             }
           },
           "400": {
-            "description": "无效请求。有关详细信息，请参阅响应体正文。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -4906,7 +4906,7 @@
           }
         },
         "operationId": "getEdgeHostnames",
-        "description": "获取调度域名的列表。通过指定搜索、起始位置和最大条数参数来过滤您的结果。默认情况下，首先返回最近更新的调度域名。",
+        "description": "获取调度域名的列表。",
         "parameters": [
           {
             "schema": {
@@ -4914,7 +4914,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "该值匹配每个调度域名的'description'和'edgeHostname'字段。"
+            "description": "通过搜索关键字匹配调度域名的前缀和描述进行过滤。"
           },
           {
             "name": "offset",
@@ -4949,7 +4949,7 @@
             },
             "in": "query",
             "name": "sortBy",
-            "description": "对调度域名的列表进行排序。"
+            "description": "返回结果的排序依据。"
           },
           {
             "schema": {
@@ -4963,7 +4963,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "表明返回调度域名的顺序。使用'asc'表示升序，使用'desc'表示降序。"
+            "description": "返回结果的排序顺序。'asc'表示升序，'desc'表示降序。"
           },
           {
             "name": "On-Behalf-Of",
@@ -4980,7 +4980,7 @@
             },
             "in": "query",
             "name": "hasBeian",
-            "description": "<i>true</i> 具体指获取与拥有备案许可证的（加速）域名一起使用的被标记的调度域名列表，允许中国大陆的服务器为其提供服务。<i>false</i>具体指只检索那些没有备案的调度域名。默认情况下，将返回所有调度域名。"
+            "description": "通过是否备案的标记来查询调度域名列表。默认返回所有调度域名。"
           },
           {
             "name": "Report-Range",
@@ -12435,19 +12435,19 @@
         "summary": "创建报表注释",
         "responses": {
           "201": {
-            "description": "注释已经创建，并将在您指定的条件下出现在CDN Pro控制台报表中。Location响应头将包含一个指向该对象的URL。",
+            "description": "报表注释创建成功。该注释将在指定的条件下出现在CDN Pro控制台的报表中。",
             "headers": {
               "Location": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "指向注释对象的URL，例如， <code>Location: http://ngapi.cdnetworks.com/cdn/annotations/5dd50ef0ace044000163278f</code>.",
+                "description": "新创建的报表注释的URL。例如， <code>Location: http://ngapi.cdnetworks.com/cdn/annotations/5dd50ef0ace044000163278f</code>。",
                 "required": true
               }
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -12491,7 +12491,7 @@
             }
           }
         },
-        "description": "此API允许您为CDN Pro控制台中显示的报表创建注释。请求主体允许您指定注释出现的条件以及要显示的文本。",
+        "description": "该接口用来创建报表注释。当您在CDN Pro控制台查看报表时，报表注释将与报表一同展示。",
         "operationId": "createAnnotation",
         "requestBody": {
           "content": {
@@ -12501,25 +12501,25 @@
                 "properties": {
                   "time": {
                     "type": "string",
-                    "description": "RFC 3339 日期，表示注释应用的时间。"
+                    "description": "RFC 3339 格式的日期，表示注释对应的时间点。"
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "应用的加速域名列表，允许使用通配符域名，如*.domain.com。如果未指定，该注释将应用于所有加速域名。",
+                    "description": "与该注释关联的加速域名列表。允许使用泛域名，如*.domain.com。如果未指定，该注释将关联所有加速域名。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "serverRegions": {
                     "type": "array",
-                    "description": "一个或多个服务器区域。请在<a href=\"#operation/createEdgeHostname\">创建调度域名API</a>中参考区域信息。",
+                    "description": "一个或多个服务区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "一个或多个访客区域。 请在<a href=\"#operation/createEdgeHostname\">创建调度域名API</a>中参考区域信息。",
+                    "description": "一个或多个访客区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                     "items": {
                       "type": "string"
                     }
@@ -12531,11 +12531,11 @@
                       "configuration",
                       "operation"
                     ],
-                    "description": "概述发生的事件类型:\n<table><tr><th>值</th><th>描述</th></tr><tr><td>client</td><td>影响访客的事件，如热门游戏的发行。</td></tr><tr><td>configuration</td><td>加速项目配置变更。</td></tr><tr><td>operation</td><td>在CDN平台上执行的操作，如更新缓存服务器等。该类型只能由CDNetworks创建。</td></tr></table>"
+                    "description": "在指定时间点发生的影响报表数据的事件，包括以下类型:\n<table><tr><th>值</th><th>描述</th></tr><tr><td>client</td><td>影响访客的事件，如热门游戏的发行。</td></tr><tr><td>configuration</td><td>加速项目配置变更。</td></tr><tr><td>operation</td><td>在CDN平台上执行的操作，如更新缓存服务器。该类型只能由CDN Pro创建。</td></tr></table>"
                   },
                   "comments": {
                     "type": "string",
-                    "description": "描述事件的文本。这将出现在报表中。",
+                    "description": "对事件的描述。该描述将出现在报表中。",
                     "minLength": 1,
                     "maxLength": 250
                   }
@@ -12557,7 +12557,7 @@
               }
             }
           },
-          "description": "指定注释出现的条件和要显示的文本。"
+          "description": "在请求体中指定注释出现的条件和相应的注释文本。"
         },
         "parameters": [
           {
@@ -13104,7 +13104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "响应主体包含一个注释列表。",
+            "description": "返回报表注释列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13113,7 +13113,7 @@
                     "count": {
                       "type": "integer",
                       "minimum": 0,
-                      "description": "注释总数。"
+                      "description": "报表注释的总数。"
                     },
                     "annotations": {
                       "type": "array",
@@ -13135,34 +13135,34 @@
                             "comments": "A major release"
                           }
                         },
-                        "description": "这描述了显示在CDN Pro控制台上的报表注释。",
+                        "description": "报表注释。",
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "表示注释的ID。",
+                            "description": "报表注释的ID。",
                             "minLength": 1
                           },
                           "time": {
                             "type": "string",
-                            "description": "RFC 3339日期，表示注释应用的时间。"
+                            "description": "RFC 3339格式的日期，表示报表注释对应的时间点。"
                           },
                           "hostnames": {
                             "type": "array",
-                            "description": "适用的加速域名。",
+                            "description": "报表注释关联的加速域名。",
                             "items": {
                               "type": "string"
                             }
                           },
                           "clientRegions": {
                             "type": "array",
-                            "description": "一个或多个访客区域。 请在 <a href=\"#operation/createEdgeHostname\">创建调度域名API</a>参考区域信息。",
+                            "description": "一个或多个访客区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                             "items": {
                               "type": "string"
                             }
                           },
                           "type": {
                             "type": "string",
-                            "description": "描述注释的类型。operation注释只能由CDNetworks创建。",
+                            "description": "报表注释的类型。operation类型的注释只能由CDN Pro创建。",
                             "enum": [
                               "client",
                               "operation",
@@ -13171,11 +13171,11 @@
                           },
                           "comments": {
                             "type": "string",
-                            "description": "CDN Pro控制台报表中显示的注释文本。"
+                            "description": "报表注释的描述。"
                           },
                           "serverRegions": {
                             "type": "array",
-                            "description": "一个或多个服务器区域。请在 <a href=\"#operation/createEdgeHostname\">创建调度域名API</a>参考区域信息。",
+                            "description": "一个或多个服务区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                             "items": {
                               "type": "string"
                             }
@@ -13226,7 +13226,7 @@
             }
           },
           "400": {
-            "description": "请求无效。请参考响应正文了解详情。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13261,22 +13261,20 @@
         "operationId": "queryAnnotationList",
         "parameters": [
           {
-            "name": "startdate",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。 根据type参数对应的粒度，您指定的开始时间可能被向前取整为最近的分钟、小时或天。例如，如果您指定 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，则返回从2019-09-05T03:00:00Z开始的数据。"
+            "name": "startdate",
+            "description": "查询范围的开始时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>startdate=2019-10-30T00:00:00Z</code>。"
           },
           {
-            "name": "enddate",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。根据type参数对应的粒度，您指定的结束时间可能被向后取整为最近的分钟、小时或天。例如，如果您指定 <code>enddate=2019-09-05T03:14:01Z&type=hourly&type=hourly</code>，则返回截止到2019-09-05T04:00:00Z的数据。"
+            "description": "查询范围的结束时间，以RFC 3339日期格式表示。必须使用UTC时区指定时间。示例：<code>enddate=2019-11-14T00:00:00Z</code>。查询范围不能超过365天。",
+            "name": "enddate"
           },
           {
             "schema": {
@@ -13289,7 +13287,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "指示注释的类型(client、configuration或operation)。operation注释只能由CDNetworks创建。"
+            "description": "报表注释的类型。"
           },
           {
             "schema": {
@@ -13297,7 +13295,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "搜索ID或comments匹配此值的注释。根据ID搜索时，只有精确匹配才会返回结果。根据comments搜索时，不区分大小写，并且支持部分匹配。"
+            "description": "通过搜索关键字匹配报表注释的ID（精确匹配）或描述（模糊匹配）进行过滤。"
           },
           {
             "name": "offset",
@@ -13346,7 +13344,7 @@
             "description": "如果您是代理商，可使用该请求头指定代理客户的ID。"
           }
         ],
-        "description": "获取已创建的注释列表。每个注释将基于定义的条件出现在CDN Pro控制台的报表中。使用查询参数和请求主体筛选结果。",
+        "description": "获取已创建的报表注释列表。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -13383,7 +13381,7 @@
               }
             }
           },
-          "description": "过滤器允许您控制返回哪些注释。请注意，如果指定了多个加速域名，API将返回应用于相应加速域名的注释。"
+          "description": "在请求体中使用过滤器指定查询范围。当指定多个加速域名时，与任何一个加速域名关联的报表注释都将出现在返回结果中。"
         }
       }
     },
@@ -13396,7 +13394,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "注释ID。"
+          "description": "报表注释的id。"
         }
       ],
       "delete": {
@@ -13406,10 +13404,10 @@
         ],
         "responses": {
           "204": {
-            "description": "成功删除注释。"
+            "description": "报表注释删除成功。"
           },
           "403": {
-            "description": "您没有删除此注释的权限。",
+            "description": "禁止访问。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13435,7 +13433,7 @@
             }
           },
           "404": {
-            "description": "找不到该注释。",
+            "description": "未找到报表注释。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13477,13 +13475,13 @@
         "x-internal": false
       },
       "get": {
-        "summary": "获取报表注释详情",
+        "summary": "获取报表注释详细信息",
         "tags": [
           "报表注释"
         ],
         "responses": {
           "200": {
-            "description": "响应包含关于注释的详细信息。",
+            "description": "返回报表注释的详细信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13504,34 +13502,34 @@
                       "comments": "A major release"
                     }
                   },
-                  "description": "这描述了显示在CDN Pro控制台上的报表注释。",
+                  "description": "报表注释。",
                   "properties": {
                     "id": {
                       "type": "string",
-                      "description": "表示注释的ID。",
+                      "description": "报表注释的ID。",
                       "minLength": 1
                     },
                     "time": {
                       "type": "string",
-                      "description": "RFC 3339日期，表示注释应用的时间。"
+                      "description": "RFC 3339格式的日期，表示报表注释对应的时间点。"
                     },
                     "hostnames": {
                       "type": "array",
-                      "description": "适用的加速域名。",
+                      "description": "报表注释关联的加速域名。",
                       "items": {
                         "type": "string"
                       }
                     },
                     "clientRegions": {
                       "type": "array",
-                      "description": "一个或多个访客区域。 请在 <a href=\"#operation/createEdgeHostname\">创建调度域名API</a>参考区域信息。",
+                      "description": "一个或多个访客区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                       "items": {
                         "type": "string"
                       }
                     },
                     "type": {
                       "type": "string",
-                      "description": "描述注释的类型。operation注释只能由CDNetworks创建。",
+                      "description": "报表注释的类型。operation类型的注释只能由CDN Pro创建。",
                       "enum": [
                         "client",
                         "operation",
@@ -13540,11 +13538,11 @@
                     },
                     "comments": {
                       "type": "string",
-                      "description": "CDN Pro控制台报表中显示的注释文本。"
+                      "description": "报表注释的描述。"
                     },
                     "serverRegions": {
                       "type": "array",
-                      "description": "一个或多个服务器区域。请在 <a href=\"#operation/createEdgeHostname\">创建调度域名API</a>参考区域信息。",
+                      "description": "一个或多个服务区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                       "items": {
                         "type": "string"
                       }
@@ -13606,7 +13604,7 @@
             }
           },
           "404": {
-            "description": "未找到。",
+            "description": "未找到报表注释。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13633,7 +13631,7 @@
           }
         },
         "operationId": "getAnnotation",
-        "description": "获取报表注释的详细信息，包括该注释将出现在CDN Pro报表中的条件。",
+        "description": "获取报表注释的详细信息。",
         "parameters": [
           {
             "name": "On-Behalf-Of",
@@ -13653,10 +13651,10 @@
         ],
         "responses": {
           "204": {
-            "description": "没有内容。"
+            "description": "报表注释更新成功。"
           },
           "400": {
-            "description": "无效的请求。有关详细信息，请参阅响应体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13694,7 +13692,7 @@
             }
           },
           "404": {
-            "description": "未找到。",
+            "description": "未找到报表注释。",
             "content": {
               "application/json": {
                 "schema": {
@@ -13720,7 +13718,7 @@
             }
           }
         },
-        "description": "更新报表注释。当条件满足时，它将出现在CDN Pro控制台报表中。",
+        "description": "更新报表注释。",
         "operationId": "updateAnnotation",
         "requestBody": {
           "content": {
@@ -13730,11 +13728,11 @@
                 "properties": {
                   "time": {
                     "type": "string",
-                    "description": "RFC 3339日期，表示注释应用的时间。"
+                    "description": "RFC 3339格式的日期，表示报表注释对应的时间点。"
                   },
                   "type": {
                     "type": "string",
-                    "description": "概述发生的事件类型:\n<table><tr><th>值</th><th>描述</th></tr><tr><td>client</td><td>影响访客的事件，如热门游戏的发行。</td></tr><tr><td>configuration</td><td>加速域名配置变更。</td></tr><tr><td>operation</td><td>在CDN平台上执行的操作，如更新缓存服务器等。该类型只能由CDNetworks创建。</td></tr></table>",
+                    "description": "在指定时间点发生的影响报表数据的事件，包括以下类型:\n<table><tr><th>值</th><th>描述</th></tr><tr><td>client</td><td>影响访客的事件，如热门游戏的发行。</td></tr><tr><td>configuration</td><td>加速项目配置变更。</td></tr><tr><td>operation</td><td>在CDN平台上执行的操作，如更新缓存服务器。该类型只能由CDN Pro创建。</td></tr></table>",
                     "enum": [
                       "client",
                       "configuration",
@@ -13743,7 +13741,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "应用的加速域名列表。允许使用通配符域名，如*.domain.com。如果未指定，该注释将应用于所有加速域名的数据。",
+                    "description": "与该注释关联的加速域名列表。允许使用泛域名，如*.domain.com。如果未指定，该注释将关联所有加速域名。",
                     "nullable": true,
                     "items": {
                       "type": "string"
@@ -13751,18 +13749,18 @@
                   },
                   "comments": {
                     "type": "string",
-                    "description": "描述事件的文本。这将出现在报表中。"
+                    "description": "对事件的描述。该描述将出现在报表中。"
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "一个或多个访客区域。 请在<a href=\"#operation/createEdgeHostname\">创建调度域名API</a>中参考区域信息。",
+                    "description": "一个或多个访客区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "serverRegions": {
                     "type": "array",
-                    "description": "一个或多个服务器区域。请在<a href=\"#operation/createEdgeHostname\">创建调度域名API</a>中参考区域信息。",
+                    "description": "一个或多个服务区域。 请参考<a href=\"#operation/createEdgeHostname\">创建调度域名</a>接口中对于区域的定义。",
                     "items": {
                       "type": "string"
                     }
@@ -13783,7 +13781,7 @@
               }
             }
           },
-          "description": "指定要更新的注释的信息。"
+          "description": "指定要更新的字段。"
         },
         "parameters": [
           {
@@ -18237,7 +18235,7 @@
         "summary": "获取运营商列表",
         "responses": {
           "200": {
-            "description": "该响应报文包含符合条件的运营商列表。您可以在<a href=\"#operation/createEdgeHostname\">创建调度域名</a>时指定运营商的编号。",
+            "description": "返回运营商列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -18248,11 +18246,11 @@
                     "properties": {
                       "code": {
                         "type": "string",
-                        "description": "代表运营商的编号。"
+                        "description": "运营商的代码。"
                       },
                       "name": {
                         "type": "string",
-                        "description": "运营商的描述名称。"
+                        "description": "运营商的名称或描述。"
                       }
                     }
                   }
@@ -18423,7 +18421,7 @@
             }
           },
           "400": {
-            "description": "请求无效。有关详细信息，请参阅响应体。",
+            "description": "无效请求，请查看响应体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -18450,7 +18448,7 @@
           }
         },
         "operationId": "get-cdn-edgeHostnames-isps",
-        "description": "获取适配于<a href=\"#operation/createEdgeHostname\">创建调度域名</a>中访客分区规则的运营商列表。",
+        "description": "获取CDN Pro支持的运营商列表。这些运营商可在<a href=\"#operation/createEdgeHostname\">创建调度域名</a>时用于定义访客分区规则。",
         "parameters": [
           {
             "schema": {
@@ -18458,7 +18456,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "返回包含指定值编号或名称的运营商。"
+            "description": "通过搜索关键字匹配运营商的代码或名称进行过滤。"
           },
           {
             "schema": {
@@ -18471,7 +18469,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "对返回的ISP列表进行排序。使用'asc'表示升序，使用'desc'表示降序。"
+            "description": "返回结果的排序顺序。使用'asc'表示升序，'desc'表示降序。"
           },
           {
             "schema": {
@@ -18479,7 +18477,7 @@
             },
             "in": "query",
             "name": "regionCode",
-            "description": "返回仅限在特定区域运营的运营商。<i>regionCode</i>该值应该是由表示API<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客分区列表</a>中的编号之一。"
+            "description": "仅返回在某个访客区域有提供服务的运营商。访客区域是指<a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">获取访客区域列表</a>中支持的访客区域。"
           }
         ],
         "tags": [
@@ -20736,7 +20734,7 @@
         "summary": "获取访客区域列表",
         "responses": {
           "200": {
-            "description": "该响应体包含区域列表。您可以在调度域名的访客分区规则中指定区域编号。",
+            "description": "返回访客区域列表。",
             "content": {
               "application/json": {
                 "schema": {
@@ -20746,11 +20744,11 @@
                     "properties": {
                       "code": {
                         "type": "string",
-                        "description": "代表一个地区的编号。"
+                        "description": "访客区域的代码。"
                       },
                       "name": {
                         "type": "string",
-                        "description": "对该地区的描述。"
+                        "description": "访客区域的名称或描述。"
                       }
                     },
                     "required": [
@@ -20785,7 +20783,7 @@
             }
           },
           "400": {
-            "description": "无效的请求。有关详细信息，请参阅响应主体。",
+            "description": "无效请求，请查看返回体中的错误信息。",
             "content": {
               "application/json": {
                 "schema": {
@@ -20812,7 +20810,7 @@
           }
         },
         "operationId": "get-cdn-edgeHostnames-clientRegions",
-        "description": "获取在<a href=\"#operation/createEdgeHostname\">创建调度域名</a>中访客分区规则的访客区域列表。您可以通过填充查询参数对结果进行筛选和排序。",
+        "description": "获取CDN Pro支持的访客区域列表。这些访客区域可在<a href=\"#operation/createEdgeHostname\">创建调度域名</a>时用于定义访客分区规则。",
         "parameters": [
           {
             "schema": {
@@ -20820,7 +20818,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "返回包含指定值编号或名称的区域。"
+            "description": "通过搜索关键字匹配访客区域的代码或名称进行过滤。"
           },
           {
             "schema": {
@@ -20833,7 +20831,7 @@
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "返回访客区域的顺序。使用'asc'表示升序，使用'desc'表示降序。"
+            "description": "返回结果的排序顺序。使用'asc'表示升序，'desc'表示降序。"
           },
           {
             "schema": {
@@ -20841,7 +20839,7 @@
             },
             "in": "query",
             "name": "ispCode",
-            "description": "返回仅限在有运营商运营的区域。该值应该是API<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>返回的运营商编号之一。"
+            "description": "仅返回某个运营商有提供服务的访客区域。运营商是指<a href=\"#operation/get-cdn-edgeHostnames-isps\">获取运营商列表</a>接口所支持的运营商。"
           }
         ],
         "tags": [
@@ -32012,7 +32010,7 @@
     },
     {
       "name": "调度域名管理",
-      "description": "必须为部署到生产环境的加速项目创建调度域名。您可以定义规则以应用于来自不同客户端区域的访问者，这些区域是地理区域和ISP的组合。您必须修改DNS记录，将每个加速项目的域名指向调度域名，以便CDN Pro处理访问者请求。如果应用相同的规则，不同加速项目的域名可能指向相同的调度域名。"
+      "description": "当加速项目部署到生产环境之后，您需要创建调度域名来管理边缘流量。您可以针对不同区域，不同运营商的访客定义不同的流量调度规则。调度域名创建完成后，您必须修改DNS记录，将加速域名指向调度域名，CDN Pro才能对访客请求进行调度。如果多个加速域名的调度规则一样，可以将同一个调度域名用于多个加速域名。"
     },
     {
       "name": "报表",
@@ -32020,7 +32018,7 @@
     },
     {
       "name": "报表注释",
-      "description": "添加文本注释以突出显示与加速域名流量相关的事件。当您查看报表时，这些注释将出现在<a href=\"https://console.cdnetworks.com/cdn\">CDN Pro控制台</a>。"
+      "description": "添加文本注释，用于标记与加速域名流量相关的事件。当您在<a href=\"https://console.cdnetworks.com/cdn\">CDN Pro控制台</a>查看报表时，这些注释将与报表一同展示。"
     },
     {
       "name": "内容管理",
