@@ -722,7 +722,21 @@ Determines in which cases a stale cached response can be used during communicati
 **Default:** — <br/>
 **Context:** server, location
 
-Sets caching time for different response codes. If no code is explicitly specified, the default is 200, 301 and 302. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance.
+Sets caching time for different response codes. If no code is explicitly specified, the default is 200, 301 and 302. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance. 
+
+The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you need the directive to configure on both server level and location block, use the directive as in the following example:
+
+```nginx
+
+proxy_cache_valid 404 10s;  # server level, cache 404 status code for 10 seconds
+proxy_cache_valid $cache_time;
+set $cache_time '';
+location / {
+  set $cache_time 1d;   # Location block, cache for a day with status code 200, 301, and 302
+  ...
+ } 
+
+```
 
 ### `proxy_cache_vary`
 
