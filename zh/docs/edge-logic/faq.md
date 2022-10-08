@@ -110,7 +110,7 @@ proxy_ignore_headers Vary;
 
 #### 无ICP备案域名中国大陆加速 - Near China 专线解决方案
 
-如果您的CDN域名没有ICP备案，但仍然需要加速并分发内容到中国大陆，CDN Pro 为您提供了Near China专线的解决方案。 这个解决方案利用 CDN Pro 的特殊服务组nearChina，以部署在香港的优质节点线路，底延时高性能的下发您的内容到中国大陆。
+如果您的CDN域名没有ICP备案，但仍然需要加速并分发内容到中国大陆，CDN Pro 为您提供了Near China专线的解决方案。 这个解决方案利用 CDN Pro 的特殊服务组nearChina，以部署在香港的优质节点线路，底延时高性能的分发您的内容到中国大陆。
 
 由于 Near China 专线解决方案是增值服务，nearChina 服务组的价格会高于普通服务组的价格。 如您有需要获取此专线价格信息或开启服务，请联系网宿（CDNetworks）技术支持团队。
 
