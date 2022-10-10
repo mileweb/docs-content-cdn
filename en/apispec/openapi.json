@@ -1,6 +1,6 @@
 {
   "openapi": "3.0.0",
-    "info": {
+  "info": {
     "title": "CDN Pro API Specification",
     "version": "1.0",
     "description": "CDN Pro APIs allow you to manage the CDN Pro service.",
@@ -1877,7 +1877,7 @@
                                 "default": 100,
                                 "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                                 "minimum": 0,
-                                "maximum": 100
+                                "maximum": 1000
                               },
                               "action": {
                                 "type": "object",
@@ -2258,7 +2258,7 @@
                           "default": 100,
                           "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
-                          "maximum": 100
+                          "maximum": 1000
                         },
                         "action": {
                           "type": "object",
@@ -2534,7 +2534,7 @@
                           "default": 100,
                           "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
-                          "maximum": 100
+                          "maximum": 1000
                         },
                         "action": {
                           "type": "object",
@@ -4657,7 +4657,7 @@
                           "default": 100,
                           "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
                           "minimum": 0,
-                          "maximum": 100
+                          "maximum": 1000
                         },
                         "action": {
                           "type": "object",
@@ -31832,6 +31832,126 @@
             "description": "Returns shields in sorted order, either \"asc\" for ascending or \"desc\" for descending. The default is to return the last shield updated first."
           }
         ]
+      }
+    },
+    "/ngadmin/ipDetails": {
+      "post": {
+        "summary": "Check if IP addresses belong to the CDN Pro platform",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response indicates the status of each address in the request body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ipDetails": {
+                      "type": "array",
+                      "description": "Describes an IP address.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ip": {
+                            "type": "string",
+                            "description": "An IPv4 or IPv6 address"
+                          },
+                          "isCdnProIp": {
+                            "type": "boolean",
+                            "description": "True if the IP address belongs to the CDN Pro platform."
+                          },
+                          "protocol": {
+                            "type": "string",
+                            "enum": [
+                              "IPv4",
+                              "IPv6"
+                            ],
+                            "description": "Indicates the protocol of the IP address."
+                          }
+                        },
+                        "required": [
+                          "ip",
+                          "isCdnProIp",
+                          "protocol"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "ipDetails": [
+                        {
+                          "ip": "185.119.40.3",
+                          "isCdnProIp": true,
+                          "protocol": "IPv4"
+                        },
+                        {
+                          "ip": "2607:B300:FD06:0001:0000:0000:0000:0002",
+                          "isCdnProIp": false,
+                          "protocol": "IPv6"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "post-ngadmin-ipDetails",
+        "description": "This API allows you to check whether one or more IP addresses belong to the CDN Pro platform.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ipList": {
+                    "type": "array",
+                    "description": "Array of IPv4 or IPv6 addresses to check.",
+                    "maxItems": 128,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "ipList": [
+                      "185.119.40.3"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body consists of an array of IP addresses to check."
+        }
       }
     }
   },
