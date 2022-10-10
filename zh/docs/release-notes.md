@@ -15,7 +15,7 @@
 * Improved error handling when a customer tries to access a product that hasn’t been enabled for him.
 * Encoded URLs when creating purge and prefetch requests to make it easier for users who submit URLs with special characters..
 * Updated handling of edgeHostnameZones in the portal to account for absent field.
-* Added support for several variables ($remote_user, $client_real_ip, $sorted_querystring_args $random_N)in the load balancer hash key field.
+* Added support for several variables ($remote_user, $client_real_ip, $sorted_querystring_args $random_N) in the load balancer hash key field.
 
 ## September 21, 2022
 ### API updates
