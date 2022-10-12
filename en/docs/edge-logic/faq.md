@@ -95,15 +95,21 @@ In this case, the servers cache the content as if the `Vary` header does not exi
 
 When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn on this feature, use the directive [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) in the location where it is needed.
 
-### China Delivery and Beian
+### China Delivery with and without ICP Beian
 
-The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, CDNetworks cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, CDNetworks can use servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
+The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, CDNetworks cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, CDNetworks can use its dedicated line Near China solution or servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
 
+#### China Delivery with ICP Beian
 If you have one or more domains with ICP Beian and want them to be accelerated in China, contact customer service to ensure we have all the required information on file about your business. After confirming that we have the necessary information, your China Delivery service will be enabled. You can then perform the following steps to enable local delivery of domains in Mainland China: 
 
 1. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. Otherwise, they will return status code 451.
 
-2. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
+2. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China.
+
+#### China Delivery without ICP Beian using the Near China Solution
+If your CDN domains do not have ICP Beian, but you want them to be accelerated in Mainland China, CDN Pro offers a Near China solution. This solution uses the CDN Pro special server group nearChina, with a robust network of servers located in Hong Kong, to effectively deliver your content with low latency and high performance for your websites and applications in China.
+
+CDN Pro's Near China solution is a value-added service. The traffic per GB cost for the server group will be more expensive than the regular server groups. Please contact the CDNetworks Support Team for details on the nearChina server group's price and to enable the service.
 
 ### How to support WebSocket?
 
@@ -133,7 +139,7 @@ To prevent CDN Pro's API servers from being overwhelmed, the CDN Pro API enforce
 of requests that customers can send per minute. If a customer sends too many requests, API rate limiting
 throttles the customer by returning error messages with HTTP status code 429.
 
-** Token Bucket Algorithm **
+* **Token Bucket Algorithm**
 
 CDN Pro uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to enforce rate limiting.
 The token bucket algorithm is based on an analogy of a fixed capacity bucket into which tokens are added at a
@@ -150,7 +156,7 @@ fixed rate of 120 tokens per minute, and the total capacity of the bucket is 45.
 "120 tokens per minute" adds 1 token  every 500 milliseconds. In other words, the refill does not wait a full
 minute to regenerate a bunch of 120 tokens.
 
-** Indicator and Error Handling **
+* **Indicator and Error Handling**
 
 After the token gets consumed, an `x-rate-limit-remaining: X` header is added to the API call’s HTTP response,
 indicating the number of tokens remaining in the bucket. This header represents the remaining quota of API requests
@@ -158,7 +164,7 @@ a customer can make at this time. Failed or malformed requests consume one token
 If there is not a sufficient number of tokens in the bucket, the API gateway returns an HTTP 429 error with
 response header `x-rate-limit-retry-after-seconds: Y` to tell the client to retry after Y seconds.
 
-** Best Practices for Avoiding Rate Limiting Errors **
+* **Best Practices for Avoiding Rate Limiting Errors**
 
 1. Check the API request history. [“GET /ngadmin/apicalls”](</apidocs#operation/get-ngadmin-apicalls>)
 shows the API calls you have made.  (The customer admin API credential is required to call this API.)
@@ -191,7 +197,7 @@ process in your code that regulates the rate of your requests so that they are d
 4. If a problem persists, contact our [technical support team](mailto:support@cdnetworks.com).
 If there is a legitimate need to increase the rate limit or burst ceiling, the technical support team will evaluate your requirements and raise the threshold.
 
-** Notes **
+* **Notes**
 
 1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The rate limits of a reseller's children are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
 

@@ -1,5 +1,22 @@
 # Release Notes
 
+## October 5, 2022
+### API updates
+* Added ipDetails API to allow customers to query whether IP addresses belong to the CDN Pro platform.
+* Ensured edgeHostnameZones field is returned as expected in serviceQuotas API.
+* Ensured that a parent customer can help deploy a child’s property using a secret in Edge Logic.
+* Improved error handling when a reseller tries to create a customer.
+* Improved error handling when property is created with the realTimeLog setting.
+* Allowed the weight field of client zone rules to have values up to 1000 for more precise control over traffic.
+* Supported parsing CRT file and splitting chainCert, if any, from the file when creating or updating a certificate.
+
+### Portal updates
+* Improved usability of client zone rule creation.
+* Improved error handling when a customer tries to access a product that hasn’t been enabled for him.
+* Encoded URLs when creating purge and prefetch requests to make it easier for users who submit URLs with special characters..
+* Updated handling of edgeHostnameZones in the portal to account for absent field.
+* Added support for several variables ($remote_user, $client_real_ip, $sorted_querystring_args $random_N) in the load balancer hash key field.
+
 ## September 21, 2022
 ### API updates
 * Ensured search for properties with keepAliveRequests returns results.

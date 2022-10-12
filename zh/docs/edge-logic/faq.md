@@ -127,3 +127,48 @@ proxy_ignore_headers Vary;
 * **回源时开启HDT链路加速配置**
 
 CDN Pro 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN Pro 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令亦可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
+
+### CDN Pro API 如何限制调用频率?
+
+为了防止CDN Pro的服务过载，CDN Pro API限制客户每分钟可以发送的请求数量。如果客户发送过多的请求，API频率限制器将返回带有HTTP状态码429的错误消息。
+
+* **令牌桶算法**
+
+CDN Pro采用令牌桶算法实现频率限制。令牌桶算法基于一个固定容量的桶，令牌以固定的速度添加到桶中。在允许一个API请求继续处理之前要先检查桶，查看它是否至少包含一个令牌。如果是，则从桶中消耗一个令牌，允许API请求继续进行。如果可用的令牌数量不足，则会阻止请求，并返回错误信息，提示在1分钟的滑动窗口内已超过配额。
+桶的容量和填充速率由客户管理API中`configs.apiMaxBurst`和`configs.apiRate`字段控制。例如，如果客户有`configs.apiMaxBurst = 45`和`configs.apiRate = 120`，则以每分钟120个令牌的固定速率向桶中添加令牌，桶的总容量为45。令牌桶以一种“贪心”的方式被填满，限流器会尽力向桶中添加令牌。例如，每分钟120个令牌即每500毫秒增加1个令牌。换句话说，限流器并不会等待整整一分钟后一次性加入120个令牌。
+
+* **错误提示和处理**
+
+在令牌被消耗之后，一个`X-rate-limit-remaining: X`响应头会被添加到API调用的HTTP响应中，表示桶中剩余的令牌数量。此响应头表示客户此时可以发出的API请求的剩余配额。失败或格式错误的请求也会从桶中消耗一个令牌。如果桶中没有足够数量的令牌，API网关将返回一个HTTP 429错误，响应头为`x-rate-limit-retry-after-seconds: Y`，告诉客户端在Y秒后重试。
+
+* **避免频率限制错误的最佳实践**
+
+检查API请求历史记录。`GET /ngadmin/apicalls` 能返回您调用API的历史记录(调用此API需要客户管理员账号)。请仔细检查记录，查看是否有滥用API的情形。
+
+您可以通过使用更适合需求场景的API或将类似的请求合并为一个来减少请求的数量。例如，如果您想查看一个列表内每个域名的流量，一种较低效的方法是:
+```
+for domain in domain_list:
+    call GET /cdn/report/vol 
+    {filters: {hostnames: [$domain]}}`
+```
+请使用以下推荐的方法:
+```
+POST /cdn/report/volSummary
+{filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
+```
+另一个例子是同时刷新大量缓存文件。高效的做法是在一个请求中刷新多个文件，而不是为每个需要刷新的 URL 单独调用 API。此外如果大量的刷新 URL 符合某种规律模式，则可在创建刷新请求时通过指定`dirUrls`或`regexPatterns`字段来使用目录或正则表达式刷新。总之，API 请求的数量不应该随着您的域名、加速项和其他资源的增加而增加。
+
+如果您通过脚本调用API，它应能处理和应对间歇性或非特定的错误。脚本应遵循`x-rate-limit-retry-after-seconds`响应头，并在延迟后重试请求。您应考虑在代码中使用一个能调节请求频率的机制，使得请求能均匀地随时间分布。
+
+如果问题仍然存在，请联系我们的技术支持团队。如果确实需要增加频率限制或突发上限，技术支持团队将评估您的需求并提高这些阈值。
+
+
+* **注意**
+
+频率限制应用于客户级别。同一个客户下的所有API帐户共享同一个令牌桶。过度使用一个帐户将耗尽客户的配额。零售商的子客户的频率限制是相互独立的。此外，子客户的API调用不会使用父客户的配额。
+
+因为CDN Pro的Portal也会调用API，所以Portal UI中的操作也受到API调用的频率限制。
+
+未经登录的API调用(如注册和登录尝试)会消耗来自客户端IP地址对应的令牌桶。该桶的默认容量为30个令牌，填充速率为每分钟60个。
+
+使用客户管理员账号对`configs.apiRate`和`configs.apiMaxBurst`的修改不会立即生效。通常需要10-15分钟的时间来改变填充速率并重新填充桶。
