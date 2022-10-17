@@ -1,5 +1,26 @@
 # Release Notes
 
+## October 17, 2022
+### API updates
+* Added support for filtering by propertyIds and propertyHostnames in traffic and request reports.
+* Added support for grouping by propertyIds and propertyHostnames in traffic and request summary reports.
+* Ensured that operator API accounts have correct permissions.
+* Ignored entry of duplicate directives when creating or updating a service quota.
+* Ensured customers can update allowed fields in their accounts.
+* Ensured customers can deploy properties using a secret only if they have defined the secret.
+* Ensured correct origin host is sent to the remote log when the auth_request directive is used.
+* Ensured the apiKey field is returned when a customer is created with a suspended status.
+
+### Portal updates
+* Disabled the validate origin link when the property is in view mode.
+* Disabled the authentication certificate field when the property is in view mode.
+* Prevented the deletion of the default client zone rule if it is the only one left.
+* Fixed error when a reseller tried to register on the portal.
+* Updated our self signup plan page to refer to sections of our website.
+* Added TLS session timeout and Enable Zero Round Trip Time Resumption settings to property configuration’ TLS Settings section.
+* Improved phrasing of edge hostnames’ action types.
+
+
 ## October 5, 2022
 ### API updates
 * Added ipDetails API to allow customers to query whether IP addresses belong to the CDN Pro platform.
