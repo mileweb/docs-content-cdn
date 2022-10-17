@@ -8740,7 +8740,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -8753,7 +8753,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -8765,6 +8765,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -8806,7 +8820,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -8819,7 +8833,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -8831,6 +8845,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -9191,7 +9219,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -9204,7 +9232,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -9216,6 +9244,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -9569,7 +9611,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -9582,7 +9624,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -9594,6 +9636,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -9949,7 +10005,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -9962,7 +10018,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -9974,6 +10030,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -11944,7 +12014,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -11957,7 +12027,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -11969,6 +12039,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -12250,7 +12334,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -12263,7 +12347,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -12275,6 +12359,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -14488,7 +14586,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\" and \"serverGroups\"."
+                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\"."
                     }
                   },
                   "Invalid timespan": {
@@ -14509,7 +14607,7 @@
           }
         },
         "operationId": "getVolSummary",
-        "description": "Get a summary of edge, intermediate (between CDN Pro servers), and origin traffic volume during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.\n",
+        "description": "Get a summary of edge, intermediate (between CDN Pro servers), and origin traffic volume during a time period. You can filter and group results by hostnames, server groups, property IDs, or property hostnames. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.\n",
         "parameters": [
           {
             "schema": {
@@ -14555,6 +14653,9 @@
             "application/json": {
               "schema": {
                 "title": "reportfiltersummary",
+                "x-stoplight": {
+                  "id": "dw3ijyzk3shdf"
+                },
                 "type": "object",
                 "x-tags": [
                   "Reports"
@@ -14607,19 +14708,35 @@
                         "items": {
                           "type": "integer"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', 'propertyIds', and 'propertyHostnames'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
                         "serverGroups",
-                        "customerIds"
+                        "customerIds",
+                        "propertyIds",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -15035,7 +15152,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\" and \"serverGroups\"."
+                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\"."
                     }
                   },
                   "Invalid timespan": {
@@ -15092,7 +15209,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', ' propertyHostnames', and 'propertyIds' by specifying a comma-separated list of the keywords."
           },
           {
             "schema": {
@@ -23466,7 +23583,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -23479,7 +23596,7 @@
                           "deluxe",
                           "ultra"
                         ],
-                        "description": "Indicates one or more server groups.",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -23491,6 +23608,20 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -26619,7 +26750,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"serverGroups1\". We  support grouping by \"hostnames\",\"serverGroups\",\" nconlyustomerIds\"."
+                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\", \"propertyHostnames\",\"propertyIds\"."
                     }
                   },
                   "Invalid customer ID": {
@@ -26634,7 +26765,7 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
-        "description": "Get a summary of requests during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' requests.",
+        "description": "Get a summary of requests during a time period. You can filter and group results by hostnames, server groups, property IDs, or property hostnames. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' requests.",
         "parameters": [
           {
             "schema": {
@@ -26682,6 +26813,9 @@
             "application/json": {
               "schema": {
                 "title": "reportfiltersummary",
+                "x-stoplight": {
+                  "id": "dw3ijyzk3shdf"
+                },
                 "type": "object",
                 "x-tags": [
                   "Reports"
@@ -26734,19 +26868,35 @@
                         "items": {
                           "type": "integer"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', 'propertyIds', and 'propertyHostnames'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
                         "serverGroups",
-                        "customerIds"
+                        "customerIds",
+                        "propertyIds",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -26896,7 +27046,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"serverGroups1\". We  support grouping by \"hostnames\",\"serverGroups\",\" nconlyustomerIds\"."
+                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\"."
                     }
                   }
                 }
@@ -26951,7 +27101,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', 'propertyHostnames', and 'propertyIds' by specifying a comma-separated list of the keywords."
           }
         ],
         "tags": [
@@ -31842,7 +31992,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response indicates the status of each address in the request body.",
+            "description": "The response indicates the status of each IP address in the request body.",
             "content": {
               "application/json": {
                 "schema": {
@@ -31856,7 +32006,7 @@
                         "properties": {
                           "ip": {
                             "type": "string",
-                            "description": "An IPv4 or IPv6 address"
+                            "description": "An IPv4 or IPv6 address."
                           },
                           "isCdnProIp": {
                             "type": "boolean",
