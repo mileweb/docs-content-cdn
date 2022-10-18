@@ -2,8 +2,8 @@
 
 ## October 17, 2022
 ### API updates
-* Added support for filtering by propertyIds and propertyHostnames in traffic and request reports.
-* Added support for grouping by propertyIds and propertyHostnames in traffic and request summary reports.
+* Added support for filtering by propertyIds and propertyHostnames in traffic volume, bandwidth, and request reports.
+* Added support for grouping by propertyIds and propertyHostnames in traffic volume and request summary reports.
 * Ensured that operator API accounts have correct permissions.
 * Ignored entry of duplicate directives when creating or updating a service quota.
 * Ensured customers can update allowed fields in their accounts.
