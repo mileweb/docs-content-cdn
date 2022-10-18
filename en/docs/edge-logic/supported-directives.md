@@ -727,15 +727,15 @@ Sets cache time for different response codes. If no code is explicitly specified
 The configuration at the server level is inherited by a location block only when this directive is not present in the location block. If you need to use the proxy_cache_valid directive at both the server level and in a location block, use the following example as a guide:
 
 ```nginx
-
-proxy_cache_valid 404 10s;  # server level, cache 404 status code for 10 seconds
+# server level, cache 404 status code for 10 seconds
+proxy_cache_valid 404 10s;  
 proxy_cache_valid $cache_time;
 set $cache_time '';
-location / {
-  set $cache_time 1d;   # Location block, cache for a day with status code 200, 301, and 302
+location / { 
+  # Location block, cache status codes 200, 301, and 302 for a day
+  set $cache_time 1d;
   ...
  } 
-
 ```
 
 ### `proxy_cache_vary`

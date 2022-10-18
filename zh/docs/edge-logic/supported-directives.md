@@ -731,15 +731,13 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 当 location 模块中没有该配置项时，上一层（ server 层）的配置才会被继承到 location 中。如果你需要同时在location模块和server层用该指令设置不同的缓存，可以用下面的代码来实现：
 
 ```nginx
-
 proxy_cache_valid 404 10s;  # server 层, 缓存404状态码响应10秒钟
 proxy_cache_valid $cache_time;
 set $cache_time '';
-location / {
+location / { 
   set $cache_time 1d;   # Location 模块, 缓存200，301，302 状态码响应一天
   ...
  } 
-
 ```
 
 ### `proxy_cache_vary`
