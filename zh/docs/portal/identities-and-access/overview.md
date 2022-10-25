@@ -1,6 +1,6 @@
 # 关于用户和权限
 
-用户和权限管理页面定义了允许访问 portal 的用户以及他们对各页面的读取、配置权限。
+用户和权限管理页面定义了允许访问 portal 的用户以及他们对各页面的读取、配置权限。It also allows you to enable two-factor authentication.
 
 
 ## 什么是“用户”？
