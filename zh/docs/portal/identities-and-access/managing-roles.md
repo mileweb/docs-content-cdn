@@ -23,7 +23,7 @@
 | -------------------- |---------------------------------- |
 | Role Name            | 该角色的名称信息。       |
 | 描述          | 该角色的描述信息。|
-| Role Status          | Specify the status of this role. Choices are: <ul><li>Local = only this customer account can use this role. This selection is available for superadmin customers only.</ul></li><ul><li>Global = this account and child customers of this account can use this role. This selection is available for resellers only.</ul></li>|
+| Role Status          | My Account + Children: This account and child customers can use this role. = allows this account and child customers of this account to use this role. This selection is available for resellers only.|
 | Permissions          | 默认情况下，新角色没有关联权限。因此，当您创建角色时，您必须为该角色添加适当的权限。单击 **+ Add Permissions**，在弹出的对话框中，选中您要授予此角色的权限，然后单击 **保存**。<br>**注意：** 在 **All features** 行中选则对应的权限则代表所有功能都将保持相同的权限。|
 
 5. 单击 **保存**.

@@ -23,7 +23,7 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 | -------------------- |---------------------------------- |
 | Role Name            | Enter a name for this role.       |
 | Description          | Enter a description for this role.|
-| Role Status          | Specify the status of this role. Choices are: <ul><li>Local = only this customer account can use this role. This selection is available for superadmin customers only.</ul></li><ul><li>Global = this account and child customers of this account can use this role. This selection is available for resellers only.</ul></li>|
+| Role Status          | My Account + Children: This account and child customers can use this role. = allows this account and child customers of this account to use this role. This selection is available for resellers only.|
 | Permissions          | By default, new roles have no permissions. Therefore, when you create a role, you must add the appropriate permissions for that role. Click **+ Add Permissions**. In the dialog box, select the check boxes for the permissions you want to grant to this role and click **Save**.<br>**Note:** Selecting a check box in the **All features** row at the top selects all the check boxes in that column.|
 
 5. Click **Save**.
