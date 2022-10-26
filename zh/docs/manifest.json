@@ -233,13 +233,10 @@
               {
                 "title": "Managing Security",
                 "path": "/docs/portal/identities-and-access/managing-security.md"
-			  }              
-			  }
+              }
             ]
-          }
-        ]
-      },
-      { 
+          },
+          {
         "title": "边缘逻辑",
         "heading": true,
         "routes": [

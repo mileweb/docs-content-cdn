@@ -215,7 +215,7 @@
               }
             ]
           },
-          {
+             {
             "title": "Identities and Access",
             "routes": [
               {
@@ -233,12 +233,10 @@
               {
                 "title": "Managing Security",
                 "path": "/docs/portal/identities-and-access/managing-security.md"
-			  }
+              }
             ]
-          }
-        ]
-      },
-      { 
+          },
+             {
         "title": "Edge Logic",
         "heading": true,
         "routes": [
