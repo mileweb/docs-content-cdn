@@ -6,7 +6,7 @@
 * Prevented parent customer from deploying a child customer’s property or certificate to production if the child customer does not yet have permission.
 * Corrected handling of deletion of child customer with an existing service quota.
 * Corrected response for attempts to remove features from a parent customer that are in use by a child customer.
-* Ensured that access control rules support non Latin characters in the URI.
+* Ensured that access control rules support non-Latin characters in the URI.
 
 ### Portal updates
 * Fixed portal’s display of session logout time.
@@ -15,9 +15,9 @@
 * Fixed display issues on self signup page.
 * Fixed issues with account setup on self signup page.
 * Improved encoding of characters in purge and prefetch URLs to make it easier for users to submit URLs.
-* Fixed self signup page’s links to the Chinese language website.
-* Updated Chinese language self signup pages' references to legal documents.
-* Allowed customers to enable use of two factor authentication via a new setting in the Identity and Access Management page.
+* Fixed self signup page links to the Chinese language website.
+* Updated Chinese language self signup page references to legal documents.
+* Allowed customers to enable use of two-factor authentication via a new setting in the Identity and Access Management page.
 * Ensured the Start Prefetch button is enabled as expected.
 
 
