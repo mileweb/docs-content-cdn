@@ -23,6 +23,7 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 | -------------------- |---------------------------------- |
 | Role Name            | Enter a name for this role.       |
 | Description          | Enter a description for this role.|
+| Role Status          | If you are a reseller, a **Role Status** field allows you to choose whether the role can be used by your child customers.|
 | Permissions          | By default, new roles have no permissions. Therefore, when you create a role, you must add the appropriate permissions for that role. Click **+ Add Permissions**. In the dialog box, select the check boxes for the permissions you want to grant to this role and click **Save**.<br>**Note:** Selecting a check box in the **All features** row at the top selects all the check boxes in that column.|
 
 5. Click **Save**.

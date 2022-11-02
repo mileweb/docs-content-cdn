@@ -1,5 +1,26 @@
 # Release Notes
 
+## October 28, 2022
+### API updates
+* Added a privateDomains field to the service quota of customers to indicate domains owned by the customer. This prevents other customers from using them in properties.
+* Prevented parent customer from deploying a child customer’s property or certificate to production if the child customer does not yet have permission.
+* Corrected handling of deletion of child customer with an existing service quota.
+* Corrected response for attempts to remove features from a parent customer that are in use by a child customer.
+* Ensured that access control rules support non-Latin characters in the URI.
+
+### Portal updates
+* Fixed portal’s display of session logout time.
+* Prevented duplicate client zone rules from being created for edge hostnames.
+* Prevented double clicks in prefetch UI.
+* Fixed display issues on self signup page.
+* Fixed issues with account setup on self signup page.
+* Improved encoding of characters in purge and prefetch URLs to make it easier for users to submit URLs.
+* Fixed self signup page links to the Chinese language website.
+* Updated Chinese language self signup page references to legal documents.
+* Allowed customers to enable use of two-factor authentication via a new setting in the Identity and Access Management page.
+* Ensured the Start Prefetch button is enabled as expected.
+
+
 ## October 17, 2022
 ### API updates
 * Added support for filtering by propertyIds and propertyHostnames in traffic volume, bandwidth, and request reports.

@@ -1,6 +1,6 @@
 # About Identities and Access
 
-The Identity & Access Management page defines the users allowed to access the portal and the permissions to view and configure portal settings.
+The Identity & Access Management page defines the users allowed to access the portal and the permissions to view and configure portal settings. It also allows you to enable two-factor authentication.
 
 
 ## What are Users?
@@ -36,7 +36,7 @@ The following figure shows the key elements on the page, and the table following
 
 | **Fields** | **Description** |
 | :----------: | --------------- |
-| 1 | Identity and access management tasks are organized into the following tabs:<ul> <li>**Users** allows administrators to manage users. Operators and viewers are limited to seeing other portal users. This tab appears when you click **Identity & Access Management**. <li>**Roles** allows administrators to manage roles. Operators and viewers are limited to seeing roles.|
+| 1 | Identity and access management tasks are organized into the following tabs:<ul> <li>**Users** allows administrators to manage users. Operators and viewers are limited to seeing other portal users. This tab appears when you click **Identity & Access Management**. </ul> </li><ul><li>**Roles** allows administrators to manage roles. Operators and viewers are limited to seeing roles.</ul> </li><ul> <li>**Security** allows you to enable or disable two-factor authentication.|
 | 2 | To filter users on the **Users** tab or roles on the **Roles** tab, type characters in this box. All users or roles that do not contain the typed characters are hidden. Filtering is not case-sensitive. To remove the filter, click the **Reset** button.|
 | 3 | Each user or role appears on a row within its respective tab.|
 | 4 | Drop-down list to take actions on the appropriate item.|

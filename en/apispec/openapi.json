@@ -342,7 +342,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                         },
                         "tlsMinVersion": {
                           "type": "string",
@@ -366,8 +366,8 @@
                           "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                         },
                         "tlsCertificateId1": {
-                          "type": "number",
-                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
+                          "type": "string",
+                          "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                         },
                         "videoSeek": {
                           "type": "object",
@@ -471,10 +471,10 @@
                                 "type": "object",
                                 "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
                                 "required": [
-                                  "status"
+                                  "statusCode"
                                 ],
                                 "properties": {
-                                  "status": {
+                                  "statusCode": {
                                     "type": "string",
                                     "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
                                   },
@@ -1047,7 +1047,7 @@
                   },
                   "tlsCertificateId": {
                     "type": "string",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -1071,8 +1071,8 @@
                     "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                   },
                   "tlsCertificateId1": {
-                    "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
+                    "type": "string",
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -1176,10 +1176,10 @@
                           "type": "object",
                           "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
                           "required": [
-                            "status"
+                            "statusCode"
                           ],
                           "properties": {
-                            "status": {
+                            "statusCode": {
                               "type": "string",
                               "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
                             },
@@ -3197,7 +3197,7 @@
                   },
                   "tlsCertificateId": {
                     "type": "string",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -3221,8 +3221,8 @@
                     "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                   },
                   "tlsCertificateId1": {
-                    "type": "number",
-                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
+                    "type": "string",
+                    "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                   },
                   "videoSeek": {
                     "type": "object",
@@ -3326,10 +3326,10 @@
                           "type": "object",
                           "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
                           "required": [
-                            "status"
+                            "statusCode"
                           ],
                           "properties": {
-                            "status": {
+                            "statusCode": {
                               "type": "string",
                               "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
                             },
@@ -3838,7 +3838,7 @@
                       },
                       "tlsCertificateId": {
                         "type": "string",
-                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
+                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. "
                       },
                       "tlsMinVersion": {
                         "type": "string",
@@ -3862,8 +3862,8 @@
                         "description": "This setting applies only if the property has an attached certificate allowing client requests to use HTTPS. If the value of allowProtocolDowngrade is <i>false</i>, we require all the origin servers to support HTTPS. If the value is <i>true</i>, we allow origins that support only HTTP, which reduces security.\n"
                       },
                       "tlsCertificateId1": {
-                        "type": "number",
-                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to only set the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
+                        "type": "string",
+                        "description": "Refers to a <a href=\"#tag/Certificate-Management\">certificate</a>. It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field. If <i>tlsCertificateId</i> is not set, HTTPS will not be enabled for this property. This is a feature to enable you to specify two certificates of different types, i.e. one RSA, one EC. If two certificates of the same type are specified, the one specified by <i>tlsCertificateId</i> will be ignored. \n"
                       },
                       "videoSeek": {
                         "type": "object",
@@ -3967,10 +3967,10 @@
                               "type": "object",
                               "description": "Indicates the action to take in response to a request that matches the conditions of the access control rule.",
                               "required": [
-                                "status"
+                                "statusCode"
                               ],
                               "properties": {
-                                "status": {
+                                "statusCode": {
                                   "type": "string",
                                   "description": "Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error."
                                 },
@@ -9198,68 +9198,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
-                "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  }
-                },
                 "x-tags": [
                   "Reports"
                 ],
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "serverGroups": {
-                        "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
-                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "standard",
-                            "premium",
-                            "deluxe",
-                            "ultra",
-                            "nearChina",
-                            "ChinaStandard",
-                            "ChinaPremium"
-                          ]
-                        }
-                      },
-                      "propertyIds": {
-                        "type": "array",
-                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "propertyHostnames": {
-                        "type": "array",
-                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
                         "items": {
                           "type": "string"
                         }
                       }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
                     }
                   }
                 }
@@ -11993,68 +11957,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
-                "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  }
-                },
                 "x-tags": [
                   "Reports"
                 ],
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "serverGroups": {
-                        "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
-                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "standard",
-                            "premium",
-                            "deluxe",
-                            "ultra",
-                            "nearChina",
-                            "ChinaStandard",
-                            "ChinaPremium"
-                          ]
-                        }
-                      },
-                      "propertyIds": {
-                        "type": "array",
-                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "propertyHostnames": {
-                        "type": "array",
-                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
                         "items": {
                           "type": "string"
                         }
                       }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
                     }
                   }
                 }
@@ -12313,68 +12241,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
+                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
-                "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  }
-                },
                 "x-tags": [
                   "Reports"
                 ],
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "serverGroups": {
-                        "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
-                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "standard",
-                            "premium",
-                            "deluxe",
-                            "ultra",
-                            "nearChina",
-                            "ChinaStandard",
-                            "ChinaPremium"
-                          ]
-                        }
-                      },
-                      "propertyIds": {
-                        "type": "array",
-                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "propertyHostnames": {
-                        "type": "array",
-                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
                         "items": {
                           "type": "string"
                         }
                       }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
                     }
                   }
                 }
@@ -21750,6 +21642,12 @@
                       "code": "InvalidCustomerId",
                       "message": "The specified customer ID does not exist or the caller doesn't have access to this resource."
                     }
+                  },
+                  "Invalid hostname": {
+                    "value": {
+                      "code": "InvalidHostname",
+                      "message": "Invalid hostname: \"testabc.abracadabra.com\". The domain \"testabc.abracadabra.com\" is reserved for another customer."
+                    }
                   }
                 }
               }
@@ -21994,6 +21892,13 @@
                         "ChinaStandard",
                         "ChinaPremium"
                       ]
+                    }
+                  },
+                  "privateDomains": {
+                    "type": "array",
+                    "description": "List of domains that the customer owns. Only this customer can create properties specifying these domains in the hostnames field. ",
+                    "items": {
+                      "type": "string"
                     }
                   }
                 },
@@ -22557,6 +22462,13 @@
                           "ChinaPremium"
                         ]
                       }
+                    },
+                    "privateDomains": {
+                      "type": "array",
+                      "description": "List of domains that the customer owns. Only this customer can create properties specifying these domains in the hostnames field. ",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -22986,6 +22898,13 @@
                         "ChinaStandard",
                         "ChinaPremium"
                       ]
+                    }
+                  },
+                  "privateDomains": {
+                    "type": "array",
+                    "description": "List of domains that the customer owns. Only this customer can create properties specifying these domains in the hostnames field. ",
+                    "items": {
+                      "type": "string"
                     }
                   }
                 }
@@ -23944,6 +23863,13 @@
                           "ChinaPremium"
                         ]
                       }
+                    },
+                    "privateDomains": {
+                      "type": "array",
+                      "description": "List of domains that the customer owns. Only this customer can create properties specifying these domains in the hostnames field. ",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -24301,6 +24227,13 @@
                           "ChinaPremium"
                         ]
                       }
+                    },
+                    "privateDomains": {
+                      "type": "array",
+                      "description": "List of domains that the customer owns. Only this customer can create properties specifying these domains in the hostnames field. ",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -24636,6 +24569,13 @@
                         "ChinaPremium"
                       ]
                     }
+                  },
+                  "privateDomains": {
+                    "type": "array",
+                    "description": "List of domains that the customer owns. Only this customer can create properties specifying these domains in the hostnames field. ",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -24965,15 +24905,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filter results by specifying hostnames or server groups.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -24981,16 +24917,23 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
+                        }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -25008,7 +24951,7 @@
               }
             }
           },
-          "description": "The request body can include filters to customize the results. By default, data from all hostnames will be included."
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames and server groups will be included."
         }
       }
     },
@@ -31518,29 +31461,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltersummary",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
-                "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
-                "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
-                  }
-                },
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -31564,20 +31489,13 @@
                             "ChinaPremium"
                           ]
                         }
-                      },
-                      "customerIds": {
-                        "type": "array",
-                        "description": "Resellers can limit the data by specifying IDs of child customers.",
-                        "items": {
-                          "type": "integer"
-                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
                     "maxItems": 2,
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.  Only resellers can specify 'customerIds'.",
                     "items": {
                       "type": "string",
                       "enum": [

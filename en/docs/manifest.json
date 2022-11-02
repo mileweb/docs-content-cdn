@@ -229,7 +229,11 @@
               {
                 "title": "Managing Users",
                 "path": "/docs/portal/identities-and-access/managing-users.md"
-              }
+              },
+              {
+                "title": "Managing Security",
+                "path": "/docs/portal/identities-and-access/managing-security.md"
+			  }
             ]
           }
         ]
