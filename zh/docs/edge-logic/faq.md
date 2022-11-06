@@ -136,6 +136,14 @@ proxy_ignore_headers Vary;
 
 CDN Pro 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN Pro 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令亦可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
 
+### 采用anycast进行流量调度
+
+我们[基于CNAME的流量调度系统](</docs/portal/traffic-management/overview>) 可综合考虑性能、成本、合规性要求和自定义规则等各种因素，动态进行流量调度。您只需[创建一个调度域名](</docs/portal/traffic-management/creating-edge-hostname>)，并添加一条DNS CNAME记录将您的域名指向调度域名，就能使用CDN Pro的流量调度功能。在大多数情况下，您都可以利用该系统的强大功能来实现最佳调度结果。
+
+然而，如果您要加速的域名是二级域名，即不包含子域名的域名（例如，example.com），由于DNS规范的限制（请参阅 [RFC1034](https://www.ietf.org/rfc/rfc1034.txt))，可能无法为二级域名创建CNAME记录。这种情况下，您可以使用我们的anycast流量调度功能。我们将会提供anycast IPv4 地址，您只需在DNS中添加A记录将您的二级域名指向anycast地址即可。每个anycast IP地址都在多个节点广播（基本包括了我们除中国大陆以外的全球绝大部分节点）。当用户对anycast IP地址发起请求时，anycast路由算法会将请求路由到距离用户最近的节点。这确保将您的内容就近分发给最终用户。
+
+目前，anycast功能未默认开放。如果您想使用此功能，请联系我们的技术支持团队开通，我们将为您提供anycast IP地址。需要注意的是，由于anycast功能依赖于互联网公网上的路由规则和算法，不受我们的直接控制，因此我们无法保证流量调度的准确性。我们建议尽可能使用基于CNAME的流量调度功能。
+
 ### CDN Pro API 如何限制调用频率?
 
 为了防止CDN Pro的服务过载，CDN Pro API限制客户每分钟可以发送的请求数量。如果客户发送过多的请求，API频率限制器将返回带有HTTP状态码429的错误消息。
