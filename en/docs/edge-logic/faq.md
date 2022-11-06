@@ -133,6 +133,14 @@ In many cases, "dynamic" does not mean the content is not cacheable. For example
 
 CDN Pro has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the ""Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN Pro support team.
 
+### Routing edge traffic via anycast
+
+Our [CNAME-based traffic management system](</docs/portal/traffic-management/overview>) is designed to make routing decisions dynamically, factoring in performance, costs, compliance requirements and custom rules, etc. Simply [create an edgeHostname](</docs/portal/traffic-management/creating-edge-hostname>) and add a CNAME record to your DNS to point your domain at the edgeHostname, then let CDN Pro do the magic. In most cases, you can leverage the powerful capabilities of this system to deliver optimal results. 
+
+However, if your domain to be accelerated is an Apex domain, i.e. a root domain (e.g. example.com) that does not contain a subdomain, adding a CNAME record to the Apex domain would become an issue, due to restrictions in DNS specification (Refer to [RFC1034](https://www.ietf.org/rfc/rfc1034.txt)). This is where our anycast traffic routing feature comes into play. It provides anycast IPv4 addresses which you can enter into your DNS as A records to point your Apex domain to CDN Pro. Each of the anycast IP addresses is broadcast in multiple locations, basically the great majority of our global network of PoPs except those in mainland China. A request targeting an anycast IP address is directed to a PoP that is nearest to where the request is originated. This ensures that your content is served to end users by locations as close as possible.
+
+Currently, the anycast feature is available on demand. Please contact our support team if you want to use this feature. Upon request, we'll provide you anycast IP addresses. However, as anycast routing relies on routing rules and algorithms on the public Internet, which is outside of our direct control, we cannot guarantee that the traffic routing would always be accurate as expected. We recommend using the CNAME-based traffic management system as much as possible.
+
 ### How are CDN Pro API calls rate limited?
 
 To prevent CDN Pro's API servers from being overwhelmed, the CDN Pro API enforces a limit on the number
