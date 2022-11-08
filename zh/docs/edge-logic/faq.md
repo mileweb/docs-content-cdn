@@ -140,7 +140,7 @@ CDN Pro 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directive
 
 我们[基于CNAME的流量调度系统](</docs/portal/traffic-management/overview>) 可综合考虑性能、成本、合规性要求和自定义规则等各种因素，动态进行流量调度。您只需[创建一个调度域名](</docs/portal/traffic-management/creating-edge-hostname>)，并添加一条DNS CNAME记录将您的域名指向调度域名，就能使用CDN Pro的流量调度功能。在大多数情况下，您都可以利用该系统的强大功能来实现最佳调度结果。
 
-然而，如果您要加速的域名是二级域名，即不包含子域名的域名（例如，example.com），由于DNS规范的限制（请参阅 [RFC1034](https://www.ietf.org/rfc/rfc1034.txt))，可能无法为二级域名创建CNAME记录。这种情况下，您可以使用我们的anycast功能。我们将会提供anycast IPv4 地址，您只需在DNS中添加A记录将您的二级域名指向anycast地址即可。目前，anycast功能未默认开放。如果您想使用此功能，请联系我们的技术支持团队开通。
+然而，如果您要加速的域名是二级域名，即不包含子域名的域名（例如，example.com），由于DNS规范的限制（请参阅 [RFC1034](https://www.ietf.org/rfc/rfc1034.txt) 3.6.2章节)，可能无法为二级域名创建CNAME记录。这种情况下，您可以使用我们的anycast功能。我们将会提供anycast IPv4 地址，您只需在DNS中添加A记录将您的二级域名指向anycast地址即可。目前，anycast功能未默认开放。如果您想使用此功能，请联系我们的技术支持团队开通。
 
 需要注意的是，每个anycast IP地址仅在少数几个节点广播，每个地址广播的节点范围可能会经常变化，且不会提前通知。因此，anycast地址所对应的服务性能和服务能力，与调度域名没有可比性。请尽可能使用调度域名来进行流量调度。只有当加速域名是二级域名才使用anycast功能。
 
