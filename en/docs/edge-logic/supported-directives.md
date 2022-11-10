@@ -270,6 +270,7 @@ This is a directive to perform some common encoding, decoding, hash, hash-mac, e
 | URL<br>codec | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>codec | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>cipher | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key``` and ```$iv``` should both be binary strings of 32 bytes.|
+| cipher | ENCRYPT_SYMM<br>**DECRYPT_SYMM** | ```eval_func $output ENCRYPT_SYMM $key $iv $message $mode;```<br>```$key``` and ```$iv``` should both be binary strings. $mode can be any of the ciphers returned by <i>openssl list -cipher-commands</i>, for example, 'aes-128-cbc'. |
 | HMAC<br>generation | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` can be ```MD5```, ```SHA1```, ```SHA256``` |
 | RSA<br>signature | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` can only be ```SHA256```.|
 | integer<br>comparator | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```$output``` will be "1" when ```$data1 > $data2```. "0" and "-1" for the other cases. |
