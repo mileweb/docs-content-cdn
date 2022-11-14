@@ -133,6 +133,14 @@ In many cases, "dynamic" does not mean the content is not cacheable. For example
 
 CDN Pro has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the ""Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN Pro support team.
 
+### Apex domains and anycast
+
+Our [CNAME-based traffic management system](</docs/portal/traffic-management/overview>) is designed to make routing decisions dynamically, factoring in performance, costs, compliance requirements, and custom rules. Simply [create an edge hostname](</docs/portal/traffic-management/creating-edge-hostname>) and add a CNAME record to your DNS to point your domain at the edge hostname, then let CDN Pro do the magic. Leverage the powerful capabilities of this system to deliver optimal results. 
+
+However, if your domain to be accelerated is an apex domain, i.e. a root domain (e.g. example.com) that does not contain a subdomain, adding a CNAME record for the apex domain would become an issue, due to restrictions in the DNS specification (Refer to section 3.6.2 of [RFC1034](https://www.ietf.org/rfc/rfc1034.txt)). This is where our anycast addressing feature comes into play. It provides anycast IPv4 addresses which you can enter into your DNS as A records to point your apex domain to some PoPs of CDN Pro. This feature is currently available on demand. Please contact our support team if you need to use it.
+
+Note that each anycast IP address is broadcast only in a small subset of our global PoPs, and the list of PoPs where anycast is available is subject to changes without prior notice. Therefore, the performance and capacity behind an anycast IP address are not comparable to that of an edge hostname. We recommend using the CNAME-based edge hostnames to route traffic as much as possible. Anycast should be used only for apex domains. 
+
 ### How are CDN Pro API calls rate limited?
 
 To prevent CDN Pro's API servers from being overwhelmed, the CDN Pro API enforces a limit on the number
