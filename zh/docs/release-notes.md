@@ -1,5 +1,23 @@
 # Release Notes
 
+## November 11, 2022
+### API updates
+* Fixed an error in the response of the [edge hostname list API](</apidocs#operation/getEdgeHostnames>).
+* Improved validation of origin server settings when 127.0.0.1 or localhost is used as a server to disallow use of nonpublic ports.
+* Improved validation of the dpaAgreedBy field when [updating a customer](</apidocs#operation/patch-ngadmin-customers-id>).
+* Improved validation of the report APIs’ filters field in the request body.
+* Removed extra whitespaces in certificates.
+
+### Portal updates
+* Ensured prefetch date’s timezone is initialized to the user’s preferred timezone.
+* Improved certificate edit page so that users aren’t asked about leaving the page.
+* Improved appearance of the self-signup page.
+* Added support for searching properties by origins.shield.
+* Updated links to DPAs in the CDNetworks self-signup page.
+* Added support for the DAY_PERIOD and CRC32 functions when using the [eval_func Edge Logic directive](</docs/edge-logic/supported-directives#eval_func>).
+* Fixed impersonation so that expected resources appear.
+* Fixed initialization of Has ICP Beian field when creating a property.
+
 ## October 28, 2022
 ### API updates
 * Added a privateDomains field to the service quota of customers to indicate domains owned by the customer. This prevents other customers from using them in properties.
