@@ -3,7 +3,7 @@
 ## November 25, 2022
 ### API updates
 * Added endpoint to return shield given its ID.
-* Added usedInProperties field to the respone of the [shield list API](</apidocs#operation/get-cdn-shields>) to indicate whether a shield is in use by any of your properties.
+* Added usedInProperties field to the response of the [shield list API](</apidocs#operation/get-cdn-shields>) to indicate whether a shield is in use by any of your properties.
 * Prevented removal of a child customer’s property if there is traffic to the corresponding hostnames.
 * Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>).
 * Improved deployment to handle certificates with line breaks.
