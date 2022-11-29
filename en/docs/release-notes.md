@@ -1,5 +1,24 @@
 # Release Notes
 
+## November 25, 2022
+### API updates
+* Added endpoint to return shield given its ID.
+* Added usedInProperties field to the respone of the [shield list API](</apidocs#operation/get-cdn-shields>) to indicate whether a shield is in use by any of your properties.
+* Prevented removal of a child customer’s property if there is traffic to the corresponding hostnames.
+* Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>).
+* Improved deployment to handle certificates with line breaks.
+
+### Portal updates
+* Fixed summary of secret’s use by deployed properties.
+* Disabled delete option for a secret that is in use.
+* Fixed initial date range for traffic volume and access log download reports.
+* Fixed text in Japanese language portal.
+* Fixed initialization of the prefetch creation form.
+* Prevented multiple clicks on Add to standby task button from generating extra confirmation dialogs.
+* Improved horizontal scrolling of load balancer logic sections of the property comparison page.
+* Ensured that newly created certificate is listed.
+
+
 ## November 11, 2022
 ### API updates
 * Fixed an error in the response of the [edge hostname list API](</apidocs#operation/getEdgeHostnames>).
