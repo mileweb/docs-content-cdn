@@ -31956,6 +31956,18 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "false",
+                "true"
+              ]
+            },
+            "in": "query",
+            "name": "usedInProperties",
+            "description": "Filter results based on whether shields are used in properties deployed to staging or production. If unspecified, all available shields are returned."
           }
         ]
       }
