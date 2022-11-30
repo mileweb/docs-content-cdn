@@ -18637,7 +18637,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">token bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -19025,7 +19025,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">token bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -19487,7 +19487,7 @@
                         "type": "integer",
                         "default": 60,
                         "maximum": 240,
-                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">token bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                         "minimum": 1
                       }
                     },
@@ -19791,7 +19791,7 @@
                           "type": "integer",
                           "default": 60,
                           "maximum": 240,
-                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                          "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">token bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                           "minimum": 1
                         }
                       },
@@ -20169,7 +20169,7 @@
                         "type": "integer",
                         "default": 60,
                         "maximum": 240,
-                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">tocken bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
+                        "description": "This value works with the <i>apiRate</i> setting to limit the number of API calls that can be made by the customer. We use the <a href=\"https://en.wikipedia.org/wiki/Token_bucket\">token bucket algorithm</a>. ApiMaxBurst is the bucket size. If the customer has multiple API accounts, they share this bucket.",
                         "minimum": 1
                       }
                     },
@@ -25163,7 +25163,7 @@
                   "Invalid region": {
                     "value": {
                       "code": "InvalidRegion",
-                      "message": "Invalid region: abc. Regions must be in ISO-3166 2-letter format."
+                      "message": "Invalid region: N."
                     }
                   },
                   "Invalid time": {
@@ -25236,9 +25236,18 @@
                   },
                   "regions": {
                     "type": "array",
-                    "description": "A list of ISO 3166-2 country codes representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                    "description": "A list of continents in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                     "items": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": [
+                        "Africa",
+                        "Antarctica",
+                        "Asia",
+                        "Europe",
+                        "North America",
+                        "Oceania",
+                        "South America"
+                      ]
                     }
                   },
                   "startTime": {
@@ -25685,9 +25694,18 @@
                     },
                     "regions": {
                       "type": "array",
-                      "description": "A list of ISO 3166-2 country codes representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                      "description": "A list of continents representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
                       "items": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "Africa",
+                          "Antarctica",
+                          "Asia",
+                          "Europe",
+                          "North America",
+                          "Oceania",
+                          "South America"
+                        ]
                       }
                     },
                     "startTime": {
@@ -25731,12 +25749,12 @@
                         }
                       ],
                       "regions": [
-                        "US"
+                        "North America"
                       ],
-                      "startTime": "2021-03-06T00:00:00Z",
+                      "startTime": "2022-10-05T00:00:00Z",
                       "metaData": {
                         "id": "4f8553f7f30942fd8a2d247f05db3602",
-                        "submissionTime": "2021-03-05T00:34:28Z",
+                        "submissionTime": "2022-10-04T00:34:28Z",
                         "successRate": 0,
                         "status": "waiting",
                         "apiRequestId": "889c2c5a2d9d93ce",
@@ -31820,6 +31838,10 @@
                           "effectiveDate": {
                             "type": "string",
                             "description": "An RFC 3339 date indicating when the shield became active."
+                          },
+                          "usedInProperties": {
+                            "type": "boolean",
+                            "description": "Whether the shield is used in any properties deployed to staging or production."
                           }
                         },
                         "required": [
@@ -31829,7 +31851,8 @@
                           "ipV4",
                           "ipV6",
                           "lastUpdated",
-                          "effectiveDate"
+                          "effectiveDate",
+                          "usedInProperties"
                         ]
                       }
                     }
@@ -31852,9 +31875,36 @@
                             "2408:8736:40 0b:0001:c000:0000:0000:0000/66"
                           ],
                           "lastUpdated": "2022-07-25T09:15:44.000+0000",
-                          "effectiveDate": "2022-07-25T09:15:44.000+0000"
+                          "effectiveDate": "2022-07-25T09:15:44.000+0000",
+                          "usedInProperties": false
                         }
                       ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "code": "InvalidImpersonation",
+                      "message": "The value of On-Behalf-Of is invalid."
                     }
                   }
                 }
@@ -31898,6 +31948,153 @@
             "in": "query",
             "name": "sortOrder",
             "description": "Returns shields in sorted order, either \"asc\" for ascending or \"desc\" for descending. The default is to return the last shield updated first."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ]
+      }
+    },
+    "/cdn/shields/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of a shield"
+        }
+      ],
+      "get": {
+        "summary": "Get a shield by its ID",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains details about the shield.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the shield."
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "A unique identifier representing the shield. This ID is referenced in properties using the shield."
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "Indicates the region of the origin shield. It is typically an ISO-3166-1 code representing a country. When choosing an origin shield for your property, it is best to select one closer to your origin servers.\nUse of a shield located in the \"cn\" region (China) requires your property to have 'hasBeian' set to true which means all of its hostnames have an ICP Beian license required by the Chinese government."
+                    },
+                    "ipV4": {
+                      "type": "array",
+                      "description": "A list of IPv4 addresses used by the shield. If your origin server has an access control list, include these IP addresses.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "ipV6": {
+                      "type": "array",
+                      "description": "A list of IPv6 addresses used by the shield. If your origin server has an access control list, include these IP addresses.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "lastUpdated": {
+                      "type": "string",
+                      "description": "An RFC 3339 date indicating when the shield was last updated."
+                    },
+                    "effectiveDate": {
+                      "type": "string",
+                      "description": "An RFC 3339 date indicating when the shield became active."
+                    },
+                    "usedInProperties": {
+                      "type": "boolean",
+                      "description": "Whether the shield is used in any properties deployed to staging or production."
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "id",
+                    "region",
+                    "ipV4",
+                    "ipV6",
+                    "lastUpdated",
+                    "effectiveDate",
+                    "usedInProperties"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "name": "China_int",
+                      "id": "originShieldID-123",
+                      "region": "cn",
+                      "ipV4": [
+                        "61.161.1.0/24",
+                        "117.157.243.0/25"
+                      ],
+                      "ipV6": [
+                        "2409:8c74:f100:0124:0000:0000:0000:0000/64",
+                        "2408:8736:40 0b:0001:c000:0000:0000:0000/66"
+                      ],
+                      "lastUpdated": "2022-07-25T09:15:44.000+0000",
+                      "effectiveDate": "2022-07-25T09:15:44.000+0000",
+                      "usedInProperties": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid shield ID": {
+                    "value": {
+                      "code": "InvalidShieldId",
+                      "message": "The shieldId does not exist or the caller does not have permission to access it."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-shields-id",
+        "description": "Obtain information about a shield which can be used as an extra layer between the CDN Pro edge servers and your origin servers. This is an advanced feature. If you require this feature, please contact our support team.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ]
       }
