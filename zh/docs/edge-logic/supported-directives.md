@@ -276,8 +276,8 @@ location @try_origin2 {
 | 字符串<br>替换 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 | 字符串<br>修改 | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>把输入字符串转成大写。|
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
-| 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
-| 一日之内<br>的时间| DAY_PERIOD| ```eval_func $out DAY_PERIOD 19:00+0800 12h CN-night;```<br>如果时间在19:00+0800之后的12小时内，则返回'CN-night'|
+| 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样。|
+| 一日之内<br>的时间| DAY_PERIOD| ```eval_func $out DAY_PERIOD 19:00+0800 12h CN-night;```<br>如果时间在19:00+0800之后的12小时内，则返回'CN-night'，否则返回空字符串。|
 
 **注意:** 使用**加粗字体** 标记的函数的输出值是一个可能无法打印的二进制字符串。因此您需要使用 BASE64_ENCODE、URL_ENCODE 或 HEX_ENCODE 将其转换为可打印格式。
 
