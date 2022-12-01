@@ -201,7 +201,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom1" and "custom2" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). In case the same field is assigned in both LB7 and ES, the LB7 has the precedence. If you require this feature, contact our support team.
+This directive allows you to add up to ten customized fields into the access log. The id is an integer from 0 through 9. The value can contain variables. Refer to the fields using the keywords "custom0", "custom1", "custom2", "custom3", "custom4", "custom5", "custom6", "custom7", "custom8", and "custom9" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). In case the same field is assigned in both LB7 and ES, the LB7 has the precedence. If you require this feature, contact our support team.
 
 Examples:
 ```nginx
