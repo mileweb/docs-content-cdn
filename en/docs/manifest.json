@@ -257,6 +257,10 @@
             "path": "/docs/edge-logic/multiple-origins.md"
           },
           {
+            "title": "Declarative vs Imperative",
+            "path": "/docs/edge-logic/declarative-imperative.md"
+          },
+          {
             "title": "Edge Node Structure",
             "path": "/docs/edge-logic/lb7-es-structure.md"
           },
