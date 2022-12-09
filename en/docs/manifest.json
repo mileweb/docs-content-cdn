@@ -88,6 +88,10 @@
                 "title": "Test a Property",
                 "path": "/docs/portal/edge-configurations/testing-property.md"
               },
+			  {
+                "title": "Working with Test Suites",
+                "path": "/docs/portal/edge-configurations/working-with-test-suites.md"
+              },
               {
                 "title": "Delete a Property",
                 "path": "/docs/portal/edge-configurations/deleting-property.md"

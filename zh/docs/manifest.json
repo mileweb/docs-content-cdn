@@ -88,6 +88,10 @@
                 "title": "测试加速项",
                 "path": "/docs/portal/edge-configurations/testing-property.md"
               },
+			  {
+                "title": "Working with Test Suites",
+                "path": "/docs/portal/edge-configurations/working-with-test-suites.md"
+              },
               {
                 "title": "删除加速项",
                 "path": "/docs/portal/edge-configurations/deleting-property.md"
