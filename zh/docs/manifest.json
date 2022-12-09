@@ -30,8 +30,8 @@
           "path": "docs/edge-logic/intro"
         },
         {
-          "title": "Release Notes",
-          "caption": "Learn About Our Releases",
+          "title": "新版本发布说明",
+          "caption": "了解新版本的功能和变化",
           "icon": "notes",
           "path": "docs/release-notes"
         }
@@ -214,7 +214,7 @@
                 "path": "/docs/portal/tasks/deployments.md"
               },
               {
-                "title": "Managing Standby Actions",
+                "title": "管理待命任务",
                 "path": "/docs/portal/tasks/standby-tasks.md"
               }
             ]
@@ -235,7 +235,7 @@
                 "path": "/docs/portal/identities-and-access/managing-users.md"
               },
               {
-                "title": "Managing Security",
+                "title": "管理安全信息",
                 "path": "/docs/portal/identities-and-access/managing-security.md"
               }
             ]
@@ -259,6 +259,10 @@
           {
             "title": "用'if'来选择多个源站",
             "path": "/docs/edge-logic/multiple-origins.md"
+          },
+          {
+            "title": "声明式与强制式指令",
+            "path": "/docs/edge-logic/declarative-imperative.md"
           },
           {
             "title": "边缘节点架构",
@@ -297,7 +301,11 @@
           {
             "title": "安全相关的配置",
             "path": "/docs/recipes/secure-delivery.md"
-          }
+          },
+          {
+            "title": "API Rate Limiting",
+            "path": "/docs/recipes/api-rate-limiting.md"
+          }	    
         ]
       },
       { 
@@ -305,7 +313,7 @@
         "heading": true,
         "routes": [
           {
-            "title": "发布说明",
+            "title": "新版本发布说明",
             "path": "/docs/release-notes.md"
           }
         ]

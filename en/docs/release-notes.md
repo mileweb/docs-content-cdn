@@ -1,5 +1,330 @@
 # Release Notes
 
+## November 25, 2022
+### API updates
+* Added endpoint to return shield given its ID.
+* Added usedInProperties field to the response of the [shield list API](</apidocs#operation/get-cdn-shields>) to indicate whether a shield is in use by any of your properties.
+* Prevented removal of a child customer’s property if there is traffic to the corresponding hostnames.
+* Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>).
+* Improved deployment to handle certificates with line breaks.
+
+### Portal updates
+* Fixed summary of secret’s use by deployed properties.
+* Disabled delete option for a secret that is in use.
+* Fixed initial date range for traffic volume and access log download reports.
+* Fixed text in Japanese language portal.
+* Fixed initialization of the prefetch creation form.
+* Prevented multiple clicks on Add to standby task button from generating extra confirmation dialogs.
+* Improved horizontal scrolling of load balancer logic sections of the property comparison page.
+* Ensured that newly created certificate is listed.
+
+
+## November 11, 2022
+### API updates
+* Fixed an error in the response of the [edge hostname list API](</apidocs#operation/getEdgeHostnames>).
+* Improved validation of origin server settings when 127.0.0.1 or localhost is used as a server to disallow use of nonpublic ports.
+* Improved validation of the dpaAgreedBy field when [updating a customer](</apidocs#operation/patch-ngadmin-customers-id>).
+* Improved validation of the report APIs’ filters field in the request body.
+* Removed extra whitespaces in certificates.
+
+### Portal updates
+* Ensured prefetch date’s timezone is initialized to the user’s preferred timezone.
+* Improved certificate edit page so that users aren’t asked about leaving the page.
+* Improved appearance of the self-signup page.
+* Added support for searching properties by origins.shield.
+* Updated links to DPAs in the CDNetworks self-signup page.
+* Added support for the DAY_PERIOD and CRC32 functions when using the [eval_func Edge Logic directive](</docs/edge-logic/supported-directives#eval_func>).
+* Fixed impersonation so that expected resources appear.
+* Fixed initialization of Has ICP Beian field when creating a property.
+
+## October 28, 2022
+### API updates
+* Added a privateDomains field to the service quota of customers to indicate domains owned by the customer. This prevents other customers from using them in properties.
+* Prevented parent customer from deploying a child customer’s property or certificate to production if the child customer does not yet have permission.
+* Corrected handling of deletion of child customer with an existing service quota.
+* Corrected response for attempts to remove features from a parent customer that are in use by a child customer.
+* Ensured that access control rules support non-Latin characters in the URI.
+
+### Portal updates
+* Fixed portal’s display of session logout time.
+* Prevented duplicate client zone rules from being created for edge hostnames.
+* Prevented double clicks in prefetch UI.
+* Fixed display issues on self signup page.
+* Fixed issues with account setup on self signup page.
+* Improved encoding of characters in purge and prefetch URLs to make it easier for users to submit URLs.
+* Fixed self signup page links to the Chinese language website.
+* Updated Chinese language self signup page references to legal documents.
+* Allowed customers to enable use of two-factor authentication via a new setting in the Identity and Access Management page.
+* Ensured the Start Prefetch button is enabled as expected.
+
+
+## October 17, 2022
+### API updates
+* Added support for filtering by propertyIds and propertyHostnames in traffic volume, bandwidth, and request reports.
+* Added support for grouping by propertyIds and propertyHostnames in traffic volume and request summary reports.
+* Ensured that operator API accounts have correct permissions.
+* Ignored entry of duplicate directives when creating or updating a service quota.
+* Ensured customers can update allowed fields in their accounts.
+* Ensured customers can deploy properties using a secret only if they have defined the secret.
+* Ensured correct origin host is sent to the remote log when the auth_request directive is used.
+* Ensured the apiKey field is returned when a customer is created with a suspended status.
+
+### Portal updates
+* Disabled the validate origin link when the property is in view mode.
+* Disabled the authentication certificate field when the property is in view mode.
+* Prevented the deletion of the default client zone rule if it is the only one left.
+* Fixed error when a reseller tried to register on the portal.
+* Updated our self signup plan page to refer to sections of our website.
+* Added TLS session timeout and Enable Zero Round Trip Time Resumption settings to property configuration’ TLS Settings section.
+* Improved phrasing of edge hostnames’ action types.
+
+
+## October 5, 2022
+### API updates
+* Added ipDetails API to allow customers to query whether IP addresses belong to the CDN Pro platform.
+* Ensured edgeHostnameZones field is returned as expected in serviceQuotas API.
+* Ensured that a parent customer can help deploy a child’s property using a secret in Edge Logic.
+* Improved error handling when a reseller tries to create a customer.
+* Improved error handling when property is created with the realTimeLog setting.
+* Allowed the weight field of client zone rules to have values up to 1000 for more precise control over traffic.
+* Supported parsing CRT file and splitting chainCert, if any, from the file when creating or updating a certificate.
+
+### Portal updates
+* Improved usability of client zone rule creation.
+* Improved error handling when a customer tries to access a product that hasn’t been enabled for him.
+* Encoded URLs when creating purge and prefetch requests to make it easier for users who submit URLs with special characters..
+* Updated handling of edgeHostnameZones in the portal to account for absent field.
+* Added support for several variables ($remote_user, $client_real_ip, $sorted_querystring_args $random_N) in the load balancer hash key field.
+
+## September 21, 2022
+### API updates
+* Ensured search for properties with keepAliveRequests returns results.
+* Prevented service quota from being created or updated with duplicate directives.
+* Fixed error handling when updating a child of a suspended parent customer.
+* Fixed limits of customers when the grandparent customer’s limits are decreased.
+* Fixed inheritance of customer limits.
+* Updated resource usage check to consider CPU Hour usage.
+* Fixed error handling when trying to update a customer’s type.
+
+### Portal updates
+* Ensured that user with multiple roles has expected access.
+* Fixed display of role status on role details page.
+* Improved appearance of staging version in the property list page.
+* Ensured that the Getting Started link points to the help in the user’s preferred language.
+* Ensured correct behavior of Has Beian setting in the property page.
+* Updated the error message about the purge name.
+* Fixed appearance of the upgrade page for expired trial users.
+* Ensured our partner can share certificates with children customers.
+* Fixed issue with creating and editing edge hostnames.
+
+
+## September 1, 2022
+### API updates
+* Ensured that only customers with access to a shared certificate can deploy it.
+* Ensured that required customer fields cannot be set to null.
+* Ensured a child customer’s service quota limits are set to appropriate values based on the  parent’s limits.
+* Ensured appropriate handling of reductions in a parent customer’s limits.
+
+### Portal updates
+* Allowed administrators to resend or cancel a portal user invitation by choosing the appropriate menu item of the pending user in the identity and access management page.
+* Improved appearance of dropdown menu in the reports page.
+* Improved appearance of the self-signup page.
+* Improved appearance of the account creation page for self-signup customers.
+* Improved appearance of the purge details page.
+* Updated the CDN Pro upgrade page to reflect the current price plan.
+* Update the user information page to support :30 and :45 timezones.
+* Allowed purges of URLs with encoded special symbols.
+
+
+## August 22, 2022
+### API updates
+
+* Added support for timezones offset by :30 or :45 minutes in portal user's setting.
+* Prevented sharing of a certificate with a non-existent customer.
+* Added support for originShield as an advanced feature, allowing you to add an extra layer between the CDN Pro edge servers and your origin servers.
+* Supported filtering of [requests](</apidocs#operation/getEdgeRequests>) by serverGroups.
+* Fixed maximum value of childCustomerLimit to match specification.
+* Improved validation of Edge Logic, in particular, the [keepalive_timeout](</docs/edge-logic/supported-directives#keepalive_timeout>) and [custom_log_field](</docs/edge-logic/supported-directives#keepalive_timeout>) directives.
+* Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>)’s handling of edge cases.
+* Improved message for invalid apiMaxBurst value.
+* Improved handling of default service quota for child customers.
+
+### Portal updates
+* Fixed display of report when timezone is changed.
+* Improved appearance of copyright.
+* Added support for origin shield as an advanced feature.
+* Fixed test environment issue in which version wasn’t properly displayed in the Add Tasks page.
+* Improved appearance of the identity and access management menu.
+* Improved appearance of top bar.
+* Fixed display of timezone in annotation creation’s dropdown menu.
+* Ensured that the user-selected timezone applies to a report’s time range.
+
+
+## August 11, 2022
+### API updates
+* Improved error handling when summary report APIs are called with invalid customer IDs.
+* Improved error handling when [creating service quotas](</apidocs#operation/post-cdn-serviceQuotas>) with invalid settings.
+* Ensured updates to a customer's portalSettings work correctly.
+* Improved error handling for invalid references to a certificate.
+* Added the customerId field to the [annotations list API](</apidocs#operation/queryAnnotationList>)’s response.
+* Fixed filter support in the [annotation list API](</apidocs#operation/queryAnnotationList>).
+* Improved assignment of default limits for a child customer.
+* Improved the create and update service quota APIs to handle null values.
+* Fixed the [property list API](</apidocs#operation/getPropertyList>)’s hasConfig filter to support the keepAliveTimeout field.
+* Increased notification limit from 2000 to 4000 characters.
+* Ensured that the Beian status check sends emails to customers warning of expired Beian licenses which affects use of PoPs in China.
+* Corrected enforcement of values of the [limit_rate Edge Logic directive](</docs/edge-logic/supported-directives#limit_rate>).
+* Fixed error handling for updating customer limits.
+* Ensured InvalidSelfUpdateChinaBizInfo error is returned when appropriate.
+* Allowed an edgeHostname with redirect or reject actions to be created in the qtlcdn.com zone.
+
+### Portal updates
+* Added help information to the portal.
+* Corrected display of the role details.
+* Displayed an appropriate message when the user tries to access a deleted certificate.
+* Improved error handling of self-signup page.
+* Supported scrolling of hostnames in the report page.
+* Improved display of hostnames in the report page.
+* Removed button in the property version comparison page.
+* Improved display of purge list.
+
+
+## July 25, 2022
+### API updates
+* Allowed variables in the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
+* Fixed issue with copying limits to child customers.
+* Ensured that less expensive server groups are shown in the edge hostname API when a customer uses the higher level group.
+* Ensured that the Report-Range header is consistently implemented among our APIs.
+* Added support for the prefetchLevel field when requesting a [prefetch](</apidocs#operation/post-cdn-prefetches>). It defaults to Parent and can be set to Edge if necessary.
+* Improved error handling if creating a validation task for a property with an incorrectly terminated directive in "loadBalancerLogic".
+* Ensured that updating customer configs works as expected.
+* Ensured that API rate limits are set correctly for child customers.
+* Ensured that child customer limits are correct.
+* Updated API server to ensure that nearChina must be in a client zone rule without other server groups.
+* Ensured that company name supports non-Latin characters.
+
+### Portal updates
+* Ensured that upgrade button text is in the correct language.
+* Ensured action menu items are disabled for users with read-only access.
+* Allowed deployment of property with expired certificate for testing.
+* Ensured prefetch timezone is correct.
+* Improved the layout of property search when many fields are specified.
+* Ensured that the hostnames field in annotations page is filled with current hostnames of the displayed report.
+* Fixed CPU time report’s behavior.
+* Allowed MacOS users to create an annotation by clicking "Command" + "Left click".
+
+
+## July 13, 2022
+### API updates
+* Improved error handling of logins.
+* Improved the appearance of account update notification emails.
+* Limited prefetch and purge URLs to 2048 characters.
+* Ensured lower level server groups are included with higher ones. (For example, access to ultra includes access to standard, premium, and deluxe.)
+
+### Portal updates
+* Updated self-signup page to support other languages. Currently, English and Chinese are supported.
+* Improved appearance of reports page.
+* Improved appearance of suspended status on users page.
+* Improved error message for access log date range.
+* Updated date/time display in report annotations to match mockups.
+* Changed report menu to image to match mockups.
+* Ensured tooltips in report annotations match mockups.
+* Improved appearance of longer report annotation comment.
+* Updated edge hostname user interface to ensure that lower server groups are enabled with higher ones.
+* Improved display of Secret Details page.
+* Ensured language of message when deleting a role matches the user’s preference.
+* Added support for request and CPU summary reports.
+* Fixed display of login page for self-signup users.
+
+## June 30, 2022
+### API updates
+* Improved cleanup of customer accounts.
+* Ensured notification emails are correctly sent to CDN Pro customers only.
+* Fixed an error when the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) is used.
+* Updated load balancer logic to support the [custom_log_field Edge Logic directive](</docs/edge-logic/supported-directives#custom_log_field>).
+* Ensured appropriate setting of child customers’ API limits.
+* Added support for the %srvip setting in the [log configuration](</apidocs#operation/post-cdn-report-logConfigs>) format to show the IP address of the CDN server handling a request.
+* Prevented client request headers from being passed to a real-time log server.
+
+### Portal updates
+* Added support for Chinese in the self-signup page.
+* Added a support office field in the self-signup page to allow regional staff to help customers.
+* Improved error handling in the property creation page.
+* Fixed display of edge configuration’s secret after it is updated.
+* Improved report annotation creation.
+* Prevented an invalid hostname from being added to a group in the reports page.
+* Improved the appearance of the task details page.
+* Improved accessibility of our portal by hosting third-party CSS/JS files ourselves.
+* Translated more text.
+* Fixed issue affecting removal of a role from a user.
+* Improved display of the self-signup page.
+* Fixed error in the property version comparison page affecting the new load balancer logic field.
+* Improved the appearance of the customer list page for resellers.
+* Fixed report’s handling of the end of the date range to round up, making it consistent with our API.
+
+
+
+## June 15, 2022
+### API updates
+* Ensured parent customers can create an edge hostname on behalf of a child customer.
+* Fixed an issue affecting purge requests.
+* Ensured that allowedServerGroups are properly saved.
+* Ensured the lists of server groups in an edge hostname and a service quota appear in a consistent order.
+* Fixed an issue with deleting a parent customer’s service quota.
+* Ensured that server groups cannot be removed if they are still in use.
+* Improved the API rate restriction implementation.
+
+### Portal updates
+* Ensured expired trial customers can upgrade.
+* Ensured the number of regular expression purges appears in the Content Management page.
+* Improved error handling when deleting a role in use.
+* Improved error message when the report date range is exceeded.
+* Updated the copyright year in emails.
+* Added caller information in purge and prefetch details.
+* Added a box to show load balancer logic in property comparison.
+* Ensured a button's text is correctly translated to Chinese.
+* Ensured the viewer role has appropriate visibility of annotations.
+* Ensured a domain group can be deleted.
+* Ensured proper display of server groups available to a customer.
+
+
+## June 2, 2022
+### API updates
+* Updated support for API rate limiting. Each customer has an apiRate and apiMaxBurst setting that limits the number of API calls that can be made in a short period of time.
+* Added regexEntries field in the [purge list API’s response](</apidocs#operation/getPurgeRequestList>).
+* Prevented duplicate server groups from being added to a client zone rule of an edge hostname.
+* Improved error handling when requesting the service quota of a customer without the CDN Pro service.
+* Improved management of server groups for customers with child customers.
+
+### Portal updates
+* Fixed count of hostnames in the Edge Hostname Request report.
+* Updated inactivity email.
+* Updated link to documentation in the access log download page.
+* Updated the traffic volume summary report to support the ChinaStandard and ChinaPremium server groups.
+* Fixed a hint in the load balancer logic editor.
+* Fixed loading of reports for some users.
+* Ensured users can create purge requests with regular expressions.
+
+
+## May 20, 2022
+### API updates
+* Added allowedServerGroups field to service quota to control the server groups a customer can access.
+* Added CPU summary report.
+* Improved error handling of PATCH API permissions to suggest creating an API permission if it does not yet exist.
+* Added support for multiple hostnames in the report download API.
+* Improved error handling if a user specifies an invalid server group in an edge hostname's configuration.
+* Ensured consistent naming of server groups in the service quota APIs.
+* Ensured default server groups are used if none are specified when creating an edge hostname.
+
+### Portal updates
+* Added support for report annotations to highlight interesting events.
+* Improved error handling when missing a semicolon in a property’s Edge Logic.
+* Added support for saving hostnames as a group in the report form to allow easier reuse.
+* Fixed display issue in access log download page when the user clicks the browser's back button.
+* Fixed an error in the log configuration creation page when a $ character is entered.
+* Fixed an error preventing deletion of a log configuration.
+
+
 ## May 6, 2022
 ### API updates
 

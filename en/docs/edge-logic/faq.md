@@ -1,6 +1,6 @@
 ## Frequently Asked Questions
 
-### How the cache time for an object is determined?
+### How is the cache time for an object determined?
 
 There are many directives you can use in the Edge Logic to control the cache time. If none of them is configured, the default behavior of CDN Pro edge servers is to "honor the origin". That is, the instructions in the `Cache-Control` and `Expires` header fields are followed. If these two fields are not present in a response from the origin, the response is not cached. The presence of the `Set-Cookie` header field also prevents caching of the response. 
 
@@ -34,9 +34,9 @@ proxy_ignore_cache_control no-cache no-store;
 
 Since you are interested in the caching behavior of CDN Pro, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
 
-### How to include query parameters and/or request headers in the cache key?
+### How do I include query parameters, request headers and body in the cache key?
 
-By default, the CDN Pro cache key includes only the hostname and URI without the query string in the request. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
+By default, the CDN Pro cache key includes only the hostname and URI without the query string. It also includes a special variable that is accessible in the Edge Logic: `$cache_misc`. Therefore, if you want to add anything to the cache key, add it to this variable. For example, to keep the entire query string in the cache key:
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
@@ -53,6 +53,9 @@ If you want to keep any previously assigned value, you can append to this variab
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
+The POST method is often used today to query information with complex or long parameters. A prominent example is the [GraphQL](https://en.wikipedia.org/wiki/GraphQL). In these cases, the POST requests are idempotent and safe as the GET requests, and the response are well cacheable. The only question is how to include the parameters in the request body to the cache key. CDN Pro created the proprietary directive [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) for this exact purpose. When this feature is turned on, our server would calculate an MD5 hash from the request body and append it to the cache key. Due to performance considerations, this only happens when the body size is less than 4kB, otherwise the cache key is not appended and the variable $ignored_body_in_cache_key is set to 1 to indicate this fact. You can use this variable with [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass) to avoid serving incorrect cached content. If you really need to include larger request body in the cache key, you are advised to calculate a hash of the request body in the client and pass it through the request header. You can then use the method introduced earlier to include it in the cache key via $cache_misc.
+
+Last but not least, don't forget to use the [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) directive to enable the caching of POST requests.
 
 ### HTTP Header Manipulation
 
@@ -92,15 +95,21 @@ In this case, the servers cache the content as if the `Vary` header does not exi
 
 When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn on this feature, use the directive [`origin_follow_redirect`](</docs/edge-logic/supported-directives.md#origin_follow_redirect>) in the location where it is needed.
 
-### China Delivery and Beian
+### China Delivery with and without ICP Beian
 
-The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, CDNetworks cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, CDNetworks can use servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
+The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, CDNetworks cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, CDNetworks can use its dedicated line Near China solution or servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
 
+#### China Delivery with ICP Beian
 If you have one or more domains with ICP Beian and want them to be accelerated in China, contact customer service to ensure we have all the required information on file about your business. After confirming that we have the necessary information, your China Delivery service will be enabled. You can then perform the following steps to enable local delivery of domains in Mainland China: 
 
 1. Set "hasBeian" to true in the [property](</docs/portal/edge-configurations/creating-property.md>) of this domain. This ensures the configuration will be deployed to servers in China and that those servers will handle client requests to this domain. Otherwise, they will return status code 451.
 
-2. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China. 
+2. Create an [Edge Hostname](</docs/portal/traffic-management/creating-edge-hostname.md>) with "hasBeian" set to true, and use this edge hostname for the domain to be accelerated. This ensures that GSLB will direct traffic of this domain to our servers in Mainland China.
+
+#### China Delivery without ICP Beian using the Near China Solution
+If your CDN domains do not have ICP Beian, but you want them to be accelerated in Mainland China, CDN Pro offers a Near China solution. This solution uses the CDN Pro special server group nearChina, with a robust network of servers located in Hong Kong, to effectively deliver your content with low latency and high performance for your websites and applications in China.
+
+CDN Pro's Near China solution is a value-added service. The traffic per GB cost for the server group will be more expensive than the regular server groups. Please contact the CDNetworks Support Team for details on the nearChina server group's price and to enable the service.
 
 ### How to support WebSocket?
 
@@ -123,3 +132,87 @@ In many cases, "dynamic" does not mean the content is not cacheable. For example
 * **Enable Fast Route to origin**
 
 CDN Pro has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the ""Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN Pro support team.
+
+### Apex domains and anycast
+
+Our [CNAME-based traffic management system](</docs/portal/traffic-management/overview>) is designed to make routing decisions dynamically, factoring in performance, costs, compliance requirements, and custom rules. Simply [create an edge hostname](</docs/portal/traffic-management/creating-edge-hostname>) and add a CNAME record to your DNS to point your domain at the edge hostname, then let CDN Pro do the magic. Leverage the powerful capabilities of this system to deliver optimal results. 
+
+However, if your domain to be accelerated is an apex domain, i.e. a root domain (e.g. example.com) that does not contain a subdomain, adding a CNAME record for the apex domain would become an issue, due to restrictions in the DNS specification (Refer to section 3.6.2 of [RFC1034](https://www.ietf.org/rfc/rfc1034.txt)). This is where our anycast addressing feature comes into play. It provides anycast IPv4 addresses which you can enter into your DNS as A records to point your apex domain to some PoPs of CDN Pro. This feature is currently available on demand. Please contact our support team if you need to use it.
+
+Note that each anycast IP address is broadcast only in a small subset of our global PoPs, and the list of PoPs where anycast is available is subject to changes without prior notice. Therefore, the performance and capacity behind an anycast IP address are not comparable to that of an edge hostname. We recommend using the CNAME-based edge hostnames to route traffic as much as possible. Anycast should be used only for apex domains. 
+
+### How are CDN Pro API calls rate limited?
+
+To prevent CDN Pro's API servers from being overwhelmed, the CDN Pro API enforces a limit on the number
+of requests that customers can send per minute. If a customer sends too many requests, API rate limiting
+throttles the customer by returning error messages with HTTP status code 429.
+
+* **Token Bucket Algorithm**
+
+CDN Pro uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to enforce rate limiting.
+The token bucket algorithm is based on an analogy of a fixed capacity bucket into which tokens are added at a
+fixed rate. Before allowing an API request to proceed, the bucket is inspected to see whether it contains at least
+one token. If it does, one token is removed from the bucket and the API request is allowed to proceed. If there
+is not a sufficient number of tokens available, the request is blocked, with an error that says the quota
+has been exceeded during the 1-minute sliding window.
+
+The capacity of the bucket and the filling rate are controlled by the `configs.apiMaxBurst` and `configs.apiRate` fields
+in the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>). For example,
+if the customer has `configs.apiMaxBurst = 45` and `configs.apiRate = 120`, tokens are added to the bucket at a
+fixed rate of 120 tokens per minute, and the total capacity of the bucket is 45. The bucket is refilled in a
+“greedy” manner. CDN Pro tries to add tokens to the bucket as soon as possible. For example, refilling at
+"120 tokens per minute" adds 1 token  every 500 milliseconds. In other words, the refill does not wait a full
+minute to regenerate a bunch of 120 tokens.
+
+* **Indicator and Error Handling**
+
+After the token gets consumed, an `x-rate-limit-remaining: X` header is added to the API call’s HTTP response,
+indicating the number of tokens remaining in the bucket. This header represents the remaining quota of API requests
+a customer can make at this time. Failed or malformed requests consume one token from the bucket as well.
+If there is not a sufficient number of tokens in the bucket, the API gateway returns an HTTP 429 error with
+response header `x-rate-limit-retry-after-seconds: Y` to tell the client to retry after Y seconds.
+
+* **Best Practices for Avoiding Rate Limiting Errors**
+
+1. Check the API request history. [“GET /ngadmin/apicalls”](</apidocs#operation/get-ngadmin-apicalls>)
+shows the API calls you have made.  (The customer admin API credential is required to call this API.)
+Carefully check the records for potential abuses.
+
+2. Reduce the number of requests by using APIs that are more suitable for the scenario or by combining similar
+requests into one. For example, if you want to monitor the traffic volume of a list of domains, an ineffective approach is:
+
+```
+	for domain in domain_list:
+	    call GET /cdn/report/vol 
+	    	 {filters: {hostnames: [$domain]}}
+```
+
+   Instead, use the following recommended approach:
+
+```
+	POST /cdn/report/volSummary 
+	     {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
+```
+
+   Another example is purging multiple files in one request instead of making an API call for each purge URL.
+   If there are thousands of purge URLs that follow a certain pattern, use directory or regex purge by specifying
+   the `dirUrls` or `regexPatterns` fields when [creating a purge request](</apidocs#operation/createPurge>). The number of requests should not scale as you acquire more domains, properties, and other resources.
+
+3. If you call the API through scripts, it should be resilient to intermittent or non-specific errors. The script
+should honor the `x-rate-limit-retry-after-seconds` header and retry the request after a delay. Consider including a
+process in your code that regulates the rate of your requests so that they are distributed evenly over time. 
+
+4. If a problem persists, contact our [technical support team](mailto:support@cdnetworks.com).
+If there is a legitimate need to increase the rate limit or burst ceiling, the technical support team will evaluate your requirements and raise the threshold.
+
+* **Notes**
+
+1. Rate limiting applies at the customer level. All API accounts under the same customer share the same token bucket. Excessive use of one account exhausts the customer’s quota. The rate limits of a reseller's children are independent of each other. In addition, the children’s API calls will not use the parent’s quota.
+
+2. Because the CDN Pro portal calls the APIs, operations in the portal UI also consume the API rate limit tokens. 
+
+3. Unauthorized API calls such as signups and login attempts consume tokens from the bucket corresponding to the client’s IP address. This bucket has a default capacity of 30 tokens and a refill rate of 60 per minute.
+
+4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
+
+

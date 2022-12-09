@@ -1,6 +1,6 @@
 ## 支持的指令
 
-这一页列出了您可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
+这一页列出了您可以在CDN Pro的边缘逻辑和7层负载均衡器(LB7)逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
 
 在下面的文档里，我们为所有非特有的指令提供了到开源版公开文档的直接链接。每一个被修改增强过的指令，我们都提供了详细的描述，包括新增的功能，参数，以及对参数取值范围的限制。
 
@@ -8,7 +8,7 @@
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `add_header name value [policy=...] [if(...)] [always];`<br/>
 **默认设置：** `-` <br/>
@@ -83,7 +83,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `allow address | CIDR | all;`<br/>
 **默认设置：** `-` <br/>
@@ -105,6 +105,7 @@ CDN Pro 在 [nginx 开源版本](http://nginx.org/en/docs/http/ngx_http_access_m
 ```nginx
 auth_request /auth$is_args$args;
 ```
+如果鉴权响应 2xx 状态码，则认为请求合法，如果响应 401 或者 403 则请求会被拒绝。其它状态码会被认为是错误，导致客户端收到 500 "internal error"。
 
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
@@ -114,7 +115,20 @@ auth_request /auth$is_args$args;
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。
+须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。下面的例子展示了如何将远端鉴权服务器返回的 etag 值加入到 cache key 里：
+```nginx
+auth_request /auth$is_args$args;
+auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
+
+location = /auth {
+  internal;
+  proxy_method HEAD;
+  # 配置鉴权服务器和URI
+  origin_pass remote_auth_server/auth-req$is_args$args;
+  # 将客户端请求URI发给鉴权服务器
+  origin_set_header client-request-uri $request_uri;
+}
+```
 
 ### [`break`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#break)
 
@@ -152,10 +166,10 @@ auth_request /auth$is_args$args;
 
 ### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
 
-<span class="badge dark">高级</span>
+<span class="badge dark">高级</span> <span class="badge">LBLogic</span>
 
 **使用语法:** `client_max_body_size size;`<br/>
-**默认设置:** `client_header_timeout 1m;`<br/>
+**默认设置:** `client_max_body_size 128m;`<br/>
 **可用位置:** server, location
 
 设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
@@ -174,13 +188,13 @@ auth_request /auth$is_args$args;
 
 ### `custom_log_field`
 
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `custom_log_field id value;`<br/>
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用这两个字段。如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用这两个字段。当同一个字段同时在 LB7 和 ES 里被定义，LB7 有优先权。 如果您需要开启此功能，请联系我们的技术支持团队。
 
 示例:
 ```nginx
@@ -193,7 +207,7 @@ location / {
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `deny address | CIDR | all;`<br/>
 **默认设置：** `—`<br/>
@@ -238,7 +252,7 @@ location @try_origin2 {
 
 ### `eval_func`
 
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `eval_func $result {function name} {parameters};` <br/>
 **默认设置：** `-` <br/>
@@ -253,6 +267,7 @@ location @try_origin2 {
 | URL<br>编解码 | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
 | HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
 | AES<br>加解密 | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串。|
+| 加解密 | ENCRYPT_SYMM<br>**DECRYPT_SYMM** | ```eval_func $output ENCRYPT_SYMM $key $iv $message $mode;```<br>```$key```和```$iv```都应为二进制串。```$mode```可以是 *openssl list -cipher-commands* 返回的任意一个密码，例如'aes-128-cbc'。|
 | 计算<br>HMAC | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` 可以是 ```MD5```, ```SHA1```, ```SHA256``` |
 | RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 目前只支持 ```SHA256```。|
 | 比较<br>整数 | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```当 ```$data1 > $data2```时 $output``` 的值为 "1"，相等时为 "0"，小于时为 “-1”。|
@@ -261,8 +276,8 @@ location @try_origin2 {
 | 字符串<br>替换 | REPLACE | ```eval_func $output REPLACE <old> <new> $input;``` |
 | 字符串<br>修改 | TO_UPPER | ```eval_func $output TO_UPPER $input;```<br>把输入字符串转成大写。|
 | 字符串<br>修改 | TO_LOWER | ```eval_func $output TO_LOWER $input;```<br>把输入字符串转成小写。|
-| 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样.|
-| 一日之内<br>的时间| DAY_PERIOD| ```eval_func $out DAY_PERIOD 19:00+0800 12h CN-night;```<br>如果时间在19:00+0800之后的12小时内，则返回'CN-night'|
+| 字符串<br>修改 | SUBSTR | ```eval_func $output SUBSTR <start> <length> $input;```<br>获取输入字符串的一个子串，长度为```<length>```，起始位置为```<start>```。```<start>```可以是一个负数，就像Javascript的[substr()](https://www.w3schools.com/jsref/jsref_substr.asp)函数一样。|
+| 一日之内<br>的时间| DAY_PERIOD| ```eval_func $out DAY_PERIOD 19:00+0800 12h CN-night;```<br>如果时间在19:00+0800之后的12小时内，则返回'CN-night'，否则返回空字符串。|
 
 **注意:** 使用**加粗字体** 标记的函数的输出值是一个可能无法打印的二进制字符串。因此您需要使用 BASE64_ENCODE、URL_ENCODE 或 HEX_ENCODE 将其转换为可打印格式。
 
@@ -284,12 +299,22 @@ location @try_origin2 {
 <span class="badge">标准</span>
 
 **使用语法：** `expires time;
-       expires epoch | max | off;` <br/>
+           expires epoch | max | off;` <br/>
 **默认设置：** `expires off;` <br/>
 **可用位置：** server, location, if in location
 
 
 该指令用于控制 CDN Pro 根据所配时长，在发给客户的响应中添加并修改“ Expires ”和“ Cache-Control ”头部。代码逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires) ，无改动。该指令仅影响发送到客户端的响应头，它不会改变CDN Pro本身对内容的缓存时间。
+
+### [`gzip`](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
+
+<span class="badge">标准</span>
+
+**使用语法:** `gzip on|off;` <br/>
+**默认设置:** `gzip on;` <br/>
+**可用位置:** server, location, if in location
+
+该指令用于开启或者关闭 CDN Pro 的自动压缩响应功能。源自 [NGINX 开源版本](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)，无改动。
 
 ### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
 
@@ -302,11 +327,13 @@ location @try_origin2 {
 CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1000 字节时才压缩功能才会生效）。该默认行为应该适用于大多数用户。
 该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持形如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。该指令最多支持20个模糊匹配参数。
 
-### [`if`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
+### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
 
-**使用语法：** `if (condition) { ... }`<br/>
+**使用语法：** `if (condition) { ... }
+           elseif (condition) { ... }
+           else {...}`<br/>
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
@@ -344,6 +371,16 @@ else { ... }
 
 指定某个 location 块内的逻辑只能用于内部请求，不允许被客户端直接访问。代码逻辑源自 Nginx 开源版本，无改动。
 
+### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
+
+<span class="badge dark">高级</span> <span class="badge">LB logic</span>
+
+**Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
+**Default:** `keepalive_timeout 30s;`<br/>
+**Context:** server (仅限在LB7)
+
+第一个参数设置每个 keep-alive 连接的最长空闲时间。服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同，但皆不能超过300s。
+
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
 <span class="badge">标准</span>
@@ -353,7 +390,6 @@ else { ... }
 **可用位置：** server, location, if in location
 
 限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
-
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -572,7 +608,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
+该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。CDN Pro 引入了 [`proxy_cache_max_stale`](#proxy_cache_max_stale) 指令来设置一个最大过期时间，以避免将过于陈旧的内容返回给客户端。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -691,7 +727,19 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 **默认设置：** — <br/>
 **可用位置：** server, location
 
-该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。当 location 模块中没有该配置项时，上一层（ server 层）的配置会被继承到 location 中。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
+
+当 location 模块中没有该配置项时，上一层（ server 层）的配置才会被继承到 location 中。如果你需要同时在location模块和server层用该指令设置不同的缓存，可以用下面的代码来实现：
+
+```nginx
+proxy_cache_valid 404 10s;  # server 层, 缓存404状态码响应10秒钟
+proxy_cache_valid $cache_time;
+set $cache_time '';
+location / { 
+  set $cache_time 1d;   # Location 模块, 缓存200，301，302 状态码响应一天
+  ...
+ } 
+```
 
 ### `proxy_cache_vary`
 
@@ -770,7 +818,7 @@ proxy_ignore_cache_control no-cache no-store;
 
 **使用语法:** `proxy_ignore_client_abort on | off;` <br/>
 **默认设置:** `proxy_ignore_client_abort off;` <br/>
-**可用位置:** server, location
+**可用位置:** server (仅限在 LB7)
 
 设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。`off` 意味着中止从源站接收数据，如果数据是不可缓存的。可缓存的数据会继续完成传输，不受本指令影响。本指令只能在 [load balancer logic](lb7-es-structure) 里使用。
 
@@ -885,6 +933,18 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 该指令用于修改 CDN Pro 传给客户端的"Location"和"Refresh"响应头中的内容。源自 NGINX 开源版本，无变更。
 
+### `proxy_request_body_in_cache_key`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `proxy_request_body_in_cache_key on/off;` <br/>
+**默认设置:** `proxy_request_body_in_cache_key off` <br/>
+**可用位置:** server, location, if in location
+
+当参数值是 'on'（支持变量）时，服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
+
+此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
+
 ### `proxy_set`
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
@@ -908,6 +968,16 @@ proxy_no_cache $no_store;
 ```
 该指令会跨不同层级（server/location/location if）合并。如果不同层级中使用该指令试图对同一个变量进行赋值，则只有最内层的配置生效。
 
+### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+
+<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LB logic</span>
+
+**使用语法：**  `proxy_set_header field value if(condition);` <br/>
+**默认设置：** `-` <br/>
+**可用位置：** server (仅限在LB7)
+
+This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES.
+
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
 <span class="badge dark">高级</span>
@@ -930,7 +1000,7 @@ proxy_no_cache $no_store;
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
-<span class="badge">标准</span>
+<span class="badge">标准</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `return code [text];
        return code URL;
@@ -974,7 +1044,7 @@ proxy_no_cache $no_store;
 **默认设置：** `sanitize_accept_encoding gzip;` <br/>
 **可用位置：** server
 
-该指令用于修改 `Accept-Encoding` 请求头，确保其可能的取值不超过5个以提高缓存的利用率。此指令最多可以携带4个参数，每个参数都是一个或多个（以逗号为分隔的）“内容编码格式”，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的 `Accept-Encoding` 请求头与本指令的参数从左至右逐个进行匹配。如果一个参数里的所有格式都出现在了此请求头里，则用该参数值替换掉请求头的值。如果没有能匹配的参数，则将请求头的值改写为“identity”。
+该指令用于修改 `Accept-Encoding` 请求头，确保其可能的取值不超过5个以提高缓存的利用率。此指令最多可以携带4个参数，每个参数都是一个或多个（以逗号为分隔的）“内容编码格式”，例如“gzip,br”或“br”。对于每个请求，CDN Pro 会把接收到的 `Accept-Encoding` 请求头与本指令的参数从左至右逐个进行匹配。如果一个参数里的所有格式都出现在了此请求头里，则用该参数值替换掉请求头的值。如果没有能匹配的参数，则将该请求头删除，表示只接受无压缩的版本。
 
 示例如下：假设边缘逻辑中的配置是：
 ```nginx
@@ -987,9 +1057,9 @@ if (A-E-header.contains("gzip") && A-E-header.contains("br"))
 else if (A-E-header.contains("gzip")) A-E-header="gzip";
 else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
-else A-E-header="identity";
+else remove A-E-header;
 ```
-不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或“identity”。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
+不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或删除。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
 
 如果您使用了此指令，那么很可能您还希望 CDN Pro 能根据 `Accept-Encoding` 请求头的值来区别缓存响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
 
@@ -1030,7 +1100,7 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 ### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
 
-<span class="badge">标准</span>
+<span class="badge">标准</span> <span class="badge">LBLogic</span>
 
 **使用语法：**	`set $variable value;` <br/>
 **默认设置：**	`-` <br/>
@@ -1046,10 +1116,9 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 **使用语法：**	`slice size;` <br/>
 **默认设置：** `slice 0;` <br/>
-**可用位置：** server
+**可用位置：** server, location
 
 该指令用于设置 CDN Pro 从源获取大文件时切片的大小。合法的参数值可以是 0（禁用切片），或一个介于 512k 和 512m 之间（含）的[nginx 尺寸](http://nginx.org/en/docs/syntax.html) 。源站必须支持 range 请求并响应 206 状态码。如果需要将切片的响应进行缓存，请使用指令 `proxy_cache_valid 206 ...` 来启用对 206 状态码缓存。同时我们在开源版本的基础上对该指令进行了以下修改和增强：
-* 我们禁止在任何 location 模块中使用此指令，以确保整个域名具有相同的切片大小设置。这是为了避免某些请求需要在不同 location 配置块内进行处理而造成的潜在问题。
 * CDN Pro 要求所有缓存的切片都携带相同的 ETag 值，以确保这些切片归属于同一个原始文件。当从源站新获取的切片与先前已缓存切片有不同的 Etag 值时，当前与客户端的响应传输将被终止，并且所有已缓存的切片都会立即清除。因此源站在一个文件内容未发生变更的情况下，请务必确保该文件的 ETag 值不会变化。在确实必要的情况下，您可以使用 `slice_ignore_etag on;` 指令来禁用此校验。
 * 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到损坏的响应。
 
@@ -1135,6 +1204,6 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 **使用语法：** `access_log_sampling factor;` <br/>
 **默认设置：** `-` <br/>
-**可用位置：** server
+**可用位置：** server (仅限在LB7)
 
 本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。
