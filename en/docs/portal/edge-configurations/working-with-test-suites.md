@@ -28,7 +28,7 @@ The following procedure describes how to create a test suite. After you create a
 | --------------- | ----------------------------------------------------- |
 | Test Suite Name | Name of the test suite you want to create.            | 
 | Property        | Type the first few characters of a property deployed to staging or production, and then select one from the matching list of properties. To test on production, you must have an edge hostname and modify your DNS settings to direct traffic to the CDN Pro production platform.|
-| Description     | Description for the test suite.                        |
+| Description     | Description of the test suite.                        |
 
 3. Click **Save** to save the test suite or **Save and Create Test Case** to create a test case and proceed to the next step.
 4. If you clicked **Save and Create Test Case**, complete the fields in the Create a test case page.
@@ -39,7 +39,7 @@ The following procedure describes how to create a test suite. After you create a
 | --------------- | ----------------------------------------------------------------------------------------------- |
 | Property        | Read-only field that shows the name of the property associated with this test suite.            | 
 | Test Case Name  | Name of the test case you are creating.                                                         |
-| Description     | Description for the test case.                                                                  |
+| Description     | Description of the test case.                                                                  |
 | URL             | Complete URL containing a hostname defined in a deployed property.                              | 
 | Request Headers | Request headers to pass.                                                                        |
 | Cookies         | Cookies to pass.                                                                                |
@@ -47,8 +47,8 @@ The following procedure describes how to create a test suite. After you create a
 | HTTP/2          | Select whether to enable or disable HTTP/2 for the request.                                     |
 | Expected Result | Select one or more HTTP response status codes.                                                  |
 
-5. Click **Save and Create Another Test Case** to save the test case and create another one or **Save and Run** to save the test case you just created and run it.
-6. If you clicked **Save and Run**, select a target environment (staging or production) to test when prompted, and then click **Run**. The Test Report page shows the results.
+1. Click **Save and Create Another Test Case** to save the test case and create another one or **Save and Run** to save the test case you just created and run it.
+2. If you clicked **Save and Run**, select a target environment (staging or production) to test when prompted, and then click **Run**. The Test Report page shows the results.
 
 ## Editing Test Suites and Test Cases
 
@@ -63,7 +63,7 @@ The following procedure describes how to create a test suite. After you create a
 5. Make your changes in the Test Case form. Required fields are denoted by an asterisk (\*).
 6. Click **Save**.
 
-## Running a Test Case within a Test Suite
+## Running Test Cases within a Test Suite
 
 1. In the left pane, click **Edge Configurations**, and then select **Test Suites**.
 2. On the Test Suites page, check a test suite, click the three dots next to the **Create Test Suite** button, and select **Run Selected Test Suites**. 

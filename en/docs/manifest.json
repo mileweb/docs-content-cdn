@@ -88,7 +88,7 @@
                 "title": "Test a Property",
                 "path": "/docs/portal/edge-configurations/testing-property.md"
               },
-			  {
+			        {
                 "title": "Working with Test Suites",
                 "path": "/docs/portal/edge-configurations/working-with-test-suites.md"
               },
@@ -177,7 +177,7 @@
             }
            ]
           },
-           {
+          {
             "title": "Reports",
             "routes": [
               {
@@ -190,7 +190,7 @@
               }
             ]
           },
-             {
+          {
             "title": "Content Management",
             "routes": [
               {
@@ -219,7 +219,7 @@
               }
             ]
           },
-             {
+          {
             "title": "Identities and Access",
             "routes": [
               {
@@ -240,49 +240,51 @@
               }
             ]
           },
-             {
-        "title": "Edge Logic",
-        "heading": true,
-        "routes": [
           {
-            "title": "Introduction",
-            "path": "/docs/edge-logic/intro.md"
-          },
-          {
-            "title": "Hello World",
-            "path": "/docs/edge-logic/hello-world.md"
-          },
-          {
-            "title": "Simple Caching",
-            "path": "/docs/edge-logic/simple-caching.md"
-          },
-          {
-            "title": "Multiple Origins with 'if'",
-            "path": "/docs/edge-logic/multiple-origins.md"
-          },
-          {
-            "title": "Declarative vs Imperative",
-            "path": "/docs/edge-logic/declarative-imperative.md"
-          },
-          {
-            "title": "Edge Node Structure",
-            "path": "/docs/edge-logic/lb7-es-structure.md"
-          },
-          {
-            "title": "Staging Environment",
-            "path": "/docs/edge-logic/staging-environment.md"
-          },
-          {
-            "title": "Supported Directives",
-            "path": "/docs/edge-logic/supported-directives.md"
-          },
-          {
-            "title": "Built-in Variables",
-            "path": "/docs/edge-logic/built-in-variables.md"
-          },
-          {
-            "title": "FAQ",
-            "path": "/docs/edge-logic/faq.md"
+            "title": "Edge Logic",
+            "heading": true,
+            "routes": [
+              {
+                "title": "Introduction",
+                "path": "/docs/edge-logic/intro.md"
+              },
+              {
+                "title": "Hello World",
+                "path": "/docs/edge-logic/hello-world.md"
+              },
+              {
+                "title": "Simple Caching",
+                "path": "/docs/edge-logic/simple-caching.md"
+              },
+              {
+               "title": "Multiple Origins with 'if'",
+                "path": "/docs/edge-logic/multiple-origins.md"
+              },
+              {
+                "title": "Declarative vs Imperative",
+                "path": "/docs/edge-logic/declarative-imperative.md"
+              },
+              {
+                "title": "Edge Node Structure",
+                "path": "/docs/edge-logic/lb7-es-structure.md"
+              },
+              {
+                "title": "Staging Environment",
+                "path": "/docs/edge-logic/staging-environment.md"
+              },
+              {
+                "title": "Supported Directives",
+                "path": "/docs/edge-logic/supported-directives.md"
+              },
+              {
+                "title": "Built-in Variables",
+                "path": "/docs/edge-logic/built-in-variables.md"
+              },
+              {
+                "title": "FAQ",
+                "path": "/docs/edge-logic/faq.md"
+              }
+            ]
           }
         ]
       },

@@ -28,7 +28,7 @@ The following procedure describes how to create a test suite. After you create a
 | --------------- | ----------------------------------------------------- |
 | Test Suite Name | Name of the test suite you want to create.            | 
 | Property        | Type the first few characters of a property deployed to staging or production, and then select one from the matching list of properties. To test on production, you must have an edge hostname and modify your DNS settings to direct traffic to the CDN Pro production platform.|
-| Description     | Description for the test suite.                        |
+| Description     | Description of the test suite.                        |
 
 3. Click **Save** to save the test suite or **Save and Create Test Case** to create a test case and proceed to the next step.
 4. If you clicked **Save and Create Test Case**, complete the fields in the Create a test case page.
@@ -39,7 +39,7 @@ The following procedure describes how to create a test suite. After you create a
 | --------------- | ----------------------------------------------------------------------------------------------- |
 | Property        | Read-only field that shows the name of the property associated with this test suite.            | 
 | Test Case Name  | Name of the test case you are creating.                                                         |
-| Description     | Description for the test case.                                                                  |
+| Description     | Description of the test case.                                                                  |
 | URL             | Complete URL containing a hostname defined in a deployed property.                              | 
 | Request Headers | Request headers to pass.                                                                        |
 | Cookies         | Cookies to pass.                                                                                |
