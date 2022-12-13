@@ -88,10 +88,10 @@
                 "title": "测试加速项",
                 "path": "/docs/portal/edge-configurations/testing-property.md"
               },
-			        {
+			  {
                 "title": "Working with Test Suites",
                 "path": "/docs/portal/edge-configurations/working-with-test-suites.md"
-              },
+              }, 			  
               {
                 "title": "删除加速项",
                 "path": "/docs/portal/edge-configurations/deleting-property.md"
@@ -237,54 +237,54 @@
               {
                 "title": "管理安全信息",
                 "path": "/docs/portal/identities-and-access/managing-security.md"
-              }
+	      }
             ]
+          }
+        ]
+      },
+      { 
+        "title": "边缘逻辑",
+        "heading": true,
+        "routes": [
+          {
+            "title": "简介",
+            "path": "/docs/edge-logic/intro.md"
           },
           {
-            "title": "边缘逻辑",
-            "heading": true,
-            "routes": [
-              {
-                "title": "简介",
-                "path": "/docs/edge-logic/intro.md"
-              },
-              {
-                "title": "Hello World",
-                "path": "/docs/edge-logic/hello-world.md"
-              },
-              {
-                "title": "简单缓存",
-                "path": "/docs/edge-logic/simple-caching.md"
-              },
-              {
-                "title": "用'if'来选择多个源站",
-                "path": "/docs/edge-logic/multiple-origins.md"
-              },
-              {
-                "title": "声明式与强制式指令",
-                "path": "/docs/edge-logic/declarative-imperative.md"
-              },
-              {
-                "title": "边缘节点架构",
-                "path": "/docs/edge-logic/lb7-es-structure.md"
-              },
-              {
-                "title": "演练环境",
-                "path": "/docs/edge-logic/staging-environment.md"
-              },
-              {
-                "title": "支持的指令",
-                "path": "/docs/edge-logic/supported-directives.md"
-              },
-              {
-                "title": "内置变量",
-                "path": "/docs/edge-logic/built-in-variables.md"
-              },
-              {
-                "title": "常见问题",
-                "path": "/docs/edge-logic/faq.md"
-              }
-            ]
+            "title": "Hello World",
+            "path": "/docs/edge-logic/hello-world.md"
+          },
+          {
+            "title": "简单缓存",
+            "path": "/docs/edge-logic/simple-caching.md"
+          },
+          {
+            "title": "用'if'来选择多个源站",
+            "path": "/docs/edge-logic/multiple-origins.md"
+          },
+          {
+            "title": "声明式与强制式指令",
+            "path": "/docs/edge-logic/declarative-imperative.md"
+          },
+          {
+            "title": "边缘节点架构",
+            "path": "/docs/edge-logic/lb7-es-structure.md"
+          },
+          {
+            "title": "演练环境",
+            "path": "/docs/edge-logic/staging-environment.md"
+          },
+          {
+            "title": "支持的指令",
+            "path": "/docs/edge-logic/supported-directives.md"
+          },
+          {
+            "title": "内置变量",
+            "path": "/docs/edge-logic/built-in-variables.md"
+          },
+          {
+            "title": "常见问题",
+            "path": "/docs/edge-logic/faq.md"
           }
         ]
       },
