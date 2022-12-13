@@ -23,7 +23,7 @@ You can display the Standby Task form from the Certificates, Edge Configurations
 
 The Standby Task form is organized into two subqueues.<ul><li>The top subqueue shows actions for the CDN Pro staging environment.</ul></li><ul><li>The bottom subqueue shows actions for the production environment.</ul></li>Each subqueue has its own search field for filtering standby actions in that subqueue.
 
-<p align=center><img src="/docs/resources/images/standby_tasks.png" alt="standby task form" width="900"></p>
+<p align=center><img src="/docs/resources/images/standby-tasks.png" alt="standby task form" width="900"></p>
 
 ## Adding Standby Tasks
 To add standby tasks to a subqueue:
