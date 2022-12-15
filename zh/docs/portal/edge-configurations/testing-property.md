@@ -2,6 +2,8 @@
 
 Before you deploy your property to production, we recommend you test and verify your property to make sure it works as expected. CDN Pro has a dedicated staging environment for this purpose. To deploy the property to the staging environment, perform the steps in [Deploying Your Property](</docs/portal/edge-configurations/deploying-property.md>).
 
+<strong>Note:</strong> You can also use the [Test Suites page](</docs/portal/edge-configurations/working-with-test-suites.md>) to test properties deployed to both the staging and production environments.
+
 ## Testing Your Property in Staging
 
 CDN Pro provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlcdn.com`. You can also see their IP addresses by issuing the following command:
