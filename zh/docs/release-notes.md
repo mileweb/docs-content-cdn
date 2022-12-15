@@ -1,5 +1,25 @@
 # Release Notes
 
+## December 13, 2022
+### API updates
+* Improved the efficiency of deploying to the staging environment.
+* Cleaned up the emails notifying customers of changes made to their settings.
+* Ensured trial customers can deploy to production after testing deployments to staging.
+
+### Portal updates
+* Added a new feature allowing users to create test suites to test properties deployed to staging and production.
+* Improved sidebar to be consistent among our products.
+* Improved appearance of the Quantil-branded console.
+* Fixed spacing issues in the listing pages.
+* Improved display of Tasks menu.
+* Renamed UTC+00:00 to UTC in the user’s time zone list.
+* Ensured only legal time zones are supported.
+* Updated links to Quantil DPA.
+* Improved position of the content header in the secrets, prefetch, and purge list pages.
+* Improved text shown when impersonating a customer.
+* Fixed table header’s color on the access logs page.
+
+
 ## November 25, 2022
 ### API updates
 * Added endpoint to return shield given its ID.
