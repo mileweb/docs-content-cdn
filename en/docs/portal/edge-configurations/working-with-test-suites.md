@@ -30,8 +30,8 @@ The following procedure describes how to create a test suite. After you create a
 | Property        | Type the first few characters of a property deployed to staging or production, and then select one from the matching list of properties. To test on production, you must have an edge hostname and modify your DNS settings to direct traffic to the CDN Pro production platform.|
 | Description     | Description of the test suite.                        |
 
-3. Click **Save** to save the test suite or **Save and Create Test Case** to create a test case and proceed to the next step.
-4. If you clicked **Save and Create Test Case**, complete the fields in the Create a test case page.
+4. Click **Save** to save the test suite or **Save and Create Test Case** to create a test case and proceed to the next step.
+5. If you clicked **Save and Create Test Case**, complete the fields in the Create a test case page.
 
 <p align=center><img src="/docs/resources/images/edge-configurations/create-a-test-case.png" alt="test case" width="900"></p>
 
@@ -47,8 +47,8 @@ The following procedure describes how to create a test suite. After you create a
 | HTTP/2          | Select whether to enable or disable HTTP/2 for the request.                                     |
 | Expected Result | Select one or more HTTP response status codes.                                                  |
 
-1. Click **Save and Create Another Test Case** to save the test case and create another one or **Save and Run** to save the test case you just created and run it.
-2. If you clicked **Save and Run**, select a target environment (staging or production) to test when prompted, and then click **Run**. The Test Report page shows the results.
+6. Click **Save and Create Another Test Case** to save the test case and create another one or **Save and Run** to save the test case you just created and run it.
+7. If you clicked **Save and Run**, select a target environment (staging or production) to test when prompted, and then click **Run**. The Test Report page shows the results.
 
 ## Editing Test Suites and Test Cases
 
