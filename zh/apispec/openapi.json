@@ -4513,6 +4513,12 @@
                       "code": "InvalidISP",
                       "message": "You may specify up to 10 ISPs."
                     }
+                  },
+                  "Invalid redirect destination": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "You can configure a client zone rule to redirect to an IPv4 address or an IPv6 address but not both."
+                    }
                   }
                 }
               }
@@ -25976,6 +25982,11 @@
                         "type": "boolean",
                         "default": true,
                         "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
+                      },
+                      "logConfigs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints."
                       }
                     }
                   }
@@ -26048,7 +26059,8 @@
                         "serviceQuotas",
                         "hostnames",
                         "webhooks",
-                        "secrets"
+                        "secrets",
+                        "logConfigs"
                       ],
                       "properties": {
                         "certificates": {
@@ -26134,6 +26146,11 @@
                           "type": "boolean",
                           "default": true,
                           "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
+                        },
+                        "logConfigs": {
+                          "type": "boolean",
+                          "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints.",
+                          "default": true
                         }
                       }
                     }
@@ -26155,7 +26172,6 @@
                         "deploymentTasks": "both",
                         "purges": true,
                         "prefetches": true,
-                        "logConfigs": false,
                         "annotations": true,
                         "apiPermissions": false,
                         "systemConfigs": true,
@@ -26164,7 +26180,8 @@
                         "hostnames": true,
                         "blockCommands": true,
                         "webhooks": true,
-                        "secrets": true
+                        "secrets": true,
+                        "logConfigs": true
                       }
                     }
                   }
@@ -26505,6 +26522,11 @@
                         "type": "boolean",
                         "default": true,
                         "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
+                      },
+                      "logConfigs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints."
                       }
                     }
                   }
