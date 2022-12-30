@@ -153,6 +153,26 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 **NOTE:** If this directive appears in a [location](#location) block, any "[return](#return)" directive after it may not be executed. Hence we require the location block to directly contain an [origin_pass](<#origin_pass>) directive.
 
+### [`brotli`](https://github.com/google/ngx_brotli#brotli)
+
+<span class="badge dark">advanced</span>
+
+**Syntax:** `brotli on|off;`<br/>
+**Default:** `brotli off;` <br/>
+**Context:** server, location, if
+
+Enables or disables on-the-fly compression of responses. 
+
+### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)
+
+<span class="badge dark">advanced</span>
+
+**Syntax:** `brotli_types <mime_type> [..];`<br/>
+**Default:** text/html <br/>
+**Context:** server, location
+
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The special value * matches any MIME type. Responses with the text/html MIME type are always compressed. 
+
 ### `client_body_timeout`
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
@@ -362,6 +382,16 @@ elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
+
+### `ignore_invalid_range`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `ignore_invalid_range on|off;` <br/>
+**Default:** `ignore_invalid_range off;` <br/>
+**Context:** server, location <br/>
+
+Specifies if invalid range header shall be ignored. When turned on, invalid range header is ignored and 200 full content is returned to client. Otherwise, the client will receive a 416 status code.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -926,6 +956,16 @@ Enables of disables passing request headers from client to upstream. No change t
 
 Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
 
+### [`proxy_request_buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering)
+
+<span class="badge dark">advanced</span> <span class="badge">LB logic</span>
+
+**Syntax:** `proxy_request_buffering on/off;` <br/>
+**Default:** `proxy_request_buffering off` <br/>
+**Context:** server, location
+
+Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be configured in both edgeLogic and loadBalancerLogic. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cachekey).
+
 ### `proxy_request_body_in_cache_key`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
@@ -934,7 +974,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **Default:** `proxy_request_body_in_cache_key off` <br/>
 **Context:** server, location, if in location
 
-When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests.
+When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests. You also need to set [`proxy_request_buffering`](#proxy_request_buffering) to "on" to enable request buffering.
 
 A restriction of this directive is that it works only when body size is less than 4kB. When the request body size is greater than this threshold, no hash value is appended to the cache key and this fact is indicated by a value '1' of the variable [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key). You can use this variable with [`proxy_cache_bypass`](#proxy_cache_bypass) to bypass caching of these requests. If it is really important to include a large request body in the cache key, you are advised to calculate the hash value in the client and pass it in the request header, then include it in the $cache_misc variable.
 
@@ -980,6 +1020,16 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **Context:** server, location
 
 Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+
+### `range_reorder`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `range_reorder on | off [coalescing];` <br/>
+**Default:** `range_reorder off` <br/>
+**Contexts:** server, location
+
+This directive can be used to reorder and merge multiple ranges. When range_reorder is turned on, multiple ranges in ascending order will be re-ordered to descending, and partial content will be returned to client with the 206 status code.
 
 ### `realtime_log_downsample`
 
@@ -1121,6 +1171,18 @@ Sets the size of the slices when fetching large files from the origin. The valid
 **Contexts:** server
 
 This directive can be used to disable the ETag consistency check of sliced files. Use it only as a workaround if the origin generates different ETag values for the same file.
+
+### `slice_verify_header`
+
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `slice_verify_header header_name;` <br/>
+**Default:** - <br/>
+**Contexts:** server, location
+
+This directive can be used to specify a header in addition to Etag to check consistency of sliced files. Use this directive in conjunction with[`slice_ignore_etag`](#slice_ignore_etag) if you want to skip Etag and check the specified header only.
+
+The header_name must be of a value other than "etag". The value is case insensitive.
 
 ### `sorted_querystring_filter_parameter`
 
