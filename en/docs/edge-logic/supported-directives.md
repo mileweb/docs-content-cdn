@@ -1029,7 +1029,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** `range_reorder off` <br/>
 **Contexts:** server, location
 
-This directive can be used to reorder and merge multiple ranges. When range_reorder is turned on, multiple ranges in ascending order will be re-ordered to descending, and partial content will be returned to client with the 206 status code.
+This directive can be used to instruct the proxy server to reorder and merge multiple byte-ranges in one request. When range_reorder is enabled, multiple ranges requested in descending order will be re-ordered to ascending. When range_order is enabled with the coalescing parameter, multiple ranges that are overlapped or are separated by a gap that is smaller than the overhead of sending multiple parts will be coalesced. This ensures that multipart content is returned to client with the 206 status code. When range_reorder is disabled, full content with 200 status code might be returned to client for requests with multiple ranges.
 
 ### `realtime_log_downsample`
 
