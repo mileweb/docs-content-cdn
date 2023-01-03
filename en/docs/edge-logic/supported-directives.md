@@ -964,7 +964,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **Default:** `proxy_request_buffering off` <br/>
 **Context:** server, location
 
-Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be configured in both edgeLogic and loadBalancerLogic. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cachekey).
+Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be configured in both edgeLogic and loadBalancerLogic. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cache_key).
 
 ### `proxy_request_body_in_cache_key`
 

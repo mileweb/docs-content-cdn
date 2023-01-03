@@ -971,7 +971,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置:** `proxy_request_buffering off` <br/>
 **使用位置:** server, location
 
-开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。该配置项需要在边缘逻辑和负载均衡器逻辑中同时配置。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cachekey)的功能，需要通过该指令将客户端请求体缓冲同时开启。
+开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。该配置项需要在边缘逻辑和负载均衡器逻辑中同时配置。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cache_key)的功能，需要通过该指令将客户端请求体缓冲同时开启。
 
 ### `proxy_request_body_in_cache_key`
 
