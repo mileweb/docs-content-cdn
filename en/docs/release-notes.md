@@ -1,5 +1,24 @@
 # Release Notes
 
+## December 29, 2022
+### API updates
+* Supported sending email notifications to administrators about deployments to staging and production.
+* Improved text of the Beian expiration warning emails.
+* Prevented an edge hostname’s client zone rule from redirecting to IPv4 and IPv6 at the same time.
+* Improved error message about encryption key.
+
+### Portal updates
+* Automatically removed a deleted property or certificate from the standby task.
+* Ensured proper display of ISPs in an edge hostname's client zone rule.
+* Fixed date range in the access log page when the user’s preferred timezone is changed.
+* Ensured search works correctly when invoked from any page of a list.
+* Improved text of the verification code email.
+* Fixed dashboard display for narrow browsers.
+* Improved display of customer’s name in popup when a reseller impersonates a customer.
+* Improved consistency of tooltip display.
+* Improved sidebar display for narrow browsers.
+
+
 ## December 13, 2022
 ### API updates
 * Improved the efficiency of deploying to the staging environment.
