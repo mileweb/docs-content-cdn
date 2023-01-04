@@ -391,7 +391,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default:** `ignore_invalid_range off;` <br/>
 **Context:** server, location <br/>
 
-Specifies if invalid range header shall be ignored. When turned on, invalid range header is ignored and 200 full content is returned to client. Otherwise, the client will receive a 416 status code.
+Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -1029,7 +1029,7 @@ Enables the specified protocols for requests to a proxied HTTPS server. No chang
 **Default:** `range_reorder off` <br/>
 **Contexts:** server, location
 
-This directive can be used to instruct the proxy server to reorder and merge multiple byte-ranges in one request. When range_reorder is enabled, multiple ranges requested in descending order will be re-ordered to ascending. When range_order is enabled with the coalescing parameter, multiple ranges that are overlapped or are separated by a gap that is smaller than the overhead of sending multiple parts will be coalesced. This ensures that multipart content is returned to client with the 206 status code. When range_reorder is disabled, full content with 200 status code might be returned to client for requests with multiple ranges.
+This directive can be used to instruct the proxy server to reorder and merge multiple byte-ranges in one request. When range_reorder is enabled, multiple ranges requested in descending order will be re-ordered to ascending. When range_order is enabled with the coalescing parameter, multiple ranges that overlap or are separated by a gap that is smaller than the overhead of sending multiple parts will be coalesced. This ensures that multipart content is returned to the client with the 206 status code. When range_reorder is disabled, full content with 200 status code might be returned to the client for requests with multiple ranges.
 
 ### `realtime_log_downsample`
 
@@ -1182,7 +1182,7 @@ This directive can be used to disable the ETag consistency check of sliced files
 
 This directive can be used to specify a header in addition to Etag to check consistency of sliced files. Use this directive in conjunction with[`slice_ignore_etag`](#slice_ignore_etag) if you want to skip Etag and check the specified header only.
 
-The header_name must be of a value other than "etag". The value is case insensitive.
+The header_name must be of a value other than "etag". The value is case-insensitive.
 
 ### `sorted_querystring_filter_parameter`
 
