@@ -2,7 +2,7 @@
 
 ## January 10, 2022
 ### API updates
-* Added an [API to return the list of HDT servers](</apidocs#operation/get-cdn-originFastRouteIpList>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>)feature.
+* Added an [API to return the list of HDT servers](</apidocs#operation/get-cdn-originFastRouteIpList>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>) feature.
 * Allowed changing of customer’s IP white list back to the default setting.
 * Removed any extra whitespaces in the certificates, chain certificates, and private keys.
 
