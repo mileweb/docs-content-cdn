@@ -143,6 +143,26 @@ location = /auth {
 
 **注意:** 如果一个 [location](#location) 中包含了 break 指令，它有可能使之后的"[return](#return)"指令失效。因此我们要求该 location 必须直接包含一个 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) 指令来确保正确生成响应。
 
+### [`brotli`](https://github.com/google/ngx_brotli#brotli)
+
+<span class="badge dark">高级</span>
+
+**使用语法:** `brotli on|off;`<br/>
+**默认设置:** `brotli off;` <br/>
+**可用位置:** server, location, if
+
+开启或关闭对响应进行即时压缩。 
+
+### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)
+
+<span class="badge dark">高级</span>
+
+**使用语法:** `brotli_types <mime_type> [..];`<br/>
+**默认设置:** text/html <br/>
+**可用位置:** server, location
+
+指定对什么MIME类型的响应进行即时压缩。 可以指定 * ，表示匹配任何MIME类型。 text/html类型的响应总会被压缩。
+
 ### `client_body_timeout`
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
@@ -360,6 +380,16 @@ elseif ($http_x >= 0xa) { ... }
 else { ... }
 ```
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
+
+### `ignore_invalid_range`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `ignore_invalid_range on|off;` <br/>
+**默认设置:** `ignore_invalid_range off;` <br/>
+**可用位置:** server, location <br/>
+
+指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -933,6 +963,16 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 该指令用于修改 CDN Pro 传给客户端的"Location"和"Refresh"响应头中的内容。源自 NGINX 开源版本，无变更。
 
+### [`proxy_request_buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering)
+
+<span class="badge dark">高级</span> <span class="badge">LB logic</span>
+
+**使用语法:** `proxy_request_buffering on/off;` <br/>
+**默认设置:** `proxy_request_buffering off` <br/>
+**使用位置:** server, location
+
+开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。该配置项需要在边缘逻辑和负载均衡器逻辑中同时配置。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cache_key)的功能，需要通过该指令将客户端请求体缓冲同时开启。
+
 ### `proxy_request_body_in_cache_key`
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
@@ -941,7 +981,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置:** `proxy_request_body_in_cache_key off` <br/>
 **可用位置:** server, location, if in location
 
-当参数值是 'on'（支持变量）时，服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
+当参数值是 'on'（支持变量）时，服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。此外，您还需要通过[`proxy_request_buffering`](#proxy_request_buffering)指令开启对客户端请求体的缓冲。
 
 此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
 
@@ -987,6 +1027,16 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **可用位置：** server, location
 
 该指令用于设置 CDN Pro 回源时的握手协议。源自 Nginx 开源版本，无变更。
+
+### `range_reorder`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `range_reorder on | off [coalescing];` <br/>
+**默认设置:** `range_reorder off` <br/>
+**可用位置:** server, location
+
+该指令用于指示代理服务器是否对range请求中指定的多个字节范围进行重新排序和合并。 当range_reorder开启时，如果请求中的Range值为降序排序，代理服务器将对Range值按升序重新排列。 当range_reorder开启且带有coalescing参数时，如果请求中的Range值存在重叠的范围或者2个范围之间的间隔小于发送多部分内容（multipart）的开销，则这些范围将被合并。开启重新排序和合并，可确保代理服务器响应206状态码和部分内容给客户端。 当range_reorder未开启时，代理服务器可能响应200状态代码和完整内容给客户端，即便客户端发送了range请求。
 
 ### `realtime_log_downsample`
 
@@ -1132,6 +1182,18 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **可用位置：** server
 
 该指令用于关闭切片文件的 ETag 一致性检查。如果源无法确保为同一文件生成相同的 ETag 值时，可用该指令作为临时解决方案。
+
+### `slice_verify_header`
+
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `slice_verify_header header_name;` <br/>
+**默认设置:** - <br/>
+**可用位置:** server, location
+
+指定头部用来检查切片文件的一致性。 此处指定的头部会与Etag一起用于一致性检查。如果您希望忽略Etag仅检查指定的头部，可将该指令与[`slice_ignore_etag`](#slice_ignore_etag)结合使用。
+
+header_name的值不能是“etag”。该值不区分大小写。
 
 
 ### `sorted_querystring_filter_parameter`
