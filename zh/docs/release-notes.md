@@ -1,5 +1,24 @@
 # Release Notes
 
+## January 10, 2022
+### API updates
+* Added an [API to return the list of HDT servers](</apidocs#operation/get-cdn-originFastRouteIpList>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>)feature.
+* Allowed changing of customer’s IP white list back to the default setting.
+* Removed any extra whitespaces in the certificates, chain certificates, and private keys.
+
+### Portal updates
+* Ensured consistency of copyright notices.
+* Improved appearance of test suite pages.
+* Ensured test suites can be renamed.
+* Supported export of hostname groups in the report pages.
+* Fixed pagination of test suites.
+* Fixed selection of property for a test suite.
+* Fixed link to test suite from a property page.
+* Ensured test suite role permissions are respected.
+* Improved initial display of the test case page.
+* Improved validation when saving a test case.
+* Fixed display of the property list after deletion of a property.
+
 ## December 29, 2022
 ### API updates
 * Supported sending email notifications to administrators about deployments to staging and production.
