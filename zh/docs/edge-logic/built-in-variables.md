@@ -60,7 +60,7 @@
 | <span id="served_from_cache"></span><span class="var">$served_from_cache</span> |<span class="badge small" title="numerical value">#</span> 如该请求在边缘的命中状态是 HIT ，则值是1；否则值为0 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="server_addr"></span><span class="var">$server_addr</span> | 边缘服务器的 IP 地址 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="server_level"></span><span class="var">$server_level</span> | <span class="badge small" title="numerical value">#</span> 缓存服务器的层级。1代表边缘缓存，2代表父级缓存 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="server_name"></span><span class="var">$server_name</span> | 用户请求所匹配的Nginx server_name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="server_name"></span><span class="var">$server_name</span> | 加速项配置里匹配用户请求的加速域名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="server_region"></span><span class="var">$server_region</span> | 边缘服务器的国家代码，例如CN，US | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘节点端口号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
