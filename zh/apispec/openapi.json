@@ -18507,7 +18507,8 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "Customer name."
+                      "description": "Customer name.",
+                      "maxLength": 128
                     },
                     "phone": {
                       "type": "string",
@@ -18895,7 +18896,8 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "Customer name."
+                      "description": "Customer name.",
+                      "maxLength": 128
                     },
                     "phone": {
                       "type": "string",
@@ -19194,10 +19196,10 @@
                       "message": "We could not fulfill your request. Please check your input."
                     }
                   },
-                  "Invalid API key": {
+                  "API key not allowed": {
                     "value": {
-                      "code": "InvalidAPIKey",
-                      "message": "The only valid value is 'reset'."
+                      "code": "ApiKeyNotAllowed",
+                      "message": "You are not allowed to pass a value other than \"reset\" for the field apiKey."
                     }
                   },
                   "Invalid portal logout idle time": {
@@ -19261,6 +19263,12 @@
                       "code": "InvalidSelfUpdateChinaBizInfo",
                       "message": "You are not authorized to make this change. Please contact your account representative for further instructions."
                     }
+                  },
+                  "API name update not allowed": {
+                    "value": {
+                      "code": "ApiNameUpdateNotAllowed",
+                      "message": "The customer’s apiName cannot be updated."
+                    }
                   }
                 }
               }
@@ -19303,14 +19311,8 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Customer name."
-                  },
-                  "apiName": {
-                    "type": "string",
-                    "description": "Administrator API account name. ",
-                    "minLength": 1,
-                    "maxLength": 60,
-                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
+                    "description": "Customer name.",
+                    "maxLength": 128
                   },
                   "apiKey": {
                     "type": "string",
@@ -19627,10 +19629,11 @@
             }
           }
         },
-        "description": "Resellers can delete a child customer using this API. Products must be removed from the customer before it can be deleted.",
+        "description": "In the past, resellers could use this API to delete a child customer. This API has been deprecated. A reseller can instead disable a child customer by <a href=\"#operation/patch-ngadmin-customers-id\">updating the customer</a>'s configuration to remove its products and modifying its status to \"suspended\".\n",
         "tags": [
           "Customer Management"
-        ]
+        ],
+        "deprecated": true
       }
     },
     "/ngadmin/customers": {
@@ -20028,7 +20031,8 @@
                   },
                   "name": {
                     "type": "string",
-                    "description": "Customer name."
+                    "description": "Customer name.",
+                    "maxLength": 128
                   },
                   "emailAddress": {
                     "type": "string",
@@ -20356,7 +20360,8 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the customer."
+                            "description": "Name of the customer.",
+                            "maxLength": 128
                           },
                           "status": {
                             "type": "string",
@@ -32251,6 +32256,66 @@
           },
           "description": "The request body consists of an array of IP addresses to check."
         }
+      }
+    },
+    "/cdn/originFastRouteIpList": {
+      "get": {
+        "summary": "Get Origin Fast Route IP List",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a list of IP addresses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "lastUpdated": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the list of IP addresses was last updated."
+                    },
+                    "effectiveDate": {
+                      "type": "string",
+                      "description": "RFC 3339 date indicating when the IP addresses became effective."
+                    },
+                    "ipV4": {
+                      "type": "array",
+                      "description": "IPv4 addresses used by origin fast route servers.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "ipV6": {
+                      "type": "array",
+                      "description": "IPv6 addresses used by origin fast route servers.",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "lastUpdated": "2020-08-26T15:48:13Z",
+                      "effectiveDate": "2020-09-02T15:48:13Z",
+                      "ipV4": [
+                        "1.0.148.0/24"
+                      ],
+                      "ipV6": [
+                        "FF80:54c1:ff0a::/64"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-originFastRouteIpList",
+        "description": "This API returns a list of IP addresses used by our origin fast route servers. If you use our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable and wish to restrict access to your origin servers, add these IP addresses to your allow lists.\n"
       }
     }
   },
