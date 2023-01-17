@@ -583,7 +583,7 @@ origin_pass my_origin/abc$uri_uenc;
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：**  `origin_set_header field value if(condition);` <br/>
-**默认设置：** `origin_set_header host $host;` <br/>
+**默认设置：** `none` <br/>
 **可用位置：** server, location, if in location
 
 该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于增、删、改回源请求头。CDN Pro 对开源版本代码进行了以下提升：
@@ -609,7 +609,7 @@ origin_pass my_origin/abc$uri_uenc;
 ```nginx
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
-2. 如果要使用该指令修改传给源站的 `Host` 请求头，则需要确保 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段配置为空。否则在配置校验环节将出现校验失败。
+2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
 3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
 ```nginx
 proxy_no_cache 1;      # 不要缓存
