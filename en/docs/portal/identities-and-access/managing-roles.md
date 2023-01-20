@@ -13,11 +13,11 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 2. At the top of the page, click **Roles**. 
 3. At the right side of the page, click the **+ Add Role** button.
 
-![null](</docs/resources/images/identities-and-access/iam-roles.png width="600">)
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-roles.png" alt="select roles" width="600"></p>
 
 4. Complete the fields in the Add Role form. Required fields are denoted by an asterisk (\*).
 
-![null](</docs/resources/images/identities-and-access/iam-add-role.png width="600">)
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-add-role.png" alt="select roles dialog box" width="600"></p>
 
 | **Fields**           | **Description**                   |
 | -------------------- |---------------------------------- |

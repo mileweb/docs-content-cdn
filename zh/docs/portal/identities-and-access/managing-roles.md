@@ -13,11 +13,11 @@
 2. 在页面顶部，单击 **角色**。
 3. 在页面右侧，单击 **+ Add Role** 按钮。
 
-![null](</docs/resources/images/identities-and-access/iam-roles.png width="600">)
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-roles.png" alt="select roles" width="600"></p>
 
 4. 填写“添加角色”页面的信息内容。必填字段将会以星号 (\*) 表示。
 
-![null](</docs/resources/images/identities-and-access/iam-add-role.png width="600">)
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-add-role.png" alt="select roles dialog box" width="600"></p>
 
 | **字段**           | **描述**                   |
 | -------------------- |---------------------------------- |
