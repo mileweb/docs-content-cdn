@@ -20,7 +20,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 <ul>b. To specify more client zone rules, repeat steps 4 and 4a for each additional rule.</ul>
 
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
-<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule" width="600"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
