@@ -22,7 +22,7 @@ The following procedure describes how to create a test suite. After you create a
 2. At the top right of the screen, click the **Create Test Suite** button.
 3. Complete the fields in the Test Suites page. Required fields are denoted by an asterisk (*).
 
-<p align=center><img src="/docs/resources/images/edge-configurations/create-test-suite-dialog-box.png" alt="test suite dialog box" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/create-test-suite-dialog-box.png" alt="test suite dialog box" width="600"></p>
 
 | **Fields**      | **Description**                                       |
 | --------------- | ----------------------------------------------------- |

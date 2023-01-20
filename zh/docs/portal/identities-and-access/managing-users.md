@@ -5,11 +5,11 @@
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
 
 2. 待系统展示用户和权限管理页面的 **用户** 信息后，单击页面右侧的 **+添加用户** 按钮。
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-users.png" alt="select add user button" width="900"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-users.png" alt="select add user button" width="600"></p>
 
 3. 填写添加用户表单中的字段。必填字段将会以用星号 (\*) 表示
 
@@ -29,7 +29,7 @@
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理** 。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
 
 2. 待系统展示用户和权限管理页面的**用户**信息后，单击目标客户的 ID。
    <br><U>或者 </u></br>
@@ -39,7 +39,7 @@
 
 3. 在修改用户页面中进行更改。
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user.png" alt="select identity management page" width="900"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user.png" alt="select identity management page" width="600"></p>
 
 | **字段**         | **描述**                              |
 | ------------------ | -------------------------------------------- |
@@ -60,7 +60,7 @@
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
 
 2. 在用户和权限管理页面的 **操作** 列中，单击要修改的用户右侧的垂直省略号，然后选择 **删除**
    
@@ -79,14 +79,14 @@
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
 
 2. 待系统展示用户和权限管理页面的**用户**信息后，执行以下步骤之一：<br>
 
    - 在 **操作** 列中，单击要暂停的用户右侧的垂直省略号，然后选择 **挂起**。当提示确认暂停该用户时，单击 **确定**。<br><br>
    - 如需在暂停前查看用户的详细信息，请点击您要挂起的用户的 ID。查看用户详细信息后，单击 **Status** 信息旁边的 **挂起** 按钮，然后单击表单右上角的 **保存** 按钮。当提示更新用户时，单击 **确定**。</br></br>
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-suspend.png" alt="suspend button" width="900"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-suspend.png" alt="suspend button" width="200"></p>
 
 ## 重新激活某个已挂起客户
 
@@ -94,11 +94,11 @@
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
 
 2. 待系统展示用户和权限管理页面的**用户**信息后，执行以下步骤之一：<br>
 
 <ul><ul><li>在 <strong>操作</strong> 列中，单击要激活的用户右侧的垂直省略号，然后选择 <strong>激活</strong>。当提示确认暂停该用户时，单击 **确定**。<br><br>
 <li>如需在激活前查看用户的详细信息，请点击您要激活的用户的 ID。查看用户详细信息后，单击 <strong>Status</strong> 信息旁边的 <strong>激活</strong> 按钮。然后单击表单右上角的 <strong>保存</strong>  按钮。当提示更新用户时，单击 <strong>确定</strong>。</br></br>
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-activate.png" alt="activate" width="900"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-edit-user-activate.png" alt="activate" width="200"></p>
