@@ -23,7 +23,7 @@ If the content on your origin web server has changed, request a purge to have CD
 2. At the top right of the page, click the **Create Purge** button. 
 3. Complete the fields in the Purge form. Required fields are denoted by an asterisk (```*```). The top of the form shows the percentage of the daily purge quota that has been used.
 
-<p align=center><img src="/docs/resources/images/content-management/purge-form.png" alt="purge form" width="900"></p>
+<p align=center><img src="/docs/resources/images/content-management/purge-form.png" alt="purge form" width="600"></p>
 
 |**Fields**|**Description**|
 |----------|---------------|

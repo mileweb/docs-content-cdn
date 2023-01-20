@@ -4,7 +4,7 @@ When you first log in to the CDN Pro portal, menus and submenus appear in the le
 
 The default menu lists the CDN Pro activities you can perform.
 
-<p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="200"></p>
 
 ## Dashboard
 

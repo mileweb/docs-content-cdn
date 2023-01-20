@@ -29,7 +29,7 @@ The Standby Task form is organized into two subqueues.<ul><li>The top subqueue s
 To add standby tasks to a subqueue:
 1. Click the **+ Add** button at the top right of a subqueue. The Add Tasks to Staging or Add Tasks to Production dialog box appears.
 
-<p align=center><img src="/docs/resources/images/adding_tasks_to_staging.png" alt="adding standby tasks" width="900"></p>
+<p align=center><img src="/docs/resources/images/adding_tasks_to_staging.png" alt="adding standby tasks" width="600"></p>
 
 2. Under **Action**, select an action from the drop-down list.
 3. Click **Add new +** and then enter the first few characters in the name of the certificate or property you want to add. When the entire name appears, click it.
