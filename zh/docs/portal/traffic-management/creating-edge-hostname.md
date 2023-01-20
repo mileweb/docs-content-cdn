@@ -6,7 +6,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
 3. Complete the fields in the Create an Edge Hostname form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/traffic-management/create-edge-hostname.png" alt="cname overview page"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-edge-hostname.png" alt="cname overview page" width="600"></p>
 
 
 | **Fields**                               | **Description**                     |
