@@ -12,7 +12,7 @@ Origins are your web servers containing the content you want CDN Pro to accelera
    - If there is an existing origin (similar to the one in the figure below), you can click the <strong>Edit</strong> link in the <strong>Origins</strong> field and complete the fields in the following dialog box to edit the origin, or click the <strong>Remove</strong> link to remove the origin. 
    - To add a new origin, click the <strong>Add New</strong> link, and then complete the fields in the following dialog box. Required fields are denoted by an asterisk (*).
 
-<p align="center"><img src="/docs/resources/images/edge-configurations/property-origins.png" width="700"></p>
+<p align="center"><img src="/docs/resources/images/edge-configurations/property-origins.png" width="300"></p>
 
 <p><br><strong>Note:</strong> The fields for adding and editing origins are similar.</p>
 

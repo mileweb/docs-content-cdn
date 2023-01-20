@@ -6,7 +6,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
 3. Complete the fields in the Create an Edge Hostname form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/traffic-management/create-edge-hostname.png" alt="cname overview page" width="600"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-edge-hostname.png" alt="cname overview page" width="800"></p>
 
 
 | **Fields**                               | **Description**                     |
@@ -20,7 +20,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 <ul>b. To specify more client zone rules, repeat steps 4 and 4a for each additional rule.</ul>
 
 **Note**: A default rule covering ALL regions and ALL ISPs will be created automatically if you don't define one.
-<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule" width="600"></p>
+<p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule" width="400"></p>
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
