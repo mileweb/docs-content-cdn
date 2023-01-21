@@ -5,7 +5,7 @@
 1. 点击位于登录页面底部的 **Forgot password** 按钮.
 2. 在重置密码页面，输入您的登录账号并点击 **I'm not a robot** 按钮并按要求完成验证码操作.
 
-<p align=center><img src="/docs/resources/images/accessing-portal/password-reset.png" alt="forgot password" width="900"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/password-reset.png" alt="forgot password" width="300"></p>
 
 3. 点击 **Submit** 按钮.
 

@@ -13,7 +13,7 @@ On the CDN Pro platform, each property is versioned to track the history of chan
 
 Using the Properties page, you can create, modify, validate, and deploy properties. You can also undeploy and delete properties if needed. To display the Properties page, click **Edge Configurations** in the left pane, and then select **Properties**. The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/edge-configurations/properties-w-numbers.png" alt="properties page" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/properties-w-numbers.png" alt="properties page" width="600"></p>
 
 
 | **Fields**   | **Description**                                                                           |

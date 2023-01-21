@@ -23,7 +23,7 @@ After you create and validate a property version, you are ready to deploy it. In
 
 1. In the **Actions** column on the Properties page, click the vertical ellipsis of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
-<p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="900"></p>
+<p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="650"></p>
 
 2. When the confirmation pop-up appears, click the appropriate button:<ul><li>To undeploy the property now, click **OK** and proceed to the next step.</ul></li><ul><li>To undeploy the property at a later time, click <strong>Add to Standby task</strong> to move this action to the [standby queue](</docs/portal/tasks/standby-tasks.md>).</ul></li>   
 3. If you clicked **OK**, you can either wait with the progress dialog box, or close it to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the status of the undeployment at any time.

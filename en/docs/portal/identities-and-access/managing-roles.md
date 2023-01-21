@@ -8,16 +8,16 @@ Administrators add roles from the **Roles** tab on the Identity & Access Managem
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 2. At the top of the page, click **Roles**. 
 3. At the right side of the page, click the **+ Add Role** button.
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-roles.png" alt="select roles" width="600"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-roles.png" alt="select roles" width="700"></p>
 
 4. Complete the fields in the Add Role form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-add-role.png" alt="select roles dialog box" width="600"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-add-role.png" alt="select roles dialog box" width="700"></p>
 
 | **Fields**           | **Description**                   |
 | -------------------- |---------------------------------- |
@@ -35,7 +35,7 @@ Administrators edit roles from the **Roles** tab on the Identity & Access Manage
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 2. At the top of the page, click **Roles**.
 
@@ -54,7 +54,7 @@ Administrators delete roles from the **Roles** tab on the Identity & Access Mana
 
 1. At the top right of the portal, click your initials, and then select **Identity & Access Management**.
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 2. At the top of the page, click **Roles**.
 

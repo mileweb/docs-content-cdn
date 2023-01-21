@@ -20,7 +20,7 @@
 6. 在证书详情页面，单击 <strong>部署</strong> 按钮，然后在 <strong>部署目标</strong> 消息框中选择 <strong>生产环境</strong> 将此新版本部署到生产上。<br>
 <strong>注意：</strong> 要在部署之前查看证书的部署历史，请单击 <strong>部署历史</strong> 按钮。</br></br>
 1. 如果您需要立即部署证书，请点击 <strong>立即部署</strong> 按钮。如果您需要稍后再部署它，请点击 <strong>添加到待命任务</strong> 来将此证书版本的部署存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>)中。
-<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="700"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="550"></p>
 
 ## 如果您需要 CSR 来向 CA 机构申请新证书
 
