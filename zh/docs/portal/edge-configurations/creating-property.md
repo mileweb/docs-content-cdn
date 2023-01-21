@@ -10,11 +10,11 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 2. To create a new property from scratch, click the **Create Property** button at the top right of the Properties page. <br><br><u>OR </u></br>
    To clone an existing property, find the property you want to clone on the Properties page, and then click the vertical ellipsis under **Actions** and select **Clone**. Or click a property ID, and then click the horizontal ellipsis next to the **Edit** or **Clone** button and select **Clone**. 
 
-<p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="600"></p>
 
 3. Complete the fields in the Create a Property form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/edge-configurations/create-a-property.png" alt="edit property" width="800"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/create-a-property.png" alt="edit property" width="600"></p>
 
 | **Fields**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
@@ -44,7 +44,7 @@ Use the Edge Logic wizard to create an initial version of the Edge Logic. The wi
 When you click the <b>Wizard</b> button, a prompt appears with the following choices. <ul><li><b>Start with a baseline setting for website acceleration</b>. Initializes settings for a typical website. </ul></li><ul><li><b>Start with a baseline setting for download or VoD acceleration</b>. Initializes settings to accelerate large file downloads or Video on Demand (VOD). </ul></li><ul><li><b>Start with a clean slate</b> Select this choice if your content does not fit one of the other choices, or if  you want to set up all the settings manually. </ul></li>
 
 
-<p align=center><img src="/docs/resources/images/edge-configurations/Edge-Logic-Wizard-Prompt.png" alt="wizard prompt" width="600"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/Edge-Logic-Wizard-Prompt.png" alt="wizard prompt" width="500"></p>
 
 After making your selection, complete the settings in the Edge Logic Wizard page, and then click <b>OK</b> to display the Edge Logic code. You can then edit the code shown in the field as necessary or click the <b>Wizard</b> button to change your selections. 
 
@@ -58,7 +58,7 @@ The remaining settings are intuitive. Specify the TLS ciphers in the format desc
 **Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
 
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-tls.png" alt="TLS Settings" width="700"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-tls.png" alt="TLS Settings" width="650"></p>
 
 ## Real-Time Log
 
@@ -90,7 +90,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $status                      | HTTP response code for the user's request. |
 | $tcpinfo_rtt                 | Time in microseconds taken by a packet to travel to the destination and return. |
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="900"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="650"></p>
 
 ## Advanced Settings
 
@@ -114,4 +114,4 @@ Example:  `if ($http_user_agent = bot) { return 403;}`
 
  **Video Seeking:** This parameter supports seeking in a video using the following fields to specify the starting and ending positions. <ul><li>In the **Start Parameter** field, enter the beginning position of a video segment in bytes. </ul></li><ul><li>In the **End Parameter** field, enter the ending position of the video segment in bytes, or leave this field empty to play the video to the end.</ul></li>
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.png" alt="Property Advanced Settings" width="700"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.png" alt="Property Advanced Settings" width="650"></p>

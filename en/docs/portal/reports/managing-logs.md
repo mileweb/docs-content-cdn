@@ -9,13 +9,13 @@ To create a log configuration:
 1. In the left pane, click **Reports**, and then select **Access Log**.
 2. At the top right, click **Configuration**.
 
-<p align=center><img src="/docs/resources/images/reports/configure-log1.png" alt="configure log1" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports/configure-log1.png" alt="configure log1" width="700"></p>
 
 3. To search for a hostname, enter the name in the <strong>Search for a hostname</strong> field.
 4. Click <strong>+Create Log Configuration</strong>.
 5. Complete the fields in the next form that appears, and then click <strong>+Create Log Configuration</strong>.
 
-<p align=center><img src="/docs/resources/images/reports/configure-log2.png" alt="configure log2" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports/configure-log2.png" alt="configure log2" width="700"></p>
 
 |**Fields**|**Description**|
 |----------|---------------|
@@ -66,7 +66,7 @@ After you create a log configuration, use the following procedure to export logs
 
 1. In the left pane, click **Reports**, and then select **Access Log**.
 
-<p align=center><img src="/docs/resources/images/reports/configure-log3.png" alt="configure log2" width="900"></p>
+<p align=center><img src="/docs/resources/images/reports/configure-log3.png" alt="configure log2" width="700"></p>
 
 2. In the top field, select a hostname.
 3. In the bottom field, specify the date range and time.

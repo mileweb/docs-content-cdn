@@ -8,16 +8,16 @@
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 2. 在页面顶部，单击 **角色**。
 3. 在页面右侧，单击 **+ Add Role** 按钮。
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-roles.png" alt="select roles" width="600"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-roles.png" alt="select roles" width="700"></p>
 
 4. 填写“添加角色”页面的信息内容。必填字段将会以星号 (\*) 表示。
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-add-role.png" alt="select roles dialog box" width="600"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-add-role.png" alt="select roles dialog box" width="700"></p>
 
 | **字段**           | **描述**                   |
 | -------------------- |---------------------------------- |
@@ -35,7 +35,7 @@ Admin 用户可以从用户和权限管理页面上的**角色**页面对角色�
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 2. 在页面顶部，单击**角色**。
 
@@ -54,7 +54,7 @@ Admin 用户可以从用户和权限管理页面上的**角色**页面对角色�
 
 1. 在 Portal 的右上角，单击您的姓名缩写，然后选择 **用户和权限管理**。
 
-    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="200"></p>
+    <p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 2. 在页面顶部，单击**角色**。
 

@@ -13,7 +13,7 @@ After you create or update a certificate, you must deploy it to either the stagi
 <strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button followed by <strong>History</strong>.</br></br>
 
 4. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>). If you clicked **Deploy Now**, it will take about 5 minutes to complete the deployment process. You can watch the progress and wait for it to finish, click the **Go to Dashboard** button in the pop-up to go to the Dashboard, or close the pop-up to perform other tasks while deployment continues in the background. You can always click **Tasks** in the left pane to check the status of the deployment.</br></br></li>
-<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="400"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="650"></p>
 
 <strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button. 
 

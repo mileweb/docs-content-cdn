@@ -31,7 +31,7 @@ To display the Identity & Access Management page, click your initials (**EM** i
 
 The following figure shows the key elements on the page, and the table following the figure describes them.
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-w-numbers.png" alt="select identity management page" width="600"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-w-numbers.png" alt="select identity management page" width="700"></p>
 
 
 | **Fields** | **Description** |
