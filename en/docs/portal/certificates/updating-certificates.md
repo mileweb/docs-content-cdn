@@ -24,7 +24,7 @@ CDN Pro sends an email notification when a certificate used in production is clo
 
 8. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
 
-<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="550"></p>
+<p align="center"><img src="/docs/resources/images/certificates/certificate-deployment.png" alt="Upload Certificate Version" width="450"></p>
 
 ## If you need a CSR to apply for the new certificate from a CA
 If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, perform the following procedure to create a self-signed version. Otherwise, skip steps 5 and 6.
