@@ -606,7 +606,7 @@ For example:
 ```nginx
 origin_set_header X-Client-IP $client_real_ip;
 ```
-2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion). Otherwise you will get a validation error.
+2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
 3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For non-cacheable requests, if you need to pass any of these fields to the origin, use this directive as in the example below:
 ```nginx
 proxy_no_cache 1;      # do not cache
