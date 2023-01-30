@@ -1,5 +1,26 @@
 # Release Notes
 
+## January 28, 2022
+### API updates
+* Ensured that a reseller can make updates on behalf of a child customer with IP restrictions.
+* Allowed API accounts to be created with names up to 100 characters long.
+* Ensured that the customer creation limit is properly enforced.
+* Updated customer creation to handle invalid ipWhiteList field.
+* Improved email notifications sent to customers about updated settings.
+* Corrected error code returned when API name is empty for customer or API account creation.
+* Improved error handling when creating a customer with invalid products.
+* Improved error handling in the API returning a list of customers.
+* Ensured settings of API accounts can be updated correctly.
+
+### Portal updates
+* Fixed expiration notification for trial customers.
+* Ensured user list is updated after deleting a user.
+* Updated copyright notices.
+* Fixed display of button in test suites page.
+* Fixed display of summary reports when there is no data.
+* Fixed appearance of password reset page.
+
+
 ## January 10, 2022
 ### API updates
 * Added an [API to return the list of HDT servers](</apidocs#operation/get-cdn-originFastRouteIpList>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>) feature.

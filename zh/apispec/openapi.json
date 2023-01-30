@@ -15739,7 +15739,7 @@
                     "apiName": {
                       "type": "string",
                       "description": "API account name.",
-                      "maxLength": 60,
+                      "maxLength": 100,
                       "minLength": 1,
                       "pattern": "^[a-zA-Z0-9\\-\\_\\.@]+"
                     },
@@ -16011,7 +16011,7 @@
                     "type": "string",
                     "description": "API account name.",
                     "minLength": 1,
-                    "maxLength": 60,
+                    "maxLength": 100,
                     "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                   },
                   "apiKey": {
@@ -16265,6 +16265,12 @@
                       "code": "ResponsiblePersonEmpty",
                       "message": "The responsiblePerson field cannot be empty."
                     }
+                  },
+                  "API name too long": {
+                    "value": {
+                      "code": "ApiNameTooLong",
+                      "message": "The value of apiName can be up to 100 characters."
+                    }
                   }
                 }
               }
@@ -16364,7 +16370,7 @@
                   "apiName": {
                     "type": "string",
                     "description": "API account name.",
-                    "maxLength": 60,
+                    "maxLength": 100,
                     "pattern": "^[a-zA-Z0-9\\-_\\.@]+",
                     "minLength": 1
                   },
@@ -16472,7 +16478,7 @@
                             "type": "string",
                             "description": "API account name.",
                             "pattern": "^[a-zA-Z0-9\\-_\\.@]+",
-                            "maxLength": 60,
+                            "maxLength": 100,
                             "minLength": 1
                           },
                           "type": {
@@ -19969,7 +19975,7 @@
                       "message": "The configs field cannot be null or empty since it has required fields."
                     }
                   },
-                  "InvalidRegionalOffice": {
+                  "Invalid regional office": {
                     "value": {
                       "code": "InvalidRegionalOffice",
                       "message": "The value for regionalOffice is not specified or invalid."
@@ -19979,6 +19985,12 @@
                     "value": {
                       "code": "InvalidContactLimit",
                       "message": "The value for limit should be non-negative."
+                    }
+                  },
+                  "Invalid IP whitelist": {
+                    "value": {
+                      "code": "InvalidWhiteList",
+                      "message": "The format is wrong or the list does not contain any IP."
                     }
                   }
                 }
