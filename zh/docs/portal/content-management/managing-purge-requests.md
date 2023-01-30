@@ -24,7 +24,7 @@ CDN Pro 提供的缓存刷新功能可以让您快速更新缓存文件。此功
 3. 填写刷新任务表单中的字段。必填字段由星号 (```*```) 表示。表格顶部显示当前可用的每日文件刷新额度。
 
 
-<p align=center><img src="/docs/resources/images/content-management/purge-form.png" alt="purge form" width="900"></p>
+<p align=center><img src="/docs/resources/images/content-management/purge-form.png" alt="purge form" width="600"></p>
 
 |**字段**|**描述**|
 |----------|---------------|

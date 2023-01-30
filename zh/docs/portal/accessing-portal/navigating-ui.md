@@ -4,7 +4,7 @@
 
 默认菜单列出了您在 CDN Pro 上可以进行的操作。
 
-<p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="300"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/side-menu.png" alt="navigation menu" width="200"></p>
 
 ## 信息中心
 

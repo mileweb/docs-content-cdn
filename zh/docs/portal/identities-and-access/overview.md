@@ -27,11 +27,11 @@
 
 要显示身份和访问管理页面，请单击 Portal 右上角的姓名缩写（下图中的**EM**），然后选择**身份和权限管理**。
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="400"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-user-info.png" alt="select identity management page" width="300"></p>
 
 下图显示了页面上的关键字段，图后面的表格有相应的描述介绍。
 
-<p align=center><img src="/docs/resources/images/identities-and-access/iam-w-numbers.png" alt="select identity management page" width="900"></p>
+<p align=center><img src="/docs/resources/images/identities-and-access/iam-w-numbers.png" alt="select identity management page" width="700"></p>
 
 
 | **字段** | **描述** |
