@@ -1,6 +1,22 @@
 # Release Notes
 
-## January 28, 2022
+## February 7, 2023
+### API updates
+* Ensured that a reseller can make API calls on behalf of child customers.
+* Fixed response of the get certificate details API.
+* Ensured customer update API works as expected.
+
+### Portal updates
+* Improved text in the test suites section of the property page.
+* Improved validation of the test case definition page.
+* Improved the appearance of the test case creation page.
+* Ensured that a newly created test suite appears at the beginning of the list.
+* Improved appearance of the login page.
+* Improved hostname list in the reports page.
+* Fixed units of measurement in reports page.
+* Fixed an error displaying the account page.
+
+## January 28, 2023
 ### API updates
 * Ensured that a reseller can make updates on behalf of a child customer with IP restrictions.
 * Allowed API accounts to be created with names up to 100 characters long.
@@ -21,7 +37,7 @@
 * Fixed appearance of password reset page.
 
 
-## January 10, 2022
+## January 10, 2023
 ### API updates
 * Added an [API to return the list of HDT servers](</apidocs#operation/get-cdn-originFastRouteIpList>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>) feature.
 * Allowed changing of customer’s IP white list back to the default setting.
