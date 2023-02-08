@@ -5666,7 +5666,7 @@
                             "type": "string",
                             "enum": [
                               "uploaded",
-                              "selfsigned"
+                              "self-signed"
                             ],
                             "description": "Indicates the type of certificate, either \"uploaded\" or \"self-signed\"."
                           },
@@ -5815,7 +5815,7 @@
                       "versions": [
                         {
                           "version": 1,
-                          "type": "selfsigned",
+                          "type": "self-signed",
                           "expirationTime": "2019-11-21T22:21:41Z",
                           "creationTime": "2019-11-11T22:21:41Z",
                           "fingerprint": "6d38d08f70e3a04ad2c2bff11fb394e8ed29f878",
