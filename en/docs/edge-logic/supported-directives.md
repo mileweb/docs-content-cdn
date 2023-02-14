@@ -1235,6 +1235,16 @@ Indicates whether to look for each string to replace once or repeatedly. No chan
 
 Enables string replacement in responses with the specified MIME types in addition to “text/html”. No change to the public version.
 
+### `upstream_origin_only`
+
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `upstream_origin_only on|off;` <br/>
+**Default:** `upstream_origin_only off` <br/>
+**Contexts:** server, location, if in location
+
+Enables or disables an origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache (including [origin shields](/cdn/apidocs#operation/get-cdn-shields)). This can be very useful if you would like some requests to go through intermediate layers while other requests (e.g. auth requests) to be forwarded directly to the origin.
+
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
