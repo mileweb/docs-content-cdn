@@ -303,7 +303,11 @@
           {
             "title": "Secure Content Delivery",
             "path": "/docs/recipes/secure-delivery.md"
-          }
+          },
+          {
+            "title": "API Rate Limiting",
+            "path": "/docs/recipes/api-rate-limiting.md"
+          }  
         ]
       },
       { 
