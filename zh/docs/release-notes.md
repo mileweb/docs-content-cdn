@@ -1,5 +1,20 @@
 # Release Notes
 
+## February 23, 2023
+### API updates
+* Extended [API permissions](</apidocs#operation/post-cdn-apiPermissions>) to allow restricting access to specific resources using the allowedResources field.
+* Modified property origin authentication to allow non-AWS storage.
+* Handled the case of updating a customer whose initial portal user has been deleted.
+* Updated the response codes of some API calls from 402 to the more appropriate 403.
+* Improved grammar in some error messages.
+
+### Portal updates
+* Improved the appearance of the property page.
+* Fixed unit of measurements on the labels of request and status code reports.
+* Improved the appearance of test suites page.
+* Added peer failure timeout settings to origin configuration allowing you to specify an origin is unavailable for a period of time if there are failures reaching it.
+
+
 ## February 7, 2023
 ### API updates
 * Ensured that a reseller can make API calls on behalf of child customers.
