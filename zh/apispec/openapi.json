@@ -247,7 +247,7 @@
                               },
                               "hostHeader": {
                                 "type": "string",
-                                "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                                "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “awsS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 or S3-compatible hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                                 "format": "hostname"
                               },
                               "verifyOrigin": {
@@ -257,7 +257,7 @@
                               },
                               "authentication": {
                                 "type": "object",
-                                "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                                "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                                 "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                                 "properties": {
                                   "methodName": {
@@ -952,7 +952,7 @@
                         },
                         "hostHeader": {
                           "type": "string",
-                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “awsS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 or S3-compatible hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
                         "verifyOrigin": {
@@ -962,7 +962,7 @@
                         },
                         "authentication": {
                           "type": "object",
-                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                           "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                           "properties": {
                             "methodName": {
@@ -1909,9 +1909,13 @@
                                     }
                                   },
                                   "to": {
-                                    "type": "string",
-                                    "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
-                                    "example": "domain.com"
+                                    "type": "array",
+                                    "description": "This field is used if the action is of type \"redirect\". It indicates either a single hostname OR one or more IP addresses to redirect to. This is typically an origin server or another CDN provider.",
+                                    "example": "domain.com",
+                                    "minItems": 1,
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   },
                                   "enableIPv6": {
                                     "type": "boolean",
@@ -2290,9 +2294,13 @@
                               }
                             },
                             "to": {
-                              "type": "string",
-                              "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
-                              "example": "domain.com"
+                              "type": "array",
+                              "description": "This field is used if the action is of type \"redirect\". It indicates either a single hostname OR one or more IP addresses to redirect to. This is typically an origin server or another CDN provider.",
+                              "example": "domain.com",
+                              "minItems": 1,
+                              "items": {
+                                "type": "string"
+                              }
                             },
                             "enableIPv6": {
                               "type": "boolean",
@@ -2566,9 +2574,13 @@
                               }
                             },
                             "to": {
-                              "type": "string",
-                              "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
-                              "example": "domain.com"
+                              "type": "array",
+                              "description": "This field is used if the action is of type \"redirect\". It indicates either a single hostname OR one or more IP addresses to redirect to. This is typically an origin server or another CDN provider.",
+                              "example": "domain.com",
+                              "minItems": 1,
+                              "items": {
+                                "type": "string"
+                              }
                             },
                             "enableIPv6": {
                               "type": "boolean",
@@ -2915,6 +2927,32 @@
               }
             }
           },
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Too many versions": {
+                    "value": {
+                      "code": "TooManyVersions",
+                      "message": "You have created the maximum number of versions allowed in a property. We recommend you create a new property and copy the configuration. Alternately, you may contact our support team to delete old versions from the property."
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
             "description": "The property could not be found.",
             "content": {
@@ -3102,7 +3140,7 @@
                         },
                         "hostHeader": {
                           "type": "string",
-                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                          "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “awsS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 or S3-compatible hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                           "format": "hostname"
                         },
                         "verifyOrigin": {
@@ -3112,7 +3150,7 @@
                         },
                         "authentication": {
                           "type": "object",
-                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                           "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                           "properties": {
                             "methodName": {
@@ -3519,7 +3557,7 @@
             }
           },
           "403": {
-            "description": "This error is returned if the API call is not permitted. Please check the response body for further details.",
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3530,9 +3568,6 @@
                     },
                     "message": {
                       "type": "string"
-                    },
-                    "": {
-                      "type": "string"
                     }
                   }
                 },
@@ -3541,6 +3576,12 @@
                     "value": {
                       "code": "AccessDenied",
                       "message": "Please enter valid credentials."
+                    }
+                  },
+                  "Too many properties": {
+                    "value": {
+                      "code": "TooManyProperties",
+                      "message": "The number of properties exceeded the account maximum."
                     }
                   }
                 }
@@ -3743,7 +3784,7 @@
                             },
                             "hostHeader": {
                               "type": "string",
-                              "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “aswS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
+                              "description": "Optional. It should be a valid hostname. It will also be used as the SNI servername when contacting the HTTPS origin. We also allow it to be an nginx variable that begins with ‘$’ followed by [a-z_]{3,60}. Nginx variable names are case insensitive, so we only allow lowercase characters.\nIf not specified, the value of the HOST header in the request will be used. \n\nOne constraint is that if “awsS3” is specified for origin authentication, the value of <i>hostHeader</i> cannot be a variable or empty. It has to be a valid Amazon S3 or S3-compatible hostname. Refer to https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html",
                               "format": "hostname"
                             },
                             "verifyOrigin": {
@@ -3753,7 +3794,7 @@
                             },
                             "authentication": {
                               "type": "object",
-                              "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                              "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: ”methodName”, which should be a string indicating one of the predefined authentication methods. The only valid value at this time is “awsS3”. When “awsS3” is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
                               "example": "{“methodName”:”awsS3”, ”awsS3”:{ ”region”:”us-west-1”, ”accessKey”:”sdnu2932”, ”secretKey”:”d12133424fvregvrew” }}",
                               "properties": {
                                 "methodName": {
@@ -4524,8 +4565,8 @@
               }
             }
           },
-          "402": {
-            "description": "Too many edge hostnames have been created.",
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4695,9 +4736,13 @@
                               }
                             },
                             "to": {
-                              "type": "string",
-                              "description": "This field is used if the action is of type \"redirect\". It indicates the hostname or IP address to redirect to. This is typically an origin server or another CDN provider.",
-                              "example": "domain.com"
+                              "type": "array",
+                              "description": "This field is used if the action is of type \"redirect\". It indicates either a single hostname OR one or more IP addresses to redirect to. This is typically an origin server or another CDN provider.",
+                              "example": "domain.com",
+                              "minItems": 1,
+                              "items": {
+                                "type": "string"
+                              }
                             },
                             "enableIPv6": {
                               "type": "boolean",
@@ -5061,8 +5106,8 @@
               }
             }
           },
-          "402": {
-            "description": "Your account already has too many certificates.",
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -5077,7 +5122,7 @@
                   }
                 },
                 "examples": {
-                  "Response when attempting to create a certificate if you have already reached the maximum number permitted.": {
+                  "Too many certificates": {
                     "value": {
                       "code": "TooManyCerts",
                       "message": "The number of certificates exceeds the account maximum."
@@ -5934,7 +5979,27 @@
                       "code": "InvalidSharingMethod",
                       "message": "An invalid value for sharingMethod was given. Only 'all', 'none', or 'some' is permitted."
                     }
-                  },
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
                   "Too many versions": {
                     "value": {
                       "code": "TooManyVersions",
@@ -15195,6 +15260,32 @@
               }
             }
           },
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Too many contacts": {
+                    "value": {
+                      "code": "TooManyContacts",
+                      "message": "Maximum number of contacts reached."
+                    }
+                  }
+                }
+              }
+            }
+          },
           "409": {
             "description": "The account could not be created. Refer to the response body for details.",
             "content": {
@@ -16302,8 +16393,8 @@
               }
             }
           },
-          "402": {
-            "description": "You have already reached your limit of API accounts.",
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -19998,7 +20089,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -20017,6 +20108,12 @@
                     "value": {
                       "code": "AccessDenied",
                       "message": "This user is not allowed to perform this request."
+                    }
+                  },
+                  "Too many child customers": {
+                    "value": {
+                      "code": "TooManyChildCustomers",
+                      "message": "The maximum number of child customers has been reached."
                     }
                   }
                 }
@@ -26006,6 +26103,47 @@
                         "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints."
                       }
                     }
+                  },
+                  "allowedResources": {
+                    "type": "object",
+                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                    "properties": {
+                      "certificates": {
+                        "type": "array",
+                        "description": "IDs of certificates that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "properties": {
+                        "type": "array",
+                        "description": "IDs of properties that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "edgeHostnames": {
+                        "type": "array",
+                        "description": "IDs of edge hostnames that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "webhooks": {
+                        "type": "array",
+                        "description": "IDs of webhooks that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "secrets": {
+                        "type": "array",
+                        "description": "IDs of secrets that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -26170,11 +26308,51 @@
                           "default": true
                         }
                       }
+                    },
+                    "allowedResources": {
+                      "type": "object",
+                      "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                      "properties": {
+                        "certificates": {
+                          "type": "array",
+                          "description": "IDs of certificates that can be accessed.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "properties": {
+                          "type": "array",
+                          "description": "IDs of properties that can be accessed.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "edgeHostnames": {
+                          "type": "array",
+                          "description": "IDs of edge hostnames that can be accessed.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "webhooks": {
+                          "type": "array",
+                          "description": "IDs of webhooks that can be accessed.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "secrets": {
+                          "type": "array",
+                          "description": "IDs of secrets that can be accessed.",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     }
                   },
                   "required": [
-                    "apiAccountId",
-                    "allowedOperations"
+                    "apiAccountId"
                   ]
                 },
                 "examples": {
@@ -26544,6 +26722,47 @@
                         "type": "boolean",
                         "default": true,
                         "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints."
+                      }
+                    }
+                  },
+                  "allowedResources": {
+                    "type": "object",
+                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                    "properties": {
+                      "certificates": {
+                        "type": "array",
+                        "description": "IDs of certificates that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "properties": {
+                        "type": "array",
+                        "description": "IDs of properties that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "edgeHostnames": {
+                        "type": "array",
+                        "description": "IDs of edge hostnames that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "webhooks": {
+                        "type": "array",
+                        "description": "IDs of webhooks that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "secrets": {
+                        "type": "array",
+                        "description": "IDs of secrets that can be accessed.",
+                        "items": {
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -27346,8 +27565,8 @@
               }
             }
           },
-          "402": {
-            "description": "The request was invalid. Refer to the response body for details.",
+          "403": {
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -27769,7 +27988,7 @@
             }
           },
           "403": {
-            "description": "Access denied. Check the credentials you used.",
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -27784,10 +28003,16 @@
                   }
                 },
                 "examples": {
+                  "Too many secrets": {
+                    "value": {
+                      "code": "TooManySecrets",
+                      "message": "The number of secrets exceeded the account maximum."
+                    }
+                  },
                   "Access denied": {
                     "value": {
                       "code": "AccessDenied",
-                      "message": "Please enter valid credentials."
+                      "message": "You are not allowed to perform this action."
                     }
                   }
                 }
@@ -28887,7 +29112,7 @@
             }
           },
           "403": {
-            "description": "You do not have permission to perform this action.",
+            "description": "The request was forbidden. Please refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -28906,6 +29131,12 @@
                     "value": {
                       "code": "AccessDenied",
                       "message": "You are not allowed to perform this action."
+                    }
+                  },
+                  "Too many log configurations": {
+                    "value": {
+                      "code": "TooManyLogConfigs",
+                      "message": "Number of log configs exceeded account maximum."
                     }
                   }
                 }
