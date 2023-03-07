@@ -1820,11 +1820,11 @@
                         },
                         "clientZones": {
                           "type": "array",
-                          "description": "Rules control how requests from client zones are handled. By default, a rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. ",
+                          "description": "Rules control how requests from client zones are handled. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.",
                           "items": {
                             "title": "Edge Hostname Client Zone Rule",
                             "type": "object",
-                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created to allow use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. \n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
+                            "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.\n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                             "x-examples": {
                               "example-1": {
                                 "region": "all",
@@ -1894,7 +1894,7 @@
                                   },
                                   "by": {
                                     "type": "array",
-                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                                    "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                                     "items": {
                                       "type": "string",
                                       "enum": [
@@ -2012,7 +2012,7 @@
             }
           }
         },
-        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history. If you have not created custom client zone rules, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. <p>(Deluxe was previously referred to as \"premium+\")</p>",
+        "description": "This API returns information about an edge hostname including the associated client zone rules and operation history.",
         "operationId": "getEdgeHostname",
         "parameters": [
           {
@@ -2118,6 +2118,12 @@
                       "code": "InvalidWeightCode",
                       "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
                     }
+                  },
+                  "Incomplete client zones": {
+                    "value": {
+                      "code": "IncompleteClientZones",
+                      "message": "There must be a client zone rule that covers all regions and ISPs."
+                    }
                   }
                 }
               }
@@ -2205,11 +2211,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. (Deluxe was previously referred to as \"premium+\")",
+                    "description": "Specify rules to control how requests from client zones are handled. You must create at least one rule covering all regions and all ISPs. For example, if you have access to the standard, premium, deluxe, and ultra server groups, you could create this rule allowing several of our server groups to handle requests and achieve the best possible performance:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>.<br/>If potential cost is a greater concern, you can choose different server groups to balance your cost and performance requirements.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created to allow use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. \n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.\n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2279,7 +2285,7 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -2402,6 +2408,12 @@
                       "code": "InvalidISP",
                       "message": "Invalid ISP 'abcdef'."
                     }
+                  },
+                  "Incomplete client zones": {
+                    "value": {
+                      "code": "IncompleteClientZones",
+                      "message": "There must be a client zone rule that covers all regions and ISPs."
+                    }
                   }
                 }
               }
@@ -2485,11 +2497,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. \nYou can modify the default rule and create custom rules to meet your needs. (Deluxe was previously referred to as \"premium+\")",
+                    "description": "Specify rules to control how requests from client zones are handled. You must create at least one rule covering all regions and all ISPs. For example, if you have access to the standard, premium, deluxe, and ultra server groups, you could create this rule allowing several of our server groups to handle requests and achieve the best possible performance:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>.<br/>If potential cost is a greater concern, you can choose different server groups to balance your cost and performance requirements.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created to allow use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. \n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.\n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -2559,7 +2571,7 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -4525,9 +4537,9 @@
                   }
                 },
                 "examples": {
-                  "Invalid client region": {
+                  "Invalid client zone": {
                     "value": {
-                      "code": "InvalidClientRegion",
+                      "code": "InvalidClientZone",
                       "message": "Invalid client region 'aaabcde'."
                     }
                   },
@@ -4559,6 +4571,18 @@
                     "value": {
                       "code": "InvalidRedirectDst",
                       "message": "You can configure a client zone rule to redirect to an IPv4 address or an IPv6 address but not both."
+                    }
+                  },
+                  "Incomplete client zones": {
+                    "value": {
+                      "code": "IncompleteClientZones",
+                      "message": "There must be a client zone rule that covers all regions and ISPs."
+                    }
+                  },
+                  "Invalid input": {
+                    "value": {
+                      "code": "InvalidInput",
+                      "message": "Invalid field 'by'. This field is required when action type is 'deliver'."
                     }
                   }
                 }
@@ -4647,11 +4671,11 @@
                   },
                   "clientZones": {
                     "type": "array",
-                    "description": "Specify rules to control how requests from client zones are handled. If unspecified, a default rule will be created to allow several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs.",
+                    "description": "Specify rules to control how requests from client zones are handled. You must create at least one rule covering all regions and all ISPs. For example, if you have access to the standard, premium, deluxe, and ultra server groups, you could create this rule allowing several of our server groups to handle requests and achieve the best possible performance:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>.<br/>If potential cost is a greater concern, you can choose different server groups to balance your cost and performance requirements.",
                     "items": {
                       "title": "Edge Hostname Client Zone Rule",
                       "type": "object",
-                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. If unspecified, a default rule will be created to allow use of several of our server groups to handle requests and achieve the best possible performance:  \n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>. You can modify the default rule and create custom rules to meet your needs. \n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
+                      "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.\n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
                       "x-examples": {
                         "example-1": {
                           "region": "all",
@@ -4721,7 +4745,7 @@
                             },
                             "by": {
                               "type": "array",
-                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. If unspecified, \"standard\" is used. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                              "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
                               "items": {
                                 "type": "string",
                                 "enum": [
@@ -7555,6 +7579,12 @@
                     "value": {
                       "code": "OutdatedSecret",
                       "message": "Property a2334bc12345 versionId 1 is using an outdated secret. Please validate the property again before deploying it."
+                    }
+                  },
+                  "Invalid deployment target": {
+                    "value": {
+                      "code": "InvalidDeploymentTarget",
+                      "message": "An invalid target was specified. It must be either 'staging' or 'production'."
                     }
                   }
                 }
@@ -16569,8 +16599,8 @@
                             "type": "string",
                             "description": "API account name.",
                             "pattern": "^[a-zA-Z0-9\\-_\\.@]+",
-                            "maxLength": 100,
-                            "minLength": 1
+                            "minLength": 1,
+                            "maxLength": 100
                           },
                           "type": {
                             "type": "string",

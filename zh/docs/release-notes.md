@@ -1,5 +1,19 @@
 # Release Notes
 
+## March 6, 2023
+### API updates
+* Improved message in response to invalid deployment.
+* Required customers [creating an edge hostname](</apidocs#operation/createEdgeHostname>) to explicitly define a rule covering all regions and ISPs rather than creating a default rule for them.
+* Ensured that suspensionDate is not set if a service quota is initially created with a suspended status.
+* Made the customer’s description field optional.
+* Fixed error returned when [updating a customer](</apidocs#operation/patch-ngadmin-customers-id>).
+* Fixed validation of API names.
+
+### Portal updates
+* Improved Chinese translations used in the portal.
+* Fixed issues related to saving settings in the property’s origin settings.
+
+
 ## February 23, 2023
 ### API updates
 * Extended [API permissions](</apidocs#operation/post-cdn-apiPermissions>) to allow restricting access to specific resources using the allowedResources field.
