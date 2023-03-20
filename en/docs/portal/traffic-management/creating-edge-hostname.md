@@ -1,6 +1,6 @@
 # Creating an Edge Hostname 
 
-An edge hostname in a CNAME record on your DNS system allows you to route end user requests. When you create an edge hostname, you define rules that determine how CDN Pro handles requests from different **client zones**. A client zone is a combination of a geographical region and one or more ISPs (for example, "US+Comcast").
+An edge hostname in a CNAME record on your DNS system allows you to route end user requests. When you create an edge hostname, you define rules that determine how CDN Pro handles requests from different **client zones**. A client zone is a combination of a geographical region and one or more ISPs (for example, "US+Comcast"). You can control how to handle user requests from different zones. There must be a rule covering all zones (all regions and all ISPs).
 
 1. In the left pane, click **Traffic Management**.
 2. At the top right of the screen, click the **Create Edge Hostname** button. 
