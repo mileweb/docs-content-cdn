@@ -1,5 +1,18 @@
 # Release Notes
 
+## March 23, 2023
+### API updates
+* Fixed a customer creation scenario resulting in an InvalidRegionalOffice error code.
+* Improved error handling when an API account makes an illegal request.
+* Ensured properties with a shield setting can be returned by a search with hasConfig=origins.shield.
+* Ensured that notification emails arrive in a user’s preferred language if one is set.
+
+### Portal updates
+* Modified description of edge hostname creation to indicate we no longer automatically create a client zone rule to cover all ISPs and regions. You must create their own rule and choose which server groups to use.
+* Fixed an issue in the origin details page in which settings could be incorrectly toggled.
+* Fixed an issue with saving updates to portal users.
+
+
 ## March 6, 2023
 ### API updates
 * Improved message in response to invalid deployment.

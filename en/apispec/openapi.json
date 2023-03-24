@@ -4267,6 +4267,14 @@
                                 "items": {
                                   "type": "string"
                                 }
+                              },
+                              "tlsCertificateId": {
+                                "type": "string",
+                                "description": "ID of a <a href=\"#tag/Certificate-Management\">certificate."
+                              },
+                              "tlsCertificateId1": {
+                                "type": "string",
+                                "description": "ID of a <a href=\"#tag/Certificate-Management\">certificate."
                               }
                             }
                           },
@@ -4285,6 +4293,14 @@
                                 "items": {
                                   "type": "string"
                                 }
+                              },
+                              "tlsCertificateId": {
+                                "type": "string",
+                                "description": "ID of a <a href=\"#tag/Certificate-Management\">certificate."
+                              },
+                              "tlsCertificateId1": {
+                                "type": "string",
+                                "description": "ID of a <a href=\"#tag/Certificate-Management\">certificate."
                               }
                             }
                           },
@@ -4416,7 +4432,7 @@
             },
             "in": "query",
             "name": "hasConfig",
-            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value for the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'. \n\nSearches for values of numeric or boolean fields require an exact match. However, partial matches are supported for string fields. For example, <code>hasConfig=hostnames:domain</code> returns all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a non-empty value for the field will be returned.\n\nSpecify multiple <i>hasConfig</i> parameters to filter on multiple conditions. Example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\nSubfields of a property version can be specified by using the period symbol as a separator. Refer to additional examples below.\n\nIf matching against values with spaces or special characters, remember to encode them in the URL.\n\nAdditional examples:\n\n<table>\n<tr><th>Value</th><th>Description</th></tr>\n<tr><td>hasConfig=disableHttp2:true</td><td>Return properties that don't support HTTP2</td></tr>\n<tr><td>hasConfig=extraServicePorts.http:85</td><td>Return properties supporting port 85 for HTTP requests.</td></tr>\n<tr><td>hasConfig=origins.servers:myorigin.com</td>\n<td>Return properties using myorigin.com as an origin server.</td></tr></table>\n"
+            "description": "The value of <i>hasConfig</i> is used to filter the results. It can be any field name of a property version, optionally followed by a colon and a value. For example: \n<code>\nhasConfig=hasBeian:true</code> \n\nWhen a colon and value are specified, only properties whose configurations have that value for the field will be returned. The value can be preceded by an exclamation mark, '!', to invert the search.  For example: \n<code>\nhasConfig=edgeLogic!sorted</code>. In this case, we check that the <i>edgeLogic</i> field does not include the value 'sorted'. \n\nSearches for values of numeric or boolean fields require an exact match. However, partial matches are supported for string fields. For example, <code>hasConfig=hostnames:domain</code> returns all properties with a hostname containing the string 'domain' such as 'mydomain.com' and 'thedomains.com'. \n\nIf a colon and value are omitted, all properties with a non-empty value for the field will be returned.\n\nSpecify multiple <i>hasConfig</i> parameters to filter on multiple conditions. Example: \n<code>\nhasConfig=hasBeian:true&hasConfig=realTimeLog</code> Only properties matching all the parameters will be returned.\n\nIf a property has multiple versions, the property will be included in the API response if any of its versions matches the <i>hasConfig</i> parameter.\n\nSubfields of a property version can be specified by using the period symbol as a separator. Refer to additional examples below.\n\nIf matching against values with spaces or special characters, remember to encode them in the URL.\n\nAdditional examples:\n\n<table>\n<tr><th>Value</th><th>Description</th></tr>\n<tr><td>hasConfig=disableHttp2:true</td><td>Return properties that don't support HTTP2</td></tr>\n<tr><td>hasConfig=extraServicePorts.http:85</td><td>Return properties supporting port 85 for HTTP requests.</td></tr>\n<tr><td>hasConfig=origins.servers:myorigin.com</td>\n<td>Return properties using myorigin.com as an origin server.</td></tr>\n<tr><td>hasConfig=origins.shield</td><td>Return properties using a shield.</td></tr>\n</table>\n"
           },
           {
             "schema": {
@@ -32592,13 +32608,18 @@
       }
     }
   },
+  "security": [
+    {
+      "API Key": []
+    }
+  ],
   "components": {
     "schemas": {},
     "securitySchemes": {
-      "APIKey": {
+      "API Key": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP request header called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`date -u \"+%a, %d %b %Y %H:%M:%S %Z\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header to make API calls to manage your child customer."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/qtlcli/tree/master/cdn/bash\">here</a>."
       }
     }
   },
