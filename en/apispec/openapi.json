@@ -281,7 +281,7 @@
                                 "enum": [
                                   "off"
                                 ],
-                                "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                                "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                                 "properties": {
                                   "failureThreshold": {
                                     "type": "integer",
@@ -986,7 +986,7 @@
                           "enum": [
                             "off"
                           ],
-                          "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                          "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                           "properties": {
                             "failureThreshold": {
                               "type": "integer",
@@ -3186,7 +3186,7 @@
                           "enum": [
                             "off"
                           ],
-                          "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                          "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                           "properties": {
                             "failureThreshold": {
                               "type": "integer",
@@ -3830,7 +3830,7 @@
                               "enum": [
                                 "off"
                               ],
-                              "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
+                              "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                               "properties": {
                                 "failureThreshold": {
                                   "type": "integer",
@@ -9315,12 +9315,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Example 1": {
+                    "filters": {
+                      "hostnames": [
+                        "endtoendsds.domain.info"
+                      ],
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    }
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -9331,16 +9338,23 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
+                        }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -9351,6 +9365,9 @@
                     "filters": {
                       "hostnames": [
                         "endtoendsds.domain.info"
+                      ],
+                      "serverGroups": [
+                        "standard"
                       ]
                     }
                   }
@@ -9358,7 +9375,7 @@
               }
             }
           },
-          "description": "The request body can include filters to customize the results. By default, data from all hostnames will be included."
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames and server groups will be included."
         },
         "parameters": [
           {
@@ -11021,12 +11038,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -11037,16 +11049,23 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
+                        }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -18884,12 +18903,29 @@
                           "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
                         }
                       }
+                    },
+                    "language": {
+                      "type": "string",
+                      "description": "Indicates the preferred language used in notification messages. A user can log into the console and set a personal preferred language.\n<br/>\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
+                      "enum": [
+                        "en",
+                        "cn",
+                        "jp",
+                        "kr"
+                      ],
+                      "default": "en"
+                    },
+                    "emailAddress": {
+                      "type": "string",
+                      "description": "Email address for the customer.",
+                      "format": "email"
                     }
                   },
                   "required": [
                     "customerId",
                     "apiName",
-                    "name"
+                    "name",
+                    "emailAddress"
                   ]
                 },
                 "examples": {
@@ -18906,6 +18942,8 @@
                         "zipcode": "95054",
                         "country": "USA"
                       },
+                      "emailAddress": "admin@customer.com",
+                      "language": "en",
                       "ipWhiteList": [
                         "0.0.0.0/0"
                       ],
@@ -18973,7 +19011,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The customer account was updated successfully.  The response body will contain the current settings.",
+            "description": "The customer account was updated successfully. The response body will contain the current settings.",
             "content": {
               "application/json": {
                 "schema": {
@@ -19273,12 +19311,29 @@
                           "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
                         }
                       }
+                    },
+                    "language": {
+                      "type": "string",
+                      "description": "Indicates the preferred language used in notification messages. A user can log into the console and set a personal preferred language.\n<br/>\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
+                      "enum": [
+                        "en",
+                        "cn",
+                        "jp",
+                        "kr"
+                      ],
+                      "default": "en"
+                    },
+                    "emailAddress": {
+                      "type": "string",
+                      "description": "Email address for the customer.",
+                      "format": "email"
                     }
                   },
                   "required": [
                     "customerId",
                     "apiName",
-                    "name"
+                    "name",
+                    "emailAddress"
                   ]
                 },
                 "examples": {
@@ -19290,6 +19345,8 @@
                       "name": "thecompany",
                       "phone": "123-4568",
                       "address": {},
+                      "emailAddress": "admin@customer.com",
+                      "language": "en",
                       "configs": {
                         "parentId": 0,
                         "type": "regular",
@@ -19373,6 +19430,12 @@
                     "value": {
                       "code": "InvalidProductUpdate",
                       "message": "You are trying to remove the CDN product from customer XYZ, but the following resources need to be cleaned up first: properties: 1, certificates: 1, edgeHostnames: 1, secrets: 1, webhooks: 1"
+                    }
+                  },
+                  "Invalid language": {
+                    "value": {
+                      "code": "InvalidLanguage",
+                      "message": "The value 'abc' is invalid for language. Only en, cn, jp, kr are supported."
                     }
                   }
                 }
@@ -19695,6 +19758,21 @@
                         "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
                       }
                     }
+                  },
+                  "language": {
+                    "type": "string",
+                    "description": "Indicates the preferred language used in notification messages. A user can log into the console and set a personal preferred language.\n<br/>\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
+                    "enum": [
+                      "en",
+                      "cn",
+                      "jp",
+                      "kr"
+                    ],
+                    "default": "en"
+                  },
+                  "emailAddress": {
+                    "type": "string",
+                    "description": "Email address of the customer."
                   }
                 }
               },
@@ -20129,6 +20207,12 @@
                       "code": "InvalidWhiteList",
                       "message": "The format is wrong or the list does not contain any IP."
                     }
+                  },
+                  "Invalid language": {
+                    "value": {
+                      "code": "InvalidLanguage",
+                      "message": "The value 'abc' is invalid for language. Only en, cn, jp, kr are supported."
+                    }
                   }
                 }
               }
@@ -20426,6 +20510,17 @@
                         "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
                       }
                     }
+                  },
+                  "language": {
+                    "type": "string",
+                    "description": "Indicates the preferred language used in notification messages. A user can log into the console and set a personal preferred language.\n<br/>\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
+                    "enum": [
+                      "en",
+                      "cn",
+                      "jp",
+                      "kr"
+                    ],
+                    "default": "en"
                   }
                 },
                 "required": [
@@ -21566,13 +21661,27 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "allowedLanguages": {
+                      "type": "array",
+                      "description": "Indicates the languages that a customer can specify as preferred for notifications.\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "en",
+                          "cn",
+                          "jp",
+                          "kr"
+                        ]
+                      }
                     }
                   },
                   "required": [
                     "minimumSupportedCacheVersion",
                     "baseDirectives",
                     "advancedDirectives",
-                    "publishedPrice"
+                    "publishedPrice",
+                    "allowedLanguages"
                   ]
                 },
                 "examples": {
@@ -21732,6 +21841,12 @@
                         "realTimeLog",
                         "nearChina",
                         "originShield"
+                      ],
+                      "allowedLanguages": [
+                        "en",
+                        "cn",
+                        "jp",
+                        "kr"
                       ],
                       "oldestPropertyValidationTime": "2021-10-23T00:00:00Z"
                     }
