@@ -1,5 +1,16 @@
 # Release Notes
 
+## April 3, 2023
+### API updates
+* Improved handling of customer limits inherited from a parent.
+* Added language field to specify the default language used in notifications sent to a customer. 
+* Added support for filtering origin request and origin traffic reports by server groups.
+
+### Portal updates
+* Ensured users can delete client zone rules of edge hostnames.
+* Updated self-signup page to reflect new CDN Pro pricing.
+
+
 ## March 23, 2023
 ### API updates
 * Fixed a customer creation scenario resulting in an InvalidRegionalOffice error code.
