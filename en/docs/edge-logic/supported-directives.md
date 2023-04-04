@@ -275,7 +275,7 @@ location @try_origin2 {
 
 ### `eval_func`
 
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
 
 **Syntax:** `eval_func $result {function name} {parameters};` <br/>
 **Default:** `-` <br/>
@@ -395,7 +395,7 @@ Specifies whether to ignore an invalid Range header. When turned on, an invalid 
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
-<span class="badge dark">advanced</span>
+<span class="badge">standard</span>
 
 **Syntax:** `internal;` <br/>
 **Default:** `—` <br/>
@@ -405,7 +405,7 @@ Specifies that a given location can be used for internal requests only. No chang
 
 ### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
 
-<span class="badge dark">advanced</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge">LB logic</span>
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
@@ -871,7 +871,7 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
-<span class="badge dark">advanced</span>
+<span class="badge">standard</span>
 
 **Syntax:** `proxy_next_upstream error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | non_idempotent | off ...;` <br/>
 **Default:** `proxy_next_upstream error timeout;` <br/>
@@ -980,7 +980,7 @@ A restriction of this directive is that it works only when body size is less tha
 
 ### `proxy_set`
 
-<span class="badge">standard</span> <span class="badge primary">Proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
 
 **Syntax:** `proxy_set $variable value [if(...)];`<br>
 **Default:** none <br>
