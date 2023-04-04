@@ -7,7 +7,7 @@
 3. [修改优化加速项](</docs/portal/edge-configurations/editing-properties.md>)，结合测试确保其行为符合您的预期。
 4. [验证加速项](</docs/portal/tasks/validations.md>)。
 5. [把加速项部署到演练环境](</docs/portal/edge-configurations/deploying-property.md>)，[测试其行为](</docs/portal/edge-configurations/testing-property.md>)符合您的预期。
-6. [把加速项部署到生产环境](</docs/portal/edge-configurations/deploying-property.md>)，测试其行为符合您的预期。如果您是自助上线的客户，系统起初会禁止部署到生产环境。一旦您在演练环境的测试请求数超过10条，系统会自动解禁。
+6. [把加速项部署到生产环境](</docs/portal/edge-configurations/deploying-property.md>)，测试其行为符合您的预期。如果您是自助上线的客户，系统起初会禁止部署到生产环境。一旦您在演练环境的测试请求数超过5条，系统会自动解禁。
 7. [创建一个边缘域名](</docs/portal/traffic-management/creating-edge-hostname.md>)用于牵引流量到我们的平台。
 8. 修改您的DNS服务配置，将服务域名通过一条CNAME记录引导到上面创建的边缘域名。
 
