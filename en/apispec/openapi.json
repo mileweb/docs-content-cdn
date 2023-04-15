@@ -26267,7 +26267,7 @@
                   },
                   "allowedResources": {
                     "type": "object",
-                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates. If the list is empty, no certificates are accessible.",
                     "properties": {
                       "certificates": {
                         "type": "array",
@@ -26472,7 +26472,7 @@
                     },
                     "allowedResources": {
                       "type": "object",
-                      "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                      "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates. If the list is empty, no certificates are accessible.",
                       "properties": {
                         "certificates": {
                           "type": "array",
@@ -26888,7 +26888,7 @@
                   },
                   "allowedResources": {
                     "type": "object",
-                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates. If the list is empty, no certificates are accessible.",
                     "properties": {
                       "certificates": {
                         "type": "array",
