@@ -421,7 +421,7 @@ The first parameter sets a timeout during which a keep-alive client connection w
 **Default:** `limit_rate 4m;` <br/>
 **Context:** server, location, if in location
 
-Limits the rate of response transmission to a client, in bytes/sec. Valid values are [1-8]m or [1-8192]k. The default setting is 4MByte/s.
+Limits the rate of response transmission to a client, in bytes/sec. Valid values are [0-32]m or [0-32768]k. The default setting is 4MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 

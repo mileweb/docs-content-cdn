@@ -419,7 +419,7 @@ else { ... }
 **默认设置：** `limit_rate 4m;` <br/>
 **可用位置：** server, location, if in location
 
-限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
+限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [0-32]m 或 [0-32768]k。默认值为 4MByte/s。
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 

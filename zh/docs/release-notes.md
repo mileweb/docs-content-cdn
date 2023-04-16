@@ -1,5 +1,13 @@
 # Release Notes
 
+## April 14, 2023
+### API updates
+* Adjusted the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) to support a minimum value of 0m and a maximum value of 32m.
+* Updated enforcement of an API permission’s empty allowedResources subfields.
+
+### Portal updates
+* Fixed an issue preventing some users from resetting their passwords due to their login names.
+
 ## April 3, 2023
 ### API updates
 * Improved handling of customer limits inherited from a parent.
