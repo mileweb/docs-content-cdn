@@ -272,7 +272,7 @@ location @try_origin2 {
 
 ### `eval_func`
 
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span> <span class="badge">LBLogic</span>
 
 **使用语法：** `eval_func $result {function name} {parameters};` <br/>
 **默认设置：** `-` <br/>
@@ -393,7 +393,7 @@ else { ... }
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
-<span class="badge dark">高级</span>
+<span class="badge">标准</span>
 
 **使用语法：** `internal;` <br/>
 **默认设置：** `—` <br/>
@@ -403,7 +403,7 @@ else { ... }
 
 ### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
 
-<span class="badge dark">高级</span> <span class="badge">LB logic</span>
+<span class="badge">标准</span> <span class="badge">LB logic</span>
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
@@ -419,7 +419,7 @@ else { ... }
 **默认设置：** `limit_rate 4m;` <br/>
 **可用位置：** server, location, if in location
 
-限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [1-8]m 或 [1-8192]k。默认值为 4MByte/s。
+限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [0-32]m 或 [0-32768]k。默认值为 4MByte/s。
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -875,7 +875,7 @@ proxy_ignore_cache_control no-cache no-store;
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
-<span class="badge dark">高级</span>
+<span class="badge">标准</span>
 
 **使用语法：** `proxy_next_upstream error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | http_429 | non_idempotent | off ...;` <br/>
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
@@ -987,7 +987,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 ### `proxy_set`
 
-<span class="badge">标准</span> <span class="badge primary">全新特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span> <span class="badge">LB logic</span>
 
 **使用语法：** `proxy_set $variable value [if(...)];`<br>
 **默认设置：** none <br>

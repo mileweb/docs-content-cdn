@@ -15506,7 +15506,7 @@
                       "canImpersonate": {
                         "type": "string",
                         "default": "all",
-                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works with the <i>impersonateExceptions</i> field.",
                         "enum": [
                           "all",
                           "none"
@@ -16960,7 +16960,7 @@
                         "canImpersonate": {
                           "type": "string",
                           "default": "all",
-                          "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                          "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works with the <i>impersonateExceptions</i> field.",
                           "enum": [
                             "all",
                             "none"
@@ -17327,7 +17327,7 @@
                       "canImpersonate": {
                         "type": "string",
                         "default": "all",
-                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works in conjunction with the <i>impersonateExceptions</i> field.",
+                        "description": "This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of \"all\" means the user can impersonate all child customers. A value of \"none\" means the user cannot impersonate any. This field works with the <i>impersonateExceptions</i> field.",
                         "enum": [
                           "all",
                           "none"
@@ -18859,7 +18859,7 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -19267,7 +19267,7 @@
                       "default": [
                         "0.0.0.0/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -19714,7 +19714,7 @@
                     "default": [
                       "0.0.0.0/0"
                     ],
-                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n ",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n ",
                     "items": {
                       "type": "string"
                     }
@@ -20284,7 +20284,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works in conjunction with each <a href=\"#operation/post-ngadmin-apiAccounts\">individual API account</a>'s IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
                     "items": {
                       "type": "string"
                     }
@@ -21284,7 +21284,7 @@
             },
             "in": "query",
             "name": "startdate",
-            "description": "RFC 3339 format date indicating the beginning of the time period when API calls were made. Example: <code>startdate=2019-10-30T00:00:00Z</code>. This field should be specified in conjunction with the enddate parameter or left empty."
+            "description": "RFC 3339 format date indicating the beginning of the time period when API calls were made. Example: <code>startdate=2019-10-30T00:00:00Z</code>. This field should be specified along with the enddate parameter or left empty."
           },
           {
             "schema": {
@@ -21292,7 +21292,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period when API calls were made. Example: <code>enddate=2019-10-30T00:00:00Z</code>. This field should be specified in conjunction with the startdate parameter or left empty."
+            "description": "RFC 3339 date indicating the end of the time period when API calls were made. Example: <code>enddate=2019-10-30T00:00:00Z</code>. This field should be specified along with the startdate parameter or left empty."
           },
           {
             "schema": {
@@ -26267,7 +26267,7 @@
                   },
                   "allowedResources": {
                     "type": "object",
-                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                    "description": "List of IDs of resources that can be accessed. This works with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates. If the list is empty, no certificates are accessible.",
                     "properties": {
                       "certificates": {
                         "type": "array",
@@ -26472,7 +26472,7 @@
                     },
                     "allowedResources": {
                       "type": "object",
-                      "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                      "description": "List of IDs of resources that can be accessed. This works with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates. If the list is empty, no certificates are accessible.",
                       "properties": {
                         "certificates": {
                           "type": "array",
@@ -26554,11 +26554,11 @@
                   "properties": {
                     "code": {
                       "type": "string",
-                      "description": "Error code if there is a problem with the API call. It would be returned in conjunction with a <i>message</i> field."
+                      "description": "Error code if there is a problem with the API call. It would be returned along with a <i>message</i> field."
                     },
                     "message": {
                       "type": "string",
-                      "description": "An error message if there is a problem with the API call. It would be returned in conjunction with a <i>code</i> field."
+                      "description": "An error message if there is a problem with the API call. It would be returned along with a <i>code</i> field."
                     },
                     "apiAccountId": {
                       "type": "string",
@@ -26888,7 +26888,7 @@
                   },
                   "allowedResources": {
                     "type": "object",
-                    "description": "List of IDs of resources that can be accessed. This works in conjunction with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates.",
+                    "description": "List of IDs of resources that can be accessed. This works with <i>allowedOperations</i>. For example, suppose allowedOperations.certificates is set to <i>true</i>. If allowedResources.certificates is not specified, then all certificates are accessible. However, if allowedResources.certificates is specified, then access is restricted to the listed certificates. If the list is empty, no certificates are accessible.",
                     "properties": {
                       "certificates": {
                         "type": "array",
