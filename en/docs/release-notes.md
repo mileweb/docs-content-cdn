@@ -1,5 +1,20 @@
 # Release Notes
 
+## May 4, 2023
+
+### API updates
+* Fixed issue with API permissions.
+* Modified systemConfigs to return supportedLanguages instead of allowedLanguages.
+* Set console user’s default language to that of the customer.
+* Ensured customer’s preferred language is used when sending notifications about changes to their accounts.
+* Ensured origin status summary and edge status summary report APIs return customer IDs when requested to group results by customers.
+* Increased number of API accounts allowed per customer to 500.
+
+### Portal updates
+* Enabled the origin_upstream_only directive in the Edge Logic editor.
+* Ensured link to log configuration API help works.
+* Ensured link to tutorial works.
+
 ## April 14, 2023
 ### API updates
 * Adjusted the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) to support a minimum value of 0m and a maximum value of 32m.
