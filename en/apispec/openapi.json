@@ -18749,7 +18749,7 @@
                           "type": "integer",
                           "default": 3,
                           "description": "Maximum number of API accounts that can be created.",
-                          "maximum": 100,
+                          "maximum": 500,
                           "minimum": 1
                         },
                         "type": {
@@ -19157,7 +19157,7 @@
                           "type": "integer",
                           "default": 3,
                           "description": "Maximum number of API accounts that can be created.",
-                          "maximum": 100,
+                          "maximum": 500,
                           "minimum": 1
                         },
                         "type": {
@@ -19644,7 +19644,7 @@
                         "type": "integer",
                         "default": 3,
                         "description": "Maximum number of API accounts that can be created.",
-                        "maximum": 100,
+                        "maximum": 500,
                         "minimum": 1
                       },
                       "type": {
@@ -19964,7 +19964,7 @@
                           "type": "integer",
                           "default": 3,
                           "description": "Maximum number of API accounts that can be created.",
-                          "maximum": 100,
+                          "maximum": 500,
                           "minimum": 1
                         },
                         "type": {
@@ -20361,7 +20361,7 @@
                         "type": "integer",
                         "default": 3,
                         "description": "Maximum number of API accounts that can be created.",
-                        "maximum": 100,
+                        "maximum": 500,
                         "minimum": 1
                       },
                       "type": {
@@ -21662,7 +21662,7 @@
                         "type": "string"
                       }
                     },
-                    "allowedLanguages": {
+                    "supportedLanguages": {
                       "type": "array",
                       "description": "Indicates the languages that a customer can specify as preferred for notifications.\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
                       "items": {
@@ -21681,7 +21681,7 @@
                     "baseDirectives",
                     "advancedDirectives",
                     "publishedPrice",
-                    "allowedLanguages"
+                    "supportedLanguages"
                   ]
                 },
                 "examples": {
@@ -21842,7 +21842,7 @@
                         "nearChina",
                         "originShield"
                       ],
-                      "allowedLanguages": [
+                      "supportedLanguages": [
                         "en",
                         "cn",
                         "jp",
@@ -29868,7 +29868,7 @@
                           },
                           "logUrl": {
                             "type": "string",
-                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format."
+                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format. The URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL."
                           },
                           "hostname": {
                             "type": "string",
@@ -29978,7 +29978,7 @@
             "required": true
           }
         ],
-        "description": "Get access logs representing requests to one or more hostnames in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs for a hostname, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "Get access logs representing requests to one or more hostnames in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs for a hostname, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n\nThe URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -30048,7 +30048,7 @@
                           },
                           "logUrl": {
                             "type": "string",
-                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format."
+                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format. The URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL."
                           }
                         },
                         "required": [
@@ -30123,7 +30123,7 @@
             }
           }
         },
-        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2021-10-31T00:00:00Z\",\n            \"dateTo\":\"2021-10-31T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n",
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2021-10-31T00:00:00Z\",\n            \"dateTo\":\"2021-10-31T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\nThe URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.\n",
         "parameters": [
           {
             "schema": {
