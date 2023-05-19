@@ -1,5 +1,14 @@
 # Release Notes
 
+## May 19, 2023
+### API updates
+* Ensured appropriate response to attempts to update an API account’s API name.
+
+### Portal updates
+* Ensured console user is prompted to agree to our DPA (Data Processing Addendum) if the customer does not have an active user who already agreed to it.
+* Added attack mitigation status for properties in the property list page.
+* Fixed log download for the status code details and origin status code details reports.
+
 ## May 4, 2023
 
 ### API updates
