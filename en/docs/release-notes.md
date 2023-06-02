@@ -2,14 +2,14 @@
 
 ## June 2, 2023
 ### API updates
-u Ensured that console invitations and password reset messages reflect the customer’s preferred language.
+* Ensured that console invitations and password reset messages reflect the customer’s preferred language.
 
 ### Console updates
 * Fixed newly invited console user must complete the confirmation process for their account to be activated.
 * Ensured that a suspended customer can still upgrade.
 * Fixed validation issue when user opts to support older TLS versions.
 
-##May 19, 2023
+## May 19, 2023
 ### API updates
 * Ensured appropriate response to attempts to update an API account’s API name.
 
