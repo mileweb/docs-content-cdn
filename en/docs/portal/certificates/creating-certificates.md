@@ -40,7 +40,7 @@ The following procedure describes how to generate self-signed certificates. Self
 |Company|Enter a company name.|
 |Department|Enter a department name.|
 |Email|Enter an email address.|
-|Comments|Enter any optional comments about this initial version.|
+|Comments|Optionally, enter any comments about this initial version.|
 
 4. To save these settings in a template that you can select at a later time using the **Template** drop-down list mentioned above, click the **Save as a Template** button. When the popup message appears, enter a name for the template and click **OK**. 
 5. Click the **Save Certificate** button followed by **OK**.
@@ -56,7 +56,7 @@ To upload the files as a new certificate:
 1. In the left pane, click **Certificates**.<br>
 2. At the top right of the Certificates page, click the **Create Certificate** button. 
 
-<p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certi button" width="900"></p>
+<p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certificate button" width="900"></p>
 
 3. Complete the fields at the top of the Create a Certificate form (see the table above). Next to **Creation Method**, select  **Upload** and upload the private key, certificate, and chain certificate. In the **Comments** field, enter any optional comments. Required fields are denoted by an asterisk (\*).
    
@@ -77,7 +77,7 @@ To automatically create a certificate supporting each of your hostnames after ve
 1. In the left pane, click **Certificates**.<br>
 2. At the top right of the Certificates page, click the **Create Certificate** button. 
 
-<p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certi button" width="900"></p>
+<p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certificate button" width="900"></p>
 
 3. Complete the fields at the top of the Create a Certificate form (see the table above). Next to **Creation Method**, select  **DNS-01 challenge**.
    
@@ -85,7 +85,6 @@ To automatically create a certificate supporting each of your hostnames after ve
 
 4. In the **SAN** field, enter a comma-separated list of hostnames.
 
-5. Click the **Save Certificate** button followed by **OK**. 
-
-Your certificate is saved and can now be used with any properties you create. 
-
+5. Click the **Save Certificate** button. A **Verifying ACME challenge** popup specifies the DNS text records to add to verify your ownership. After you verify the ACME challenge, CDN Pro continues to upload the  certificate. After the certificate is uploaded, it is saved and can now be used with any properties you create. 
+   
+**Note:** It might take a few minutes for the new DNS records to propagate.
