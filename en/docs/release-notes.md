@@ -1,5 +1,16 @@
 # Release Notes
 
+## June 16, 2023
+### API updates
+* Required API permissions to be explicitly granted to new API accounts before they can make API calls.
+* Enhanced API permissions to support read-only access for an operator API account. This allows you to give an API account read and write access to some resources but read-only access to others.
+* Added a maxConnections field to property origins allowing you to limit the number of simultaneous connections made to the origin.
+* Added an isMaster URL parameter to the API which returns a list of portal users.
+* Added “enableIpv6Origin“ and “followClientIpVersion“ to the property configuration to support IPv6. If enableIpv6Origin is enabled, then IPv6 addresses of origin servers can be used. FollowClientIpVersion controls whether to access the origin using the same addressing as the client uses.
+
+### Console updates
+* Added DNS-01 challenge option to the certificate creation to streamline the certificate creation process. Customers must modify the DNS server to verify ownership of the hostnames for which they are creating a certificate.
+
 ## June 2, 2023
 ### API updates
 * Ensured that console invitations and password reset messages reflect the customer’s preferred language.
