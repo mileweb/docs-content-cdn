@@ -225,7 +225,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -305,7 +305,13 @@
                               },
                               "shield": {
                                 "type": "string",
-                                "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                                "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best if you select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                              },
+                              "maxConnections": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "default": 0,
+                                "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
                               }
                             }
                           }
@@ -930,7 +936,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -1010,7 +1016,13 @@
                         },
                         "shield": {
                           "type": "string",
-                          "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                          "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best if you select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                        },
+                        "maxConnections": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "default": 0,
+                          "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
                         }
                       }
                     }
@@ -3130,7 +3142,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -3210,7 +3222,13 @@
                         },
                         "shield": {
                           "type": "string",
-                          "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                          "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best if you select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                        },
+                        "maxConnections": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "default": 0,
+                          "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
                         }
                       }
                     }
@@ -3774,7 +3792,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port has to be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -3854,7 +3872,13 @@
                             },
                             "shield": {
                               "type": "string",
-                              "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best to select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                              "description": "Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href=\"#operation/get-cdn-shields\">origin shields API</a> provides a list of available shields along with their IP addresses. It is best if you select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have 'hasBeian' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use."
+                            },
+                            "maxConnections": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "default": 0,
+                              "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
                             }
                           }
                         }
@@ -15474,7 +15498,7 @@
                   "configs": {
                     "title": "portal user configurations",
                     "type": "object",
-                    "description": "Contains portal user settings in the \"configs\" field.",
+                    "description": "Contains settings that control the level of access given to the portal user.",
                     "x-examples": {
                       "example-1": {
                         "isMaster": false,
@@ -15764,6 +15788,12 @@
                       "code": "InvalidIds",
                       "message": "At least one of the specified IDs in the 'ids' parameter is not a valid integer."
                     }
+                  },
+                  "Invalid isMaster parameter": {
+                    "value": {
+                      "code": "invalidIsMaster",
+                      "message": "The valid isMaster values are true and false."
+                    }
                   }
                 }
               }
@@ -15869,6 +15899,14 @@
             "in": "query",
             "name": "ids",
             "description": "Comma-separated list of user IDs to return."
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isMaster",
+            "description": "Whether to return only the portal users with full access to all products."
           }
         ]
       }
@@ -16512,7 +16550,7 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
-        "description": "Create an API account that can be used to call CDN Pro APIs in addition to your administrator API account. You can grant <i>read-only</i> access, which permits calling API endpoints using the HTTP GET method only, OR <i>operator</i> access, which also allows creating, updating, and deleting objects like properties and certificates. \n<br/><br/>To restrict the endpoints accessible to the new API account, call our <a \nhref=\"#operation/post-cdn-apiPermissions\">API to create custom permissions</a> for it. After that, you can make additional changes by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a>.",
+        "description": "Create an API account that can be used to call CDN Pro APIs in addition to your administrator API account. You can grant <i>read-only</i> access, which permits calling API endpoints using the HTTP GET method only, OR <i>operator</i> access, which also allows creating, updating, and deleting objects like properties and certificates. \n<br/><br/>After creating an API account, you must call our <a \nhref=\"#operation/post-cdn-apiPermissions\">API to create custom permissions</a> for it and define the endpoints that can be accessed. After that, you can make additional changes by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a>.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -16928,7 +16966,7 @@
                     "configs": {
                       "title": "portal user configurations",
                       "type": "object",
-                      "description": "Contains portal user settings in the \"configs\" field.",
+                      "description": "Contains settings that control the level of access given to the portal user.",
                       "x-examples": {
                         "example-1": {
                           "isMaster": false,
@@ -17295,7 +17333,7 @@
                   "configs": {
                     "title": "portal user configurations",
                     "type": "object",
-                    "description": "Contains portal user settings in the \"configs\" field.",
+                    "description": "Contains settings that control the level of access given to the portal user.",
                     "x-examples": {
                       "example-1": {
                         "isMaster": false,
@@ -26134,7 +26172,7 @@
                   "Invalid input": {
                     "value": {
                       "code": "InvalidInput",
-                      "message": "The value of 'deploymentTasks' is invalid. Use one of false, 'staging', 'production', or 'both'."
+                      "message": "The value of 'deploymentTasks' is invalid. Use one of false, 'staging', 'production', 'both' or 'read'."
                     }
                   },
                   "Invalid API account ID": {
@@ -26149,7 +26187,7 @@
           }
         },
         "operationId": "post-cdn-apiPermissions",
-        "description": "Control which CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security, you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs. \n\nAfter you create a custom API permission for the API account, you can update it further by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">update permission API</a>.",
+        "description": "Control which CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security, you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs. \n\nYou must call this API to create permissions for each new API account before it can be used. After you create a custom API permission for the API account, you can update its permissions further by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">update permission API</a>.",
         "parameters": [
           {
             "schema": {
@@ -26175,24 +26213,56 @@
                     "description": "Customize the access given to the API account. Unspecified fields will be given default values.",
                     "properties": {
                       "certificates": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "properties": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "edgeHostnames": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "validations": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "deploymentTasks": {
                         "type": [
@@ -26204,64 +26274,147 @@
                           false,
                           "staging",
                           "production",
-                          "both"
+                          "both",
+                          "read"
                         ],
-                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints."
+                        "description": "Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task's details."
                       },
                       "purges": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a> (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "prefetches": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a> (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "annotations": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "apiPermissions": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permission</a>  (/cdn/apiPermissions) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permission</a> (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "systemConfigs": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint."
+                        "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint.",
+                        "enum": [
+                          true,
+                          false
+                        ]
                       },
                       "reports": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints.",
+                        "enum": [
+                          true,
+                          false
+                        ]
                       },
                       "serviceQuotas": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "hostnames": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
+                        "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n",
+                        "enum": [
+                          true,
+                          false
+                        ]
                       },
                       "webhooks": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "secrets": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "logConfigs": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of log configurations or a log configuration's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       }
                     }
                   },
@@ -26360,6 +26513,194 @@
                     "allowedOperations": {
                       "type": "object",
                       "description": "This object contains the permissions given to the API account. Fields without custom settings will be given default values.",
+                      "properties": {
+                        "certificates": {
+                          "type": [
+                            "boolean",
+                            "string"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints.The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "properties": {
+                          "type": [
+                            "boolean",
+                            "string"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "edgeHostnames": {
+                          "type": [
+                            "boolean",
+                            "string"
+                          ],
+                          "default": false,
+                          "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "validations": {
+                          "type": [
+                            "boolean",
+                            "string"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation </a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "deploymentTasks": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": "staging",
+                          "enum": [
+                            false,
+                            "staging",
+                            "production",
+                            "both",
+                            "read"
+                          ],
+                          "description": "Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task's details."
+                        },
+                        "purges": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a> (/cdn/purges) endpoints.The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "prefetches": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "annotations": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "apiPermissions": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": false,
+                          "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a> (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "systemConfigs": {
+                          "type": "boolean",
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint."
+                        },
+                        "reports": {
+                          "type": "boolean",
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
+                        },
+                        "serviceQuotas": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": false,
+                          "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "hostnames": {
+                          "type": "boolean",
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
+                        },
+                        "webhooks": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "secrets": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "default": true,
+                          "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.",
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        },
+                        "logConfigs": {
+                          "type": [
+                            "string",
+                            "boolean"
+                          ],
+                          "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of log configurations or a log configuration's details.",
+                          "default": false,
+                          "enum": [
+                            true,
+                            false,
+                            "read"
+                          ]
+                        }
+                      },
                       "required": [
                         "certificates",
                         "properties",
@@ -26377,98 +26718,7 @@
                         "webhooks",
                         "secrets",
                         "logConfigs"
-                      ],
-                      "properties": {
-                        "certificates": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints."
-                        },
-                        "properties": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints."
-                        },
-                        "edgeHostnames": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints."
-                        },
-                        "validations": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation </a> (/cdn/validations) endpoints."
-                        },
-                        "deploymentTasks": {
-                          "type": [
-                            "string",
-                            "boolean"
-                          ],
-                          "default": "staging",
-                          "enum": [
-                            false,
-                            "staging",
-                            "production",
-                            "both"
-                          ],
-                          "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints."
-                        },
-                        "purges": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints."
-                        },
-                        "prefetches": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints."
-                        },
-                        "annotations": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints."
-                        },
-                        "apiPermissions": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a> (/cdn/apiPermissions) endpoints."
-                        },
-                        "systemConfigs": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#operation/get-cdn-systemConfigs\">system configuration</a> (/cdn/systemConfigs) endpoint."
-                        },
-                        "reports": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
-                        },
-                        "serviceQuotas": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints."
-                        },
-                        "hostnames": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
-                        },
-                        "webhooks": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints."
-                        },
-                        "secrets": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
-                        },
-                        "logConfigs": {
-                          "type": "boolean",
-                          "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints.",
-                          "default": true
-                        }
-                      }
+                      ]
                     },
                     "allowedResources": {
                       "type": "object",
@@ -26546,7 +26796,7 @@
             }
           },
           "404": {
-            "description": "If the request is for a valid API account without any custom permissions, the default permissions will be returned in the response. To change the default behavior, you must <a href=\"#operation/post-cdn-apiPermissions\">create an API permission</a> with custom permissions, after which you can <a href=\"#operation/patch-cdn-apiPermissions-id\">modify the API permissions further</a>. Otherwise, if the API account ID is invalid, a message will indicate that.",
+            "description": "The request was invalid. Refer to the response body for details.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26559,102 +26809,6 @@
                     "message": {
                       "type": "string",
                       "description": "An error message if there is a problem with the API call. It would be returned along with a <i>code</i> field."
-                    },
-                    "apiAccountId": {
-                      "type": "string",
-                      "description": "ID of an API account. This field is returned if the API account exists but only has default permissions. The <i>allowedOperations</i> field would also be returned in the response."
-                    },
-                    "allowedOperations": {
-                      "type": "object",
-                      "description": "This object contains the default permissions given to the API account. This field is returned along with the <i>apiAccountId</i> field if the account exists but only has default permissions.",
-                      "properties": {
-                        "certificates": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the certificate management (/cdn/certificates) endpoints."
-                        },
-                        "properties": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the property management (/cdn/properties) endpoints."
-                        },
-                        "edgeHostnames": {
-                          "type": "boolean",
-                          "default": false,
-                          "description": "Whether the API account can access the edge hostname management (/cdn/edgeHostnames) endpoints."
-                        },
-                        "validations": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the property validation (/cdn/validations) endpoints."
-                        },
-                        "deploymentTasks": {
-                          "type": "string",
-                          "default": "staging",
-                          "enum": [
-                            "false",
-                            "staging",
-                            "production",
-                            "both"
-                          ],
-                          "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the deployment management (/cdn/deploymentTasks) endpoints."
-                        },
-                        "purges": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the purge  (/cdn/purges) endpoints."
-                        },
-                        "prefetches": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the prefetch   (/cdn/prefetches) endpoints."
-                        },
-                        "annotations": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the report annotations (/cdn/annotations) endpoints."
-                        },
-                        "apiPermissions": {
-                          "type": "boolean",
-                          "default": false,
-                          "description": "Whether the API account can access the API permission  (/cdn/apiPermissions) endpoints."
-                        },
-                        "systemConfigs": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the system configuration (/cdn/systemConfigs) endpoint."
-                        },
-                        "reports": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the report (/cdn/report) endpoints."
-                        },
-                        "serviceQuotas": {
-                          "type": "boolean",
-                          "default": false,
-                          "description": "Whether the API account can access the service quotas (/cdn/serviceQuotas) endpoints."
-                        },
-                        "hostnames": {
-                          "type": "boolean",
-                          "default": true,
-                          "description": "Whether the API account can access the hostnames (/cdn/hostnames) endpoints.                    \n"
-                        }
-                      },
-                      "required": [
-                        "certificates",
-                        "properties",
-                        "edgeHostnames",
-                        "validations",
-                        "deploymentTasks",
-                        "purges",
-                        "prefetches",
-                        "annotations",
-                        "apiPermissions",
-                        "systemConfigs",
-                        "reports",
-                        "serviceQuotas",
-                        "hostnames"
-                      ]
                     }
                   }
                 },
@@ -26665,26 +26819,10 @@
                       "message": "The specified account ID does not exist or the caller doesn't have access to this resource."
                     }
                   },
-                  "Valid API account with default permissions only": {
+                  "Invalid API permission": {
                     "value": {
-                      "apiAccountId": "12345678",
-                      "allowedOperations": {
-                        "certificates": true,
-                        "properties": true,
-                        "edgeHostnames": false,
-                        "validations": true,
-                        "deploymentTasks": "staging",
-                        "purges": true,
-                        "prefetches": true,
-                        "logConfigs": false,
-                        "annotations": true,
-                        "apiPermissions": false,
-                        "systemConfigs": true,
-                        "reports": true,
-                        "serviceQuotas": false,
-                        "hostnames": true,
-                        "blockCommands": true
-                      }
+                      "code": "InvalidAPIPermission",
+                      "message": "Permission is not found."
                     }
                   }
                 }
@@ -26693,7 +26831,7 @@
           }
         },
         "operationId": "get-cdn-apiPermissions-id",
-        "description": "Return an API account's permissions, both custom ones as well as the defaults. If you have never customized the API account's permissions, you will get a 404 HTTP response whose body consists of the default settings for the API account. To change the permissions of an API account, you must first <a href=\"#operation/post-cdn-apiPermissions\">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a> further if needed.",
+        "description": "Return an API account's permissions, both custom ones as well as the defaults. If you have not set an API account's permissions, you will get a 404 HTTP response. To specify the permissions of a new API account, you must <a href=\"#operation/post-cdn-apiPermissions\">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a> further if needed.",
         "parameters": [
           {
             "schema": {
@@ -26796,24 +26934,56 @@
                     "description": "Customize the access given to the API account. Unspecified fields will be given default values.",
                     "properties": {
                       "certificates": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Certificate-Management\">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "properties": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Management\">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "edgeHostnames": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#tag/Edge-Hostname-Management\">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "validations": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Property-Validation\">property validation</a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "deploymentTasks": {
                         "type": [
@@ -26825,29 +26995,62 @@
                           false,
                           "staging",
                           "production",
-                          "both"
+                          "both",
+                          "read"
                         ],
-                        "description": "Whether the API account can deploy properties and certificates to staging, production, both, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints."
+                        "description": "Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href=\"#tag/Deployment-Management\">deployment management</a> (/cdn/deploymentTasks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task's details."
                       },
                       "purges": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/createPurge\">purge</a>  (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "prefetches": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-prefetches\">prefetch</a>   (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "annotations": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Annotations-for-Reports\">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "apiPermissions": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a>  (/cdn/apiPermissions) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a>  (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "systemConfigs": {
                         "type": "boolean",
@@ -26860,9 +27063,17 @@
                         "description": "Whether the API account can access the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints."
                       },
                       "serviceQuotas": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#operation/post-cdn-serviceQuotas\">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "hostnames": {
                         "type": "boolean",
@@ -26870,19 +27081,40 @@
                         "description": "Whether the API account can access the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints.\n"
                       },
                       "webhooks": {
-                        "type": "boolean",
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Webhooks\">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "secrets": {
-                        "type": "boolean",
+                        "type": "string",
                         "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints."
+                        "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       },
                       "logConfigs": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints."
+                        "type": [
+                          "boolean",
+                          "string"
+                        ],
+                        "default": false,
+                        "description": "Whether the API account can access the <a href=\"#tag/Log-Configuration-Management\">log configuration</a> (/cdn/logConfigs) endpoints.",
+                        "enum": [
+                          true,
+                          false,
+                          "read"
+                        ]
                       }
                     }
                   },
@@ -30123,7 +30355,7 @@
             }
           }
         },
-        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2021-10-31T00:00:00Z\",\n            \"dateTo\":\"2021-10-31T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\nThe URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.\n",
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2021-10-31T00:00:00Z\",\n            \"dateTo\":\"2021-10-31T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\nThe URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.",
         "parameters": [
           {
             "schema": {
@@ -31200,7 +31432,7 @@
                     }
                   }
                 },
-                "examples": {
+                "EXAMPLES": {
                   "example-1": {
                     "value": {
                       "lastUpdated": "2021-11-01T09:09:49Z",
