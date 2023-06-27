@@ -214,13 +214,13 @@ location = /auth {
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom1” 和 “custom2” 来引用这两个字段。当同一个字段同时在 LB7 和 ES 里被定义，LB7 有优先权。 如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom_1” 和 “custom_2” 来引用这两个字段。当同一个字段同时在 LB7 和 ES 里被定义，LB7 有优先权。 如果您需要开启此功能，请联系我们的技术支持团队。
 
 示例:
 ```nginx
 location / {
-  custom_log_field 1 $http_x_data; # 将请求头X-Data的值保存到custom1
-  custom_log_field 2 $cookie_abc; # 将cookie abc的值保存到custom2
+  custom_log_field 1 $http_x_data; # 将请求头X-Data的值保存到custom_1
+  custom_log_field 2 $cookie_abc; # 将cookie abc的值保存到custom_2
   ...
 }
 ```

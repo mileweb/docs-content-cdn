@@ -37,8 +37,8 @@ The following table shows the variables you can use in the **Log Format** field 
 | %cltport     | Client port number                      |
 | %cltregion   | Client region                           |
 | %cpu_ns      | CPU time, in nanoseconds, for this request|
-| %custom1     | Refers to a custom log field with ID 1 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
-| %custom2     | Refers to a custom log field with ID 2 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
+| %custom_1     | Refers to a custom log field with ID 1 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
+| %custom_2     | Refers to a custom log field with ID 2 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
 | %hostname    | Host header|
 | %method      | HTTP method used to access the content (for example, GET)|
 | %protocol    | HTTP/1.0, HTTP/1.1, or HTTP2.0|
