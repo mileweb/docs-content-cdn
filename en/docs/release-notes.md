@@ -1,5 +1,11 @@
 # Release Notes
 
+## July 4, 2023
+### API updates
+* Renamed log download format fields,  %custom1 to %custom_1, and %custom2 to %custom_2.
+* Fixed issue with filtering the traffic volume report API’s results by hostname.
+
+
 ## June 16, 2023
 ### API updates
 * Required API permissions to be explicitly granted to new API accounts before they can make API calls.
