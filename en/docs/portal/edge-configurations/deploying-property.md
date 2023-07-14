@@ -2,7 +2,7 @@
 
 After you create and validate a property version, you are ready to deploy it. Initially, we highly recommend that you always deploy the property to the staging environment to make sure the property is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
 
-**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production. It takes about 5 minutes for the test requests to show up in the reports. Production deployment will not be enabled before that.
+**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production. It takes about 5 minutes for the test requests to appear in the reports. Production deployment will not be enabled before that occurs.
 
 1. In the left pane, click **Edge Configurations**, and then select **Properties**. 
 
