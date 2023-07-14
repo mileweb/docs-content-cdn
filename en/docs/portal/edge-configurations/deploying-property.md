@@ -2,11 +2,11 @@
 
 After you create and validate a property version, you are ready to deploy it. Initially, we highly recommend that you always deploy the property to the staging environment to make sure the property is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
 
-**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production.
+**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production. It takes about 5 minutes for the test requests to show up in the reports. Production deployment will not be enabled before that.
 
 1. In the left pane, click **Edge Configurations**, and then select **Properties**. 
 
-2. On the Properties page, click the ID of the property you want to deploy.
+2. On the Properties page, click the ID of the property you want to deploy.
     <br><u>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the property you want to deploy, and then select **Edit**.
 
@@ -21,7 +21,7 @@ After you create and validate a property version, you are ready to deploy it. In
 
 # Undeploying a Property
 
-1. In the **Actions** column on the Properties page, click the vertical ellipsis of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
+1. In the **Actions** column on the Properties page, click the vertical ellipsis of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="900"></p>
 
