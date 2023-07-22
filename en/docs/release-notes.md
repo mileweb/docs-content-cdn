@@ -1,5 +1,12 @@
 # Release Notes
 
+## July 19, 2023
+### API updates
+* Added support for filtering and grouping by content codes in layer 7 report APIs. You can define values of $content_code in a property's loadBalancerLogic field.
+* Allowed an operator API account to manage API permissions.
+* Supported IPv6 origin in property configuration.
+* Fixed an issue with use of %utctime in log download format.
+
 ## July 4, 2023
 ### API updates
 * Renamed log download format fields,  %custom1 to %custom_1, and %custom2 to %custom_2.
