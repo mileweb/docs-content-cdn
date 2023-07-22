@@ -225,7 +225,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -545,6 +545,21 @@
                           "type": "boolean",
                           "default": false,
                           "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
+                        },
+                        "enableIpv6Origin": {
+                          "type": "boolean",
+                          "default": false,
+                          "description": "Enable use of IPv6 addresses to access the property's origin servers."
+                        },
+                        "followClientIpVersion": {
+                          "type": "string",
+                          "enum": [
+                            "auto",
+                            "strict",
+                            "off"
+                          ],
+                          "default": "off",
+                          "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
                         }
                       }
                     },
@@ -936,7 +951,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -1256,6 +1271,21 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
+                  },
+                  "enableIpv6Origin": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable use of IPv6 addresses to access the property's origin servers."
+                  },
+                  "followClientIpVersion": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "strict",
+                      "off"
+                    ],
+                    "default": "off",
+                    "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
                   }
                 }
               },
@@ -3142,7 +3172,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -3462,6 +3492,21 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
+                  },
+                  "enableIpv6Origin": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable use of IPv6 addresses to access the property's origin servers."
+                  },
+                  "followClientIpVersion": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "strict",
+                      "off"
+                    ],
+                    "default": "off",
+                    "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
                   }
                 }
               },
@@ -3792,7 +3837,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -4112,6 +4157,21 @@
                         "type": "boolean",
                         "default": false,
                         "description": "Enable TLS zero round-trip time, a feature of TLS 1.3 that can improve performance for repeat visits to a site. If enabling it though, be sure your site is not vulnerable to the HTTP replay attack."
+                      },
+                      "enableIpv6Origin": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Enable use of IPv6 addresses to access the property's origin servers."
+                      },
+                      "followClientIpVersion": {
+                        "type": "string",
+                        "enum": [
+                          "auto",
+                          "strict",
+                          "off"
+                        ],
+                        "default": "off",
+                        "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
                       }
                     }
                   }
@@ -26324,7 +26384,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permission</a> (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details.",
+                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permission</a> (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details. An operator API account with this permission set to 'true' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller's operator API account could manage this permission on behalf of child customers' API accounts though.",
                         "enum": [
                           true,
                           false,
@@ -26626,7 +26686,7 @@
                             "boolean"
                           ],
                           "default": false,
-                          "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a> (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details.",
+                          "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a> (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details. An operator API account with this permission set to 'true' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller's operator API account could manage this permission on behalf of child customers' API accounts though.",
                           "enum": [
                             true,
                             false,
@@ -27045,7 +27105,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a>  (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details.",
+                        "description": "Whether the API account can access the <a href=\"#tag/API-Access-Control\">API permissions</a>  (/cdn/apiPermissions) endpoints. The value 'read' can be given to an operator API account to restrict it to getting an API permission's details. An operator API account with this permission set to 'true' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller's operator API account could manage this permission on behalf of child customers' API accounts though.",
                         "enum": [
                           true,
                           false,
@@ -32774,6 +32834,594 @@
         ]
       }
     },
+    "/cdn/logAggregationPoints": {
+      "get": {
+        "summary": "Get a list of log aggregation points.",
+        "tags": [
+          "Log Aggregation Points"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a list of log aggregation points.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Number of log aggregation points."
+                    },
+                    "logAggregationPoints": {
+                      "type": "array",
+                      "description": "Contains log aggregation points.",
+                      "items": {
+                        "type": "object",
+                        "description": "Identifies a log aggregation point.",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID of the log aggregation point."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the log aggregation point."
+                          },
+                          "creationTime": {
+                            "type": "string",
+                            "description": "When the log aggregation point was created."
+                          },
+                          "lastUpdateTime": {
+                            "type": "string",
+                            "description": "When the log aggregation point was updated."
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "creationTime",
+                          "lastUpdateTime"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "logAggregationPoints"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "count": 1,
+                      "logAggregationPoints": [
+                        {
+                          "id": "631b9edadde86036978ff7ff",
+                          "name": "my-logaggregationPoint",
+                          "creationTime": "2022-09-09T20:15:22.558+0000",
+                          "lastUpdateTime": "2022-09-09T20:15:22.558+0000"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-logAggregationPoints",
+        "description": "Get a list of log aggregation points that are used to collect raw server logs.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "The value of the search parameter is matched on the name, description, and destinationURL fields of log aggregation points. Partial matches are supported."
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a log aggregation point",
+        "tags": [
+          "Log Aggregation Points"
+        ],
+        "responses": {
+          "201": {
+            "description": "The log aggregation point was created. The <i>Location</i> header contains a URL to the new log aggregation point. The URL can then be used in the <i>logUrl</i> field of the <a href=\"#operation/createProperty\">realTimeLog setting in a property</a>.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ingestURL": {
+                      "type": "string",
+                      "description": "URL of the log aggregation point. To use it, specify this URL in the <i>logUrl</i> field of the realTimeLog setting of a property."
+                    }
+                  },
+                  "required": [
+                    "ingestURL"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "ingestURL": "https://codsupload.haplat.net:1443/dsp/raw?table=ngcdn_aggregation_632512f4dac30908abcdad82"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "DuplicateName": {
+                    "value": {
+                      "code": "DuplicateName",
+                      "message": "The customer already has a logAggregationPoint with the same name."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-logAggregationPoints",
+        "description": "Create a new log aggregation point where batches of logs are sent together rather than individually. The maximum number of log aggregation points that can be created by a customer are defined in the customer's service quota.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the log aggregation point."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "An optional description of the log aggregation point."
+                  },
+                  "maxEntries": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Maximum number of entries to send in a report."
+                  },
+                  "maxLatency": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 600,
+                    "default": 60,
+                    "description": "Maximum time in seconds allowed by the log processing system at the destination URL."
+                  },
+                  "maxSizeKBytes": {
+                    "type": "integer",
+                    "default": 1000,
+                    "minimum": 10,
+                    "maximum": 10000,
+                    "description": "Maximum aggregate size in kilobytes of logs before gzip compression is applied."
+                  },
+                  "separator": {
+                    "type": "string",
+                    "default": "\\n",
+                    "description": "Text that appears between log entries."
+                  },
+                  "destinationURL": {
+                    "type": "string",
+                    "description": "URL where logs should be sent."
+                  },
+                  "destinationAuthCertificate": {
+                    "type": "string",
+                    "description": "A certificate in PEM format required to connect to the destination URL."
+                  },
+                  "destinationAuthKey": {
+                    "type": "string",
+                    "description": "Authentication key in PEM format used to connect to the destination URL."
+                  },
+                  "gzipToDestination": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to use gzip compression on data sent to the destination URL."
+                  },
+                  "headerToDestination": {
+                    "description": "HTTP headers passed to the destination URL.",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "description": "Describes an HTTP header passed to the destination URL.",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of an HTTP header."
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Value of the HTTP header."
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "value"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "name",
+                  "destinationURL"
+                ]
+              }
+            }
+          },
+          "description": "The request body defines the parameters of the aggregation point."
+        }
+      }
+    },
+    "/cdn/logAggregationPoints/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of a log aggregation point"
+        }
+      ],
+      "get": {
+        "summary": "Get details about a log aggregation point",
+        "tags": [
+          "Log Aggregation Points"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains details about a log aggregation point.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the log aggregation point."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "An optional description of the log aggregation point."
+                    },
+                    "maxEntries": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Maximum time in seconds allowed by the log processing system at the destination URL."
+                    },
+                    "maxLatency": {
+                      "type": "integer",
+                      "description": "Maximum time in seconds allowed by the log processing system at the destination URL.",
+                      "default": 60,
+                      "minimum": 5,
+                      "maximum": 600
+                    },
+                    "maxSizeKBytes": {
+                      "type": "integer",
+                      "description": "Maximum aggregate size in kilobytes of logs before gzip compression is applied.",
+                      "minimum": 10,
+                      "maximum": 10000,
+                      "default": 1000
+                    },
+                    "separator": {
+                      "type": "string",
+                      "description": "Text that appears between log entries."
+                    },
+                    "destinationURL": {
+                      "type": "string",
+                      "description": "URL where logs should be sent."
+                    },
+                    "destinationAuthCertificate": {
+                      "type": "string",
+                      "description": "A certificate in PEM format required to connect to the destination URL."
+                    },
+                    "destinationAuthKey": {
+                      "type": "string",
+                      "description": "Authentication key in PEM format used to connect to the destination URL."
+                    },
+                    "gzipToDestination": {
+                      "type": "boolean",
+                      "description": "Whether to use gzip compression on data sent to the destination URL.",
+                      "default": false
+                    },
+                    "headerToDestination": {
+                      "type": "array",
+                      "description": "HTTP headers passed to the destination URL.",
+                      "items": {
+                        "type": "object",
+                        "description": "Describes an HTTP header passed to the destination URL.",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Name of an HTTP header."
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": "Value of the HTTP header."
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "value"
+                        ]
+                      }
+                    },
+                    "metaData": {
+                      "type": "object",
+                      "properties": {
+                        "creationTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the log aggregation point was created."
+                        },
+                        "lastUpdateTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the log aggregation point was last updated."
+                        },
+                        "ingestURL": {
+                          "type": "string",
+                          "description": "URL used to collect raw log entries from the edge servers before sending them in a batch to the destination URL. Use this URL by entering it into the logURL field of the <a href=\"#operation/createProperty\">realTimeLog settings of a property."
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "destinationURL"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "name": "my-logaggregationPoint",
+                      "destinationURL": "https://ingest.customer.com/remote-log",
+                      "metaData": {
+                        "creationTime": "2022-09-09T20:15:22.558+ 0000",
+                        "lastUpdateTime": "2022-09-09T20:15:22.558+0000",
+                        "ingestURL": "https://codsupload.haplat.net:1443/dsp/raw?table=ngcdn_aggregation_my-logaggregationPoint"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The log aggregation point does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid Log Aggregation ID": {
+                    "value": {
+                      "code": "InvalidLogAggregationId",
+                      "message": "The specified log aggregation ID does not exist or the caller doesn't have access to this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-logAggregationPoints-id",
+        "description": "Use this API to get details about a log aggregration point."
+      },
+      "delete": {
+        "summary": "Delete a log aggregation point",
+        "tags": [
+          "Log Aggregation Points"
+        ],
+        "responses": {
+          "204": {
+            "description": "The log aggregation point was successfully deleted."
+          },
+          "404": {
+            "description": "The log aggregation point was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "code": "InvalidLogAggregationPoint",
+                      "message": "The log aggregation point is invalid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-cdn-logAggregationPoints-id",
+        "description": "Use this API to delete a log aggregation point."
+      },
+      "patch": {
+        "summary": "Update a log aggregation point",
+        "tags": [
+          "Log Aggregation Points"
+        ],
+        "responses": {
+          "204": {
+            "description": "The log aggregation point was updated."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid max entries": {
+                    "value": {
+                      "code": "InvalidMaxEntries",
+                      "message": "maxEntries should be an integer between 1 and 100000."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The log aggregation point does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid log aggregation ID": {
+                    "value": {
+                      "code": "InvalidLogAggregationId",
+                      "message": "The specified log aggregation ID does not exist or the caller doesn't have access to this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patch-cdn-logAggregationPoints-id",
+        "description": "Use this API to update a log aggregation point.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the log aggregation point."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "An optional description of the log aggregation point."
+                  },
+                  "maxEntries": {
+                    "type": "integer",
+                    "description": "Maximum number of entries to send in a report.",
+                    "minimum": 1
+                  },
+                  "maxLatency": {
+                    "type": "integer",
+                    "description": "Maximum time in seconds allowed by the log processing system at the destination URL.",
+                    "minimum": 5,
+                    "maximum": 600,
+                    "default": 60
+                  },
+                  "maxSizeKBytes": {
+                    "type": "integer",
+                    "minimum": 10,
+                    "maximum": 10000,
+                    "default": 1000,
+                    "description": "Maximum aggregate size in kilobytes of logs before gzip compression is applied."
+                  },
+                  "separator": {
+                    "type": "string",
+                    "description": "Text that appears between log entries."
+                  },
+                  "destinationURL": {
+                    "type": "string",
+                    "description": "URL where logs should be sent."
+                  },
+                  "destinationAuthCertificate": {
+                    "type": "string",
+                    "description": "A certificate in PEM format required to connect to the destination URL."
+                  },
+                  "destinationAuthKey": {
+                    "type": "string",
+                    "description": "Authentication key in PEM format used to connect to the destination URL."
+                  },
+                  "gzipToDestination": {
+                    "type": "boolean",
+                    "description": "Whether to use gzip compression on data sent to the destination URL.",
+                    "default": false
+                  },
+                  "headerToDestination": {
+                    "type": "array",
+                    "description": "HTTP headers passed to the destination URL.",
+                    "items": {
+                      "type": "object",
+                      "description": "Describes an HTTP header passed to the destination URL.",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of an HTTP header."
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Value of the HTTP header."
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "value"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body contains the fields to update."
+        }
+      }
+    },
     "/ngadmin/ipDetails": {
       "post": {
         "summary": "Check if IP addresses belong to the CDN Pro platform",
@@ -32892,6 +33540,1636 @@
           },
           "description": "The request body consists of an array of IP addresses to check."
         }
+      }
+    },
+    "/cdn/report/volL7": {
+      "post": {
+        "summary": "Get the L7 traffic volume",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "reportResponse",
+                  "type": "object",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2022-10-01T00:00:00Z",
+                          "data": 5698.81972
+                        },
+                        {
+                          "timestamp": "2022-11-01T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid type": {
+                    "value": {
+                      "code": "InvalidType",
+                      "message": "Invalid parameter 'type': 'monthly1'. The report type must be 'fiveminutes', 'hourly', 'daily'(with optional timezone) or 'monthly'(with optional timezone)."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-volL7",
+        "description": "Get the OSI layer 7 traffic volume in megabytes during a time period. Query parameters let you specify the time period and granularity of data. Filter the results further by passing a filters object in the request. This report's data has a latency of less than two minutes.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code> Due to latency associated with new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "children-only",
+                "self+children"
+              ]
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>\n"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Filter results by specifying hostnames, propertyHostnames, clientRegions, or clientIsps.",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "contentCodes": {
+                        "type": "array",
+                        "description": "List of content codes for which to return data. Content codes can be defined in your properties' <i>loadBalancerLogic</i> field by setting values for the variable $content_code.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames is included."
+        }
+      }
+    },
+    "/cdn/report/bandwidthL7": {
+      "post": {
+        "summary": "Get the L7 traffic bandwidth",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains the data. Note that it is always in UTC time.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "reportResponse",
+                  "type": "object",
+                  "description": "Contains data returned by a report.",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement. This will depend on the report API."
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "The data points.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ],
+                  "x-tags": [
+                    "Reports"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "edge response bandwidth",
+                      "dataUnit": "megabps",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2023-07-01T00:00:00Z",
+                          "data": 568.81972
+                        },
+                        {
+                          "timestamp": "2023-07-02T00:00:00Z",
+                          "data": 140.6
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid type": {
+                    "value": {
+                      "code": "InvalidType",
+                      "message": "Invalid parameter 'type': 'monthly1'. The report type must be 'fiveminutes', 'hourly', 'daily'(with optional timezone) or 'monthly'(with optional timezone)."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-bandwidthL7",
+        "description": "Get the OSI layer 7 traffic bandwidth in Mbps during a time period. Query parameters let you specify the time period and granularity of data. Filter the results further by passing a filters object in the request. This report's data has a latency of less than two minutes.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code> Due to latency associated with new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "type",
+            "description": "Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "self-only",
+              "enum": [
+                "self-only",
+                "children-only",
+                "self+children"
+              ]
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>          \n"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Filter results by specifying hostnames, propertyHostnames, clientRegions, or clientIsps.",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "contentCodes": {
+                        "type": "array",
+                        "description": "List of content codes for which to return data. Content codes can be defined in your properties' <i>loadBalancerLogic</i> field by setting values for the variable $content_code.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames is included."
+        }
+      }
+    },
+    "/cdn/report/volL7Summary": {
+      "post": {
+        "summary": "Get a summary of L7 traffic volume",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of layer 7 traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "trafficVolumeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2019-09-01T12:35:00Z",
+                        "endTime": "2019-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "metaData": {
+                        "startTime": "2020-01-05T12:35:00Z",
+                        "endTime": "2020-01-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge response</td><td>edge traffic to visitors</td></tr>\n<tr><td>edge request</td><td>traffic from visitors to edge servers</td></tr>\n<tr><td>intermediate response</td><td>traffic from intermediate CDN Pro servers to other CDN Pro servers</td></tr>\n<tr><td>intermediate request</td><td>traffic of requests to intermediate CDN Pro servers</td></tr>\n<tr><td>origin response</td><td>traffic from origin servers</td></tr>\n<tr><td>origin request</td><td>traffic to origin servers</td></tr>\n<tr><td>fast route response</td><td>traffic from your origin accelerated through the HDT product</td></tr>\n<tr><td>fast route request</td><td>traffic to your origin accelerated through the HDT product</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      }
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of traffic by group. ",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of the group. \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Total traffic": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2023-06-29T12:35:00Z",
+                        "endTime": "2023-07-02T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Traffic grouped by hostnames": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2023-06-05T12:35:00Z",
+                        "endTime": "2023-06-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getVolL7Summary",
+        "description": "Get a summary of edge layer 7 traffic volume during a time period. You can filter and group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-10-30T00:00:00Z</code>. Due to latency associated with processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "filters": {
+                      "hostnames": [
+                        "domain1.com",
+                        "domain2.com"
+                      ]
+                    },
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "description": "Choose whether to limit the results to specific hostnames or content codes.",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string",
+                          "example": "domain.com"
+                        }
+                      },
+                      "contentCodes": {
+                        "type": "array",
+                        "description": "List of content codes for which to return data. Content codes can be defined in your properties' <i>loadBalancerLogic</i> field by setting values for the variable $content_code.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'contentCodes'.",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "hostnames",
+                        "contentCodes"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Group results by hostnames": {
+                  "value": {
+                    "filters": {},
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
+        }
+      },
+      "parameters": [],
+      "get": {
+        "summary": "Get a summary of L7 traffic volume",
+        "operationId": "get-cdn-report-volL7Summary",
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of layer 7 traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "trafficVolumeSummaryResponse",
+                  "type": "object",
+                  "description": "The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2019-09-01T12:35:00Z",
+                        "endTime": "2019-09-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "metaData": {
+                        "startTime": "2020-01-05T12:35:00Z",
+                        "endTime": "2020-01-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response",
+                          "fast route response",
+                          "fast route request"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993,
+                            0,
+                            0
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139,
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \n<table>\n<tr><th>Data Name</th><th>Description</th></tr>\n<tr><td>edge response</td><td>edge traffic to visitors</td></tr>\n<tr><td>edge request</td><td>traffic from visitors to edge servers</td></tr>\n<tr><td>intermediate response</td><td>traffic from intermediate CDN Pro servers to other CDN Pro servers</td></tr>\n<tr><td>intermediate request</td><td>traffic of requests to intermediate CDN Pro servers</td></tr>\n<tr><td>origin response</td><td>traffic from origin servers</td></tr>\n<tr><td>origin request</td><td>traffic to origin servers</td></tr>\n<tr><td>fast route response</td><td>traffic from your origin accelerated through the HDT product</td></tr>\n<tr><td>fast route request</td><td>traffic to your origin accelerated through the HDT product</td></tr>\n</table>\nThe order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      }
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of traffic by group. ",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of the group. \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Total traffic": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2023-06-29T12:35:00Z",
+                        "endTime": "2023-07-02T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            214.57945
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Traffic grouped by hostnames": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2023-06-05T12:35:00Z",
+                        "endTime": "2023-06-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge response"
+                        ],
+                        "dataUnit": "megabytes"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            1338301885.66941
+                          ]
+                        },
+                        {
+                          "group": "domain1.com",
+                          "data": [
+                            798516559.66809
+                          ]
+                        },
+                        {
+                          "group": "domain2.com",
+                          "data": [
+                            2.72993
+                          ]
+                        },
+                        {
+                          "group": "domain3.com",
+                          "data": [
+                            539785323.27139
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-10-30T00:00:00Z</code>. Due to latency associated with processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames' and 'contentCodes' by specifying a comma-separated list of the keywords."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>"
+          }
+        ],
+        "tags": [
+          "Reports"
+        ],
+        "description": "Get a summary of edge layer 7 traffic volume during a time period. You can group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n"
+      }
+    },
+    "/cdn/report/bandwidthL7Summary": {
+      "post": {
+        "summary": "Get a summary of layer 7 traffic bandwidth",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of layer 7 traffic bandwidth by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "bandwidthSummaryResponse",
+                  "type": "object",
+                  "description": "This describes the response to the bandwidth summary report APIs.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge bandwidth"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-bandwidthL7Summary",
+        "description": "Get a summary of layer 7 traffic bandwidth during a time period. You can filter and group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency associated with new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "filters": {},
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                },
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "description": "Choose whether to limit the results to specific hostnames or content codes.",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "contentCodes": {
+                        "type": "array",
+                        "description": "List of content codes for which to return data. Content codes can be defined in your properties' <i>loadBalancerLogic</i> field by setting values for the variable $content_code.",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groupBy": {
+                    "type": "array",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'contentCodes'.",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "hostnames",
+                        "contentCodes"
+                      ]
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "groupBy": [
+                      "hostnames"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "The request body can include filters to customize the results. By default, data from all hostnames are included."
+        }
+      },
+      "get": {
+        "summary": "Get a summary of layer 7 traffic bandwidth",
+        "operationId": "get-cdn-report-bandwidthL7Summary",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> ",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time span. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-10-30T00:00:00Z</code>. Due to latency associated with processing new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "groupBy",
+            "description": "You can group results using any combination of up to two of 'hostnames' and 'contentCodes' by specifying a comma-separated list of the keywords."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response contains a summary of layer 7 traffic bandwidth by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "bandwidthSummaryResponse",
+                  "type": "object",
+                  "description": "This describes the response to the bandwidth summary report APIs.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge bandwidth"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period."
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end."
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of traffic by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data values. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "metaData": {
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a summary of layer 7 traffic bandwidth during a time period. You can group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.) ",
+        "tags": [
+          "Reports"
+        ]
       }
     },
     "/cdn/originFastRouteIpList": {
@@ -33042,6 +35320,10 @@
     {
       "name": "Log Configuration Management",
       "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/getLogfiles\">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname."
+    },
+    {
+      "name": "Log Aggregation Points",
+      "description": "These APIs allow you to create log aggregation points which are ingestion URLs that receive raw log entries from the CDN Pro servers. This option is available for those who use our realTimeLog advanced feature."
     }
   ]
 }
