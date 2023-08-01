@@ -31,6 +31,7 @@ The following table shows the variables you can use in the **Log Format** field 
 
 |**Variable**  |**Description**                          |
 |--------------|-----------------------------------------|
+| %apachet     | Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000|
 | %cachestate  | HIT, MISS, or REVALIDATE                |
 | %cltip       | Client IP address                       |
 | %cltisp      | Client ISP                              |
