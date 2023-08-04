@@ -243,7 +243,7 @@ location / {
 **默认设置：** `-`<br/>
 **可用位置：** server, location
 
-该指令用于开启 WebSocket 协议。客户端必须确保不使用 HTTP/2。默认读取和发送超时设置为 21 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
+该指令用于开启 WebSocket 协议。客户端必须确保不使用 HTTP/2。默认读取和发送超时设置为 60 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -416,10 +416,10 @@ else { ... }
 <span class="badge">标准</span>
 
 **使用语法：** `limit_rate rate;` <br/>
-**默认设置：** `limit_rate 4m;` <br/>
+**默认设置：** `limit_rate 32m;` <br/>
 **可用位置：** server, location, if in location
 
-限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [0-32]m 或 [0-32768]k。默认值为 4MByte/s。
+限制对客户端的响应传输速率，以字节/秒为单位。可配范围为 [0-32]m 或 [0-32768]k。默认值为 32MByte/s。
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -460,7 +460,7 @@ else { ... }
 **默认设置：** `origin_fast_route off;` <br/>
 **可用位置：** server, location, if in location
 
-该指令用于在访问源站时开启使用**快速路由**功能。此功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过**快速路由**传输的回源流量可能会被收取比边缘流量更高的费率。
+该指令用于在访问源站时开启使用**快速路由**功能。此功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过**快速路由**传输的回源流量可能会被收取比边缘流量更高的费率。通过**快速路由**传输的流量限速3 Mbps。如果您需要提高速率，请联系我们的技术支持。
 
 
 ### `origin_follow_redirect`
@@ -516,7 +516,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_limit_rate rate;`<br>
-**默认设置：** `origin_limit_rate 0;`<br>
+**默认设置：** `origin_limit_rate 30m;`<br>
 **可用位置：** server, location
 
 该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制从源服务器读取正文的速度。
