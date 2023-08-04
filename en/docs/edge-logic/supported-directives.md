@@ -250,7 +250,7 @@ Denies access from the specified network or address. Usually used together with 
 **Default:** `-`<br/>
 **Context:** server, location
 
-This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The default read and send timeouts are set to 21s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
+This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2. The default read and send timeouts are set to 60s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -418,10 +418,10 @@ The first parameter sets a timeout during which a keep-alive client connection w
 <span class="badge">standard</span>
 
 **Syntax:** `limit_rate rate;` <br/>
-**Default:** `limit_rate 4m;` <br/>
+**Default:** `limit_rate 32m;` <br/>
 **Context:** server, location, if in location
 
-Limits the rate of response transmission to a client, in bytes/sec. Valid values are [0-32]m or [0-32768]k. The default setting is 4MByte/s.
+Limits the rate of response transmission to a client, in bytes/sec. Valid values are [0-32]m or [0-32768]k. The default setting is 32MByte/s.
 
 ### [`limit_rate_after`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate_after)
 
@@ -461,7 +461,7 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 **Default:** `origin_fast_route off;` <br/>
 **Context:** server, location, if in location
 
-This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic.
+This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic. The traffic such transferred is subject to a rate limit of 3 Mbps. Please contact our customer support if a higher limit is required.
 
 ### `origin_follow_redirect`
 
@@ -517,7 +517,7 @@ Although CDN Pro has a hierarchical cache structure, the directive changes the h
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_limit_rate rate;`<br>
-**Default:** `origin_limit_rate 0;`<br>
+**Default:** `origin_limit_rate 30m;`<br>
 **Context:** server, location
 
 This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server.
