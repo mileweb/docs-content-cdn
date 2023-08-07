@@ -1,5 +1,17 @@
 # Release Notes
 
+## August 4, 2023
+### API updates
+* Improved error handling of CSR download when there is a mismatch between the signature algorithms of the private key and certificate.
+* Returned a 404 status code if a purge or prefetch request is not found. This could happen because a valid request made in the past was cleaned up. We do not track requests older than 30 days.
+* Ensured that allowedResources remains unmodified when updating allowedOperations in an API permission.
+
+### Console updates
+* Fixed the erroneous appearance of a trial expiration message once the customer upgraded.
+* Ensured that DNS-01 challenge option works for wildcard certificates.
+* Added %apachet log configuration variable.
+
+
 ## July 19, 2023
 ### API updates
 * Added support for filtering and grouping by content codes in layer 7 report APIs. You can define values of $content_code in a property's loadBalancerLogic field.
