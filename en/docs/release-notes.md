@@ -1,5 +1,13 @@
 # Release Notes
 
+## August 17, 2023
+### API updates
+* Improved message returned if attempting to create a property with an invalid "maxConnections" value.
+* Added a type field in the response to API to get a certificate version.
+
+### Console updates
+* Improved reports’ filtering by service groups and enabled the user to select a time range to get traffic during a particular period of a day.
+
 ## August 4, 2023
 ### API updates
 * Improved error handling of CSR download when there is a mismatch between the signature algorithms of the private key and certificate.
