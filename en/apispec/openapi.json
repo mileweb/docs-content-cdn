@@ -6674,6 +6674,10 @@
                     "issuer": {
                       "type": "string",
                       "description": "Issuer of the certificate."
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Indicates the type of certificate, either \"uploaded\" or \"self-signed.\""
                     }
                   },
                   "required": [
@@ -6699,7 +6703,8 @@
                         "a.domain.com",
                         "b.domain.com"
                       ],
-                      "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA"
+                      "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA",
+                      "type": "uploaded"
                     }
                   }
                 }
