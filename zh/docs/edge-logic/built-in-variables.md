@@ -16,6 +16,7 @@
 | <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | 客户端IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次连接中包含的请求次数 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="content_code"></span><span class="var">$content_code</span> | 客户端所请求的内容的标识代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> 请求中 Content-Length 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="content_type"></span><span class="var">$content_type</span> | 请求中 Content-Type 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | 客户端请求中指定的 cookie 参数值。为了支持名称中包含小数点(.)的cookie，我们允许本变量名中出现该字符。这样在某些场合您会需要使用大括号{}来分隔本变量与紧跟其后的小数点符号。例如：$cookie_abc.test 和 ${cookie_abc.test} 都返回 abc.test 这个cookie的值，但是 ${cookie_abc}.test 将返回 abc 这个cookie的值外加“.test” 这个字符串 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
