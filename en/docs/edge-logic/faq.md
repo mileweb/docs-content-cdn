@@ -215,4 +215,8 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
 
+### How to identify traffic?
 
+When utilizing the CDN Pro network to deliver a broad range of content at the edge, you probably would like to be able to understand, in one way or another, the traffic served by CDN Pro. For instance, when there are multiple domains accelerated, you might want to know the traffic distribution across these domains. And, for the various types of content hosted under a specific domain, you may be interested in knowing which pieces of content are most frequently requested.
+
+Our report APIs enable you to easily gain insights into the traffic served by CDN Pro. Many of the APIs support the powerful `filters` and `groupBy` request parameters which can be used to tailor the reports to your specific needs. The `filters` parameter allows you to apply specific conditions to filter the report data, while the `groupBy` parameter helps grouping the data as needed. Say you want to check the breakdowns of traffic per domains, you can have such data by specifying "hostnames" or "propertyHostnames" in the 2 parameters. If you want to know what's the traffic like for specific properties, you can specify property ids using `filters.propertyIds`. If the need is to look at the amounts of traffic per server groups (for billing purpose for example), simply speficy "serverGroups" in the parameters when calling the report APIs.
