@@ -217,17 +217,17 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 ### How to identify traffic?
 
-When utilizing the CDN Pro network to deliver a broad range of content at the edge, you probably would like to be able to identify, in one way or another, the traffic served by CDN Pro. For instance, when there are multiple domains accelerated, you might want to understand the traffic distribution across these domains. And, for the various types of content hosted under a specific domain, you may be interested in knowing which pieces of content are most frequently requested.
+When utilizing the CDN Pro network to deliver a broad range of content at the edge, you probably would like to be able to identify, in one way or another, the traffic served by CDN Pro. For instance, when there are multiple domains accelerated, you might want to understand the traffic distribution across these domains. And, for the various segments of content hosted under a specific domain, you may be interested in knowing which pieces of content are most frequently requested.
 
-Our report APIs enable you to easily gain insights into the traffic served by CDN Pro. Many of the APIs support the powerful `filters` and `groupBy` request parameters which can be used to tailor the reports to your specific needs. The `filters` parameter allows you to apply specific conditions to filter the report data, while the `groupBy` parameter helps grouping the data as needed. Say you want to check the breakdowns of traffic per domains, you can obtain such data by specifying "hostnames" or "propertyHostnames" in the 2 parameters. If you want to get the traffic for specific properties, you can specify property ids using `filters.propertyIds`. And, if the need is to look at the amounts of traffic per server groups (for billing purpose for example), simply speficy "serverGroups" in the parameters when calling the report APIs.
+Our report APIs enable you to easily gain insights into the traffic served by CDN Pro. The powerful `filters` and `groupBy` request parameters supported by many of the report APIs can be leveraged to tailor the reports to your specific needs. The `filters` parameter allows you to apply specific conditions to filter the report data, while the `groupBy` parameter helps grouping the data as needed. Say you want to check the breakdowns of traffic per domains, you can obtain such data by specifying "hostnames" or "propertyHostnames" in the 2 parameters. If you want to get reports for specific properties, you can specify property ids using `filters.propertyIds`. If the need is to look at the amounts of traffic per server groups (for billing purpose for example), simply speficy "serverGroups" in the parameters when calling the report APIs.
 
-In general, the paremeters along with the options mentioned above shall already meet most of the needs. However, if you would like to take a closer look at the traffic, or if you want to tailor the reports in your own ways, consider using the **content code** feature. Basically, this feature allows you to assign your own codes to tag content. When CDN Pro edge servers process requests pertinent to a specific piece of content, the edge servers will map the traffic to the code assigned to that content. This then enables queries of report data based on such content codes. 
+In general, the paremeters along with the options mentioned above shall already meet most of the needs. However, if you would like to take a closer look at the traffic, or if you want to tailor the reports in your own ways, consider using the **content code** feature. Basically, this feature allows you to assign your own codes to tag content. When CDN Pro cache servers process requests pertinent to a specific piece of content, the servers will map the traffic to the code assigned to that content. This then enables queries of report data based on such content codes. 
 
 #### Assign codes to content
 
-CDN Pro allows you to assign codes to content by introducing a built-in variable `$content_code`. When you configure a property, you can assign codes to content by assigning value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>).
+CDN Pro allows you to assign codes to content by introducing a built-in variable `$content_code`. When you configure a property, you can assign codes to content by assigning value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
 
-You can assign codes on a per property basis. This is useful when you have properties that fall into several groups, and you want to view reports per groups. The following shows an example in which you group property A and B into group1 and property C into group2.
+You can assign codes on a per property basis. This is useful when you have properties that fall into several groups, and you want to get reports per groups. The following shows an example in which you group property A and B into group1 and property C into group2.
 
 ```
 # loadBalancerLogic for property A
@@ -242,8 +242,23 @@ set $content_code group1;
 set $content_code group2;
 ```
 
-The assignment of codes can also be applied to segments of content that is hosted under a specific property. In this case, assign codes to the variable `$content_code` based on conditions.
+The assignment of codes can also be applied to segments of content that is hosted under a specific property. In this case, assign codes to the variable `$content_code` based on conditions. The following shows an example in which you assign "abc" to content served under the /abc directory and "xyz" to content served under /xyz.
 
+```
+# loadBalancerLogic
+if ($uri ~ ^/abc(/|$)) {
+     set $content_code "abc";
+    }
+elif ($uri ~ ^/xyz(/|$)) {
+     set $content_code "xyz";
+}
+```
 
+> While we encourage you to make the most out of this **content code** feature to conveniently categorize your content, we also have in mind the potential for abuse. Therefore, we have imposed a restriction. The value assigned to the $content_code variable must be a literal string. The value cannot be another variable. Using the [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to set value for this variable is not allowed, either.
 
 #### Use content codes for multiple purposes
+
+* **Reporting**
+
+
+* **Realtime logging**
