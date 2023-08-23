@@ -68,6 +68,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | --------------------------| ---------------------------------------------------|
 | $body_bytes_sent             | Size of the response body.|
 | $bytes_sent                  | Size of the response, including body, headers, and response line.|
+| $content_code                | Code assigned to the content requested by client.|
 | $client_country_code         | ISO 3166-1 country code representing the country of the client request (for example, <b>US</b>). If the country is unknown, <b>ZZ</B> is returned.|
 | $client_real_ip              | IP address of the client request.|
 | $cookie_x                    | Obtains any cookie named <i>x</i>. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
