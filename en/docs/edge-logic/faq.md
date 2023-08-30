@@ -268,4 +268,4 @@ You can use these report APIs to get reports based on content codes. For instanc
 
 * **Realtime logging**
 
-The `$content_code` variable is also available to the [Real-Time Log](docs/portal/edge-configurations/creating-property#real-time-log) feature. Include this variable in your realtime log format to have access logs carrying this field streamed to your designated endpoint.
+The `$content_code` variable is also available to the [Real-Time Log](</docs/portal/edge-configurations/creating-property#real-time-log>) feature. Include this variable in your realtime log format to have access logs carrying this field streamed to your designated endpoint.
