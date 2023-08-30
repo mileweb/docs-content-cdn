@@ -215,9 +215,9 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
 
-### How to identify traffic?
+### How to classify traffic in reports based on custom rules?
 
-When utilizing the CDN Pro network to deliver a broad range of content at the edge, you probably would like to be able to identify, in one way or another, the traffic served by CDN Pro. For instance, when there are multiple domains accelerated, you might want to understand the traffic distribution across these domains. And, for the various segments of content hosted under a specific domain, you may be interested in knowing which pieces of content are most frequently requested.
+When utilizing the CDN Pro network to deliver a broad range of content at the edge, you probably would like to be able to identify, in one way or another, the traffic served by CDN Pro. For instance, when there are multiple domains accelerated, you might want to understand the traffic distribution across these domains. And, for the various segments of content hosted under a specific domain, you may be interested in a breakdown of traffic across different segments.
 
 Our report APIs enable you to easily gain insights into the traffic served by CDN Pro. The powerful `filters` and `groupBy` request parameters supported by many of the report APIs can be leveraged to tailor the reports to your specific needs. The `filters` parameter allows you to apply specific conditions to filter the report data, while the `groupBy` parameter allows you to segment the data. For example, if you want a breakdown of traffic by domain, you can obtain it by specifying "hostnames" or "propertyHostnames" in the 2 parameters. If you want to get reports for specific properties, you can specify property IDs using `filters.propertyIds`. If the need is to look at the amounts of traffic per server groups (for billing purpose for example), simply specify "serverGroups" in the parameters when calling the report APIs.
 
