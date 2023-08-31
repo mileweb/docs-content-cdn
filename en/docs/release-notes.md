@@ -1,5 +1,10 @@
 # Release Notes
 
+## August 30, 2023
+### API updates
+* Fixed calls to the customer list API resulting in a 500 HTTP response.
+* Updated certificate creation and update APIs to reject privateKey, certificate, and chainCert files containing lines more than 64 characters long.
+
 ## August 17, 2023
 ### API updates
 * Improved message returned if attempting to create a property with an invalid "maxConnections" value.

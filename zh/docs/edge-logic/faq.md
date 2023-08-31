@@ -188,3 +188,58 @@ POST /cdn/report/volSummary
 未经登录的API调用(如注册和登录尝试)会消耗来自客户端IP地址对应的令牌桶。该桶的默认容量为30个令牌，填充速率为每分钟60个。
 
 使用客户管理员账号对`configs.apiRate`和`configs.apiMaxBurst`的修改不会立即生效。通常需要10-15分钟的时间来改变填充速率并重新填充桶。
+
+### 如何在报表中对数据进行分类？
+
+当您利用CDN Pro的网络加速各种各样的内容时，您可能希望能够以某种方式识别在CDN Pro平台上分发的流量。例如，当有多个域名在平台进行加速时，您可能想了解这些域名的流量分布。当一个域名下有不同类型的内容时，您可能想了解哪些内容产生的流量最多。
+
+我们的报表API接口使您能够方便地深入了解CDN Pro所分发的流量。 API接口支持功能强大的`filters`和`groupBy`请求参数，您可使用这2个参数来根据您的特定需求定制报告。`filters`参数允许您使用特定条件来过滤报表数据，而`groupBy`参数则可以用来指定条件对数据进行分组汇总。假设您想按域名查看流量数据，您可以通过这两个参数指定“hostnames”或“propertyHostnames”进行查询。如果您想查询指定加速项目的流量数据，可以使用`filters.propertyIds`指定加速项目。如果需要按server group （节点组）查询流量，则只需在调用API接口时在参数中指定“serverGroups”即可。
+
+多数情况下，以上所提到的参数和支持的选项已经可以满足大部分需求。 如果您想更进一步查看流量数据，或者想以自己的方式定制报告，则可以使用**内容代码**功能。此功能允许您指定自定义的代码来标记内容。当CDN Pro缓存服务器处理请求时，服务器会以内容对应的代码对流量进行标记。 这样您就可以根据内容代码来查询报表数据。
+
+#### 指定自定义的代码对内容进行标记
+
+CDN Pro通过引入`$content_code`这个内置变量来实现对内容进行标记。 当您配置加速项目时，可以通过在**loadBalancerLogic**中为该变量赋值来对内容进行标记。 可以使用 [`set`](</docs/edge-logic/supported-directives.md#set>) 或 [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) 指令来进行赋值。
+
+您可以为加速项目指定内容代码。 当您创建了多个加速项目，您可以通过指定内容代码的方式对这些加速项目进行分组。下面的示例展示了将加速项目A和B归到group1这个组，将加速项目C归到group2这个组。
+
+```
+# loadBalancerLogic for property A
+set $content_code group1;
+```
+```
+# loadBalancerLogic for property B
+set $content_code group1;
+```
+```
+# loadBalancerLogic for property C
+set $content_code group2;
+```
+
+您也可以为具体的内容指定内容代码。 可以基于条件判断将内容代码赋值给变量`$content_code`。 下面显示了一个示例，对于/abc路径下提供的内容，标记为“abc”，对于/xyz路径下提供的内容，标记为“xyz”。
+
+```
+# loadBalancerLogic
+if ($uri ~ ^/abc(/|$)) {
+     set $content_code "abc";
+    }
+elif ($uri ~ ^/xyz(/|$)) {
+     set $content_code "xyz";
+}
+```
+
+> 我们鼓励您充分利用**内容代码**功能来方便地标记内容，识别流量。但为避免这个功能被滥用，我们加了一个限制，即赋值给$content_code 的值必须是一个字符串，不能是另一个变量。 也不允许使用 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令为此变量赋值。
+
+#### 在多种场景下使用内容代码
+
+* **报表查询**
+
+[查询7层流量](</apidocs#operation/post-cdn-report-volL7>)和[查询7层带宽](</apidocs#operation/post-cdn-report-bandwidthL7>)API接口支持在请求体中的`filters`参数指定“contentCodes”。 [查询7层流量汇总数据](</apidocs#operation/getVolL7Summary>)和[查询7层流量带宽汇总数据](</apidocs#operation/post-cdn-report-bandwidthL7Summary>)API接口支持在请求体中的`filters`和`groupBy`参数指定“contentCodes”。
+
+您可以使用这些API接口基于内容代码查询报表数据。例如，如果您需要查询以“abc”和“xyz”为标识的内容所产生的流量的明细，可调用“查询7层流量”接口，在请求体中指定`{"filters":{"contentCodes":["abc","xyz"]}}`。如果您需要查询同样的内容所产生的流量的汇总数据，则可调用“查询7层流量汇总数据”接口，在请求体中指定`{"filters":{"contentCodes":["abc","xyz"]},"groupBy":["contentCodes"]}`。
+
+> 正如接口名称所示，以上API接口仅返回7层流量数据。 返回的数据不包括TCP/IP/MAC开销。
+
+* **实时日志**
+
+`$content_code`变量也可以在[实时日志](</docs/portal/edge-configurations/creating-property#real-time-log>)中使用。在日志格式中加上该变量，即可将携带此字段的访问日志实时地传输到您指定的日志服务器。

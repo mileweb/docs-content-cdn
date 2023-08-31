@@ -215,4 +215,57 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
 
+### How to classify traffic in reports based on custom rules?
 
+When utilizing the CDN Pro network to deliver a broad range of content at the edge, you probably would like to be able to identify, in one way or another, the traffic served by CDN Pro. For instance, when there are multiple domains accelerated, you might want to understand the traffic distribution across these domains. And, for the various segments of content hosted under a specific domain, you may be interested in a breakdown of traffic across different segments.
+
+Our report APIs enable you to easily gain insights into the traffic served by CDN Pro. The powerful `filters` and `groupBy` request parameters supported by many of the report APIs can be leveraged to tailor the reports to your specific needs. The `filters` parameter allows you to apply specific conditions to filter the report data, while the `groupBy` parameter allows you to segment the data. For example, if you want a breakdown of traffic by domain, you can obtain it by specifying "hostnames" or "propertyHostnames" in the 2 parameters. If you want to get reports for specific properties, you can specify property IDs using `filters.propertyIds`. If the need is to look at the amounts of traffic per server groups (for billing purpose for example), simply specify "serverGroups" in the parameters when calling the report APIs.
+
+In general, the parameters along with the options mentioned above can meet most requirements. However, if you would like to take a closer look at the traffic, or if you want to tailor the reports in your own way, consider using the **content code** feature. Basically, this feature allows you to assign your own codes to tag content. Then, when CDN Pro cache servers process requests pertinent to a specific piece of content, the servers will map the traffic to the code assigned to that content. This enables queries of report data based on such content codes. 
+
+#### Assign codes to content
+
+CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning a value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
+
+You can assign codes on a per property basis. This is useful if you have properties belonging to different groups, and you want to get reports based on the groups. The following is an example where properties A and B belong to group1 and property C belongs to group2.
+
+```
+# loadBalancerLogic for property A
+set $content_code "group1";
+```
+```
+# loadBalancerLogic for property B
+set $content_code "group1";
+```
+```
+# loadBalancerLogic for property C
+set $content_code "group2";
+```
+
+The assignment of codes can also be applied to segments of content that are hosted under a specific property. In this case, assign codes to the variable `$content_code` based on conditions. The following shows an example in which you assign "abc" to content served under the /abc directory and "xyz" to content served under /xyz.
+
+```
+# loadBalancerLogic
+if ($uri ~ ^/abc(/|$)) {
+     set $content_code "abc";
+    }
+elif ($uri ~ ^/xyz(/|$)) {
+     set $content_code "xyz";
+}
+```
+
+> While we encourage you to make the most out of this **content code** feature to conveniently tag your content and then identify traffic, there remains the potential for abuse. Therefore, a restriction has been imposed: the value assigned to the $content_code variable must be a literal string. The value cannot be another variable. Using the [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) directive to set a value for this variable is not allowed, either.
+
+#### Use content codes for multiple purposes
+
+* **Reporting**
+
+The [GET layer 7 traffic volume](</apidocs#operation/post-cdn-report-volL7>) and [GET layer 7 traffic bandwidth](</apidocs#operation/post-cdn-report-bandwidthL7>) report APIs accept "contentCodes" in the `filters` parameter in the request body. The [GET summary of layer 7 traffic volume](</apidocs#operation/getVolL7Summary>) and [GET summary of layer 7 traffic bandwidth](</apidocs#operation/post-cdn-report-bandwidthL7Summary>) report APIs accept "contentCodes" in the `filters` and `groupBy` parameters in the request body. 
+
+You can use these report APIs to get reports based on content codes. For instance, if you need a time series report of traffic volume for the content which is identified by the codes "abc" and "xyz", make a request to the "GET layer 7 traffic volume" API with `{"filters":{"contentCodes":["abc","xyz"]}}` in the request body. If you want a summary report of traffic volume for the same content,  make a request to the "GET summary of layer 7 traffic volume" API with `{"filters":{"contentCodes":["abc","xyz"]},"groupBy":["contentCodes"]}` in the request body.
+
+> As the names indicate, the APIs return layer 7 traffic only. The data returned does not include TCP, IP, and MAC overheads.
+
+* **Realtime logging**
+
+The `$content_code` variable is also available to the [Real-Time Log](</docs/portal/edge-configurations/creating-property#real-time-log>) feature. Include this variable in your realtime log format to have access logs carrying this field streamed to your designated endpoint.

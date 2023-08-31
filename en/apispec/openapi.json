@@ -88,9 +88,6 @@
                       }
                     }
                   },
-                  "x-tags": [
-                    "Property Management"
-                  ],
                   "properties": {
                     "version": {
                       "type": "integer"
@@ -123,9 +120,6 @@
                           }
                         }
                       },
-                      "x-tags": [
-                        "Property Management"
-                      ],
                       "properties": {
                         "description": {
                           "type": "string",
@@ -849,9 +843,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Property Management"
-                ],
                 "properties": {
                   "description": {
                     "type": "string",
@@ -1906,9 +1897,6 @@
                                 "weight": 10
                               }
                             },
-                            "x-tags": [
-                              "Edge Hostname Management"
-                            ],
                             "properties": {
                               "region": {
                                 "type": "string",
@@ -2297,9 +2285,6 @@
                           "weight": 10
                         }
                       },
-                      "x-tags": [
-                        "Edge Hostname Management"
-                      ],
                       "properties": {
                         "region": {
                           "type": "string",
@@ -2583,9 +2568,6 @@
                           "weight": 10
                         }
                       },
-                      "x-tags": [
-                        "Edge Hostname Management"
-                      ],
                       "properties": {
                         "region": {
                           "type": "string",
@@ -2823,16 +2805,28 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid list limit": {
                     "value": {
                       "code": "InvalidListLimit",
                       "message": "The value of limit should be between 1 and 200, inclusive."
                     }
                   },
-                  "example-2": {
+                  "Invalid list offset": {
                     "value": {
                       "code": "InvalidListOffset",
                       "message": "The offset must be a valid non-negative integer."
+                    }
+                  },
+                  "Invalid sort order": {
+                    "value": {
+                      "code": "InvalidSortOrder",
+                      "message": "The valid sort order values are asc and desc."
+                    }
+                  },
+                  "Invalid sort by": {
+                    "value": {
+                      "code": "InvalidSortBy",
+                      "message": "The valid sort by values for this endpoint are 'version', 'lastUpdateTime'."
                     }
                   }
                 }
@@ -2903,6 +2897,32 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "version",
+                "lastUpdateTime"
+              ],
+              "default": "version"
+            },
+            "in": "query",
+            "name": "sortBy",
+            "description": "Returns results in sorted order."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "asc"
+            },
+            "in": "query",
+            "name": "sortOrder",
+            "description": "Order of property versions to return, either ascending, represented by 'asc', or descending, represented by 'desc' ."
           }
         ]
       },
@@ -3070,9 +3090,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Property Management"
-                ],
                 "properties": {
                   "description": {
                     "type": "string",
@@ -3735,9 +3752,6 @@
                         }
                       }
                     },
-                    "x-tags": [
-                      "Property Management"
-                    ],
                     "properties": {
                       "description": {
                         "type": "string",
@@ -4309,9 +4323,6 @@
                             }
                           }
                         },
-                        "x-tags": [
-                          "Property Management"
-                        ],
                         "properties": {
                           "id": {
                             "type": "string",
@@ -4815,9 +4826,6 @@
                           "weight": 10
                         }
                       },
-                      "x-tags": [
-                        "Edge Hostname Management"
-                      ],
                       "properties": {
                         "region": {
                           "type": "string",
@@ -5334,7 +5342,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -5351,9 +5359,6 @@
                         "x-examples": {
                           "example-1": {}
                         },
-                        "x-tags": [
-                          "Certificate Management"
-                        ],
                         "properties": {
                           "country": {
                             "type": "string",
@@ -6228,9 +6233,6 @@
                         "x-examples": {
                           "example-1": {}
                         },
-                        "x-tags": [
-                          "Certificate Management"
-                        ],
                         "properties": {
                           "country": {
                             "type": "string",
@@ -7787,10 +7789,7 @@
                           "description": "Indicates the version of the certificate or property to deploy or remove."
                         }
                       }
-                    },
-                    "x-tags": [
-                      "Deployment Management"
-                    ]
+                    }
                   },
                   "webhook": {
                     "type": "string",
@@ -8005,10 +8004,7 @@
                             "description": "Indicates the version of the certificate or property to deploy or remove."
                           }
                         }
-                      },
-                      "x-tags": [
-                        "Deployment Management"
-                      ]
+                      }
                     },
                     "target": {
                       "type": "string",
@@ -8184,9 +8180,6 @@
                             }
                           }
                         },
-                        "x-tags": [
-                          "Deployment Management"
-                        ],
                         "description": "This object summarizes a hostname that has been deployed.",
                         "properties": {
                           "hostname": {
@@ -8426,9 +8419,6 @@
                       }
                     }
                   },
-                  "x-tags": [
-                    "Deployment Management"
-                  ],
                   "description": "This object summarizes a hostname that has been deployed.",
                   "properties": {
                     "hostname": {
@@ -8798,9 +8788,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -8937,9 +8924,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -9017,9 +9001,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -9274,9 +9255,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -9657,9 +9635,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -9789,9 +9764,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -10050,9 +10022,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -10183,9 +10152,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -10341,9 +10307,6 @@
                 "schema": {
                   "title": "statuscodedetails",
                   "type": "object",
-                  "x-tags": [
-                    "Reports"
-                  ],
                   "description": "This object is returned by status code details report APIs.",
                   "properties": {
                     "dataName": {
@@ -10772,9 +10735,6 @@
               "schema": {
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
@@ -11006,9 +10966,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -11263,9 +11220,6 @@
                 "schema": {
                   "title": "statuscodedetails",
                   "type": "object",
-                  "x-tags": [
-                    "Reports"
-                  ],
                   "description": "This object is returned by status code details report APIs.",
                   "properties": {
                     "dataName": {
@@ -11754,9 +11708,6 @@
               "schema": {
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
@@ -11988,9 +11939,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -12184,9 +12132,6 @@
               "schema": {
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
@@ -12345,9 +12290,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -12468,9 +12410,6 @@
               "schema": {
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
@@ -13493,9 +13432,6 @@
               "schema": {
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
@@ -14774,9 +14710,6 @@
                   "id": "dw3ijyzk3shdf"
                 },
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
@@ -17609,9 +17542,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -18921,9 +18851,6 @@
                       "title": "customerPortalSettings",
                       "type": "object",
                       "description": "These settings apply to your users accessing the CDN Pro portal.",
-                      "x-tags": [
-                        "Customer Management"
-                      ],
                       "properties": {
                         "enforce2fa": {
                           "type": "boolean",
@@ -19329,9 +19256,6 @@
                       "title": "customerPortalSettings",
                       "type": "object",
                       "description": "These settings apply to your users accessing the CDN Pro portal.",
-                      "x-tags": [
-                        "Customer Management"
-                      ],
                       "properties": {
                         "enforce2fa": {
                           "type": "boolean",
@@ -19679,9 +19603,6 @@
                     "title": "customerPortalSettings",
                     "type": "object",
                     "description": "These settings apply to your users accessing the CDN Pro portal.",
-                    "x-tags": [
-                      "Customer Management"
-                    ],
                     "properties": {
                       "enforce2fa": {
                         "type": "boolean",
@@ -20136,9 +20057,6 @@
                       "title": "customerPortalSettings",
                       "type": "object",
                       "description": "These settings apply to your users accessing the CDN Pro portal.",
-                      "x-tags": [
-                        "Customer Management"
-                      ],
                       "properties": {
                         "enforce2fa": {
                           "type": "boolean",
@@ -20396,9 +20314,6 @@
                     "title": "customerPortalSettings",
                     "type": "object",
                     "description": "These settings apply to your users accessing the CDN Pro portal.",
-                    "x-tags": [
-                      "Customer Management"
-                    ],
                     "properties": {
                       "enforce2fa": {
                         "type": "boolean",
@@ -22164,9 +22079,6 @@
                   "directiveParameterLimits": {
                     "title": "directiveParameterLimits",
                     "type": "object",
-                    "x-tags": [
-                      "CDN Product Management"
-                    ],
                     "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
@@ -22599,9 +22511,6 @@
                       "billUsingStripe": false
                     }
                   },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
                   "properties": {
                     "serviceQuotaId": {
                       "type": "string",
@@ -22725,9 +22634,6 @@
                     "directiveParameterLimits": {
                       "title": "directiveParameterLimits",
                       "type": "object",
-                      "x-tags": [
-                        "CDN Product Management"
-                      ],
                       "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
@@ -23056,9 +22962,6 @@
                 "title": "updateServiceQuotaBody",
                 "type": "object",
                 "description": "This object contains the fields of the service quota that can be updated.",
-                "x-tags": [
-                  "CDN Product Management"
-                ],
                 "properties": {
                   "contractId": {
                     "type": "string",
@@ -23166,9 +23069,6 @@
                   "directiveParameterLimits": {
                     "title": "directiveParameterLimits",
                     "type": "object",
-                    "x-tags": [
-                      "CDN Product Management"
-                    ],
                     "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
@@ -23525,9 +23425,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -23645,9 +23542,6 @@
               "schema": {
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
@@ -23877,9 +23771,6 @@
                     }
                   }
                 },
-                "x-tags": [
-                  "Reports"
-                ],
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -24000,9 +23891,6 @@
                       "billUsingStripe": false
                     }
                   },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
                   "properties": {
                     "serviceQuotaId": {
                       "type": "string",
@@ -24126,9 +24014,6 @@
                     "directiveParameterLimits": {
                       "title": "directiveParameterLimits",
                       "type": "object",
-                      "x-tags": [
-                        "CDN Product Management"
-                      ],
                       "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
@@ -24364,9 +24249,6 @@
                       "billUsingStripe": false
                     }
                   },
-                  "x-tags": [
-                    "CDN Product Management"
-                  ],
                   "properties": {
                     "serviceQuotaId": {
                       "type": "string",
@@ -24490,9 +24372,6 @@
                     "directiveParameterLimits": {
                       "title": "directiveParameterLimits",
                       "type": "object",
-                      "x-tags": [
-                        "CDN Product Management"
-                      ],
                       "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                       "properties": {
                         "maxLimitRate": {
@@ -24726,9 +24605,6 @@
                 "title": "updateServiceQuotaBody",
                 "type": "object",
                 "description": "This object contains the fields of the service quota that can be updated.",
-                "x-tags": [
-                  "CDN Product Management"
-                ],
                 "properties": {
                   "contractId": {
                     "type": "string",
@@ -24836,9 +24712,6 @@
                   "directiveParameterLimits": {
                     "title": "directiveParameterLimits",
                     "type": "object",
-                    "x-tags": [
-                      "CDN Product Management"
-                    ],
                     "description": "Contains limits on values of Edge Logic directives. These override the default maximums.",
                     "properties": {
                       "maxLimitRate": {
@@ -25168,9 +25041,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -27223,8 +27093,15 @@
                         }
                       }
                     }
+                  },
+                  "apiAccountId": {
+                    "type": "string",
+                    "description": "ID of an API account."
                   }
-                }
+                },
+                "required": [
+                  "apiAccountId"
+                ]
               }
             }
           },
@@ -27494,9 +27371,6 @@
                   "id": "dw3ijyzk3shdf"
                 },
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
@@ -30716,9 +30590,6 @@
               "schema": {
                 "title": "reportfiltersummary",
                 "type": "object",
-                "x-tags": [
-                  "Reports"
-                ],
                 "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
                 "x-examples": {
                   "Filter by a specific hostname": {
@@ -32974,7 +32845,7 @@
                   }
                 },
                 "examples": {
-                  "DuplicateName": {
+                  "Duplicate name": {
                     "value": {
                       "code": "DuplicateName",
                       "message": "The customer already has a logAggregationPoint with the same name."
@@ -33663,9 +33534,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {
@@ -33926,9 +33794,6 @@
                   },
                   "required": [
                     "dataName"
-                  ],
-                  "x-tags": [
-                    "Reports"
                   ]
                 },
                 "examples": {

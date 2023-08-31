@@ -68,6 +68,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | --------------------------| ---------------------------------------------------|
 | $body_bytes_sent             | Size of the response body.|
 | $bytes_sent                  | Size of the response, including body, headers, and response line.|
+| $content_code                | A code assigned to content for reporting and billing purposes.|
 | $client_country_code         | ISO 3166-1 country code representing the country of the client request (for example, <b>US</b>). If the country is unknown, <b>ZZ</B> is returned.|
 | $client_real_ip              | IP address of the client request.|
 | $cookie_x                    | Obtains any cookie named <i>x</i>. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
@@ -76,10 +77,10 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $qtl_req_id                  | Unique identifier representing the request. |
 | $request_uri                 | HTTP request URI. |
 | $request_method              | HTTP request method used to access the origin. |
+| $request_scheme                      | Protocol of the user's request (either <b>http</b> or <b>https</b>).</br> |
 | $request_time                | Response time in milliseconds. This is the time between receiving the request's first byte and serving the last byte of the response. |
 | $sc_completed                | 1 = last byte of the object was served to the user.<br>Otherwise, 0.</br> |
 | $sc_initial                  | 1 = first byte of the object was served to the user. <br>Otherwise, 0.</br> |
-| $scheme                      | Protocol of the user's request (either <b>http</b> or <b>https</b>).</br> |
 | $sent_http_content_length    | Original file size. |
 | $sent_http_x                 | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
 | $server_addr                 | IP address of the edge node serving the user's request. |
