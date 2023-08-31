@@ -225,7 +225,7 @@ In general, the parameters along with the options mentioned above can meet most 
 
 #### Assign codes to content
 
-CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
+CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning a value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
 
 You can assign codes on a per property basis. This is useful if you have properties belonging to different groups, and you want to get reports based on the groups. The following is an example where properties A and B belong to group1 and property C belongs to group2.
 
@@ -268,4 +268,4 @@ You can use these report APIs to get reports based on content codes. For instanc
 
 * **Realtime logging**
 
-The `$content_code` variable is also available to the [Real-Time Log](docs/portal/edge-configurations/creating-property#real-time-log) feature. Include this variable in your realtime log format to have access logs carrying this field streamed to your designated endpoint.
+The `$content_code` variable is also available to the [Real-Time Log](</docs/portal/edge-configurations/creating-property#real-time-log>) feature. Include this variable in your realtime log format to have access logs carrying this field streamed to your designated endpoint.
