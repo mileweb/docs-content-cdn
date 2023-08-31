@@ -225,7 +225,7 @@ In general, the parameters along with the options mentioned above can meet most 
 
 #### Assign codes to content
 
-CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
+CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning a value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
 
 You can assign codes on a per property basis. This is useful if you have properties belonging to different groups, and you want to get reports based on the groups. The following is an example where properties A and B belong to group1 and property C belongs to group2.
 
