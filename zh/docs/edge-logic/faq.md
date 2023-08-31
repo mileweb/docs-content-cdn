@@ -242,4 +242,4 @@ elif ($uri ~ ^/xyz(/|$)) {
 
 * **实时日志**
 
-`$content_code`变量也可以在[实时日志](docs/portal/edge-configurations/creating-property#real-time-log)中使用。在日志格式中加上该变量，即可将携带此字段的访问日志实时地传输到您指定的日志服务器。
+`$content_code`变量也可以在[实时日志](</docs/portal/edge-configurations/creating-property#real-time-log>)中使用。在日志格式中加上该变量，即可将携带此字段的访问日志实时地传输到您指定的日志服务器。
