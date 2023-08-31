@@ -77,10 +77,10 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $qtl_req_id                  | Unique identifier representing the request. |
 | $request_uri                 | HTTP request URI. |
 | $request_method              | HTTP request method used to access the origin. |
+| $request_scheme                      | Protocol of the user's request (either <b>http</b> or <b>https</b>).</br> |
 | $request_time                | Response time in milliseconds. This is the time between receiving the request's first byte and serving the last byte of the response. |
 | $sc_completed                | 1 = last byte of the object was served to the user.<br>Otherwise, 0.</br> |
 | $sc_initial                  | 1 = first byte of the object was served to the user. <br>Otherwise, 0.</br> |
-| $scheme                      | Protocol of the user's request (either <b>http</b> or <b>https</b>).</br> |
 | $sent_http_content_length    | Original file size. |
 | $sent_http_x                 | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
 | $server_addr                 | IP address of the edge node serving the user's request. |
