@@ -229,22 +229,22 @@ CDN Pro allows you to assign codes to content by introducing a built-in variable
 
 You can assign codes on a per property basis. This is useful if you have properties belonging to different groups, and you want to get reports based on the groups. The following is an example where properties A and B belong to group1 and property C belongs to group2.
 
-```
+```nginx
 # loadBalancerLogic for property A
 set $content_code "group1";
 ```
-```
+```nginx
 # loadBalancerLogic for property B
 set $content_code "group1";
 ```
-```
+```nginx
 # loadBalancerLogic for property C
 set $content_code "group2";
 ```
 
 The assignment of codes can also be applied to segments of content that are hosted under a specific property. In this case, assign codes to the variable `$content_code` based on conditions. The following shows an example in which you assign "abc" to content served under the /abc directory and "xyz" to content served under /xyz.
 
-```
+```nginx
 # loadBalancerLogic
 if ($uri ~ ^/abc(/|$)) {
      set $content_code "abc";
