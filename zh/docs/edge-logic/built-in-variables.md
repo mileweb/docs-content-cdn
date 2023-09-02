@@ -1,6 +1,6 @@
 ## 内置变量
 
-下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。另外在下表中<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
+下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。除非在描述中特别说明，表中所有的变量都是只读的。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
 | **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
 | ---- | ---- | ---- | ---- |
@@ -16,7 +16,7 @@
 | <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | 客户端IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次连接中包含的请求次数 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="content_code"></span><span class="var">$content_code</span> | 内容标志代码，可以在报表中对流量进行分类 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="content_code"></span><span class="var">$content_code</span> | 一个可写的变量，对内容赋予标志代码，用来[在报表中对流量进行分类](/docs/edge-logic/faq#如何在报表中对数据进行分类) | <span class="badge green">R/W</span> | <span class="badge green">R/W</span> |
 | <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> 请求中 Content-Length 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="content_type"></span><span class="var">$content_type</span> | 请求中 Content-Type 头部的值 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | 客户端请求中指定的 cookie 参数值。为了支持名称中包含小数点(.)的cookie，我们允许本变量名中出现该字符。这样在某些场合您会需要使用大括号{}来分隔本变量与紧跟其后的小数点符号。例如：$cookie_abc.test 和 ${cookie_abc.test} 都返回 abc.test 这个cookie的值，但是 ${cookie_abc}.test 将返回 abc 这个cookie的值外加“.test” 这个字符串 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -43,7 +43,7 @@
 | <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 请求的唯一标识 ID | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | [缓存状态](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="random_N"></span><span class="var">$random_N</span> |<span class="badge small" title="numerical value">#</span> 一个[0, N-1]之内的随机整数，N范围是[2,1e9]| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样参数，值为 N 代表每N个请求会生产1条实时日志| <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样参数，值为 N 代表每N个请求会生产1条实时日志。可以通过写入这个变量来[取代默认采样率](/docs/edge-logic/supported-directives#realtime_log_downsample)。| <span class="badge yellow">No</span> | <span class="badge green">R/W</span> |
 | <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样率， $realtime_log_ds_factor 的倒数，值为介于0~1之间的小数。 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="remote_user"></span><span class="var">$remote_user</span> | 当使用[基础鉴权](https://datatracker.ietf.org/doc/html/rfc7617)时，从Authorization请求头中提取的用户名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request"></span><span class="var">$request</span> | 完整的 http 请求行 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
