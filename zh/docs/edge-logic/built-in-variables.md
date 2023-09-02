@@ -1,6 +1,6 @@
 ## 内置变量
 
-下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。除非在描述中特别说明，表中所有的变量都是只读的。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
+下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。表中的大多数变量都是只读的，只有那些标记为<span class="badge green">R/W</span>的变量可写。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
 | **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
 | ---- | ---- | ---- | ---- |
@@ -8,7 +8,7 @@
 | <span id="args"></span><span class="var">$args</span> | 请求 URL 中所有问号后参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="body_bytes_sent"></span><span class="var">$body_bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的文件 body 大小 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的数据大小（包含 header ） | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
-| <span id="cache_misc"></span><span class="var">$cache_misc</span> | 添加到缓存 key 中的参数 | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
+| <span id="cache_misc"></span><span class="var">$cache_misc</span> | 添加到缓存 key 中的参数 | <span class="badge green">R/W</span> | <span class="badge yellow">No</span> |
 | <span id="client_country_code"></span><span class="var">$client_country_code</span> | 客户端的国家码（ISO 3166 格式） | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | 客户端请求的 HTTP 协议版本，例如 "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> 客户端IP 版本：4代表 IPv4 ；6代表 IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
