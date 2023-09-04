@@ -989,7 +989,7 @@ A restriction of this directive is that it works only when body size is less tha
 This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While this directive looks very similar to the [`set`](#set) directive, it differs in when it is executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore, the `value` can have information contained in the response header (after being modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
 ```nginx
 set $cache_time 1d; # by default, cache for 1 day
-# if origin responds with a "cachetime" header, use it to  the default
+# if origin responds with a "cachetime" header, use it to override the default
 proxy_set $cache_time $upstream_http_cachetime if($upstream_http_cachetime);
 proxy_cache_valid $cache_time;
 # extract a part from the origin's response header and send to client
