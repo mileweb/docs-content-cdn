@@ -223,7 +223,7 @@ set $content_code group2;
 if ($uri ~ ^/abc(/|$)) {
      set $content_code "abc";
     }
-elif ($uri ~ ^/xyz(/|$)) {
+elseif ($uri ~ ^/xyz(/|$)) {
      set $content_code "xyz";
 }
 ```
