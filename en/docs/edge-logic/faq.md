@@ -249,7 +249,7 @@ The assignment of codes can also be applied to segments of content that are host
 if ($uri ~ ^/abc(/|$)) {
      set $content_code "abc";
     }
-elif ($uri ~ ^/xyz(/|$)) {
+elseif ($uri ~ ^/xyz(/|$)) {
      set $content_code "xyz";
 }
 ```
