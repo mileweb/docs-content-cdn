@@ -1,5 +1,16 @@
 # Release Notes
 
+## September 8, 2023
+#### API updates
+* Ensured CDN Pro trial warning email is sent in the customer’s preferred language.
+* Allowed all API accounts to access supported [regions](</apidocs/#operation/get-cdn-clientRegions>) and [ISPs](</apidocs#operation/get-cdn-publicIpList>).
+* Added support for filtering by server groups to the following report APIs: [fast origin requests](</apidocs#operation/post-cdn-report-fastOriginReq>), [status code details](</apidocs#operation/getEdgeStatusCodeDetails>), and [origin status code details](</apidocs#operation/getOriginStatusCodeDetails>).
+* Fixed HTTP response code when updating an API account.
+* Fixed response to [L7 bandwidth summary report](</apidocs#operation/post-cdn-report-bandwidthL7Summary>) when an invalid hostname is specified.
+
+#### Console updates
+* Highlighted traffic within the user-specified time range in traffic volume and request reports.
+
 ## August 30, 2023
 #### API updates
 * Fixed calls to the customer list API resulting in a 500 HTTP response.
