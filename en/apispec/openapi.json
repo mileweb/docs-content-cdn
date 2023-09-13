@@ -1837,11 +1837,6 @@
                           "type": "string",
                           "description": "An edge hostname."
                         },
-                        "pciRequired": {
-                          "type": "boolean",
-                          "default": false,
-                          "description": "Indicates whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
-                        },
                         "description": {
                           "type": "string",
                           "description": "A description of the edge hostname."
@@ -1900,7 +1895,7 @@
                             "properties": {
                               "region": {
                                 "type": "string",
-                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
+                                "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".\n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                               },
                               "weight": {
                                 "type": "integer",
@@ -1959,7 +1954,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                                "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                               }
                             },
                             "required": [
@@ -2231,14 +2226,6 @@
                     "type": "string",
                     "description": "A description of the edge hostname."
                   },
-                  "pciRequired": {
-                    "type": "boolean",
-                    "description": "Whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
-                  },
-                  "gdprCompliant": {
-                    "type": "boolean",
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
-                  },
                   "clientZones": {
                     "type": "array",
                     "description": "Specify rules to control how requests from client zones are handled. You must create at least one rule covering all regions and all ISPs. For example, if you have access to the standard, premium, deluxe, and ultra server groups, you could create this rule allowing several of our server groups to handle requests and achieve the best possible performance:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>.<br/>If potential cost is a greater concern, you can choose different server groups to balance your cost and performance requirements.",
@@ -2288,7 +2275,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".\n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -2347,7 +2334,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -2514,14 +2501,6 @@
                     "type": "string",
                     "description": "A description of the edge hostname."
                   },
-                  "pciRequired": {
-                    "type": "boolean",
-                    "description": "Whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
-                  },
-                  "grprCompliant": {
-                    "type": "boolean",
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
-                  },
                   "clientZones": {
                     "type": "array",
                     "description": "Specify rules to control how requests from client zones are handled. You must create at least one rule covering all regions and all ISPs. For example, if you have access to the standard, premium, deluxe, and ultra server groups, you could create this rule allowing several of our server groups to handle requests and achieve the best possible performance:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>.<br/>If potential cost is a greater concern, you can choose different server groups to balance your cost and performance requirements.",
@@ -2571,7 +2550,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".\n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -2630,7 +2609,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -4770,16 +4749,6 @@
                     "type": "string",
                     "description": "A description of the edge hostname."
                   },
-                  "pciRequired": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Indicates whether PCI compliance is required.  <i>true</i> means content will only be served by PCI certified PoPs."
-                  },
-                  "gdprCompliant": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "If set to 'true', clients from European Economic Area (EEA) countries will only be served by IP addresses in EEA countries."
-                  },
                   "clientZones": {
                     "type": "array",
                     "description": "Specify rules to control how requests from client zones are handled. You must create at least one rule covering all regions and all ISPs. For example, if you have access to the standard, premium, deluxe, and ultra server groups, you could create this rule allowing several of our server groups to handle requests and achieve the best possible performance:\n<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\",\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>.<br/>If potential cost is a greater concern, you can choose different server groups to balance your cost and performance requirements.",
@@ -4829,7 +4798,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".  \n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
+                          "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".\n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
                         },
                         "weight": {
                           "type": "integer",
@@ -4888,7 +4857,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-edgeHostnames-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                          "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
                         }
                       },
                       "required": [
@@ -10733,9 +10702,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Example 1": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.com"
+                      ],
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    }
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -10746,16 +10725,23 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
+                        }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -11706,9 +11692,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Example 1": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.com"
+                      ],
+                      "serverGroups": [
+                        "standard"
+                      ]
+                    }
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -11719,16 +11715,23 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
+                        }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -16044,7 +16047,7 @@
           "API Account Management"
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The account was successfully updated.",
             "content": {
               "application/json": {
@@ -18362,12 +18365,9 @@
         ]
       }
     },
-    "/cdn/edgeHostnames/isps": {
+    "/cdn/isps": {
       "get": {
         "summary": "Get a list of ISPs",
-        "tags": [
-          "Edge Hostname Management"
-        ],
         "responses": {
           "200": {
             "description": "The response contains a list of ISPs. You can specify an ISP's code in an <a href=\"#operation/createEdgeHostname\">edge hostname's client zone rule</a>.",
@@ -18582,7 +18582,7 @@
             }
           }
         },
-        "operationId": "get-cdn-edgeHostnames-isps",
+        "operationId": "get-cdn-isps",
         "description": "Obtain a list of ISPs that can be used in <a href=\"#operation/createEdgeHostname\">edge hostname client zone rules</a>.",
         "parameters": [
           {
@@ -18612,10 +18612,14 @@
             },
             "in": "query",
             "name": "regionCode",
-            "description": "Limit returned ISPs to those operating in a particular region. The value of <i>regionCode</i> should be one of the codes representing a region returned by the <a href=\"#operation/get-cdn-edgeHostnames-clientRegions\">client regions API</a>."
+            "description": "Limit returned ISPs to those operating in a particular region. The value of <i>regionCode</i> should be one of the codes representing a region returned by the <a href=\"#operation/get-cdn-clientRegions\">client regions API</a>."
           }
+        ],
+        "tags": [
+          "CDN Product Management"
         ]
-      }
+      },
+      "parameters": []
     },
     "/ngadmin/customers/{id}": {
       "parameters": [
@@ -20939,11 +20943,11 @@
         ]
       }
     },
-    "/cdn/edgeHostnames/clientRegions": {
+    "/cdn/clientRegions": {
       "get": {
         "summary": "Get client regions",
         "tags": [
-          "Edge Hostname Management"
+          "CDN Product Management"
         ],
         "responses": {
           "200": {
@@ -21022,7 +21026,7 @@
             }
           }
         },
-        "operationId": "get-cdn-edgeHostnames-clientRegions",
+        "operationId": "get-cdn-clientRegions",
         "description": "Get a list of client regions that can be used in <a href=\"#operation/createEdgeHostname\">edge hostname client zone rules</a>. Query parameters allow you to filter and sort the results.",
         "parameters": [
           {
@@ -21052,7 +21056,7 @@
             },
             "in": "query",
             "name": "ispCode",
-            "description": "Limit the returned regions to those where an ISP operates. The value should be one of the ISP codes returned by the <a href=\"#operation/get-cdn-edgeHostnames-isps\">ISPs API</a>."
+            "description": "Limit the returned regions to those where an ISP operates. The value should be one of the ISP codes returned by the <a href=\"#operation/get-cdn-isps\">ISPs API</a>."
           }
         ]
       }
@@ -21571,10 +21575,6 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "minimumSupportedCacheVersion": {
-                      "type": "string",
-                      "description": "The minimum version of the cache server required to validate and deploy properties."
-                    },
                     "baseDirectives": {
                       "type": "array",
                       "description": "A list of Edge Logic directives that are available to everyone.",
@@ -21695,7 +21695,6 @@
                     }
                   },
                   "required": [
-                    "minimumSupportedCacheVersion",
                     "baseDirectives",
                     "advancedDirectives",
                     "publishedPrice",
@@ -21705,7 +21704,6 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "minimumSupportedCacheVersion": "1.18.0.1.2.07",
                       "baseDirectives": [
                         "access_log_downsample",
                         "add_trailer",
@@ -23540,9 +23538,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -23550,19 +23546,24 @@
                       "hostnames": {
                         "type": "array",
                         "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {}
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "premium",
+                            "deluxe",
+                            "ultra",
+                            "nearChina",
+                            "ChinaStandard",
+                            "ChinaPremium"
+                          ]
                         }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }

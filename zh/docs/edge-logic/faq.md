@@ -221,10 +221,10 @@ set $content_code group2;
 ```nginx
 # loadBalancerLogic
 if ($uri ~ ^/abc(/|$)) {
-     set $content_code "abc";
-    }
-elif ($uri ~ ^/xyz(/|$)) {
-     set $content_code "xyz";
+    set $content_code "abc";
+}
+elseif ($uri ~ ^/xyz(/|$)) {
+    set $content_code "xyz";
 }
 ```
 

@@ -247,10 +247,10 @@ The assignment of codes can also be applied to segments of content that are host
 ```nginx
 # loadBalancerLogic
 if ($uri ~ ^/abc(/|$)) {
-     set $content_code "abc";
-    }
-elif ($uri ~ ^/xyz(/|$)) {
-     set $content_code "xyz";
+    set $content_code "abc";
+}
+elseif ($uri ~ ^/xyz(/|$)) {
+    set $content_code "xyz";
 }
 ```
 
