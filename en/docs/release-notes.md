@@ -2,7 +2,7 @@
 
 ## September 27, 2023
 #### API updates
-* Validated if the portal user is logging in from an allowed IP address if the customer or user has an ipWhiteList setting.
+* Validated whether the portal user is logging in from an allowed IP address if the customer or user has an ipWhiteList setting.
 * Added support to the [summayr of layer 7 traffic API](</apidocs#operation/getVolL7Summary>) for grouping by property hostnames.
 * Added submissionTime, finishTime, configuration, status and statusDetails to the history array in the response of the [GET edgehostname API](</apidocs#operation/getEdgeHostname>).
 * Updated prefetch validation to reject regions that are not among the 7 supported continents.
