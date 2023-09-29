@@ -10,7 +10,7 @@ In the left pane, click **Traffic Management** to see a page with a list of the 
 | :----------: | ---------------------------------------------------------------------------------------|
 | 1            | A search box that you can enter any keyword to filter the edge hostname list.          |
 | 2            | The list of all edge hostnames in your account.                                        |
-| 3            | The icon to filter edge hostnames by Has Bien.                                         |
+| 3            | The icon to filter edge hostnames by Has Beian.                                         |
 | 4            | Drop-down lists to take actions on each edge hostname.                                 |
 | 5            | The button to [create a new edge hostname](</docs/portal/traffic-management/creating-edge-hostname.md>).    |
 
