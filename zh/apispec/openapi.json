@@ -157,9 +157,10 @@
                               "type": "string",
                               "enum": [
                                 "json",
-                                "none"
+                                "none",
+                                "compactJson"
                               ],
-                              "description": "Specify <i>json</i> to enable JSON character escaping in variables or <i>none</i> to disable escaping."
+                              "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
                             },
                             "format": {
                               "type": "string",
@@ -880,9 +881,10 @@
                         "type": "string",
                         "enum": [
                           "json",
-                          "none"
+                          "none",
+                          "compactJson"
                         ],
-                        "description": "Specify <i>json</i> to enable JSON character escaping in variables or <i>none</i> to disable escaping."
+                        "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
                       },
                       "format": {
                         "type": "string",
@@ -1773,6 +1775,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "description": "Detailed information about the edge hostname.",
                   "properties": {
                     "history": {
                       "type": "array",
@@ -1804,6 +1807,166 @@
                           "apiRequestId": {
                             "type": "string",
                             "description": "An ID representing the API call that made the change."
+                          },
+                          "configuration": {
+                            "type": "object",
+                            "description": "The configuration that was set.",
+                            "properties": {
+                              "edgeHostname": {
+                                "type": "string",
+                                "description": "An edge hostname."
+                              },
+                              "hasBeian": {
+                                "type": "boolean",
+                                "description": "Indicates whether you have a Beian license for service in China. If you do, content can be served by servers located within mainland China using the ChinaStandard or ChinaPremium server group.\n"
+                              },
+                              "clientZones": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Edge Hostname Client Zone Rule",
+                                  "type": "object",
+                                  "description": "This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.\n\nAn additional server group, \"nearChina\", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.\n\nIf you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" \n\nPlease contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.",
+                                  "x-examples": {
+                                    "example-1": {
+                                      "region": "all",
+                                      "isp": "all",
+                                      "action": {
+                                        "type": "deliver",
+                                        "by": [
+                                          "standard"
+                                        ]
+                                      }
+                                    },
+                                    "example-2": {
+                                      "region": "as.cn",
+                                      "action": {
+                                        "type": "deliver",
+                                        "by": [
+                                          "standard",
+                                          "premium",
+                                          "deluxe"
+                                        ]
+                                      }
+                                    },
+                                    "example-3": {
+                                      "region": "apac",
+                                      "action": {
+                                        "type": "reject"
+                                      }
+                                    },
+                                    "example-4": {
+                                      "region": "as.cn",
+                                      "action": {
+                                        "type": "redirect",
+                                        "to": [
+                                          "redirect.cname.com"
+                                        ]
+                                      },
+                                      "weight": 10
+                                    }
+                                  },
+                                  "properties": {
+                                    "region": {
+                                      "type": "string",
+                                      "description": "This field indicates the region in which the rule applies. Refer to our <a href=\"#operation/get-cdn-clientRegions\">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify \"eu\" as the region. You can indicate specific countries. For example, \"na.us\" represents the \"United States of America\", and \"eu.fr\" represents \"France\".\n\nA special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify \"as\" in one rule and \"as.cn\" in another, a request from China will follow the rule for \"as.cn\"."
+                                    },
+                                    "weight": {
+                                      "type": "integer",
+                                      "default": 100,
+                                      "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
+                                      "minimum": 0,
+                                      "maximum": 1000
+                                    },
+                                    "action": {
+                                      "type": "object",
+                                      "description": "This object describes the action to take for requests matching the rule.",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "deliver",
+                                            "redirect",
+                                            "reject"
+                                          ],
+                                          "description": "Defines the action to take for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If \"reject\" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing \"Forbidden\". Up to one \"reject\" action is allowed for each client zone.\n"
+                                        },
+                                        "by": {
+                                          "type": "array",
+                                          "description": "This field is used if the action is of type \"deliver\". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. <br/><br/>\"nearChina\" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use \"ChinaStandard\" and \"ChinaPremium.\" Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "standard",
+                                              "premium",
+                                              "deluxe",
+                                              "ultra",
+                                              "nearChina",
+                                              "ChinaStandard",
+                                              "ChinaPremium"
+                                            ]
+                                          }
+                                        },
+                                        "to": {
+                                          "type": "array",
+                                          "description": "This field is used if the action is of type \"redirect\". It indicates either a single hostname OR one or more IP addresses to redirect to. This is typically an origin server or another CDN provider.",
+                                          "example": "domain.com",
+                                          "minItems": 1,
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "enableIPv6": {
+                                          "type": "boolean",
+                                          "description": "Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is \"deliver\".",
+                                          "default": true
+                                        }
+                                      },
+                                      "required": [
+                                        "type"
+                                      ]
+                                    },
+                                    "isp": {
+                                      "type": "string",
+                                      "description": "Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href=\"#operation/get-cdn-isps\">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP."
+                                    }
+                                  },
+                                  "required": [
+                                    "region",
+                                    "isp"
+                                  ]
+                                }
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "A description of the edge hostname."
+                              },
+                              "estimatedBandwidth": {
+                                "type": "string",
+                                "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                              }
+                            }
+                          },
+                          "finishTime": {
+                            "type": "string",
+                            "description": "RFC 3339 format date indicating when the operation completed."
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Status of the operation.",
+                            "enum": [
+                              "waiting",
+                              "inprogress",
+                              "succeeded",
+                              "failed"
+                            ]
+                          },
+                          "statusDetails": {
+                            "type": "string",
+                            "description": "Additional information about the operation."
+                          },
+                          "submissionTime": {
+                            "type": "string",
+                            "description": "RFC 3339 format date indicating when the operation was submitted for processing."
                           }
                         },
                         "required": [
@@ -1994,14 +2157,36 @@
                         ],
                         "geoFences": []
                       },
-                      "creationTime": "2020-05-30T00:43:49Z",
-                      "lastUpdateTime": "2020-05-30T00:43:49Z",
+                      "creationTime": "2023-09-01T23:54:47Z",
+                      "lastUpdateTime": "2023-09-01T23:54:47Z",
                       "history": [
                         {
                           "apiName": "myapiname",
                           "operation": "creation",
-                          "time": "2020-05-30T00:43:49Z",
-                          "apiRequestId": "b46c1a060706c4e9"
+                          "time": "2023-09-01T23:54:43Z",
+                          "apiRequestId": "b46c1a060706c4e9",
+                          "configuration": {
+                            "edgeHostname": "rtycno8odxuwycaror3f.qtlcdn.com",
+                            "hasBeian": false,
+                            "clientZones": [
+                              {
+                                "region": "all",
+                                "isp": "all",
+                                "action": {
+                                  "type": "deliver",
+                                  "enableIPv6": true,
+                                  "by": [
+                                    "standard"
+                                  ]
+                                },
+                                "weight": 100
+                              }
+                            ],
+                            "geoFences": []
+                          },
+                          "finishTime": "2023-09-01T23:54:47Z",
+                          "status": "succeeded",
+                          "statusDetails": ""
                         }
                       ]
                     }
@@ -3106,9 +3291,10 @@
                         "type": "string",
                         "enum": [
                           "json",
-                          "none"
+                          "none",
+                          "compactJson"
                         ],
-                        "description": "Specify <i>json</i> to enable JSON character escaping in variables or <i>none</i> to disable escaping."
+                        "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
                       },
                       "format": {
                         "type": "string",
@@ -3768,9 +3954,10 @@
                             "type": "string",
                             "enum": [
                               "json",
-                              "none"
+                              "none",
+                              "compactJson"
                             ],
-                            "description": "Specify <i>json</i> to enable JSON character escaping in variables or <i>none</i> to disable escaping."
+                            "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
                           },
                           "format": {
                             "type": "string",
@@ -15553,6 +15740,13 @@
                         "items": {
                           "type": "integer"
                         }
+                      },
+                      "ipWhiteList": {
+                        "type": "array",
+                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\"], which permits logins from all IP addresses.",
+                        "items": {
+                          "type": "string"
+                        }
                       }
                     }
                   },
@@ -17021,6 +17215,13 @@
                           "items": {
                             "type": "integer"
                           }
+                        },
+                        "ipWhiteList": {
+                          "type": "array",
+                          "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\"], which permits logins from all IP addresses.",
+                          "items": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
@@ -17387,6 +17588,13 @@
                         "description": "This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is \"all\" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is \"none\", entries in the exception list represent customers who can be impersonated by this user.",
                         "items": {
                           "type": "integer"
+                        }
+                      },
+                      "ipWhiteList": {
+                        "type": "array",
+                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\"], which permits logins from all IP addresses.",
+                        "items": {
+                          "type": "string"
                         }
                       }
                     }
@@ -18880,7 +19088,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -19285,7 +19493,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -19632,7 +19840,7 @@
                         "default": [
                           "0.0.0.0/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -20086,7 +20294,7 @@
                           "default": [
                             "0.0.0.0/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -20343,7 +20551,7 @@
                         "default": [
                           "0.0.0.0/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -32851,6 +33059,18 @@
                       "code": "DuplicateName",
                       "message": "The customer already has a logAggregationPoint with the same name."
                     }
+                  },
+                  "Invalid certificate ID": {
+                    "value": {
+                      "code": "InvalidCertificateId",
+                      "message": "destinationAuthCertificateId is not a valid certificate ID"
+                    }
+                  },
+                  "Certificate conflict": {
+                    "value": {
+                      "code": "CertificateConflict",
+                      "message": "destinationAuthCertificate and destinationAuthCertificateId should not both appear"
+                    }
                   }
                 }
               }
@@ -32903,7 +33123,7 @@
                   },
                   "destinationAuthCertificate": {
                     "type": "string",
-                    "description": "A certificate in PEM format required to connect to the destination URL."
+                    "description": "A certificate in PEM format required to connect to the destination URL. If destinationAuthCertificate is specified, the destinationAuthCertificateId field should be empty."
                   },
                   "destinationAuthKey": {
                     "type": "string",
@@ -32935,6 +33155,10 @@
                         "value"
                       ]
                     }
+                  },
+                  "destinationAuthCertificateId": {
+                    "type": "string",
+                    "description": "Refers to the ID of a <a href=\"#operation/createCertificate\">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty."
                   }
                 },
                 "required": [
@@ -33059,6 +33283,15 @@
                           "description": "URL used to collect raw log entries from the edge servers before sending them in a batch to the destination URL. Use this URL by entering it into the logURL field of the <a href=\"#operation/createProperty\">realTimeLog settings of a property."
                         }
                       }
+                    },
+                    "destinationAuthCertificateId": {
+                      "type": "string",
+                      "description": "Refers to the ID of a <a href=\"#operation/createCertificate\">certificate created in CDN Pro</a> if this was specified while creating the certificate."
+                    },
+                    "destinationAuthCertificateVersion": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Version of the certificate used."
                     }
                   },
                   "required": [
@@ -33181,6 +33414,18 @@
                       "code": "InvalidMaxEntries",
                       "message": "maxEntries should be an integer between 1 and 100000."
                     }
+                  },
+                  "Certificate conflict": {
+                    "value": {
+                      "code": "CertificateConflict",
+                      "message": "destinationAuthCertificate and destinationAuthCertificateId should not both appear"
+                    }
+                  },
+                  "Invalid certificate ID": {
+                    "value": {
+                      "code": "InvalidCertificateId",
+                      "message": "destinationAuthCertificateId is not a valid certificate ID"
+                    }
                   }
                 }
               }
@@ -33258,7 +33503,7 @@
                   },
                   "destinationAuthCertificate": {
                     "type": "string",
-                    "description": "A certificate in PEM format required to connect to the destination URL."
+                    "description": "A certificate in PEM format required to connect to the destination URL. If destinationAuthCertificate is specified, the destinationAuthCertificateId field should be empty."
                   },
                   "destinationAuthKey": {
                     "type": "string",
@@ -33290,6 +33535,10 @@
                         "value"
                       ]
                     }
+                  },
+                  "destinationAuthCertificateId": {
+                    "type": "string",
+                    "description": "Refers to the ID of a <a href=\"#operation/createCertificate\">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty."
                   }
                 }
               }
@@ -34171,7 +34420,7 @@
           }
         },
         "operationId": "getVolL7Summary",
-        "description": "Get a summary of edge layer 7 traffic volume during a time period. You can filter and group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n",
+        "description": "Get a summary of edge layer 7 traffic volume during a time period. You can filter and group results by hostnames, property hostnames, or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n",
         "parameters": [
           {
             "schema": {
@@ -34250,12 +34499,13 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'contentCodes'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'contentCodes', 'propertyhostnames'.",
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "contentCodes"
+                        "contentCodes",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -34538,7 +34788,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames' and 'contentCodes' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'propertyHostnames', and 'contentCodes' by specifying a comma-separated list of the keywords."
           },
           {
             "schema": {
@@ -34552,7 +34802,7 @@
         "tags": [
           "Reports"
         ],
-        "description": "Get a summary of edge layer 7 traffic volume during a time period. You can group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n"
+        "description": "Get a summary of edge layer 7 traffic volume during a time period. You can group results by hostnames, property hostnames, or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n"
       }
     },
     "/cdn/report/bandwidthL7Summary": {
@@ -35101,6 +35351,103 @@
         },
         "operationId": "get-cdn-originFastRouteIpList",
         "description": "This API returns a list of IP addresses used by our origin fast route servers. If you use our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable and wish to restrict access to your origin servers, add these IP addresses to your allow lists.\n"
+      }
+    },
+    "/cdn/stagingServers": {
+      "get": {
+        "summary": "Get a list of staging servers",
+        "tags": [
+          "CDN Product Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a list of staging servers that can be used.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "stagingServers": {
+                      "type": "array",
+                      "description": "Each entry describe a staging server.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ip": {
+                            "type": "string",
+                            "description": "IP address. It can be IPv4 or IPv6 format."
+                          },
+                          "code": {
+                            "type": "string",
+                            "description": "A code representing the staging server."
+                          },
+                          "location": {
+                            "type": "string",
+                            "description": "Location of the staging server."
+                          },
+                          "ipVersion": {
+                            "type": "integer",
+                            "description": "Indicates the format of the 'ip' field.",
+                            "enum": [
+                              4,
+                              6
+                            ]
+                          }
+                        },
+                        "required": [
+                          "ip",
+                          "code",
+                          "location",
+                          "ipVersion"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "stagingServers": [
+                        {
+                          "ip": "93.188.133.234",
+                          "code": "RO.B",
+                          "location": "Romania",
+                          "ipVersion": 4
+                        },
+                        {
+                          "ip": "163.171.238.124",
+                          "code": "US.MA",
+                          "location": "United States",
+                          "ipVersion": 4
+                        },
+                        {
+                          "ip": "112.240.57.226",
+                          "code": "CN.SD",
+                          "location": "China",
+                          "ipVersion": 4
+                        },
+                        {
+                          "ip": "115.223.12.235",
+                          "code": "CN.ZJ",
+                          "location": "China",
+                          "ipVersion": 4
+                        },
+                        {
+                          "ip": "2408:8719:5300:0004:ff31:cf4a:65b9:4ee6",
+                          "code": "CN.SD",
+                          "location": "China",
+                          "ipVersion": 6
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-stagingServers",
+        "description": "This API returns a list of IP addresses of servers that can be used to test deployments of properties and certificates to 'staging'. We recommend deploying to 'staging' and testing before deploying to 'production'."
       }
     }
   },
