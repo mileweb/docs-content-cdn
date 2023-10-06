@@ -6,26 +6,13 @@ Before you deploy your property to production, we recommend you test and verify 
 
 ## Testing Your Property in Staging
 
-CDN Pro provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by the hostname `staging.qtlcdn.com`. You can also see their IP addresses by issuing the following command:
+CDN Pro provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by opening a validated property, clicking the horizontal ellipsis next to the **Edit** or **Clone** button, selecting **Deploy**, and clicking the info icon next to the Staging target.
 
-```bash
-$ curl staging.qtlcdn.com
-[
-  { "ip":"163.171.230.47", "ipVersion":4,
-    "code":"US.GA", "location":"United States" },
-  { "ip":"115.223.12.247", "ipVersion":4,
-    "code":"CN.ZJ", "location":"China" },
-  { "ip":"163.171.228.89", "ipVersion":4,
-    "code":"US.VA", "location":"United States" },
-  { "ip":"112.240.57.248", "ipVersion":4, 
-    "code":"CN.SD", "location":"China" },
-  { "ip": "2401:c500:fd00:0002:1c7b:a470:f69b:6e2a", "ipVersion":6,
-    "code": "RO.B", "location": "Romania" },
-  { "ip": "2409:8c54:2000:060b:c35f:367c:72f3:6274", "ipVersion":6,
-    "code": "CN.GD", "location": "China" }
-  ...
-]
-```
+<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-EN-1.png" alt="deployment selections and button" width="400"></p>
+
+<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-EN-2.png" alt="staging servers" width="400"></p>
+
+You can also get a list of current IP addresses by calling our [staging servers API](</apidocs#operation/get-cdn-stagingServers>).
 
 Pick one of the IP addresses. The corresponding ```location``` field indicates its country. If your property hostname has an ICP Beian license, you can use an IP address in China. Otherwise, choose an IP address in another country to avoid getting an HTTP 451 'Unavailable for Legal Reasons' status error.
 
