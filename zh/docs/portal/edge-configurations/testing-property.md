@@ -10,7 +10,7 @@ CDN Pro provides a staging environment for you to test your property configurati
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-CH-1.png" alt="deployment selections and button" width="400"></p>
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-CH-2.png" alt="staging servers" width="450"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-CH-2.png" alt="staging servers" width="475"></p>
 
 You can also get a list of current IP addresses by calling our [staging servers API](</apidocs#operation/get-cdn-stagingServers>).
 
