@@ -6,11 +6,11 @@ Before you deploy your property to production, we recommend you test and verify 
 
 ## Testing Your Property in Staging
 
-CDN Pro provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect. The staging servers can be found by opening a validated property, clicking the horizontal ellipsis next to the **Edit** or **Clone** button, selecting **Deploy**, and clicking the info icon next to the Staging target.
+CDN Pro provides a staging environment for you to test your property configurations without affecting production. Sending your test traffic to the servers in the staging environment is a way for you to make sure the behavior is what you expect before they hit your production environment. The staging servers can be found by opening a validated property, clicking the horizontal ellipsis next to the **Edit** or **Clone** button, selecting **Deploy**, and clicking the info icon next to the Staging target.
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-EN-1.png" alt="deployment selections and button" width="400"></p>
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-EN-2.png" alt="staging servers" width="400"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-EN-2.png" alt="staging servers" width="450"></p>
 
 You can also get a list of current IP addresses by calling our [staging servers API](</apidocs#operation/get-cdn-stagingServers>).
 
