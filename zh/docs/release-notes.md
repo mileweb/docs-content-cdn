@@ -1,5 +1,16 @@
 # Release Notes
 
+## October 12, 2023
+#### API updates
+* Ensured that a certificate’s name can be updated independent of the number of versions the certificate has.
+* Ensured correct enforcement of deployment task API permission.
+
+#### Console updates
+* Improved client zone region and ISP selection by restricting to legal combinations.
+* Allow additional reports to be filtered by server groups.
+* Added support for $content_code variable in Load Balancer Logic and Edge Logic fields.
+
+
 ## September 27, 2023
 #### API updates
 * Validated whether the portal user is logging in from an allowed IP address if the customer or user has an ipWhiteList setting.

@@ -23750,6 +23750,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters limit the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -23968,61 +23969,22 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfilters",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
+                  "Example 1": {
+                    "hostnames": [],
+                    "propertyIds": [],
+                    "propertyHostnames": []
                   }
                 },
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters limit the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "serverGroups": {
-                        "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
-                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "standard",
-                            "premium",
-                            "deluxe",
-                            "ultra",
-                            "nearChina",
-                            "ChinaStandard",
-                            "ChinaPremium"
-                          ]
-                        }
-                      },
-                      "propertyIds": {
-                        "type": "array",
-                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "propertyHostnames": {
-                        "type": "array",
-                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
                         "items": {
                           "type": "string"
                         }
@@ -25720,15 +25682,6 @@
                   "webhook": {
                     "type": "string",
                     "description": "ID of a webhook to call when the prefetch task completes."
-                  },
-                  "prefetchLevel": {
-                    "type": "string",
-                    "default": "Parent",
-                    "enum": [
-                      "Edge",
-                      "Parent"
-                    ],
-                    "description": "CDN Pro servers that will perform the prefetch. The default, <i>Parent</i>, has parent nodes of the CDN prefetching content while <i>Edge</i> has edge servers requesting the content. The latter would likely result in more requests to your origin servers."
                   }
                 },
                 "required": [
@@ -26181,10 +26134,9 @@
                     },
                     "prefetchLevel": {
                       "type": "string",
-                      "description": " CDN Pro servers that would perform the prefetch. The default, <i>Parent</i>, results in parent nodes of the CDN prefetching content while <i>Edge</i> results in edge servers requesting the content. The latter would likely result in more requests to your origin servers.",
+                      "description": "CDN Pro servers that will perform the prefetch. The default, <i>Parent</i>, results in parent nodes of the CDN prefetching content.",
                       "default": "Parent",
                       "enum": [
-                        "Edge",
                         "Parent"
                       ]
                     }
