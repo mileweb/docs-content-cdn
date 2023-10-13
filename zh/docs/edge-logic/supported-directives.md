@@ -530,17 +530,15 @@ origin_header_modify Cache-Control "" policy=overwrite;
 **默认设置：** none <br>
 **可用位置：** location, if in location
 
-该指令用于指定获取内容的源站以及URI。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源站名后可以选择配置一个 URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 将以携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，请在源名称后添加 `$uri`。例如：
+该指令用于指定获取内容的源站以及URI。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源站名后可以选择配置一个 URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 会用携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，可以使用[rewrite](#rewrite)指令并在第二个参数（替换路径）的末尾加上一个问号，例如：
 ```nginx
-# 如果没有配置URI，nginx会自动添加URL编码过的$uri以及query string。
-origin_pass my_origin;
-eval_func $uri_uenc URL_ENCODE $uri;
-origin_pass my_origin$uri_uenc$is_args$args; #效果完全同上
-origin_pass my_origin$uri_uenc; #不带query string回源
-origin_pass my_origin/abc$uri_uenc;
+# 如果没有配置URI，
+# origin_pass my_origin; nginx会自动添加URL编码过的$uri以及query string。
+rewrite ^(.*) $1?; # 阻止自动添加任何query string。
+origin_pass my_origin; # 不带query string回源
 ```
-请注意nginx变量`$uri`的值是被URL解码过的，所以其有可能包含二进制格式，比如UTF-8。
-如果源站无法处理二进制的URL，您可以使用`eval_func`将其URL编码后再用来生成回源请求。
+请注意nginx变量`$uri`的值是被URL解码过的，所以其有可能包含二进制格式，比如UTF-8，或者不可显示的特殊字符，例如0x0D和0x0A.
+为了避免可能的异常，我们不建议在本志令里使用 `$uri` 变量。
 
 ### `origin_read_timeout`
 
