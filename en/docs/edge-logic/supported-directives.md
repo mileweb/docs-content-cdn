@@ -530,17 +530,15 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 **Default:** none <br>
 **Context:** location, if in location
 
-This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) and a few other directives. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can optionally be followed by a URI which is allowed to contain variables. If no URI is specified, the full normalized request URI (which may have been modified by the `rewrite` directive) and the query string are appended when accessing the origin. To drop the query string, add `$uri` after the origin name. Examples:
+This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) and a few other directives. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can optionally be followed by a URI which can contain variables. If no URI is specified, the full normalized and escaped request URI (which may have been modified by the `rewrite` directive) plus the query string are appended when accessing the origin. To drop the query string, one can use the [rewrite](#rewrite) directive with a question mark at the end of the replacement URI. Examples:
 ```nginx
-# when URI is not specified, URL-encoded $uri and query string will be appended by default
-origin_pass my_origin;
-eval_func $uri_uenc URL_ENCODE $uri;
-origin_pass my_origin$uri_uenc$is_args$args; #same as above
-origin_pass my_origin$uri_uenc; #to drop the query string
-origin_pass my_origin/abc$uri_uenc;
+# when URI is not specified, 
+# origin_pass my_origin; # URI-escaped $uri and the query string will be appended by default
+rewrite ^(.*) $1? break; # the question mark at the end prevents query strings being appended
+origin_pass my_origin; # no query string will be forwarded to the origin
 ```
-Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8.
-If you know the origin can't handle it, use `eval_func` to URL-encode it to form the URL to the origin.
+Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8, or contain
+special unprintable characters, such as 0x0D, 0x0A. Therefore, we don't recommend including this variable in the URI part of this directive.
 
 ### `origin_read_timeout`
 
