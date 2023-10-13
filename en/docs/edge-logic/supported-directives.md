@@ -534,7 +534,7 @@ This directive specifies the origin from which to fetch the content. It is a wra
 ```nginx
 # when URI is not specified, 
 # origin_pass my_origin; # URI-escaped $uri and the query string will be appended by default
-rewrite ^(.*) $1? break; # the question mark at the end prevents query strings being appended
+rewrite ^(.*) $1? break; # the question mark at the end prevents query strings from being appended
 origin_pass my_origin; # no query string will be forwarded to the origin
 ```
 Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8, or contain
