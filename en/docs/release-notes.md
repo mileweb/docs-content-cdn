@@ -1,5 +1,11 @@
 # Release Notes
 
+## October 20, 2023
+#### API updates
+* Improved validation of client zones to report an error if an unsupported combination of region and ISP is chosen.
+* Added support for content code in log configurations by introducing a %concode variable.
+* Relaxed the validation of property names to permit more characters including Chinese ones.
+
 ## October 12, 2023
 #### API updates
 * Ensured that a certificate’s name can be updated independent of the number of versions the certificate has.
