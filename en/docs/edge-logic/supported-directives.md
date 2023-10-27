@@ -1241,7 +1241,7 @@ Enables string replacement in responses with the specified MIME types in additio
 **Default:** `upstream_origin_only off` <br/>
 **Contexts:** server, location, if in location
 
-Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/cdn/apidocs#operation/get-cdn-shields). For example, you may have configured your property's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin.
+Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/cdn/apidocs#operation/get-cdn-shields). For example, you may have configured an origin's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin. Even if you set directConnection to "alwaysDirect", the edge may still send retry requests to an intermediate server when the origin is not reachable directly. `upstream_origin_only on;` eliminates this possibility.
 
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
