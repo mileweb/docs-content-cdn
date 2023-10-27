@@ -1255,7 +1255,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置:** `upstream_origin_only off` <br/>
 **可用位置:** server, location, if in location
 
-启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为不直连或自动选择时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。
+启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
