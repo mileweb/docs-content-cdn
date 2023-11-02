@@ -1,5 +1,14 @@
 # Release Notes
 
+## November 1, 2023
+#### API updates
+* Improved an error message shown when an edge hostname is updated or deleted while an update is already in progress.
+* Enabled support for filtering fast route traffic volume report by property hostnames, property IDs, server groups, 
+
+#### Console updates
+* Ensured password expiration reminders are sent to portal users.
+
+
 ## October 20, 2023
 #### API updates
 * Improved validation of client zones to report an error if an unsupported combination of region and ISP is chosen.

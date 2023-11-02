@@ -2244,6 +2244,32 @@
           "204": {
             "description": "The edge hostname was successfully deleted."
           },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Edge hostname being deployed": {
+                    "value": {
+                      "code": "EdgeHostnameBeingDeployed",
+                      "message": "The edge hostname is being deployed and cannot be updated or deleted now."
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
             "description": "The edge hostname could not be found.",
             "content": {
@@ -2333,6 +2359,12 @@
                     "value": {
                       "code": "IncompleteClientZones",
                       "message": "There must be a client zone rule that covers all regions and ISPs."
+                    }
+                  },
+                  "Edge hostname being deployed": {
+                    "value": {
+                      "code": "EdgeHostnameBeingDeployed",
+                      "message": "The edge hostname is being deployed and cannot be updated or deleted now."
                     }
                   }
                 }
@@ -2612,6 +2644,12 @@
                     "value": {
                       "code": "IncompleteClientZones",
                       "message": "There must be a client zone rule that covers all regions and ISPs."
+                    }
+                  },
+                  "Edge hostname being deployed": {
+                    "value": {
+                      "code": "EdgeHostnameBeingDeployed",
+                      "message": "The edge hostname is being deployed and cannot be updated or deleted now."
                     }
                   }
                 }
@@ -4860,6 +4898,12 @@
                     "value": {
                       "code": "InvalidInput",
                       "message": "Invalid field 'by'. This field is required when action type is 'deliver'."
+                    }
+                  },
+                  "Edge hostname being deployed": {
+                    "value": {
+                      "code": "EdgeHostnameBeingDeployed",
+                      "message": "The edge hostname is being deployed and cannot be created now."
                     }
                   }
                 }
