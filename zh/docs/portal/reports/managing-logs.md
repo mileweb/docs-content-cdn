@@ -31,25 +31,31 @@ The following table shows the variables you can use in the **Log Format** field 
 
 |**Variable**  |**Description**                          |
 |--------------|-----------------------------------------|
+| %apachet     | Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000|
 | %cachestate  | HIT, MISS, or REVALIDATE                |
 | %cltip       | Client IP address                       |
 | %cltisp      | Client ISP                              |
 | %cltport     | Client port number                      |
 | %cltregion   | Client region                           |
+| %content_code | Content code as defined by the [$content_code variable in your property's Edge Logic](</docs/edge-logic/faq.md#how-to-classify-traffic-in-reports-based-on-custom-rules   |
 | %cpu_ns      | CPU time, in nanoseconds, for this request|
 | %custom_1     | Refers to a custom log field with ID 1 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
 | %custom_2     | Refers to a custom log field with ID 2 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
 | %hostname    | Host header|
 | %method      | HTTP method used to access the content (for example, GET)|
 | %protocol    | HTTP/1.0, HTTP/1.1, or HTTP2.0|
+| %querystr    | Query string|
 | %referer     | Referer request header|
 | %reqrange    | Range header in requests from client|
+| %reqhdrsize  | Request header length|
+| %reqsize     | Request length (including request line, header, and request body)|
 | %rmtuser     | User name extracted from the Authorization header when basic authentication is used|
 | %rspsize     | HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC|
 | %rsptime     | Response time in milliseconds|
 | %samplerate  | Number of requests corresponding to each log entry|
 | %scheme      | http or https|
 | %statuscode  | Response's status code (for example, 200)|
+| %svrip       | IP address of the CDN server handling the request |
 | %svrnode     | Cache server node name|
 | %tcprtt      | Round trip time, in microseconds, between server and client|
 | %ua          | User-agent header|
