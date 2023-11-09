@@ -37,7 +37,7 @@ The following table shows the variables you can use in the **Log Format** field 
 | %cltisp      | Client ISP                              |
 | %cltport     | Client port number                      |
 | %cltregion   | Client region                           |
-| %content_code | Content code as defined by the [$content_code variable in your property's Edge Logic](</docs/edge-logic/faq.md#how-to-classify-traffic-in-reports-based-on-custom-rules>)   |
+| %content_code | Content code. Values can be set in Edge Logic by [setting the $content_code variable](</docs/edge-logic/faq.md#how-to-classify-traffic-in-reports-based-on-custom-rules>)   |
 | %cpu_ns      | CPU time, in nanoseconds, for this request|
 | %custom_1     | Refers to a custom log field with ID 1 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
 | %custom_2     | Refers to a custom log field with ID 2 you define using the  [`custom_log_field` directive](</docs/edge-logic/supported-directives.md#custom_log_field>)|
