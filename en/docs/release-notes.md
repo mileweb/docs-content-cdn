@@ -1,5 +1,18 @@
 # Release Notes
 
+## November 20, 2023
+#### API updates
+* Updated deployment notification to indicate the version of the property or certificate that was deployed.
+* Ensured deployment notification appears.
+* Ensured the statusDetails field in edge hostname’s history is updated.
+* Fixed error message returned when an invalid region is specified in an edge hostname’s client zone rule.
+
+#### Console updates
+* Improved popup text confirming creation of a test suite.
+* Allowed an administrator to resend an invitation to access the console.
+* Added support for $content_code in log configurations.
+* Allowed filtering by server groups, property hostnames, and property IDs in the fast route traffic volume report.
+
 ## November 1, 2023
 #### API updates
 * Improved an error message shown when an edge hostname is updated or deleted while an update is already in progress.
