@@ -284,10 +284,10 @@ location @try_origin2 {
 |----------|----------|------------| 
 | 计算哈希值 | **SHA256**, **MD5**<br>CRC32 | ```eval_func $output SHA256 $input;```<br>SHA256 和 MD5 返回二进制串; CRC32 返回文本串|
 | BASE64<br>编解码 | BASE64_ENCODE<br>**BASE64_DECODE** | ```eval_func $output BASE64_ENCODE $input;``` |
-| URL<br>编解码 | URL_ENCODE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;``` |
-| HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE** | ```eval_func $output HEX_ENCODE $input;``` |
+| URL<br>编解码 | URL_ENCODE<br>URL_ESCAPE<br>ARG_ESCAPE<br>**URL_DECODE** | ```eval_func $output URL_ENCODE $input;```<br>```eval_func $output URL_ESCAPE $input;```<br>```eval_func $output ARG_ESCAPE $input;```<br>这三个函数都使用百分号(```%```)对 ```$input``` 进行编码。```URL_ENCODE``` 转义最多的特殊字符，包括 ```/?=&```。它适用于对 URL 里的一个目录或者文件名进行编码。```ARG_ESCAPE``` 转义的特殊字符要少一些。它不转义 ```/=```，因此适用于对查询串的参数进行编码，如 ```key=val```。```URL_ESCAPE``` 转义的特殊字符更少，但是它仍转义问号(```?```)。它适用于对不包含查询串的整个URL进行编码，比如 nginx 变量```$uri```。|
+| HEX<br>编解码 | HEX_ENCODE<br>**HEX_DECODE**<br>**LITTLE_ENDIAN_BYTES** | ```eval_func $output HEX_ENCODE $input;```<br>```eval_func $output LITTLE_ENDIAN_BYTES $int $len;```<br>```LITTLE_ENDIAN_BYTES``` 会将整数 ```$int``` 从字符串格式转换为一个长度为 ```$len``` 的字节串。例如 ```eval_func $output LITTLE_ENDIAN_BYTES 260 3;``` 会把 ```$output``` 赋值为一个长度为3的字节串：```0x04, 0x01, 0x00```。|
 | AES<br>加解密 | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串。|
-| 加解密 | ENCRYPT_SYMM<br>**DECRYPT_SYMM** | ```eval_func $output ENCRYPT_SYMM $key $iv $message $mode;```<br>```$key```和```$iv```都应为二进制串。```$mode```可以是 *openssl list -cipher-commands* 返回的任意一个密码，例如'aes-128-cbc'。|
+| 加解密 | **ENCRYPT_SYMM**<br>**DECRYPT_SYMM** | ```eval_func $output ENCRYPT_SYMM $key $iv $message $mode;```<br>```$key```和```$iv```都应为二进制串。```$mode```可以是 *openssl list -cipher-commands* 返回的任意一个密码，例如'aes-128-cbc'。|
 | 计算<br>HMAC | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` 可以是 ```MD5```, ```SHA1```, ```SHA256``` |
 | RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 目前只支持 ```SHA256```。|
 | 比较<br>整数 | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```当 ```$data1 > $data2```时 $output``` 的值为 "1"，相等时为 "0"，小于时为 “-1”。|
