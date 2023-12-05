@@ -69,21 +69,21 @@ if ($b64hash != $http_x_hash) {
 ### 实现回源站的鉴权
 很多源站都会配置一些鉴权规则来避免服务被滥用。在这种情况下，您可以使用 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来方便的生成访问源站所需要的 token。下面这个例子展示了如何实现 [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html) 算法:
 ```nginx
-## required input variables: $awskey $awsseckey $awsbucket/$s3key
+## 输入变量: $awskey $awsseckey $awsbucket/$s3key
 
-# Step 1: construct the STS
+# 第 1 步: 构造 被签名字符串（STS）
 set $awsdatev2 $time_rfc822;
 set $awssts "GET\n\n\n$awsdatev2\n/$awsbucket/$s3key";
 
-# Step 2: sign the STS with secKey
+# 第 2 步: 用 secKey 生成 STS 的签名，并用 base64 编码
 eval_func $awssigv2 HMAC $awsseckey $awssts SHA1;
 eval_func $awssigv2_b64 BASE64_ENCODE $awssigv2;
 
-# Step 3: set the required header fields
+# 第 3 步: 设置要求的请求头
 origin_set_header Date $awsdatev2;
 origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
-CDN Pro 也支持源站使用客户端证书来鉴权。您可以为每一个源站指定一个客户端证书。下图展示了如何在控制台上做这个配置：
+CDN Pro 也支持源站使用客户端证书来鉴权。下图展示了如何在控制台上为每一个源站指定一个客户端证书：
 <p align=center><img src="/docs/resources/images/recipes/secure/origin_cert.png" alt="origin client cert" width="550"></p>
 
 ### 保密信息的管理
@@ -114,7 +114,7 @@ location /protected/ {
 这只是一个简单例子。我们可以通过更复杂的 Javascript 代码来防御更聪明的机器爬虫。
 
 ### TLS相关配置
-* CDN Pro supports TLS certificates with both RSA and ECDSA algorithms. You can even configure two certificates with different algorithms in the same property and have the server pick one based on the client's capability and preference.
+* CDN Pro 支持使用 RSA 和 ECDSA 算法的 TLS 证书。您甚至可以在同一个加速项内配置两个不同算法的证书，边缘服务器会根据客户端的能力和意愿来选择。
 * We highly recommend that you set the minimum TLS version to 1.2. For maximum security and performance, however, you should really take advantage of TLSv1.3. The TLS version on both the client and origin sides can be configured.
 * CDN Pro also allows you to fully configure TLS ciphers based on your security requirements. For example, you can prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * If a client request uses HTTPS, CDN Pro contacts the origin with the same protocol to ensure that the entire path is encrypted. Although CDN Pro supports "protocol downgrades," you should avoid using them unless absolutely necessary.
