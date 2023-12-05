@@ -537,8 +537,13 @@ This directive specifies the origin from which to fetch the content. It is a wra
 rewrite ^(.*) $1? break; # the question mark at the end prevents query strings from being appended
 origin_pass my_origin; # no query string will be forwarded to the origin
 ```
-Please notice that the variable `$uri` is URL-decoded by nginx, which may have a binary format such as UTF-8, or contain
-special unprintable characters, such as 0x0D, 0x0A. Therefore, we don't recommend including this variable in the URI part of this directive.
+Please notice that the variable `$uri` is the original URL decoded by nginx, which may have a binary format such as UTF-8, or contain
+special unprintable characters, such as 0x0D, 0x0A. Therefore, you need to escape those characters in the variable before including
+it in the URI part of this directive. For example, this is another way to drop the query string:
+```nginx
+eval_func $escaped_uri URI_ESCAPE $uri; # escape the special characters
+origin_pass my_origin$escaped_uri; # no query string will be forwarded to the origin
+```
 
 ### `origin_read_timeout`
 
