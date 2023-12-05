@@ -82,6 +82,8 @@ eval_func $awssigv2_b64 BASE64_ENCODE $awssigv2;
 origin_set_header Date $awsdatev2;
 origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
+CDN Pro 也支持源站使用客户端证书来鉴权。您可以为每一个源站指定一个客户端证书。下图展示了如何在控制台上做这个配置：
+<p align=center><img src="/docs/resources/images/recipes/secure/origin_cert.png" alt="origin client cert" width="550"></p>
 
 ### 保密信息的管理
 As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The [`保密信息`](</docs/portal/secrets/overview>) feature allows you to manage and apply secret keys with minimal exposure.
