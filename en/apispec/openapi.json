@@ -578,6 +578,10 @@
                         },
                         "inStaging": {
                           "type": "boolean"
+                        },
+                        "warning": {
+                          "type": "string",
+                          "description": "This field can appear if the property is created or updated with a reference to a certificate that is incompatible. For example, the certificate could be expired or does not support the property's hostname. The value will provide details."
                         }
                       }
                     }
@@ -729,7 +733,15 @@
         "summary": "Update a property version",
         "responses": {
           "204": {
-            "description": "Indicates the property version was successfully updated."
+            "description": "Indicates the property version was successfully updated.",
+            "headers": {
+              "Warning": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href=\"#operation/getPropertyVersion\">Get a property version</a> API for details."
+              }
+            }
           },
           "400": {
             "description": "The request was invalid. Refer to the response body for details.",
@@ -3150,6 +3162,12 @@
                 },
                 "description": "Refers to the new version",
                 "required": true
+              },
+              "Warning": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href=\"#operation/getPropertyVersion\">Get a property version</a> API for details."
               }
             }
           },
@@ -3780,6 +3798,12 @@
                 },
                 "description": "Refers to the new property URL.",
                 "required": true
+              },
+              "Warning": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href=\"#operation/getPropertyVersion\">Get a property version</a> API for details."
               }
             }
           },
@@ -23541,7 +23565,7 @@
                   "Has edge hostname": {
                     "value": {
                       "code": "HasEdgeHostname",
-                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                      "message": "This customer still has edge hostnames deployed in production. They must be deleted before the service quota can be deleted."
                     }
                   },
                   "Has property in production": {
@@ -25104,7 +25128,7 @@
                   "Has edge hostname": {
                     "value": {
                       "code": "HasEdgeHostname",
-                      "message": "This customer still has edge hostname deployed in production. They must be deleted before the configuration can be deleted."
+                      "message": "This customer still has edge hostnames deployed in production. They must be deleted before the service quota can be deleted."
                     }
                   },
                   "Has property in production": {
@@ -25129,6 +25153,14 @@
                     },
                     "message": {
                       "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Has edge hostname": {
+                    "value": {
+                      "code": "HasEdgeHostname",
+                      "message": "This customer still has edge hostnames deployed in production. They must be deleted before the service quota can be deleted."
                     }
                   }
                 }
