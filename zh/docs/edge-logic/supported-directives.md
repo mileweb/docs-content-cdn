@@ -538,7 +538,11 @@ rewrite ^(.*) $1?; # 末尾的问号将阻止自动添加查询参数
 origin_pass my_origin; # 回源请求不会携带查询参数
 ```
 请注意nginx变量`$uri`的值是被URL解码过的，所以其有可能包含二进制格式，比如UTF-8，或者不可显示的特殊字符，例如0x0D和0x0A。
-为了避免可能的异常，我们不建议在本指令里直接使用 `$uri` 变量。
+为了避免可能的异常，您需要先将变量中的特殊字符进行转义，然后才能将其添加到本指令的URI部分。下面的例子展示了另外一种去除查询参数的方法：
+```nginx
+eval_func $escaped_uri URI_ESCAPE $uri; # 对特殊字符进行转义
+origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
+```
 
 ### `origin_read_timeout`
 
