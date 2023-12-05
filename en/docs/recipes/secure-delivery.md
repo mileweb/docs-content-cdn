@@ -81,7 +81,8 @@ eval_func $awssigv2_b64 BASE64_ENCODE $awssigv2;
 origin_set_header Date $awsdatev2;
 origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
-CDN Pro also supports origin access control through a client certificate. You can select a certificate for each origin. This is how you can do this on the portal:
+CDN Pro also supports origin access control through a client certificate. 
+The screenshot below shows how you can specify a certificate for each origin on the portal:
 <p align=center><img src="/docs/resources/images/recipes/secure/origin_cert.png" alt="origin client cert" width="550"></p>
 
 ### Secret Management 
