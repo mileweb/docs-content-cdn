@@ -81,6 +81,8 @@ eval_func $awssigv2_b64 BASE64_ENCODE $awssigv2;
 origin_set_header Date $awsdatev2;
 origin_set_header Authorization "$awsv2origin $awskey:$awssigv2_b64";
 ```
+CDN Pro also supports origin access control through a client certificate. You can select a certificate for each origin. This is how you can do this on the portal:
+<p align=center><img src="/docs/resources/images/recipes/secure/origin_cert.png" alt="origin client cert" width="550"></p>
 
 ### Secret Management 
 As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The [`secret management`](</docs/portal/secrets/overview>) feature allows you to manage and apply secret keys with minimal exposure.
