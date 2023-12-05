@@ -40,26 +40,27 @@ if ($http_my_token != 'authorized' && $arg_my_token != 'authorized') {
 * 通过 [`auth_request`](</docs/edge-logic/supported-directives.md#auth_request>) 指令实现用远端服务器鉴权:
 ```nginx
 location /protected/ {
-    auth_request /auth; # 2xx to grant access, 401 or 403 to reject
+    auth_request /auth; # 鉴权服务返回 2xx 状态码将允许访问, 401 或 403 将拒绝访问
     ...
 }
 
-location = /auth { # calls a remote server to authenticate the request
+location = /auth { # 调用一个远端鉴权服务器来认证请求
     origin_pass remote-auth-server;
-    proxy_method HEAD; # specify method required by the remote server
-    proxy_pass_request_body off; # remove the request body, if any
+    proxy_method HEAD; # 配置远端服务器要求的访问方法
+    proxy_pass_request_body off; # 去掉请求的正文，远端服务器不需要查看
     origin_set_header Content-Length "" policy=overwrite;
-    # forward the original request URI to the remote server
+    # 把请求试图访问的 URL 通过一个请求头发给远端服务器
     origin_set_header X-Original-URI $request_uri;
 }
 ```
-* 使用 Nginx 内置的 [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) 鉴权算法. This feature allows clients to use a secret key to generate an MD5 HMAC from components in the HTTP request. An expiration time can also be specified. The edge server grants the request only after the MD5 value is validated and the request has not expired. For details, please refer to the [official Nginx documentation](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link).
+* 使用 Nginx 内置的 [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) 鉴权算法。这个功能要求客户端使用 MD5 算法，利用 HTTP 请求的特征以及一个密钥来生成
+一个哈希信息验证码（HMAC）。请求也可以携带一个过期时间。边缘服务器只有在请求未过期，且 HMAC 验证成功的情况下才会允许访问。更多详情请参阅 [nginx 官方文档](http://nginx.org/en/docs/http/ngx_http_secure_link_module.html#secure_link)。
 
 * 通过 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令 来实现几乎任意的定制鉴权算法. 下面这个例子描述了如何验证一个基于 SHA256 的 HMAC（哈希验证码）:
 ```nginx
 eval_func $binhash HMAC $secret_key $request_uri SHA256;
 eval_func $b64hash BASE64_ENCODE $binhash;
-# assume the client passes the hash through the X-Hash header
+# 假设客户端通过 X-Hash 头部传入哈希验证码
 if ($b64hash != $http_x_hash) {
     return 403;
 }
@@ -86,13 +87,16 @@ CDN Pro 也支持源站使用客户端证书来鉴权。您可以为每一个源
 <p align=center><img src="/docs/resources/images/recipes/secure/origin_cert.png" alt="origin client cert" width="550"></p>
 
 ### 保密信息的管理
-As shown in the sections above, access control algorithms using [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) or [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) usually require a secret key for HMAC generation or encryption. Since the portal may be accessible by operators who are not authorized to see those keys, you want to prevent the keys from being exposed in clear text in the Edge Logic. The [`保密信息`](</docs/portal/secrets/overview>) feature allows you to manage and apply secret keys with minimal exposure.
+前面几节里提到的访问控制算法 [`secure_link`](</docs/edge-logic/supported-directives.md#secure_link>) 或者 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 都需要用到一个密钥来生成 HMAC 或者进行加密。 由于 portal 的使用者不一定都有查看密钥的授权，您可能希望这些密钥不要在 Edge Logic 里以明文的形式暴露。
+我们的 [`保密信息`](</docs/portal/secrets/overview>) 功能使您可以方便的管理和使用密钥，并最大程度地保护它们不被暴露。
 
 ### 爬虫防护
-在把某些内容发送给客户端之前，有时候您可能希望确定对方是一个人类在使用一个正常的浏览器，而不是某种机器爬虫。下面这段 Edge Logic 代码展示了如何实现一个机制让终端用户点击一个按钮之后才能获取文件内容，同时也验证了他至少是在使用一个支持 Javascript 和 Cookie 的客户端:
+在把某些内容发送给客户端之前，有时候您可能希望确定对方是一个人类在使用一个正常的浏览器，而不是某种机器爬虫。下面这段 Edge Logic 代码展示了
+如何实现一个机制让终端用户点击一个按钮之后才能获取文件内容，同时也验证了他至少是在使用一个支持 Javascript 和 Cookie 的客户端:
 ```nginx
 location /protected/ {
-    if ($cookie_validated = '') { #check the existence of the cookie 'validated'
+    if ($cookie_validated = '') { # 检查是否存在一个 cookie 'validated'
+        # 如果 cookie 不存在就返回一个验证 HTML 代码和头部
         add_header Set-Cookie 'validated=1; Max-Age=60';
         add_header Content-Type 'text/html' policy=overwrite;
         return 200 '<!DOCTYPE html>
@@ -103,7 +107,7 @@ location /protected/ {
   </script>
 </html>';
     }
-    # continue loading the page from origin or cache
+    # 如果 cookie 存在就继续服务请求
     origin_pass my_origin;
 }
 ```
