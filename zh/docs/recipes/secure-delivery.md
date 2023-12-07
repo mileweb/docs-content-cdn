@@ -118,19 +118,19 @@ location /protected/ {
 * 我们强烈建议您将支持的 TLS 最低版本设置为至少 1.2。为了最高的安全性，如果没有客户端兼容性的问题，您应该使用1.3版本。CDN Pro 支持您配置客户端侧和回源侧的 TLS 版本。
 * CDN Pro 也支持您根据安全性需求完全控制 TLS 的加密套件。例如，您可以配置优先选用 ECDHE 或 EDH 密钥交换算法来确保 "[前向保密性](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * 如果一个客户端请求使用 HTTPS 协议，CDN Pro 会使用同样的协议来访问源站来确保整个链路是加密的。尽管 CDN Pro 提供了 "协议降级" 的选项，您如果没有十分的必要请不要启用。
-* To avoid "man-in-the-middle" attacks or DNS hijacking attempts of your origin's hostname, enable the validation of the origin's certificate.
-* If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS counterpart. You can enable this on the [CDN Pro portal](/docs/portal/edge-configurations/creating-property.md#tls-settings) with the following dropdown list:
+* 在源站配置里，您可以选择打开“验证源站证书”功能来有效防范针对源站的 "中间人" 攻击或者是 DNS 劫持。
+* 如果您的加速项支持 HTTPS，一个好的实践是将所有 HTTP 请求都重定向到对应的 HTTPS 入口。您可以在 [CDN Pro 控制台](/docs/portal/edge-configurations/creating-property.md#tls-settings) 使用这个下拉框来配置：
 <p align=center><img src="/docs/resources/images/edge-logic/http-redirect.png" alt="HTTP redirect" width="500"></p>
 
 ### 防止缓存敏感数据
-If you know that some information is extremely sensitive and should never be stored on the edge server, use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) and [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) directives to bypass caching of confidential content. For example:
+如果某些信息非常敏感，不应该被缓存在 CDN 服务器上，您可以使用 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 和 [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 指令来防止这些需要保密的内容被缓存。下面是一个配置示例：
 ```nginx
 location /credit-card-info {
     proxy_cache_bypass 1;
     proxy_no_cache 1;
 }
 ```
-This is particularly important when meeting privacy standards such as PCI-DSS and HIPAA.
+这样的配置对符合某些隐私保护规范，例如 PCI-DSS 和 HIPAA 的要求十分重要。
 
 ### Web应用防火墙 (WAF)
-CDN Pro can work seamlessly with CDNetworks' WAF platform to protect your origin servers from any malicious requests. It also works well with any 3rd party WAF solutions.
+CDN Pro 可以与 CDNetworks 的 WAF 平台协作来保护您的源站免受恶意请求的攻击。CDN Pro 也可以与任何第三方的 WAF 平台协作。
