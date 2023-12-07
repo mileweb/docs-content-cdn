@@ -115,9 +115,9 @@ location /protected/ {
 
 ### TLS相关配置
 * CDN Pro 支持使用 RSA 和 ECDSA 算法的 TLS 证书。您甚至可以在同一个加速项内配置两个不同算法的证书，边缘服务器会根据客户端的能力和意愿来选择。
-* We highly recommend that you set the minimum TLS version to 1.2. For maximum security and performance, however, you should really take advantage of TLSv1.3. The TLS version on both the client and origin sides can be configured.
-* CDN Pro also allows you to fully configure TLS ciphers based on your security requirements. For example, you can prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
-* If a client request uses HTTPS, CDN Pro contacts the origin with the same protocol to ensure that the entire path is encrypted. Although CDN Pro supports "protocol downgrades," you should avoid using them unless absolutely necessary.
+* 我们强烈建议您将支持的 TLS 最低版本设置为至少 1.2。为了最高的安全性，如果没有客户端兼容性的问题，您应该使用1.3版本。CDN Pro 支持您配置客户端侧和回源侧的 TLS 版本。
+* CDN Pro 也支持您根据安全性需求完全控制 TLS 的加密套件。例如，您可以配置优先选用 ECDHE 或 EDH 密钥交换算法来确保 "[前向保密性](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
+* 如果一个客户端请求使用 HTTPS 协议，CDN Pro 会使用同样的协议来访问源站来确保整个链路是加密的。尽管 CDN Pro 提供了 "协议降级" 的选项，您如果没有十分的必要请不要启用。
 * To avoid "man-in-the-middle" attacks or DNS hijacking attempts of your origin's hostname, enable the validation of the origin's certificate.
 * If your site supports HTTPS, a good practice is to redirect all HTTP requests to the HTTPS counterpart. You can enable this on the [CDN Pro portal](/docs/portal/edge-configurations/creating-property.md#tls-settings) with the following dropdown list:
 <p align=center><img src="/docs/resources/images/edge-logic/http-redirect.png" alt="HTTP redirect" width="500"></p>
