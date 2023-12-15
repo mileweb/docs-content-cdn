@@ -788,6 +788,12 @@
                       "code": "InvalidInput",
                       "message": "Invalid field 'nonexistentfield'."
                     }
+                  },
+                  "Invalid algorithm": {
+                    "value": {
+                      "code": "InvalidAlgorithm",
+                      "message": "The algorithm type of the two certificates must be different. The current certificate algorithm type is 'RSA'."
+                    }
                   }
                 }
               }
@@ -3870,6 +3876,12 @@
                       "code": "InvalidHostname",
                       "message": "The hostname 'mytesthostname.com' is already in your property."
                     }
+                  },
+                  "Invalid algorithm": {
+                    "value": {
+                      "code": "InvalidAlgorithm",
+                      "message": "The algorithm type of the two certificates must be different. The current certificate algorithm type is 'RSA'."
+                    }
                   }
                 }
               }
@@ -6332,6 +6344,12 @@
                       "code": "InvalidSharingMethod",
                       "message": "An invalid value for sharingMethod was given. Only 'all', 'none', or 'some' is permitted."
                     }
+                  },
+                  "Invalid certificate version": {
+                    "value": {
+                      "code": "InvalidCertVersion",
+                      "message": "The algorithm type of the certificate must be the same as the latest version. The latest version algorithm type is 'RSA' and the current algorithm type is 'ECC'."
+                    }
                   }
                 }
               }
@@ -6786,12 +6804,15 @@
         {
           "schema": {
             "type": "integer",
-            "minimum": 1
+            "minimum": 1,
+            "enum": [
+              "latest"
+            ]
           },
           "name": "version",
           "in": "path",
           "required": true,
-          "description": "Version of the certificate."
+          "description": "Version of the certificate to retrieve. It can be an integer representing the version like \"1\" or \"latest\" to return the most recently created version of the certificate."
         },
         {
           "schema": {
@@ -6937,6 +6958,38 @@
               }
             }
           },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "kvaiwh4py85dz"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "ojzp9xd9eu1zl"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid version": {
+                    "value": {
+                      "code": "InvalidVersion",
+                      "message": "The version number must be a positive integer or \"latest\"."
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -6953,13 +7006,13 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid certificate ID": {
                     "value": {
                       "code": "InvalidCertId",
                       "message": "The specified certificate ID does not exist."
                     }
                   },
-                  "example-2": {
+                  "Invalid certificate version": {
                     "value": {
                       "code": "InvalidCertVersion",
                       "message": "The specified version 999 of certificate 9fddeb2fea3ed5b52d89d81d does not exist."
@@ -7882,12 +7935,6 @@
                       "message": "A deployment action is invalid. It must be deploy_property, remove_property, deploy_cert, or remove_cert."
                     }
                   },
-                  "Property with expired certificate": {
-                    "value": {
-                      "code": "CertificateExpired",
-                      "message": "Certificate is expired. Use request header 'Check-Certificate: no' to bypass cert expiration check."
-                    }
-                  },
                   "Invalid property version": {
                     "value": {
                       "code": "InvalidPropertyVersion",
@@ -7898,12 +7945,6 @@
                     "value": {
                       "code": "InvalidCertificateVersion",
                       "message": "The specified version 100 of certificate 5c65d18197146f000148511f does not exist."
-                    }
-                  },
-                  "Certificate mismatch": {
-                    "value": {
-                      "code": "CertificateMismatch",
-                      "message": "The domain(s) mytestdomain.domain.info are not included in the Subject Alternative Name field of the deployed version of certificate c5fbb345a24615f2a7ea0791."
                     }
                   },
                   "Outdated secret": {
@@ -7942,6 +7983,18 @@
                     "value": {
                       "code": "CertificateNotDeployed",
                       "message": "The required certificate 879aba3828341232 has not been deployed to the target yet."
+                    }
+                  },
+                  "Certificate expired": {
+                    "value": {
+                      "code": "CertificateExpired",
+                      "message": "Certificate is expired. Use request header 'Check-Certificate: no' to bypass cert expiration check."
+                    }
+                  },
+                  "Certificate mismatch": {
+                    "value": {
+                      "code": "CertificateMismatch",
+                      "message": "The domain(s) abc.mydomain.com are not included in the Subject Alternative Name field of the deployed version of certificate 01964be9254c9f2132bb260c."
                     }
                   }
                 }
@@ -13101,7 +13154,7 @@
               }
             }
           },
-          "description": "The request body is used to specify the files and directories to purge, the type of purge to perform, and the affected environment. To ensure that all variations of a file are purged, place the URL into the <i>dirUrls</i> list. If a file has multiple copies cached due to the origin's Vary header, you must also purge it by placing the URL into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
+          "description": "The request body is used to specify the files and directories to purge, the type of purge to perform, and the affected environment. To ensure that all variations of a file are purged, place the URL into the <i>dirUrls</i> list. If you are a reseller, you can help purge a child customer's files or directories using this API.\n"
         }
       },
       "get": {
@@ -13191,11 +13244,6 @@
                             "minimum": 0,
                             "description": "Number of regex patterns that were part of the purge request."
                           },
-                          "variedFiles": {
-                            "type": "integer",
-                            "minimum": 0,
-                            "description": "Number of files with multiple copies cached to the origin's Vary header. Purges of such files are automatically converted to <i>directory</i> purges and count against the directory purge quota."
-                          },
                           "ownerCustomerId": {
                             "type": "integer",
                             "description": "ID of the customer that made the purge request. This field is present only if the Report-Range header is children-only or self+children.",
@@ -13225,7 +13273,6 @@
                           "apiRequestId": "a104b7ad6ab2e91f",
                           "fileEntries": 1,
                           "dirEntries": 0,
-                          "variedFiles": 0,
                           "successRate": 100,
                           "hostnames": [
                             "mydomain.com"
@@ -13241,7 +13288,6 @@
                           "apiRequestId": "049ee33603dc1aab",
                           "fileEntries": 1,
                           "dirEntries": 0,
-                          "variedFiles": 0,
                           "successRate": 100,
                           "hostnames": [
                             "dana2.com"
@@ -13257,7 +13303,6 @@
                           "apiRequestId": "646163723701dbfc",
                           "fileEntries": 1,
                           "dirEntries": 0,
-                          "variedFiles": 0,
                           "successRate": 100,
                           "hostnames": [
                             "mydomain.com"
@@ -14273,13 +14318,6 @@
                       "type": "array",
                       "description": "Regular expression patterns used to match the cache key. Each must begin with the following format: \n <i>{scheme}://{hostname}/</i>. {scheme} can be <i>http</i>, <i>https</i>, or <i>any</i> which matches any scheme.\nExample: \n<code>https://test.domain.com/my.*\\.(jpg|png)\\?q=</code>\n<br/>\nFor performance considerations, the following restrictions apply:\n<ul>\n<li>The regular expression pattern following the hostname can be up to 126 characters.\n</li>\n<li>It can consist of up to two unlimited quantifiers (\"*\", \"+\", or \",}\").</li>\n<li>The upper limit on a quantifier cannot be more than 59, for example, <code>{1,59}</code></li>\n</ul>",
                       "maxItems": 2,
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "variedFiles": {
-                      "type": "array",
-                      "description": "Files with multiple copies cached due to the origin's Vary header. ",
                       "items": {
                         "type": "string"
                       }
@@ -33862,6 +33900,12 @@
                       "code": "InvalidType",
                       "message": "Invalid parameter 'type': 'monthly1'. The report type must be 'fiveminutes', 'hourly', 'daily'(with optional timezone) or 'monthly'(with optional timezone)."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Duplicate propertyHostname(s) 'myHostname.com'."
+                    }
                   }
                 }
               }
@@ -34121,6 +34165,12 @@
                     "value": {
                       "code": "InvalidType",
                       "message": "Invalid parameter 'type': 'monthly1'. The report type must be 'fiveminutes', 'hourly', 'daily'(with optional timezone) or 'monthly'(with optional timezone)."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Duplicate propertyHostname(s) 'myHostname.com'."
                     }
                   }
                 }
