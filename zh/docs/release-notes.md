@@ -1,5 +1,15 @@
 # Release Notes
 
+## December 13, 2023
+#### API updates
+* Ensured APIs treat edge hostnames as case-insensitive.
+* Updated [create property](</apidocs#operation/createProperty>), [create property version](</apidocs#operation/createPropertyVersion>), and [update property version](</apidocs#operation/updatePropertyVersion>) APIs to return a Warning header if there is an inconsistency in a certificate referenced by the property. Scenarios include a certificate that does not support a hostname defined in the property or a certificate which is expired.
+* Improved the warning message for [deleting a service quota](</apidocs#operation/delete-cdn-serviceQuotas-customer-customerId>) if the customer still has edge hostnames.
+
+#### Console updates
+* Removed leading and trailing spaces in purge and prefetch input boxes.
+* Fixed error displayed on Reports page after generating a Edge Hostname Request report with a 1 Day or 1 Month report interval.
+
 ## December 4, 2023
 #### API updates
 * Ensured edge hostnames are case insensitive.
