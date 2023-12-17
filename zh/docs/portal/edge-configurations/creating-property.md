@@ -101,6 +101,8 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 **Note:** You can set **Has ICP Beian** to **Yes** without contacting CDNetworks; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from CDNetworks.
 
+**Note:** Setting **Has ICP Beian** to **Yes** applies to the entire property, i.e. all hostnames in a property. If any hostname in a property does not have Beian, the property deployment will be rejected. And, if any hostname in a deployed property is later found to have invalid Beian, CDN Pro will automatically turn off the "hasBeian" switch for the entire property, even if the other hostnames in the same property still have valid Beian. Refer to [this FAQ](</docs/edge-logic/faq.md#china-delivery-with-icp-beian>) for more information.
+
 **Load Balancer Logic:** Enter Edge Logic to customize load balancing. You can use a subset of the directives, including `if`, `set`, `return`, `eval_func`, `add_header`, `client_max_body_size`, `deny`, and `allow`. For the list of directives allowed in this field, refer to the `loadBalancerDirectives` field in the response to the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). This list can include advanced Edge Logic directives that have not been enabled for your account.
 Example:  `if ($http_user_agent = bot) { return 403;}` 
 
