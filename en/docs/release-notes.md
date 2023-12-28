@@ -1,5 +1,17 @@
 # Release Notes
 
+## December 22, 2023
+#### API updates
+* Ensured certificate expiration notification emails are in the customer’s preferred language.
+* Rejected duplicate names in [purge request's](</apidocs#operation/createPurge>) fileHeaders field.
+* Fixed certificate auto-renewal issues related to an inconsistent algorithm used by the private key.
+* Fixed sending of deployment notifications.
+
+#### Console updates
+* Updated the Edge Logic editor's hint for eval_func to include new functions, URI_ESCAPE and ARG_ESCAPE.
+* Fixed error that occurred if spaces were entered in URLs to purge.
+* Updated prompts for the LITTLE_ENDIAN_BYTES subfunction of the eval_func directive in the Edge Logic editor.
+
 ## December 13, 2023
 #### API updates
 * Ensured APIs treat edge hostnames as case-insensitive.

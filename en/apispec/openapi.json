@@ -13033,6 +13033,12 @@
                       "code": "InvalidPurgeUrl",
                       "message": "The purge URL 'http://domain.info/i/image/gallery/123%abc.jpg' is invalid. Special letters need to be encoded."
                     }
+                  },
+                  "Duplicate file header name": {
+                    "value": {
+                      "code": "DuplicateFileHeaderName",
+                      "message": "Multiple headers with same name are not allowed in fileHeaders."
+                    }
                   }
                 }
               }
