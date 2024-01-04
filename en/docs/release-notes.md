@@ -1,5 +1,16 @@
 # Release Notes
 
+## January 3, 2024
+#### API updates
+* Checked whether a certificate being deployed would stop supporting a hostname in a deployed property.
+* Ensured the _all_ field appears first in the responses of the [edge status summary](</apidocs#operation/post-cdn-reports-edgeStatusSummary>) and [origin status summary](</apidocs#operation/post-cdn-reports-originStatusSummary>) report APIs.
+* Returned an appropriate error if the user tries to create a log configuration with an invalid hostname.
+* Improved error handling when an invalid target is specified in the [certificate list API](</apidocs#operation/getCertificates>).
+* Improved handling if a deployment task references properties that do not exist.
+* Improved deployment notification email when a deployment task is created to remove a property or certificate without specifying its version.
+* Rejected duplicate deployment attempts.
+* Ensured trial expiration warning emails are sent in the customer’s preferred language.
+
 ## December 22, 2023
 #### API updates
 * Ensured certificate expiration notification emails are in the customer’s preferred language.

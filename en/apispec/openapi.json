@@ -794,6 +794,12 @@
                       "code": "InvalidAlgorithm",
                       "message": "The algorithm type of the two certificates must be different. The current certificate algorithm type is 'RSA'."
                     }
+                  },
+                  "Invalid hostname": {
+                    "value": {
+                      "code": "InvalidHostname",
+                      "message": "Invalid hostname(s): \"ghjhkj参考.domain.com\"."
+                    }
                   }
                 }
               }
@@ -3221,6 +3227,12 @@
                     "value": {
                       "code": "InvalidDirective",
                       "message": "An invalid directive 'ORIGIN_set_header' was found in your Edge Logic. Please refer to the API documentation for a list of supported directives."
+                    }
+                  },
+                  "Invalid hostname": {
+                    "value": {
+                      "code": "InvalidHostname",
+                      "message": "Invalid hostname(s): \"ghjhkj参考.domain.com\"."
                     }
                   }
                 }
@@ -5870,10 +5882,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid target parameter": {
+                  "Invalid target": {
                     "value": {
                       "code": "InvalidTarget",
-                      "message": "Invalid target query parameter. Only \"all\", \"staging\", or \"production\" are allowed."
+                      "message": "An invalid target was specified. It must be either 'staging', 'production', 'all', or left empty."
                     }
                   },
                   "Invalid auto renew": {
@@ -7958,6 +7970,12 @@
                       "code": "InvalidDeploymentTarget",
                       "message": "An invalid target was specified. It must be either 'staging' or 'production'."
                     }
+                  },
+                  "Duplicate deployment": {
+                    "value": {
+                      "code": "DuplicateDeployment",
+                      "message": "A version of certificate 'aab3ab5d4ed2345223ae7aa7' is already being deployed in the 'production' environment."
+                    }
                   }
                 }
               }
@@ -7995,6 +8013,12 @@
                     "value": {
                       "code": "CertificateMismatch",
                       "message": "The domain(s) abc.mydomain.com are not included in the Subject Alternative Name field of the deployed version of certificate 01964be9254c9f2132bb260c."
+                    }
+                  },
+                  "Removing active SAN": {
+                    "value": {
+                      "code": "RemovingActiveSan",
+                      "message": "Some SANs are removed from the certificate including these deployed hostnames: 'atestdomain.domain.info'."
                     }
                   }
                 }
@@ -29719,6 +29743,12 @@
                       "code": "InvalidFormat",
                       "message": "Invalid variable name: %apacheto. It supports: referer, custom_1, rmtuser, scheme, custom_2, apachet, cltport, ua, cltregion, statuscode, reqsize, protocol, hostname, cachestate, reqhdrsize, svrip, uniqueid, samplerate, querystr, cltisp, method, utctime, tcprtt, cpu_ns, url, rspsize, svrnode, cltip, rsptime, reqrange, content_code."
                     }
+                  },
+                  "Invalid hostname 2": {
+                    "value": {
+                      "code": "InvalidHostname",
+                      "message": "Invalid hostname(s): \"ghjhkj参考.domain.com\"."
+                    }
                   }
                 }
               }
@@ -30051,6 +30081,12 @@
                     "value": {
                       "code": "InvalidFormat",
                       "message": "Invalid variable name: %apacheto. It supports: referer, custom_1, rmtuser, scheme, custom_2, apachet, cltport, ua, cltregion, statuscode, reqsize, protocol, hostname, cachestate, reqhdrsize, svrip, uniqueid, samplerate, querystr, cltisp, method, utctime, tcprtt, cpu_ns, url, rspsize, svrnode, cltip, rsptime, reqrange, content_code."
+                    }
+                  },
+                  "Invalid hostname": {
+                    "value": {
+                      "code": "InvalidHostname",
+                      "message": "Invalid hostname(s): \"ghjhkj参考.domain.com\"."
                     }
                   }
                 }
