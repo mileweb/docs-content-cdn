@@ -2331,6 +2331,17 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "no"
+              ]
+            },
+            "in": "header",
+            "name": "Check-Usage",
+            "description": "By default, we check if the edge hostname has been recently used as determined by the number of requests to it in the past 24 hours. This safety check is intended to protect against accidentally impacting visitors to your content.  You can pass the <i>Check-Usage: no</i> header to bypass this check."
           }
         ]
       },
@@ -8223,6 +8234,17 @@
             "in": "header",
             "name": "Check-Certificate",
             "description": "By default, if you deploy a property using a certificate, we check that the hostnames in the property are covered by the subject alternative name (SAN) of the certificate and that the certificate has not expired. For test purposes, you can bypass this check by passing the <i>Check-Certificate: no</i> header when creating the deployment task. You should not use this header when deploying for real users of your content since their browsers will warn about the invalid certificate and discourage them from visiting."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "no"
+              ]
+            },
+            "in": "header",
+            "name": "Check-Usage",
+            "description": "By default, we check if the deployment would result in removal of hostnames which have been recently used as determined by the number of requests to them in the past 24 hours. This safety check is intended to protect against accidentally impacting visitors to your content.  You can pass the <i>Check-Usage: no</i> header to bypass this check."
           }
         ]
       },

@@ -1,5 +1,17 @@
 # Release Notes
 
+## January 18, 2024
+#### API updates
+* Redeployed a certificate to the staging environment if it was automatically renewed.
+* Ensured shield change notification emails are in the customer’s preferred language.
+* Checked if an active hostname is removed from the Subject Alternative Name field of a new certificate version being deployed. An error is returned in this scenario to prevent accidental removal of support which could impact visitors to the content.
+* Rejected duplicate names in a prefetch request's fileList.headers field.
+* Removed duplicate webhook call triggered by completion of a validation task.
+
+#### Console updates
+* Fixed errors in the email warning of the end of a CDN Pro trial.
+* Added prompt to deploy newly created certificate version.
+
 ## January 3, 2024
 #### API updates
 * Checked whether a certificate being deployed would stop supporting a hostname in a deployed property.
