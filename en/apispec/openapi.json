@@ -5492,6 +5492,12 @@
                       "code": "InvalidIdentificationInfo",
                       "message": "IdentificationInfo can't be empty for self-signed certificate."
                     }
+                  },
+                  "Invalid input": {
+                    "value": {
+                      "code": "InvalidInput",
+                      "message": "The shareWith cannot be empty."
+                    }
                   }
                 }
               }
@@ -6149,7 +6155,7 @@
                           },
                           "propertyId": {
                             "type": "string",
-                            "description": "ID of the property using the certificate"
+                            "description": "ID of the property using the certificate."
                           },
                           "hostnames": {
                             "type": "array",
@@ -6372,6 +6378,12 @@
                     "value": {
                       "code": "InvalidCertVersion",
                       "message": "The algorithm type of the certificate must be the same as the latest version. The latest version algorithm type is 'RSA' and the current algorithm type is 'ECC'."
+                    }
+                  },
+                  "Invalid input": {
+                    "value": {
+                      "code": "InvalidInput",
+                      "message": "The shareWith cannot be empty."
                     }
                   }
                 }
@@ -7946,10 +7958,10 @@
                   }
                 },
                 "examples": {
-                  "Invalid property": {
+                  "Invalid property ID": {
                     "value": {
                       "code": "InvalidPropertyId",
-                      "message": "An invalid property ID was specified."
+                      "message": "An invalid property ID was specified: 'inv'."
                     }
                   },
                   "Invalid action": {
@@ -7986,6 +7998,12 @@
                     "value": {
                       "code": "DuplicateDeployment",
                       "message": "A version of certificate 'aab3ab5d4ed2345223ae7aa7' is already being deployed in the 'production' environment."
+                    }
+                  },
+                  "Invalid certificate ID": {
+                    "value": {
+                      "code": "InvalidCertificateId",
+                      "message": "An invalid certificate ID was specified: 'invalid'."
                     }
                   }
                 }
@@ -8930,6 +8948,12 @@
                       "code": "InvalidListLimit",
                       "message": "The value of limit should be an integer."
                     }
+                  },
+                  "Invalid target": {
+                    "value": {
+                      "code": "InvalidTarget",
+                      "message": "An invalid target was specified. It must be either 'staging', 'production', 'all', or left empty."
+                    }
                   }
                 }
               }
@@ -8991,6 +9015,20 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "staging",
+                "production",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "target",
+            "description": "Limit the response to hostnames from properties deployed to staging only or production only. By default, all hostnames from properties deployed to either production or staging are returned."
           }
         ]
       }
@@ -25761,6 +25799,12 @@
                     "value": {
                       "code": "InvalidTime",
                       "message": "The start time has to be within 24 hours in the future."
+                    }
+                  },
+                  "Invalid prefetch header": {
+                    "value": {
+                      "code": "InvalidPrefetchUrl",
+                      "message": "Invalid prefetch header. The header name shouldn't be empty."
                     }
                   }
                 }
