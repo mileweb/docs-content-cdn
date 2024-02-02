@@ -2,7 +2,7 @@
 
 ## February 1, 2024
 #### API updates
-* Updated [historical hostnames API](</apidocs#operation/getHistoricalHostnames>) to return hostnames deployed to the staging environment and added the target parameter to allow caller to choose between ‘production’, ‘staging’, and ‘all.
+* Updated [historical hostnames API](</apidocs#operation/getHistoricalHostnames>) to return hostnames deployed to the staging environment and added the target parameter to allow caller to choose between ‘production’, ‘staging’, and ‘all'.
 * Updated trial service expiration warning email to be in the customer’s preferred language.
 * Fixed [get certificate details API](</apidocs#operation/getCertificate>) to correctly reflect use of the certificate in a property.
 * Required shareWith to be specified when sharingMethod is set to ‘some’ when creating or updating a certificate.
