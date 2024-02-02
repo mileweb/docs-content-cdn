@@ -63,7 +63,7 @@ The following procedure describes how to create a test suite. After you create a
 5. Make your changes in the Test Case form. Required fields are denoted by an asterisk (\*).
 6. Click **Save**.
 
-## Running a Test Case within a Test Suite
+## Running Test Cases within a Test Suite
 
 1. In the left pane, click **Edge Configurations**, and then select **Test Suites**.
 2. On the Test Suites page, check a test suite, click the three dots next to the **Create Test Suite** button, and select **Run Selected Test Suites**. 

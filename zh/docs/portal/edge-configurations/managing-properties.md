@@ -74,9 +74,9 @@ The following table shows examples of using <b>hasConfig=<i><'configuration'></i
 Each property has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected property.
 - **Edit**: [Update](</docs/portal/edge-configurations/editing-properties.md>) the selected property.
 - **Compare Versions**: [Compare](</docs/portal/edge-configurations/comparing-properties.md>) two property versions.
-- **Undeploy from Staging**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md>) the selected property from the staging environment.
-- **Undeploy from Production**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md>) the selected property from production.
+- **Undeploy from Staging**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>) the selected property from the staging environment.
+- **Undeploy from Production**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>) the selected property from production.
 - **Delete**: [Delete](</docs/portal/edge-configurations/deleting-property.md>) the selected property.
-- **Deployment History**: [View](</docs/portal/edge-configurations/deploying-property.md>) the deployment history of the selected property.
+- **Deployment History**: [View](</docs/portal/edge-configurations/deploying-property.md#viewing-a-propertys-deployment-history>) the deployment history of the selected property.
 - **Clone**: [Copy](</docs/portal/edge-configurations/creating-property.md>) settings into the Create a Property form to create a new property.
-- **Report**: [Run](</docs/portal/reports/generating-reports.md>>) a report using the hostnames of the deployed property. This action is available only for properties that have been deployed to production.
+- **Report**: [Run](</docs/portal/reports/generating-reports.md>) a report using the hostnames of the deployed property. This action is available only for properties that have been deployed to production.
