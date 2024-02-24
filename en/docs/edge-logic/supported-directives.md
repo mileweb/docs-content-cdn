@@ -1195,7 +1195,7 @@ The header_name must be of a value other than "etag". The value is case-insensit
 **Default:** `-` <br/>
 **Contexts:** server, location, if in location
 
-Removes some query parameters from the variable ```$sorted_querystring_args```.
+Removes some query parameters from the variable ```$sorted_querystring_args```. The parameter names specified in this directive are case-sensitive.
 This feature is implemented on top of this [open-source project](https://github.com/wandenberg/nginx-sorted-querystring-module).
 
 ### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)
