@@ -1206,7 +1206,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
-从变量```$sorted_querystring_args``` 中删除一些查询参数。
+从变量```$sorted_querystring_args``` 中删除一些查询参数。这里配置的参数名称是区分大小写的。
 此功能是基于这个 [开源模块](https://github.com/wandenberg/nginx-sorted-querystring-module) 实现的。
 
 
