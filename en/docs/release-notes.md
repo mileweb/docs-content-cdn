@@ -1,5 +1,14 @@
 # Release Notes
 
+## February 26, 2024
+#### API updates
+* Improved message for the InvalidTarget error code returned by several APIs.
+* Improved validation of a property’s origin servers.
+* Consolidated emails sent to customers about changes to shield IP addresses.
+
+#### Console updates
+* Ensured that a trial customer who has exceeded the trial period’s usage limits can still upgrade their account.
+
 ## February 1, 2024
 #### API updates
 * Updated [historical hostnames API](</apidocs#operation/getHistoricalHostnames>) to return hostnames deployed to the staging environment and added the target parameter to allow caller to choose between ‘production’, ‘staging’, and ‘all'.
