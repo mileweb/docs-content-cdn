@@ -461,7 +461,7 @@ This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/h
 **Default:** `origin_fast_route off;` <br/>
 **Context:** server, location, if in location
 
-This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged with a higher rate than the edge traffic. The traffic such transferred is subject to a rate limit of 3 MByte/s. Please contact our customer support if a higher limit is required.
+This directive enables a fast route to be used to access the origin. It is powered by our proprietary HDT technology which provides more reliable connection with reduced latency. The traffic transferred through this fast route may be charged at a higher rate than the edge traffic. The traffic is restricted to a rate of 3 MByte/s. Please contact our customer support if a higher limit is required.
 
 ### `origin_follow_redirect`
 
@@ -520,7 +520,7 @@ Although CDN Pro has a hierarchical cache structure, the directive changes the h
 **Default:** `origin_limit_rate 30m;`<br>
 **Context:** server, location
 
-This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server. Measured in in bytes/sec.
+This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) directive. It limits the speed at which the response is read from the origin server. Measured in bytes/sec.
 
 ### `origin_pass`
 
