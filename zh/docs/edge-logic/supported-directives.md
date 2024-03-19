@@ -460,7 +460,7 @@ else { ... }
 **默认设置：** `origin_fast_route off;` <br/>
 **可用位置：** server, location, if in location
 
-该指令用于在访问源站时开启使用**快速路由**功能。此功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过**快速路由**传输的回源流量可能会被收取比边缘流量更高的费率。通过**快速路由**传输的流量限速3 Mbps。如果您需要提高速率，请联系我们的技术支持。
+该指令用于在访问源站时开启使用**快速路由**功能。此功能由我们专有的 HDT 技术提供支持，可提供更稳定的连接并减少延迟。通过**快速路由**传输的回源流量可能会被收取比边缘流量更高的费率。通过**快速路由**传输的流量限速3 MByte/s。如果您需要提高速率，请联系我们的技术支持。
 
 
 ### `origin_follow_redirect`
@@ -519,7 +519,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 **默认设置：** `origin_limit_rate 30m;`<br>
 **可用位置：** server, location
 
-该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制从源服务器读取正文的速度。
+该指令在 [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_limit_rate) 指令基础上进行了优化提升，用于限制从源服务器读取正文的速度。以字节/秒为单位。
 
 
 ### `origin_pass`

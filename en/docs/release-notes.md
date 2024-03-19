@@ -1,5 +1,16 @@
 # Release Notes
 
+## March 18, 2024
+#### API updates
+* Handled concurrent requests more gracefully.
+* Updated the [edge hostname list API](</apidocs#operation/getEdgeHostnames>) to support filtering by server groups.
+* Updated the [get historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>) to return the history of deployments to staging.
+
+#### Console updates
+* Fixed error messages for edge hostname user interface to be in the user’s preferred language.
+* Ensured the origin details page is shown in the user’s preferred language.
+* Ensured the selected timezone is applied in the access log page.
+
 ## February 26, 2024
 #### API updates
 * Improved message for the InvalidTarget error code returned by several APIs.
