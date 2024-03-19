@@ -3245,6 +3245,12 @@
                       "code": "InvalidHostname",
                       "message": "Invalid hostname(s): \"ghjhkj参考.domain.com\"."
                     }
+                  },
+                  "Invalid origin server": {
+                    "value": {
+                      "code": "InvalidOrigins",
+                      "message": "Invalid origin server 'testdomain.info:'. The origin server format is {hostname or IP address}:{http port},{https port} [weight=1-100] [backup]."
+                    }
                   }
                 }
               }
@@ -3904,6 +3910,12 @@
                     "value": {
                       "code": "InvalidAlgorithm",
                       "message": "The algorithm type of the two certificates must be different. The current certificate algorithm type is 'RSA'."
+                    }
+                  },
+                  "Invalid origin server": {
+                    "value": {
+                      "code": "InvalidOrigins",
+                      "message": "Invalid origin server 'testdomain.info:'. The origin server format is {hostname or IP address}:{http port},{https port} [weight=1-100] [backup]."
                     }
                   }
                 }
@@ -5320,19 +5332,19 @@
                   }
                 },
                 "examples": {
-                  "Invalid List Limit": {
+                  "Invalid list limit": {
                     "value": {
                       "code": "InvalidListLimit",
                       "message": "The value of limit should be between 1 and 200, inclusive."
                     }
                   },
-                  "Invalid List Limit 2": {
+                  "Invalid list limit 2": {
                     "value": {
                       "code": "InvalidListLimit",
                       "message": "The limit value should be an integer."
                     }
                   },
-                  "Invalid Sort Order": {
+                  "Invalid sort order": {
                     "value": {
                       "code": "InvalidSortOrder",
                       "message": "The valid sort order values are asc and desc."
@@ -5342,6 +5354,12 @@
                     "value": {
                       "code": "InvalidHasBeian",
                       "message": "Invalid hasBeian parameter. Only true and false are allowed."
+                    }
+                  },
+                  "Invalid server group": {
+                    "value": {
+                      "code": "InvalidServerGroup",
+                      "message": "The serverGroup 'abc' is invalid."
                     }
                   }
                 }
@@ -5436,6 +5454,14 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include edge hostnames of the caller.</td></tr><tr><td>children-only</td><td>Include edge hostnames of children customers only.</td></tr><tr><td>self+children</td><td>Include edge hostnames of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "serverGroups",
+            "description": "Comma-separated list of server groups ( chinaStandard, chinaPremium, standard, premium, deluxe, ultra, and nearChina). Only edge hostnames whose client zone rules reference the server groups will be returned."
           }
         ]
       }
@@ -8960,7 +8986,7 @@
             }
           }
         },
-        "description": "Get a list of hostnames belonging to properties that were successfully <a href=\"#tag/Deployment-Management\">deployed</a> to production during a particular timeframe.",
+        "description": "Get a list of hostnames belonging to properties that were successfully <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging during a particular timeframe.",
         "operationId": "getHistoricalHostnames",
         "parameters": [
           {
@@ -25633,12 +25659,24 @@
                           "undeploymentDate": {
                             "type": "string",
                             "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was undeployed. Example: \"2020-04-24T20:09:15Z\""
+                          },
+                          "target": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "6kp9i8p3wisjx"
+                            },
+                            "description": "Indicates where the property was deployed.",
+                            "enum": [
+                              "staging",
+                              "production"
+                            ]
                           }
                         },
                         "required": [
                           "customerId",
                           "propertyId",
-                          "deploymentDate"
+                          "deploymentDate",
+                          "target"
                         ]
                       }
                     }
@@ -25650,24 +25688,28 @@
                       "hostname": "test20201203.com",
                       "history": [
                         {
+                          "target": "staging",
                           "customerId": 123456,
                           "propertyId": "8453f93ad91fd4338eb87510",
                           "deploymentDate": "2021-01-29T08:06:38Z",
                           "undeploymentDate": "2021-01-29T09:30:49Z"
                         },
                         {
+                          "target": "production",
                           "customerId": 123456,
                           "propertyId": "8453f93ad91fd4338eb87510",
                           "deploymentDate": "2021-01-29T09:30:49Z",
                           "undeploymentDate": "2021-01-29T09:35:42Z"
                         },
                         {
+                          "target": "staging",
                           "customerId": 123456,
                           "propertyId": "8453f93ad91fd4338eb87510",
                           "deploymentDate": "2021-01-29T09:35:42Z",
                           "undeploymentDate": "2021-01-29T09:38:22Z"
                         },
                         {
+                          "target": "production",
                           "customerId": 123456,
                           "propertyId": "8453f93ad91fd4338eb87516",
                           "deploymentDate": "2021-02-13T08:06:12Z"
@@ -25700,6 +25742,12 @@
                       "code": "InvalidDate",
                       "message": "Invalid parameter 'startdate'. 'abc' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
                     }
+                  },
+                  "Invalid target": {
+                    "value": {
+                      "code": "InvalidTarget",
+                      "message": "An invalid target was specified. It must be either 'staging', 'production', 'all', or left empty."
+                    }
                   }
                 }
               }
@@ -25707,7 +25755,7 @@
           }
         },
         "operationId": "get-cdn-hostnames-historical-hostname",
-        "description": "This API returns information about a hostname's deployments to production. Query parameters let you specify a timeframe to search.",
+        "description": "This API returns information about a hostname's deployments to production. Query parameters let you specify a timeframe to search and where the hostname was deployed.",
         "parameters": [
           {
             "schema": {
@@ -25732,6 +25780,20 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "staging",
+                "production",
+                "all"
+              ],
+              "default": "all"
+            },
+            "in": "query",
+            "name": "target",
+            "description": "Return historical information about deployments to a particular environment. By default, information about deployments to both staging and production are returned."
           }
         ]
       }
