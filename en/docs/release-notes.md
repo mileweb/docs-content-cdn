@@ -4,7 +4,7 @@
 #### API updates
 * Handled concurrent requests more gracefully.
 * Updated the [edge hostname list API](</apidocs#operation/getEdgeHostnames>) to support filtering by server groups.
-* Updated the [get historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname> to return the history of deployments to staging.
+* Updated the [get historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>) to return the history of deployments to staging.
 
 #### Console updates
 * Fixed error messages for edge hostname user interface to be in the user’s preferred language.
