@@ -565,21 +565,6 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了将回源请求从 CDN Pro 节点发送到源站的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
 
 
-### `origin_selection_algorithm`
-
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
-
-**使用语法：** `origin_selection_algorithm {algorithm name};` <br/>
-**默认设置：** `origin_selection_algorithm round_robin;` <br/>
-**可用位置：** server, location
-
-当源站的域名解析为多个 IP 地址时，该指令用于设置使用哪个算法来选择源站IP。有效值为：
-
-* `round_robin` : 轮询回源，默认设置，它尝试将回源流量均匀分配到所有的源站IP上。
-* `consistent_hash` : 一致性哈希回源，基于回源 URL 的哈希值。如果源站有缓存，可以提高其命中率。
-* `sorted_list` : 优选回源，按照源站的链路质量状况回最优的源IP。当源站IP地理分布广泛时，此回源方式有助于确保回源性能稳定。
-
-
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
