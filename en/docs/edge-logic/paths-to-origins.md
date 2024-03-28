@@ -35,14 +35,22 @@ So if you know an origin is used for dynamic content, you can configure the "dir
 
 ### Origin with Mixed Content
 
-If you have an origin that servers both static and dynamic content, you will want to configure "directConnect" to "Auto".
+If you have an origin that servers both static and dynamic content, your best choice is to configure "directConnect" to "Auto".
 In this mode, the edge servers will dynamically decide if a parent needs to be tried based on the cacheability of the request.
-However, it is very challenging to fully automatically decide if a request is cacheable or not.
-The servers expect some hints from the user to help them, which is the parameters of the [proxy_cache_bypass]() directive.
+You will need to specify the rules in the edge logic for the server to determine if a request is cacheable or not.
+This is done through the [proxy_cache_bypass]() directive.
 For a property with mixed content, we highly recommend you to use this directive to specify the cacheablity of each request 
 based on the design of your business application. This is very important to achieve the best possible performance.
 
 ### Fast Route to Origin
+
+There is still one remaining issue for both dynamic and static content: What if there is network connectivity issue between the edge/parent server and the origin?
+Although congestions and outages are always happening on the internet, we want to minimize the impact of them on our business. Here is where our "Fast Route to Origin"
+feature can help. When you enable it in the edge logic with the [origin_fast_route]() directive, the data to and from the origin will be 
+accelerated by our highspeed data transmission (HDT) platform. This platform features our proprietary protocol based on UDP and smart routing technology to ensure
+a stable layer-4 performance regardless of any fluctuation in the public internet. The traffic transmitted through this channel is charged seperately from the edge delivery traffic.
+
+
 
 
 
