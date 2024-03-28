@@ -1,5 +1,14 @@
 # Release Notes
 
+## March 27, 2024
+#### API updates
+* Ignored the trialDeadline field if updating a service quota for a non-trial customer.
+* Increased the number of characters permitted in the property version description to 10000.
+* Ensured the [IP details API](</apidocs#operation/post-ngadmin-ipDetails>) works correctly with IPv6 addresses.
+
+#### Console updates
+* Fixed the link to online help from Test Suites page.
+
 ## March 18, 2024
 #### API updates
 * Handled concurrent requests more gracefully.
