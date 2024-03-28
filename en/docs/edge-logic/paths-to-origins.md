@@ -21,7 +21,8 @@ To make sure the parent cache is used for an origin, you need to configure the "
 Here is how to do this on the portal:
 [screenshot]
 If it is very important to keep the origin traffic at the minimum possible level, you can use our "shield" feature to essentially
-create a mirror of your origin such that each object will only be accessed once.
+create a mirror of your origin such that each object will only be accessed once. Shield is also useful when the origin has an IP
+whitelist for access control and only allow a very short list.
 In general, you want to pick a shield PoP that is close to your origin:
 [screenshot]
 
@@ -50,7 +51,28 @@ feature can help. When you enable it in the edge logic with the [origin_fast_rou
 accelerated by our highspeed data transmission (HDT) platform. This platform features our proprietary protocol based on UDP and smart routing technology to ensure
 a stable layer-4 performance regardless of any fluctuation in the public internet. The traffic transmitted through this channel is charged seperately from the edge delivery traffic.
 
+### Advanced Features for Performance
+#### The $server_level variable
+This variable is available in the load balancer logic and it tells you if you are on an edge server (value=1) or a parent server (value=2).
+The main usage of it is when you have a complicated access control algorithm, you may want to skip it on the parent servers to save time and cost:
+```nginx
+if ($server_level = 2) {
+  break;  # skip the complicated ACL algorithm below
+}
+# the complicated ACL algorithm:
+eval_func $var RSA_VERIFY ...
+...
+if ($result = 0) {
+  return 403 "You are not allowed to access!\n";
+}
+```
+#### Directives to Reduce Accesses to Origin
+You may want to read about these directives on serving recently expired content to save latency:
+[proxy_cache_use_stale]
+[proxy_cache_background_update]
+[proxy_cache_max_stale]
+This directive holds off requests fetching the same object from origin if one is already on the way:
+[proxy_cache_lock_timeout]
 
-
-
-
+#### Origin Configurations
+The 
