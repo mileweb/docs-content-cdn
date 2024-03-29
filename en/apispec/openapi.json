@@ -123,7 +123,8 @@
                       "properties": {
                         "description": {
                           "type": "string",
-                          "description": "A description of the version.\n"
+                          "description": "A description of the version.\n",
+                          "maxLength": 10000
                         },
                         "cacheKeyHostname": {
                           "type": "string",
@@ -871,7 +872,8 @@
                 "properties": {
                   "description": {
                     "type": "string",
-                    "description": "A description of the version.\n"
+                    "description": "A description of the version.\n",
+                    "maxLength": 10000
                   },
                   "cacheKeyHostname": {
                     "type": "string",
@@ -1482,15 +1484,18 @@
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the property was created."
+                      "description": "An RFC 3339 date indicating when the property was created.",
+                      "format": "date-time"
                     },
                     "lastUpdateTime": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the property was last updated."
+                      "description": "An RFC 3339 date indicating when the property was last updated.",
+                      "format": "date-time"
                     },
                     "versions": {
                       "type": "integer",
-                      "description": "Number of versions of the property.\n"
+                      "description": "Number of versions of the property.\n",
+                      "minimum": 1
                     }
                   },
                   "required": [
@@ -1826,7 +1831,8 @@
                           "time": {
                             "type": "string",
                             "description": "RFC 3339 format date of the event.",
-                            "example": "\"2019-11-11T23:34:59Z"
+                            "example": "\"2019-11-11T23:34:59Z",
+                            "format": "date-time"
                           },
                           "apiRequestId": {
                             "type": "string",
@@ -1972,7 +1978,8 @@
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "RFC 3339 format date indicating when the operation completed."
+                            "description": "RFC 3339 format date indicating when the operation completed.",
+                            "format": "date-time"
                           },
                           "status": {
                             "type": "string",
@@ -1990,7 +1997,8 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "RFC 3339 format date indicating when the operation was submitted for processing."
+                            "description": "RFC 3339 format date indicating when the operation was submitted for processing.",
+                            "format": "date-time"
                           }
                         },
                         "required": [
@@ -2004,12 +2012,14 @@
                     "lastUpdateTime": {
                       "type": "string",
                       "description": "RFC 3339 format date indicating when the edge hostname was last updated.",
-                      "example": "2019-11-11T23:35:00Z"
+                      "example": "2019-11-11T23:35:00Z",
+                      "format": "date-time"
                     },
                     "creationTime": {
                       "type": "string",
                       "description": "RFC 3339 format date indicating when the edge hostname was created.",
-                      "example": "2019-11-11T23:34:59Z"
+                      "example": "2019-11-11T23:34:59Z",
+                      "format": "date-time"
                     },
                     "ownerCustomerId": {
                       "type": "integer",
@@ -2935,11 +2945,13 @@
                           },
                           "description": {
                             "type": "string",
-                            "description": "A description of the property version."
+                            "description": "A description of the property version.",
+                            "maxLength": 10000
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 format date indicating when the property version was created. Example: 2016-12-28T23:10:42Z"
+                            "description": "RFC 3339 format date indicating when the property version was created. Example: 2016-12-28T23:10:42Z",
+                            "format": "date-time"
                           },
                           "hostnames": {
                             "type": "array",
@@ -2955,7 +2967,8 @@
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339 format date indicating when the property version was last updated. Example: 2016-12-28T23:10:42Z"
+                            "description": "RFC 3339 format date indicating when the property version was last updated. Example: 2016-12-28T23:10:42Z",
+                            "format": "date-time"
                           },
                           "lastValidationStatus": {
                             "type": "string",
@@ -3348,7 +3361,8 @@
                 "properties": {
                   "description": {
                     "type": "string",
-                    "description": "A description of the version.\n"
+                    "description": "A description of the version.\n",
+                    "maxLength": 10000
                   },
                   "cacheKeyHostname": {
                     "type": "string",
@@ -4029,7 +4043,8 @@
                     "properties": {
                       "description": {
                         "type": "string",
-                        "description": "A description of the version.\n"
+                        "description": "A description of the version.\n",
+                        "maxLength": 10000
                       },
                       "cacheKeyHostname": {
                         "type": "string",
@@ -4612,11 +4627,13 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC3339 format date indicating when the property was created."
+                            "description": "RFC3339 format date indicating when the property was created.",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC3339 date indicating when the property was last updated.\n"
+                            "description": "RFC3339 date indicating when the property was last updated.\n",
+                            "format": "date-time"
                           },
                           "latestVersion": {
                             "type": "integer",
@@ -4976,6 +4993,12 @@
                       "code": "EdgeHostnameBeingDeployed",
                       "message": "The edge hostname is being deployed and cannot be created now."
                     }
+                  },
+                  "Invalid use of nearChina server group": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "The nearChina server group cannot be used for regions outside mainland China"
+                    }
                   }
                 }
               }
@@ -5243,11 +5266,13 @@
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC3339 format string indicating when the edge hostname was last updated."
+                            "description": "RFC3339 format string indicating when the edge hostname was last updated.",
+                            "format": "date-time"
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC3339 format string indicating when the edge hostname was created."
+                            "description": "RFC3339 format string indicating when the edge hostname was created.",
+                            "format": "date-time"
                           },
                           "hasBeian": {
                             "type": "boolean",
@@ -5835,15 +5860,18 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "An RFC3339 format date indicates when the certificate was added to the system."
+                            "description": "An RFC3339 format date indicates when the certificate was added to the system.",
+                            "format": "date-time"
                           },
                           "expirationTime": {
                             "type": "string",
-                            "description": "An RFC3339 format date indicating when the latest version of the certificate expires.\n"
+                            "description": "An RFC3339 format date indicating when the latest version of the certificate expires.\n",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "An RFC3339 format date indicates when the certificate was last updated.\n"
+                            "description": "An RFC3339 format date indicates when the certificate was last updated.\n",
+                            "format": "date-time"
                           },
                           "versionInProduction": {
                             "type": "integer",
@@ -5857,11 +5885,13 @@
                           },
                           "productionExpirationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the version deployed to production will expire."
+                            "description": "RFC 3339 date indicating when the version deployed to production will expire.",
+                            "format": "date-time"
                           },
                           "stagingExpirationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the version deployed to staging will expire."
+                            "description": "RFC 3339 date indicating when the version deployed to staging will expire.",
+                            "format": "date-time"
                           },
                           "forceRenew": {
                             "type": "boolean",
@@ -6137,11 +6167,13 @@
                           },
                           "expirationTime": {
                             "type": "string",
-                            "description": "RFC 3339 format string indicating when the certificate expires."
+                            "description": "RFC 3339 format string indicating when the certificate expires.",
+                            "format": "date-time"
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 format string indicating when the certificate was created."
+                            "description": "RFC 3339 format string indicating when the certificate was created.",
+                            "format": "date-time"
                           },
                           "fingerprint": {
                             "type": "string",
@@ -6777,7 +6809,8 @@
                         },
                         "expirationTime": {
                           "type": "string",
-                          "description": "An RFC 3339 date indicating when the file expires."
+                          "description": "An RFC 3339 date indicating when the file expires.",
+                          "format": "date-time"
                         }
                       },
                       "required": [
@@ -6909,11 +6942,13 @@
                     },
                     "expirationTime": {
                       "type": "string",
-                      "description": "An RFC3339 format date indicating when the certificate version expires."
+                      "description": "An RFC3339 format date indicating when the certificate version expires.",
+                      "format": "date-time"
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "An RFC 3339 format date indicating when the certificate version was created."
+                      "description": "An RFC 3339 format date indicating when the certificate version was created.",
+                      "format": "date-time"
                     },
                     "subject": {
                       "type": "string",
@@ -6966,7 +7001,8 @@
                           },
                           "expirationTime": {
                             "type": "string",
-                            "description": "RFC 3339 format date indicating when the certificate expires."
+                            "description": "RFC 3339 format date indicating when the certificate expires.",
+                            "format": "date-time"
                           },
                           "signatureAlgo": {
                             "type": "string",
@@ -7138,7 +7174,8 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "An RFC 3339 format string indicating when the validation task was submitted. Example: \"2019-11-12T03:09:26Z\""
+                            "description": "An RFC 3339 format string indicating when the validation task was submitted. Example: \"2019-11-12T03:09:26Z\"",
+                            "format": "date-time"
                           },
                           "status": {
                             "type": "string",
@@ -7350,7 +7387,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -7358,7 +7396,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -7520,7 +7559,8 @@
                     },
                     "submissionTime": {
                       "type": "string",
-                      "description": "An RFC 3339 format string indicating when the task was created. Example: \"2019-11-12T03:06:16Z\""
+                      "description": "An RFC 3339 format string indicating when the task was created. Example: \"2019-11-12T03:06:16Z\"",
+                      "format": "date-time"
                     },
                     "status": {
                       "type": "string",
@@ -7547,7 +7587,8 @@
                     },
                     "finishTime": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the task finished."
+                      "description": "An RFC 3339 date indicating when the task finished.",
+                      "format": "date-time"
                     },
                     "name": {
                       "type": "string",
@@ -7705,18 +7746,20 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "An RFC 3339 format date indicates when the task was submitted."
+                            "description": "An RFC 3339 format date indicates when the task was submitted.",
+                            "format": "date-time"
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicates when the task completed."
+                            "description": "An RFC 3339 date indicates when the task completed.",
+                            "format": "date-time"
                           },
                           "status": {
                             "type": "string",
                             "description": "Indicates the status of the deployment task.",
                             "enum": [
                               "waiting",
-                              "in progress",
+                              "inprogress",
                               "failed",
                               "succeeded"
                             ]
@@ -7921,7 +7964,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -7929,7 +7973,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -8325,7 +8370,8 @@
                     },
                     "submissionTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the task was created."
+                      "description": "RFC 3339 date indicating when the task was created.",
+                      "format": "date-time"
                     },
                     "actions": {
                       "title": "deploymentActions",
@@ -8383,13 +8429,14 @@
                     },
                     "finishTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the task completed."
+                      "description": "RFC 3339 date indicating when the task completed.",
+                      "format": "date-time"
                     },
                     "status": {
                       "type": "string",
                       "enum": [
                         "waiting",
-                        "in progress",
+                        "inprogress",
                         "failed",
                         "succeeded"
                       ],
@@ -8991,7 +9038,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -8999,7 +9047,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -9163,7 +9212,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -9457,7 +9507,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -9466,7 +9517,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -9630,7 +9682,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -9834,7 +9887,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -9843,7 +9897,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -10010,7 +10065,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -10221,7 +10277,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -10230,7 +10287,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -10397,7 +10455,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -10608,7 +10667,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -10617,7 +10677,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -10695,52 +10756,6 @@
                   "title": "statuscodedetails",
                   "type": "object",
                   "description": "This object is returned by status code details report APIs.",
-                  "properties": {
-                    "dataName": {
-                      "type": "string",
-                      "description": "A brief description of the data."
-                    },
-                    "dataUnit": {
-                      "type": "string",
-                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
-                      "enum": [
-                        "counts"
-                      ]
-                    },
-                    "dataSeries": {
-                      "type": "array",
-                      "description": "Contains information about status codes at different points in time.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "timestamp": {
-                            "type": "string",
-                            "description": "RFC 3339 format date indicate the beginning of an interval."
-                          },
-                          "details": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "statusCode": {
-                                  "type": "string",
-                                  "description": "Indicates an HTTP status code, for example, \"200\"."
-                                },
-                                "data": {
-                                  "type": "integer",
-                                  "minimum": 0,
-                                  "description": "Indicates the number of times the status code was returned."
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "dataName"
-                  ],
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge status code",
@@ -10907,7 +10922,54 @@
                         }
                       ]
                     }
-                  }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
+                      "enum": [
+                        "counts"
+                      ]
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "Contains information about status codes at different points in time.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "RFC 3339 format date indicate the beginning of an interval.",
+                            "format": "date-time"
+                          },
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "statusCode": {
+                                  "type": "string",
+                                  "description": "Indicates an HTTP status code, for example, \"200\"."
+                                },
+                                "data": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Indicates the number of times the status code was returned."
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -11182,7 +11244,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -11191,7 +11254,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -11358,7 +11422,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -11538,7 +11603,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -11547,7 +11613,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -11625,52 +11692,6 @@
                   "title": "statuscodedetails",
                   "type": "object",
                   "description": "This object is returned by status code details report APIs.",
-                  "properties": {
-                    "dataName": {
-                      "type": "string",
-                      "description": "A brief description of the data."
-                    },
-                    "dataUnit": {
-                      "type": "string",
-                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
-                      "enum": [
-                        "counts"
-                      ]
-                    },
-                    "dataSeries": {
-                      "type": "array",
-                      "description": "Contains information about status codes at different points in time.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "timestamp": {
-                            "type": "string",
-                            "description": "RFC 3339 format date indicate the beginning of an interval."
-                          },
-                          "details": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "statusCode": {
-                                  "type": "string",
-                                  "description": "Indicates an HTTP status code, for example, \"200\"."
-                                },
-                                "data": {
-                                  "type": "integer",
-                                  "minimum": 0,
-                                  "description": "Indicates the number of times the status code was returned."
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "dataName"
-                  ],
                   "x-examples": {
                     "example-1": {
                       "dataName": "edge status code",
@@ -11837,7 +11858,54 @@
                         }
                       ]
                     }
-                  }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "A brief description of the data."
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement.  For status code APIs, it will be \"counts\", which indicates the number of times a status code appears.",
+                      "enum": [
+                        "counts"
+                      ]
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "Contains information about status codes at different points in time.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "RFC 3339 format date indicate the beginning of an interval.",
+                            "format": "date-time"
+                          },
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "statusCode": {
+                                  "type": "string",
+                                  "description": "Indicates an HTTP status code, for example, \"200\"."
+                                },
+                                "data": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Indicates the number of times the status code was returned."
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -12172,7 +12240,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -12181,7 +12250,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -12348,7 +12418,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -12477,7 +12548,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -12486,7 +12558,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -12699,7 +12772,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -12874,7 +12948,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -12883,7 +12958,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -13300,7 +13376,8 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the purge request was created."
+                            "description": "An RFC 3339 date indicating when the purge request was created.",
+                            "format": "date-time"
                           },
                           "hostnames": {
                             "type": "array",
@@ -13345,7 +13422,8 @@
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the purge was completed. It can be empty if the purge is still in progress."
+                            "description": "RFC 3339 date indicating when the purge was completed. It can be empty if the purge is still in progress.",
+                            "format": "date-time"
                           },
                           "apiRequestId": {
                             "type": "string",
@@ -13475,7 +13553,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -13485,7 +13564,8 @@
             "schema": {
               "type": "string",
               "maxLength": 0,
-              "minLength": 0
+              "minLength": 0,
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -13654,7 +13734,8 @@
                           },
                           "time": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the annotation applies."
+                            "description": "RFC 3339 date indicating when the annotation applies.",
+                            "format": "date-time"
                           },
                           "hostnames": {
                             "type": "array",
@@ -13772,7 +13853,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -13781,7 +13863,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -14006,7 +14089,8 @@
                     },
                     "time": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the annotation applies."
+                      "description": "RFC 3339 date indicating when the annotation applies.",
+                      "format": "date-time"
                     },
                     "hostnames": {
                       "type": "array",
@@ -14222,7 +14306,8 @@
                 "properties": {
                   "time": {
                     "type": "string",
-                    "description": "RFC 3339 date indicating when the annotation applies."
+                    "description": "RFC 3339 date indicating when the annotation applies.",
+                    "format": "date-time"
                   },
                   "type": {
                     "type": "string",
@@ -14348,7 +14433,8 @@
                     },
                     "submissionTime": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the purge request was created."
+                      "description": "An RFC 3339 date indicating when the purge request was created.",
+                      "format": "date-time"
                     },
                     "successRate": {
                       "type": "number",
@@ -14392,7 +14478,8 @@
                     },
                     "finishTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the purge was completed. It can be empty if the purge is still in progress."
+                      "description": "RFC 3339 date indicating when the purge was completed. It can be empty if the purge is still in progress.",
+                      "format": "date-time"
                     },
                     "apiRequestId": {
                       "type": "string",
@@ -14629,7 +14716,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -14638,7 +14726,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -14647,7 +14736,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "header",
             "name": "On-Behalf-Of",
@@ -14764,11 +14854,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -15076,7 +15168,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -15085,7 +15178,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -15327,11 +15421,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -15635,7 +15731,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -15644,7 +15741,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -16088,11 +16186,13 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the user account was created."
+                            "description": "RFC 3339 date indicating when the user account was created.",
+                            "format": "date-time"
                           },
                           "lastLoginTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the user last logged in to the portal."
+                            "description": "RFC 3339 date indicating when the user last logged in to the portal.",
+                            "format": "date-time"
                           },
                           "customerId": {
                             "type": "integer",
@@ -17107,11 +17207,13 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the API account was created."
+                            "description": "RFC 3339 date indicating when the API account was created.",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the API account was most recently updated."
+                            "description": "RFC 3339 date indicating when the API account was most recently updated.",
+                            "format": "date-time"
                           },
                           "emailAddress": {
                             "type": "string",
@@ -17368,15 +17470,18 @@
                         },
                         "creationtime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the user was added."
+                          "description": "RFC 3339 date indicating when the user was added.",
+                          "format": "date-time"
                         },
                         "lastLoginTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the user last logged in to the portal."
+                          "description": "RFC 3339 date indicating when the user last logged in to the portal.",
+                          "format": "date-time"
                         },
                         "lastUpdateTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the account was last updated."
+                          "description": "RFC 3339 date indicating when the account was last updated.",
+                          "format": "date-time"
                         }
                       }
                     },
@@ -17963,7 +18068,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -18115,7 +18221,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -18124,7 +18231,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -18202,60 +18310,6 @@
                   "title": "edgeHostnameSummaryResponse",
                   "type": "object",
                   "description": "The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
-                  "properties": {
-                    "metaData": {
-                      "type": "object",
-                      "description": "This object contains fields describing the data returned in the groups object.",
-                      "properties": {
-                        "startTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
-                        },
-                        "endTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
-                        },
-                        "isComplete": {
-                          "type": "boolean",
-                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
-                        },
-                        "dataNames": {
-                          "type": "array",
-                          "description": "Indicates the type of data returned: \"edgeHostname dns request\"",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "dataUnit": {
-                          "type": "string",
-                          "description": "Indicates the unit of measurement of the returned values."
-                        }
-                      },
-                      "required": [
-                        "isComplete"
-                      ]
-                    },
-                    "groups": {
-                      "type": "array",
-                      "description": "This object contains the breakdown of DNS requests by group. Groups are determined by the request body.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "group": {
-                            "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
-                          },
-                          "data": {
-                            "type": "array",
-                            "description": "Data value. The units of measurement are determined by the dataUnit field.",
-                            "items": {
-                              "type": "number"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
                   "examples": [
                     {
                       "metaData": {
@@ -18312,7 +18366,63 @@
                         }
                       ]
                     }
-                  ]
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned: \"edgeHostname dns request\"",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of DNS requests by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data value. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 "examples": {
                   "Summary of total requests": {
@@ -18435,7 +18545,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -18444,7 +18555,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -18528,60 +18640,6 @@
                   "title": "edgeHostnameSummaryResponse",
                   "type": "object",
                   "description": "The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit.  When \"isComplete\" is true, the total is the sum of all other returned groups.",
-                  "properties": {
-                    "metaData": {
-                      "type": "object",
-                      "description": "This object contains fields describing the data returned in the groups object.",
-                      "properties": {
-                        "startTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
-                        },
-                        "endTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
-                        },
-                        "isComplete": {
-                          "type": "boolean",
-                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
-                        },
-                        "dataNames": {
-                          "type": "array",
-                          "description": "Indicates the type of data returned: \"edgeHostname dns request\"",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "dataUnit": {
-                          "type": "string",
-                          "description": "Indicates the unit of measurement of the returned values."
-                        }
-                      },
-                      "required": [
-                        "isComplete"
-                      ]
-                    },
-                    "groups": {
-                      "type": "array",
-                      "description": "This object contains the breakdown of DNS requests by group. Groups are determined by the request body.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "group": {
-                            "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
-                          },
-                          "data": {
-                            "type": "array",
-                            "description": "Data value. The units of measurement are determined by the dataUnit field.",
-                            "items": {
-                              "type": "number"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
                   "examples": [
                     {
                       "metaData": {
@@ -18638,7 +18696,63 @@
                         }
                       ]
                     }
-                  ]
+                  ],
+                  "properties": {
+                    "metaData": {
+                      "type": "object",
+                      "description": "This object contains fields describing the data returned in the groups object.",
+                      "properties": {
+                        "startTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
+                        },
+                        "isComplete": {
+                          "type": "boolean",
+                          "description": "The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>."
+                        },
+                        "dataNames": {
+                          "type": "array",
+                          "description": "Indicates the type of data returned: \"edgeHostname dns request\"",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "dataUnit": {
+                          "type": "string",
+                          "description": "Indicates the unit of measurement of the returned values."
+                        }
+                      },
+                      "required": [
+                        "isComplete"
+                      ]
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "This object contains the breakdown of DNS requests by group. Groups are determined by the request body.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "group": {
+                            "type": "string",
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups.\n"
+                          },
+                          "data": {
+                            "type": "array",
+                            "description": "Data value. The units of measurement are determined by the dataUnit field.",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 "examples": {
                   "Summary of total requests": {
@@ -18757,7 +18871,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code>",
@@ -18766,7 +18881,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "required": true,
@@ -21075,11 +21191,13 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the customer account was created."
+                            "description": "RFC 3339 date indicating when the customer account was created.",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the customer account was last updated."
+                            "description": "RFC 3339 date indicating when the customer account was last updated.",
+                            "format": "date-time"
                           },
                           "type": {
                             "type": "string",
@@ -21522,7 +21640,8 @@
                           },
                           "requestTimestamp": {
                             "type": "string",
-                            "description": "RFC 3339 date with UTC time that indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\""
+                            "description": "RFC 3339 date with UTC time that indicates when the API call was made. Example: \"2020-04-24T20:09:15Z\"",
+                            "format": "date-time"
                           },
                           "requestURL": {
                             "type": "string",
@@ -21732,7 +21851,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -21740,7 +21860,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -21840,7 +21961,8 @@
                     },
                     "requestTimestamp": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the API call was made. Example: \"2020-04-24T15:21:17Z\" "
+                      "description": "RFC 3339 date indicating when the API call was made. Example: \"2020-04-24T15:21:17Z\" ",
+                      "format": "date-time"
                     },
                     "requestMethod": {
                       "type": "string",
@@ -21870,7 +21992,8 @@
                     },
                     "responseTimestamp": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the response was sent."
+                      "description": "RFC 3339 date indicating when the response was sent.",
+                      "format": "date-time"
                     },
                     "responseCode": {
                       "type": "integer",
@@ -22094,7 +22217,8 @@
                     },
                     "oldestPropertyValidationTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating the oldest validated property that can be deployed. Properties validated before this date must be re-validated before you can deploy them. Example: \"2021-02-05T00:00:00Z\""
+                      "description": "RFC 3339 date indicating the oldest validated property that can be deployed. Properties validated before this date must be re-validated before you can deploy them. Example: \"2021-02-05T00:00:00Z\"",
+                      "format": "date-time"
                     },
                     "baseLbDirectives": {
                       "type": "array",
@@ -22415,7 +22539,8 @@
                   },
                   "trialDeadline": {
                     "type": "string",
-                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value is <i>trial</i>. "
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value is <i>trial</i>. ",
+                    "format": "date-time"
                   },
                   "usageLimitDays": {
                     "type": "integer",
@@ -23042,15 +23167,18 @@
                     },
                     "trialDeadline": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>.",
+                      "format": "date-time"
                     },
                     "upgradeDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>.",
+                      "format": "date-time"
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended.",
+                      "format": "date-time"
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -23156,7 +23284,8 @@
                     },
                     "terminationDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated.",
+                      "format": "date-time"
                     },
                     "allowedLbDirectives": {
                       "type": "array",
@@ -23485,7 +23614,8 @@
                   },
                   "trialDeadline": {
                     "type": "string",
-                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value is <i>trial</i>."
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value is <i>trial</i>.",
+                    "format": "date-time"
                   },
                   "advancedFeatures": {
                     "type": "array",
@@ -23841,7 +23971,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -23930,7 +24061,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -23939,7 +24071,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -24153,7 +24286,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -24162,7 +24296,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -24387,15 +24522,18 @@
                     },
                     "trialDeadline": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>.",
+                      "format": "date-time"
                     },
                     "upgradeDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>.",
+                      "format": "date-time"
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended.",
+                      "format": "date-time"
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -24501,7 +24639,8 @@
                     },
                     "terminationDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated.",
+                      "format": "date-time"
                     },
                     "allowedLbDirectives": {
                       "type": "array",
@@ -24745,15 +24884,18 @@
                     },
                     "trialDeadline": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>."
+                      "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value  is <i>trial</i>.",
+                      "format": "date-time"
                     },
                     "upgradeDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>."
+                      "description": "A date in RFC 3339 format indicating when a customer's status changed from <i>trial</i> to <i>active</i>.",
+                      "format": "date-time"
                     },
                     "suspensionDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was suspended.",
+                      "format": "date-time"
                     },
                     "advancedFeatures": {
                       "type": "array",
@@ -24859,7 +25001,8 @@
                     },
                     "terminationDate": {
                       "type": "string",
-                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated."
+                      "description": "A date in RFC 3339 format indicating when the customer's CDN Pro service was terminated.",
+                      "format": "date-time"
                     },
                     "allowedLbDirectives": {
                       "type": "array",
@@ -25093,7 +25236,8 @@
                   },
                   "trialDeadline": {
                     "type": "string",
-                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value is <i>trial</i>."
+                    "description": "A date in RFC 3339 format indicating when the trial expires. This field is required if the <i>status</i> field's value is <i>trial</i>.",
+                    "format": "date-time"
                   },
                   "advancedFeatures": {
                     "type": "array",
@@ -25430,7 +25574,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -25520,7 +25665,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -25529,7 +25675,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -25654,11 +25801,13 @@
                           },
                           "deploymentDate": {
                             "type": "string",
-                            "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was deployed. Example: \"2020-04-24T20:09:15Z\""
+                            "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was deployed. Example: \"2020-04-24T20:09:15Z\"",
+                            "format": "date-time"
                           },
                           "undeploymentDate": {
                             "type": "string",
-                            "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was undeployed. Example: \"2020-04-24T20:09:15Z\""
+                            "description": "RFC 3339 date with UTC time that indicates when the property with the hostname was undeployed. Example: \"2020-04-24T20:09:15Z\"",
+                            "format": "date-time"
                           },
                           "target": {
                             "type": "string",
@@ -25755,11 +25904,12 @@
           }
         },
         "operationId": "get-cdn-hostnames-historical-hostname",
-        "description": "This API returns information about a hostname's deployments to production. Query parameters let you specify a timeframe to search and where the hostname was deployed.",
+        "description": "This API returns information about a hostname's deployments to production and staging. Query parameters let you specify a timeframe to search and where the hostname was deployed.",
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "description": "Beginning of the time period in RFC 3339 format. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-11-14T00:00:00Z</code> By default, the value is when you began using CDN Pro.",
@@ -25767,7 +25917,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -25949,7 +26100,8 @@
                   },
                   "startTime": {
                     "type": "string",
-                    "description": "RFC 3339 date indicating when the prefetch should begin. This must be in UTC time, for example, \"2021-03-06T00:00:00Z\"."
+                    "description": "RFC 3339 date indicating when the prefetch should begin. This must be in UTC time, for example, \"2021-03-06T00:00:00Z\".",
+                    "format": "date-time"
                   },
                   "webhook": {
                     "type": "string",
@@ -26020,11 +26172,13 @@
                           },
                           "submissionTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the prefetch request was submitted."
+                            "description": "RFC 3339 date indicating when the prefetch request was submitted.",
+                            "format": "date-time"
                           },
                           "finishTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the prefetch completed."
+                            "description": "RFC 3339 date indicating when the prefetch completed.",
+                            "format": "date-time"
                           },
                           "successRate": {
                             "type": "number",
@@ -26164,7 +26318,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -26172,7 +26327,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -26329,7 +26485,8 @@
                         },
                         "submissionTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the prefetch request was submitted."
+                          "description": "RFC 3339 date indicating when the prefetch request was submitted.",
+                          "format": "date-time"
                         },
                         "successRate": {
                           "type": "number",
@@ -26348,7 +26505,8 @@
                         },
                         "finishTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the prefetch completed."
+                          "description": "RFC 3339 date indicating when the prefetch completed.",
+                          "format": "date-time"
                         },
                         "apiRequestId": {
                           "type": "string",
@@ -26398,7 +26556,8 @@
                     },
                     "startTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the prefetch should begin. This must be in UTC time, for example, \"2021-03-06T00:00:00Z\"."
+                      "description": "RFC 3339 date indicating when the prefetch should begin. This must be in UTC time, for example, \"2021-03-06T00:00:00Z\".",
+                      "format": "date-time"
                     },
                     "webhook": {
                       "type": "string",
@@ -27642,11 +27801,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -27756,7 +27917,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -27765,7 +27927,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -27960,11 +28123,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -28138,15 +28303,18 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the webhook was created."
+                            "description": "RFC 3339 date indicating when the webhook was created.",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the webhook was last updated."
+                            "description": "RFC 3339 date indicating when the webhook was last updated.",
+                            "format": "date-time"
                           },
                           "lastCallTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the webhook was last called."
+                            "description": "RFC 3339 date indicating when the webhook was last called.",
+                            "format": "date-time"
                           },
                           "totalCalls": {
                             "type": "integer",
@@ -28492,15 +28660,18 @@
                       "properties": {
                         "creationTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the webhook was created."
+                          "description": "RFC 3339 date indicating when the webhook was created.",
+                          "format": "date-time"
                         },
                         "lastUpdatetime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the webhook was last updated."
+                          "description": "RFC 3339 date indicating when the webhook was last updated.",
+                          "format": "date-time"
                         },
                         "lastCallTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the webhook was last called"
+                          "description": "RFC 3339 date indicating when the webhook was last called",
+                          "format": "date-time"
                         },
                         "totalCalls": {
                           "type": "integer",
@@ -28910,11 +29081,13 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the secret was created. This will be in UTC time, for example, \"2021-07-06T00:00:00Z\".\n"
+                            "description": "An RFC 3339 date indicating when the secret was created. This will be in UTC time, for example, \"2021-07-06T00:00:00Z\".\n",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the secret was last updated, for example, \"2021-07-06T00:00:00Z\".\n"
+                            "description": "An RFC 3339 date indicating when the secret was last updated, for example, \"2021-07-06T00:00:00Z\".\n",
+                            "format": "date-time"
                           },
                           "ownerCustomerId": {
                             "type": "integer",
@@ -29221,11 +29394,13 @@
                     },
                     "lastUpdateTime": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the secret was last updated, for example, \"2021-07-06T00:00:00Z\"."
+                      "description": "An RFC 3339 date indicating when the secret was last updated, for example, \"2021-07-06T00:00:00Z\".",
+                      "format": "date-time"
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the secret was created. This will be in UTC time, for example, \"2021-07-06T00:00:00Z\"."
+                      "description": "An RFC 3339 date indicating when the secret was created. This will be in UTC time, for example, \"2021-07-06T00:00:00Z\".",
+                      "format": "date-time"
                     },
                     "usageInProduction": {
                       "type": "array",
@@ -29680,11 +29855,13 @@
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the log configuration was last updated."
+                            "description": "RFC 3339 date indicating when the log configuration was last updated.",
+                            "format": "date-time"
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "RFC 3339 date indicating when the log configuration was created."
+                            "description": "RFC 3339 date indicating when the log configuration was created.",
+                            "format": "date-time"
                           },
                           "customerId": {
                             "type": "integer",
@@ -30073,11 +30250,13 @@
                     },
                     "lastUpdateTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the log configuration was last updated."
+                      "description": "RFC 3339 date indicating when the log configuration was last updated.",
+                      "format": "date-time"
                     },
                     "creationTime": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the log configuration was created."
+                      "description": "RFC 3339 date indicating when the log configuration was created.",
+                      "format": "date-time"
                     }
                   },
                   "required": [
@@ -30477,11 +30656,13 @@
                         "properties": {
                           "dateFrom": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicate the beginning of the log file."
+                            "description": "An RFC 3339 date indicate the beginning of the log file.",
+                            "format": "date-time"
                           },
                           "dateTo": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating the end of the log file."
+                            "description": "An RFC 3339 date indicating the end of the log file.",
+                            "format": "date-time"
                           },
                           "fileSize": {
                             "type": "integer",
@@ -30490,7 +30671,7 @@
                           },
                           "logUrl": {
                             "type": "string",
-                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format. The URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL."
+                            "description": "URL to the log file. The file has been compressed using gzip. Refer to the API description for details about the format. The URL is valid for 24 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL."
                           },
                           "hostname": {
                             "type": "string",
@@ -30512,17 +30693,10 @@
                     "value": {
                       "logs": [
                         {
-                          "dateFrom": "2021-10-12T12:00:00Z",
-                          "dateTo": "2021-10-12T12:29:59Z",
-                          "fileSize": 304,
-                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211012-000000-235959/myreports.domain.info/20211012-120000-122959_52b8e3ed_myreports.domain.info.log.gz?wskey=8f8aaac672514b73465761c8d856ba435afd02ddc8dc241c38fedea3b2e416fa",
-                          "hostname": "myreports.domain.info"
-                        },
-                        {
-                          "dateFrom": "2021-10-18T08:30:00Z",
-                          "dateTo": "2021-10-18T08:59:59Z",
+                          "dateFrom": "2024-03-18T08:30:00Z",
+                          "dateTo": "2024-03-18T08:59:59Z",
                           "fileSize": 300,
-                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211018-000000-235959/myreports.domain.info/20211018-083000-085959_aecac869_myreports.domain.info.log.gz?wskey=e527ff274cc684824935ab6dfed2b2a05afd02ddc8dc241c38fedea3b2e416fc",
+                          "logUrl": "https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd10000",
                           "hostname": "myreports.domain.info"
                         }
                       ]
@@ -30583,7 +30757,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -30592,7 +30767,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -30600,7 +30776,7 @@
             "required": true
           }
         ],
-        "description": "Get access logs representing requests to one or more hostnames in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs for a hostname, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2021-10-31T00:00:00Z\",\n          \"dateTo\":\"2021-10-31T00:29:59Z\",\n          \"fileSize\":105878,\n          \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n\nThe URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.\n",
+        "description": "Get access logs representing requests to one or more hostnames in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs for a hostname, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2024-03-21T00:00:00Z\",\n          \"dateTo\":\"2024-03-21T00:29:59Z\",\n          \"fileSize\":105878,          \"logUrl\":\"https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd1e39\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [21/Mar/2024:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n\nThe URL is valid for 24 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -30657,11 +30833,13 @@
                         "properties": {
                           "dateFrom": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicate the beginning of the log file."
+                            "description": "An RFC 3339 date indicate the beginning of the log file.",
+                            "format": "date-time"
                           },
                           "dateTo": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating the end of the log file."
+                            "description": "An RFC 3339 date indicating the end of the log file.",
+                            "format": "date-time"
                           },
                           "fileSize": {
                             "type": "integer",
@@ -30688,16 +30866,10 @@
                     "value": {
                       "logs": [
                         {
-                          "dateFrom": "2021-10-12T12:00:00Z",
-                          "dateTo": "2021-10-12T12:29:59Z",
-                          "fileSize": 304,
-                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211012-000000-235959/myreports.domain.info/20211012-120000-122959_52b8e3ed_myreports.domain.info.log.gz?wskey=8f8aaac672514b73465761c8d856ba435afd02ddc8dc241c38fedea3b2e416fa"
-                        },
-                        {
-                          "dateFrom": "2021-10-18T08:30:00Z",
-                          "dateTo": "2021-10-18T08:59:59Z",
+                          "dateFrom": "2024-03-18T08:30:00Z",
+                          "dateTo": "2024-03-18T08:59:59Z",
                           "fileSize": 300,
-                          "logUrl": "http://lfpc.quantil.com:81/nglogdl/20211018-000000-235959/myreports.domain.info/20211018-083000-085959_aecac869_myreports.domain.info.log.gz?wskey=e527ff274cc684824935ab6dfed2b2a05afd02ddc8dc241c38fedea3b2e416fc"
+                          "logUrl": "https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd10000"
                         }
                       ]
                     }
@@ -30745,11 +30917,12 @@
             }
           }
         },
-        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2021-10-31T00:00:00Z\",\n            \"dateTo\":\"2021-10-31T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://lfpc.quantil.com:6443/nglogdl/20211031-000000-235959/mydomain.domain.info/20211031-000000-002959_3a1e64f2_mydomain.domain.info.log.gz?wskey=987b95187a322787a5b147f8e94b13110\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [31/Oct/2021:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\nThe URL is valid for 10 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.",
+        "description": "Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.\n\nTo obtain logs, you must first specify the format of the logs by <a href=\"#operation/post-cdn-report-logConfigs\">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.\n\nFor example, suppose you define a log configuration format as follows:\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\nThis API will return a list of available logs such as:\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2024-03-21T00:00:00Z\",\n            \"dateTo\":\"2024-03-21T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd10000\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nThe logUrl field contains a URL to a gzip-compressed log file consisting of rows such as the following:<br/>\n<pre>\n9.8.7.6 - [21/Mar/2024:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\nThe URL is valid for 24 hours. If you need to download the logs again after that, you must make another request to this API to get a new URL.",
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -30758,7 +30931,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -30854,11 +31028,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -31004,7 +31180,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -31013,7 +31190,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -31184,11 +31362,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -31283,7 +31463,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -31292,7 +31473,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "name": "enddate",
             "required": true,
@@ -31375,11 +31557,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -31490,7 +31674,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -31499,7 +31684,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -31647,11 +31833,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -31740,7 +31928,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -31749,7 +31938,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -31797,11 +31987,13 @@
                   "properties": {
                     "lastUpdated": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the list of IP addresses was last updated."
+                      "description": "RFC 3339 date indicating when the list of IP addresses was last updated.",
+                      "format": "date-time"
                     },
                     "effectiveDate": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the IP address list became effective."
+                      "description": "RFC 3339 date indicating when the IP address list became effective.",
+                      "format": "date-time"
                     },
                     "ipV4": {
                       "type": "array",
@@ -31923,11 +32115,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -32195,11 +32389,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -32288,7 +32484,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -32297,7 +32494,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -32344,6 +32542,29 @@
                   "title": "cpuSummaryResponse",
                   "type": "object",
                   "description": "The response contains a summary of CPU usage. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2022-05-10T00:00:00Z",
+                        "endTime": "2022-05-31T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge cpu time",
+                          "intermediate cpu time"
+                        ],
+                        "dataUnit": "seconds"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            74.32706,
+                            1.94213
+                          ]
+                        }
+                      ]
+                    }
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -32351,11 +32572,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -32401,30 +32624,7 @@
                         }
                       }
                     }
-                  },
-                  "examples": [
-                    {
-                      "metaData": {
-                        "startTime": "2022-05-10T00:00:00Z",
-                        "endTime": "2022-05-31T00:00:00Z",
-                        "isComplete": true,
-                        "dataNames": [
-                          "edge cpu time",
-                          "intermediate cpu time"
-                        ],
-                        "dataUnit": "seconds"
-                      },
-                      "groups": [
-                        {
-                          "group": "__all__",
-                          "data": [
-                            74.32706,
-                            1.94213
-                          ]
-                        }
-                      ]
-                    }
-                  ]
+                  }
                 },
                 "examples": {
                   "example-1": {
@@ -32486,7 +32686,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -32495,7 +32696,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -32604,6 +32806,29 @@
                   "title": "cpuSummaryResponse",
                   "type": "object",
                   "description": "The response contains a summary of CPU usage. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2022-05-10T00:00:00Z",
+                        "endTime": "2022-05-31T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "edge cpu time",
+                          "intermediate cpu time"
+                        ],
+                        "dataUnit": "seconds"
+                      },
+                      "groups": [
+                        {
+                          "group": "__all__",
+                          "data": [
+                            74.32706,
+                            1.94213
+                          ]
+                        }
+                      ]
+                    }
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -32611,11 +32836,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -32661,30 +32888,7 @@
                         }
                       }
                     }
-                  },
-                  "examples": [
-                    {
-                      "metaData": {
-                        "startTime": "2022-05-10T00:00:00Z",
-                        "endTime": "2022-05-31T00:00:00Z",
-                        "isComplete": true,
-                        "dataNames": [
-                          "edge cpu time",
-                          "intermediate cpu time"
-                        ],
-                        "dataUnit": "seconds"
-                      },
-                      "groups": [
-                        {
-                          "group": "__all__",
-                          "data": [
-                            74.32706,
-                            1.94213
-                          ]
-                        }
-                      ]
-                    }
-                  ]
+                  }
                 },
                 "examples": {
                   "example-1": {
@@ -32746,7 +32950,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -32755,7 +32960,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -32883,11 +33089,16 @@
                           },
                           "lastUpdated": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the shield was last updated."
+                            "description": "An RFC 3339 date indicating when the shield was last updated.",
+                            "format": "date-time"
                           },
                           "effectiveDate": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the shield became active."
+                            "description": "An RFC 3339 date indicating when the shield became active.",
+                            "x-stoplight": {
+                              "id": "9nempgwuz9xy9"
+                            },
+                            "format": "date-time"
                           },
                           "usedInProperties": {
                             "type": "boolean",
@@ -33075,11 +33286,13 @@
                     },
                     "lastUpdated": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the shield was last updated."
+                      "description": "An RFC 3339 date indicating when the shield was last updated.",
+                      "format": "date-time"
                     },
                     "effectiveDate": {
                       "type": "string",
-                      "description": "An RFC 3339 date indicating when the shield became active."
+                      "description": "An RFC 3339 date indicating when the shield became active.",
+                      "format": "date-time"
                     },
                     "usedInProperties": {
                       "type": "boolean",
@@ -33196,11 +33409,13 @@
                           },
                           "creationTime": {
                             "type": "string",
-                            "description": "When the log aggregation point was created."
+                            "description": "When the log aggregation point was created.",
+                            "format": "date-time"
                           },
                           "lastUpdateTime": {
                             "type": "string",
-                            "description": "When the log aggregation point was updated."
+                            "description": "When the log aggregation point was updated.",
+                            "format": "date-time"
                           }
                         },
                         "required": [
@@ -33514,11 +33729,13 @@
                       "properties": {
                         "creationTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the log aggregation point was created."
+                          "description": "RFC 3339 date indicating when the log aggregation point was created.",
+                          "format": "date-time"
                         },
                         "lastUpdateTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating when the log aggregation point was last updated."
+                          "description": "RFC 3339 date indicating when the log aggregation point was last updated.",
+                          "format": "date-time"
                         },
                         "ingestURL": {
                           "type": "string",
@@ -34014,7 +34231,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -34095,7 +34313,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -34104,7 +34323,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -34280,7 +34500,8 @@
                         "properties": {
                           "timestamp": {
                             "type": "string",
-                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>"
+                            "description": "An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
                           },
                           "data": {
                             "type": "number",
@@ -34361,7 +34582,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -34370,7 +34592,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -34536,11 +34759,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -34678,7 +34903,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -34687,7 +34913,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -34872,11 +35099,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end of the period."
+                          "description": "RFC 3339 date indicating the end of the period.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -35012,7 +35241,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -35021,7 +35251,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -35125,11 +35356,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -35243,7 +35476,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -35252,7 +35486,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -35335,7 +35570,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -35344,7 +35580,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
@@ -35436,11 +35673,13 @@
                       "properties": {
                         "startTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the beginning of the period."
+                          "description": "RFC 3339 date indicating the beginning of the period.",
+                          "format": "date-time"
                         },
                         "endTime": {
                           "type": "string",
-                          "description": "RFC 3339 date indicating the end."
+                          "description": "RFC 3339 date indicating the end.",
+                          "format": "date-time"
                         },
                         "isComplete": {
                           "type": "boolean",
@@ -35563,11 +35802,13 @@
                   "properties": {
                     "lastUpdated": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the list of IP addresses was last updated."
+                      "description": "RFC 3339 date indicating when the list of IP addresses was last updated.",
+                      "format": "date-time"
                     },
                     "effectiveDate": {
                       "type": "string",
-                      "description": "RFC 3339 date indicating when the IP addresses became effective."
+                      "description": "RFC 3339 date indicating when the IP addresses became effective.",
+                      "format": "date-time"
                     },
                     "ipV4": {
                       "type": "array",
