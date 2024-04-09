@@ -1,5 +1,9 @@
 # Release Notes
 
+## April 8, 2024
+#### API updates
+* Added support for filtering [deployment tasks](</apidocs#operation/queryDeploymentTaskList>) and [validation tasks](</apidocs#operation/queryPropertyValidationList>) by their status.
+
 ## March 27, 2024
 #### API updates
 * Ignored the trialDeadline field if updating a service quota for a non-trial customer.
