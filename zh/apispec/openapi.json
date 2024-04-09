@@ -1831,7 +1831,7 @@
                           "time": {
                             "type": "string",
                             "description": "RFC 3339 format date of the event.",
-                            "example": "\"2019-11-11T23:34:59Z",
+                            "example": "2019-11-11T23:34:59Z",
                             "format": "date-time"
                           },
                           "apiRequestId": {
@@ -6897,11 +6897,10 @@
       "parameters": [
         {
           "schema": {
-            "type": "integer",
-            "minimum": 1,
             "enum": [
               "latest"
-            ]
+            ],
+            "type": "string"
           },
           "name": "version",
           "in": "path",
@@ -7297,6 +7296,12 @@
                       "code": "InvalidPropertyId",
                       "message": "An invalid property ID was specified."
                     }
+                  },
+                  "Invalid status": {
+                    "value": {
+                      "code": "InvalidStatus",
+                      "message": "Invalid field 'status'."
+                    }
                   }
                 }
               }
@@ -7416,6 +7421,20 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include validation tasks of the caller.</td></tr><tr><td>children-only</td><td>Include validation tasks of children customers only.</td></tr><tr><td>self+children</td><td>Include validation tasks of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "waiting",
+                "in progress",
+                "failed",
+                "succeeded"
+              ]
+            },
+            "in": "query",
+            "description": "Filter based on the task's status. By default, tasks are returned regardless of their status.",
+            "name": "status"
           }
         ]
       },
@@ -7792,7 +7811,6 @@
                     "count": {
                       "type": "integer",
                       "description": "Total number of deployment tasks.",
-                      "exclusiveMaximum": false,
                       "exclusiveMinimum": false,
                       "minimum": 0
                     }
@@ -7854,6 +7872,12 @@
                     "value": {
                       "code": "InvalidStartDate",
                       "message": "Invalid parameter 'startdate'. '2020-09-20T00:00:00Za' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  },
+                  "Invalid status": {
+                    "value": {
+                      "code": "InvalidStatus",
+                      "message": "Invalid field 'status'."
                     }
                   }
                 }
@@ -7993,6 +8017,20 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include deployment tasks of the caller.</td></tr><tr><td>children-only</td><td>Include deployment tasks of children customers only</td></tr><tr><td>self+children</td><td>Include deployment tasks of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "waiting",
+                "inprogress",
+                "failed",
+                "succeeded"
+              ]
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Filter based on the deployment task's status. By default, tasks are returned regardless of their status."
           }
         ]
       },
@@ -27621,7 +27659,10 @@
                         ]
                       },
                       "secrets": {
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "boolean"
+                        ],
                         "default": true,
                         "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.",
                         "enum": [
@@ -29907,7 +29948,7 @@
                           ],
                           "description": "another log configuration",
                           "creationTime": "2021-12-13T12:48:08Z",
-                          "lastUpdateTime": "2021-13-15T22:48:08Z"
+                          "lastUpdateTime": "2021-12-15T22:48:08Z"
                         }
                       ],
                       "count": 2
@@ -31476,6 +31517,7 @@
               "type": "string",
               "format": "date-time"
             },
+            "in": "query",
             "name": "enddate",
             "required": true,
             "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency associated with new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
@@ -32015,7 +32057,7 @@
                   "example-1": {
                     "value": {
                       "lastUpdated": "2021-11-01T09:09:49Z",
-                      "effectiveDate": "2021-11-1T09:09:49Z",
+                      "effectiveDate": "2021-11-01T09:09:49Z",
                       "ipV4": [
                         "183.134.12.0/24",
                         "112.47.27.0/24",
@@ -33094,11 +33136,11 @@
                           },
                           "effectiveDate": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the shield became active.",
                             "x-stoplight": {
                               "id": "9nempgwuz9xy9"
                             },
-                            "format": "date-time"
+                            "format": "date-time",
+                            "description": "An RFC 3339 date indicating when the shield became active."
                           },
                           "usedInProperties": {
                             "type": "boolean",
@@ -33764,7 +33806,7 @@
                       "name": "my-logaggregationPoint",
                       "destinationURL": "https://ingest.customer.com/remote-log",
                       "metaData": {
-                        "creationTime": "2022-09-09T20:15:22.558+ 0000",
+                        "creationTime": "2022-09-09T20:15:22.558+0000",
                         "lastUpdateTime": "2022-09-09T20:15:22.558+0000",
                         "ingestURL": "https://codsupload.haplat.net:1443/dsp/raw?table=ngcdn_aggregation_my-logaggregationPoint"
                       }
@@ -35302,17 +35344,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "description": "This describes the response to the bandwidth summary report APIs.",
-                  "examples": [
-                    {
+                  "x-examples": {
+                    "Example 1": {
                       "metaData": {
-                        "startTime": "2021-10-01T12:35:00Z",
-                        "endTime": "2021-11-12T12:40:00Z",
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge bandwidth"
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35320,36 +35362,40 @@
                         {
                           "group": "__all__",
                           "data": [
-                            76763.00002
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
-                        },
+                        }
+                      ]
+                    }
+                  },
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
                         {
-                          "group": "hostname1.domain.info",
+                          "group": "__all__",
                           "data": [
-                            123.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname2.domain.info",
-                          "data": [
-                            67580.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname3.domain.info",
-                          "data": [
-                            8720
-                          ]
-                        },
-                        {
-                          "group": "zi.domain.info",
-                          "data": [
-                            340
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
                         }
                       ]
                     }
                   ],
+                  "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35370,7 +35416,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "description": "Indicates the type of data returned.",
                           "items": {
                             "type": "string"
                           }
@@ -35392,13 +35438,16 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": "number"
+                              "type": [
+                                "string",
+                                "number"
+                              ]
                             }
                           }
                         }
@@ -35619,17 +35668,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "description": "This describes the response to the bandwidth summary report APIs.",
-                  "examples": [
-                    {
+                  "x-examples": {
+                    "Example 1": {
                       "metaData": {
-                        "startTime": "2021-10-01T12:35:00Z",
-                        "endTime": "2021-11-12T12:40:00Z",
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge bandwidth"
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35637,36 +35686,40 @@
                         {
                           "group": "__all__",
                           "data": [
-                            76763.00002
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
-                        },
+                        }
+                      ]
+                    }
+                  },
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
                         {
-                          "group": "hostname1.domain.info",
+                          "group": "__all__",
                           "data": [
-                            123.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname2.domain.info",
-                          "data": [
-                            67580.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname3.domain.info",
-                          "data": [
-                            8720
-                          ]
-                        },
-                        {
-                          "group": "zi.domain.info",
-                          "data": [
-                            340
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
                         }
                       ]
                     }
                   ],
+                  "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35687,7 +35740,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "description": "Indicates the type of data returned.",
                           "items": {
                             "type": "string"
                           }
@@ -35709,13 +35762,16 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": "number"
+                              "type": [
+                                "string",
+                                "number"
+                              ]
                             }
                           }
                         }
@@ -35724,7 +35780,7 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Example 1": {
                     "value": {
                       "metaData": {
                         "startTime": "2023-07-01T00:00:00Z",
