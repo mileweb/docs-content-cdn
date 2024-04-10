@@ -1831,7 +1831,7 @@
                           "time": {
                             "type": "string",
                             "description": "RFC 3339 format date of the event.",
-                            "example": "\"2019-11-11T23:34:59Z",
+                            "example": "2019-11-11T23:34:59Z",
                             "format": "date-time"
                           },
                           "apiRequestId": {
@@ -6897,11 +6897,10 @@
       "parameters": [
         {
           "schema": {
-            "type": "integer",
-            "minimum": 1,
             "enum": [
               "latest"
-            ]
+            ],
+            "type": "string"
           },
           "name": "version",
           "in": "path",
@@ -7295,7 +7294,13 @@
                   "Invalid property ID": {
                     "value": {
                       "code": "InvalidPropertyId",
-                      "message": "An invalid property ID was specified."
+		      "message": "An invalid property ID was specified."
+                    }			
+                  },
+                  "Invalid status": {
+                    "value": {
+                      "code": "InvalidStatus",
+                      "message": "Invalid field 'status'."
                     }
                   }
                 }
@@ -7416,6 +7421,20 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include validation tasks of the caller.</td></tr><tr><td>children-only</td><td>Include validation tasks of children customers only.</td></tr><tr><td>self+children</td><td>Include validation tasks of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "waiting",
+                "in progress",
+                "failed",
+                "succeeded"
+              ]
+            },
+            "in": "query",
+            "description": "Filter based on the task's status. By default, tasks are returned regardless of their status.",
+            "name": "status"
           }
         ]
       },
@@ -7792,7 +7811,6 @@
                     "count": {
                       "type": "integer",
                       "description": "Total number of deployment tasks.",
-                      "exclusiveMaximum": false,
                       "exclusiveMinimum": false,
                       "minimum": 0
                     }
@@ -7854,6 +7872,12 @@
                     "value": {
                       "code": "InvalidStartDate",
                       "message": "Invalid parameter 'startdate'. '2020-09-20T00:00:00Za' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  },
+                  "Invalid status": {
+                    "value": {
+                      "code": "InvalidStatus",
+                      "message": "Invalid field 'status'."
                     }
                   }
                 }
@@ -7993,6 +8017,20 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include deployment tasks of the caller.</td></tr><tr><td>children-only</td><td>Include deployment tasks of children customers only</td></tr><tr><td>self+children</td><td>Include deployment tasks of both the caller and children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "waiting",
+                "inprogress",
+                "failed",
+                "succeeded"
+              ]
+            },
+            "in": "query",
+            "name": "status",
+            "description": "Filter based on the deployment task's status. By default, tasks are returned regardless of their status."
           }
         ]
       },
