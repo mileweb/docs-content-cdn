@@ -18,12 +18,12 @@ In case of a cache miss at the edge, a parent within the zone is chosen based on
 As a result, each object will only be fetched once from the origin by each zone.
 To enable the parent cache for an origin, you need to configure its "directConnect" setting to "No Direct".
 Here is how to do this on the portal:
-[screenshot]
+<p align=center><img src="origin-no-direct.png" alt="always use a parent" width="400"></p>
 If it is very important to keep the origin traffic at the minimum possible level, you can enable the "shield". This feature essentially
 creates a mirror of the origin such that each object will only be accessed once.
 Shield is also useful when the origin only allows a very short IP whitelist for access control.
 In general, you want to pick a shield PoP that is close to your origin for performance:
-[screenshot]
+<p align=center><img src="origin-shield-selection.png" alt="select a shield for origin" width="300"></p>
 
 ### Direct Access for Dynamic Content
 
@@ -31,14 +31,14 @@ For dynamic content that are not cacheable, such as API calls or interactive dat
 A direct connection from the edge to the origin almost always results in the smallest latency.
 An intermediate server may provide some routing advantage in some cases but the extra processing time usually kills it.
 So if you know an origin is used for dynamic content, you should configure its "directConnect" setting to "Always Direct" for best performance:
-[screenshot]
+<p align=center><img src="origin-always-direct.png" alt="always go directly to origin" width="400"></p>
 
 ### Origin with Mixed Content
 
 If you have an origin that servers both static and dynamic content, your best choice is to configure its "directConnect" to "Auto".
 In this mode, the edge servers will dynamically decide if a parent needs to be tried based on the cacheability of the request.
 You will need to specify the rules in the edge logic for the server to determine if a request is cacheable or not.
-This is done through the [proxy_cache_bypass]() directive.
+This is done through the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive.
 For a property with mixed content, we highly recommend you to use this directive to specify the cacheablity of each request 
 based on the design of your business logic. This is very important to achieve the best possible performance.
 One simple way is to organize the content under different directories:
@@ -57,7 +57,7 @@ location / { # caching is enabled by default for all other directories
 
 There is still one remaining issue for both dynamic and static content: What if the connectivity between the CDN Pro server and the origin is not stable?
 When internet congestions and outages happen, we want to minimize their impact on our business. Here is where the "Fast Route to Origin"
-feature can help greatly. When you enable it in the edge logic with the [origin_fast_route]() directive, the data to and from the origin will be 
+feature can help greatly. When you enable it in the edge logic with the [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) directive, the data to and from the origin will be 
 accelerated by our highspeed data transmission (HDT) platform. This platform features our proprietary protocol based on UDP and smart routing technology to ensure
 a stable layer-4 performance regardless of any fluctuation in the public internet.
 
@@ -80,16 +80,16 @@ if ($result = 0) {
 ```
 #### Directives to Reduce Requests to Origin
 You may want to read about these directives on serving recently expired content:
-[proxy_cache_use_stale]()
-[proxy_cache_background_update]()
-[proxy_cache_max_stale]()
+[`proxy_cache_use_stale`](</docs/edge-logic/supported-directives.md#proxy_cache_use_stale>)
+[`proxy_cache_background_update`](</docs/edge-logic/supported-directives.md#proxy_cache_background_update>)
+[`proxy_cache_max_stale`](</docs/edge-logic/supported-directives.md#proxy_cache_max_stale>)
 This directive holds off requests fetching the same object from origin if one is already on the way:
-[proxy_cache_lock_timeout]()
+[`proxy_cache_lock_timeout`](</docs/edge-logic/supported-directives.md#proxy_cache_lock_timeout>)
 
 #### Origin Configurations
 The "peerSelectionAlgorithm" field can be used to optimize the choice of origin servers. Use "round_robin" to balance all the server instances,
 "sorted_list" to get the best connectivity and "consistent_hash" to maximize caching on the origin.
 
 The "peerFailureTimeout" field can be used to specify the detailed retry and backoff policy if an instance of the origin is not accessible.
-
+<p align=center><img src="origin-peer-failure-timeout.png" alt="limit retry of failed origin peer" width="300"></p>
 The "maxConnections" field sets the maximum number of simutaneous connections that can be made to the origin to avoid overloading.
