@@ -7294,8 +7294,8 @@
                   "Invalid property ID": {
                     "value": {
                       "code": "InvalidPropertyId",
-		      "message": "An invalid property ID was specified."
-                    }			
+                      "message": "An invalid property ID was specified."
+                    }
                   },
                   "Invalid status": {
                     "value": {
@@ -27659,7 +27659,10 @@
                         ]
                       },
                       "secrets": {
-                        "type": "string",
+                        "type": [
+                          "string",
+                          "boolean"
+                        ],
                         "default": true,
                         "description": "Whether the API account can access the <a href=\"#tag/Secret-Management\">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.",
                         "enum": [
@@ -29945,7 +29948,7 @@
                           ],
                           "description": "another log configuration",
                           "creationTime": "2021-12-13T12:48:08Z",
-                          "lastUpdateTime": "2021-13-15T22:48:08Z"
+                          "lastUpdateTime": "2021-12-15T22:48:08Z"
                         }
                       ],
                       "count": 2
@@ -31514,6 +31517,7 @@
               "type": "string",
               "format": "date-time"
             },
+            "in": "query",
             "name": "enddate",
             "required": true,
             "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z. Due to latency associated with new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results."
@@ -32053,7 +32057,7 @@
                   "example-1": {
                     "value": {
                       "lastUpdated": "2021-11-01T09:09:49Z",
-                      "effectiveDate": "2021-11-1T09:09:49Z",
+                      "effectiveDate": "2021-11-01T09:09:49Z",
                       "ipV4": [
                         "183.134.12.0/24",
                         "112.47.27.0/24",
@@ -33132,11 +33136,11 @@
                           },
                           "effectiveDate": {
                             "type": "string",
-                            "description": "An RFC 3339 date indicating when the shield became active.",
                             "x-stoplight": {
                               "id": "9nempgwuz9xy9"
                             },
-                            "format": "date-time"
+                            "format": "date-time",
+                            "description": "An RFC 3339 date indicating when the shield became active."
                           },
                           "usedInProperties": {
                             "type": "boolean",
@@ -33802,7 +33806,7 @@
                       "name": "my-logaggregationPoint",
                       "destinationURL": "https://ingest.customer.com/remote-log",
                       "metaData": {
-                        "creationTime": "2022-09-09T20:15:22.558+ 0000",
+                        "creationTime": "2022-09-09T20:15:22.558+0000",
                         "lastUpdateTime": "2022-09-09T20:15:22.558+0000",
                         "ingestURL": "https://codsupload.haplat.net:1443/dsp/raw?table=ngcdn_aggregation_my-logaggregationPoint"
                       }
@@ -35762,7 +35766,7 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Example 1": {
                     "value": {
                       "metaData": {
                         "startTime": "2023-07-01T00:00:00Z",
