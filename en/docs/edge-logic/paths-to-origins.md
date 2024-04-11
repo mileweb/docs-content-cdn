@@ -79,17 +79,17 @@ if ($result = 0) {
 }
 ```
 #### Directives to Reduce Requests to Origin
-You may want to read about these directives on serving recently expired content:
+* You may want to read about these directives on serving recently expired content:
 [`proxy_cache_use_stale`](</docs/edge-logic/supported-directives.md#proxy_cache_use_stale>)
 [`proxy_cache_background_update`](</docs/edge-logic/supported-directives.md#proxy_cache_background_update>)
 [`proxy_cache_max_stale`](</docs/edge-logic/supported-directives.md#proxy_cache_max_stale>)
-This directive holds off requests fetching the same object from origin if one is already on the way:
+* This directive holds off requests fetching the same object from origin if one is already on the way:
 [`proxy_cache_lock_timeout`](</docs/edge-logic/supported-directives.md#proxy_cache_lock_timeout>)
 
 #### Origin Configurations
-The "peerSelectionAlgorithm" field can be used to optimize the choice of origin servers. Use "round_robin" to balance all the server instances,
+* The "peerSelectionAlgorithm" field can be used to optimize the choice of origin servers. Use "round_robin" to balance all the server instances,
 "sorted_list" to get the best connectivity and "consistent_hash" to maximize caching on the origin.
-
-The "peerFailureTimeout" field can be used to specify the detailed retry and backoff policy if an instance of the origin is not accessible.
+* The "peerFailureTimeout" field can be used to specify the detailed retry and backoff policy if an instance of the origin is not accessible.
 <p align=center><img src="origin-peer-failure-timeout.png" alt="limit retry of failed origin peer" width="300"></p>
-The "maxConnections" field sets the maximum number of simutaneous connections that can be made to the origin to avoid overloading.
+
+* The "maxConnections" field sets the maximum number of simutaneous connections that can be made to the origin to avoid overloading.
