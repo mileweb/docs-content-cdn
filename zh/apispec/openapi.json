@@ -35344,42 +35344,17 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
-                        "isComplete": true,
-                        "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
-                        ],
-                        "dataUnit": "megabits per second"
-                      },
-                      "groups": [
-                        {
-                          "group": "__all__",
-                          "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
-                          ]
-                        }
-                      ]
-                    }
-                  },
+                  "description": "This describes the response to the bandwidth summary report APIs.",
                   "examples": [
                     {
                       "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
+                          "edge bandwidth"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35387,15 +35362,36 @@
                         {
                           "group": "__all__",
                           "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
                           ]
                         }
                       ]
                     }
                   ],
-                  "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35416,7 +35412,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned.",
+                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
                           "items": {
                             "type": "string"
                           }
@@ -35438,16 +35434,13 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": [
-                                "string",
-                                "number"
-                              ]
+                              "type": "number"
                             }
                           }
                         }
@@ -35668,42 +35661,17 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
-                      "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
-                        "isComplete": true,
-                        "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
-                        ],
-                        "dataUnit": "megabits per second"
-                      },
-                      "groups": [
-                        {
-                          "group": "__all__",
-                          "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
-                          ]
-                        }
-                      ]
-                    }
-                  },
+                  "description": "This describes the response to the bandwidth summary report APIs.",
                   "examples": [
                     {
                       "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
+                          "edge bandwidth"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35711,15 +35679,36 @@
                         {
                           "group": "__all__",
                           "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
                           ]
                         }
                       ]
                     }
                   ],
-                  "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35740,7 +35729,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned.",
+                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
                           "items": {
                             "type": "string"
                           }
@@ -35762,16 +35751,13 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": [
-                                "string",
-                                "number"
-                              ]
+                              "type": "number"
                             }
                           }
                         }
