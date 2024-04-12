@@ -35344,17 +35344,17 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
+                  "description": "This describes the response to the bandwidth summary report APIs.",
+                  "examples": [
+                    {
                       "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
+                          "edge bandwidth"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35362,16 +35362,36 @@
                         {
                           "group": "__all__",
                           "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
                           ]
                         }
                       ]
                     }
-                  },
-                  "examples": [],
-                  "description": "Response to the bandwidthL7Summary API",
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35644,17 +35664,17 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "x-examples": {
-                    "Example 1": {
+                  "description": "This describes the response to the bandwidth summary report APIs.",
+                  "examples": [
+                    {
                       "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
+                        "startTime": "2021-10-01T12:35:00Z",
+                        "endTime": "2021-11-12T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
+                          "edge bandwidth"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35662,16 +35682,36 @@
                         {
                           "group": "__all__",
                           "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
+                            76763.00002
+                          ]
+                        },
+                        {
+                          "group": "hostname1.domain.info",
+                          "data": [
+                            123.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname2.domain.info",
+                          "data": [
+                            67580.00001
+                          ]
+                        },
+                        {
+                          "group": "hostname3.domain.info",
+                          "data": [
+                            8720
+                          ]
+                        },
+                        {
+                          "group": "zi.domain.info",
+                          "data": [
+                            340
                           ]
                         }
                       ]
                     }
-                  },
-                  "examples": [],
-                  "description": "Response to the bandwidthL7Summary API",
+                  ],
                   "properties": {
                     "metaData": {
                       "type": "object",
