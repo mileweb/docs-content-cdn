@@ -35434,7 +35434,7 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
@@ -35754,7 +35754,7 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
+                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
