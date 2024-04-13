@@ -880,7 +880,8 @@ Specifies the HTTP method to use in requests forwarded to the proxied server ins
 **Default:** `proxy_next_upstream error timeout;` <br/>
 **Context:** server, location
 
-Specifies in which cases a request should be passed to the next server in the origin configuration. No change to the public version. 
+Specifies in which cases a request should be passed to the next server in the origin configuration. One important function of this directive is to
+define an "unsuccessful attempt" for the [`peerFailureTimeout`](/cdn/docs/edge-logic/paths-to-origins#origin-configurations) settings of the origin. No change to the public version. 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
