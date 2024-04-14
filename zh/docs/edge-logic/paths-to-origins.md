@@ -7,7 +7,7 @@ CDN Pro 设计目标是能同时分发静态可缓存的文件以及动态私有
 ### 为静态内容设计的多级缓存
 
 行业发展早期，CDN 带来的加速效果完全得益于将静态内容缓存在离终端用户较近的服务器内。
-同时缓存可以大大降低源站服务器的负载。所以对于静态内容，我们希望尽可能地从缓存找到内容，避免访问源站。
+同时缓存可以大大降低源站服务器的负载。所以对于静态内容，我们希望尽可能地利用缓存提供服务，避免访问源站。
 CDN Pro has implemented an edge-parent structure in which a static object not
 available on an edge server will be first looked up in the cache of a parent server.
 If there is a hit, cache the object on the edge, and respond to the end user.
