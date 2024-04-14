@@ -868,7 +868,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。源自 NGINX 公共版本没有变化。
+该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。本指令的一个重要功能是为源站的 [`peerFailureTimeout`](/cdn/docs/edge-logic/paths-to-origins#origin-configurations) 配置定义了什么叫“失败的请求”。源自 NGINX 公共版本没有变化。
 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
