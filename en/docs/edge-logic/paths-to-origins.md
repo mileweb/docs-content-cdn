@@ -25,6 +25,7 @@ A shield is also useful when the origin only allows a very short IP whitelist fo
 In general, you want to pick a shield PoP that is close to your origin for performance:
 <p align=center><img src="/docs/edge-logic/origin-shield-selection.png" alt="select a shield for origin" width="300"></p>
 If you require this feature, please contact our support team.
+
 ### Direct Access for Dynamic Content
 
 For dynamic content that are not cacheable, such as API calls or interactive data of an app, we need to send/fetch as quickly as possible to/from the origin.
