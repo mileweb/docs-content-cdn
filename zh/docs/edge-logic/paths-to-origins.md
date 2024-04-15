@@ -17,12 +17,12 @@ In case of a cache miss at the edge, a parent within the zone is chosen based on
 As a result, each object will only be fetched once from the origin by each cache zone.
 To enable the parent cache for an origin, you need to configure its "directConnect" setting to "No Direct".
 Here is how to do this on the portal:
-<p align=center><img src="origin-no-direct.png" alt="始终使用父节点" width="400"></p>
+<p align=center><img src="/docs/edge-logic/origin-no-direct.png" alt="始终使用父节点" width="400"></p>
 If it is very important to keep the origin traffic at the minimum possible level, you can enable the "origin shield". This advanced feature essentially
 creates a mirror of the origin such that each object will only be accessed once.
 A shield is also useful when the origin only allows a very short IP whitelist for access control.
 In general, you want to pick a shield PoP that is close to your origin for performance:
-<p align=center><img src="origin-shield-selection.png" alt="选择一个源站的Shield" width="300"></p>
+<p align=center><img src="/docs/edge-logic/origin-shield-selection.png" alt="选择一个源站的Shield" width="300"></p>
 If you require this feature, please contact our support team.
 
 ### 动态内容直接回源
@@ -31,7 +31,7 @@ For dynamic content that are not cacheable, such as API calls or interactive dat
 A direct connection from the edge to the origin almost always results in the smallest latency.
 An intermediate server may provide some routing advantage in some cases, but the extra processing time usually kills it.
 So if you know an origin is used for dynamic content, you should configure its "directConnect" setting to "Always Direct" for best performance:
-<p align=center><img src="origin-always-direct.png" alt="始终直接回源" width="400"></p>
+<p align=center><img src="/docs/edge-logic/origin-always-direct.png" alt="始终直接回源" width="400"></p>
 
 Please note that the setting of "directConnect" is respected with best effort only. In extreme cases when none of the parent servers is available, edge servers will try the origin directly, even if the setting is "No Direct". Likewise, when an origin is not accessible directly, edge servers might retry a parent server, even if the setting is "Always Direct". The directive [`upstream_origin_only`](/docs/edge-logic/supported-directives#upstream_origin_only) can be used in the edge logic to strictly avoid access to any parent server.
 
@@ -92,7 +92,7 @@ if ($result = 0) {
 * The "peerSelectionAlgorithm" field can be used to optimize the choice of origin servers. Use "round_robin" to balance among all the server instances,
 "sorted_list" to get the best connectivity, and "consistent_hash" to maximize caching on the origin.
 * The "peerFailureTimeout" field can be used to specify the detailed retry and backoff policy if an IP address of the origin is not accessible.
-<p align=center><img src="origin-peer-failure-timeout.png" alt="limit retry of failed origin peer" width="300"></p>
+<p align=center><img src="/docs/edge-logic/origin-peer-failure-timeout.png" alt="limit retry of failed origin peer" width="300"></p>
 
 The definition of "not accessible" or "unsuccessful attempt" is determined by the [`proxy_next_upstream`](</docs/edge-logic/supported-directives#proxy_next_upstream>) directive, which by itself can be used to improve the fault-tolerance of the origin.
 
