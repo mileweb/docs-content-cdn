@@ -485,7 +485,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream\_http\_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
 
-Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The default policy is ```repeat```.
+Possible values of policy are ```repeat```, ```overwrite```, and ```preserve```. The default policy is ```repeat```.
 
 *   The ```repeat``` policy always adds the header and the value into the upstream response. Repeating these headers is not allowed: Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, and User-Agent.
 *   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response. Overwriting these 3 headers is not allowed: Transfer-Encoding, Connection, and Keep-Alive.
