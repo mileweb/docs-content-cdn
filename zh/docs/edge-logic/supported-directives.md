@@ -24,9 +24,9 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 ```preserve```: 如果头部名称不存在，则添加。否则不做任何操作，保留原头部不变。
 
-```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则新增一条。
+```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则新增一条。不支持新增以下头部：
+Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, Vary
 
-该参数支持变量，其取值必须是上面3者之一。
 
 **局限：** 对于下面这几个“特殊”头部，本指令的行为是固定的，不受policy参数的控制：
 
@@ -36,6 +36,9 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 | ```Link``` | ```repeat``` |
 | ```Last-Modified``` | ```overwrite``` |
 | ```ETag``` | ```overwrite``` |
+| ```Transfer-Encoding``` | ```preserve``` |
+| ```Connection``` | ```preserve``` |
+| ```Keep-Alive``` | ```preserve``` |
 
 
 如果需要的话，可以使用[proxy_hide_header](#proxy_hide_header)指令来删除从源站收到的 "Cache-Control"或"Link"响应头部。
@@ -483,10 +486,11 @@ else { ... }
 
 该指令可用于在所有其他处理**之前**对源站的响应头进行添加、删除或者改写。换句话说，其他指令看到的源站响应头部和值都可能受到该指令的影响。该指令支持使用 nginx 变量作为配置值。
 
-policy 的可能取值是 ```repeat,overwrite,``` 以及 ```preserve。``` policy 参数同样支持使用变量作为值。默认的策略是```repeat```。
+policy 的可能取值是 ```repeat```,```overwrite```, 以及 ```preserve```。 默认的策略是```repeat```。
 
-*   ```repeat``` 不管指定响应头原先是否存在，强制添加响应头部和值到上游响应中。
-*   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写；否则将配置响应头和值添加到上游响应中。
+*   ```repeat``` 不管指定响应头原先是否存在，强制添加响应头部和值到上游响应中。不支持重复添加以下头部：
+Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, User-Agent
+*   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写；否则将配置响应头和值添加到上游响应中。不支持改写这3个头部：Transfer-Encoding, Connection, Keep-Alive。
 *   ```preserve``` 仅当指定响应头不存在时，才将配置的响应头和值加到上游响应中。
 
 指令后最后的参数 ```if``` 可用于设置该指令的生效条件。条件可以是以下之一：
@@ -607,16 +611,6 @@ origin_pass My-Dynamic-Origin;
 ```
 由于本指令对发往父节点的请求不生效，您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。否则发往父节点的请求仍会缺失这些头部。
 
-### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
-
-<span class="badge">标准</span>
-
-**使用语法：** `proxy_buffering on | off;` <br/>
-**默认设置：** `proxy_buffering on;` <br/>
-**可用位置：** server, location
-
-启用或禁用 CDN Pro 的响应缓冲功能。代码源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)，无变更。
-
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
 <span class="badge">标准</span>
@@ -625,7 +619,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。CDN Pro 引入了 [`proxy_cache_max_stale`](#proxy_cache_max_stale) 指令来设置一个最大过期时间，以避免将过于陈旧的内容返回给客户端。
+该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -677,23 +671,23 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
-**使用语法:** `proxy_cache_max_stale if_error=$time while_revalidate=$time;` <br/>
+**使用语法:** `proxy_cache_max_stale if_error=$time;` <br/>
 **默认设置:** `-` <br/>
 **可用位置:** server, location
 
-本指令允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error` 和 `stale-while-revalidate` 参数相同。但是优先级低于该响应头。
+本指令允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error`参数相同。但是优先级低于该响应头。
 
-其中的 'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’。参数 'while_revalidate=' 必须和 [`proxy_cache_background_update on;`](#proxy_cache_background_update) 一同配置，同时要求 `proxy_cache_use_stale` 的配置里包含 'updating'。
+'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’。
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
 <span class="badge">标准</span>
 
-**使用语法：** `proxy_cache_methods GET | HEAD | POST ...;` <br/>
+**使用语法：** `proxy_cache_methods GET | HEAD | POST;` <br/>
 **默认设置：** `proxy_cache_methods GET HEAD;` <br/>
 **可用位置：** server, location
 
-该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。逻辑源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods) ，无变更。
+该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。支持GET, HEAD以及POST这3种方法。
 
 ### proxy_cache_min_age 
 
