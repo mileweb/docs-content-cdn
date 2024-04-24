@@ -801,6 +801,12 @@
                       "code": "InvalidHostname",
                       "message": "Invalid hostname(s): \"ghjhkj参考.domain.com\"."
                     }
+                  },
+                  "Invalid use of shield": {
+                    "value": {
+                      "code": "InvalidOrigins",
+                      "message": "A shield is acceptable only when \"directConnection\" is set to \"noDirect\"."
+                    }
                   }
                 }
               }
@@ -3264,6 +3270,12 @@
                       "code": "InvalidOrigins",
                       "message": "Invalid origin server 'testdomain.info:'. The origin server format is {hostname or IP address}:{http port},{https port} [weight=1-100] [backup]."
                     }
+                  },
+                  "Invalid use of shield": {
+                    "value": {
+                      "code": "InvalidOrigins",
+                      "message": "A shield is acceptable only when \"directConnection\" is set to \"noDirect\"."
+                    }
                   }
                 }
               }
@@ -3930,6 +3942,12 @@
                     "value": {
                       "code": "InvalidOrigins",
                       "message": "Invalid origin server 'testdomain.info:'. The origin server format is {hostname or IP address}:{http port},{https port} [weight=1-100] [backup]."
+                    }
+                  },
+                  "Invalid use of shield": {
+                    "value": {
+                      "code": "InvalidOrigins",
+                      "message": "A shield is acceptable only when \"directConnection\" is set to \"noDirect\"."
                     }
                   }
                 }
@@ -32054,45 +32072,106 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "example": {
                     "value": {
-                      "lastUpdated": "2021-11-01T09:09:49Z",
-                      "effectiveDate": "2021-11-01T09:09:49Z",
+                      "lastUpdated": "2024-04-16T19:55:02Z",
+                      "effectiveDate": "2024-04-23T19:55:02Z",
                       "ipV4": [
+                        "110.242.20.0/24",
+                        "112.48.136.0/24",
+                        "114.80.120.0/24",
+                        "115.238.201.0/24",
+                        "120.240.116.0/24",
+                        "123.134.185.0/24",
+                        "125.44.104.0/24",
+                        "138.113.112.0/24",
+                        "138.113.158.0/24",
+                        "138.113.159.0/24",
+                        "14.0.41.0/24",
+                        "14.0.43.0/24",
+                        "157.185.163.0/24",
+                        "157.185.178.0/24",
+                        "163.171.130.0/24",
+                        "163.171.133.0/24",
+                        "163.171.152.0/24",
+                        "163.171.214.0/24",
+                        "183.204.228.0/24",
+                        "211.91.67.0/25",
+                        "218.64.94.0/24",
+                        "218.92.130.0/25",
+                        "27.148.142.0/24",
+                        "36.147.56.0/24",
+                        "59.83.228.192/26",
+                        "61.164.116.0/24",
                         "183.134.12.0/24",
-                        "112.47.27.0/24",
-                        "221.15.46. 128/27",
+                        "112.48.138.0/25",
+                        "114.230.204.0/24",
                         "163.171.241.0/24",
+                        "36.147.49.0/24",
                         "111.6.241.128/25",
                         "115.223.12.0/24",
-                        "163.171.230.0/24",
-                        "183.240.58.0/24",
+                        "120.240.112.0/25",
                         "112.240.57.0/24",
-                        "120.39.211. 0/24",
-                        "220.249.134.192/27",
+                        "106.74.44.64/26",
+                        "223.111.20.0/25",
+                        "101.96.148.0/24",
+                        "163.171.242.0/24",
+                        "174.35.74.0/24",
+                        "58.220.72.0/24",
+                        "14.0.32.0/24",
+                        "120.39.211.0/24",
+                        "221.193.246.0/24",
                         "163.171.243.0/24",
                         "14.0.39.0/24",
                         "163.171.236.0/25",
-                        "163.171.242.0/24",
+                        "36.150.31.0/24",
                         "221.182.23.0/24",
-                        "138.113.77.0/ 24",
-                        "174.35.74.0/24",
-                        "219.157.125.0/24",
-                        "58.220.72.0/24"
+                        "138.113.77.0/24",
+                        "183.232.4.0/24",
+                        "36.249.66.64/26"
                       ],
                       "ipV6": [
-                        "240e:00f7:4f00:1a00:0000:0000:0000:0000/56",
-                        "2606:1980:0004:ffff :0000:0000:0000:0000/64",
-                        "2409:8c54:2000:060b:0000:0000:0000:0000/64",
-                        "2408:8722:9000:0000:0000:0000:0000:0000/64",
-                        "2409:8c62:0e10: 0048:0000:0000:0000:0000/65",
-                        "2409:8c34:4400:0700:0000:0002:8000:0000/97",
+                        "2401:8700:ff02:0000:0000:0000:0000:0000/64",
+                        "2401:8700:ff03:0000:0000:0000:0000:0000/64",
+                        "2408:8719:c900:1001:0000:0000:0000:0000/64",
+                        "2408:871a:2400:0018:0000:0000:0000:0000/61",
+                        "2408:8722:9000:0002:0000:0000:0000:0000/64",
+                        "2408:8744:0d03:0005:0000:0000:0000:0000/64",
+                        "2409:8c34:2220:0050:0000:0000:0000:0000/64",
+                        "2409:8c44:3d01:0102:0000:0000:0000:0000/64",
+                        "2409:8c54:9020:0000:0000:0000:0000:0000/64",
+                        "2409:8c6c:0561:8105:0000:0000:0000:0000/64",
+                        "240e:096c:6000:1000:0000:0000:0000:0000/56",
+                        "240e:00cd:ef00:0104:0000:0000:0000:0000/64",
+                        "240e:00d6:660b:0005:0000:0000:0000:0000/64",
+                        "240e:00f7:7c00:0826:8000:0000:0000:0000/65",
+                        "240e:00f7:c010:0505:0000:0000:0000:0000/64",
+                        "240e:00f7:c010:0508:0000:0000:0000:0000/64",
+                        "2606:1980:000b:0000:0000:0000:0000:0000/64",
+                        "2606:1980:000c:0000:0000:0000:0000:0000/64",
+                        "2606:1980:000d:0000:0000:0000:0000:0000/64",
+                        "2607:3f40:ff00:0000:0000:0000:0000:0000/48",
+                        "2607:3f40:ff11:0000:0000:0000:0000:0000/48",
+                        "2a01:53c0:ff0c:0000:0000:0000:0000:0000/64",
+                        "2a01:53c0:ff0e:0000:0000:0000:0000:0000/64",
+                        "2a01:53c0:ffcc:0000:0000:0000:0000:0000/64",
+                        "2a01:53c0:fff1:0000:0000:0000:0000:0000/64",
+                        "2408:871a:a900:0006:0000:0000:0000:0000/64",
+                        "2409:8c20:6ed1:0111:0000:0000:0000:0000/64",
+                        "240e:0978:0913:5000:0000:0000:0000:0000/64",
                         "240e:00f7:c010:0503:0000:0000:0000:0000/64",
-                        "2401:8700:f f03:0001:0000:0000:0000:0000/64",
+                        "2401:8700:ff03:0001:0000:0000:0000:0000/64",
+                        "240e:0978:0902:0000:0000:0000:0000:0000/50",
+                        "2401:8700:ff04:ffff:0000:0000:0000:0000/64",
+                        "2a01:53c0:ffe5:ffff:0000:0000:0000:0000/64",
+                        "240e:00f7:4f00:1a00:0000:0000:0000:0000/56",
+                        "2409:8c34:2220:0050:0000:0000:0000:0000/64",
+                        "2606:1980:0007:ffff:0000:0000:0000:0000/64",
+                        "2409:8c44:0b00:0101:0000:0000:0000:0000/65",
+                        "2409:8c62:0e10:0048:0000:0000:0000:0000/65",
+                        "2408:8719:5300:0004:0000:0000:0000:0000/64",
                         "2606:1980:0000:ffff:0000:0000:0000:0000/64",
-                        "2a01:53c0:ff03:ffff:0000:0000:0000:0000/64",
-                        "240e:09 78:0902:0000:0000:0000:0000:0000/50",
-                        "2a01:53c0:ffe5:ffff:0000:0000:0000:0000/64"
+                        "2a01:53c0:ff03:ffff:0000:0000:0000:0000/64"
                       ]
                     }
                   }
@@ -33175,7 +33254,7 @@
                           ],
                           "ipV6": [
                             "2409:8c74:f100:0124:0000:0000:0000:0000/64",
-                            "2408:8736:40 0b:0001:c000:0000:0000:0000/66"
+                            "2408:8736:400b:0001:c000:0000:0000:0000/66"
                           ],
                           "lastUpdated": "2022-07-25T09:15:44.000+0000",
                           "effectiveDate": "2022-07-25T09:15:44.000+0000",
@@ -33364,7 +33443,7 @@
                       ],
                       "ipV6": [
                         "2409:8c74:f100:0124:0000:0000:0000:0000/64",
-                        "2408:8736:40 0b:0001:c000:0000:0000:0000/66"
+                        "2408:8736:400b:0001:c000:0000:0000:0000/66"
                       ],
                       "lastUpdated": "2022-07-25T09:15:44.000+0000",
                       "effectiveDate": "2022-07-25T09:15:44.000+0000",
@@ -35344,17 +35423,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "description": "This describes the response to the bandwidth summary report APIs.",
-                  "examples": [
-                    {
+                  "x-examples": {
+                    "Example 1": {
                       "metaData": {
-                        "startTime": "2021-10-01T12:35:00Z",
-                        "endTime": "2021-11-12T12:40:00Z",
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge bandwidth"
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35362,36 +35441,40 @@
                         {
                           "group": "__all__",
                           "data": [
-                            76763.00002
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
-                        },
+                        }
+                      ]
+                    }
+                  },
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
                         {
-                          "group": "hostname1.domain.info",
+                          "group": "__all__",
                           "data": [
-                            123.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname2.domain.info",
-                          "data": [
-                            67580.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname3.domain.info",
-                          "data": [
-                            8720
-                          ]
-                        },
-                        {
-                          "group": "zi.domain.info",
-                          "data": [
-                            340
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
                         }
                       ]
                     }
                   ],
+                  "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35412,7 +35495,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "description": "Indicates the type of data returned.",
                           "items": {
                             "type": "string"
                           }
@@ -35434,13 +35517,16 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": "number"
+                              "type": [
+                                "string",
+                                "number"
+                              ]
                             }
                           }
                         }
@@ -35661,17 +35747,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "bandwidthSummaryResponse",
                   "type": "object",
-                  "description": "This describes the response to the bandwidth summary report APIs.",
-                  "examples": [
-                    {
+                  "x-examples": {
+                    "Example 1": {
                       "metaData": {
-                        "startTime": "2021-10-01T12:35:00Z",
-                        "endTime": "2021-11-12T12:40:00Z",
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge bandwidth"
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
                         ],
                         "dataUnit": "megabits per second"
                       },
@@ -35679,36 +35765,40 @@
                         {
                           "group": "__all__",
                           "data": [
-                            76763.00002
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
-                        },
+                        }
+                      ]
+                    }
+                  },
+                  "examples": [
+                    {
+                      "metaData": {
+                        "startTime": "2023-07-01T00:00:00Z",
+                        "endTime": "2023-08-01T00:00:00Z",
+                        "isComplete": true,
+                        "dataNames": [
+                          "average bandwidth",
+                          "peak bandwidth",
+                          "peak bandwidth timestamp"
+                        ],
+                        "dataUnit": "megabits per second"
+                      },
+                      "groups": [
                         {
-                          "group": "hostname1.domain.info",
+                          "group": "__all__",
                           "data": [
-                            123.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname2.domain.info",
-                          "data": [
-                            67580.00001
-                          ]
-                        },
-                        {
-                          "group": "hostname3.domain.info",
-                          "data": [
-                            8720
-                          ]
-                        },
-                        {
-                          "group": "zi.domain.info",
-                          "data": [
-                            340
+                            0.00698,
+                            1.78078,
+                            "2023-07-13T10:55:00Z"
                           ]
                         }
                       ]
                     }
                   ],
+                  "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
                       "type": "object",
@@ -35729,7 +35819,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \"edge bandwidth\" represents edge bandwidth traffic. ",
+                          "description": "Indicates the type of data returned.",
                           "items": {
                             "type": "string"
                           }
@@ -35751,13 +35841,16 @@
                         "properties": {
                           "group": {
                             "type": "string",
-                            "description": "Name of a group.  \"\\_\\_all\\_\\_\" is a special group encompassing all groups."
+                            "description": "Name of a group. \"__all__\" is a special group encompassing all groups."
                           },
                           "data": {
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": "number"
+                              "type": [
+                                "string",
+                                "number"
+                              ]
                             }
                           }
                         }
@@ -35877,7 +35970,7 @@
                         "1.0.148.0/24"
                       ],
                       "ipV6": [
-                        "FF80:54c1:ff0a::/64"
+                        "ff80:54c1:ff0a:0000:0000:0000:0000:0000/64"
                       ]
                     }
                   }

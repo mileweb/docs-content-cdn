@@ -1,5 +1,16 @@
 # Release Notes
 
+## April 23, 2024
+#### API updates
+* Rejected use of an origin shield unless directConnect is set to “noDirect”.
+* Modified output to use a uniform format for IPv6 addresses consisting of full instead of compressed values and also lowercase for consistency.
+* Deprecated the origin_selection_algorithm directive in Edge Logic in favor of a new peerSelectionAlgorithm field added to property.origins in a property's configuration.
+
+#### Console updates
+* Limited use of the nearChina server group to the mainland China client region in an edge hostname’s configuration.
+* Improved Chinese text in property origins page.
+
+
 ## April 8, 2024
 #### API updates
 * Added support for filtering [deployment tasks](</apidocs#operation/queryDeploymentTaskList>) and [validation tasks](</apidocs#operation/queryPropertyValidationList>) by their status.
