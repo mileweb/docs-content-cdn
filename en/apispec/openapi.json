@@ -35524,7 +35524,6 @@
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
                               "type": [
-                                "string",
                                 "number"
                               ]
                             }
@@ -35848,7 +35847,6 @@
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
                               "type": [
-                                "string",
                                 "number"
                               ]
                             }
