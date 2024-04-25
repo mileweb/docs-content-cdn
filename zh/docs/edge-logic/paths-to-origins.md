@@ -63,7 +63,7 @@ When internet congestions and outages happen, we want to minimize their impact o
 feature can help greatly. When you enable it in the edge logic with the [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) directive, the data to and from the origin will be 
 accelerated by our high-speed data transmission (HDT) platform. This service features our proprietary protocol based on UDP and smart routing technology to ensure stable layer-4 performance regardless of any fluctuation in the public internet.
 
-Please contact our customer support if you need to try this service. Due to the higher cost of HDT, the traffic transmitted through this channel is charged seperately from the edge delivery traffic.
+Please contact our customer support if you need to try this service. Due to the higher cost of HDT, the traffic transmitted through this channel is charged separately from the edge delivery traffic.
 
 ### 性能相关的高级功能
 #### $server_level 变量
