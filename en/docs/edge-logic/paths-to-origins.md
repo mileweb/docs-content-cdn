@@ -4,7 +4,7 @@ CDN Pro is designed to deliver both static, highly cacheable files and dynamic, 
 Different kinds of content have different requirements when their origins need to be accessed.
 This article is an introduction of all the related features and how to configure them to achieve the best result.
 
-### Hierachical Cache Structure for Static Content
+### Hierarchical Cache Structure for Static Content
 
 Historically, the acceleration by a CDN is achieved through caching the static content close to the end users.
 Caching can also greatly offload the pressure on the origin servers. For this kind of content, we want to serve as much of them
@@ -64,7 +64,7 @@ When internet congestions and outages happen, we want to minimize their impact o
 feature can help greatly. When you enable it in the edge logic with the [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) directive, the data to and from the origin will be 
 accelerated by our high-speed data transmission (HDT) platform. This service features our proprietary protocol based on UDP and smart routing technology to ensure stable layer-4 performance regardless of any fluctuation in the public internet.
 
-Please contact our customer support if you need to try this service. Due to the higher cost of HDT, the traffic transmitted through this channel is charged seperately from the edge delivery traffic.
+Please contact our customer support if you need to try this service. Due to the higher cost of HDT, the traffic transmitted through this channel is charged separately from the edge delivery traffic.
 
 ### Advanced Features for Performance
 #### The $server_level variable
