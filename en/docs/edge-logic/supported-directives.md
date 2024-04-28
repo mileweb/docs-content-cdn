@@ -34,7 +34,7 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 ```preserve```: If the header being added exists in the upstream response, the header value is not changed;
 
-```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. But repeating these headers below is not allowed: 
+```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. But repeating these headers below is not allowed. The property validation will fail, if any of these headers is specified with policy=repeat. 
 
 Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, and Vary.
 
@@ -493,7 +493,7 @@ Use this directive to add, delete, or overwrite the response header fields from 
 
 Possible values of policy are ```repeat```, ```overwrite```, and ```preserve```. The default policy is ```repeat```.
 
-*   The ```repeat``` policy always adds the header and the value into the upstream response. But repeating these headers below is not allowed: 
+*   The ```repeat``` policy always adds the header and the value into the upstream response. But repeating these headers below is not allowed. The property validation will fail, if any of these headers is specified with policy=repeat. 
 
 Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, and User-Agent.
 
@@ -624,7 +624,7 @@ Because this directive does not affect the requests to parent servers, you need 
 **Default:** `proxy_cache_background_update off;` <br/>
 **Context:** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive with the `updating` option.
+Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive with the `updating` option. CDN Pro introduced the [`proxy_cache_max_stale`](#proxy_cache_max_stale) directive to set a maximum staleness to avoid serving too old objects to the clients.
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -676,13 +676,13 @@ Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amo
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:** `proxy_cache_max_stale if_error=$time;` <br/>
+**Syntax:** `proxy_cache_max_stale if_error=$time while_revalidate=$time;` <br/>
 **Default:** `-` <br/>
 **Context:** server, location
 
-This directive allows serving of stale content that did not expire too long ago to give the end user a better experience. It has the same functionality as the parameters `stale-if-error` in the `Cache-Control` header field. Its priority is lower than the header value.
+This directive allows serving of stale content that did not expire too long ago to give the end user a better experience. It has the same functionality as the parameters `stale-if-error` and `stale-while-revalidate` in the `Cache-Control` header field. Its priority is lower than the header value.
 
-The parameter 'if_error=' requires 'error' to be specified in the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive.
+The parameter 'if_error=' requires 'error' to be specified in the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive. The parameter 'while_revalidate=' only works with [`proxy_cache_background_update on;`](#proxy_cache_background_update), which needs 'updating' to be specified in `proxy_cache_use_stale`.
 
 ### [`proxy_cache_methods`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods)
 
