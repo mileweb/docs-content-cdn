@@ -25,6 +25,7 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 ```preserve```: 如果头部名称不存在，则添加。否则不做任何操作，保留原头部不变。
 
 ```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则新增一条。不支持新增以下头部：
+
 Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, Vary
 
 
@@ -493,7 +494,9 @@ else { ... }
 policy 的可能取值是 ```repeat```,```overwrite```, 以及 ```preserve```。 默认的策略是```repeat```。
 
 *   ```repeat``` 不管指定响应头原先是否存在，强制添加响应头部和值到上游响应中。不支持重复添加以下头部：
+
 Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, User-Agent
+
 *   ```overwrite``` 如果指定响应头已存在，则对已有响应头的值进行改写；否则将配置响应头和值添加到上游响应中。不支持改写这3个头部：Transfer-Encoding, Connection, Keep-Alive。
 *   ```preserve``` 仅当指定响应头不存在时，才将配置的响应头和值加到上游响应中。
 
@@ -623,7 +626,7 @@ origin_pass My-Dynamic-Origin;
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
-该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale'](#proxy_cache_use_stale) 指令结合使用。
+该指令用于允许 CDN Pro 先将旧缓存响应给客户端，同时通过后台子请求的方式来更新过期缓存。在分发某些需要较长时间才能从源站获取完整数据的大文件时，该配置项有助于提高响应能力，减少客户端的等待时长。通常情况下，它应该与带有 `updating` 选项的 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 指令结合使用。
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -671,7 +674,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
 
-### proxy_cache_max_stale
+### `proxy_cache_max_stale`
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
@@ -693,7 +696,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 该指令用于配置可被 CDN Pro 缓存的客户端请求方法，默认情况下 “GET” 和 “HEAD” 这两种方法将会被配置为可缓存。支持GET, HEAD以及POST这3种方法。
 
-### proxy_cache_min_age 
+### `proxy_cache_min_age` 
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 

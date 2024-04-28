@@ -34,7 +34,9 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 ```preserve```: If the header being added exists in the upstream response, the header value is not changed;
 
-```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. Repeating these headers is not allowed: Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, and Vary.
+```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. But repeating these headers below is not allowed: 
+
+Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, and Vary.
 
 **Limitation:** For the following "built-in" headers, the behavior is always fixed, regardless of the configured policy:
 
@@ -491,7 +493,10 @@ Use this directive to add, delete, or overwrite the response header fields from 
 
 Possible values of policy are ```repeat```, ```overwrite```, and ```preserve```. The default policy is ```repeat```.
 
-*   The ```repeat``` policy always adds the header and the value into the upstream response. Repeating these headers is not allowed: Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, and User-Agent.
+*   The ```repeat``` policy always adds the header and the value into the upstream response. But repeating these headers below is not allowed: 
+
+Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, and User-Agent.
+
 *   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response. Overwriting these 3 headers is not allowed: Transfer-Encoding, Connection, and Keep-Alive.
 *   The ```preserve``` policy adds the header and the value into the upstream response only if the header does not exist in the upstream response.
 
@@ -619,7 +624,7 @@ Because this directive does not affect the requests to parent servers, you need 
 **Default:** `proxy_cache_background_update off;` <br/>
 **Context:** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option.
+Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive with the `updating` option.
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -667,7 +672,7 @@ If the last request passed to the proxied server for populating a new cache elem
 
 Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
-### proxy_cache_max_stale
+### `proxy_cache_max_stale`
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
@@ -689,7 +694,7 @@ The parameter 'if_error=' requires 'error' to be specified in the [`proxy_cache_
 
 If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. The methods supported are GET, HEAD and POST.
 
-### proxy_cache_min_age 
+### `proxy_cache_min_age`
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
