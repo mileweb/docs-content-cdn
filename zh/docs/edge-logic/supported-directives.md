@@ -166,6 +166,8 @@ location = /auth {
 
 指定对什么MIME类型的响应进行即时压缩。 可以指定 * ，表示匹配任何MIME类型。 text/html类型的响应总会被压缩。
 
+尽管当前支持使用 [`gzip_types`](#gzip_types) 和 `brotli_types`指令给gzip和br压缩算法指定不同的MIME类型，在不久的将来我们计划将gzip和br压缩适用的MIME类型做合并。如果您同时开启了gzip和br压缩，建议给`gzip_types` 和 `brotli_types`设置相同的MIME类型值。
+
 ### `client_body_timeout`
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
@@ -349,6 +351,8 @@ location @try_origin2 {
 
 CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1000 字节时才压缩功能才会生效）。该默认行为应该适用于大多数用户。
 该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持形如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。该指令最多支持20个模糊匹配参数。
+
+尽管当前支持使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，在不久的将来我们计划将gzip和br压缩适用的MIME类型做合并。如果您同时开启了gzip和br压缩，建议给`gzip_types` 和 `brotli_types`设置相同的MIME类型值。
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
