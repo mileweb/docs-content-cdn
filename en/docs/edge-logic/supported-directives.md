@@ -34,9 +34,9 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 ```preserve```: If the header being added exists in the upstream response, the header value is not changed;
 
-```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response.
+```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. But repeating these headers below is not allowed. The property validation will fail, if any of these headers is specified with policy=repeat. 
 
-The policy parameter also supports variables; the value must be one of the three above.
+Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, and Vary.
 
 **Limitation:** For the following "built-in" headers, the behavior is always fixed, regardless of the configured policy:
 
@@ -46,6 +46,9 @@ The policy parameter also supports variables; the value must be one of the three
 | ```Link``` | ```repeat``` |
 | ```Last-Modified``` | ```overwrite``` |
 | ```ETag``` | ```overwrite``` |
+| ```Transfer-Encoding``` | ```preserve``` |
+| ```Connection``` | ```preserve``` |
+| ```Keep-Alive``` | ```preserve``` |
 
 
 If needed, use [proxy_hide_header](#proxy_hide_header) to remove the "Cache-Control" or "Link" headers from the origin.
@@ -171,7 +174,9 @@ Enables or disables on-the-fly compression of responses.
 **Default:** text/html <br/>
 **Context:** server, location
 
-Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The special value * matches any MIME type. Responses with the text/html MIME type are always compressed. 
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The special value * matches any MIME type. Responses with the text/html MIME type are always compressed.
+
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the 2 compression algorithms will be merged in the near future. We recommend setting same value for the 2 directives, if both gzip and brotli compression are enabled. 
 
 ### `client_body_timeout`
 
@@ -350,6 +355,8 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the 2 compression algorithms will be merged in the near future. We recommend setting same value for the 2 directives, if both gzip and brotli compression are enabled.
+
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
@@ -484,10 +491,13 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream\_http\_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
 
-Possible values of policy are ```repeat, overwrite,``` and ```preserve.``` The policy parameter supports a variable as a value. The default policy is ```repeat```.
+Possible values of policy are ```repeat```, ```overwrite```, and ```preserve```. The default policy is ```repeat```.
 
-*   The ```repeat``` policy always adds the header and the value into the upstream response.
-*   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response.
+*   The ```repeat``` policy always adds the header and the value into the upstream response. But repeating these headers below is not allowed. The property validation will fail, if any of these headers is specified with policy=repeat. 
+
+Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, and User-Agent.
+
+*   The ```overwrite``` policy overwrites the value if the header already exists in the upstream response. Otherwise, it adds the header and the value into the upstream response. Overwriting these 3 headers is not allowed: Transfer-Encoding, Connection, and Keep-Alive.
 *   The ```preserve``` policy adds the header and the value into the upstream response only if the header does not exist in the upstream response.
 
 The parameter ```if``` is introduced to add the header based on the condition. A condition can be one of the following:
@@ -606,16 +616,6 @@ origin_pass My-Dynamic-Origin;
 ```
 Because this directive does not affect the requests to parent servers, you need to set the origin's "direct connection" option to "always direct" to make sure the edge servers contact the origin directly. Otherwise the header field will be missing in any requests sent to the parent servers.
 
-### [`proxy_buffering`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering)
-
-<span class="badge">standard</span>
-
-**Syntax:** `proxy_buffering on | off;` <br/>
-**Default:** `proxy_buffering on;` <br/>
-**Context:** server, location
-
-Enables or disables buffering of responses from the proxied server. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_buffering). 
-
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
 <span class="badge">standard</span>
@@ -624,7 +624,7 @@ Enables or disables buffering of responses from the proxied server. No change to
 **Default:** `proxy_cache_background_update off;` <br/>
 **Context:** server, location
 
-Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale'](#proxy_cache_use_stale) directive with the `updating` option. CDN Pro introduced the [`proxy_cache_max_stale`](#proxy_cache_max_stale) directive to set a maximum staleness to avoid serving too old objects to the clients.
+Turning it on allows a background subrequest to be fired to update an expired cache item while a stale cached response is returned to the client. It should help with the responsiveness when serving popular large files which might take a while to fetch from the origin. It should be used in conjunction with the [`proxy_cache_use_stale`](#proxy_cache_use_stale) directive with the `updating` option. CDN Pro introduced the [`proxy_cache_max_stale`](#proxy_cache_max_stale) directive to set a maximum staleness to avoid serving too old objects to the clients.
 
 ### [`proxy_cache_bypass`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass)
 
@@ -672,7 +672,7 @@ If the last request passed to the proxied server for populating a new cache elem
 
 Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
-### proxy_cache_max_stale
+### `proxy_cache_max_stale`
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
@@ -688,13 +688,13 @@ The parameter 'if_error=' requires 'error' to be specified in the [`proxy_cache_
 
 <span class="badge">standard</span>
 
-**Syntax:** `proxy_cache_methods GET | HEAD | POST ...;` <br/>
+**Syntax:** `proxy_cache_methods GET | HEAD | POST;` <br/>
 **Default:** `proxy_cache_methods GET HEAD;` <br/>
 **Context:** server, location
 
-If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods).
+If the client request method is listed in this directive, the response will be cached. “GET” and “HEAD” methods are always added to the list, though it is recommended to specify them explicitly. The methods supported are GET, HEAD and POST.
 
-### proxy_cache_min_age 
+### `proxy_cache_min_age`
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
