@@ -34,7 +34,7 @@ add_header X-My-Header $header_value policy=repeat|overwrite|preserve
 
 ```preserve```: If the header being added exists in the upstream response, the header value is not changed;
 
-```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. But repeating these headers below is not allowed. The property validation will fail, if any of these headers is specified with policy=repeat. 
+```repeat```: (default) Add the header to the client response, regardless of whether the header exists in the upstream response. Repeating the headers below is not allowed. The property validation will fail if any of these headers is specified with 'policy=repeat': 
 
 Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, and Vary.
 
@@ -176,7 +176,7 @@ Enables or disables on-the-fly compression of responses.
 
 Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The special value * matches any MIME type. Responses with the text/html MIME type are always compressed.
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the 2 compression algorithms will be merged in the near future. We recommend setting same value for the 2 directives, if both gzip and brotli compression are enabled. 
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two compression algorithms will be merged in the near future. We recommend setting the same value for the two directives if both gzip and brotli compression are enabled. 
 
 ### `client_body_timeout`
 
@@ -355,7 +355,7 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the 2 compression algorithms will be merged in the near future. We recommend setting same value for the 2 directives, if both gzip and brotli compression are enabled.
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two compression algorithms will be merged in the near future. We recommend setting the same value for the two directives if both gzip and brotli compression are enabled.
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
@@ -493,7 +493,7 @@ Use this directive to add, delete, or overwrite the response header fields from 
 
 Possible values of policy are ```repeat```, ```overwrite```, and ```preserve```. The default policy is ```repeat```.
 
-*   The ```repeat``` policy always adds the header and the value into the upstream response. But repeating these headers below is not allowed. The property validation will fail, if any of these headers is specified with policy=repeat. 
+*   The ```repeat``` policy always adds the header and the value into the upstream response. Repeating the headers below is not allowed. The property validation will fail if any of these headers is specified with 'policy=repeat': 
 
 Status, Content-Type, Content-Length, Date, Last-Modified, ETag, Server, WWW-Authenticate, Location, Refresh, Content-Disposition, Expires, Accept-Ranges, Content-Range, Vary, X-Accel-Expires, X-Accel-Redirect, X-Accel-Limit-Rate, X-Accel-Buffering, X-Accel-Charset, Content-Encoding, Transfer-Encoding, Connection, Keep-Alive, X-Ws-buffer-length, Cache_state, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, TE, Trailer, Upgrade, and User-Agent.
 
