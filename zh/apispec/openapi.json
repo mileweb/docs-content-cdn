@@ -35856,9 +35856,7 @@
                             "type": "array",
                             "description": "Data values. The units of measurement are determined by the dataUnit field.",
                             "items": {
-                              "type": [
-                                "number"
-                              ]
+                              "type": "number"
                             }
                           }
                         }
