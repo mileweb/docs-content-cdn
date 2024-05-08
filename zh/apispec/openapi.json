@@ -2417,6 +2417,12 @@
                       "code": "EdgeHostnameBeingDeployed",
                       "message": "The edge hostname is being deployed and cannot be updated or deleted now."
                     }
+                  },
+                  "Invalid use of nearChina server group": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "The nearChina server group cannot be used for regions outside mainland China."
+                    }
                   }
                 }
               }
@@ -2701,6 +2707,12 @@
                     "value": {
                       "code": "EdgeHostnameBeingDeployed",
                       "message": "The edge hostname is being deployed and cannot be updated or deleted now."
+                    }
+                  },
+                  "Invalid use of nearChina server group": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "The nearChina server group cannot be used for regions outside mainland China."
                     }
                   }
                 }
