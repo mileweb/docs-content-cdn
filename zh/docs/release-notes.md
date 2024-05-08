@@ -1,5 +1,12 @@
 # Release Notes
 
+## May 7, 2024
+#### API updates
+* Ensured the nearChina server group can be used in an edge hostname’s client zone rule only if the rule’s region is mainland China.
+
+#### Console updates
+* Improved Chinese text in the origin details page.
+
 ## April 23, 2024
 #### API updates
 * Rejected use of an origin shield unless directConnect is set to “noDirect”.
