@@ -56,6 +56,20 @@ set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 The POST method is often used today to query information with complex or long parameters. A prominent example is the [GraphQL](https://en.wikipedia.org/wiki/GraphQL). In these cases, the POST requests are idempotent and safe as the GET requests, and the response are well cacheable. The only question is how to include the parameters in the request body to the cache key. CDN Pro created the proprietary directive [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) for this exact purpose. When this feature is turned on, our server would calculate an MD5 hash from the request body and append it to the cache key. Due to performance considerations, this only happens when the body size is less than 4kB, otherwise the cache key is not appended and the variable $ignored_body_in_cache_key is set to 1 to indicate this fact. You can use this variable with [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass) to avoid serving incorrect cached content. If you really need to include larger request body in the cache key, you are advised to calculate a hash of the request body in the client and pass it through the request header. You can then use the method introduced earlier to include it in the cache key via $cache_misc.
 
 Last but not least, don't forget to use the [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) directive to enable the caching of POST requests.
+Here is the code snippet to add POST request body to the cache key:
+```nginx
+location /api/v1/ {
+  origin_pass my-api-origin;
+  proxy_cache_methods GET HEAD POST; # allow caching of POST requests
+  proxy_cache_valid 1m; # 200, 301, and 302 responses will be cached for 1 minute
+  proxy_cache_bypass $ignored_body_in_cache_key;
+  proxy_no_cache $ignored_body_in_cache_key;
+  proxy_request_buffering on; # turn on proxy request buffering for proxy_request_body_in_cache_key to work
+  if ($request_method = POST) {
+    proxy_request_body_in_cache_key on; # if the body is < 4kB, calculate the hash and put cacke key
+  }
+}
+```
 
 ### HTTP Header Manipulation
 

@@ -56,7 +56,21 @@ set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
 POST 方法在今天经常被用来实现需要提供大量参数的查询操作，一个典型的例子是 [GraphQL](https://en.wikipedia.org/wiki/GraphQL)。 在这种情况下，POST 请求和 GET 一样都是 idempotent 和安全的，而且响应也都是可缓存的。唯一的问题就是如何把请求正文里的参数添加到缓存 key 中。CDN Pro 为此专门开发了 [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) 指令来实现这个目的。当这项功能被启用的时候，服务器会为收到的请求正文计算一个 MD5 哈希值，并将其添加到缓存 key 的末尾。出于性能考虑，这些操作只会在请求正文小于 4kB 的时候发生。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass)指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
 
-最后给您的提醒是，不要忘了使用 [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) 指令来开启对 POST 请求的缓存.
+最后给您的提醒是，不要忘了使用 [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) 指令来开启对 POST 请求的缓存。
+下面是如何把 POST 请求正文加入缓存 key 的配置代码示例：
+```nginx
+location /api/v1/ {
+  origin_pass my-api-origin;
+  proxy_cache_methods GET HEAD POST; # 允许缓存 POST 请求
+  proxy_cache_valid 1m; # 200, 301, 和 302 响应会被缓存1分钟
+  proxy_cache_bypass $ignored_body_in_cache_key;
+  proxy_no_cache $ignored_body_in_cache_key;
+  proxy_request_buffering on; # 必须打开此配置 proxy_request_body_in_cache_key 才能工作
+  if ($request_method = POST) {
+    proxy_request_body_in_cache_key on; # 如果请求正文小于 4kB，计算其哈希值并加入缓存 key
+  }
+}
+```
 
 
 ### HTTP 头部管理
