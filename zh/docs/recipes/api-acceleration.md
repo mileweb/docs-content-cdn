@@ -1,4 +1,4 @@
-## REST API Acceleration
+## 加速 REST API
 
 API calls are usually considered dynamic HTTP requests since the responses are generated
 by the server in real time based on some input parameters supplied in the request. As we
@@ -52,7 +52,7 @@ that the API user name and client IP are added to the cache key. This ensures th
 cached content will be served only to the same user from the same IP address. Combined
 with HTTPS and the short cache time of 1 minute, this should be reasonably safe for most 
 applications in the industry. By default, only responses to `GET` method are cached. 
-You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses.
+You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses. Refer to the [FAQ for an example](/docs/edge-logic/faq#如何将问号后参数，请求头，或者请求正文加入到缓存key中) to cache `POST` requests with request body in the cache key.
 Another thing to notice is that we allow the
 clients to use the `Cache-Control: no-cache` header field to bypass the cache. When a CDN Pro
 server sees this field value, it will go directly to the origin without looking up the cache.
