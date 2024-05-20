@@ -1,5 +1,14 @@
 # Release Notes
 
+## May 17, 2024
+#### API updates
+* Updated the [get service quotas list API](</apidocs#operation/get-cdn-serviceQuotas>) to support search and advancedFeatures query parameters. The search parameter lets you specify a keyword to find in the field values of the allowedCacheDirectives, allowedLbDirectives, allowedServerGroups, allowedLegacyTypes, and advancedFeatures fields within the service quotas while the advancedFeatures parameter lets you find service quotas with a particular advanced feature enabled.
+* Ensured the correct enforcement of a service quota’s edgeHostnameLimit.
+* Moved the description and estimatedBandwidth fields out of the history array of the edge hostname object.
+
+#### Console updates
+* Added ‘required’ prompt for fields of the client zone rule user interface.
+
 ## May 7, 2024
 #### API updates
 * Ensured the nearChina server group can be used in an edge hostname’s client zone rule only if the rule’s region is mainland China.

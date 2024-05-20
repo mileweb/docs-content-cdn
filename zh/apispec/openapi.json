@@ -1971,14 +1971,6 @@
                                     "isp"
                                   ]
                                 }
-                              },
-                              "description": {
-                                "type": "string",
-                                "description": "A description of the edge hostname."
-                              },
-                              "estimatedBandwidth": {
-                                "type": "string",
-                                "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
                               }
                             }
                           },
@@ -22982,7 +22974,7 @@
           }
         },
         "operationId": "get-cdn-serviceQuotas",
-        "description": "Obtain a list of service quotas. Optional query parameters let you filter the results.",
+        "description": "<b>Resellers</b> can use this API to obtain a list of service quotas of their child customers. Optional query parameters let you filter the results.",
         "parameters": [
           {
             "schema": {
@@ -23076,6 +23068,26 @@
             "in": "query",
             "name": "limit",
             "description": "Maximum number of service quotas to return. "
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "realTimeLog",
+                "originShield"
+              ]
+            },
+            "in": "query",
+            "name": "advancedFeatures",
+            "description": "Specify an advanced feature to search for. Only service quotas with the feature enabled will be returned."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "Specify a value to search for among the values of the allowedCacheDirectives, allowedLbDirectives, allowedServerGroups, and advancedFeatures fields. Only service quotas which include the value will be returned."
           }
         ]
       }
