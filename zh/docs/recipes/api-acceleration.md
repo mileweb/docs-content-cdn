@@ -51,8 +51,8 @@ minimize latency and know there will not be any cache hit across different serve
 that the API user name and client IP are added to the cache key. This ensures that the 
 cached content will be served only to the same user from the same IP address. Combined
 with HTTPS and the short cache time of 1 minute, this should be reasonably safe for most 
-applications in the industry. By default, only responses to `GET` method are cached. 
-You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses. Refer to the [FAQ for an example](/docs/edge-logic/faq#如何将问号后参数，请求头，或者请求正文加入到缓存key中) to cache `POST` requests with the request body in the cache key.
+applications in the industry. By default, only responses to `GET` and `HEAD` methods are cached. 
+You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses. 常见问题里的[这个例子](/docs/edge-logic/faq#如何将问号后参数，请求头，或者请求正文加入到缓存key中) 展示了如何缓存 `POST` 请求，并将请求正文加入到缓存 key 里。
 Another thing to notice is that we allow the
 clients to use the `Cache-Control: no-cache` header field to bypass the cache. When a CDN Pro
 server sees this field value, it will go directly to the origin without looking up the cache.
