@@ -54,7 +54,7 @@ set $cache_misc "ae=$http_accept_encoding";
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
-POST 方法在今天经常被用来实现需要提供大量参数的查询操作，一个典型的例子是 [GraphQL](https://en.wikipedia.org/wiki/GraphQL)。 在这种情况下，POST 请求和 GET 一样都是 idempotent 和安全的，而且响应也都是可缓存的。唯一的问题就是如何把请求正文里的参数添加到缓存 key 中。CDN Pro 为此专门开发了 [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) 指令来实现这个目的。当这项功能被启用的时候，服务器会为收到的请求正文计算一个 MD5 哈希值，并将其添加到缓存 key 的末尾。出于性能考虑，这些操作只会在请求正文小于 4kB 的时候发生。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass)指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
+POST 方法在今天经常被用来实现需要提供大量参数的查询操作，一个典型的例子是 [GraphQL](https://en.wikipedia.org/wiki/GraphQL)。 在这种情况下，POST 请求和 GET 一样都是 idempotent 和安全的，而且响应也都是可缓存的。唯一的问题就是如何把请求正文里的参数添加到缓存 key 中。CDN Pro 为此专门开发了 [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) 指令来实现这个目的。当这项功能被启用的时候，服务器会为收到的请求正文计算一个 MD5 哈希值，并将其添加到缓存 key 的末尾。出于性能考虑，这些操作只会在请求正文小于 4kB 的时候发生。当请求正文过大时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass)指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 `$cache_misc` 变量中。
 
 最后给您的提醒是，不要忘了使用 [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) 指令来开启对 POST 请求的缓存。
 下面是如何把 POST 请求正文加入缓存 key 的配置代码示例：
@@ -142,7 +142,7 @@ proxy_ignore_headers Vary;
 如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端得到的响应性能可能会非常差。此时该如何通过 CDN Pro 来加速这些动态内容呢？ 以下操作将极大提升此类动态响应性能：
 * **使用 CDN Pro 来为您的业务争取数秒的宝贵时间**
 
-当您使用 CDN Pro 时，您的客户端将会被全局调度系统（GSLB）引导与最近的边缘服务器建连。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下，CDN Pro 与源站之间会保持长链接，您可以使用指令 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN Pro 上的延迟。
+当您使用 CDN Pro 时，您的客户端将会被全局调度系统（GSLB）引导与最近的边缘服务器建连。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下，CDN Pro 与源站之间会保持长链接，您可以使用配置 [keep-alive 超时](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN Pro 上的延迟。
 * **将动态文件转换成可缓存文件**
 
 在许多情况下，“动态文件”并不意味着内容完全不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，客户端几乎体验不到任何差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和算力。需要注意的是，如果客户端收到的响应依赖请求 URL 中的参数或者请求头部值，或者请求正文的话，请确保所有相关参数都被[添加到缓存 key 中](#如何将问号后参数，请求头，或者请求正文加入到缓存key中)。
