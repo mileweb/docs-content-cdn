@@ -142,7 +142,7 @@ proxy_ignore_headers Vary;
 如果您的源站服务器位于数据中心或云服务器上，那么远离源站或与源站的网络链路不佳的客户端得到的响应性能可能会非常差。此时该如何通过 CDN Pro 来加速这些动态内容呢？ 以下操作将极大提升此类动态响应性能：
 * **使用 CDN Pro 来为您的业务争取数秒的宝贵时间**
 
-当您使用 CDN Pro 时，您的客户端将会被全局调度系统（GSLB）引导与最近的边缘服务器建连。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下，CDN Pro 与源站之间会保持长链接，您可以使用指令 [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN Pro 上的延迟。
+当您使用 CDN Pro 时，您的客户端将会被全局调度系统（GSLB）引导与最近的边缘服务器建连。客户端与边缘服务器之间的往返时间 (RTT) 可能比客户端直连源服务器快几百毫秒。 TCP 和 TLS 握手通常需要 3-4 个 RTT，这样便可以通过 CDN 来提升1秒的响应性能。默认情况下，CDN Pro 与源站之间会保持长链接，您可以使用配置 [keep-alive 超时](/docs/portal/edge-configurations/managing-origins) 来设置长达10分钟的长链接时间。同时如果您已提前规划了某些业务不需要缓存，那么您可以使用指令 [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 和 [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 来跳过缓存处理步骤以最大程度减少 CDN Pro 上的延迟。
 * **将动态文件转换成可缓存文件**
 
 在许多情况下，“动态文件”并不意味着内容完全不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，客户端几乎体验不到任何差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和算力。需要注意的是，如果客户端收到的响应依赖请求 URL 中的参数或者请求头部值，或者请求正文的话，请确保所有相关参数都被[添加到缓存 key 中](#如何将问号后参数，请求头，或者请求正文加入到缓存key中)。
