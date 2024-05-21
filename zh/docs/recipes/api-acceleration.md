@@ -1,4 +1,4 @@
-## REST API Acceleration
+## 加速 REST API
 
 API calls are usually considered dynamic HTTP requests since the responses are generated
 by the server in real time based on some input parameters supplied in the request. As we
@@ -9,7 +9,7 @@ duplicate API calls in a short period of time. Some caching using a CDN can sign
 improve the performance. In this article, we are going to use an example to illustrate how
 to use the portal to create a property to accelerate an API server.
 
-Here are the assumptions about this task:
+下面是本次假想任务的一些背景和需求:
 * The API server to be accelerated has a hostname: `api.company.com`. The server requires
 the request `Host` header to carry this value.
 * You currently set up the DNS server to resolve this hostname to two IP addresses: `1.1.1.1`
@@ -24,7 +24,7 @@ to use a more sophisticated algorithm like the one for [CDN Pro API](https://doc
 to generate a signature to put after the colon.
 * All the input parameters to the API server are specified in the request query string.
 
-To use CDN Pro to accelerate this service:
+下面就是如何使用 CDN Pro 来加速这个 API 服务:
 * Create a new DNS record `api-origin.company.com` to point to the two IP addresses. The 
 CDN Pro servers need to use it to reach the origin. The name `api.company.com` can
 no longer be used because we will later CNAME it to a CDN Pro edge hostname to direct
@@ -51,8 +51,8 @@ minimize latency and know there will not be any cache hit across different serve
 that the API user name and client IP are added to the cache key. This ensures that the 
 cached content will be served only to the same user from the same IP address. Combined
 with HTTPS and the short cache time of 1 minute, this should be reasonably safe for most 
-applications in the industry. By default, only responses to `GET` method are cached. 
-You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses.
+applications in the industry. By default, only responses to `GET` and `HEAD` methods are cached. 
+You can use the [proxy_cache_methods](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses. 常见问题里的[这个例子](/docs/edge-logic/faq#如何将问号后参数，请求头，或者请求正文加入到缓存key中) 展示了如何缓存 `POST` 请求，并将请求正文加入到缓存 key 里。
 Another thing to notice is that we allow the
 clients to use the `Cache-Control: no-cache` header field to bypass the cache. When a CDN Pro
 server sees this field value, it will go directly to the origin without looking up the cache.
