@@ -53,9 +53,26 @@ If you want to keep any previously assigned value, you can append to this variab
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
-The POST method is often used today to query information with complex or long parameters. A prominent example is the [GraphQL](https://en.wikipedia.org/wiki/GraphQL). In these cases, the POST requests are idempotent and safe as the GET requests, and the response are well cacheable. The only question is how to include the parameters in the request body to the cache key. CDN Pro created the proprietary directive [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) for this exact purpose. When this feature is turned on, our server would calculate an MD5 hash from the request body and append it to the cache key. Due to performance considerations, this only happens when the body size is less than 4kB, otherwise the cache key is not appended and the variable $ignored_body_in_cache_key is set to 1 to indicate this fact. You can use this variable with [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass) to avoid serving incorrect cached content. If you really need to include larger request body in the cache key, you are advised to calculate a hash of the request body in the client and pass it through the request header. You can then use the method introduced earlier to include it in the cache key via $cache_misc.
+The POST method is often used today to query information with complex or long parameters. A prominent example is the [GraphQL](https://en.wikipedia.org/wiki/GraphQL). In these cases, the POST requests are idempotent and safe as the GET requests, and the responses are well cacheable. The only question is how to include the parameters in the request body to the cache key.
+CDN Pro created the proprietary directive [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) for this exact purpose. When this feature is turned on, our server calculates an MD5 hash from the request body and appends it to the cache key.
+Due to performance considerations, this only happens when the body size is less than 4kB. Otherwise the cache key is not appended and the variable `$ignored_body_in_cache_key` is set to 1 to indicate this fact. You can use this variable with [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass) to avoid serving incorrect cached content.
+If you really need to include a larger request body in the cache key, you are advised to calculate a hash of the request body in the client and pass it through the request header. You can then use the method introduced earlier to include it in the cache key via `$cache_misc`.
 
 Last but not least, don't forget to use the [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) directive to enable the caching of POST requests.
+Here is the code snippet to add the POST request's body to the cache key:
+```nginx
+location /api/v1/ {
+  origin_pass my-api-origin;
+  proxy_cache_methods GET HEAD POST; # allow caching of POST requests
+  proxy_cache_valid 1m; # 200, 301, and 302 responses will be cached for 1 minute
+  proxy_cache_bypass $ignored_body_in_cache_key;
+  proxy_no_cache $ignored_body_in_cache_key;
+  proxy_request_buffering on; # turn on proxy request buffering for proxy_request_body_in_cache_key to work
+  if ($request_method = POST) {
+    proxy_request_body_in_cache_key on; # if the body is < 4kB, calculate the hash and add to the cache key
+  }
+}
+```
 
 ### HTTP Header Manipulation
 
@@ -128,7 +145,7 @@ If you only have the origin server in a central data center or in the cloud, the
 If you use CDN Pro, your clients will connect to the PoP that is closest to them. The round trip time (RTT) can be a few hundred milliseconds faster than directly connecting to the origin server. The TCP and TLS handshakes usually take 3-4 RTTs which can be a second faster through the CDN. By default, the CDN Pro servers maintain persistent connections to the origin. You can increase the [keep-alive timeout](/docs/portal/edge-configurations/managing-origins) to up to 10 minutes in the origin configurations. In the meantime, if you know the content is not cacheable at all, use [`proxy_no_cache 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) and [`proxy_cache_bypass 1;`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) to completely skip caching to minimize latency.
 * **Cache the response!**
 
-In many cases, "dynamic" does not mean the content is not cacheable. For example, end users will not experiance the difference if you cache the score of a basketball game for 1 second. If you have 10 requests per second to fetch the score, you can save 90% of the bandwidth and processing power. If the response depends on some query parameter or request header values, make sure those variables are [included in the cache key](#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key).
+In many cases, "dynamic" does not mean the content is not cacheable. For example, end users will typically not notice if you cache the score of a basketball game for 1 second. If you have 10 requests per second to fetch the score, you can save 90% of the bandwidth and processing power. If the response depends on some query parameter, request header value or the request body, make sure all those variables are [included in the cache key](#how-do-i-include-query-parameters-request-headers-and-body-in-the-cache-key).
 * **Enable Fast Route to origin**
 
 CDN Pro has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/enterprise-applications/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the ""Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN Pro support team.

@@ -1,5 +1,11 @@
 # Release Notes
 
+## May 31, 2024
+
+#### API updates
+* Removed duplicate IP address from one origin shield.
+* Ensured API access is limited to an API account's [list of allowed properties](</apidocs#operation/post-cdn-apiPermissions>), if specified. Notably, only hostnames of those properties will be accessible. For example, if an API account is permitted to access a single property, then report APIs would return data only for hostnames associated with that one property.
+
 ## May 17, 2024
 #### API updates
 * Updated the [get service quotas list API](</apidocs#operation/get-cdn-serviceQuotas>) to support search and advancedFeatures query parameters. The search parameter lets you specify a keyword to find in the field values of the allowedCacheDirectives, allowedLbDirectives, allowedServerGroups, allowedLegacyTypes, and advancedFeatures fields within the service quotas while the advancedFeatures parameter lets you find service quotas with a particular advanced feature enabled.

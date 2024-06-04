@@ -27038,14 +27038,14 @@
                       },
                       "properties": {
                         "type": "array",
-                        "description": "IDs of properties that can be accessed.",
+                        "description": "IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.",
                         "items": {
                           "type": "string"
                         }
                       },
                       "edgeHostnames": {
                         "type": "array",
-                        "description": "IDs of edge hostnames that can be accessed.",
+                        "description": "Edge hostnames that can be accessed.",
                         "items": {
                           "type": "string"
                         }
@@ -27340,14 +27340,14 @@
                         },
                         "properties": {
                           "type": "array",
-                          "description": "IDs of properties that can be accessed.",
+                          "description": "IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.",
                           "items": {
                             "type": "string"
                           }
                         },
                         "edgeHostnames": {
                           "type": "array",
-                          "description": "IDs of edge hostnames that can be accessed.",
+                          "description": "Edge hostnames that can be accessed.",
                           "items": {
                             "type": "string"
                           }
@@ -27741,14 +27741,14 @@
                       },
                       "properties": {
                         "type": "array",
-                        "description": "IDs of properties that can be accessed.",
+                        "description": "IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href=\"#tag/Hostnames\">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href=\"#tag/Reports\">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.",
                         "items": {
                           "type": "string"
                         }
                       },
                       "edgeHostnames": {
                         "type": "array",
-                        "description": "IDs of edge hostnames that can be accessed.",
+                        "description": "Edge hostnames that can be accessed.",
                         "items": {
                           "type": "string"
                         }
