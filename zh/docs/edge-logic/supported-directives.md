@@ -580,7 +580,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
-**使用语法：**  `origin_set_header field value if(condition);` <br/>
+**使用语法：**  `origin_set_header field value [flag=any if(condition)];` <br/>
 **默认设置：** `none` <br/>
 **可用位置：** server, location, if in location
 
@@ -588,7 +588,8 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 
 1. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
-2. CDN Pro 采用了分层缓存结构，我们确保此指令设置仅在回源站时（而不是回上传父节点时）才会生效。
+2. CDN Pro 采用了[分层缓存结构](/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
+ If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
 3. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
 
 *   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
@@ -1204,8 +1205,12 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。对 NGINX 开源版本无变更。请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。
-
+该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。对 NGINX 开源版本无变更。请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
+```nginx
+  # 清除发往源站和父节点的 `Accept-Encoding` 请求头
+  origin_set_header accept-encoding '' flag=any;
+  sub_filter 'match-string' 'replacement string';
+```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
 
