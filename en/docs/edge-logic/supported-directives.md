@@ -1193,7 +1193,7 @@ This feature is implemented on top of this [open-source project](https://github.
 **Default:** `—` <br/>
 **Context:** server, location
 
-Sets a string to replace in the response and a replacement string. No change to the public version. Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for uncompressed response from the origin and parent server:
+Sets a string to replace in the response and a replacement string. There is no change to the public version. Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
 ```nginx
   # clear the Accept-Encoding field in the request header to parent and origin
   origin_set_header accept-encoding '' flag=any;
