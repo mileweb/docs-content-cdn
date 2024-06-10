@@ -1189,11 +1189,15 @@ This feature is implemented on top of this [open-source project](https://github.
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `sub_filter {string} {replacement};` <br/>
+**Syntax:** `sub_filter {string} {replacement} [if(...)];` <br/>
 **Default:** `—` <br/>
 **Context:** server, location
 
-Sets a string to replace in the response and a replacement string. There is no change to the public version. Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
+Sets a string to replace in the response and a replacement string. We made the following changes to the public version:
+1. This directive only takes effect on edge servers, not the parent servers. This is to avoid double replacement.
+2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive.
+
+Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
 ```nginx
   # clear the Accept-Encoding field in the request header to parent and origin
   origin_set_header accept-encoding '' flag=any;
