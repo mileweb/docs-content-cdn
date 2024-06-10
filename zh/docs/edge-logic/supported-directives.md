@@ -1207,13 +1207,13 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。我们对 NGINX 开源版本做了如下修改：
 1. 为了确保响应在 CDN Pro 的[层级结构](/cdn/docs/edge-logic/paths-to-origins)中不会被重复替换，本指令只会在边缘服务器上生效，不会在父节点上生效；
-2. 我们为本指令引入了 `if()` 参数来更精确地设置它生效的条件，就像我们为 [`add_header`](#add_header) 做的那样。
+2. 我们为本指令引入了 `if()` 参数来更精确地设置它生效的条件，就像我们为 [`add_header`](#add_header) 做的那样。由于扫描大的响应正文可能会引入显著的延时和 CPU 消耗，我们建议您尽可能地利用这个参数来限制本指令的作用范围，以降低对性能的影响和成本开销。
 
 请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
 ```nginx
   # 清除发往源站和父节点的 `Accept-Encoding` 请求头
-  origin_set_header accept-encoding '' flag=any;
-  sub_filter 'match-string' 'replacement string';
+  origin_set_header accept-encoding '' flag=any if($uri = /the/special/file);
+  sub_filter 'match-string' 'replacement string' if($uri = /the/special/file);
 ```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)

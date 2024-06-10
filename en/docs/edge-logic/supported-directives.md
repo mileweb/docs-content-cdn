@@ -1196,13 +1196,13 @@ This feature is implemented on top of this [open-source project](https://github.
 Sets a string to replace in the response and a replacement string. We made the following changes to the public version:
 
 1. This directive takes effect only on the edge servers, not the parent servers. This ensures the replacement happens only once across the [hierarchical structure](/cdn/docs/edge-logic/paths-to-origins) of CDN Pro.
-2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive.
+2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive. Since scanning large responses can introduce significant delay and CPU consumption, we recommend using this parameter whenever possible to minimize performance hit and cost increase.
 
 Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
 ```nginx
   # clear the Accept-Encoding field in the request header to parent and origin
-  origin_set_header accept-encoding '' flag=any;
-  sub_filter 'match-string' 'replacement string';
+  origin_set_header accept-encoding '' flag=any if($uri = /the/special/file);
+  sub_filter 'match-string' 'replacement string' if($uri = /the/special/file);
 ```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
