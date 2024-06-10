@@ -1195,7 +1195,7 @@ This feature is implemented on top of this [open-source project](https://github.
 
 Sets a string to replace in the response and a replacement string. We made the following changes to the public version:
 
-1. This directive takes effect only on the edge servers, not the parent servers. This is to make sure the replacement only happen once across the [hierarchical structure](/cdn/docs/edge-logic/paths-to-origins) of CDN Pro.
+1. This directive takes effect only on the edge servers, not the parent servers. This ensures the replacement happens only once across the [hierarchical structure](/cdn/docs/edge-logic/paths-to-origins) of CDN Pro.
 2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive.
 
 Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
