@@ -9921,6 +9921,19 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "pvldr4hian46w"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "whsn279pias8r"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -11281,6 +11294,19 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "vp862bdcy80lg"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "4l5ja1mbry8fg"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -11639,6 +11665,19 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "4x1so9lui3w3m"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "uqzujyca4xdsj"
+                          },
+                          "type": "string"
                         }
                       }
                     }
@@ -12277,6 +12316,19 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "1n47fnqutm60h"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "7o66s8rn8glrl"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -12684,40 +12736,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
-                  "filters": {
-                    "type": "object",
-                    "properties": {
-                      "hostnames": {
-                        "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
+                  "hostnames": {
+                    "type": "array",
+                    "x-stoplight": {
+                      "id": "jhizdby1fe1s3"
+                    },
+                    "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                    "items": {
+                      "x-stoplight": {
+                        "id": "75ow5oye90b2j"
+                      },
+                      "type": "string"
                     }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Return data for a specific hostname only": {
-                  "value": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
+                  },
+                  "propertyHostnames": {
+                    "type": "array",
+                    "x-stoplight": {
+                      "id": "t68g48tsnafc3"
+                    },
+                    "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                    "items": {
+                      "x-stoplight": {
+                        "id": "k0pa46mhiqhfh"
+                      },
+                      "type": "string"
                     }
                   }
                 }
@@ -12963,40 +13007,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltershostnamesonly",
                 "type": "object",
-                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "properties": {
-                  "filters": {
-                    "type": "object",
-                    "properties": {
-                      "hostnames": {
-                        "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
+                  "hostnames": {
+                    "type": "array",
+                    "x-stoplight": {
+                      "id": "mgjjqvg1y98bc"
+                    },
+                    "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                    "items": {
+                      "x-stoplight": {
+                        "id": "f0901g779bkpu"
+                      },
+                      "type": "string"
                     }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Return data for a specific hostname only": {
-                  "value": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
+                  },
+                  "propertyHostnames": {
+                    "type": "array",
+                    "x-stoplight": {
+                      "id": "z1rdwtttsfxyn"
+                    },
+                    "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                    "items": {
+                      "x-stoplight": {
+                        "id": "4r9g1liwn5m83"
+                      },
+                      "type": "string"
                     }
                   }
                 }
@@ -24207,6 +24243,19 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "lqxm2c3pw8i4o"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "m1663kd95zi89"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -24423,6 +24472,19 @@
                         "type": "array",
                         "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "2ahs2gd9fedy5"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "x3l9wy5zc03qr"
+                          },
                           "type": "string"
                         }
                       }
@@ -25791,7 +25853,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
-                    "description": "Filter results by specifying hostnames or server groups.",
+                    "description": "Filter results by specifying hostnames, server groups, or property hostnames.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -25814,6 +25876,19 @@
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "nxltuijj3k8kc"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "sh7xgsk607hna"
+                          },
+                          "type": "string"
                         }
                       }
                     }
@@ -31350,19 +31425,33 @@
                         "items": {
                           "type": "integer"
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "b2tgrmbucwte0"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "jupf0i5duxcal"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
                         "serverGroups",
-                        "customerIds"
+                        "customerIds",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -31584,7 +31673,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
           }
         ]
       }
@@ -31745,7 +31834,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
                     }
                   }
                 }
@@ -31830,6 +31919,19 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "sgabpxa0ax0a3"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "brqrkoqjvl2br"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
@@ -31842,7 +31944,8 @@
                       "enum": [
                         "hostnames",
                         "serverGroups",
-                        "customerIds"
+                        "customerIds",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -31989,7 +32092,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
                     }
                   }
                 }
@@ -32050,7 +32153,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
           }
         ]
       }
@@ -32364,7 +32467,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
                     }
                   }
                 }
@@ -32447,19 +32550,33 @@
                             "deluxe"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "v7s8exy4v404l"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "lef5ocpzn0e1l"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
                         "serverGroups",
-                        "customerIds"
+                        "customerIds",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -32606,7 +32723,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
                     }
                   }
                 }
@@ -32667,7 +32784,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
           }
         ]
       }
@@ -32904,19 +33021,33 @@
                             "ChinaPremium"
                           ]
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "ca0kvexzomn89"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "qihaigfsh9fmo"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
                     "maxItems": 2,
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', and 'customerIds'.  Only resellers can specify 'customerIds'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', and 'propertyHostnames'.  Only resellers can specify 'customerIds'.",
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
                         "serverGroups",
-                        "customerIds"
+                        "customerIds",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -33133,7 +33264,7 @@
             },
             "in": "query",
             "name": "groupby",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
           },
           {
             "schema": {
@@ -34519,8 +34650,14 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "x-stoplight": {
+                          "id": "2ft1h9g17tv0y"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.\n",
                         "items": {
+                          "x-stoplight": {
+                            "id": "q1s9vg72rmopa"
+                          },
                           "type": "string"
                         }
                       },
