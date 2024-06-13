@@ -589,7 +589,6 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 1. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
 2. CDN Pro 采用了[分层缓存结构](/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
- If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
 3. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
 
 *   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
@@ -614,10 +613,10 @@ origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Clien
 proxy_no_cache 1;      # 不要缓存
 proxy_cache_bypass 1;  # 不使用缓存文件响应客户
 # 将客户端的If-Modified-Since请求头传递给源站
-origin_set_header If-Modified-Since $http_if_modified_since;
+origin_set_header If-Modified-Since $http_if_modified_since flag=any;
 origin_pass My-Dynamic-Origin;
 ```
-由于本指令对发往父节点的请求不生效，您需要将源站配置里的"direct connection"选项设为"always direct"来确保边缘服务器会直接联系源站。否则发往父节点的请求仍会缺失这些头部。
+请注意这里 `flag=any` 参数是必须的，否则发往父节点的请求不会携带 `If-Modified-Since`，导致父节点回源也不会携带。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
