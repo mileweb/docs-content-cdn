@@ -614,7 +614,7 @@ proxy_cache_bypass 1;
 origin_set_header If-Modified-Since $http_if_modified_since flag=any;
 origin_pass My-Dynamic-Origin;
 ```
-Note that the `flag=any` parameter is necessary in this case, otherwise the `If-Modified-Since` header won't appear in the requests to parent server, hence won't be forwarded to the origin as desired.
+Note that the `flag=any` parameter is necessary in this case. Otherwise the `If-Modified-Since` header won't appear in the requests to the parent servers, hence won't be forwarded to the origin as desired.
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
