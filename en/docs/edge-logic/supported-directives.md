@@ -579,14 +579,14 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:**  `origin_set_header field value if(condition);` <br/>
+**Syntax:**  `origin_set_header field value [flag=any if(condition)];` <br/>
 **Default:** `none` <br/>
 **Contexts:** server, location, if in location
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
 1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
-2. Because CDN Pro has a hierarchical cache structure, we try to make sure the headers set by this directive appear only in the requests to the origin servers (not parent cache servers).
+2. CDN Pro has a [hierarchical cache structure](/cdn/docs/edge-logic/paths-to-origins). By default, the headers set by this directive appear only in the requests to the origin servers. If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
 3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
@@ -611,10 +611,10 @@ origin_set_header X-Client-IP $client_real_ip;
 proxy_no_cache 1;      # do not cache
 proxy_cache_bypass 1;
 # pass the If-Modified-Since field from client to the origin
-origin_set_header If-Modified-Since $http_if_modified_since;
+origin_set_header If-Modified-Since $http_if_modified_since flag=any;
 origin_pass My-Dynamic-Origin;
 ```
-Because this directive does not affect the requests to parent servers, you need to set the origin's "direct connection" option to "always direct" to make sure the edge servers contact the origin directly. Otherwise the header field will be missing in any requests sent to the parent servers.
+Note that the `flag=any` parameter is necessary in this case. Otherwise the `If-Modified-Since` header won't appear in the requests to the parent servers, hence won't be forwarded to the origin as desired.
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -1193,7 +1193,12 @@ This feature is implemented on top of this [open-source project](https://github.
 **Default:** `—` <br/>
 **Context:** server, location
 
-Sets a string to replace in the response and a replacement string. No change to the public version. Note that when the response is compressed, the search and replace may not work as desired.
+Sets a string to replace in the response and a replacement string. There is no change to the public version. Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
+```nginx
+  # clear the Accept-Encoding field in the request header to parent and origin
+  origin_set_header accept-encoding '' flag=any;
+  sub_filter 'match-string' 'replacement string';
+```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
 

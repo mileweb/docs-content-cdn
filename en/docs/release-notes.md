@@ -1,5 +1,10 @@
 # Release Notes
 
+## June 11, 2024
+#### API updates
+* Added support for filtering and grouping by property hostnames to additional report APIs.
+* Ensured edge hostname history includes status fields.
+
 ## May 31, 2024
 
 #### API updates
