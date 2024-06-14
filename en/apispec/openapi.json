@@ -31305,7 +31305,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-			"message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
                     }
                   },
                   "Invalid timespan": {
