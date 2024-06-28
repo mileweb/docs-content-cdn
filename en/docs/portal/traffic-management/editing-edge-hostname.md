@@ -4,10 +4,11 @@
 2. Click the edge hostname you want to edit. 
     <br><U>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the edge hostname you want to edit, and then select **Edit**.
-3. At the top right of the page, click the **Edit** button.
+3. At the top right of the page, click the **Clone** button.
+
+<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form" width="700"></p>
 
 The Edge Hostname form appears for creating, editing, and deleting client zone rules. For more information, refer to the topics below.
-<p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form" width="700"></p>
 
 4. To create one or more client zone rules, perform the following steps.
 

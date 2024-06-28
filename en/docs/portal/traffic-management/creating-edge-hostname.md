@@ -33,7 +33,7 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN Pro will redirect your traffic. |
 | Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional to the weight specified here. |
 
-5. Click the **Create Edge Hostname** button.
+5. Click the **Create Edge Hostname** button. It can take a minute for the new edge hostname to be ready.
 6. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created edge hostname.
 
 ## About Server Groups
