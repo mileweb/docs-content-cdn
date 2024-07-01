@@ -4,7 +4,7 @@
 2. Click the edge hostname you want to edit. 
     <br><U>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the edge hostname you want to edit, and then select **Edit**.
-3. “At the top of the page, select an entry in the edge hostname’s history on which to base your updates, and click the **Clone** button.
+3. At the top of the page, select an entry in the edge hostname’s history on which to base your updates, and click the **Clone** button.
 
 <p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form" width="700"></p>
 
