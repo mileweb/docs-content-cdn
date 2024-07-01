@@ -4,16 +4,16 @@
 2. Click the edge hostname you want to edit. 
     <br><U>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the edge hostname you want to edit, and then select **Edit**.
-3. At the top right of the page, click the **Clone** button.
+3. “At the top of the page, select an entry in the edge hostname’s history on which to base your updates, and click the **Clone** button.
 
 <p align=center><img src="/docs/resources/images/traffic-management/traffic-management-edit-edge-hostname.png" alt="edit cname form" width="700"></p>
 
-The Edge Hostname form appears for creating, editing, and deleting client zone rules. For more information, refer to the topics below.
+The Edge Hostname form appears for creating, editing, and deleting client zone rules. For more information, refer to the topics below.
 
 4. To create one or more client zone rules, perform the following steps.
 
 <ul>a. At the top right of the page, click the <strong>Create Client Zone Rule</strong> button.</ul>
-<ul>b. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button.</ul>
+<ul>b. Complete all the fields, and then click the <strong>Create Client Zone Rule</strong> button.</ul>
 <ul>c. To add more client zone rules, repeat this step for each additional rule.</ul>
 
 <p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="create client region rule" width="550"></p>
@@ -45,6 +45,6 @@ The Edge Hostname form appears for creating, editing, and deleting client zone 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
 7. Click **Update**.
-8. When a message confirms that the edge hostname was updated, click **OK**.
+8. When a message confirms that the edge hostname was updated, click **OK**.
 9.  Click **Close** to return to the main page.
 
