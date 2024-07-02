@@ -45,6 +45,6 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
 7. Click **Update**.
-8. When a message confirms that the edge hostname update was accepted, click **OK**. It can take a minute for the udpate to complete.
+8. When a message confirms that the edge hostname update was accepted, click **OK**. It can take a minute for the update to complete.
 9.  Click **Close** to return to the main page.
 
