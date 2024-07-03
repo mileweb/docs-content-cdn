@@ -1,5 +1,16 @@
 # Release Notes
 
+## July 2, 2024
+#### API updates
+* Ensured Edge Logic validation error if the origin_set_header directive is used to set the Host header.
+* Ensured enforcement of a service quota’s hostnameLimit.
+
+#### Console updates
+* Added the Peer Selection Algorithm field to property origins.
+* Updated the edge hostname page to show the history of an edge hostname.
+* Enabled autocomplete option for username in the login page.
+
+
 ## June 11, 2024
 #### API updates
 * Added support for filtering and grouping by property hostnames to additional report APIs.
