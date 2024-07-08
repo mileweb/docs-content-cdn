@@ -308,6 +308,19 @@
                                 "minimum": 0,
                                 "default": 0,
                                 "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
+                              },
+                              "peerSelectionAlgorithm": {
+                                "type": "string",
+                                "x-stoplight": {
+                                  "id": "vd1adbrntml4p"
+                                },
+                                "enum": [
+                                  "round_robin",
+                                  "consistent_hash",
+                                  "sorted_list"
+                                ],
+                                "default": "round_robin",
+                                "description": "This setting controls how the origin server is selected when an origin server's hostname resolves to multiple IP addresses. <table><tr><td>round_robin</td><td> Rotate among the peers sequentially. This is the default setting, which tries to evenly distribute the origin traffic to all the peers.</td></tr><tr><td>consistent_hash</td><td>Distribute the origin traffic based on the hash value of the URL. If the origin server has a cache, this option should help with the hit ratio.</td></tr><tr><td>sorted_list</td><td>Select the peer based on the network quality. When the origin peers are geographically distributed (such as another CDN), this option should help ensure consistent performance.</td></tr></table>"
                               }
                             }
                           }
@@ -1063,6 +1076,19 @@
                           "minimum": 0,
                           "default": 0,
                           "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
+                        },
+                        "peerSelectionAlgorithm": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "vd1adbrntml4p"
+                          },
+                          "enum": [
+                            "round_robin",
+                            "consistent_hash",
+                            "sorted_list"
+                          ],
+                          "default": "round_robin",
+                          "description": "This setting controls how the origin server is selected when an origin server's hostname resolves to multiple IP addresses. <table><tr><td>round_robin</td><td> Rotate among the peers sequentially. This is the default setting, which tries to evenly distribute the origin traffic to all the peers.</td></tr><tr><td>consistent_hash</td><td>Distribute the origin traffic based on the hash value of the URL. If the origin server has a cache, this option should help with the hit ratio.</td></tr><tr><td>sorted_list</td><td>Select the peer based on the network quality. When the origin peers are geographically distributed (such as another CDN), this option should help ensure consistent performance.</td></tr></table>"
                         }
                       }
                     }
@@ -3562,6 +3588,19 @@
                           "minimum": 0,
                           "default": 0,
                           "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
+                        },
+                        "peerSelectionAlgorithm": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "vd1adbrntml4p"
+                          },
+                          "enum": [
+                            "round_robin",
+                            "consistent_hash",
+                            "sorted_list"
+                          ],
+                          "default": "round_robin",
+                          "description": "This setting controls how the origin server is selected when an origin server's hostname resolves to multiple IP addresses. <table><tr><td>round_robin</td><td> Rotate among the peers sequentially. This is the default setting, which tries to evenly distribute the origin traffic to all the peers.</td></tr><tr><td>consistent_hash</td><td>Distribute the origin traffic based on the hash value of the URL. If the origin server has a cache, this option should help with the hit ratio.</td></tr><tr><td>sorted_list</td><td>Select the peer based on the network quality. When the origin peers are geographically distributed (such as another CDN), this option should help ensure consistent performance.</td></tr></table>"
                         }
                       }
                     }
@@ -4250,6 +4289,19 @@
                               "minimum": 0,
                               "default": 0,
                               "description": "Defines the maximum number of simultaneous connections to the origin. The default is '0', which indicates connections are unlimited."
+                            },
+                            "peerSelectionAlgorithm": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "vd1adbrntml4p"
+                              },
+                              "enum": [
+                                "round_robin",
+                                "consistent_hash",
+                                "sorted_list"
+                              ],
+                              "default": "round_robin",
+                              "description": "This setting controls how the origin server is selected when an origin server's hostname resolves to multiple IP addresses. <table><tr><td>round_robin</td><td> Rotate among the peers sequentially. This is the default setting, which tries to evenly distribute the origin traffic to all the peers.</td></tr><tr><td>consistent_hash</td><td>Distribute the origin traffic based on the hash value of the URL. If the origin server has a cache, this option should help with the hit ratio.</td></tr><tr><td>sorted_list</td><td>Select the peer based on the network quality. When the origin peers are geographically distributed (such as another CDN), this option should help ensure consistent performance.</td></tr></table>"
                             }
                           }
                         }
@@ -8135,6 +8187,38 @@
                     "value": {
                       "code": "InvalidCertificateId",
                       "message": "An invalid certificate ID was specified: 'invalid'."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The request was forbidden. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "qum6rwipntnwc"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "tbqk6jh5nvi0j"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Too many hostnames": {
+                    "value": {
+                      "code": "TooManyHostnames",
+                      "message": "The number of hostnames exceeded the account maximum."
                     }
                   }
                 }
