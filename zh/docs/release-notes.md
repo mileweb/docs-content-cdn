@@ -1,5 +1,17 @@
 # Release Notes
 
+## July 16, 2024
+#### API updates
+* Allowed up to 10 custom log fields in [log configurations](</apidocs#operation/post-cdn-report-logConfigs>).
+* Added support for [deletion of the latest certificate version](</apidocs#operation/delete-cdn-certificates-certificateID-latest>).
+* Fixed issue with hostnames API returning an error.
+* Updated [request summary report API](</apidocs#operation/post-cdn-report-reqSummary>) to return intermediate and origin request data.
+* Rejected [deployment tasks](</apidocs#operation/createDeployment>) of properties or certificates if they are already being removed.
+
+#### Console updates
+* Improved DNS-01 certificate creation.
+* Enabled property version descriptions to be up to 10000 characters in length.
+
 ## July 2, 2024
 #### API updates
 * Ensured Edge Logic validation error if the origin_set_header directive is used to set the Host header.
