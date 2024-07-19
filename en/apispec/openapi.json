@@ -22637,7 +22637,6 @@
                         "custom_log_field",
                         "origin_follow_redirect",
                         "sanitize_accept_encoding",
-                        "origin_selection_algorithm",
                         "client_header_timeout",
                         "client_body_timeout",
                         "client_send_timeout",
@@ -30468,7 +30467,7 @@
             }
           }
         },
-        "description": "Create a log configuration used to format the <a href=\"#operation/post-cdn-report-logDownload\">access logs</a> for one or more hostnames. An applicable log configuration must exist for you to obtain logs for a hostname.",
+        "description": "Create a log configuration used to format the <a href=\"#operation/post-cdn-report-logDownload\">access logs</a> for one or more hostnames. An applicable log configuration must exist for you to obtain logs for a hostname. It can take up to 40 minutes for the log configuration to take effect.",
         "tags": [
           "Log Configuration Management"
         ],
@@ -30804,7 +30803,7 @@
           }
         },
         "operationId": "patch-cdn-report-logConfigs-id",
-        "description": "Update a log configuration's settings.",
+        "description": "Update a log configuration's settings. It can take up to 40 minutes for the revision to take effect.",
         "requestBody": {
           "content": {
             "application/json": {

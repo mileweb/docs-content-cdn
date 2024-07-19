@@ -1,5 +1,10 @@
 # Release Notes
 
+## July 18, 2024
+#### API updates
+* Updated password expiration email logic.
+* Fixed incorrect validation finishTime issue.
+
 ## July 16, 2024
 #### API updates
 * Allowed up to 10 custom log fields in [log configurations](</apidocs#operation/post-cdn-report-logConfigs>).
