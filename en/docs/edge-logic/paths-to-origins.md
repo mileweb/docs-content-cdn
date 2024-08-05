@@ -16,7 +16,7 @@ The origin will be accessed only when the parent is also missing the object.
 Based on geography and ISP, our global PoPs are organized into a few "cache zones", with each zone having its own group of designated parent servers.
 In case of a cache miss at the edge, a parent within the zone is chosen based on the consistent hash of the object's cache key.
 As a result, each object will only be fetched once from the origin by each cache zone.
-To enable the parent cache for an origin, you need to configure its "directConnect" field to "noDirect" in the property JSON. Here is how to do this on the portal:
+To enable the parent cache for an origin, you need to configure its "directConnection" field to "noDirect" in the property JSON. Here is how to do this on the portal:
 <p align=center><img src="/docs/edge-logic/origin-no-direct.png" alt="always use a parent" width="400"></p>
 If it is very important to keep the origin traffic at the minimum possible level, you can enable the "origin shield". This advanced feature essentially
 creates a mirror of the origin such that each object will only be accessed once.
@@ -30,14 +30,14 @@ If you require this feature, please contact our support team.
 For dynamic content that are not cacheable, such as API calls or interactive data of an app, we need to send/fetch as quickly as possible to/from the origin.
 A direct connection from the edge to the origin almost always results in the smallest latency.
 An intermediate server may provide some routing advantage in some cases, but the extra processing time usually kills it.
-So if you know an origin is used for dynamic content, you should configure its "directConnect" field to "alwaysDirect" for best performance:
+So if you know an origin is used for dynamic content, you should configure its "directConnection" field to "alwaysDirect" for best performance:
 <p align=center><img src="/docs/edge-logic/origin-always-direct.png" alt="always go directly to origin" width="400"></p>
 
-Please note that the setting of "directConnect" is respected with best effort only. In extreme cases when none of the parent servers is available, edge servers will try the origin directly, even if the setting is "noDirect". Likewise, when an origin is not accessible directly, edge servers might retry a parent server, even if the setting is "alwaysDirect". The directive [`upstream_origin_only`](/docs/edge-logic/supported-directives#upstream_origin_only) can be used in the edge logic to strictly avoid access to any parent server.
+Please note that the setting of "directConnection" is respected with best effort only. In extreme cases when none of the parent servers is available, edge servers will try the origin directly, even if the setting is "noDirect". Likewise, when an origin is not accessible directly, edge servers might retry a parent server, even if the setting is "alwaysDirect". The directive [`upstream_origin_only`](/docs/edge-logic/supported-directives#upstream_origin_only) can be used in the edge logic to strictly avoid access to any parent server.
 
 ### Origin with Mixed Content
 
-If you have an origin that serves both static and dynamic content, your best choice is to configure its "directConnect" to "auto".
+If you have an origin that serves both static and dynamic content, your best choice is to configure its "directConnection" to "auto".
 In this mode, the edge servers will dynamically decide if a parent needs to be tried based on the cacheability of the request.
 You will need to specify the rules in the edge logic for the server to determine if a request is cacheable or not.
 This is done through the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive.
