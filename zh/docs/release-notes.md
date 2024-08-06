@@ -8,7 +8,7 @@
 
 #### Console updates
 * Allowed report users to filter and group by property hostnames.
-* Limited reports users to grouping by up to two items.
+* Limited report users to group by up to two items for summary reports.
 * Rejected use of an origin shield unless ‘Direct Connection’ is set to ‘No Direct’.
 
 
