@@ -1,5 +1,17 @@
 # Release Notes
 
+## August 2, 2024
+#### API updates
+* Fixed accuracy of [validation task](</apidocs#operation/queryValidationTask>)’s finishTime.
+* Restricted wildcard certificates to supporting subdomains at the same level as the wildcard hostname.
+* Improved error handling of [deployment task creation](</apidocs#operation/createDeployment>).
+
+#### Console updates
+* Allowed report users to filter and group by property hostnames.
+* Limited report users to group by up to two items for summary reports.
+* Rejected use of an origin shield unless ‘Direct Connection’ is set to ‘No Direct’.
+
+
 ## July 18, 2024
 #### API updates
 * Updated password expiration email logic.

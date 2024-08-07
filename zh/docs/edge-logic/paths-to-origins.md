@@ -14,7 +14,7 @@ CDN 缓存除了实现加速效果，还大大降低了源站服务器的负载�
 我们把全球的节点按照地理位置和运营商划分成了若干个“缓存大区”，每个大区内都有一组独立的父节点。
 当一个请求在边缘未命中缓存时，边缘服务器会根据缓存key通过一致性哈希算法来选取一个本大区内的父节点。这样的机制可以确保同样的内容在每个大区只会
 产生一次回源请求。
-要启用父级缓存、减少回源，您需要将源站配置中的“直接连接”配置项设置为“不直连”。下图展示了如何在控制台上做该项配置：
+要启用父级缓存、减少回源，您需要将源站配置中的“直接连接”配置项(JSON配置里的directConnection字段)设置为“不直连”。下图展示了如何在控制台上做该项配置：
 <p align=center><img src="/docs/edge-logic/origin-no-direct.png" alt="始终使用父节点" width="400"></p>
 
 如果要进一步控制回源流量，您可以启用“源站Shield”。使用这个功能，相当于创建了一个源站的镜像，确保每个文件只会被访问一次。
@@ -88,7 +88,7 @@ if ($result = 0) {
 #### 源站相关配置
 * "IP选择算法（peerSelectionAlgorithm）" 配置项可以设置回源选择算法。使用"轮询"可以平衡源站服务器的负载,
 使用"性能优先"可以获得最好的连接性能, 而"一致性哈希"可以最大限度地利用源站的缓存。
-* "IP失败挂起（peerFailureTimeout）" 配置项可以设置当源站的一些IP地址不可用的时候进行重试和挂起的策略。
+* "失败IP挂起（peerFailureTimeout）" 配置项可以设置当源站的一些IP地址"不可用"的时候进行重试和挂起的策略。
 <p align=center><img src="/docs/edge-logic/origin-peer-failure-timeout.png" alt="降低重试源站的不可用IP" width="300"></p>
 
 "不可用"或者"unsuccessful attempt"的定义是由 [`proxy_next_upstream`](</docs/edge-logic/supported-directives#proxy_next_upstream>) 指令来确定的。这个指令本身也可以用来提高对源站的容错性能。
