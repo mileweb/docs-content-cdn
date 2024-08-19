@@ -112,7 +112,7 @@ proxy_ignore_headers Vary;
 
 ### 中国大陆加速以及备案相关
 
-按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN Pro 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被关停。作为客户，您需要提前为计划在中国大陆进行本地分发的域申请并和获取备案。当然，在这个过程中 CDN Pro 可以供相应的咨询服务来进行协助。在您的域名取得备案之前，CDN Pro 可以使用Near China专线或临近中国大陆（例如香港、韩国或者日本等等）的服务器向中大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
+按照中华人民共和国工业和信息化部（MIIT）的需求，所有使用中国大陆节点的域名都需要提前进行备案（[ICP Beian (备案)](https://beian.miit.gov.cn/)）。部分域名还需要进行额外的[安全备案](https://www.beian.gov.cn/)。 作为 CDN 分发平台，CDN Pro 无法使用中国大陆节点来服务未备案域名。任何违规行为都可能导致我们在中国大陆的服务器被关停。作为客户，您需要提前为计划在中国大陆进行本地分发的域名申请并获取备案。当然，在这个过程中 CDN Pro 可以提供相应的咨询服务来进行协助。在您的域名取得备案之前，CDN Pro 可以使用Near China专线或临近中国大陆（例如香港、韩国或者日本等等）的服务器向中国大陆的客户分发内容，但是这样的分发方式与中国大陆本地服务器相比，性能上会有一定差距。
 
 #### 有ICP备案域名中国大陆加速
 
@@ -132,7 +132,7 @@ proxy_ignore_headers Vary;
 
 您可以在希望开启 WebSocket 协议的location下使用指令 [`enable_websocket`](</docs/edge-logic/supported-directives.md#enable_websocket>)。需要确保客户端使用的是 HTTP/1.1（非 HTTP/2）协议来与服务器建连。该指令默认会将读取和发送超时时间设置为21秒。你可以通过[`origin_read_timeout`](</docs/edge-logic/supported-directives.md#origin_read_timeout>) 和 [`origin_send_timeout`](</docs/edge-logic/supported-directives.md#origin_send_timeout>) 这两个指令对其进行修改。
 
-### 动态文件的支持情况?
+### 动态文件能通过CDN Pro加速吗?
 
 动态内容通常是针对每个请求即时生成，并且对于不同的客户端的响应是不同的。部分示例如下：
 * 实时股价、体育比赛比分查询
@@ -157,6 +157,7 @@ CDN Pro 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directive
 然而，如果您要加速的域名是二级域名，即不包含子域名的域名（例如，example.com），由于DNS规范的限制（请参阅 [RFC1034](https://www.ietf.org/rfc/rfc1034.txt) 3.6.2章节)，可能无法为二级域名创建CNAME记录。这种情况下，您可以使用我们的anycast功能。我们将会提供anycast IPv4 地址，您只需在DNS中添加A记录将您的二级域名指向anycast地址即可。目前，anycast功能未默认开放。如果您想使用此功能，请联系我们的技术支持团队开通。
 
 需要注意的是，每个anycast IP地址仅在少数几个节点广播，每个地址广播的节点范围可能会经常变化，且不会提前通知。因此，anycast地址所对应的服务性能和服务能力，与调度域名没有可比性。请尽可能使用调度域名来进行流量调度。只有当加速域名是二级域名才使用anycast功能。加速项目的配置也应尽量简单，通常就是将请求重定向到一个三级域名，比如 www 页面。
+<p align=center><img src="redirect-apex-domain.png" alt="重定向二级域名" width="700"></p>
 
 ### CDN Pro API 如何限制调用频率?
 
