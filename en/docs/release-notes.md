@@ -1,5 +1,17 @@
 # Release Notes
 
+## August 21, 2024
+#### API updates
+* Ensured that only edge requests are counted when checking if a hostname being undeployed has been recently used.
+* Permit only line feeds and carriage returns with line feeds to be used as line breaks in certificates.
+* Fixed issue with request report API when 'Report-Range: self+children' is used.
+
+### Console updates
+* Added option allowing users to select the public key algorithm when creating a certificate. ECC256 is recommended.
+* Improved error handling when undeploying a certificate that is still in use.
+* Improved messages shown when the user creates or updates an edge hostname.
+
+
 ## August 2, 2024
 #### API updates
 * Fixed accuracy of [validation task](</apidocs#operation/queryValidationTask>)’s finishTime.

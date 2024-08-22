@@ -156,7 +156,8 @@ Our [CNAME-based traffic management system](</docs/portal/traffic-management/ove
 
 However, if your domain to be accelerated is an apex domain, i.e. a root domain (e.g. example.com) that does not contain a subdomain, adding a CNAME record for the apex domain would become an issue, due to restrictions in the DNS specification (Refer to section 3.6.2 of [RFC1034](https://www.ietf.org/rfc/rfc1034.txt)). This is where our anycast addressing feature comes into play. It provides anycast IPv4 addresses which you can enter into your DNS as A records to point your apex domain to some PoPs of CDN Pro. This feature is currently available on demand. Please contact our support team if you need to use it.
 
-Note that each anycast IP address is broadcast only in a small subset of our global PoPs, and the list of PoPs where anycast is available is subject to changes without prior notice. Therefore, the performance and capacity behind an anycast IP address are not comparable to that of an edge hostname. We recommend using the CNAME-based edge hostnames to route traffic as much as possible. Anycast should be used only for apex domains and the property configuration should be a simple redirection to a non-apex domain, such as the www site.
+Note that each anycast IP address is broadcast only in a small subset of our global PoPs, and the list of PoPs where anycast is available is subject to change without prior notice. Therefore, the performance and capacity behind an anycast IP address are not comparable to that of an edge hostname. We recommend using the CNAME-based edge hostnames to route traffic as much as possible. Anycast should be used only for apex domains and the property configuration should be a simple redirection to a non-apex domain, such as the www subdomain. Here is how to do this on the portal:
+<p align=center><img src="redirect-apex-domain.png" alt="redirect apex domain" width="700"></p>
 
 ### How are CDN Pro API calls rate limited?
 
