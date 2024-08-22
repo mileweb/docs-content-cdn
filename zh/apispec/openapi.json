@@ -5623,6 +5623,12 @@
                       "code": "InvalidInput",
                       "message": "The shareWith cannot be empty."
                     }
+                  },
+                  "Invalid line break": {
+                    "value": {
+                      "code": "InvalidLineBreak",
+                      "message": "'\r' cannot be used as a line break in the certificate field. Only '\n' or '\r\n' are permitted."
+                    }
                   }
                 }
               }
@@ -8316,6 +8322,12 @@
                       "code": "InvalidAction",
                       "message": "certificateId is required for action remove_cert."
                     }
+                  },
+                  "Removing active hostname": {
+                    "value": {
+                      "code": "RemovingActiveHostname",
+                      "message": "The following hostnames are being removed from production, but they still have active requests in the last 24 hours: abc123.com: 250 requests."
+                    }
                   }
                 }
               }
@@ -8605,7 +8617,7 @@
             },
             "in": "header",
             "name": "Check-Usage",
-            "description": "By default, we check if the deployment would result in removal of hostnames which have been recently used as determined by the number of requests to them in the past 24 hours. This safety check is intended to protect against accidentally impacting visitors to your content.  You can pass the <i>Check-Usage: no</i> header to bypass this check."
+            "description": "By default, we check if the deployment would result in removal of hostnames which have been recently used as determined by the number of requests to them in the past 24 hours. If this is the case, the API returns an error with the code 'RemovingActiveHostname'. This safety check is intended to protect against accidentally impacting visitors to your content.  You can pass the <i>Check-Usage: no</i> header to bypass this check."
           }
         ]
       },
@@ -13857,7 +13869,7 @@
           }
         },
         "operationId": "getPurgeRequestList",
-        "description": "Get a list of purge requests. Filter the list by specifying query parameters.",
+        "description": "Get a list of purge requests. Purge records are retained for fifteen days. Filter the list by specifying query parameters.",
         "parameters": [
           {
             "schema": {
@@ -14899,7 +14911,7 @@
             }
           }
         },
-        "description": "Gets information about a purge request including its associated hostnames and status.",
+        "description": "Get information about a purge request including its associated hostnames and status.",
         "operationId": "queryPurgeStatus",
         "parameters": [
           {
@@ -26680,7 +26692,7 @@
           }
         },
         "operationId": "get-cdn-prefetches",
-        "description": "Get a list of prefetch requests. Filter the list by specifying query parameters.",
+        "description": "Get a list of prefetch requests. Prefetch records are retained for fifteen days. Filter the list by specifying query parameters.",
         "parameters": [
           {
             "schema": {
