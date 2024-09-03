@@ -1,8 +1,19 @@
 # Release Notes
 
+## August 30, 2024
+### API updates
+* Updated headers sent to the real-time log feature’s remote server.
+* Improved error handling of log configuration list API in response to invalid parameters.
+* Fixed issue with deleting a certificate version that had not been deployed.
+
+### Console updates
+* In the reports page, we restricted selection of hostnames to a single wildcard hostname or multiple non-wildcard hostnames.
+* Ensured Verifying ACME challenge window of the certificate creation process is closed after a certificate is uploaded.
+
+
 ## August 21, 2024
 #### API updates
-* Ensured that only edge requests are counted when checking if a hostname being undeployed has been recently used.
+* Ensured that only edge requests are counted when checking whether a hostname being undeployed has been recently used.
 * Permit only line feeds and carriage returns with line feeds to be used as line breaks in certificates.
 * Fixed issue with request report API when 'Report-Range: self+children' is used.
 
