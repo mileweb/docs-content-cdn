@@ -1,12 +1,18 @@
 # Release Notes
 
+## September 19, 2024
+#### API updates
+* Fixed error in the [secrets list API](</apidocs#operation/get-cdn-secrets>) handling some characters.
+* Limited an edge hostname’s client zone rule to redirect to up to 15 IP addresses.
+
+
 ## August 30, 2024
-### API updates
+#### API updates
 * Updated headers sent to the real-time log feature’s remote server.
 * Improved error handling of log configuration list API in response to invalid parameters.
 * Fixed issue with deleting a certificate version that had not been deployed.
 
-### Console updates
+#### Console updates
 * In the reports page, we restricted selection of hostnames to a single wildcard hostname or multiple non-wildcard hostnames.
 * Ensured Verifying ACME challenge window of the certificate creation process is closed after a certificate is uploaded.
 
@@ -17,7 +23,7 @@
 * Permit only line feeds and carriage returns with line feeds to be used as line breaks in certificates.
 * Fixed issue with request report API when 'Report-Range: self+children' is used.
 
-### Console updates
+#### Console updates
 * Added option allowing users to select the public key algorithm when creating a certificate. ECC256 is recommended.
 * Improved error handling when undeploying a certificate that is still in use.
 * Improved messages shown when the user creates or updates an edge hostname.
