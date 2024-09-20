@@ -2441,6 +2441,18 @@
                       "code": "InvalidClientZone",
                       "message": "The nearChina server group cannot be used for regions outside mainland China."
                     }
+                  },
+                  "Duplicate redirect IP addresses": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "The field 'to' must not contain duplicate IP addresses."
+                    }
+                  },
+                  "Maximum redirect IP addresses": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "The field 'to' supports a maximum of 15 IP addresses."
+                    }
                   }
                 }
               }
@@ -2731,6 +2743,18 @@
                     "value": {
                       "code": "InvalidClientZone",
                       "message": "The nearChina server group cannot be used for regions outside mainland China."
+                    }
+                  },
+                  "Duplicate redirect IP addresses": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "The field 'to' must not contain duplicate IP addresses."
+                    }
+                  },
+                  "Maximum redirect IP addresses": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "The field 'to' supports a maximum of 15 IP addresses."
                     }
                   }
                 }
@@ -5072,6 +5096,18 @@
                     "value": {
                       "code": "InvalidClientZone",
                       "message": "The nearChina server group cannot be used for regions outside mainland China"
+                    }
+                  },
+                  "Duplicate redirect IP addresses": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "The field 'to' must not contain duplicate IP addresses."
+                    }
+                  },
+                  "Maximum redirect IP addresses": {
+                    "value": {
+                      "code": "InvalidRedirectDst",
+                      "message": "The field 'to' supports a maximum of 15 IP addresses."
                     }
                   }
                 }
