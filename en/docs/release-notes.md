@@ -1,5 +1,12 @@
 # Release Notes
 
+## September 29, 2024
+#### API updates
+* Changed dataNames field in the [request summary report](</apidocs#operation/post-cdn-report-reqSummary>) API's response.
+* Added creationTime and lastUpdateTime to service quota object.
+* Added property version description to deployment notification email.
+
+
 ## September 19, 2024
 #### API updates
 * Fixed error in the [secrets list API](</apidocs#operation/get-cdn-secrets>) handling some characters.
