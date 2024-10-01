@@ -1997,6 +1997,62 @@
                                     "isp"
                                   ]
                                 }
+                              },
+                              "deliverByHttps": {
+                                "title": "deliverByHttps",
+                                "x-stoplight": {
+                                  "id": "fyfechmf9xy36"
+                                },
+                                "type": "string",
+                                "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                                "properties": {
+                                  "state": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "v5ba3d6ze0otf"
+                                    },
+                                    "enum": [
+                                      "on",
+                                      "off"
+                                    ],
+                                    "description": "Whether to advertise the HTTPS support through a DNS record."
+                                  },
+                                  "alpn": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "0bfghcz48z9d2"
+                                    },
+                                    "enum": [
+                                      "h2",
+                                      "h3",
+                                      "h2,h3"
+                                    ],
+                                    "description": "Indicates the supported protocols. <table><tr><th>Value</th><th>Description</td></tr><tr><td>h2</td><td>Supports HTTP/2 </td></tr><tr><td>h3</td><td>Supports HTTP/3</td></tr><tr><td>h2,h3</td><td>Supports both HTTP/2 and HTTP3</td></tr></table>This field is required if <i>state</i> is set to 'on' and ignored if it is set to 'off'."
+                                  },
+                                  "port": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "lf60mtmbbzzga"
+                                    },
+                                    "minimum": 80,
+                                    "maximum": 65535,
+                                    "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
+                                    "default": 443
+                                  },
+                                  "ttl": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "hc2ikcyq9brau"
+                                    },
+                                    "minimum": 60,
+                                    "maximum": 86400,
+                                    "default": 1800,
+                                    "description": "Number of seconds the DNS record is valid.  This field is ignored if <i>state</i> is set to 'off'."
+                                  }
+                                },
+                                "required": [
+                                  "state"
+                                ]
                               }
                             }
                           },
@@ -2187,6 +2243,62 @@
                         "estimatedBandwidth": {
                           "type": "string",
                           "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                        },
+                        "deliverByHttps": {
+                          "title": "deliverByHttps",
+                          "x-stoplight": {
+                            "id": "b5upebnysbdde"
+                          },
+                          "type": "object",
+                          "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                          "properties": {
+                            "state": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "v5ba3d6ze0otf"
+                              },
+                              "enum": [
+                                "on",
+                                "off"
+                              ],
+                              "description": "Whether to advertise the HTTPS support through a DNS record."
+                            },
+                            "alpn": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "0bfghcz48z9d2"
+                              },
+                              "enum": [
+                                "h2",
+                                "h3",
+                                "h2,h3"
+                              ],
+                              "description": "Indicates the supported protocols. <table><tr><th>Value</th><th>Description</td></tr><tr><td>h2</td><td>Supports HTTP/2 </td></tr><tr><td>h3</td><td>Supports HTTP/3</td></tr><tr><td>h2,h3</td><td>Supports both HTTP/2 and HTTP3</td></tr></table>This field is required if <i>state</i> is set to 'on' and ignored if it is set to 'off'."
+                            },
+                            "port": {
+                              "type": "integer",
+                              "x-stoplight": {
+                                "id": "lf60mtmbbzzga"
+                              },
+                              "minimum": 80,
+                              "maximum": 65535,
+                              "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
+                              "default": 443
+                            },
+                            "ttl": {
+                              "type": "integer",
+                              "x-stoplight": {
+                                "id": "hc2ikcyq9brau"
+                              },
+                              "minimum": 60,
+                              "maximum": 86400,
+                              "default": 1800,
+                              "description": "Number of seconds the DNS record is valid.  This field is ignored if <i>state</i> is set to 'off'."
+                            }
+                          },
+                          "required": [
+                            "state"
+                          ]
                         }
                       }
                     }
@@ -2453,6 +2565,18 @@
                       "code": "InvalidRedirectDst",
                       "message": "The field 'to' supports a maximum of 15 IP addresses."
                     }
+                  },
+                  "Invalid alpn": {
+                    "value": {
+                      "code": "InvalidAlpn",
+                      "message": "The alpn for deliverByHttps must be “h2”, “h3” or “h2,h3”."
+                    }
+                  },
+                  "Invalid port": {
+                    "value": {
+                      "code": "InvalidPort",
+                      "message": "The port for deliverByHttps must be an integer in [80,65535]."
+                    }
                   }
                 }
               }
@@ -2650,6 +2774,62 @@
                   "estimatedBandwidth": {
                     "type": "string",
                     "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                  },
+                  "deliverByHttps": {
+                    "title": "deliverByHttps",
+                    "x-stoplight": {
+                      "id": "b5upebnysbdde"
+                    },
+                    "type": "object",
+                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "v5ba3d6ze0otf"
+                        },
+                        "enum": [
+                          "on",
+                          "off"
+                        ],
+                        "description": "Whether to advertise the HTTPS support through a DNS record."
+                      },
+                      "alpn": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "0bfghcz48z9d2"
+                        },
+                        "enum": [
+                          "h2",
+                          "h3",
+                          "h2,h3"
+                        ],
+                        "description": "Indicates the supported protocols. <table><tr><th>Value</th><th>Description</td></tr><tr><td>h2</td><td>Supports HTTP/2 </td></tr><tr><td>h3</td><td>Supports HTTP/3</td></tr><tr><td>h2,h3</td><td>Supports both HTTP/2 and HTTP3</td></tr></table>This field is required if <i>state</i> is set to 'on' and ignored if it is set to 'off'."
+                      },
+                      "port": {
+                        "type": "integer",
+                        "x-stoplight": {
+                          "id": "lf60mtmbbzzga"
+                        },
+                        "minimum": 80,
+                        "maximum": 65535,
+                        "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
+                        "default": 443
+                      },
+                      "ttl": {
+                        "type": "integer",
+                        "x-stoplight": {
+                          "id": "hc2ikcyq9brau"
+                        },
+                        "minimum": 60,
+                        "maximum": 86400,
+                        "default": 1800,
+                        "description": "Number of seconds the DNS record is valid.  This field is ignored if <i>state</i> is set to 'off'."
+                      }
+                    },
+                    "required": [
+                      "state"
+                    ]
                   }
                 },
                 "required": [
@@ -2755,6 +2935,18 @@
                     "value": {
                       "code": "InvalidRedirectDst",
                       "message": "The field 'to' supports a maximum of 15 IP addresses."
+                    }
+                  },
+                  "Invalid alpn": {
+                    "value": {
+                      "code": "InvalidAlpn",
+                      "message": "The alpn for deliverByHttps must be “h2”, “h3” or “h2,h3”."
+                    }
+                  },
+                  "Invalid port": {
+                    "value": {
+                      "code": "InvalidPort",
+                      "message": "The port for deliverByHttps must be an integer in [80,65535]."
                     }
                   }
                 }
@@ -2949,6 +3141,62 @@
                   "estimatedBandwidth": {
                     "type": "string",
                     "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                  },
+                  "deliverByHttps": {
+                    "title": "deliverByHttps",
+                    "x-stoplight": {
+                      "id": "b5upebnysbdde"
+                    },
+                    "type": "object",
+                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "v5ba3d6ze0otf"
+                        },
+                        "enum": [
+                          "on",
+                          "off"
+                        ],
+                        "description": "Whether to advertise the HTTPS support through a DNS record."
+                      },
+                      "alpn": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "0bfghcz48z9d2"
+                        },
+                        "enum": [
+                          "h2",
+                          "h3",
+                          "h2,h3"
+                        ],
+                        "description": "Indicates the supported protocols. <table><tr><th>Value</th><th>Description</td></tr><tr><td>h2</td><td>Supports HTTP/2 </td></tr><tr><td>h3</td><td>Supports HTTP/3</td></tr><tr><td>h2,h3</td><td>Supports both HTTP/2 and HTTP3</td></tr></table>This field is required if <i>state</i> is set to 'on' and ignored if it is set to 'off'."
+                      },
+                      "port": {
+                        "type": "integer",
+                        "x-stoplight": {
+                          "id": "lf60mtmbbzzga"
+                        },
+                        "minimum": 80,
+                        "maximum": 65535,
+                        "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
+                        "default": 443
+                      },
+                      "ttl": {
+                        "type": "integer",
+                        "x-stoplight": {
+                          "id": "hc2ikcyq9brau"
+                        },
+                        "minimum": 60,
+                        "maximum": 86400,
+                        "default": 1800,
+                        "description": "Number of seconds the DNS record is valid.  This field is ignored if <i>state</i> is set to 'off'."
+                      }
+                    },
+                    "required": [
+                      "state"
+                    ]
                   }
                 }
               },
@@ -5109,6 +5357,24 @@
                       "code": "InvalidRedirectDst",
                       "message": "The field 'to' supports a maximum of 15 IP addresses."
                     }
+                  },
+                  "Invalid state": {
+                    "value": {
+                      "code": "InvalidState",
+                      "message": "The state for deliverByHttps must be either “on” or “off”."
+                    }
+                  },
+                  "Invalid alpn": {
+                    "value": {
+                      "code": "InvalidAlpn",
+                      "message": "The alpn for deliverByHttps must be “h2”, “h3” or “h2,h3”."
+                    }
+                  },
+                  "Invalid port": {
+                    "value": {
+                      "code": "InvalidPort",
+                      "message": "The port for deliverByHttps must be an integer in [80,65535]."
+                    }
                   }
                 }
               }
@@ -5304,8 +5570,67 @@
                   "estimatedBandwidth": {
                     "type": "string",
                     "description": "An estimate of the bandwidth required to serve content using this edge hostname. Units of measurement should be in Tbps, Gbps, Mbps, or kbps. Example: 100Gbps"
+                  },
+                  "deliverByHttps": {
+                    "title": "deliverByHttps",
+                    "x-stoplight": {
+                      "id": "b5upebnysbdde"
+                    },
+                    "type": "object",
+                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "v5ba3d6ze0otf"
+                        },
+                        "enum": [
+                          "on",
+                          "off"
+                        ],
+                        "description": "Whether to advertise the HTTPS support through a DNS record."
+                      },
+                      "alpn": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "0bfghcz48z9d2"
+                        },
+                        "enum": [
+                          "h2",
+                          "h3",
+                          "h2,h3"
+                        ],
+                        "description": "Indicates the supported protocols. <table><tr><th>Value</th><th>Description</td></tr><tr><td>h2</td><td>Supports HTTP/2 </td></tr><tr><td>h3</td><td>Supports HTTP/3</td></tr><tr><td>h2,h3</td><td>Supports both HTTP/2 and HTTP3</td></tr></table>This field is required if <i>state</i> is set to 'on' and ignored if it is set to 'off'."
+                      },
+                      "port": {
+                        "type": "integer",
+                        "x-stoplight": {
+                          "id": "lf60mtmbbzzga"
+                        },
+                        "minimum": 80,
+                        "maximum": 65535,
+                        "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
+                        "default": 443
+                      },
+                      "ttl": {
+                        "type": "integer",
+                        "x-stoplight": {
+                          "id": "hc2ikcyq9brau"
+                        },
+                        "minimum": 60,
+                        "maximum": 86400,
+                        "default": 1800,
+                        "description": "Number of seconds the DNS record is valid.  This field is ignored if <i>state</i> is set to 'off'."
+                      }
+                    },
+                    "required": [
+                      "state"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "clientZones"
+                ]
               },
               "examples": {
                 "example-1": {
@@ -22373,7 +22698,7 @@
                   ]
                 },
                 "examples": {
-                  "example-1": {
+                  "Details of a successful API call": {
                     "value": {
                       "requestHeaders": [
                         "sec-fetch-dest:empty",
@@ -22413,6 +22738,59 @@
                       "apiRequestId": "bf9bdb402ef4eaf5",
                       "clientIp": "123.45.67.89",
                       "apiName": "mycompanyapiname"
+                    }
+                  },
+                  "Details of a failed API call": {
+                    "value": {
+                      "requestHeaders": [
+                        "host:ngapi.cdnetworks.com",
+                        "sec-ch-ua:",
+                        "content-type:application/json",
+                        "sec-ch-ua-mobile:?0",
+                        "user-agent:Mozilla/5.0 (Windows NT 6.3; Win64; x64)  AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/105.0.5195.102 Safari/537.36",
+                        "contact-id:26394",
+                        "sec-ch-ua-platform:",
+                        "accept:application/json",
+                        "origin:https://console-integration.quantil.com",
+                        "sec-fetch-site:same-origin",
+                        "sec-fetch-mode:cors",
+                        "sec-fetch-dest:empty",
+                        "referer:https://console.cdnetworks.com/cdn/certificates?limit=10&autoRenew=&pageNumber=1&sortOrder=&target=all&sortBy=&search=Deletable",
+                        "accept-language:en-US",
+                        "x-ws-ttl:10",
+                        "cdn-src-ip:123.56.78.90",
+                        "x-ws-request-id:66f3a110_VM-HKG-01u2Y234_29855-16602",
+                        "x-cdn-src-port:55784",
+                        "accept-encoding:gzip",
+                        "x-via:1.1 ny57:4 (Cdn Cache Server V2.0)",
+                        "x-cloud-trace-context:447327b7ab0e4ea726afeed5b0eb5ba0/8939112450530357663",
+                        "x-forwarded-proto:https",
+                        "authorization :[HIDDEN]",
+                        "date:Wed, 25 Sep 2024 05:35:12 UTC",
+                        "content-length:213",
+                        "cookie:GCLB=COeP5p6Rq7HMwQEQAw; connect.sid=s%3Avwv0GbSJSO5SWlWaXKnrBZOUJWtKwGAg.Ae2NFsU0baT%2BmeG%2BDOSPUtc0jJKGr6eT%2F%2BhWwF%2FQUxA",
+                        "via:1.1 google, 1.1 google",
+                        "x-forwarded-for:163.171.236.156, 157.185.170.61, 35.241.43.180, 104.198.165.181, 35.241.43.180",
+                        "connection:Keep-Alive"
+                      ],
+                      "requestBody": "{\"name\":\"Undeploy certificate 'deletable'\",\"actions\":[{\"action\":\"remove_cert\",\"certificateId\":\"1a8a0716e7d56a98bcc9e61b\",\"version\":1}],\"target\":\"production\"}",
+                      "requestURL": "https://ngapi.cdnetworks.com/cdnapi/deploymentTasks",
+                      "requestMethod": "POST",
+                      "requestTimestamp": "2024-09-25T05: 35:12Z",
+                      "responseHeaders": [
+                        "vary:accept-encoding",
+                        "Qtl-Request-Id:e5d6c85d9883be0a",
+                        "Date:Wed, 25 Sep 2024 05:35:15 GMT",
+                        "Content-Type:application/json"
+                      ],
+                      "responseBody": "{\"code\":\"CertificateInUse\",\"message\":\"Certificate 1a8a0716e7d56a98bcc9e61b is still in use\"}",
+                      "responseCode": 400,
+                      "responseTimestamp": "2024-09-25T05:35:15Z",
+                      "isSafe": false,
+                      "customerId": "987654321",
+                      "apiRequestId": "e5d6c85d9883be0a",
+                      "clientIp": "123.45.67.89",
+                      "apiName": "anApiAccountName"
                     }
                   }
                 }
@@ -23197,6 +23575,22 @@
                           "usageLimitDollar": {
                             "type": "integer",
                             "description": "This setting applies to trial customers. It represents the amount of traffic valued in US dollars that is permitted to be used over a period of time  set by the <i>usageLimitDays</i> field. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over 90 day period. The dollar value is based on CDN Pro's default pricing.\n"
+                          },
+                          "creationTime": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "dvd3643xtn6cr"
+                            },
+                            "description": "RFC 3339 date indicate when the service quota was created.",
+                            "format": "date-time"
+                          },
+                          "lastUpdateTime": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "eqfxdmus78ioo"
+                            },
+                            "description": "RFC 3339 date indicating when the service quota was last updated.",
+                            "format": "date-time"
                           }
                         },
                         "required": [
@@ -23220,7 +23614,9 @@
                           "status": "active",
                           "allowProduction": true,
                           "usageLimitDays": 0,
-                          "usageLimitDollar": 0
+                          "usageLimitDollar": 0,
+                          "creationTime": "2024-09-22T05:12:00Z",
+                          "lastUpdateTime": "2024-09-22T05:12:00Z"
                         }
                       ]
                     }
@@ -23691,6 +24087,22 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "creationTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "3vl56i51051lo"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the service quota was created."
+                    },
+                    "lastUpdateTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "nguvndjv4fu5o"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the service quota was last updated."
                     }
                   },
                   "required": [
@@ -23735,7 +24147,9 @@
                         "premium",
                         "deluxe",
                         "ultra"
-                      ]
+                      ],
+                      "creationTime": "2024-09-22T05:12:00Z",
+                      "lastUpdateTime": "2024-09-22T05:12:00Z"
                     }
                   }
                 }
@@ -25072,6 +25486,22 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "creationTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "3vl56i51051lo"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the service quota was created."
+                    },
+                    "lastUpdateTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "nguvndjv4fu5o"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the service quota was last updated."
                     }
                   },
                   "required": [
@@ -25115,7 +25545,9 @@
                         "premium",
                         "deluxe",
                         "ultra"
-                      ]
+                      ],
+                      "creationTime": "2024-09-22T05:12:00Z",
+                      "lastUpdateTime": "2024-09-22T05:12:00Z"
                     }
                   }
                 }
@@ -25434,6 +25866,22 @@
                       "items": {
                         "type": "string"
                       }
+                    },
+                    "creationTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "3vl56i51051lo"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the service quota was created."
+                    },
+                    "lastUpdateTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "nguvndjv4fu5o"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the service quota was last updated."
                     }
                   },
                   "required": [
@@ -28195,10 +28643,10 @@
                         "endTime": "2024-07-10T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge response",
-                          "fast route response",
-                          "intermediate response",
-                          "origin response"
+                          "edge request",
+                          "fast route request",
+                          "intermediate request",
+                          "origin request"
                         ],
                         "dataUnit": "counts"
                       },
@@ -28236,7 +28684,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \n<table><tr><th>Name</th><th>Description</th></tr><tr><td>edge response</td><td>requests to edge servers</td></tr><tr><td>fast route response</td><td>requests to your origin accelerated through the HDT product</td></tr><tr><td>intermediate response</td><td>requests between CDN Pro servers</td></tr><tr><td>origin response</td><td>requests to your origin server</td></tr></table> The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
+                          "description": "Indicates the type of data returned. \n<table><tr><th>Name</th><th>Description</th></tr><tr><td>edge request</td><td>requests to edge servers</td></tr><tr><td>fast route request</td><td>requests to your origin accelerated through the HDT product</td></tr><tr><td>intermediate request</td><td>requests between CDN Pro servers</td></tr><tr><td>origin request</td><td>requests to your origin server</td></tr></table> The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
                           "items": {
                             "type": "string"
                           }
@@ -28280,10 +28728,10 @@
                         "endTime": "2024-07-10T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge response",
-                          "fast route response",
-                          "intermediate response",
-                          "origin response"
+                          "edge request",
+                          "fast route request",
+                          "intermediate request",
+                          "origin request"
                         ],
                         "dataUnit": "counts"
                       },
@@ -28525,10 +28973,10 @@
                         "endTime": "2024-07-10T12:40:00Z",
                         "isComplete": true,
                         "dataNames": [
-                          "edge response",
-                          "fast route response",
-                          "intermediate response",
-                          "origin response"
+                          "edge request",
+                          "fast route request",
+                          "intermediate request",
+                          "origin request"
                         ],
                         "dataUnit": "counts"
                       },
@@ -28566,7 +29014,7 @@
                         },
                         "dataNames": {
                           "type": "array",
-                          "description": "Indicates the type of data returned. \n<table><tr><th>Name</th><th>Description</th></tr><tr><td>edge response</td><td>requests to edge servers</td></tr><tr><td>fast route response</td><td>requests to your origin accelerated through the HDT product</td></tr><tr><td>intermediate response</td><td>requests between CDN Pro servers</td></tr><tr><td>origin response</td><td>requests to your origin server</td></tr></table> The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
+                          "description": "Indicates the type of data returned. \n<table><tr><th>Name</th><th>Description</th></tr><tr><td>edge request</td><td>requests to edge servers</td></tr><tr><td>fast route request</td><td>requests to your origin accelerated through the HDT product</td></tr><tr><td>intermediate request</td><td>requests between CDN Pro servers</td></tr><tr><td>origin request</td><td>requests to your origin server</td></tr></table> The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.",
                           "items": {
                             "type": "string"
                           }
