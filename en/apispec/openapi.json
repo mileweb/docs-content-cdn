@@ -2004,7 +2004,7 @@
                                   "id": "fyfechmf9xy36"
                                 },
                                 "type": "string",
-                                "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                                "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                                 "properties": {
                                   "state": {
                                     "type": "string",
@@ -2250,7 +2250,7 @@
                             "id": "b5upebnysbdde"
                           },
                           "type": "object",
-                          "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                          "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                           "properties": {
                             "state": {
                               "type": "string",
@@ -2781,7 +2781,7 @@
                       "id": "b5upebnysbdde"
                     },
                     "type": "object",
-                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                     "properties": {
                       "state": {
                         "type": "string",
@@ -3148,7 +3148,7 @@
                       "id": "b5upebnysbdde"
                     },
                     "type": "object",
-                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                     "properties": {
                       "state": {
                         "type": "string",
@@ -5577,7 +5577,7 @@
                       "id": "b5upebnysbdde"
                     },
                     "type": "object",
-                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 ipv4hint=\"192.0.2.1\" ipv6hint=\"2001:db8:122:344::192.0.2.33\"\n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+                    "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                     "properties": {
                       "state": {
                         "type": "string",
@@ -22679,6 +22679,13 @@
                     "responseCode": {
                       "type": "integer",
                       "description": "HTTP response status code for the API call."
+                    },
+                    "responseBody": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "27n7abo5m8gg3"
+                      },
+                      "description": "The API response body will be included to help with investigation of failed API calls if responseCode is in the 4xx or 5xx range."
                     }
                   },
                   "required": [
