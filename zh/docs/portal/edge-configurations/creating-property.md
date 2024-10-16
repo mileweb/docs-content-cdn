@@ -52,7 +52,7 @@ After making your selection, complete the settings in the Edge Logic Wizard page
 
 ## TLS Settings
 
-This section allows you to:<ul><li>Enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate.</ul></li><ul><li>Downgrade the protocol from HTTPS to HTTP when accessing the origin. Note that doing so may expose you to security risks.</ul></li><ul><li>Enable Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates (refer to https://en.wikipedia.org/wiki/OCSP_stapling).</ul></li><ul><li>Enable zero round-trip time resumption for TLS 1.3. Select <B>Enable 0-RTT</b> only if tlsMinVersion or tlsMaxVersion includes TLS 1.3.</ul></li><ul><li>Specify the maximum number of seconds to wait for a secure TLS handshake to be initiated and to complete before the TLS session times out.</ul></li>
+This section allows you to:<ul><li>Enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate.</ul></li><ul><li>Specify the supported TLS versions. We strongly recommend using TLS 1.2 or greater because the older versions are insecure.</li></ul><ul><li>Downgrade the protocol from HTTPS to HTTP when accessing the origin. Note that doing so may expose you to security risks.</ul></li><ul><li>Enable Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates (refer to https://en.wikipedia.org/wiki/OCSP_stapling).</ul></li><ul><li>Enable zero round-trip time resumption for TLS 1.3. Select <B>Enable 0-RTT</b> only if the supported TLS versions include TLS 1.3.</ul></li><ul><li>Specify the maximum number of seconds to wait for a secure TLS handshake to be initiated and to complete before the TLS session times out.</ul></li>
 The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT).
 
 **Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
@@ -113,7 +113,9 @@ Example:  `if ($http_user_agent = bot) { return 403;}`
 
  **Certificate Renew Automation:** By default, CDN Pro takes control of the contents under the ``/.well-known/{acme-challenge, pki-validation}`` directories to support [certificate auto-renew](</docs/portal/certificates/auto-renewal.md>) for properties. If you need to manage these two directories by yourself on the origin (for example, to implement your own certificate auto-renew mechanism), you can use this configuration option to disable the default behavior. <ul><li>If **Support** is selected, CDN Pro takes control of the two "special" directories to support auto-renewing of the property's certificate. This is the default setting.</ul></li> <ul><li>If **Disable** is selected, CDN Pro releases control of these special directories to the origin.</ul></li>
 
- **HTTP/2:** Use the radio buttons to enable or disable the HTTP/2 protocol. HTTP/2 is enabled by default. If disabled, HTTP/1.1 is used. 
+ **HTTP/2:** Use the radio buttons to enable or disable the HTTP/2 protocol. HTTP/2 is enabled by default. If disabled, HTTP/1.1 is used.
+
+ **HTTP/3:** Use the radio buttons to enable or disable the HTTP/3 protocol. HTTP/3 is disabled by default.
 
  **Video Seeking:** This parameter supports seeking in a video using the following fields to specify the starting and ending positions. <ul><li>In the **Start Parameter** field, enter the beginning position of a video segment in bytes. </ul></li><ul><li>In the **End Parameter** field, enter the ending position of the video segment in bytes, or leave this field empty to play the video to the end.</ul></li>
 
