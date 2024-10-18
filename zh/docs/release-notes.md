@@ -1,5 +1,15 @@
 # Release Notes
 
+## October 17, 2024
+#### API updates
+* Enforced resource permissions for logDownload, edgeHostnameReq, edgeHostnameReqSummary, volSummary, and volL7Summary report APIs based on allowedResources settings for the customer.
+* Removed the requirement on origin server name and host header to be the same for AWS S3 auth.
+
+#### Console updates
+* Showed client IP in error message if access to the portal is rejected due to IP whitelisting.
+* Added HTTP/3 to advanced property settings.
+* Used TLS 1.2 as default minimum TLS version.
+
 ## September 29, 2024
 #### API updates
 * Changed dataNames field in the [request summary report](</apidocs#operation/post-cdn-report-reqSummary>) API's response.
