@@ -255,7 +255,7 @@ Denies access from the specified network or address. Usually used together with 
 **Default:** `-`<br/>
 **Context:** server, location
 
-This directive enables proxying the WebSocket protocol. The client must make sure not to use HTTP/2 or HTTP/3. The default read and send timeouts are set to 60s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
+This directive enables proxying the WebSocket protocol. The client must use HTTP/1.1, not the other HTTP protocol versions. The default read and send timeouts are set to 60s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
