@@ -102,7 +102,7 @@ Because we saved the certificate earlier, we can now deploy it. To make sure the
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-origin.png" alt="create bucket" width="720"></p>
 
-5. **Origin name** will be used in the edge logic script (in our example, it's called `aws_origin`). In the **Servers** field, add our S3 bucket domain: `files-waytoo-digital.s3.amazonaws.com`.
+5. **Origin name** will be used in the Edge Logic script (in our example, it's called `aws_origin`). In the **Servers** field, add our S3 bucket domain: `files-waytoo-digital.s3.amazonaws.com`.
 
 6. Click **Validate** to make sure everything is satisfactory.
 
@@ -110,7 +110,7 @@ Because we saved the certificate earlier, we can now deploy it. To make sure the
 
 8. Click **Save**.
 
-We have created an origin. Next we will create an initial edge logic configuration. 
+We have created an origin. Next we will create an initial Edge Logic configuration. 
 
 9. Click the **Wizard** button.
 
@@ -118,7 +118,7 @@ We have created an origin. Next we will create an initial edge logic configurati
 
 10. Select the previously configured origin, set cache time to 3600 minutes, and ignore cache-control headers from origin to handle cache behavior on the edge. 
 
-11. Click **"OK"**. The system generates the following edge logic script:
+11. Click **"OK"**. The system generates the following Edge Logic script:
 
  ```nginx
         location / { #This is the default location.
@@ -201,11 +201,11 @@ Our configuration is working as expected, so let's deploy it to production.
 
 To deploy the configuration to production, use the Certificates and Edge Configurations pages. 
 
-1. Go to the Certificates page first. Then select the certificate, set **Deployment Destination** to **Production**, and click **Deploy Configuration**.
+1. Go to the Certificates page first. Then open the certificate, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-production.png" alt="create bucket" width="500"></p>
 
-2. Go to the to Edge Configurations page, set **Deployment Destination** to **Production**, and click **Deploy Configuration**. 
+2. Go to the Edge Configurations page. Then open the property, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**. 
 
 #### Testing(Production)
 
