@@ -142,7 +142,7 @@ Assuming that no issues occurred after saving and validating, you can now deploy
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
-#### Testing(Staging) 
+#### Testing (Staging)
 
 To test staging deployments, you should know the IP addresses of the staging server:
 
