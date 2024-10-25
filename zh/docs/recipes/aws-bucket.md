@@ -207,7 +207,7 @@ To deploy the configuration to production, use the Certificates and Edge Configu
 
 2. Go to the Edge Configurations page. Then open the property, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**. 
 
-#### Testing(Production)
+#### Testing (Production)
 
 Before we release the property to production, we should create or change the CNAME record of our DNS and point it to the edge hostname we created earlier (`files-waytoo-digital.qtlcdn.com`).
 
