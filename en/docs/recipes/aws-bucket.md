@@ -142,7 +142,7 @@ Assuming that no issues occurred after saving and validating, you can now deploy
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
-#### Testing(Staging) 
+#### Testing (Staging)
 
 To test staging deployments, you should know the IP addresses of the staging server:
 
@@ -201,13 +201,13 @@ Our configuration is working as expected, so let's deploy it to production.
 
 To deploy the configuration to production, use the Certificates and Edge Configurations pages. 
 
-1. Go to the Certificates page first. Then select the certificate, set **Deployment Destination** to **Production**, and click **Deploy Configuration**.
+1. Go to the Certificates page first. Then open the certificate, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-production.png" alt="create bucket" width="500"></p>
 
-2. Go to the to Edge Configurations page, set **Deployment Destination** to **Production**, and click **Deploy Configuration**. 
+2. Go to the Edge Configurations page. Then open the property, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**. 
 
-#### Testing(Production)
+#### Testing (Production)
 
 Before we release the property to production, we should create or change the CNAME record of our DNS and point it to the edge hostname we created earlier (`files-waytoo-digital.qtlcdn.com`).
 
