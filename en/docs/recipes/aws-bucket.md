@@ -136,7 +136,7 @@ In our example, we have everything we need for this property, except for one thi
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-tls.png" alt="create bucket" width="600"></p>
 	
-13. Click **Save & Validate** to make sure that everything is configured properly.
+13. Click <strong>Save & Validate</strong> to make sure that everything is configured properly.
 
 Assuming that no issues occurred after saving and validating, you can now deploy the property to the staging environment for testing.
 
