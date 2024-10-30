@@ -249,7 +249,7 @@ location / {
 **默认设置：** `-`<br/>
 **可用位置：** server, location
 
-该指令用于开启 WebSocket 协议。客户端必须确保不使用 HTTP/2。默认读取和发送超时设置为 60 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
+该指令用于开启 WebSocket 协议。客户端需要使用HTTP/1.1来与服务端通信，不能用其它HTTP协议版本。默认读取和发送超时设置为 60 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 

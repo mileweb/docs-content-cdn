@@ -102,7 +102,7 @@ Because we saved the certificate earlier, we can now deploy it. To make sure the
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-origin.png" alt="create bucket" width="720"></p>
 
-5. **Origin name** will be used in the edge logic script (in our example, it's called `aws_origin`). In the **Servers** field, add our S3 bucket domain: `files-waytoo-digital.s3.amazonaws.com`.
+5. **Origin name** will be used in the Edge Logic script (in our example, it's called `aws_origin`). In the **Servers** field, add our S3 bucket domain: `files-waytoo-digital.s3.amazonaws.com`.
 
 6. Click **Validate** to make sure everything is satisfactory.
 
@@ -110,7 +110,7 @@ Because we saved the certificate earlier, we can now deploy it. To make sure the
 
 8. Click **Save**.
 
-We have created an origin. Next we will create an initial edge logic configuration. 
+We have created an origin. Next we will create an initial Edge Logic configuration. 
 
 9. Click the **Wizard** button.
 
@@ -118,7 +118,7 @@ We have created an origin. Next we will create an initial edge logic configurati
 
 10. Select the previously configured origin, set cache time to 3600 minutes, and ignore cache-control headers from origin to handle cache behavior on the edge. 
 
-11. Click **"OK"**. The system generates the following edge logic script:
+11. Click **"OK"**. The system generates the following Edge Logic script:
 
  ```nginx
         location / { #This is the default location.
@@ -136,13 +136,13 @@ In our example, we have everything we need for this property, except for one thi
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-tls.png" alt="create bucket" width="600"></p>
 	
-13. Click **Save and Validate** to make sure that everything is configured properly.
+13. Click <strong>Save & Validate</strong> to make sure that everything is configured properly.
 
 Assuming that no issues occurred after saving and validating, you can now deploy the property to the staging environment for testing.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
-#### Testing(Staging) 
+#### Testing (Staging)
 
 To test staging deployments, you should know the IP addresses of the staging server:
 
@@ -201,13 +201,13 @@ Our configuration is working as expected, so let's deploy it to production.
 
 To deploy the configuration to production, use the Certificates and Edge Configurations pages. 
 
-1. Go to the Certificates page first. Then select the certificate, set **Deployment Destination** to **Production**, and click **Deploy Configuration**.
+1. Go to the Certificates page first. Then open the certificate, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-production.png" alt="create bucket" width="500"></p>
 
-2. Go to the to Edge Configurations page, set **Deployment Destination** to **Production**, and click **Deploy Configuration**. 
+2. Go to the Edge Configurations page. Then open the property, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**. 
 
-#### Testing(Production)
+#### Testing (Production)
 
 Before we release the property to production, we should create or change the CNAME record of our DNS and point it to the edge hostname we created earlier (`files-waytoo-digital.qtlcdn.com`).
 

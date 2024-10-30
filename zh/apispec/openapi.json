@@ -333,7 +333,7 @@
                         "disableHttp2": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
+                          "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1. HTTP/2 requires TLS to work, so you must specify a certificate in the tlsCertificateId field to support HTTP/2."
                         },
                         "schemeInCacheKey": {
                           "type": "boolean",
@@ -348,7 +348,7 @@
                             1.2,
                             1.3
                           ],
-                          "description": "Maximum supported TLS version."
+                          "description": "Maximum supported TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2."
                         },
                         "loadBalancerHashKey": {
                           "type": "string",
@@ -362,7 +362,7 @@
                         "tlsMinVersion": {
                           "type": "string",
                           "default": 1,
-                          "description": "Minimum required TLS version.",
+                          "description": "Minimum required TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2.",
                           "enum": [
                             1.1,
                             1.2,
@@ -569,6 +569,14 @@
                           ],
                           "default": "off",
                           "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
+                        },
+                        "enableHttp3": {
+                          "type": "boolean",
+                          "x-stoplight": {
+                            "id": "dh1mxvtyud0vj"
+                          },
+                          "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
+                          "default": false
                         }
                       }
                     },
@@ -1101,7 +1109,7 @@
                   "disableHttp2": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1. HTTP/2 requires TLS to work, so you must specify a certificate in the tlsCertificateId field to support HTTP/2."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -1116,7 +1124,7 @@
                       1.2,
                       1.3
                     ],
-                    "description": "Maximum supported TLS version."
+                    "description": "Maximum supported TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2."
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
@@ -1130,7 +1138,7 @@
                   "tlsMinVersion": {
                     "type": "string",
                     "default": 1,
-                    "description": "Minimum required TLS version.",
+                    "description": "Minimum required TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2.",
                     "enum": [
                       1.1,
                       1.2,
@@ -1337,6 +1345,14 @@
                     ],
                     "default": "off",
                     "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
+                  },
+                  "enableHttp3": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "dh1mxvtyud0vj"
+                    },
+                    "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
+                    "default": false
                   }
                 }
               },
@@ -3885,7 +3901,7 @@
                   "disableHttp2": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
+                    "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1. HTTP/2 requires TLS to work, so you must specify a certificate in the tlsCertificateId field to support HTTP/2."
                   },
                   "schemeInCacheKey": {
                     "type": "boolean",
@@ -3900,7 +3916,7 @@
                       1.2,
                       1.3
                     ],
-                    "description": "Maximum supported TLS version."
+                    "description": "Maximum supported TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2."
                   },
                   "loadBalancerHashKey": {
                     "type": "string",
@@ -3914,7 +3930,7 @@
                   "tlsMinVersion": {
                     "type": "string",
                     "default": 1,
-                    "description": "Minimum required TLS version.",
+                    "description": "Minimum required TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2.",
                     "enum": [
                       1.1,
                       1.2,
@@ -4121,6 +4137,14 @@
                     ],
                     "default": "off",
                     "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
+                  },
+                  "enableHttp3": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "dh1mxvtyud0vj"
+                    },
+                    "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
+                    "default": false
                   }
                 }
               },
@@ -4586,7 +4610,7 @@
                       "disableHttp2": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1."
+                        "description": "Set to <i>true</i> to disable support for HTTP/2 and support only HTTP 1.1. HTTP/2 requires TLS to work, so you must specify a certificate in the tlsCertificateId field to support HTTP/2."
                       },
                       "schemeInCacheKey": {
                         "type": "boolean",
@@ -4601,7 +4625,7 @@
                           1.2,
                           1.3
                         ],
-                        "description": "Maximum supported TLS version."
+                        "description": "Maximum supported TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2."
                       },
                       "loadBalancerHashKey": {
                         "type": "string",
@@ -4615,7 +4639,7 @@
                       "tlsMinVersion": {
                         "type": "string",
                         "default": 1,
-                        "description": "Minimum required TLS version.",
+                        "description": "Minimum required TLS version. TLS versions 1.0 and 1.1 have been deprecated for security reasons, so we strongly recommend a minimum of TLS 1.2.",
                         "enum": [
                           1.1,
                           1.2,
@@ -4822,6 +4846,14 @@
                         ],
                         "default": "off",
                         "description": "When enableIpv6Origin is enabled, this setting controls whether to match the addressing method used by a client if a request to the origin is required to fetch content. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>auto</td><td>Attempt to reach the origin server using the same IP addressing as the client, but use the other version as backup if needed.</td></tr><tr><td>strict</td><td>Use only the same addressing method as the client when accessing the origin for content.</td></tr><tr><td>off</td><td>Use both IPv4 and IPv6 addressing to reach the origin, regardless of the IP addressing method used by the client.</td></tr></table>"
+                      },
+                      "enableHttp3": {
+                        "type": "boolean",
+                        "x-stoplight": {
+                          "id": "dh1mxvtyud0vj"
+                        },
+                        "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
+                        "default": false
                       }
                     }
                   }
