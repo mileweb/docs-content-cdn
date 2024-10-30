@@ -1,5 +1,9 @@
 # Release Notes
 
+## October 29, 2024
+#### Console updates
+* Provided default HTTP/3 setting in the property page.
+
 ## October 17, 2024
 #### API updates
 * Enforced resource permissions for logDownload, edgeHostnameReq, edgeHostnameReqSummary, volSummary, and volL7Summary report APIs based on allowedResources settings for the customer.
