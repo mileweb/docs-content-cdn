@@ -117,6 +117,11 @@ Example:  `if ($http_user_agent = bot) { return 403;}`
 
  **HTTP/3:** Use the radio buttons to enable or disable the HTTP/3 protocol. HTTP/3 is disabled by default.
 
+ **Enable IPv6 Origin:** Control whether IPv6 addresses can be used when accessing the property's origin servers. Enabling does not mean IPv6 is exclusively used though. If the setting is **Disable**, only IPv4 addresses are used to access the origin even if the origin supports IPv6. If your origin supports IPv6 only, then you must also modify the origin's **Direct Connection** setting to **No Direct** and the property's **Follow Client IP Version** to **strict** to ensure IPv6 is exclusively used. This is required because some CDN Pro edge server only support IPv4.
+
+
+ **Follow Client IP Version:** This setting controls whether to use the IP version of the client when a corresponding request must be made to the origin server for content. The setting is ignored if **Enable IPv6 Origin** is **Disable**. Choices are:<ul><li><strong>auto</strong> = Use the same IP version as the client, but use the other version as backup if needed.</li><li><strong>strict</strong> = Strictly match the IP version of the client.</li><li><strong>off</strong> = Use both IPv4 and IPv6 addresses regardless of the IP version of the client. (*default*)</li></ul>
+ 
  **Video Seeking:** This parameter supports seeking in a video using the following fields to specify the starting and ending positions. <ul><li>In the **Start Parameter** field, enter the beginning position of a video segment in bytes. </ul></li><ul><li>In the **End Parameter** field, enter the ending position of the video segment in bytes, or leave this field empty to play the video to the end.</ul></li>
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.png" alt="Property Advanced Settings" width="650"></p>
