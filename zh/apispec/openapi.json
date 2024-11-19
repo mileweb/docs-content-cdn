@@ -3,17 +3,14 @@
   "info": {
     "title": "CDN Pro API Specification",
     "version": "1.0",
-    "description": "CDN Pro APIs allow you to manage the CDN Pro service.",
+    "description": "CDN Pro APIs allow you to manage the CDN Pro service.  <p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> is a command line tool that facilitates API calls in <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> and <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a>. It includes the \"cdnapi.sh\" shell script mentioned in this document's examples.</p>",
     "contact": {
       "url": "https://www.cdnetworks.com"
     }
   },
   "servers": [
     {
-      "url": "https://ngapi.cdnetworks.com"
-    },
-    {
-      "url": "https://ngapi.quantil.com",
+      "url": "https://ngapi.cdnetworks.com",
       "description": ""
     }
   ],
@@ -90,7 +87,9 @@
                   },
                   "properties": {
                     "version": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "Identifies the property version.",
+                      "minimum": 1
                     },
                     "configs": {
                       "title": "propertyConfiguration",
@@ -221,7 +220,7 @@
                               },
                               "servers": {
                                 "type": "array",
-                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                                "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{HTTP port}</li>\n<li>{hostname or IP address}:{HTTP port},{HTTPS port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nIf specifying an IPv6 address along with a port, the IPv6 address should be enclosed in brackets, for example, <code>[2001:0DB7:AC10:FE01:0000:0000:0000:0000]:8080</code>\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                                 "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                                 "items": {
                                   "type": "string"
@@ -582,32 +581,79 @@
                     },
                     "status": {
                       "type": "object",
+                      "description": "Summarizes the property version's validation and deployment status.",
                       "properties": {
                         "lastValidationStatus": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "Validated",
+                            "NotValidated"
+                          ],
+                          "description": "Indicates whether the property version has been validated."
                         },
                         "frozen": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Indicates whether changes can still be made to the property version. A property version that has been deployed to production or staging will be frozen and can no longer be modified. A new property version must be created to edit the property."
                         },
                         "creationTime": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the property version was created."
                         },
                         "lastUpdateTime": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when the property version was last updated."
                         },
                         "inProduction": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Indicates whether the property version is currently deployed in the production environment."
                         },
                         "inStaging": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Indicates whether the property version is currently deployed in the staging environment."
                         },
                         "warning": {
                           "type": "string",
                           "description": "This field can appear if the property is created or updated with a reference to a certificate that is incompatible. For example, the certificate could be expired or does not support the property's hostname. The value will provide details."
+                        },
+                        "lastValidationCacheVersion": {
+                          "type": "string",
+                          "x-stoplight": null,
+                          "id": "314imcgbbd0a5",
+                          "description": "Indicates the version of cache most recently used to validate the property version. It will be empty if the property version has not yet been validated."
+                        },
+                        "lastStagingDeployment": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "a9td9qagjo8vc"
+                          },
+                          "id": "fhq5nzrbhy90j",
+                          "format": "date-time",
+                          "example": "2024-03-28T00:07:04Z",
+                          "description": "If the property version is currently deployed to staging, this field indicates the RFC 3339 date when the deployment occurred."
+                        },
+                        "lastProductionDeployment": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "svknhhk9brkqd"
+                          },
+                          "id": "qu347vl97lfd1",
+                          "format": "date-time",
+                          "example": "2024-03-29T00:04:04Z",
+                          "description": "If the property version is currently deployed to production, this field indicates the RFC 3339 date when the deployment occurred."
                         }
-                      }
+                      },
+                      "required": [
+                        "lastValidationStatus",
+                        "frozen",
+                        "creationTime",
+                        "inProduction",
+                        "inStaging"
+                      ]
                     }
-                  }
+                  },
+                  "required": [
+                    "version"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -720,6 +766,13 @@
           }
         },
         "summary": "Get a property version",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e/versions/1\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -753,6 +806,13 @@
       ],
       "patch": {
         "summary": "Update a property version",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /properties/81230c199e5f9dd381daff5e/versions/1 -j body.json -e edgelogic.el\n"
+          }
+        ],
         "responses": {
           "204": {
             "description": "Indicates the property version was successfully updated.",
@@ -997,7 +1057,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{HTTP port}</li>\n<li>{hostname or IP address}:{HTTP port},{HTTPS port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nIf specifying an IPv6 address along with a port, the IPv6 address should be enclosed in brackets, for example, <code>[2001:0DB7:AC10:FE01:0000:0000:0000:0000]:8080</code>\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -1459,6 +1519,13 @@
         },
         "operationId": "delete-cdn-properties-propertyID-versions-version",
         "description": "Delete a property version.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /properties/81230c199e5f9dd381daff5e/versions/1\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -1544,6 +1611,22 @@
                       "type": "integer",
                       "description": "Number of versions of the property.\n",
                       "minimum": 1
+                    },
+                    "productionDeploymentTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "pgpvdingj1c9k"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the property was deployed to production."
+                    },
+                    "stagingDeploymentTime": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "gbx4yn6z4clwn"
+                      },
+                      "format": "date-time",
+                      "description": "RFC 3339 date indicating when the property was deployed to staging."
                     }
                   },
                   "required": [
@@ -1594,6 +1677,13 @@
         },
         "description": "Returns a summary about a property including the number of versions that have been created and which versions are deployed.",
         "operationId": "queryProperty",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -1695,6 +1785,13 @@
         },
         "description": "This endpoint changes the name and description of a property. Its versions are unaffected. \n\nIf you wish to change a property's configuration, use the <a href=\"#operation/updatePropertyVersion\">Update a property version API</a>.",
         "operationId": "updateProperty",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /properties/81230c199e5f9dd381daff5e -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1709,10 +1806,7 @@
                     "type": "string",
                     "description": "Description of the property. If unspecified, the description will not be updated."
                   }
-                },
-                "required": [
-                  "name"
-                ]
+                }
               },
               "examples": {
                 "example-1": {
@@ -1826,6 +1920,13 @@
         },
         "tags": [
           "Property Management"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /properties/81230c199e5f9dd381daff5e\n"
+          }
         ],
         "parameters": [
           {
@@ -2410,6 +2511,13 @@
         },
         "description": "This API returns information about an edge hostname including the associated client zone rules and operation history.",
         "operationId": "getEdgeHostname",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /edgeHostnames/myedgehostname.qtlgslb.com\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -2484,6 +2592,13 @@
           }
         },
         "operationId": "deleteEdgeHostname",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /edgeHostnames/myedgehostname.qtlgslb.com\n"
+          }
+        ],
         "description": "Use this API to delete an edge hostname. If you have configured your DNS server with this edge hostname, you should update your DNS records before deleting it. Otherwise, visitors to the associated hostnames will see an error.",
         "parameters": [
           {
@@ -2653,6 +2768,13 @@
         },
         "operationId": "updateEdgeHostname",
         "description": "Use this API to update an edge hostname. Be sure to enter all fields describing your edge hostname including ones that are not changing.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PUT /edgeHostnames/myedgehostname.qtlgslb.com -j body.json\n"
+          }
+        ],
         "tags": [
           "Edge Hostname Management"
         ],
@@ -3024,6 +3146,13 @@
           }
         },
         "description": "This API allows you to update an edge hostname by sending only the fields that are changing.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /edgeHostnames/myedgehostname.qtlgslb.com -j body.json\n"
+          }
+        ],
         "tags": [
           "Edge Hostname Management"
         ],
@@ -3244,6 +3373,13 @@
         "description": "Get a list of all property versions. A summary of each version including its status and associated hostnames is returned.",
         "operationId": "getPropertyVersions",
         "summary": "Get list of property versions",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e/versions\n"
+          }
+        ],
         "tags": [
           "Property Management"
         ],
@@ -3507,7 +3643,8 @@
           },
           "name": "propertyID",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "ID of a property"
         }
       ],
       "post": {
@@ -3654,6 +3791,13 @@
         },
         "description": "Create a new version of a property. Call this API to make additional changes to a property after you have <a href=\"#operation/createDeployment\">deployed it to production or staging</a>.",
         "operationId": "createPropertyVersion",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /properties/81230c199e5f9dd381daff5e/versions -j body.json -e edgelogic.el\n"
+          }
+        ],
         "tags": [
           "Property Management"
         ],
@@ -3789,7 +3933,7 @@
                         },
                         "servers": {
                           "type": "array",
-                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                          "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{HTTP port}</li>\n<li>{hostname or IP address}:{HTTP port},{HTTPS port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nIf specifying an IPv6 address along with a port, the IPv6 address should be enclosed in brackets, for example, <code>[2001:0DB7:AC10:FE01:0000:0000:0000:0000]:8080</code>\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                           "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                           "items": {
                             "type": "string"
@@ -4326,7 +4470,7 @@
             }
           },
           "409": {
-            "description": "This error is returned if you try to create a property that already exists.",
+            "description": "This error is returned if you try to create a property using the name of an existing property.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4354,6 +4498,13 @@
         },
         "description": "Creates a property to define the configuration of one or more hostnames (domains) to deploy to the CDN servers.",
         "operationId": "createProperty",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /properties -j body.json -e edgelogic.el\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4498,7 +4649,7 @@
                             },
                             "servers": {
                               "type": "array",
-                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{http port}</li>\n<li>{hostname or IP address}:{http port},{https port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
+                              "description": "Each entry should be a string consisting of an address optionally followed by one or more parameters, separated by space characters. The address can take one of the following three forms:\n<ul>\n<li>{hostname or IP address}</li>\n<li>{hostname or IP address}:{HTTP port}</li>\n<li>{hostname or IP address}:{HTTP port},{HTTPS port}</li>\n</ul>\n\nThe IP address can be either IPv4 or IPv6.  IPv6 is supported if the property's <i>enableIpv6Origin</i> setting is <i>true</i>.  IPv6 addresses can be specified in uncompressed or compressed format, for example, <code>2001:1234:0000:0000:1b12:0000:0000:1a13</code> or <code>2001:1234::1b12:0:0:1a13</code>.\n\nValues for the HTTP and HTTPS ports should be integers in the range [1,65535]. \nEven if the value of <i>supportedProtocol</i> is “https”, the HTTPS port must be specified after the comma.\nIn the third form, one of the two ports can be empty.\n\nIf specifying an IPv6 address along with a port, the IPv6 address should be enclosed in brackets, for example, <code>[2001:0DB7:AC10:FE01:0000:0000:0000:0000]:8080</code>\n\nSupported parameters are \"backup\" and \"weight\".\n\n\"backup\" is used to indicate the server is a backup server. It will be used when the primary servers are unavailable.\n\n\"weight\" is a value in the range [1, 100]. The default value is 1. It lets you control the likelihood that one origin server will be used relative to another.\n\nThere should be at least one primary server defined; it does not have the \"backup\" parameter.\n\nExample:\n<code>[\"www.abc.com weight=1\", \"www1.abc.com:8080 weight=4\", \"www2.abc.com:880,4443 backup\"]</code>\n\nThis example specifies two primary servers which are used in a 1:4 ratio meaning one gets about 20% of the requests to origin while the other gets 80% of the requests. In addition, a backup server is specified.\n",
                               "example": "[“www.abc.com”, “www1.abc.com:8080”, “www2.abc.com:880,4443 backup”]",
                               "items": {
                                 "type": "string"
@@ -5182,6 +5333,13 @@
         },
         "description": "The API returns a summary of properties including the ID, latest version number, comments, staging version number, production version number, and last update time of each one. Use query parameters to filter the list of returned properties.",
         "operationId": "getPropertyList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /properties\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -5467,6 +5625,13 @@
         },
         "description": "This API enables you to create edge hostnames to control how requests from different client zones are handled. You must create CNAME DNS records to point your properties' hostnames to an edge hostname created using this API in order for the CDN to handle your content.",
         "operationId": "createEdgeHostname",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /edgeHostnames -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -5860,6 +6025,13 @@
           }
         },
         "operationId": "getEdgeHostnames",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /edgeHostnames\n"
+          }
+        ],
         "description": "Get a list of edge hostnames. Specify search, offset, and limit parameters to filter your results. The default is to return the most recently updated edge hostname first.",
         "parameters": [
           {
@@ -6081,6 +6253,13 @@
           }
         },
         "operationId": "createCertificate",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /certificates -j body.json -k key.pem -c cert.pem -a cacert.pem\n"
+          }
+        ],
         "description": "Create a certificate along with its first version. You can choose to upload the key/certificate pair or generate a self-signed one.",
         "requestBody": {
           "content": {
@@ -6452,6 +6631,13 @@
           }
         },
         "operationId": "getCertificates",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /certificates\n"
+          }
+        ],
         "description": "Get a list of available certificates including each certificate's ID, name, version deployed to production, version deployed to staging, the latest version number, when the certificate was last updated, and when the certificate expires. By default, certificates are returned in order of most recently updated first. Use query parameters to filter the list of returned certificates.",
         "parameters": [
           {
@@ -6852,6 +7038,13 @@
         },
         "description": "Gets details about a certificate including the versions of the certificate and who is using it.",
         "operationId": "getCertificate",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -6975,6 +7168,13 @@
           }
         },
         "operationId": "updateCertificate",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /certificates/12330c199e5f9dd381daff5e -j body.json -k key.pem -c cert.pem -a cacert.pem\n"
+          }
+        ],
         "description": "Update a certificate using this API. The fields are the same as those in the <a href=\"#operation/createCertificate\">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href=\"#operation/createDeployment\">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN Pro may still serve content using an older version of the certificate.",
         "tags": [
           "Certificate Management"
@@ -7213,6 +7413,13 @@
         },
         "description": "This API lets you delete a certificate that is not being used in production or staging.",
         "operationId": "deleteCertificate",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e\n"
+          }
+        ],
         "tags": [
           "Certificate Management"
         ],
@@ -7246,6 +7453,13 @@
         ],
         "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
         "operationId": "downloadCSR",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e/csr\n"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contains the CSR.",
@@ -7594,6 +7808,13 @@
         },
         "description": "Obtain details about a certificate version including the expiration date, algorithm and key length, fingerprint, and whether it is deployed in production and staging.",
         "operationId": "queryCertificateVersion",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e/versions/1\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -7725,6 +7946,13 @@
           }
         },
         "operationId": "delete-cdn-certificates-certificateID-latest",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e/latest\n"
+          }
+        ],
         "description": "This endpoint can be used to delete the latest version of a certificate if it was accidentally created but never deployed. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>."
       }
     },
@@ -7904,6 +8132,13 @@
           }
         },
         "operationId": "queryPropertyValidationList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /validations\n"
+          }
+        ],
         "description": "Get a list of property validation tasks including the associated property ID, version, submission time, and status. Filter the results using the query parameters.",
         "parameters": [
           {
@@ -8087,6 +8322,13 @@
         },
         "description": "This API validates a property version. You must call this API before you can <a href=\"#operation/createDeployment\">deploy the property version</a> to staging or production. Your property will be checked for correct syntax.",
         "operationId": "createValidationTask",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /validations -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -8316,6 +8558,13 @@
           }
         },
         "operationId": "queryValidationTask",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /validations/415e9495c9e77c000680c10e\n"
+          }
+        ],
         "description": "This API returns details about a validation task.",
         "parameters": [
           {
@@ -8482,6 +8731,13 @@
         },
         "description": "Get a summary of deployment tasks. Filter results using the query parameters. If you specify more than one query parameter, only the tasks meeting all criteria will be returned.",
         "operationId": "queryDeploymentTaskList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /deploymentTasks\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -8805,6 +9061,13 @@
         },
         "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to <a href=\"/cdn/docs/portal/edge-configurations/testing-property\">testing a property</a> for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. An error will also be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a>.",
         "operationId": "createDeployment",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /deploymentTasks -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -9227,6 +9490,13 @@
           }
         },
         "operationId": "queryDeploymentTask",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /deploymentTasks/415e9495c9e77c000680c10e\n"
+          }
+        ],
         "description": "Get details about a deployment task including the associated actions, when it was submitted, its status, and additional details if the deployment failed.",
         "parameters": [
           {
@@ -9413,6 +9683,13 @@
         },
         "description": "Get a list of hostnames belonging to properties that have been deployed to production or staging.",
         "operationId": "listhostnames",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /hostnames\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -9600,6 +9877,13 @@
         },
         "description": "This API returns information about a specific hostname belonging to a property that has been deployed to production or staging.",
         "operationId": "queryOneHostname",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /hostnames/myhostname.com\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -9712,6 +9996,13 @@
         },
         "description": "Get a list of hostnames belonging to properties that were successfully <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging during a particular timeframe.",
         "operationId": "getHistoricalHostnames",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /hostnames/historical -p -l 24H\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -10022,6 +10313,13 @@
         },
         "description": "Get the edge traffic volume in megabytes during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n",
         "operationId": "getEdgeTrafficVolume",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/vol?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -10041,6 +10339,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -10118,6 +10417,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -10491,6 +10791,13 @@
           }
         },
         "operationId": "getOriginTrafficVolume",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/volOrigin?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Gets the origin traffic volume in megabytes during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "tags": [
           "Reports"
@@ -10881,6 +11188,13 @@
           }
         },
         "description": "Gets the number of requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/req?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -10900,6 +11214,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -11271,6 +11586,13 @@
           }
         },
         "operationId": "getEdgeBandwidth",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/bandwidth?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get the bandwidth in Mbps to CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n",
         "requestBody": {
           "content": {
@@ -11291,6 +11613,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -11867,6 +12190,13 @@
           }
         },
         "operationId": "getEdgeStatusCodeDetails",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/statusCodeDetails?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Gets details about HTTP status codes returned by requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period, scheme, and granularity so you can monitor changes during the period. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
@@ -11888,6 +12218,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -12251,6 +12582,13 @@
           }
         },
         "operationId": "getOriginRequests",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/reqOrigin?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get the number of requests to your origin servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "requestBody": {
           "content": {
@@ -12260,6 +12598,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -12889,6 +13228,13 @@
           }
         },
         "operationId": "getOriginStatusCodeDetails",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/statusCodeDetailsOrigin?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Gets details about HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and granularity so you can monitor changes during the period. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "requestBody": {
           "content": {
@@ -12910,6 +13256,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -13273,6 +13620,13 @@
           }
         },
         "operationId": "getIntermediateTraffic",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/volInterm?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get the intermediate traffic volume in megabytes during a time period. Intermediate traffic is traffic between CDN Pro servers. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n",
         "parameters": [
           {
@@ -13355,30 +13709,39 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "hostnames": {
-                    "type": "array",
+                  "filters": {
+                    "type": "object",
                     "x-stoplight": {
-                      "id": "jhizdby1fe1s3"
+                      "id": "5gvrjeu2bzjkt"
                     },
-                    "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
-                    "items": {
-                      "x-stoplight": {
-                        "id": "75ow5oye90b2j"
+                    "description": "Filters let you refine the results that are returned.",
+                    "properties": {
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "ei6xx3xrgfc4x"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "zgppvc20as3ou"
+                          },
+                          "type": "string"
+                        }
                       },
-                      "type": "string"
-                    }
-                  },
-                  "propertyHostnames": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "t68g48tsnafc3"
-                    },
-                    "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
-                    "items": {
-                      "x-stoplight": {
-                        "id": "k0pa46mhiqhfh"
-                      },
-                      "type": "string"
+                      "hostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "53wmopbvdtm2w"
+                        },
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "l5lf0s4v6ajwv"
+                          },
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -13620,36 +13983,52 @@
         },
         "description": "Gets the traffic volume in megabytes uploaded to edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.\n\nNote: The overhead of TCP, IP, and MAC headers is not included in this API's results.",
         "operationId": "getEdgeUploadTrafficVolume",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/upVol?type=fiveminutes -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "hostnames": {
-                    "type": "array",
+                  "filters": {
+                    "type": "object",
                     "x-stoplight": {
-                      "id": "mgjjqvg1y98bc"
+                      "id": "fmfd50lxo4b0o"
                     },
-                    "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
-                    "items": {
-                      "x-stoplight": {
-                        "id": "f0901g779bkpu"
+                    "description": "Filters let you refine the results that are returned.",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "bprbpyqkkiuo3"
+                        },
+                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "edmw07tmdh0ix"
+                          },
+                          "type": "string"
+                        }
                       },
-                      "type": "string"
-                    }
-                  },
-                  "propertyHostnames": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "z1rdwtttsfxyn"
-                    },
-                    "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
-                    "items": {
-                      "x-stoplight": {
-                        "id": "4r9g1liwn5m83"
-                      },
-                      "type": "string"
+                      "propertyHostnames": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "sfux8slx3yrfv"
+                        },
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "0zlfnd0v8ua2q"
+                          },
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -13801,6 +14180,13 @@
         },
         "description": "This API allows you to create an annotation for a report shown in the CDN Pro portal. The request body lets you specify the conditions under which the annotation appears along with the text to show.",
         "operationId": "createAnnotation",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /annotations -p -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -13946,6 +14332,13 @@
         },
         "description": "Create a purge request to force a refresh of the content stored in the CDN Pro cache servers.  You may wish to do this if you just updated content on your origin server and want visitors to see the changes right away rather than wait for the updates to propagate according to the schedule defined in your property configuration.",
         "operationId": "createPurge",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /purges -p -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -14262,6 +14655,13 @@
           }
         },
         "operationId": "getPurgeRequestList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /purges\n"
+          }
+        ],
         "description": "Get a list of purge requests. Purge records are retained for fifteen days. Filter the list by specifying query parameters.",
         "parameters": [
           {
@@ -14563,6 +14963,13 @@
           }
         },
         "operationId": "queryAnnotationList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /annotationsList?type=client -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -14648,9 +15055,19 @@
                 "title": "reportfiltershostnamesonly",
                 "type": "object",
                 "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -14659,15 +15076,6 @@
                           "type": "string"
                         }
                       }
-                    }
-                  }
-                },
-                "x-examples": {
-                  "filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
                     }
                   }
                 }
@@ -14754,6 +15162,13 @@
         },
         "description": "Delete a report annotation.",
         "operationId": "deleteAnnotation",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /annotations/81230c199e5f9dd381daff5e\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -14923,6 +15338,13 @@
           }
         },
         "operationId": "getAnnotation",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /annotations/81230c199e5f9dd381daff5e\n"
+          }
+        ],
         "description": "Retrieve details about a report annotation including the conditions in which it will appear in a CDN Pro report.",
         "parameters": [
           {
@@ -15011,6 +15433,13 @@
         },
         "description": "Update a report annotation. It will appear within CDN Pro portal reports when its conditions are met.",
         "operationId": "updateAnnotation",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /annotations/81230c199e5f9dd381daff5e -p -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -15210,10 +15639,12 @@
                         "type": "object",
                         "properties": {
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "HTTP header name."
                           },
                           "value": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "HTTP header value."
                           }
                         }
                       }
@@ -15306,6 +15737,13 @@
         },
         "description": "Get information about a purge request including its associated hostnames and status.",
         "operationId": "queryPurgeStatus",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /purges/12330c199e5f9dd381daff5e\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -15425,6 +15863,13 @@
           }
         },
         "operationId": "queryPurgeSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /purges/purgeSummary -p -m 2024-10\n"
+          }
+        ],
         "description": "Returns a summary of purge requests that were made during a time period. Query parameters let you specify the timeframe and target environment.",
         "parameters": [
           {
@@ -15877,6 +16322,13 @@
           }
         },
         "operationId": "getVolSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/volSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get a summary of edge, intermediate (between CDN Pro servers), and origin traffic volume during a time period. You can filter and group results by hostnames, server groups, property IDs, or property hostnames. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.\n",
         "parameters": [
           {
@@ -15947,6 +16399,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -16046,6 +16499,13 @@
       "get": {
         "summary": "Get a summary of traffic volume",
         "operationId": "get-cdn-report-volSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/volSummary -p -m 2024-10\n"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
@@ -16625,6 +17085,13 @@
         },
         "description": "Create a CDN Pro portal user account. The loginName field must be unique. If you delete a user, you cannot reuse the old loginName.",
         "operationId": "createContact",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh POST /contacts -p -j body.json\n"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -16776,7 +17243,11 @@
                       },
                       "ipWhiteList": {
                         "type": "array",
-                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\"], which permits logins from all IP addresses.",
+                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\", \\\"::/0\\\"], which permits logins from all IP addresses.",
+                        "default": [
+                          "0.0.0.0/0",
+                          "::/0"
+                        ],
                         "items": {
                           "type": "string"
                         }
@@ -17031,6 +17502,13 @@
           }
         },
         "operationId": "getContacts",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /contacts -p\n"
+          }
+        ],
         "description": "Get a list of CDN Pro portal users. Use the query parameters to filter the results. If you are a reseller you may use the <i>Report-Range</i> request header to get a list of user accounts from child customers as well, or use the On-Behalf-Of header to get results from a single child customer.",
         "parameters": [
           {
@@ -17258,6 +17736,13 @@
           }
         },
         "operationId": "get-ngadmin-apiAccounts-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /apiAccounts/12345 -p\n"
+          }
+        ],
         "description": "Get details about an API account.",
         "parameters": [
           {
@@ -17410,6 +17895,13 @@
           }
         },
         "operationId": "patch-ngadmin-apiAccounts-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh PATCH /apiAccounts/12345 -p -j body.json\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -17531,6 +18023,13 @@
         },
         "description": "Delete an API account.",
         "operationId": "deleteApiAccount",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh DELETE /apiAccounts/12345 -p\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -17780,6 +18279,13 @@
           }
         },
         "operationId": "post-ngadmin-apiAccounts",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh POST /apiAccounts -p -j body.json\n"
+          }
+        ],
         "description": "Create an API account that can be used to call CDN Pro APIs in addition to your administrator API account. You can grant <i>read-only</i> access, which permits calling API endpoints using the HTTP GET method only, OR <i>operator</i> access, which also allows creating, updating, and deleting objects like properties and certificates. \n<br/><br/>After creating an API account, you must call our <a \nhref=\"#operation/post-cdn-apiPermissions\">API to create custom permissions</a> for it and define the endpoints that can be accessed. After that, you can make additional changes by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a>.",
         "requestBody": {
           "content": {
@@ -18029,6 +18535,13 @@
           }
         },
         "operationId": "get-ngadmin-apiAccounts",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /apiAccounts -p\n"
+          }
+        ],
         "description": "Get a list of API accounts belonging to you. You can filter the results using query parameters. If you are a reseller, you can also use the Report-Range header to get all the API accounts from your child customers as well.",
         "parameters": [
           {
@@ -18258,7 +18771,11 @@
                         },
                         "ipWhiteList": {
                           "type": "array",
-                          "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\"], which permits logins from all IP addresses.",
+                          "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\", \\\"::/0\\\"], which permits logins from all IP addresses.",
+                          "default": [
+                            "0.0.0.0/0",
+                            "::/0"
+                          ],
                           "items": {
                             "type": "string"
                           }
@@ -18381,6 +18898,13 @@
           }
         },
         "operationId": "get-ngadmin-contacts-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /contacts/12345 -p\n"
+          }
+        ],
         "description": "Return information about a CDN Pro portal user.",
         "parameters": [
           {
@@ -18430,6 +18954,13 @@
           }
         },
         "operationId": "delete-ngadmin-contacts-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh DELETE /contacts/12345 -p\n"
+          }
+        ],
         "description": "Delete a CDN Pro portal user account using this API.",
         "parameters": [
           {
@@ -18485,6 +19016,13 @@
           }
         },
         "operationId": "patch-ngadmin-contacts-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh PATCH /contacts/12345 -p -j body.json\n"
+          }
+        ],
         "description": "Update a CDN Pro portal user account. Only fields in the request body will be updated.",
         "requestBody": {
           "content": {
@@ -18632,7 +19170,11 @@
                       },
                       "ipWhiteList": {
                         "type": "array",
-                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\"], which permits logins from all IP addresses.",
+                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\", \\\"::/0\\\"], which permits logins from all IP addresses.",
+                        "default": [
+                          "0.0.0.0/0",
+                          "::/0"
+                        ],
                         "items": {
                           "type": "string"
                         }
@@ -18923,6 +19465,13 @@
         },
         "operationId": "post-cdn-report-edgeHostnameReq",
         "description": "Get the number of DNS requests to resolve your edge hostnames during a time period.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/edgeHostnameReq?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -19254,6 +19803,13 @@
           }
         },
         "operationId": "post-cdn-report-edgeHostnameReqSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/edgeHostnameReqSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.",
         "parameters": [
           {
@@ -19578,6 +20134,13 @@
           }
         },
         "description": "Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/edgeHostnameReqSummary -p -m 2024-10\n"
+          }
+        ],
         "tags": [
           "Reports"
         ],
@@ -19842,6 +20405,13 @@
           }
         },
         "operationId": "get-cdn-isps",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /isps\n"
+          }
+        ],
         "description": "Obtain a list of ISPs that can be used in <a href=\"#operation/createEdgeHostname\">edge hostname client zone rules</a>.",
         "parameters": [
           {
@@ -20137,9 +20707,10 @@
                         "ipWhiteList": {
                           "type": "array",
                           "default": [
-                            "0.0.0.0/0"
+                            "0.0.0.0/0",
+                            "::/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -20150,9 +20721,10 @@
                     "ipWhiteList": {
                       "type": "array",
                       "default": [
-                        "0.0.0.0/0"
+                        "0.0.0.0/0",
+                        "::/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\",\"::/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -20295,6 +20867,13 @@
           }
         },
         "operationId": "get-ngadmin-customers-ID",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /customers/me -p\n"
+          }
+        ],
         "description": "Obtain configuration details for a customer."
       },
       "patch": {
@@ -20542,9 +21121,10 @@
                         "ipWhiteList": {
                           "type": "array",
                           "default": [
-                            "0.0.0.0/0"
+                            "0.0.0.0/0",
+                            "::/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -20555,9 +21135,10 @@
                     "ipWhiteList": {
                       "type": "array",
                       "default": [
-                        "0.0.0.0/0"
+                        "0.0.0.0/0",
+                        "::/0"
                       ],
-                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
+                      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\",\"::/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -20798,6 +21379,13 @@
           }
         },
         "operationId": "patch-ngadmin-customers-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh PATCH /customers/12345 -p -j body.json\n"
+          }
+        ],
         "description": "Update a customer account. Settings within the <i>configs</i> field can only be set by a reseller on behalf of a child customer. A child customer's access to a product can only be removed if they are not currently using resources. For example, the child should not have any remaining deployed properties.",
         "requestBody": {
           "content": {
@@ -20889,9 +21477,10 @@
                       "ipWhiteList": {
                         "type": "array",
                         "default": [
-                          "0.0.0.0/0"
+                          "0.0.0.0/0",
+                          "::/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -20999,9 +21588,9 @@
                   "ipWhiteList": {
                     "type": "array",
                     "default": [
-                      "0.0.0.0/0"
+                      "0.0.0.0/0,::/0"
                     ],
-                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n ",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list. You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\",\"::/0\"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
                     "items": {
                       "type": "string"
                     }
@@ -21343,9 +21932,10 @@
                         "ipWhiteList": {
                           "type": "array",
                           "default": [
-                            "0.0.0.0/0"
+                            "0.0.0.0/0",
+                            "::/0"
                           ],
-                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                          "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                           "items": {
                             "type": "string"
                           }
@@ -21390,7 +21980,8 @@
                       },
                       "emailAddress": "testcustomer@domain.com",
                       "ipWhiteList": [
-                        "0.0.0.0/0"
+                        "0.0.0.0/0",
+                        "::/0"
                       ],
                       "configs": {
                         "parentId": 12345,
@@ -21410,7 +22001,8 @@
                         "passwordExpirationDays": 41,
                         "logoutIdleTime": 355,
                         "ipWhiteList": [
-                          "0.0.0.0/0"
+                          "0.0.0.0/0",
+                          "::/0"
                         ]
                       }
                     }
@@ -21536,6 +22128,13 @@
           }
         },
         "description": "Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the <i>phone</i>, <i>address</i>, <i>responsiblePerson</i>, and <i>chinaBizInfo</i> fields for the customer before enabling deployment to China.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh POST /customers -p -j body.json\n"
+          }
+        ],
         "tags": [
           "Customer Management"
         ],
@@ -21568,7 +22167,11 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
+                    "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
+                    "default": [
+                      "0.0.0.0/0",
+                      "::/0"
+                    ],
                     "items": {
                       "type": "string"
                     }
@@ -21600,9 +22203,10 @@
                       "ipWhiteList": {
                         "type": "array",
                         "default": [
-                          "0.0.0.0/0"
+                          "0.0.0.0/0",
+                          "::/0"
                         ],
-                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+                        "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
                         "items": {
                           "type": "string"
                         }
@@ -22110,6 +22714,13 @@
           }
         },
         "operationId": "get-ngadmin-customers",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /customers -p\n"
+          }
+        ],
         "description": "<b>Resellers</b> can use this API to get a list of their child customers. Query parameters filter results.\n",
         "parameters": [
           {
@@ -22288,6 +22899,13 @@
           }
         },
         "operationId": "get-cdn-clientRegions",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /clientRegions\n"
+          }
+        ],
         "description": "Get a list of client regions that can be used in <a href=\"#operation/createEdgeHostname\">edge hostname client zone rules</a>. Query parameters allow you to filter and sort the results.",
         "parameters": [
           {
@@ -22493,6 +23111,13 @@
           }
         },
         "operationId": "get-ngadmin-apicalls",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /apicalls -p\n"
+          }
+        ],
         "description": "Retrieve a list of recent API calls that have been made by you or on your behalf. API calls triggered by portal users are included as well. Query parameters allow you to filter results. By default, API calls made in the last 30 days will be returned if the startdate and enddate parameters are unspecified.",
         "parameters": [
           {
@@ -22790,7 +23415,7 @@
                         "contact-id:26394",
                         "sec-ch-ua-platform:",
                         "accept:application/json",
-                        "origin:https://console-integration.quantil.com",
+                        "origin:https://console.cdnetworks.com",
                         "sec-fetch-site:same-origin",
                         "sec-fetch-mode:cors",
                         "sec-fetch-dest:empty",
@@ -22874,6 +23499,13 @@
           }
         },
         "operationId": "get-ngadmin-apicalls-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./adminapi.sh GET /apicalls/4567f449795483d -p\n"
+          }
+        ],
         "description": "Get details about an API call including its response status, request and response headers, and caller's IP address.",
         "parameters": [
           {
@@ -23199,6 +23831,13 @@
           }
         },
         "operationId": "get-cdn-systemConfigs",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /systemConfigs\n"
+          }
+        ],
         "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a>, advanced Edge Logic directives, the default pricing for traffic, and nonstandard ports that can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed."
       }
     },
@@ -23278,6 +23917,13 @@
           }
         },
         "operationId": "post-cdn-serviceQuotas",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /serviceQuotas -p -j body.json\n"
+          }
+        ],
         "description": "A reseller can use this API to define CDN Pro service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. ",
         "requestBody": {
           "content": {
@@ -23704,6 +24350,13 @@
           }
         },
         "operationId": "get-cdn-serviceQuotas",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /serviceQuotas\n"
+          }
+        ],
         "description": "<b>Resellers</b> can use this API to obtain a list of service quotas of their child customers. Optional query parameters let you filter the results.",
         "parameters": [
           {
@@ -24250,6 +24903,13 @@
           }
         },
         "operationId": "get-cdn-serviceQuotas-serviceQuotaId",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /serviceQuotas/12345\n"
+          }
+        ],
         "description": "This API allows a reseller to get a child customer's service quota by referencing its service quota ID."
       },
       "patch": {
@@ -24339,6 +24999,13 @@
           }
         },
         "operationId": "patch-cdn-serviceQuotas-serviceQuotaId",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /serviceQuotas/123456 -p -j body.json\n"
+          }
+        ],
         "description": "This API allows a reseller to update a child customer's service quota by referencing its service quota ID.",
         "requestBody": {
           "content": {
@@ -24692,6 +25359,13 @@
           }
         },
         "operationId": "delete-cdn-serviceQuotas-serviceQuotaId",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /serviceQuotas/12345\n"
+          }
+        ],
         "description": "This API allows a reseller to delete a child customer's service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
       }
     },
@@ -24869,6 +25543,13 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginReq",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/fastOriginReq?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Return the number of requests to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
         "parameters": [
           {
@@ -24909,7 +25590,13 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
             },
             "in": "query",
             "name": "type",
@@ -25107,6 +25794,13 @@
           }
         },
         "operationId": "post-cdn-report-fastOriginVol",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/fastOriginVol?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
         "parameters": [
           {
@@ -25147,7 +25841,13 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
             },
             "in": "query",
             "name": "type",
@@ -25958,6 +26658,13 @@
           }
         },
         "operationId": "get-cdn-serviceQuotas-customer-customerId",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /serviceQuotas/customer/12345\n"
+          }
+        ],
         "description": "Get the CDN service quota for a customer."
       },
       "patch": {
@@ -26021,6 +26728,13 @@
           }
         },
         "operationId": "patch-cdn-serviceQuotas-customer-customerId",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /serviceQuotas/customer/123456 -p -j body.json\n"
+          }
+        ],
         "description": "This API allows a reseller to update an existing service quota for a child customer.",
         "requestBody": {
           "content": {
@@ -26355,6 +27069,13 @@
           }
         },
         "operationId": "delete-cdn-serviceQuotas-customer-customerId",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /serviceQuotas/customer/12345\n"
+          }
+        ],
         "description": "This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href=\"#operation/createDeployment\">deployed</a> in the staging or production environments."
       }
     },
@@ -26534,6 +27255,13 @@
           }
         },
         "operationId": "post-cdn-report-cpuTime",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/cpuTime?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -26573,7 +27301,13 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
             },
             "in": "query",
             "name": "type",
@@ -26805,6 +27539,13 @@
           }
         },
         "operationId": "get-cdn-hostnames-historical-hostname",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /hostnames/historical/myhostname.com\n"
+          }
+        ],
         "description": "This API returns information about a hostname's deployments to production and staging. Query parameters let you specify a timeframe to search and where the hostname was deployed.",
         "parameters": [
           {
@@ -26927,6 +27668,13 @@
           }
         },
         "operationId": "post-cdn-prefetches",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /prefetches -p -j body.json\n"
+          }
+        ],
         "description": "Create a prefetch request to warm up the CDN Pro cache with contents from your origin in anticipation of visitors. This is helpful to prevent a sudden influx of requests to your origin servers. The URLs you prefetch must be for hostnames of properties deployed to production.\n",
         "parameters": [
           {
@@ -26951,6 +27699,7 @@
                   },
                   "fileList": {
                     "type": "array",
+                    "description": "URLs to prefetch.",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -27215,6 +27964,13 @@
           }
         },
         "operationId": "get-cdn-prefetches",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /prefetches\n"
+          }
+        ],
         "description": "Get a list of prefetch requests. Prefetch records are retained for fifteen days. Filter the list by specifying query parameters.",
         "parameters": [
           {
@@ -27344,6 +28100,7 @@
                     },
                     "fileList": {
                       "type": "array",
+                      "description": "URLs to prefetch.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -27543,6 +28300,13 @@
           }
         },
         "operationId": "get-cdn-prefetches-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /prefetches/12330c199e5f9dd381daff5e\n"
+          }
+        ],
         "description": "Get details on the status of a prefetch request.",
         "parameters": [
           {
@@ -27615,6 +28379,13 @@
           }
         },
         "operationId": "post-cdn-apiPermissions",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /apiPermissions -p -j body.json\n"
+          }
+        ],
         "description": "Control which CDN endpoints an <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a> can access. The permissions work with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security, you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs. \n\nYou must call this API to create permissions for each new API account before it can be used. After you create a custom API permission for the API account, you can update its permissions further by calling our <a href=\"#operation/patch-cdn-apiPermissions-id\">update permission API</a>.",
         "parameters": [
           {
@@ -28259,6 +29030,13 @@
           }
         },
         "operationId": "get-cdn-apiPermissions-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /apiPermissions/123 -p\n"
+          }
+        ],
         "description": "Return an API account's permissions, both custom ones as well as the defaults. If you have not set an API account's permissions, you will get a 404 HTTP response. To specify the permissions of a new API account, you must <a href=\"#operation/post-cdn-apiPermissions\">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href=\"#operation/patch-cdn-apiPermissions-id\">API to modify the permissions</a> further if needed.",
         "parameters": [
           {
@@ -28340,6 +29118,13 @@
           }
         },
         "operationId": "patch-cdn-apiPermissions-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /apiPermissions/123 -p -j body.json\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -28647,6 +29432,13 @@
           }
         },
         "operationId": "delete-cdn-apiPermissions-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /apiPermissions/123 -p\n"
+          }
+        ],
         "description": "Delete custom permissions for an API account.",
         "parameters": [
           {
@@ -28825,6 +29617,13 @@
           }
         },
         "operationId": "post-cdn-report-reqSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/reqSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get a summary of requests during a time period. You can filter and group results by hostnames, server groups, property IDs, or property hostnames. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' requests.",
         "parameters": [
           {
@@ -28897,6 +29696,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -29120,6 +29920,13 @@
           }
         },
         "description": "Get a summary of requests during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' requests.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/reqSummary -p -m 2024-10\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -29195,6 +30002,7 @@
                     },
                     "webooks": {
                       "type": "array",
+                      "description": "A list of webhooks",
                       "items": {
                         "type": "object",
                         "description": "List of webhooks.",
@@ -29312,6 +30120,13 @@
           }
         },
         "operationId": "get-cdn-webhooks",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /webhooks -p\n"
+          }
+        ],
         "description": "Get a list of webhooks that have been defined. You can reference a webhook when <a href=\"#operation/createDeployment\">creating a deployment task</a>, <a href=\"#operation/createPurge\">creating a purge request</a>, <a href=\"#operation/post-cdn-prefetches\">creating a prefetch request</a>, or <a href=\"#operation/createValidationTask\">creating a validation task</a>.",
         "parameters": [
           {
@@ -29442,6 +30257,13 @@
           }
         },
         "operationId": "post-cdn-webhooks",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /webhooks -p -j body.json\n"
+          }
+        ],
         "description": "Create a webhook. It can be used to notify you when an asynchronous task completes. You can reference a webhook when <a href=\"#operation/createDeployment\">creating a deployment task</a>, <a href=\"#operation/createPurge\">creating a purge request</a>, <a href=\"#operation/post-cdn-prefetches\">creating a prefetch request</a>, or <a href=\"#operation/createValidationTask\">creating a validation task</a>.",
         "parameters": [
           {
@@ -29653,6 +30475,13 @@
           }
         },
         "operationId": "get-cdn-webhooks-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /webhooks/12 -p\n"
+          }
+        ],
         "description": "This API returns details about a webhook including its URL and metadata about its use.",
         "parameters": [
           {
@@ -29679,6 +30508,13 @@
           }
         },
         "operationId": "patch-cdn-webhooks-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /webhooks/12 -p -j body.json\n"
+          }
+        ],
         "description": "Update a webhook. Only the fields in the request body will be updated.",
         "parameters": [
           {
@@ -29776,6 +30612,13 @@
           }
         },
         "operationId": "delete-cdn-webhooks-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /webhooks/12 -p\n"
+          }
+        ],
         "description": "Delete a webhook. If an asychronous task using it is still in progress, the webhook may not be called when the task completes.",
         "parameters": [
           {
@@ -29899,6 +30742,13 @@
           }
         },
         "operationId": "post-cdn-secrets",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /secrets -j body.json\n"
+          }
+        ],
         "description": "Create a secret to protect sensitive text from being exposed in a property's Edge Logic. Refer to the secret in your property's Edge Logic using the <code>$SECRET(secretName)</code> syntax. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
         "requestBody": {
           "content": {
@@ -30110,6 +30960,13 @@
           }
         },
         "operationId": "get-cdn-secrets",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /secrets\n"
+          }
+        ],
         "description": "Get a list of secrets that have been defined. Filter the results using the query parameters.",
         "parameters": [
           {
@@ -30230,6 +31087,13 @@
           }
         },
         "operationId": "get-cdn-purges-purgeTokens",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /purges/purgeTokens?target=production\n"
+          }
+        ],
         "description": "This API indicates the number of directory and file purge requests you can make in the staging or production environments. Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> specifies a daily limit on file and directory purges for production and staging environments. You can temporarily exceed the limit during a day, but it will reduce the number of purges available during the next day.",
         "parameters": [
           {
@@ -30450,6 +31314,13 @@
           }
         },
         "operationId": "get-cdn-secrets-secretID",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /secrets/81230c199e5f9dd381daff5e\n"
+          }
+        ],
         "description": "Get details about a secret including its usage in properties deployed to staging and production.",
         "parameters": [
           {
@@ -30583,6 +31454,13 @@
           }
         },
         "operationId": "patch-cdn-secrets-secretID",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /secrets -j body.json\n"
+          }
+        ],
         "description": "Update a secret using this API. Deployed properties using the secret will continue to use its original value at the time of deployment. If you change the secret's name, property versions referring to the old name will not pass future validations until you edit the properties to remove the references or update them to use a valid secret's name. If you change the secret's value, properties using the secret must be revalidated before they can be redeployed. ",
         "requestBody": {
           "content": {
@@ -30721,6 +31599,13 @@
           }
         },
         "operationId": "delete-cdn-secrets-secretID",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /secrets/81230c199e5f9dd381daff5e\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -30867,6 +31752,13 @@
           }
         },
         "operationId": "get-cdn-report-logConfigs",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/logConfigs\n"
+          }
+        ],
         "description": "Obtain a list of log configurations you have created.",
         "parameters": [
           {
@@ -30919,6 +31811,13 @@
       "post": {
         "summary": "Create a log configuration",
         "operationId": "post-cdn-report-logConfigs",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/logConfigs -j body.json\n"
+          }
+        ],
         "responses": {
           "201": {
             "description": "The log configuration was created. The Location header contains a reference to the new log configuration.",
@@ -31257,6 +32156,13 @@
           }
         },
         "operationId": "get-cdn-report-logConfigs-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/logConfigs/123\n"
+          }
+        ],
         "description": "Retrieve a log configuration.",
         "parameters": [
           {
@@ -31344,6 +32250,13 @@
           }
         },
         "operationId": "patch-cdn-report-logConfigs-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /report/logConfigs/1 -j body.json\n"
+          }
+        ],
         "description": "Update a log configuration's settings. It can take up to 40 minutes for the revision to take effect.",
         "requestBody": {
           "content": {
@@ -31537,6 +32450,13 @@
           }
         },
         "operationId": "delete-cdn-report-logConfigs-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /report/logConfigs/123\n"
+          }
+        ],
         "description": "Delete a log configuration.",
         "parameters": [
           {
@@ -31662,6 +32582,13 @@
           }
         },
         "operationId": "post-cdn-report-logDownload",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/logDownload -p -m 2024-10-25 -j body.json\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -31701,6 +32628,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -31733,6 +32661,13 @@
       "get": {
         "summary": "Get access logs for a hostname",
         "operationId": "get-cdn-report-logDownload",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/logDownload?hostname=mydomain.com -p -m 2024-10-25\n"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contains an array of log file URLs. Each log file is compressed using gzip.",
@@ -32084,6 +33019,13 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/bandwidthSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get a summary of traffic bandwidth during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers' traffic.",
         "parameters": [
           {
@@ -32153,6 +33095,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -32232,6 +33175,13 @@
       "get": {
         "summary": "Get a summary of traffic bandwidth",
         "operationId": "get-cdn-report-bandwidthSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/bandwidthSummary -p -m 2024-10\n"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contains a summary of traffic bandwidth by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
@@ -32601,6 +33551,13 @@
           }
         },
         "operationId": "post-cdn-reports-edgeStatusSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/edgeStatusSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Gets a summary of HTTP status codes returned by requests to the CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "parameters": [
           {
@@ -32654,6 +33611,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -32732,6 +33690,13 @@
       "get": {
         "summary": "Get a summary of status codes returned by edge servers",
         "operationId": "get-cdn-reports-edgeStatusSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/edgeStatusSummary -p -m 2024-10\n"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contains a summary of status codes returned by the CDN Pro edge servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
@@ -33066,6 +34031,13 @@
           }
         },
         "operationId": "get-cdn-publicIpList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /publicIpList\n"
+          }
+        ],
         "description": "Get a list of IP addresses used by CDN Pro. If your property's origin configuration uses the directConnection setting 'noDirect', and its Edge Logic does not use the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">origin fast route directive</a>, you can restrict access to your origin servers by updating your allow lists with these IP addresses. Since the CDN's IP addresses can periodically change, we recommend that you check once a day and update your allow lists."
       }
     },
@@ -33234,6 +34206,13 @@
           }
         },
         "operationId": "post-cdn-reports-originStatusSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/originStatusSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.",
         "parameters": [
           {
@@ -33285,6 +34264,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -33490,6 +34470,13 @@
           }
         },
         "description": "Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. This report's data has a latency of up to thirty minutes.",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/originStatusSummary -p -m 2024-10\n"
+          }
+        ],
         "tags": [
           "Reports"
         ],
@@ -33702,6 +34689,13 @@
           }
         },
         "operationId": "post-cdn-report-cpuSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/cpuSummary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Obtain a summary of CPU usage by edge and intermediate servers.",
         "parameters": [
           {
@@ -33980,6 +34974,13 @@
           }
         },
         "operationId": "get-cdn-report-cpuSummary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/cpuSummary -p -m 2024-10\n"
+          }
+        ],
         "description": "Obtain a summary of CPU usage by edge and intermediate servers.",
         "parameters": [
           {
@@ -34071,6 +35072,13 @@
           }
         },
         "operationId": "get-cdn-prefetches-prefetchTokens",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /prefetches/prefetchTokens\n"
+          }
+        ],
         "description": "This API indicates the number of prefetch requests you can make. Your <a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">service quota</a> specifies a daily limit on prefetch requests. You can temporarily exceed the limit during a day, but it will reduce the number of prefetches available during the next day."
       }
     },
@@ -34208,6 +35216,13 @@
           }
         },
         "operationId": "get-cdn-shields",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /shields\n"
+          }
+        ],
         "description": "Get a list of shields that can be used as an extra layer between the CDN Pro edge servers and your origin servers. A shield can further reduce the number of requests to your origin and limit the requests to a smaller set of servers. \nThis is an advanced feature. If you require this feature, please contact our support team.",
         "parameters": [
           {
@@ -34395,6 +35410,13 @@
           }
         },
         "operationId": "get-cdn-shields-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /shields/as-jp1\n"
+          }
+        ],
         "description": "Obtain information about a shield which can be used as an extra layer between the CDN Pro edge servers and your origin servers. This is an advanced feature. If you require this feature, please contact our support team.",
         "parameters": [
           {
@@ -34485,6 +35507,13 @@
           }
         },
         "operationId": "get-cdn-logAggregationPoints",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /logAggregationPoints\n"
+          }
+        ],
         "description": "Get a list of log aggregation points that are used to collect raw server logs.",
         "parameters": [
           {
@@ -34566,9 +35595,48 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "This error is returned if you try to create a log aggregation point using the name of an existing one.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "lzootnbz5njs1"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "47p5kvfov17pt"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "DuplicateName": {
+                    "value": {
+                      "code": "DuplicateName",
+                      "message": "The customer already has a log aggregation point with the same name."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "post-cdn-logAggregationPoints",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /logAggregationPoints -j body.json\n"
+          }
+        ],
         "description": "Create a new log aggregation point where batches of logs are sent together rather than individually. The maximum number of log aggregation points that can be created by a customer are defined in the customer's service quota.",
         "requestBody": {
           "content": {
@@ -34836,6 +35904,13 @@
           }
         },
         "operationId": "get-cdn-logAggregationPoints-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /logAggregationPoints/12\n"
+          }
+        ],
         "description": "Use this API to get details about a log aggregration point."
       },
       "delete": {
@@ -34875,6 +35950,13 @@
           }
         },
         "operationId": "delete-cdn-logAggregationPoints-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /logAggregationPoints/12\n"
+          }
+        ],
         "description": "Use this API to delete a log aggregation point."
       },
       "patch": {
@@ -34952,6 +36034,13 @@
           }
         },
         "operationId": "patch-cdn-logAggregationPoints-id",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh PATCH /logAggregationPoints/12 -j body.json\n"
+          }
+        ],
         "description": "Use this API to update a log aggregation point.",
         "requestBody": {
           "content": {
@@ -35129,6 +36218,13 @@
           }
         },
         "operationId": "post-ngadmin-ipDetails",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /ipDetails -p -j body.json\n"
+          }
+        ],
         "description": "This API allows you to check whether one or more IP addresses belong to the CDN Pro platform.",
         "requestBody": {
           "content": {
@@ -35335,6 +36431,13 @@
           }
         },
         "operationId": "post-cdn-report-volL7",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/volL7?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get the OSI layer 7 traffic volume in megabytes during a time period. Query parameters let you specify the time period and granularity of data. Filter the results further by passing a filters object in the request. This report's data has a latency of less than two minutes.",
         "parameters": [
           {
@@ -35367,7 +36470,13 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
             },
             "in": "query",
             "name": "type",
@@ -35398,6 +36507,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -35610,6 +36720,13 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthL7",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/bandwidthL7?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get the OSI layer 7 traffic bandwidth in Mbps during a time period. Query parameters let you specify the time period and granularity of data. Filter the results further by passing a filters object in the request. This report's data has a latency of less than two minutes.",
         "parameters": [
           {
@@ -35642,7 +36759,13 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
             },
             "in": "query",
             "name": "type",
@@ -35673,6 +36796,7 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
@@ -35939,6 +37063,13 @@
           }
         },
         "operationId": "getVolL7Summary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/volL7Summary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get a summary of edge layer 7 traffic volume during a time period. You can filter and group results by hostnames, property hostnames, or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)\n",
         "parameters": [
           {
@@ -36051,6 +37182,13 @@
       "get": {
         "summary": "Get a summary of L7 traffic volume",
         "operationId": "get-cdn-report-volL7Summary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/volL7Summary -p -m 2024-10\n"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contains a summary of layer 7 traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of \"isComplete\" will be false. A special group \"\\_\\_all\\_\\_\" contains the total for all groups including those beyond the 10000 limit. When \"isComplete\" is true, the total is the sum of all other returned groups.",
@@ -36508,6 +37646,13 @@
           }
         },
         "operationId": "post-cdn-report-bandwidthL7Summary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh POST /report/bandwidth7Summary -p -m 2024-10 -j body.json\n"
+          }
+        ],
         "description": "Get a summary of layer 7 traffic bandwidth during a time period. You can filter and group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)",
         "parameters": [
           {
@@ -36611,6 +37756,13 @@
       "get": {
         "summary": "Get a summary of layer 7 traffic bandwidth",
         "operationId": "get-cdn-report-bandwidthL7Summary",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /report/bandwidthL7Summary -p -m 2024-10\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -36893,6 +38045,13 @@
           }
         },
         "operationId": "get-cdn-originFastRouteIpList",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /originFastRouteIpList\n"
+          }
+        ],
         "description": "This API returns a list of IP addresses used by our origin fast route servers. If you use our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable and wish to restrict access to your origin servers, add these IP addresses to your allow lists.\n"
       }
     },
@@ -36990,6 +38149,13 @@
           }
         },
         "operationId": "get-cdn-stagingServers",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /stagingServers\n"
+          }
+        ],
         "description": "This API returns a list of IP addresses of servers that can be used to test deployments of properties and certificates to 'staging'. We recommend deploying to 'staging' and testing before deploying to 'production'."
       }
     }
@@ -37005,7 +38171,7 @@
       "API Key": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/qtlcli/tree/master/cdn/bash\">here</a>."
+        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
       }
     }
   },
