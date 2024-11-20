@@ -1,5 +1,16 @@
 # Release Notes
 
+## November 18, 2024
+#### API updates
+* Added missing information to details of API calls which result in 401 and 403 responses.
+* Improved handling of concurrent requests to [create API permissions](</apidocs#operation/post-cdn-apiPermissions>).
+* Supported IPv6 addresses in the whitelists used to manage access to APIs and the portal.
+* Fixed deployment and undeployment dates of properties and historic hostnames.
+* Fixed problems with [deleting an API permission](</apidocs#operation/delete-cdn-apiPermissions-id>).
+
+#### Console updates
+* Supported specification of IPv6 addresses for an origin server in property configurations.
+
 ## October 29, 2024
 #### Console updates
 * Provided default HTTP/3 setting in the property page.
