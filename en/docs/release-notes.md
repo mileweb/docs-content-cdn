@@ -6,7 +6,7 @@
 * Improved handling of concurrent requests to [create API permissions](</apidocs#operation/post-cdn-apiPermissions>).
 * Supported IPv6 addresses in the whitelists used to manage access to APIs and the portal.
 * Fixed deployment and undeployment dates of properties and historic hostnames.
-* Fixed problems with [deleting an API permission](/apidocs#operation/delete-cdn-apiPermissions-id>).
+* Fixed problems with [deleting an API permission](</apidocs#operation/delete-cdn-apiPermissions-id>).
 
 #### Console updates
 * Supported specification of IPv6 addresses for an origin server in property configurations.
