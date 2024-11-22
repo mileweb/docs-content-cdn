@@ -660,7 +660,7 @@ When enabled, only one request at a time will be allowed to populate a new cache
 **Default:** `proxy_cache_lock_age 15s;` <br/>
 **Context:** server, location
 
-If the last request passed to the proxied server for populating a new cache element has not completed for the specified time, one more request may be passed to the proxied server. No change to the public version.
+If the last request passed to the upstream server for populating a new cache element has not completed for the specified time, one more request may be passed to the upstream server. No change to the public version.
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -670,7 +670,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the upstream server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
 ### `proxy_cache_max_stale`
 
@@ -732,7 +732,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 **Default:** `proxy_cache_use_stale error timeout;` <br/>
 **Context:** server, location
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN Pro edge server would return stale cached content if there is any problem establishing connection to the origin.
+Determines in which cases a stale cached response can be used during communication with the upstream server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN Pro edge server would return stale cached content if there is any problem establishing connection to the origin.
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -781,7 +781,7 @@ Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq
 **Default:** `proxy_cookie_domain off;` <br/>
 **Context:** server, location
 
-Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of an origin server response. No change to the public version. 
 
 ### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)
 
@@ -792,7 +792,7 @@ Sets a text that should be changed in the domain attribute of the `Set-Cookie` h
 **Default:** `proxy_cookie_path off;` <br/>
 **Context:** server, location
 
-Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of an origin server response. No change to the public version. 
 
 ### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)
 
@@ -836,7 +836,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **Default:** `proxy_ignore_client_abort off;` <br/>
 **Context:** server, location (LB only)
 
-Determines whether the connection with a proxied server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the proxied server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
+Determines whether the connection with an upstream server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the upstream server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -856,7 +856,7 @@ Disables processing of certain response header fields in the response from the o
 **Default:** `-` <br/>
 **Context:** server, location
 
-Specifies the HTTP method to use in requests forwarded to the proxied server instead of the method from the client request. Parameter value can contain variables.
+Specifies the HTTP method to use in requests forwarded to the origin server instead of the method from the client request. Parameter value can contain variables.
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
@@ -912,7 +912,7 @@ Since the content is not saved, usually there is no point in looking up the cach
 **Default:** `proxy_pass_header Date;` <br/>
 **Context:** server, location
 
-Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from an origin server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -944,7 +944,7 @@ Enables of disables passing request headers from client to upstream. No change t
 **Default:** `proxy_redirect default;` <br/>
 **Context:** server, location
 
-Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
+Sets the text that should be changed in the “Location” and “Refresh” header fields of an origin server response. No change to the public version. 
 
 ### [`proxy_request_buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering)
 
@@ -1009,7 +1009,7 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **Default:** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;` <br/>
 **Context:** server, location
 
-Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+Enables the specified protocols for requests to an origin HTTPS server. No change to the public version.
 
 ### `range_reorder`
 
