@@ -2708,6 +2708,12 @@
                       "code": "InvalidPort",
                       "message": "The port for deliverByHttps must be an integer in [80,65535]."
                     }
+                  },
+                  "Invalid client zone ": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "Client zone with region 'na.us' and isp 'us_cox' can have at most one 'deliver' action."
+                    }
                   }
                 }
               }
@@ -3085,6 +3091,12 @@
                     "value": {
                       "code": "InvalidPort",
                       "message": "The port for deliverByHttps must be an integer in [80,65535]."
+                    }
+                  },
+                  "Invalid client zone rule 2": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "Client zone with region 'na.us' and isp 'us_cox' can have at most one 'deliver' action."
                     }
                   }
                 }
@@ -5565,6 +5577,12 @@
                       "code": "InvalidPort",
                       "message": "The port for deliverByHttps must be an integer in [80,65535]."
                     }
+                  },
+                  "Invalid client zone 2": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "Client zone with region 'na.us' and isp 'us_cox' can have at most one 'deliver' action."
+                    }
                   }
                 }
               }
@@ -6017,6 +6035,12 @@
                     "value": {
                       "code": "InvalidServerGroup",
                       "message": "The serverGroup 'abc' is invalid."
+                    }
+                  },
+                  "Invalid client zone": {
+                    "value": {
+                      "code": "InvalidClientZone",
+                      "message": "Client zone with region 'na.us' and isp 'us_cox' can have at most one 'deliver' action."
                     }
                   }
                 }
@@ -10305,6 +10329,12 @@
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'daily' report must be no more than 366 days."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -10784,6 +10814,12 @@
                       "code": "InvalidHostnames",
                       "message": "Invalid hostname(s): 'sfasdfsdfasdfasdf'."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -11180,6 +11216,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'fiveminutes' report must be no more than 31 days."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -11578,6 +11620,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'monthly' report must be no more than 366 days."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -12183,6 +12231,12 @@
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'hourly' report must be no more than 92 days."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -12574,6 +12628,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'daily' report must be no more than 366 days."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -13221,6 +13281,12 @@
                       "code": "InvalidType",
                       "message": "Invalid parameter 'type': 'monthly+13'. The report type must be 'fiveminutes', 'hourly', 'daily'(with optional timezone) or 'monthly'(with optional timezone)."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -13613,6 +13679,12 @@
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'daily' report must be no more than 366 days."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -13974,6 +14046,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'daily' report must be no more than 366 days."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -16314,6 +16392,12 @@
                     "value": {
                       "code": "InvalidCustomerId",
                       "message": "The customerId should be a valid positive integer."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -25536,6 +25620,12 @@
                       "code": "InvalidScheme",
                       "message": "Invalid parameter 'scheme': 'httpsd'. The value of the scheme parameter must be 'http', 'https' or 'all'."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -25786,6 +25876,12 @@
                     "value": {
                       "code": "InvalidScheme",
                       "message": "Invalid parameter 'scheme': 'httpsd'. The value of the scheme parameter must be 'http', 'https' or 'all'."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -27247,6 +27343,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The max time span of 'daily' report must be no more than 366 days."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -29609,6 +29711,12 @@
                     "value": {
                       "code": "InvalidCustomerId",
                       "message": "The customerId should be a valid positive integer."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -33012,6 +33120,12 @@
                       "code": "InvalidCustomerId",
                       "message": "The customerId should be a valid positive integer."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -33543,6 +33657,12 @@
                     "value": {
                       "code": "InvalidGroupBy",
                       "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -34199,6 +34319,12 @@
                       "code": "InvalidGroupBy",
                       "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -34677,10 +34803,16 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid scheme": {
                     "value": {
                       "code": "InvalidScheme",
                       "message": "Invalid parameter 'scheme': 'a'. The value of the scheme parameter must be 'http', 'https' or 'all'."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -34962,7 +35094,7 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid scheme": {
                     "value": {
                       "code": "InvalidScheme",
                       "message": "Invalid parameter 'scheme': 'a'. The value of the scheme parameter must be 'http', 'https' or 'all'."
@@ -36424,6 +36556,12 @@
                       "code": "InvalidPropertyHostnames",
                       "message": "Duplicate propertyHostname(s) 'myHostname.com'."
                     }
+                  },
+                  "Invalid property hostnames 2": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -36712,6 +36850,12 @@
                     "value": {
                       "code": "InvalidPropertyHostnames",
                       "message": "Duplicate propertyHostname(s) 'myHostname.com'."
+                    }
+                  },
+                  "Invalid property hostnames 2": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
@@ -37055,6 +37199,12 @@
                     "value": {
                       "code": "InvalidTimeSpan",
                       "message": "The parameter 'enddate' should be after 'startdate'."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
                     }
                   }
                 }
