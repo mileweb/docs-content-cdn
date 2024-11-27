@@ -1,5 +1,13 @@
 # Release Notes
 
+## November 26, 2024
+#### API updates
+* Checked for duplicate client zone rules when creating or updating edge hostnames.
+* Checked for invalid property hostnames in filters of report APIs.
+
+#### Console updates
+* Automatically remove spaces around entered hostnames when generating a report to prevent errors.
+
 ## November 18, 2024
 #### API updates
 * Added missing information to details of API calls which result in 401 and 403 responses.
