@@ -148,10 +148,10 @@
                             },
                             "sampleRate": {
                               "type": "integer",
-                              "default": 1,
+                              "default": 10,
                               "minimum": 1,
                               "maximum": 65536,
-                              "description": "An integer between [1, 65536]. n means one notification for every n edge requests. 1 means every edge request will generate a notification. This is optional. Default is 1."
+                              "description": "An integer between [1, 65536]. n means one notification for every n edge requests. A value of 1 means every edge request will generate a notification. The default of 10 means a notification is sent for every 10 edge requests."
                             },
                             "escape": {
                               "type": "string",
@@ -160,7 +160,8 @@
                                 "none",
                                 "compactJson"
                               ],
-                              "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
+                              "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping.",
+                              "default": "none"
                             },
                             "format": {
                               "type": "string",
@@ -233,7 +234,8 @@
                                   "http",
                                   "https",
                                   "both"
-                                ]
+                                ],
+                                "default": "both"
                               },
                               "directConnection": {
                                 "type": "string",
@@ -272,9 +274,6 @@
                                 "type": [
                                   "string",
                                   "object"
-                                ],
-                                "enum": [
-                                  "off"
                                 ],
                                 "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                                 "properties": {
@@ -985,10 +984,10 @@
                       },
                       "sampleRate": {
                         "type": "integer",
-                        "default": 1,
+                        "default": 10,
                         "minimum": 1,
                         "maximum": 65536,
-                        "description": "An integer between [1, 65536]. n means one notification for every n edge requests. 1 means every edge request will generate a notification. This is optional. Default is 1."
+                        "description": "An integer between [1, 65536]. n means one notification for every n edge requests. A value of 1 means every edge request will generate a notification. The default of 10 means a notification is sent for every 10 edge requests."
                       },
                       "escape": {
                         "type": "string",
@@ -997,7 +996,8 @@
                           "none",
                           "compactJson"
                         ],
-                        "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
+                        "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping.",
+                        "default": "none"
                       },
                       "format": {
                         "type": "string",
@@ -1070,7 +1070,8 @@
                             "http",
                             "https",
                             "both"
-                          ]
+                          ],
+                          "default": "both"
                         },
                         "directConnection": {
                           "type": "string",
@@ -1109,9 +1110,6 @@
                           "type": [
                             "string",
                             "object"
-                          ],
-                          "enum": [
-                            "off"
                           ],
                           "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                           "properties": {
@@ -3873,10 +3871,10 @@
                       },
                       "sampleRate": {
                         "type": "integer",
-                        "default": 1,
+                        "default": 10,
                         "minimum": 1,
                         "maximum": 65536,
-                        "description": "An integer between [1, 65536]. n means one notification for every n edge requests. 1 means every edge request will generate a notification. This is optional. Default is 1."
+                        "description": "An integer between [1, 65536]. n means one notification for every n edge requests. A value of 1 means every edge request will generate a notification. The default of 10 means a notification is sent for every 10 edge requests."
                       },
                       "escape": {
                         "type": "string",
@@ -3885,7 +3883,8 @@
                           "none",
                           "compactJson"
                         ],
-                        "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
+                        "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping.",
+                        "default": "none"
                       },
                       "format": {
                         "type": "string",
@@ -3958,7 +3957,8 @@
                             "http",
                             "https",
                             "both"
-                          ]
+                          ],
+                          "default": "both"
                         },
                         "directConnection": {
                           "type": "string",
@@ -3997,9 +3997,6 @@
                           "type": [
                             "string",
                             "object"
-                          ],
-                          "enum": [
-                            "off"
                           ],
                           "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                           "properties": {
@@ -4589,10 +4586,10 @@
                           },
                           "sampleRate": {
                             "type": "integer",
-                            "default": 1,
+                            "default": 10,
                             "minimum": 1,
                             "maximum": 65536,
-                            "description": "An integer between [1, 65536]. n means one notification for every n edge requests. 1 means every edge request will generate a notification. This is optional. Default is 1."
+                            "description": "An integer between [1, 65536]. n means one notification for every n edge requests. A value of 1 means every edge request will generate a notification. The default of 10 means a notification is sent for every 10 edge requests."
                           },
                           "escape": {
                             "type": "string",
@@ -4601,7 +4598,8 @@
                               "none",
                               "compactJson"
                             ],
-                            "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping."
+                            "description": "Specify <i>json</i> to enable JSON character escaping in variables, <i>compactJson</i> to enable JSON character escaping with whitespace in the body removed, or <i>none</i> to disable escaping.",
+                            "default": "none"
                           },
                           "format": {
                             "type": "string",
@@ -4674,7 +4672,8 @@
                                 "http",
                                 "https",
                                 "both"
-                              ]
+                              ],
+                              "default": "both"
                             },
                             "directConnection": {
                               "type": "string",
@@ -4713,9 +4712,6 @@
                               "type": [
                                 "string",
                                 "object"
-                              ],
-                              "enum": [
-                                "off"
                               ],
                               "description": "This setting allows you to specify the number of unsuccessful attempts to reach one of the origin's IP addresses or peers before it is marked as <i>unavailable</i> for a period of time designated by the timeout. The number of attempts should be specified in a subfield of the peerFailureTimeout object called <i>failureThreshold</i> while the timeout in seconds should be in a subfield called <i>timeout</i>. If all peers of all servers are unavailable, requests for content from the origin will receive an immediate 502 HTTP response. By default, six attempts to a peer are made, after which a one-second timeout applies to that peer. To disable this feature, set peerFailureTimeout to \"<i>off</i>\".",
                               "properties": {
@@ -37296,6 +37292,13 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
+                        }
                       }
                     }
                   },
@@ -37789,6 +37792,12 @@
                       "code": "InvalidTimeSpan",
                       "message": "The parameter 'enddate' should be after 'startdate'."
                     }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
                   }
                 }
               }
@@ -37873,17 +37882,25 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
+                        "items": {
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'contentCodes'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'contentCodes', 'propertyHostnames'.",
                     "items": {
                       "type": "string",
                       "enum": [
                         "hostnames",
-                        "contentCodes"
+                        "contentCodes",
+                        "propertyHostnames"
                       ]
                     }
                   }
@@ -37948,7 +37965,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames' and 'contentCodes' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'propertyHostnames', and 'contentCodes' by specifying a comma-separated list of the keywords."
           },
           {
             "schema": {

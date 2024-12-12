@@ -1,5 +1,14 @@
 # Release Notes
 
+## December 11, 2024
+#### API updates
+* Returned default values for optional settings when a property version is queried.
+
+#### Console updates
+* Improved the appearance of the validation task details page when the task has no available details.
+* Fixed a security issue related to the password reset functionality.
+* Ensured the options 'auto,' 'strict,' and 'off' in the 'Follow Client IP Version' field are displayed in the user's preferred portal language after saving a property.
+
 ## November 26, 2024
 #### API updates
 * Checked for duplicate client zone rules when creating or updating edge hostnames.
