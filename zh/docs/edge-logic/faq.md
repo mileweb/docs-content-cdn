@@ -34,6 +34,12 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源站 Cache-Control 响�
 * [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 指令用于设置 CDN Pro 不响应缓存文件给客户端，而是每次都从源站获取文件。该指令经常与 [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 一起使用来达到“强制文件不缓存”的效果。
 * [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) 指令用于设置 CDN Pro 从源站拿到文件后不缓存到本地。该指令经常与 [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) 一起使用来达到“强制文件不缓存”的效果。
 
+注意： 以下3种特殊的请求不会被缓存，边缘逻辑以及源站缓存相关的指令会被忽略。
+
+* 非GET请求携带“Expect”头
+* POST请求携带“Transfer-Encoding: chunked”头
+* 源站响应类型为“Content-Type: multipart/x-mixed-replace”
+
 如果您对 CDN Pro 的缓存行为感兴趣，您可能也希望了解 [如何设置自定义缓存Key](#如何将问号后参数或者请求头加入到缓存key中) 以及 [CDN Pro 对 `Vary` 头部的处理方式](#关于-vary-响应头的处理方式)。
 
 ### 如何将问号后参数，请求头，或者请求正文加入到缓存Key中?

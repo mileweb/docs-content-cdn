@@ -170,7 +170,7 @@ Enables or disables on-the-fly compression of responses.
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `brotli_types <mime_type> [..];`<br/>
+**Syntax:** `brotli_types <mime_type> [...];`<br/>
 **Default:** text/html <br/>
 **Context:** server, location
 
@@ -236,6 +236,15 @@ location / {
   ...
 }
 ```
+### [`default_type`](http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)
+
+<span class="badge">standard</span> <span class="badge">LB logic</span>
+
+**Syntax:** `default_type <mime-type>;`<br/>
+**Default:** `default_type application/octet-stream`<br/>
+**Context:** server, location
+
+Defines the default MIME type of a response. No change to the public version, except the default value.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -349,7 +358,7 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
-**Syntax:** `gzip_types mime-type ...;` <br/>
+**Syntax:** `gzip_types <mime-type> [...];` <br/>
 **Default:** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context:** server, location
 
@@ -606,15 +615,7 @@ For example:
 origin_set_header X-Client-IP $client_real_ip;
 ```
 2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
-3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For non-cacheable requests, if you need to pass any of these fields to the origin, use this directive as in the example below:
-```nginx
-proxy_no_cache 1;      # do not cache
-proxy_cache_bypass 1;
-# pass the If-Modified-Since field from client to the origin
-origin_set_header If-Modified-Since $http_if_modified_since flag=any;
-origin_pass My-Dynamic-Origin;
-```
-Note that the `flag=any` parameter is necessary in this case. Otherwise the `If-Modified-Since` header won't appear in the requests to the parent servers, hence won't be forwarded to the origin as desired.
+3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For example, when [slicing](#slice) is enabled, the servers will automatically generate the `Range` header based on size of slices. Thus, the directive shall not be used to set the `Range` header to origin. For non-cacheable requests, those client request headers will still be forwarded to upstream.
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -1151,6 +1152,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
+* The Nginx variable $slice_range is not supported. When slicing is enabled, the server automatically generates the `Range` header in the request to origin based on size of slices. If this behavior is overridden, for example, by the `origin_set_header Range ...` directive, the client may receive a corrupted response.
 
 ### `slice_ignore_etag`
 
@@ -1224,7 +1226,7 @@ Indicates whether to look for each string to replace once or repeatedly. No chan
 
 <span class="badge">standard</span>
 
-**Syntax:** `sub_filter_types {mime-type} ...;` <br/>
+**Syntax:** `sub_filter_types <mime-type> [...];` <br/>
 **Default:** `sub_filter_types text/html;` <br/>
 **Context:** server, location
 

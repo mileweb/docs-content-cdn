@@ -161,7 +161,7 @@ location = /auth {
 
 <span class="badge dark">高级</span>
 
-**使用语法:** `brotli_types <mime_type> [..];`<br/>
+**使用语法:** `brotli_types <mime_type> [...];`<br/>
 **默认设置:** text/html <br/>
 **可用位置:** server, location
 
@@ -230,6 +230,17 @@ location / {
   ...
 }
 ```
+
+### [`default_type`](http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)
+
+<span class="badge">标准</span> <span class="badge">LBLogic</span>
+
+**使用语法:** `default_type <mime-type>;`<br/>
+**默认设置:** `default_type application/octet-stream`<br/>
+**可用位置:** server, location
+
+设置给客户端的响应的默认类型。代码逻辑源自 Nginx 开源版本，除了默认值，无其它改动。
+Defines the default MIME type of a response. No change to the public version, except the default value.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -346,7 +357,7 @@ location @try_origin2 {
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
-**使用语法：** `gzip_types mime-type ...;` <br/>
+**使用语法：** `gzip_types <mime-type> [...];` <br/>
 **默认设置：** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **可用位置：** server, location
 
@@ -608,15 +619,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
 2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
-3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
-```nginx
-proxy_no_cache 1;      # 不要缓存
-proxy_cache_bypass 1;  # 不使用缓存文件响应客户
-# 将客户端的If-Modified-Since请求头传递给源站
-origin_set_header If-Modified-Since $http_if_modified_since flag=any;
-origin_pass My-Dynamic-Origin;
-```
-请注意这里 `flag=any` 参数是必须的，否则发往父节点的请求不会携带 `If-Modified-Since`，导致父节点回源也不会携带。
+3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。例如，当开启[分片缓存](#slice)时，服务器会根据所设置的分片大小自动生成`Range`头部。所以，不要使用该指令修改传给源站的`Range`请求头。对于不可缓存的请求，这些请求头部则仍然会原样传递给父服务器和源站。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -1158,7 +1161,8 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 该指令用于设置 CDN Pro 从源获取大文件时切片的大小。合法的参数值可以是 0（禁用切片），或一个介于 512k 和 512m 之间（含）的[nginx 尺寸](http://nginx.org/en/docs/syntax.html) 。源站必须支持 range 请求并响应 206 状态码。如果需要将切片的响应进行缓存，请使用指令 `proxy_cache_valid 206 ...` 来启用对 206 状态码缓存。同时我们在开源版本的基础上对该指令进行了以下修改和增强：
 * CDN Pro 要求所有缓存的切片都携带相同的 ETag 值，以确保这些切片归属于同一个原始文件。当从源站新获取的切片与先前已缓存切片有不同的 Etag 值时，当前与客户端的响应传输将被终止，并且所有已缓存的切片都会立即清除。因此源站在一个文件内容未发生变更的情况下，请务必确保该文件的 ETag 值不会变化。在确实必要的情况下，您可以使用 `slice_ignore_etag on;` 指令来禁用此校验。
-* 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到损坏的响应。
+* 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到异常的响应。
+* 不支持Nginx原生变量$slice_range。启用切片功能后，CDN Pro 会根据设置的切片大小自动在回源请求里加上“Range”请求头。如果此行为被其他指令覆盖，例如，`origin_set_header Range ...` 指令，那么客户端可能会收到异常的响应。
 
 
 ### `slice_ignore_etag`
@@ -1235,7 +1239,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 <span class="badge">标准</span>
 
-**使用语法：** `sub_filter_types {mime-type} ...;` <br/>
+**使用语法：** `sub_filter_types <mime-type> [...];` <br/>
 **默认设置：** `sub_filter_types text/html;` <br/>
 **可用位置：** server, location
 
