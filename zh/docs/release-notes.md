@@ -1,5 +1,13 @@
 # Release Notes
 
+## December 23, 2024
+#### API updates
+* Ensured correct handling of concurrent requests to create a certificate.
+
+#### Console updates
+* Added support for filtering by origin’s peerSelectionAlgorithm in advanced search.
+* Corrected Edge Logic editor to refer to URI_ESCAPE directive instead of URL_ESCAPE.
+
 ## December 11, 2024
 #### API updates
 * Returned default values for optional settings when a property version is queried.
