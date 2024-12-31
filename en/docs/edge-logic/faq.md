@@ -32,6 +32,12 @@ proxy_ignore_cache_control no-cache no-store;
 * The CDN Pro proprietary directive [`proxy_cache_min_age`](</docs/edge-logic/supported-directives.md#proxy_cache_min_age>) can be used to override the `max-age` in the `Cache-Control` header field to enforce a minimum cache time.
 * If you don't want a request to be served from the cache, you can use the [`proxy_cache_bypass`](</docs/edge-logic/supported-directives.md#proxy_cache_bypass>) directive. [`proxy_no_cache`](</docs/edge-logic/supported-directives.md#proxy_no_cache>) can be used to prevent a response from being cached.
 
+Note: Requests that meet any of the following conditions will not be cached, irrespective of edgeLogic and instructions from origin:
+
+* Requests that include the "Expect" request header, except when the request method is GET.
+* POST requests that include "Transfer-Encoding: chunked" header.
+* Responses with "Content-Type: multipart/x-mixed-replace" header.
+
 Since you are interested in the caching behavior of CDN Pro, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
 
 ### How do I include query parameters, request headers and body in the cache key?

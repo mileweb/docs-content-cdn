@@ -64,6 +64,7 @@
 | <span id="server_level"></span><span class="var">$server_level</span> | <span class="badge small" title="numerical value">#</span> 缓存服务器的层级。1代表边缘缓存，2代表父级缓存 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="server_name"></span><span class="var">$server_name</span> | 加速项配置里匹配用户请求的加速域名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="server_region"></span><span class="var">$server_region</span> | 边缘服务器的国家代码，例如CN，US | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="server_province_code"></span><span class="var">$server_province_code</span> | 边缘服务器的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘节点端口号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该配置项进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

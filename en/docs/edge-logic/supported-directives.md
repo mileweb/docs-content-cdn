@@ -170,7 +170,7 @@ Enables or disables on-the-fly compression of responses.
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `brotli_types <mime_type> [..];`<br/>
+**Syntax:** `brotli_types <mime_type> [...];`<br/>
 **Default:** text/html <br/>
 **Context:** server, location
 
@@ -236,6 +236,15 @@ location / {
   ...
 }
 ```
+### [`default_type`](http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)
+
+<span class="badge">standard</span> <span class="badge">LB logic</span>
+
+**Syntax:** `default_type <mime-type>;`<br/>
+**Default:** `default_type application/octet-stream`<br/>
+**Context:** server, location
+
+Defines the default MIME type of a response. No change to the public version, except the default value.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -349,7 +358,7 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
-**Syntax:** `gzip_types mime-type ...;` <br/>
+**Syntax:** `gzip_types <mime-type> [...];` <br/>
 **Default:** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context:** server, location
 
@@ -606,15 +615,7 @@ For example:
 origin_set_header X-Client-IP $client_real_ip;
 ```
 2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
-3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For non-cacheable requests, if you need to pass any of these fields to the origin, use this directive as in the example below:
-```nginx
-proxy_no_cache 1;      # do not cache
-proxy_cache_bypass 1;
-# pass the If-Modified-Since field from client to the origin
-origin_set_header If-Modified-Since $http_if_modified_since flag=any;
-origin_pass My-Dynamic-Origin;
-```
-Note that the `flag=any` parameter is necessary in this case. Otherwise the `If-Modified-Since` header won't appear in the requests to the parent servers, hence won't be forwarded to the origin as desired.
+3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For example, when [slicing](#slice) is enabled, the servers will automatically generate the `Range` header based on size of slices. Thus, the directive shall not be used to set the `Range` header to origin. For non-cacheable requests, those client request headers will still be forwarded to upstream.
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -660,7 +661,7 @@ When enabled, only one request at a time will be allowed to populate a new cache
 **Default:** `proxy_cache_lock_age 15s;` <br/>
 **Context:** server, location
 
-If the last request passed to the proxied server for populating a new cache element has not completed for the specified time, one more request may be passed to the proxied server. No change to the public version.
+If the last request passed to the upstream server for populating a new cache element has not completed for the specified time, one more request may be passed to the upstream server. No change to the public version.
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -670,7 +671,7 @@ If the last request passed to the proxied server for populating a new cache elem
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the proxied server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the upstream server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
 
 ### `proxy_cache_max_stale`
 
@@ -732,7 +733,7 @@ If there is no suffix in the time, the configured value is considered in seconds
 **Default:** `proxy_cache_use_stale error timeout;` <br/>
 **Context:** server, location
 
-Determines in which cases a stale cached response can be used during communication with the proxied server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN Pro edge server would return stale cached content if there is any problem establishing connection to the origin.
+Determines in which cases a stale cached response can be used during communication with the upstream server. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale). Based on the default setting, the CDN Pro edge server would return stale cached content if there is any problem establishing connection to the origin.
 
 ### [`proxy_cache_valid`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid)
 
@@ -781,7 +782,7 @@ Related reading: [The support (and non-support) of "Vary"](</docs/edge-logic/faq
 **Default:** `proxy_cookie_domain off;` <br/>
 **Context:** server, location
 
-Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+Sets a text that should be changed in the domain attribute of the `Set-Cookie` header fields of an origin server response. No change to the public version. 
 
 ### [`proxy_cookie_path`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_path)
 
@@ -792,7 +793,7 @@ Sets a text that should be changed in the domain attribute of the `Set-Cookie` h
 **Default:** `proxy_cookie_path off;` <br/>
 **Context:** server, location
 
-Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of a proxied server response. No change to the public version. 
+Sets a text that should be changed in the path attribute of the `Set-Cookie` header fields of an origin server response. No change to the public version. 
 
 ### [`proxy_hide_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header)
 
@@ -836,7 +837,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 **Default:** `proxy_ignore_client_abort off;` <br/>
 **Context:** server, location (LB only)
 
-Determines whether the connection with a proxied server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the proxied server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
+Determines whether the connection with an upstream server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the upstream server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -856,7 +857,7 @@ Disables processing of certain response header fields in the response from the o
 **Default:** `-` <br/>
 **Context:** server, location
 
-Specifies the HTTP method to use in requests forwarded to the proxied server instead of the method from the client request. Parameter value can contain variables.
+Specifies the HTTP method to use in requests forwarded to the origin server instead of the method from the client request. Parameter value can contain variables.
 
 ### [`proxy_next_upstream`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream)
 
@@ -912,7 +913,7 @@ Since the content is not saved, usually there is no point in looking up the cach
 **Default:** `proxy_pass_header Date;` <br/>
 **Context:** server, location
 
-Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from a proxied server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
+Permits passing an [otherwise disabled](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header) header field from an origin server to a client. Changed the default behavior to pass the `Date` header from the upstream, which should carry the time when the content was fetched from origin. Use this directive multiple times to pass multiple fields. The configuration at the server level is inherited by a location block only when this directive is not present in the location block.
 
 ### [`proxy_pass_request_body`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass_request_body)
 
@@ -944,7 +945,7 @@ Enables of disables passing request headers from client to upstream. No change t
 **Default:** `proxy_redirect default;` <br/>
 **Context:** server, location
 
-Sets the text that should be changed in the “Location” and “Refresh” header fields of a proxied server response. No change to the public version. 
+Sets the text that should be changed in the “Location” and “Refresh” header fields of an origin server response. No change to the public version. 
 
 ### [`proxy_request_buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering)
 
@@ -1009,7 +1010,7 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **Default:** `proxy_ssl_protocols TLSv1 TLSv1.1 TLSv1.2;` <br/>
 **Context:** server, location
 
-Enables the specified protocols for requests to a proxied HTTPS server. No change to the public version.
+Enables the specified protocols for requests to an origin HTTPS server. No change to the public version.
 
 ### `range_reorder`
 
@@ -1151,6 +1152,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 Sets the size of the slices when fetching large files from the origin. The valid values are 0, which disables slicing, OR an [nginx size](http://nginx.org/en/docs/syntax.html) that is between `512k` and `512m`, inclusive. The origin has to support range requests and respond with status code 206. If caching is desired, use the statement `proxy_cache_valid 206 ...` to enable caching of the partial responses. We made the following changes to this directive on top of the open-source version:
 * CDN Pro requires all cached slices to carry the same ETag value to ensure the content is consistent. When a slice fetched from the origin has a value that is different from the cached ones, any in-progress transfers to clients are terminated and all the cached slices are purged immediately. Please make sure the ETag value of each file on origin does not change unless the file's content has changed. This behavior can be disabled using `slice_ignore_etag on;`.
 * When slicing is enabled, the server automatically removes the `Accept-Encoding` header in the request to origin to disable compression. If this behavior is overridden, for example, by the `origin_set_header Accept-Encoding ...` directive, the client may receive a corrupted response.
+* The Nginx variable $slice_range is not supported. When slicing is enabled, the server automatically generates the `Range` header in the request to origin based on size of slices. If this behavior is overridden, for example, by the `origin_set_header Range ...` directive, the client may receive a corrupted response.
 
 ### `slice_ignore_etag`
 
@@ -1224,7 +1226,7 @@ Indicates whether to look for each string to replace once or repeatedly. No chan
 
 <span class="badge">standard</span>
 
-**Syntax:** `sub_filter_types {mime-type} ...;` <br/>
+**Syntax:** `sub_filter_types <mime-type> [...];` <br/>
 **Default:** `sub_filter_types text/html;` <br/>
 **Context:** server, location
 
