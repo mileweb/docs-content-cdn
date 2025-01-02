@@ -6,6 +6,8 @@ Each non-proprietary directive includes a direct link to the official nginx docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
 
+**Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All the supported directives shall be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
+
 ### `access_log_sampling`
 
 <span class="badge">standard</span> <span class="badge">LB logic</span> <span class="badge primary">proprietary</span>
