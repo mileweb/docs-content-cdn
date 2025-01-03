@@ -6,6 +6,8 @@
 
 以下列表中，标记为<span class="badge">标准</span>的指令对所有的客户都开放。它们应该可以满足绝大部分常见的CDN配置需求。标记为<span class="badge dark">高级</span>的指令通常会消耗更多的资源。对于这些指令，我们需要逐一审核来明确需求。如果您需要用到这些指令，请联系客服。您有可能需要为它们额外付费。
 
+**注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
+
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>

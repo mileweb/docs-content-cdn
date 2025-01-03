@@ -271,6 +271,10 @@
             "path": "/docs/edge-logic/lb7-es-structure.md"
           },
           {
+            "title": "边缘节点架构升级",
+            "path": "/docs/edge-logic/edge-node-structure-upgrade.md"
+          },
+          {
             "title": "访问源站须知",
             "path": "/docs/edge-logic/paths-to-origins.md"
           },
