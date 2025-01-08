@@ -17323,11 +17323,7 @@
                       },
                       "ipWhiteList": {
                         "type": "array",
-                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\", \\\"::/0\\\"], which permits logins from all IP addresses.",
-                        "default": [
-                          "0.0.0.0/0",
-                          "::/0"
-                        ],
+                        "description": "List of IP addresses from which the portal user can log in. This list applies in addition to the portalSettings.ipWhiteList's addresses you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level.</a> You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
                         "items": {
                           "type": "string"
                         }
@@ -17756,7 +17752,7 @@
                     },
                     "ipWhiteList": {
                       "type": "array",
-                      "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
+                      "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
                       "items": {
                         "type": "string"
                       }
@@ -18044,7 +18040,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
+                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
                     "items": {
                       "type": "string"
                     }
@@ -18411,7 +18407,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
+                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
                     "items": {
                       "type": "string"
                     }
@@ -18851,11 +18847,7 @@
                         },
                         "ipWhiteList": {
                           "type": "array",
-                          "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\", \\\"::/0\\\"], which permits logins from all IP addresses.",
-                          "default": [
-                            "0.0.0.0/0",
-                            "::/0"
-                          ],
+                          "description": "List of IP addresses from which the portal user can log in. This list applies in addition to the portalSettings.ipWhiteList's addresses you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level.</a> You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
                           "items": {
                             "type": "string"
                           }
@@ -19250,11 +19242,7 @@
                       },
                       "ipWhiteList": {
                         "type": "array",
-                        "description": "List of IP addresses from which the portal user can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>  The default is [\\\"0.0.0.0/0\\\", \\\"::/0\\\"], which permits logins from all IP addresses.",
-                        "default": [
-                          "0.0.0.0/0",
-                          "::/0"
-                        ],
+                        "description": "List of IP addresses from which the portal user can log in. This list applies in addition to the portalSettings.ipWhiteList's addresses you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level.</a> You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
                         "items": {
                           "type": "string"
                         }
@@ -22930,20 +22918,500 @@
                   "example-1": {
                     "value": [
                       {
-                        "code": "euna",
-                        "name": "Europe & North America"
+                        "code": "af",
+                        "name": "Africa"
+                      },
+                      {
+                        "code": "af.ao",
+                        "name": "Angola"
+                      },
+                      {
+                        "code": "af.bw",
+                        "name": "Botswana"
+                      },
+                      {
+                        "code": "af.cd",
+                        "name": "DR Congo"
+                      },
+                      {
+                        "code": "af.ci",
+                        "name": "Ivory Coast"
+                      },
+                      {
+                        "code": "af.cm",
+                        "name": "Cameroon"
+                      },
+                      {
+                        "code": "af.dj",
+                        "name": "Djibouti"
+                      },
+                      {
+                        "code": "af.dz",
+                        "name": "Algeria"
+                      },
+                      {
+                        "code": "af.eg",
+                        "name": "Egypt"
+                      },
+                      {
+                        "code": "af.et",
+                        "name": "Ethiopia"
+                      },
+                      {
+                        "code": "af.gh",
+                        "name": "Ghana"
+                      },
+                      {
+                        "code": "af.ke",
+                        "name": "Kenya"
+                      },
+                      {
+                        "code": "af.ls",
+                        "name": "Lesotho"
+                      },
+                      {
+                        "code": "af.ly",
+                        "name": "Libya"
+                      },
+                      {
+                        "code": "af.ma",
+                        "name": "Morocco"
+                      },
+                      {
+                        "code": "af.mg",
+                        "name": "Madagascar"
+                      },
+                      {
+                        "code": "af.mu",
+                        "name": "Mauritius"
+                      },
+                      {
+                        "code": "af.mz",
+                        "name": "Mozambique"
+                      },
+                      {
+                        "code": "af.ng",
+                        "name": "Nigeria"
+                      },
+                      {
+                        "code": "af.sd",
+                        "name": "Sudan"
+                      },
+                      {
+                        "code": "af.so",
+                        "name": "Somalia"
+                      },
+                      {
+                        "code": "af.sz",
+                        "name": "Eswatini"
+                      },
+                      {
+                        "code": "af.td",
+                        "name": "Chad"
+                      },
+                      {
+                        "code": "af.tg",
+                        "name": "Togo"
+                      },
+                      {
+                        "code": "af.tn",
+                        "name": "Tunisia"
+                      },
+                      {
+                        "code": "af.tz",
+                        "name": "Tanzania"
+                      },
+                      {
+                        "code": "af.ug",
+                        "name": "Uganda"
+                      },
+                      {
+                        "code": "af.za",
+                        "name": "South Africa"
+                      },
+                      {
+                        "code": "af.zm",
+                        "name": "Zambia"
+                      },
+                      {
+                        "code": "as",
+                        "name": "Asia"
+                      },
+                      {
+                        "code": "as.ae",
+                        "name": "United Arab Emirates"
+                      },
+                      {
+                        "code": "as.am",
+                        "name": "Armenia"
+                      },
+                      {
+                        "code": "as.az",
+                        "name": "Azerbaijan"
+                      },
+                      {
+                        "code": "as.bd",
+                        "name": "Bangladesh"
+                      },
+                      {
+                        "code": "as.bh",
+                        "name": "Bahrain"
+                      },
+                      {
+                        "code": "as.bn",
+                        "name": "Brunei"
+                      },
+                      {
+                        "code": "as.bt",
+                        "name": "Bhutan"
+                      },
+                      {
+                        "code": "as.cn",
+                        "name": "Mainland China (not including Hong Kong, Macao, Taiwan)"
+                      },
+                      {
+                        "code": "as.ge",
+                        "name": "Georgia"
+                      },
+                      {
+                        "code": "as.hk",
+                        "name": "Hong Kong"
+                      },
+                      {
+                        "code": "as.id",
+                        "name": "Indonesia"
+                      },
+                      {
+                        "code": "as.il",
+                        "name": "Israel"
+                      },
+                      {
+                        "code": "as.in",
+                        "name": "India"
+                      },
+                      {
+                        "code": "as.iq",
+                        "name": "Iraq"
+                      },
+                      {
+                        "code": "as.ir",
+                        "name": "Iran"
+                      },
+                      {
+                        "code": "as.jo",
+                        "name": "Hashemite Kingdom of Jordan"
+                      },
+                      {
+                        "code": "as.jp",
+                        "name": "Japan"
+                      },
+                      {
+                        "code": "as.kg",
+                        "name": "Kyrgyzstan"
+                      },
+                      {
+                        "code": "as.kh",
+                        "name": "Cambodia"
+                      },
+                      {
+                        "code": "as.kr",
+                        "name": "South Korea"
+                      },
+                      {
+                        "code": "as.kw",
+                        "name": "Kuwait"
+                      },
+                      {
+                        "code": "as.kz",
+                        "name": "Kazakhstan"
+                      },
+                      {
+                        "code": "as.la",
+                        "name": "Laos"
+                      },
+                      {
+                        "code": "as.lb",
+                        "name": "Lebanon"
+                      },
+                      {
+                        "code": "as.lk",
+                        "name": "Sri Lanka"
+                      },
+                      {
+                        "code": "as.mm",
+                        "name": "Myanmar"
+                      },
+                      {
+                        "code": "as.mn",
+                        "name": "Mongolia"
+                      },
+                      {
+                        "code": "as.mo",
+                        "name": "Macao"
+                      },
+                      {
+                        "code": "as.mv",
+                        "name": "Maldives"
+                      },
+                      {
+                        "code": "as.my",
+                        "name": "Malaysia"
+                      },
+                      {
+                        "code": "as.np",
+                        "name": "Nepal"
+                      },
+                      {
+                        "code": "as.om",
+                        "name": "Oman"
+                      },
+                      {
+                        "code": "as.ph",
+                        "name": "Philippines"
+                      },
+                      {
+                        "code": "as.pk",
+                        "name": "Pakistan"
+                      },
+                      {
+                        "code": "as.qa",
+                        "name": "Qatar"
+                      },
+                      {
+                        "code": "as.sa",
+                        "name": "Saudi Arabia"
+                      },
+                      {
+                        "code": "as.sg",
+                        "name": "Singapore"
+                      },
+                      {
+                        "code": "as.th",
+                        "name": "Thailand"
+                      },
+                      {
+                        "code": "as.tr",
+                        "name": "Turkey"
+                      },
+                      {
+                        "code": "as.tw",
+                        "name": "Taiwan"
+                      },
+                      {
+                        "code": "as.uz",
+                        "name": "Uzbekistan"
+                      },
+                      {
+                        "code": "as.vn",
+                        "name": "Vietnam"
+                      },
+                      {
+                        "code": "eu",
+                        "name": "Europe"
+                      },
+                      {
+                        "code": "eu.at",
+                        "name": "Austria"
+                      },
+                      {
+                        "code": "eu.be",
+                        "name": "Belgium"
+                      },
+                      {
+                        "code": "eu.by",
+                        "name": "Belarus"
+                      },
+                      {
+                        "code": "eu.ch",
+                        "name": "Switzerland"
+                      },
+                      {
+                        "code": "eu.cz",
+                        "name": "Czechia"
+                      },
+                      {
+                        "code": "eu.de",
+                        "name": "Germany"
+                      },
+                      {
+                        "code": "eu.dk",
+                        "name": "Denmark"
+                      },
+                      {
+                        "code": "eu.es",
+                        "name": "Spain"
+                      },
+                      {
+                        "code": "eu.fi",
+                        "name": "Finland"
+                      },
+                      {
+                        "code": "eu.fr",
+                        "name": "France"
+                      },
+                      {
+                        "code": "eu.gb",
+                        "name": "United Kingdom"
+                      },
+                      {
+                        "code": "eu.gr",
+                        "name": "Greece"
+                      },
+                      {
+                        "code": "eu.hu",
+                        "name": "Hungary"
+                      },
+                      {
+                        "code": "eu.ie",
+                        "name": "Ireland"
+                      },
+                      {
+                        "code": "eu.it",
+                        "name": "Italy"
+                      },
+                      {
+                        "code": "eu.lt",
+                        "name": "Republic of Lithuania"
+                      },
+                      {
+                        "code": "eu.nl",
+                        "name": "Netherlands"
+                      },
+                      {
+                        "code": "eu.no",
+                        "name": "Norway"
+                      },
+                      {
+                        "code": "eu.pl",
+                        "name": "Poland"
+                      },
+                      {
+                        "code": "eu.pt",
+                        "name": "Portugal"
+                      },
+                      {
+                        "code": "eu.ro",
+                        "name": "Romania"
+                      },
+                      {
+                        "code": "eu.rs",
+                        "name": "Serbia"
+                      },
+                      {
+                        "code": "eu.ru",
+                        "name": "Russia"
+                      },
+                      {
+                        "code": "eu.se",
+                        "name": "Sweden"
+                      },
+                      {
+                        "code": "eu.sk",
+                        "name": "Slovakia"
+                      },
+                      {
+                        "code": "eu.ua",
+                        "name": "Ukraine"
                       },
                       {
                         "code": "na",
                         "name": "North America"
                       },
                       {
-                        "code": "oc.as",
-                        "name": "American Samoa"
+                        "code": "na.ca",
+                        "name": "Canada"
+                      },
+                      {
+                        "code": "na.cr",
+                        "name": "Costa Rica"
+                      },
+                      {
+                        "code": "na.do",
+                        "name": "Dominican Republic"
+                      },
+                      {
+                        "code": "na.hn",
+                        "name": "Honduras"
+                      },
+                      {
+                        "code": "na.ht",
+                        "name": "Haiti"
+                      },
+                      {
+                        "code": "na.mx",
+                        "name": "Mexico"
+                      },
+                      {
+                        "code": "na.pa",
+                        "name": "Panama"
+                      },
+                      {
+                        "code": "na.us",
+                        "name": "United States"
+                      },
+                      {
+                        "code": "oc",
+                        "name": "Oceania"
+                      },
+                      {
+                        "code": "oc.au",
+                        "name": "Australia"
+                      },
+                      {
+                        "code": "oc.fj",
+                        "name": "Fiji"
+                      },
+                      {
+                        "code": "oc.nz",
+                        "name": "New Zealand"
                       },
                       {
                         "code": "sa",
                         "name": "South America, Antarctica"
+                      },
+                      {
+                        "code": "sa.ar",
+                        "name": "Argentina"
+                      },
+                      {
+                        "code": "sa.bo",
+                        "name": "Bolivia"
+                      },
+                      {
+                        "code": "sa.br",
+                        "name": "Brazil"
+                      },
+                      {
+                        "code": "sa.cl",
+                        "name": "Chile"
+                      },
+                      {
+                        "code": "sa.co",
+                        "name": "Colombia"
+                      },
+                      {
+                        "code": "sa.ec",
+                        "name": "Ecuador"
+                      },
+                      {
+                        "code": "sa.pe",
+                        "name": "Peru"
+                      },
+                      {
+                        "code": "sa.py",
+                        "name": "Paraguay"
+                      },
+                      {
+                        "code": "sa.uy",
+                        "name": "Uruguay"
+                      },
+                      {
+                        "code": "sa.ve",
+                        "name": "Venezuela"
+                      },
+                      {
+                        "code": "spider",
+                        "name": "Spider"
                       }
                     ]
                   }
@@ -27832,17 +28300,17 @@
                   },
                   "regions": {
                     "type": "array",
-                    "description": "A list of continents in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                    "description": "A list of regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers. \"Asia\" includes servers in Mainland China.",
                     "items": {
                       "type": "string",
                       "enum": [
                         "Africa",
-                        "Antarctica",
                         "Asia",
                         "Europe",
                         "North America",
                         "Oceania",
-                        "South America"
+                        "South America",
+                        "Mainland China"
                       ]
                     }
                   },
@@ -28296,17 +28764,17 @@
                     },
                     "regions": {
                       "type": "array",
-                      "description": "A list of continents representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers.",
+                      "description": "A list of continents representing the regions in which to perform the prefetch. Omitting the field means the prefetch will be done by all regions' servers. \"Asia\" includes servers in Mainland China.",
                       "items": {
                         "type": "string",
                         "enum": [
                           "Africa",
-                          "Antarctica",
                           "Asia",
                           "Europe",
                           "North America",
                           "Oceania",
-                          "South America"
+                          "South America",
+                          "Mainland China"
                         ]
                       }
                     },
