@@ -1,5 +1,14 @@
 # Release Notes
 
+## January 7, 2025
+#### API updates
+* Added “Mainland China” as a [prefetch](</apidocs#operation/post-cdn-prefetches>) region.
+* Returned default for ipWhiteList when [retrieving contact details](</apidocs#operation/get-ngadmin-contacts-id>).
+
+#### Console updates
+* Removed Antarctica from the list of supported prefetch regions.
+* Fixed links in the self signup page.
+
 ## December 23, 2024
 #### API updates
 * Ensured correct handling of concurrent requests to create a certificate.
