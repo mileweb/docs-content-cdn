@@ -6,6 +6,8 @@
 
 以下列表中，标记为<span class="badge">标准</span>的指令对所有的客户都开放。它们应该可以满足绝大部分常见的CDN配置需求。标记为<span class="badge dark">高级</span>的指令通常会消耗更多的资源。对于这些指令，我们需要逐一审核来明确需求。如果您需要用到这些指令，请联系客服。您有可能需要为它们额外付费。
 
+**注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
+
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
@@ -161,7 +163,7 @@ location = /auth {
 
 <span class="badge dark">高级</span>
 
-**使用语法:** `brotli_types <mime_type> [..];`<br/>
+**使用语法:** `brotli_types <mime_type> [...];`<br/>
 **默认设置:** text/html <br/>
 **可用位置:** server, location
 
@@ -188,7 +190,7 @@ location = /auth {
 **默认设置：** `client_header_timeout 10;`<br/>
 **可用位置：** server
 
-该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，服务器将关闭连接。
+该指令设置 CDN Pro 边缘服务器从客户端接收完整请求头的最长空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。请注意，该配置对`Host` 请求头无效，因为CDN Pro 服务器需要其值来确定对应的Edge Logic。如果在 10 秒内没有收到来自客户端的 `Host` 请求头，CDN Pro 服务器将关闭连接。
 
 ### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
 
@@ -230,6 +232,17 @@ location / {
   ...
 }
 ```
+
+### [`default_type`](http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)
+
+<span class="badge">标准</span> <span class="badge">LBLogic</span>
+
+**使用语法:** `default_type <mime-type>;`<br/>
+**默认设置:** `default_type application/octet-stream`<br/>
+**可用位置:** server, location
+
+设置给客户端的响应的默认类型。代码逻辑源自 Nginx 开源版本，除了默认值，无其它改动。
+Defines the default MIME type of a response. No change to the public version, except the default value.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -346,7 +359,7 @@ location @try_origin2 {
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
-**使用语法：** `gzip_types mime-type ...;` <br/>
+**使用语法：** `gzip_types <mime-type> [...];` <br/>
 **默认设置：** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **可用位置：** server, location
 
@@ -417,7 +430,7 @@ else { ... }
 **Default:** `keepalive_timeout 30s;`<br/>
 **Context:** server (仅限在LB7)
 
-第一个参数设置 CDN 服务器与客户端 keep-alive 连接的最长空闲超时。服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同，但皆不能超过300s。
+第一个参数设置 CDN Pro 服务器与客户端 keep-alive 连接的最长空闲超时。CDN Pro 服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同，但皆不能超过300s。
 
 ### [`limit_rate`](http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate)
 
@@ -447,7 +460,7 @@ else { ... }
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。为了确保服务器能正确生成响应，我们要求每个 [locaiton](#location) 里须直接（不在嵌套的if或location里）包含一个 [return](#return) 或者 [origin_pass](#origin_pass) 指令。如果一个 location 里包含了 [break](#break) 指令，则其必须直接包含 origin_pass。
+按照请求 URI(不带问号后参数) 进行分类匹配，并在 {} 中设置此类请求的处理逻辑。代码源自[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)，无变更。为了确保CDN Pro 服务器能正确生成响应，我们要求每个 [locaiton](#location) 里须直接（不在嵌套的if或location里）包含一个 [return](#return) 或者 [origin_pass](#origin_pass) 指令。如果一个 location 里包含了 [break](#break) 指令，则其必须直接包含 origin_pass。
 
 ### `origin_connect_timeout`
 
@@ -457,7 +470,7 @@ else { ... }
 **默认设置：** `origin_connect_timeout 5s;` <br/>
 **可用位置：** server
 
-该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 与源站服务器建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。该指令不能出现在 location 配置块中。
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 服务器与源站建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。该指令不能出现在 location 配置块中。
 
 
 ### `origin_fast_route`
@@ -608,15 +621,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
 2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
-3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，服务器在回源的时候会根据缓存策略自动重新生成这些头部。对于不可缓存的请求，如果您希望将这些请求头部原样传递给源站，请参考下面这个示例使用本指令：
-```nginx
-proxy_no_cache 1;      # 不要缓存
-proxy_cache_bypass 1;  # 不使用缓存文件响应客户
-# 将客户端的If-Modified-Since请求头传递给源站
-origin_set_header If-Modified-Since $http_if_modified_since flag=any;
-origin_pass My-Dynamic-Origin;
-```
-请注意这里 `flag=any` 参数是必须的，否则发往父节点的请求不会携带 `If-Modified-Since`，导致父节点回源也不会携带。
+3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。例如，当开启[分片缓存](#slice)时，服务器会根据所设置的分片大小自动生成`Range`头部。所以，不要使用该指令修改传给源站的`Range`请求头。对于不可缓存的请求，这些请求头部则仍然会原样传递给父服务器和源站。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
 
@@ -682,7 +687,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置:** `-` <br/>
 **可用位置:** server, location
 
-本指令允许边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error`和 `stale-while-revalidate`参数相同。但是优先级低于该响应头。
+本指令允许CDN Pro 边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error`和 `stale-while-revalidate`参数相同。但是优先级低于该响应头。
 
 'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’。参数 'while_revalidate=' 必须和 [`proxy_cache_background_update on;`](#proxy_cache_background_update) 一同配置，同时要求 `proxy_cache_use_stale` 的配置里包含 'updating'。
 
@@ -708,7 +713,7 @@ Description:
 
 该指令允许您为响应文件配置最小缓存时间。如果源给的 Cache-Control 响应头中的 max-age 小于所指定的参数值，则使用指定的参数值作为缓存时间。例如，如果源站的 Cache-Control 响应头中的max-age值为100s，而该指令配置的值为200s，则内容的有效缓存时间为200s。
 
-CDN Pro服务器将根据源站提供的响应头以及 nginx 指令按照以下优先顺序确定缓存时间：
+CDN Pro 服务器将根据源站提供的响应头以及 nginx 指令按照以下优先顺序确定缓存时间：
 
 X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > proxy_cache_valid
 
@@ -969,9 +974,9 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置:** `proxy_request_body_in_cache_key off` <br/>
 **可用位置:** server, location, if in location
 
-当参数值是 'on'（支持变量）时，服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。此外，您还需要通过[`proxy_request_buffering`](#proxy_request_buffering)指令开启对客户端请求体的缓冲。
+当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。此外，您还需要通过[`proxy_request_buffering`](#proxy_request_buffering)指令开启对客户端请求体的缓冲。
 
-此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 $cache_misc 变量中。
+此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到CDN Pro 服务器，然后将其添加到 $cache_misc 变量中。
 
 ### `proxy_set`
 
@@ -1024,7 +1029,7 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **默认设置:** `range_reorder off` <br/>
 **可用位置:** server, location
 
-该指令用于指示代理服务器是否对range请求中指定的多个字节范围进行重新排序和合并。 当range_reorder开启时，如果请求中的Range值为降序排序，代理服务器将对Range值按升序重新排列。 当range_reorder开启且带有coalescing参数时，如果请求中的Range值存在重叠的范围或者2个范围之间的间隔小于发送多部分内容（multipart）的开销，则这些范围将被合并。开启重新排序和合并，可确保代理服务器响应206状态码和部分内容给客户端。 当range_reorder未开启时，代理服务器可能响应200状态代码和完整内容给客户端，即便客户端发送了range请求。
+该指令用于指示CDN Pro 服务器是否对range请求中指定的多个字节范围进行重新排序和合并。 当range_reorder开启时，如果请求中的Range值为降序排序，CDN Pro 服务器将对Range值按升序重新排列。 当range_reorder开启且带有coalescing参数时，如果请求中的Range值存在重叠的范围或者2个范围之间的间隔小于发送多部分内容（multipart）的开销，则这些范围将被合并。开启重新排序和合并，可确保CDN Pro 服务器响应206状态码和部分内容给客户端。 当range_reorder未开启时，CDN Pro 服务器可能响应200状态代码和完整内容给客户端，即便客户端发送了range请求。
 
 ### `realtime_log_downsample`
 
@@ -1097,7 +1102,7 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else remove A-E-header;
 ```
-不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或删除。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，服务器将会通过把缓存的版本在线压缩或解压缩来响应。
+不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或删除。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，CDN Pro 服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，CDN Pro 服务器将会通过把缓存的版本在线压缩或解压缩来响应。
 
 如果您使用了此指令，那么很可能您还希望 CDN Pro 能根据 `Accept-Encoding` 请求头的值来区别缓存响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
 
@@ -1158,7 +1163,8 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 该指令用于设置 CDN Pro 从源获取大文件时切片的大小。合法的参数值可以是 0（禁用切片），或一个介于 512k 和 512m 之间（含）的[nginx 尺寸](http://nginx.org/en/docs/syntax.html) 。源站必须支持 range 请求并响应 206 状态码。如果需要将切片的响应进行缓存，请使用指令 `proxy_cache_valid 206 ...` 来启用对 206 状态码缓存。同时我们在开源版本的基础上对该指令进行了以下修改和增强：
 * CDN Pro 要求所有缓存的切片都携带相同的 ETag 值，以确保这些切片归属于同一个原始文件。当从源站新获取的切片与先前已缓存切片有不同的 Etag 值时，当前与客户端的响应传输将被终止，并且所有已缓存的切片都会立即清除。因此源站在一个文件内容未发生变更的情况下，请务必确保该文件的 ETag 值不会变化。在确实必要的情况下，您可以使用 `slice_ignore_etag on;` 指令来禁用此校验。
-* 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到损坏的响应。
+* 启用切片功能后，CDN Pro 会自动在回源请求里删除 “Accept-Encoding” 头来避免获取压缩响应。如果此行为被其他指令覆盖，例如，`origin_set_header Accept-Encoding ...` 指令，那么客户端可能会收到异常的响应。
+* 不支持Nginx原生变量$slice_range。启用切片功能后，CDN Pro 会根据设置的切片大小自动在回源请求里加上“Range”请求头。如果此行为被其他指令覆盖，例如，`origin_set_header Range ...` 指令，那么客户端可能会收到异常的响应。
 
 
 ### `slice_ignore_etag`
@@ -1235,7 +1241,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 <span class="badge">标准</span>
 
-**使用语法：** `sub_filter_types {mime-type} ...;` <br/>
+**使用语法：** `sub_filter_types <mime-type> [...];` <br/>
 **默认设置：** `sub_filter_types text/html;` <br/>
 **可用位置：** server, location
 
@@ -1249,7 +1255,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置:** `upstream_origin_only off` <br/>
 **可用位置:** server, location, if in location
 
-启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
+启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
@@ -1270,4 +1276,4 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置：** `-` <br/>
 **可用位置：** server (仅限在LB7)
 
-本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。
+本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对CDN Pro 边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。
