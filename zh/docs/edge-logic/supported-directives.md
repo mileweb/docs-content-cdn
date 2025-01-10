@@ -202,8 +202,6 @@ location = /auth {
 
 设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
 
-一般来说，您需要在 Load Balancer 和 Edge Logic 里同时配置本指令。
-
 ### `client_send_timeout`
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
@@ -428,7 +426,7 @@ else { ... }
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
-**Context:** server (仅限在LB7)
+**Context:** server, location
 
 第一个参数设置 CDN Pro 服务器与客户端 keep-alive 连接的最长空闲超时。CDN Pro 服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同，但皆不能超过300s。
 
@@ -841,9 +839,9 @@ proxy_ignore_cache_control no-cache no-store;
 
 **使用语法:** `proxy_ignore_client_abort on | off;` <br/>
 **默认设置:** `proxy_ignore_client_abort off;` <br/>
-**可用位置:** server (仅限在 LB7)
+**可用位置:** server, location
 
-设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。`off` 意味着中止从源站接收数据，如果数据是不可缓存的。可缓存的数据会继续完成传输，不受本指令影响。本指令只能在 [load balancer logic](lb7-es-structure) 里使用。
+设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。`off` 意味着中止从源站接收数据，如果数据是不可缓存的。可缓存的数据会继续完成传输，不受本指令影响。
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -964,7 +962,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置:** `proxy_request_buffering off` <br/>
 **使用位置:** server, location
 
-开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。该配置项需要在边缘逻辑和负载均衡器逻辑中同时配置。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cache_key)的功能，需要通过该指令将客户端请求体缓冲同时开启。
+开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cache_key)的功能，需要通过该指令将客户端请求体缓冲同时开启。
 
 ### `proxy_request_body_in_cache_key`
 
@@ -1001,7 +999,7 @@ proxy_no_cache $no_store;
 ```
 该指令会跨不同层级（server/location/location if）合并。如果不同层级中使用该指令试图对同一个变量进行赋值，则只有最内层的配置生效。
 
-### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)（已废弃）
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LB logic</span>
 
@@ -1009,7 +1007,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server (仅限在LB7)
 
-This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES.
+该指令在 [开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)基础上做了一些修改。支持条件判断，主要用于从 [负载均衡器](lb7-es-structure) 传递信息到边缘服务器。该指令已被废弃。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -1274,6 +1272,6 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 **使用语法：** `access_log_sampling factor;` <br/>
 **默认设置：** `-` <br/>
-**可用位置：** server (仅限在LB7)
+**可用位置：** server, location, if in location
 
-本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对CDN Pro 边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。
+本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
