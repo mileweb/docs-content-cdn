@@ -10,9 +10,9 @@ A few years ago when we started the CDN Pro project, we came up with a 2-stage d
 
 This LB7-ES structure has achieved the intended design goals. However, it also introduced some noticeable “side effects”, in particular the following: 
 
-* Although loadBalancerLogic is optional in a property, its existence means our users need to be aware of this LB7-ES structure. For example, you need to know if a [supported directive](supported-directives) or a [built-in variable](built-in-variables) is available in LB7, ES, or both. For advanced request processing, you may need to contemplate how to divide the logic into the two parts. If a piece of information available in LB7 only is also needed in ES, you must pass that information from LB7 to ES by using the [proxy_set_header](supported-directives#proxy_set_header) directive. Similarly, you may have to pass information in the other direction by using the [add_header](supported-directives#add_header)/[add_trailer](supported-directives#add_trailer) directives. Although things do work this way, having to know about the structure increases the steepness of the learning curve for users. Sometimes, it leads to misconfigurations and complaints. It’d be great if this structure was completely transparent to customers, and they could configure a property in just a single place.
+* Although loadBalancerLogic is optional in a property, its existence means our users need to be aware of this LB7-ES structure. For example, you need to know if a [supported directive](supported-directives) or a [built-in variable](built-in-variables) is available in LB7, ES, or both. For advanced request processing, you may need to contemplate how to divide the logic into the two parts. If a piece of information that is only available in LB7 is also needed in ES, you must pass it from LB7 to ES by using the [proxy_set_header](supported-directives#proxy_set_header) directive. Similarly, you may have to pass information in the other direction by using the [add_header](supported-directives#add_header)/[add_trailer](supported-directives#add_trailer) directives. Although things do work this way, having to know about the structure increases the steepness of the learning curve for users. Sometimes, it leads to misconfigurations and complaints. It’d be great if this structure was completely transparent to customers, and they could configure a property in just a single place.
 
-* As illustrated in the edge node structure, an edge node consists of a group of LB7 servers and a group of edge servers. Under the hood, they are the same group of Nginx processes running on the same group of physical servers. While such a structure fully utilizes the power of Nginx as a load balancer, reverse proxy and storage server, it is not the most performance-optimal setup for the CDN use case. As CDN Pro continues to expand, the proxy_cache module of Nginx, which has served as the cache storage since inception, is now facing performance challenges. There is a pressing need to optimize the system to accommodate the ever increasing traffic loads.
+* As illustrated in the edge node structure, an edge node consists of a group of LB7 servers and a group of edge servers. Under the hood, they share the same group of Nginx processes running on the same group of physical servers. While such a structure fully utilizes the power of Nginx as a load balancer, reverse proxy and storage server, it is not the most performance-optimal setup for the CDN use case. As CDN Pro continues to expand, the proxy_cache module of Nginx, which has served as the cache storage since inception, is now facing performance challenges. There is a pressing need to optimize the system to accommodate the ever increasing traffic loads.
 
 ### The Solution
 
@@ -20,7 +20,7 @@ The new design of the node structure is illustrated in the diagram below:
 
 <p align=center><img src="/docs/edge-logic/edge-node-structure.png" alt="Upgrade of Edge Node Structure" width="600"></p>
 
-As shown above, there is no longer an LB7 stage sitting in front of the ES stage. Instead, the ES accepts a request and handles everything at the HTTP level, including upstreaming to an intermediate cache or origin to fetch content and any modification to the request and/or response. Caching is outsourced to a dedicated storage service whose sole purpose is to write and read objects as fast as possible. 
+As shown by the diagram, there is no longer an LB7 stage sitting in front of the ES stage. Instead, the ES directly accepts a request and handles everything at the HTTP level, including upstreaming to an intermediate cache or origin to fetch content and any modification to the request and/or response. Caching is outsourced to a dedicated storage service whose sole purpose is to write and read objects as fast as possible. 
 
 This is actually the architecture we originally planned for CDN Pro. However, we could not find a distributed storage that met our requirements back in 2017. We decided to implement the LB7-ES structure to roll out the product without delay while developing our own storage product. After a few years of intensive coding and testing, we believe we are ready to move to the desired node structure. Our in-house load tests show that, compared to the previous structure using Nginx’s proxy_cache module, the new structure achieves substantially higher throughput and lower latency. Taking 50KB files as an example, the throughput increases by up to 300% for write operations and up to 50% for read operations, and the latency reduces by up to 80%!
 
@@ -35,7 +35,7 @@ In Q2 2024, we started upgrading the entire CDN Pro production environment to th
 
 **Phase 3**: Decommission the LB7-ES structure and deprecate the loadBalancerLogic field.
 
-As of December 2024, phases 1 and 2 have concluded, and the traffic migration in phase 2 has been seamless and has caused zero impact on customers. The next step is to migrate configurations off loadBalancerLogic.
+As of December 2024, phases 1 and 2 have concluded, and the traffic migration in phase 2 has been seamless with zero impact on customers. The next step is to migrate configurations off loadBalancerLogic.
 
 ### Your Help is Needed
 We aim to complete the deprecation of loadBalancerLogic by the end of March 2025. Starting from Q2 2025, loadBalancerLogic will no longer be supported. This means configurations containing loadBalancerLogic will be rejected, when you create a new property or create a new version for an existing property.  
@@ -44,7 +44,7 @@ While the above-mentioned phase 1 and phase 2 are completely transparent to our 
 
 **Directives**
 
-The following is a list of directives that are supported in loadBalancerLogic. Refer to the recommendations on how to merge loadBalancerLogic into edgeLogic.
+The following is a list of directives that are supported in loadBalancerLogic. Refer to the recommendations on how to merge them from loadBalancerLogic into edgeLogic.
 
 | Directive | Recommendation |
 |----------|----------|
