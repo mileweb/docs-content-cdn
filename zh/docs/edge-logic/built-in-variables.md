@@ -2,6 +2,8 @@
 
 下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。表中的大多数变量都是只读的，只有那些标记为<span class="badge cyan">R/W</span>的变量可写。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
+**注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令和变量应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
+
 | **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | URL 问号后参数中的指定参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

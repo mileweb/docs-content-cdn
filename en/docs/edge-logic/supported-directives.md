@@ -14,9 +14,9 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 **Syntax:** `access_log_sampling factor;` <br/>
 **Default:** `-` <br/>
-**Contexts:** server (LB-only)
+**Contexts:** server, location, if in location
 
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
+Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
@@ -208,7 +208,7 @@ This directive sets the maximum wait time for the complete request header from t
 **Default:** `client_max_body_size 128m;`<br/>
 **Context:** server, location
 
-Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of the client request body size. Usually you will need to configure this directive in both the load balancer and Edge Logic.
+Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of the client request body size.
 
 ### `client_send_timeout`
 
@@ -427,7 +427,7 @@ Specifies that a given location can be used for internal requests only. No chang
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
-**Context:** server (LB-only)
+**Context:** server, location
 
 The first parameter sets a timeout during which a keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. The optional second parameter sets a value in the “Keep-Alive: timeout=time” response header field. The two parameters may differ, but they should be no greater than 300s.
 
@@ -837,9 +837,9 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 **Syntax:** `proxy_ignore_client_abort on | off;` <br/>
 **Default:** `proxy_ignore_client_abort off;` <br/>
-**Context:** server, location (LB only)
+**Context:** server, location
 
-Determines whether the connection with an upstream server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the upstream server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
+Determines whether the connection with an upstream server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the upstream server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues.
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -957,7 +957,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **Default:** `proxy_request_buffering off` <br/>
 **Context:** server, location
 
-Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be configured in both edgeLogic and loadBalancerLogic. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cache_key).
+Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cache_key).
 
 ### `proxy_request_body_in_cache_key`
 
@@ -994,7 +994,7 @@ proxy_no_cache $no_store;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
 
-### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) (Deprecated)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
@@ -1002,7 +1002,7 @@ The directive is merged across different levels (http/server/location/location i
 **Default:** `-` <br/>
 **Contexts:** server (LB only)
 
-This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES.
+This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES. This directive is deprecated. Refer to the [upgrade of edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>).
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 

@@ -78,19 +78,16 @@ Under the LB7-ES structure, incoming requests are always processed by LB7 first 
 
 ```nginx
 ## loadBalancerLogic prior to merge
-
 deny 103.15.234.251;
 deny 104.23.161.214; 
  
 ## edgeLogic prior to merge
-
 location / { 
     deny 18.16.236.115;  
     deny 193.2.13.203/32;
     allow all;
     origin_pass myorigin;
 }
-
 location /abc {
     origin_pass myorigin;
 }
@@ -98,7 +95,6 @@ location /abc {
 
 ```nginx
 ## edgeLogic after merging in loadBalancerLogic
-
 # Rules copied from loadBalancerLogic and prepended to server context of edgeLogic 
 deny 103.15.234.251;
 deny 104.23.161.214;  
@@ -113,7 +109,6 @@ location / {
     allow all;
     origin_pass myorigin;
 }
-
 location /abc { # No change. Inherits the server level rules
     origin_pass myorigin;
 }
@@ -123,29 +118,24 @@ The directive add_header is executed when the server constructs a response to th
 
 ```nginx
 ## loadBalancerLogic prior to merge
-
 add_header X-Custom-Header “value-from-lb” policy=overwrite always;
  
 ## edgeLogic prior to merge
-
 location / { 
     origin_pass myorigin;
     add_header X-Custom-Header “value-from-es” policy=overwrite always;
 }
-
 location /abc
     origin_pass myorigin;
 }
 ```
 ```nginx
 ## edgeLogic after merging in loadBalancerLogic
-
 location / {
     origin_pass myorigin;
     add_header X-Custom-Header “value-from-es” policy=overwrite always;
     add_header X-Custom-Header “value-from-lb” policy=overwrite always; # Append configuration copied from loadBalancerLogic to the location context of edgeLogic. Without this copied configuration, the client will see “value-from-es” being assigned to X-Custom-Header for requests matching this location, but “value-from-lb” is expected. 
 }
-
 location /abc { # No change. Inherits the server level config
     origin_pass myorigin;
 }
