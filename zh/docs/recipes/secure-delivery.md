@@ -67,7 +67,7 @@ if ($b64hash != $http_x_hash) {
 ```
 
 ### 实现回源站的鉴权
-很多源站都会配置一些鉴权规则来避免服务被滥用。在这种情况下，您可以使用 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来方便的生成访问源站所需要的 token。下面这个例子展示了如何实现 [AWS Signature Version 2](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html) 算法:
+很多源站都会配置一些鉴权规则来避免服务被滥用。在这种情况下，您可以使用 [`eval_func`](</docs/edge-logic/supported-directives.md#eval_func>) 指令来方便的生成访问源站所需要的 token。下面这个例子展示了如何实现 [AWS Signature Version 2](https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/RESTAuthentication.html) 算法:
 ```nginx
 ## 输入变量: $awskey $awsseckey $awsbucket/$s3key
 
