@@ -3,6 +3,8 @@
 The table below lists all the built-in variables supported by the CDN Pro servers. You can use them in Edge Logic or [Load Balancer Logic](lb7-es-structure). Not all variables are supported in both places. The [real-time log](/docs/portal/edge-configurations/creating-property#real-time-log) supports the same set of variables as the Load Balancer Logic. Most variables here are read-only. The writable ones are indicated by <span class="badge cyan">R/W</span>. The variables with numerical values are tagged with <span class="badge small" title="numerical value">#</span>.
 If you use the CDN Pro portal to edit the property, typing `$` at a position where a variable is allowed will list all the supported variables.
 
+**Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All supported directives and variables should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
+
 | **Variable Name** | **Description** | **Edge Logic** | **LB Logic** |
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | query parameter with the specified name | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
