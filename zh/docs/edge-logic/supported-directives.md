@@ -1047,7 +1047,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。本指令只能在 Edge Logic里使用。在 Load Balancer Logic 可以通过直接 `set $realtime_log_ds_factor {factor};` 来改变采样率。
+该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。本指令只能在 Edge Logic里使用。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
