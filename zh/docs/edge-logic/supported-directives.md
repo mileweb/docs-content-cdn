@@ -14,9 +14,9 @@
 
 **使用语法：** `access_log_sampling factor;` <br/>
 **默认设置：** `-` <br/>
-**可用位置：** server (仅限在LB7)
+**可用位置：** server, location, if in location
 
-本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对CDN Pro 边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。
+本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
