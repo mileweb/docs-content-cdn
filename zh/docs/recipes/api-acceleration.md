@@ -20,7 +20,7 @@ server following the **format** of [basic authentication](https://zh.wikipedia.o
 This makes it easy for the CDN Pro servers to obtain the API user name with the built-in
 variable `$remote_user`. Please notice that you don't have to use the actual basic
 authentication algorithm which transfers the secret password in clear text. You are free 
-to use a more sophisticated algorithm like the one for [CDN Pro API](https://docs.quantil.com/zh/cdn/apidocs#section/Authentication)
+to use a more sophisticated algorithm like the one for [CDN Pro API](/zh/cdn/apidocs#section/Authentication)
 to generate a signature to put after the colon.
 * All the input parameters to the API server are specified in the request query string.
 
