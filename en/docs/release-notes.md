@@ -1,5 +1,14 @@
 # Release Notes
 
+## January 21, 2025
+
+#### API updates
+* Improved deletion of the latest certificate version by adding a new endpoint requiring specification of the version to be deleted. This is safer than the existing endpoint which used the keyword ‘latest’.
+* Fixed incorrect TooManyHostnames error returned when deploying a property on behalf of a customer whose hostnameLimit has not been reached.
+
+#### Console updates
+* Fixed issue with loading customer list.
+
 ## January 7, 2025
 #### API updates
 * Added “Mainland China” as a [prefetch](</apidocs#operation/post-cdn-prefetches>) region.
