@@ -545,8 +545,9 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                          "maxLength": 65530
+                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                          "maxLength": 65530,
+                          "deprecated": true
                         },
                         "tls0Rtt": {
                           "type": "boolean",
@@ -1381,8 +1382,9 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                    "maxLength": 65530
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                    "maxLength": 65530,
+                    "deprecated": true
                   },
                   "tls0Rtt": {
                     "type": "boolean",
@@ -4268,8 +4270,9 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                    "maxLength": 65530
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                    "maxLength": 65530,
+                    "deprecated": true
                   },
                   "tls0Rtt": {
                     "type": "boolean",
@@ -4983,8 +4986,9 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                        "maxLength": 65530
+                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                        "maxLength": 65530,
+                        "deprecated": true
                       },
                       "tls0Rtt": {
                         "type": "boolean",
@@ -7604,15 +7608,12 @@
       "parameters": [
         {
           "schema": {
-            "enum": [
-              "latest"
-            ],
             "type": "string"
           },
           "name": "version",
           "in": "path",
           "required": true,
-          "description": "Version of the certificate to retrieve. It can be an integer representing the version like \"1\" or \"latest\" to return the most recently created version of the certificate."
+          "description": "Version of the certificate. It can be an integer representing the version like \"1\"."
         },
         {
           "schema": {
@@ -7845,6 +7846,134 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ]
+      },
+      "delete": {
+        "summary": "Delete the latest version of a certificate",
+        "operationId": "delete-cdn-certificates-certificateID-versions-version",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /certificates/45230c199e5f9dd381daff5e/versions/2\n"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The certificate version was deleted."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "ybu7yf05lc4am"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "mdct4cijazgcx"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Version Is not the latest": {
+                    "value": {
+                      "code": "VersionIsNotTheLatest",
+                      "message": "Trying to delete version 3 which is not the latest version"
+                    }
+                  },
+                  "Certificate with only one version": {
+                    "value": {
+                      "code": "CertificateWithOnlyOneVersion",
+                      "message": "This is the only version in existence. Deleting this version is not allowed."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid certificate. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "8nfnbomhrq2gk"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "feljdfmf2ptuk"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid certificate": {
+                    "value": {
+                      "code": "InvalidCertId",
+                      "message": "The specified certificate ID does not exist."
+                    }
+                  },
+                  "Invalid version": {
+                    "value": {
+                      "code": "InvalidVersion",
+                      "message": "Version 3 does not exist (may have already been deleted)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The certificate version could not be deleted. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "244vu0caxcp5z"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "oxz6r1fm491ky"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Version used": {
+                    "value": {
+                      "code": "VersionUsed",
+                      "message": "The latest version cannot be deleted because it is in deployment history."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Certificate Management"
+        ],
+        "description": "This endpoint can be used to delete the latest version of a certificate if it was never deployed before. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>."
       }
     },
     "/cdn/certificates/{certificateID}/versions/latest": {
@@ -7973,7 +8102,8 @@
             "source": "./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e/latest\n"
           }
         ],
-        "description": "This endpoint can be used to delete the latest version of a certificate if it was accidentally created but never deployed. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>."
+        "description": "This endpoint can be used to delete the latest version of a certificate if it was accidentally created but never deployed. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>.",
+        "deprecated": true
       }
     },
     "/cdn/validations": {
@@ -24075,7 +24205,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains system configuration.",
+            "description": "The response contains the system configuration.",
             "content": {
               "application/json": {
                 "schema": {
@@ -24238,6 +24368,7 @@
                         "proxy_cache_lock_timeout",
                         "proxy_cache_methods",
                         "proxy_cache_min_age",
+                        "proxy_cache_max_stale",
                         "proxy_cache_use_stale",
                         "proxy_ignore_cache_control",
                         "proxy_ignore_headers",
@@ -24256,16 +24387,24 @@
                         "sorted_querystring_filter_parameter",
                         "slice",
                         "slice_ignore_etag",
-                        "realtime_log_downsample"
+                        "realtime_log_downsample",
+                        "slice_verify_header",
+                        "upstream_origin_only",
+                        "eval_func",
+                        "internal",
+                        "proxy_next_upstream",
+                        "proxy_cache_convert_head",
+                        "default_type",
+                        "access_log_sampling",
+                        "keepalive_timeout"
                       ],
                       "advancedDirectives": [
-                        "internal",
                         "auth_request",
                         "auth_request_set",
+                        "gzip",
                         "gzip_types",
                         "proxy_cookie_domain",
                         "proxy_cookie_path",
-                        "proxy_next_upstream",
                         "proxy_next_upstream_timeout",
                         "proxy_next_upstream_tries",
                         "proxy_redirect",
@@ -24282,7 +24421,6 @@
                         "origin_read_timeout",
                         "origin_send_timeout",
                         "proxy_cache_vary",
-                        "eval_func",
                         "enable_websocket",
                         "origin_fast_route",
                         "custom_log_field",
@@ -24296,47 +24434,31 @@
                         "proxy_request_body_in_cache_key",
                         "proxy_max_body_in_cache_key",
                         "ignore_invalid_range",
+                        "brotli",
+                        "brotli_types",
+                        "range_reorder",
+                        "proxy_request_buffering",
+                        "http2_max_concurrent_streams",
+                        "proxy_ignore_client_abort",
+                        "set_attack_state_req",
+                        "set_attack_state_tlshs",
+                        "attack_detection",
+                        "ssl_delay_handshake",
+                        "ssl_reject_handshake",
+                        "set_attack_state_rspbytes",
+                        "set_attack_state_cpu",
+                        "remote_log_set_header",
+                        "limit_req",
+                        "limit_req_status",
+                        "limit_req_dry_run",
                         "VVVVVVVVVVVVVV_Experimental_Below_VVVVVVVVVVVVVVVV",
-                        "gzip_comp_level",
                         "proxy_set_body",
                         "mirror",
                         "mirror_request_body",
                         "client_body_buffer_size",
                         "proxy_max_temp_file_size",
-                        "proxy_set_header",
-                        "proxy_request_buffering",
-                        "proxy_cache_convert_head",
-                        "gzip",
                         "include"
                       ],
-                      "publishedPrice": {
-                        "perGB": {
-                          "standard": 0.057,
-                          "premium": 0.112,
-                          "deluxe": 0.197,
-                          "ultra": 0.279
-                        },
-                        "perMHttpsReq": 0.99
-                      },
-                      "extraServicePorts": {
-                        "http": [
-                          8000,
-                          8080,
-                          8062,
-                          6382,
-                          3000,
-                          9200,
-                          7778
-                        ],
-                        "https": [
-                          8443,
-                          4443,
-                          5850,
-                          9443,
-                          6443,
-                          9210
-                        ]
-                      },
                       "baseLbDirectives": [
                         "if",
                         "else",
@@ -24347,22 +24469,164 @@
                         "allow",
                         "deny",
                         "access_log_sampling",
-                        "proxy_set_header"
+                        "proxy_set_header",
+                        "eval_func",
+                        "proxy_set",
+                        "keepalive_timeout",
+                        "sorted_querystring_filter_parameter",
+                        "proxy_cache_convert_head"
                       ],
                       "advancedLbDirectives": [
-                        "eval_func",
                         "client_max_body_size",
                         "http2_max_concurrent_streams",
                         "proxy_ignore_client_abort",
                         "proxy_request_buffering",
                         "custom_log_field",
-                        "proxy_cache_convert_head",
-                        "keepalive_timeout"
+                        "default_type",
+                        "set_attack_state_req",
+                        "set_attack_state_tlshs",
+                        "attack_detection",
+                        "ssl_delay_handshake",
+                        "ssl_reject_handshake",
+                        "limit_req",
+                        "limit_req_status",
+                        "limit_req_dry_run",
+                        "set_attack_state_rspbytes",
+                        "set_attack_state_cpu",
+                        "rewrite",
+                        "remote_log_set_header"
                       ],
+                      "publishedPrice": {
+                        "perGB": {
+                          "standard": 0.04,
+                          "premium": 0.08,
+                          "deluxe": 0.158,
+                          "ultra": 0.237,
+                          "nearChina": 0.938
+                        },
+                        "perCpuHour": 1.95
+                      },
+                      "extraServicePorts": {
+                        "http": [
+                          1081,
+                          1082,
+                          1083,
+                          3000,
+                          3080,
+                          5085,
+                          5087,
+                          7000,
+                          7001,
+                          7070,
+                          7777,
+                          7778,
+                          7788,
+                          8000,
+                          8001,
+                          8010,
+                          8055,
+                          8062,
+                          8080,
+                          8081,
+                          8082,
+                          8084,
+                          8086,
+                          8087,
+                          8088,
+                          8090,
+                          8181,
+                          8282,
+                          8580,
+                          8680,
+                          8800,
+                          8888,
+                          8999,
+                          9000,
+                          9001,
+                          9011,
+                          9080,
+                          9090,
+                          9091,
+                          9200,
+                          9306,
+                          10099,
+                          10117,
+                          12033,
+                          18081,
+                          20000,
+                          21026,
+                          28088,
+                          48080,
+                          48899,
+                          10001,
+                          10101,
+                          10201,
+                          10301,
+                          10401,
+                          10501,
+                          21001,
+                          21101,
+                          21201,
+                          21301,
+                          21401,
+                          21501,
+                          21601,
+                          21701,
+                          21801,
+                          21901,
+                          50000
+                        ],
+                        "https": [
+                          1443,
+                          4003,
+                          4443,
+                          5443,
+                          6443,
+                          8083,
+                          8089,
+                          8100,
+                          8383,
+                          8443,
+                          8445,
+                          8681,
+                          8890,
+                          9003,
+                          9006,
+                          9210,
+                          9220,
+                          9222,
+                          9224,
+                          9226,
+                          9228,
+                          9310,
+                          9443,
+                          9980,
+                          9999,
+                          10000,
+                          10004,
+                          32001,
+                          32101,
+                          32201,
+                          32301,
+                          32401,
+                          32501,
+                          40601,
+                          40701,
+                          40801,
+                          40901,
+                          52601,
+                          52701,
+                          52801,
+                          52901,
+                          53001,
+                          10443
+                        ]
+                      },
                       "advancedFeatures": [
                         "realTimeLog",
                         "nearChina",
-                        "originShield"
+                        "originShield",
+                        "attackMitigation"
                       ],
                       "supportedLanguages": [
                         "en",
