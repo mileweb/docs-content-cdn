@@ -78,26 +78,22 @@ allow和deny这2个指令在负载均衡器逻辑和边缘逻辑中都可用。�
 
 ```nginx
 ## 合并前的负载均衡器逻辑
-
 deny 103.15.234.251;
 deny 104.23.161.214; 
  
 ## 合并前的边缘逻辑
-
 location / { 
     deny 18.16.236.115;  
     deny 193.2.13.203/32;
     allow all;
     origin_pass myorigin;
 }
-
 location /abc {
     origin_pass myorigin;
 }
 ```
 ```nginx
 ## 把负载均衡器逻辑合并到边缘逻辑后的配置
-
 # 从负载均衡器逻辑复制规则并插入到边缘逻辑server块之前
 deny 103.15.234.251;
 deny 104.23.161.214;  
@@ -112,7 +108,6 @@ location / {
     allow all;
     origin_pass myorigin;
 }
-
 location /abc { # 无变化。继承server块的规则
     origin_pass myorigin;
 }
@@ -122,29 +117,24 @@ add_header指令是在服务器构建响应的阶段执行。在LB7-ES架构下�
 
 ```nginx
 ## 合并前的负载均衡器逻辑
-
 add_header X-Custom-Header “value-from-lb” policy=overwrite always;
  
 ## 合并前的边缘逻辑
-
 location / { 
     origin_pass myorigin;
     add_header X-Custom-Header “value-from-es” policy=overwrite always;
 }
-
 location /abc {
     origin_pass myorigin;
 }
 ```
 ```nginx
 ## 把负载均衡器逻辑合并到边缘逻辑后的配置
-
 location / {
     origin_pass myorigin;
     add_header X-Custom-Header “value-from-es” policy=overwrite always;
     add_header X-Custom-Header “value-from-lb” policy=overwrite always; # 从负载均衡器逻辑复制配置追加到边缘逻辑location块。如果没有此处的配置，客户端将看到 X-Custom-Header头部的值为“value-from-es”，但预期的值为“value-from-lb”。
 }
-
 location /abc { # 无变化。继承server块的配置
     origin_pass myorigin;
 }
@@ -159,7 +149,7 @@ add_header X-Custom-Header “value-from-lb” policy=overwrite always;
 
 | 变量 | 配置处理 |
 |----------|----------|
-| $upstream_http_*name* | 在边缘逻辑中可以用add_header指令通过头部从ES传递信息给LB7。所传递的信息可以在LB7中通过$upstream_http_*name*变量获取。<br>新架构不再有LB7，负载均衡器逻辑中的配置也需要被合并到边缘逻辑中。因此，任何与在ES和LB7之间传递信息相关的逻辑都应该调整，应改成直接从ES中获取信息，而不是依赖于add_header和$upstream_http_*name*。 |
-| $upstream_trailer_*name* | add_trailer指令是从ES向LB7传递信息的另一种方式。所传递的信息可以在LB7中通过$upstream_trailer_*name*变量获取。<br>与$upstream_http_*name*类似，任何与传递信息相关的逻辑都应该调整，应改成直接从ES获取信息，而不是依赖于add_trailer和$upstream_trailer_*name*。 |
+| $upstream\_http\_*name* | 在边缘逻辑中可以用add\_header指令通过头部从ES传递信息给LB7。所传递的信息可以在LB7中通过$upstream\_http\_*name*变量获取。<br>新架构不再有LB7，负载均衡器逻辑中的配置也需要被合并到边缘逻辑中。因此，任何与在ES和LB7之间传递信息相关的逻辑都应该调整，应改成直接从ES中获取信息，而不是依赖于add\_header和$upstream\_http\_*name*。 |
+| $upstream\_trailer\_*name* | add\_trailer指令是从ES向LB7传递信息的另一种方式。所传递的信息可以在LB7中通过$upstream\_trailer\_*name*变量获取。<br>与$upstream\_http\_*name*类似，任何与传递信息相关的逻辑都应该调整，应改成直接从ES获取信息，而不是依赖于add\_trailer和$upstream\_trailer\_*name*。 |
 
 如果您对以上变更有任何疑问，请随时联系我们的[技术支持](https://www.cdnetworks.com/cn/support/)。加速愉快！
