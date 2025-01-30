@@ -110,7 +110,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $sc_completed                | 1 = last byte of the object was served to the user.<br>Otherwise, 0.</br> |
 | $sc_initial                  | 1 = first byte of the object was served to the user. <br>Otherwise, 0.</br> |
 | $sent_http_content_length    | Original file size. |
-| $sent_http_<i>x</i>          | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
+| $sent\_http\_<i>x</i>          | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
 | $server_addr                 | IP address of the edge node serving the user's request. |
 | $server_level		       | Level of the cache server. 1 means edge, and 2 means intermediate. |
 | $server_name		       | The value specified in the property's hostnames that matched the incoming request. |
@@ -118,8 +118,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $server_province_code	       | A two character ISO 3166-2 code representing the China province of the edge server if the request was handled by a server in China |
 | $server_region	       | Country code of the edge server, e.g. CN, US |
 | $service_port		       | Port number that received the request. |
-| $sorted_querystring_args     | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href="/cdn/docs/edge-logic/supported-directives#sorted_q\
-uerystring_filter_parameter">sorted_querystring_filter_parameter directive</a>. |
+| $sorted_querystring_args     | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href="/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter">sorted_querystring_filter_parameter directive</a>. |
 | $ssl_cipher                  | Cipher suite used for the TLS (SSL) connection. |
 | $ssl_protocol                | TLS version used for the TLS (SSL) connection. Example versions include <b>SSLv3</b>, <b> TLSv1</b>, <b>TLSv1.1</b>, <b>TLSv1.2</b>, and <b>unknown</b>. |
 | $ssl_server_name             | Hostname to which a client initiating a TLS (SSL) connection is attempting to connect. It is sent only by clients supporting Server Name Indication (SNI). |
@@ -129,8 +128,8 @@ uerystring_filter_parameter">sorted_querystring_filter_parameter directive</a>. 
 | $tcpinfo_rtt                 | Time in microseconds taken by a packet to travel to the destination and return. |
 | $transfer_time	       | The time needed for CDN Pro to send the full requested object ( up to last byte ) to system buffer, in seconds. |
 | $turn_around_time	       | The time needed for CDN Pro to receive first byte of response of origin, in seconds. |
-| $upstream_cookie_name	       | Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache. |
-| $uri			       | ormalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href="/cdn/docs/edge-logic/supported-directives#rewrite">rewrite directive</a> in the Edge Logic. |
+| $upstream_cookie_<i>name</i>   | Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache. |
+| $uri			       | Normalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href="/cdn/docs/edge-logic/supported-directives#rewrite">rewrite directive</a> in the Edge Logic. |
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="650"></p>
 
