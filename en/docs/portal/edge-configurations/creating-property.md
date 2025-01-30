@@ -1,4 +1,4 @@
-O[O# Creating a Property
+# Creating a Property
 
 There are two ways to create a new property:<ul><li>Create a new property from scratch.</ul></li><ul><li> Clone an existing property whose settings are similar to the property you want to create, and then change the settings of the cloned property to suit your needs.</ul></li>
 
