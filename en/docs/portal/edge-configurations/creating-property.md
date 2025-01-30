@@ -66,7 +66,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 | **Variable**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
-| $arg_name		      | Value of the query parameter with the specified name. |
+| $arg_<i>name</i>	       | Value of the query parameter with the specified name. |
 | $args			      | The full query string from the client.  |
 | $body_bytes_sent             | Size of the response body.|
 | $bytes_sent                  | Size of the response, including body, headers, and response line.|
@@ -80,12 +80,12 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $content_code                | A code assigned to content for reporting and billing purposes.|
 | $content_length	       | Value of the request's Content-Length header. |
 | $content_type		       | Value of the request's Content-Type header. |
-| $cookie_x                    | Obtain the value of the cookie named 'x'. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
+| $cookie_<i>x</i>             | Obtain the value of the cookie named 'x'. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
 | $error_code		       | Error, if any, about the client and origin. |
 | $extra_deliver_time_ms       | Estimated time in milliseconds needed to flush the TCP send buffer. |
 | $host			       | Value of the request's Host header. |
 | $hostname		       | Server's hostname. |
-| $http_x                      | Obtain any HTTP header named <i>x</i> from the original request. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$http_user_agent</b> fetches the value of User-Agent. |
+| $http_<i>x</i>               | Obtain any HTTP header named <i>x</i> from the original request. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$http_user_agent</b> fetches the value of User-Agent. |
 | $invalid_referer	       | Empty string if the "Referer" request header field value is considered valid; otherwise "1". |
 | $is_args		       | Empty or "?", when the request contains a query string. |
 | $msec                        | Current Unix time in seconds with millisecond precision. |
@@ -110,7 +110,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 | $sc_completed                | 1 = last byte of the object was served to the user.<br>Otherwise, 0.</br> |
 | $sc_initial                  | 1 = first byte of the object was served to the user. <br>Otherwise, 0.</br> |
 | $sent_http_content_length    | Original file size. |
-| $sent_http_x                 | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
+| $sent_http_<i>x</i>          | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
 | $server_addr                 | IP address of the edge node serving the user's request. |
 | $server_level		       | Level of the cache server. 1 means edge, and 2 means intermediate. |
 | $server_name		       | The value specified in the property's hostnames that matched the incoming request. |
