@@ -24,10 +24,10 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 | Description               | Add a description for this first property version. |
 | Hostnames                 | Enter one or more hostnames to be accelerated and which your end users will access. |
 | Origins                   | Origins are your servers that CDN Pro accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
-| Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Edge Logic Wizard dialog box. For more information, refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>).</li>
+| Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Edge Logic Wizard dialog box. For more information, refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>) and [variables](</docs/edge-logic/built-in-variable>).</li>
 | TLS Settings              | Select the [TLS client certificate settings](#tls-settings) for your property.|
 | Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact the [CDNetworks support team](mailto:support@cdnetworks.com).|
-| Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache sharing, China ICP Beian, and a load balancer hash key.|
+| Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache sharing, China ICP Beian, a load balancer hash key, whether to manage certificate renewal yourself, HTTP/2, HTTP/3, IPv6 origin support, and whether to match the client IP version when accessing origin content.|
 
 4. To include a baseline configuration with the Edge Logic for the property, click the gear icon at the bottom left of the **Edge Logic** field. When the popup appears, enter the baseline configuration. When you finish, click the **Save** button to save the baseline configuration to the database.
 
@@ -66,30 +66,70 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 | **Variable**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
+| $arg_<i>name</i>	       | Value of the query parameter with the specified name. |
+| $args			      | The full query string from the client.  |
 | $body_bytes_sent             | Size of the response body.|
 | $bytes_sent                  | Size of the response, including body, headers, and response line.|
 | $client_country_code         | ISO 3166-1 country code representing the country of the client request (for example, <b>US</b>). If the country is unknown, <b>ZZ</B> is returned.|
+| $client_http_version 	       | Client's HTTP version, like "HTTP/1.1" |
+| $client_ip_version	       | Client's IP version: 4 for IPv4 or 6 for IPv6 |
+| $client_isp		       | Client's ISP information. |
+| $client_province_code	       | A two character ISO 3166-2 code representing the China province corresponding to a client's request, if it came from China. |
 | $client_real_ip              | IP address of the client request.|
+| $connection_requests	       | Current number of requests in the connection. |
 | $content_code                | A code assigned to content for reporting and billing purposes.|
-| $cookie_x                    | Obtains any cookie named <i>x</i>. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
-| $http_x                      | Obtains any HTTP header named <i>x</i> from the original request. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$http_user_agent</b> fetches the value of User-Agent. |
+| $content_length	       | Value of the request's Content-Length header. |
+| $content_type		       | Value of the request's Content-Type header. |
+| $cookie_<i>x</i>             | Obtain the value of the cookie named 'x'. For example, <b>$cookie_account</b> retrieves the value of a cookie named <b>account</b>. |
+| $error_code		       | Error, if any, about the client and origin. |
+| $extra_deliver_time_ms       | Estimated time in milliseconds needed to flush the TCP send buffer. |
+| $host			       | Value of the request's Host header. |
+| $hostname		       | Server's hostname. |
+| $http_<i>x</i>               | Obtain any HTTP header named <i>x</i> from the original request. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$http_user_agent</b> fetches the value of User-Agent. |
+| $invalid_referer	       | Empty string if the "Referer" request header field value is considered valid; otherwise "1". |
+| $is_args		       | Empty or "?", when the request contains a query string. |
 | $msec                        | Current Unix time in seconds with millisecond precision. |
+| $origin_host		       | Origin's hostname. |
+| $origin_ip		       | Origin's IP address.|
+| $origin_status_code	       | Status code if a request is made to the origin. |
+| $pid			       | Process ID of the service.|
+| $pipe			       | "p" if the request is pipelined, or "." otherwise.|
+| $property_ver		       | Property version number. |
 | $qtl_req_id                  | Unique identifier representing the request. |
-| $request_uri                 | HTTP request URI. |
+| $qtl_upstream_cache_status   | Cache status: HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. |
+| $remote_user		       | User name extracted from the Authorization header if Basic authentication is used.|
+| $request		       | Full HTTP request line. |
+| $request_cpu_time	       | CPU time, in nanoseconds, spent on processing the request. |
+| $request_end_time	       | Time in seconds it takes to receive the request header from the client and be ready to process or forward it. |
+| $request_length	       | Length of request line, header and body.|
 | $request_method              | HTTP request method used to access the origin. |
 | $request_scheme                      | Protocol of the user's request (either <b>http</b> or <b>https</b>).</br> |
+| $request_ssl_handshake_time	       | CPU time, in nanoseconds, spent on TLS handshake. |
 | $request_time                | Response time in milliseconds. This is the time between receiving the request's first byte and serving the last byte of the response. |
+| $request_uri                 | HTTP request URI. |
 | $sc_completed                | 1 = last byte of the object was served to the user.<br>Otherwise, 0.</br> |
 | $sc_initial                  | 1 = first byte of the object was served to the user. <br>Otherwise, 0.</br> |
 | $sent_http_content_length    | Original file size. |
-| $sent_http_x                 | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
+| $sent\_http\_<i>x</i>          | Obtain the value of an HTTP header named <i>x</i> that is returned in the response to the client. The header name is converted to lower case, with dashes replaced by underscores. For example, <b>$sent_http_etag</b> fetches the value of the ETag header. |
 | $server_addr                 | IP address of the edge node serving the user's request. |
+| $server_level		       | Level of the cache server. 1 means edge, and 2 means intermediate. |
+| $server_name		       | The value specified in the property's hostnames that matched the incoming request. |
 | $server_protocol             | Version of HTTP used in the user's request (<b>HTTP/1.0</b>, <b>HTTP/1.1</b>, or <b>HTTP/2.0</b>). |
+| $server_province_code	       | A two character ISO 3166-2 code representing the China province of the edge server if the request was handled by a server in China |
+| $server_region	       | Country code of the edge server, e.g. CN, US |
+| $service_port		       | Port number that received the request. |
+| $sorted_querystring_args     | Variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href="/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter">sorted_querystring_filter_parameter directive</a>. |
 | $ssl_cipher                  | Cipher suite used for the TLS (SSL) connection. |
-| $ssl_server_name             | Hostname to which a client initiating a TLS (SSL) connection is attempting to connect. It is sent only by clients supporting Server Name Indication (SNI). |
 | $ssl_protocol                | TLS version used for the TLS (SSL) connection. Example versions include <b>SSLv3</b>, <b> TLSv1</b>, <b>TLSv1.1</b>, <b>TLSv1.2</b>, and <b>unknown</b>. |
+| $ssl_server_name             | Hostname to which a client initiating a TLS (SSL) connection is attempting to connect. It is sent only by clients supporting Server Name Indication (SNI). |
 | $status                      | HTTP response code for the user's request. |
+| $tcpinfo_delivery_rate       | The rate, in bytes/s, at which the sent data is acknowledged by the client. |
+| $tcpinfo_min_rtt	       | Minimum RTT, in microseconds, observed by TCP stack for the connection |
 | $tcpinfo_rtt                 | Time in microseconds taken by a packet to travel to the destination and return. |
+| $transfer_time	       | The time needed for CDN Pro to send the full requested object ( up to last byte ) to system buffer, in seconds. |
+| $turn_around_time	       | The time needed for CDN Pro to receive first byte of response of origin, in seconds. |
+| $upstream\_cookie\_<i>name</i>   | Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache. |
+| $uri			       | Normalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href="/cdn/docs/edge-logic/supported-directives#rewrite">rewrite directive</a> in the Edge Logic. |
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="650"></p>
 
@@ -105,7 +145,7 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 **Load Balancer Logic (to be deprecated):** Enter Edge Logic to customize load balancing. You can use a subset of the directives, including `if`, `set`, `return`, `eval_func`, `add_header`, `client_max_body_size`, `deny`, and `allow`. For the list of directives allowed in this field, refer to the `loadBalancerDirectives` field in the response to the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). This list can include advanced Edge Logic directives that have not been enabled for your account.
 Example:  `if ($http_user_agent = bot) { return 403;}`. **Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All the supported directives should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
- 
+
 
 **Note:** If the Edge Logic code is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
 

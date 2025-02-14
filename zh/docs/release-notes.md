@@ -1,5 +1,9 @@
 # Release Notes
 
+## February 13, 2025
+#### Console updates
+* Added support for $server_province_code in the Edge Logic and Load Balancer Logic fields.
+
 ## January 21, 2025
 
 #### API updates
