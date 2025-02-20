@@ -53,8 +53,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 | Port              | Enter the port handling HTTPS requests. It defaults to 443. |
 | TTL               | Enter the number of seconds between 60 and 86400 indicating how long the DNS record is valid. |
 
-<br/>
-The DNS record would look like:
+<br>The DNS record would look like:</br>
 <code>yourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn="h2,h3" port=443</code>
 
 8. Click **Update**.
