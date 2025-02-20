@@ -42,6 +42,9 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 | Port              | Enter the port handling HTTPS requests. It defaults to 443. |
 | TTL               | Enter the number of seconds between 60 and 86400 indicating how long the DNS record is valid. | 
 
+<br/>
+The DNS record would look like:
+<code>yourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn="h2,h3" port=443</code>
 
 6. Click the **Create Edge Hostname** button. It can take a minute for the new edge hostname to be ready.
 7. Add a CNAME record on your DNS server to point your service hostname(s) to the newly created edge hostname.

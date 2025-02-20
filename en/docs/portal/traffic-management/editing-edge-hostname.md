@@ -44,7 +44,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
-7. To update use of a DNS record to advertise HTTPS upport, click **Advanced Settings**, and update the following fields:
+7. To use a DNS record to advertise HTTPS upport, click **Advanced Settings**, and update the following fields:
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
