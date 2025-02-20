@@ -33,11 +33,11 @@ An edge hostname in a CNAME record on your DNS system allows you to route end us
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN Pro will redirect your traffic. |
 | Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional to the weight specified here. |
 
-5. If you would like to use a DNS record to advertise your HTTPS support and allow clients to negotiate the supported protocols faster, click Advanced Settings, and fill in the following fields:
+5. If you would like to use a DNS record to advertise your HTTPS support and allow clients to negotiate the supported protocols faster, click **Advanced Settings**, and fill in the following fields:
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
-| Deliver By HTTPS  | Choose <i>on</i> to use a DNS record.  |
+| Deliver By HTTPS  | Choose <strong>on</strong> to use a DNS record.  |
 | Application Layer Protocol Negotiation (ALPN) | Choose the supported protocols.  |
 | Port              | Enter the port handling HTTPS requests. It defaults to 443. |
 | TTL               | Enter the number of seconds between 60 and 86400 indicating how long the DNS record is valid. | 
