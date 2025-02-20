@@ -44,14 +44,18 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 
 **Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
 
-7. To use a DNS record to advertise HTTPS upport, click **Advanced Settings**, and update the following fields:
+7. To use a DNS record to advertise HTTPS support and allow compatible clients to connect faster, click **Advanced Settings**, and update the following fields:
 
 | **Fields**        | **Description**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
 | Deliver By HTTPS  | Choose <strong>on</strong> to use a DNS record.  |
 | Application Layer Protocol Negotiation (ALPN) | Choose the supported protocols.  |
 | Port              | Enter the port handling HTTPS requests. It defaults to 443. |
-| TTL               | Enter the number of seconds between 60 and 86400 indicating how long the DNS record is valid. | 
+| TTL               | Enter the number of seconds between 60 and 86400 indicating how long the DNS record is valid. |
+
+<br/>
+The DNS record would look like:
+<code>yourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn="h2,h3" port=443</code>
 
 8. Click **Update**.
 9. When a message confirms that the edge hostname update was accepted, click **OK**. It can take a minute for the update to complete.
