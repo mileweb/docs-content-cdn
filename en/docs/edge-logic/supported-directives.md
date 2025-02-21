@@ -401,7 +401,7 @@ else { ... }
 ```
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### `ignore_invalid_range`
+### `ignore_invalid_range`  (Deprecated)
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
@@ -409,7 +409,19 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default:** `ignore_invalid_range off;` <br/>
 **Context:** server, location <br/>
 
-Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
+Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code. This directive is deprecated. Please use the `ignore_range` directive instead.
+
+### [`ignore_range`]
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `ignore_range on|off|invalid;` <br/>
+**Default:** `ignore_range off;` <br/>
+**Context:** server, location <br/>
+
+This directive lets you control when to ignore ranger headers from the client.
+When set to `on`, range headers from the client will be ignored, and the request will not be treated as a range request.
+When set to `invalid`, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 

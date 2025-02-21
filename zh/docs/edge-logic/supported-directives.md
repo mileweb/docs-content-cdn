@@ -410,7 +410,7 @@ else { ... }
 ```
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
-### `ignore_invalid_range`
+### `ignore_invalid_range` （已废弃）
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
@@ -418,7 +418,17 @@ else { ... }
 **默认设置:** `ignore_invalid_range off;` <br/>
 **可用位置:** server, location <br/>
 
-指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。
+指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。该指令已废弃，请使用 ignore_range 指令。
+
+### [`ignore_range`]
+
+<span class="badge dark">advanced</span> <span class="badge primary">全新特有</span>
+
+**Syntax:** `ignore_range on|off|invalid;` <br/>
+**Default:** `ignore_range off;` <br/>
+**Context:** server, location <br/>
+
+设置为on时，会忽略Range请求头，不按Range请求处理。设置为invalid时，无效的Range请求头将被忽略，客户端会收到200状态码和完整内容，否则客户端将收到 416 状态码。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
