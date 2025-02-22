@@ -411,7 +411,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code. This directive is deprecated. Please use the `ignore_range` directive instead.
 
-### [`ignore_range`]
+### `ignore_range`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 

@@ -420,7 +420,7 @@ else { ... }
 
 指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。该指令已废弃，请使用 ignore_range 指令。
 
-### [`ignore_range`]
+### `ignore_range`
 
 <span class="badge dark">advanced</span> <span class="badge primary">全新特有</span>
 
