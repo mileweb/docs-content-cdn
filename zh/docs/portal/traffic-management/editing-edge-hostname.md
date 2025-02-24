@@ -42,7 +42,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</ul>
 
-**Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
+**Note**: A default rule that covers all regions and all ISPs is always required.
 
 7. To use a DNS record to advertise HTTPS support and allow compatible clients to connect faster, click **Advanced Settings**, and update the following fields:
 
