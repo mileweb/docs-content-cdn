@@ -121,6 +121,10 @@ auth_request /auth$is_args$args;
 ```
 The request will be granted if the auth response returns a 2xx status code or rejected if the auth response returns a 401 or 403 status code. Other status codes are considered an error and return a 500 "internal error" to the client.
 
+Variables in the subrequest context are handled separately from the main request. This avoids variables in the main request context being polluted. 
+
+The Content-Length header (if any) is removed, as an auth request is not supposed to carry a request body.
+
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
 <span class="badge dark">advanced</span>
@@ -267,6 +271,8 @@ Denies access from the specified network or address. Usually used together with 
 **Context:** server, location
 
 This directive enables proxying the WebSocket protocol. The client must use HTTP/1.1, not the other HTTP protocol versions. The default read and send timeouts are set to 60s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
+
+When `enable_websocket` is not configured, requests with Upgrade header will be rejected and the status code 403 will be returned.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -657,25 +663,15 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 This directive does not prevent the response from being saved in the cache.
 That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
-### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
-
-<span class="badge dark">advanced</span>
-
-**Syntax:** `proxy_cache_lock on/off;` <br/>
-**Default:** `proxy_cache_lock on;` <br/>
-**Context:** server, location
-
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN Pro enables it to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
-
-### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
+### [`proxy_cache_convert_head`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_convert_head)
 
 <span class="badge">standard</span>
 
-**Syntax:** `proxy_cache_lock_age time;` <br/>
-**Default:** `proxy_cache_lock_age 15s;` <br/>
+**Syntax:** `proxy_cache_convert_head on | off;` <br/>
+**Default:** `proxy_cache_convert_head on;` <br/>
 **Context:** server, location
 
-If the last request passed to the upstream server for populating a new cache element has not completed for the specified time, one more request may be passed to the upstream server. No change to the public version.
+Enables or disables the conversion of the “HEAD” method to “GET” for caching. When enabled, CDN Pro cache servers will convert “HEAD” method to “GET” when reading from cache or sending upstream requests to origin. If your origin expects HEAD requests and this conversion might cause requests to break, you should disable the conversion. For example, if your origin enforces authentication and request method is taken as a factor in the generation of signature for authentication, the conversion of request method is likely to cause unexpected authentication failures.
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -685,7 +681,9 @@ If the last request passed to the upstream server for populating a new cache ele
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the upstream server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). When `proxy_cache_lock` is enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by this `proxy_cache_lock_timeout` directive. By default, CDN Pro enables `proxy_cache_lock` to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible. 
+
+We made a change to the open source version such that requests released upon expiration of timeout are still allowed to populate the cache element.
 
 ### `proxy_cache_max_stale`
 
@@ -861,7 +859,7 @@ Determines whether the connection with an upstream server should be closed when 
 **Default:** `-` <br/>
 **Context:** server, location
 
-Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
+Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` and `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers), except that we couple `Cache-Control` and `Expires` together. Configuring this directive to ignore `Cache-Control` will cause `Expires` to be also ignored, or vice verca. If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -969,17 +967,17 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **Default:** `proxy_request_buffering off` <br/>
 **Context:** server, location
 
-Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cache_key).
+Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. The value of this directive does not have an effect on the behavior of [appending request body to cache key](#proxy_request_body_in_cache_key).
 
 ### `proxy_request_body_in_cache_key`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_request_body_in_cache_key on/off;` <br/>
-**Default:** `proxy_request_body_in_cache_key off` <br/>
+**Default:** `proxy_request_body_in_cache_key on` <br/>
 **Context:** server, location, if in location
 
-When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests. You also need to set [`proxy_request_buffering`](#proxy_request_buffering) to "on" to enable request buffering.
+When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests.
 
 A restriction of this directive is that it works only when body size is less than 4kB. When the request body size is greater than this threshold, no hash value is appended to the cache key and this fact is indicated by a value '1' of the variable [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key). You can use this variable with [`proxy_cache_bypass`](#proxy_cache_bypass) to bypass caching of these requests. If it is really important to include a large request body in the cache key, you are advised to calculate the hash value in the client and pass it in the request header, then include it in the $cache_misc variable.
 
@@ -1025,16 +1023,6 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **Context:** server, location
 
 Enables the specified protocols for requests to an origin HTTPS server. No change to the public version.
-
-### `range_reorder`
-
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
-
-**Syntax:** `range_reorder on | off [coalescing];` <br/>
-**Default:** `range_reorder off` <br/>
-**Contexts:** server, location
-
-This directive can be used to instruct the proxy server to reorder and merge multiple byte-ranges in one request. When range_reorder is enabled, multiple ranges requested in descending order will be re-ordered to ascending. When range_order is enabled with the coalescing parameter, multiple ranges that overlap or are separated by a gap that is smaller than the overhead of sending multiple parts will be coalesced. This ensures that multipart content is returned to the client with the 206 status code. When range_reorder is disabled, full content with 200 status code might be returned to the client for requests with multiple ranges.
 
 ### `realtime_log_downsample`
 
