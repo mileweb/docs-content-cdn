@@ -1,5 +1,11 @@
 # Release Notes
 
+## February 24, 2025
+#### Console updates
+* Introduced a new Edge Logic directive ignore_range. Ignore_invalid_range will be deprecated.
+* Added an interface allowing the customer to control whether to use a DNS record to advertise HTTPS support.
+
+
 ## February 13, 2025
 #### Console updates
 * Added support for $server_province_code in the Edge Logic and Load Balancer Logic fields.
