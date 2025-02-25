@@ -422,7 +422,7 @@ else { ... }
 
 ### `ignore_range`
 
-<span class="badge dark">advanced</span> <span class="badge primary">全新特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **Syntax:** `ignore_range on|off|invalid;` <br/>
 **Default:** `ignore_range off;` <br/>
