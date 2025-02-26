@@ -401,7 +401,7 @@ else { ... }
 ```
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### `ignore_invalid_range`
+### `ignore_invalid_range`  (Deprecated)
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
@@ -409,7 +409,19 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default:** `ignore_invalid_range off;` <br/>
 **Context:** server, location <br/>
 
-Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
+Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code. This directive is deprecated. Please use the `ignore_range` directive instead.
+
+### `ignore_range`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `ignore_range on|off|invalid;` <br/>
+**Default:** `ignore_range off;` <br/>
+**Context:** server, location <br/>
+
+This directive lets you control when to ignore ranger headers from the client.
+When set to `on`, range headers from the client will be ignored, and the request will not be treated as a range request.
+When set to `invalid`, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -1193,15 +1205,20 @@ This feature is implemented on top of this [open-source project](https://github.
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `sub_filter {string} {replacement};` <br/>
+**Syntax:** `sub_filter {string} {replacement} [if(...)];` <br/>
 **Default:** `—` <br/>
 **Context:** server, location
 
-Sets a string to replace in the response and a replacement string. There is no change to the public version. Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
+Sets a string to replace in the response and a replacement string. We made the following changes to the public version:
+
+1. This directive takes effect only on the edge servers, not the parent servers. This ensures the replacement happens only once across the [hierarchical structure](/cdn/docs/edge-logic/paths-to-origins) of CDN Pro.
+2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive. Since scanning large responses can introduce significant delay and CPU consumption, we recommend using this parameter whenever possible to minimize performance hit and cost increase.
+
+Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
 ```nginx
   # clear the Accept-Encoding field in the request header to parent and origin
-  origin_set_header accept-encoding '' flag=any;
-  sub_filter 'match-string' 'replacement string';
+  origin_set_header accept-encoding '' flag=any if($uri = /the/special/file);
+  sub_filter 'match-string' 'replacement string' if($uri = /the/special/file);
 ```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)

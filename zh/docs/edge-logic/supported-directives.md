@@ -410,7 +410,7 @@ else { ... }
 ```
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
-### `ignore_invalid_range`
+### `ignore_invalid_range` （已废弃）
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
@@ -418,7 +418,17 @@ else { ... }
 **默认设置:** `ignore_invalid_range off;` <br/>
 **可用位置:** server, location <br/>
 
-指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。
+指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。该指令已废弃，请使用 ignore_range 指令。
+
+### `ignore_range`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**Syntax:** `ignore_range on|off|invalid;` <br/>
+**Default:** `ignore_range off;` <br/>
+**Context:** server, location <br/>
+
+设置为on时，会忽略Range请求头，不按Range请求处理。设置为invalid时，无效的Range请求头将被忽略，客户端会收到200状态码和完整内容，否则客户端将收到 416 状态码。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -1214,15 +1224,19 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 <span class="badge dark">高级</span>
 
-**使用语法：** `sub_filter {string} {replacement};` <br/>
+**使用语法：** `sub_filter {string} {replacement} [if(...)];` <br/>
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。对 NGINX 开源版本无变更。请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
+该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。我们对 NGINX 开源版本做了如下修改：
+1. 为了确保响应在 CDN Pro 的[层级结构](/cdn/docs/edge-logic/paths-to-origins)中不会被重复替换，本指令只会在边缘服务器上生效，不会在父节点上生效；
+2. 我们为本指令引入了 `if()` 参数来更精确地设置它生效的条件，就像我们为 [`add_header`](#add_header) 做的那样。由于扫描大的响应正文可能会引入显著的延时和 CPU 消耗，我们建议您尽可能地利用这个参数来限制本指令的作用范围，以降低对性能的影响和成本开销。
+
+请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
 ```nginx
   # 清除发往源站和父节点的 `Accept-Encoding` 请求头
-  origin_set_header accept-encoding '' flag=any;
-  sub_filter 'match-string' 'replacement string';
+  origin_set_header accept-encoding '' flag=any if($uri = /the/special/file);
+  sub_filter 'match-string' 'replacement string' if($uri = /the/special/file);
 ```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
