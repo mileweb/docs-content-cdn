@@ -73,7 +73,6 @@ location /api/v1/ {
   proxy_cache_valid 1m; # 200, 301, and 302 responses will be cached for 1 minute
   proxy_cache_bypass $ignored_body_in_cache_key;
   proxy_no_cache $ignored_body_in_cache_key;
-  proxy_request_buffering on; # turn on proxy request buffering for proxy_request_body_in_cache_key to work
   if ($request_method = POST) {
     proxy_request_body_in_cache_key on; # if the body is < 4kB, calculate the hash and add to the cache key
   }

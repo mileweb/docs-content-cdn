@@ -272,7 +272,7 @@ Denies access from the specified network or address. Usually used together with 
 
 This directive enables proxying the WebSocket protocol. The client must use HTTP/1.1, not the other HTTP protocol versions. The default read and send timeouts are set to 60s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
 
-When `enable_websocket` is not configured, requests with Upgrade header will be rejected and the status code 403 will be returned.
+When `enable_websocket` is not configured, requests with "Upgrade: websocket" header will be rejected and the status code 403 will be returned.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -671,7 +671,7 @@ That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_ca
 **Default:** `proxy_cache_convert_head on;` <br/>
 **Context:** server, location
 
-Enables or disables the conversion of the “HEAD” method to “GET” for caching. When enabled, CDN Pro cache servers will convert “HEAD” method to “GET” when reading from cache or sending upstream requests to origin. If your origin expects HEAD requests and this conversion might cause requests to break, you should disable the conversion. For example, if your origin enforces authentication and request method is taken as a factor in the generation of signature for authentication, the conversion of request method is likely to cause unexpected authentication failures.
+Enables or disables the conversion of the “HEAD” method to “GET” for caching. When enabled, CDN Pro cache servers will convert “HEAD” method to “GET” when reading from cache or sending upstream requests to origin. If your origin expects HEAD requests and this conversion might cause requests to break, you should disable the conversion. For example, if your origin enforces authentication which takes request method as a factor when computing signature for authentication, the conversion of request method is likely to cause unexpected authentication failures.
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -681,9 +681,9 @@ Enables or disables the conversion of the “HEAD” method to “GET” for cac
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). When `proxy_cache_lock` is enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by this `proxy_cache_lock_timeout` directive. By default, CDN Pro enables `proxy_cache_lock` to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible. 
+Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). When `proxy_cache_lock` is enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by this `proxy_cache_lock_timeout` directive. CDN Pro turns on `proxy_cache_lock` platform wide to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we make `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable content, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible. 
 
-We made a change to the open source version such that requests released upon expiration of timeout are still allowed to populate the cache element.
+We make a change to the open source version such that requests released upon expiration of lock timeout are still allowed to populate the cache element.
 
 ### `proxy_cache_max_stale`
 

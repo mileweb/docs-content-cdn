@@ -123,6 +123,10 @@ auth_request /auth$is_args$args;
 ```
 如果鉴权响应 2xx 状态码，则认为请求合法，如果响应 401 或者 403 则请求会被拒绝。其它状态码会被认为是错误，导致客户端收到 500 "internal error"。
 
+鉴权子请求的变量与主请求的变量隔离，即在子请求的location里设置变量不会影响到主请求的同名变量值。这是为了避免子请求污染主请求的变量。
+
+鉴权子请求默认会删除Content-Length头部，因为鉴权子请求不应该有请求体。
+
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
 <span class="badge dark">高级</span>
@@ -271,6 +275,8 @@ Defines the default MIME type of a response. No change to the public version, ex
 **可用位置：** server, location
 
 该指令用于开启 WebSocket 协议。客户端需要使用HTTP/1.1来与服务端通信，不能用其它HTTP协议版本。默认读取和发送超时设置为 60 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
+
+当域名没有配置开启websocket时，如果来自客户端的请求携带“Upgrade: websocket”头部，CDN Pro 服务器会拒绝请求，响应403状态码。
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -667,25 +673,15 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 ```
 该指令不会阻止将源站给的响应保存在 cache 缓存中。这个 "保存"行为是由另一个指令 [`proxy_no_cache`](#proxy_no_cache) 控制的。一般情况下这两个配置项会同时使用来实现某些文件不缓存。
 
-### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
-
-<span class="badge dark">高级</span>
-
-**使用语法：** `proxy_cache_lock on/off;` <br/>
-**默认设置：** `proxy_cache_lock on;` <br/>
-**可用位置：** server, location
-
-当该指令被启用时，如果有多个客户端同时请求同一个缓存中不存在，或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并填充缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。但是如果等待时间超过 [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) 指令设置的时间后也会被“放行”至源站。默认情况下，出于减少对源站带宽消耗的考虑，CDN Pro 将该指令设置为开启。同时为了避免该功能在大部分内容不可缓存时引入不必要的延迟，我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时的值来降低源站负载。如果您可以通过请求里的变量来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作并尽可能降低处理延迟。
-
-### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
+### [`proxy_cache_convert_head`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_convert_head)
 
 <span class="badge">标准</span>
 
-**使用语法：** `proxy_cache_lock_age time;` <br/>
-**默认设置：** `proxy_cache_lock_age 15s;` <br/>
+**使用语法：** `proxy_cache_convert_head on | off;` <br/>
+**默认设置：** `proxy_cache_convert_head on;` <br/>
 **可用位置：** server, location
 
-前一个“放行”至源站的请求，没有在该指令设置的时间内完成，则 CDN Pro 将会放行下一个请求用来填充缓存。逻辑源自开源[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)，无变更。
+配置是否将“HEAD”方法转换为“GET”，合并缓存。开启转换时，CDN Pro 缓存服务器会在从缓存读取数据或向源站发请求时，将“HEAD”方法转换为“GET”。如果您的源站预期接收的是 HEAD 请求，并且这种转换可能导致请求异常，则应禁用转换。例如，如果您的源站在计算鉴权签名时将请求方法作为一个因子，那么请求方法的转换可能会导致鉴权失败。
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -695,7 +691,9 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置：** `proxy_cache_lock_timeout 0s;` <br/>
 **可用位置：** server, location
 
-该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
+该指令为 [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock) 设置超时时间。当`proxy_cache_lock`开启时，如果有多个客户端同时请求同一个在缓存中不存在或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并写入缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。当等待时间超过 `proxy_cache_lock_timeout` 指令设置的时间后，其他请求也会被“放行”至源站。出于减少对源站带宽消耗的考虑，CDN Pro 全局开启`proxy_cache_lock`。但为了避免该功能在大部分内容不可缓存时引入不必要的延迟，我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时时长来降低源站负载。如果您可以通过请求信息来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作，尽可能降低处理延迟。
+
+我们对NGINX开源版本做了一点修改：在超时时间之后被“放行”至源站的请求，其响应内容也允许被用来写入缓存。
 
 ### `proxy_cache_max_stale`
 
@@ -871,7 +869,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 忽略掉来自源站的某些响应头。最常用的情景是用于忽略缓存相关标记，例如 “Cache-Control” 或 “Expires” 响应头。 源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 无修改。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
+该指令用于设置 CDN Pro 忽略掉来自源站的某些响应头。最常用的情景是用于忽略缓存相关标记，例如 “Cache-Control” 和 “Expires” 响应头。 我们对 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 做了一点修改：将“Cache-Control” 和 “Expires”响应头合并处理。当您使用该指令配置仅忽略“Cache-Control”响应头时，“Expires”响应头也会被一并忽略，反之同理。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -982,17 +980,19 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置:** `proxy_request_buffering off` <br/>
 **使用位置:** server, location
 
-开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cache_key)的功能，需要通过该指令将客户端请求体缓冲同时开启。
+开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。
+
+是否开启请求体缓冲，对于[将请求体附加到缓存 key](#proxy_request_body_in_cache_key)的功能无影响。
 
 ### `proxy_request_body_in_cache_key`
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `proxy_request_body_in_cache_key on/off;` <br/>
-**默认设置:** `proxy_request_body_in_cache_key off` <br/>
+**默认设置:** `proxy_request_body_in_cache_key on` <br/>
 **可用位置:** server, location, if in location
 
-当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。此外，您还需要通过[`proxy_request_buffering`](#proxy_request_buffering)指令开启对客户端请求体的缓冲。
+当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是幂等和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
 
 此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到CDN Pro 服务器，然后将其添加到 $cache_misc 变量中。
 
@@ -1038,16 +1038,6 @@ proxy_no_cache $no_store;
 **可用位置：** server, location
 
 该指令用于设置 CDN Pro 回源时的握手协议。源自 Nginx 开源版本，无变更。
-
-### `range_reorder`
-
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
-
-**使用语法:** `range_reorder on | off [coalescing];` <br/>
-**默认设置:** `range_reorder off` <br/>
-**可用位置:** server, location
-
-该指令用于指示CDN Pro 服务器是否对range请求中指定的多个字节范围进行重新排序和合并。 当range_reorder开启时，如果请求中的Range值为降序排序，CDN Pro 服务器将对Range值按升序重新排列。 当range_reorder开启且带有coalescing参数时，如果请求中的Range值存在重叠的范围或者2个范围之间的间隔小于发送多部分内容（multipart）的开销，则这些范围将被合并。开启重新排序和合并，可确保CDN Pro 服务器响应206状态码和部分内容给客户端。 当range_reorder未开启时，CDN Pro 服务器可能响应200状态代码和完整内容给客户端，即便客户端发送了range请求。
 
 ### `realtime_log_downsample`
 
@@ -1167,7 +1157,7 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：**	`-` <br/>
 **可用位置：** server, location, if
 
-该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存键。
+该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存 key。
 
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段与同一模块中的其他指令一道被顺序（imperatively）执行。
 
