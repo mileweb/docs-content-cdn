@@ -382,6 +382,16 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 
 尽管当前支持使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，在不久的将来我们计划将gzip和br压缩适用的MIME类型做合并。如果您同时开启了gzip和br压缩，建议给`gzip_types` 和 `brotli_types`设置相同的MIME类型值。
 
+### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
+
+<span class="badge dark">高级</span>
+
+**使用语法：** `http2_max_concurrent_streams number;` <br/>
+**默认设置：** `http2_max_concurrent_streams 32;` <br/>
+**可用位置：** server, location
+
+设置单连接中HTTP/2流的最大并发数。与NGINX开源版本一致，但默认值改为32。
+
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
@@ -1048,6 +1058,16 @@ proxy_no_cache $no_store;
 **可用位置：** server, location
 
 该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。本指令只能在 Edge Logic里使用。
+
+### `remote_log_set_header`
+
+<span class="badge">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法：** `remote_log_set_header name value;` <br/>
+**默认设置：** `-` <br/>
+**可用位置：** server, location
+
+该指令用于自定义实时日志相关的请求头。CDN Pro 服务器发送实时日志到接收端时，会带上此处定义的请求头。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 

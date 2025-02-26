@@ -350,7 +350,6 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
 
-
 ### [`gzip`](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
 
 <span class="badge">standard</span>
@@ -373,6 +372,16 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
 Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two compression algorithms will be merged in the near future. We recommend setting the same value for the two directives if both gzip and brotli compression are enabled.
+
+### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
+
+<span class="badge dark">advanced</span>
+
+**Syntax:** `http2_max_concurrent_streams number;` <br/>
+**Default:** `http2_max_concurrent_streams 32;` <br/>
+**Context:** server, location
+
+Sets the maximum number of concurrent HTTP/2 streams in a connection. No change to the open source version, except that the default value is set to 32.
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
@@ -1033,6 +1042,16 @@ Enables the specified protocols for requests to an origin HTTPS server. No chang
 **Contexts:** server, location
 
 Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the default setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor). This directive can only be used in the Edge Logic.
+
+### `remote_log_set_header`
+
+<span class="badge">advanced</span> <span class="badge primary">proprietary</span>
+
+**Syntax:** `remote_log_set_header name value;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location
+
+Set header and its value which will will be included as request header when sending realtime logs to remote server.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
