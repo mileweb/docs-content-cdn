@@ -1051,7 +1051,7 @@ Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-
 **Default:** `-` <br/>
 **Contexts:** server, location
 
-Sets a header and its value which will will be included as a request header when sending realtime logs to the remote server.
+Sets a header and its value which will be included as a request header when sending realtime logs to the remote server.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
