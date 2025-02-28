@@ -680,7 +680,7 @@ That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_ca
 **Default:** `proxy_cache_convert_head on;` <br/>
 **Context:** server, location
 
-Enables or disables the conversion of the “HEAD” method to “GET” for caching. When enabled, CDN Pro cache servers will convert “HEAD” method to “GET” when reading from cache or sending upstream requests to origin. If your origin expects HEAD requests and this conversion might cause requests to break, you should disable the conversion. For example, if your origin enforces authentication which takes request method as a factor when computing signature for authentication, the conversion of request method is likely to cause unexpected authentication failures.
+Enables or disables the conversion of the “HEAD” method to “GET” for caching. When enabled, CDN Pro cache servers will convert “HEAD” method to “GET” when reading from cache or sending upstream requests to the origin. If your origin expects HEAD requests and this conversion might cause requests to break, you should disable the conversion. For example, if your origin enforces authentication which takes the request method as a factor when computing the signature for authentication, the conversion of the request method is likely to cause unexpected authentication failures.
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
@@ -692,7 +692,7 @@ Enables or disables the conversion of the “HEAD” method to “GET” for cac
 
 Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). When `proxy_cache_lock` is enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by this `proxy_cache_lock_timeout` directive. CDN Pro turns on `proxy_cache_lock` platform wide to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we make `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable content, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible. 
 
-We make a change to the open source version such that requests released upon expiration of lock timeout are still allowed to populate the cache element.
+We make a change to the open source version such that requests released upon expiration of the lock timeout are still allowed to populate the cache element.
 
 ### `proxy_cache_max_stale`
 
@@ -1051,7 +1051,7 @@ Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-
 **Default:** `-` <br/>
 **Contexts:** server, location
 
-Set header and its value which will will be included as request header when sending realtime logs to remote server.
+Sets a header and its value which will will be included as a request header when sending realtime logs to the remote server.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
