@@ -692,7 +692,7 @@ Enables or disables the conversion of the “HEAD” method to “GET” for cac
 
 Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). When `proxy_cache_lock` is enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by this `proxy_cache_lock_timeout` directive. CDN Pro turns on `proxy_cache_lock` platform wide to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we make `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable content, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible. 
 
-We make a change to the open source version such that requests released upon expiration of the lock timeout are still allowed to populate the cache element.
+We modified the open source version so that requests released upon expiration of the lock timeout are still allowed to populate the cache element.
 
 ### `proxy_cache_max_stale`
 
@@ -868,7 +868,7 @@ Determines whether the connection with an upstream server should be closed when 
 **Default:** `-` <br/>
 **Context:** server, location
 
-Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` and `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers), except that we couple `Cache-Control` and `Expires` together. Configuring this directive to ignore `Cache-Control` will cause `Expires` to be also ignored, or vice verca. If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
+Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` and `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers), except that we couple `Cache-Control` and `Expires` together. Configuring this directive to ignore `Cache-Control` will cause `Expires` to be also ignored, or vice versa. If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
