@@ -133,7 +133,10 @@ The Content-Length header (if any) is removed, as an auth request is not suppose
 **Default:** `—`<br/>
 **Context:** server, location
 
-Sets the request variable to the given value after the authorization request completes. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set). Here is an example to add something returned from the remote auth server to the cache key:
+Sets the request variable to the given value after the authorization request completes. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set).
+The first parameter is a variable in the context of the main request.
+Any variables that appear in the second parameter are from the context of the auth sub-request.
+Here is an example to add something returned from the remote auth server to the cache key:
 ```nginx
 auth_request /auth$is_args$args;
 auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
