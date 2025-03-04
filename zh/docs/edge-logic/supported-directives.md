@@ -135,7 +135,9 @@ auth_request /auth$is_args$args;
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。下面的例子展示了如何将远端鉴权服务器返回的 etag 值加入到 cache key 里：
+须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。
+需要注意的是本指令的第一个参数是一个位于主请求上下文里的变量，而第二个参数里出现的任何变量取值都来自于鉴权子请求的上下文。
+下面的例子展示了如何将远端鉴权服务器返回的 etag 值加入到 cache key 里：
 ```nginx
 auth_request /auth$is_args$args;
 auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
