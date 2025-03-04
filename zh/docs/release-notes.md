@@ -1,10 +1,17 @@
 # Release Notes
 
+## March 3, 2025
+
+#### API updates
+* Fixed issue in which "InvalidCertificateId" error is returned when trying to [create a logAggregationPoint](</apidocs#operation/post-cdn-logAggregationPoints>) with destinationAuthCertificateId.
+
+#### Console updates
+* Supported merging of loadBalancerLogic into edgeLogic field. loadBalancerLogic will be deprecated.
+
 ## February 24, 2025
 #### Console updates
 * Introduced a new Edge Logic directive ignore_range. Ignore_invalid_range will be deprecated.
 * Added an interface allowing the customer to control whether to use a DNS record to advertise HTTPS support.
-
 
 ## February 13, 2025
 #### Console updates
