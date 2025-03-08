@@ -687,15 +687,15 @@ Enables or disables the conversion of the “HEAD” method to “GET” for cac
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `proxy_cache_lock_timeout time;` <br/>
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). When `proxy_cache_lock` is enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by this `proxy_cache_lock_timeout` directive. CDN Pro turns on `proxy_cache_lock` platform wide to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we make `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable content, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible. 
+Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). CDN Pro turns on `proxy_cache_lock` platform wide to better control the traffic to the origin servers. It allows only one request to the origin at a time to populate a cache element for the same cache key. Other requests hitting the same cache element will either wait for a response to appear in the cache or the timeout value set by this `proxy_cache_lock_timeout` directive. We set the default value to 0 to avoid introducing unnecessary latency to uncacheable contents. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable content, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching to get the least latency possible. 
 
-We modified the open source version so that requests released upon expiration of the lock timeout are still allowed to populate the cache element.
+We modified the open source version so that requests released by this directive may be used to populate the cache element.
 
 ### `proxy_cache_max_stale`
 
