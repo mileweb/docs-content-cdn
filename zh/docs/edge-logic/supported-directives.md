@@ -697,15 +697,15 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
-<span class="badge">标准</span>
+<span class="badge">标准</span>  <span class="badge green">修改增强</span>
 
 **使用语法：** `proxy_cache_lock_timeout time;` <br/>
 **默认设置：** `proxy_cache_lock_timeout 0s;` <br/>
 **可用位置：** server, location
 
-该指令为 [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock) 设置超时时间。当`proxy_cache_lock`开启时，如果有多个客户端同时请求同一个在缓存中不存在或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并写入缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。当等待时间超过 `proxy_cache_lock_timeout` 指令设置的时间后，其他请求也会被“放行”至源站。出于减少对源站带宽消耗的考虑，CDN Pro 全局开启`proxy_cache_lock`。但为了避免该功能在大部分内容不可缓存时引入不必要的延迟，我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时时长来降低源站负载。如果您可以通过请求信息来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作，尽可能降低处理延迟。
+该指令为 [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock) 设置超时时间。出于减少对源站带宽消耗的考虑，CDN Pro 全局开启了`proxy_cache_lock`。如果有多个客户端同时请求同一个在缓存中不存在或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并写入缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。当等待时间超过 `proxy_cache_lock_timeout` 指令设置的时间后，其他请求也会被“放行”至源站。为了避免该功能对不可缓存的内容引入不必要的延迟，我们将本指令的默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时时长来降低源站负载。如果您可以通过请求信息来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作，尽可能降低处理延迟。
 
-我们对NGINX开源版本做了一点修改：在超时时间之后被“放行”至源站的请求，其响应内容也允许被用来写入缓存。
+我们对NGINX开源版本做了一点修改：在超时时间之后被“放行”至源站的请求，其响应内容也有可能被用来写入缓存。
 
 ### `proxy_cache_max_stale`
 
