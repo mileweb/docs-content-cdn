@@ -8,13 +8,13 @@
 
 **注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
 
-### `access_log_sampling`
+### `access_log_downsample`
 
-<span class="badge">标准</span> <span class="badge">LBLogic</span> <span class="badge primary">全新特有</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `access_log_sampling factor;` <br/>
+**使用语法：** `access_log_downsample factor;` <br/>
 **默认设置：** `-` <br/>
-**可用位置：** server, location, if in location
+**可用位置：** server
 
 本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
 
@@ -249,7 +249,7 @@ location / {
 
 ### [`default_type`](http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)
 
-<span class="badge">标准</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span>
 
 **使用语法:** `default_type <mime-type>;`<br/>
 **默认设置:** `default_type application/octet-stream`<br/>
@@ -390,7 +390,7 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 
 **使用语法：** `http2_max_concurrent_streams number;` <br/>
 **默认设置：** `http2_max_concurrent_streams 32;` <br/>
-**可用位置：** server, location
+**可用位置：** server
 
 设置单连接中HTTP/2流的最大并发数。与NGINX开源版本一致，但默认值改为32。
 

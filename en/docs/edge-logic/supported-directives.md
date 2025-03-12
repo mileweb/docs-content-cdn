@@ -8,13 +8,13 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 **Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All supported directives should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
 
-### `access_log_sampling`
+### `access_log_downsample`
 
-<span class="badge">standard</span> <span class="badge">LB logic</span> <span class="badge primary">proprietary</span>
+<span class="badge">standard</span> <span class="badge primary">proprietary</span>
 
-**Syntax:** `access_log_sampling factor;` <br/>
+**Syntax:** `access_log_downsample factor;` <br/>
 **Default:** `-` <br/>
-**Contexts:** server, location, if in location
+**Contexts:** server
 
 Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
@@ -247,7 +247,7 @@ location / {
 ```
 ### [`default_type`](http://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)
 
-<span class="badge">standard</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span>
 
 **Syntax:** `default_type <mime-type>;`<br/>
 **Default:** `default_type application/octet-stream`<br/>
@@ -382,7 +382,7 @@ Note: Although it is currently allowed to set different MIME types for gzip and 
 
 **Syntax:** `http2_max_concurrent_streams number;` <br/>
 **Default:** `http2_max_concurrent_streams 32;` <br/>
-**Context:** server, location
+**Context:** server
 
 Sets the maximum number of concurrent HTTP/2 streams in a connection. No change to the open source version, except that the default value is set to 32.
 
