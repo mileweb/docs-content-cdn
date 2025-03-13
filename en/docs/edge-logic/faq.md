@@ -111,7 +111,7 @@ origin_header_modify Vary "" policy=preserve;
 # ignore the Vary header, just pass it to the client
 proxy_ignore_headers Vary; 
 ```
-In this case, the servers cache the content as if the `Vary` header does not exist. Without `proxy_ignore_headers Vary`, the preserved `Vary` header would prevent the response from being cached because [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) is configured by default. If it is absolutely important for the CDN Pro servers to cache multiple versions based on the `Vary` header, contact CDNetworks customer support to obtain permission to set `proxy_cache_vary on`.
+In this case, the servers cache the content as if the `Vary` header does not exist. Without `proxy_ignore_headers Vary`, the preserved `Vary` header would prevent the response from being cached because [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) is configured by default. If it is absolutely important for the CDN Pro servers to cache multiple versions based on the `Vary` header, contact {{title}} customer support to obtain permission to set `proxy_cache_vary on`.
 
 ### How to follow redirections from origin?
 
@@ -119,7 +119,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 ### China Delivery with and without ICP Beian
 
-The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, CDNetworks cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, CDNetworks can use its dedicated line Near China solution or servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
+The Chinese Ministry of Industry and Information Technology (MIIT) requires every domain served from a server in Mainland China to have a record in its system. This is called [ICP Beian (备案)](https://beian.miit.gov.cn/). For certain domains, a [Security Beian](https://www.beian.gov.cn/) is also required. As a CDN provider, {{title}} cannot use our servers in China to serve domains without ICP Beian. Any violation may result in our China-based servers being blocked. Customers are responsible for filing and obtaining Beian for any domain that needs local delivery in China. We can provide consulting services to assist with this process. For domains without Beian, {{title}} can use its dedicated line Near China solution or servers located in close proximity to Mainland China (for example, Hong Kong, Korea, and Japan) to deliver content to clients in Mainland China; however, the performance will not be as good as local delivery.
 
 #### China Delivery with ICP Beian
 If you have one or more domains with ICP Beian and want them to be accelerated in China, contact customer service to ensure we have all the required information on file about your business. After confirming that we have the necessary information, your China Delivery service will be enabled. You can then perform the following steps to enable local delivery of domains in Mainland China: 
@@ -131,7 +131,7 @@ If you have one or more domains with ICP Beian and want them to be accelerated i
 #### China Delivery without ICP Beian using the Near China Solution
 If your CDN domains do not have ICP Beian, but you want them to be accelerated in Mainland China, CDN Pro offers a Near China solution. This solution uses the CDN Pro special server group nearChina, with a robust network of servers located in Hong Kong, to effectively deliver your content with low latency and high performance for your websites and applications in China.
 
-CDN Pro's Near China solution is a value-added service. The traffic per GB cost for the server group will be more expensive than the regular server groups. Please contact the CDNetworks Support Team for details on the nearChina server group's price and to enable the service.
+CDN Pro's Near China solution is a value-added service. The traffic per GB cost for the server group will be more expensive than the regular server groups. Please contact the {{title}} Support Team for details on the nearChina server group's price and to enable the service.
 
 ### How to support WebSocket?
 
@@ -153,7 +153,7 @@ If you use CDN Pro, your clients will connect to the PoP that is closest to them
 In many cases, "dynamic" does not mean the content is not cacheable. For example, end users will typically not notice if you cache the score of a basketball game for 1 second. If you have 10 requests per second to fetch the score, you can save 90% of the bandwidth and processing power. If the response depends on some query parameter, request header value or the request body, make sure all those variables are [included in the cache key](#how-do-i-include-query-parameters-request-headers-and-body-in-the-cache-key).
 * **Enable Fast Route to origin**
 
-CDN Pro has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.cdnetworks.com/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the "Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN Pro support team.
+CDN Pro has a directive [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) that enables a "Fast Route" to access the origin. This powerful feature is based on our award-winning [High-speed Data Transmission](https://www.{{siteDomain}}/high-speed-data-transmission/) (HDT) technology. It ensures that our servers always have the best possible channel to reach your origin, even under challenging situations. This directive can also be used for highly cacheable contents if the origin is hard to reach from certain networks or when the cache-miss performance is critical to you. However, the traffic served through the "Fast Route" may be charged a higher price due to the extra cost associated with it. To try out this feature, contact the CDN Pro support team.
 
 ### Apex domains and anycast
 
@@ -225,7 +225,7 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 should honor the `x-rate-limit-retry-after-seconds` header and retry the request after a delay. Consider including a
 process in your code that regulates the rate of your requests so that they are distributed evenly over time. 
 
-4. If a problem persists, contact our [technical support team](mailto:support@cdnetworks.com).
+4. If a problem persists, contact our [technical support team](mailto:support@{{siteDomain}}).
 If there is a legitimate need to increase the rate limit or burst ceiling, the technical support team will evaluate your requirements and raise the threshold.
 
 * **Notes**
