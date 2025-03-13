@@ -31,7 +31,7 @@
 
 ## 边缘配置
 
-在 CDN Pro 中，您可以通过定义 [加速项](</docs/portal/edge-configurations/managing-properties.md>) 来配置边缘服务器的行为。创建一个加速项的过程与开发其他软件非常相似。您可以创建和编辑加速项，然后验证、测试、部署和升级它——所有的这些操作都可以从 CDN Pro 门户页面上方便地完成。 **边缘配置** 还提供了一个页面，您可以在其中创建和管理与 CDNetworks 运营人员共享的 [秘钥](</docs/portal/secrets/overview.md>)，以便 CDN 配置工作。
+在 CDN Pro 中，您可以通过定义 [加速项](</docs/portal/edge-configurations/managing-properties.md>) 来配置边缘服务器的行为。创建一个加速项的过程与开发其他软件非常相似。您可以创建和编辑加速项，然后验证、测试、部署和升级它——所有的这些操作都可以从 CDN Pro 门户页面上方便地完成。 **边缘配置** 还提供了一个页面，您可以在其中创建和管理与 {{title}} 运营人员共享的 [秘钥](</docs/portal/secrets/overview.md>)，以便 CDN 配置工作。
 
 
 ## 调度管理

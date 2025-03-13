@@ -1,10 +1,10 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN Pro Edge Logic and Load Balancer Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
+This section lists all the directives you can use in the CDN Pro Edge Logic and Load Balancer Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. {{title}} also introduced some <span class="badge primary">proprietary</span> directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
-In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
+In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact {{title}} customer service.
 
 **Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All supported directives should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
 
@@ -26,7 +26,7 @@ Downsamples the local access log. A `factor` of N means one log entry for every 
 **Default:** `-` <br/>
 **Context:** server, location, if in location
 
-This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
+This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. {{title}} has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
 1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx

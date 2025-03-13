@@ -1,4 +1,4 @@
-# Quantil Documentation Content
+# {{title}} Documentation Content
 
 Directory structure
 ```

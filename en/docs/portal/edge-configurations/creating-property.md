@@ -24,9 +24,9 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 | Description               | Add a description for this first property version. |
 | Hostnames                 | Enter one or more hostnames to be accelerated and which your end users will access. |
 | Origins                   | Origins are your servers that CDN Pro accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
-| Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Edge Logic Wizard dialog box. For more information, refer to CDNetworks' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>) and [variables](</docs/edge-logic/built-in-variable>).</li>
+| Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Edge Logic Wizard dialog box. For more information, refer to {{title}}' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>) and [variables](</docs/edge-logic/built-in-variable>).</li>
 | TLS Settings              | Select the [TLS client certificate settings](#tls-settings) for your property.|
-| Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact the [CDNetworks support team](mailto:support@cdnetworks.com).|
+| Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact the [{{title}} support team](mailto:support@{{siteDomain}}).|
 | Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache sharing, China ICP Beian, a load balancer hash key, whether to manage certificate renewal yourself, HTTP/2, HTTP/3, IPv6 origin support, and whether to match the client IP version when accessing origin content.|
 
 4. To include a baseline configuration with the Edge Logic for the property, click the gear icon at the bottom left of the **Edge Logic** field. When the popup appears, enter the baseline configuration. When you finish, click the **Save** button to save the baseline configuration to the database.
@@ -35,7 +35,7 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 
 5. To save the property, click the **Save** button. Several basic syntax checks are performed. If errors are found, you are prompted to fix them before the property is saved. Any property version will have to be "validated" before it can be deployed to staging or production. You can click the <strong>Save & Validate</strong> button to start the validation process. When the Confirmation pop-up appears, click <strong>OK</strong>. The validation process usually takes less than a minute. You can either wait for it to finish or close the progress dialog box to perform other tasks while validation continues in the background. You can click <strong>Tasks</strong> in the left pane to [check the validation results](</docs/portal/tasks/validations.md>). If there is a failure, perform the instructions in the error message to fix it.
 
-6. If the property is validated successfully, you can [deploy](</docs/portal/edge-configurations/deploying-property.md>) it to the staging or production environment. By default, trial users will have access to the staging environment only. Please contact the [CDNetworks support team](mailto:support@cdnetworks.com) to enable access to the production environment.
+6. If the property is validated successfully, you can [deploy](</docs/portal/edge-configurations/deploying-property.md>) it to the staging or production environment. By default, trial users will have access to the staging environment only. Please contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable access to the production environment.
 
 ## Edge Logic Wizard
 
@@ -62,7 +62,7 @@ The remaining settings are intuitive. Specify the TLS ciphers in the format desc
 
 ## Real-Time Log
 
-If you signed an agreement with CDNetworks for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the NGINX variables shown in the following table; they will be replaced with the actual values in the notifications. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+If you signed an agreement with {{title}} for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the NGINX variables shown in the following table; they will be replaced with the actual values in the notifications. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
 
 | **Variable**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
@@ -137,9 +137,9 @@ If you signed an agreement with CDNetworks for accessing the real-time log, use 
 
 **Cache Key Hostname:** By default, the Host header value in the client request is used in the cache key. If this property contains multiple service hostnames, the contents of different hostnames will be cached separately. If you want all hostnames to share one cached copy, specify a fixed "Cache Key Hostname" to override the default behavior.
 
-**Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. You can then contact the [CDNetworks support team](mailto:support@cdnetworks.com) to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
+**Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. You can then contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
 
-**Note:** You can set **Has ICP Beian** to **Yes** without contacting CDNetworks; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from CDNetworks.
+**Note:** You can set **Has ICP Beian** to **Yes** without contacting {{title}}; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from {{title}}.
 
 **Note:** Setting **Has ICP Beian** to **Yes** applies to the entire property, i.e. all hostnames in a property. If any hostname in a property does not have Beian, the property deployment will be rejected. And, if any hostname in a deployed property is later found to have invalid Beian, CDN Pro will automatically turn off the "hasBeian" switch for the entire property, even if the other hostnames in the same property still have valid Beian. Refer to [this FAQ](</docs/edge-logic/faq.md#china-delivery-with-icp-beian>) for more information.
 
