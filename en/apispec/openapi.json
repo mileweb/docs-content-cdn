@@ -14469,7 +14469,7 @@
                       "configuration",
                       "operation"
                     ],
-                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by CDNetworks.</td></tr></table>"
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by {{title}}.</td></tr></table>"
                   },
                   "comments": {
                     "type": "string",
@@ -15110,7 +15110,7 @@
                           },
                           "type": {
                             "type": "string",
-                            "description": "Describes the type of annotation. Operation annotations can only be created by CDNetworks.",
+                            "description": "Describes the type of annotation. Operation annotations can only be created by {{title}}.",
                             "enum": [
                               "client",
                               "operation",
@@ -15246,7 +15246,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the type of annotation (client, configuration, or operation). Operation annotations can only be created by CDNetworks."
+            "description": "Indicates the type of annotation (client, configuration, or operation). Operation annotations can only be created by {{title}}."
           },
           {
             "schema": {
@@ -15480,7 +15480,7 @@
                     },
                     "type": {
                       "type": "string",
-                      "description": "Describes the type of annotation. Operation annotations can only be created by CDNetworks.",
+                      "description": "Describes the type of annotation. Operation annotations can only be created by {{title}}.",
                       "enum": [
                         "client",
                         "operation",
@@ -15697,7 +15697,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by CDNetworks.</td></tr></table>",
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by {{title}}.</td></tr></table>",
                     "enum": [
                       "client",
                       "configuration",
@@ -24953,7 +24953,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "secretLimit": {
                     "type": "integer",
@@ -26019,7 +26019,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -27760,7 +27760,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -39110,7 +39110,7 @@
       "API Key": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
+        "description": "All requests to the {{title}} platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n#You will be given the following information by the {{title}} sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
       }
     }
   },
