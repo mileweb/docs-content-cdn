@@ -5,12 +5,12 @@
     "version": "1.0",
     "description": "CDN Pro APIs allow you to manage the CDN Pro service.  <p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> is a command line tool that facilitates API calls in <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> and <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a>. It includes the \"cdnapi.sh\" shell script mentioned in this document's examples.</p>",
     "contact": {
-      "url": "https://www.cdnetworks.com"
+      "url": "https://www.{{siteDomain}}"
     }
   },
   "servers": [
     {
-      "url": "https://ngapi.cdnetworks.com",
+      "url": "https://ngapi.{{siteDomain}}",
       "description": ""
     }
   ],
@@ -165,7 +165,7 @@
                             },
                             "format": {
                               "type": "string",
-                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$arg_<i>name</i></td><td>Value of the query parameter with the specified name.</td></tr>\n<tr><td>$args</td><td>The full query string from the client.</td></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_http_version</td><td>Client's HTTP version, like \"HTTP/1.1\"</td></tr>\n<tr><td>$client_ip_version</td><td>Client's IP version: 4 for IPv4 or 6 for IPv6</td></tr>\n<tr><td>$client_isp</td><td>Client's ISP information.</td></tr>\n<tr><td>$client_province_code</td><td>A two character ISO 3166-2 code representing the China province corresponding to a client's request, if it came from China.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$connection_requests</td><td>Current number of requests in the connection.</td></tr>\n<tr><td>$content_code</td><td>Value of the $content_code variable if you <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">defined it in your Edge Logic</a>.</td></tr>\n<tr><td>$content_length</td><td>Value of the request's Content-Length header.</td></tr>\n<tr><td>$content_type</td><td>Value of the request's Content-Type header.</td></tr>\n<tr><td>$cookie_<i>x</i></td><td>Obtain the value of the cookie named 'x'. For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$error_code</td><td>Error, if any, about the client and origin.</td></tr>\n<tr><td>$extra_deliver_time_ms</td><td>Estimated time in milliseconds needed to flush the TCP send buffer.</td></tr>\n<tr><td>$host</td><td>Value of the request's Host header.</td></tr>\n<tr><td>$hostname</td><td>Server's hostname.</td></tr>\n<tr><td>$http_<i>x</i></td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$invalid_referer</td><td>Empty string if the \"Referer\" request header field value is considered valid; otherwise \"1\".</td></tr>\n<tr><td>$is_args</td><td>Empty or \"?\", when the request contains a query string.</td></tr>\n<tr><td>$msec</td><td>Current Unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$origin_host</td><td>Origin's hostname.</td></tr>\n<tr><td>$origin_ip</td><td>Origin's IP address.</td></tr>\n<tr><td>$origin_status_code</td><td>Status code if a request is made to the origin.</td></tr>\n<tr><td>$pid</td><td>Process ID of the service.</td></tr>\n<tr><td>$pipe</td><td>\"p\" if the request is pipelined, or \".\" otherwise.</td></tr>\n<tr><td>$property_ver</td><td>Property version number.</td></tr>\n<tr><td>$qtl_upstream_cache_status</td><td>Cache status: HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED.</td></tr>\n<tr><td>$remote_user</td><td>User name extracted from the Authorization header if Basic authentication is used.</td></tr>\n<tr><td>$request</td><td>Full HTTP request line.</td></tr>\n<tr><td>$request_cpu_time</td><td>CPU time, in nanoseconds, spent on processing the request.</td></tr>\n<tr><td>$request_end_time</td><td>Time in seconds it takes to receive the request header from the client and be ready to process or forward it.</td></tr>\n<tr><td>$request_length</td><td>Length of request line, header and body.</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used, for example, 'GET'.</td></tr>\n<tr><td>$request_scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$request_ssl_handshake_time</td><td> CPU time, in nanoseconds, spent on TLS handshake.</td></tr>\n<tr><td>$request_start_time</td><td>Unix time (in seconds with milliseconds resolution) when the first byte of the request is received from the client.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's first byte and serving the last byte of the response.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI, beginning with '/' and including the query string.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sec</td><td>Unix time in seconds.</td></tr>\n<tr><td>$sent_http_content_length</td><td>The original file size.</td></tr>\n<tr><td>$sent_http_<i>x</i></td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$served_from_cache</td><td>Value is 1 for a HIT on edge; 0 for a MISS.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_level</td><td>Level of the cache server. 1 means edge, and 2 means intermediate.</td></tr>\n<tr><td>$server_name</td><td>The value specified in the property's hostnames that matched the incoming request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$server_province_code</td><td>A two character ISO 3166-2 code representing the China province of the edge server if the request was handled by a server in China.</td></tr>\n<tr><td>$server_region</td><td>Country code of the edge server, e.g. CN, US</td></tr>\n<tr><td>$service_port</td><td>Port number that received the request.</td></tr>\n<tr><td>$sorted_querystring_args</td><td>variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter\">sorted_querystring_filter_parameter directive</a>.</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_delivery_rate</td><td>The rate, in bytes/s, at which the sent data is acknowledged by the client.</td></tr>\n<tr><td>$tcpinfo_min_rtt</td><td>Minimum RTT, in microseconds, observed by TCP stack for the connection</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n<tr><td>$transfer_time</td><td>The time needed for CDN Pro to send the full requested object ( up to last byte ) to system buffer, in seconds.</td></tr>\n<tr><td>$turn_around_time</td><td>The time needed for CDN Pro to receive first byte of response of origin, in seconds.</td></tr>\n<tr><td>$upstream_cookie_<i>name</i></td><td>Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache.</td></tr>\n<tr><td>$uri</td><td>Normalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#rewrite\">rewrite directive</a> in the Edge Logic.</td></tr>\n</table>"
                             },
                             "headers": {
                               "type": "array",
@@ -192,7 +192,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 65530,
-                          "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
+                          "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -545,8 +545,9 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                          "maxLength": 65530
+                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                          "maxLength": 65530,
+                          "deprecated": true
                         },
                         "tls0Rtt": {
                           "type": "boolean",
@@ -612,7 +613,7 @@
                         },
                         "warning": {
                           "type": "string",
-                          "description": "This field can appear if the property is created or updated with a reference to a certificate that is incompatible. For example, the certificate could be expired or does not support the property's hostname. The value will provide details."
+                          "description": "This field can appear if the property definition has issues that might impact its use. For example, if the property is created or updated with a reference to an incompatible certificate, the warning can indicate the certificate is expired or does not support the property's hostname."
                         },
                         "lastValidationCacheVersion": {
                           "type": "string",
@@ -639,6 +640,21 @@
                           "format": "date-time",
                           "example": "2024-03-29T00:04:04Z",
                           "description": "If the property version is currently deployed to production, this field indicates the RFC 3339 date when the deployment occurred."
+                        },
+                        "lastValidationTime": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "z40k75sudy1lk"
+                          },
+                          "format": "date-time",
+                          "description": "If the property version has been validated, this field indicates the RFC 3339 date when it was last validated."
+                        },
+                        "deleted": {
+                          "type": "boolean",
+                          "x-stoplight": {
+                            "id": "33rxo1tc8j7p9"
+                          },
+                          "description": "Indicates whether the property version has been deleted."
                         }
                       },
                       "required": [
@@ -703,7 +719,8 @@
                         "creationTime": "2019-10-30T02:47:59Z",
                         "lastUpdateTime": "2019-10-30T02:47:59Z",
                         "inProduction": false,
-                        "inStaging": false
+                        "inStaging": false,
+                        "deleted": false
                       }
                     }
                   }
@@ -919,7 +936,7 @@
             }
           }
         },
-        "description": "This API lets you update a property version. Please note that a property that has already been deployed to production or staging is 'frozen' and cannot be updated or validated again. The only exception is that the version description can be updated. If a property is frozen, you should <a href=\"#operation/createPropertyVersion\">create a new property version</a> instead.",
+        "description": "This API lets you update a property version. Please note that a property version that has already been deployed to production or staging is 'frozen' and cannot be updated again. The only exception is that the version description can be updated. If a property version is frozen, you should instead <a href=\"#operation/createPropertyVersion\">create a new property version</a> with your desired changes.",
         "operationId": "updatePropertyVersion",
         "tags": [
           "Property Management"
@@ -1001,7 +1018,7 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$arg_<i>name</i></td><td>Value of the query parameter with the specified name.</td></tr>\n<tr><td>$args</td><td>The full query string from the client.</td></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_http_version</td><td>Client's HTTP version, like \"HTTP/1.1\"</td></tr>\n<tr><td>$client_ip_version</td><td>Client's IP version: 4 for IPv4 or 6 for IPv6</td></tr>\n<tr><td>$client_isp</td><td>Client's ISP information.</td></tr>\n<tr><td>$client_province_code</td><td>A two character ISO 3166-2 code representing the China province corresponding to a client's request, if it came from China.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$connection_requests</td><td>Current number of requests in the connection.</td></tr>\n<tr><td>$content_code</td><td>Value of the $content_code variable if you <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">defined it in your Edge Logic</a>.</td></tr>\n<tr><td>$content_length</td><td>Value of the request's Content-Length header.</td></tr>\n<tr><td>$content_type</td><td>Value of the request's Content-Type header.</td></tr>\n<tr><td>$cookie_<i>x</i></td><td>Obtain the value of the cookie named 'x'. For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$error_code</td><td>Error, if any, about the client and origin.</td></tr>\n<tr><td>$extra_deliver_time_ms</td><td>Estimated time in milliseconds needed to flush the TCP send buffer.</td></tr>\n<tr><td>$host</td><td>Value of the request's Host header.</td></tr>\n<tr><td>$hostname</td><td>Server's hostname.</td></tr>\n<tr><td>$http_<i>x</i></td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$invalid_referer</td><td>Empty string if the \"Referer\" request header field value is considered valid; otherwise \"1\".</td></tr>\n<tr><td>$is_args</td><td>Empty or \"?\", when the request contains a query string.</td></tr>\n<tr><td>$msec</td><td>Current Unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$origin_host</td><td>Origin's hostname.</td></tr>\n<tr><td>$origin_ip</td><td>Origin's IP address.</td></tr>\n<tr><td>$origin_status_code</td><td>Status code if a request is made to the origin.</td></tr>\n<tr><td>$pid</td><td>Process ID of the service.</td></tr>\n<tr><td>$pipe</td><td>\"p\" if the request is pipelined, or \".\" otherwise.</td></tr>\n<tr><td>$property_ver</td><td>Property version number.</td></tr>\n<tr><td>$qtl_upstream_cache_status</td><td>Cache status: HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED.</td></tr>\n<tr><td>$remote_user</td><td>User name extracted from the Authorization header if Basic authentication is used.</td></tr>\n<tr><td>$request</td><td>Full HTTP request line.</td></tr>\n<tr><td>$request_cpu_time</td><td>CPU time, in nanoseconds, spent on processing the request.</td></tr>\n<tr><td>$request_end_time</td><td>Time in seconds it takes to receive the request header from the client and be ready to process or forward it.</td></tr>\n<tr><td>$request_length</td><td>Length of request line, header and body.</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used, for example, 'GET'.</td></tr>\n<tr><td>$request_scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$request_ssl_handshake_time</td><td> CPU time, in nanoseconds, spent on TLS handshake.</td></tr>\n<tr><td>$request_start_time</td><td>Unix time (in seconds with milliseconds resolution) when the first byte of the request is received from the client.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's first byte and serving the last byte of the response.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI, beginning with '/' and including the query string.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sec</td><td>Unix time in seconds.</td></tr>\n<tr><td>$sent_http_content_length</td><td>The original file size.</td></tr>\n<tr><td>$sent_http_<i>x</i></td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$served_from_cache</td><td>Value is 1 for a HIT on edge; 0 for a MISS.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_level</td><td>Level of the cache server. 1 means edge, and 2 means intermediate.</td></tr>\n<tr><td>$server_name</td><td>The value specified in the property's hostnames that matched the incoming request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$server_province_code</td><td>A two character ISO 3166-2 code representing the China province of the edge server if the request was handled by a server in China.</td></tr>\n<tr><td>$server_region</td><td>Country code of the edge server, e.g. CN, US</td></tr>\n<tr><td>$service_port</td><td>Port number that received the request.</td></tr>\n<tr><td>$sorted_querystring_args</td><td>variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter\">sorted_querystring_filter_parameter directive</a>.</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_delivery_rate</td><td>The rate, in bytes/s, at which the sent data is acknowledged by the client.</td></tr>\n<tr><td>$tcpinfo_min_rtt</td><td>Minimum RTT, in microseconds, observed by TCP stack for the connection</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n<tr><td>$transfer_time</td><td>The time needed for CDN Pro to send the full requested object ( up to last byte ) to system buffer, in seconds.</td></tr>\n<tr><td>$turn_around_time</td><td>The time needed for CDN Pro to receive first byte of response of origin, in seconds.</td></tr>\n<tr><td>$upstream_cookie_<i>name</i></td><td>Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache.</td></tr>\n<tr><td>$uri</td><td>Normalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#rewrite\">rewrite directive</a> in the Edge Logic.</td></tr>\n</table>"
                       },
                       "headers": {
                         "type": "array",
@@ -1028,7 +1045,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
+                    "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -1381,8 +1398,9 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                    "maxLength": 65530
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                    "maxLength": 65530,
+                    "deprecated": true
                   },
                   "tls0Rtt": {
                     "type": "boolean",
@@ -3449,6 +3467,21 @@
                               "Failed"
                             ],
                             "description": "Indicates the status of the most recent validation of the property version."
+                          },
+                          "lastValidationTime": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "2jgn5vfmiswk3"
+                            },
+                            "format": "date-time",
+                            "description": "If the property version has been validated, this field indicates the RFC 3339 date when it was last validated."
+                          },
+                          "warning": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "jswt6kff3mk2d"
+                            },
+                            "description": "This field can appear if the property definition has issues that might impact its use. For example, if the property is created or updated with a reference to an incompatible certificate, the warning can indicate the certificate is expired or does not support the property's hostname."
                           }
                         },
                         "required": [
@@ -3488,7 +3521,8 @@
                           ],
                           "frozen": true,
                           "lastUpdateTime": "2019-10-30T02:33:46Z",
-                          "lastValidationStatus": "Validated"
+                          "lastValidationStatus": "Validated",
+                          "lastValidationTime": "2023-01-02T01:02:00.00Z"
                         },
                         {
                           "version": 3,
@@ -3661,7 +3695,7 @@
         "summary": "Create a property version",
         "responses": {
           "201": {
-            "description": "A new property version was successfully created. The <b>Location</b> HTTP header indicates the version number. Example:  <code>Location: http://ngapi.cdnetworks.com/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
+            "description": "A new property version was successfully created. The <b>Location</b> HTTP header indicates the version number. Example:  <code>Location: http://ngapi.{{siteDomain}}/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -3888,7 +3922,7 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$arg_<i>name</i></td><td>Value of the query parameter with the specified name.</td></tr>\n<tr><td>$args</td><td>The full query string from the client.</td></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_http_version</td><td>Client's HTTP version, like \"HTTP/1.1\"</td></tr>\n<tr><td>$client_ip_version</td><td>Client's IP version: 4 for IPv4 or 6 for IPv6</td></tr>\n<tr><td>$client_isp</td><td>Client's ISP information.</td></tr>\n<tr><td>$client_province_code</td><td>A two character ISO 3166-2 code representing the China province corresponding to a client's request, if it came from China.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$connection_requests</td><td>Current number of requests in the connection.</td></tr>\n<tr><td>$content_code</td><td>Value of the $content_code variable if you <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">defined it in your Edge Logic</a>.</td></tr>\n<tr><td>$content_length</td><td>Value of the request's Content-Length header.</td></tr>\n<tr><td>$content_type</td><td>Value of the request's Content-Type header.</td></tr>\n<tr><td>$cookie_<i>x</i></td><td>Obtain the value of the cookie named 'x'. For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$error_code</td><td>Error, if any, about the client and origin.</td></tr>\n<tr><td>$extra_deliver_time_ms</td><td>Estimated time in milliseconds needed to flush the TCP send buffer.</td></tr>\n<tr><td>$host</td><td>Value of the request's Host header.</td></tr>\n<tr><td>$hostname</td><td>Server's hostname.</td></tr>\n<tr><td>$http_<i>x</i></td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$invalid_referer</td><td>Empty string if the \"Referer\" request header field value is considered valid; otherwise \"1\".</td></tr>\n<tr><td>$is_args</td><td>Empty or \"?\", when the request contains a query string.</td></tr>\n<tr><td>$msec</td><td>Current Unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$origin_host</td><td>Origin's hostname.</td></tr>\n<tr><td>$origin_ip</td><td>Origin's IP address.</td></tr>\n<tr><td>$origin_status_code</td><td>Status code if a request is made to the origin.</td></tr>\n<tr><td>$pid</td><td>Process ID of the service.</td></tr>\n<tr><td>$pipe</td><td>\"p\" if the request is pipelined, or \".\" otherwise.</td></tr>\n<tr><td>$property_ver</td><td>Property version number.</td></tr>\n<tr><td>$qtl_upstream_cache_status</td><td>Cache status: HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED.</td></tr>\n<tr><td>$remote_user</td><td>User name extracted from the Authorization header if Basic authentication is used.</td></tr>\n<tr><td>$request</td><td>Full HTTP request line.</td></tr>\n<tr><td>$request_cpu_time</td><td>CPU time, in nanoseconds, spent on processing the request.</td></tr>\n<tr><td>$request_end_time</td><td>Time in seconds it takes to receive the request header from the client and be ready to process or forward it.</td></tr>\n<tr><td>$request_length</td><td>Length of request line, header and body.</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used, for example, 'GET'.</td></tr>\n<tr><td>$request_scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$request_ssl_handshake_time</td><td> CPU time, in nanoseconds, spent on TLS handshake.</td></tr>\n<tr><td>$request_start_time</td><td>Unix time (in seconds with milliseconds resolution) when the first byte of the request is received from the client.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's first byte and serving the last byte of the response.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI, beginning with '/' and including the query string.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sec</td><td>Unix time in seconds.</td></tr>\n<tr><td>$sent_http_content_length</td><td>The original file size.</td></tr>\n<tr><td>$sent_http_<i>x</i></td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$served_from_cache</td><td>Value is 1 for a HIT on edge; 0 for a MISS.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_level</td><td>Level of the cache server. 1 means edge, and 2 means intermediate.</td></tr>\n<tr><td>$server_name</td><td>The value specified in the property's hostnames that matched the incoming request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$server_province_code</td><td>A two character ISO 3166-2 code representing the China province of the edge server if the request was handled by a server in China.</td></tr>\n<tr><td>$server_region</td><td>Country code of the edge server, e.g. CN, US</td></tr>\n<tr><td>$service_port</td><td>Port number that received the request.</td></tr>\n<tr><td>$sorted_querystring_args</td><td>variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter\">sorted_querystring_filter_parameter directive</a>.</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_delivery_rate</td><td>The rate, in bytes/s, at which the sent data is acknowledged by the client.</td></tr>\n<tr><td>$tcpinfo_min_rtt</td><td>Minimum RTT, in microseconds, observed by TCP stack for the connection</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n<tr><td>$transfer_time</td><td>The time needed for CDN Pro to send the full requested object ( up to last byte ) to system buffer, in seconds.</td></tr>\n<tr><td>$turn_around_time</td><td>The time needed for CDN Pro to receive first byte of response of origin, in seconds.</td></tr>\n<tr><td>$upstream_cookie_<i>name</i></td><td>Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache.</td></tr>\n<tr><td>$uri</td><td>Normalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#rewrite\">rewrite directive</a> in the Edge Logic.</td></tr>\n</table>"
                       },
                       "headers": {
                         "type": "array",
@@ -3915,7 +3949,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
+                    "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -4268,8 +4302,9 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                    "maxLength": 65530
+                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                    "maxLength": 65530,
+                    "deprecated": true
                   },
                   "tls0Rtt": {
                     "type": "boolean",
@@ -4343,7 +4378,7 @@
         "summary": "Create a property",
         "responses": {
           "201": {
-            "description": "This response indicates the property was successfully created. A Location header containing the URL of the new property is returned. For example, <code>Location: http://ngapi.cdnetworks.com/cdn/properties/8fdc9c949e986564cc24b149</code>",
+            "description": "This response indicates the property was successfully created. A Location header containing the URL of the new property is returned. For example, <code>Location: http://ngapi.{{siteDomain}}/cdn/properties/8fdc9c949e986564cc24b149</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -4603,7 +4638,7 @@
                           },
                           "format": {
                             "type": "string",
-                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$cookie_x</td><td>This lets you obtain any cookie named x.  For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$http_x</td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$msec</td><td>Current unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$qtl_req_id</td><td>Unique identifier representing the request.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used to access the origin.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's  first byte and serving the last byte of the response.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.\n</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$sent_http_content_length</td><td>the original file size.</td></tr>\n<tr><td>$sent_http_x</td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n</table>"
+                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nThe following built-in variables can be used within the format field. They will be replaced with the actual values in the notifications.\n<table>\n<tr><th>Name</th><th>Description</th></tr>\n<tr><td>$arg_<i>name</i></td><td>Value of the query parameter with the specified name.</td></tr>\n<tr><td>$args</td><td>The full query string from the client.</td></tr>\n<tr><td>$body_bytes_sent</td><td>Size of the response body.</td></tr>\n<tr><td>$bytes_sent</td><td>Size of the response, including body, headers and response line.</td></tr>\n<tr><td>$client_country_code</td><td>An ISO 3166-1 country code representing the country of the client request, for example, \"US\". \"ZZ\" is returned if the country is unknown.</td></tr>\n<tr><td>$client_http_version</td><td>Client's HTTP version, like \"HTTP/1.1\"</td></tr>\n<tr><td>$client_ip_version</td><td>Client's IP version: 4 for IPv4 or 6 for IPv6</td></tr>\n<tr><td>$client_isp</td><td>Client's ISP information.</td></tr>\n<tr><td>$client_province_code</td><td>A two character ISO 3166-2 code representing the China province corresponding to a client's request, if it came from China.</td></tr>\n<tr><td>$client_real_ip</td><td>IP address of the client request.</td></tr>\n<tr><td>$connection_requests</td><td>Current number of requests in the connection.</td></tr>\n<tr><td>$content_code</td><td>Value of the $content_code variable if you <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">defined it in your Edge Logic</a>.</td></tr>\n<tr><td>$content_length</td><td>Value of the request's Content-Length header.</td></tr>\n<tr><td>$content_type</td><td>Value of the request's Content-Type header.</td></tr>\n<tr><td>$cookie_<i>x</i></td><td>Obtain the value of the cookie named 'x'. For example, $cookie_account would retrieve the value of a cookie named 'account'.</td></tr>\n<tr><td>$error_code</td><td>Error, if any, about the client and origin.</td></tr>\n<tr><td>$extra_deliver_time_ms</td><td>Estimated time in milliseconds needed to flush the TCP send buffer.</td></tr>\n<tr><td>$host</td><td>Value of the request's Host header.</td></tr>\n<tr><td>$hostname</td><td>Server's hostname.</td></tr>\n<tr><td>$http_<i>x</i></td><td>Obtain any HTTP header named x from the original request. The header name is converted to lower case with dashes replaced by underscores. For example, specify $http_user_agent to get the value of User-Agent.</td></tr>\n<tr><td>$invalid_referer</td><td>Empty string if the \"Referer\" request header field value is considered valid; otherwise \"1\".</td></tr>\n<tr><td>$is_args</td><td>Empty or \"?\", when the request contains a query string.</td></tr>\n<tr><td>$msec</td><td>Current Unix time in seconds with millisecond precision.</td></tr>\n<tr><td>$origin_host</td><td>Origin's hostname.</td></tr>\n<tr><td>$origin_ip</td><td>Origin's IP address.</td></tr>\n<tr><td>$origin_status_code</td><td>Status code if a request is made to the origin.</td></tr>\n<tr><td>$pid</td><td>Process ID of the service.</td></tr>\n<tr><td>$pipe</td><td>\"p\" if the request is pipelined, or \".\" otherwise.</td></tr>\n<tr><td>$property_ver</td><td>Property version number.</td></tr>\n<tr><td>$qtl_upstream_cache_status</td><td>Cache status: HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED.</td></tr>\n<tr><td>$remote_user</td><td>User name extracted from the Authorization header if Basic authentication is used.</td></tr>\n<tr><td>$request</td><td>Full HTTP request line.</td></tr>\n<tr><td>$request_cpu_time</td><td>CPU time, in nanoseconds, spent on processing the request.</td></tr>\n<tr><td>$request_end_time</td><td>Time in seconds it takes to receive the request header from the client and be ready to process or forward it.</td></tr>\n<tr><td>$request_length</td><td>Length of request line, header and body.</td></tr>\n<tr><td>$request_method</td><td>The HTTP request method used, for example, 'GET'.</td></tr>\n<tr><td>$request_scheme</td><td>Indicates the protocol of the user's request (\"http\" or https\").</td></tr>\n<tr><td>$request_ssl_handshake_time</td><td> CPU time, in nanoseconds, spent on TLS handshake.</td></tr>\n<tr><td>$request_start_time</td><td>Unix time (in seconds with milliseconds resolution) when the first byte of the request is received from the client.</td></tr>\n<tr><td>$request_time</td><td>Response time in milliseconds. It is the time between receiving the request's first byte and serving the last byte of the response.</td></tr>\n<tr><td>$request_uri</td><td>HTTP request URI, beginning with '/' and including the query string.</td></tr>\n<tr><td>$sc_completed</td><td>1 to indicate the last byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sc_initial</td><td>1 to indicate the first byte of the object was served to the user, 0 otherwise.</td></tr>\n<tr><td>$sec</td><td>Unix time in seconds.</td></tr>\n<tr><td>$sent_http_content_length</td><td>The original file size.</td></tr>\n<tr><td>$sent_http_<i>x</i></td><td>Obtain the value of an HTTP header named x that is returned in the response to the client. The header name should be converted to lower case with dashes replaced by underscores. For example, $sent_http_etag would give you the value of the ETag header.</td></tr>\n<tr><td>$served_from_cache</td><td>Value is 1 for a HIT on edge; 0 for a MISS.</td></tr>\n<tr><td>$server_addr</td><td>IP address of the edge node serving the user's request.</td></tr>\n<tr><td>$server_level</td><td>Level of the cache server. 1 means edge, and 2 means intermediate.</td></tr>\n<tr><td>$server_name</td><td>The value specified in the property's hostnames that matched the incoming request.</td></tr>\n<tr><td>$server_protocol</td><td>Indicates the version of HTTP used in the user's request, either \"HTTP/1.0\", \"HTTP/1.1\", or \"HTTP/2.0\".</td></tr>\n<tr><td>$server_province_code</td><td>A two character ISO 3166-2 code representing the China province of the edge server if the request was handled by a server in China.</td></tr>\n<tr><td>$server_region</td><td>Country code of the edge server, e.g. CN, US</td></tr>\n<tr><td>$service_port</td><td>Port number that received the request.</td></tr>\n<tr><td>$sorted_querystring_args</td><td>variable providing an ASCII-based sorted list of input query parameters; it can be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter\">sorted_querystring_filter_parameter directive</a>.</td></tr>\n<tr><td>$ssl_cipher</td><td>Indicates the cipher suite used for the TLS (SSL) connection.</td></tr>\n<tr><td>$ssl_protocol</td><td>Indicates the TLS version used for the TLS (SSL) connection. Example versions include \"SSLv3\", \"TLSv1\", \"TLSv1.1\", \"TLSv1.2\", and \"unknown\".</td></tr>\n<tr><td>$ssl_server_name</td><td>The hostname that a client initiating a TLS (SSL) connection is attempting to connect to. It is only sent by clients supporting SNI (Server Name Indication).</td></tr>\n<tr><td>$status</td><td>An HTTP response code for the user's request.</td></tr>\n<tr><td>$tcpinfo_delivery_rate</td><td>The rate, in bytes/s, at which the sent data is acknowledged by the client.</td></tr>\n<tr><td>$tcpinfo_min_rtt</td><td>Minimum RTT, in microseconds, observed by TCP stack for the connection</td></tr>\n<tr><td>$tcpinfo_rtt</td><td>The time in microseconds taken by a packet to travel to the destination and back.</td></tr>\n<tr><td>$transfer_time</td><td>The time needed for CDN Pro to send the full requested object ( up to last byte ) to system buffer, in seconds.</td></tr>\n<tr><td>$turn_around_time</td><td>The time needed for CDN Pro to receive first byte of response of origin, in seconds.</td></tr>\n<tr><td>$upstream_cookie_<i>name</i></td><td>Value of the cookie with the specified name received from the upstream server in the “Set-Cookie” response header field. May be served from the cache.</td></tr>\n<tr><td>$uri</td><td>Normalized request URI beginning with '/' and excluding the query string. The value may be modified by the <a href=\"/cdn/docs/edge-logic/supported-directives#rewrite\">rewrite directive</a> in the Edge Logic.</td></tr>\n</table>"
                           },
                           "headers": {
                             "type": "array",
@@ -4630,7 +4665,7 @@
                       "edgeLogic": {
                         "type": "string",
                         "maxLength": 65530,
-                        "description": "Refer to <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a>."
+                        "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                       },
                       "hasBeian": {
                         "type": "boolean",
@@ -4983,8 +5018,9 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>",
-                        "maxLength": 65530
+                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                        "maxLength": 65530,
+                        "deprecated": true
                       },
                       "tls0Rtt": {
                         "type": "boolean",
@@ -5355,7 +5391,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "The value of the search parameter is matched on the <i>id</i>, <i>name</i>, <i>description</i>, and <i>hostnames</i> fields of each property. A value like \"domain.com\" would match on hostnames domain.com and abc.123domain.com.\n\nUse a value beginning with the '^' character to narrow the matches to properties with <i>name</i>, <i>description</i>, or <i>hostnames</i> fields beginning with the text following the '^'. For example, \"^domain\" would match on hostnames domain.com and domain123.com but not abc.123domain.com. \n\nSince a limited number of characters are permitted in URIs, you must encode '^' as '%5E' when specifying a search parameter containing it in the URI, for example, <code>curl -i --url 'https://ngapi.cdnetworks.com/cdn/properties?search=%5Edomain' ... </code>.\n\nNote that a property will be returned if the search matches on any version of the property which has not been deleted. Also, when searching for a property by its ID, you must specify the entire ID as partial matches are not supported."
+            "description": "The value of the search parameter is matched on the <i>id</i>, <i>name</i>, <i>description</i>, and <i>hostnames</i> fields of each property. A value like \"domain.com\" would match on hostnames domain.com and abc.123domain.com.\n\nUse a value beginning with the '^' character to narrow the matches to properties with <i>name</i>, <i>description</i>, or <i>hostnames</i> fields beginning with the text following the '^'. For example, \"^domain\" would match on hostnames domain.com and domain123.com but not abc.123domain.com. \n\nSince a limited number of characters are permitted in URIs, you must encode '^' as '%5E' when specifying a search parameter containing it in the URI, for example, <code>curl -i --url 'https://ngapi.{{siteDomain}}/cdn/properties?search=%5Edomain' ... </code>.\n\nNote that a property will be returned if the search matches on any version of the property which has not been deleted. Also, when searching for a property by its ID, you must specify the entire ID as partial matches are not supported."
           },
           {
             "schema": {
@@ -6164,7 +6200,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header's value will be a URL allowing you to get details about the new certificate.  Example: <code>Location: http://ngapi.cdnetworks.com/cdn/certificates/d60b730d9a586425677940cc</code>",
+                "description": "The Location header's value will be a URL allowing you to get details about the new certificate.  Example: <code>Location: http://ngapi.{{siteDomain}}/cdn/certificates/d60b730d9a586425677940cc</code>",
                 "required": true
               }
             }
@@ -6330,7 +6366,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -7086,7 +7122,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header returns a URL to the specific certificate version if a new one is created.  Example:  <code>Location: http://ngapi.cdnetworks.com/cdn/certificates/329f12c1fe6708c23c31e91f/versions/5</code>"
+                "description": "The Location header returns a URL to the specific certificate version if a new one is created.  Example:  <code>Location: http://ngapi.{{siteDomain}}/cdn/certificates/329f12c1fe6708c23c31e91f/versions/5</code>"
               }
             }
           },
@@ -7604,15 +7640,12 @@
       "parameters": [
         {
           "schema": {
-            "enum": [
-              "latest"
-            ],
             "type": "string"
           },
           "name": "version",
           "in": "path",
           "required": true,
-          "description": "Version of the certificate to retrieve. It can be an integer representing the version like \"1\" or \"latest\" to return the most recently created version of the certificate."
+          "description": "Version of the certificate. It can be an integer representing the version like \"1\"."
         },
         {
           "schema": {
@@ -7845,6 +7878,134 @@
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
         ]
+      },
+      "delete": {
+        "summary": "Delete the latest version of a certificate",
+        "operationId": "delete-cdn-certificates-certificateID-versions-version",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh DELETE /certificates/45230c199e5f9dd381daff5e/versions/2\n"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The certificate version was deleted."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "ybu7yf05lc4am"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "mdct4cijazgcx"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Version Is not the latest": {
+                    "value": {
+                      "code": "VersionIsNotTheLatest",
+                      "message": "Trying to delete version 3 which is not the latest version"
+                    }
+                  },
+                  "Certificate with only one version": {
+                    "value": {
+                      "code": "CertificateWithOnlyOneVersion",
+                      "message": "This is the only version in existence. Deleting this version is not allowed."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid certificate. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "8nfnbomhrq2gk"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "feljdfmf2ptuk"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid certificate": {
+                    "value": {
+                      "code": "InvalidCertId",
+                      "message": "The specified certificate ID does not exist."
+                    }
+                  },
+                  "Invalid version": {
+                    "value": {
+                      "code": "InvalidVersion",
+                      "message": "Version 3 does not exist (may have already been deleted)"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The certificate version could not be deleted. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "244vu0caxcp5z"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "oxz6r1fm491ky"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Version used": {
+                    "value": {
+                      "code": "VersionUsed",
+                      "message": "The latest version cannot be deleted because it is in deployment history."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Certificate Management"
+        ],
+        "description": "This endpoint can be used to delete the latest version of a certificate if it was never deployed before. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>."
       }
     },
     "/cdn/certificates/{certificateID}/versions/latest": {
@@ -7973,7 +8134,8 @@
             "source": "./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e/latest\n"
           }
         ],
-        "description": "This endpoint can be used to delete the latest version of a certificate if it was accidentally created but never deployed. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>."
+        "description": "This endpoint can be used to delete the latest version of a certificate if it was accidentally created but never deployed. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>.",
+        "deprecated": true
       }
     },
     "/cdn/validations": {
@@ -8044,6 +8206,14 @@
                           "customerId": {
                             "type": "integer",
                             "description": "ID of the customer who owns the property will be returned to a reseller using the Report-Range header with a value of self+children or children-only."
+                          },
+                          "finishTime": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "2hdqploew235v"
+                            },
+                            "format": "date-time",
+                            "description": "An RFC 3339 format string indicating when the validation task finished. Example: \"2024-11-12T03:09:26Z\""
                           }
                         },
                         "required": [
@@ -8302,7 +8472,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header contains a URL to the validation task. Example: <code>Location: http://ngapi.cdnetworks.com/cdn/validations/5dca2205f9e9cc0001df7b24</code>",
+                "description": "The Location header contains a URL to the validation task. Example: <code>Location: http://ngapi.{{siteDomain}}/cdn/validations/5dca2205f9e9cc0001df7b24</code>",
                 "required": true
               }
             }
@@ -8918,7 +9088,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header's value will be the URL of the new deployment task.  Example: <code>Location: http://ngapi.cdnetworks.com/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>"
+                "description": "The Location header's value will be the URL of the new deployment task.  Example: <code>Location: http://ngapi.{{siteDomain}}/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>"
               }
             }
           },
@@ -9079,7 +9249,7 @@
             }
           }
         },
-        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to <a href=\"/cdn/docs/portal/edge-configurations/testing-property\">testing a property</a> for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. An error will also be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a>.",
+        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to <a href=\"/cdn/docs/portal/edge-configurations/testing-property\">testing a property</a> for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. An error will also be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a> with your desired changes.",
         "operationId": "createDeployment",
         "x-codeSamples": [
           {
@@ -14202,7 +14372,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "A URL to the annotation object, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/annotations/5dd50ef0ace044000163278f</code>.",
+                "description": "A URL to the annotation object, for example, <code>Location: http://ngapi.{{siteDomain}}/cdn/annotations/5dd50ef0ace044000163278f</code>.",
                 "required": true
               }
             }
@@ -14299,7 +14469,7 @@
                       "configuration",
                       "operation"
                     ],
-                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by CDNetworks.</td></tr></table>"
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by {{title}}.</td></tr></table>"
                   },
                   "comments": {
                     "type": "string",
@@ -14354,7 +14524,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header is a URL representing the new purge request, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "description": "The Location header is a URL representing the new purge request, for example, <code>Location: http://ngapi.{{siteDomain}}/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
                 "required": true
               }
             }
@@ -14940,7 +15110,7 @@
                           },
                           "type": {
                             "type": "string",
-                            "description": "Describes the type of annotation. Operation annotations can only be created by CDNetworks.",
+                            "description": "Describes the type of annotation. Operation annotations can only be created by {{title}}.",
                             "enum": [
                               "client",
                               "operation",
@@ -15076,7 +15246,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the type of annotation (client, configuration, or operation). Operation annotations can only be created by CDNetworks."
+            "description": "Indicates the type of annotation (client, configuration, or operation). Operation annotations can only be created by {{title}}."
           },
           {
             "schema": {
@@ -15310,7 +15480,7 @@
                     },
                     "type": {
                       "type": "string",
-                      "description": "Describes the type of annotation. Operation annotations can only be created by CDNetworks.",
+                      "description": "Describes the type of annotation. Operation annotations can only be created by {{title}}.",
                       "enum": [
                         "client",
                         "operation",
@@ -15527,7 +15697,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by CDNetworks.</td></tr></table>",
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by {{title}}.</td></tr></table>",
                     "enum": [
                       "client",
                       "configuration",
@@ -22083,7 +22253,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header's value will refer to the newly created customer. Example:  https://ngapi.cdnetworks.com/ngadmin/customers/12345678",
+                "description": "The Location header's value will refer to the newly created customer. Example:  https://ngapi.{{siteDomain}}/ngadmin/customers/12345678",
                 "required": true
               }
             }
@@ -23571,7 +23741,7 @@
                         {
                           "apiRequestId": "2d99b9d962847b3f",
                           "requestTimestamp": "2020-04-24T20:09:15Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/ngadmin/apicalls?limit=5",
+                          "requestURL": "https://ngapi.{{siteDomain}}/ngadmin/apicalls?limit=5",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "responseCode": 0
@@ -23579,7 +23749,7 @@
                         {
                           "apiRequestId": "94d2b2168fabccb7",
                           "requestTimestamp": "2020-04-24T20:09:06Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/certificates?offset=0&limit=10&search=&sortOrder=desc",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/certificates?offset=0&limit=10&search=&sortOrder=desc",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -23588,7 +23758,7 @@
                         {
                           "apiRequestId": "97f8af300ff5a982",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -23597,7 +23767,7 @@
                         {
                           "apiRequestId": "f291e3014bd06216",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname2",
@@ -23606,7 +23776,7 @@
                         {
                           "apiRequestId": "f03ca108dd17d342",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -23689,7 +23859,7 @@
             },
             "in": "query",
             "name": "path",
-            "description": "Specify the path portion of a URI to filter out calls to a particular path. For example, to get a list of calls to property API endpoints using https://ngapi.cdnetworks.com/cdn/properties, you would specify \"path=/cdn/properties\"."
+            "description": "Specify the path portion of a URI to filter out calls to a particular path. For example, to get a list of calls to property API endpoints using https://ngapi.{{siteDomain}}/cdn/properties, you would specify \"path=/cdn/properties\"."
           },
           {
             "schema": {
@@ -23920,7 +24090,7 @@
                         "accept:application/json",
                         "sec-fetch-site:same-origin",
                         "sec-fetch-mode:cors",
-                        "referer:https://console.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb?taskId=5ea30363f5a9ba7b2b4251f9&taskName=Validate%20version%201%20of%20property%20%27xyzabc20200424%27",
+                        "referer:https://console.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb?taskId=5ea30363f5a9ba7b2b4251f9&taskName=Validate%20version%201%20of%20property%20%27xyzabc20200424%27",
                         "accept-encoding:gzip, deflate, br",
                         "accept-language:en-US,en;q=0.9",
                         "cookie:_ga=GA1.2.1656448886.1553879004; LPVID=MyMDIzZGU0YTFmOWMyMTll; MPEL=CH; LPSID-78804126=iQsfcMCrQQ6Ep7Pi6CcYkQ; crowd.token_key=Rl6Fjm4WCtDMPHWrHhMpyQAAAAAAAAACYnVydG9uLmxlZQ; LPSID-75492851=w619XhnXQOu0ZILa4ci9hg; connect.sid=s%3AM2j0Xp9ij9Kv8J8I-OVa6xnoxJfrq37g.p%2FFU8DdBACz0F3aV7sgobPRYrBn3ZFty%2BkT4Tu%2BB9rs",
@@ -23928,13 +24098,13 @@
                         "x-forwarded-proto:https",
                         "authorization:Basic YnVydG9uY29tcGFueTItYXBpOnBvUG9IRm8wQms3SGcwOXVzYzBDOGR6SVlIcz0=",
                         "date:Fri, 24 Apr 2020 15:21:17 UTC",
-                        "host:ngapi.cdnetworks.com",
+                        "host:ngapi.{{siteDomain}}",
                         "via:1.1 google, 1.1 google",
                         "x-forwarded-for:220.242.143.61, 35.241.43.180, 35.222.43.216, 35.241.43.180",
                         "connection:Keep-Alive"
                       ],
                       "requestBody": "",
-                      "requestURL": "https://ngapi.cdnetworks.com/cdn/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
+                      "requestURL": "https://ngapi.{{siteDomain}}/cdn/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
                       "requestMethod": "GET",
                       "requestTimestamp": "2020-04-24T15:21:17Z",
                       "responseHeaders": [
@@ -23955,7 +24125,7 @@
                   "Details of a failed API call": {
                     "value": {
                       "requestHeaders": [
-                        "host:ngapi.cdnetworks.com",
+                        "host:ngapi.{{siteDomain}}",
                         "sec-ch-ua:",
                         "content-type:application/json",
                         "sec-ch-ua-mobile:?0",
@@ -23963,11 +24133,11 @@
                         "contact-id:26394",
                         "sec-ch-ua-platform:",
                         "accept:application/json",
-                        "origin:https://console.cdnetworks.com",
+                        "origin:https://console.{{siteDomain}}",
                         "sec-fetch-site:same-origin",
                         "sec-fetch-mode:cors",
                         "sec-fetch-dest:empty",
-                        "referer:https://console.cdnetworks.com/cdn/certificates?limit=10&autoRenew=&pageNumber=1&sortOrder=&target=all&sortBy=&search=Deletable",
+                        "referer:https://console.{{siteDomain}}/cdn/certificates?limit=10&autoRenew=&pageNumber=1&sortOrder=&target=all&sortBy=&search=Deletable",
                         "accept-language:en-US",
                         "x-ws-ttl:10",
                         "cdn-src-ip:123.56.78.90",
@@ -23986,7 +24156,7 @@
                         "connection:Keep-Alive"
                       ],
                       "requestBody": "{\"name\":\"Undeploy certificate 'deletable'\",\"actions\":[{\"action\":\"remove_cert\",\"certificateId\":\"1a8a0716e7d56a98bcc9e61b\",\"version\":1}],\"target\":\"production\"}",
-                      "requestURL": "https://ngapi.cdnetworks.com/cdnapi/deploymentTasks",
+                      "requestURL": "https://ngapi.{{siteDomain}}/cdnapi/deploymentTasks",
                       "requestMethod": "POST",
                       "requestTimestamp": "2024-09-25T05: 35:12Z",
                       "responseHeaders": [
@@ -24075,7 +24245,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The response contains system configuration.",
+            "description": "The response contains the system configuration.",
             "content": {
               "application/json": {
                 "schema": {
@@ -24238,6 +24408,7 @@
                         "proxy_cache_lock_timeout",
                         "proxy_cache_methods",
                         "proxy_cache_min_age",
+                        "proxy_cache_max_stale",
                         "proxy_cache_use_stale",
                         "proxy_ignore_cache_control",
                         "proxy_ignore_headers",
@@ -24256,16 +24427,24 @@
                         "sorted_querystring_filter_parameter",
                         "slice",
                         "slice_ignore_etag",
-                        "realtime_log_downsample"
+                        "realtime_log_downsample",
+                        "slice_verify_header",
+                        "upstream_origin_only",
+                        "eval_func",
+                        "internal",
+                        "proxy_next_upstream",
+                        "proxy_cache_convert_head",
+                        "default_type",
+                        "access_log_sampling",
+                        "keepalive_timeout"
                       ],
                       "advancedDirectives": [
-                        "internal",
                         "auth_request",
                         "auth_request_set",
+                        "gzip",
                         "gzip_types",
                         "proxy_cookie_domain",
                         "proxy_cookie_path",
-                        "proxy_next_upstream",
                         "proxy_next_upstream_timeout",
                         "proxy_next_upstream_tries",
                         "proxy_redirect",
@@ -24282,7 +24461,6 @@
                         "origin_read_timeout",
                         "origin_send_timeout",
                         "proxy_cache_vary",
-                        "eval_func",
                         "enable_websocket",
                         "origin_fast_route",
                         "custom_log_field",
@@ -24296,47 +24474,31 @@
                         "proxy_request_body_in_cache_key",
                         "proxy_max_body_in_cache_key",
                         "ignore_invalid_range",
+                        "brotli",
+                        "brotli_types",
+                        "range_reorder",
+                        "proxy_request_buffering",
+                        "http2_max_concurrent_streams",
+                        "proxy_ignore_client_abort",
+                        "set_attack_state_req",
+                        "set_attack_state_tlshs",
+                        "attack_detection",
+                        "ssl_delay_handshake",
+                        "ssl_reject_handshake",
+                        "set_attack_state_rspbytes",
+                        "set_attack_state_cpu",
+                        "remote_log_set_header",
+                        "limit_req",
+                        "limit_req_status",
+                        "limit_req_dry_run",
                         "VVVVVVVVVVVVVV_Experimental_Below_VVVVVVVVVVVVVVVV",
-                        "gzip_comp_level",
                         "proxy_set_body",
                         "mirror",
                         "mirror_request_body",
                         "client_body_buffer_size",
                         "proxy_max_temp_file_size",
-                        "proxy_set_header",
-                        "proxy_request_buffering",
-                        "proxy_cache_convert_head",
-                        "gzip",
                         "include"
                       ],
-                      "publishedPrice": {
-                        "perGB": {
-                          "standard": 0.057,
-                          "premium": 0.112,
-                          "deluxe": 0.197,
-                          "ultra": 0.279
-                        },
-                        "perMHttpsReq": 0.99
-                      },
-                      "extraServicePorts": {
-                        "http": [
-                          8000,
-                          8080,
-                          8062,
-                          6382,
-                          3000,
-                          9200,
-                          7778
-                        ],
-                        "https": [
-                          8443,
-                          4443,
-                          5850,
-                          9443,
-                          6443,
-                          9210
-                        ]
-                      },
                       "baseLbDirectives": [
                         "if",
                         "else",
@@ -24347,22 +24509,164 @@
                         "allow",
                         "deny",
                         "access_log_sampling",
-                        "proxy_set_header"
+                        "proxy_set_header",
+                        "eval_func",
+                        "proxy_set",
+                        "keepalive_timeout",
+                        "sorted_querystring_filter_parameter",
+                        "proxy_cache_convert_head"
                       ],
                       "advancedLbDirectives": [
-                        "eval_func",
                         "client_max_body_size",
                         "http2_max_concurrent_streams",
                         "proxy_ignore_client_abort",
                         "proxy_request_buffering",
                         "custom_log_field",
-                        "proxy_cache_convert_head",
-                        "keepalive_timeout"
+                        "default_type",
+                        "set_attack_state_req",
+                        "set_attack_state_tlshs",
+                        "attack_detection",
+                        "ssl_delay_handshake",
+                        "ssl_reject_handshake",
+                        "limit_req",
+                        "limit_req_status",
+                        "limit_req_dry_run",
+                        "set_attack_state_rspbytes",
+                        "set_attack_state_cpu",
+                        "rewrite",
+                        "remote_log_set_header"
                       ],
+                      "publishedPrice": {
+                        "perGB": {
+                          "standard": 0.04,
+                          "premium": 0.08,
+                          "deluxe": 0.158,
+                          "ultra": 0.237,
+                          "nearChina": 0.938
+                        },
+                        "perCpuHour": 1.95
+                      },
+                      "extraServicePorts": {
+                        "http": [
+                          1081,
+                          1082,
+                          1083,
+                          3000,
+                          3080,
+                          5085,
+                          5087,
+                          7000,
+                          7001,
+                          7070,
+                          7777,
+                          7778,
+                          7788,
+                          8000,
+                          8001,
+                          8010,
+                          8055,
+                          8062,
+                          8080,
+                          8081,
+                          8082,
+                          8084,
+                          8086,
+                          8087,
+                          8088,
+                          8090,
+                          8181,
+                          8282,
+                          8580,
+                          8680,
+                          8800,
+                          8888,
+                          8999,
+                          9000,
+                          9001,
+                          9011,
+                          9080,
+                          9090,
+                          9091,
+                          9200,
+                          9306,
+                          10099,
+                          10117,
+                          12033,
+                          18081,
+                          20000,
+                          21026,
+                          28088,
+                          48080,
+                          48899,
+                          10001,
+                          10101,
+                          10201,
+                          10301,
+                          10401,
+                          10501,
+                          21001,
+                          21101,
+                          21201,
+                          21301,
+                          21401,
+                          21501,
+                          21601,
+                          21701,
+                          21801,
+                          21901,
+                          50000
+                        ],
+                        "https": [
+                          1443,
+                          4003,
+                          4443,
+                          5443,
+                          6443,
+                          8083,
+                          8089,
+                          8100,
+                          8383,
+                          8443,
+                          8445,
+                          8681,
+                          8890,
+                          9003,
+                          9006,
+                          9210,
+                          9220,
+                          9222,
+                          9224,
+                          9226,
+                          9228,
+                          9310,
+                          9443,
+                          9980,
+                          9999,
+                          10000,
+                          10004,
+                          32001,
+                          32101,
+                          32201,
+                          32301,
+                          32401,
+                          32501,
+                          40601,
+                          40701,
+                          40801,
+                          40901,
+                          52601,
+                          52701,
+                          52801,
+                          52901,
+                          53001,
+                          10443
+                        ]
+                      },
                       "advancedFeatures": [
                         "realTimeLog",
                         "nearChina",
-                        "originShield"
+                        "originShield",
+                        "attackMitigation"
                       ],
                       "supportedLanguages": [
                         "en",
@@ -24649,7 +24953,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "secretLimit": {
                     "type": "integer",
@@ -25715,7 +26019,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -27456,7 +27760,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -28171,7 +28475,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header is a URL representing the new prefetch request, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "description": "The Location header is a URL representing the new prefetch request, for example, <code>Location: http://ngapi.{{siteDomain}}/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
                 "required": true
               }
             }
@@ -28900,7 +29204,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Refers to the API permission for the API account. Example: Location: https://ngapi.cdnetworks.com/cdn/apiPermissions/1234567890\n",
+                "description": "Refers to the API permission for the API account. Example: Location: https://ngapi.{{siteDomain}}/cdn/apiPermissions/1234567890\n",
                 "required": true
               }
             }
@@ -30758,7 +31062,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Refers to the new webhook. Example: <code>Location: https://ngapi.cdnetworks.com/cdn/webhooks/60a2e69806d5583a81ad9500</code>\n"
+                "description": "Refers to the new webhook. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/webhooks/60a2e69806d5583a81ad9500</code>\n"
               }
             }
           },
@@ -31212,7 +31516,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The location header in the response will contain a reference to the new secret's ID, for example, <code>Location: https://ngapi-cdnetworks.com/cdn/secrets/60d6707cca3e387d2a28fc9e</code>. You can refer to the ID when calling APIs to delete, get, or update the secret.\n",
+            "description": "The location header in the response will contain a reference to the new secret's ID, for example, <code>Location: https://ngapi-{{siteDomain}}/cdn/secrets/60d6707cca3e387d2a28fc9e</code>. You can refer to the ID when calling APIs to delete, get, or update the secret.\n",
             "headers": {
               "Location": {
                 "schema": {
@@ -32398,7 +32702,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "A reference to the new log configuration. Example:<code>Location: https://ngapi.cdnetworks.com/cdn/report/logConfigs/4427</code>."
+                "description": "A reference to the new log configuration. Example:<code>Location: https://ngapi.{{siteDomain}}/cdn/report/logConfigs/4427</code>."
               }
             }
           },
@@ -38806,7 +39110,7 @@
       "API Key": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
+        "description": "All requests to the {{title}} platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n#You will be given the following information by the {{title}} sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
       }
     }
   },
@@ -38829,7 +39133,7 @@
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.{{siteDomain}}/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
@@ -38845,7 +39149,7 @@
     },
     {
       "name": "Annotations for Reports",
-      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a> when you look at the reports."
+      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.{{siteDomain}}/cdn\">CDN Pro portal</a> when you look at the reports."
     },
     {
       "name": "Content Management",
@@ -38853,7 +39157,7 @@
     },
     {
       "name": "Portal User Management",
-      "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a>."
+      "description": "Create and manage users who access the <a href=\"https://console.{{siteDomain}}/cdn\">CDN Pro portal</a>."
     },
     {
       "name": "API Account Management",

@@ -1,10 +1,10 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN Pro Edge Logic and Load Balancer Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. CDNetworks also introduced some <span class="badge primary">proprietary</span> directives.
+This section lists all the directives you can use in the CDN Pro Edge Logic and Load Balancer Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. {{title}} also introduced some <span class="badge primary">proprietary</span> directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
-In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact CDNetworks customer service.
+In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact {{title}} customer service.
 
 **Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All supported directives should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
 
@@ -14,9 +14,9 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 **Syntax:** `access_log_sampling factor;` <br/>
 **Default:** `-` <br/>
-**Contexts:** server (LB-only)
+**Contexts:** server, location, if in location
 
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the edge servers' behavior, including the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system. This directive is supported only in the load balancer logic.
+Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
@@ -26,7 +26,7 @@ Downsamples the local access log. A `factor` of N means one log entry for every 
 **Default:** `-` <br/>
 **Context:** server, location, if in location
 
-This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. CDNetworks has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
+This directive modifies the response headers to the client when the status code is 200, 201, 204, 206, 301-304, 307, or 308. When the 'always' parameter is present, it works for all status codes. {{title}} has made the following major changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header):
 
 1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx
@@ -121,6 +121,10 @@ auth_request /auth$is_args$args;
 ```
 The request will be granted if the auth response returns a 2xx status code or rejected if the auth response returns a 401 or 403 status code. Other status codes are considered an error and return a 500 "internal error" to the client.
 
+Variables in the subrequest context are handled separately from the main request. This avoids variables in the main request context being polluted. 
+
+The Content-Length header (if any) is removed, as an auth request is not supposed to carry a request body.
+
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
 <span class="badge dark">advanced</span>
@@ -129,7 +133,10 @@ The request will be granted if the auth response returns a 2xx status code or re
 **Default:** `—`<br/>
 **Context:** server, location
 
-Sets the request variable to the given value after the authorization request completes. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set). Here is an example to add something returned from the remote auth server to the cache key:
+Sets the request variable to the given value after the authorization request completes. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set).
+The first parameter is a variable in the context of the main request.
+Any variables that appear in the second parameter are from the context of the auth sub-request.
+Here is an example to add something returned from the remote auth server to the cache key:
 ```nginx
 auth_request /auth$is_args$args;
 auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
@@ -208,7 +215,7 @@ This directive sets the maximum wait time for the complete request header from t
 **Default:** `client_max_body_size 128m;`<br/>
 **Context:** server, location
 
-Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of the client request body size. Usually you will need to configure this directive in both the load balancer and Edge Logic.
+Sets the maximum allowed size of the client request body. If the size in a request exceeds the configured value, the 413 (Request Entity Too Large) error is returned to the client. Please be aware that browsers cannot correctly display this error. Setting size to 0 disables checking of the client request body size.
 
 ### `client_send_timeout`
 
@@ -228,7 +235,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom_1" and "custom_2" when configuring the download log format or when using our [advanced analytical tool](https://obd.quantil.com). In case the same field is assigned in both LB7 and ES, the LB7 has precedence. If you require this feature, contact our support team.
+This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom_1" and "custom_2" when configuring the download log format. In case the same field is assigned in both LB7 and ES, the LB7 has precedence. If you require this feature, contact our support team.
 
 Examples:
 ```nginx
@@ -267,6 +274,8 @@ Denies access from the specified network or address. Usually used together with 
 **Context:** server, location
 
 This directive enables proxying the WebSocket protocol. The client must use HTTP/1.1, not the other HTTP protocol versions. The default read and send timeouts are set to 60s and can be changed using the `origin_read_timeout` or `origin_send_timeout` directives.
+
+When `enable_websocket` is not configured, requests with "Upgrade: websocket" header will be rejected and the status code 403 will be returned.
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -344,7 +353,6 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Enables or disables adding or modifying the “Expires” and “Cache-Control” response header fields. No change to the [public version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires). This directive affects only the header fields sent to the client. It does not change the cache time of the content on the server.
 
-
 ### [`gzip`](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
 
 <span class="badge">standard</span>
@@ -367,6 +375,16 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
 
 Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two compression algorithms will be merged in the near future. We recommend setting the same value for the two directives if both gzip and brotli compression are enabled.
+
+### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
+
+<span class="badge dark">advanced</span>
+
+**Syntax:** `http2_max_concurrent_streams number;` <br/>
+**Default:** `http2_max_concurrent_streams 32;` <br/>
+**Context:** server, location
+
+Sets the maximum number of concurrent HTTP/2 streams in a connection. No change to the open source version, except that the default value is set to 32.
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
@@ -401,7 +419,7 @@ else { ... }
 ```
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
-### `ignore_invalid_range`
+### `ignore_invalid_range`  (Deprecated)
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
@@ -409,7 +427,19 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 **Default:** `ignore_invalid_range off;` <br/>
 **Context:** server, location <br/>
 
-Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
+Specifies whether to ignore an invalid Range header. When turned on, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code. This directive is deprecated. Please use the `ignore_range` directive instead.
+
+### `ignore_range`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `ignore_range on|off|invalid;` <br/>
+**Default:** `ignore_range off;` <br/>
+**Context:** server, location <br/>
+
+This directive lets you control when to ignore ranger headers from the client.
+When set to `on`, range headers from the client will be ignored, and the request will not be treated as a range request.
+When set to `invalid`, an invalid Range header is ignored, and a 200 response with full content is returned to the client. Otherwise, the client will receive a 416 status code.
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -427,7 +457,7 @@ Specifies that a given location can be used for internal requests only. No chang
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
-**Context:** server (LB-only)
+**Context:** server, location
 
 The first parameter sets a timeout during which a keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. The optional second parameter sets a value in the “Keep-Alive: timeout=time” response header field. The two parameters may differ, but they should be no greater than 300s.
 
@@ -645,35 +675,27 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 This directive does not prevent the response from being saved in the cache.
 That behavior is controlled by another directive [`proxy_no_cache`](#proxy_no_cache), and usually the two should be used together.
 
-### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
-
-<span class="badge dark">advanced</span>
-
-**Syntax:** `proxy_cache_lock on/off;` <br/>
-**Default:** `proxy_cache_lock on;` <br/>
-**Context:** server, location
-
-When enabled, only one request at a time will be allowed to populate a new cache element for the same cache key. Other requests of the same cache element will either wait for a response to appear in the cache or the cache lock for this element to be released, up to the time set by the [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) directive. No change to the public version. By default, CDN Pro enables it to better control the traffic to the origin servers. However, since locking will introduce unnecessary latency when most of the contents are not cacheable, we made `proxy_cache_lock_timeout` default to 0. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable contents, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching and incur the least latency possible.
-
-### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
+### [`proxy_cache_convert_head`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_convert_head)
 
 <span class="badge">standard</span>
 
-**Syntax:** `proxy_cache_lock_age time;` <br/>
-**Default:** `proxy_cache_lock_age 15s;` <br/>
+**Syntax:** `proxy_cache_convert_head on | off;` <br/>
+**Default:** `proxy_cache_convert_head on;` <br/>
 **Context:** server, location
 
-If the last request passed to the upstream server for populating a new cache element has not completed for the specified time, one more request may be passed to the upstream server. No change to the public version.
+Enables or disables the conversion of the “HEAD” method to “GET” for caching. When enabled, CDN Pro cache servers will convert “HEAD” method to “GET” when reading from cache or sending upstream requests to the origin. If your origin expects HEAD requests and this conversion might cause requests to break, you should disable the conversion. For example, if your origin enforces authentication which takes the request method as a factor when computing the signature for authentication, the conversion of the request method is likely to cause unexpected authentication failures.
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
-<span class="badge">standard</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `proxy_cache_lock_timeout time;` <br/>
 **Default:** `proxy_cache_lock_timeout 0s;` <br/>
 **Context:** server, location
 
-Sets a timeout for `proxy_cache_lock`. If a request has been locked for this amount of time, it will be released to the upstream server but the response will not be used to populate the cache. (`proxy_cache_lock_age` determines how often a request should be sent to populate the cache.) No change to the public version. The default value of 0s optimizes latency. You can change this to a higher value if you know that most of the contents are cacheable and want to reduce origin traffic.
+Sets a timeout for [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock). CDN Pro turns on `proxy_cache_lock` platform wide to better control the traffic to the origin servers. It allows only one request to the origin at a time to populate a cache element for the same cache key. Other requests hitting the same cache element will either wait for a response to appear in the cache or the timeout value set by this `proxy_cache_lock_timeout` directive. We set the default value to 0 to avoid introducing unnecessary latency to uncacheable contents. If you know that most of the contents are cacheable, you can set it to some higher value to reduce origin traffic. In the meantime, if you have a way to accurately identify uncacheable content, use `proxy_cache_bypass` and `proxy_no_cache` to skip caching to get the least latency possible. 
+
+We modified the open source version so that requests released by this directive may be used to populate the cache element.
 
 ### `proxy_cache_max_stale`
 
@@ -837,9 +859,9 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 **Syntax:** `proxy_ignore_client_abort on | off;` <br/>
 **Default:** `proxy_ignore_client_abort off;` <br/>
-**Context:** server, location (LB only)
+**Context:** server, location
 
-Determines whether the connection with an upstream server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the upstream server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues. This directive is supported only in the [load balancer logic](lb7-es-structure).
+Determines whether the connection with an upstream server should be closed when a client closes the connection without waiting for a response. Value `on` means ignore the client abort and continue the connection and data transfer with the upstream server. `off` means abort the upstream transfer as soon as the client side aborts, if the response is not cacheable. The transfer of cacheable responses always continues.
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -849,7 +871,7 @@ Determines whether the connection with an upstream server should be closed when 
 **Default:** `-` <br/>
 **Context:** server, location
 
-Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` or `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers). If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
+Disables processing of certain response header fields in the response from the origin. It is most commonly used to ignore caching instructions such as the `Cache-Control` and `Expires` fields from the origin. No change to the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers), except that we couple `Cache-Control` and `Expires` together. Configuring this directive to ignore `Cache-Control` will cause `Expires` to be also ignored, or vice versa. If you need to ignore only some of the `cache-control` directives, use the [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) directive.
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -957,17 +979,17 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 **Default:** `proxy_request_buffering off` <br/>
 **Context:** server, location
 
-Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. Must be configured in both edgeLogic and loadBalancerLogic. Must be set to "on" to enable [appending request body to cache key](#proxy_request_body_in_cache_key).
+Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. The value of this directive does not have an effect on the behavior of [appending the request body to the cache key](#proxy_request_body_in_cache_key).
 
 ### `proxy_request_body_in_cache_key`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_request_body_in_cache_key on/off;` <br/>
-**Default:** `proxy_request_body_in_cache_key off` <br/>
+**Default:** `proxy_request_body_in_cache_key on` <br/>
 **Context:** server, location, if in location
 
-When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests. You also need to set [`proxy_request_buffering`](#proxy_request_buffering) to "on" to enable request buffering.
+When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests.
 
 A restriction of this directive is that it works only when body size is less than 4kB. When the request body size is greater than this threshold, no hash value is appended to the cache key and this fact is indicated by a value '1' of the variable [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key). You can use this variable with [`proxy_cache_bypass`](#proxy_cache_bypass) to bypass caching of these requests. If it is really important to include a large request body in the cache key, you are advised to calculate the hash value in the client and pass it in the request header, then include it in the $cache_misc variable.
 
@@ -994,7 +1016,7 @@ proxy_no_cache $no_store;
 ```
 The directive is merged across different levels (http/server/location/location if). If the same variable is assigned in different levels, the assignment in the innermost level takes effect.
 
-### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) (Deprecated)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
@@ -1002,7 +1024,7 @@ The directive is merged across different levels (http/server/location/location i
 **Default:** `-` <br/>
 **Contexts:** server (LB only)
 
-This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES.
+This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES. This directive is deprecated. Refer to the [upgrade of edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>).
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -1014,16 +1036,6 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 
 Enables the specified protocols for requests to an origin HTTPS server. No change to the public version.
 
-### `range_reorder`
-
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
-
-**Syntax:** `range_reorder on | off [coalescing];` <br/>
-**Default:** `range_reorder off` <br/>
-**Contexts:** server, location
-
-This directive can be used to instruct the proxy server to reorder and merge multiple byte-ranges in one request. When range_reorder is enabled, multiple ranges requested in descending order will be re-ordered to ascending. When range_order is enabled with the coalescing parameter, multiple ranges that overlap or are separated by a gap that is smaller than the overhead of sending multiple parts will be coalesced. This ensures that multipart content is returned to the client with the 206 status code. When range_reorder is disabled, full content with 200 status code might be returned to the client for requests with multiple ranges.
-
 ### `realtime_log_downsample`
 
 <span class="badge">standard</span> <span class="badge primary">proprietary</span>
@@ -1032,7 +1044,17 @@ This directive can be used to instruct the proxy server to reorder and merge mul
 **Default:** `-` <br/>
 **Contexts:** server, location
 
-Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the default setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor). This directive can only be used in the Edge Logic. In the Load Balancer Logic, one can directly use `set $realtime_log_ds_factor {factor}` to override the default sample rate.
+Overrides the "Sample Rate" specified for the [Real-Time Log](/docs/portal/edge-configurations/creating-property#real-time-log). `factor` can be an integer in [0, 65535] or a variable. A value of 0 disables the logging; 1 means do not downsample; N>1 means one log entry for every N requests. If the variable value is an empty string, the default setting is not overridden. An invalid value in the variable results in a factor of 100. The actual sample factor can be included in the log with the variable [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor). This directive can only be used in the Edge Logic.
+
+### `remote_log_set_header`
+
+<span class="badge">advanced</span> <span class="badge primary">proprietary</span>
+
+**Syntax:** `remote_log_set_header name value;` <br/>
+**Default:** `-` <br/>
+**Contexts:** server, location
+
+Sets a header and its value which will be included as a request header when sending realtime logs to the remote server.
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -1193,15 +1215,20 @@ This feature is implemented on top of this [open-source project](https://github.
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `sub_filter {string} {replacement};` <br/>
+**Syntax:** `sub_filter {string} {replacement} [if(...)];` <br/>
 **Default:** `—` <br/>
 **Context:** server, location
 
-Sets a string to replace in the response and a replacement string. There is no change to the public version. Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
+Sets a string to replace in the response and a replacement string. We made the following changes to the public version:
+
+1. This directive takes effect only on the edge servers, not the parent servers. This ensures the replacement happens only once across the [hierarchical structure](/cdn/docs/edge-logic/paths-to-origins) of CDN Pro.
+2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive. Since scanning large responses can introduce significant delay and CPU consumption, we recommend using this parameter whenever possible to minimize performance hit and cost increase.
+
+Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
 ```nginx
   # clear the Accept-Encoding field in the request header to parent and origin
-  origin_set_header accept-encoding '' flag=any;
-  sub_filter 'match-string' 'replacement string';
+  origin_set_header accept-encoding '' flag=any if($uri = /the/special/file);
+  sub_filter 'match-string' 'replacement string' if($uri = /the/special/file);
 ```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)

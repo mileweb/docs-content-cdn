@@ -129,4 +129,4 @@ location /credit-card-info {
 This is particularly important when meeting privacy standards such as PCI-DSS and HIPAA.
 
 ### Web Application firewall (WAF)
-CDN Pro can work seamlessly with CDNetworks' WAF platform to protect your origin servers from any malicious requests. It also works well with any 3rd party WAF solutions.
+CDN Pro can work seamlessly with {{title}}' WAF platform to protect your origin servers from any malicious requests. It also works well with any 3rd party WAF solutions.

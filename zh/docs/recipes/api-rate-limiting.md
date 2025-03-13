@@ -59,7 +59,7 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 should honor the `x-rate-limit-retry-after-seconds` header and retry the request after a delay. Consider including a
 process in your code that regulates the rate of your requests so that they are distributed evenly over time. 
 
-4. If a problem persists, contact our [technical support team](mailto:support@cdnetworks.com).
+4. If a problem persists, contact our [technical support team](mailto:support@{{siteDomain}}).
 If there is a legitimate need to increase the rate limit or burst ceiling, the technical support team will evaluate your requirements and raise the threshold.
 
 ### Notes

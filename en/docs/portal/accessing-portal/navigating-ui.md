@@ -27,7 +27,7 @@ The Reports page allows you to [generate reports](</docs/portal/reports/generati
 
 ## Edge Configurations
 
-In CDN Pro, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, and then validate, test, deploy, and upgrade it -- all conveniently from the CDN Pro portal. **Edge Configurations** also provides a page where you can create and manage a [secret](</docs/portal/secrets/overview.md>) that you share with CDNetworks in order for the CDN configuration to work.
+In CDN Pro, you configure the edge servers' behavior by defining [Properties](</docs/portal/edge-configurations/managing-properties.md>). The process of developing a property is very much like developing any other software. You can create and edit a property, and then validate, test, deploy, and upgrade it -- all conveniently from the CDN Pro portal. **Edge Configurations** also provides a page where you can create and manage a [secret](</docs/portal/secrets/overview.md>) that you share with {{title}} in order for the CDN configuration to work.
 
 ## Traffic Management
 

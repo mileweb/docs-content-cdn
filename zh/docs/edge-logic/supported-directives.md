@@ -8,6 +8,16 @@
 
 **注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
 
+### `access_log_sampling`
+
+<span class="badge">标准</span> <span class="badge">LBLogic</span> <span class="badge primary">全新特有</span>
+
+**使用语法：** `access_log_sampling factor;` <br/>
+**默认设置：** `-` <br/>
+**可用位置：** server, location, if in location
+
+本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
+
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
@@ -83,7 +93,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 该指令可用于在响应正文之后添加一个尾部（trailer）。默认只在状态码为200, 201, 206, 301, 302, 303, 307或308时生效。当携带 “always” 参数时，则对所有状态码生效。参数 value 可以是变量。CDN Pro 在 [开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) 的基础上做了如下修改和增强：
 
-1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
+1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/zh/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/zh/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/zh/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/zh/cdn/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/zh/cdn/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
 
 2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。本指令添加的尾部并不会出现在发给客户的响应里。
 
@@ -113,6 +123,10 @@ auth_request /auth$is_args$args;
 ```
 如果鉴权响应 2xx 状态码，则认为请求合法，如果响应 401 或者 403 则请求会被拒绝。其它状态码会被认为是错误，导致客户端收到 500 "internal error"。
 
+鉴权子请求的变量与主请求的变量隔离，即在子请求的location里设置变量不会影响到主请求的同名变量值。这是为了避免子请求污染主请求的变量。
+
+鉴权子请求默认会删除Content-Length头部，因为鉴权子请求不应该有请求体。
+
 ### [`auth_request_set`](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)
 
 <span class="badge dark">高级</span>
@@ -121,7 +135,9 @@ auth_request /auth$is_args$args;
 **默认设置：** `—`<br/>
 **可用位置：** server, location
 
-须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。下面的例子展示了如何将远端鉴权服务器返回的 etag 值加入到 cache key 里：
+须与 [`auth_request`](#auth_request) 指令一起使用，在鉴权子请求完成后将响应中的某些数据值（如响应头，状态码等）赋值给变量。代码逻辑源自 Nginx [开源版本](http://nginx.org/en/docs/http/ngx_http_auth_request_module.html#auth_request_set)，无改动。
+需要注意的是本指令的第一个参数是一个位于主请求上下文里的变量，而第二个参数里出现的任何变量取值都来自于鉴权子请求的上下文。
+下面的例子展示了如何将远端鉴权服务器返回的 etag 值加入到 cache key 里：
 ```nginx
 auth_request /auth$is_args$args;
 auth_request_set $cache_misc $cache_misc.etag=$upstream_http_etag;
@@ -202,8 +218,6 @@ location = /auth {
 
 设置允许的最大请求正文。如果请求正文超过此大小，则向客户端返回错误码413 (Request Entity Too Large)。请注意部分浏览器无法正确显示该错误。 如果把 size 配置成 0 则会停止检查请求正文大小。
 
-一般来说，您需要在 Load Balancer 和 Edge Logic 里同时配置本指令。
-
 ### `client_send_timeout`
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
@@ -222,7 +236,7 @@ location = /auth {
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式，或使用我们的高级分析工具时，可以通过关键字 “custom_1” 和 “custom_2” 来引用这两个字段。当同一个字段同时在 LB7 和 ES 里被定义，LB7 有优先权。 如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式时，可以通过关键字 “custom_1” 和 “custom_2” 来引用这两个字段。当同一个字段同时在 LB7 和 ES 里被定义，LB7 有优先权。 如果您需要开启此功能，请联系我们的技术支持团队。
 
 示例:
 ```nginx
@@ -263,6 +277,8 @@ Defines the default MIME type of a response. No change to the public version, ex
 **可用位置：** server, location
 
 该指令用于开启 WebSocket 协议。客户端需要使用HTTP/1.1来与服务端通信，不能用其它HTTP协议版本。默认读取和发送超时设置为 60 秒，您也可以使用 `origin_read_timeout` 或 `origin_send_timeout` 指令修改超时时间。
+
+当域名没有配置开启websocket时，如果来自客户端的请求携带“Upgrade: websocket”头部，CDN Pro 服务器会拒绝请求，响应403状态码。
 
 ### [`error_page`](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page)
 
@@ -368,6 +384,16 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 
 尽管当前支持使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，在不久的将来我们计划将gzip和br压缩适用的MIME类型做合并。如果您同时开启了gzip和br压缩，建议给`gzip_types` 和 `brotli_types`设置相同的MIME类型值。
 
+### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
+
+<span class="badge dark">高级</span>
+
+**使用语法：** `http2_max_concurrent_streams number;` <br/>
+**默认设置：** `http2_max_concurrent_streams 32;` <br/>
+**可用位置：** server, location
+
+设置单连接中HTTP/2流的最大并发数。与NGINX开源版本一致，但默认值改为32。
+
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
@@ -402,7 +428,7 @@ else { ... }
 ```
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。在 CDN Pro 对请求处理的早期阶段中，它将与同一模块中的其他指令一同被执行。
 
-### `ignore_invalid_range`
+### `ignore_invalid_range` （已废弃）
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
@@ -410,7 +436,17 @@ else { ... }
 **默认设置:** `ignore_invalid_range off;` <br/>
 **可用位置:** server, location <br/>
 
-指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。
+指定是否应忽略无效的Range请求头。 开启时，无效的Range请求头将被忽略，向客户端返回200状态码和完整内容。 否则，客户端将收到 416 状态码。该指令已废弃，请使用 ignore_range 指令。
+
+### `ignore_range`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**Syntax:** `ignore_range on|off|invalid;` <br/>
+**Default:** `ignore_range off;` <br/>
+**Context:** server, location <br/>
+
+设置为on时，会忽略Range请求头，不按Range请求处理。设置为invalid时，无效的Range请求头将被忽略，客户端会收到200状态码和完整内容，否则客户端将收到 416 状态码。
 
 ### [`internal`](http://nginx.org/en/docs/http/ngx_http_core_module.html#internal)
 
@@ -428,7 +464,7 @@ else { ... }
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
-**Context:** server (仅限在LB7)
+**Context:** server, location
 
 第一个参数设置 CDN Pro 服务器与客户端 keep-alive 连接的最长空闲超时。CDN Pro 服务器会关闭空闲过长的连接。设置为 0 将会禁用 keep-alive 连接。第二个参数（非必填）用于设置 “Keep-Alive: timeout=time” 这个响应头里的值。这两个参数的数值可以不同，但皆不能超过300s。
 
@@ -601,7 +637,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 
 1. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
-2. CDN Pro 采用了[分层缓存结构](/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
+2. CDN Pro 采用了[分层缓存结构](/zh/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
 3. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
 
 *   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
@@ -612,15 +648,15 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的协议或 IP 地址传递给源服务器，请使用以下变量：
 
-*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
-*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
-*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
+*   [$request_scheme](/zh/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
+*   [$client_real_ip](/zh/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
+*   [$client_country_code](/zh/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
 
 示例如下:
 ```nginx
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
 ```
-2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
+2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/zh/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
 3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。例如，当开启[分片缓存](#slice)时，服务器会根据所设置的分片大小自动生成`Range`头部。所以，不要使用该指令修改传给源站的`Range`请求头。对于不可缓存的请求，这些请求头部则仍然会原样传递给父服务器和源站。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
@@ -649,35 +685,27 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 ```
 该指令不会阻止将源站给的响应保存在 cache 缓存中。这个 "保存"行为是由另一个指令 [`proxy_no_cache`](#proxy_no_cache) 控制的。一般情况下这两个配置项会同时使用来实现某些文件不缓存。
 
-### [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock)
-
-<span class="badge dark">高级</span>
-
-**使用语法：** `proxy_cache_lock on/off;` <br/>
-**默认设置：** `proxy_cache_lock on;` <br/>
-**可用位置：** server, location
-
-当该指令被启用时，如果有多个客户端同时请求同一个缓存中不存在，或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并填充缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。但是如果等待时间超过 [proxy_cache_lock_timeout](#proxy_cache_lock_timeout) 指令设置的时间后也会被“放行”至源站。默认情况下，出于减少对源站带宽消耗的考虑，CDN Pro 将该指令设置为开启。同时为了避免该功能在大部分内容不可缓存时引入不必要的延迟，我们将 `proxy_cache_lock_timeout` 默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时的值来降低源站负载。如果您可以通过请求里的变量来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作并尽可能降低处理延迟。
-
-### [`proxy_cache_lock_age`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)
+### [`proxy_cache_convert_head`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_convert_head)
 
 <span class="badge">标准</span>
 
-**使用语法：** `proxy_cache_lock_age time;` <br/>
-**默认设置：** `proxy_cache_lock_age 15s;` <br/>
+**使用语法：** `proxy_cache_convert_head on | off;` <br/>
+**默认设置：** `proxy_cache_convert_head on;` <br/>
 **可用位置：** server, location
 
-前一个“放行”至源站的请求，没有在该指令设置的时间内完成，则 CDN Pro 将会放行下一个请求用来填充缓存。逻辑源自开源[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_age)，无变更。
+配置是否将“HEAD”方法转换为“GET”，合并缓存。开启转换时，CDN Pro 缓存服务器会在从缓存读取数据或向源站发请求时，将“HEAD”方法转换为“GET”。如果您的源站预期接收的是 HEAD 请求，并且这种转换可能导致请求异常，则应禁用转换。例如，如果您的源站在计算鉴权签名时将请求方法作为一个因子，那么请求方法的转换可能会导致鉴权失败。
 
 ### [`proxy_cache_lock_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)
 
-<span class="badge">标准</span>
+<span class="badge">标准</span>  <span class="badge green">修改增强</span>
 
 **使用语法：** `proxy_cache_lock_timeout time;` <br/>
 **默认设置：** `proxy_cache_lock_timeout 0s;` <br/>
 **可用位置：** server, location
 
-该指令为 `proxy_cache_lock` 指令设置一个超时时间。如果客户端请求等待时间超过该设置，则 CDN Pro 服务器将“放行”等待请求至源站。但响应的内容不会被用来填充缓存。（`proxy_cache_lock_age` 决定应该多久发送一次请求来填充缓存。）逻辑源自[公共版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock_timeout)，无变更。出于优化延迟的考虑默认值为 0s。如果您事先知道该域名下大部分内容都是可缓存的并希望减少源站流量，则可以将其更改为更高的值。
+该指令为 [`proxy_cache_lock`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock) 设置超时时间。出于减少对源站带宽消耗的考虑，CDN Pro 全局开启了`proxy_cache_lock`。如果有多个客户端同时请求同一个在缓存中不存在或者过期的文件，CDN Pro 服务器只会“放行”一个请求至源站去获取内容并写入缓存。其他请求会等待该请求得到结果之后在缓存中读取文件。当等待时间超过 `proxy_cache_lock_timeout` 指令设置的时间后，其他请求也会被“放行”至源站。为了避免该功能对不可缓存的内容引入不必要的延迟，我们将本指令的默认值设置为 0。如果您已事先预知了大部分内容是可缓存的，您可以增加该超时时长来降低源站负载。如果您可以通过请求信息来鉴别不可缓存的内容，那么请使用 `proxy_cache_bypass` 和 `proxy_no_cache` 来跳过缓存处理操作，尽可能降低处理延迟。
+
+我们对NGINX开源版本做了一点修改：在超时时间之后被“放行”至源站的请求，其响应内容也有可能被用来写入缓存。
 
 ### `proxy_cache_max_stale`
 
@@ -841,9 +869,9 @@ proxy_ignore_cache_control no-cache no-store;
 
 **使用语法:** `proxy_ignore_client_abort on | off;` <br/>
 **默认设置:** `proxy_ignore_client_abort off;` <br/>
-**可用位置:** server (仅限在 LB7)
+**可用位置:** server, location
 
-设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。`off` 意味着中止从源站接收数据，如果数据是不可缓存的。可缓存的数据会继续完成传输，不受本指令影响。本指令只能在 [load balancer logic](lb7-es-structure) 里使用。
+设置在客户端中止连接的时候，是否要中止与源站的连接。配置成 `on` 意味着忽略客户端的中止行为，继续保持与源站的连接和数据传输。`off` 意味着中止从源站接收数据，如果数据是不可缓存的。可缓存的数据会继续完成传输，不受本指令影响。
 
 ### [`proxy_ignore_headers`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers)
 
@@ -853,7 +881,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 忽略掉来自源站的某些响应头。最常用的情景是用于忽略缓存相关标记，例如 “Cache-Control” 或 “Expires” 响应头。 源自 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 无修改。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
+该指令用于设置 CDN Pro 忽略掉来自源站的某些响应头。最常用的情景是用于忽略缓存相关标记，例如 “Cache-Control” 和 “Expires” 响应头。 我们对 [NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers) 做了一点修改：将“Cache-Control” 和 “Expires”响应头合并处理。当您使用该指令配置仅忽略“Cache-Control”响应头时，“Expires”响应头也会被一并忽略，反之同理。如果您只需要忽略 `cache-control` 响应头中的部分值，请使用 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 指令。
 
 ### [`proxy_method`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_method)
 
@@ -874,7 +902,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。本指令的一个重要功能是为源站的 [`peerFailureTimeout`](/cdn/docs/edge-logic/paths-to-origins#origin-configurations) 配置定义了什么叫“失败的请求”。源自 NGINX 公共版本没有变化。
+该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。本指令的一个重要功能是为源站的 [`peerFailureTimeout`](/zh/cdn/docs/edge-logic/paths-to-origins#origin-configurations) 配置定义了什么叫“失败的请求”。源自 NGINX 公共版本没有变化。
 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
@@ -964,17 +992,19 @@ proxy_no_cache $http_pragma    $http_authorization;
 **默认设置:** `proxy_request_buffering off` <br/>
 **使用位置:** server, location
 
-开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。该配置项需要在边缘逻辑和负载均衡器逻辑中同时配置。如果您需要使用[将请求体附加到缓存键](#proxy_request_body_in_cache_key)的功能，需要通过该指令将客户端请求体缓冲同时开启。
+开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。
+
+是否开启请求体缓冲，对于[将请求体附加到缓存 key](#proxy_request_body_in_cache_key)的功能无影响。
 
 ### `proxy_request_body_in_cache_key`
 
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `proxy_request_body_in_cache_key on/off;` <br/>
-**默认设置:** `proxy_request_body_in_cache_key off` <br/>
+**默认设置:** `proxy_request_body_in_cache_key on` <br/>
 **可用位置:** server, location, if in location
 
-当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是 idempotent 和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。此外，您还需要通过[`proxy_request_buffering`](#proxy_request_buffering)指令开启对客户端请求体的缓冲。
+当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是幂等和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
 
 此指令的一个限制是它只在请求正文小于4kB时生效。当请求正文大于此门限时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](#proxy_cache_bypass) 指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到CDN Pro 服务器，然后将其添加到 $cache_misc 变量中。
 
@@ -1001,7 +1031,7 @@ proxy_no_cache $no_store;
 ```
 该指令会跨不同层级（server/location/location if）合并。如果不同层级中使用该指令试图对同一个变量进行赋值，则只有最内层的配置生效。
 
-### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
+### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)（已废弃）
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LB logic</span>
 
@@ -1009,7 +1039,7 @@ proxy_no_cache $no_store;
 **默认设置：** `-` <br/>
 **可用位置：** server (仅限在LB7)
 
-This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES.
+该指令在 [开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)基础上做了一些修改。支持条件判断，主要用于从 [负载均衡器](lb7-es-structure) 传递信息到边缘服务器。该指令已被废弃。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)
 
 ### [`proxy_ssl_protocols`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_protocols)
 
@@ -1021,16 +1051,6 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 
 该指令用于设置 CDN Pro 回源时的握手协议。源自 Nginx 开源版本，无变更。
 
-### `range_reorder`
-
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
-
-**使用语法:** `range_reorder on | off [coalescing];` <br/>
-**默认设置:** `range_reorder off` <br/>
-**可用位置:** server, location
-
-该指令用于指示CDN Pro 服务器是否对range请求中指定的多个字节范围进行重新排序和合并。 当range_reorder开启时，如果请求中的Range值为降序排序，CDN Pro 服务器将对Range值按升序重新排列。 当range_reorder开启且带有coalescing参数时，如果请求中的Range值存在重叠的范围或者2个范围之间的间隔小于发送多部分内容（multipart）的开销，则这些范围将被合并。开启重新排序和合并，可确保CDN Pro 服务器响应206状态码和部分内容给客户端。 当range_reorder未开启时，CDN Pro 服务器可能响应200状态代码和完整内容给客户端，即便客户端发送了range请求。
-
 ### `realtime_log_downsample`
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
@@ -1039,7 +1059,17 @@ This is an enhanced version of the [open-source version](http://nginx.org/en/doc
 **默认设置：** `-` <br/>
 **可用位置：** server, location
 
-该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。本指令只能在 Edge Logic里使用。在 Load Balancer Logic 可以通过直接 `set $realtime_log_ds_factor {factor};` 来改变采样率。
+该指令用于覆盖加速项配置 [实时日志](/docs/portal/edge-configurations/creating-property#real-time-log) 的“采样率”。 其参数 `factor` 可以是一个 [0, 65535] 中的整数或一个变量。值 0 表示关闭实时日志功能；1 表示不对实时日志进行采样；N>1 表示每 N 个请求才生成一条实时日志。如果该指令的变量值为空，则指令不生效，维持配置项里的默认值；如果变量值无法被正常解析（非整数的字符串），则该参数将被视为100。最终生效的采样率可通过内置变量 [`$realtime_log_ds_factor`](/docs/edge-logic/built-in-variables#realtime_log_ds_factor) 记录到实时日志中。本指令只能在 Edge Logic里使用。
+
+### `remote_log_set_header`
+
+<span class="badge">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法：** `remote_log_set_header name value;` <br/>
+**默认设置：** `-` <br/>
+**可用位置：** server, location
+
+该指令用于自定义实时日志相关的请求头。CDN Pro 服务器发送实时日志到接收端时，会带上此处定义的请求头。
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
@@ -1149,7 +1179,7 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：**	`-` <br/>
 **可用位置：** server, location, if
 
-该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存键。
+该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存 key。
 
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段与同一模块中的其他指令一道被顺序（imperatively）执行。
 
@@ -1206,15 +1236,19 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 <span class="badge dark">高级</span>
 
-**使用语法：** `sub_filter {string} {replacement};` <br/>
+**使用语法：** `sub_filter {string} {replacement} [if(...)];` <br/>
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。对 NGINX 开源版本无变更。请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
+该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。我们对 NGINX 开源版本做了如下修改：
+1. 为了确保响应在 CDN Pro 的[层级结构](/cdn/docs/edge-logic/paths-to-origins)中不会被重复替换，本指令只会在边缘服务器上生效，不会在父节点上生效；
+2. 我们为本指令引入了 `if()` 参数来更精确地设置它生效的条件，就像我们为 [`add_header`](#add_header) 做的那样。由于扫描大的响应正文可能会引入显著的延时和 CPU 消耗，我们建议您尽可能地利用这个参数来限制本指令的作用范围，以降低对性能的影响和成本开销。
+
+请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
 ```nginx
   # 清除发往源站和父节点的 `Accept-Encoding` 请求头
-  origin_set_header accept-encoding '' flag=any;
-  sub_filter 'match-string' 'replacement string';
+  origin_set_header accept-encoding '' flag=any if($uri = /the/special/file);
+  sub_filter 'match-string' 'replacement string' if($uri = /the/special/file);
 ```
 
 ### [`sub_filter_last_modified`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_last_modified)
@@ -1255,7 +1289,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置:** `upstream_origin_only off` <br/>
 **可用位置:** server, location, if in location
 
-启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
+启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/zh/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
@@ -1267,13 +1301,3 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
 
-
-### `access_log_sampling`
-
-<span class="badge">标准</span> <span class="badge">LBLogic</span> <span class="badge primary">全新特有</span>
-
-**使用语法：** `access_log_sampling factor;` <br/>
-**默认设置：** `-` <br/>
-**可用位置：** server (仅限在LB7)
-
-本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对CDN Pro 边缘服务器的行为没有影响，包括实时日志（实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制）。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。本指令只能在Load Balancer Logic里使用。

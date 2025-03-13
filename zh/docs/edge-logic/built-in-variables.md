@@ -2,6 +2,8 @@
 
 下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。表中的大多数变量都是只读的，只有那些标记为<span class="badge cyan">R/W</span>的变量可写。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
+**注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令和变量应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
+
 | **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
 | ---- | ---- | ---- | ---- |
 | <span id="arg_"></span><span class="var">$arg_<em>name</em></span> | URL 问号后参数中的指定参数内容 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -13,7 +15,7 @@
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | 客户端请求的 HTTP 协议版本，例如 "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> 客户端IP 版本：4代表 IPv4 ；6代表 IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_isp"></span><span class="var">$client_isp</span> | 客户端的 ISP 运营商信息 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国省份代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | 客户端IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次连接中包含的请求次数 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="content_code"></span><span class="var">$content_code</span> | 一个可写的变量，对内容赋予标志代码，用来[在报表中对流量进行分类](/docs/edge-logic/faq#如何在报表中对数据进行分类) | <span class="badge cyan">R/W</span> | <span class="badge cyan">R/W</span> |
@@ -43,8 +45,8 @@
 | <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 请求的唯一标识 ID | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | [缓存状态](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="random_N"></span><span class="var">$random_N</span> |<span class="badge small" title="numerical value">#</span> 一个[0, N-1]之内均匀分布的随机整数，N范围是[2,1e9]。| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样参数，值为 N 代表每N个请求会生产1条实时日志。可以通过写入这个变量来[取代默认采样率](/docs/edge-logic/supported-directives#realtime_log_downsample)。| <span class="badge yellow">No</span> | <span class="badge cyan">R/W</span> |
-| <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样率， $realtime_log_ds_factor 的倒数，值为介于0~1之间的小数。 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
+| <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样参数，值为 N 代表每N个请求会生产1条实时日志。可以通过设置“[realtime_log_downsample](/docs/edge-logic/supported-directives#realtime_log_downsample)"指令来取代默认采样率。| <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
+| <span id="realtime_log_ds_ratio"></span><span class="var">$realtime_log_ds_ratio</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样率， $realtime_log_ds_factor 的倒数，值为介于0~1之间的小数。 | <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
 | <span id="remote_user"></span><span class="var">$remote_user</span> | 当使用[基础鉴权](https://datatracker.ietf.org/doc/html/rfc7617)时，从Authorization请求头中提取的用户名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request"></span><span class="var">$request</span> | 完整的 http 请求行 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="request_cpu_time"></span><span class="var">$request_cpu_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时所消耗的CPU时间, 在Edge Logic 中被使用时仅包含 ES 层的执行消耗，当在 LB Logic 或实时日志中被使用时仅包含负载均衡层的总执行消耗。单位为纳秒。| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
@@ -67,7 +69,7 @@
 | <span id="server_province_code"></span><span class="var">$server_province_code</span> | 边缘服务器的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1 or HTTP/2.0 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘节点端口号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该配置项进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该指令进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="request_ssl_handshake_time"></span><span class="var">$request_ssl_handshake_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |

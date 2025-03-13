@@ -16,11 +16,11 @@ the request `Host` header to carry this value.
 and `1.1.1.2`
 * The API server uses the standard HTTP methods: GET, POST, PUT, DELETE, PATCH.
 * The client is using the `Authorization` request header to pass the credential to the
-server following the **format** of [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
+server following the **format** of [basic authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81).
 This makes it easy for the CDN Pro servers to obtain the API user name with the built-in
 variable `$remote_user`. Please notice that you don't have to use the actual basic
 authentication algorithm which transfers the secret password in clear text. You are free 
-to use a more sophisticated algorithm like the one for [CDN Pro API](https://docs.quantil.com/cdn/apidocs#section/Authentication)
+to use a more sophisticated algorithm like the one for [CDN Pro API](/zh/cdn/apidocs#section/Authentication)
 to generate a signature to put after the colon.
 * All the input parameters to the API server are specified in the request query string.
 

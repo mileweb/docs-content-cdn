@@ -23,7 +23,7 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 | Client Region     | Select a region that defines this client zone. We currently support country-level granularity.|
 | Client ISP        | Select one or more ISPs that define this client zone. |
 | Action Type       | Select the type of action to be performed to requests from this client zone. <br><ul><li><strong>Deliver</strong> = contents will be served by CDN Pro servers to fulfill the requests from this client zone. Only one delivery action is allowed for each client zone. You need to select the server groups to deliver the contents. </li><li><strong>Redirect</strong> = redirect client requests to another destination specified in the Redirect Target field (see below). This can be your origin site or maybe another CDN provider. There can be multiple redirect actions for each client zone.</li><li><strong>Reject</strong> = client requests will always receive a response with a 403 - forbidden error message. Only one reject action is allowed for each client zone.</li></ul>  
-| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server groups to deliver the content for this client zone. CDN Pro servers are organized into groups based on traffic cost from low to high: <strong>Standard</strong>, <strong>Premium</strong>, <strong>Deluxe</strong>, <strong>Ultra</strong>, and <strong>nearChina</strong>. When you select one group, all the lower groups will be automatically included. For more information, see [About Server Groups](</docs/portal/traffic-management/creating-edge-hostname.md#about-server-groups>). To see the location of servers in each group, go to: https://www.cdnetworks.com/cdnpro/.<br><br><strong>Note:</strong> <strong>nearChina</strong>, <strong>ChinaStandard</strong>, and <strong>ChinaPremium</strong> are special server groups that can be enabled for you by contacting the [CDNetworks support team](mailto:support@cdnetworks.com):</br><ul><li>Use <strong>nearChina</strong> if you want optimal performance serving Chinese visitors, but your domains lack ICP Beian.</ul></li><ul><li>Use <strong>ChinaStandard</strong> or <strong>ChinaPremium</strong> if you have an ICP Beian license for your hostnames and want the content served from servers in China.</ul></li>| 
+| Server Group      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select one or more server groups to deliver the content for this client zone. CDN Pro servers are organized into groups based on traffic cost from low to high: <strong>Standard</strong>, <strong>Premium</strong>, <strong>Deluxe</strong>, <strong>Ultra</strong>, and <strong>nearChina</strong>. When you select one group, all the lower groups will be automatically included. For more information, see [About Server Groups](</docs/portal/traffic-management/creating-edge-hostname.md#about-server-groups>). To see the location of servers in each group, go to: https://www.{{siteDomain}}/cn/cdnpro/.<br><br><strong>Note:</strong> <strong>nearChina</strong>, <strong>ChinaStandard</strong>, and <strong>ChinaPremium</strong> are special server groups that can be enabled for you by contacting the [{{title}} support team](mailto:support@{{siteDomain}}):</br><ul><li>Use <strong>nearChina</strong> if you want optimal performance serving Chinese visitors, but your domains lack ICP Beian.</ul></li><ul><li>Use <strong>ChinaStandard</strong> or <strong>ChinaPremium</strong> if you have an ICP Beian license for your hostnames and want the content served from servers in China.</ul></li>| 
 | Enable IPv6      | If <strong>Action Type</strong> is set to <strong>Deliver</strong>, select whether you want to enable IPv6 addressing.|
 | Redirect Target   | If <strong>Action Type</strong> is set to <strong>Redirect</strong>, specify an IP address or hostname to which CDN Pro will redirect your traffic. |
 | Weight | When a client zone has multiple rules defined, each of them will be used randomly with a probability proportional to the weight specified here. |
@@ -42,9 +42,20 @@ The Edge Hostname form appears for creating, editing, and deleting client zone r
 
 <ul>b. When prompted to confirm the deletion, click <strong>OK</strong> to delete the client zone rule.</ul>
 
-**Note**: A default rule that covers all regions and all ISPs is always required. If you accidentally delete the default rule, the system will create one automatically.
+**Note**: A default rule that covers all regions and all ISPs is always required.
 
-7. Click **Update**.
-8. When a message confirms that the edge hostname update was accepted, click **OK**. It can take a minute for the update to complete.
-9.  Click **Close** to return to the main page.
+7. To use a DNS record to advertise HTTPS support and allow compatible clients to connect faster, click **Advanced Settings**, and update the following fields:
 
+| **Fields**        | **Description**                                                           |
+| ----------------- | ------------------------------------------------------------------------- |
+| Deliver By HTTPS  | Choose <strong>on</strong> to use a DNS record.  |
+| Application Layer Protocol Negotiation (ALPN) | Choose the supported protocols.  |
+| Port              | Enter the port handling HTTPS requests. It defaults to 443. |
+| TTL               | Enter the number of seconds between 60 and 86400 indicating how long the DNS record is valid. |
+
+<br>The DNS record would look like:</br>
+<code>yourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn="h2,h3" port=443</code>
+
+8. Click **Update**.
+9. When a message confirms that the edge hostname update was accepted, click **OK**. It can take a minute for the update to complete.
+10.  Click **Close** to return to the main page.

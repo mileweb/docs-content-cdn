@@ -1,5 +1,31 @@
 # Release Notes
 
+## March 3, 2025
+
+#### API updates
+* Fixed issue in which "InvalidCertificateId" error is returned when trying to [create a logAggregationPoint](</apidocs#operation/post-cdn-logAggregationPoints>) with destinationAuthCertificateId.
+
+#### Console updates
+* Supported merging of loadBalancerLogic into edgeLogic field. loadBalancerLogic will be deprecated.
+
+## February 24, 2025
+#### Console updates
+* Introduced a new Edge Logic directive ignore_range. Ignore_invalid_range will be deprecated.
+* Added an interface allowing the customer to control whether to use a DNS record to advertise HTTPS support.
+
+## February 13, 2025
+#### Console updates
+* Added support for $server_province_code in the Edge Logic and Load Balancer Logic fields.
+
+## January 21, 2025
+
+#### API updates
+* Improved deletion of the latest certificate version by adding a new endpoint requiring specification of the version to be deleted. This is safer than the existing endpoint which used the keyword ‘latest’.
+* Fixed incorrect TooManyHostnames error returned when deploying a property on behalf of a customer whose hostnameLimit has not been reached.
+
+#### Console updates
+* Fixed issue with loading customer list.
+
 ## January 7, 2025
 #### API updates
 * Added “Mainland China” as a [prefetch](</apidocs#operation/post-cdn-prefetches>) region.
@@ -562,12 +588,12 @@
 #### Portal updates
 * Added a new feature allowing users to create test suites to test properties deployed to staging and production.
 * Improved sidebar to be consistent among our products.
-* Improved appearance of the Quantil-branded console.
+* Improved appearance of the qtl-branded console.
 * Fixed spacing issues in the listing pages.
 * Improved display of Tasks menu.
 * Renamed UTC+00:00 to UTC in the user’s time zone list.
 * Ensured only legal time zones are supported.
-* Updated links to Quantil DPA.
+* Updated links to qtl DPA.
 * Improved position of the content header in the secrets, prefetch, and purge list pages.
 * Improved text shown when impersonating a customer.
 * Fixed table header’s color on the access logs page.
@@ -605,7 +631,7 @@
 * Improved certificate edit page so that users aren’t asked about leaving the page.
 * Improved appearance of the self-signup page.
 * Added support for searching properties by origins.shield.
-* Updated links to DPAs in the CDNetworks self-signup page.
+* Updated links to DPAs in the {{title}} self-signup page.
 * Added support for the DAY_PERIOD and CRC32 functions when using the [eval_func Edge Logic directive](</docs/edge-logic/supported-directives#eval_func>).
 * Fixed impersonation so that expected resources appear.
 * Fixed initialization of Has ICP Beian field when creating a property.
@@ -1259,7 +1285,7 @@
 * Improved the self-signup page to describe our promotional offers.
 * Made improvements to support translation from English to other languages.
 * Fixed display of certificate name when creating a property.
-* Pointed self-signup customers to our [“Getting Started” video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>).
+* Pointed self-signup customers to our [“Getting Started” video](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>).
 * Added tooltip for real-time log sample rate in property configuration.
 * Fixed display of dropdown lists in reports page.
 * Added support for TO_UPPER, TO_LOWER, and SUBSTR to our Edge Logic function [eval_func](</docs/edge-logic/supported-directives#eval_func>).
@@ -1331,7 +1357,7 @@
 
 * Improved validation of API calls made by resellers.
 * Improved error handling of [secret management APIs](</apidocs#tag/Secret-Management>).
-* Added support for “operation” report annotations that CDNetworks may use to identify operational changes. We expect these to be infrequent.
+* Added support for “operation” report annotations that {{title}} may use to identify operational changes. We expect these to be infrequent.
 * Made API query parameters case-insensitive for ease of use.
 * Fixed [annotation list](</apidocs#operation/queryAnnotationList>) to include recently updated annotations.
 * Fixed [search for secret by its ID](</apidocs#operation/get-cdn-secrets>).
@@ -1407,7 +1433,7 @@
 
 #### API updates
 * Enhanced the property search to allow direct matches including prefacing with ‘^’ to match text at the beginning of fields.
-* Fixed a problem with enabling the [High Speed Data Transmission (HDT)](<https://www.cdnetworks.com/high-speed-data-transmission/>) product for a reseller's customer.
+* Fixed a problem with enabling the [High Speed Data Transmission (HDT)](<https://www.{{siteDomain}}/high-speed-data-transmission/>) product for a reseller's customer.
 * Fixed an error when deploying a property using a certificate without SANs.
 
 
@@ -1563,7 +1589,7 @@
 * Added the edge hostname request report.
 * Added the CPU time report.
 * Enhanced the date picker in reports page.
-* Added support for [High Speed Data Transmission (HDT)](<https://www.cdnetworks.com/high-speed-data-transmission/>) in the product selection menu, allowing you to switch to the HDT portal.
+* Added support for [High Speed Data Transmission (HDT)](<https://www.{{siteDomain}}/high-speed-data-transmission/>) in the product selection menu, allowing you to switch to the HDT portal.
 * Fixed password expiration email’s appearance.
 * Implemented notification message when a deployment is added to the standby task.
 * Fixed text of standby task confirmation.
@@ -1669,7 +1695,7 @@
 * Added support for startdate and enddate parameters for querying [validation](</apidocs#operation/queryPropertyValidationList>) and [deployment task](</apidocs#operation/queryDeploymentTaskList>) lists.
 * Allowed deletion of a property version.
 * Updated [service quota API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>).
-* Added fast route traffic to the [traffic volume summary report](</apidocs#operation/getVolSummary>) to show traffic accelerated by the [High-Speed Data Transmission product](<https://www.cdnetworks.com/high-speed-data-transmission/>).
+* Added fast route traffic to the [traffic volume summary report](</apidocs#operation/getVolSummary>) to show traffic accelerated by the [High-Speed Data Transmission product](<https://www.{{siteDomain}}/high-speed-data-transmission/>).
 * Supported CSR validation by more certificate authorities, not just Let’s Encrypt.
 * Improved error handling of parameters when [getting purge requests](</apidocs#operation/getPurgeRequestList>).
 
@@ -1848,7 +1874,7 @@
 * Fixed use of redirectHttpToHttps with multiple hostnames.
 
 #### Portal updates
-* Fixed issues switching between our [Edge Computing Platform (ECP)](<https://www.cdnetworks.com/edge-computing/>) and CDN Pro products.
+* Fixed issues switching between our [Edge Computing Platform (ECP)](<https://www.{{siteDomain}}/edge-computing/>) and CDN Pro products.
 * Allowed selection of ISPs when defining client region rules for edge hostnames.
 * Added support for ‘group by’ to traffic summary report.
 
@@ -2093,7 +2119,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 #### Portal updates
 * Updated client region values.
 * Implemented access denial page.
-* Fixed display of link to the [Edge Computing Platform (ECP) product](<https://www.cdnetworks.com/edge-computing/>) portal.
+* Fixed display of link to the [Edge Computing Platform (ECP) product](<https://www.{{siteDomain}}/edge-computing/>) portal.
 
 ## June 17, 2019
 #### API updates
