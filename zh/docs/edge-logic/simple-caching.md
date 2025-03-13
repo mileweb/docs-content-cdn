@@ -1,7 +1,7 @@
 ## 简单缓存
 
 在实际生产环境中，您对 CDN Pro 的需求绝不会仅仅是生成一个固定字符串返回给客户端而已。一个典型的 CDN 需求通常需要 CDN Pro 作为代理服务器从源站获取一些文件并缓存一段时间，以供终端客户前来请求和检索该文件。
-假设您需要加速主机名 “faster.cdnetworks.com”，源站服务器的主机名是 "[www.cdnetworks.com](https://www.cdnetworks.com)" 。
+假设您需要加速主机名 “faster.{{siteDomain}}”，源站服务器的主机名是 "[www.{{siteDomain}}](https://www.{{siteDomain}})" 。
 默认情况下，您希望 CDN Pro 作为代理服务器根据源站响应头中的 `cache-control` 和 `expires` 来缓存对应的文件。如果源没有指定该文件的缓存时间，则缓存 10 分钟。
 同时，由于您已经提前预知了 HTML、CSS、PNG、JS 和 JPEG 文件不会经常更新，因此您希望此类文件至少能够缓存1天（即便源站给的缓存规则小于1天）。
 为了实现以上需求，CDN Pro 的边缘逻辑配置如下：

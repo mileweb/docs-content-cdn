@@ -27760,7 +27760,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",

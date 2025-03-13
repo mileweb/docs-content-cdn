@@ -15,4 +15,4 @@ The following figure shows the steps to follow when using CDN Pro to accelerate 
 
 ![null](</docs/resources/images/getting-started-flowchart.png>)
 
-To help you get started, check out the [Getting Started with CDN Pro Video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>).
+To help you get started, check out the [Getting Started with CDN Pro Video](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>).

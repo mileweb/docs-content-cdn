@@ -13,7 +13,7 @@ CDN Pro's key features make it easy for anyone with a minimum background in CDN 
 - State-of-the-art load balancing dynamically monitors the Internet to direct traffic based on real-time performance metrics and system-load information.
 - Sophisticated access-control algorithms with Edge Logic process requests to protected content at the edge. Support for NGINX configuration scripts and JavaScript allow you to process requests and responses on the edge using familiar tools.
 - With points of presence deployed on every continent, CDN Pro routes user requests to edge servers based on factors such as proximity and resource/content availability, reducing workloads on origin servers by more than 90%. Cached content on the edge remains available even if the origin server stops responding to requests.
-- CDN Pro allows your content to reach customers in mainland China. CDNetworks can also help to secure all necessary permissions and licenses.
+- CDN Pro allows your content to reach customers in mainland China. {{title}} can also help to secure all necessary permissions and licenses.
 - The CDN Pro infrastructure provides a natural shield from a wide array of attacks against content providers and their users. Web Application Firewall (WAF) and DDoS mitigation afford even greater protection against serious threats.
 - As part of CDN Pro, you receive access to raw data and tools to obtain invaluable insight into your audience’s activity, location, devices, carriers, and more.
 
@@ -34,5 +34,5 @@ The CDN Pro content delivery platform provides a rich [API](</apidocs>) that sup
 
 ## Where to Go from Here
 
-Check the [Getting Started with CDN Pro Video](<https://www.cdnetworks.com/wp-content/uploads/videos/cdnpro_v1.mp4>) and perform the steps in the [CDN Pro Quick Start](</docs/getting-started.md>).
+Check the [Getting Started with CDN Pro Video](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>) and perform the steps in the [CDN Pro Quick Start](</docs/getting-started.md>).
 

@@ -133,4 +133,4 @@ location /credit-card-info {
 这样的配置对符合某些隐私保护规范，例如 PCI-DSS 和 HIPAA 的要求十分重要。
 
 ### Web应用防火墙 (WAF)
-CDN Pro 可以与 CDNetworks 的 WAF 平台协作来保护您的源站免受恶意请求的攻击。CDN Pro 也可以与任何第三方的 WAF 平台协作。
+CDN Pro 可以与 {{title}} 的 WAF 平台协作来保护您的源站免受恶意请求的攻击。CDN Pro 也可以与任何第三方的 WAF 平台协作。
