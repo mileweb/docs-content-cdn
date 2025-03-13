@@ -5,12 +5,12 @@
     "version": "1.0",
     "description": "CDN Pro APIs allow you to manage the CDN Pro service.  <p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> is a command line tool that facilitates API calls in <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> and <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a>. It includes the \"cdnapi.sh\" shell script mentioned in this document's examples.</p>",
     "contact": {
-      "url": "https://www.cdnetworks.com"
+      "url": "https://www.{{siteDomain}}"
     }
   },
   "servers": [
     {
-      "url": "https://ngapi.cdnetworks.com",
+      "url": "https://ngapi.{{siteDomain}}",
       "description": ""
     }
   ],
@@ -3695,7 +3695,7 @@
         "summary": "Create a property version",
         "responses": {
           "201": {
-            "description": "A new property version was successfully created. The <b>Location</b> HTTP header indicates the version number. Example:  <code>Location: http://ngapi.cdnetworks.com/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
+            "description": "A new property version was successfully created. The <b>Location</b> HTTP header indicates the version number. Example:  <code>Location: http://ngapi.{{siteDomain}}/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -4378,7 +4378,7 @@
         "summary": "Create a property",
         "responses": {
           "201": {
-            "description": "This response indicates the property was successfully created. A Location header containing the URL of the new property is returned. For example, <code>Location: http://ngapi.cdnetworks.com/cdn/properties/8fdc9c949e986564cc24b149</code>",
+            "description": "This response indicates the property was successfully created. A Location header containing the URL of the new property is returned. For example, <code>Location: http://ngapi.{{siteDomain}}/cdn/properties/8fdc9c949e986564cc24b149</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -5391,7 +5391,7 @@
             },
             "in": "query",
             "name": "search",
-            "description": "The value of the search parameter is matched on the <i>id</i>, <i>name</i>, <i>description</i>, and <i>hostnames</i> fields of each property. A value like \"domain.com\" would match on hostnames domain.com and abc.123domain.com.\n\nUse a value beginning with the '^' character to narrow the matches to properties with <i>name</i>, <i>description</i>, or <i>hostnames</i> fields beginning with the text following the '^'. For example, \"^domain\" would match on hostnames domain.com and domain123.com but not abc.123domain.com. \n\nSince a limited number of characters are permitted in URIs, you must encode '^' as '%5E' when specifying a search parameter containing it in the URI, for example, <code>curl -i --url 'https://ngapi.cdnetworks.com/cdn/properties?search=%5Edomain' ... </code>.\n\nNote that a property will be returned if the search matches on any version of the property which has not been deleted. Also, when searching for a property by its ID, you must specify the entire ID as partial matches are not supported."
+            "description": "The value of the search parameter is matched on the <i>id</i>, <i>name</i>, <i>description</i>, and <i>hostnames</i> fields of each property. A value like \"domain.com\" would match on hostnames domain.com and abc.123domain.com.\n\nUse a value beginning with the '^' character to narrow the matches to properties with <i>name</i>, <i>description</i>, or <i>hostnames</i> fields beginning with the text following the '^'. For example, \"^domain\" would match on hostnames domain.com and domain123.com but not abc.123domain.com. \n\nSince a limited number of characters are permitted in URIs, you must encode '^' as '%5E' when specifying a search parameter containing it in the URI, for example, <code>curl -i --url 'https://ngapi.{{siteDomain}}/cdn/properties?search=%5Edomain' ... </code>.\n\nNote that a property will be returned if the search matches on any version of the property which has not been deleted. Also, when searching for a property by its ID, you must specify the entire ID as partial matches are not supported."
           },
           {
             "schema": {
@@ -6200,7 +6200,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header's value will be a URL allowing you to get details about the new certificate.  Example: <code>Location: http://ngapi.cdnetworks.com/cdn/certificates/d60b730d9a586425677940cc</code>",
+                "description": "The Location header's value will be a URL allowing you to get details about the new certificate.  Example: <code>Location: http://ngapi.{{siteDomain}}/cdn/certificates/d60b730d9a586425677940cc</code>",
                 "required": true
               }
             }
@@ -6366,7 +6366,7 @@
                       },
                       "privateKey": {
                         "type": "string",
-                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
+                        "description": "The value must be either the private key in PEM format and encrypted with the API key and timestamp OR the literal string \"RSA2048\" or \"ECC256\" if you opt to generate a self-signed certificate. The key must be encrypted with AES-128-CBC and base64-encoded. This helps protect your key when you upload it to CDN Pro. The following Bash script demonstrates the required encryption when passing us the private key:\n<pre><code>\n#!/bin/bash\n\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n\nUSER=YourAPILogin\nAPI_KEY=YourAPIKey\n\n\nDATE=`date \"+%a, %d %b %Y %H:%M:%S %Z\"`\necho $DATE\n\n#Generates password\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n# Generates IV and Key private key encryption\naesivkey=$(echo -n \"$DATE\" | openssl dgst -sha256 -hmac \"$API_KEY\" -r)\naes128cbciv=${aesivkey:0:32}\naes128cbckey=${aesivkey:32:32}\necho $aes128cbciv\necho $aes128cbckey\n\n# Encrypts the private key in certificate.\nprivate_key='-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAACavS...bw==\\n-----END RSA PRIVATE KEY-----'\nencrypted_private_key=`echo -e $private_key | openssl aes-128-cbc -base64 -nosalt -K $aes128cbckey -iv $aes128cbciv`\n\n# Create certificate\napiCall=\"curl -i --url\n '${API_SERVER}/cdn/certificates'\n\t\t\t-X POST \\\n\t\t\t-u $USER:$passw \\\n\t\t\t-H 'Date: $DATE' \\\n            -H 'Content-Type: application/json' \\\n\t\t\t-H 'Accept: application/json'\\\n            -H 'On-Behalf-Of:126' \\\n            -d '{\n                \\\"name\\\":\\\"testncas728\\\", \\\n                \\\"description\\\":\\\"\\\", \\\n                \\\"sharingMethod\\\": \\\"some\\\", \\\n                \\\"shareWith\\\":[123,456,789], \\\n                \\\"newVersion\\\":{ \\\n                    \\\"comments\\\":\\\"some comments\\\", \\\n                    \\\"privateKey\\\":\\\"$encrypted_private_key\\\", \\\n                    \\\"certificate\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDnD...s\\nsbg==\\n-----END CERTIFICATE-----\\\", \\\n                    \\\"chainCert\\\":\\\"-----BEGIN CERTIFICATE-----\\nMIIDpj...FeK+28=\\n-----END CERTIFICATE-----\\\" \\\n                } \\\n            }' \\\n            \"\neval $apiCall\n</code></pre>"
                       },
                       "certificate": {
                         "type": "string",
@@ -7122,7 +7122,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header returns a URL to the specific certificate version if a new one is created.  Example:  <code>Location: http://ngapi.cdnetworks.com/cdn/certificates/329f12c1fe6708c23c31e91f/versions/5</code>"
+                "description": "The Location header returns a URL to the specific certificate version if a new one is created.  Example:  <code>Location: http://ngapi.{{siteDomain}}/cdn/certificates/329f12c1fe6708c23c31e91f/versions/5</code>"
               }
             }
           },
@@ -8472,7 +8472,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header contains a URL to the validation task. Example: <code>Location: http://ngapi.cdnetworks.com/cdn/validations/5dca2205f9e9cc0001df7b24</code>",
+                "description": "The Location header contains a URL to the validation task. Example: <code>Location: http://ngapi.{{siteDomain}}/cdn/validations/5dca2205f9e9cc0001df7b24</code>",
                 "required": true
               }
             }
@@ -9088,7 +9088,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header's value will be the URL of the new deployment task.  Example: <code>Location: http://ngapi.cdnetworks.com/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>"
+                "description": "The Location header's value will be the URL of the new deployment task.  Example: <code>Location: http://ngapi.{{siteDomain}}/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>"
               }
             }
           },
@@ -14372,7 +14372,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "A URL to the annotation object, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/annotations/5dd50ef0ace044000163278f</code>.",
+                "description": "A URL to the annotation object, for example, <code>Location: http://ngapi.{{siteDomain}}/cdn/annotations/5dd50ef0ace044000163278f</code>.",
                 "required": true
               }
             }
@@ -14469,7 +14469,7 @@
                       "configuration",
                       "operation"
                     ],
-                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by CDNetworks.</td></tr></table>"
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by {{title}}.</td></tr></table>"
                   },
                   "comments": {
                     "type": "string",
@@ -14524,7 +14524,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header is a URL representing the new purge request, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "description": "The Location header is a URL representing the new purge request, for example, <code>Location: http://ngapi.{{siteDomain}}/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
                 "required": true
               }
             }
@@ -15110,7 +15110,7 @@
                           },
                           "type": {
                             "type": "string",
-                            "description": "Describes the type of annotation. Operation annotations can only be created by CDNetworks.",
+                            "description": "Describes the type of annotation. Operation annotations can only be created by {{title}}.",
                             "enum": [
                               "client",
                               "operation",
@@ -15246,7 +15246,7 @@
             },
             "in": "query",
             "name": "type",
-            "description": "Indicates the type of annotation (client, configuration, or operation). Operation annotations can only be created by CDNetworks."
+            "description": "Indicates the type of annotation (client, configuration, or operation). Operation annotations can only be created by {{title}}."
           },
           {
             "schema": {
@@ -15480,7 +15480,7 @@
                     },
                     "type": {
                       "type": "string",
-                      "description": "Describes the type of annotation. Operation annotations can only be created by CDNetworks.",
+                      "description": "Describes the type of annotation. Operation annotations can only be created by {{title}}.",
                       "enum": [
                         "client",
                         "operation",
@@ -15697,7 +15697,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by CDNetworks.</td></tr></table>",
+                    "description": "Summarizes the type of event that occurred:\n<table><tr><th>Value</th><th>Description</th></tr><tr><td>client</td><td>An event affecting clients, such as the release of a popular game.</td></tr><tr><td>configuration</td><td>A property configuration change.</td></tr><tr><td>operation</td><td>An operation performed on the CDN platform, for example, updated cache servers. This type can only be created by {{title}}.</td></tr></table>",
                     "enum": [
                       "client",
                       "configuration",
@@ -22253,7 +22253,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header's value will refer to the newly created customer. Example:  https://ngapi.cdnetworks.com/ngadmin/customers/12345678",
+                "description": "The Location header's value will refer to the newly created customer. Example:  https://ngapi.{{siteDomain}}/ngadmin/customers/12345678",
                 "required": true
               }
             }
@@ -23741,7 +23741,7 @@
                         {
                           "apiRequestId": "2d99b9d962847b3f",
                           "requestTimestamp": "2020-04-24T20:09:15Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/ngadmin/apicalls?limit=5",
+                          "requestURL": "https://ngapi.{{siteDomain}}/ngadmin/apicalls?limit=5",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "responseCode": 0
@@ -23749,7 +23749,7 @@
                         {
                           "apiRequestId": "94d2b2168fabccb7",
                           "requestTimestamp": "2020-04-24T20:09:06Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/certificates?offset=0&limit=10&search=&sortOrder=desc",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/certificates?offset=0&limit=10&search=&sortOrder=desc",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -23758,7 +23758,7 @@
                         {
                           "apiRequestId": "97f8af300ff5a982",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb/versions/latest",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -23767,7 +23767,7 @@
                         {
                           "apiRequestId": "f291e3014bd06216",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname2",
@@ -23776,7 +23776,7 @@
                         {
                           "apiRequestId": "f03ca108dd17d342",
                           "requestTimestamp": "2020-04-24T20:09:02Z",
-                          "requestURL": "https://ngapi.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
+                          "requestURL": "https://ngapi.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb/versions?offset=0&limit=100",
                           "requestMethod": "GET",
                           "isSafe": true,
                           "apiName": "myapiname",
@@ -23859,7 +23859,7 @@
             },
             "in": "query",
             "name": "path",
-            "description": "Specify the path portion of a URI to filter out calls to a particular path. For example, to get a list of calls to property API endpoints using https://ngapi.cdnetworks.com/cdn/properties, you would specify \"path=/cdn/properties\"."
+            "description": "Specify the path portion of a URI to filter out calls to a particular path. For example, to get a list of calls to property API endpoints using https://ngapi.{{siteDomain}}/cdn/properties, you would specify \"path=/cdn/properties\"."
           },
           {
             "schema": {
@@ -24090,7 +24090,7 @@
                         "accept:application/json",
                         "sec-fetch-site:same-origin",
                         "sec-fetch-mode:cors",
-                        "referer:https://console.cdnetworks.com/cdn/properties/2b83a6aab4b4fa93837df8eb?taskId=5ea30363f5a9ba7b2b4251f9&taskName=Validate%20version%201%20of%20property%20%27xyzabc20200424%27",
+                        "referer:https://console.{{siteDomain}}/cdn/properties/2b83a6aab4b4fa93837df8eb?taskId=5ea30363f5a9ba7b2b4251f9&taskName=Validate%20version%201%20of%20property%20%27xyzabc20200424%27",
                         "accept-encoding:gzip, deflate, br",
                         "accept-language:en-US,en;q=0.9",
                         "cookie:_ga=GA1.2.1656448886.1553879004; LPVID=MyMDIzZGU0YTFmOWMyMTll; MPEL=CH; LPSID-78804126=iQsfcMCrQQ6Ep7Pi6CcYkQ; crowd.token_key=Rl6Fjm4WCtDMPHWrHhMpyQAAAAAAAAACYnVydG9uLmxlZQ; LPSID-75492851=w619XhnXQOu0ZILa4ci9hg; connect.sid=s%3AM2j0Xp9ij9Kv8J8I-OVa6xnoxJfrq37g.p%2FFU8DdBACz0F3aV7sgobPRYrBn3ZFty%2BkT4Tu%2BB9rs",
@@ -24098,13 +24098,13 @@
                         "x-forwarded-proto:https",
                         "authorization:Basic YnVydG9uY29tcGFueTItYXBpOnBvUG9IRm8wQms3SGcwOXVzYzBDOGR6SVlIcz0=",
                         "date:Fri, 24 Apr 2020 15:21:17 UTC",
-                        "host:ngapi.cdnetworks.com",
+                        "host:ngapi.{{siteDomain}}",
                         "via:1.1 google, 1.1 google",
                         "x-forwarded-for:220.242.143.61, 35.241.43.180, 35.222.43.216, 35.241.43.180",
                         "connection:Keep-Alive"
                       ],
                       "requestBody": "",
-                      "requestURL": "https://ngapi.cdnetworks.com/cdn/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
+                      "requestURL": "https://ngapi.{{siteDomain}}/cdn/deploymentTasks/024a6b98-6421-4f74-9a8b-06bd2b0bcab9",
                       "requestMethod": "GET",
                       "requestTimestamp": "2020-04-24T15:21:17Z",
                       "responseHeaders": [
@@ -24125,7 +24125,7 @@
                   "Details of a failed API call": {
                     "value": {
                       "requestHeaders": [
-                        "host:ngapi.cdnetworks.com",
+                        "host:ngapi.{{siteDomain}}",
                         "sec-ch-ua:",
                         "content-type:application/json",
                         "sec-ch-ua-mobile:?0",
@@ -24133,11 +24133,11 @@
                         "contact-id:26394",
                         "sec-ch-ua-platform:",
                         "accept:application/json",
-                        "origin:https://console.cdnetworks.com",
+                        "origin:https://console.{{siteDomain}}",
                         "sec-fetch-site:same-origin",
                         "sec-fetch-mode:cors",
                         "sec-fetch-dest:empty",
-                        "referer:https://console.cdnetworks.com/cdn/certificates?limit=10&autoRenew=&pageNumber=1&sortOrder=&target=all&sortBy=&search=Deletable",
+                        "referer:https://console.{{siteDomain}}/cdn/certificates?limit=10&autoRenew=&pageNumber=1&sortOrder=&target=all&sortBy=&search=Deletable",
                         "accept-language:en-US",
                         "x-ws-ttl:10",
                         "cdn-src-ip:123.56.78.90",
@@ -24156,7 +24156,7 @@
                         "connection:Keep-Alive"
                       ],
                       "requestBody": "{\"name\":\"Undeploy certificate 'deletable'\",\"actions\":[{\"action\":\"remove_cert\",\"certificateId\":\"1a8a0716e7d56a98bcc9e61b\",\"version\":1}],\"target\":\"production\"}",
-                      "requestURL": "https://ngapi.cdnetworks.com/cdnapi/deploymentTasks",
+                      "requestURL": "https://ngapi.{{siteDomain}}/cdnapi/deploymentTasks",
                       "requestMethod": "POST",
                       "requestTimestamp": "2024-09-25T05: 35:12Z",
                       "responseHeaders": [
@@ -24953,7 +24953,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "secretLimit": {
                     "type": "integer",
@@ -26019,7 +26019,7 @@
                   },
                   "billUsingStripe": {
                     "type": "boolean",
-                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. CDNetworks will not bill your customers for you."
+                    "description": "Whether the customer will be invoiced using Stripe payment processing. If you are a reseller who plans to use Stripe to bill your child customers, you can specify <i>true</i>. Otherwise, <i>false</i> is more appropriate. {{title}} will not bill your customers for you."
                   },
                   "webhookLimit": {
                     "type": "integer",
@@ -28475,7 +28475,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "The Location header is a URL representing the new prefetch request, for example, <code>Location: http://ngapi.cdnetworks.com/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
+                "description": "The Location header is a URL representing the new prefetch request, for example, <code>Location: http://ngapi.{{siteDomain}}/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.",
                 "required": true
               }
             }
@@ -29204,7 +29204,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Refers to the API permission for the API account. Example: Location: https://ngapi.cdnetworks.com/cdn/apiPermissions/1234567890\n",
+                "description": "Refers to the API permission for the API account. Example: Location: https://ngapi.{{siteDomain}}/cdn/apiPermissions/1234567890\n",
                 "required": true
               }
             }
@@ -31062,7 +31062,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Refers to the new webhook. Example: <code>Location: https://ngapi.cdnetworks.com/cdn/webhooks/60a2e69806d5583a81ad9500</code>\n"
+                "description": "Refers to the new webhook. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/webhooks/60a2e69806d5583a81ad9500</code>\n"
               }
             }
           },
@@ -31516,7 +31516,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The location header in the response will contain a reference to the new secret's ID, for example, <code>Location: https://ngapi-cdnetworks.com/cdn/secrets/60d6707cca3e387d2a28fc9e</code>. You can refer to the ID when calling APIs to delete, get, or update the secret.\n",
+            "description": "The location header in the response will contain a reference to the new secret's ID, for example, <code>Location: https://ngapi-{{siteDomain}}/cdn/secrets/60d6707cca3e387d2a28fc9e</code>. You can refer to the ID when calling APIs to delete, get, or update the secret.\n",
             "headers": {
               "Location": {
                 "schema": {
@@ -32702,7 +32702,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "A reference to the new log configuration. Example:<code>Location: https://ngapi.cdnetworks.com/cdn/report/logConfigs/4427</code>."
+                "description": "A reference to the new log configuration. Example:<code>Location: https://ngapi.{{siteDomain}}/cdn/report/logConfigs/4427</code>."
               }
             }
           },
@@ -39110,7 +39110,7 @@
       "API Key": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the CDNetworks platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.cdnetworks.com\n\n#You will be given the following information by the CDNetworks sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
+        "description": "All requests to the {{title}} platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n#You will be given the following information by the {{title}} sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
       }
     }
   },
@@ -39133,7 +39133,7 @@
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.cdnetworks.com/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.{{siteDomain}}/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
@@ -39149,7 +39149,7 @@
     },
     {
       "name": "Annotations for Reports",
-      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a> when you look at the reports."
+      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.{{siteDomain}}/cdn\">CDN Pro portal</a> when you look at the reports."
     },
     {
       "name": "Content Management",
@@ -39157,7 +39157,7 @@
     },
     {
       "name": "Portal User Management",
-      "description": "Create and manage users who access the <a href=\"https://console.cdnetworks.com/cdn\">CDN Pro portal</a>."
+      "description": "Create and manage users who access the <a href=\"https://console.{{siteDomain}}/cdn\">CDN Pro portal</a>."
     },
     {
       "name": "API Account Management",
