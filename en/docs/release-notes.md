@@ -1,5 +1,17 @@
 # Release Notes
 
+## March 14, 2025
+#### API updates
+* Deprecated support for specifying ‘latest’ when deleting a certificate version.
+* Improved the error message for the InvalidKey error when creating or updating a certificate.
+* Fixed intermittent 'OutdatedProperty' error returned when trying to create a deployment task for a successfully validated property.
+
+#### Console updates
+* Supported LB only directives in the Edge Logic editor. Load Balancer Logic will be deprecated.
+* Ensured all variables can be used in the Edge Logic and realtime logging format editors.
+* Fixed issue in which advanced settings were not copied when cloning an edge hostname.
+* Added hints to directives in Edge Logic editor for internal use only directives, new ones, and those that are deprecated.
+
 ## March 3, 2025
 
 #### API updates

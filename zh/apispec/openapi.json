@@ -6221,12 +6221,6 @@
                   }
                 },
                 "examples": {
-                  "Example of creating a certificate without a proper private key.": {
-                    "value": {
-                      "code": "InvalidKey",
-                      "message": "Invalid private key cipher. To protect the private key, it must be encrypted with your API key and the timestamp before you upload."
-                    }
-                  },
                   "Example of passing an invalid value to the autoRenew field": {
                     "value": {
                       "code": "InvalidAutoRenew",
@@ -6249,6 +6243,12 @@
                     "value": {
                       "code": "InvalidLineBreak",
                       "message": "'\r' cannot be used as a line break in the certificate field. Only '\n' or '\r\n' are permitted."
+                    }
+                  },
+                  "Invalid key": {
+                    "value": {
+                      "code": "InvalidKey",
+                      "message": "Invalid private key cipher. The private key must be encrypted with your API key and the timestamp. Check if the API key is correct and if the private key is properly encrypted."
                     }
                   }
                 }
@@ -7165,6 +7165,12 @@
                       "code": "InvalidInput",
                       "message": "The shareWith cannot be empty."
                     }
+                  },
+                  "Invalid key": {
+                    "value": {
+                      "code": "InvalidKey",
+                      "message": "Invalid private key cipher. The private key must be encrypted with your API key and the timestamp. Check if the API key is correct and if the private key is properly encrypted."
+                    }
                   }
                 }
               }
@@ -7645,7 +7651,7 @@
           "name": "version",
           "in": "path",
           "required": true,
-          "description": "Version of the certificate. It can be an integer representing the version like \"1\"."
+          "description": "Version of the certificate. It can be an integer representing the version like \"2\"."
         },
         {
           "schema": {
@@ -7915,7 +7921,7 @@
                   }
                 },
                 "examples": {
-                  "Version Is not the latest": {
+                  "Version is not the latest": {
                     "value": {
                       "code": "VersionIsNotTheLatest",
                       "message": "Trying to delete version 3 which is not the latest version"
@@ -7925,6 +7931,12 @@
                     "value": {
                       "code": "CertificateWithOnlyOneVersion",
                       "message": "This is the only version in existence. Deleting this version is not allowed."
+                    }
+                  },
+                  "Invalid version": {
+                    "value": {
+                      "code": "InvalidVersion",
+                      "message": "The version number must be a positive integer."
                     }
                   }
                 }
@@ -8019,124 +8031,7 @@
           "required": true,
           "description": "ID of a certificate."
         }
-      ],
-      "delete": {
-        "summary": "Delete the latest version of a certificate",
-        "tags": [
-          "Certificate Management"
-        ],
-        "responses": {
-          "204": {
-            "description": "The latest version of the certificate was deleted."
-          },
-          "400": {
-            "description": "The request was invalid. Refer to the response body for details.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "3uh9tmh86kwcc"
-                      }
-                    },
-                    "": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "pdoo8ifyjhaci"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Certificate with only one version": {
-                    "value": {
-                      "code": "CertificateWithOnlyOneVersion",
-                      "message": "This is the only version in existence. Deleting this version is not allowed."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The certificate was not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "33k9kktwyeqrl"
-                      }
-                    },
-                    "message": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "inxk051ou9kdi"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Invalid certificate": {
-                    "value": {
-                      "code": "InvalidCertId",
-                      "message": "The specified certificate ID does not exist."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The latest version of the certificate cannot be deleted if it was deployed to production or staging before. ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "dlm8h0dtb1ezr"
-                      }
-                    },
-                    "message": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "r3rjggdkrfv3l"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Version used": {
-                    "value": {
-                      "code": "VersionUsed",
-                      "message": "The latest version cannot be deleted because it is in deployment history."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "delete-cdn-certificates-certificateID-latest",
-        "x-codeSamples": [
-          {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
-            "source": "./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e/latest\n"
-          }
-        ],
-        "description": "This endpoint can be used to delete the latest version of a certificate if it was accidentally created but never deployed. The version number will be reused the next time the certificate is <a href=\"#operation/updateCertificate\">updated to a new version</a>.",
-        "deprecated": true
-      }
+      ]
     },
     "/cdn/validations": {
       "get": {
@@ -39110,7 +39005,7 @@
       "API Key": {
         "type": "http",
         "scheme": "Basic",
-        "description": "All requests to the {{title}} platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n#You will be given the following information by the {{title}} sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
+        "description": "All requests to the CDN Pro platform must be authenticated using an API account name and key assigned to your organization. For security, the API key is not passed directly but is secured as described in the example script below.\n\nThe authentication type is HTTP Basic, and the authorization string is specified in the HTTP header field called Authorization.\n\n<pre>\n<code>\n#!/bin/bash\n#URL of the CDN Pro API server\nAPI_SERVER=https://ngapi.{{siteDomain}}\n\n#You will be given the following information by the {{title}} sales team\nUSER=\"{API user name}\"\nAPI_KEY=\"{API key (make sure to escape the $ sign if any)}\"\n\n#Date in RFC 1123 format\nDATE=`LC_TIME=\"C\" date -u \"+%a, %d %b %Y %H:%M:%S GMT\"`\n\n#Generate the password. Raw output from openssl by adding the \"-binary\" flag\npassw=$(echo -n \"$DATE\" | openssl dgst -sha1 -hmac \"$API_KEY\" -binary | base64)\necho \" \"\n\n#Construct the curl command to query list of properties\napiCall=\"curl -i --url '${API_SERVER}/cdn/properties'\n               -X GET\n               -u $USER:$passw\n               -H 'Date: $DATE'\n               -H 'Accept: application/json'\"\n\neval $apiCall\necho \" \"\n</code>\n</pre>\n\nIf you are a reseller you can also specify a child customer's ID in an On-Behalf-Of HTTP header field to make API calls to manage your child customer.\n\nA more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">here</a>."
       }
     }
   },
