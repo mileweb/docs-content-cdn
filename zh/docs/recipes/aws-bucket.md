@@ -55,7 +55,7 @@ Amazon S3 uses the following URI syntax to access bucket names: `<BUCKET_NAME>.<
 
 ### Setting Up CDN Pro
 
-Log in to the CDN Pro management console at https://console.cdnetworks.com.
+Log in to the CDN Pro management console at https://console.{{siteDomain}}.
 
 #### Traffic Management 
 1. In the Traffic Management page, create an edge hostname.

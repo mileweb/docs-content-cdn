@@ -60,7 +60,7 @@ set $cache_misc "ae=$http_accept_encoding";
 ```nginx
 set $cache_misc "${cache_misc}hdr1=$http_header1&hdr2=$http_header2";
 ```
-POST 方法在今天经常被用来实现需要提供大量参数的查询操作，一个典型的例子是 [GraphQL](https://zh.wikipedia.org/wiki/GraphQL)。 在这种情况下，POST 请求和 GET 一样都是 idempotent 和安全的，而且响应也都是可缓存的。唯一的问题就是如何把请求正文里的参数添加到缓存 key 中。CDN Pro 为此专门开发了 [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) 指令来实现这个目的。当这项功能被启用的时候，服务器会为收到的请求正文计算一个 MD5 哈希值，并将其添加到缓存 key 的末尾。出于性能考虑，这些操作只会在请求正文小于 4kB 的时候发生。当请求正文过大时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass)指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 `$cache_misc` 变量中。
+POST 方法在今天经常被用来实现需要提供大量参数的查询操作，一个典型的例子是 [GraphQL](https://zh.wikipedia.org/wiki/GraphQL)。 在这种情况下，POST 请求和 GET 一样都是幂等和安全的，而且响应也都是可缓存的。唯一的问题就是如何把请求正文里的参数添加到缓存 key 中。CDN Pro 为此专门开发了 [`proxy_request_body_in_cache_key`](/docs/edge-logic/supported-directives.md#proxy_request_body_in_cache_key) 指令来实现这个目的。当这项功能被启用的时候，服务器会为收到的请求正文计算一个 MD5 哈希值，并将其添加到缓存 key 的末尾。出于性能考虑，这些操作只会在请求正文小于 4kB 的时候发生。当请求正文过大时，不会有哈希值被添加到缓存 key 中，同时变量 [`$ignored_body_in_cache_key`](/docs/edge-logic/built-in-variables#ignored_body_in_cache_key) 的值会被设为 '1'。为了避免可能由此带来的缓存冲突，您可以将此变量用于 [`proxy_cache_bypass`](/docs/edge-logic/supported-directives.md#proxy_cache_bypass)指令来避免缓存这样的请求。如果一定要把更大的请求正文添加到缓存 key 里，您需要在客户端计算哈希值，并通过请求头传递到服务器，然后将其添加到 `$cache_misc` 变量中。
 
 最后给您的提醒是，不要忘了使用 [`proxy_cache_methods`](/docs/edge-logic/supported-directives.md#proxy_cache_methods) 指令来开启对 POST 请求的缓存。
 下面是如何把 POST 请求正文加入缓存 key 的配置代码示例：
@@ -71,7 +71,6 @@ location /api/v1/ {
   proxy_cache_valid 1m; # 200, 301, 和 302 响应会被缓存1分钟
   proxy_cache_bypass $ignored_body_in_cache_key;
   proxy_no_cache $ignored_body_in_cache_key;
-  proxy_request_buffering on; # 必须开启此配置，proxy_request_body_in_cache_key 才能生效
   if ($request_method = POST) {
     proxy_request_body_in_cache_key on; # 如果请求正文小于 4kB，计算其哈希值并加入缓存 key
   }
@@ -83,7 +82,7 @@ location /api/v1/ {
 
 当您需要 CDN Pro 在回源时添加，修改，或者删除某些头部值时，您可以使用指令[`origin_set_header`](</docs/edge-logic/supported-directives.md#origin_set_header>) 。示例如下：
 ```nginx
-origin_set_header CDN-Name Quantil;
+origin_set_header CDN-Name {{title}};
 ```
 另外一个典型的场景如下，它可以让 CDN Pro 把客户端 IP 添加到 Client-IP 这个头部中并发送给源站：
 ```nginx
@@ -93,7 +92,7 @@ origin_set_header Client-IP $client_real_ip;
 
 当您需要 CDN Pro 在响应客户端时添加，修改，或者删除某些头部值时，您可以使用指令 [`add_header`](</docs/edge-logic/supported-directives.md#add_header>)。示例如下：
 ```nginx
-add_header CDN-Name Quantil;
+add_header CDN-Name {{title}};
 ```
 同时 CDN Pro 开发并提供了指令 [`origin_header_modify`](</docs/edge-logic/supported-directives.md#origin_header_modify>) ，此指令将在其他所有处理源站响应的操作之前修改掉源站的响应头。当您需要改写某些可能影响 CDN 服务器行为的源站响应头（例如缓存时间）时，这个指令将非常有用。
 
@@ -110,7 +109,7 @@ origin_header_modify Vary "" policy=preserve;
 # Cache不对 `Vary` 做任何操作，仅透传给客户端
 proxy_ignore_headers Vary; 
 ```
-在这种情况下，CDN Pro 将按照响应头 `Vary` 完全不存在来处理缓存。如果仅配置了 `origin_header_modify Vary "" policy=preserve` 而没有配置 `proxy_ignore_headers Vary` ，那么由于默认生效的配置 [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) ，您的文件将不会被缓存在 CDN Pro 平台上。如果您的业务的确需要 CDN Pro 按照响应头 `Vary` 来区分不同缓存版本，请联系网宿（CDNetworks）技术支持为您开通配置`proxy_cache_vary on` 的权限。
+在这种情况下，CDN Pro 将按照响应头 `Vary` 完全不存在来处理缓存。如果仅配置了 `origin_header_modify Vary "" policy=preserve` 而没有配置 `proxy_ignore_headers Vary` ，那么由于默认生效的配置 [`proxy_cache_vary off`](</docs/edge-logic/supported-directives.md#proxy_cache_vary>) ，您的文件将不会被缓存在 CDN Pro 平台上。如果您的业务的确需要 CDN Pro 按照响应头 `Vary` 来区分不同缓存版本，请联系网宿（{{title}}）技术支持为您开通配置`proxy_cache_vary on` 的权限。
 
 ### 如何遵循源站的跳转请求（301、302等）?
 
@@ -122,7 +121,7 @@ proxy_ignore_headers Vary;
 
 #### 有ICP备案域名中国大陆加速
 
-如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（CDNetworks）技术支持提交关于您业务的所有必要信息。我们将这些信息确认无误后，CDN Pro 就将为您开启中国大陆节点的使用权限。然后您可以按以下步骤来启用这些中国大陆节点：
+如果您有一个或多个ICP备案域名并希望它们在中国大陆加速，请联系网宿（{{title}}）技术支持提交关于您业务的所有必要信息。我们将这些信息确认无误后，CDN Pro 就将为您开启中国大陆节点的使用权限。然后您可以按以下步骤来启用这些中国大陆节点：
 
 1. 在该域名的 [加速项目](</docs/portal/edge-configurations/creating-property.md>) 配置中，将“有ICP备案”设置成“是”。这样做可确保该加速项目部署到位于中国大陆的服务器，当这些服务器接收到客户端请求时会正常响应内容。否则它们将返回状态代码 451。请注意这个设置是生效于整个加速项目的，所以项目内的每个域名都必须有备案，否则项目将被拒绝部署。此时您需要为没有备案的域名创建另一个加速项目。同时 CDN Pro 平台会定时检查所有域名 ICP 备案的有效性。如果某个域名的备案失效，系统会自动将对应加速项目的“有ICP备案”设置成“否”，并邮件通知您。如果您没有及时调整 DNS 配置避免使用中国大陆的服务器，中国大陆的访客就可能会收到 451 错误码。
 
@@ -132,7 +131,7 @@ proxy_ignore_headers Vary;
 
 如果您的CDN域名没有ICP备案，但仍然需要加速并分发内容到中国大陆，CDN Pro 为您提供了Near China专线的解决方案。 这个解决方案利用 CDN Pro 的特殊服务组nearChina，以部署在香港的优质节点线路，底延时高性能的分发您的内容到中国大陆。
 
-由于 Near China 专线解决方案是增值服务，nearChina 服务组的价格会高于普通服务组的价格。 如您有需要获取此专线价格信息或开启服务，请联系网宿（CDNetworks）技术支持团队。
+由于 Near China 专线解决方案是增值服务，nearChina 服务组的价格会高于普通服务组的价格。 如您有需要获取此专线价格信息或开启服务，请联系网宿（{{title}}）技术支持团队。
 
 ### 如何开启websocket功能?
 
@@ -154,7 +153,7 @@ proxy_ignore_headers Vary;
 在许多情况下，“动态文件”并不意味着内容完全不可缓存。例如，如果您将篮球比赛的得分缓存 1 秒，客户端几乎体验不到任何差异。如果每秒有 10 个请求来获取分数，则可以节省 90% 的源站带宽和算力。需要注意的是，如果客户端收到的响应依赖请求 URL 中的参数或者请求头部值，或者请求正文的话，请确保所有相关参数都被[添加到缓存 key 中](#如何将问号后参数，请求头，或者请求正文加入到缓存key中)。
 * **回源时开启HDT链路加速配置**
 
-CDN Pro 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.cdnetworks.com/cn/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN Pro 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令亦可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（CDNetworks）技术支持。
+CDN Pro 使用指令 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 来进行回源时与源站之间的加速。 这个强大的功能基于我们屡获殊荣的 [High-speed Data Transmission](https://www.{{siteDomain}}/cn/high-speed-data-transmission/) (HDT) 技术。它确保了 CDN Pro 的服务器使用最优的回源链路，即使在某些极端恶劣的网络链路情况下也能保证服务的稳定性。此指令亦可用于某些源站链路不佳，但是首次 MISS 请求性能又极其重要的可缓存业务上。通过 [`origin_fast_route`](</docs/edge-logic/supported-directives.md#origin_fast_route>) 服务的流量会因其带来额外成本而收取更高的费用。要试用此功能，请联系网宿（{{title}}）技术支持。
 
 ### 二级域名和anycast
 

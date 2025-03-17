@@ -20,7 +20,7 @@ Administrators add users from the **Users** tab on the Identity & Access Managem
 | Description | Enter a description for this user.|
 
 4. Click **Save & Invite**. An invitation to join the portal is sent to the user. 
-5. The user clicks the **Join Now!** button in the invitation, enters the required information on the Join CDNetworks Portal page, and then clicks the **Save & Join** button.
+5. The user clicks the **Join Now!** button in the invitation, enters the required information on the Join {{title}} Portal page, and then clicks the **Save & Join** button.
 6. The user can now sign in to the portal.
 
 ## Resending or Canceling Invitations

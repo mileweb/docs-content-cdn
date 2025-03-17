@@ -15,7 +15,7 @@
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | 客户端请求的 HTTP 协议版本，例如 "HTTP/1.1" | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> 客户端IP 版本：4代表 IPv4 ；6代表 IPv6 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_isp"></span><span class="var">$client_isp</span> | 客户端的 ISP 运营商信息 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国城市代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国省份代码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | 客户端IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次连接中包含的请求次数 | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
 | <span id="content_code"></span><span class="var">$content_code</span> | 一个可写的变量，对内容赋予标志代码，用来[在报表中对流量进行分类](/docs/edge-logic/faq#如何在报表中对数据进行分类) | <span class="badge cyan">R/W</span> | <span class="badge cyan">R/W</span> |
