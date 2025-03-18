@@ -83,7 +83,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 3. 针对该指令的另一个改进是支持合并不同层级(server/location/if)里的配置。但是如果同一个头部名称出现在了不同的层级里，则只有最内层的配置会生效。
 
-### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
+### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) (已废弃)
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span>
 
