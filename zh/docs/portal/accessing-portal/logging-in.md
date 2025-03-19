@@ -2,13 +2,13 @@
 
 1. 访问 CDN Pro 登录页面 https://console.{{siteDomain}}.
 
-<p align=center><img src="/docs/resources/images/accessing-portal/portal-login.png" alt="login page" width="300"></p>
+<p align=center><img src="/docs/resources/images/accessing-portal/portal-login-{{id}}.png" alt="login page" width="300"></p>
 
-2. 在登录页面顶部输入框中输入您的用户名，在底部输入框中输入您的密码。为安全起见，每个键入的密码字符都用点 (●) 屏蔽。如果您要取消屏蔽密码，请单击 ![null](</docs/resources/images/accessing-portal/eye-icon.png>) icon.
+2. 在登录页面输入您的用户名，点击“Next”输入您的密码。为安全起见，每个键入的密码字符都用点 (●) 屏蔽。如果您要取消屏蔽密码，请单击 ![null](</docs/resources/images/accessing-portal/eye-icon.png>) 图标。
 
 <strong>Note:</strong> 如果您遗忘了登录密码，您可以查阅 [密码重置](</docs/portal/accessing-portal/forgot-password.md>).
 
-3. 点击 **Sign In** 按钮.
+3. 点击 **Sign In** 按钮完成登陆。
 
 ## 登录后操作
 
