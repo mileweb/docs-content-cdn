@@ -248,27 +248,27 @@ In general, the parameters along with the options mentioned above can meet most 
 
 #### Assign codes to content
 
-CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning a value to this variable in the **loadBalancerLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
+CDN Pro allows you to assign codes to content by introducing a built-in variable called `$content_code`. When you configure a property, you can assign codes to content by assigning a value to this variable in the **edgeLogic**. The value assignment can be done by using the [`set`](</docs/edge-logic/supported-directives.md#set>) or [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) directive.
 
 You can assign codes on a per property basis. This is useful if you have properties belonging to different groups, and you want to get reports based on the groups. The following is an example where properties A and B belong to group1 and property C belongs to group2.
 
 ```nginx
-# loadBalancerLogic for property A
+# edgeLogic for property A
 set $content_code "group1";
 ```
 ```nginx
-# loadBalancerLogic for property B
+# edgeLogic for property B
 set $content_code "group1";
 ```
 ```nginx
-# loadBalancerLogic for property C
+# edgeLogic for property C
 set $content_code "group2";
 ```
 
 The assignment of codes can also be applied to segments of content that are hosted under a specific property. In this case, assign codes to the variable `$content_code` based on conditions. The following shows an example in which you assign "abc" to content served under the /abc directory and "xyz" to content served under /xyz.
 
 ```nginx
-# loadBalancerLogic
+# edgeLogic
 if ($uri ~ ^/abc(/|$)) {
     set $content_code "abc";
 }

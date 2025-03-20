@@ -219,27 +219,27 @@ POST /cdn/report/volSummary
 
 #### 指定自定义的代码对内容进行标记
 
-CDN Pro通过引入`$content_code`这个内置变量来实现对内容进行标记。 当您配置加速项目时，可以通过在**loadBalancerLogic**中为该变量赋值来对内容进行标记。 可以使用 [`set`](</docs/edge-logic/supported-directives.md#set>) 或 [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) 指令来进行赋值。
+CDN Pro通过引入`$content_code`这个内置变量来实现对内容进行标记。 当您配置加速项目时，可以通过在**edgeLogic**中为该变量赋值来对内容进行标记。 可以使用 [`set`](</docs/edge-logic/supported-directives.md#set>) 或 [`proxy_set`](</docs/edge-logic/supported-directives.md#proxy_set>) 指令来进行赋值。
 
 您可以为加速项目指定内容代码。 当您创建了多个加速项目，您可以通过指定内容代码的方式对这些加速项目进行分组。下面的示例展示了将加速项目A和B归到group1这个组，将加速项目C归到group2这个组。
 
 ```nginx
-# loadBalancerLogic for property A
+# edgeLogic for property A
 set $content_code group1;
 ```
 ```nginx
-# loadBalancerLogic for property B
+# edgeLogic for property B
 set $content_code group1;
 ```
 ```nginx
-# loadBalancerLogic for property C
+# edgeLogic for property C
 set $content_code group2;
 ```
 
 您也可以为具体的内容指定内容代码。 可以基于条件判断将内容代码赋值给变量`$content_code`。 下面显示了一个示例，对于/abc路径下提供的内容，标记为“abc”，对于/xyz路径下提供的内容，标记为“xyz”。
 
 ```nginx
-# loadBalancerLogic
+# edgeLogic
 if ($uri ~ ^/abc(/|$)) {
     set $content_code "abc";
 }
