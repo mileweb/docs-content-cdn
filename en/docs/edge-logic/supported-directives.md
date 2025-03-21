@@ -18,7 +18,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
-### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header) (Deprecated)
+### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header) 
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
@@ -82,7 +82,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
 
-### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
+### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) (Deprecated)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
