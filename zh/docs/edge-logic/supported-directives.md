@@ -180,7 +180,7 @@ location = /auth {
 <span class="badge dark">高级</span>
 
 **使用语法:** `brotli_types <mime_type> [...];`<br/>
-**默认设置:** brotli_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml; <br/>
+**默认设置:** `brotli_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **可用位置:** server, location
 
 指定对什么MIME类型的响应进行即时压缩。 text/html类型的响应总会被压缩,不受该指令约束。仅当响应正文大小大于 1024 字节时压缩功能才会生效。该默认行为应该适用于大多数用户。CDN Pro 对开源版本进行了改进以支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。

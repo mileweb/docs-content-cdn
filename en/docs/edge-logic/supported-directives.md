@@ -180,7 +180,7 @@ Enables or disables on-the-fly compression of responses.
 <span class="badge dark">advanced</span>
 
 **Syntax:** `brotli_types <mime_type> [...];`<br/>
-**Default:** brotli_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml; <br/>
+**Default:** `brotli_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context:** server, location
 
 Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. 
