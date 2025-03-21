@@ -67,7 +67,7 @@ Please contact our customer support if you need to try this service. Due to the 
 
 ### Advanced Features for Performance
 #### The $server_level variable
-This variable is available in the load balancer logic and indicates if you are on an edge server (value=1) or a parent server (value=2).
+This variable is available in the edge logic and indicates if you are on an edge server (value=1) or a parent server (value=2).
 The main use of this variable is to allow you to skip complicated access control logic on the parent servers to save time and cost:
 ```nginx
 if ($server_level = 2) {
