@@ -18,7 +18,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
-### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
+### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header) 
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
 
@@ -82,7 +82,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 3. Another change made to this directive is the ability to merge the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, the configuration of only the deepest layer takes effect for that header.
 
-### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer)
+### [`add_trailer`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) (Deprecated)
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
@@ -180,12 +180,12 @@ Enables or disables on-the-fly compression of responses.
 <span class="badge dark">advanced</span>
 
 **Syntax:** `brotli_types <mime_type> [...];`<br/>
-**Default:** text/html <br/>
+**Default:** `brotli_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context:** server, location
 
-Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The special value * matches any MIME type. Responses with the text/html MIME type are always compressed.
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. 
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two compression algorithms will be merged in the near future. We recommend setting the same value for the two directives if both gzip and brotli compression are enabled. 
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled. `gzip_types` and `brotli_types` will be deprecated in the near future, and a new directive will be introduced to support setting MIME types for both gzip and brotli.
 
 ### `client_body_timeout`
 
@@ -372,9 +372,9 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 **Default:** `gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;` <br/>
 **Context:** server, location
 
-CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1000 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support up to 20 wildcards like `text/*` and `*javascript`.
+CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. Responses with the “text/html” type are always compressed, regardless of the setting for this directive. 
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two compression algorithms will be merged in the near future. We recommend setting the same value for the two directives if both gzip and brotli compression are enabled.
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled. `gzip_types` and `brotli_types` will be deprecated in the near future, and a new directive will be introduced to support setting MIME types for both gzip and brotli.
 
 ### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
 
