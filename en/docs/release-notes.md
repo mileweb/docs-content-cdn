@@ -1,5 +1,16 @@
 # Release Notes
 
+## April 2, 2025
+#### API updates
+* Fixed error handling for logAggregationPoints summaryReport when timespan exceeds 7 days.
+
+#### Console updates
+* Improved the tooltip shown to self signup customers about deploying to production.
+* Fixed failure to load the certificate name in the property version page.
+* Improved the display of the Advanced Settings section of the edge hostname page.
+* Implemented display of deployment status details in the console when the task status is ‘inprogress’.
+
+
 ## March 14, 2025
 #### API updates
 * Deprecated support for specifying ‘latest’ when deleting a certificate version.
