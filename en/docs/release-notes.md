@@ -7,7 +7,7 @@
 #### Console updates
 * Improved the tooltip shown to self signup customers about deploying to production.
 * Fixed failure to load the certificate name in the property version page.
-* Improved the display of the Advanced Settings section of the  edge hostname page.
+* Improved the display of the Advanced Settings section of the edge hostname page.
 * Implemented display of deployment status details in the console when the task status is ‘inprogress’.
 
 
