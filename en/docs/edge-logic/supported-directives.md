@@ -632,7 +632,7 @@ origin_set_header X-My-Header $header_value policy=repeat|overwrite|preserve;
 ```
 ```overwrite```: If the header being added exists in the request, the local configuration overrides the header value. If you want to remove a header, set the value to an empty string. Overwriting these 2 headers is not allowed: Transfer-Encoding and Content-Length.
 
-```preserve```: If the header being added exists in the request, the header value is not changed;
+```preserve```: If the header being added exists in the request, the header value is not changed.
 
 ```repeat```: (default) Add the header to the client request, regardless of whether the header exists in the request. Repeating the headers below is not allowed. The property validation will fail if any of these headers is specified with 'policy=repeat': 
 
