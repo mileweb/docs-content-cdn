@@ -2,6 +2,8 @@
 
 下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）或[均衡器逻辑 （Load Balancer Logic）](lb7-es-structure)中使用它们，但请注意并非所有变量都支持配置在这两个地方。[实时日志](/docs/portal/edge-configurations/creating-property#real-time-log)支持与均衡器逻辑完全相同的变量集合。表中的大多数变量都是只读的，只有那些标记为<span class="badge cyan">R/W</span>的变量可写。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。当您在控制台上编辑边缘逻辑或者实时日志时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。
 
+要正确使用变量，需要了解请求处理的生命周期。NGINX 处理请求时会经历[多个阶段](</docs/edge-logic/declarative-imperative#timing-of-the-declarative-directives>)。在不同的阶段，NGINX 会给变量赋值或动态更新变量的值。如果过早地读取变量可能导致预期外的结果。例如，当请求还未传递到上层服务器之前，不应读取 $upstream_* 这种上游请求相关的变量。例如，$bytes_sent、$body_bytes_sent 和 $sc_completed 等变量仅在响应完成后才可用。在响应完成之前，不应去读取这些变量，即便是add_header指令（构造响应头时执行）也不例外。这几个变量应当仅在日志记录阶段使用，通过 custom_log_field 指令或实时日志读取变量。此外，有些变量（如 $request_time） 在请求生命周期中会被持续地更新。如果在这些变量最终确定之前读取，得到的值将与请求完成时的值不同。
+
 **注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令和变量应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
 
 | **变量名称** | **描述** | **边缘逻辑** | **均衡器逻辑** |
