@@ -526,7 +526,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:** `origin_header_modify field value policy=value if(condition);` <br/>
+**Syntax:** `origin_header_modify field value [policy=...] [if(condition)];` <br/>
 **Default:**  - <br/>
 **Context:** server, location, if in location
 
@@ -620,15 +620,27 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
-**Syntax:**  `origin_set_header field value [flag=any if(condition)];` <br/>
+**Syntax:**  `origin_set_header field value [flag=any] [policy=...] [if(condition)];` <br/>
 **Default:** `none` <br/>
 **Contexts:** server, location, if in location
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
 
-1. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
-2. CDN Pro has a [hierarchical cache structure](/cdn/docs/edge-logic/paths-to-origins). By default, the headers set by this directive appear only in the requests to the origin servers. If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
-3. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
+1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
+```nginx
+origin_set_header X-My-Header $header_value policy=repeat|overwrite|preserve;
+```
+```overwrite```: If the header being added exists in the request, the local configuration overrides the header value. If you want to remove a header, set the value to an empty string. Overwriting these 2 headers is not allowed: Transfer-Encoding and Content-Length.
+
+```preserve```: If the header being added exists in the request, the header value is not changed.
+
+```repeat```: (default) Add the header to the client request, regardless of whether the header exists in the request. Repeating the headers below is not allowed. The property validation will fail if any of these headers is specified with 'policy=repeat': 
+
+Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, Vary.
+
+2. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
+3. CDN Pro has a [hierarchical cache structure](/cdn/docs/edge-logic/paths-to-origins). By default, the headers set by this directive appear only in the requests to the origin servers. If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
+4. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
 *   Comparison of a variable with a string using the "=" and "!=" operators.
