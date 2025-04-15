@@ -16,7 +16,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 **Default:** `-` <br/>
 **Contexts:** server
 
-Downsamples the local access log. A `factor` of N means one log entry for every N requests. It can be used to reduce the amount of access log to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
+Downsamples the local access logs. A `factor` of N means one log entry for every N requests. The factor specified can be a positive integer or a variable. The default value of 1, meaning no downsampling, is used if the directive is not configured or when the variable value is invalid. This directive can be used to reduce the amount of access logs to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header) 
 
