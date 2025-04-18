@@ -45,8 +45,8 @@
 | <span id="pid"></span><span class="var">$pid</span> | CDN 进程 ID 号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="pipe"></span><span class="var">$pipe</span> | 如果请求属于“流水线”（pipelined），值为“p”，否则为“.” | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="property_ver"></span><span class="var">$property_ver</span> |<span class="badge small" title="numerical value">#</span> 加速项版本号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="qtl_cpu_cycle"></span><span class="var">$qtl_cpu_cycle</span> | 已废弃，请使用$cpu_time_ns | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 已废弃，请使用$unique_req_id | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="qtl_cpu_cycle"></span><span class="var">$qtl_cpu_cycle</span> | 已废弃，请使用 $cpu_time_ns | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="qtl_req_id"></span><span class="var">$qtl_req_id</span> | 已废弃，请使用 $unique_req_id | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="qtl_upstream_cache_status"></span><span class="var">$qtl_upstream_cache_status</span> | 已废弃，请使用 $cdn_cache_status | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="random_N"></span><span class="var">$random_N</span> |<span class="badge small" title="numerical value">#</span> 一个[0, N-1]之内均匀分布的随机整数，N范围是[2,1e9]。| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="realtime_log_ds_factor"></span><span class="var">$realtime_log_ds_factor</span> |<span class="badge small" title="numerical value">#</span> 实时日志采样参数，值为 N 代表每N个请求会生产1条实时日志。可以通过设置“[realtime_log_downsample](/docs/edge-logic/supported-directives#realtime_log_downsample)"指令来取代默认采样率。| <span class="badge green">Yes</span> | <span class="badge yellow">No</span> |
