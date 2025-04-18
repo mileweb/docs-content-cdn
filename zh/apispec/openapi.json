@@ -28341,7 +28341,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The prefetch request was successfully created. The <i>Location</i> header includes a reference to the task.  Call the <a href=\"#operation/queryPrefetchStatus\">Query Prefetch Request status API</a> to check its status.",
+            "description": "The prefetch request was successfully created. The <i>Location</i> header includes a reference to the task.  Call the <a href=\"#operation/get-cdn-prefetches-id\">Get Prefetch Request status API</a> to check its status.",
             "headers": {
               "Location": {
                 "schema": {
@@ -38993,7 +38993,7 @@
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png\">"
     },
     {
       "name": "Property Validation",
@@ -39009,7 +39009,7 @@
     },
     {
       "name": "Hostnames",
-      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#tag/Deployment-Management\">deployed</a> to production or staging."
+      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#operation/createDeployment\">deployed</a> to production or staging."
     },
     {
       "name": "Edge Hostname Management",
@@ -39021,7 +39021,7 @@
     },
     {
       "name": "Annotations for Reports",
-      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the <a href=\"https://console.{{siteDomain}}/cdn\">CDN Pro portal</a> when you look at the reports."
+      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the [CDN Pro portal](https://console.{{siteDomain}}/cdn) when you look at the reports."
     },
     {
       "name": "Content Management",
@@ -39029,11 +39029,11 @@
     },
     {
       "name": "Portal User Management",
-      "description": "Create and manage users who access the <a href=\"https://console.{{siteDomain}}/cdn\">CDN Pro portal</a>."
+      "description": "Create and manage users who access the [CDN Pro portal](https://console.{{siteDomain}}/cdn)."
     },
     {
       "name": "API Account Management",
-      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#tag/API-Access-Control\">API permissions</a>."
+      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#operation/post-cdn-apiPermissions\">API permissions</a>."
     },
     {
       "name": "Customer Management",
@@ -39049,7 +39049,7 @@
     },
     {
       "name": "API Access Control",
-      "description": "These APIs allow you to customize what a <a href=\"#tag/API-Account-Management\">CDN Pro API account</a> can do by specifying the categories of accessible endpoints."
+      "description": "These APIs allow you to customize what a <a href=\"#operation/post-ngadmin-apiAccounts\">CDN Pro API account</a> can do by specifying the categories of accessible endpoints."
     },
     {
       "name": "Webhooks",
@@ -39057,7 +39057,7 @@
     },
     {
       "name": "Log Configuration Management",
-      "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/getLogfiles\">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname."
+      "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/get-cdn-report-logDownload\">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname."
     },
     {
       "name": "Log Aggregation Points",

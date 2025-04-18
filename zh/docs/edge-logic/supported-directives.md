@@ -16,7 +16,7 @@
 **默认设置：** `-` <br/>
 **可用位置：** server
 
-本指令用于设置对保存访问日志进行采样的“因子”。数值 N 意味着平均每 N 个请求生产一条访问日志。它可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样“因子”。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
+本指令用于设置访问日志的“采样率”，其参数可以是一个正整数或一个变量。采样率 N 意味着平均每 N 个请求生产一条访问日志。如果该指令未配置，或者指定的变量值无效，则默认采样率为1，即不采样。该指令可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样率。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
@@ -534,7 +534,7 @@ else { ... }
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
-**使用语法：** `origin_header_modify field value policy=value if(condition);` <br/>
+**使用语法：** `origin_header_modify field value [policy=...] [if(condition)];` <br/>
 **默认设置：**  - <br/>
 **可用位置：** server, location, if in location
 
@@ -629,16 +629,28 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
-**使用语法：**  `origin_set_header field value [flag=any if(condition)];` <br/>
+**使用语法：**  `origin_set_header field value [flag=any] [policy=...] [if(condition)];` <br/>
 **默认设置：** `none` <br/>
 **可用位置：** server, location, if in location
 
 该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于增、删、改回源请求头。CDN Pro 对开源版本代码进行了以下提升：
 
 
-1. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
-2. CDN Pro 采用了[分层缓存结构](/zh/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
-3. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
+1. 引入了```policy=```参数来更精确地控制指令的行为:
+```nginx
+origin_set_header X-My-Header $header_value policy=repeat|overwrite|preserve;
+```
+```overwrite```: 添加一个头部。如果该头部名称已经存在，则覆盖原有的值。如果value是空字符串，则会将该头部删除。不支持改写这2个头部：Transfer-Encoding, Content-Length。
+
+```preserve```: 如果头部名称不存在，则添加。否则不做任何操作，保留原头部不变。
+
+```repeat```: (默认行为) 添加一个头部。如果该头部名称已经存在，则新增一条。不支持新增以下头部。如果在边缘逻辑中指定重复添加以下任何头部，加速项目的验证会失败。
+
+Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, Vary
+
+2. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
+3. CDN Pro 采用了[分层缓存结构](/zh/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
+4. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
 
 *   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
 *   用"="或者"!="来比较一个变量是否等于一个字符串；
