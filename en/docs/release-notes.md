@@ -1,5 +1,13 @@
 # Release Notes
 
+## April 17, 2025
+#### API updates
+* Fixed incorrect error handling for requests to logAggregationPoints/summaryReport when time span exceeds 7 days
+* Updated the  edge logic validator to allow a variable to be specified for the access_log_downsample directive.
+
+#### Console updates
+* Fixed error handling for reports when the date interval is too large.
+
 ## April 2, 2025
 #### API updates
 * Fixed error handling for logAggregationPoints summaryReport when timespan exceeds 7 days.
