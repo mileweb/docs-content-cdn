@@ -60,14 +60,6 @@ Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range,
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
 ```
-使用变量的例子:
-```nginx
-set $cache_status_method "preserve";  
-if ($arg_debug = cache_status) {
-    set $cache_status_method "overwrite";
-}
-add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
-```
 
 2. 引入了```if(condition)```参数来控制本指令生效的条件。只有当条件为真的时候，本指令才会修改发往客户端的头部，否则完全不起作用。这个```if()```参数必须出现在本指令的末尾。```condition```可以是如下条件表达式:
 
@@ -252,7 +244,7 @@ location / {
 <span class="badge">标准</span>
 
 **使用语法:** `default_type <mime-type>;`<br/>
-**默认设置:** `default_type application/octet-stream`<br/>
+**默认设置:** `default_type application/octet-stream;`<br/>
 **可用位置:** server, location
 
 设置给客户端的响应的默认类型。代码逻辑源自 Nginx 开源版本，除了默认值，无其它改动。
@@ -675,7 +667,7 @@ origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Clien
 
 <span class="badge">标准</span>
 
-**使用语法：** `proxy_cache_background_update on | off;;` <br/>
+**使用语法：** `proxy_cache_background_update on | off;` <br/>
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
@@ -1001,7 +993,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 <span class="badge dark">高级</span> <span class="badge">LB logic</span>
 
 **使用语法:** `proxy_request_buffering on/off;` <br/>
-**默认设置:** `proxy_request_buffering off` <br/>
+**默认设置:** `proxy_request_buffering off;` <br/>
 **使用位置:** server, location
 
 开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。
@@ -1013,7 +1005,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `proxy_request_body_in_cache_key on/off;` <br/>
-**默认设置:** `proxy_request_body_in_cache_key on` <br/>
+**默认设置:** `proxy_request_body_in_cache_key on;` <br/>
 **可用位置:** server, location, if in location
 
 当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是幂等和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
@@ -1298,7 +1290,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `upstream_origin_only on|off;` <br/>
-**默认设置:** `upstream_origin_only off` <br/>
+**默认设置:** `upstream_origin_only off;` <br/>
 **可用位置:** server, location, if in location
 
 启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/zh/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。

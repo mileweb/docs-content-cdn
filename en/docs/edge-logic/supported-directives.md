@@ -59,14 +59,6 @@ Example configurations:
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
 ```
-Example with variable:
-```nginx
-set $cache_status_method "preserve";  
-if ($arg_debug = cache_status) {
-    set $cache_status_method "overwrite";
-}
-add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
-```
 
 2. The new parameter ```if(condition)``` has been introduced to allow adding the header based on some condition. If the condition is true, the ```add_header``` directive adds the header and the value to the downstream response based on the policy. The ```if``` parameter should always be at the end of the directive configuration. A condition may be any of the following:
 
@@ -250,7 +242,7 @@ location / {
 <span class="badge">standard</span>
 
 **Syntax:** `default_type <mime-type>;`<br/>
-**Default:** `default_type application/octet-stream`<br/>
+**Default:** `default_type application/octet-stream;`<br/>
 **Context:** server, location
 
 Defines the default MIME type of a response. No change to the public version, except the default value.
@@ -665,7 +657,7 @@ origin_set_header X-Client-IP $client_real_ip;
 
 <span class="badge">standard</span>
 
-**Syntax:** `proxy_cache_background_update on | off;;` <br/>
+**Syntax:** `proxy_cache_background_update on | off;` <br/>
 **Default:** `proxy_cache_background_update off;` <br/>
 **Context:** server, location
 
@@ -988,7 +980,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 <span class="badge dark">advanced</span> <span class="badge">LB logic</span>
 
 **Syntax:** `proxy_request_buffering on/off;` <br/>
-**Default:** `proxy_request_buffering off` <br/>
+**Default:** `proxy_request_buffering off;` <br/>
 **Context:** server, location
 
 Enables or disables buffering of a client request body. No change to the open source version, except that it is disabled by default. The value of this directive does not have an effect on the behavior of [appending the request body to the cache key](#proxy_request_body_in_cache_key).
@@ -998,7 +990,7 @@ Enables or disables buffering of a client request body. No change to the open so
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_request_body_in_cache_key on/off;` <br/>
-**Default:** `proxy_request_body_in_cache_key on` <br/>
+**Default:** `proxy_request_body_in_cache_key on;` <br/>
 **Context:** server, location, if in location
 
 When the parameter is 'on' (variable supported), the server calculates an MD5 hash of the request body and appends it to the cache key. This is useful when parameters are carried in the body of a POST request to query resources. These kinds of requests are usually idempotent and safe like GET requests, and the responses are well cacheable. You need to use the [`proxy_cache_methods`](#proxy_cache_methods) directive to enable caching of the POST requests.
@@ -1278,7 +1270,7 @@ Enables string replacement in responses with the specified MIME types in additio
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `upstream_origin_only on|off;` <br/>
-**Default:** `upstream_origin_only off` <br/>
+**Default:** `upstream_origin_only off;` <br/>
 **Contexts:** server, location, if in location
 
 Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/cdn/apidocs#operation/get-cdn-shields). For example, you may have configured an origin's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin. Even if you set directConnection to "alwaysDirect", the edge may still send retry requests to an intermediate server when the origin is not reachable directly. `upstream_origin_only on;` eliminates this possibility.
