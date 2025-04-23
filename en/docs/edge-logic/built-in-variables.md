@@ -37,7 +37,7 @@ If you use the CDN Pro portal to edit the property, typing `$` at a position whe
 | <span id="msec"></span><span class="var">$msec</span> |<span class="badge small" title="numerical value">#</span> current Unix time in seconds with milliseconds resolution | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="sec"></span><span class="var">$sec</span> |<span class="badge small" title="numerical value">#</span> current Unix time in integer seconds | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="origin_host"></span><span class="var">$origin_host</span> | origin's hostname | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="origin_ip"></span><span class="var">$origin_ip</span> | origin's IP | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="origin_ip"></span><span class="var">$origin_ip</span> | IP and port of the origin. The format is {IP}:{port} | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="origin_status_code"></span><span class="var">$origin_status_code</span> | origin's status code | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="pid"></span><span class="var">$pid</span> | process ID of the service | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="pipe"></span><span class="var">$pipe</span> | "p" if request is pipelined, or "." otherwise. | <span class="badge yellow">No</span> | <span class="badge green">Yes</span> |
