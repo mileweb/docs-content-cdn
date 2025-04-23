@@ -30,7 +30,7 @@ This directive modifies the response headers to the client when the status code 
 
 1. A parameter ```policy=``` has been introduced to control the behavior more precisely:
 ```nginx
-add_header X-My-Header $header_value policy=repeat|overwrite|preserve
+add_header X-My-Header $header_value policy=repeat|overwrite|preserve;
 ```
 ```overwrite```: If the header being added exists in the upstream response, the local configuration overrides the header value. If you want to remove a header, set the value to an empty string.
 
@@ -508,7 +508,7 @@ This directive enables a fast route to be used to access the origin. It is power
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_follow_redirect;` <br/>
-**Default:** - <br/>
+**Default:** `-` <br/>
 **Context:** location
 
 When the origin responds with a 30x redirect, you may want the CDN servers to chase it until the redirection stops. Passing the redirection to the client takes more time to get the final content. If you want to turn it on, you can use this directive in a location block that uses [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) to access an origin.
@@ -519,7 +519,7 @@ When the origin responds with a 30x redirect, you may want the CDN servers to ch
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_header_modify field value [policy=...] [if(condition)];` <br/>
-**Default:**  - <br/>
+**Default:** `-` <br/>
 **Context:** server, location, if in location
 
 Use this directive to add, delete, or overwrite the response header fields from the origin **before** any other processing. In other words, the value of any $upstream\_http\_* variable seen by other directives can be affected by this directive. The directive supports nginx variables.
@@ -570,7 +570,7 @@ This is a wrapper of the [proxy_limit_rate](http://nginx.org/en/docs/http/ngx_ht
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `origin_pass _origin_name[URI];`<br>
-**Default:** none <br>
+**Default:** `-` <br>
 **Context:** location, if in location
 
 This directive specifies the origin from which to fetch the content. It is a wrapper of the nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) and a few other directives. It takes one parameter that is an origin name specified in the "origins" field of the property JSON. The origin name can optionally be followed by a URI which can contain variables. If no URI is specified, the full normalized and escaped request URI (which may have been modified by the `rewrite` directive) plus the query string are appended when accessing the origin. To drop the query string, one can use the [rewrite](#rewrite) directive with a question mark at the end of the replacement URI. Examples:
@@ -613,7 +613,7 @@ This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:**  `origin_set_header field value [flag=any] [policy=...] [if(condition)];` <br/>
-**Default:** `none` <br/>
+**Default:** `-` <br/>
 **Contexts:** server, location, if in location
 
 This is a wrapper of the [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) directive to allow redefining (overwriting) or appending fields to the request header passed to the origin server. The following changes were made to the open-source version:
@@ -768,7 +768,7 @@ Determines in which cases a stale cached response can be used during communicati
 <span class="badge">standard</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `proxy_cache_valid [code ...] time;` <br/>
-**Default:** — <br/>
+**Default:** `-` <br/>
 **Context:** server, location
 
 Sets cache time for different response codes. If no code is explicitly specified, the cache time applies to 200, 301, and 302 response codes. The specified time is applied only to responses without caching instructions from the origin. Response header fields `Cache-Control`, `Expires`, `Set-Cookie`, etc. have higher precedence unless ignored by [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) or [`proxy_ignore_headers`](#proxy_ignore_headers). We enhanced the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) to support setting `time` with a variable. If the variable value is not a valid time, this directive does not do anything. A value of 0 means cache the response and treat it as expired. If you can identify dynamic/non-cacheable contents based on certain parameters in the request, use [`proxy_cache_bypass`](#proxy_cache_bypass) and [`proxy_no_cache`](#proxy_no_cache) to bypass caching and improve performance. 
@@ -838,7 +838,7 @@ Sets response header fields that will not be passed to the client. No change to 
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `proxy_ignore_cache_control directives…;` <br/>
-**Default:** none <br/>
+**Default:** `-` <br/>
 **Contexts:** server, location, if in location
 
 Disables processing of certain `cache-control` directives in the response from the origin. The following directives can be ignored:
@@ -1002,7 +1002,7 @@ A restriction of this directive is that it works only when body size is less tha
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
 
 **Syntax:** `proxy_set $variable value [if(...)];`<br>
-**Default:** none <br>
+**Default:** `-` <br>
 **Context:** server, location, if in location
 
 This directive assigns the `value` to the `$variable`. The `value` can be another variable or a composition of variables and literals. While this directive looks very similar to the [`set`](#set) directive, it differs in when it is executed. The `set` directive is executed during the "rewrite" phases which are very early -- almost right after the request is received from the client. On the contrary, `proxy_set` is executed after the response header is received from the origin (in case of a cache miss) or read from the cache. Therefore, the `value` can have information contained in the response header (after being modified by any [`origin_header_modify`](#origin_header_modify) directive). In addition, this directive supports the `if()` parameter which can set a condition for the assignment to happen. Here are a few examples:
@@ -1197,7 +1197,7 @@ This directive can be used to disable the ETag consistency check of sliced files
 <span class="badge">standard</span> <span class="badge primary">Proprietary</span>
 
 **Syntax:** `slice_verify_header header_name;` <br/>
-**Default:** - <br/>
+**Default:** `-` <br/>
 **Contexts:** server, location
 
 This directive can be used to specify a header in addition to Etag to check consistency of sliced files. Use this directive in conjunction with[`slice_ignore_etag`](#slice_ignore_etag) if you want to skip Etag and check the specified header only.
