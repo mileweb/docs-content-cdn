@@ -38918,7 +38918,62 @@
                         "id": "xvm1znk3ecg0y"
                       },
                       "items": {
-                        "$ref": "./models/logAggregationPointSummary.yaml"
+                        "title": "logAggregationPointSummary",
+                        "x-stoplight": {
+                          "id": "qlxyx7z93jf52"
+                        },
+                        "type": "object",
+                        "description": "Summarizes use of a log aggregation point.",
+                        "examples": [
+                          {
+                            "id": "401235176c80dd80dad2a8c47",
+                            "name": "aggregator",
+                            "ingestEntries": "23650642109",
+                            "destinationRequests": "95862252",
+                            "ingestBytes": "39347407448363"
+                          }
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID of a log aggregation point."
+                          },
+                          "name": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "hjii8vjtbg60w"
+                            },
+                            "description": "Name of the log aggregation point."
+                          },
+                          "ingestEntries": {
+                            "type": "integer",
+                            "x-stoplight": {
+                              "id": "8n3sucb00tusk"
+                            },
+                            "description": "Number of entries ingested."
+                          },
+                          "destinationRequests": {
+                            "type": "integer",
+                            "x-stoplight": {
+                              "id": "5s0tsso08jj7u"
+                            },
+                            "description": "Total number of requests made to the destination URL."
+                          },
+                          "ingestBytes": {
+                            "type": "integer",
+                            "x-stoplight": {
+                              "id": "sb5dm1m1mosxz"
+                            },
+                            "description": "Total number of bytes ingested."
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "ingestEntries",
+                          "destinationRequests",
+                          "ingestBytes"
+                        ]
                       }
                     }
                   },
