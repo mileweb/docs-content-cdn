@@ -1,5 +1,15 @@
 # Release Notes
 
+## April 29, 2025
+#### API updates
+* Introduced a flag to the certificate version to indicate if it is deletable.
+
+#### Console updates
+* Added support for deleting the latest certificate version if it has never been deployed to staging or production.
+* Deprecated the load balancer hash key field of properties.
+* Introduced the following built-in variables which can be used in Edge Logic: $cpu_time_ns, $unique_req_id, and $cdn_cache_status. They replace $qtl_cpu_cycle, $qtl_req_id, and $qtl_upstream_cache_status, respectively.
+
+
 ## April 17, 2025
 #### API updates
 * Fixed incorrect error handling for requests to logAggregationPoints/summaryReport when time span exceeds 7 days
