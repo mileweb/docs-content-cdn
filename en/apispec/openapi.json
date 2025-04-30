@@ -620,7 +620,6 @@
                           "x-stoplight": {
                             "id": "a9td9qagjo8vc"
                           },
-                          "id": "fhq5nzrbhy90j",
                           "format": "date-time",
                           "example": "2024-03-28T00:07:04Z",
                           "description": "If the property version is currently deployed to staging, this field indicates the RFC 3339 date when the deployment occurred."
@@ -630,7 +629,6 @@
                           "x-stoplight": {
                             "id": "svknhhk9brkqd"
                           },
-                          "id": "qu347vl97lfd1",
                           "format": "date-time",
                           "example": "2024-03-29T00:04:04Z",
                           "description": "If the property version is currently deployed to production, this field indicates the RFC 3339 date when the deployment occurred."
@@ -2121,17 +2119,11 @@
                               },
                               "deliverByHttps": {
                                 "title": "deliverByHttps",
-                                "x-stoplight": {
-                                  "id": "fyfechmf9xy36"
-                                },
-                                "type": "string",
+                                "type": "object",
                                 "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                                 "properties": {
                                   "state": {
                                     "type": "string",
-                                    "x-stoplight": {
-                                      "id": "v5ba3d6ze0otf"
-                                    },
                                     "enum": [
                                       "on",
                                       "off"
@@ -2140,9 +2132,6 @@
                                   },
                                   "alpn": {
                                     "type": "string",
-                                    "x-stoplight": {
-                                      "id": "0bfghcz48z9d2"
-                                    },
                                     "enum": [
                                       "h2",
                                       "h3",
@@ -2152,9 +2141,6 @@
                                   },
                                   "port": {
                                     "type": "integer",
-                                    "x-stoplight": {
-                                      "id": "lf60mtmbbzzga"
-                                    },
                                     "minimum": 80,
                                     "maximum": 65535,
                                     "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
@@ -2162,9 +2148,6 @@
                                   },
                                   "ttl": {
                                     "type": "integer",
-                                    "x-stoplight": {
-                                      "id": "hc2ikcyq9brau"
-                                    },
                                     "minimum": 60,
                                     "maximum": 86400,
                                     "default": 1800,
@@ -2367,17 +2350,11 @@
                         },
                         "deliverByHttps": {
                           "title": "deliverByHttps",
-                          "x-stoplight": {
-                            "id": "b5upebnysbdde"
-                          },
                           "type": "object",
                           "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                           "properties": {
                             "state": {
                               "type": "string",
-                              "x-stoplight": {
-                                "id": "v5ba3d6ze0otf"
-                              },
                               "enum": [
                                 "on",
                                 "off"
@@ -2386,9 +2363,6 @@
                             },
                             "alpn": {
                               "type": "string",
-                              "x-stoplight": {
-                                "id": "0bfghcz48z9d2"
-                              },
                               "enum": [
                                 "h2",
                                 "h3",
@@ -2398,9 +2372,6 @@
                             },
                             "port": {
                               "type": "integer",
-                              "x-stoplight": {
-                                "id": "lf60mtmbbzzga"
-                              },
                               "minimum": 80,
                               "maximum": 65535,
                               "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
@@ -2408,9 +2379,6 @@
                             },
                             "ttl": {
                               "type": "integer",
-                              "x-stoplight": {
-                                "id": "hc2ikcyq9brau"
-                              },
                               "minimum": 60,
                               "maximum": 86400,
                               "default": 1800,
@@ -2925,17 +2893,11 @@
                   },
                   "deliverByHttps": {
                     "title": "deliverByHttps",
-                    "x-stoplight": {
-                      "id": "b5upebnysbdde"
-                    },
                     "type": "object",
                     "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                     "properties": {
                       "state": {
                         "type": "string",
-                        "x-stoplight": {
-                          "id": "v5ba3d6ze0otf"
-                        },
                         "enum": [
                           "on",
                           "off"
@@ -2944,9 +2906,6 @@
                       },
                       "alpn": {
                         "type": "string",
-                        "x-stoplight": {
-                          "id": "0bfghcz48z9d2"
-                        },
                         "enum": [
                           "h2",
                           "h3",
@@ -2956,9 +2915,6 @@
                       },
                       "port": {
                         "type": "integer",
-                        "x-stoplight": {
-                          "id": "lf60mtmbbzzga"
-                        },
                         "minimum": 80,
                         "maximum": 65535,
                         "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
@@ -2966,9 +2922,6 @@
                       },
                       "ttl": {
                         "type": "integer",
-                        "x-stoplight": {
-                          "id": "hc2ikcyq9brau"
-                        },
                         "minimum": 60,
                         "maximum": 86400,
                         "default": 1800,
@@ -3305,17 +3258,11 @@
                   },
                   "deliverByHttps": {
                     "title": "deliverByHttps",
-                    "x-stoplight": {
-                      "id": "b5upebnysbdde"
-                    },
                     "type": "object",
                     "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                     "properties": {
                       "state": {
                         "type": "string",
-                        "x-stoplight": {
-                          "id": "v5ba3d6ze0otf"
-                        },
                         "enum": [
                           "on",
                           "off"
@@ -3324,9 +3271,6 @@
                       },
                       "alpn": {
                         "type": "string",
-                        "x-stoplight": {
-                          "id": "0bfghcz48z9d2"
-                        },
                         "enum": [
                           "h2",
                           "h3",
@@ -3336,9 +3280,6 @@
                       },
                       "port": {
                         "type": "integer",
-                        "x-stoplight": {
-                          "id": "lf60mtmbbzzga"
-                        },
                         "minimum": 80,
                         "maximum": 65535,
                         "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
@@ -3346,9 +3287,6 @@
                       },
                       "ttl": {
                         "type": "integer",
-                        "x-stoplight": {
-                          "id": "hc2ikcyq9brau"
-                        },
                         "minimum": 60,
                         "maximum": 86400,
                         "default": 1800,
@@ -5797,17 +5735,11 @@
                   },
                   "deliverByHttps": {
                     "title": "deliverByHttps",
-                    "x-stoplight": {
-                      "id": "b5upebnysbdde"
-                    },
                     "type": "object",
                     "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
                     "properties": {
                       "state": {
                         "type": "string",
-                        "x-stoplight": {
-                          "id": "v5ba3d6ze0otf"
-                        },
                         "enum": [
                           "on",
                           "off"
@@ -5816,9 +5748,6 @@
                       },
                       "alpn": {
                         "type": "string",
-                        "x-stoplight": {
-                          "id": "0bfghcz48z9d2"
-                        },
                         "enum": [
                           "h2",
                           "h3",
@@ -5828,9 +5757,6 @@
                       },
                       "port": {
                         "type": "integer",
-                        "x-stoplight": {
-                          "id": "lf60mtmbbzzga"
-                        },
                         "minimum": 80,
                         "maximum": 65535,
                         "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
@@ -5838,9 +5764,6 @@
                       },
                       "ttl": {
                         "type": "integer",
-                        "x-stoplight": {
-                          "id": "hc2ikcyq9brau"
-                        },
                         "minimum": 60,
                         "maximum": 86400,
                         "default": 1800,
@@ -5857,12 +5780,7 @@
                 ]
               },
               "examples": {
-                "example-1": {
-                  "value": {
-                    "edgeHostname": "test.t1573428787161.qtlcdn.com"
-                  }
-                },
-                "example-2": {
+                "Example": {
                   "value": {
                     "edgeHostname": "testabcd.123.qtlcdn.com",
                     "clientZones": [
@@ -7744,10 +7662,18 @@
                     "type": {
                       "type": "string",
                       "description": "Indicates the type of certificate, either \"uploaded\" or \"self-signed.\""
+                    },
+                    "deletable": {
+                      "type": "boolean",
+                      "x-stoplight": {
+                        "id": "ns94zxapvkjq1"
+                      },
+                      "description": "Whether or not the certificate version can be deleted. A version can be deleted if it is not the only version, and it has never been deployed to staging or production."
                     }
                   },
                   "required": [
-                    "version"
+                    "version",
+                    "deletable"
                   ]
                 },
                 "examples": {
@@ -7770,7 +7696,8 @@
                         "b.domain.com"
                       ],
                       "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA",
-                      "type": "uploaded"
+                      "type": "uploaded",
+                      "deletable": false
                     }
                   }
                 }
@@ -24030,7 +23957,7 @@
                       "requestBody": "{\"name\":\"Undeploy certificate 'deletable'\",\"actions\":[{\"action\":\"remove_cert\",\"certificateId\":\"1a8a0716e7d56a98bcc9e61b\",\"version\":1}],\"target\":\"production\"}",
                       "requestURL": "https://ngapi.{{siteDomain}}/cdnapi/deploymentTasks",
                       "requestMethod": "POST",
-                      "requestTimestamp": "2024-09-25T05: 35:12Z",
+                      "requestTimestamp": "2024-09-25T05:35:12Z",
                       "responseHeaders": [
                         "vary:accept-encoding",
                         "Qtl-Request-Id:e5d6c85d9883be0a",
@@ -24141,8 +24068,7 @@
                       "type": "object",
                       "description": "Describes the price for traffic and requests.",
                       "required": [
-                        "perGB",
-                        "perMHttpsReq"
+                        "perGB"
                       ],
                       "properties": {
                         "perGB": {
@@ -36248,6 +36174,7 @@
                         },
                         "required": [
                           "id",
+                          "name",
                           "creationTime",
                           "lastUpdateTime"
                         ]
@@ -36346,12 +36273,6 @@
                   }
                 },
                 "examples": {
-                  "Duplicate name": {
-                    "value": {
-                      "code": "DuplicateName",
-                      "message": "The customer already has a logAggregationPoint with the same name."
-                    }
-                  },
                   "Invalid certificate ID": {
                     "value": {
                       "code": "InvalidCertificateId",
@@ -36362,6 +36283,12 @@
                     "value": {
                       "code": "CertificateConflict",
                       "message": "destinationAuthCertificate and destinationAuthCertificateId should not both appear"
+                    }
+                  },
+                  "Prefix too long": {
+                    "value": {
+                      "code": "PrefixTooLong",
+                      "message": "Prefix can be up to 250 characters."
                     }
                   }
                 }
@@ -36490,6 +36417,22 @@
                   "destinationAuthCertificateId": {
                     "type": "string",
                     "description": "Refers to the ID of a <a href=\"#operation/createCertificate\">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty."
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "lfj8wui44tmx4"
+                    },
+                    "maxLength": 250,
+                    "description": "Text to prepend before log entries. It can include the variable ${timestamp} which will be replaced by the current Unix timestamp in seconds."
+                  },
+                  "postfix": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "iexgvsja78xba"
+                    },
+                    "description": "Text to append after log entries. It can include the variable ${timestamp} which will be replaced by the current Unix timestamp in seconds.",
+                    "maxLength": 250
                   }
                 },
                 "required": [
@@ -36554,6 +36497,14 @@
                       "minimum": 10,
                       "maximum": 10000,
                       "default": 1000
+                    },
+                    "prefix": {
+                      "type": "string",
+                      "description": "Text that appears before each log entry. It can include variables.\n<table>\n<tr><th>Variable</th><th>Description</th></tr>\n<tr><td>${timestamp}</td><td>current Unix timestamp in seconds</td></tr>\n</table>"
+                    },
+                    "postfix": {
+                      "type": "string",
+                      "description": "Text that appears after each log entry. It can include variables.\n<table>\n<tr><th>Variable</th><th>Description</th></tr>\n<tr><td>${timestamp}</td><td>current Unix timestamp in seconds</td></tr>\n</table>"
                     },
                     "separator": {
                       "type": "string",
@@ -36683,7 +36634,8 @@
             "source": "./cdnapi.sh GET /logAggregationPoints/12\n"
           }
         ],
-        "description": "Use this API to get details about a log aggregration point."
+        "description": "Use this API to get details about a log aggregation point.",
+        "parameters": []
       },
       "delete": {
         "summary": "Delete a log aggregation point",
@@ -36710,10 +36662,10 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid log aggregation point ID": {
                     "value": {
-                      "code": "InvalidLogAggregationPoint",
-                      "message": "The log aggregation point is invalid"
+                      "code": "InvalidLogAggregationPointId",
+                      "message": "The specified log aggregation ID does not exist or the caller doesn't have access to this resource."
                     }
                   }
                 }
@@ -38968,6 +38920,198 @@
           }
         ],
         "description": "This API returns a list of IP addresses of servers that can be used to test deployments of properties and certificates to 'staging'. We recommend deploying to 'staging' and testing before deploying to 'production'."
+      }
+    },
+    "/cdn/logAggregationPoints/summaryReport": {
+      "get": {
+        "summary": "Get a summary of log aggregation points used during a period of time.",
+        "tags": [
+          "Log Aggregation Points"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a summary of aggregation points' use.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "An array of objects summarizing use of aggregation points.",
+                  "properties": {
+                    "summary": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "xvm1znk3ecg0y"
+                      },
+                      "items": {
+                        "title": "logAggregationPointSummary",
+                        "x-stoplight": {
+                          "id": "qlxyx7z93jf52"
+                        },
+                        "type": "object",
+                        "description": "Summarizes use of a log aggregation point.",
+                        "examples": [
+                          {
+                            "id": "401235176c80dd80dad2a8c47",
+                            "name": "aggregator",
+                            "ingestEntries": "23650642109",
+                            "destinationRequests": "95862252",
+                            "ingestBytes": "39347407448363"
+                          }
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "ID of a log aggregation point."
+                          },
+                          "name": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "hjii8vjtbg60w"
+                            },
+                            "description": "Name of the log aggregation point."
+                          },
+                          "ingestEntries": {
+                            "type": "integer",
+                            "x-stoplight": {
+                              "id": "8n3sucb00tusk"
+                            },
+                            "description": "Number of entries ingested."
+                          },
+                          "destinationRequests": {
+                            "type": "integer",
+                            "x-stoplight": {
+                              "id": "5s0tsso08jj7u"
+                            },
+                            "description": "Total number of requests made to the destination URL."
+                          },
+                          "ingestBytes": {
+                            "type": "integer",
+                            "x-stoplight": {
+                              "id": "sb5dm1m1mosxz"
+                            },
+                            "description": "Total number of bytes ingested."
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "ingestEntries",
+                          "destinationRequests",
+                          "ingestBytes"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "summary"
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "summary": [
+                        {
+                          "id": "43f6624861092b1fae5579e9",
+                          "name": "my aggregation point",
+                          "ingestEntries": 17,
+                          "destinationRequests": 17,
+                          "ingestBytes": 1014
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "te7b52xxzjc58"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "yvulimo79ss6p"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid timespan": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The time span should be no more than 7 days."
+                    }
+                  },
+                  "Invalid timespan 2": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The parameter 'startdate' cannot be a time in the future."
+                    }
+                  },
+                  "Invalid start date": {
+                    "value": {
+                      "code": "InvalidStartDate",
+                      "message": "Invalid parameter 'startdate'. '2025-0x-10T00:00:00Z' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  },
+                  "Invalid end date": {
+                    "value": {
+                      "code": "InvalidEndDate",
+                      "message": "Invalid parameter 'enddate'. '202d-04-07T00:00:00Z' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cdn-logAggregationPoints-summaryReport",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /logAggregationPoints/summaryReport -p -m 2025-03\n"
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "startdate",
+            "required": true,
+            "description": "RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone. Example: <code>startdate=2025-03-14T00:00:00Z</code>"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone. Example: <code>startdate=2025-03-18T00:00:00Z</code>",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          }
+        ],
+        "description": "This API summarizes use of your log aggregation points during a time period."
       }
     }
   },
