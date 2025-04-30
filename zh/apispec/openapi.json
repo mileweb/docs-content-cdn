@@ -36174,6 +36174,7 @@
                         },
                         "required": [
                           "id",
+                          "name",
                           "creationTime",
                           "lastUpdateTime"
                         ]
@@ -36272,12 +36273,6 @@
                   }
                 },
                 "examples": {
-                  "Duplicate name": {
-                    "value": {
-                      "code": "DuplicateName",
-                      "message": "The customer already has a logAggregationPoint with the same name."
-                    }
-                  },
                   "Invalid certificate ID": {
                     "value": {
                       "code": "InvalidCertificateId",
@@ -36288,6 +36283,12 @@
                     "value": {
                       "code": "CertificateConflict",
                       "message": "destinationAuthCertificate and destinationAuthCertificateId should not both appear"
+                    }
+                  },
+                  "Prefix too long": {
+                    "value": {
+                      "code": "PrefixTooLong",
+                      "message": "Prefix can be up to 250 characters."
                     }
                   }
                 }
@@ -36416,6 +36417,22 @@
                   "destinationAuthCertificateId": {
                     "type": "string",
                     "description": "Refers to the ID of a <a href=\"#operation/createCertificate\">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty."
+                  },
+                  "prefix": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "lfj8wui44tmx4"
+                    },
+                    "maxLength": 250,
+                    "description": "Text to prepend before log entries. It can include the variable ${timestamp} which will be replaced by the current Unix timestamp in seconds."
+                  },
+                  "postfix": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "iexgvsja78xba"
+                    },
+                    "description": "Text to append after log entries. It can include the variable ${timestamp} which will be replaced by the current Unix timestamp in seconds.",
+                    "maxLength": 250
                   }
                 },
                 "required": [
@@ -36480,6 +36497,14 @@
                       "minimum": 10,
                       "maximum": 10000,
                       "default": 1000
+                    },
+                    "prefix": {
+                      "type": "string",
+                      "description": "Text that appears before each log entry. It can include variables.\n<table>\n<tr><th>Variable</th><th>Description</th></tr>\n<tr><td>${timestamp}</td><td>current Unix timestamp in seconds</td></tr>\n</table>"
+                    },
+                    "postfix": {
+                      "type": "string",
+                      "description": "Text that appears after each log entry. It can include variables.\n<table>\n<tr><th>Variable</th><th>Description</th></tr>\n<tr><td>${timestamp}</td><td>current Unix timestamp in seconds</td></tr>\n</table>"
                     },
                     "separator": {
                       "type": "string",
@@ -36637,10 +36662,10 @@
                   }
                 },
                 "examples": {
-                  "example-1": {
+                  "Invalid log aggregation point ID": {
                     "value": {
-                      "code": "InvalidLogAggregationPoint",
-                      "message": "The log aggregation point is invalid"
+                      "code": "InvalidLogAggregationPointId",
+                      "message": "The specified log aggregation ID does not exist or the caller doesn't have access to this resource."
                     }
                   }
                 }
@@ -39051,6 +39076,13 @@
           }
         },
         "operationId": "get-cdn-logAggregationPoints-summaryReport",
+        "x-codeSamples": [
+          {
+            "lang": "CDN Pro script",
+            "label": "CDNProCLI",
+            "source": "./cdnapi.sh GET /logAggregationPoints/summaryReport -p -m 2025-03\n"
+          }
+        ],
         "parameters": [
           {
             "schema": {
@@ -39067,7 +39099,8 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone. Example: <code>startdate=2025-03-18T00:00:00Z</code>"
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone. Example: <code>startdate=2025-03-18T00:00:00Z</code>",
+            "required": true
           },
           {
             "schema": {
