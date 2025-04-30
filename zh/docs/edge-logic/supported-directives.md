@@ -30,7 +30,7 @@
 
 1. 引入了```policy=```参数来更精确地控制指令的行为:
 ```nginx
-add_header X-My-Header $header_value policy=repeat|overwrite|preserve
+add_header X-My-Header $header_value policy=repeat|overwrite|preserve;
 ```
 ```overwrite```: 添加一个头部。如果该头部名称已经存在，则覆盖原有的值。如果value是空字符串，则会将该头部删除。
 
@@ -59,14 +59,6 @@ Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range,
 使用举例:
 ```nginx
 add_header X-Cache-Status $upstream_cache_status policy=preserve;
-```
-使用变量的例子:
-```nginx
-set $cache_status_method "preserve";  
-if ($arg_debug = cache_status) {
-    set $cache_status_method "overwrite";
-}
-add_header X-Cache-Status $upstream_cache_status policy=$cache_status_method;
 ```
 
 2. 引入了```if(condition)```参数来控制本指令生效的条件。只有当条件为真的时候，本指令才会修改发往客户端的头部，否则完全不起作用。这个```if()```参数必须出现在本指令的末尾。```condition```可以是如下条件表达式:
@@ -252,11 +244,10 @@ location / {
 <span class="badge">标准</span>
 
 **使用语法:** `default_type <mime-type>;`<br/>
-**默认设置:** `default_type application/octet-stream`<br/>
+**默认设置:** `default_type application/octet-stream;`<br/>
 **可用位置:** server, location
 
 设置给客户端的响应的默认类型。代码逻辑源自 Nginx 开源版本，除了默认值，无其它改动。
-Defines the default MIME type of a response. No change to the public version, except the default value.
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
@@ -525,7 +516,7 @@ else { ... }
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_follow_redirect;` <br/>
-**默认设置：** - <br/>
+**默认设置：** `-` <br/>
 **可用位置：** location
 
 当源站响应 30x 状态码并携带一个 Location 跳转地址时，您或许希望 CDN360 继续对这个地址发起请求直至获取到实际的响应文件，然后再进行缓存和客户端响应。如果将跳转地址传递给客户端来发起新请求会导致更长的时间来获取最终内容。如果需要实现上述行为，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location 块中使用本指令。
@@ -569,7 +560,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 ```
 该指令可跨不同层级（http/server/location/location if）合并。如果不同层级存在针对相同的响应头的配置，则最内层的配置生效。
 
-尽管 CDN360 具有分层缓存结构，该指令仅更改源站响应中的头部（不会更改来自中间节点的响应头）。
+尽管 CDN Pro 具有分层缓存结构，该指令仅更改源站响应中的头部（不会更改来自中间节点的响应头）。
 
 ### `origin_limit_rate`
 
@@ -587,7 +578,7 @@ origin_header_modify Cache-Control "" policy=overwrite;
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `origin_pass _origin_name[URI];`<br>
-**默认设置：** none <br>
+**默认设置：** `-` <br>
 **可用位置：** location, if in location
 
 该指令用于指定获取内容的源站以及URI。它在 nginx [proxy_pass](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) 指令的基础上进行了优化提升。该指令携带的参数是在加速项“源站配置”中提前设置好的源站名。源站名后可以选择配置一个 URI，该 URI 中支持使用变量。如果未指定 URI，则 CDN Pro 会用携带问号后参数的完整 URI（可能已被 `rewrite` 指令更改） 发起对源站的请求。如果您希望回源时去掉问号后参数，可以使用[rewrite](#rewrite)指令并在第二个参数（替换路径）的末尾加上一个问号，例如：
@@ -630,7 +621,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：**  `origin_set_header field value [flag=any] [policy=...] [if(condition)];` <br/>
-**默认设置：** `none` <br/>
+**默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
 该指令在 [proxy_set_header](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) 的指令基础上进行了优化提升，用于增、删、改回源请求头。CDN Pro 对开源版本代码进行了以下提升：
@@ -675,7 +666,7 @@ origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Clien
 
 <span class="badge">标准</span>
 
-**使用语法：** `proxy_cache_background_update on | off;;` <br/>
+**使用语法：** `proxy_cache_background_update on | off;` <br/>
 **默认设置：** `proxy_cache_background_update off;` <br/>
 **可用位置：** server, location
 
@@ -727,7 +718,7 @@ proxy_cache_bypass $http_pragma    $http_authorization;
 **默认设置:** `-` <br/>
 **可用位置:** server, location
 
-本指令允许CDN Pro 边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的的功能和 `Cache-Control` 响应头里的 `stale-if-error`和 `stale-while-revalidate`参数相同。但是优先级低于该响应头。
+本指令允许CDN Pro 边缘服务器返回缓存中过期不太久的内容，以提高终端用户的体验。他的功能和 `Cache-Control` 响应头里的 `stale-if-error`和 `stale-while-revalidate`参数相同。但是优先级低于该响应头。
 
 'if_error=' 参数要求 [`proxy_cache_use_stale`](#proxy_cache_use_stale) 的配置里包含 ‘error’。参数 'while_revalidate=' 必须和 [`proxy_cache_background_update on;`](#proxy_cache_background_update) 一同配置，同时要求 `proxy_cache_use_stale` 的配置里包含 'updating'。
 
@@ -787,7 +778,7 @@ X-Accel-Expires > Cache-Control (max-age)，proxy_cache_min_age > Expires > prox
 <span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `proxy_cache_valid [code ...] time;` <br/>
-**默认设置：** — <br/>
+**默认设置：** `-` <br/>
 **可用位置：** server, location
 
 该指令用于给不同的响应状态码设置缓存时间。如果没有显式配置状态码，默认值为200， 301和302。只有当源站提供的响应头中没有缓存规则时（如 Cache-Control\Expire 响应头）时，该配置项才会生效。换句话说，源站的响应头字段 `Cache-Control`、`Expires`、`Set-Cookie` 等具有更高的优先级，除非这些响应头被 [`proxy_ignore_cache_control`](#proxy_ignore_cache_control) 或 [`proxy_ignore_headers`](#proxy_ignore_headers) 忽略。CDN Pro 在[NGINX 开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid) 基础上上进行了部分代码优化以支持使用变量来设置缓存时间。变量的值如果不是一个合法的时间参数，则该指令不生效，内容不会缓存。参数值 0 表示缓存响应并将其视为已过期。如果您可以根据请求中的某些参数识别动态/不可缓存的内容，请使用 [`proxy_cache_bypass`](#proxy_cache_bypass) 和 [`proxy_no_cache`](#proxy_no_cache) 来绕过缓存执行过程并提高性能。
@@ -856,7 +847,7 @@ location / {
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `proxy_ignore_cache_control directives…;` <br/>
-**默认设置：** none <br/>
+**默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
 该指令用于设置 CDN Pro 忽略来自源站 `cache-control` 响应头中的某些参数。可以忽略以下指令：
@@ -1001,7 +992,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 <span class="badge dark">高级</span> <span class="badge">LB logic</span>
 
 **使用语法:** `proxy_request_buffering on/off;` <br/>
-**默认设置:** `proxy_request_buffering off` <br/>
+**默认设置:** `proxy_request_buffering off;` <br/>
 **使用位置:** server, location
 
 开启或关闭对客户端请求体的缓冲。与开源版本基本一致，不同的是CDN Pro默认关闭缓冲。
@@ -1013,7 +1004,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 <span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `proxy_request_body_in_cache_key on/off;` <br/>
-**默认设置:** `proxy_request_body_in_cache_key on` <br/>
+**默认设置:** `proxy_request_body_in_cache_key on;` <br/>
 **可用位置:** server, location, if in location
 
 当参数值是 'on'（支持变量）时，CDN Pro 服务器将计算请求正文的 MD5 哈希值并将其加到缓存 key 的末尾。此指令主要针对使用 POST 请求来查询信息，并且查询参数携带在请求正文的情形。这类请求通常跟 GET 一样是幂等和安全的，而且其响应也是可缓存的。请注意您需要使用 [`proxy_cache_methods`](#proxy_cache_methods) 指令来启用对 POST 请求的缓存。
@@ -1025,7 +1016,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 <span class="badge">标准</span> <span class="badge primary">全新特有</span> <span class="badge">LB logic</span>
 
 **使用语法：** `proxy_set $variable value [if(...)];`<br>
-**默认设置：** none <br>
+**默认设置：** `-`<br>
 **可用位置：** server, location, if in location
 
 该指令将参数 `value` 的值赋值给变量 `$variable`。`value` 可以是另一个变量或变量和字符串的组合。该指令与 [`set`](#set) 指令非常相似，但是它们在请求处理的不同阶段被执行。`set` 指令是在收到请求后很早的 “rewrite” 阶段中被执行。而 `proxy_set` 是在从源接收到响应头（在缓存未命中的情况下）或从缓存中读取完毕后才被执行。因此，proxy_set 指令可以将响应头中的信息赋值给目标变量。请注意，响应头有可能被 [`origin_header_modify`](#origin_header_modify) 指令修改过。此外，该指令支持 `if()` 参数，用于指定该指令生效的条件。示例如下：
@@ -1224,7 +1215,7 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `slice_verify_header header_name;` <br/>
-**默认设置:** - <br/>
+**默认设置:** `-` <br/>
 **可用位置:** server, location
 
 指定头部用来检查切片文件的一致性。 此处指定的头部会与Etag一起用于一致性检查。如果您希望忽略Etag仅检查指定的头部，可将该指令与[`slice_ignore_etag`](#slice_ignore_etag)结合使用。
@@ -1298,7 +1289,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 <span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法:** `upstream_origin_only on|off;` <br/>
-**默认设置:** `upstream_origin_only off` <br/>
+**默认设置:** `upstream_origin_only off;` <br/>
 **可用位置:** server, location, if in location
 
 启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/zh/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
