@@ -1,5 +1,23 @@
 # Release Notes
 
+## May 29, 2025
+#### API updates
+* Added support for changing the legacyType of a property.
+* Improved error handling for logAggregationPoints/summaryReport API.
+* Updated several report APIs (vol, volOrigin, req, reqOrigin, and bandwidth) to support filtering and grouping by legacyType.
+
+#### Console updates
+* Added hint text and documentation for some items that had been omitted.
+
+## May 9, 2025
+#### API updates
+* Ensured directive cannot be removed from systemConfigs if it is still used in a serviceQuota.
+* Allowed a port to be reused for both HTTPS and HTTP traffic though not in the same property.
+
+#### Console updates
+* Fixed incorrect warning preventing deployment of a property using certificates that were previously deployed.
+
+
 ## April 29, 2025
 #### API updates
 * Introduced a flag to the certificate version to indicate if it is deletable.

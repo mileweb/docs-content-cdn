@@ -3660,7 +3660,7 @@
                       "message": "The origin hostHeader 'invalid' is invalid. It must be a valid hostname or a variable name ($ + a string consists of lower case a-z and '_' with length 3-60)."
                     }
                   },
-                  "OriginHostnameConflict": {
+                  "Origin hostname conflict": {
                     "value": {
                       "code": "OriginHostnameConflict",
                       "message": "At least one of the hostnames is equal to an origin's server name."
@@ -3700,6 +3700,12 @@
                     "value": {
                       "code": "InvalidOrigins",
                       "message": "A shield is acceptable only when \"directConnection\" is set to \"noDirect\"."
+                    }
+                  },
+                  "Service port conflict": {
+                    "value": {
+                      "code": "ServicePortConflict",
+                      "message": "1999 cannot be included in both http and https service port lists."
                     }
                   }
                 }
@@ -4350,7 +4356,7 @@
                       "message": "The TLS session timeout value should be between 300 and 86400 inclusive."
                     }
                   },
-                  "OriginHostnameConflict": {
+                  "Origin hostname conflict": {
                     "value": {
                       "code": "OriginHostnameConflict",
                       "message": "At least one of the hostnames is equal to an origin's server name."
@@ -4396,6 +4402,12 @@
                     "value": {
                       "code": "InvalidOrigins",
                       "message": "A shield is acceptable only when \"directConnection\" is set to \"noDirect\"."
+                    }
+                  },
+                  "Service port conflict": {
+                    "value": {
+                      "code": "ServicePortConflict",
+                      "message": "1999 cannot be included in both http and https service port lists."
                     }
                   }
                 }
@@ -10345,12 +10357,6 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
                         "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
@@ -10376,6 +10382,19 @@
                         "type": "array",
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "y9sid9e79f72w"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "mcxfnr7oms1jk"
+                          },
                           "type": "string"
                         }
                       }
@@ -10423,12 +10442,6 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
                         "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
@@ -10454,6 +10467,19 @@
                         "type": "array",
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "y9sid9e79f72w"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "mcxfnr7oms1jk"
+                          },
                           "type": "string"
                         }
                       }
@@ -10807,15 +10833,14 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "reportfilters",
                 "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
                 "x-examples": {
-                  "Example 1": {
+                  "Filter by a specific hostname": {
                     "filters": {
                       "hostnames": [
-                        "endtoendsds.domain.info"
-                      ],
-                      "serverGroups": [
-                        "standard"
+                        "domain.info"
                       ]
                     }
                   }
@@ -10823,10 +10848,11 @@
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -10847,15 +10873,29 @@
                           ]
                         }
                       },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
                       "propertyHostnames": {
                         "type": "array",
-                        "x-stoplight": {
-                          "id": "pvldr4hian46w"
-                        },
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "y9sid9e79f72w"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
                           "x-stoplight": {
-                            "id": "whsn279pias8r"
+                            "id": "mcxfnr7oms1jk"
                           },
                           "type": "string"
                         }
@@ -11232,12 +11272,6 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
                         "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
@@ -11263,6 +11297,19 @@
                         "type": "array",
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "y9sid9e79f72w"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "mcxfnr7oms1jk"
+                          },
                           "type": "string"
                         }
                       }
@@ -11637,12 +11684,6 @@
                       },
                       "serverGroups": {
                         "type": "array",
-                        "enum": [
-                          "standard",
-                          "premium",
-                          "deluxe",
-                          "ultra"
-                        ],
                         "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
                         "items": {
                           "type": "string",
@@ -11668,6 +11709,19 @@
                         "type": "array",
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "y9sid9e79f72w"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "mcxfnr7oms1jk"
+                          },
                           "type": "string"
                         }
                       }
@@ -12274,6 +12328,19 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "oxypcfzxsb1xv"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "4qkfzu57bep13"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -12619,7 +12686,18 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "reportfilters",
                 "type": "object",
+                "description": "An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.",
+                "x-examples": {
+                  "Filter by a specific hostname": {
+                    "filters": {
+                      "hostnames": [
+                        "domain.info"
+                      ]
+                    }
+                  }
+                },
                 "properties": {
                   "filters": {
                     "type": "object",
@@ -12627,7 +12705,7 @@
                     "properties": {
                       "hostnames": {
                         "type": "array",
-                        "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
+                        "description": "List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. ",
                         "items": {
                           "type": "string"
                         }
@@ -12648,15 +12726,29 @@
                           ]
                         }
                       },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
                       "propertyHostnames": {
                         "type": "array",
-                        "x-stoplight": {
-                          "id": "4x1so9lui3w3m"
-                        },
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "y9sid9e79f72w"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
                           "x-stoplight": {
-                            "id": "uqzujyca4xdsj"
+                            "id": "mcxfnr7oms1jk"
                           },
                           "type": "string"
                         }
@@ -13324,6 +13416,19 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "382zkxgx4a9wk"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "tztbbyuvcr67x"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -13778,6 +13883,32 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "13ervncgy5mmw"
+                        },
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "52bncjdhhprlk"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "p2t4aerw0qdpc"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "v0es54cfi7n84"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -14068,6 +14199,32 @@
                         "items": {
                           "x-stoplight": {
                             "id": "0zlfnd0v8ua2q"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "pd973g5iq43vf"
+                        },
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "av87njn0s7sgz"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "5dd9ynzmyixlw"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "h1sz5cbe4n7lp"
                           },
                           "type": "string"
                         }
@@ -16344,7 +16501,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\"."
+                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\",\"legacyTypes\"."
                     }
                   },
                   "Invalid timespan": {
@@ -16493,12 +16650,25 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "x-stoplight": {
+                          "id": "bj21fwk9w3jts"
+                        },
+                        "items": {
+                          "x-stoplight": {
+                            "id": "bcyfc5588dpyt"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', 'propertyIds', and 'propertyHostnames'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', 'propertyIds', 'propertyHostnames', and 'legacyTypes'. Only resellers can specify 'customerIds'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -16507,7 +16677,8 @@
                         "serverGroups",
                         "customerIds",
                         "propertyIds",
-                        "propertyHostnames"
+                        "propertyHostnames",
+                        "legacyTypes"
                       ]
                     }
                   }
@@ -16932,7 +17103,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\"."
+                      "message": "Invalid group name(s): 'hostnames2'. We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\",\"legacyTypes\"."
                     }
                   },
                   "Invalid timespan": {
@@ -16991,7 +17162,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', ' propertyHostnames', and 'propertyIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', ' propertyHostnames', 'propertyIds', and 'legacyTypes' by specifying a comma-separated list of the keywords. Only resellers can specify 'customerIds'."
           },
           {
             "schema": {
@@ -26311,6 +26482,19 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "rztrdbfir9mcl"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be ",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "kuay0x618wnb4"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   }
@@ -26558,6 +26742,32 @@
                         "items": {
                           "x-stoplight": {
                             "id": "x3l9wy5zc03qr"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "serverGroups": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "u5pmfcxvrefph"
+                        },
+                        "description": "One or more server groups for which to return data. If unspecified, data for all server groups will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "0auo02z5t1va4"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "im1tli2lcp6x9"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "m959gtqpym7rq"
                           },
                           "type": "string"
                         }
@@ -28035,6 +28245,19 @@
                         "items": {
                           "x-stoplight": {
                             "id": "sh7xgsk607hna"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "14dbil69fu0k0"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "ofr6kb0gv1kw7"
                           },
                           "type": "string"
                         }
@@ -30270,7 +30493,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\", \"propertyHostnames\",\"propertyIds\"."
+                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\", \"propertyHostnames\",\"propertyIds\",\"legacyTypes\"."
                     }
                   },
                   "Invalid customer ID": {
@@ -30415,12 +30638,25 @@
                         "items": {
                           "type": "string"
                         }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "x-stoplight": {
+                          "id": "bj21fwk9w3jts"
+                        },
+                        "items": {
+                          "x-stoplight": {
+                            "id": "bcyfc5588dpyt"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', 'propertyIds', and 'propertyHostnames'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups',  'customerIds', 'propertyIds', 'propertyHostnames', and 'legacyTypes'. Only resellers can specify 'customerIds'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -30429,7 +30665,8 @@
                         "serverGroups",
                         "customerIds",
                         "propertyIds",
-                        "propertyHostnames"
+                        "propertyHostnames",
+                        "legacyTypes"
                       ]
                     }
                   }
@@ -30585,7 +30822,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\"."
+                      "message": "Invalid group name(s): \"serverGroups1\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"propertyIds\",\"legacyTypes\"."
                     }
                   }
                 }
@@ -30647,7 +30884,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', 'propertyHostnames', and 'propertyIds' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', 'propertyHostnames',  'propertyIds', and 'legacyTypes' by specifying a comma-separated list of the keywords."
           }
         ],
         "tags": [
@@ -33672,7 +33909,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"legacyTypes\"."
                     }
                   },
                   "Invalid timespan": {
@@ -33755,46 +33992,44 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "reportfiltersummary",
                 "type": "object",
-                "description": "An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.",
-                "x-examples": {
-                  "Filter by a specific hostname": {
-                    "filters": {
-                      "hostnames": [
-                        "domain.info"
-                      ]
-                    }
-                  },
-                  "Group results by hostnames": {
-                    "groupBy": [
-                      "hostnames"
-                    ]
-                  }
-                },
                 "properties": {
                   "filters": {
                     "type": "object",
+                    "x-stoplight": {
+                      "id": "j3mdsh7cvsfo0"
+                    },
                     "description": "Filters let you refine the results that are returned.",
                     "properties": {
                       "hostnames": {
                         "type": "array",
+                        "x-stoplight": {
+                          "id": "qko7fkg1onfhh"
+                        },
                         "description": "List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.",
                         "items": {
+                          "x-stoplight": {
+                            "id": "gvu1cp8t0kgdx"
+                          },
                           "type": "string"
                         }
                       },
                       "serverGroups": {
                         "type": "array",
+                        "x-stoplight": {
+                          "id": "x1zyk10km7450"
+                        },
                         "description": "Indicates one or more server groups.",
                         "items": {
+                          "x-stoplight": {
+                            "id": "r0bw67a48ywt6"
+                          },
                           "type": "string",
                           "enum": [
                             "standard",
                             "premium",
                             "deluxe",
                             "ultra",
-                            "nearChina",
                             "ChinaStandard",
                             "ChinaPremium"
                           ]
@@ -33802,20 +34037,52 @@
                       },
                       "customerIds": {
                         "type": "array",
+                        "x-stoplight": {
+                          "id": "pp1xn3xl3rtt4"
+                        },
                         "description": "Resellers can limit the data by specifying IDs of child customers.",
                         "items": {
-                          "type": "integer"
+                          "x-stoplight": {
+                            "id": "32yntwqw0489k"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "jb603z0b8qdt9"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "k7izffboxeui3"
+                          },
+                          "type": "string"
                         }
                       },
                       "propertyHostnames": {
                         "type": "array",
                         "x-stoplight": {
-                          "id": "b2tgrmbucwte0"
+                          "id": "2oj27my7kpnf0"
                         },
                         "description": "A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href=\"#operation/createProperty\">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.",
                         "items": {
                           "x-stoplight": {
-                            "id": "jupf0i5duxcal"
+                            "id": "udmn4zwqpdzmc"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "legacyTypes": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "8lgrzqxfm72od"
+                        },
+                        "description": "A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "wd5vhgq4lgpyi"
                           },
                           "type": "string"
                         }
@@ -33824,15 +34091,21 @@
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames'.",
-                    "maxItems": 2,
+                    "x-stoplight": {
+                      "id": "qx5p32muqiofz"
+                    },
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', 'customerIds', 'propertyHostnames', and 'legacyTypes'. Only resellers can specify 'customerIds'.",
                     "items": {
+                      "x-stoplight": {
+                        "id": "s9zrsp8nexmpc"
+                      },
                       "type": "string",
                       "enum": [
                         "hostnames",
                         "serverGroups",
                         "customerIds",
-                        "propertyHostnames"
+                        "propertyHostnames",
+                        "legacyTypes"
                       ]
                     }
                   }
@@ -33994,7 +34267,7 @@
                   "Invalid group by": {
                     "value": {
                       "code": "InvalidGroupBy",
-                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\"."
+                      "message": "Invalid group name(s): \"x\". We only support grouping by \"hostnames\",\"serverGroups\",\"customerIds\",\"propertyHostnames\",\"legacyTypes\"."
                     }
                   },
                   "Invalid timespan": {
@@ -34061,7 +34334,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', ' propertyHostnames',  and 'legacyTypes' by specifying a comma-separated list of the keywords. Only resellers can specify 'customerIds'."
           }
         ]
       }
@@ -34334,12 +34607,38 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "j3jzcs1yao3un"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "ot5mfsc9xvlz9"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "axw3zvjg4ycpg"
+                        },
+                        "description": "Resellers can specify the IDs of child customers for which to return data.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "jhufx24tea2pe"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds'.",
+                    "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', and 'customerIds'. Only resellers can specify 'customerIds'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -34562,7 +34861,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords. Only resellers can specify 'customerIds'."
           }
         ]
       }
@@ -34993,12 +35292,38 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "f073qv88pu5nl"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "penwate6kdrsb"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "x7gv2he3u4opm"
+                        },
+                        "description": "Resellers can specify the IDs of child customers for which to return data.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "9x09mxdd8n824"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
                   "groupBy": {
                     "type": "array",
-                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames'.",
+                    "description": "You can group results using a combination of up to two of the following: 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames'. Only resellers can specify 'customerIds'.",
                     "maxItems": 2,
                     "items": {
                       "type": "string",
@@ -35221,7 +35546,7 @@
             },
             "in": "query",
             "name": "groupBy",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords. Only resellers can specify 'customerIds'."
           }
         ]
       }
@@ -35484,6 +35809,32 @@
                           },
                           "type": "string"
                         }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "w6azia5jzx8ij"
+                        },
+                        "description": "IDs of properties for which to return data. If unspecified, data for all properties will be returned.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "o7wu4ivhz0tgc"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "customerIds": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "s7yvdk0or2vtm"
+                        },
+                        "description": "Resellers can specify the IDs of child customers for which to return data.",
+                        "items": {
+                          "x-stoplight": {
+                            "id": "n7k44c4f8oxgk"
+                          },
+                          "type": "string"
+                        }
                       }
                     }
                   },
@@ -35721,7 +36072,7 @@
             },
             "in": "query",
             "name": "groupby",
-            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords."
+            "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords. Only resellers can specify 'customerIds'."
           },
           {
             "schema": {
@@ -39068,6 +39419,12 @@
                     "value": {
                       "code": "InvalidEndDate",
                       "message": "Invalid parameter 'enddate'. '202d-04-07T00:00:00Z' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  },
+                  "Invalid time frame": {
+                    "value": {
+                      "code": "InvalidTimeFrame",
+                      "message": "Logs are only available for the past 31 days. Please specify a time frame within this period."
                     }
                   }
                 }
