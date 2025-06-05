@@ -191,7 +191,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 65530,
-                            "description": "Refer to the <a href=\"/{{locale}}/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
+                            "description": "Refer to the [Edge Logic Introduction](</cdn/docs/edge-logic/intro>) to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                         },
                         "hasBeian": {
                           "type": "boolean",
