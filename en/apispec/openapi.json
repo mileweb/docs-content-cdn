@@ -570,6 +570,27 @@
                           },
                           "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                           "default": false
+                        },
+                        "tlsVerifyClient": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "yvd31sv0k0lem"
+                          },
+                          "enum": [
+                            "on",
+                            "off",
+                            "optional",
+                            "noCA"
+                          ],
+                          "default": "off",
+                          "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                        },
+                        "tlsClientCACertId": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "ryd3oz69wsct8"
+                          },
+                          "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                         }
                       }
                     },
@@ -1415,6 +1436,27 @@
                     },
                     "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                     "default": false
+                  },
+                  "tlsVerifyClient": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "yvd31sv0k0lem"
+                    },
+                    "enum": [
+                      "on",
+                      "off",
+                      "optional",
+                      "noCA"
+                    ],
+                    "default": "off",
+                    "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                  },
+                  "tlsClientCACertId": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ryd3oz69wsct8"
+                    },
+                    "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                   }
                 }
               },
@@ -4260,6 +4302,27 @@
                     },
                     "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                     "default": false
+                  },
+                  "tlsVerifyClient": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "yvd31sv0k0lem"
+                    },
+                    "enum": [
+                      "on",
+                      "off",
+                      "optional",
+                      "noCA"
+                    ],
+                    "default": "off",
+                    "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                  },
+                  "tlsClientCACertId": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ryd3oz69wsct8"
+                    },
+                    "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                   }
                 }
               },
@@ -4408,6 +4471,18 @@
                     "value": {
                       "code": "ServicePortConflict",
                       "message": "1999 cannot be included in both http and https service port lists."
+                    }
+                  },
+                  "Invalid certificate": {
+                    "value": {
+                      "code": "InvalidCertificate",
+                      "message": "The certificate specified for tlsCertificateId must not be CA-only."
+                    }
+                  },
+                  "Invalid client CA cert ID": {
+                    "value": {
+                      "code": "InvalidClientCACertId",
+                      "message": "The specified tlsClientCACertId does not exist."
                     }
                   }
                 }
@@ -4977,6 +5052,27 @@
                         },
                         "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                         "default": false
+                      },
+                      "tlsVerifyClient": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "yvd31sv0k0lem"
+                        },
+                        "enum": [
+                          "on",
+                          "off",
+                          "optional",
+                          "noCA"
+                        ],
+                        "default": "off",
+                        "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                      },
+                      "tlsClientCACertId": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "ryd3oz69wsct8"
+                        },
+                        "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                       }
                     }
                   }
@@ -6158,6 +6254,18 @@
                       "code": "InvalidKey",
                       "message": "Invalid private key cipher. The private key must be encrypted with your API key and the timestamp. Check if the API key is correct and if the private key is properly encrypted."
                     }
+                  },
+                  "Invalid data": {
+                    "value": {
+                      "code": "InvalidData",
+                      "message": "The autoRenew must be Off for a CA only certificate."
+                    }
+                  },
+                  "Invalid chain": {
+                    "value": {
+                      "code": "InvalidChain",
+                      "message": "The chain certificate has expired."
+                    }
                   }
                 }
               }
@@ -6260,9 +6368,10 @@
                     "type": "string",
                     "enum": [
                       "LE",
-                      "Off"
+                      "off"
                     ],
-                    "description": "Specifying \"LE\" requests that we automatically renew your certificate through Let's Encrypt (https://letsencrypt.org/docs/challenge-types/) when it is close to expiring. "
+                    "description": "Specifying \"LE\" requests that we automatically renew your certificate through Let's Encrypt (https://letsencrypt.org/docs/challenge-types/) when it is close to expiring. This field must be <i>off</i> if caOnly is <i>true</i>.",
+                    "default": "off"
                   },
                   "newVersion": {
                     "type": "object",
@@ -6282,7 +6391,7 @@
                       },
                       "chainCert": {
                         "type": "string",
-                        "description": "The chain certificate in PEM format."
+                        "description": "The chain certificate in PEM format. This field is required if caOnly is <i>true</i>."
                       },
                       "identificationInfo": {
                         "title": "certificateIdentificationInfo",
@@ -6342,7 +6451,15 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal. This field should be false if caOnly is <i>true</i>."
+                  },
+                  "caOnly": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "f9g1teu4no4vg"
+                    },
+                    "default": false,
+                    "description": "Indicates whether this is a CA file for client verification. This field cannot be changed after creation of the certificate object."
                   }
                 },
                 "required": [
@@ -6512,6 +6629,13 @@
                           "forceRenew": {
                             "type": "boolean",
                             "description": "Setting the value to true requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                          },
+                          "caOnly": {
+                            "type": "boolean",
+                            "x-stoplight": {
+                              "id": "x0gp9mye53xtf"
+                            },
+                            "description": "Whether or not the certificate is a CA-only file. A CA-only certificate is used for verification of a client's certificate."
                           }
                         }
                       }
@@ -6533,6 +6657,8 @@
                           "latestVersion": 3,
                           "owner": 1234567,
                           "autoRenew": "Off",
+                          "forceRenew": false,
+                          "caOnly": false,
                           "creationTime": "2019-02-06T04:16:37Z",
                           "expirationTime": "2020-10-12T12:10:31Z",
                           "lastUpdateTime": "2019-02-06T04:16:37Z",
@@ -6544,6 +6670,8 @@
                           "latestVersion": 1,
                           "owner": 1234567,
                           "autoRenew": "LE",
+                          "forceRenew": false,
+                          "caOnly": false,
                           "creationTime": "2019-02-06T04:23:35Z",
                           "expirationTime": "2019-09-22T08:11:54Z",
                           "lastUpdateTime": "2019-02-06T04:23:35Z"
@@ -6587,6 +6715,12 @@
                     "value": {
                       "code": "InvalidSortBy",
                       "message": "The valid sort by values for this endpoint are 'creationTime', 'lastUpdateTime', 'expirationTime'."
+                    }
+                  },
+                  "Invalid sort by 2": {
+                    "value": {
+                      "code": "InvalidSortBy",
+                      "message": "The valid sort by values for this endpoint are 'creationTime', lastUpdateTime' when caOnly=true is specified."
                     }
                   }
                 }
@@ -6706,6 +6840,15 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include certificates owned by or shared with the caller.</td></tr><tr><td>children-only</td><td>Include certificates owned by or shared with children customers only.</td></tr><tr><td>self+children</td><td>Include certificates owned by or shared with the caller or children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "in": "query",
+            "name": "caOnly",
+            "description": "By default, only non CA-only certificates are returned. Set to true to obtain a list of CA-only certificates."
           }
         ]
       }
@@ -6909,6 +7052,13 @@
                     "forceRenew": {
                       "type": "boolean",
                       "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    },
+                    "caOnly": {
+                      "type": "boolean",
+                      "x-stoplight": {
+                        "id": "tqfledhsoxdwg"
+                      },
+                      "description": "Indicates whether this is a CA file for client verification. "
                     }
                   },
                   "required": [
@@ -6917,7 +7067,8 @@
                     "ownerCustomerId",
                     "description",
                     "versions",
-                    "autoRenew"
+                    "autoRenew",
+                    "caOnly"
                   ]
                 },
                 "examples": {
@@ -6966,7 +7117,9 @@
                           ]
                         }
                       ],
-                      "autoRenew": "Off"
+                      "autoRenew": "Off",
+                      "forceRenew": false,
+                      "caOnly": false
                     }
                   }
                 }
@@ -7079,6 +7232,18 @@
                       "code": "InvalidKey",
                       "message": "Invalid private key cipher. The private key must be encrypted with your API key and the timestamp. Check if the API key is correct and if the private key is properly encrypted."
                     }
+                  },
+                  "Invalid update": {
+                    "value": {
+                      "code": "InvalidUpdate",
+                      "message": "Changing caOnly is not permitted. You must create a new certificate."
+                    }
+                  },
+                  "Invalid data": {
+                    "value": {
+                      "code": "InvalidData",
+                      "message": "The privateKey should not be specified for a CA only certificate."
+                    }
                   }
                 }
               }
@@ -7186,7 +7351,7 @@
                       "Off",
                       "LE"
                     ],
-                    "description": "Indicates whether the certificate will be renewed with Let's Encrypt."
+                    "description": "Indicates whether the certificate will be renewed with Let's Encrypt. The value must remain <i>Off</i> for CA-only certificates."
                   },
                   "newVersion": {
                     "type": "object",
@@ -7194,11 +7359,11 @@
                     "properties": {
                       "privateKey": {
                         "type": "string",
-                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>privateKey</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format."
+                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>privateKey</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format. This field should not be specified for CA-only certificates."
                       },
                       "certificate": {
                         "type": "string",
-                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>certificate</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format."
+                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>certificate</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format. This field should not be specified for CA-only certificates."
                       },
                       "chainCert": {
                         "type": "string",
@@ -7262,7 +7427,7 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal. The value must remain <i>false</i> for CA-only certificates."
                   }
                 }
               },
@@ -7421,7 +7586,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
+        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>. This API cannot be used for CA-only certificates.",
         "operationId": "downloadCSR",
         "x-codeSamples": [
           {
@@ -7494,6 +7659,38 @@
                         "uri": "/.well-known/pki-validation/8EAA4C3B692BA43579B00CD30F0E5D7C.txt",
                         "expirationTime": "2020-09-18T20:10:25Z"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "l91hq2j89iqui"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "gqscxo8vnfgun"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid cert type": {
+                    "value": {
+                      "code": "InvalidCertType",
+                      "message": "No CSR is available for download for a CA-only certificate."
                     }
                   }
                 }
@@ -7682,11 +7879,19 @@
                         "id": "ns94zxapvkjq1"
                       },
                       "description": "Whether or not the certificate version can be deleted. A version can be deleted if it is not the only version, and it has never been deployed to staging or production."
+                    },
+                    "caOnly": {
+                      "type": "boolean",
+                      "x-stoplight": {
+                        "id": "p7tzz459b7rqz"
+                      },
+                      "description": "Indicates whether this is a CA file for client verification. "
                     }
                   },
                   "required": [
                     "version",
-                    "deletable"
+                    "deletable",
+                    "caOnly"
                   ]
                 },
                 "examples": {
@@ -7710,7 +7915,8 @@
                       ],
                       "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA",
                       "type": "uploaded",
-                      "deletable": false
+                      "deletable": false,
+                      "caOnly": false
                     }
                   }
                 }
@@ -8315,6 +8521,12 @@
                     "value": {
                       "code": "InvalidPropertyVersion",
                       "message": "The property version specified does not exist."
+                    }
+                  },
+                  "Invalid certificate": {
+                    "value": {
+                      "code": "InvalidCertificate",
+                      "message": "The certificate 1234567abcdefghijklmn specified for 'tlsClientCACertId' in the property does not exist."
                     }
                   }
                 }
