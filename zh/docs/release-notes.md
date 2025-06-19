@@ -1,5 +1,12 @@
 # Release Notes
 
+## June 19, 2025
+#### API updates
+* Updated certificate APIs to support CA-only certificates which are used to verify a client’s certificate before our CDN responds with content.
+* Updated property APIs to support specifying a certificate used to verify a client’s certificate before our CDN responds with content.
+* Fixed an error in our API that checks whether an IP address is a CDN Pro one.
+
+
 ## May 29, 2025
 #### API updates
 * Added support for changing the legacyType of a property.
