@@ -164,7 +164,7 @@
                             },
                             "format": {
                               "type": "string",
-                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the <a href=\"/cdn/docs/edge-logic/built-in-variables\">built-in variables</a> within the format field. They will be replaced with the actual values in the notifications."
+                              "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the [built-in variables](</docs/edge-logic/built-in-variables>) within the format field. They will be replaced with the actual values in the notifications."
                             },
                             "headers": {
                               "type": "array",
@@ -191,7 +191,7 @@
                         "edgeLogic": {
                           "type": "string",
                           "maxLength": 65530,
-                          "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
+                          "description": "Refer to the [Edge Logic Introduction](</docs/edge-logic/intro>) to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                         },
                         "hasBeian": {
                           "type": "boolean",
@@ -539,7 +539,7 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                          "description": "This field allows you to enter [Edge Logic](</docs/edge-logic/intro>) to customize load balancing. A subset of the [directives](</docs/edge-logic/supported-directives>)  can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to [this guide](</docs/edge-logic/edge-node-structure-upgrade>) for more details.",
                           "maxLength": 65530,
                           "deprecated": true
                         },
@@ -570,6 +570,27 @@
                           },
                           "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                           "default": false
+                        },
+                        "tlsVerifyClient": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "yvd31sv0k0lem"
+                          },
+                          "enum": [
+                            "on",
+                            "off",
+                            "optional",
+                            "noCA"
+                          ],
+                          "default": "off",
+                          "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                        },
+                        "tlsClientCACertId": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "ryd3oz69wsct8"
+                          },
+                          "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                         }
                       }
                     },
@@ -1009,7 +1030,7 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the <a href=\"/cdn/docs/edge-logic/built-in-variables\">built-in variables</a> within the format field. They will be replaced with the actual values in the notifications."
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the [built-in variables](</docs/edge-logic/built-in-variables>) within the format field. They will be replaced with the actual values in the notifications."
                       },
                       "headers": {
                         "type": "array",
@@ -1036,7 +1057,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
+                    "description": "Refer to the [Edge Logic Introduction](</docs/edge-logic/intro>) to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -1384,7 +1405,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                    "description": "This field allows you to enter [Edge Logic](</docs/edge-logic/intro>) to customize load balancing. A subset of the [directives](</docs/edge-logic/supported-directives>)  can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to [this guide](</docs/edge-logic/edge-node-structure-upgrade>) for more details.",
                     "maxLength": 65530,
                     "deprecated": true
                   },
@@ -1415,6 +1436,27 @@
                     },
                     "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                     "default": false
+                  },
+                  "tlsVerifyClient": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "yvd31sv0k0lem"
+                    },
+                    "enum": [
+                      "on",
+                      "off",
+                      "optional",
+                      "noCA"
+                    ],
+                    "default": "off",
+                    "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                  },
+                  "tlsClientCACertId": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ryd3oz69wsct8"
+                    },
+                    "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                   }
                 }
               },
@@ -3854,7 +3896,7 @@
                       },
                       "format": {
                         "type": "string",
-                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the <a href=\"/cdn/docs/edge-logic/built-in-variables\">built-in variables</a> within the format field. They will be replaced with the actual values in the notifications."
+                        "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the [built-in variables](</docs/edge-logic/built-in-variables>) within the format field. They will be replaced with the actual values in the notifications."
                       },
                       "headers": {
                         "type": "array",
@@ -3881,7 +3923,7 @@
                   "edgeLogic": {
                     "type": "string",
                     "maxLength": 65530,
-                    "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
+                    "description": "Refer to the [Edge Logic Introduction](</docs/edge-logic/intro>) to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                   },
                   "hasBeian": {
                     "type": "boolean",
@@ -4229,7 +4271,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                    "description": "This field allows you to enter [Edge Logic](</docs/edge-logic/intro>) to customize load balancing. A subset of the [directives](</docs/edge-logic/supported-directives>)  can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to [this guide](</docs/edge-logic/edge-node-structure-upgrade>) for more details.",
                     "maxLength": 65530,
                     "deprecated": true
                   },
@@ -4260,6 +4302,27 @@
                     },
                     "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                     "default": false
+                  },
+                  "tlsVerifyClient": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "yvd31sv0k0lem"
+                    },
+                    "enum": [
+                      "on",
+                      "off",
+                      "optional",
+                      "noCA"
+                    ],
+                    "default": "off",
+                    "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                  },
+                  "tlsClientCACertId": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ryd3oz69wsct8"
+                    },
+                    "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                   }
                 }
               },
@@ -4408,6 +4471,18 @@
                     "value": {
                       "code": "ServicePortConflict",
                       "message": "1999 cannot be included in both http and https service port lists."
+                    }
+                  },
+                  "Invalid certificate": {
+                    "value": {
+                      "code": "InvalidCertificate",
+                      "message": "The certificate specified for tlsCertificateId must not be CA-only."
+                    }
+                  },
+                  "Invalid client CA cert ID": {
+                    "value": {
+                      "code": "InvalidClientCACertId",
+                      "message": "The specified tlsClientCACertId does not exist."
                     }
                   }
                 }
@@ -4571,7 +4646,7 @@
                           },
                           "format": {
                             "type": "string",
-                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the <a href=\"/cdn/docs/edge-logic/built-in-variables\">built-in variables</a> within the format field. They will be replaced with the actual values in the notifications."
+                            "description": "This is a required field to specify the notification body to be sent to the remote server. It can be any printable text that can be sent in the body of an HTTP POST request. \n\nUse the [built-in variables](</docs/edge-logic/built-in-variables>) within the format field. They will be replaced with the actual values in the notifications."
                           },
                           "headers": {
                             "type": "array",
@@ -4598,7 +4673,7 @@
                       "edgeLogic": {
                         "type": "string",
                         "maxLength": 65530,
-                        "description": "Refer to the <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic Introduction</a> to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
+                        "description": "Refer to the [Edge Logic Introduction](</docs/edge-logic/intro>) to learn how to use the NGINX language to further customize CDN Pro to meet your business requirements."
                       },
                       "hasBeian": {
                         "type": "boolean",
@@ -4946,7 +5021,7 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "This field allows you to enter <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> to customize load balancing. A subset of the <a href=\"/cdn/docs/edge-logic/supported-directives\"> directives</a> can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to <a href=\"/cdn/docs/edge-logic/edge-node-structure-upgrade\">this guide</a> for more details.",
+                        "description": "This field allows you to enter [Edge Logic](</docs/edge-logic/intro>) to customize load balancing. A subset of the [directives](</docs/edge-logic/supported-directives>)  can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href=\"#operation/get-cdn-systemConfigs\">system configuration API</a>. Currently, these include \"if\", \"else\", \"elseif\", \"set\", \"return\", \"add_header\", \"deny\", \"allow\", \"access_log_sampling\", and \"proxy_set_header.\" In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>Note:</b> Due to our upgrade of the CDN Pro edge node structure, the loadBalancerLogic field will be deprecated soon. Please avoid using this field. All the supported directives should be configured in the edgeLogic field only. Please refer to [this guide](</docs/edge-logic/edge-node-structure-upgrade>) for more details.",
                         "maxLength": 65530,
                         "deprecated": true
                       },
@@ -4977,6 +5052,27 @@
                         },
                         "description": "Set to <i>true</i> to enable support for HTTP/3. HTTP/3 requires TLS to work, so this field will be ignored unless you specify a certificate in the tlsCertificateId field.",
                         "default": false
+                      },
+                      "tlsVerifyClient": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "yvd31sv0k0lem"
+                        },
+                        "enum": [
+                          "on",
+                          "off",
+                          "optional",
+                          "noCA"
+                        ],
+                        "default": "off",
+                        "description": "Whether to enable verification of a client's certificate. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>on</td><td>verify the client certificate</td></tr><tr><td>off</td><td>do not verify the client certificate</td></tr><tr><td>optional</td><td>request the client certificate and verify it if it is present</td></tr><tr><td>noCA</td><td>request the client certificate but do not require it to be signed by a trusted CA certificate</td></tr></table>"
+                      },
+                      "tlsClientCACertId": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "ryd3oz69wsct8"
+                        },
+                        "description": "ID of a CA-only certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>."
                       }
                     }
                   }
@@ -5824,7 +5920,8 @@
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
           }
-        ]
+        ],
+        "x-internal": false
       },
       "get": {
         "summary": "Get a list of edge hostnames",
@@ -6157,6 +6254,18 @@
                       "code": "InvalidKey",
                       "message": "Invalid private key cipher. The private key must be encrypted with your API key and the timestamp. Check if the API key is correct and if the private key is properly encrypted."
                     }
+                  },
+                  "Invalid data": {
+                    "value": {
+                      "code": "InvalidData",
+                      "message": "The autoRenew must be Off for a CA only certificate."
+                    }
+                  },
+                  "Invalid chain": {
+                    "value": {
+                      "code": "InvalidChain",
+                      "message": "The chain certificate has expired."
+                    }
                   }
                 }
               }
@@ -6259,9 +6368,10 @@
                     "type": "string",
                     "enum": [
                       "LE",
-                      "Off"
+                      "off"
                     ],
-                    "description": "Specifying \"LE\" requests that we automatically renew your certificate through Let's Encrypt (https://letsencrypt.org/docs/challenge-types/) when it is close to expiring. "
+                    "description": "Specifying \"LE\" requests that we automatically renew your certificate through Let's Encrypt (https://letsencrypt.org/docs/challenge-types/) when it is close to expiring. This field must be <i>off</i> if caOnly is <i>true</i>.",
+                    "default": "off"
                   },
                   "newVersion": {
                     "type": "object",
@@ -6281,7 +6391,7 @@
                       },
                       "chainCert": {
                         "type": "string",
-                        "description": "The chain certificate in PEM format."
+                        "description": "The chain certificate in PEM format. This field is required if caOnly is <i>true</i>."
                       },
                       "identificationInfo": {
                         "title": "certificateIdentificationInfo",
@@ -6341,7 +6451,15 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal. This field should be false if caOnly is <i>true</i>."
+                  },
+                  "caOnly": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "f9g1teu4no4vg"
+                    },
+                    "default": false,
+                    "description": "Indicates whether this is a CA file for client verification. This field cannot be changed after creation of the certificate object."
                   }
                 },
                 "required": [
@@ -6511,6 +6629,13 @@
                           "forceRenew": {
                             "type": "boolean",
                             "description": "Setting the value to true requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                          },
+                          "caOnly": {
+                            "type": "boolean",
+                            "x-stoplight": {
+                              "id": "x0gp9mye53xtf"
+                            },
+                            "description": "Whether or not the certificate is a CA-only file. A CA-only certificate is used for verification of a client's certificate."
                           }
                         }
                       }
@@ -6532,6 +6657,8 @@
                           "latestVersion": 3,
                           "owner": 1234567,
                           "autoRenew": "Off",
+                          "forceRenew": false,
+                          "caOnly": false,
                           "creationTime": "2019-02-06T04:16:37Z",
                           "expirationTime": "2020-10-12T12:10:31Z",
                           "lastUpdateTime": "2019-02-06T04:16:37Z",
@@ -6543,6 +6670,8 @@
                           "latestVersion": 1,
                           "owner": 1234567,
                           "autoRenew": "LE",
+                          "forceRenew": false,
+                          "caOnly": false,
                           "creationTime": "2019-02-06T04:23:35Z",
                           "expirationTime": "2019-09-22T08:11:54Z",
                           "lastUpdateTime": "2019-02-06T04:23:35Z"
@@ -6586,6 +6715,12 @@
                     "value": {
                       "code": "InvalidSortBy",
                       "message": "The valid sort by values for this endpoint are 'creationTime', 'lastUpdateTime', 'expirationTime'."
+                    }
+                  },
+                  "Invalid sort by 2": {
+                    "value": {
+                      "code": "InvalidSortBy",
+                      "message": "The valid sort by values for this endpoint are 'creationTime', lastUpdateTime' when caOnly=true is specified."
                     }
                   }
                 }
@@ -6705,6 +6840,15 @@
             "in": "header",
             "name": "Report-Range",
             "description": "An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include certificates owned by or shared with the caller.</td></tr><tr><td>children-only</td><td>Include certificates owned by or shared with children customers only.</td></tr><tr><td>self+children</td><td>Include certificates owned by or shared with the caller or children customers.</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "in": "query",
+            "name": "caOnly",
+            "description": "By default, only non CA-only certificates are returned. Set to true to obtain a list of CA-only certificates."
           }
         ]
       }
@@ -6908,6 +7052,13 @@
                     "forceRenew": {
                       "type": "boolean",
                       "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    },
+                    "caOnly": {
+                      "type": "boolean",
+                      "x-stoplight": {
+                        "id": "tqfledhsoxdwg"
+                      },
+                      "description": "Indicates whether this is a CA file for client verification. "
                     }
                   },
                   "required": [
@@ -6916,7 +7067,8 @@
                     "ownerCustomerId",
                     "description",
                     "versions",
-                    "autoRenew"
+                    "autoRenew",
+                    "caOnly"
                   ]
                 },
                 "examples": {
@@ -6965,7 +7117,9 @@
                           ]
                         }
                       ],
-                      "autoRenew": "Off"
+                      "autoRenew": "Off",
+                      "forceRenew": false,
+                      "caOnly": false
                     }
                   }
                 }
@@ -7078,6 +7232,18 @@
                       "code": "InvalidKey",
                       "message": "Invalid private key cipher. The private key must be encrypted with your API key and the timestamp. Check if the API key is correct and if the private key is properly encrypted."
                     }
+                  },
+                  "Invalid update": {
+                    "value": {
+                      "code": "InvalidUpdate",
+                      "message": "Changing caOnly is not permitted. You must create a new certificate."
+                    }
+                  },
+                  "Invalid data": {
+                    "value": {
+                      "code": "InvalidData",
+                      "message": "The privateKey should not be specified for a CA only certificate."
+                    }
                   }
                 }
               }
@@ -7185,7 +7351,7 @@
                       "Off",
                       "LE"
                     ],
-                    "description": "Indicates whether the certificate will be renewed with Let's Encrypt."
+                    "description": "Indicates whether the certificate will be renewed with Let's Encrypt. The value must remain <i>Off</i> for CA-only certificates."
                   },
                   "newVersion": {
                     "type": "object",
@@ -7193,11 +7359,11 @@
                     "properties": {
                       "privateKey": {
                         "type": "string",
-                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>privateKey</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format."
+                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>privateKey</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format. This field should not be specified for CA-only certificates."
                       },
                       "certificate": {
                         "type": "string",
-                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>certificate</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format."
+                        "description": "If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>certificate</i> field in the <a href=\"#operation/createCertificate\">Create a certificate API</a> for details about the format. This field should not be specified for CA-only certificates."
                       },
                       "chainCert": {
                         "type": "string",
@@ -7261,7 +7427,7 @@
                   "forceRenew": {
                     "type": "boolean",
                     "default": false,
-                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                    "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal. The value must remain <i>false</i> for CA-only certificates."
                   }
                 }
               },
@@ -7420,7 +7586,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>.",
+        "description": "Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href=\"#operation/updateCertificate\">Update a certificate API</a>. This API cannot be used for CA-only certificates.",
         "operationId": "downloadCSR",
         "x-codeSamples": [
           {
@@ -7493,6 +7659,38 @@
                         "uri": "/.well-known/pki-validation/8EAA4C3B692BA43579B00CD30F0E5D7C.txt",
                         "expirationTime": "2020-09-18T20:10:25Z"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "l91hq2j89iqui"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "gqscxo8vnfgun"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid cert type": {
+                    "value": {
+                      "code": "InvalidCertType",
+                      "message": "No CSR is available for download for a CA-only certificate."
                     }
                   }
                 }
@@ -7681,11 +7879,19 @@
                         "id": "ns94zxapvkjq1"
                       },
                       "description": "Whether or not the certificate version can be deleted. A version can be deleted if it is not the only version, and it has never been deployed to staging or production."
+                    },
+                    "caOnly": {
+                      "type": "boolean",
+                      "x-stoplight": {
+                        "id": "p7tzz459b7rqz"
+                      },
+                      "description": "Indicates whether this is a CA file for client verification. "
                     }
                   },
                   "required": [
                     "version",
-                    "deletable"
+                    "deletable",
+                    "caOnly"
                   ]
                 },
                 "examples": {
@@ -7709,7 +7915,8 @@
                       ],
                       "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA",
                       "type": "uploaded",
-                      "deletable": false
+                      "deletable": false,
+                      "caOnly": false
                     }
                   }
                 }
@@ -8314,6 +8521,12 @@
                     "value": {
                       "code": "InvalidPropertyVersion",
                       "message": "The property version specified does not exist."
+                    }
+                  },
+                  "Invalid certificate": {
+                    "value": {
+                      "code": "InvalidCertificate",
+                      "message": "The certificate 1234567abcdefghijklmn specified for 'tlsClientCACertId' in the property does not exist."
                     }
                   }
                 }
@@ -9060,7 +9273,7 @@
             }
           }
         },
-        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to <a href=\"/cdn/docs/portal/edge-configurations/testing-property\">testing a property</a> for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. An error will also be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a> with your desired changes.",
+        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to [testing a property](</docs/portal/edge-configurations/testing-property>) for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. An error will also be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a> with your desired changes.",
         "operationId": "createDeployment",
         "x-codeSamples": [
           {
@@ -24659,7 +24872,7 @@
             "source": "./cdnapi.sh GET /systemConfigs\n"
           }
         ],
-        "description": "This API returns system configuration settings including supported <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a>, advanced Edge Logic directives, the default pricing for traffic, and nonstandard ports that can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed."
+        "description": "This API returns system configuration settings including supported [Edge Logic directives](</docs/edge-logic/supported-directives>), advanced Edge Logic directives, the default pricing for traffic, and nonstandard ports that can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed."
       }
     },
     "/cdn/serviceQuotas": {
@@ -24851,7 +25064,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of advanced <a href=\"/cdn/docs/edge-logic/supported-directives\">Edge Logic directives</a> that are permitted to be used in addition to standard ones.",
+                    "description": "A list of advanced [Edge Logic directives](</docs/edge-logic/supported-directives>) that are permitted to be used in addition to standard ones.",
                     "items": {
                       "type": "string"
                     }
@@ -24875,7 +25088,7 @@
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
-                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "description": "Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.",
                         "minimum": 1
                       },
                       "maxUpstreamKeepaliveTimeOut": {
@@ -24885,32 +25098,32 @@
                       "maxOriginConnectTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive."
                       },
                       "maxOriginReadTimeOut": {
                         "type": "integer",
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "description": "Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.",
                         "minimum": 1
                       },
                       "maxOriginSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive."
                       },
                       "maxClientHeaderTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive."
                       },
                       "maxClientSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive."
                       },
                       "maxClientBodyTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive."
                       }
                     }
                   },
@@ -25242,7 +25455,7 @@
             },
             "in": "query",
             "name": "allowedCacheDirectives",
-            "description": "Return service quotas of customers permitted to use an advanced <a href=\"/cdn/docs/edge-logic/supported-directives#expires\">Edge Logic directive</a> specified by this parameter."
+            "description": "Return service quotas of customers permitted to use an advanced [Edge Logic directive](</docs/edge-logic/supported-directives#expires>) specified by this parameter."
           },
           {
             "schema": {
@@ -25478,7 +25691,7 @@
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
-                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "description": "Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.",
                           "minimum": 1
                         },
                         "maxUpstreamKeepaliveTimeOut": {
@@ -25488,32 +25701,32 @@
                         "maxOriginConnectTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive."
                         },
                         "maxOriginReadTimeOut": {
                           "type": "integer",
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "description": "Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.",
                           "minimum": 1
                         },
                         "maxOriginSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive."
                         },
                         "maxClientHeaderTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive."
                         },
                         "maxClientSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive."
                         },
                         "maxClientBodyTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive."
                         }
                       }
                     },
@@ -25892,7 +26105,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced Edge Logic directives</a> that are permitted to be used.",
+                    "description": "A list of [advanced Edge Logic directives](</docs/edge-logic/supported-directives>) that are permitted to be used.",
                     "items": {
                       "type": "string"
                     }
@@ -25947,7 +26160,7 @@
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
-                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "description": "Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.",
                         "minimum": 1
                       },
                       "maxUpstreamKeepaliveTimeOut": {
@@ -25957,32 +26170,32 @@
                       "maxOriginConnectTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive."
                       },
                       "maxOriginReadTimeOut": {
                         "type": "integer",
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "description": "Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.",
                         "minimum": 1
                       },
                       "maxOriginSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive."
                       },
                       "maxClientHeaderTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive."
                       },
                       "maxClientSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive."
                       },
                       "maxClientBodyTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive."
                       }
                     }
                   },
@@ -26377,7 +26590,7 @@
             "source": "./cdnapi.sh POST /report/fastOriginReq?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
-        "description": "Return the number of requests to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
+        "description": "Return the number of requests to your origin server that uses our [fast route feature](</docs/edge-logic/supported-directives#origin_fast_route>) to make the connections faster and more reliable.",
         "parameters": [
           {
             "schema": {
@@ -26647,7 +26860,7 @@
             "source": "./cdnapi.sh POST /report/fastOriginVol?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
-        "description": "Return the traffic to your origin server that uses our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable.",
+        "description": "Return the traffic to your origin server that uses our [fast route feature](</docs/edge-logic/supported-directives#origin_fast_route>) to make the connections faster and more reliable.",
         "parameters": [
           {
             "schema": {
@@ -26975,7 +27188,7 @@
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
-                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "description": "Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.",
                           "minimum": 1
                         },
                         "maxUpstreamKeepaliveTimeOut": {
@@ -26985,32 +27198,32 @@
                         "maxOriginConnectTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive."
                         },
                         "maxOriginReadTimeOut": {
                           "type": "integer",
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "description": "Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.",
                           "minimum": 1
                         },
                         "maxOriginSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive."
                         },
                         "maxClientHeaderTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive."
                         },
                         "maxClientSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive."
                         },
                         "maxClientBodyTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive."
                         }
                       }
                     },
@@ -27355,7 +27568,7 @@
                       "properties": {
                         "maxLimitRate": {
                           "type": "integer",
-                          "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                          "description": "Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.",
                           "minimum": 1
                         },
                         "maxUpstreamKeepaliveTimeOut": {
@@ -27365,32 +27578,32 @@
                         "maxOriginConnectTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive."
                         },
                         "maxOriginReadTimeOut": {
                           "type": "integer",
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                          "description": "Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.",
                           "minimum": 1
                         },
                         "maxOriginSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive."
                         },
                         "maxClientHeaderTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive."
                         },
                         "maxClientSendTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive."
                         },
                         "maxClientBodyTimeOut": {
                           "type": "integer",
                           "minimum": 1,
-                          "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                          "description": "Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive."
                         }
                       }
                     },
@@ -27672,7 +27885,7 @@
                   },
                   "allowedCacheDirectives": {
                     "type": "array",
-                    "description": "A list of <a href=\"/cdn/docs/edge-logic/supported-directives\">advanced Edge Logic directives</a> that are permitted to be used.",
+                    "description": "A list of [advanced Edge Logic directives](</docs/edge-logic/supported-directives>) that are permitted to be used.",
                     "items": {
                       "type": "string"
                     }
@@ -27727,7 +27940,7 @@
                     "properties": {
                       "maxLimitRate": {
                         "type": "integer",
-                        "description": "Maximum number of bytes per second that can permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#limit_rate\">limit_rate</a> directive.",
+                        "description": "Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.",
                         "minimum": 1
                       },
                       "maxUpstreamKeepaliveTimeOut": {
@@ -27737,32 +27950,32 @@
                       "maxOriginConnectTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_connect_timeout\">origin_connect_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive."
                       },
                       "maxOriginReadTimeOut": {
                         "type": "integer",
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_read_timeout\">origin_read_timeout</a> directive.",
+                        "description": "Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.",
                         "minimum": 1
                       },
                       "maxOriginSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_send_timeout\">origin_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive."
                       },
                       "maxClientHeaderTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_header_timeout\">client_header_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive."
                       },
                       "maxClientSendTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_send_timeout\">client_send_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive."
                       },
                       "maxClientBodyTimeOut": {
                         "type": "integer",
                         "minimum": 1,
-                        "description": "Maximum number of seconds permitted in the <a href=\"/cdn/docs/edge-logic/supported-directives#client_body_timeout\">client_body_timeout</a> directive."
+                        "description": "Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive."
                       }
                     }
                   },
@@ -32843,7 +33056,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>     \n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%apachet] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -32941,7 +33154,7 @@
                         },
                         "logDownloadFormat": {
                           "type": "string",
-                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>     \n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>\n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>      \n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
+                          "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>      \n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>\n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>      \n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing."
                         },
                         "logDownloadStorageDays": {
                           "type": "integer",
@@ -33190,7 +33403,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>     \n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%apachet] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -33253,7 +33466,7 @@
                   },
                   "logDownloadFormat": {
                     "type": "string",
-                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/cdn/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>     \n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/cdn/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
+                    "description": "Format of the log entry. You can use the following variables to create a custom format:\n<table>\n<tr><th>Variable</th><th>Meaning</th></tr>\n<tr><td>%apachet</td><td>Time in the Common Log Format, for example, 03/Apr/2023:07:49:03 +0000</td></tr>\n<tr><td>%cachestate</td><td>HIT, MISS, or REVALIDATE</td></tr>\n<tr><td>%cltip</td><td>Client IP address</td></tr>\n<tr><td>%cltisp</td><td>Client ISP</td></tr>\n<tr><td>%cltport</td><td>Client port number</td></tr>\n<tr><td>%cltregion</td><td>Client region</td></tr>\n<tr><td>%content_code</td><td>Content code. Values can be set in Edge Logic by <a href=\"/docs/edge-logic/faq#how-to-classify-traffic-in-reports-based-on-custom-rules\">setting the $content_code variable</a>.</td></tr>\n<tr><td>%cpu_ns</td><td>CPU time in nanoseconds for this request</td></tr>\n<tr><td>%custom_0</td><td>Refers to a custom log field with ID 0 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_1</td><td>Refers to a custom log field with ID 1 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_2</td><td>Refers to a custom log field with ID 2 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_3</td><td>Refers to a custom log field with ID 3 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_4</td><td>Refers to a custom log field with ID 4 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_5</td><td>Refers to a custom log field with ID 5 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_6</td><td>Refers to a custom log field with ID 6 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_7</td><td>Refers to a custom log field with ID 7 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_8</td><td>Refers to a custom log field with ID 8 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%custom_9</td><td>Refers to a custom log field with ID 9 you define using the <a href=\"/docs/edge-logic/supported-directives#custom_log_field\">custom_log_field directive</a>.</td></tr>\n<tr><td>%hostname</td><td>Host header</td></tr>\n<tr><td>%method</td><td>HTTP method used to access the content, for example, GET</td></tr>\n<tr><td>%protocol</td><td>HTTP/1.0 or HTTP/1.1 or HTTP2.0</td></tr>\n<tr><td>%querystr</td><td>Query string</td></tr>      \n<tr><td>%referer</td><td>Referer request header</td></tr>\n<tr><td>%reqhdrsize</td><td>Request header size in bytes</td></tr>\n<tr><td>%reqrange</td><td>Range header in requests from client</td></tr>\n<tr><td>%reqsize</td><td>Request size in bytes including the request line, header, and request body</td></tr>\n<tr><td>%rmtuser</td><td>User name extracted from the Authorization header when basic authentication is used</td></tr>\n<tr><td>%rspsize</td><td>HTTP response size, in bytes, including header and body, but not including TCP/IP/MAC</td></tr>\n<tr><td>%rsptime</td><td>Response time in milliseconds</td></tr>\n<tr><td>%samplerate</td><td>Number of requests corresponding to each log entry</td></tr>\n<tr><td>%scheme</td><td>http or https</td></tr>\n<tr><td>%statuscode</td><td>Response's status code, for example, 200</td></tr>\n<tr><td>%svrip</td><td>IP address of the CDN server handling the request</td></tr>\n<tr><td>%svrnode</td><td>Cache server node name</td></tr>\n<tr><td>%tcprtt</td><td>Round-trip time between server and client in microseconds</td></tr>      \n<tr><td>%ua</td><td>User-Agent header</td></tr>\n<tr><td>%uniqueid</td><td>A string uniquely identifying this request</td></tr>       \n<tr><td>%url</td><td>Full URL with query string, if any</td></tr>\n<tr><td>%utctime</td><td>RFC 3339 timestamp of the response, for example, 2021-10-05T12:34:56Z</td></tr>\n</table>\nIf any variable value contains non-printable characters (ASCII characters <=0x1F or >=0x7F), double quotes, or a backslash, each of those characters will be escaped to a format like \"\\xXX\". For example, double quotes will become \"\\x22\" and backslash will become \"\\x5C\".\nNote that space is not escaped. You must quote variables that may contain spaces to facilitate parsing.",
                     "default": "%cltip %rmtuser  [%apachet] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime"
                   },
                   "logDownloadStorageDays": {
@@ -35023,7 +35236,7 @@
             "source": "./cdnapi.sh GET /publicIpList\n"
           }
         ],
-        "description": "Get a list of IP addresses used by CDN Pro. If your property's origin configuration uses the directConnection setting 'noDirect', and its Edge Logic does not use the <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">origin fast route directive</a>, you can restrict access to your origin servers by updating your allow lists with these IP addresses. Since the CDN's IP addresses can periodically change, we recommend that you check once a day and update your allow lists."
+        "description": "Get a list of IP addresses used by CDN Pro. If your property's origin configuration uses the directConnection setting 'noDirect', and its Edge Logic does not use the [origin fast route directive](</docs/edge-logic/supported-directives#origin_fast_route>), you can restrict access to your origin servers by updating your allow lists with these IP addresses. Since the CDN's IP addresses can periodically change, we recommend that you check once a day and update your allow lists."
       }
     },
     "/cdn/report/originStatusSummary": {
@@ -38606,31 +38819,7 @@
                       ]
                     }
                   },
-                  "examples": [
-                    {
-                      "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
-                        "isComplete": true,
-                        "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
-                        ],
-                        "dataUnit": "megabits per second"
-                      },
-                      "groups": [
-                        {
-                          "group": "__all__",
-                          "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
-                          ]
-                        }
-                      ]
-                    }
-                  ],
+                  "examples": [],
                   "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
@@ -38955,31 +39144,7 @@
                       ]
                     }
                   },
-                  "examples": [
-                    {
-                      "metaData": {
-                        "startTime": "2023-07-01T00:00:00Z",
-                        "endTime": "2023-08-01T00:00:00Z",
-                        "isComplete": true,
-                        "dataNames": [
-                          "average bandwidth",
-                          "peak bandwidth",
-                          "peak bandwidth timestamp"
-                        ],
-                        "dataUnit": "megabits per second"
-                      },
-                      "groups": [
-                        {
-                          "group": "__all__",
-                          "data": [
-                            0.00698,
-                            1.78078,
-                            "2023-07-13T10:55:00Z"
-                          ]
-                        }
-                      ]
-                    }
-                  ],
+                  "examples": [],
                   "description": "Response to the bandwidthL7Summary API",
                   "properties": {
                     "metaData": {
@@ -39166,7 +39331,7 @@
             "source": "./cdnapi.sh GET /originFastRouteIpList\n"
           }
         ],
-        "description": "This API returns a list of IP addresses used by our origin fast route servers. If you use our <a href=\"/cdn/docs/edge-logic/supported-directives#origin_fast_route\">fast route feature</a> to make the connections faster and more reliable and wish to restrict access to your origin servers, add these IP addresses to your allow lists.\n"
+        "description": "This API returns a list of IP addresses used by our origin fast route servers. If you use our [fast route feature](</docs/edge-logic/supported-directives#origin_fast_route>) to make the connections faster and more reliable and wish to restrict access to your origin servers, add these IP addresses to your allow lists.\n"
       }
     },
     "/cdn/stagingServers": {
@@ -39502,11 +39667,11 @@
     },
     {
       "name": "Secret Management",
-      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your <a href=\"/cdn/docs/edge-logic/intro\">Edge Logic</a> using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
+      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you <a href=\"https://docs.{{siteDomain}}/cdn/docs/portal/edge-configurations/testing-property\">deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i></a>. <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you [deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i>](</docs/portal/edge-configurations/testing-property>). <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
     },
     {
       "name": "Hostnames",
