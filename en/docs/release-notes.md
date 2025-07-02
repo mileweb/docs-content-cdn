@@ -1,5 +1,9 @@
 # Release Notes
 
+## July 1, 2025
+#### Console updates
+* Updated the upgrade page to support referrals.
+
 ## June 19, 2025
 #### API updates
 * Updated certificate APIs to support CA-only certificates which are used to verify a client’s certificate before our CDN responds with content.
