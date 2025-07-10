@@ -1,5 +1,11 @@
 # Release Notes
 
+## July 10, 2025
+#### Console updates
+* Ensured labels in the property details page are shown in the user's preferred language.
+* Updated reports to support filtering and grouping by service types for applicable customers.
+
+
 ## July 1, 2025
 #### Console updates
 * Updated the upgrade page to support referrals.
