@@ -7421,6 +7421,13 @@
                           "commonName",
                           "subjectAlternativeNames"
                         ]
+                      },
+                      "comments": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "qjyye8qu3q54l"
+                        },
+                        "description": "Comments about the certificate version."
                       }
                     }
                   },
