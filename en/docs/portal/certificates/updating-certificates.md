@@ -1,4 +1,4 @@
-# Updating a Certificate
+# Updating a Server Certificate
 
 On CDN Pro, each certificate is versioned, and each version is not editable once saved. You can deploy each version independently to the staging and production environments. There can be only one version deployed in each environment at any time. Deploying a new version replaces the old one automatically. Therefore, if you need to update an expiring certificate in production, create a new version of that certificate and deploy to production to replace the old one. All properties using the old certificate in production pick up the new version automatically.
 
@@ -19,8 +19,6 @@ CDN Pro sends an email notification when a certificate used in production is clo
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-upload.png" alt="Upload Certificate Version" width="700"></p>
 
 7. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
-
-<strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button and select <strong>History</strong>.</br></br>
 
 8. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
 
@@ -43,7 +41,6 @@ If your company's security policy requires the new certificate to have a new pri
 10. With **Creation Method** set  to **Upload**, upload the new certificate and, optionally, the chain certificate. Click **Save Version**. Do not worry about the private key because it will be the same one as the last version.
 11. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
 
-<strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button and select <strong>History</strong>.</br></br>
 
 12. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>).
-**Note**: To update a certificate, you must be the owner of the certificate.
+**Note**: To update a certificate, you must be the owner of the certificate.
