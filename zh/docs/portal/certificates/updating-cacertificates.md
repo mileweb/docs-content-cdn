@@ -2,7 +2,7 @@
 
 On CDN Pro, each certificate is versioned, and each version is not editable once saved. You can deploy each version independently to the staging and production environments. There can be only one version deployed in each environment at any time. Deploying a new version replaces the old one automatically. 
 
-To update a CA certificates:
+To update a CA certificate:
 
 1. In the left pane, click **Certificates** and choose **CA Certificates**.
 2. Click a certificate name.

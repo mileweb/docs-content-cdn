@@ -45,6 +45,8 @@ The actions are:
 
 ## CA Certificates
 
+Trusted CA certificates are used to verify clients' certificates.
+
 ### CA Certificates Page
 CA certificates are managed from the CA Certificates page. To display this page, click **Certificates** in the left pane and choose **CA Certificates**. All certificates are versioned in CDN Pro. After a version is saved, it cannot be changed. If you need to update a CA certificate, you just create a new version and deploy it to replace the old one. At any time, only one version of each certificate can be deployed into the staging or production environment. 
 

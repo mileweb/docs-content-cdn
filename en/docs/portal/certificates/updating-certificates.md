@@ -2,10 +2,10 @@
 
 On CDN Pro, each certificate is versioned, and each version is not editable once saved. You can deploy each version independently to the staging and production environments. There can be only one version deployed in each environment at any time. Deploying a new version replaces the old one automatically. Therefore, if you need to update an expiring certificate in production, create a new version of that certificate and deploy to production to replace the old one. All properties using the old certificate in production pick up the new version automatically.
 
-CDN Pro sends an email notification when a certificate used in production is close to its expiration date. For convenience, CDN Pro supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>), so you never need to worry about the expiration of your certificates. If you prefer to renew your certificates manually, perform one of the following procedures.
+CDN Pro sends an email notification when a server certificate used in production is close to its expiration date. For convenience, CDN Pro supports certificate [auto-renewal](</docs/portal/certificates/auto-renewal.md>) through [Let's Encrypt](<https://letsencrypt.org/docs/challenge-types/>), so you never need to worry about the expiration of your certificates. If you prefer to renew your certificates manually, perform one of the following procedures.
 
 ## If you already have a new CA-signed certificate with private key and chain certificate
-1. In the left pane, click **Certificates**.
+1. In the left pane, click **Certificates** and choose **Server Certificates**.
 2. Click a certificate name.
     <br><u>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the certificate you want to edit, and then select **Edit**.
@@ -27,7 +27,7 @@ CDN Pro sends an email notification when a certificate used in production is clo
 ## If you need a CSR to apply for the new certificate from a CA
 If your company's security policy requires the new certificate to have a new private key that is different from the expiring one, perform the following procedure to create a self-signed version. Otherwise, skip steps 5 and 6.
 
-1. In the left pane, click **Certificates**.
+1. In the left pane, click **Certificates** and choose **Server Certificates**.
 2. Click a certificate name.
 3. To change the name of the certificate, move your mouse to the right of the certificate name at the top of the form. When the pencil icon appears, click it and enter the new name. When done, click the checkmark at the bottom right of the field in which you typed the name.
 4. Edit the **Share With** setting now or after step 5 if desired.

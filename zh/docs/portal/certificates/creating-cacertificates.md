@@ -5,7 +5,7 @@ To create a new CA certificate that can be used to verify a client's certificate
 1. In the left pane, click **Certificates** and choose **CA Certificates**.<br>
 2. At the top of the CA Certificates page, click the **Create CA Certificate** button.
 
-<p align=center><img src="/docs/resources/images/certificates/cacertificates-wo-numbers.png" alt="Create new CA certificate button" width="900"></p>
+<p align=center><img src="/docs/resources/images/certificates/cacertificates.png" alt="Create new CA certificate button" width="900"></p>
 
 3. Complete the fields in the Create a CA Certificate form.  Click Upload to upload the chain certificate. In the **Comments** field, enter any optional comments. Required fields are denoted by an asterisk (\*).
 
