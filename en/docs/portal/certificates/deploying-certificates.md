@@ -8,12 +8,9 @@ After you create or update a server or CA certificate, you must deploy it to eit
 
 1. In the left pane, click **Certificates**.
 2. To deploy a server certificate, click **Server Certificates**. To deploy a CA certificate, click **CA Certificates**.
-2. On the certificate list page, click the name of the certificate you want to deploy.
-3. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
-
-<strong>Note:</strong> To view the deployment history of the property before deploying it, click the <strong>Deploy</strong> button followed by <strong>History</strong>.</br></br>
-
-4. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>). If you clicked **Deploy Now**, it will take about 5 minutes to complete the deployment process. You can watch the progress and wait for it to finish, click the **Go to Dashboard** button in the pop-up to go to the Dashboard, or close the pop-up to perform other tasks while deployment continues in the background. You can always click **Tasks** in the left pane to check the status of the deployment.</br></br></li>
+3. On the certificate list page, click the name of the certificate you want to deploy.
+4. Click the <strong>Deploy</strong> button and select <strong>Staging</strong> or <strong>Production</strong>.<br>
+5. To deploy the certificate now, click <strong>Deploy Now</strong>. To deploy it at a later time, click <strong>Add to Standby task</strong> to add this task to the [standby queue](</docs/portal/tasks/standby-tasks.md>). If you clicked **Deploy Now**, it will take about 5 minutes to complete the deployment process. You can watch the progress and wait for it to finish, click the **Go to Dashboard** button in the pop-up to go to the Dashboard, or close the pop-up to perform other tasks while deployment continues in the background. You can always click **Tasks** in the left pane to check the status of the deployment.</br></br></li>
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="550"></p>
 
 <strong>Note:</strong> To view the deployment history of the certificate before deploying it, click the **Deployment History** button. 
@@ -31,4 +28,4 @@ If you no longer need a certificate in a staging or production environment, you 
 Below is an example from the server certificates list:
 <p align="center"><img src="/docs/resources/images/certificates/certificate-actions.png" alt="Certificate Actions" width="900"></p>
 
-3. When the confirmation pop-up appears, undeploy the certificate now by clicking <strong>OK</strong> (the undeployment process takes about 5 minutes).<br><br><u>OR</u> <br><br>Undeploy the certificate at a later time by clicking the **Add to Standby task** button to move this action to the [standby queue](</docs/portal/tasks/standby-tasks.md>).</br></br>
+4. When the confirmation pop-up appears, undeploy the certificate now by clicking <strong>OK</strong> (the undeployment process takes about 5 minutes).<br><br><u>OR</u> <br><br>Undeploy the certificate at a later time by clicking the **Add to Standby task** button to move this action to the [standby queue](</docs/portal/tasks/standby-tasks.md>).</br></br>
