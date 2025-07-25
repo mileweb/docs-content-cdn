@@ -156,15 +156,15 @@
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
-                "title": "创建证书",
+                "title": "创建服务端证书",
                 "path": "/docs/portal/certificates/creating-certificates.md"
               },
               {
-                "title": "修改证书",
+                "title": "修改服务端证书",
                 "path": "/docs/portal/certificates/updating-certificates.md"
               },
               {
-                "title": "自动更新证书",
+                "title": "自动更新服务端证书",
                 "path": "/docs/portal/certificates/auto-renewal.md"
               },
               {

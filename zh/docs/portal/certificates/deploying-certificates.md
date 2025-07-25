@@ -10,7 +10,7 @@
 2. 要部署服务端证书，点击 **服务端证书** 菜单。要部署CA证书，点击 **CA证书** 菜单。
 3. 在证书页面，点击您需要部署的证书名。
 4. 在证书详情页面，点击 **部署** 按钮。
-5. 如果您需要立即部署证书，请在 **部署目标** 消息框中选择 **演练** 或者 **生产** 环境，然后点击 **立即部署**。 在下个部署确认消息提示中，点击 **确定**。 <br><br><u><p>或者</br></br></u></li> 如果您需要稍后再部署证书，请选择 **添加到待命任务** 按钮，将此证书的部署存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>) 中。<br><br><li>如果您点击**立即部署**，则大约需要 5 分钟来完成整个部署过程。您可以查看进度并等待它完成，或者点击 **Hide** 让其继续部署。您可以随时点击左边菜单栏中的 **查看任务** 来检查部署状态。</br></br></li>
+5. 如果您需要立即部署证书，请在 **部署目标** 消息框中选择 **演练** 或者 **生产** 环境，然后点击 **立即部署**。 在下个部署确认消息提示中，点击 **确定**。 如果您需要稍后再部署证书，请选择 **添加到待命任务** 按钮，将此证书的部署存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>) 中。<br><br><li>如果您点击**立即部署**，则大约需要 5 分钟来完成整个部署过程。您可以查看进度并等待它完成，或者隐藏弹窗。您可以随时点击左边菜单栏中的 **查看任务** 来检查部署状态。</br></br></li>
 <p align="center"><img src="/docs/resources/images/certificates/certificate-deployment-options.png" alt="Deployment Options" width="550"></p>
 
 <strong>注意：</strong> 要在部署之前查看证书的部署历史，请点击 **部署历史** 按钮。
@@ -25,4 +25,4 @@
 3. 在“证书”页面的 **操作** 列中，点击垂直省略号，然后选择 **从演练环境卸载** 或 **从生产环境卸载**。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-actions.png" alt="Certificate Actions" width="900"></p>
 
-4. 当出现确认窗口时，点击 <strong>OK</strong> 来卸载掉证书（整个卸载操作预计需要 5 分钟）。<br><br><u>或者</u> <br><br> 点击 **添加到待命任务** 按钮，将此证书的卸载操作存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>)中。</br></br>
+4. 当出现确认窗口时，点击 <strong>OK</strong> 来卸载掉证书（整个卸载操作预计需要 5 分钟）。或者，点击 **添加到待命任务** 按钮，将此证书的卸载操作存放到 [待命列表](</docs/portal/tasks/standby-tasks.md>)中。</br></br>
