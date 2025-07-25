@@ -164,12 +164,20 @@
                 "path": "/docs/portal/certificates/updating-certificates.md"
               },
               {
-                "title": "部署证书",
-                "path": "/docs/portal/certificates/deploying-certificates.md"
-              },
-              {
                 "title": "自动更新证书",
                 "path": "/docs/portal/certificates/auto-renewal.md"
+              },
+              {
+                "title": "Create a CA Certificate",
+                "path": "/docs/portal/certificates/creating-cacertificates.md"
+              },
+              {
+                "title": "Update a CA Certificate",
+                "path": "/docs/portal/certificates/updating-cacertificates.md"
+              },
+              {
+                "title": "部署证书",
+                "path": "/docs/portal/certificates/deploying-certificates.md"
               },
               {
                   "title": "删除证书",
