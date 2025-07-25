@@ -168,11 +168,11 @@
                 "path": "/docs/portal/certificates/auto-renewal.md"
               },
               {
-                "title": "Create a CA Certificate",
+                "title": "创建CA证书",
                 "path": "/docs/portal/certificates/creating-cacertificates.md"
               },
               {
-                "title": "Update a CA Certificate",
+                "title": "更新CA证书",
                 "path": "/docs/portal/certificates/updating-cacertificates.md"
               },
               {

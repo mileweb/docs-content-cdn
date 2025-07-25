@@ -61,8 +61,6 @@ To upload the files as a new certificate:
 <p align=center><img src="/docs/resources/images/certificates/certificates-wo-numbers.png" alt="Create new certificate button" width="900"></p>
 
 3. Complete the fields at the top of the Create a Certificate form (see the table above). Next to **Creation Method**, select  **Upload** and upload the private key, certificate, and chain certificate. In the **Comments** field, enter any optional comments. Required fields are denoted by an asterisk (\*).
-   
-**Note:** Upload only the files you need to change on top of the current latest version.
 
 <p align="center"><img src="/docs/resources/images/certificates/create-certificate-upload.png" alt="Upload Certificate" width="600"></p>
 
