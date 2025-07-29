@@ -9,7 +9,7 @@ You can display the Standby Task form from the Certificates, Edge Configurations
 
 ### Displaying the Standby Task Form from the Certificate or Edge Configurations Page
 
-1. In the left pane, click **Certificates** or **Edge Configurations > Properties**.
+1. In the left pane, click **Certificates** followed by **Server Certificates** or **CA Certificates**, or click **Edge Configurations > Properties**.
 2. Click a certificate name or property ID.
 3. Click the three dots next to either the **Deploy** button (for certificates) or the **Edit** button (for properties) and select **History**.
 4. Click a standby task to display the Standby Task form.
