@@ -114,7 +114,7 @@ location /protected/ {
 这只是一个简单例子。我们可以通过更复杂的 Javascript 代码来防御更聪明的机器爬虫。
 
 ### TLS相关配置
-* CDN Pro 支持使用 RSA 和 ECDSA 算法的 TLS 证书。您甚至可以在同一个加速项内配置两个不同算法的证书，边缘服务器会根据客户端的能力和意愿来选择。
+* CDN Pro 支持使用 RSA 和 ECDSA 算法的 TLS 服务端证书。您甚至可以在同一个加速项内配置两个不同算法的证书，边缘服务器会根据客户端的能力和意愿来选择。
 * 我们强烈建议您将支持的 TLS 最低版本设置为至少 1.2。为了最高的安全性，如果没有客户端兼容性的问题，您应该使用1.3版本。CDN Pro 支持您配置客户端侧和回源侧的 TLS 版本。
 * CDN Pro 也支持您根据安全性需求完全控制 TLS 的加密套件。例如，您可以配置优先选用 ECDHE 或 EDH 密钥交换算法来确保 "[前向保密性](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * 如果一个客户端请求使用 HTTPS 协议，CDN Pro 会使用同样的协议来访问源站来确保整个链路是加密的。尽管 CDN Pro 提供了 "协议降级" 的选项，您如果没有十分的必要请不要启用。
