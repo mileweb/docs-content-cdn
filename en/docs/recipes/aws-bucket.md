@@ -73,19 +73,19 @@ PING files-waytoo-digital.qtlcdn.com (14.0.119.186): 56 data bytes
 64 bytes from 14.0.119.186: icmp_seq=3 ttl=56 time=4.733 ms
 ```
 
-#### Certificates 
-Now let's generate a certificate and renew it automatically with Let’s Encrypt.
+#### Server Certificates 
+Now let's generate a server certificate and renew it automatically with Let’s Encrypt.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-certificate.png" alt="create bucket" width="600"></p>
 
-1. In the Certificates page, click **Create Certificate**.
+1. Click **Certificates** and choose **Server Certificates**. In the Certificates page, click **Create Certificate**.
 2. Complete the **Certificate Name** and **Certificate Description** fields. 
 3. Set **Auto Renew** to **Let’s Encrypt**. 
 4. Click the **"Auto Generate Certificate"** tab, and then enter **files.waytoo.digital** in the **Common Name** and **SAN** fields.
 5. Click **Save Certificate** to save the settings.
 
 #### Deploy a Certificate to the Staging Environment
-Because we saved the certificate earlier, we can now deploy it. To make sure the certificate meets our needs, we are going to deploy it to a staging environment to test our setup before releasing the certificate to production.
+Because we saved the server certificate earlier, we can now deploy it. To make sure the certificate meets our needs, we are going to deploy it to a staging environment to test our setup before releasing the certificate to production.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
@@ -130,7 +130,7 @@ We have created an origin. Next we will create an initial Edge Logic configurati
 
 You can edit this script and set up any logic you need to address your requirements. 
 
-In our example, we have everything we need for this property, except for one thing: the certificate we want to add.
+In our example, we have everything we need for this property, except for one thing: the server certificate we want to add.
 
 12. Expand the **TLS Settings** tab. In the **TLS Certificate** field, enter the name of the certificate we created and deployed to staging.
 
@@ -201,7 +201,7 @@ Our configuration is working as expected, so let's deploy it to production.
 
 To deploy the configuration to production, use the Certificates and Edge Configurations pages. 
 
-1. Go to the Certificates page first. Then open the certificate, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**.
+1. Go to the Certificates page first by clicking "Certificates" and choosing "Server Certificates". Then open the certificate, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**.
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-production.png" alt="create bucket" width="500"></p>
 

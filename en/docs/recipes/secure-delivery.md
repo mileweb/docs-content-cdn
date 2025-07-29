@@ -110,7 +110,7 @@ location /protected/ {
 More sophisticated methods can be adopted in this way to block more advanced bots.
 
 ### TLS features
-* CDN Pro supports TLS certificates with both RSA and ECDSA algorithms. You can even configure two certificates with different algorithms in the same property and have the server pick one based on the client's capability and preference.
+* CDN Pro supports TLS server certificates with both RSA and ECDSA algorithms. You can even configure two certificates with different algorithms in the same property and have the server pick one based on the client's capability and preference.
 * We highly recommend that you set the minimum TLS version to 1.2. For maximum security and performance, however, you should really take advantage of TLSv1.3. The TLS version on both the client and origin sides can be configured.
 * CDN Pro also allows you to fully configure TLS ciphers based on your security requirements. For example, you can prioritize the ECDHE and EDH key exchange algorithms to ensure "[Perfect Forward Secrecy](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * If a client request uses HTTPS, CDN Pro contacts the origin with the same protocol to ensure that the entire path is encrypted. Although CDN Pro supports "protocol downgrades," you should avoid using them unless absolutely necessary.
