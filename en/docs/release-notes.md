@@ -1,5 +1,13 @@
 # Release Notes
 
+## July 29, 2025
+#### API updates
+* Improved messages to refer to the CDN Pro product.
+* Fixed issue with property that was incorrectly reported as frozen.
+
+#### Console updates
+* Added support for verification of clients’ certificates before the CDN Pro servers serve content.
+
 ## July 10, 2025
 #### Console updates
 * Ensured labels in the property details page are shown in the user's preferred language.
