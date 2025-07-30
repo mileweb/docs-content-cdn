@@ -156,26 +156,34 @@
                 "path": "/docs/portal/certificates/overview.md"
               },
               {
-                "title": "Create a Certificate",
+                "title": "Create a Server Certificate",
                 "path": "/docs/portal/certificates/creating-certificates.md"
               },
               {
-                "title": "Update a Certificate",
+                "title": "Update a Server Certificate",
                 "path": "/docs/portal/certificates/updating-certificates.md"
+              },
+              {
+                "title": "Auto-Renew a Server Certificate",
+                "path": "/docs/portal/certificates/auto-renewal.md"
+              },
+              {
+                "title": "Create a CA Certificate",
+                "path": "/docs/portal/certificates/creating-cacertificates.md"
+              },
+              {
+                "title": "Update a CA Certificate",
+                "path": "/docs/portal/certificates/updating-cacertificates.md"
               },
               {
                 "title": "Deploy a Certificate",
                 "path": "/docs/portal/certificates/deploying-certificates.md"
               },
               {
-                "title": "Auto-Renew a Certificate",
-                "path": "/docs/portal/certificates/auto-renewal.md"
-              },
-              {
                   "title": "Delete a Certificate",
                 "path": "/docs/portal/certificates/deleting-certificate.md"
-            }
-           ]
+              }
+            ]
           },
            {
             "title": "Reports",
