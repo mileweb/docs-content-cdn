@@ -407,7 +407,7 @@
                         "enableOcspStapling": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling) No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
+                          "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                         },
                         "beianContentType": {
                           "type": "integer",
@@ -1273,7 +1273,7 @@
                   "enableOcspStapling": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling) No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
+                    "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                   },
                   "beianContentType": {
                     "type": "integer",
@@ -4139,7 +4139,7 @@
                   "enableOcspStapling": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling) No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
+                    "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                   },
                   "beianContentType": {
                     "type": "integer",
@@ -4889,7 +4889,7 @@
                       "enableOcspStapling": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling) No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
+                        "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                       },
                       "beianContentType": {
                         "type": "integer",
