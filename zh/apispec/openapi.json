@@ -17469,7 +17469,7 @@
                   "Invalid linked account": {
                     "value": {
                       "code": "InvalidLinkedAccount",
-                      "message": "The value for linkedAccount can be up to 60 characters."
+                      "message": "The value for linkedAccount must contain 1 to 60 characters."
                     }
                   }
                 }
@@ -19469,7 +19469,7 @@
                   "Invalid linked account": {
                     "value": {
                       "code": "InvalidLinkedAccount",
-                      "message": "The value for linkedAccount can be up to 60 characters."
+                      "message": "The value for linkedAccount must contain 1 to 60 characters."
                     }
                   }
                 }
