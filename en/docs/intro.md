@@ -1,4 +1,4 @@
-# Welcome to CDN Pro (previously known as CDN360)
+# Welcome to CDN Pro
 
 CDN Pro is a platform we architected from scratch based on the latest technology and our 20+ years of experience in the content delivery industry. It is designed to give you unprecedented flexibility to deliver digital assets to consumers globally with the best possible performance and security. Under the hood, we made sure the system has a very clean structure that is stable, resilient and easy to operate. This also helps us to keep the cost down and outages away.
 
@@ -32,7 +32,7 @@ The platform's customizable point-and-click user interface provides granular con
 
 The CDN Pro content delivery platform provides a rich [API](</apidocs>) that supports the same functions as the CDN Pro GUI, along with advanced configuration capabilities. Using the API, developers can have their applications interact with CDN Pro by sending and receiving JavaScript Object Notation (JSON) data.
 
-## Where to Go from Here
+## Where to Go from Here
 
 Check the [Getting Started with CDN Pro Video](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>) and perform the steps in the [CDN Pro Quick Start](</docs/getting-started.md>).
 

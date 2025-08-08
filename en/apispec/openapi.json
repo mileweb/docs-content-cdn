@@ -407,7 +407,7 @@
                         "enableOcspStapling": {
                           "type": "boolean",
                           "default": false,
-                          "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                          "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                         },
                         "beianContentType": {
                           "type": "integer",
@@ -1273,7 +1273,7 @@
                   "enableOcspStapling": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                    "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                   },
                   "beianContentType": {
                     "type": "integer",
@@ -4139,7 +4139,7 @@
                   "enableOcspStapling": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                    "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                   },
                   "beianContentType": {
                     "type": "integer",
@@ -4889,7 +4889,7 @@
                       "enableOcspStapling": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Enables Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates. (Refer to https://en.wikipedia.org/wiki/OCSP_stapling)"
+                        "description": "Enables <a href=\"https://en.wikipedia.org/wiki/OCSP_stapling\">Online Certificate Status Protocol (OCSP) stapling</a> to check the revocation status of digital certificates. No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate."
                       },
                       "beianContentType": {
                         "type": "integer",
@@ -17465,6 +17465,12 @@
                       "code": "UnauthorizedProduct",
                       "message": "One or more product is not purchased by this customer."
                     }
+                  },
+                  "Invalid linked account": {
+                    "value": {
+                      "code": "InvalidLinkedAccount",
+                      "message": "The value for linkedAccount must contain 1 to 60 characters."
+                    }
                   }
                 }
               }
@@ -17707,6 +17713,15 @@
                     "type": "string",
                     "maxLength": 20,
                     "description": "User's department."
+                  },
+                  "linkedAccount": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "t14klrlb0i2cz"
+                    },
+                    "description": "ID of an external account that this portal user maps to.",
+                    "maxLength": 60,
+                    "pattern": "^[a-zA-Z0-9]+"
                   }
                 },
                 "required": [
@@ -19261,6 +19276,15 @@
                           "description": "A phone number."
                         }
                       }
+                    },
+                    "linkedAccount": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "xthjcs1eeg1i5"
+                      },
+                      "maxLength": 60,
+                      "description": "ID of an external account that this portal user maps to.",
+                      "pattern": "^[a-zA-Z0-9]+"
                     }
                   },
                   "required": [
@@ -19440,6 +19464,12 @@
                     "value": {
                       "code": "UnauthorizedProduct",
                       "message": "One or more product is not purchased by this customer."
+                    }
+                  },
+                  "Invalid linked account": {
+                    "value": {
+                      "code": "InvalidLinkedAccount",
+                      "message": "The value for linkedAccount must contain 1 to 60 characters."
                     }
                   }
                 }
@@ -19621,6 +19651,15 @@
                   "reset2fa": {
                     "type": "boolean",
                     "description": "Set to <i>true</i> to force the user to go through the two factor authentication setup process when logging in. This applies only if you have chosen to require two factor authentication for improved security. You can enable the feature by setting <i>enforce2fa</i> to <i>true</i> when <a href=\"#operation/patch-ngadmin-customers-id\">updating your account</a>. A common reason to use <i>reset2fa</i> is when the user switches to a new phone."
+                  },
+                  "linkedAccount": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "j5skhve0ucjhp"
+                    },
+                    "pattern": "^[a-zA-Z0-9]+",
+                    "maxLength": 60,
+                    "description": "ID of an external account that this portal user maps to."
                   }
                 }
               },

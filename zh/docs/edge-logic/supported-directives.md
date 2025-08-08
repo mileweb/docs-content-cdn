@@ -519,7 +519,7 @@ else { ... }
 **默认设置：** `-` <br/>
 **可用位置：** location
 
-当源站响应 30x 状态码并携带一个 Location 跳转地址时，您或许希望 CDN360 继续对这个地址发起请求直至获取到实际的响应文件，然后再进行缓存和客户端响应。如果将跳转地址传递给客户端来发起新请求会导致更长的时间来获取最终内容。如果需要实现上述行为，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location 块中使用本指令。
+当源站响应 30x 状态码并携带一个 Location 跳转地址时，您或许希望 CDN Pro 继续对这个地址发起请求直至获取到实际的响应文件，然后再进行缓存和客户端响应。如果将跳转地址传递给客户端来发起新请求会导致更长的时间来获取最终内容。如果需要实现上述行为，您可以在任意一个配置了 [origin_pass](</docs/edge-logic/supported-directives.md#origin_pass>) location 块中使用本指令。
 
 ### `origin_header_modify`
 
