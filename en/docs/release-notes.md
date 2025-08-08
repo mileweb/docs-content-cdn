@@ -1,5 +1,14 @@
 # Release Notes
 
+## August 7, 2025
+#### API updates
+* Extended Contacts API to support a linkedAccount field.
+
+#### Console updates
+* Improved translations of text.
+* Updated self signup page text.
+* Removed service types group by option from the CPU summary report since it is not applicable.
+
 ## July 29, 2025
 #### API updates
 * Improved messages to refer to the CDN Pro product.
