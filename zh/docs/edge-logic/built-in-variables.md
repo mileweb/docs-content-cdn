@@ -94,7 +94,7 @@
 | <span id="upstream_header_time"></span><span class="var">$upstream_header_time</span> |<span class="badge small" title="numerical value">#</span> 从中间层或者源站请求数据时，接收响应 header 过程消耗的时间，单位为毫秒 | <span class="badge green">Yes</span> |
 | <span id="upstream_http_"></span><span class="var">$upstream\_http\_<em>name</em></span> | 从中间层或者源站拿到的响应头，可能源自中间层的 HIT 已缓存数据 | <span class="badge green">Yes</span> |
 | <span id="upstream_response_status"></span><span class="var">$upstream_response_status</span> | 从中间层或者源站拿到的响应状态码，如本请求没有发起回源则该变量值为0 | <span class="badge yellow">No</span> |
-| <span id="upstream_response_time"></span><span class="var">$upstream_response_time</span> |<span class="badge small" title="numerical value">#</span> 从中间层或者源站获取完整响应数据所消耗的时间，单位为毫秒 | <span class="badge yellow">No</span> |
+| <span id="upstream_response_time"></span><span class="var">$upstream_response_time</span> |<span class="badge small" title="numerical value">#</span> 从中间层或者源站获取完整响应数据所消耗的时间，单位为毫秒 | <span class="badge green">Yes</span> |
 | <span id="upstream_server_type"></span><span class="var">$upstream_server_type</span> | 'O' 代表回源站; 'C' 代表回中间层节点. | <span class="badge yellow">No</span> |
 | <span id="upstream_trailer_"></span><span class="var">$upstream\_trailer\_<em>name</em></span> | 由上层添加的尾部（trailer） 值。通常该值会通过上层的[add_trailer](/docs/edge-logic/supported-directives#add_trailer) 指令设置。该变量已废弃。 | <span class="badge green">Yes</span> |
 | <span id="uri"></span><span class="var">$uri</span> | [归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)的请求 uri ，从'/'开始且不包含问号后查询参数 。其值会被边缘逻辑里的"[rewrite](/docs/edge-logic/supported-directives#rewrite)"指令修改。| <span class="badge green">Yes</span> |
