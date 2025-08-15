@@ -870,7 +870,7 @@ proxy_ignore_cache_control no-cache no-store;
 
 ### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
 
-<span class="badge">高级</span>
+<span class="badge dark">高级</span>
 
 **使用语法:** `proxy_ignore_client_abort on | off;` <br/>
 **默认设置:** `proxy_ignore_client_abort off;` <br/>

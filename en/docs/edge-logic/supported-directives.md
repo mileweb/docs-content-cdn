@@ -6,7 +6,7 @@ Each non-proprietary directive includes a direct link to the official nginx docu
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact {{title}} customer service.
 
-**Note:** Some variables were previously also available in Load Balancer Logic. However, following the [upgrade of the edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>), Load Balancer Logic has been deprecated. The Load Balancer Logic should no longer be used.
+**Note:** Some directives were previously also available in Load Balancer Logic. However, following the [upgrade of the edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>), Load Balancer Logic has been deprecated. The Load Balancer Logic should no longer be used.
 
 ### `access_log_downsample`
 
@@ -861,7 +861,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 ### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
 
-<span class="badge">advanced</span> 
+<span class="badge dark">advanced</span> 
 
 **Syntax:** `proxy_ignore_client_abort on | off;` <br/>
 **Default:** `proxy_ignore_client_abort off;` <br/>
