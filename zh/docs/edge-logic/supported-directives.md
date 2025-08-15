@@ -1,12 +1,12 @@
 ## 支持的指令
 
-这一页列出了您可以在CDN Pro的边缘逻辑和7层负载均衡器(LB7)逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
+这一页列出了您可以在CDN Pro的边缘逻辑里使用的全部指令。部分指令是未经修改的开源版本，部分指令经过了我们的<span class="badge green">修改增强</span>以更好地满足CDN服务的需求。同时我们也引入了大量<span class="badge primary">全新特有</span>的指令来完善开源版本作为CDN服务器的不足。
 
 在下面的文档里，我们为所有非特有的指令提供了到开源版公开文档的直接链接。每一个被修改增强过的指令，我们都提供了详细的描述，包括新增的功能，参数，以及对参数取值范围的限制。
 
 以下列表中，标记为<span class="badge">标准</span>的指令对所有的客户都开放。它们应该可以满足绝大部分常见的CDN配置需求。标记为<span class="badge dark">高级</span>的指令通常会消耗更多的资源。对于这些指令，我们需要逐一审核来明确需求。如果您需要用到这些指令，请联系客服。您有可能需要为它们额外付费。
 
-**注意:** 由于边缘节点架构升级，7层负载均衡器逻辑即将被废弃。请避免使用7层负载均衡器逻辑。所有支持的指令应全部在边缘逻辑中配置。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)。
+**注意:** 有些指令原本也可用于7层负载均衡器逻辑中。但随着[边缘节点架构升级](</docs/edge-logic/edge-node-structure-upgrade.md>)，7层负载均衡器已被废弃。请停止使用7层负载均衡器逻辑。
 
 ### `access_log_downsample`
 
@@ -20,7 +20,7 @@
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `add_header name value [policy=...] [if(...)] [always];`<br/>
 **默认设置：** `-` <br/>
@@ -89,9 +89,11 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。本指令添加的尾部并不会出现在发给客户的响应里。
 
+该指令已被废弃。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)
+
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `allow address | CIDR | all;`<br/>
 **默认设置：** `-` <br/>
@@ -202,7 +204,7 @@ location = /auth {
 
 ### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
 
-<span class="badge dark">高级</span> <span class="badge">LBLogic</span>
+<span class="badge dark">高级</span>
 
 **使用语法:** `client_max_body_size size;`<br/>
 **默认设置:** `client_max_body_size 128m;`<br/>
@@ -222,13 +224,13 @@ location = /auth {
 
 ### `custom_log_field`
 
-<span class="badge dark">高级</span> <span class="badge primary">全新特有</span> <span class="badge">LBLogic</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `custom_log_field id value;`<br/>
 **默认设置：** `-`<br/>
 **可用位置：** server, location, if in location
 
-该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式时，可以通过关键字 “custom_1” 和 “custom_2” 来引用这两个字段。当同一个字段同时在 LB7 和 ES 里被定义，LB7 有优先权。 如果您需要开启此功能，请联系我们的技术支持团队。
+该指令允许您将最多 2 个自定义字段添加到访问日志中。id的值可以是1或者2，value的值可以包含变量。您在自定义日志下载格式时，可以通过关键字 “custom_1” 和 “custom_2” 来引用这两个字段。
 
 示例:
 ```nginx
@@ -251,7 +253,7 @@ location / {
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `deny address | CIDR | all;`<br/>
 **默认设置：** `—`<br/>
@@ -298,7 +300,7 @@ location @try_origin2 {
 
 ### `eval_func`
 
-<span class="badge">标准</span> <span class="badge primary">全新特有</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `eval_func $result {function name} {parameters};` <br/>
 **默认设置：** `-` <br/>
@@ -387,7 +389,7 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `if (condition) { ... }
            elseif (condition) { ... }
@@ -451,7 +453,7 @@ else { ... }
 
 ### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
 
-<span class="badge">标准</span> <span class="badge">LB logic</span>
+<span class="badge">标准</span>
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
@@ -868,7 +870,7 @@ proxy_ignore_cache_control no-cache no-store;
 
 ### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
 
-<span class="badge">高级</span> <span class="badge">LB logic</span>
+<span class="badge">高级</span>
 
 **使用语法:** `proxy_ignore_client_abort on | off;` <br/>
 **默认设置:** `proxy_ignore_client_abort off;` <br/>
@@ -989,7 +991,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 ### [`proxy_request_buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering)
 
-<span class="badge dark">高级</span> <span class="badge">LB logic</span>
+<span class="badge dark">高级</span>
 
 **使用语法:** `proxy_request_buffering on/off;` <br/>
 **默认设置:** `proxy_request_buffering off;` <br/>
@@ -1013,7 +1015,7 @@ proxy_no_cache $http_pragma    $http_authorization;
 
 ### `proxy_set`
 
-<span class="badge">标准</span> <span class="badge primary">全新特有</span> <span class="badge">LB logic</span>
+<span class="badge">标准</span> <span class="badge primary">全新特有</span>
 
 **使用语法：** `proxy_set $variable value [if(...)];`<br>
 **默认设置：** `-`<br>
@@ -1036,11 +1038,11 @@ proxy_no_cache $no_store;
 
 ### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)（已废弃）
 
-<span class="badge">标准</span> <span class="badge green">修改增强</span> <span class="badge">LB logic</span>
+<span class="badge">标准</span> <span class="badge green">修改增强</span>
 
 **使用语法：**  `proxy_set_header field value if(condition);` <br/>
 **默认设置：** `-` <br/>
-**可用位置：** server (仅限在LB7)
+**可用位置：** server
 
 该指令在 [开源版本](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)基础上做了一些修改。支持条件判断，主要用于从 [负载均衡器](lb7-es-structure) 传递信息到边缘服务器。该指令已被废弃。更多信息，请查看[该文档](</docs/edge-logic/edge-node-structure-upgrade.md>)
 
@@ -1076,7 +1078,7 @@ proxy_no_cache $no_store;
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
-<span class="badge">标准</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span>
 
 **使用语法：** `return code [text];
        return code URL;
@@ -1176,7 +1178,7 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 
 ### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
 
-<span class="badge">标准</span> <span class="badge">LBLogic</span>
+<span class="badge">标准</span>
 
 **使用语法：**	`set $variable value;` <br/>
 **默认设置：**	`-` <br/>
@@ -1237,7 +1239,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 ### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)
 
-<span class="badge dark">高级</span>
+<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
 **使用语法：** `sub_filter {string} {replacement} [if(...)];` <br/>
 **默认设置：** `—` <br/>
