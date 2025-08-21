@@ -7127,7 +7127,7 @@
                     },
                     "forceRenew": {
                       "type": "boolean",
-                      "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to false after a successful renewal."
+                      "description": "A value of <i>true</i> requests the certificate to be auto-renewed as soon as possible instead of waiting for the certificate to expire in 15 days. The value will be set to <i>false</i> after a successful renewal. The value will always be <i>false</i> for a CA certificate."
                     }
                   },
                   "required": [
@@ -7137,7 +7137,8 @@
                     "description",
                     "versions",
                     "caOnly",
-                    "autoRenew"
+                    "autoRenew",
+                    "forceRenew"
                   ]
                 },
                 "examples": {
