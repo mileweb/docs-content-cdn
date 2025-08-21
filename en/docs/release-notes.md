@@ -1,5 +1,12 @@
 # Release Notes
 
+## August 20, 2025
+#### API updates
+* Removed extraneous character from an error message.
+
+#### Console updates
+* Improved Russian language translations.
+
 ## August 7, 2025
 #### API updates
 * Extended Contacts API to support a linkedAccount field.
