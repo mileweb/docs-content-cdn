@@ -5,7 +5,7 @@
 * Removed extraneous character from an error message.
 
 #### Console updates
-* Improved Russian language translations
+* Improved Russian language translations.
 
 ## August 7, 2025
 #### API updates
