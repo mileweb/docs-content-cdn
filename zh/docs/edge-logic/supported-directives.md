@@ -167,7 +167,7 @@ location = /auth {
 
 开启或关闭对响应进行即时压缩。 
 
-### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)
+### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types) (已废弃)
 
 <span class="badge dark">高级</span>
 
@@ -219,6 +219,17 @@ location = /auth {
 **可用位置：** server
 
 该指令与开源版本的 [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) 指令非常相似，用于设置向客户端发送响应时的最大空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
+
+### `compress_types`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+**Syntax:** `compress_types <mime_type> [...];`<br/>
+**Default:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
+**Context:** server, location
+
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users.
+
+This directive replaces `gzip_types` and `brotli_types`.
 
 ### `custom_log_field`
 
@@ -362,7 +373,7 @@ location @try_origin2 {
 
 该指令用于开启或者关闭 CDN Pro 的自动压缩响应功能。源自 [NGINX 开源版本](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)，无改动。
 
-### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
+### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types) (已废弃)
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 

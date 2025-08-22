@@ -167,7 +167,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Enables or disables on-the-fly compression of responses. 
 
-### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)
+### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types) (Deprecated)
 
 <span class="badge dark">advanced</span>
 
@@ -177,7 +177,9 @@ Enables or disables on-the-fly compression of responses.
 
 Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. 
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled. `gzip_types` and `brotli_types` will be deprecated in the near future, and a new directive will be introduced to support setting MIME types for both gzip and brotli.
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled.
+
+`gzip_types` and `brotli_types` have been deprecated. Please use `compress_types` instead.
 
 ### `client_body_timeout`
 
@@ -218,6 +220,17 @@ Sets the maximum allowed size of the client request body. If the size in a reque
 **Context:** server
 
 This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
+
+### `compress_types`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+**Syntax:** `compress_types <mime_type> [...];`<br/>
+**Default:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
+**Context:** server, location
+
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users.
+
+This directive replaces `gzip_types` and `brotli_types`.
 
 ### `custom_log_field`
 
@@ -356,7 +369,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 Enables or disables gzipping of responses. No change to the [public version](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
 
 
-### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
+### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types) (Deprecated)
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
@@ -366,7 +379,9 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. Responses with the “text/html” type are always compressed, regardless of the setting for this directive. 
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled. `gzip_types` and `brotli_types` will be deprecated in the near future, and a new directive will be introduced to support setting MIME types for both gzip and brotli.
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled.
+
+`gzip_types` and `brotli_types` have been deprecated. Please use `compress_types` instead.
 
 ### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
 
