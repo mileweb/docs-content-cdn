@@ -181,7 +181,7 @@ location = /auth {
 
 尽管当前可以使用 [`gzip_types`](#gzip_types) 和 `brotli_types`指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。`gzip_types` 和 `brotli_types`这2个指令在不久的将来会被废弃，我们会引入一个新的指令，用于对gzip和br压缩统一设置MIME类型。
 
-`gzip_types` and `brotli_types` have been deprecated. Please use `compress_types` instead.
+`gzip_types` 和 `brotli_types` 已弃用。请改用 `compress_types`。
 
 ### `client_body_timeout`
 
@@ -226,14 +226,14 @@ location = /auth {
 
 ### `compress_types`
 
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
-**Syntax:** `compress_types <mime_type> [...];`<br/>
-**Default:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
-**Context:** server, location
+<span class="badge dark">>高级</span> <span class="badge primary">全新特有</span>
+**使用语法:** `compress_types <mime_type> [...];`<br/>
+**默认设置:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
+**可用位置:** server, location
 
-Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users.
+除 text/html 之外，还支持对指定 MIME 类型的响应进行动态压缩。仅当响应正文大小大于 1024 字节时才会激活压缩。默认行为应该适用于大多数用户。
 
-This directive replaces `gzip_types` and `brotli_types`.
+此指令取代了 `gzip_types` 和 `brotli_types`。
 
 ### `custom_log_field`
 
@@ -390,7 +390,7 @@ CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gz
 
 尽管当前可以使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。`gzip_types` 和 `brotli_types`这2个指令在不久的将来会被废弃，我们会引入一个新的指令，用于对gzip和br压缩统一设置MIME类型。
 
-`gzip_types` and `brotli_types` have been deprecated. Please use `compress_types` instead.
+`gzip_types` 和 `brotli_types` 已弃用。请改用 `compress_types`。
 
 ### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
 
