@@ -181,7 +181,7 @@ Enables on-the-fly compression of responses for the specified MIME types in addi
 
 Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled.
 
-`gzip_types` and `brotli_types` have been deprecated. Please use `compress_types` instead.
+`gzip_types` and `brotli_types` have been deprecated. Please use [`compress_types`](#compress_types) instead.
 
 ### `client_body_timeout`
 
@@ -383,7 +383,7 @@ CDN Pro always uses gzip and applies it to the default MIME types above. In addi
 
 Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled.
 
-`gzip_types` and `brotli_types` have been deprecated. Please use `compress_types` instead.
+`gzip_types` and `brotli_types` have been deprecated. Please use [`compress_types`](#compress_types) instead.
 
 ### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
 
