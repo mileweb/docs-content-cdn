@@ -77,7 +77,6 @@ To use the variables properly, it is important to understand the request process
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> port number that received the request | <span class="badge yellow">No</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge yellow">No</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | TLS cipher suite used | <span class="badge green">Yes</span> |
-
 | <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | client certificate in PEM format (urlencoded) | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | SHA1 fingerprint of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | "issuer DN” string of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
