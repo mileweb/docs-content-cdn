@@ -226,6 +226,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 ### `compress_types`
 
 <span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
 **Syntax:** `compress_types <mime_type> [...];`<br/>
 **Default:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
 **Context:** server, location

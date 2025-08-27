@@ -226,14 +226,17 @@ location = /auth {
 
 ### `compress_types`
 
-<span class="badge dark">>高级</span> <span class="badge primary">全新特有</span>
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
 **使用语法:** `compress_types <mime_type> [...];`<br/>
 **默认设置:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
 **可用位置:** server, location
 
-除 text/html 之外，还支持对指定 MIME 类型的响应进行动态压缩。仅当响应正文大小大于 1024 字节时才会激活压缩。默认行为应该适用于大多数用户。
+指定对哪些MIME类型的响应进行压缩。text/html类型的响应总会被压缩，不受该指令约束。
 
-此指令取代了 `gzip_types` 和 `brotli_types`。
+仅当响应正文大小大于 1024 字节时，才会触发压缩。
+
+此处指定的MIME类型同时生效于gzip和br压缩。该指令取代了 gzip_types 和 brotli_types。
 
 ### `custom_log_field`
 

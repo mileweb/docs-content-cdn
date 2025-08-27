@@ -85,7 +85,7 @@
 | <span id="ssl_client_serial"></span><span class="var">$ssl_client_serial</span> | 客户端证书的序列号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_end"></span><span class="var">$ssl_client_v_end</span> | 客户端证书的结束日期 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | 客户端证书到期前的天数 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书到期前的天数 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书的开始日期 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | 客户端证书验证的结果| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge green">Yes</span> |
 | <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername | <span class="badge green">Yes</span> |
