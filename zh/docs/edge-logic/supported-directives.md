@@ -232,7 +232,7 @@ location = /auth {
 **默认设置:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
 **可用位置:** server, location
 
-指定对哪些MIME类型的响应进行压缩。text/html类型的响应总会被压缩，不受该指令约束。
+指定对哪些MIME类型的响应进行压缩。text/html类型的响应总会被压缩，不受该指令约束。MIME类型匹配不区分大小写。支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。
 
 仅当响应正文大小大于 1024 字节时，才会触发压缩。
 

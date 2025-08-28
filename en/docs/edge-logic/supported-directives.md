@@ -231,7 +231,7 @@ This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/
 **Default:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
 **Context:** server, location
 
-Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The specified MIME types apply to both brotli and gzip compression. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users.
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The specified MIME types apply to both brotli and gzip compression. MIME type matching is case-insensitive and supports fuzzy matching of prefixes and suffixes such as `text/*` and `*javascript`. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users.
 
 This directive replaces `gzip_types` and `brotli_types`.
 
