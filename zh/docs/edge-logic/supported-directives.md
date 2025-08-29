@@ -169,7 +169,7 @@ location = /auth {
 
 开启或关闭对响应进行即时压缩。 
 
-### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)
+### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types) (已废弃)
 
 <span class="badge dark">高级</span>
 
@@ -179,7 +179,9 @@ location = /auth {
 
 指定对什么MIME类型的响应进行即时压缩。 text/html类型的响应总会被压缩,不受该指令约束。仅当响应正文大小大于 1024 字节时压缩功能才会生效。该默认行为应该适用于大多数用户。CDN Pro 对开源版本进行了改进以支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。
 
-尽管当前可以使用 [`gzip_types`](#gzip_types) 和 `brotli_types`指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。`gzip_types` 和 `brotli_types`这2个指令在不久的将来会被废弃，我们会引入一个新的指令，用于对gzip和br压缩统一设置MIME类型。
+尽管当前可以使用 [`gzip_types`](#gzip_types) 和 `brotli_types`指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。
+
+`gzip_types` 和 `brotli_types` 已弃用。请改用 [`compress_types`](#compress_types)。
 
 ### `client_body_timeout`
 
@@ -221,6 +223,20 @@ location = /auth {
 **可用位置：** server
 
 该指令与开源版本的 [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) 指令非常相似，用于设置向客户端发送响应时的最大空闲等待时间。如果您需要在加速项中更改它的默认值，请联系我们的技术支持团队。可设最大值为 60 秒。
+
+### `compress_types`
+
+<span class="badge dark">高级</span> <span class="badge primary">全新特有</span>
+
+**使用语法:** `compress_types <mime_type> [...];`<br/>
+**默认设置:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
+**可用位置:** server, location
+
+指定对哪些MIME类型的响应进行压缩。text/html类型的响应总会被压缩，不受该指令约束。MIME类型匹配不区分大小写。支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。
+
+仅当响应正文大小大于 1024 字节时，才会触发压缩。
+
+此处指定的MIME类型同时生效于gzip和br压缩。该指令取代了 gzip_types 和 brotli_types。
 
 ### `custom_log_field`
 
@@ -364,7 +380,7 @@ location @try_origin2 {
 
 该指令用于开启或者关闭 CDN Pro 的自动压缩响应功能。源自 [NGINX 开源版本](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)，无改动。
 
-### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
+### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types) (已废弃)
 
 <span class="badge dark">高级</span> <span class="badge green">修改增强</span>
 
@@ -375,7 +391,9 @@ location @try_origin2 {
 CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1024 字节时压缩功能才会生效）。该默认行为应该适用于大多数用户。
 该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。text/html类型的响应固定会被压缩，不受该指令的约束。
 
-尽管当前可以使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。`gzip_types` 和 `brotli_types`这2个指令在不久的将来会被废弃，我们会引入一个新的指令，用于对gzip和br压缩统一设置MIME类型。
+尽管当前可以使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。
+
+`gzip_types` 和 `brotli_types` 已弃用。请改用 [`compress_types`](#compress_types)。
 
 ### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
 

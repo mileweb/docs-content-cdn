@@ -57,6 +57,7 @@
 | <span id="request_length"></span><span class="var">$request_length</span> |<span class="badge small" title="numerical value">#</span> 请求的长度 (包括请求的地址, http 请求头和请求正文) | <span class="badge green">Yes</span> |
 | <span id="request_method"></span><span class="var">$request_method</span> | HTTP 请求方法，例如 ：GET, POST | <span class="badge green">Yes</span> |
 | <span id="request_scheme"></span><span class="var">$request_scheme</span> | 请求协议，值为"http" 或者 "https" | <span class="badge yellow">No</span> |
+| <span id="request_ssl_handshake_time"></span><span class="var">$request_ssl_handshake_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒 | <span class="badge yellow">No</span> |
 | <span id="request_start_time"></span><span class="var">$request_start_time</span> |<span class="badge small" title="numerical value">#</span> CDN Pro接收到客户请求第一个字节的 Unix 时间戳，以秒为单位，精度到毫秒 | <span class="badge yellow">No</span> |
 | <span id="request_time"></span><span class="var">$request_time</span> |<span class="badge small" title="numerical value">#</span> 以毫秒为单位的请求处理时间，标记服务端从客户端读取第一个字节到发送最后一个字节给客户端所经过的时间。该时间等于$request_end_time，$turn_around_time和$transfer_time这3个变量的值之和。对于小请求，请求和响应通常各自一次发包完成。这种情况下，$request_end_time和$transfer_time的值为0，$request_time的值与$turn_around_time相同。 | <span class="badge green">Yes</span> |
 | <span id="request_uri"></span><span class="var">$request_uri</span> | 从'/'开始，包含问号后参数的客户端请求 URI | <span class="badge green">Yes</span> |
@@ -76,7 +77,16 @@
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘服务器端口号 | <span class="badge yellow">No</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该指令进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" | <span class="badge yellow">No</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件 | <span class="badge green">Yes</span> |
-| <span id="request_ssl_handshake_time"></span><span class="var">$request_ssl_handshake_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒 | <span class="badge yellow">No</span> |
+| <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | PEM 格式的客户端证书，经过URL编码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | 客户端证书的SHA1指纹 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | 客户端证书颁发者的标识名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_raw_cert"></span><span class="var">$ssl_client_raw_cert</span> | PEM 格式的客户端证书 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_s_dn"></span><span class="var">$ssl_client_s_dn</span> | 客户端证书持有者的标识名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_serial"></span><span class="var">$ssl_client_serial</span> | 客户端证书的序列号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_end"></span><span class="var">$ssl_client_v_end</span> | 客户端证书的结束日期 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | 客户端证书到期前的天数 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书的开始日期 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | 客户端证书验证的结果| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge green">Yes</span> |
 | <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername | <span class="badge green">Yes</span> |
 | <span id="status"></span><span class="var">$status</span> | 响应给客户端的 HTTP 状态码 | <span class="badge green">Yes</span> |
