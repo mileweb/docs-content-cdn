@@ -79,9 +79,9 @@ To use the variables properly, it is important to understand the request process
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | TLS cipher suite used | <span class="badge green">Yes</span> |
 | <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | client certificate in PEM format (urlencoded) | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | SHA1 fingerprint of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | "issuer DN” string of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | "issuer DN" string of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_raw_cert"></span><span class="var">$ssl_client_raw_cert</span> | client certificate in PEM format | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_s_dn"></span><span class="var">$ssl_client_s_dn</span> | "subject DN” string of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_s_dn"></span><span class="var">$ssl_client_s_dn</span> | "subject DN" string of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_serial"></span><span class="var">$ssl_client_serial</span> | serial number of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_end"></span><span class="var">$ssl_client_v_end</span> | end date of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | the number of days until the client certificate expires | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
