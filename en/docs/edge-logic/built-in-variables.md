@@ -84,7 +84,7 @@ To use the variables properly, it is important to understand the request process
 | <span id="ssl_client_s_dn"></span><span class="var">$ssl_client_s_dn</span> | "subject DN" string of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_serial"></span><span class="var">$ssl_client_serial</span> | serial number of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_end"></span><span class="var">$ssl_client_v_end</span> | end date of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | the number of days until the client certificate expires | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | <span class="badge small" title="numerical value">#</span> the number of days until the client certificate expires | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | start date of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | result of client certificate verification | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | returns protocol name like "TLSv1.1" | <span class="badge green">Yes</span> |
