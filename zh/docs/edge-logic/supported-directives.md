@@ -179,7 +179,7 @@ location = /auth {
 
 指定对什么MIME类型的响应进行即时压缩。 text/html类型的响应总会被压缩,不受该指令约束。仅当响应正文大小大于 1024 字节时压缩功能才会生效。该默认行为应该适用于大多数用户。CDN Pro 对开源版本进行了改进以支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。
 
-尽管当前可以使用 [`gzip_types`](#gzip_types) 和 `brotli_types`指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。
+尽管当前可以使用 [`gzip_types`](#gzip_types-已废弃) 和 `brotli_types`指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。
 
 `gzip_types` 和 `brotli_types` 已弃用。请改用 [`compress_types`](#compress_types)。
 
@@ -236,7 +236,7 @@ location = /auth {
 
 仅当响应正文大小大于 1024 字节时，才会触发压缩。
 
-此处指定的MIME类型同时生效于gzip和br压缩。该指令取代了 gzip_types 和 brotli_types。
+此处指定的MIME类型同时生效于gzip和br压缩。该指令取代了 `gzip_types` 和 `brotli_types`。
 
 ### `custom_log_field`
 
@@ -391,7 +391,7 @@ location @try_origin2 {
 CDN Pro 默认支持上述 MIME 类型文件（匹配不区分大小写）的 gzip 压缩响应（仅当响应正文大小大于 1024 字节时压缩功能才会生效）。该默认行为应该适用于大多数用户。
 该指令可用于对其他类型启用压缩。CDN Pro 对开源版本进行了改进以支持如 `text/*` 和 `*javascript` 的前、后缀模糊匹配。text/html类型的响应固定会被压缩，不受该指令的约束。
 
-尽管当前可以使用 `gzip_types` 和 [`brotli_types`](#brotli_types)指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。
+尽管当前可以使用 `gzip_types` 和 [`brotli_types`](#brotli_types-已废弃)指令给gzip和br压缩算法指定不同的MIME类型，但实际上通过这2个指令设置的值会被合并，合并后的类型会同时对gzip和br压缩生效。如果您同时开启了gzip和br压缩，请给`gzip_types` 和 `brotli_types`设置相同的MIME类型。
 
 `gzip_types` 和 `brotli_types` 已弃用。请改用 [`compress_types`](#compress_types)。
 
