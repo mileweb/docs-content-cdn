@@ -14,7 +14,6 @@ When a property and its associated certificates are deployed, CDN Pro sends the 
 
 <p align="center"><img src="/docs/resources/images/tasks/deployment_time_range_filter.png" alt="Filter by date" width="700"></p>
 
-y
 3. To filter by deployment target, click the icon at the top of the **Target** column and choose Staging or Production.
 
 4. To filter by deployment task status, click the icon at the top of the **Status** column and choose Waiting, In Progress, Successful, or Failed.
