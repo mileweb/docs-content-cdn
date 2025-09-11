@@ -22,7 +22,7 @@ Downsamples the local access logs. A `factor` of N means one log entry for every
 
 <span class="badge">standard</span> <span class="badge green">Enhanced</span> 
 
-**Syntax:** `add_header name value [policy=...] [if(...)] [always];`<br/>
+**Syntax:** `add_header name value [policy=...] [always] [if(...)];`<br/>
 **Default:** `-` <br/>
 **Context:** server, location, if in location
 
