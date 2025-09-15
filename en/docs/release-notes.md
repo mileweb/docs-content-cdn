@@ -1,5 +1,16 @@
 # Release Notes
 
+## September 12, 2025
+### API updates
+* Enabled hostname field in accessControlRules to accept subdomains corresponding to a wildcard domain.
+
+#### Console updates
+* Improved error handling in Create a CA Certificate page.
+* Improved validations list page and deployment tasks list page by supporting filtering by status and adding a Finished column.
+* Introduced a new Edge Logic directive, compress_types, which deprecates brotli_types and gzip_types.
+* Enabled access to and documented variables related to client certificate verification: (ssl_client_escaped_cert, ssl_client_fingerprint, ssl_client_i_dn, ssl_client_raw_cert, ssl_client_s_dn, ssl_client_serial, ssl_client_v_end, ssl_client_v_remain, ssl_client_v_start, ssl_client_verify).
+
+
 ## August 20, 2025
 #### API updates
 * Removed extraneous character from an error message.
