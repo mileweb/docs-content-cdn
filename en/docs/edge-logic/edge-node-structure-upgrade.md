@@ -33,14 +33,15 @@ In Q2 2024, we started upgrading the entire CDN Pro production environment to th
 
 **Phase 2**: Deploy edge nodes with the new structure and gradually route production traffic to the new nodes. The new nodes are placed strategically to provide the same or better geographic coverage as the existing ones.
 
-**Phase 3**: Decommission the LB7-ES structure and deprecate the loadBalancerLogic field.
+**Phase 3**: Decommission the LB7-ES structure.
 
-As of December 2024, phases 1 and 2 have concluded, and the traffic migration in phase 2 has been seamless and has caused zero impact on customers. The next step is to migrate configurations off loadBalancerLogic.
+As of December 2024, the process has concluded, and the traffic migration in phase 2 has been seamless and has caused zero impact on customers. The next step is to deprecate loadBalancerLogic.
 
 ### Your Help is Needed
-We aim to complete the deprecation of loadBalancerLogic by the end of March 2025. Starting from Q2 2025, loadBalancerLogic will no longer be supported. This means configurations containing loadBalancerLogic will be rejected, when you create a new property or create a new version for an existing property.  
 
-While the above-mentioned phase 1 and phase 2 are completely transparent to our customers, we do need your kind help to proceed with phase 3. As loadBalancerLogic will soon be deprecated, using loadBalancerLogic in any new property configurations should be avoided from now on. More importantly, if there are existing properties that contain loadBalancerLogic, we kindly request that you start moving the script in it over to edgeLogic. In most cases, you just need to copy the script from loadBalancerLogic and prepend it to the script of edgeLogic. However, there are indeed some nuances which deserve more attention. Below are guidelines to assist you with this process.
+While the above-mentioned process is completely transparent to our customers, we do need your kind help to proceed with the deprecation of loadBalancerLogic. We look forward to completing the deprecation in the near future. By the time the deprecation is done, any configurations containing loadBalancerLogic will be rejected when you create a new property or a new version of an existing property.  
+
+In light of the above, please avoid using loadBalancerLogic in any new property configurations going forward. More importantly, if there are existing properties that contain loadBalancerLogic, we kindly request that you start moving the script in it over to edgeLogic. In most cases, you just need to copy the script from loadBalancerLogic and prepend it to the script of edgeLogic. However, there are indeed some nuances which deserve more attention. Below are guidelines to assist you with this process.
 
 **Directives**
 

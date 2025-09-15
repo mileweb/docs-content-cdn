@@ -1,12 +1,12 @@
 ## Supported Directives
 
-This section lists all the directives you can use in the CDN Pro Edge Logic and Load Balancer Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. {{title}} also introduced some <span class="badge primary">proprietary</span> directives.
+This section lists all the directives you can use in the CDN Pro Edge Logic. While some of them are unmodified from the open-source version of nginx, many have been <span class="badge green">enhanced</span> to better suit the needs of a CDN proxy server. {{title}} also introduced some <span class="badge primary">proprietary</span> directives.
 
 Each non-proprietary directive includes a direct link to the official nginx documentation. A detailed description is provided if the directive has been modified from the original version, such as limitations on the parameters of some directives.
 
 In the following list, the <span class="badge">standard</span> directives are available to all customers and should cover the most common use cases. The <span class="badge dark">advanced</span> directives are usually more resource-consuming than the standard ones and will be granted on a case-by-case basis. If you need one or more of them, contact {{title}} customer service.
 
-**Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All supported directives should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
+**Note:** Some directives were previously also available in Load Balancer Logic. However, following the [upgrade of the edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>), Load Balancer Logic has been deprecated. The Load Balancer Logic should no longer be used.
 
 ### `access_log_downsample`
 
@@ -20,7 +20,7 @@ Downsamples the local access logs. A `factor` of N means one log entry for every
 
 ### [`add_header`](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header) 
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> 
 
 **Syntax:** `add_header name value [policy=...] [if(...)] [always];`<br/>
 **Default:** `-` <br/>
@@ -88,9 +88,11 @@ Adds the specified field to the end of a response provided that the response cod
 
 2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the `Transfer-Encoding` to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client. The added trailer won't appear in the response to the client.
 
+This directive is deprecated. Refer to the [upgrade of edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>).
+
 ### [`allow`](http://nginx.org/en/docs/http/ngx_http_access_module.html#allow)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> 
 
 **Syntax:** `allow address | CIDR | all;`<br/>
 **Default:** `-` <br/>
@@ -167,7 +169,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 
 Enables or disables on-the-fly compression of responses. 
 
-### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)
+### [`brotli_types`](https://github.com/google/ngx_brotli#brotli_types)  (Deprecated)
 
 <span class="badge dark">advanced</span>
 
@@ -177,7 +179,9 @@ Enables or disables on-the-fly compression of responses.
 
 Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. 
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types) and `brotli_types`, the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled. `gzip_types` and `brotli_types` will be deprecated in the near future, and a new directive will be introduced to support setting MIME types for both gzip and brotli.
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using [`gzip_types`](#gzip_types-deprecated) and `brotli_types`, the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled.
+
+`gzip_types` and `brotli_types` have been deprecated. Please use [`compress_types`](#compress_types) instead.
 
 ### `client_body_timeout`
 
@@ -201,7 +205,7 @@ This directive sets the maximum wait time for the complete request header from t
 
 ### [`client_max_body_size`](http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size)
 
-<span class="badge dark">advanced</span> <span class="badge">LB logic</span>
+<span class="badge dark">advanced</span> 
 
 **Syntax:** `client_max_body_size size;`<br/>
 **Default:** `client_max_body_size 128m;`<br/>
@@ -219,15 +223,27 @@ Sets the maximum allowed size of the client request body. If the size in a reque
 
 This directive is very similar to the [`send_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout) directive of the open-source version. It sets the maximum idle time when transmitting the response to the client. If you need to change the default value for your property, please contact our support team. The maximum value is 60s.
 
+### `compress_types`
+
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span>
+
+**Syntax:** `compress_types <mime_type> [...];`<br/>
+**Default:** `compress_types text/plain text/css text/xml text/javascript application/x-javascript application/javascript application/xml;`<br/>
+**Context:** server, location
+
+Enables on-the-fly compression of responses for the specified MIME types in addition to text/html. The specified MIME types apply to both brotli and gzip compression. MIME type matching is case-insensitive and supports fuzzy matching of prefixes and suffixes such as `text/*` and `*javascript`. Compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users.
+
+This directive replaces `gzip_types` and `brotli_types`.
+
 ### `custom_log_field`
 
-<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
+<span class="badge dark">advanced</span> <span class="badge primary">Proprietary</span> 
 
 **Syntax:** `custom_log_field id value;`<br/>
 **Default:** `-`<br/>
 **Context:** server, location, if in location
 
-This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom_1" and "custom_2" when configuring the download log format. In case the same field is assigned in both LB7 and ES, the LB7 has precedence. If you require this feature, contact our support team.
+This directive allows you to add up to two customized fields into the access log. The id can be either 1 or 2. The value can contain variables. Refer to the two fields using the keywords "custom_1" and "custom_2" when configuring the download log format.
 
 Examples:
 ```nginx
@@ -249,7 +265,7 @@ Defines the default MIME type of a response. No change to the public version, ex
 
 ### [`deny`](http://nginx.org/en/docs/http/ngx_http_access_module.html#deny)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> 
 
 **Syntax:** `deny address | CIDR | all;`<br/>
 **Default:** `—`<br/>
@@ -292,7 +308,7 @@ location @try_origin2 {
 
 ### `eval_func`
 
-<span class="badge">standard</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span> 
 
 **Syntax:** `eval_func $result {function name} {parameters};` <br/>
 **Default:** `-` <br/>
@@ -356,7 +372,7 @@ Enables or disables adding or modifying the “Expires” and “Cache-Control�
 Enables or disables gzipping of responses. No change to the [public version](https://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip)
 
 
-### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types)
+### [`gzip_types`](http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_types) (Deprecated)
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
@@ -366,7 +382,9 @@ Enables or disables gzipping of responses. No change to the [public version](htt
 
 CDN Pro always uses gzip and applies it to the default MIME types above. In addition, compression is activated only when the response body size is greater than 1024 bytes. The default behavior should work well for most users. This directive can be used to enable compression on other types. The search and match are case-insensitive. We improved the public version to support wildcards like `text/*` and `*javascript`. Responses with the “text/html” type are always compressed, regardless of the setting for this directive. 
 
-Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types), the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled. `gzip_types` and `brotli_types` will be deprecated in the near future, and a new directive will be introduced to support setting MIME types for both gzip and brotli.
+Note: Although it is currently allowed to set different MIME types for gzip and brotli compression by using `gzip_types` and [`brotli_types`](#brotli_types--deprecated), the types set for the two directives are merged, and the merged types apply to both gzip and brotli compression. Please set the same value for the two directives if both gzip and brotli compression are enabled.
+
+`gzip_types` and `brotli_types` have been deprecated. Please use [`compress_types`](#compress_types) instead.
 
 ### [`http2_max_concurrent_streams`](https://nginx.org/en/docs/http/ngx_http_v2_module.html#http2_max_concurrent_streams)
 
@@ -380,7 +398,7 @@ Sets the maximum number of concurrent HTTP/2 streams in a connection. No change 
 
 ### [`if/elseif/else`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> 
 
 **Syntax:** `if (condition) { ... }
         elseif (condition) { ... }
@@ -445,7 +463,7 @@ Specifies that a given location can be used for internal requests only. No chang
 
 ### [`keepalive_timeout`](http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout)
 
-<span class="badge">standard</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> 
 
 **Syntax:** `keepalive_timeout timeout [header_timeout];`<br/>
 **Default:** `keepalive_timeout 30s;`<br/>
@@ -859,7 +877,7 @@ Note: This directive does not modify the "Cache-Control" header from the origin.
 
 ### [`proxy_ignore_client_abort`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_client_abort)
 
-<span class="badge">advanced</span> <span class="badge">LB logic</span>
+<span class="badge dark">advanced</span> 
 
 **Syntax:** `proxy_ignore_client_abort on | off;` <br/>
 **Default:** `proxy_ignore_client_abort off;` <br/>
@@ -977,7 +995,7 @@ Sets the text that should be changed in the “Location” and “Refresh” hea
 
 ### [`proxy_request_buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering)
 
-<span class="badge dark">advanced</span> <span class="badge">LB logic</span>
+<span class="badge dark">advanced</span> 
 
 **Syntax:** `proxy_request_buffering on/off;` <br/>
 **Default:** `proxy_request_buffering off;` <br/>
@@ -999,7 +1017,7 @@ A restriction of this directive is that it works only when body size is less tha
 
 ### `proxy_set`
 
-<span class="badge">standard</span> <span class="badge primary">Proprietary</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge primary">Proprietary</span> 
 
 **Syntax:** `proxy_set $variable value [if(...)];`<br>
 **Default:** `-` <br>
@@ -1022,11 +1040,11 @@ The directive is merged across different levels (http/server/location/location i
 
 ### [`proxy_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header) (Deprecated)
 
-<span class="badge">standard</span> <span class="badge green">Enhanced</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> <span class="badge green">Enhanced</span> 
 
 **Syntax:**  `proxy_set_header field value if(condition);` <br/>
 **Default:** `-` <br/>
-**Contexts:** server (LB only)
+**Contexts:** server
 
 This is an enhanced version of the [open-source version](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header). It supports condition and can be used only in the [load balancer logic](lb7-es-structure) to pass data to the ES. This directive is deprecated. Refer to the [upgrade of edge node structure](</docs/edge-logic/edge-node-structure-upgrade.md>).
 
@@ -1062,7 +1080,7 @@ Sets a header and its value which will be included as a request header when send
 
 ### [`return`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#return)
 
-<span class="badge">standard</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> 
 
 **Syntax:** `return code [text];
        return code URL;
@@ -1159,7 +1177,7 @@ Defines a secret word used to check authenticity of requested links. No change t
 
 ### [`set`](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#set)
 
-<span class="badge">standard</span> <span class="badge">LB logic</span>
+<span class="badge">standard</span> 
 
 **Syntax:**	`set $variable value;` <br/>
 **Default:**	`-` <br/>
@@ -1217,7 +1235,7 @@ This feature is implemented on top of this [open-source project](https://github.
 
 ### [`sub_filter`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter)
 
-<span class="badge dark">advanced</span>
+<span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
 **Syntax:** `sub_filter {string} {replacement} [if(...)];` <br/>
 **Default:** `—` <br/>
