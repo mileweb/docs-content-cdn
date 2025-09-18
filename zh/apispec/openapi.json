@@ -461,7 +461,7 @@
                                   },
                                   "hostname": {
                                     "type": "string",
-                                    "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                                    "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property. If a wildcard hostname is configured in the property, you can specify either the wildcard hostname or a specific hostname matching the wildcard. For example, if the wildcard was \"*.xyz.com\", then you could enter a hostname such as \"w.xyz.com\"."
                                   },
                                   "uri": {
                                     "type": "string",
@@ -1337,7 +1337,7 @@
                             },
                             "hostname": {
                               "type": "string",
-                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property. If a wildcard hostname is configured in the property, you can specify either the wildcard hostname or a specific hostname matching the wildcard. For example, if the wildcard was \"*.xyz.com\", then you could enter a hostname such as \"w.xyz.com\"."
                             },
                             "uri": {
                               "type": "string",
@@ -4229,7 +4229,7 @@
                             },
                             "hostname": {
                               "type": "string",
-                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                              "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property. If a wildcard hostname is configured in the property, you can specify either the wildcard hostname or a specific hostname matching the wildcard. For example, if the wildcard was \"*.xyz.com\", then you could enter a hostname such as \"w.xyz.com\"."
                             },
                             "uri": {
                               "type": "string",
@@ -4989,7 +4989,7 @@
                                 },
                                 "hostname": {
                                   "type": "string",
-                                  "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property."
+                                  "description": "Indicates the hostname requested. It must be one of the hostnames defined in the property. If a wildcard hostname is configured in the property, you can specify either the wildcard hostname or a specific hostname matching the wildcard. For example, if the wildcard was \"*.xyz.com\", then you could enter a hostname such as \"w.xyz.com\"."
                                 },
                                 "uri": {
                                   "type": "string",
