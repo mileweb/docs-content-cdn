@@ -22,7 +22,7 @@
 
 <span class="badge">标准</span> <span class="badge green">修改增强</span>
 
-**使用语法：** `add_header name value [policy=...] [if(...)] [always];`<br/>
+**使用语法：** `add_header name value [policy=...] [always] [if(...)];`<br/>
 **默认设置：** `-` <br/>
 **可用位置：** server, location, if in location
 
