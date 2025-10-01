@@ -1,7 +1,11 @@
 # 发布日志
 
+## 2025年9月23日
+#### Console 更新
+* Ensured trial customers can use the CDN Pro service up to their designated limits.
+
 ## 2025年9月12日
-### API 更新
+#### API 更新
 * 配置 accessControlRules 的 hostname 字段允许接受泛域名下的单个子域名。
 
 #### 控制台更新
