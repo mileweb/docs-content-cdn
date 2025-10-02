@@ -14,7 +14,7 @@ In the following list, the <span class="badge">standard</span> directives are av
 
 **Syntax:** `access_log_downsample factor;` <br/>
 **Default:** `-` <br/>
-**Contexts:** server
+**Contexts:** server, location, if in location
 
 Downsamples the local access logs. A `factor` of N means one log entry for every N requests. The factor specified can be a positive integer or a variable. The default value of 1, meaning no downsampling, is used if the directive is not configured or when the variable value is invalid. This directive can be used to reduce the amount of access logs to download from the portal or API. A log field can be defined with the keyword `%samplerate` to show this factor. This directive has no effect on the real-time log, whose downsampling is controlled by [`realtime_log_downsample`](#realtime_log_downsample). We may also use this directive to prevent properties with large request volume from overloading the log processing system.
 
@@ -507,7 +507,7 @@ Sets configuration depending on the request URI without query string. No change 
 
 **Syntax:** `origin_connect_timeout time;` <br/>
 **Default:** `origin_connect_timeout 5s;` <br/>
-**Context:** server
+**Context:** server, location
 
 This is an enhancement of the [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) directive. It defines a timeout for establishing a connection with the origin server. The value is limited to an integer in [1,15] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 
@@ -612,7 +612,7 @@ origin_pass my_origin$escaped_uri; # no query string will be forwarded to the or
 
 **Syntax:** `origin_read_timeout time;` <br/>
 **Default:**  `origin_read_timeout 20s;` <br/>
-**Context:** server
+**Context:** server, location
 
 This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) directive. It defines a timeout for reading a response from the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level. 
 
@@ -622,7 +622,7 @@ This is an enhancement of the [proxy_read_timeout](http://nginx.org/en/docs/http
 
 **Syntax:** `origin_send_timeout time;` <br/>
 **Default:** `origin_send_timeout 20s;` <br/>
-**Context:** server
+**Context:** server, location
 
 This is an enhancement of the [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) directive. It sets a timeout for transmitting a request to the origin server. The value is limited to an integer in [1,60] followed by ‘s’. We made sure that the entire chain of connections respects this timeout value. Currently, this directive is not supported at the location level.
 

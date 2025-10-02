@@ -14,7 +14,7 @@
 
 **使用语法：** `access_log_downsample factor;` <br/>
 **默认设置：** `-` <br/>
-**可用位置：** server
+**可用位置：** server, location, if in location
 
 本指令用于设置访问日志的“采样率”，其参数可以是一个正整数或一个变量。采样率 N 意味着平均每 N 个请求生产一条访问日志。如果该指令未配置，或者指定的变量值无效，则默认采样率为1，即不采样。该指令可用于减少从 Portal 或 API 下载的访问日志量。可以在日志中用 `%samplerate` 关键字记录该采样率。该指令对实时日志没有影响，实时日志的采样由 [`realtime_log_downsample`](#realtime_log_downsample) 控制。在极端情况下，我们可能对某些请求量巨大的域名使用该本令来避免日志系统过载。
 
@@ -515,7 +515,7 @@ else { ... }
 
 **使用语法：** `origin_connect_timeout time;` <br/>
 **默认设置：** `origin_connect_timeout 5s;` <br/>
-**可用位置：** server
+**可用位置：** server, location
 
 该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 服务器与源站建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。该指令不能出现在 location 配置块中。
 
@@ -621,7 +621,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 **使用语法：** `origin_read_timeout time;` <br/>
 **默认设置：**  `origin_read_timeout 20s;` <br/>
-**可用位置：** server
+**可用位置：** server, location
 
 该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
 
@@ -631,7 +631,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 
 **使用语法：** `origin_send_timeout time;` <br/>
 **默认设置：** `origin_send_timeout 20s;` <br/>
-**可用位置：** server
+**可用位置：** server, location
 
 该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了将回源请求从 CDN Pro 节点发送到源站的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
 
