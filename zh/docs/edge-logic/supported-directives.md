@@ -333,7 +333,7 @@ location @try_origin2 {
 | AES<br>加解密 | **ENCRYPT_AES_256_CBC**<br>**DECRYPT_AES_256_CBC** |```eval_func $output ENCRYPT_AES_256_CBC $key $iv $message;```<br>```$key```和```$iv```都应为32字节的二进制串。|
 | 加解密 | **ENCRYPT_SYMM**<br>**DECRYPT_SYMM** | ```eval_func $output ENCRYPT_SYMM $key $iv $message $mode;```<br>```$key```和```$iv```都应为二进制串。```$mode```可以是 *openssl list -cipher-commands* 返回的任意一个密码，例如'aes-128-cbc'。|
 | 计算<br>HMAC | **HMAC**<br>**HMAC_HEXKEY** | ```eval_func $output HMAC $key $message {dgst-alg};```<br>```eval_func $output HMAC_HEXKEY $hexkey $msg {dgst-alg};```<br>```{dgst-alg}``` 可以是 ```MD5```, ```SHA1```, ```SHA256``` |
-| RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 目前只支持 ```SHA256```。|
+| RSA<br>签名 | **RSA_SIGN**<br>RSA_VERIFY | ```eval_func $sig RSA_SIGN {dgst-alg} $msg $privkey;```<br>```eval_func $ok RSA_VERIFY {dgst-alg} $msg $sig $pubkey;```<br>```{dgst-alg}``` 可以是 ```SHA256```，```SHA384```或者当 key 包含 pss 参数时，```USE-PSS```。|
 | 比较<br>整数 | COMPARE_INT | ```eval_func $output COMPARE_INT $data1 $data2;```<br>```当 ```$data1 > $data2```时 $output``` 的值为 "1"，相等时为 "0"，小于时为 “-1”。|
 | 整数<br>计算器 | CALC_INT | ```eval_func $output CALC_INT "$integer + 1000";```<br>计算这个表达式并把结果赋予 ```$output```. 仅支持整数的 +, -, *, / 操作。非法的输入表达式会导致结果为 "NAN"。|
 | 整数<br>绝对值 | ABS_INT | ```eval_func $output ABS_INT $integer;```<br>```$output``` 会被赋予 ```$integer``` 的绝对值。非法输入会导致结果为空。|
