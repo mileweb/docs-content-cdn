@@ -1,4 +1,6 @@
-## An Introduction to the CDN Pro Edge Logic
+# An Introduction to the CDN Pro Edge Logic
+
+## A serverless cloud of enhanced NGINX at the edge
 
 CDN Pro’s proxy server is developed on top of the open-source software [NGINX](http://nginx.org), which is widely used to build powerful web servers and reverse proxy servers with superior performance. NGINX has its own configuration language, which is described in greater detail on their [documentation website](http://nginx.org/en/docs/).
 

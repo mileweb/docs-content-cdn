@@ -7,7 +7,8 @@ Our platform comes with a friendly yet powerful user interface that allows 100% 
 ## CDN Pro Key Features
 
 CDN Pro's key features make it easy for anyone with a minimum background in CDN to get started, while offering powerful features for advanced users as well.
-- A rich API, Edge Logic, and processing at the edge enable you to implement features at the CDN level without touching your application codebase.
+
+- A feature-rich API, combined with Edge Logic, enables you to do complex data processing at the edge without touching your application codebase.
 - You can configure CDN Pro, test its behavior in a dedicated staging environment, and then deploy to production in minutes, without long wait times to create and change configurations by email or phone calls. CDN Pro also allows you to self-configure edge servers and customize GSLB service maps.
 - Flexible cost/performance management empowers you to self-customize service coverage to manage expenses according to the performance you need.
 - State-of-the-art load balancing dynamically monitors the Internet to direct traffic based on real-time performance metrics and system-load information.
