@@ -1,5 +1,11 @@
 # 发布日志
 
+
+## 2025年10月10日
+#### Console 更新
+* Fixed incorrect check for ICP Beian when an invalid hostname is used in a property.
+* Adjusted the HasConfig filter on the property list page to be consistent with our API.
+
 ## 2025年9月23日
 #### Console 更新
 * Ensured trial customers can use the CDN Pro service up to their designated limits.
