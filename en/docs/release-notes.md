@@ -1,5 +1,12 @@
 # Release Notes
 
+## October 20, 2025
+#### Console updates
+* fixed display of supported types in the service type dropdown of the reports page.
+
+#### API updates
+* Improved resource cleanup following service termination.
+
 ## October 10, 2025
 #### Console updates
 * Fixed incorrect check for ICP Beian when an invalid hostname is used in a property.
