@@ -1,5 +1,11 @@
 # 发布日志
 
+## 2025年10月20日
+#### Console 更新
+* fixed display of supported types in the service type dropdown of the reports page.
+
+#### API 更新
+* Improved resource cleanup following service termination.
 
 ## 2025年10月10日
 #### Console 更新
