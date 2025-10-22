@@ -164,7 +164,7 @@ This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/ht
 <span class="badge dark">advanced</span>
 
 **Syntax:** `brotli on|off;`<br/>
-**Default:** `brotli off;` <br/>
+**Default:** `brotli on;` <br/>
 **Context:** server, location, if
 
 Enables or disables on-the-fly compression of responses. 
