@@ -65,7 +65,7 @@ To use the variables properly, it is important to understand the request process
 | <span id="sc_initial"></span><span class="var">$sc_initial</span> |<span class="badge small" title="numerical value">#</span> Value is 1 if the first byte was served to the client; 0 otherwise. | <span class="badge yellow">No</span> |
 | <span id="sec"></span><span class="var">$sec</span> |<span class="badge small" title="numerical value">#</span> current Unix time in integer seconds | <span class="badge yellow">No</span> |
 | <span id="secure_link"></span><span class="var">$secure_link</span> | result of secure link evaluation | <span class="badge green">Yes</span> |
-| <span id="secure_link_expires"></span><span class="var">$secure_link_expires</span> |  lifetime of a link passed in a request | <span class="badge green">Yes</span> |
+| <span id="secure_link_expires"></span><span class="var">$secure_link_expires</span> | <span class="badge small" title="numerical value">#</span> lifetime of a link passed in a request | <span class="badge green">Yes</span> |
 | <span id="sent_http_"></span><span class="var">$sent\_http\_<em>name</em></span> | header with the specified name sent to client | <span class="badge green">Yes</span> |
 | <span id="sent_http_content_length"></span><span class="var">$sent_http_content_length</span> |<span class="badge small" title="numerical value">#</span> Content-Length to client | <span class="badge green">Yes</span> |
 | <span id="sent_http_content_type"></span><span class="var">$sent_http_content_type</span> | Content-Type to client | <span class="badge green">Yes</span> |
