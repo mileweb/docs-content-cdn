@@ -164,7 +164,7 @@ location = /auth {
 <span class="badge dark">高级</span>
 
 **使用语法:** `brotli on|off;`<br/>
-**默认设置:** `brotli on;` <br/>
+**默认设置:** `brotli off;` <br/>
 **可用位置:** server, location, if
 
 开启或关闭对响应进行即时压缩。 

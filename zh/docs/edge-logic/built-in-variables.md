@@ -64,6 +64,8 @@
 | <span id="sc_completed"></span><span class="var">$sc_completed</span> |<span class="badge small" title="numerical value">#</span> 如果本次请求的所有数据都已响应给客户端则值为1，否则值为0  | <span class="badge yellow">No</span> |
 | <span id="sc_initial"></span><span class="var">$sc_initial</span> |<span class="badge small" title="numerical value">#</span> 如果本次请求的第一个字节已响应给客户端则值为1，否则值为0| <span class="badge yellow">No</span> |
 | <span id="sec"></span><span class="var">$sec</span> |<span class="badge small" title="numerical value">#</span> 当前 Unix 时间戳，精度到秒 | <span class="badge yellow">No</span> |
+| <span id="secure_link"></span><span class="var">$secure_link</span> | 防盗链的验证结果 | <span class="badge green">Yes</span> |
+| <span id="secure_link_expires"></span><span class="var">$secure_link_expires</span> | <span class="badge small" title="numerical value">#</span> 防盗链的有效期 | <span class="badge green">Yes</span> |
 | <span id="sent_http_"></span><span class="var">$sent\_http\_<em>name</em></span> | 响应给客户端的指定参数值 | <span class="badge green">Yes</span> |
 | <span id="sent_http_content_length"></span><span class="var">$sent_http_content_length</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的Content-Length 头部值 | <span class="badge green">Yes</span> |
 | <span id="sent_http_content_type"></span><span class="var">$sent_http_content_type</span> | 响应给客户端的Content-Type 头部值 | <span class="badge green">Yes</span> |
