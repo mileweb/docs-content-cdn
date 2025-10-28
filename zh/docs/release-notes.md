@@ -1,5 +1,13 @@
 # 发布日志
 
+## 2025年10月27日
+#### API 更新
+* Ensured properties can be filtered based on origins.maxConnections.
+
+#### Console 更新
+* Added support for variables $secure_link and $secure_link_expires in a property's Edge Logic.
+* Improved search functionality on the standby task page.
+
 ## 2025年10月20日
 #### Console 更新
 * fixed display of supported types in the service type dropdown of the reports page.

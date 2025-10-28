@@ -1,5 +1,14 @@
 # Release Notes
 
+## October 27, 2025
+### API updates
+* Ensured properties can be filtered based on origins.maxConnections.
+
+#### Console updates
+* Added support for variables $secure_link and $secure_link_expires in a property's Edge Logic.
+* Improved search functionality on the standby task page.
+
+
 ## October 20, 2025
 #### Console updates
 * fixed display of supported types in the service type dropdown of the reports page.
