@@ -1,4 +1,6 @@
-## CDN Pro 边缘逻辑（Edge Logic）简介
+# CDN Pro 边缘逻辑（Edge Logic）简介
+
+## 一个基于增强版 NGINX 的 serverless 边缘云
 
 CDN Pro 的代理服务器是在开源软件[NGINX](http://nginx.org)之上开发完成。NGINX 拥有目前业内通用性、适配性最强的代理缓存技术。自2004年问世以来已被广泛用于构建功能强大的Web服务器和性能优越的反向代理服务器中。NGINX 对外提供了标准化的脚本语言，更多详细的技术细节以及使用案例可参阅[Nginx官网文档库](http://nginx.org/en/docs/)。
 
