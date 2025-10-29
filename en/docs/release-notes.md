@@ -1,7 +1,7 @@
 # Release Notes
 
 ## October 27, 2025
-### API updates
+#### API updates
 * Ensured properties can be filtered based on origins.maxConnections.
 
 #### Console updates
