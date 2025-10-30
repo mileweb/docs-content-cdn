@@ -27,7 +27,7 @@
 * Ensured trial customers can use the CDN Pro service up to their designated limits.
 
 ## September 12, 2025
-### API updates
+#### API updates
 * Enabled hostname field in accessControlRules to accept subdomains corresponding to a wildcard domain.
 
 #### Console updates
