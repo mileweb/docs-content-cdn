@@ -1,5 +1,14 @@
 # Release Notes
 
+## November 7, 2025
+#### API updates
+* Fixed issue with aggregation point missing from the [log aggregation points summaryReport API](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>) when thestartdate is earlier than its creation time.
+
+#### Console updates
+* Ensured proper display of error message in the property list page.
+* Ensured correct operators are used in HasConfig’s origins.shield, beianContentType, and realTimeLog.escape fields when searching for properties.
+
+
 ## October 27, 2025
 #### API updates
 * Ensured properties can be filtered based on origins.maxConnections.
