@@ -39790,7 +39790,7 @@
             },
             "in": "query",
             "name": "enddate",
-            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone. Example: <code>startdate=2025-03-18T00:00:00Z</code>",
+            "description": "RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone. Example: <code>enddate=2025-03-18T00:00:00Z</code>",
             "required": true
           },
           {

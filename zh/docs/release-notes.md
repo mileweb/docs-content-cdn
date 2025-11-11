@@ -2,7 +2,7 @@
 
 ## 2025年11月7日
 #### API 更新
-* Fixed issue with aggregation point missing from the [log aggregation points summaryReport API](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>) when thestartdate is earlier than its creation time.
+* Fixed issue with aggregation point missing from the [log aggregation points summaryReport API](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>) when the startdate is earlier than its creation time.
 
 #### Console 更新
 * Ensured proper display of error message in the property list page.
