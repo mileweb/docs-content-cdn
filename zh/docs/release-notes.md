@@ -1,5 +1,13 @@
 # 发布日志
 
+## 2025年11月26日
+#### API 更新
+* Checked for duplicate filter values in report APIs.
+* Changed the certificate fingerprint hash algorithm to sha256 for new certificate versions.
+
+#### Console 更新
+* Improved Chinese text used in our console and and signup pages.
+
 ## 2025年11月7日
 #### API 更新
 * Fixed issue with aggregation point missing from the [log aggregation points summaryReport API](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>) when the startdate is earlier than its creation time.
