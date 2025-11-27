@@ -6,7 +6,7 @@
 * Changed the certificate fingerprint hash algorithm to sha256 for new certificate versions.
 
 #### Console updates
-* Improved Chinese text used in our console and and signup pages.
+* Improved Chinese text used in our console and signup pages.
 
 ## November 7, 2025
 #### API updates
