@@ -1,5 +1,13 @@
 # Release Notes
 
+## November 26, 2025
+#### API updates
+* Checked for duplicate filter values in report APIs.
+* Changed the certificate fingerprint hash algorithm to sha256 for new certificate versions.
+
+#### Console updates
+* Improved Chinese text used in our console and signup pages.
+
 ## November 7, 2025
 #### API updates
 * Fixed issue with aggregation point missing from the [log aggregation points summaryReport API](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>) when the startdate is earlier than its creation time.
