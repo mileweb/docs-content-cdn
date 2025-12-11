@@ -1,5 +1,14 @@
 # Release Notes
 
+## December 10, 2025
+
+#### API updates
+* Improved deployment related notifications.
+
+#### Console updates
+* Ensured displayed text is translated correctly.
+* Updated link to data processing addendum.
+
 ## November 26, 2025
 #### API updates
 * Checked for duplicate filter values in report APIs.
