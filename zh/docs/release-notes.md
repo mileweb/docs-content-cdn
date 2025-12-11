@@ -1,5 +1,14 @@
 # 发布日志
 
+## 2025年12月10日
+
+#### API 更新
+* Improved deployment related notifications.
+
+#### Console 更新
+* Ensured displayed text is translated correctly.
+* Updated link to data processing addendum.
+
 ## 2025年11月26日
 #### API 更新
 * Checked for duplicate filter values in report APIs.
