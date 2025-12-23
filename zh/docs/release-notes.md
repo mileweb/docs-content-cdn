@@ -1,5 +1,10 @@
 # 发布日志
 
+## 2025年12月22日
+#### Console 更新
+* Fixed links on self signup and plan pages to point to appropriate URLs based on the preferred language.
+* Simplified legal links on signup page.
+
 ## 2025年12月10日
 
 #### API 更新
