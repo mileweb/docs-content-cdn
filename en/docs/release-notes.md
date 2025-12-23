@@ -1,5 +1,11 @@
 # Release Notes
 
+## December 22, 2025
+
+#### Console updates
+* Fixed links on self signup and plan pages to point to appropriate URLs based on the preferred language.
+* Simplified legal links on signup page.
+
 ## December 10, 2025
 
 #### API updates

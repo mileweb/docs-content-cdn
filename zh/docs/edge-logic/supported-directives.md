@@ -517,7 +517,7 @@ else { ... }
 **默认设置：** `origin_connect_timeout 5s;` <br/>
 **可用位置：** server, location
 
-该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 服务器与源站建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。该指令不能出现在 location 配置块中。
+该指令是 [proxy_connect_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_connect_timeout) 的增强版本。它设置了 CDN Pro 服务器与源站建立连接的超时时间。该值仅限于 [1,15] 中的整数，后跟“s”。 CDN Pro 已确保回源链路上所有节点都遵守此超时值。
 
 
 ### `origin_fast_route`
@@ -623,7 +623,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 **默认设置：**  `origin_read_timeout 20s;` <br/>
 **可用位置：** server, location
 
-该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
+该指令在 [proxy_read_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_read_timeout) 指令的基础上进行了优化提升。它定义了 CDN Pro 从源服务器读取响应的超时时间。可配值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。
 
 ### `origin_send_timeout`
 
@@ -633,7 +633,7 @@ origin_pass my_origin$escaped_uri; # 回源请求不会携带查询参数
 **默认设置：** `origin_send_timeout 20s;` <br/>
 **可用位置：** server, location
 
-该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了将回源请求从 CDN Pro 节点发送到源站的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。此指令不支持在 location {}中使用。
+该指令在 [proxy_send_timeout](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_send_timeout) 指令的基础上进行了优化提升。它设置了将回源请求从 CDN Pro 节点发送到源站的超时时间。该值仅限于 [1,60] 中的整数，后跟“s”。CDN Pro 已确保回源链路上所有节点都都遵守此超时值。
 
 
 ### [`origin_set_header`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header)
