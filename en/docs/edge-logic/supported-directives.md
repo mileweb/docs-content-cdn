@@ -1275,7 +1275,7 @@ Indicates whether to look for each string to replace once or repeatedly. No chan
 
 ### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)
 
-<span class="badge">standard</span>
+<span class="badge dark">advanced</span>
 
 **Syntax:** `sub_filter_types <mime-type> [...];` <br/>
 **Default:** `sub_filter_types text/html;` <br/>
