@@ -29,11 +29,13 @@ If you use the [API to create the property](</apidocs#operation/createProperty>)
 } 
 ```
 
-Note: You must enter the entire Edge Logic code in one line following the [JSON string escaping](https://www.freeformatter.com/json-escape.html) syntax. For example, if you configured the acceleration hostname to be `www.testdomain.com` as shown in the JSON above, and then deployed the property to the staging environment, you can use a cURL command to perform the following test:
+Note: You must enter the entire Edge Logic code in one line following the [JSON string escaping](https://www.freeformatter.com/json-escape.html) syntax.
+
+Assume you configured the acceleration hostname to be `www.testdomain.com` as shown in the JSON above, and then deployed the property to the staging environment, you can use a cURL command to perform the following test:
 
 ```bash
-$ curl -v http://www.testdomain.com/ --resolve www.testdomain.com:80:163.171.228.89
-* Added www.testdomain.com:80:163.171.228.89 to DNS cache
+$ curl -v https://www.testdomain.com/ --connect-to ::174.35.123.148: 
+* Connecting to hostname: 174.35.123.148
 ...
 > 
 < HTTP/1.1 200 OK
@@ -49,7 +51,7 @@ hello world!
 * Connection #0 to host www.testdomain.com left intact
 ```
 
-In this example, 163.171.228.89 is the IP address of one of the staging servers. For details about using the staging environment, refer to [this section](</docs/edge-logic/staging-environment.md>). 
+In this example, 174.35.123.148 is the IP address of one of the staging servers. For details about using the staging environment, refer to [this section](</docs/edge-logic/staging-environment.md>). 
 
 Under the hood, the CDN Pro API server encloses the Edge Logic into an NGINX "[server block](http://nginx.org/en/docs/http/ngx_http_core_module.html#server)" generated for this property. The acceleration hostname "www.testdomain.com" specified in the property becomes the parameter to the "[server_name](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name)" directive in this server block. As a result, all HTTP requests targeting www.testdomain.com are handled by this server block, and the server follows the behavior you defined in the Edge Logic.
 
