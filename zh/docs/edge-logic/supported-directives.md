@@ -1296,7 +1296,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 
 ### [`sub_filter_types`](http://nginx.org/en/docs/http/ngx_http_sub_module.html#sub_filter_types)
 
-<span class="badge">标准</span>
+<span class="badge dark">高级</span>
 
 **使用语法：** `sub_filter_types <mime-type> [...];` <br/>
 **默认设置：** `sub_filter_types text/html;` <br/>
@@ -1322,5 +1322,5 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置：** `—` <br/>
 **可用位置：** server, location
 
-该指令用于设置将内置变量 $invalid_referer 赋值为的空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
+该指令用于设置将内置变量 $invalid_referer 赋值为空字符串的条件。当请求头 `Referer` 的值不满足这些条件的时候，内置变量 $invalid_referer 将被赋值为1。代码源自NGINX开源版本，无变更。
 
