@@ -1,5 +1,16 @@
 # Release Notes
 
+## January 5, 2026
+#### API updates
+* Ensured user's preferred language is used in notification email.
+
+#### Console updates
+* Added tooltip to encourage users to test against the staging environment.
+* Fixed links to certificates on the details page of a deployment task.
+* Corrected links to help on CA certificates.
+* Fixed link on properties page to Edge Logic introduction.
+* Removed extraneous space in a message box.
+
 ## December 22, 2025
 
 #### Console updates
