@@ -1,5 +1,17 @@
 # 发布日志
 
+## 2026年01月05日
+
+#### API 更新
+* Ensured user's preferred language is used in notification email.
+
+#### Console 更新
+* Added tooltip to encourage users to test against the staging environment.
+* Fixed links to certificates on the details page of a deployment task.
+* Corrected links to help on CA certificates.
+* Fixed link on properties page to Edge Logic introduction.
+* Removed extraneous space in a message box.
+
 ## 2025年12月22日
 #### Console 更新
 * Fixed links on self signup and plan pages to point to appropriate URLs based on the preferred language.
