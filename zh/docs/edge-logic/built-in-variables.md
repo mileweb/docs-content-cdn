@@ -14,6 +14,8 @@
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> 响应给客户端的数据大小（包含 header ） | <span class="badge green">Yes</span> |
 | <span id="cache_misc"></span><span class="var">$cache_misc</span> | 一个<span class="badge cyan">R/W</span>可写的变量，表示参加到缓存 key 中的参数 | <span class="badge yellow">No</span> |
 | <span id="cdn_cache_status"></span><span class="var">$cdn_cache_status</span> | [缓存状态](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge yellow">No</span> |
+| <span id="client_as_name"></span><span class="var">$client_as_name</span> | 客户端所在的自治系统（AS）的名称 | <span class="badge yellow">No</span> |
+| <span id="client_asn"></span><span class="var">$client_asn</span> | 客户端所在的自治系统（AS）的编号 | <span class="badge yellow">No</span> |
 | <span id="client_country_code"></span><span class="var">$client_country_code</span> | 客户端的国家码（ISO 3166 格式） | <span class="badge yellow">No</span> |
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | 客户端请求的 HTTP 协议版本，例如 "HTTP/1.1" | <span class="badge yellow">No</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> 客户端IP 版本：4代表 IPv4 ；6代表 IPv6 | <span class="badge yellow">No</span> |

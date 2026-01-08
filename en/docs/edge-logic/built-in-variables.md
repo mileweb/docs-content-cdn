@@ -14,6 +14,8 @@ To use the variables properly, it is important to understand the request process
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> total response bytes to client | <span class="badge green">Yes</span> |
 | <span id="cache_misc"></span><span class="var">$cache_misc</span> | a <span class="badge cyan">R/W</span> writable variable to add parameters to the cache key | <span class="badge yellow">No</span> |
 | <span id="cdn_cache_status"></span><span class="var">$cdn_cache_status</span> | [cache status](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge yellow">No</span> |
+| <span id="client_as_name"></span><span class="var">$client_as_name</span> | name of the AS associated with client's IP address | <span class="badge yellow">No</span> |
+| <span id="client_asn"></span><span class="var">$client_asn</span> | number of the AS associated with client's IP address | <span class="badge yellow">No</span> |
 | <span id="client_country_code"></span><span class="var">$client_country_code</span> | client’s ISO 3166 country code | <span class="badge yellow">No</span> |
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | client's HTTP version, like "HTTP/1.1" | <span class="badge yellow">No</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> client's IP version: 4 for IPv4; 6 for IPv6 | <span class="badge yellow">No</span> |
