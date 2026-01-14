@@ -73,6 +73,7 @@ To use the variables properly, it is important to understand the request process
 | <span id="sent_http_content_type"></span><span class="var">$sent_http_content_type</span> | Content-Type to client | <span class="badge green">Yes</span> |
 | <span id="served_from_cache"></span><span class="var">$served_from_cache</span> |<span class="badge small" title="numerical value">#</span> Value is 1 for a HIT on edge; 0 for a MISS. | <span class="badge yellow">No</span> |
 | <span id="server_addr"></span><span class="var">$server_addr</span> | IP address of the edge server | <span class="badge green">Yes</span> |
+| <span id="server_env"></span><span class="var">$server_env</span> | environment of the edge server，staging or production | <span class="badge yellow">No</span> |
 | <span id="server_level"></span><span class="var">$server_level</span> | <span class="badge small" title="numerical value">#</span> Level of the cache server. 1 means edge, and 2 means intermediate. | <span class="badge yellow">No</span> |
 | <span id="server_name"></span><span class="var">$server_name</span> | The value specified in the property's hostnames that matched the incoming request. | <span class="badge green">Yes</span> |
 | <span id="server_region"></span><span class="var">$server_region</span> | Country code of the edge server, e.g. CN, US | <span class="badge yellow">No</span> |
@@ -80,6 +81,7 @@ To use the variables properly, it is important to understand the request process
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1, HTTP/2.0 or HTTP/3.0 | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> port number that received the request | <span class="badge yellow">No</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge yellow">No</span> |
+| <span id="ssl_cert_alg"></span><span class="var">$ssl_cert_alg</span> | algorithm of the certificate, e.g. RSA, EC | <span class="badge yellow">No</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | TLS cipher suite used | <span class="badge green">Yes</span> |
 | <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | client certificate in PEM format (urlencoded) | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | SHA1 fingerprint of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
