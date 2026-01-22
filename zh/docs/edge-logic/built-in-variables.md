@@ -73,13 +73,15 @@
 | <span id="sent_http_content_type"></span><span class="var">$sent_http_content_type</span> | 响应给客户端的Content-Type 头部值 | <span class="badge green">Yes</span> |
 | <span id="served_from_cache"></span><span class="var">$served_from_cache</span> |<span class="badge small" title="numerical value">#</span> 如该请求在边缘的命中状态是 HIT ，则值是1；否则值为0 | <span class="badge yellow">No</span> |
 | <span id="server_addr"></span><span class="var">$server_addr</span> | 边缘服务器的 IP 地址 | <span class="badge green">Yes</span> |
+| <span id="server_env"></span><span class="var">$server_env</span> | 边缘服务器所在的环境，staging 或者 production | <span class="badge yellow">No</span> |
 | <span id="server_level"></span><span class="var">$server_level</span> | <span class="badge small" title="numerical value">#</span> 缓存服务器的层级。1代表边缘缓存，2代表父级缓存 | <span class="badge yellow">No</span> |
 | <span id="server_name"></span><span class="var">$server_name</span> | 加速项目配置里匹配用户请求的加速域名 | <span class="badge green">Yes</span> |
-| <span id="server_region"></span><span class="var">$server_region</span> | 边缘服务器的国家代码，例如CN，US | <span class="badge yellow">No</span> |
+| <span id="server_region"></span><span class="var">$server_region</span> | 边缘服务器的国家代码，例如 CN，US | <span class="badge yellow">No</span> |
 | <span id="server_province_code"></span><span class="var">$server_province_code</span> | 边缘服务器的中国省份代码 | <span class="badge yellow">No</span> |
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1，HTTP/2.0或HTTP/3.0 | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘服务器端口号 | <span class="badge yellow">No</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该指令进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" | <span class="badge yellow">No</span> |
+| <span id="ssl_cert_alg"></span><span class="var">$ssl_cert_alg</span> | 本次 SSL 请求中所使用的证书算法，例如 RSA，EC | <span class="badge yellow">No</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | PEM 格式的客户端证书，经过URL编码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | 客户端证书的SHA1指纹 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
