@@ -14,6 +14,8 @@ To use the variables properly, it is important to understand the request process
 | <span id="bytes_sent"></span><span class="var">$bytes_sent</span> |<span class="badge small" title="numerical value">#</span> total response bytes to client | <span class="badge green">Yes</span> |
 | <span id="cache_misc"></span><span class="var">$cache_misc</span> | a <span class="badge cyan">R/W</span> writable variable to add parameters to the cache key | <span class="badge yellow">No</span> |
 | <span id="cdn_cache_status"></span><span class="var">$cdn_cache_status</span> | [cache status](https://www.nginx.com/blog/nginx-caching-guide/#Frequently-Asked-Questions-(FAQ)): HIT, MISS, BYPASS, EXPIRED, STALE, UPDATING, REVALIDATED. | <span class="badge yellow">No</span> |
+| <span id="client_as_name"></span><span class="var">$client_as_name</span> | name of the AS associated with client's IP address | <span class="badge yellow">No</span> |
+| <span id="client_asn"></span><span class="var">$client_asn</span> | number of the AS associated with client's IP address | <span class="badge yellow">No</span> |
 | <span id="client_country_code"></span><span class="var">$client_country_code</span> | client’s ISO 3166 country code | <span class="badge yellow">No</span> |
 | <span id="client_http_version"></span><span class="var">$client_http_version</span> | client's HTTP version, like "HTTP/1.1" | <span class="badge yellow">No</span> |
 | <span id="client_ip_version"></span><span class="var">$client_ip_version</span> | <span class="badge small" title="numerical value">#</span> client's IP version: 4 for IPv4; 6 for IPv6 | <span class="badge yellow">No</span> |
@@ -71,6 +73,7 @@ To use the variables properly, it is important to understand the request process
 | <span id="sent_http_content_type"></span><span class="var">$sent_http_content_type</span> | Content-Type to client | <span class="badge green">Yes</span> |
 | <span id="served_from_cache"></span><span class="var">$served_from_cache</span> |<span class="badge small" title="numerical value">#</span> Value is 1 for a HIT on edge; 0 for a MISS. | <span class="badge yellow">No</span> |
 | <span id="server_addr"></span><span class="var">$server_addr</span> | IP address of the edge server | <span class="badge green">Yes</span> |
+| <span id="server_env"></span><span class="var">$server_env</span> | environment of the edge server，staging or production | <span class="badge yellow">No</span> |
 | <span id="server_level"></span><span class="var">$server_level</span> | <span class="badge small" title="numerical value">#</span> Level of the cache server. 1 means edge, and 2 means intermediate. | <span class="badge yellow">No</span> |
 | <span id="server_name"></span><span class="var">$server_name</span> | The value specified in the property's hostnames that matched the incoming request. | <span class="badge green">Yes</span> |
 | <span id="server_region"></span><span class="var">$server_region</span> | Country code of the edge server, e.g. CN, US | <span class="badge yellow">No</span> |
@@ -78,6 +81,7 @@ To use the variables properly, it is important to understand the request process
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1, HTTP/2.0 or HTTP/3.0 | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> port number that received the request | <span class="badge yellow">No</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | variable providing an ASCII-based sorted list of input query parameters; it can be modified by the "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" directive | <span class="badge yellow">No</span> |
+| <span id="ssl_cert_alg"></span><span class="var">$ssl_cert_alg</span> | algorithm of the certificate, e.g. RSA, EC | <span class="badge yellow">No</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | TLS cipher suite used | <span class="badge green">Yes</span> |
 | <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | client certificate in PEM format (urlencoded) | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
 | <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | SHA1 fingerprint of the client certificate | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |

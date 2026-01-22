@@ -1,5 +1,17 @@
 # 发布日志
 
+## 2026年01月21日
+
+#### API 更新
+* Sorted history array in the response of the [historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>).
+
+#### Console 更新
+* Improved display of origin shields in property settings.
+* Improved consistency of modal window titles.
+* Added support for more precise translations of some link labels.
+* Ensured annotation details on the dashboard page are translated to the user’s preferred language.
+* Introduced two new Edge Logic variables, $client_asn and $client_as_name, to represent Autonomous System number and name associated with a client’s IP address.
+
 ## 2026年01月05日
 
 #### API 更新
