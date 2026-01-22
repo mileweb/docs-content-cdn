@@ -1,6 +1,6 @@
 # Release Notes
 
-## January 21,2026
+## January 21, 2026
 #### API updates
 * Sorted history array in the response of the [historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>).
 
