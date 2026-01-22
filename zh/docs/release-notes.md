@@ -10,7 +10,7 @@
 * Improved consistency of modal window titles.
 * Added support for more precise translations of some link labels.
 * Ensured annotation details on the dashboard page are translated to the user’s preferred language.
-* Introduced two new Edge Logic variables, $client_asn and $client_as_name, to represent Anonymous System number and name associated with a client’s IP address.
+* Introduced two new Edge Logic variables, $client_asn and $client_as_name, to represent Autonomous System number and name associated with a client’s IP address.
 
 ## 2026年01月05日
 
