@@ -1,5 +1,13 @@
 # Release Notes
 
+## February 2, 2026
+#### API updates
+* Filled optional fields with default values when creating a property or a property version.
+
+#### Console updates
+* Ensured help link point to correct URL.
+* Updated links to legal documents on contact invitation pages.
+
 ## January 21, 2026
 #### API updates
 * Sorted history array in the response of the [historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>).
