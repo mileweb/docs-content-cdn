@@ -1,88 +1,96 @@
 # 发布日志
 
+## 2026年02月03日
+
+#### API变更
+* 创建加速项目及加速项目版本时，对于可选字段填入默认值。
+
+#### 控制台变更
+* 改进tooltip提示框中跳转到帮助文档的链接。
+* 更新控制台账号注册邀请页面中的产品使用条款的链接。
+
 ## 2026年01月21日
 
-#### API 更新
-* Sorted history array in the response of the [historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>).
+#### API变更
+* [加速域名部署历史查询接口](</apidocs#operation/get-cdn-hostnames-historical-hostname>)支持对部署历史排序。
 
-#### Console 更新
-* Improved display of origin shields in property settings.
-* Improved consistency of modal window titles.
-* Added support for more precise translations of some link labels.
-* Ensured annotation details on the dashboard page are translated to the user’s preferred language.
-* Introduced two new Edge Logic variables, $client_asn and $client_as_name, to represent Autonomous System number and name associated with a client’s IP address.
+#### 控制台变更
+* 改进加速项目配置页中origin shields列表的展示。
+* 改进页面对话框的标题，保持风格一致性。
+* 改进部分链接标签的国际化。
+* 总览页面下的报表注释支持国际化。
+* 边缘逻辑编辑框新增2个变量：$client_asn，$client_as_name，用于获取客户端所处的AS网络标识。
 
 ## 2026年01月05日
 
-#### API 更新
-* Ensured user's preferred language is used in notification email.
+#### API变更
+* 发给用户的通知邮件，遵循用户的语言偏好。
 
-#### Console 更新
-* Added tooltip to encourage users to test against the staging environment.
-* Fixed links to certificates on the details page of a deployment task.
-* Corrected links to help on CA certificates.
-* Fixed link on properties page to Edge Logic introduction.
-* Removed extraneous space in a message box.
+#### 控制台变更
+* 加速项目详情页增加tooltip提示框，引导客户在演练环境进行测试。
+* 修复部署任务页面中跳转到证书的链接。
+* 改进CA证书页面中到跳转到帮助文档的链接。
+* 改进加速项目页面中跳转到边缘逻辑文档的链接。
 
 ## 2025年12月22日
 #### Console 更新
-* Fixed links on self signup and plan pages to point to appropriate URLs based on the preferred language.
-* Simplified legal links on signup page.
+* 改进账号注册页面和账号升级页面中的链接，使链接跳转前后页面的国际化一致。
+* 简化账号注册页面中指向产品使用条款的链接。
 
 ## 2025年12月10日
 
-#### API 更新
-* Improved deployment related notifications.
+#### API变更
+* 改进配置部署相关的消息通知。
 
-#### Console 更新
-* Ensured displayed text is translated correctly.
-* Updated link to data processing addendum.
+#### 控制台变更
+* 改正页面上一些国际化文本的错误。
+* 更新跳转到DPA数据处理条款的链接。
 
 ## 2025年11月26日
-#### API 更新
-* Checked for duplicate filter values in report APIs.
-* Changed the certificate fingerprint hash algorithm to sha256 for new certificate versions.
+#### API变更
+* 报表接口强化校验，拒绝重复入参。
+* 变更证书指纹哈希算法为sha256。
 
-#### Console 更新
-* Improved Chinese text used in our console and signup pages.
+#### 控制台变更
+* 改进中文国际化。
 
 ## 2025年11月7日
-#### API 更新
-* Fixed issue with aggregation point missing from the [log aggregation points summaryReport API](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>) when the startdate is earlier than its creation time.
+#### API变更
+* 修复[日志汇聚点报表查询接口](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>)在特定场景下查不到数据的bug。
 
-#### Console 更新
-* Ensured proper display of error message in the property list page.
-* Ensured correct operators are used in HasConfig’s origins.shield, beianContentType, and realTimeLog.escape fields when searching for properties.
+#### 控制台变更
+* 改进加速项目列表页面，错误信息的展示。
+* 针对使用条件表达式过滤加速项目列表的功能，改进个别字段的操作符。
 
 ## 2025年10月27日
-#### API 更新
-* Ensured properties can be filtered based on origins.maxConnections.
+#### API变更
+* 支持按origins.maxConnections字段，通过条件表达式过滤加速项目列表。
 
-#### Console 更新
-* Added support for variables $secure_link and $secure_link_expires in a property's Edge Logic.
-* Improved search functionality on the standby task page.
+#### 控制台变更
+* 边缘逻辑编辑框新增2个变量：$secure_link，$secure_link_expires。
+* 改进待命任务页面中的搜索功能。
 
 ## 2025年10月20日
-#### Console 更新
-* fixed display of supported types in the service type dropdown of the reports page.
+#### 控制台变更
+* 改进报表页面中的服务类型查询条件。
 
-#### API 更新
-* Improved resource cleanup following service termination.
+#### API变更
+* 改进服务挂起时资源清理的流程。
 
 ## 2025年10月10日
-#### Console 更新
-* Fixed incorrect check for ICP Beian when an invalid hostname is used in a property.
-* Adjusted the HasConfig filter on the property list page to be consistent with our API.
+#### 控制台变更
+* 改进加速项目中某个域名是否有ICP备案的校验。
+* 改进加速项目列表页中的条件表达式的字段列表，使之与API接口一致。
 
 ## 2025年9月23日
-#### Console 更新
-* Ensured trial customers can use the CDN Pro service up to their designated limits.
+#### 控制台变更
+* 完善免费试用客户的用量监控。
 
 ## 2025年9月12日
-#### API 更新
-* 配置 accessControlRules 的 hostname 字段允许接受泛域名下的单个子域名。
+#### API变更
+* accessControlRules下的hostname字段，支持配置泛域名下的某个具体子域名。
 
-#### 控制台更新
+#### 控制台变更
 * 改进了创建 CA 证书页面的错误处理。
 * 改进了验证任务和部署任务列表页面。添加了“结束时间”列，支持用”状态“列过滤。
 * 引进了新 Edge Logic 指令： compress_types, 该指令将取代 brotli_types 和 gzip_types.
