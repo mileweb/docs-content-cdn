@@ -174,24 +174,41 @@ throttles the customer by returning error messages with HTTP status code 429.
 
 CDN Pro uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to enforce rate limiting.
 The token bucket algorithm is based on an analogy of a fixed capacity bucket into which tokens are added at a
-fixed rate. Before allowing an API request to proceed, the bucket is inspected to see whether it contains at least
-one token. If it does, one token is removed from the bucket and the API request is allowed to proceed. If there
-is not a sufficient number of tokens available, the request is blocked, with an error that says the quota
-has been exceeded during the 1-minute sliding window.
+fixed rate. Before allowing an API request to proceed, the bucket is inspected to see whether it contains
+enough tokens to cover the cost of that request. If it does, the corresponding number of tokens is removed
+from the bucket and the API request is allowed to proceed. If there is not a sufficient number of tokens
+available, the request is blocked, with an error that says the quota has been exceeded during the 1-minute
+sliding window.
 
 The capacity of the bucket and the filling rate are controlled by the `configs.apiMaxBurst` and `configs.apiRate` fields
 in the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>). For example,
 if the customer has `configs.apiMaxBurst = 45` and `configs.apiRate = 120`, tokens are added to the bucket at a
 fixed rate of 120 tokens per minute, and the total capacity of the bucket is 45. The bucket is refilled in a
-“greedy” manner. CDN Pro tries to add tokens to the bucket as soon as possible. For example, refilling at
-"120 tokens per minute" adds 1 token  every 500 milliseconds. In other words, the refill does not wait a full
+"greedy" manner. CDN Pro tries to add tokens to the bucket as soon as possible. For example, refilling at
+"120 tokens per minute" adds 1 token every 500 milliseconds. In other words, the refill does not wait a full
 minute to regenerate a bunch of 120 tokens.
+
+* **Endpoint Token Weights**
+
+Not all API calls are equal in terms of server resource consumption. To reflect this, each API endpoint is
+assigned a token weight that determines how many tokens are deducted from the bucket per call. This means the effective number of calls you can make within your rate limit depends on the mix of endpoints you use.
+
+Most API endpoints are assigned the default token weight: 1 and thus consume 1 token per call. However, the following report endpoints are assigned higher weights and consume more tokens per call due to their significantly higher server resource usage:
+
+| Endpoint | Token weight |
+|---|---|
+| POST /cdn/report/bandwidthSummary | 2 |
+| POST /cdn/report/edgeStatusSummary | 2 |
+| POST /cdn/report/originStatusSummary | 2 |
+
+> **Note:** The weights assigned are subject to change.
 
 * **Indicator and Error Handling**
 
 After the token gets consumed, an `x-rate-limit-remaining: X` header is added to the API call’s HTTP response,
 indicating the number of tokens remaining in the bucket. This header represents the remaining quota of API requests
-a customer can make at this time. Failed or malformed requests consume one token from the bucket as well.
+a customer can make at this time. Failed or malformed requests consume tokens from the bucket as well,
+according to the weight of the endpoint called.
 If there is not a sufficient number of tokens in the bucket, the API gateway returns an HTTP 429 error with
 response header `x-rate-limit-retry-after-seconds: Y` to tell the client to retry after Y seconds.
 
@@ -205,16 +222,16 @@ Carefully check the records for potential abuses.
 requests into one. For example, if you want to monitor the traffic volume of a list of domains, an ineffective approach is:
 
 ```
-	for domain in domain_list:
-	    call GET /cdn/report/vol 
-	    	 {filters: {hostnames: [$domain]}}
+  for domain in domain_list:
+      call GET /cdn/report/vol 
+         {filters: {hostnames: [$domain]}}
 ```
 
    Instead, use the following recommended approach:
 
 ```
-	POST /cdn/report/volSummary 
-	     {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
+  POST /cdn/report/volSummary 
+       {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
 ```
 
    Another example is purging multiple files in one request instead of making an API call for each purge URL.
