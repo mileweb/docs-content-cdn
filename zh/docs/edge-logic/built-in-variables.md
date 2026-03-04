@@ -94,8 +94,8 @@
 | <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | <span class="badge small" title="numerical value">#</span> 客户端证书到期前的天数 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书的开始日期 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | 客户端证书验证的结果| <span class="badge green">Yes</span> |
-| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | 客户端JA4指纹| <span class="badge yellow">No</span> |
 | <span id="ssl_fingerprint_ja3"></span><span class="var">$ssl_fingerprint_ja3</span> | 客户端JA3指纹| <span class="badge yellow">No</span> |
+| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | 客户端JA4指纹| <span class="badge yellow">No</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge green">Yes</span> |
 | <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername | <span class="badge green">Yes</span> |
 | <span id="status"></span><span class="var">$status</span> | 响应给客户端的 HTTP 状态码 | <span class="badge green">Yes</span> |
