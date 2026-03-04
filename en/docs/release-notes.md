@@ -18,7 +18,6 @@
 * Fixed an issue where an invalid IPv6 address in dual-stack format passed origin server validation when it should have been rejected.
 * Improved origin server settings to prevent duplicate server entries (same hostname/IP and port combination) in the Servers and Backup Servers fields.
 
-# Release Notes
 
 ## February 2, 2026
 #### API updates
