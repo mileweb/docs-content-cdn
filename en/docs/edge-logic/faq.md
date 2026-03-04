@@ -230,7 +230,7 @@ requests into one. For example, if you want to monitor the traffic volume of a l
    Instead, use the following recommended approach:
 
 ```
-  POST /cdn/report/volSummary 
+  POST /cdn/report/volSummary
        {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
 ```
 
