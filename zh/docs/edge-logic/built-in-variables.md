@@ -83,16 +83,19 @@
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该指令进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" | <span class="badge yellow">No</span> |
 | <span id="ssl_cert_alg"></span><span class="var">$ssl_cert_alg</span> | 本次 SSL 请求中所使用的证书算法，例如 RSA，EC | <span class="badge yellow">No</span> |
 | <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件 | <span class="badge green">Yes</span> |
-| <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | PEM 格式的客户端证书，经过URL编码 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | 客户端证书的SHA1指纹 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | 客户端证书颁发者的标识名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_raw_cert"></span><span class="var">$ssl_client_raw_cert</span> | PEM 格式的客户端证书 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_s_dn"></span><span class="var">$ssl_client_s_dn</span> | 客户端证书持有者的标识名 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_serial"></span><span class="var">$ssl_client_serial</span> | 客户端证书的序列号 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_v_end"></span><span class="var">$ssl_client_v_end</span> | 客户端证书的结束日期 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | <span class="badge small" title="numerical value">#</span> 客户端证书到期前的天数 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书的开始日期 | <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
-| <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | 客户端证书验证的结果| <span class="badge green">Yes</span> | <span class="badge green">Yes</span> |
+| <span id="ssl_ciphers"></span><span class="var">$ssl_ciphers</span> | 客户端支持的 TLS 加密套件 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | PEM 格式的客户端证书，经过URL编码 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | 客户端证书的SHA1指纹 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | 客户端证书颁发者的标识名 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_raw_cert"></span><span class="var">$ssl_client_raw_cert</span> | PEM 格式的客户端证书 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_s_dn"></span><span class="var">$ssl_client_s_dn</span> | 客户端证书持有者的标识名 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_serial"></span><span class="var">$ssl_client_serial</span> | 客户端证书的序列号 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_end"></span><span class="var">$ssl_client_v_end</span> | 客户端证书的结束日期 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | <span class="badge small" title="numerical value">#</span> 客户端证书到期前的天数 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书的开始日期 | <span class="badge green">Yes</span> |
+| <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | 客户端证书验证的结果| <span class="badge green">Yes</span> |
+| <span id="ssl_fingerprint_ja3"></span><span class="var">$ssl_fingerprint_ja3</span> | 客户端JA3指纹| <span class="badge yellow">No</span> |
+| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | 客户端JA4指纹| <span class="badge yellow">No</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge green">Yes</span> |
 | <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername | <span class="badge green">Yes</span> |
 | <span id="status"></span><span class="var">$status</span> | 响应给客户端的 HTTP 状态码 | <span class="badge green">Yes</span> |
