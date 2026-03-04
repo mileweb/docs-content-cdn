@@ -223,15 +223,15 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 
 ```
   for domain in domain_list:
-      call GET /cdn/report/vol 
-         {filters: {hostnames: [$domain]}}
+      call GET /cdn/report/vol
+          {filters: {hostnames: [$domain]}}
 ```
 
    Instead, use the following recommended approach:
 
 ```
   POST /cdn/report/volSummary
-       {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
+      {filters: {hostnames: [$domain_list]}, groupBy: [hostnames]}
 ```
 
    Another example is purging multiple files in one request instead of making an API call for each purge URL.
