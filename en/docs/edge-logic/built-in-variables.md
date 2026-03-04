@@ -94,8 +94,8 @@ To use the variables properly, it is important to understand the request process
 | <span id="ssl_client_v_remain"></span><span class="var">$ssl_client_v_remain</span> | <span class="badge small" title="numerical value">#</span> the number of days until the client certificate expires | <span class="badge green">Yes</span> |
 | <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | start date of the client certificate | <span class="badge green">Yes</span> |
 | <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | result of client certificate verification | <span class="badge green">Yes</span> |
-| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | JA4 fingerprint of the client | <span class="badge yellow">No</span> |
 | <span id="ssl_fingerprint_ja3"></span><span class="var">$ssl_fingerprint_ja3</span> | JA3 fingerprint of the client | <span class="badge yellow">No</span> |
+| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | JA4 fingerprint of the client | <span class="badge yellow">No</span> |
 | <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | returns protocol name like "TLSv1.1" | <span class="badge green">Yes</span> |
 | <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS SNI servername | <span class="badge green">Yes</span> |
 | <span id="status"></span><span class="var">$status</span> | HTTP status code to client | <span class="badge green">Yes</span> |
