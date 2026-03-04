@@ -193,15 +193,7 @@ minute to regenerate a bunch of 120 tokens.
 Not all API calls are equal in terms of server resource consumption. To reflect this, each API endpoint is
 assigned a token weight that determines how many tokens are deducted from the bucket per call. This means the effective number of calls you can make within your rate limit depends on the mix of endpoints you use.
 
-Most API endpoints are assigned the default token weight: 1 and thus consume 1 token per call. However, the following report endpoints are assigned higher weights and consume more tokens per call due to their significantly higher server resource usage:
-
-| Endpoint | Token weight |
-|---|---|
-| POST /cdn/report/bandwidthSummary | 2 |
-| POST /cdn/report/edgeStatusSummary | 2 |
-| POST /cdn/report/originStatusSummary | 2 |
-
-> **Note:** The weights assigned are subject to change.
+Most API endpoints are assigned the default token weight: 1 and thus consume 1 token per call. However, some endpoints, in particular some report endpoints, are assigned higher weights and consume more tokens per call due to their higher server resource usage.
 
 * **Indicator and Error Handling**
 
