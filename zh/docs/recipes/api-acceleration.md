@@ -1,97 +1,51 @@
 ## 加速 REST API
 
-API calls are usually considered dynamic HTTP requests since the responses are generated
-by the server in real time based on some input parameters supplied in the request. As we
-mentioned in the [FAQ](/docs/edge-logic/faq#what-about-dynamic-content), dynamic requests
-such as REST API calls can be very effectively accelerated by CDN Pro. For example, the user
-of a mobile or web app may repeatedly reload the same page generating lots of 
-duplicate API calls in a short period of time. Some caching using a CDN can significantly 
-improve the performance. In this article, we are going to use an example to illustrate how
-to use the portal to create a property to accelerate an API server.
+API 调用通常被视为动态 HTTP 请求，因为服务器根据请求中提供的输入参数在实时生成响应。正如我们在 [常见问题](/docs/edge-logic/faq#what-about-dynamic-content) 中所提到的，REST API 调用等动态请求可以通过 CDN Pro 非常有效地加速。例如，移动或 web 应用的用户可能会多次重新加载同一页面，在短时间内生成大量重复的 API 调用。使用 CDN 缓存可以显著提高性能。在本文中，我们将通过一个示例来说明如何使用控制台创建加速项目来加速 API 服务器。
 
-下面是本次假想任务的一些背景和需求:
-* The API server to be accelerated has a hostname: `api.company.com`. The server requires
-the request `Host` header to carry this value.
-* You currently set up the DNS server to resolve this hostname to two IP addresses: `1.1.1.1`
-and `1.1.1.2`
-* The API server uses the standard HTTP methods: GET, POST, PUT, DELETE, PATCH.
-* The client is using the `Authorization` request header to pass the credential to the
-server following the **format** of [basic authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81).
-This makes it easy for the CDN Pro servers to obtain the API user name with the built-in
-variable `$remote_user`. Please notice that you don't have to use the actual basic
-authentication algorithm which transfers the secret password in clear text. You are free 
-to use a more sophisticated algorithm like the one for [CDN Pro API](/zh/cdn/apidocs#section/Authentication)
-to generate a signature to put after the colon.
-* All the input parameters to the API server are specified in the request query string.
+下面是本次假想任务的一些背景和需求：
+* 要加速的 API 服务器的主机名为：`api.company.com`。服务器要求请求的 `Host` 请求头携带此值。
+* 您当前已设置 DNS 服务器将此主机名解析为两个 IP 地址：`1.1.1.1` 和 `1.1.1.2`
+* API 服务器使用标准 HTTP 方法：GET、POST、PUT、DELETE、PATCH。
+* 客户端使用 `Authorization` 请求头将凭证传递给服务器，采用 [基本认证](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) 的**格式**。这使 CDN Pro 服务器可以轻松通过内置变量 `$remote_user` 获取 API 用户名。请注意，您不必使用以明文形式传输密钥密码的实际基本认证算法。您可以自由使用更复杂的算法，例如 [CDN Pro API](/zh/cdn/apidocs#section/Authentication) 中的算法，生成签名放在冒号后面。
+* API 服务器的所有输入参数都在请求查询字符串中指定。
 
-下面就是如何使用 CDN Pro 来加速这个 API 服务:
-* Create a new DNS record `api-origin.company.com` to point to the two IP addresses. The 
-CDN Pro servers need to use it to reach the origin. The name `api.company.com` can
-no longer be used because we will later CNAME it to a CDN Pro edge hostname to direct
-client's traffic to the platform to be accelerated.
-* No API service should be running without the protection of TLS encryption. You need to
-upload the certificate for `api.company.com` to the CDN Pro platform. We recommend using 
-[Let's Encrypt](/docs/portal/certificates/auto-renewal) to automatically renew the certificate.
-<p align=center><img src="/docs/resources/images/recipes/api/upload-certificate.png" alt="upload certificate" width="700"></p>
+下面就是如何使用 CDN Pro 来加速这个 API 服务：
+* 创建一条新的 DNS 记录 `api-origin.company.com` 指向这两个 IP 地址。CDN Pro 服务器需要使用它来连接源站。主机名 `api.company.com` 不能再使用，因为我们稍后会将其 CNAME 到 CDN Pro 调度域名，以将客户端流量引导到要加速的平台。
+* 任何 API 服务都应在 TLS 加密保护下运行。您需要将 `api.company.com` 的证书上传到 CDN Pro 平台。我们建议使用 [Let's Encrypt](/docs/portal/certificates/auto-renewal) 来自动更新证书。
+<p align=center><img src="/docs/resources/images/recipes/api/upload-certificate.png" alt="上传证书" width="700"></p>
 
-* Go to the CDN Pro portal to create a property to accelerate this API service. It is important
-to enter the correct hostname to be accelerated: `api.company.com`.
-<p align=center><img src="/docs/resources/images/recipes/api/create-property.png" alt="create property" width="720"></p>
+* 进入 CDN Pro 控制台创建加速项目以加速此 API 服务。重要的是输入要加速的正确主机名：`api.company.com`。
+<p align=center><img src="/docs/resources/images/recipes/api/create-property.png" alt="创建加速项目" width="720"></p>
 
-* Enter the information about the origin. A few things to note on this page: The server
-is specified with the new DNS record we just created. We are enforcing the HTTPS protocol
-to reach the origin to ensure security. The `Host` header is set to the value
-required by the origin. In this case, we can actually leave it empty because, by
-default, CDN Pro will pass the `Host` header value received from the client to the origin. We also
-chose "Always Direct" to reach the origin without going through a parent cache because we want to
-minimize latency and know there will not be any cache hit across different servers.
-<p align=center><img src="/docs/resources/images/recipes/api/origin.png" alt="create origin" width="600"></p>
+* 输入有关源站的信息。此页面需要注意几点：服务器使用我们刚刚创建的新 DNS 记录指定。我们强制使用 HTTPS 协议连接源站以确保安全。`Host` 请求头设置为源站需要的值。在这种情况下，我们实际上可以将其留空，因为默认情况下，CDN Pro 会将从客户端收到的 `Host` 请求头值传递给源站。我们还选择了"总是直连"来连接源站，不通过父缓存，因为我们希望最小化延迟，并且知道不同服务器之间不会有任何缓存命中。
+<p align=center><img src="/docs/resources/images/recipes/api/origin.png" alt="创建源站" width="600"></p>
 
-* Enter the following code into the Edge Logic field. The important thing to note here is
-that the API user name and client IP are added to the cache key. This ensures that the 
-cached content will be served only to the same user from the same IP address. Combined
-with HTTPS and the short cache time of 1 minute, this should be reasonably safe for most 
-applications in the industry. By default, only responses to `GET` and `HEAD` methods are cached. 
-You can use the [`proxy_cache_methods`](/docs/edge-logic/supported-directives#proxy_cache_methods) directive to cache other responses. 常见问题里的[这个例子](/docs/edge-logic/faq#如何将问号后参数，请求头，或者请求正文加入到缓存key中) 展示了如何缓存 `POST` 请求，并将请求正文加入到缓存 key 里。
-Another thing to notice is that we allow the
-clients to use the `Cache-Control: no-cache` header field to bypass the cache. When a CDN Pro
-server sees this field value, it will go directly to the origin without looking up the cache.
-Lastly, we enabled the [Fast Route to origin](/docs/edge-logic/supported-directives#origin_fast_route)
-to ensure stable connections to the origin.
+* 在边缘逻辑字段中输入以下代码。这里需要注意的重要事项是 API 用户名和客户端 IP 被添加到缓存键中。这确保了缓存的内容只会提供给来自相同 IP 地址的同一用户。结合 HTTPS 和 1 分钟的短缓存时间，这对于行业中的大多数应用程序应该是合理安全的。默认情况下，只有对 `GET` 和 `HEAD` 方法的响应被缓存。您可以使用 [`proxy_cache_methods`](/docs/edge-logic/supported-directives#proxy_cache_methods) 指令来缓存其他响应。常见问题里的 [这个例子](/docs/edge-logic/faq#如何将问号后参数，请求头，或者请求正文加入到缓存key中) 展示了如何缓存 `POST` 请求，并将请求正文加入到缓存 key 里。另一个需要注意的是，我们允许客户端使用 `Cache-Control: no-cache` 请求头绕过缓存。当 CDN Pro 服务器看到此字段值时，它会直接进入源站而不查看缓存。最后，我们启用了 [源站快速路由](/docs/edge-logic/supported-directives#origin_fast_route) 以确保与源站的稳定连接。
 
 ```nginx
-location / { #This is the default location.
-  # reject http
+location / { #这是默认 location。
+  # 拒绝 http
   if ($request_scheme = http) {
-    return 400 "please use https!";
+    return 400 "请使用 https！";
   }
-  origin_pass api-origin; #the request URI and query string will be passed to the origin
-  # add API user name and client IP into cache key
+  origin_pass api-origin; #请求 URI 和查询字符串将传递给源站
+  # 将 API 用户名和客户端 IP 添加到缓存键
   set $cache_misc $cache_misc.$remote_user.$client_real_ip;
-  # add sorted query string into cache key
+  # 将排序的查询字符串添加到缓存键
   set $cache_misc $cache_misc.$sorted_querystring_args;
-  # the client can use Cache-Control: no-cache to by pass cache
+  # 客户端可以使用 Cache-Control: no-cache 绕过缓存
   if ($http_cache_control ~ (no-cache|no-store)) {
-    set $bypass_cache 1;     #do not use cached copy
+    set $bypass_cache 1;     #不使用缓存副本
   }
   proxy_cache_bypass $bypass_cache;
-  proxy_cache_valid 1m; #200, 301, and 302 responses will be cached for 1m
-  origin_fast_route on; #enable the Fast Route to origin
+  proxy_cache_valid 1m; #200、301 和 302 响应将被缓存 1 分钟
+  origin_fast_route on; #启用源站快速路由
 }
 ```
-* Make sure the correct certificate is attached to this property. You can configure the
-TLS min/max versions and cipher suites based on your security requirements:
-<p align=center><img src="/docs/resources/images/recipes/api/attach-certificate.png" alt="attach certificate" width="600"></p>
-* Optionally test the above property [in staging](/docs/portal/edge-configurations/testing-property#testing-property-in-staging)
-and then deploy to production.
-* If you still don't have an edge hostname, create one based on your intended delivery
-destination and performance/cost requirement. Then update the DNS record of `api.company.com`
-to CNAME to this edge hostname.
+* 确保正确的证书已附加到此加速项目。您可以根据安全要求配置 TLS 最小/最大版本和密码套件：
+<p align=center><img src="/docs/resources/images/recipes/api/attach-certificate.png" alt="附加证书" width="600"></p>
 
-Any request to `api.company.com` will now be routed to the CDN Pro platform. Every cache miss
-or expiration will be forwarded to the origin to validate the credential and fetch the latest content.
-If the same request comes again from the same user and the same IP address before the 
-cached copy expires, the content will be served immediately by the CDN Pro server with
-much a smaller turnaround time. The end user will experience improved performance and 
-the origin server will not have to generate the same content repeatedly in a 
-short period of time. 
+* 可选择 [在测试环境中测试](/docs/portal/edge-configurations/testing-property#testing-property-in-staging) 上述加速项目，然后部署到生产环境。
+* 如果您还没有调度域名，请根据您的预期交付地点和性能/成本要求创建一个。然后将 `api.company.com` 的 DNS 记录更新为 CNAME 到此调度域名。
+
+对 `api.company.com` 的任何请求现在都将被路由到 CDN Pro 平台。每次缓存缺失或过期都会转发给源站以验证凭证并获取最新内容。如果相同的请求在缓存副本过期之前再次从同一用户和同一 IP 地址来临，内容将立即由 CDN Pro 服务器提供，周转时间大大缩短。最终用户将体验到改进的性能，源站服务器不必在短时间内重复生成相同内容。 
