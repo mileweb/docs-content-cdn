@@ -1,5 +1,18 @@
 # Release Notes
 
+## March 17, 2026
+#### API updates
+* Improved error messages when deploying a property that references an expired certificate, to better distinguish between edge certificates, origin certificates, and CA certificates.
+* Fixed an issue where requests with trailing spaces in resource IDs in the URL returned unexpected responses.
+* Allowed IP whitelists set at the API account level to override the customer-level IP whitelist, enabling more granular access control per API account.
+* Fixed an issue where impersonation requests were incorrectly rejected due to IP whitelist evaluation using the impersonated customer's settings rather than the impersonator's.
+
+#### Console updates
+* Added a Billing page for self-signup customers, providing a monthly cost breakdown and access to invoices and payment method management via the Stripe customer portal.
+* Fixed a display issue where a warning message overflowed the TLS Certificate field.
+* Improved the self-signup page.
+* Improved several localization items across the portal.
+
 ## March 3, 2026
 #### API updates
 * Added `referrer` field to the customer list API response.
