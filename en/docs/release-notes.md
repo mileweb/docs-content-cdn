@@ -1,5 +1,37 @@
 # Release Notes
 
+## March 17, 2026
+#### API updates
+* Improved error messages when deploying a property that references an expired certificate, to better distinguish between edge certificates, origin certificates, and CA certificates.
+* Fixed an issue where requests with trailing spaces in resource IDs in the URL returned unexpected responses.
+* Allowed IP whitelists set at the API account level to override the customer-level IP whitelist, enabling more granular access control per API account.
+* Fixed an issue where impersonation requests were incorrectly rejected due to IP whitelist evaluation using the impersonated customer's settings rather than the impersonator's.
+
+#### Console updates
+* Added a Billing page for self-signup customers, providing a monthly cost breakdown and access to invoices and payment method management via the Stripe customer portal.
+* Fixed a display issue where a warning message overflowed the TLS Certificate field.
+* Improved the self-signup page.
+* Improved several localization items across the portal.
+
+## March 3, 2026
+#### API updates
+* Added `referrer` field to the customer list API response.
+* Increased the maximum number of certificate versions per certificate from 500 to 1000.
+* Improved various notifications to ensure language-specific links across all supported languages.
+* Improved API rate limiting to support configurable token weights per endpoint, allowing more fine-grained control over how requests are counted against the rate limit.
+* Fixed an issue where saving a property with the abbreviated IPv6 address :: as an origin server resulted in an internal error.
+
+#### Console updates
+* Added SSL- and server environment-related variables to the Edge Logic editor and real-time log format: `$server_env`, `$ssl_cert_alg`, `$ssl_fingerprint_ja4`, `$ssl_fingerprint_ja3`, and `$ssl_ciphers`.
+* Improved data precision in volume and bandwidth reports, displaying volume down to 0.01 GB and bandwidth to at least 0.1 kbps.
+* Added a self-signup link on the portal login page so that users without an account can easily navigate to the CDN Pro signup page.
+* Added internationalization (i18n) support to the login and forgot password pages, matching the languages already supported in the portal.
+* Fixed the issue that prevents running test cases against IPv6-capable servers.
+* Fixed several usability issues on the test suite and test case pages.
+* Fixed an issue where an invalid IPv6 address in dual-stack format passed origin server validation when it should have been rejected.
+* Improved origin server settings to prevent duplicate server entries (same hostname/IP and port combination) in the Servers and Backup Servers fields.
+
+
 ## February 2, 2026
 #### API updates
 * Filled optional fields with default values when creating a property or a property version.
