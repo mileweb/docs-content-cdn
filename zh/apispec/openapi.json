@@ -2117,7 +2117,7 @@
                                       "type": "integer",
                                       "default": 100,
                                       "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
-                                      "minimum": 0,
+                                      "minimum": 1,
                                       "maximum": 1000
                                     },
                                     "action": {
@@ -2349,7 +2349,7 @@
                                 "type": "integer",
                                 "default": 100,
                                 "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
-                                "minimum": 0,
+                                "minimum": 1,
                                 "maximum": 1000
                               },
                               "action": {
@@ -2707,7 +2707,7 @@
                   "Invalid weight code": {
                     "value": {
                       "code": "InvalidWeightCode",
-                      "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
+                      "message": "Invalid weight 'test'. The weight should be an integer between 1 and 100."
                     }
                   },
                   "Incomplete client zones": {
@@ -2896,7 +2896,7 @@
                           "type": "integer",
                           "default": 100,
                           "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
-                          "minimum": 0,
+                          "minimum": 1,
                           "maximum": 1000
                         },
                         "action": {
@@ -3263,7 +3263,7 @@
                           "type": "integer",
                           "default": 100,
                           "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
-                          "minimum": 0,
+                          "minimum": 1,
                           "maximum": 1000
                         },
                         "action": {
@@ -5614,7 +5614,7 @@
                   "Invalid weight code": {
                     "value": {
                       "code": "InvalidWeightCode",
-                      "message": "Invalid weight 'test'. The weight should be an integer between 0 and 100."
+                      "message": "Invalid weight 'test'. The weight should be an integer between 1 and 100."
                     }
                   },
                   "Invalid edge hostname": {
@@ -5831,7 +5831,7 @@
                           "type": "integer",
                           "default": 100,
                           "description": "When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.\nConsider two rules that apply to \"as.cn\": <code>{\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\", \"by\":[\"standard\", \"premium\", \"deluxe\"]}},\n    {\"region\":\"as.cn\", \"isp\":\"all\", \"action\":{\"type\":\"redirect\", \"to\":[\"alternate.cname.com\"]}, \"weight\":10}</code>\n\n The probability of \"deliver\" will be 100/(100+10) or 0.909 while the probability of \"redirect\" will be 10/(100+10) or 0.091.\n \n",
-                          "minimum": 0,
+                          "minimum": 1,
                           "maximum": 1000
                         },
                         "action": {
@@ -9356,7 +9356,7 @@
             }
           }
         },
-        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to [testing a property](</docs/portal/edge-configurations/testing-property>) for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. An error will also be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a> with your desired changes.",
+        "description": "Create a deployment task to deploy your property or certificate to the staging or production environments or to remove the property or certificate. The staging environment allows you to test your property to ensure correct behavior before you make it available to end users. Refer to [testing a property](</docs/portal/edge-configurations/testing-property>) for more information.\n\nIf a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. For server certificates, an error will be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.\n\nAfter a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href=\"#operation/createPropertyVersion\">creating a new property version</a> with your desired changes.",
         "operationId": "createDeployment",
         "x-codeSamples": [
           {
@@ -9563,7 +9563,29 @@
             },
             "in": "header",
             "name": "Check-Certificate",
-            "description": "By default, if you deploy a property using a certificate, we check that the hostnames in the property are covered by the subject alternative name (SAN) of the certificate and that the certificate has not expired. For test purposes, you can bypass this check by passing the <i>Check-Certificate: no</i> header when creating the deployment task. You should not use this header when deploying for real users of your content since their browsers will warn about the invalid certificate and discourage them from visiting."
+            "description": "If you deploy a property using a server certificate, we check that the hostnames in the property are covered by the subject alternative name (SAN) of the certificate and that the certificate has not expired. For test purposes, you can bypass this check by passing the <i>Check-Certificate: no</i> header when creating the deployment task. You should not use this header when deploying for real users of your content since their browsers will warn about the invalid certificate and discourage them from visiting."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "no"
+              ]
+            },
+            "in": "header",
+            "name": "Check-Origin-Auth-Certificate",
+            "description": "If you deploy a property using a certificate for origin authentication, we check that the certificate has not expired. For test purposes, you can bypass this check by passing the <i>Check-Origin-Auth-Certificate: no</i> header when creating the deployment task."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "no"
+              ]
+            },
+            "in": "header",
+            "name": "Check-Client-CA-Certificate",
+            "description": "If you deploy a property using a CA certificate for client verification, we check that the certificate has not expired. For test purposes, you can bypass this check by passing the <i>Check-Client-CA-Certificate: no</i> header when creating the deployment task."
           },
           {
             "schema": {
