@@ -1,5 +1,22 @@
 # Release Notes
 
+## April 1, 2026
+#### API updates
+* Used separate error codes to distinguish between expired edge certificates, origin authentication certificates, and CA certificates when deploying a property.
+* Fixed an issue where querying the historical hostname list with an offset exceeding the total record count incorrectly returned an error instead of an empty result.
+* Fixed incorrect error messages for the `weight` field in edge hostname requests.
+* Changed the implementation of rate limiting to boost performance.
+* Optimized the deployment and undeployment of a large number of properties/certificates.
+* Reduced the token weight for the `GET /properties/{id}/versions/{version}` endpoint.
+
+#### Console updates
+* Added internationalization (i18n) support for variable hints in the log configuration editor.
+* Fixed an issue where dismissing the real-time log URL validation warning prevented saving a property version.
+* Fixed an issue where the log configuration ID was displayed on multiple lines instead of one.
+* Fixed the layout of the property ID on the certificate details page so it appears inline with its label.
+* Improved the filters on the properties list page.
+
+
 ## March 17, 2026
 #### API updates
 * Improved error messages when deploying a property that references an expired certificate, to better distinguish between edge certificates, origin certificates, and CA certificates.

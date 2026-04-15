@@ -32,12 +32,11 @@ CDN Pro provides robust filtering capabilities that allow you to find properties
 Typing the carat character at the beginning of a search string narrows matches to properties whose name, description, or hostnames fields start with the text following the <b>^</b>. For example, <b>^domain</b> matches the hostnames domain.com and domain123.com, but not abc.123domain.com.<br><br><b>Note:</b> When searching for a property by ID, specify the entire ID, not just a portion of it.
 
 ### Performing Advanced Searches
-CDN Pro provides an advanced search filter that allows you to find properties that match a specific configuration. This feature is particularly useful if you have many properties. 
+CDN Pro provides an advanced search filter that allows you to find properties that match specific conditions. This feature is particularly useful if you have many properties. 
 
-You can access the advanced search using either the Advanced Filter icon next to the search box or the <b>hasConfig=<i><'configuration'></b></i> search string syntax.
+You can access the advanced search using the Advanced Filter icon next to the search box.
 
-#### Using the Advanced Filter Icon
-The Advanced Filter icon next to the search box allows you to search specific configurations by entering keywords and conditions in an Advanced Filter dialog box.
+The advanced search allows you to search specific configurations by entering keyword and conditions in an Advanced Filter dialog box.
 
 1. Click the Advanced Filter icon.
    
@@ -47,28 +46,12 @@ The Advanced Filter icon next to the search box allows you to search specific co
 
 | **Fields/Buttons**   | **Description**                                                                           |
 | :----------: | ----------------------------------------------------------------------------------------- |
-| Keywords     | To search by keywords, enter one or more keywords associated with the property you want to find. A keyword can be a property ID, name, or description. To enter multiple keywords, separate each one with a carriage return. For more information, refer to the [CDN Pro API Specification](</apidocs#operation/createPropertyVersion>).<br>                                   |
+| Search     | To search by keywords, enter one or more keywords associated with the properties you want to find. A keyword can be a property ID, name, or description. <br>                                   |
 | Add New +    | To search based on conditions, click **Add New +**. Select a field name and operator from the first two lists. If a value is required, enter it in the rightmost field. Click **Add New +**. Repeat these steps for each additional filter condition you want to add.               |
 
 3. After specifying your search criteria, click **Search**. 
 
-#### Using the <b>hasConfig=<i><'configuration'></b></i> Search String Syntax
-The <b>hasConfig=<i><'configuration'></i></b> syntax allows you to find properties that match a specific configuration. You enter these by entering keywords in the search box. Using this advanced filter method, <b><i><'configuration'></b></i> is a keyword supported by the CDN Pro API. For more information, refer to the [CDN Pro API Specification](</apidocs#operation/createPropertyVersion>).<br>
-
-You can search for properties matching multiple settings by entering more than one <b>hasConfig=<i><'configuration'></i></b> search string in the search box. Type the first one and press the Carriage Return key, and then repeat this sequence for each additional advanced search string you want to enter in the search box.
-
-Observe the following guidelines when performing advanced searches:<ul><li>Searches on numeric and Boolean fields return an exact match.</ul></li><ul><li>Searches on strings return full and partial matches.</ul></li><ul><li>If you omit the colon and configuration keyword, CDN Pro returns all properties that have a non-empty configuration for the field. </ul></li><ul><li>If a property has multiple versions, the property is included in the matched results if any of its versions matches the <b>hasConfig</b> configuration keyword.</ul></li><ul><li>You can specify the subfields of a property version by using the period (<b>.</b>) as a separator.</ul></li>
-
-The following table shows examples of using <b>hasConfig=<i><'configuration'></i></b> to perform advanced searches.
-
-| **Example**                           | **Description**                                                                                                        |
-| --------------------------------------| -----------------------------------------------------------------------------------------------------------------------|
-| hasConfig=hasBeian:true               | Returns properties whose <b>Has ICP Beian</b> setting is Yes.                                                          |
-| hasConfig=edgeLogic!sorted            | Returns properties for which the <b>Edge Logic</b> field does not include the configuration keyword <b>sorted</b>.     |
-| hasConfig=hostnames:domain            | Returns all properties with a hostname containing the string <b>domain</b> such as <b>mydomain.com</b> and <b>thedomains.com</b>. |
-| hasConfig=disableHttp2:true           | Returns properties that do not support HTTP2.                                                                          |
-| hasConfig=extraServicePorts.http:85   | Returns properties that support port 85 for HTTP requests.                                                             |
-| hasConfig=origins.servers:myorigin.com| Returns properties that use myorigin.com as an origin server.                                                          |
+Observe the following guidelines when performing advanced searches:<ul><li>Searches on numeric and Boolean fields return an exact match.</ul></li><ul><li>Searches on strings return full and partial matches.</ul></li><ul><li>If a property has multiple versions, the property is included in the matched results if any of its versions matches the <b>hasConfig</b> conditions.</ul></li>                                                          |
 
 ## Property Actions
 Each property has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected property.
