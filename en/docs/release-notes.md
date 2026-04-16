@@ -1,5 +1,20 @@
 # Release Notes
 
+## April 15, 2026
+#### API updates
+* Fixed an issue with regard to permission control for certificates listing.
+* Fixed an issue related to notifications when an API account is updated.
+* Fixed an issue related to rate limiting.
+
+#### Console updates
+* Added a **Cache Key URI** field to the **Advanced Settings** section of a property, allowing you to control whether the pre-rewrite or post-rewrite URI is incorporated into the cache key when you use the `rewrite` directive in Edge Logic.
+* Moved the **Cache HTTPS Contents Separately from HTTP** field from **TLS Settings** to **Advanced Settings**, grouping it with other cache key customization settings.
+* Reordered the property configuration tabs so that **Advanced Settings** appears before **Real-Time Log**.
+* Updated the property deployment warning message for expired certificates so that the message is indicative of certificate type.
+* Fixed an issue where the user info panel in the top-right corner of the portal was not dismissed.
+* Updated the billing page to show usage in the recent months. This is available to self signup customers only.
+* Updated the billing page to allow users to view invoices and manage payment methods directly on the portal. This is available to upgraded self signup customers only.
+
 ## April 1, 2026
 #### API updates
 * Used separate error codes to distinguish between expired edge certificates, origin authentication certificates, and CA certificates when deploying a property.
