@@ -14,7 +14,7 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 
 3. Complete the fields in the Create a Property form. Required fields are denoted by an asterisk (\*).
 
-<p align=center><img src="/docs/resources/images/edge-configurations/create-a-property.png" alt="edit property" width="600"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/create-a-property.jpg" alt="edit property" width="600"></p>
 
 | **Fields**                | **Description**                                    |
 | --------------------------| ---------------------------------------------------|
@@ -26,8 +26,8 @@ After you create the new property, save and [validate](</docs/portal/tasks/valid
 | Origins                   | Origins are your servers that CDN Pro accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
 | Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Edge Logic Wizard dialog box. For more information, refer to {{title}}' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>) and [variables](</docs/edge-logic/built-in-variables>).</li>
 | TLS Settings              | Select the [TLS client certificate settings](#tls-settings) for your property.|
+| Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache key customization, China ICP Beian, whether to manage certificate renewal yourself, HTTP/2, HTTP/3, IPv6 origin support, and whether to match the client IP version when accessing origin content.|
 | Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact the [{{title}} support team](mailto:support@{{siteDomain}}).|
-| Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache sharing, China ICP Beian, whether to manage certificate renewal yourself, HTTP/2, HTTP/3, IPv6 origin support, and whether to match the client IP version when accessing origin content.|
 
 4. To include a baseline configuration with the Edge Logic for the property, click the gear icon at the bottom left of the **Edge Logic** field. When the popup appears, enter the baseline configuration. When you finish, click the **Save** button to save the baseline configuration to the database.
 
@@ -60,17 +60,15 @@ The remaining settings are intuitive. Specify the TLS ciphers in the format desc
 **Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
 
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-tls.png" alt="TLS Settings" width="650"></p>
-
-## Real-Time Log
-
-If you signed an agreement with {{title}} for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the [built-in variables](/docs/edge-logic/built-in-variables); they will be replaced with the actual values in the notifications. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
-
-<p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="650"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-tls.jpg" alt="TLS Settings" width="650"></p>
 
 ## Advanced Settings
 
+**Cache HTTPS Contents Separately from HTTP:** When this option is set to **Yes**, responses to HTTPS requests and HTTP requests are cached separately, even when they have the same cache key. The default is **No**.
+
 **Cache Key Hostname:** By default, the Host header value in the client request is used in the cache key. If this property contains multiple service hostnames, the contents of different hostnames will be cached separately. If you want all hostnames to share one cached copy, specify a fixed "Cache Key Hostname" to override the default behavior.
+
+**Cache Key URI:** Controls how the URI of an incoming request is incorporated into the cache key when you use the `rewrite` directive to rewrite the URI in Edge Logic. Select **Pre-rewrite** (default) to use the unmodified URI in the cache key, or select **Post-rewrite** to use the rewritten URI instead. Note that the URI put into the cache key does not include the query string by default. To append the query string and other parameters such as request headers to the cache key, assign a value to the `$cache_misc` variable in Edge Logic.
 
 **Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. You can then contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
 
@@ -97,4 +95,10 @@ Example:  `if ($http_user_agent = bot) { return 403;}`. **Note:** Due to upgrade
  
  **Video Seeking:** This parameter supports seeking in a video using the following fields to specify the starting and ending positions. <ul><li>In the **Start Parameter** field, enter the beginning position of a video segment in bytes. </ul></li><ul><li>In the **End Parameter** field, enter the ending position of the video segment in bytes, or leave this field empty to play the video to the end.</ul></li>
 
-<p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.png" alt="Property Advanced Settings" width="650"></p>
+<p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.jpg" alt="Property Advanced Settings" width="650"></p>
+
+## Real-Time Log
+
+If you signed an agreement with {{title}} for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the [built-in variables](/docs/edge-logic/built-in-variables); they will be replaced with the actual values in the notifications. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+
+<p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="650"></p>
