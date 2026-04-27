@@ -18198,6 +18198,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "Id of the API account."
+                    },
                     "responsiblePerson": {
                       "type": "string",
                       "description": "Name of the primary user of the API account.",
@@ -18240,7 +18244,7 @@
                     },
                     "ipWhiteList": {
                       "type": "array",
-                      "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
+                      "description": "List of IP addresses from which API calls using this account are permitted. Inherits the corresponding setting at customer level, if unspecified. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
                       "items": {
                         "type": "string"
                       }
@@ -18258,6 +18262,7 @@
                 "examples": {
                   "example-1": {
                     "value": {
+                      "id": 123,
                       "apiName": "janeapiuser",
                       "type": "read-only",
                       "customerId": 123456,
@@ -18386,7 +18391,6 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "apiName": "myAPIAccount",
                       "type": "read-only",
                       "customerId": 12345678,
                       "responsiblePerson": "Jane Doe",
@@ -18486,13 +18490,6 @@
                     "type": "string",
                     "description": "Name of the primary user of the API account."
                   },
-                  "apiName": {
-                    "type": "string",
-                    "description": "API account name.",
-                    "minLength": 1,
-                    "maxLength": 100,
-                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
-                  },
                   "apiKey": {
                     "type": "string",
                     "description": "If specified, the field's value must be <i>reset</i>. A new random API key will be generated for the API account.",
@@ -18526,7 +18523,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
+                    "description": "List of IP addresses from which API calls using this account are permitted. Inherits the corresponding setting at customer level, if unspecified. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.",
                     "items": {
                       "type": "string"
                     }
@@ -18892,7 +18889,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "List of IP addresses from which API calls using this account are permitted. This list applies in addition to the IP whitelist you can <a href=\"#operation/patch-ngadmin-customers-id\">set up at the customer level</a>. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
+                    "description": "List of IP addresses from which API calls using this account are permitted. Inherits the corresponding setting at customer level, if unspecified. You can specify a range, an individual IP address, or an IP in CIDR notation.  Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n",
                     "items": {
                       "type": "string"
                     }
