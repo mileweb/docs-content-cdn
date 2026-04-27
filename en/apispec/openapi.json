@@ -18391,7 +18391,6 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "apiName": "myAPIAccount",
                       "type": "read-only",
                       "customerId": 12345678,
                       "responsiblePerson": "Jane Doe",
@@ -18490,13 +18489,6 @@
                   "responsiblePerson": {
                     "type": "string",
                     "description": "Name of the primary user of the API account."
-                  },
-                  "apiName": {
-                    "type": "string",
-                    "description": "API account name.",
-                    "minLength": 1,
-                    "maxLength": 100,
-                    "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
                   },
                   "apiKey": {
                     "type": "string",
