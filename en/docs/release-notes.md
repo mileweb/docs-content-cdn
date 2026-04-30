@@ -1,5 +1,15 @@
 # Release Notes
 
+## April 29, 2026
+#### API updates
+* Improved various system notifications.
+* Improved report summaries grouped by service types.
+
+#### Console updates
+* Released an AI assistant for **Edge logic**.
+* Improved the logic related to validation of login requests.
+* Fixed an issue where the configured timezone was reset to "Auto" after re-logging into the portal.
+
 ## April 15, 2026
 #### API updates
 * Fixed an issue with regard to permission control for certificates listing.
