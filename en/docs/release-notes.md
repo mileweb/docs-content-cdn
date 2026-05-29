@@ -5,15 +5,23 @@
 * Added `Last-Modified` response header to resource query responses and support for the optional `If-Unmodified-Since` request header on update operations, allowing callers to avoid overwriting concurrent changes.
 * The `origins.authentication.awsS3.secretKey` field in property configuration now requires the `$SECRET(name)` format. Specifying a plain-text secret key is no longer accepted.
 * Fixed an issue where property validation returned an internal error when a referenced secret had been renamed or deleted; the error message now correctly indicates that the secret does not exist.
-* Fixed an issue where failures in backend services were incorrectly returned to API callers as HTTP 400 with an `InternalError` code; they are now properly returned as HTTP 500.
-* Fixed an issue where certificate deployment with the `Check-Certificate: no` header failed with an internal error when active SANs were removed in the new certificate version.
 * Improved the error message for an invalid log download format variable to list the supported variables in alphabetical order.
 
 #### Console updates
 * Improved internationalization (i18n) support for the contact invitation workflow so that invitation emails and pages now use the recipient's preferred language.
 * Fixed an issue where the language preference selected during self sign-up was not applied to the invitation email and the confirmation page.
-* Fixed an issue where the **Create Test Suite** button was enabled for contacts with the Viewer role.
-* Fixed a display issue where **Property:** and the property name were shown without a space between them.
+
+## May 13, 2026
+#### API updates
+* Fixed an issue where the rate-limit headers were missing from 429 responses when the rate limit token bucket was exhausted.
+* Fixed an issue where an impersonating parent account was able to perform write operations on behalf of inactive customers.
+
+#### Console updates
+* Added a table view for summary reports, making it easier to sort and compare data across groups.
+* Fixed an issue where navigating back from a deployment task or validation task detail page reset the list to the first page instead of restoring the previous page position.
+* Fixed an issue where a newly created purge request did not appear immediately in the purge list.
+* Fixed an issue where the deployment confirmation popup reappeared when navigating back from a Standby task page.
+* Fixed tooltips in summary reports not being localized.
 
 ## April 29, 2026
 #### API updates
