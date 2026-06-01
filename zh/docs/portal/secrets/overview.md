@@ -1,6 +1,10 @@
 # Overview of Secrets
 
-Typically, a secret is a password that you share with {{title}} in order for the CDN configuration to work. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your Edge Logic using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API.
+Typically, a secret is a password that you share with {{title}} in order for the CDN configuration to work. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it using the secret's name via the syntax `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API.
+
+Secrets can be referenced in:
+- **Edge Logic** - Use `$SECRET(secretName)` syntax in your Edge Logic configuration.
+- **Origin Authentication** - Use `$SECRET(secretName)` for AWS S3 secret keys when [configuring origin authentication](</docs/portal/edge-configurations/managing-origins.md>).
 
 ## Secrets Page 
 
