@@ -25,6 +25,14 @@
         "responses": {
           "200": {
             "description": "The response contains the full details of the property version configuration.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -246,7 +254,7 @@
                               },
                               "authentication": {
                                 "type": "object",
-                                "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                                "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n\nThe value specified for \"awsS3.secretKey\" must not be plain text secret key. Instead, create a \"secret\" object, and then use the `$SECRET(secret.name)` syntax here to refer to the secret containing the secret key. This avoids exposure of the sensitive information.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"$SECRET(mysecret)\"\n}}\n</code>",
                                 "example": "{\"methodName\":\"awsS3\", \"awsS3\":{ \"region\":\"us-west-1\", \"accessKey\":\"sdnu2932\", \"secretKey\":\"d12133424fvregvrew\" }}",
                                 "properties": {
                                   "methodName": {
@@ -672,6 +680,13 @@
                           "format": "date-time",
                           "description": "If the property version has been validated, this field indicates the RFC 3339 date when it was last validated."
                         },
+                        "secrets": {
+                          "type": "array",
+                          "description": "Array of secrets referenced by the property version.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
                         "deleted": {
                           "type": "boolean",
                           "x-stoplight": {
@@ -956,6 +971,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "description": "This API lets you update a property version. Please note that a property version that has already been deployed to production or staging is 'frozen' and cannot be updated again. The only exception is that the version description can be updated. If a property version is frozen, you should instead <a href=\"#operation/createPropertyVersion\">create a new property version</a> with your desired changes.",
@@ -1122,7 +1163,7 @@
                         },
                         "authentication": {
                           "type": "object",
-                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n\nThe value specified for \"awsS3.secretKey\" must not be plain text secret key. Instead, create a \"secret\" object, and then use the `$SECRET(secret.name)` syntax here to refer to the secret containing the secret key. This avoids exposure of the sensitive information.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"$SECRET(mysecret)\"\n}}\n</code>",
                           "example": "{\"methodName\":\"awsS3\", \"awsS3\":{ \"region\":\"us-west-1\", \"accessKey\":\"sdnu2932\", \"secretKey\":\"d12133424fvregvrew\" }}",
                           "properties": {
                             "methodName": {
@@ -1510,6 +1551,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ]
       },
@@ -1622,6 +1671,14 @@
         "responses": {
           "200": {
             "description": "This API returns a brief summary of a property including its description, version deployed to production and staging, and the number of versions that have been created.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1845,9 +1902,35 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "description": "This endpoint changes the name and description of a property. Its versions are unaffected. \n\nIf you wish to change a property's configuration, use the <a href=\"#operation/updatePropertyVersion\">Update a property version API</a>.",
+        "description": "This endpoint changes the name and description of a property. Its versions are unaffected.\n\nIf you wish to change a property's configuration, use the <a href=\"#operation/updatePropertyVersion\">Update a property version API</a>.",
         "operationId": "updateProperty",
         "x-codeSamples": [
           {
@@ -1892,6 +1975,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ]
       },
@@ -2013,6 +2104,14 @@
         "responses": {
           "200": {
             "description": "The response body contains details of the edge hostname.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -2813,6 +2912,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "updateEdgeHostname",
@@ -3043,6 +3168,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ]
       },
@@ -3180,6 +3313,32 @@
                     "value": {
                       "code": "EdgeHostnameChangeForbidden",
                       "message": "The edge hostname cannot be changed."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
                     }
                   }
                 }
@@ -3392,6 +3551,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ]
       }
@@ -4014,7 +4181,7 @@
                         },
                         "authentication": {
                           "type": "object",
-                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                          "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n\nThe value specified for \"awsS3.secretKey\" must not be plain text secret key. Instead, create a \"secret\" object, and then use the `$SECRET(secret.name)` syntax here to refer to the secret containing the secret key. This avoids exposure of the sensitive information.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"$SECRET(mysecret)\"\n}}\n</code>",
                           "example": "{\"methodName\":\"awsS3\", \"awsS3\":{ \"region\":\"us-west-1\", \"accessKey\":\"sdnu2932\", \"secretKey\":\"d12133424fvregvrew\" }}",
                           "properties": {
                             "methodName": {
@@ -4774,7 +4941,7 @@
                             },
                             "authentication": {
                               "type": "object",
-                              "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\nAlso, the value of the <i>hostHeader</i> field cannot be a variable or empty. It must be a valid Amazon S3 or S3-compatible hostname.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"d12345678abcdefghi\"\n}}\n</code>",
+                              "description": "Optional. It is a structure to specify the parameters, such as password, for authentication with the origin servers. It should have at least one field: \"methodName\", which should be a string indicating one of the predefined authentication methods. The only valid value at this time is \"awsS3\". When \"awsS3\" is used, the following parameters are required:\n<ul>\n<li>awsS3.region</li>\n<li>awsS3.accessKey</li>\n<li>awsS3.secretKey</li>\n</ul>\n\nThe value specified for \"awsS3.secretKey\" must not be plain text secret key. Instead, create a \"secret\" object, and then use the `$SECRET(secret.name)` syntax here to refer to the secret containing the secret key. This avoids exposure of the sensitive information.\n\nExample:\n<code>\n{\"methodName\":\"awsS3\",\n\"awsS3\":{\n\"region\":\"us-west-1\",\n\"accessKey\":\"sdnu2932\",\n\"secretKey\":\"$SECRET(mysecret)\"\n}}\n</code>",
                               "example": "{\"methodName\":\"awsS3\", \"awsS3\":{ \"region\":\"us-west-1\", \"accessKey\":\"sdnu2932\", \"secretKey\":\"d12133424fvregvrew\" }}",
                               "properties": {
                                 "methodName": {
@@ -18391,6 +18558,7 @@
                 "examples": {
                   "example-1": {
                     "value": {
+                      "apiName": "demouser",
                       "type": "read-only",
                       "customerId": 12345678,
                       "responsiblePerson": "Jane Doe",
@@ -24575,6 +24743,14 @@
         "responses": {
           "200": {
             "description": "The response contains the system configuration.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -25680,6 +25856,14 @@
         "responses": {
           "200": {
             "description": "The response contains the service quotas for a CDN Pro customer.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -26181,6 +26365,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-serviceQuotas-serviceQuotaId",
@@ -26441,7 +26651,17 @@
             }
           },
           "description": "Include the fields that you wish to update. Omitted fields will not be changed."
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
+          }
+        ]
       },
       "delete": {
         "summary": "Delete a service quota by service quota ID",
@@ -27177,6 +27397,14 @@
         "responses": {
           "200": {
             "description": "The response contains the service quotas for a CDN Pro customer.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -27961,6 +28189,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-serviceQuotas-customer-customerId",
@@ -28221,7 +28475,17 @@
             }
           },
           "description": "Include the fields that you wish to update. Omitted fields will not be changed."
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
+          }
+        ]
       },
       "delete": {
         "summary": "Delete the service quota for a customer",
@@ -29959,6 +30223,14 @@
         "responses": {
           "200": {
             "description": "The response body contains the API account's permissions.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -30374,6 +30646,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-apiPermissions-id",
@@ -30392,6 +30690,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ],
         "description": "Update permissions for an API account. If you have not yet customized the permissions of an API account, you must first <a href=\"#operation/post-cdn-apiPermissions\">create a custom API permission</a>. Otherwise, this API will return a 404 response.",
@@ -31636,6 +31942,14 @@
         "responses": {
           "200": {
             "description": "The response body contains details about the webhook.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -31786,6 +32100,32 @@
           },
           "404": {
             "description": "The webhook could not be updated."
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-webhooks-id",
@@ -31805,6 +32145,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ],
         "requestBody": {
@@ -32031,7 +32379,7 @@
             "source": "./cdnapi.sh POST /secrets -j body.json\n"
           }
         ],
-        "description": "Create a secret to protect sensitive text from being exposed in a property's Edge Logic. Refer to the secret in your property's Edge Logic using the <code>$SECRET(secretName)</code> syntax. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
+        "description": "Create a secret to protect sensitive text from being exposed in a property's Edge Logic or origins. Refer to the secret in your property's Edge Logic using the <code>$SECRET(secretName)</code> syntax. You can also set <code>origins.authentication.awsS3.secretKey</code> to <code>$SECRET(secretName)</code>. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -32040,7 +32388,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "The name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax.",
+                    "description": "The name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>.",
                     "maxLength": 30,
                     "minLength": 1,
                     "pattern": "^[A-Za-z0-9_.-]+"
@@ -32052,7 +32400,7 @@
                   },
                   "secret": {
                     "type": "string",
-                    "description": "The sensitive text you want to protect. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by this text. The secret can consist of printable ASCII characters along with the tab, newline, and return characters.",
+                    "description": "The sensitive text you want to protect. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic or in <code>origins.authentication.awsS3.secretKey</code> will be replaced by this text. The secret can consist of printable ASCII characters along with the tab, newline, and return characters.",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -32117,7 +32465,7 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic as <code>$SECRET(secretName)</code>.",
+                            "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic as <code>$SECRET(secretName)</code>, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>.",
                             "minLength": 1,
                             "pattern": "^[A-Za-z0-9_.-]+",
                             "maxLength": 30
@@ -32424,6 +32772,14 @@
         "responses": {
           "200": {
             "description": "The response body contains details about the secret.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -32435,7 +32791,7 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax.",
+                      "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>.",
                       "minLength": 1,
                       "maxLength": 30,
                       "pattern": "^[A-Za-z0-9_.-]+"
@@ -32447,7 +32803,7 @@
                     },
                     "secret": {
                       "type": "string",
-                      "description": "The value of the secret. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. For security, we will not show all the characters. The middle of the secret will be masked out by asterisk characters. References to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by the value.",
+                      "description": "The value of the secret. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. For security, we will not show all the characters. The middle of the secret will be masked out by asterisk characters. References to <code>$SECRET(secretName)</code> in your Edge Logic or in <code>origins.authentication.awsS3.secretKey</code> will be replaced by the value.",
                       "minLength": 8,
                       "maxLength": 3599
                     },
@@ -32467,7 +32823,7 @@
                     },
                     "usageInProduction": {
                       "type": "array",
-                      "description": "Properties deployed to production that refer to the secret.",
+                      "description": "Properties deployed to production that refer to the secret in Edge Logic or origins.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -32480,7 +32836,7 @@
                     },
                     "usageInStaging": {
                       "type": "array",
-                      "description": "Properties deployed to staging that refer to the secret.",
+                      "description": "Properties deployed to staging that refer to the secret in Edge Logic or origins.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -32604,7 +32960,7 @@
             "source": "./cdnapi.sh GET /secrets/81230c199e5f9dd381daff5e\n"
           }
         ],
-        "description": "Get details about a secret including its usage in properties deployed to staging and production.",
+        "description": "Get details about a secret including its usage in properties deployed to staging and production. Usage includes references in Edge Logic as well as in <code>origins.authentication.awsS3.secretKey</code>.",
         "parameters": [
           {
             "schema": {
@@ -32734,6 +33090,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-secrets-secretID",
@@ -32753,7 +33135,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax. If you change the name, property versions referring to the old name will not pass future validation.",
+                    "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>. If you change the name, property versions referring to the old name will not pass future validation.",
                     "minLength": 1,
                     "maxLength": 30,
                     "pattern": "^[A-Za-z0-9_.-]+"
@@ -32765,7 +33147,7 @@
                   },
                   "secret": {
                     "type": "string",
-                    "description": "The sensitive text you want to protect. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by this text. Once the property is deployed, it will use the value of the secret at that time. If you change the secret's value and want your property to use the new value, you must revalidate and redeploy the property.",
+                    "description": "The sensitive text you want to protect. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic or in <code>origins.authentication.awsS3.secretKey</code> will be replaced by this text. Once the property is deployed, it will use the value of the secret at that time. If you change the secret's value and want your property to use the new value, you must revalidate and redeploy the property.",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -32790,6 +33172,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ]
       },
@@ -33287,6 +33677,14 @@
         "responses": {
           "200": {
             "description": "The response body contains the details of the log configuration.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -33532,6 +33930,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-report-logConfigs-id",
@@ -33669,6 +34093,14 @@
             "in": "header",
             "name": "On-Behalf-Of",
             "description": "If you are a reseller, you can use this header to specify the ID of a child customer."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
           }
         ]
       },
@@ -37209,6 +37641,14 @@
         "responses": {
           "200": {
             "description": "The response body contains details about a log aggregation point.",
+            "headers": {
+              "Last-Modified": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The date and time at which the resource was last modified, in RFC 1123 format."
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -37498,6 +37938,32 @@
                 }
               }
             }
+          },
+          "412": {
+            "description": "The resource has been modified since the date specified in the If-Unmodified-Since header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource modified": {
+                    "value": {
+                      "code": "PreconditionFailed",
+                      "message": "The resource has been modified since the date specified in the If-Unmodified-Since header."
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "patch-cdn-logAggregationPoints-id",
@@ -37594,7 +38060,17 @@
             }
           },
           "description": "The request body contains the fields to update."
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "If-Unmodified-Since",
+            "description": "The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response."
+          }
+        ]
       }
     },
     "/ngadmin/ipDetails": {
@@ -39855,7 +40331,7 @@
     },
     {
       "name": "Secret Management",
-      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
+      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)`, or by setting `origins.authentication.awsS3.secretKey` to `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
     },
     {
       "name": "Deployment Management",
