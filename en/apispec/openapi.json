@@ -680,6 +680,13 @@
                           "format": "date-time",
                           "description": "If the property version has been validated, this field indicates the RFC 3339 date when it was last validated."
                         },
+                        "secrets": {
+                          "type": "array",
+                          "description": "Array of secrets referenced by the property version.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
                         "deleted": {
                           "type": "boolean",
                           "x-stoplight": {
