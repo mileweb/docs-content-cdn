@@ -32372,7 +32372,7 @@
             "source": "./cdnapi.sh POST /secrets -j body.json\n"
           }
         ],
-        "description": "Create a secret to protect sensitive text from being exposed in a property's Edge Logic. Refer to the secret in your property's Edge Logic using the <code>$SECRET(secretName)</code> syntax. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
+        "description": "Create a secret to protect sensitive text from being exposed in a property's Edge Logic or origins. Refer to the secret in your property's Edge Logic using the <code>$SECRET(secretName)</code> syntax. You can also set <code>origins.authentication.awsS3.secretKey</code> to <code>$SECRET(secretName)</code>. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -32381,7 +32381,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "The name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax.",
+                    "description": "The name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>.",
                     "maxLength": 30,
                     "minLength": 1,
                     "pattern": "^[A-Za-z0-9_.-]+"
@@ -32393,7 +32393,7 @@
                   },
                   "secret": {
                     "type": "string",
-                    "description": "The sensitive text you want to protect. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by this text. The secret can consist of printable ASCII characters along with the tab, newline, and return characters.",
+                    "description": "The sensitive text you want to protect. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic or in <code>origins.authentication.awsS3.secretKey</code> will be replaced by this text. The secret can consist of printable ASCII characters along with the tab, newline, and return characters.",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -32458,7 +32458,7 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic as <code>$SECRET(secretName)</code>.",
+                            "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic as <code>$SECRET(secretName)</code>, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>.",
                             "minLength": 1,
                             "pattern": "^[A-Za-z0-9_.-]+",
                             "maxLength": 30
@@ -32784,7 +32784,7 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax.",
+                      "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>.",
                       "minLength": 1,
                       "maxLength": 30,
                       "pattern": "^[A-Za-z0-9_.-]+"
@@ -32796,7 +32796,7 @@
                     },
                     "secret": {
                       "type": "string",
-                      "description": "The value of the secret. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. For security, we will not show all the characters. The middle of the secret will be masked out by asterisk characters. References to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by the value.",
+                      "description": "The value of the secret. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. For security, we will not show all the characters. The middle of the secret will be masked out by asterisk characters. References to <code>$SECRET(secretName)</code> in your Edge Logic or in <code>origins.authentication.awsS3.secretKey</code> will be replaced by the value.",
                       "minLength": 8,
                       "maxLength": 3599
                     },
@@ -32816,7 +32816,7 @@
                     },
                     "usageInProduction": {
                       "type": "array",
-                      "description": "Properties deployed to production that refer to the secret.",
+                      "description": "Properties deployed to production that refer to the secret in Edge Logic or origins.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -32829,7 +32829,7 @@
                     },
                     "usageInStaging": {
                       "type": "array",
-                      "description": "Properties deployed to staging that refer to the secret.",
+                      "description": "Properties deployed to staging that refer to the secret in Edge Logic or origins.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -32953,7 +32953,7 @@
             "source": "./cdnapi.sh GET /secrets/81230c199e5f9dd381daff5e\n"
           }
         ],
-        "description": "Get details about a secret including its usage in properties deployed to staging and production.",
+        "description": "Get details about a secret including its usage in properties deployed to staging and production. Usage includes references in Edge Logic as well as in <code>origins.authentication.awsS3.secretKey</code>.",
         "parameters": [
           {
             "schema": {
@@ -33128,7 +33128,7 @@
                 "properties": {
                   "name": {
                     "type": "string",
-                    "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax. If you change the name, property versions referring to the old name will not pass future validation.",
+                    "description": "Name of the secret. It can consist of letters, numbers, hyphens, underscores, and periods. Refer to this in your Edge Logic using the <code>$SECRET(secretName)</code> syntax, or use it as the value of <code>origins.authentication.awsS3.secretKey</code>. If you change the name, property versions referring to the old name will not pass future validation.",
                     "minLength": 1,
                     "maxLength": 30,
                     "pattern": "^[A-Za-z0-9_.-]+"
@@ -33140,7 +33140,7 @@
                   },
                   "secret": {
                     "type": "string",
-                    "description": "The sensitive text you want to protect. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic will be replaced by this text. Once the property is deployed, it will use the value of the secret at that time. If you change the secret's value and want your property to use the new value, you must revalidate and redeploy the property.",
+                    "description": "The sensitive text you want to protect. The secret can consist of printable ASCII characters along with the tab, newline, and return characters. When you deploy your property, references to <code>$SECRET(secretName)</code> in your Edge Logic or in <code>origins.authentication.awsS3.secretKey</code> will be replaced by this text. Once the property is deployed, it will use the value of the secret at that time. If you change the secret's value and want your property to use the new value, you must revalidate and redeploy the property.",
                     "minLength": 8,
                     "maxLength": 3599
                   }
@@ -40324,7 +40324,7 @@
     },
     {
       "name": "Secret Management",
-      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)` the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
+      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)`, or by setting `origins.authentication.awsS3.secretKey` to `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
     },
     {
       "name": "Deployment Management",
