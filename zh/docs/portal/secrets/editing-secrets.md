@@ -7,7 +7,7 @@
    <br><U>OR </u></br>
   In the **Actions** column, click the vertical ellipsis for the secret you want to edit, and then select **Edit**.
 
-<p align="center"><img src="/docs/resources/images/secrets/edit-secrets.png" alt="Edit secrets" width="700"></p>
+<p align="center"><img src="/docs/resources/images/secrets/edit-secrets.jpg" alt="Edit secrets" width="700"></p>
 
 3. Make your changes in the Update Secret form. Required fields are denoted by an asterisk (\*) and described in [Creating a Secret](</docs/portal/secrets/creating-secrets.md>).
 
