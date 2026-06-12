@@ -1,5 +1,15 @@
 # Release Notes
 
+## June 10, 2026
+#### API updates
+* Fixed an issue where the `count` field in the API calls list responses returned the page size instead of the total number of records.
+* Improved certificate version validation.
+
+#### Console updates
+* The **Secret Key** field in AWS S3 origin authentication now requires selecting a Secret from a dropdown list, automatically formatting the value as `$SECRET(name)`. Entering a plain-text secret key directly is no longer supported.
+* Fixed an issue where the **Additional TLS Certificate** field was disabled when cloning a property.
+* Fixed an issue where failed test case results were displayed in green instead of red when the user's preferred language was not English.
+
 ## May 27, 2026
 #### API updates
 * Added `Last-Modified` response header to resource query responses and support for the optional `If-Unmodified-Since` request header on update operations, allowing callers to avoid overwriting concurrent changes.
