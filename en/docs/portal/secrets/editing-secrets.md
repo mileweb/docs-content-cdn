@@ -11,6 +11,6 @@
 
 3. Make your changes in the Update Secret form. Required fields are denoted by an asterisk (\*) and described in [Creating a Secret](</docs/portal/secrets/creating-secrets.md>).
 
-**Note:** Deployed properties using the secret will continue to use its original value at the time of deployment. If you change the secret's name, property versions referring to the old name will not pass future [validations](</docs/portal/tasks/validations.md>) until you edit the properties to remove the references or update them to use a valid secret's name. If you change the secret's value, properties using the secret must be revalidated before they can be redeployed.
+**Note:** Deployed properties using the secret will continue to use its original value at the time of deployment. Changing the name will break validation for property versions that reference it. Changing the secret value requires re-validation and re-deployment of property versions to take effect.
 
 4. Click the **Update** button.

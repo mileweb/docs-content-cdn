@@ -272,7 +272,7 @@ Now we can edit our property settings and set up the `Origin Authentication for 
 
 5. Set **Authentication** to **AWS S3** and fill the required fields as follows:
 
-<p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-origin-auth.png" alt="create bucket" width="600"></p>
+<p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-origin-auth.jpg" alt="create bucket" width="600"></p>
 
 6. Click **Save**, and then deploy this configuration to staging. Make sure it works.
 
