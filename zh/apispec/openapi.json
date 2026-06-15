@@ -24274,7 +24274,8 @@
                   },
                   "required": [
                     "hasMore",
-                    "apiCalls"
+                    "apiCalls",
+                    "filters"
                   ]
                 },
                 "examples": {
