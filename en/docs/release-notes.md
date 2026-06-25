@@ -1,5 +1,16 @@
 # Release Notes
 
+## June 23, 2026
+#### API updates
+* Fixed an issue where Chinese-language invitation emails contained links to English legal documents.
+* Supported tracking why a customer account gets suspended.
+* Improved permission control for admin accounts.
+
+#### Console updates
+* Fixed an issue where the origin configuration was not saved after disabling AWS S3 authentication.
+* Improved handling of errors or permission issues when fetching resources.
+* Implemented an Admin portal (Phase A).
+
 ## June 10, 2026
 #### API updates
 * Fixed an issue where the `count` field in the API calls list responses returned the page size instead of the total number of records.
