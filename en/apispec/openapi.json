@@ -37153,14 +37153,15 @@
             "schema": {
               "type": "string",
               "enum": [
+                "id",
                 "lastUpdated",
                 "effectiveDate"
               ],
-              "default": "lastUpdated"
+              "default": "id"
             },
             "in": "query",
             "name": "sortBy",
-            "description": "Returns shields sorted by when they were last updated or when they became active."
+            "description": "Returns shields sorted by their ID, when they were last updated, or when they became active."
           },
           {
             "schema": {
@@ -37169,11 +37170,11 @@
                 "asc",
                 "desc"
               ],
-              "default": "desc"
+              "default": "asc"
             },
             "in": "query",
             "name": "sortOrder",
-            "description": "Returns shields in sorted order, either \"asc\" for ascending or \"desc\" for descending. The default is to return the last shield updated first."
+            "description": "Returns shields in sorted order, either \"asc\" for ascending or \"desc\" for descending. The default is to return shields sorted by ID in ascending order."
           },
           {
             "schema": {
