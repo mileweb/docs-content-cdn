@@ -1,5 +1,15 @@
 # Release Notes
 
+## July 8, 2026
+#### API updates
+* Supported sorting the list of shields.
+
+#### Console updates
+* Implemented the Admin Portal (Phase B).
+* Improved how suspended customer accounts are handled on the portal, with clearer messages based on the suspension reason and appropriate self-service actions.
+* Improved the report range selector to support viewing data for a specific child customer.
+* Fixed an issue where users were logged out when switching between CDN Pro and HDT portals after SSO authentication.
+
 ## June 23, 2026
 #### API updates
 * Fixed an issue where Chinese-language invitation emails contained links to English legal documents.
