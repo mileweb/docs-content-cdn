@@ -24829,6 +24829,14 @@
             "in": "query",
             "name": "by_me_only",
             "description": "Scope toggle. `true` — only count calls made directly by the calling customer. `false` — also include calls made on behalf of the calling customer. "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.",
+            "name": "On-Behalf-Of"
           }
         ],
         "responses": {
