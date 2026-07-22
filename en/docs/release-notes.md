@@ -1,5 +1,15 @@
 # Release Notes
 
+## July 22, 2026
+#### API updates
+* Improved performance to support batch deploying a large number of certificates and properties.
+* Added an admin API endpoint to query API call counts.
+
+#### Console updates
+* Implemented Phase C of the Admin portal. Customers can now use the portal to manage organization settings, API accounts, contacts and roles.
+* Improved role and permission logic and implementation.
+* Restricted access to portal by deactivated customers.
+
 ## July 8, 2026
 #### API updates
 * Supported sorting the list of shields.
