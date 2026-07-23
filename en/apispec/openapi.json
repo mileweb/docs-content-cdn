@@ -24786,6 +24786,172 @@
         ]
       }
     },
+    "/ngadmin/apicalls/counts": {
+      "get": {
+        "operationId": "countApiCalls",
+        "summary": "Count API calls",
+        "description": "Returns a count of API call records made by the calling customer. Supports optional filtering by time window, request path prefix, and whether to include calls made on behalf of the caller.",
+        "tags": [
+          "API Call History"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "Start of the query time window, as an RFC 3339 UTC datetime (e.g. `2019-03-01T10:00:00Z`). When omitted together with `enddate`, the window defaults to the last 24 hours."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "End of the query time window, as an RFC 3339 UTC datetime (e.g. `2019-03-31T10:00:00Z`). When omitted together with `startdate`, the window defaults to the last 24 hours."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "path",
+            "description": "Filter to API calls whose request path starts with this prefix. Case-insensitive; normalized to lowercase with a leading `/`. Must start with one of: `/cdn/`, `/ngadmin/`, `/hdt/`. A 400 error is returned for disallowed prefixes."
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "in": "query",
+            "name": "by_me_only",
+            "description": "Scope toggle. `true` — only count calls made directly by the calling customer. `false` — also include calls made on behalf of the calling customer. "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "If you are a reseller, you can use this header to specify the ID of a child customer.",
+            "name": "On-Behalf-Of"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A named data series containing the count of matching API calls. Currently returns a single data point timestamped at `startdate`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "DataSeries",
+                  "description": "A named, unit-tagged data series.",
+                  "type": "object",
+                  "required": [
+                    "dataName",
+                    "dataUnit",
+                    "dataSeries"
+                  ],
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "Human-readable name of the data series.",
+                      "example": "api calls"
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "Unit of measurement for `data` values.",
+                      "example": "counts"
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "items": {
+                        "title": "DataPoint",
+                        "description": "A single data point with a timestamp and a numeric value.",
+                        "type": "object",
+                        "required": [
+                          "timestamp",
+                          "data"
+                        ],
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "RFC 3339 UTC timestamp. For the counts endpoint this is always the `startdate` (start of the query window).",
+                            "example": "2019-03-01T10:00:00Z"
+                          },
+                          "data": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "The count of API calls matching the query.",
+                            "example": 1234
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "api calls",
+                      "dataUnit": "counts",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-03-01T10:00:00Z",
+                          "data": 1234
+                        }
+                      ]
+                    }
+                  }
+                },
+                "example": {
+                  "dataName": "api calls",
+                  "dataUnit": "counts",
+                  "dataSeries": [
+                    {
+                      "timestamp": "2019-03-01T10:00:00Z",
+                      "data": 1234
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request — invalid date format, invalid path prefix, or missing/invalid parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "code": "INVALID_PATH_PREFIX",
+                  "status": 400,
+                  "message": "Path prefix must start with one of: /cdn/, /cdnapi/, /report/, /ngrole/, /ngadmin/, /hdt/, /ngscheduler/"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "code": "InvalidStartDate",
+                      "message": "Invalid parameter 'startdate'. '00:20:00Z' is not a valid RFC3339 timestamp in UTC. The timestamp should be in \"yyyy-MM-dd'T'HH:mm:ss'Z'\" format."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
+    },
     "/cdn/systemConfigs": {
       "get": {
         "summary": "Get system configuration",
