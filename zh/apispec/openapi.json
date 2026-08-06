@@ -21338,7 +21338,7 @@
                       }
                     },
                     "configs": {
-                      "title": "customerConfigs",
+                      "title": "customerConfigsUpdatable",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
@@ -21349,6 +21349,9 @@
                           "type": "regular",
                           "products": [
                             "CDN"
+                          ],
+                          "historicalProducts": [
+                            "HDT"
                           ],
                           "status": "suspended",
                           "description": "string",
@@ -21394,7 +21397,7 @@
                         },
                         "historicalProducts": {
                           "type": "array",
-                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers.",
+                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers. It is not supported when creating a customer.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -21762,7 +21765,7 @@
                       }
                     },
                     "configs": {
-                      "title": "customerConfigs",
+                      "title": "customerConfigsUpdatable",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
@@ -21773,6 +21776,9 @@
                           "type": "regular",
                           "products": [
                             "CDN"
+                          ],
+                          "historicalProducts": [
+                            "HDT"
                           ],
                           "status": "suspended",
                           "description": "string",
@@ -21818,7 +21824,7 @@
                         },
                         "historicalProducts": {
                           "type": "array",
-                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers.",
+                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers. It is not supported when creating a customer.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -22257,7 +22263,7 @@
                     "x-examples": {}
                   },
                   "configs": {
-                    "title": "customerConfigs",
+                    "title": "customerConfigsUpdatable",
                     "type": "object",
                     "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                     "x-examples": {},
@@ -22268,6 +22274,9 @@
                         "type": "regular",
                         "products": [
                           "CDN"
+                        ],
+                        "historicalProducts": [
+                          "HDT"
                         ],
                         "status": "suspended",
                         "description": "string",
@@ -22313,7 +22322,7 @@
                       },
                       "historicalProducts": {
                         "type": "array",
-                        "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers.",
+                        "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers. It is not supported when creating a customer.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -22633,17 +22642,6 @@
                         "products": {
                           "type": "array",
                           "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, and \"HDT\" representing High-Speed Data Transmission are supported. ",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "CDN",
-                              "HDT"
-                            ]
-                          }
-                        },
-                        "historicalProducts": {
-                          "type": "array",
-                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -23049,17 +23047,6 @@
                       "products": {
                         "type": "array",
                         "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, and \"HDT\" representing High-Speed Data Transmission are supported. ",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "CDN",
-                            "HDT"
-                          ]
-                        }
-                      },
-                      "historicalProducts": {
-                        "type": "array",
-                        "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers.",
                         "items": {
                           "type": "string",
                           "enum": [
