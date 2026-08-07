@@ -1,5 +1,19 @@
 # Release Notes
 
+## August 4, 2026
+#### API updates
+* Corrected the `Location` header returned when creating a log configuration.
+* Improved API calls reporting for child customers.
+* Supported tracking a customer's history product subscription.
+
+#### Console updates
+* Enhanced the Edge Logic AI assistant with an agent mode that can update the edge logic configuration directly. Proposed changes are shown as a diff, which you can review and accept or reject.
+* Improved handling of access-denied errors, with clearer and more consistent messaging across portal pages.
+* Improved self sign-up and contact invitation flows with stricter username validation.
+* Improved filter behavior on the Certificates, Purge, Validation Tasks, and Deployment Tasks pages, including more accurate "Last 1h/2h/6h" quick filters across timezones.
+* Polished the styles of the buttons on the secret details page.
+* Improved the Admin portal.
+
 ## July 22, 2026
 #### API updates
 * Improved performance to support batch deploying a large number of certificates and properties.

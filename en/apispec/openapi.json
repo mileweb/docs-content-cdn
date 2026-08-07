@@ -17753,6 +17753,12 @@
                       "code": "InvalidLinkedAccount",
                       "message": "The value for linkedAccount must contain 1 to 60 characters."
                     }
+                  },
+                  "Invalid login name": {
+                    "value": {
+                      "code": "InvalidLoginName",
+                      "message": "The loginName specified contains leading or trailing spaces."
+                    }
                   }
                 }
               }
@@ -17811,7 +17817,7 @@
             }
           }
         },
-        "description": "Create a CDN Pro portal user account. The loginName field must be unique. If you delete a user, you cannot reuse the old loginName.",
+        "description": "Create a CDN Pro portal user account. The loginName field must be unique (the comparison is case insensitive) and cannot contain leading or trailing whitespace. If you delete a user, you cannot reuse the old loginName.",
         "operationId": "createContact",
         "x-codeSamples": [
           {
@@ -17836,7 +17842,8 @@
                   },
                   "loginName": {
                     "type": "string",
-                    "description": "Name used to log in to the portal.  "
+                    "maxLength": 60,
+                    "description": "Name used to log in to the portal. It can be up to 60 characters long and cannot contain leading or trailing whitespace."
                   },
                   "emailAddress": {
                     "type": "string",
@@ -19745,6 +19752,12 @@
                       "code": "InvalidLinkedAccount",
                       "message": "The value for linkedAccount must contain 1 to 60 characters."
                     }
+                  },
+                  "Invalid login name": {
+                    "value": {
+                      "code": "InvalidLoginName",
+                      "message": "The loginName specified contains leading or trailing spaces."
+                    }
                   }
                 }
               }
@@ -19776,7 +19789,8 @@
                   },
                   "loginName": {
                     "type": "string",
-                    "description": "Name used to log in to the portal."
+                    "maxLength": 60,
+                    "description": "Name used to log in to the portal. It can be up to 60 characters long and cannot contain leading or trailing whitespace."
                   },
                   "emailAddress": {
                     "type": "string",
@@ -21324,7 +21338,7 @@
                       }
                     },
                     "configs": {
-                      "title": "customerConfigs",
+                      "title": "customerConfigsUpdatable",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
@@ -21335,6 +21349,9 @@
                           "type": "regular",
                           "products": [
                             "CDN"
+                          ],
+                          "historicalProducts": [
+                            "HDT"
                           ],
                           "status": "suspended",
                           "description": "string",
@@ -21370,6 +21387,17 @@
                         "products": {
                           "type": "array",
                           "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "CDN",
+                              "HDT"
+                            ]
+                          }
+                        },
+                        "historicalProducts": {
+                          "type": "array",
+                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers. It is not supported when creating a customer.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -21737,7 +21765,7 @@
                       }
                     },
                     "configs": {
-                      "title": "customerConfigs",
+                      "title": "customerConfigsUpdatable",
                       "type": "object",
                       "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                       "x-examples": {},
@@ -21748,6 +21776,9 @@
                           "type": "regular",
                           "products": [
                             "CDN"
+                          ],
+                          "historicalProducts": [
+                            "HDT"
                           ],
                           "status": "suspended",
                           "description": "string",
@@ -21783,6 +21814,17 @@
                         "products": {
                           "type": "array",
                           "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "CDN",
+                              "HDT"
+                            ]
+                          }
+                        },
+                        "historicalProducts": {
+                          "type": "array",
+                          "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers. It is not supported when creating a customer.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -22020,7 +22062,7 @@
                   "Invalid product update": {
                     "value": {
                       "code": "InvalidProductUpdate",
-                      "message": "At least one of the apiAccounts or contacts under this customer has access to the product you are trying to remove. Please revoke the access before unsubscribing the customer from this product."
+                      "message": "You are trying to remove the CDN product from customer XYZ, but the following resources need to be cleaned up first: properties: 1, certificates: 1, edgeHostnames: 1, secrets: 1, webhooks: 1"
                     }
                   },
                   "Invalid product": {
@@ -22033,12 +22075,6 @@
                     "value": {
                       "code": "InvalidStatus",
                       "message": "The specified status is not supported."
-                    }
-                  },
-                  "Invalid product update 2": {
-                    "value": {
-                      "code": "InvalidProductUpdate",
-                      "message": "You are trying to remove the CDN product from customer XYZ, but the following resources need to be cleaned up first: properties: 1, certificates: 1, edgeHostnames: 1, secrets: 1, webhooks: 1"
                     }
                   },
                   "Invalid language": {
@@ -22227,7 +22263,7 @@
                     "x-examples": {}
                   },
                   "configs": {
-                    "title": "customerConfigs",
+                    "title": "customerConfigsUpdatable",
                     "type": "object",
                     "description": "This object contains various limits and settings for a customer.  Customers cannot modify their own settings. Resellers can modify them for their child customers. Resellers can only specify products they have already purchased. If you have special requirements for your account, please contact our support team.",
                     "x-examples": {},
@@ -22238,6 +22274,9 @@
                         "type": "regular",
                         "products": [
                           "CDN"
+                        ],
+                        "historicalProducts": [
+                          "HDT"
                         ],
                         "status": "suspended",
                         "description": "string",
@@ -22273,6 +22312,17 @@
                       "products": {
                         "type": "array",
                         "description": "Products enabled for the customer. \"CDN\" representing CDN Pro, and \"HDT\" representing High-Speed Data Transmission are supported. ",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "CDN",
+                            "HDT"
+                          ]
+                        }
+                      },
+                      "historicalProducts": {
+                        "type": "array",
+                        "description": "Products the customer was subscribed to previously but no longer has access to. This field is for record-keeping and does not grant access to the products. Only resellers can update this field for their child customers. It is not supported when creating a customer.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -23512,6 +23562,15 @@
             "in": "query",
             "name": "products",
             "description": "Comma-separated list of products which can include 'CDN' representing CDN Pro and 'HDT' representing High-Speed Data Transmission'. Only customers with access to the specified products will be returned."
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "in": "query",
+            "name": "checkHistoryProduct",
+            "description": "This parameter is processed only when <i>products</i> is also specified. If true, a customer is considered a match when a specified product is in either the customer's <i>configs.products</i> or <i>configs.historicalProducts</i> list. If false or omitted, only <i>configs.products</i> is checked."
           },
           {
             "schema": {
