@@ -1,5 +1,18 @@
 # Release Notes
 
+## August 19, 2026
+#### API updates
+* Fixed an issue where adding or updating products for a customer, contact, or API account returned an internal error.
+* Added upfront validation of the version number in deployment tasks and other version-related APIs, returning a 400 response with the `InvalidVersion` error code when the version is not a positive integer.
+* Standardized the error code returned when a certificate version does not exist, so callers consistently receive `InvalidCertVersion`.
+
+#### Console updates
+* Fixed an issue where blank lines containing only spaces in the purge or prefetch URL fields triggered an incorrect duplicate-URL error.
+* Fixed an issue where a duplicate entry appeared in the edge hostname list of the Edge Hostname Request report.
+* Fixed an issue where the certificate comment was truncated in the portal.
+* Upgraded the console's underlying React and Ant Design frameworks.
+* Enhanced the Edge Logic AI assistant so that the edge logic attached to a message is included in the conversation history and shown when you revisit a past conversation.
+
 ## August 4, 2026
 #### API updates
 * Corrected the `Location` header returned when creating a log configuration.
