@@ -17940,7 +17940,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, and \"HDT\" for High-Speed Data Transmission.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, and \"HDT\" for High-Speed Data Transmission. This field is ignored for master contacts, as a master contact has access to all subscribed products.",
                         "items": {
                           "type": "string",
                           "enum": [
@@ -19466,7 +19466,7 @@
                         },
                         "products": {
                           "type": "array",
-                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, and \"HDT\" for High-Speed Data Transmission.",
+                          "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, and \"HDT\" for High-Speed Data Transmission. This field is ignored for master contacts, as a master contact has access to all subscribed products.",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -19882,7 +19882,7 @@
                       },
                       "products": {
                         "type": "array",
-                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, and \"HDT\" for High-Speed Data Transmission.",
+                        "description": "List of products that the user has access to. The default is no products. You can specify \"CDN\" to represent CDN Pro, and \"HDT\" for High-Speed Data Transmission. This field is ignored for master contacts, as a master contact has access to all subscribed products.",
                         "items": {
                           "type": "string",
                           "enum": [
