@@ -1,5 +1,15 @@
 # Release Notes
 
+## September 1, 2026
+#### Console updates
+* Fixed an issue where permission names appeared in English regardless of the selected portal language.
+* Improved edge hostname editing to avoid an unnecessary confirmation prompt when exiting edit mode without changes.
+* Improved the Ask AI chatbot panel so it no longer blocks form controls while open.
+* Added last login time display and sorting to the Contact List table.
+* Fixed a display issue where the Purge Type dropdown truncated option text.
+* Supported viewing CDN Pro service quota in the admin portal.
+* Refined role-based access control and master-only permissions in the admin portal.
+
 ## August 19, 2026
 #### API updates
 * Fixed an issue where adding or updating products for a customer, contact, or API account returned an internal error.
