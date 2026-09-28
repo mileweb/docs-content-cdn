@@ -669,15 +669,27 @@ Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range,
 
 使用本指令需要注意以下事项：
 
-1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用内置变量 $scheme 和 $remote_addr 作为该指令中 if 的判断条件。如果您需要将客户端使用的协议或 IP 地址传递给源服务器，请使用以下变量：
+1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用NGINX原生的内置变量 $scheme 和 $remote_addr。如果您需要将客户端使用的协议或 IP 地址传递给源服务器，请使用以下变量：
 
 *   [$request_scheme](/zh/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
 *   [$client_real_ip](/zh/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
-*   [$client_country_code](/zh/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
 
 示例如下:
 ```nginx
 origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Client-IP 回源请求头中并传递给源站
+```
+
+除了 `$request_scheme` 和 `$client_real_ip` 之外，以下变量同样不受分层缓存结构影响，可以放心使用：
+
+*   [$client_country_code](/zh/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
+*   [$client_province_code](/zh/cdn/docs/edge-logic/built-in-variables#client_province_code):  客户端的中国省份代码
+*   [$client_asn](/zh/cdn/docs/edge-logic/built-in-variables#client_asn):  客户端所在的自治系统（AS）的编号
+*   [$client_http_version](/zh/cdn/docs/edge-logic/built-in-variables#client_http_version):  客户端请求的 HTTP 协议版本，例如 "HTTP/1.1"
+
+大多数携带客户端请求信息的变量仅在边缘节点上可用。例如，与 SSL 相关的变量，如 `$ssl_cipher`、`$ssl_protocol` 和 `$ssl_fingerprint_ja4`。由于采用了分层缓存结构，请求可能会由边缘节点转发给父节点，再转发给源站。如果您想将客户端请求信息传递给源站，请使用 `flag=any`，使该指令同样对边缘节点与父节点之间的请求生效；同时使用 `policy=preserve`，避免该头部被父节点覆盖。示例如下：
+
+```nginx
+origin_set_header X-Fingerprint-JA4 $ssl_fingerprint_ja4 policy=preserve flag=any;
 ```
 2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/zh/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
 3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。例如，当开启[分片缓存](#slice)时，服务器会根据所设置的分片大小自动生成`Range`头部。所以，不要使用该指令修改传给源站的`Range`请求头。对于不可缓存的请求，这些请求头部则仍然会原样传递给父服务器和源站。

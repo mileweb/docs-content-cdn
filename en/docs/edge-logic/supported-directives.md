@@ -658,15 +658,27 @@ Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range,
 
 There are a few things to note when using this directive:
 
-1. Because of the hierarchical cache structure, the built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
+1. Because of the hierarchical cache structure, the NGINX native built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
 *   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
 *   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
-*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code):  client’s ISO 3166 country code
 
 For example:
 ```nginx
 origin_set_header X-Client-IP $client_real_ip;
+```
+
+In addition to `$request_scheme` and `$client_real_ip`, the following variables can also be safely used without concern about the hierarchical cache structure:
+
+*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code): client’s ISO 3166 country code
+*   [$client_province_code](/cdn/docs/edge-logic/built-in-variables#client_province_code): client’s China province code
+*   [$client_asn](/cdn/docs/edge-logic/built-in-variables#client_asn): number of the AS associated with the client’s IP address
+*   [$client_http_version](/cdn/docs/edge-logic/built-in-variables#client_http_version): client’s HTTP version, like "HTTP/1.1"
+
+Most variables that carry client request information are available only at the edge cache. For example, the SSL related variables such as `$ssl_cipher`, `$ssl_protocol`, and `$ssl_fingerprint_ja4`. Due to the hierarchical cache structure, a request might be forwarded from the edge cache to the parent cache and then to the origin. If you want to pass client request information to the origin, use `flag=any` so that the directive also applies to the requests between the edge cache and the parent cache, and use `policy=preserve` so that the header is not overwritten by the parent cache. For example:
+
+```nginx
+origin_set_header X-Fingerprint-JA4 $ssl_fingerprint_ja4 policy=preserve flag=any;
 ```
 2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
 3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For example, when [slicing](#slice) is enabled, the servers will automatically generate the `Range` header based on size of slices. Thus, the directive shall not be used to set the `Range` header to origin. For non-cacheable requests, those client request headers will still be forwarded to upstream.
