@@ -1,5 +1,16 @@
 # Release Notes
 
+## September 30, 2026
+#### Console updates
+* Added Mainland China as a special region option for prefetch requests.
+* Improved the CDN dashboard and permission control.
+* Fixed inconsistent tooltip content on form fields.
+* Moved IAM pages to the Admin portal only, and made portal user management product agnostic.
+* Made bottom action buttons always visible on create and update pages.
+* Added a bar chart to the API Calls page, improved filtering of API calls by API name, and added support for filtering API calls by ID.
+* Improved the login name uniqueness check.
+* Preserved the service URL and impersonation state through the CAS login process.
+
 ## September 1, 2026
 #### Console updates
 * Fixed an issue where permission names appeared in English regardless of the selected portal language.
