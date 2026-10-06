@@ -29,7 +29,7 @@ location / {
 } 
 ```
 
-请注意：您必须按照 [JSON 字符串转义语法](https://www.freeformatter.com/json-escape.html)在同一行中输入整个 Edge Logic 代码。假设此时您创建了一个加速域名为 `www.testdomain.com` 的配置，而且将这个加速配置部署到了演练环境，您可以使用 cURL 命令来对其进行测试：
+请注意：您必须按照 [JSON 字符串转义语法](https://jsonviewertool.com/json-escape)在同一行中输入整个 Edge Logic 代码。假设此时您创建了一个加速域名为 `www.testdomain.com` 的配置，而且将这个加速配置部署到了演练环境，您可以使用 cURL 命令来对其进行测试：
 
 ```bash
 $ curl -v http://www.testdomain.com/ --resolve www.testdomain.com:80:163.171.228.89
