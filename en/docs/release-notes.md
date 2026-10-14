@@ -1,5 +1,17 @@
 # Release Notes
 
+## October 13, 2026
+#### API updates
+* Fixed an issue where a secret could be deleted while a deployment that uses it was still in progress.
+* Fixed an issue where a property using an expired CA certificate could be deployed without a validation error.
+* Fixed an issue where log configurations appeared in list responses but returned a 404 error when retrieved, updated, or deleted.
+
+#### Console updates
+* Allowed self sign-up customers who have upgraded to set a spending alert threshold.
+* Added internationalization (i18n) support to reCAPTCHA so that it matches the user’s preferred language.
+* Fixed an issue where a previously added purge header could not be removed after clicking Purge Again.
+* Added the total and loaded API call counts to the API Calls page.
+
 ## September 30, 2026
 #### Console updates
 * Added Mainland China as a special region option for prefetch requests.
