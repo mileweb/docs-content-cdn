@@ -29,7 +29,7 @@ If you use the [API to create the property](</apidocs#operation/createProperty>)
 } 
 ```
 
-Note: You must enter the entire Edge Logic code in one line following the [JSON string escaping](https://www.freeformatter.com/json-escape.html) syntax.
+Note: You must enter the entire Edge Logic code in one line following the [JSON string escaping](https://www.rfc-editor.org/rfc/rfc8259#section-7) syntax.
 
 Assume you configured the acceleration hostname to be `www.testdomain.com` as shown in the JSON above, and then deployed the property to the staging environment, you can use a cURL command to perform the following test:
 
