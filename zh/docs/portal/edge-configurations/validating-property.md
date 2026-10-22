@@ -1,11 +1,11 @@
-# Validating a Property
+# 验证加速项目
 
-A property version must be validated before it can be deployed to staging and/or production environments. CDN Pro sends the compiled property and associated certificate(s) to a validation environment and performs basic tests, such as making sure the server does not crash and running artificial traffic to the hostnames associated with the property. The validation process usually takes less than a minute. 
+加速项目版本必须经过验证，才能部署到演练环境和/或生产环境。CDN Pro 会将编译后的加速项目及其关联的证书发送到验证环境，并执行基本测试，例如确保服务器不会崩溃，以及向与该加速项目关联的加速域名发送模拟流量。验证过程通常在一分钟内完成。
 
-The following procedure describes how to validate a property. For more information, see the [CDN Pro API](</apidocs#tag/Property-Validation>). 
+以下步骤介绍如何验证加速项目。更多信息，请参阅 [CDN Pro API](</apidocs#tag/Property-Validation>)。
 
-1. In the left pane, click **Edge Configurations** > **Properties**.
-2. Click the ID of the property you want to validate. <br><br><u>OR </u></br>
-   In the **Actions** column, click the vertical ellipsis associated with the property you want to validate, and then select **Edit**.
-3. Click the horizontal ellipsis next to the **Edit** or **Clone** button, and then select **Validate** followed by **OK**. When the validation is completed, a message shows whether the validation succeeded or failed.
-4. When a message says that the configuration has been validated and is ready to deploy, click **Deploy It**. When the Deployment Target dialog box appears, select whether to deploy to staging (default) or production, and then click **Deploy Now**. Or click **Add to Standby task** to move this action to the [standby queue](</docs/portal/tasks/standby-tasks.md>). Clicking **Cancel** cancels deployment.</ul></li> If the configuration fails validation, click **View Details** in the message to view details about the failure.
+1. 在左侧导航栏中，点击**边缘配置** > **加速项目**。
+2. 点击您要验证的加速项目的 ID。 <br><br><u>或 </u></br>
+   在**操作**列中，点击与您要验证的加速项目关联的垂直省略号，然后选择**修改**。
+3. 点击**编辑**或**克隆**按钮旁边的水平省略号，然后选择**验证**，再点击**确定**。验证完成后，会有消息显示验证成功还是失败。
+4. 当消息提示配置已通过验证并可以部署时，点击**立即部署**。出现“部署目标”对话框后，选择部署到演练环境（默认）还是生产环境，然后点击**立即部署**。或者点击**添加到待命任务**，将此操作移至[待命队列](</docs/portal/tasks/standby-tasks.md>)。点击**取消**将取消部署。如果配置未通过验证，请点击消息中的**查看详情**，查看有关失败的详细信息。
