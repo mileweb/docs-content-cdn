@@ -1,65 +1,65 @@
-# Using Properties to Configure the Edge
+# 使用加速项目配置边缘
 
-A "property" is a configuration of one or more hostnames (domains) that need to be deployed to the CDN Pro edge servers. A property determines how you want the servers to obtain, cache, modify, and distribute your content to end users. The key elements of a property include:
-- Service hostname(s) to be accelerated
-- One or more origin servers
-- Caching rules for different types of contents
-- Modifications to the URL or HTTP header fields
-- Whether HTTPS is required, TLS certificates, and TLS protocol version
+“加速项目”是一个或多个加速域名的配置，需要部署到 CDN Pro 边缘服务器。加速项目决定了您希望服务器如何获取、缓存、修改并向最终用户分发您的内容。加速项目的关键要素包括：
+- 需要加速的加速域名
+- 一个或多个源站服务器
+- 针对不同类型内容的缓存规则
+- 对 URL 或 HTTP 头字段的修改
+- 是否要求 HTTPS、TLS 证书以及 TLS 协议版本
 
-## Managing Properties
+## 管理加速项目
 
-On the CDN Pro platform, each property is versioned to track the history of changes and allow rollback if needed. Each version can be deployed independently to the staging or production environment. 
+在 CDN Pro 控制台上，每个加速项目都有版本，用于跟踪修改历史，并在需要时支持回滚。每个版本都可以独立部署到演练环境或生产环境。
 
-Using the Properties page, you can create, modify, validate, and deploy properties. You can also undeploy and delete properties if needed. To display the Properties page, click **Edge Configurations** in the left pane, and then select **Properties**. The following figure shows the key elements on the page, and the table following the figure describes them.
+在“加速项目”页面，您可以创建、修改、验证和部署加速项目，也可以在需要时卸载和删除加速项目。要显示“加速项目”页面，请在左侧导航栏中点击**边缘配置**，然后选择**加速项目**。下图显示了页面上的关键元素，图后的表格对它们进行了说明。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-w-numbers.png" alt="properties page" width="600"></p>
 
 
-| **Fields**   | **Description**                                                                           |
+| **编号**   | **说明**                                                                           |
 | :----------: | ----------------------------------------------------------------------------------------- |
-| 1            | A search box for filtering properties that have been deployed to staging or production. You can filter properties by ID, name, description, hostname, or configuration settings. To enter multiple search strings, separate each one with a carriage return. Advanced filtering capabilities allow you to search specific configurations. For more information, see [Filtering Properties](#filtering-properties).</br>                                   |
-| 2            | Appears only for resellers, allowing them to search the properties of their child customers.                |
-| 3            | The list of all properties that are available to you.                                                                 |
-| 4            | Icons to filter properties based on whether they have been deployed to staging or production.                                  |
-| 5            | Drop-down lists to take actions on each property.                                                                     |
-| 6            | The button to [create new properties](</docs/portal/edge-configurations/creating-property.md>).                       |
+| 1            | 搜索框，用于筛选已部署到演练环境或生产环境的加速项目。您可以按 ID、名称、描述、加速域名或配置设置筛选加速项目。要输入多个搜索字符串，请用回车符分隔。高级筛选功能允许您搜索特定的配置。更多信息，请参见[筛选加速项目](#筛选加速项目)。</br>                                   |
+| 2            | 仅对代理商显示，允许代理商搜索其子客户的加速项目。                |
+| 3            | 加速项目列表。                                                                 |
+| 4            | 筛选图标，用于根据加速项目是否已部署到演练环境或生产环境来筛选加速项目。                                  |
+| 5            | 操作列表，用于对每个加速项目执行操作。                                                                     |
+| 6            | 用于[创建新加速项目](</docs/portal/edge-configurations/creating-property.md>)的按钮。                       |
 
-## Filtering Properties
-CDN Pro provides robust filtering capabilities that allow you to find properties that meet certain criteria.
+## 筛选加速项目
+加速项目列表页提供强大的筛选功能，帮助您找到符合查询条件的加速项目。
 
-### Using the Carat
-Typing the carat character at the beginning of a search string narrows matches to properties whose name, description, or hostnames fields start with the text following the <b>^</b>. For example, <b>^domain</b> matches the hostnames domain.com and domain123.com, but not abc.123domain.com.<br><br><b>Note:</b> When searching for a property by ID, specify the entire ID, not just a portion of it.
+### 使用前缀匹配
+在搜索字符串的开头输入^，可对加速项目的名称、描述或加速域名字段进行前缀匹配。例如，<b>^domain</b> 可匹配加速域名 domain.com 和 domain123.com，但不匹配 abc.123domain.com。<br><br><b>注意：</b>按 ID 搜索加速项目时，请指定完整的 ID，不支持模糊匹配 ID。
 
-### Performing Advanced Searches
-CDN Pro provides an advanced search filter that allows you to find properties that match specific conditions. This feature is particularly useful if you have many properties. 
+### 高级搜索
+支持高级搜索筛选功能，帮助您找到符合特定条件的加速项目。如果您的加速项目很多，此功能尤其有用。
 
-You can access the advanced search using the Advanced Filter icon next to the search box.
+您可以使用搜索框旁边的“高级搜索”图标进入高级搜索。
 
-The advanced search allows you to search specific configurations by entering keyword and conditions in an Advanced Filter dialog box.
+高级搜索允许您在“高级搜索”对话框中输入关键字和条件，以搜索特定的配置。
 
-1. Click the Advanced Filter icon.
+1. 点击“高级搜索”图标。
    
    <p align=center><img src="/docs/resources/images/edge-configurations/advanced-filter-icon.png" alt="advfilter icon" width="900"></p>
    
-2. When the dialog box appears, complete the following fields.
+2. 对话框出现后，请填写以下字段。
 
-| **Fields/Buttons**   | **Description**                                                                           |
+| **字段/按钮**   | **说明**                                                                           |
 | :----------: | ----------------------------------------------------------------------------------------- |
-| Search     | To search by keywords, enter one or more keywords associated with the properties you want to find. A keyword can be a property ID, name, or description. <br>                                   |
-| Add New +    | To search based on conditions, click **Add New +**. Select a field name and operator from the first two lists. If a value is required, enter it in the rightmost field. Click **Add New +**. Repeat these steps for each additional filter condition you want to add.               |
+| 搜索     | 要按关键字搜索，请输入一个或多个与您要查找的加速项目相关的关键字。关键字可以是加速项目的 ID、名称或描述。<br>                                   |
+| 添加 +    | 要按条件表达式搜索，请点击**添加 +**。从前两个列表中选择字段名和操作符。如果需要值，请在最右侧的字段中输入。点击**添加 +**。可添加多个表达式               |
 
-3. After specifying your search criteria, click **Search**. 
+3. 指定搜索条件后，请点击**查询**。
 
-Observe the following guidelines when performing advanced searches:<ul><li>Searches on numeric and Boolean fields return an exact match.</ul></li><ul><li>Searches on strings return full and partial matches.</ul></li><ul><li>If a property has multiple versions, the property is included in the matched results if any of its versions matches the <b>hasConfig</b> conditions.</ul></li>                                                          |
+执行高级搜索时，遵循以下原则：<ul><li>对数值和布尔类型字段的检索按精确匹配。</ul></li><ul><li>对字符串字段的检索支持模糊匹配。</ul></li><ul><li>如果一个加速项目有多个版本，只要其任一版本符合条件表达式条件，该加速项目就会包含在匹配结果中。</ul></li>
 
-## Property Actions
-Each property has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected property.
-- **Edit**: [Update](</docs/portal/edge-configurations/editing-properties.md>) the selected property.
-- **Compare Versions**: [Compare](</docs/portal/edge-configurations/comparing-properties.md>) two property versions.
-- **Undeploy from Staging**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>) the selected property from the staging environment.
-- **Undeploy from Production**: [Undeploy](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>) the selected property from production.
-- **Delete**: [Delete](</docs/portal/edge-configurations/deleting-property.md>) the selected property.
-- **Deployment History**: [View](</docs/portal/edge-configurations/deploying-property.md#viewing-a-propertys-deployment-history>) the deployment history of the selected property.
-- **Clone**: [Copy](</docs/portal/edge-configurations/creating-property.md>) settings into the Create a Property form to create a new property.
-- **Report**: [Run](</docs/portal/reports/generating-reports.md>) a report using the hostnames of the deployed property. This action is available only for properties that have been deployed to production.
+## 加速项目操作
+每个加速项目在**操作**列中都有一个垂直省略号。点击省略号会显示可对所选加速项目执行的操作。
+- **修改**：[更新](</docs/portal/edge-configurations/editing-properties.md>)所选加速项目。
+- **对比版本**：[对比](</docs/portal/edge-configurations/comparing-properties.md>)加速项目的两个版本。
+- **从演练环境卸载**：从演练环境[卸载](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>)所选加速项目。
+- **从生产环境卸载**：从生产环境[卸载](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>)所选加速项目。
+- **删除**：[删除](</docs/portal/edge-configurations/deleting-property.md>)所选加速项目。
+- **部署历史**：[查看](</docs/portal/edge-configurations/deploying-property.md#viewing-a-propertys-deployment-history>)所选加速项目的部署历史。
+- **克隆**：将设置[复制](</docs/portal/edge-configurations/creating-property.md>)到“创建加速项目”表单中，以创建新的加速项目。
+- **查看报表**：使用已部署加速项目的加速域名[运行](</docs/portal/reports/generating-reports.md>)报表。此操作仅适用于已部署的加速项目。
