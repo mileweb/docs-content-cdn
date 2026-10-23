@@ -82,7 +82,7 @@ location / { #This is the default location.
 * Make sure the correct certificate is attached to this property. You can configure the
 TLS min/max versions and cipher suites based on your security requirements:
 <p align=center><img src="/docs/resources/images/recipes/api/attach-certificate.png" alt="attach certificate" width="600"></p>
-* Optionally test the above property [in staging](/docs/portal/edge-configurations/testing-property#testing-your-property-in-staging)
+* Optionally test the above property [in staging](/docs/portal/edge-configurations/testing-property#在演练环境中测试加速项目)
 and then deploy to production.
 * If you still don't have an edge hostname, create one based on your intended delivery
 destination and performance/cost requirement. Then update the DNS record of `api.company.com`

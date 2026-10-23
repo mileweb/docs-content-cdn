@@ -17,7 +17,7 @@
 
 5. 如果您点击了**立即部署**按钮，请在出现确认弹窗时点击**确定**。通常，部署过程会在 2 分钟内完成。您可以等待进度对话框，也可以关闭它去进行其它操作，部署将在后台继续进行。您可以随时点击左侧导航栏中的**查看任务**来查看部署状态。
 
-6. 有关在演练环境中测试加速项目的说明，请点击[此处](</docs/portal/edge-configurations/testing-property.md#testing-your-property-in-staging>)。
+6. 有关在演练环境中测试加速项目的说明，请点击[此处](</docs/portal/edge-configurations/testing-property.md#在演练环境中测试加速项目>)。
 
 # 卸载加速项目
 
