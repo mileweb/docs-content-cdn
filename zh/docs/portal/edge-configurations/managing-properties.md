@@ -57,9 +57,9 @@
 每个加速项目在**操作**列中都有一个垂直省略号。点击省略号会显示可对所选加速项目执行的操作。
 - **修改**：[更新](</docs/portal/edge-configurations/editing-properties.md>)所选加速项目。
 - **对比版本**：[对比](</docs/portal/edge-configurations/comparing-properties.md>)加速项目的两个版本。
-- **从演练环境卸载**：从演练环境[卸载](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>)所选加速项目。
-- **从生产环境卸载**：从生产环境[卸载](</docs/portal/edge-configurations/deploying-property.md#undeploying-a-property>)所选加速项目。
+- **从演练环境卸载**：从演练环境[卸载](</docs/portal/edge-configurations/deploying-property.md#卸载加速项目>)所选加速项目。
+- **从生产环境卸载**：从生产环境[卸载](</docs/portal/edge-configurations/deploying-property.md#卸载加速项目>)所选加速项目。
 - **删除**：[删除](</docs/portal/edge-configurations/deleting-property.md>)所选加速项目。
-- **部署历史**：[查看](</docs/portal/edge-configurations/deploying-property.md#viewing-a-propertys-deployment-history>)所选加速项目的部署历史。
+- **部署历史**：[查看](</docs/portal/edge-configurations/deploying-property.md#查看加速项目的部署历史>)所选加速项目的部署历史。
 - **克隆**：将设置[复制](</docs/portal/edge-configurations/creating-property.md>)到“创建加速项目”表单中，以创建新的加速项目。
 - **查看报表**：使用已部署加速项目的加速域名[运行](</docs/portal/reports/generating-reports.md>)报表。此操作仅适用于已部署的加速项目。
