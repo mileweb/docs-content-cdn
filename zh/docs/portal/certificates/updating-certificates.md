@@ -31,7 +31,7 @@
 3. 如果您需要更改证书名称，请将鼠标移至页面顶部证书名称的右侧。当铅笔图标出现时，点击它并输入新名称。完成后，点击新名称字段右下角的**√**。
 4. 如果需要修改证书共享权限，您可以现在或在第 5 步之后编辑 **与下列客户共享** 设置。
 5. 点击 **创建新版本**。
-6. 将 **创建方法** 设置为 **自动生成**。然后填写必填字段（请参阅 [详细信息](</docs/portal/certificates/creating-certificates.md#auto-genating-a-self-signed-certificate>)）并点击**保存**。
+6. 将 **创建方法** 设置为 **自动生成**。然后填写必填字段（请参阅 [详细信息](</docs/portal/certificates/creating-certificates.md#自动生成自签名证书>)）并点击**保存**。
 <p align="center"><img src="/docs/resources/images/certificates/certificate-versions-autogenerate.png" alt="Certificate New Self-Signed Version" width="700"></p>
 
 7. 点击“证书详情”页面顶部的**下载 CSR** 按钮以便从最新版本上生成 CSR。
