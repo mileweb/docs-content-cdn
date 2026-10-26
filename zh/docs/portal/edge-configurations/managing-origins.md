@@ -1,40 +1,37 @@
+# 管理源站配置
 
-# Managing Origins for Your Property
+源站是包含您希望 CDN Pro 加速的内容的服务器。CDN Pro 支持为每个加速项目配置多个源站，并提供多种设置来定义对源站的访问。
 
-Origins are your web servers containing the content you want CDN Pro to accelerate. CDN Pro supports more than one origin for each property, along with a number of settings for defining access to your origins.
+## 在加速项目中添加、修改或删除源站
 
-## Adding, Editing, or Removing Origins in a Property
-
-1. In the left pane, click **Edge Configurations**, and then select **Properties**.
-2. From the Properties page, click the ID of the property you want to edit, and then select the version from the **Version Number** drop-down list. 
-3. Click the **Edit** button or select **Clone** from the drop-down list to make changes.
-4. Edit or remove an existing origin or add a new one:
-   - If there is an existing origin (similar to the one in the figure below), you can click the <strong>Edit</strong> link in the <strong>Origins</strong> field and complete the fields in the following dialog box to edit the origin, or click the <strong>Remove</strong> link to remove the origin. 
-   - To add a new origin, click the <strong>Add New</strong> link, and then complete the fields in the following dialog box. Required fields are denoted by an asterisk (*).
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**加速项目**。
+2. 在“加速项目”页面，点击您要修改的加速项目的 ID，然后从**版本号**下拉列表中选择版本。
+3. 点击**编辑**按钮，或从下拉列表中选择**克隆**以进行更改。
+4. 修改或删除现有源站，或添加新源站：
+   - 如果已存在源站（类似于下图中的源站），您可以点击**源站**字段中的<strong>编辑</strong>链接，并在以下对话框中填写字段来修改源站；或者点击<strong>删除</strong>链接来删除源站。
+   - 要添加新源站，请点击<strong>添加新源站</strong>链接，然后在以下对话框中填写字段。必填字段以星号（*）标示。
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-origins.png" width="650"></p>
 
-<p><br><strong>Note:</strong> The fields for adding and editing origins are similar.</p>
-
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-add-origin.png" alt="Upload Certificate Version" width="650"></p>
 
-| **Fields**             | **Description**                                       |
+| **字段**             | **说明**                                       |
 | ---------------------- | ----------------------------------------------------- |
-| Auto Detect            | This button appears only when creating a new property. When you click it, CDN Pro tries to resolve the IP address of the hostname you entered for the property. This may or may not be the origin you want to use. Please double-check the results.|
-| Origin Name            | A name to identify this origin. The [`origin_pass` directive](</docs/edge-logic/supported-directives.md#origin_pass>) in [Edge Logic](</docs/edge-logic/intro.md>) uses this name to refer to this origin.|
-| Servers                | Enter a hostname or IP address and the port numbers of a primary origin server.<p></p><p>Click **Validate** to verify that the server information is correct and reachable.</p><p>To add more servers, click the **Add new +** link. To remove a server, click the **Remove** link.</p><p>If you add more than one server, CDN Pro will distribute origin requests equally among them. To direct more requests to specific servers, enter a percentage value in the **Weight** field. For example, to have 80% of the origin requests directed to "heavy_duty.server.com" and 20% directed to "light_duty.server.com," assign a weight of 4 to "heavy_duty.server.com" and a weight of 1 to "light_duty.server.com."</p>|
-| Backup Servers         | Backup origin server that will be used when all primary servers are not accessible. Click **Add new +** to specify the backup server in the same way as primary servers.|
-|| **Advanced Settings**                                                         |
-| Supported Protocol   | Protocol(s) that your origin server supports. Choices are: <ul><li><strong>HTTP</strong> = use HTTP only.<li><strong>HTTPS</strong> = use HTTPS only.<li><strong>Both</strong> = use HTTP and HTTPS. (*default*)</ul>|
-| Verify Origin Certificate        | Specify whether CDN Pro should verify the TLS certificate on the origin servers. Choices are:<ul><li><strong>True</strong> = perform backend verification.<li><strong>False</strong> = do not perform backend verification. (*default*)</ul>|
-| Authentication Certificate        |Select a certificate you want to use to authenticate with the origin server. The certificate must be [uploaded](</docs/portal/certificates/creating-certificates.md#uploading-an-existing-certificate>) and then [deployed](</docs/portal/certificates/deploying-certificates.md>) like other certificates.</ul>|
-| Host Header           | Enter a `Host` header value that CDN Pro will use to contact the origin. It will also be used as the SNI servername when contacting the HTTPS origin. It should be a valid hostname. You can specify an Nginx variable in this field. A legal variable name begins with a '$' followed by between 3 and 60 lowercase alphabetic characters (a-z). By default, the value of the Host header in the client request will be passed through.|
-| Direct Connection     | Specify how the CDN Pro edge servers should reach the origin servers for uncached content or uncacheable requests. Choices are:<ul><li><strong>No Direct</strong> = always go to a parent CDN Pro server. Choose this selection to maximize the cache hit ratio on CDN Pro.<li><strong>Auto</strong> = automatically decide whether to go to the origin directly or to a parent CDN Pro server, based on performance and resource availability. (*default*)<li><strong>Always Direct</strong> = the edge servers should always go directly to the origin servers.</ul>|
-| Keep-Alive Timeout     | The concept of HTTP keep-alive is to use a single TCP connection to send and receive multiple HTTP requests/responses rather than open a new connection for every single request/response pair. In this field, enter the maximum number of seconds that a connection can remain open before timing out.|
-|Peer Failure Timeout   | Specify the maximum number of unsuccessful attempts to reach one of the origin server's IP addresses or peers before CDN Pro marks it as "unavailable" for a period of time designated by the timeout. If all peers of all servers are unavailable, requests for content from the origin receive an immediate "502 Bad Gateway" HTTP response. By default, six attempts are made to a peer, after which a one-second timeout applies to that peer. If you select <strong>On</strong> the following subfields appear:<ul><li><strong>Failure Threshold</strong> = enter the maximum number of unsuccessful attempts that will be made to reach one of the origin server's IP addresses or peers before CDN Pro marks it as unavailable.</ul></li><ul><li><strong>Timeout</strong> = enter the number of seconds that an origin's server IP addresses or peers will be unavailable.</ul></li>| 
-| Peer Selection Algorithm | This setting controls how the origin server is selected when an origin server's hostname resolves to multiple IP addresses. Choices are: <ul><li><strong>Round robin</strong> = Rotate among the peers sequentially. This is the default setting, which tries to evenly distribute the origin traffic to all the peers.  (*default*)<li><strong>Consistent hash</strong> = Distribute the origin traffic based on the hash value of the URL. If the origin server has a cache, this option should help with the hit ratio.<li><strong>Sorted list</strong> = Select the peer based on the network quality. When the origin peers are geographically distributed (such as another CDN), this option should help ensure consistent performance.</ul>|
-| Authentication        | Enables authentication for Amazon Web Services (AWS) S3 servers. Choices are:<ul><li><strong>None</strong> = no authentication. (*default*) <br><li><strong>AWS S3</strong> = enables authentication for AWS S3 servers. If you select this choice, you need to provide additional information to access the S3 bucket:<ul><li><strong>Region</strong> = select a [region](<https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions>) from the drop-down list.<li><strong>Access Key</strong> = enter the AWS access key to authenticate with the S3 server.<li><strong>Secret Key</strong> = select a [secret](</docs/portal/secrets/creating-secrets.md>) from the drop-down list. The selected secret is referenced as <code>$SECRET(name)</code>. Since the secret key is sensitive information, it must be stored as a secret and cannot be entered as plain text. The secret must be created before it can be referenced here.</ul>|
-| Enable Shield        | Enables the shield. The shield is an advanced feature that provides an extra caching layer between the CDN Pro edge servers and origin. The shield reduces the number of servers that can access your origin and improves the cache hit ratio. If your origin server has an IP access control list, call this [API](</zh/cdn/apidocs#operation/get-cdn-shields>) to obtain the current IP addresses of the origin shield, and add the IP addresses of the shield you want to use. You will be notified by email if there are any changes to the IP addresses. If you require this feature, contact the [{{title}} support team](mailto:support@{{siteDomain}}).| 
-| Shield               | If you enabled the shield, select a shield location that is the most appropriate location for the origin. To use a shield in China, your property must have ICP Beian and enable **Has ICP Beian** in **Advanced Settings** on the [Property page](</docs/portal/edge-configurations/creating-property.md#advanced-settings>). For more information, contact the [{{title}} support team](mailto:support@{{siteDomain}}). | 
+| 自动检测            | 此按钮仅在创建新加速项目时出现。点击此按钮时，CDN Pro 会尝试解析您为加速项目输入的加速域名的 IP 地址。解析结果可能是也可能不是您要使用的源站。请仔细核对结果。|
+| 源站名称            | 用于标识此源站的名称。[边缘逻辑](</docs/edge-logic/intro.md>)中的 [`origin_pass` 指令](</docs/edge-logic/supported-directives.md#origin_pass>)使用此名称来引用此源站。|
+| 服务器                | 输入主源站服务器的域名或 IP 地址以及端口号。<p></p><p>点击**验证**以确认服务器信息正确且可访问。</p><p>要添加更多服务器，请点击**添加 +** 链接。要删除服务器，请点击**删除**链接。</p><p>如果您添加了多个服务器，CDN Pro 会将源站请求平均分配到这些服务器。要将更多请求定向到特定服务器，请在**权重**字段中输入百分比值。例如，要让 80% 的源站请求定向到 "heavy_duty.server.com"、20% 定向到 "light_duty.server.com"，请为 "heavy_duty.server.com" 分配权重 4，为 "light_duty.server.com" 分配权重 1。</p>|
+| 备服务器         | 当所有主服务器都不可访问时使用的备用源站服务器。点击**添加 +**，以与主服务器相同的方式指定备用服务器。|
+|| **高级设置**                                                         |
+| 支持协议   | 源站服务器支持的协议。可选值： <ul><li><strong>HTTP</strong> = 仅使用 HTTP。<li><strong>HTTPS</strong> = 仅使用 HTTPS。<li><strong>全部</strong> = 同时使用 HTTP 和 HTTPS。（*默认*）</ul>|
+| 验证源站证书        | 指定 CDN Pro 是否应验证源站服务器上的 TLS 证书。可选值：<ul><li><strong>是</strong> = 执行后端验证。<li><strong>否</strong> = 不执行后端验证。（*默认*）</ul>|
+| 鉴权证书        |选择要用于向源站服务器进行身份验证的证书。与其他证书一样，该证书必须先[上传](</docs/portal/certificates/creating-certificates.md#上传一本已有证书>)，然后[部署](</docs/portal/certificates/deploying-certificates.md>)。</ul>|
+| Host请求头           | 输入 CDN Pro 用于访问源站的 `Host` 请求头值。访问 HTTPS 源站时，该值还会用作 SNI 服务器名。它应为有效的域名。您可以在此字段中指定 Nginx 变量。合法的变量名以 '$' 开头，后跟 3 到 60 个小写字母（a-z）。默认情况下，会透传客户端请求中 Host 请求头的值。|
+| 直接连接     | 指定对于未缓存内容或不可缓存的请求，CDN Pro 边缘服务器应如何访问源站服务器。可选值：<ul><li><strong>不直连，使用父缓存</strong> = 始终连接到父级 CDN Pro 服务器。选择此项可最大限度地提高 CDN Pro 上的缓存命中率。<li><strong>自动选择</strong> = 根据性能和资源可用性，自动决定是直接访问源站还是连接到父级 CDN Pro 服务器。（*默认*）<li><strong>总是直接连接</strong> = 边缘服务器始终直接访问源站服务器。</ul>|
+| Keep-Alive超时     | HTTP keep-alive 的概念是使用单个 TCP 连接来发送和接收多个 HTTP 请求/响应，而不是为每一对请求/响应打开一个新连接。在此字段中，输入连接在超时之前可以保持打开的最长秒数。|
+| 失败IP挂起   | 指定 CDN Pro 在将源站服务器的某个 IP 地址标记为“不可用”之前，尝试访问该地址的累计连续失败次数；该不可用状态持续的时间由“挂起时间”指定。如果所有服务器的IP都不可用，从源站请求内容将立即收到 "502 Bad Gateway" HTTP 响应。失败IP挂起的功能默认关闭。开启时，CDN Pro 默认会对一个源IP进行6次尝试，如果6次请求后仍然失败则将该IP挂起1秒。您可以<strong>开启</strong>此功能，通过以下2个子字段修改默认行为：<ul><li><strong>失败次数阈值</strong> = 设置 CDN Pro 在将源站服务器的某个 IP 地址标记为不可用之前，尝试访问该地址的累计连续失败次数。</ul></li><ul><li><strong>挂起时间</strong> = 设置将源站 IP 地址视为不可用的持续时间。</ul></li>| 
+| IP选择算法 | 此设置控制当源站服务器的域名解析为多个 IP 地址时如何选择源站服务器。可选值： <ul><li><strong>轮询</strong> = 依次轮询源IP。这是默认设置，它会尝试将源站流量平均分配到所有IP。（*默认*）<li><strong>一致性哈希</strong> = 根据 URL 的哈希值分配源站流量。如果源站服务器有缓存，此选项应有助于提高命中率。<li><strong>性能优先</strong> = 根据网络质量选择源IP。当源站IP在地理上分散（例如另一个 CDN）时，此选项应有助于确保稳定的性能。</ul>|
+| 鉴权方法        | 为您的源站对象存储启用身份验证。可选值：<ul><li><strong>无</strong> = 不进行身份验证。（*默认*） <br><li><strong>AWS S3</strong> = 使用 AWS Signature Version 4（V4）算法启用身份验证。尽管名称为“AWS S3”，此鉴权方法并不限于 Amazon S3 服务，而是适用于任何支持 AWS V4 签名的云对象存储。如果选择此项，您需要提供以下附加信息来访问对象存储桶：<ul><li><strong>地区</strong> = 如果您的对象存储位于 AWS S3，请从下拉列表中选择一个[地区](<https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions>)。否则，请从下拉列表中选择<strong>自定义</strong>，然后手动输入地区标识。<li><strong>访问密钥</strong> = 输入用于向对象存储服务进行身份验证的访问密钥。<li><strong>密钥</strong> = 从下拉列表中选择一个[保密信息](</docs/portal/secrets/creating-secrets.md>)。所选保密信息以 <code>$SECRET(name)</code> 的形式引用。由于密钥属于敏感信息，必须将其存储为保密信息，不能以明文形式输入。必须先在保密信息中创建该密钥，然后才能在此处引用。</ul>|
+| 启用Shield        | 启用 Shield。Shield 是一项高级功能，可在 CDN Pro 边缘服务器和源站之间提供额外的缓存层。Shield 可减少能够访问源站的服务器数量，并提高缓存命中率。如果您的源站服务器有 IP 访问控制列表，请调用此 [API](</zh/cdn/apidocs#operation/get-cdn-shields>) 接口获取源站 Shield 当前的 IP 地址，并添加您要使用的 Shield 的 IP 地址。如果 IP 地址有任何更改，您将通过电子邮件收到通知。如果您需要此功能，请联系 [{{title}} 支持团队](mailto:support@{{siteDomain}})。| 
+| Shield               | 如果您启用了 Shield，请选择最适合源站的 Shield 位置。要使用位于中国大陆的 Shield，您的加速域名必须有 ICP 备案，并在[加速项目页面](</docs/portal/edge-configurations/creating-property.md#高级设置>)的**高级设置**中设置**有ICP备案**。更多信息，请联系 [{{title}} 支持团队](mailto:support@{{siteDomain}})。 | 
 
-5. Click the **Save** button.
+5. 点击**保存**按钮。

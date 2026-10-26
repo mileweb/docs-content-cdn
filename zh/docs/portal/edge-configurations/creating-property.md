@@ -1,104 +1,104 @@
-# Creating a Property
+# 创建加速项目
 
-There are two ways to create a new property:<ul><li>Create a new property from scratch.</ul></li><ul><li> Clone an existing property whose settings are similar to the property you want to create, and then change the settings of the cloned property to suit your needs.</ul></li>
+创建新的加速项目有两种方式：<ul><li>从头创建一个新的加速项目。</ul></li><ul><li>克隆一个现有的加速项目，然后根据您的需要修改所克隆的配置。</ul></li>
 
-After you create the new property, save and [validate](</docs/portal/tasks/validations.md>) the property before you deploy and test it.
+创建新的加速项目后，请先保存并[验证](</docs/portal/tasks/validations.md>)该加速项目，然后再对其进行部署和测试。
 
-## Getting Started
+## 开始
 
-1. In the left pane, click **Edge Configurations**, and then select **Properties**.
-2. To create a new property from scratch, click the **Create Property** button at the top right of the Properties page. <br><br><u>OR </u></br>
-   To clone an existing property, find the property you want to clone on the Properties page, and then click the vertical ellipsis under **Actions** and select **Clone**. Or click a property ID, and then click the horizontal ellipsis next to the **Edit** or **Clone** button and select **Clone**. 
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**加速项目**。
+2. 要从头创建新的加速项目，请点击“加速项目”页面右上角的**创建加速项目**按钮。 <br><br>
+   要克隆现有的加速项目，请在“加速项目”页面中找到您要克隆的加速项目，然后点击**操作**列下的垂直省略号并选择**克隆**。或者点击某个加速项目的 ID，然后点击**修改**或**克隆**按钮旁边的水平省略号并选择**克隆**。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/properties-create-property.png" alt="create property" width="600"></p>
 
-3. Complete the fields in the Create a Property form. Required fields are denoted by an asterisk (\*).
+3. 填写“创建加速项目”表单中的字段。必填字段以星号（\*）标示。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/create-a-property.jpg" alt="edit property" width="600"></p>
 
-| **Fields**                | **Description**                                    |
+| **字段**                | **说明**                                    |
 | --------------------------| ---------------------------------------------------|
-| Property Name             | Enter a name that helps you identify this property.|
-| Description               | Add a description to associate with this property. |
-| Configuration Version     | Read-only field that shows the version number of this property. By default, your first property configuration is Version 1. |
-| Description               | Add a description for this first property version. |
-| Hostnames                 | Enter one or more hostnames to be accelerated and which your end users will access. |
-| Origins                   | Origins are your servers that CDN Pro accesses to fetch your content. You can specify more than one server. Click the **Add New** link and then see [Adding or Editing Origins in a Property](</docs/portal/edge-configurations/managing-origins.md>).|
-| Edge Logic                | Write NGINX configuration code to specify how you want CDN Pro to deliver content to your visitors. You can click the [**Wizard** button](#edge-logic-wizard) to bootstrap this configuration using the Edge Logic Wizard dialog box. For more information, refer to {{title}}' [Edge Logic documentation](</docs/edge-logic/intro.md>), which includes a description of [supported directives](</docs/edge-logic/supported-directives.md>) and [variables](</docs/edge-logic/built-in-variables>).</li>
-| TLS Settings              | Select the [TLS client certificate settings](#tls-settings) for your property.|
-| Advanced Settings         | Use [advanced settings](#advanced-settings) to specify cache key customization, China ICP Beian, whether to manage certificate renewal yourself, HTTP/2, HTTP/3, IPv6 origin support, and whether to match the client IP version when accessing origin content.|
-| Real Time Logging | If this advanced feature was enabled for you, complete the [real-time logging parameters](#real-time-log). If you require this feature, contact the [{{title}} support team](mailto:support@{{siteDomain}}).|
+| 加速项目名称             | 输入一个有助于您识别此加速项目的名称。|
+| 描述               | 为此加速项目添加描述。 |
+| 配置版本     | 只读字段，显示此加速项目的版本号。默认情况下，您的第一个加速项目配置为版本 1。 |
+| 版本描述               | 为此加速项目的第一个版本添加描述。 |
+| 加速域名                 | 输入一个或多个需要加速、且最终用户将访问的加速域名。 |
+| 源站                   | 源站是 CDN Pro 访问以获取您的内容的服务器。您可以指定多个服务器。点击**添加新源站**链接，然后参见[管理源站配置](</docs/portal/edge-configurations/managing-origins.md>)。|
+| 边缘逻辑                | 编写 NGINX 脚本，声明您希望 CDN Pro 如何处理客户端请求。您可以点击[**向导**按钮](#边缘逻辑向导)，使用边缘逻辑向导对话框生成初始配置。有关更多信息，请参阅 {{title}} 的[边缘逻辑文档](</docs/edge-logic/intro.md>)，其中包含对[支持的指令](</docs/edge-logic/supported-directives.md>)和[内置变量](</docs/edge-logic/built-in-variables>)的说明。</li>
+| TLS设置              | 为您的加速项目配置 [证书及TLS相关设置](#tls设置)。|
+| 高级设置         | 使用[高级设置](#高级设置)指定自定义缓存键、ICP 备案、是否自行管理证书续签、HTTP/2、HTTP/3、IPv6 源站支持，以及访问源站内容时是否匹配客户端的 IP 版本。|
+| 实时日志 | 如果此高级功能已为您开通，请填写[实时日志参数](#实时日志)。如果您需要此功能，请联系 [{{title}} 支持团队](mailto:support@{{siteDomain}})。|
 
-4. To include a baseline configuration with the Edge Logic for the property, click the gear icon at the bottom left of the **Edge Logic** field. When the popup appears, enter the baseline configuration. When you finish, click the **Save** button to save the baseline configuration to the database.
+4. 支持保存和使用基线配置。请点击**边缘逻辑**字段左下角的齿轮图标。弹出窗口出现后，编辑基线配置。完成后，点击**保存**按钮将基线配置，供后续的加速项目使用。
 
-**Note:** If you add a baseline configuration, the wizard appends its configuration after that of the baseline configuration. When you save the baseline configuration, it will not be used to initialize the Edge Logic until you create another property. To use the baseline configuration with the current property you are adding or editing, reload the page; doing so, however, may cause you to lose other changes you made.
+**注意：**如果您创建了基线配置，则通过向导生成的配置会追加在基线配置之后。保存基线配置后，在您创建另一个加速项目之前，它不会用于初始化边缘逻辑。要将基线配置用于您当前正在添加或编辑的加速项目，请重新加载页面；但这样做可能会导致您丢失所做的其他更改。
 
-5. To save the property, click the **Save** button. Several basic syntax checks are performed. If errors are found, you are prompted to fix them before the property is saved. Any property version will have to be "validated" before it can be deployed to staging or production. You can click the <strong>Save & Validate</strong> button to start the validation process. When the Confirmation pop-up appears, click <strong>OK</strong>. The validation process usually takes less than a minute. You can either wait for it to finish or close the progress dialog box to perform other tasks while validation continues in the background. You can click <strong>Tasks</strong> in the left pane to [check the validation results](</docs/portal/tasks/validations.md>). If there is a failure, perform the instructions in the error message to fix it.
+5. 要保存加速项目，请点击**保存**按钮。系统会执行若干基本的语法检查。如果发现错误，系统会提示您先修复错误，然后才会保存加速项目。任何加速项目版本都必须经过“验证”，才能部署到演练环境或生产环境。您可以点击<strong>保存并验证</strong>按钮来启动验证流程。出现确认弹窗时，请点击<strong>确定</strong>。验证流程通常在一分钟内完成。您可以等待其完成，也可以关闭进度对话框去执行其他任务，验证将在后台继续进行。您可以点击左侧导航栏中的<strong>查看任务</strong>来[查看验证结果](</docs/portal/tasks/validations.md>)。如果验证失败，请按照错误信息中的说明进行修复。
 
-6. If the property is validated successfully, you can [deploy](</docs/portal/edge-configurations/deploying-property.md>) it to the staging or production environment. By default, trial users will have access to the staging environment only. Please contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable access to the production environment.
+6. 如果加速项目验证成功，您就可以将其[部署](</docs/portal/edge-configurations/deploying-property.md>)到演练环境或生产环境。
 
-## Edge Logic Wizard
+## 边缘逻辑向导
 
-Use the Edge Logic wizard to create an initial version of the Edge Logic. The wizard supports some of the most basic cache configurations. You can set cache behavior for multiple locations. You can also modify the generated Edge Logic code to add complicated behaviors to suit your requirements. 
+使用边缘逻辑向导可以方便地生成边缘逻辑。向导支持一些最基本的缓存配置，您可以为多个路径设置缓存行为。您还可以修改生成的边缘逻辑代码，添加复杂的行为以满足您的需求。
 
-When you click the <b>Wizard</b> button, a prompt appears with the following choices. <ul><li><b>Start with a baseline setting for website acceleration</b>. Initializes settings for a typical website. </ul></li><ul><li><b>Start with a baseline setting for download or VoD acceleration</b>. Initializes settings to accelerate large file downloads or Video on Demand (VOD). </ul></li><ul><li><b>Start with a clean slate</b> Select this choice if your content does not fit one of the other choices, or if  you want to set up all the settings manually. </ul></li>
+点击<b>向导</b>按钮后，会出现一个包含以下选项的提示。<ul><li><b>使用适用于网页加速的配置模板</b>。生成适合常规网站加速的配置。</ul></li><ul><li><b>使用适用于下载或点播加速的配置模板</b>。生成适合加速大文件下载或视频点播（VOD）的配置。</ul></li><ul><li><b>使用空白模板</b>。如果以上模板不适合您的业务，或者您想手动编辑所有配置，可选择此项。</ul></li>
 
 
 <p align=center><img src="/docs/resources/images/edge-configurations/Edge-Logic-Wizard-Prompt.png" alt="wizard prompt" width="500"></p>
 
-After making your selection, complete the settings in the Edge Logic Wizard page, and then click <b>OK</b> to display the Edge Logic code. You can then edit the code shown in the field as necessary or click the <b>Wizard</b> button to change your selections. 
+做出选择后，在边缘逻辑向导页面中完成设置，然后点击<b>确定</b>生成边缘逻辑代码。之后您可以根据需要编辑编辑器中显示的代码，也可以点击<b>向导</b>按钮更改您的选择。
 
-<b>Note:</b> If the Edge Logic code is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
+<b>注意：</b>如果边缘逻辑代码特别长，请勾选<b>文本软换行</b>复选框，使长文本分多行显示，而不是显示为很长的一行。
 
-## TLS Settings
+## TLS设置
 
-This section allows you to:<ul><li>Enable HTTPS for this property by attaching a TLS certificate to it. If both RSA and ECC algorithms need to be supported, add a second certificate with an algorithm different from the first certificate.</li><li>Specify the supported TLS versions. We strongly recommend using TLS 1.2 or greater because the older versions are insecure.</li><li>Downgrade the protocol from HTTPS to HTTP when accessing the origin. Note that doing so may expose you to security risks.</li><li>Enable Online Certificate Status Protocol (OCSP) stapling to check the revocation status of digital certificates (refer to https://en.wikipedia.org/wiki/OCSP_stapling). No OCSP response will be stapled to TLS handshakes if there is no OCSP URL specified on your certificate.</li><li>Enable zero round-trip time resumption for TLS 1.3. Select <B>Enable 0-RTT</b> only if the supported TLS versions include TLS 1.3.</ul></li><ul><li>Specify the maximum number of seconds to wait for a secure TLS handshake to be initiated and to complete before the TLS session times out.</li><li>Choose whether to verify a client's certificate before serving content to the client. Select <b>On</b> to enable verification, <b>Optional</b> to verify only when the client presents certificates, or <b>Optional, no CA</b> to check for a client's certificate but not verify it is from a trusted CA.</li>The first two options require you to select a CA certificate.</ul>
+该部分包括以下设置：<ul><li>通过为加速项目绑定 TLS 证书来启用 HTTPS。如果需要同时支持 RSA 和 ECC 算法，请再添加一个算法与第一个证书不同的证书。</li><li>指定支持的 TLS 版本。我们强烈建议使用 TLS 1.2 或更高版本，因为旧版本并不安全。</li><li>访问源站时，将协议从 HTTPS 降级为 HTTP。请注意，这样做可能使您面临安全风险。</li><li>启用在线证书状态协议（OCSP）装订，以检查数字证书的吊销状态（请参阅 https://en.wikipedia.org/wiki/OCSP_stapling）。如果您的证书上没有指定 OCSP URL，则 TLS 握手中不会装订任何 OCSP 响应。</li><li>为 TLS 1.3 启用零往返时间（0-RTT）恢复。仅当支持的 TLS 版本包含 TLS 1.3 时，才选择<b>启用 0-RTT</b>。</li><li>指定等待 TLS 握手发起并完成的最大秒数，超过该时间 TLS 会话将超时。</li><li>选择在向客户端提供内容之前是否验证客户端的证书。选择<b>开启</b>以启用验证，选择<b>可选</b>以仅在客户端出示证书时进行验证，或选择<b>可选，无CA</b>以检查客户端的证书，但不验证其是否来自受信任的 CA。前两个选项要求您选择一个 CA 证书。</li></ul>
 
 
-The remaining settings are intuitive. Specify the TLS ciphers in the format described in the [OpenSSL documentation](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT).
+其余设置都很直观。请按照 [OpenSSL 文档](https://www.openssl.org/docs/man1.1.1/man1/ciphers.html#CIPHER-LIST-FORMAT)中描述的格式指定 TLS 加密套件。
 
-**Note:** If you enter multiple cipher suites in the **TLS Ciphers** field, separate them with colons.
+**注意：**如果您在 **TLS 加密套件**字段中输入多个加密套件，请用冒号分隔。
 
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-tls.jpg" alt="TLS Settings" width="650"></p>
 
-## Advanced Settings
+## 高级设置
 
-**Cache HTTPS Contents Separately from HTTP:** When this option is set to **Yes**, responses to HTTPS requests and HTTP requests are cached separately, even when they have the same cache key. The default is **No**.
+**HTTP与HTTPS分开缓存：**当此选项设置为**是**时，即使 HTTPS 请求和 HTTP 请求的缓存键相同，对它们的响应也会分别缓存。默认值为**否**。
 
-**Cache Key Hostname:** By default, the Host header value in the client request is used in the cache key. If this property contains multiple service hostnames, the contents of different hostnames will be cached separately. If you want all hostnames to share one cached copy, specify a fixed "Cache Key Hostname" to override the default behavior.
+**缓存键里的域名：**默认情况下，客户端请求中的 Host 请求头的值会用于缓存键。如果此加速项目包含多个加速域名，则不同域名的内容会分别缓存。如果您希望所有域名共享同一份缓存副本，请指定一个固定的“缓存键里的域名”来覆盖默认行为。
 
-**Cache Key URI:** Controls how the URI of an incoming request is incorporated into the cache key when you use the `rewrite` directive to rewrite the URI in Edge Logic. Select **Pre-rewrite** (default) to use the unmodified URI in the cache key, or select **Post-rewrite** to use the rewritten URI instead. Note that the URI put into the cache key does not include the query string by default. To append the query string and other parameters such as request headers to the cache key, assign a value to the `$cache_misc` variable in Edge Logic.
+**缓存键里的URI：**当您在边缘逻辑中使用 `rewrite` 指令改写 URI 时，此选项控制传入请求的 URI 如何纳入缓存键。选择**改写前**（默认）将未经修改的 URI 用于缓存键，或选择**改写后**改用改写后的 URI。请注意，默认情况下放入缓存键的 URI 不包含查询字符串。要将查询字符串以及请求头等其他参数附加到缓存键，请在边缘逻辑中为 `$cache_misc` 变量赋值。
 
-**Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. You can then contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
+**有ICP备案：**如果此加速项目必须由中国大陆的服务器提供服务，请确保所有加速域名都已在中国政府[备案](</docs/edge-logic/faq.md#中国大陆加速以及备案相关>)。然后您可以联系 [{{title}} 支持团队](mailto:support@{{siteDomain}})为您开通此功能。开通后，请将**有ICP备案**设置更改为**是**。
 
-**Note:** You can set **Has ICP Beian** to **Yes** without contacting {{title}}; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from {{title}}.
+**注意：**您无需联系 {{title}} 即可将**有ICP备案**设置为**是**；但是，在您向 {{title}} 申请开通之前，该功能<ins>**不会**</ins>启用。
 
-**Note:** Setting **Has ICP Beian** to **Yes** applies to the entire property, i.e. all hostnames in a property. If any hostname in a property does not have Beian, the property deployment will be rejected. And, if any hostname in a deployed property is later found to have invalid Beian, CDN Pro will automatically turn off the "hasBeian" switch for the entire property, even if the other hostnames in the same property still have valid Beian. Refer to [this FAQ](</docs/edge-logic/faq.md#china-delivery-with-icp-beian>) for more information.
+**注意：**将**有ICP备案**设置为**是**适用于整个加速项目，即加速项目中的所有加速域名。如果加速项目中有任何加速域名没有备案，该加速项目的部署将被拒绝。并且，如果已部署的加速项目中有任何加速域名后来被发现备案无效，CDN Pro 会自动关闭整个加速项目的“hasBeian”开关，即使同一加速项目中的其他加速域名仍然具有有效备案。更多信息请参阅[此常见问题](</docs/edge-logic/faq.md#有icp备案域名中国大陆加速>)。
 
-**Load Balancer Logic (to be deprecated):** Enter Edge Logic to customize load balancing. You can use a subset of the directives, including `if`, `set`, `return`, `eval_func`, `add_header`, `client_max_body_size`, `deny`, and `allow`. For the list of directives allowed in this field, refer to the `loadBalancerDirectives` field in the response to the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). This list can include advanced Edge Logic directives that have not been enabled for your account.
-Example:  `if ($http_user_agent = bot) { return 403;}`. **Note:** Due to upgrade of the edge node structure, the Load Balancer Logic will be deprecated soon. Please avoid using this field. All the supported directives should be configured in Edge Logic only. Refer to [this article](</docs/edge-logic/edge-node-structure-upgrade.md>) for more details.
-
-
-**Note:** If the Edge Logic code is extremely long, check the <b>Soft Wrap Text</b> check box to display long text on multiple lines instead of one long line.
-
- **Certificate Renew Automation:** By default, CDN Pro takes control of the contents under the ``/.well-known/{acme-challenge, pki-validation}`` directories to support [certificate auto-renew](</docs/portal/certificates/auto-renewal.md>) for properties. If you need to manage these two directories by yourself on the origin (for example, to implement your own certificate auto-renew mechanism), you can use this configuration option to disable the default behavior. <ul><li>If **Support** is selected, CDN Pro takes control of the two "special" directories to support auto-renewing of the property's certificate. This is the default setting.</ul></li> <ul><li>If **Disable** is selected, CDN Pro releases control of these special directories to the origin.</ul></li>
-
- **HTTP/2:** Use the radio buttons to enable or disable the HTTP/2 protocol. HTTP/2 is enabled by default. If disabled, HTTP/1.1 is used.
-
- **HTTP/3:** Use the radio buttons to enable or disable the HTTP/3 protocol. HTTP/3 is disabled by default.
-
- **Enable IPv6 Origin:** Control whether IPv6 addresses can be used when accessing the property's origin servers. Enabling does not mean IPv6 is exclusively used though. If the setting is **Disable**, only IPv4 addresses are used to access the origin even if the origin supports IPv6. If your origin supports IPv6 only, then you must also modify the origin's **Direct Connection** setting to **No Direct** and the property's **Follow Client IP Version** to **strict** to ensure IPv6 is exclusively used. This is required because some CDN Pro edge server only support IPv4.
+**负载均衡器逻辑（即将废弃）：**输入配置以自定义负载均衡。您可以使用部分指令，包括 `if`、`set`、`return`、`eval_func`、`add_header`、`client_max_body_size`、`deny` 和 `allow`。有关此字段允许使用的指令列表，请参阅[系统配置 API](</apidocs#operation/get-cdn-systemConfigs>)响应中的 `loadBalancerDirectives` 字段。此列表可能包含尚未为您的账号开通的高级负载均衡逻辑指令。
+示例：`if ($http_user_agent = bot) { return 403;}`。**注意：**由于边缘节点架构的升级，负载均衡器逻辑即将被废弃。请避免使用此字段。所有支持的指令都应仅在边缘逻辑中配置。更多详情请参阅[边缘节点架构升级](</docs/edge-logic/edge-node-structure-upgrade.md>)。
 
 
- **Follow Client IP Version:** This setting controls whether to use the IP version of the client when a corresponding request must be made to the origin server for content. The setting is ignored if **Enable IPv6 Origin** is **Disable**. Choices are:<ul><li><strong>auto</strong> = Use the same IP version as the client, but use the other version as backup if needed.</li><li><strong>strict</strong> = Strictly match the IP version of the client.</li><li><strong>off</strong> = Use both IPv4 and IPv6 addresses regardless of the IP version of the client. (*default*)</li></ul>
+**注意：**如果负载均衡逻辑代码特别长，请勾选<b>文本软换行</b>复选框，使长文本分多行显示，而不是显示为很长的一行。
+
+ **证书续签自动化：**默认情况下，CDN Pro 会接管 ``/.well-known/{acme-challenge, pki-validation}`` 目录，以支持加速项目的[证书自动更新](</docs/portal/certificates/auto-renewal.md>)功能。如果您需要在源站自行管理这两个目录（例如，实现您自己的证书自动更新机制），可以使用此配置选项禁用默认行为。 <ul><li>如果选择**启用**，CDN Pro 将接管这两个“特殊”目录，以支持加速项目证书的自动更新。这是默认设置。</ul></li> <ul><li>如果选择**禁用**，CDN Pro 将这些特殊目录的控制权交还给源站。</ul></li>
+
+ **HTTP/2：**使用单选按钮启用或禁用 HTTP/2 协议。HTTP/2 默认启用。如果禁用，则使用 HTTP/1.1。
+
+ **HTTP/3：**使用单选按钮启用或禁用 HTTP/3 协议。HTTP/3 默认禁用。
+
+ **使用IPv6源站：**控制访问加速项目的源站服务器时是否可以使用 IPv6 地址。启用并不意味着只使用 IPv6。如果该设置为**禁用**，即使源站支持 IPv6，也只会使用 IPv4 地址访问源站。如果您的源站仅支持 IPv6，则还必须将源站的**直接连接**设置修改为**不直连**，并将加速项目的**遵循客户端IP协议**修改为 **strict**，以确保只使用 IPv6。这是必需的，因为部分 CDN Pro 边缘服务器仅支持 IPv4。
+
+
+ **遵循客户端IP协议：**此设置控制在必须向源站服务器发起相应请求以获取内容时，是否使用客户端的 IP 版本。如果**使用IPv6源站**为**禁用**，则忽略此设置。可选值包括：<ul><li><strong>auto</strong> = 使用与客户端相同的 IP 版本，但在需要时使用另一个版本作为备用。</li><li><strong>strict</strong> = 严格匹配客户端的 IP 版本。</li><li><strong>off</strong> = 无论客户端的 IP 版本如何，同时使用 IPv4 和 IPv6 地址。（*默认*）</li></ul>
  
- **Video Seeking:** This parameter supports seeking in a video using the following fields to specify the starting and ending positions. <ul><li>In the **Start Parameter** field, enter the beginning position of a video segment in bytes. </ul></li><ul><li>In the **End Parameter** field, enter the ending position of the video segment in bytes, or leave this field empty to play the video to the end.</ul></li>
+ **视频拖拉：**此参数通过以下字段指定起始和结束位置，以支持在视频中拖拉定位。 <ul><li>在**起始参数名**字段中，输入视频片段的起始位置（以字节为单位）。 </ul></li><ul><li>在**结束参数名**字段中，输入视频片段的结束位置（以字节为单位），或将此字段留空以播放到视频末尾。</ul></li>
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-advanced-settings.jpg" alt="Property Advanced Settings" width="650"></p>
 
-## Real-Time Log
+## 实时日志
 
-If you signed an agreement with {{title}} for accessing the real-time log, use the **Real-Time Log** section to "stream" an access log in real time to your designated HTTP or HTTPS endpoint. You can specify the format of each log entry using the [built-in variables](/docs/edge-logic/built-in-variables); they will be replaced with the actual values in the notifications. If you use JSON format for the log, select **JSON** to escape special characters in the variable values. You can also specify a sample rate to reduce the number of log entries. Use request headers to pass additional information to the receiving endpoint.
+如果您已开通了实时日志的功能权限，请可使用**实时日志**功能将访问日志实时“流式”推送到您指定的 HTTP 或 HTTPS 端点。您可以使用[内置变量](/docs/edge-logic/built-in-variables)指定每条日志的格式，这些变量将在日志中被替换为实际值。如果您对日志使用 JSON 格式，请选择 **JSON** 以转义变量值中的特殊字符。您还可以指定采样率以减少日志条目数量。使用请求头可向接收端点传递额外的信息。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-realtime-log.png" alt="Real-Time Log" width="650"></p>

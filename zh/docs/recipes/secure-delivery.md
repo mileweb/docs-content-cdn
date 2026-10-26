@@ -119,7 +119,7 @@ location /protected/ {
 * CDN Pro 也支持您根据安全性需求完全控制 TLS 的加密套件。例如，您可以配置优先选用 ECDHE 或 EDH 密钥交换算法来确保 "[前向保密性](https://www.digicert.com/kb/ssl-support/ssl-enabling-perfect-forward-secrecy.htm)".
 * 如果一个客户端请求使用 HTTPS 协议，CDN Pro 会使用同样的协议来访问源站来确保整个链路是加密的。尽管 CDN Pro 提供了 "协议降级" 的选项，您如果没有十分的必要请不要启用。
 * 在源站配置里，您可以选择打开“验证源站证书”功能来有效防范针对源站的 "中间人" 攻击或者是 DNS 劫持。
-* 如果您的加速项支持 HTTPS，一个好的实践是将所有 HTTP 请求都重定向到对应的 HTTPS 入口。您可以在 [CDN Pro 控制台](/docs/portal/edge-configurations/creating-property.md#tls-settings) 使用这个下拉框来配置：
+* 如果您的加速项支持 HTTPS，一个好的实践是将所有 HTTP 请求都重定向到对应的 HTTPS 入口。您可以在 [CDN Pro 控制台](/docs/portal/edge-configurations/creating-property.md#tls设置) 使用这个下拉框来配置：
 <p align=center><img src="/docs/resources/images/edge-logic/http-redirect.png" alt="HTTP redirect" width="500"></p>
 
 ### 防止缓存敏感数据

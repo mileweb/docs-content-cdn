@@ -1,20 +1,19 @@
+# 修改加速项目
 
-# Editing Properties
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**加速项目**。
 
-1. In the left pane, click **Edge Configurations**, and then select **Properties**.
+2. 在“加速项目”页面，点击您要修改的加速项目的 ID。
+   <br><U>或 </u></br>
+  在**操作**列中，点击您要修改的加速项目的垂直省略号，然后选择**修改**。
 
-2. On the Properties page, click the ID of the property you want to edit. 
-   <br><U>OR </u></br>
-  In the **Actions** column, click the vertical ellipsis for the property you want to edit, and then select **Edit**.
+3. 要在修改或克隆之前更改加速项目的名称，请点击当前名称，输入新名称，然后点击输入名称的字段右下角的对勾。
 
-3. To change the name of the property before editing or cloning it, click the current name, enter the new name, and click the checkmark at the bottom right of the field in which you typed the name.
-   
-4. From the **Version Number** drop-down list, choose the property version you want to edit. If the **Edit** button is enabled, you can click it to start editing.
+4. 从**版本号**下拉列表中，选择您要修改的加速项目版本。如果**编辑**按钮可用，您可以点击它开始修改。
 
-**Note:** A lock icon next to the version number means the version has been deployed. Editing this version is not permitted to ensure that CDN Pro can reliably roll back to any version that has been deployed. If you want to make any changes on top of this version, click the **Clone** button to create a new version to edit.
+**注意：**版本号旁边的锁图标表示该版本已被部署。为确保 CDN Pro 能够可靠地回滚到任何已部署的版本，不允许修改此版本。如果您想在此版本的基础上做任何更改，请点击**克隆**按钮创建一个新版本进行修改。
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-versions.png" alt="Upload Certificate Version" width="700"></p>
 
-5. Make your changes in the Edit Property form. Required fields are denoted by an asterisk (\*) and described in [Creating a Property](</docs/portal/edge-configurations/creating-property.md>).
-**Note:** You can perform step 3 if you want to change the name of the property after editing or cloning it.
-6. Save and [validate](</docs/portal/tasks/validations.md>) the new version before you deploy it.
+5. 在“修改加速项目”表单中进行更改。必填字段以星号（\*）标示，并在[创建加速项目](</docs/portal/edge-configurations/creating-property.md>)中进行了说明。
+**注意：**如果您想在修改或克隆之后更改加速项目的名称，可以执行第 3 步。
+6. 在部署之前，请保存并[验证](</docs/portal/tasks/validations.md>)新版本。

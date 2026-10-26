@@ -10,7 +10,7 @@ The following figure shows the key elements on the page, and the table following
 
 | **Fields**   | **Description**                                                                                           |
 | :----------: | --------------------------------------------------------------------------------------------------------- |
-| 1            | A search box for filtering test suites. You can filter test suites by ID, name, description, or property. To enter multiple search strings, separate each one with a carriage return. Advanced filtering capabilities allow you to search specific configurations. For more information, see [Filtering Properties](#filtering-properties).               |
+| 1            | A search box for filtering test suites. You can filter test suites by ID, name, description, or property.               |
 | 2            | The list of all test suites that are available to you.                                                    |
 | 3            | Drop-down lists to take actions on each test suite.                                                       |
 | 4            | The button to create and run test suites.                                                                 |

@@ -1770,7 +1770,7 @@
 
 * Added [secret management](</apidocs#tag/Secret-Management>) APIs you can use to improve security by preventing sensitive text from being exposed in Edge Logic.
 * Allowed you to show [report annotations](</apidocs#tag/Annotations-for-Reports>) for property deployments, certificate deployments, and edge hostname updates.
-* Added “proxy_next_upstream off;” in NGINX configuration to avoid latency related to using the [real-time log feature](</docs/portal/edge-configurations/creating-property#real-time-log>).
+* Added “proxy_next_upstream off;” in NGINX configuration to avoid latency related to using the [real-time log feature](</docs/portal/edge-configurations/creating-property#实时日志>).
 
 
 #### Portal updates

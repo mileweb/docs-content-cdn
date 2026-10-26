@@ -1,5 +1,5 @@
-# Deleting a Property
+# 删除加速项目
 
-1. In the left pane, click **Edge Configurations**, and then select **Properties**.
-2. In the **Actions** column on the Properties page, click the vertical ellipsis of the property you want to delete, and then select **Delete**.
-3. When prompted to confirm the deletion, click **OK** to delete the property.
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**加速项目**。
+2. 在“加速项目”页面的**操作**列中，点击您要删除的加速项目的垂直省略号，然后选择**删除**。
+3. 当系统提示确认删除时，点击**确定**以删除该加速项目。

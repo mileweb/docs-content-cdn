@@ -1,38 +1,38 @@
-# Deploying Your Property
+# 部署加速项目
 
-After you create and validate a property version, you are ready to deploy it. Initially, we highly recommend that you always deploy the property to the staging environment to make sure the property is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
+在创建并验证加速项目版本后，即可部署该版本。首次部署时，我们强烈建议您始终先将加速项目部署到演练环境，以确保加速项目配置正确并符合预期。确认加速项目可以正式上线后，再将其部署到生产环境。
 
-**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production. It takes about 5 minutes for the test requests to appear in the reports. Production deployment will not be enabled before that occurs.
+**注意：**如果您是免费试用客户，您需先部署配置到演练环境，并向演练环境测试节点发起至少 10 个测试请求后，才能部署到生产环境。测试请求统计大约需要 3 分钟才会出现在报表中。在此之前，生产环境部署功能不会开启。
 
-1. In the left pane, click **Edge Configurations**, and then select **Properties**. 
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**加速项目**。
 
-2. On the Properties page, click the ID of the property you want to deploy.
-    <br><u>OR </u></br>
-  In the **Actions** column, click the vertical ellipsis for the property you want to deploy, and then select **Edit**.
+2. 在“加速项目”页面，点击您要部署的加速项目的 ID。
+    <br><u>或 </u></br>
+  在**操作**列中，点击您要部署的加速项目的垂直省略号，然后选择**修改**。
 
-3. To deploy the property, click the horizontal ellipsis next to the **Edit** button, and then select **Deploy**.
-4. When the Deployment Target dialog box appears, select whether to deploy to staging (default) or production, and then click **Deploy Now**. Or click **Add to Standby task** to move this action to the [standby queue](</docs/portal/tasks/standby-tasks.md>). Clicking **Cancel** cancels deployment.</ul></li> 
+3. 要部署加速项目，请点击**编辑**按钮旁边的水平省略号，然后选择**部署**。
+4. 出现“部署目标”对话框后，选择部署到演练环境（默认）还是生产环境，然后点击**立即部署**。或者点击**添加到待命任务**，将此操作移至[待命队列](</docs/portal/tasks/standby-tasks.md>)。点击**取消**可取消部署。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment.png" alt="deployment selections and button" width="400"></p>
 
-5. If you clicked the **Deploy Now** button, click **OK** when the confirmation pop-up appears. Usually, the deployment process finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment at any time.
+5. 如果您点击了**立即部署**按钮，请在出现确认弹窗时点击**确定**。通常，部署过程会在 2 分钟内完成。您可以等待进度对话框，也可以关闭它去进行其它操作，部署将在后台继续进行。您可以随时点击左侧导航栏中的**查看任务**来查看部署状态。
 
-6. For instructions about testing the property in the staging environment, click [here](</docs/portal/edge-configurations/testing-property.md#testing-property-in-staging>).
+6. 有关在演练环境中测试加速项目的说明，请点击[此处](</docs/portal/edge-configurations/testing-property.md#在演练环境中测试加速项目>)。
 
-# Undeploying a Property
+# 卸载加速项目
 
-1. In the **Actions** column on the Properties page, click the vertical ellipsis of the deployed property you want to undeploy, and then select **Undeploy from Staging** or **Undeploy from Production**.
+1. 在“加速项目”页面的**操作**列中，点击您要卸载的已部署加速项目的垂直省略号，然后选择**从演练环境卸载**或**从生产环境卸载**。
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-actions-undeploy.png" alt="property undeployment" width="650"></p>
 
-2. When the confirmation pop-up appears, click the appropriate button:<ul><li>To undeploy the property now, click **OK** and proceed to the next step.</ul></li><ul><li>To undeploy the property at a later time, click <strong>Add to Standby task</strong> to move this action to the [standby queue](</docs/portal/tasks/standby-tasks.md>).</ul></li>   
-3. If you clicked **OK**, you can either wait with the progress dialog box, or close it to perform other tasks while the undeployment continues in the background. You can click **Tasks** in the left pane to check the status of the undeployment at any time.
+2. 出现确认弹窗时，点击相应的按钮：<ul><li>如需立即卸载加速项目，请点击**确定**，然后继续下一步。</ul></li><ul><li>如需稍后再卸载加速项目，请点击<strong>添加到待命任务</strong>，将此操作移至[待命队列](</docs/portal/tasks/standby-tasks.md>)。</ul></li>
+3. 如果您点击了**确定**，您可以等待进度对话框，也可以关闭它去进行其它操作，卸载将在后台继续进行。您可以随时点击左侧导航栏中的**查看任务**来查看卸载状态。
 
-# Viewing a Property's Deployment History
+# 查看加速项目的部署历史
 
-1. In the **Actions** column on the Properties page, click the vertical ellipsis of the property whose deployment history you want to view, and then select **Deployment History**.  
-   <br><u>OR </u></br>
- Click the ID of the property on the Properties page. Then click the horizontal ellipsis next to the **Edit** or **Clone** button and select **History**.
-2. To view task details, click the ID or task name for a deployment.
-3. Clicking the **Property ID** link under **Actions** on the Task Details page displays the page where you can edit the corresponding property.
-**Note:** Fields at the top of the Deployment page allow you to search for deployments over a specified date and time range.
+1. 在“加速项目”页面的**操作**列中，点击您要查看部署历史的加速项目的垂直省略号，然后选择**部署历史**。
+   <br><u>或 </u></br>
+ 点击“加速项目”页面上加速项目的 ID。然后点击**克隆**按钮旁边的水平省略号，并选择**部署历史**。
+2. 要查看任务详情，请点击某次部署的 ID 或任务名。
+3. 在任务详情页的**操作**下方点击**加速项目 ID**链接，即可打开对应的编辑页面。
+**注意：**“配置部署”页面顶部的字段可用于按指定的日期和时间范围搜索部署记录。
