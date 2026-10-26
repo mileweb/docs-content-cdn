@@ -1,79 +1,79 @@
-# Working with Test Suites
+# 管理测试用例集
 
-CDN Pro provides a staging environment for you to [test your property configurations](</docs/portal/edge-configurations/testing-property.md>) without affecting production. Test suites provide the added convenience of allowing you to test properties deployed to both the staging and production environments.
+CDN Pro 提供了演练环境，供您在不影响生产环境的情况下[测试加速项目配置](</docs/portal/edge-configurations/testing-property.md>)。您可以使用测试用例集的功能，方便地测试部署到演练环境和生产环境的加速项目。
 
-Test suites are created and run from the Test Suites page. To display this page, click **Edge Configurations** > **Test Suites** in the left pane.
+您可以在“测试用例集”页面中创建和运行测试用例集。要显示该页面，请在左侧导航栏中点击**边缘配置** > **测试用例集**。
 
-The following figure shows the key elements on the page, and the table following the figure describes them.
+下图显示了页面上的关键元素，图后的表格对它们进行了说明。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/test-suites-page.png" alt="test suite page" width="900"></p>
 
-| **Fields**   | **Description**                                                                                           |
+| **编号**   | **说明**                                                                                                   |
 | :----------: | --------------------------------------------------------------------------------------------------------- |
-| 1            | A search box for filtering test suites. You can filter test suites by ID, name, description, or property. To enter multiple search strings, separate each one with a carriage return. Advanced filtering capabilities allow you to search specific configurations. For more information, see [Filtering Properties](#filtering-properties).               |
-| 2            | The list of all test suites that are available to you.                                                    |
-| 3            | Drop-down lists to take actions on each test suite.                                                       |
-| 4            | The button to create and run test suites.                                                                 |
+| 1            | 用于筛选测试用例集的搜索框。您可以按 ID、名称、描述或加速项目筛选测试用例集。   |
+| 2            | 测试用例集的列表。                                                                                |
+| 3            | 用于对每个测试用例集执行操作的下拉列表。                                                                       |
+| 4            | 用于创建测试用例集的按钮。                                                                                 |
 
-## Creating Test Suites
-The following procedure describes how to create a test suite. After you create a test suite, you can run it as part of this procedure or save it for future use.
+## 创建测试用例集
+以下步骤介绍如何创建测试用例集。创建测试用例集后，您可以在此流程中运行它，也可以将其保存以备将来使用。
 
-1. In the left pane, click **Edge Configurations**, and then select **Test Suites**. 
-2. At the top right of the screen, click the **Create Test Suite** button.
-3. Complete the fields in the Test Suites page. Required fields are denoted by an asterisk (*).
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**测试用例集**。
+2. 在屏幕右上角，点击**创建测试用例集**按钮。
+3. 在“创建测试用例集”对话框中填写字段。必填字段以星号（*）标示。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/create-test-suite-dialog-box.png" alt="test suite dialog box" width="550"></p>
 
-| **Fields**      | **Description**                                       |
+| **字段**      | **说明**                                       |
 | --------------- | ----------------------------------------------------- |
-| Test Suite Name | Name of the test suite you want to create.            | 
-| Property        | Type the first few characters of a property deployed to staging or production, and then select one from the matching list of properties. To test on production, you must have an edge hostname and modify your DNS settings to direct traffic to the CDN Pro production platform.|
-| Description     | Description of the test suite.                        |
+| 测试用例集名称 | 您要创建的测试用例集的名称。            |
+| 加速项目    | 输入部署到演练环境或生产环境的加速项目的名称，然后从匹配的加速项目列表中选择一个。要在生产环境上测试，您必须先创建调度域名，并修改 DNS 设置，将流量指向 CDN Pro 生产平台。|
+| 描述     | 测试用例集的描述。                        |
 
-4. Click **Save** to save the test suite or **Save and Create Test Case** to create a test case and proceed to the next step.
-5. If you clicked **Save and Create Test Case**, complete the fields in the Create a test case page.
+4. 点击**保存**保存测试用例集，或点击**保存并创建测试用例**以创建测试用例并进入下一步。
+5. 如果您点击了**保存并创建测试用例**，请在“创建测试用例”页面中填写表单。
 
 <p align=center><img src="/docs/resources/images/edge-configurations/create-a-test-case.png" alt="test case" width="700"></p>
 
-| **Fields**      | **Description**                                                                                 |
+| **字段**      | **说明**                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------------------- |
-| Property        | Read-only field that shows the name of the property associated with this test suite.            | 
-| Test Case Name  | Name of the test case you are creating.                                                         |
-| Description     | Description of the test case.                                                                  |
-| URL             | Complete URL containing a hostname defined in a deployed property.                              | 
-| Request Headers | Request headers to pass.                                                                        |
-| Cookies         | Cookies to pass.                                                                                |
-| TLS Version     | TLS version to use for the request.                                                             | 
-| HTTP/2          | Select whether to enable or disable HTTP/2 for the request.                                     |
-| Expected Result | Select one or more HTTP response status codes.                                                  |
+| 加速项目    | 只读字段，显示与此测试用例集关联的加速项目名称。            |
+| 测试用例名称  | 您正在创建的测试用例的名称。                                                         |
+| 描述     | 测试用例的描述。                                                                  |
+| URL             | 包含已部署加速项目中所定义的加速域名的完整 URL。                              |
+| 请求头 | 要传递的请求头。                                                                        |
+| Cookies         | 要传递的 Cookies。                                                                                |
+| TLS 版本     | 请求使用的 TLS 版本。                                                             |
+| HTTP/2          | 选择为请求启用还是禁用 HTTP/2。                                     |
+| 预期结果 | 选择一个或多个 HTTP 响应状态码。                                                  |
 
-6. Click **Save and Create Another Test Case** to save the test case and create another one or **Save and Run** to save the test case you just created and run it.
-7. If you clicked **Save and Run**, select a target environment (staging or production) to test when prompted, and then click **Run**. The Test Report page shows the results.
+6. 点击**保存并继续创建**以保存该测试用例并创建另一个，或点击**保存并运行**以保存刚创建的测试用例并运行它。
+7. 如果您点击了**保存并运行**，请在出现提示时选择要测试的目标环境（演练或生产），然后点击**运行**。“测试报告”页面会显示结果。
 
-## Editing Test Suites and Test Cases
+## 编辑测试用例集和测试用例
 
-1. In the left pane, click **Edge Configurations**, and then select **Test Suites**.
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**测试用例集**。
 
-2. On the Test Suites page, click the ID of the test suite you want to edit. 
-   <br><U>OR </u></br>
-  In the **Actions** column, click the vertical ellipsis for the test suite you want to edit, and then select **Edit**.
+2. 在“测试用例集”页面，点击您要编辑的测试用例集的 ID。
+   <br><U>或 </u></br>
+  在**操作**列中，点击您要编辑的测试用例集的垂直省略号，然后选择**编辑**。
 
-3. To change the name of the test suite before editing it, click the current name, enter the new name, and click **Save**.
-4. Click the ID of the test case you want to edit.
-5. Make your changes in the Test Case form. Required fields are denoted by an asterisk (\*).
-6. Click **Save**.
+3. 要更改测试用例集的名称，请点击当前名称，输入新名称，然后点击对勾保存。
+4. 点击您要编辑的测试用例的 ID。
+5. 在“测试用例”表单中进行更改。必填字段以星号（\*）标示。
+6. 点击**保存**。
 
-## Running Test Cases within a Test Suite
+## 在测试用例集中运行测试用例
 
-1. In the left pane, click **Edge Configurations**, and then select **Test Suites**.
-2. On the Test Suites page, check a test suite, click the three dots next to the **Create Test Suite** button, and select **Run Selected Test Suites**. 
-   <br><U>OR </u></br>
-  In the **Actions** column, click the vertical ellipsis for a test suite, and then select **Run**.
-3. When prompted, select a target environment (staging or production) to test.
-4. Click **Run**. The Test Report page shows the results.
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**测试用例集**。
+2. 在“测试用例集”页面，勾选一个测试用例集，点击**创建测试用例集**按钮旁边的三个点，然后选择**运行选定的测试用例集**。
+   <br><U>或 </u></br>
+  在**操作**列中，点击测试用例集的垂直省略号，然后选择**运行**。
+3. 出现提示时，选择要测试的目标环境（演练或生产）。
+4. 点击**运行**。“测试报告”页面会显示结果。
 
-## Deleting a Test Suite
+## 删除测试用例集
 
-1. In the left pane, click **Edge Configurations**, and then select **Test Suites**.
-2. In the **Actions** column on the Test Suites page, click the vertical ellipsis of the test suite you want to delete, and then select **Delete**.
-3. When prompted to confirm the deletion, click **Yes, delete** to delete the test suite.
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**测试用例集**。
+2. 在“测试用例集”页面的**操作**列中，点击您要删除的测试用例集的垂直省略号，然后选择**删除**。
+3. 出现“确认删除”提示时，点击**是的，删除**以删除测试用例集。

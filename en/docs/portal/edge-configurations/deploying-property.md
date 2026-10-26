@@ -2,7 +2,7 @@
 
 After you create and validate a property version, you are ready to deploy it. Initially, we highly recommend that you always deploy the property to the staging environment to make sure the property is configured properly and behaves as expected. After you confirm that the property is ready to go live, you can deploy it to the production environment.
 
-**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production. It takes about 5 minutes for the test requests to appear in the reports. Production deployment will not be enabled before that occurs.
+**Note:** If you began your free trial of CDN Pro, you must submit at least 10 requests to content deployed to the staging environment before you can deploy to production. It takes about 3 minutes for the test requests to appear in the reports. Production deployment will not be enabled before that occurs.
 
 1. In the left pane, click **Edge Configurations**, and then select **Properties**. 
 
@@ -15,9 +15,9 @@ After you create and validate a property version, you are ready to deploy it. In
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment.png" alt="deployment selections and button" width="400"></p>
 
-5. If you clicked the **Deploy Now** button, click **OK** when the confirmation pop-up appears. Usually, the deployment process finishes in 5 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment at any time.
+5. If you clicked the **Deploy Now** button, click **OK** when the confirmation pop-up appears. Usually, the deployment process finishes in 2 minutes. You can either wait with the progress dialog box, or close it to perform other tasks while the deployment continues in the background. You can click **Tasks** in the left pane to check the status of the deployment at any time.
 
-6. For instructions about testing the property in the staging environment, click [here](</docs/portal/edge-configurations/testing-property.md#testing-property-in-staging>).
+6. For instructions about testing the property in the staging environment, click [here](</docs/portal/edge-configurations/testing-property.md#testing-your-property-in-staging>).
 
 # Undeploying a Property
 

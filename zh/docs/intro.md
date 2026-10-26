@@ -1,39 +1,38 @@
 # 欢迎使用 CDN Pro
 
-CDN Pro 是我们用最新的技术，基于我们20多年的行业经验从头开始构建的一个全新平台。它的一个重要设计目标是赋予用户对所有使用环节完全的掌控，从而将数字内容最安全、快速地分发给全球任意角落的消费者。在系统底层，我们致力于确保整个平台有一个最清晰合理，稳定健壮，易于维护的架构。这使得我们可以有效降地低成本并避免事故的发生。
+CDN Pro 是我们用最新的技术，基于我们20多年的行业经验从头开始构建的一个全新平台。它的一个重要设计目标是赋予用户对所有使用环节完全的掌控，从而将数字内容最安全、快速地分发给全球任意角落的用户。在系统底层，我们致力于确保整个平台有一个最清晰合理，稳定健壮，易于维护的架构。这使得我们可以有效降低成本并避免事故的发生。
 
-我们的平台提供了一个友好并十分强大的客户界面，使得每一个用户可以100%自助实现哪怕是最复杂的分发配置。它的应用编程接口（API）让用户可以将CDN服务无缝地整合到应用的整个开发生命周期里。我们还把”100%自助“的理念延伸到了商务层面。CDN Pro 独特的计费模型使得用户可以自由地在成本和性能之间选择最佳的平衡点。我们相信这是一个将要改变整个行业的革命性产品。
+我们的平台提供了一个友好并十分强大的用户界面，使得每一个用户可以100%自助实现哪怕是最复杂的分发配置。它的应用编程接口（API）让用户可以将CDN服务无缝地整合到应用的整个开发生命周期里。我们还把”100%自助“的理念延伸到了商务层面。CDN Pro 独特的计费模型使得用户可以自由地在成本和性能之间选择最佳的平衡点。我们相信这是一个将要改变整个行业的革命性产品。
 
 ## CDN Pro 的主要特点
 
-CDN Pro's key features make it easy for anyone with a minimum background in CDN to get started, while offering powerful features for advanced users as well.
+CDN Pro 以下产品特性使得即使不熟悉 CDN 的用户也能轻松上手，同时也为高级用户提供了强大的功能。
 
-- A feature-rich API, combined with Edge Logic, enables you to do complex data processing at the edge without touching your application codebase.
-- You can configure CDN Pro, test its behavior in a dedicated staging environment, and then deploy to production in minutes, without long wait times to create and change configurations by email or phone calls. CDN Pro also allows you to self-configure edge servers and customize GSLB service maps.
-- Flexible cost/performance management empowers you to self-customize service coverage to manage expenses according to the performance you need.
-- State-of-the-art load balancing dynamically monitors the Internet to direct traffic based on real-time performance metrics and system-load information.
-- Sophisticated access-control algorithms with Edge Logic process requests to protected content at the edge. Support for NGINX configuration scripts and JavaScript allow you to process requests and responses on the edge using familiar tools.
-- With points of presence deployed on every continent, CDN Pro routes user requests to edge servers based on factors such as proximity and resource/content availability, reducing workloads on origin servers by more than 90%. Cached content on the edge remains available even if the origin server stops responding to requests.
-- CDN Pro allows your content to reach customers in mainland China. {{title}} can also help to secure all necessary permissions and licenses.
-- The CDN Pro infrastructure provides a natural shield from a wide array of attacks against content providers and their users. Web Application Firewall (WAF) and DDoS mitigation afford even greater protection against serious threats.
-- As part of CDN Pro, you receive access to raw data and tools to obtain invaluable insight into your audience’s activity, location, devices, carriers, and more.
+- 功能丰富的 API 与边缘逻辑相结合，使您无需改动应用程序代码，即可在边缘完成复杂的数据处理。
+- 您可以自助配置 CDN Pro，在专门的演练环境中测试其行为，然后在几分钟内快速部署到生产环境，无需通过我们的技术支持进行配置的创建和修改。CDN Pro 允许您自行配置边缘服务器的行为，并自定义 GSLB 服务节点。
+- 灵活的成本/性能管理使您可以自行定制服务覆盖范围，根据所需的性能来控制开支。
+- 先进的负载均衡技术持续监测互联网，并根据实时性能指标和系统负载信息来调度流量。
+- 通过边缘逻辑实现的精密访问控制算法，可在边缘处理对受保护内容的请求。支持 NGINX 配置脚本，使您可以用熟悉的工具在边缘处理请求和响应。
+- CDN Pro 的接入点遍布各大洲，会根据距离、资源/内容可用性等因素将用户请求路由到边缘服务器，使源站的负载降低90%以上。即使源站停止响应请求，边缘缓存的内容仍然可用。
+- CDN Pro 可使您的内容触达中国大陆的客户。{{title}}还可以帮助您获取所有必要的许可和资质。
+- CDN Pro 的基础设施为内容提供商及其用户抵御各类攻击提供了天然的屏障。Web 应用防火墙（WAF）和 DDoS 防护能为应对严重威胁提供更强的保护。
+- 作为 CDN Pro 的一部分，您可以获得原始数据和各种工具，从而深入了解受众的活动、地理位置、设备、运营商等信息。
 
-## CDN Pro Graphical User Interface (GUI)
+## CDN Pro 控制台
 
-The CDN Pro content delivery platform makes it easy for anyone with a minimum CDN background to get started, yet is sufficiently powerful for advanced users as well.
+CDN Pro 内容分发平台使即使不熟悉 CDN 的用户也能轻松上手，同时功能强大，足以满足高级用户的需求。
 
-The platform's customizable point-and-click user interface provides granular controls for:
+简单易用的用户界面为以下方面提供了精细的控制：
 
-- Self-configuring edge servers and service coverage to meet performance needs while reducing data transport costs and latencies.
-- Choosing the best way to fetch content from the origin and deciding where to store it on CDN Pro servers.
-- Customizing global traffic management rules and selecting advanced settings for any edge hostname you create.
-- Testing behaviors in a dedicated staging environment and then deploying to production — in minutes! 
+- 自行配置边缘服务器和服务覆盖范围，在满足性能需求的同时降低数据传输成本和延迟。
+- 选择从源站获取内容的最佳方式，并决定将内容存储在 CDN Pro 服务器的什么位置。
+- 自定义全局流量管理规则，并为您创建的任意调度域名选择高级设置。
+- 在专门的演练环境中测试行为，然后快速部署到生产环境！
 
-## CDN Pro Application Programming Interface (API)
+## CDN Pro 应用程序编程接口（API）
 
-The CDN Pro content delivery platform provides a rich [API](</apidocs>) that supports the same functions as the CDN Pro GUI, along with advanced configuration capabilities. Using the API, developers can have their applications interact with CDN Pro by sending and receiving JavaScript Object Notation (JSON) data.
+CDN Pro 内容分发平台提供功能丰富的 [API](</apidocs>)，它支持与 CDN Pro 图形界面相同的功能，并具备高级配置能力。开发人员可以通过 API 以JSON格式发送和接收数据，使其应用程序与 CDN Pro 交互。
 
-## Where to Go from Here
+## 下一步
 
-点击观看新手[快速启动CDN Pro视频](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>)，并执行[CDN Pro新手指南](</docs/getting-started.md>)文档描述的步骤。
-
+点击观看[快速开始使用CDN Pro](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>)，完成[快速开始](</docs/getting-started.md>)文档所描述的步骤。

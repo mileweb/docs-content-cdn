@@ -3,3 +3,6 @@
 .mcp.json
 CLAUDE.md
 .claude
+.playwright-mcp
+portal-captures
+translation-notes

@@ -1,10 +1,10 @@
-# Comparing Property Versions
+# 对比加速项目版本
 
-CDN Pro allows you to compare two versions of a property side by side.
+在CDN Pro控制台，您可以方便地追踪加速项目的历史变更。您可以选择加速项目的任意两个版本进行配置比较。
 
-1. In the left pane, click **Edge Configurations**, and then select **Properties**.
-2. In the **Actions** column on the Properties page, click the vertical ellipsis of a property you want to compare, and then select **Compare Versions**. The two most recent property versions appear side by side in the Compare Versions form.<br><br><U>OR </u></br>
-   To see details about a property before comparing it with another version, click its ID. Review the property details, and then click the horizontal ellipsis next to the **Edit** or **Clone** button and select **Compare**. The same version of the property appears side by side in the Compare Versions form.<br>
-3. To change the versions shown, select another version using the **Please select two versions of the property to compare** drop-down lists. The selected versions appear side by side with differences highlighted. For example:
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**加速项目**。
+2. 在“加速项目”页面的**操作**列中，点击您要对比的加速项目的垂直省略号，然后选择**对比版本**。最近的两个加速项目版本会并排显示在“对比版本”表单中。<br><U>或者 </u></br>
+   点击该加速项目的 ID。查看加速项目详细信息，然后点击**编辑**或**克隆**按钮旁边的水平省略号，并选择**比较**。该加速项目的相同版本会并排显示在“对比版本”表单中。<br>
+3. 要更改显示的版本，请使用**请选择两个不同的版本进行比较**下拉列表选择另一个版本。所选版本会并排显示，并高亮显示差异。例如：
 <p align=center><img src="/docs/resources/images/edge-configurations/property-versions-compare.png" alt="compare versions" width="900"></p>
-4. When you finish your comparison, click the <strong>Back</strong> button at the top right of the form.
+4. 完成对比后，点击表单右上角的**返回**按钮。

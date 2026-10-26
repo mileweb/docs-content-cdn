@@ -12,8 +12,8 @@
           "path": "docs/intro"
         },
         {
-          "title": "Portal参考文档",
-          "caption": "CDN Pro Portal参考文档",
+          "title": "控制台参考文档",
+          "caption": "CDN Pro 控制台参考文档",
           "icon": "book",
           "path": "docs/portal/accessing-portal/logging-in"
         },
@@ -38,17 +38,17 @@
       ]
     },
     "routes": [
-      { "title": "概览", "path": "/docs/intro.md" },
-      { "title": "如何开始", "path": "/docs/getting-started.md" },
+      { "title": "简介", "path": "/docs/intro.md" },
+      { "title": "快速开始", "path": "/docs/getting-started.md" },
       {
-        "title": "Portal",
+        "title": "控制台",
         "heading": true,
         "routes": [
           {
-            "title": "开始使用Portal",
+            "title": "访问控制台",
             "routes": [
               {
-                "title": "如何登录",
+                "title": "登录",
                 "path": "/docs/portal/accessing-portal/logging-in.md"
               },
               {
@@ -56,7 +56,7 @@
                 "path": "/docs/portal/accessing-portal/forgot-password.md"
               },
               {
-                "title": "页面切换",
+                "title": "界面导航",
                 "path": "/docs/portal/accessing-portal/navigating-ui.md"
               }
             ]
@@ -69,35 +69,35 @@
                 "path": "/docs/portal/edge-configurations/managing-properties.md"
               },
               {
-                "title": "创建加速项",
+                "title": "创建加速项目",
                 "path": "/docs/portal/edge-configurations/creating-property.md"
               },
               {
-                "title": "编辑加速项",
+                "title": "修改加速项目",
                 "path": "/docs/portal/edge-configurations/editing-properties.md"
               },
               {
-                "title": "验证加速项",
+                "title": "验证加速项目",
                 "path": "/docs/portal/edge-configurations/validating-property.md"
               },
               {
-                "title": "部署或卸载加速项",
+                "title": "部署或卸载加速项目",
                 "path": "/docs/portal/edge-configurations/deploying-property.md"
               },
               {
-                "title": "测试加速项",
+                "title": "测试加速项目",
                 "path": "/docs/portal/edge-configurations/testing-property.md"
               },
 			  {
-                "title": "管理测试用例",
+                "title": "测试用例集",
                 "path": "/docs/portal/edge-configurations/working-with-test-suites.md"
               }, 			  
               {
-                "title": "删除加速项",
+                "title": "删除加速项目",
                 "path": "/docs/portal/edge-configurations/deleting-property.md"
               },
               {
-                "title": "比较加速项版本",
+                "title": "对比加速项目版本",
                 "path": "/docs/portal/edge-configurations/comparing-properties.md"
               },
               {
@@ -128,28 +128,28 @@
             ]
           },
           {
-            "title": "流量管理",
+            "title": "调度管理",
             "routes": [
               {
                 "title": "概览",
                 "path": "/docs/portal/traffic-management/overview.md"
               },
               {
-                "title": "创建边缘域名",
+                "title": "创建调度域名",
                 "path": "/docs/portal/traffic-management/creating-edge-hostname.md"
               },
               {
-                "title": "修改边缘域名",
+                "title": "修改调度域名",
                 "path": "/docs/portal/traffic-management/editing-edge-hostname.md"
               },
               {
-                "title": "删除边缘域名",
+                "title": "删除调度域名",
                 "path": "/docs/portal/traffic-management/deleting-edge-hostname.md"
               }
             ]
           },
           {
-            "title": "证书管理",
+            "title": "证书",
             "routes": [
               {
                 "title": "概览",
@@ -193,7 +193,7 @@
                 "path": "/docs/portal/reports/generating-reports.md"
               },
               {
-                "title": "内容管理",
+                "title": "日志管理",
                 "path": "/docs/portal/reports/managing-logs.md"
               }
             ]
@@ -211,7 +211,7 @@
               }
             ]
           },
-          { "title": "异步任务",
+          { "title": "查看任务",
             "routes": [
               {
                 "title": "配置验证",
