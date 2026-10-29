@@ -202,11 +202,11 @@
             "title": "内容管理",
             "routes": [
               {
-                "title": "管理刷新请求",
+                "title": "缓存刷新",
                 "path": "/docs/portal/content-management/managing-purge-requests.md"
               },
               {
-                "title": "管理预取请求",
+                "title": "内容预取",
                 "path": "/docs/portal/content-management/managing-prefetch-requests.md"
               }
             ]

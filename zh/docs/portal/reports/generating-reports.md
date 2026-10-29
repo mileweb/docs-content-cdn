@@ -1,90 +1,77 @@
-# Generating Reports
+# 报表查看
 
-CDN Pro provides reporting capabilities that allow you to analyze the traffic to your properties, identify trends over time, and pinpoint times when visitors are most likely to land on your site.
+CDN Pro 提供报表查询功能，使您能够分析加速域名的流量、识别流量变化趋势。
 
-Reports are generated from the Reports page. To display this page, click **Reports** > **Charts** in the left pane.
+## 支持的报表类型
 
-The following figure shows the key elements on the page, and the table following the figure describes them.
+支持以下报表类型：
 
-<p align=center><img src="/docs/resources/images/reports/reports-w-numbers.png" alt="report page" width="650"></p>
-
-| **Fields**   | **Description**                                                                                           |
-| :----------: | --------------------------------------------------------------------------------------------------------- |
-| 1            | Specify the report type, date range, and other parameters appropriate for the report you want to generate.               |
-| 2            | The **Generate Report** button allows you to generate the report defined by the report parameters.        |
-
-## Supported Report Types
-
-The following report types are supported:
-
-| **Report**            | **Description**                                                   |
+| **报表**            | **说明**                                                   |
 | --------------------- | ----------------------------------------------------------------- |
-| Traffic Volume        | Reports edge versus origin traffic.                                 |
-| Traffic Bandwidth     | Reports edge versus origin traffic bandwidth. Lines represent edge traffic from CDN Pro servers, traffic from your origin servers, and cache hit rate. The vertical (Y) axis shows the bandwidth and hit ratio, while the horizontal (X) axis shows time. The cache hit rate is computed as (edge traffic - origin traffic) / edge traffic.     |
-| Requests              | Reports requests made to the files of your property. Lines show the requests to CDN Pro edge servers, requests to your origin servers, and cache hit rate. The cache hit rate is computed as (edge requests - origin requests)/edge requests.              |
-| Status Code Details   | Reports the percentage of HTTP status codes returned. For example, code 200 represents a successful request. |
-| Origin Status Code Details   | Reports the percentage of HTTP status codes returned in requests to your origin servers. For example, code 200 represents a successful request. |
-| Fast Route Traffic Volume   | Reports the traffic to your origin server that use {{title}}' <a href="/zh/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
-| Fast Route Requests   | Reports the number of requests to your origin server that uses {{title}}' <a href="/zh/cdn/docs/edge-logic/supported-directives#origin_fast_route">fast route feature</a> to make connections faster and more reliable. |
-| CPU Time| Reports the CPU time consumed in each time interval to serve your properties. You can toggle the unit between **seconds** and **number of cores**. For example, if 3000 seconds of CPU time are reported in a 5-minute interval, it means your properties are maxing out an average of 10 (=3000s/5m) physical CPU cores during that period.                               |
-| Edge Hostname Request| Shows the number of requests made to your [edge hostnames](</docs/portal/traffic-management/creating-edge-hostname.md>) over a period of time.                               |
-| Traffic Volume Summary| Summarizes the edge traffic volume. Mousing over slices in the pie chart shows detailed information about traffic volume.                              |
-| Request Summary| Summarizes all requests by group, including edge requests and fast route requests. Mousing over slices in the pie charts shows detailed information about the requests.                              |
-| CPU Time Summary| Summarizes the CPU time by group, including total edge CPU time and total intermediate CPU time. Mousing over slices in the pie charts shows detailed information about CPU times.                              |
+| 流量        | 查看边缘与回源流量报表。                                 |
+| 带宽     | 查看边缘与回源带宽报表。分别有边缘带宽、回源带宽以及缓存命中率曲线。Y轴显示带宽和命中率，X轴显示时间。缓存命中率的计算方式为（边缘流量 - 源站流量）/ 边缘流量。     |
+| 请求数              | 查看请求数报表。分别有边缘请求数、回源请求数以及缓存命中率曲线。缓存命中率的计算方式为（边缘请求数 - 回源请求数）/ 边缘请求数。              |
+| 状态码详情   | 查看 HTTP 响应状态码的百分比。 |
+| 回源状态码详情   | 查看回源请求的 HTTP 状态码的百分比。 |
+| 回源快速通道流量   | 查看使用 <a href="/zh/cdn/docs/edge-logic/supported-directives#origin_fast_route">快速通道功能</a>加速的回源流量。 |
+| 回源快速通道请求数   | 查看使用 <a href="/zh/cdn/docs/edge-logic/supported-directives#origin_fast_route">快速通道功能</a>加速的回源请求数。 |
+| CPU时间| 查看 CDN 服务器处理请求所消耗的 CPU 时间。您可以在**秒**和**核心数**之间切换单位。例如，如果在 5 分钟间隔内统计到了 3000 秒的 CPU 时间，则表示您的加速项目在该时间段内平均占用了 10（=3000 秒/5 分钟）个物理 CPU 核心。                               |
+| 调度域名DNS请求数| 查看指定时间内客户端向您的[调度域名](</docs/portal/traffic-management/creating-edge-hostname.md>)发出的DNS请求数。                               |
+| 边缘流量汇总| 查询边缘流量统计数据。将鼠标悬停在饼图的扇形上会显示流量分布。                              |
+| 请求数汇总| 查询请求数统计数据。包括边缘请求和快速通道请求。将鼠标悬停在饼图的扇形上会显示请求数分布。                              |
+| CPU时间汇总| 查询 CPU 时间统计数据，包括边缘缓存 CPU 时间和中间缓存 CPU 时间。将鼠标悬停在饼图的扇形上会显示 CPU 时间的统计信息。                              |
 
-**Note:** The selections you choose for the Traffic Volume Summary, Request Summary, or CPU Time Summary report persist as you switch among these three reports using the **Report Type** dropdown.
+## 生成报表
 
-## Generating Reports
-
-1. In the left pane, click **Reports**, and then select **Charts**. 
-2. Complete the fields in the Reports page.
+1. 在左侧导航栏中，点击**报表**，然后选择**数据图**。 
+2. 填写报表页面中的字段。
 
 <p align=center><img src="/docs/resources/images/reports/reports-wo-numbers.png" alt="report page" width="650"></p>
 
-| **Fields**      | **Description**                                       |
+| **字段**      | **说明**                                       |
 | --------------- | ----------------------------------------------------- |
-| Report Type     | Select the type of report you want to generate.       | 
-| Report Range        | If you are a reseller with child accounts, select the account that this report will cover. <li><strong>This Account Only</strong>. *(default)*</li><li><strong>Children Accounts Only</strong>.</li><li><strong>This Account + Children</strong>.|
-| Date Range      | Select the start and end dates and the time for the report. |
-| Report Interval | For all reports except Traffic Volume Summary, select the granularity of the returned data. <li><strong>5 minutes</strong>. *(default)*</li><li><strong>1 Hour</strong>.</li><li><strong>1 Day</strong>.</li><li><strong>1 Month.</li></li>|
-| Hostnames       | For all reports except Edge Hostname Request, select one or more hostnames defined in your properties. <br><br>**Tip:** If you select two or more hostnames, you can save them as a group by clicking **+Save selected hostnames as a group** at the bottom of the dropdown list. The next time you want to use the same hostnames, just select the group instead of selecting the hostnames individually. A down arrow next to **Groups** at the top of the dropdown list allows you to export the groups to a CSV file.          |
-| Edge Hostnames       | For Edge Hostname Request, select one or more edge hostnames.         |
-| Scheme        | For all reports except Edge Hostname Request, select the protocol-based data traffic that will be reported. <li><strong>All</strong> = report  HTTP and HTTPS traffic. *(default)*<li><strong>HTTP</strong> = report HTTP traffic only.<br><li><strong>HTTPS</strong> = report HTTPS traffic only.         | 
-| Server Groups        | By default, Traffic Volume Summary, Request Summary, and CPU Time Summary report on all server groups. To choose specific server groups, select them from the available choices.|
-| Group By       | If **Report Type** is set to **Traffic Volume Summary**, **Request Summary**, or **CPU Time Summary**, use this field to group the results according to one or two of the following choices. <li><strong>None</strong>.</li><li><strong>Hostnames</strong>.</li><li><strong>Server Groups</strong>.</li><li><strong>Customer Ids</strong>.</li> |
+| 报表类型     | 选择报表类型。       | 
+| 报表范围        | 如果您是代理商，请选择此报表覆盖的账号范围。 |
+| 日期      | 选择报表的开始和结束日期及时间。 |
+| 粒度 | 对于非统计类报表，选择数据查询的粒度。 <li><strong>5 分钟</strong>。（*默认*）</li><li><strong>1 小时</strong>。</li><li><strong>1 天</strong>。</li><li><strong>1 个月</strong>。</li>|
+| 加速域名       | 对于除调度域名DNS请求数外的所有报表，选择在您的加速项目中定义的一个或多个加速域名。 <br><br>**提示：**如果您选择了多个加速域名，可以通过点击下拉列表底部的**+将选定的域名保存为一个域名组**将它们保存为一个组。下次要查询同样的加速域名的报表时，只需选择该域名组，而无需再逐个选择加速域名。您可以点击下拉列表顶部**域名组**旁边的向下箭头将域名组导出为 CSV 文件。         |
+| 调度域名       | 对于调度域名DNS请求数报表，选择一个或多个调度域名。         |
+| 协议        | 对于除调度域名DNS请求数外的所有报表，选择查看哪个HTTP协议的报表数据。 <li><strong>全部</strong> = 查看 HTTP 和 HTTPS 请求的数据。（*默认*）<li><strong>仅HTTP</strong> = 仅查看 HTTP 请求的数据。<br><li><strong>仅HTTPS</strong> = 仅查看 HTTPS 请求的数据。         | 
+| 节点组        | 除调度域名DNS请求数报表外的所有报表都支持按节点组筛选。默认情况下，包含所有节点组的数据。要选择特定节点组，请从可用选项中选择。|
+| 按指定字段汇总       | 如果所选择的**报表类型**为**边缘流量汇总**、**请求数汇总**或 **CPU时间汇总**，可使用此字段根据以下一个或两个选项对结果进行分组。 <li><strong>无</strong>。</li><li><strong>加速域名</strong>。</li><li><strong>域名</strong>。</li><li><strong>节点组</strong>。</li><li><strong>客户ID</strong>。</li> |
 
-3. Click the **Generate Report** button to generate the report.
-4. After the report is generated, you can:
+3. 点击**查询报表**按钮生成报表。
+4. 报表生成后，您可以：
 
-<ul><li>Mouse over data points in the report to view detailed information.<br>
-<li>Drag over the chart to magnify areas, and then use the <strong>Reset zoom</strong> button to return to the default zoom level.<br>
-<li>Use the three vertical buttons at the top right of the report to download raw data in comma-separated-value (CSV) format, create annotations (described below), or hide annotations.
-<li>Get traffic within a time range of a traffic volume report by using the "Traffic Within Time Range" fields below the chart.</ul>
+<ul><li>将鼠标悬停在报表中的数据点上以查看详细信息。<br>
+<li>在图表上拖动以放大区域，然后使用<strong>Reset zoom</strong>按钮返回默认缩放级别。<br>
+<li>使用报表右上角的三个垂直按钮，以CSV格式下载原始数据、创建注释（见下文）或隐藏注释。
+<li>使用图表下方的“按指定时段查询流量”分时段查询流量。</ul>
 
 <p><img src="/docs/resources/images/reports/download-options-icon.png" alt="dload options" width="225"></p>
 
-## Creating Annotations
+## 创建注释
 
-After you generate a report, you can create text annotations to highlight events related to traffic going to your hostnames.
+您可以创建注释来标记与加速域名的流量变化相关的事件。
 
-1. Click the three vertical buttons at the top right of the report and select **Create Annotation**.
-2. Complete the fields in the Create an annotation dialog box.
+1. 点击报表右上角的三个垂直按钮，然后选择**创建注释**。
+2. 填写“创建注释”对话框中的字段。
 
    <p align=center><img src="/docs/resources/images/reports/create_annotation.png" alt="report page" width="650"></p>
 
-| **Fields**      | **Description**                                       |
+| **字段**      | **说明**                                       |
 | --------------- | ----------------------------------------------------- |
-| Annotation Type | Select the type of annotation you want to add.<ul><li> <strong>Client</strong> = an event affecting clients, such as the release of a popular game.</ul></li><ul><li><strong>Configuration</strong> = an event related to a configuration change.</ul></li> **Note:** Annotations created by {{title}} to indicate operations events may also appear in your reports.  |
-| Time            | Select an RFC 3339 date indicating when the annotation applies. |
-| Comments        | Enter a description about the event. The comments will appear in the report. 
-| Hostnames       | Select one or more hostnames. You can use wildcard domains such as <strong>*.abc.com</strong>, <strong>\*.com</strong>, or <strong>\*</strong>. If left blank, the annotation will apply to all hostnames. || Hostnames       | Select one or more hostnames. You can use wildcard domains such as <strong>*.abc.com</strong>, <strong>\*.com</strong>, or <strong>\*</strong>. If left blank, the annotation will apply to all hostnames. |
-| Server Regions  | Select one or more CDN Pro server regions affected by the event.         |
-| Client Regions  | Select one or more end-user regions affected by the event.         |
+| 注释类型 | 选择要添加的注释类型。<ul><li> <strong>客户端</strong> = 影响客户端的事件，例如热门游戏的发布。</ul></li><ul><li><strong>配置</strong> = 与配置更改相关的事件。</ul></li> **注意：**由 {{title}} 创建用于标记平台运营事件的注释也可能会出现在您的报表中。  |
+| 时间            | 选择表示注释生效时间的 RFC 3339 日期。 |
+| 描述        | 输入关于事件的描述。描述会显示在报表中。 
+| 加速域名       | 选择一个或多个加速域名。您可以使用通配符域名，例如 <strong>*.abc.com</strong>、<strong>\*.com</strong> 或 <strong>\*</strong>。如果留空，注释将应用于所有加速域名。 |
+| 服务器区域  | 选择受事件影响的一个或多个 CDN Pro 节点区域。         |
+| 客户端区域  | 选择受事件影响的一个或多个客户端区域。         |
 
-3. Click **Create**.
+3. 点击**创建**。
    
-After you create annotations, you can hide them or redisplay them by clicking the three vertical buttons at the top right of the report and selecting **Hide Annotations** or **Show Annotations**.
+创建注释后，您可以通过点击报表右上角的三个垂直按钮并选择**隐藏注释**或**显示注释**来隐藏或重新显示它们。
 
- The following figure shows an example of two annotations.
+ 下图显示了两个注释的示例。
 
  <p align=center><img src="/docs/resources/images/reports/two_annotations.png" alt="report page" width="650"></p>
