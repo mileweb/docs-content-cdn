@@ -1,5 +1,5 @@
-# Deleting an Edge Hostname
+# 删除调度域名
 
-1. In the left pane, click **Traffic Management**.
-2. In the **Actions** column on the Edge Hostnames page, click the vertical ellipsis of the edge hostname you want to delete, and then select **Delete**.
-3. When prompted to confirm the deletion, click **OK**.
+1. 在左侧导航栏中，点击**调度管理**。
+2. 在“调度域名”页面的**操作**列中，点击您要删除的调度域名的垂直省略号，然后选择**删除**。
+3. 当系统提示确认删除时，点击**确定**。

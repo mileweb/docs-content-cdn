@@ -1,51 +1,49 @@
-# Managing Standby Actions
+# 管理待命任务
 
-When you deploy and undeploy certificates and properties, you can perform  the action immediately or move it to a standby queue, where it will join other standby actions waiting to be run.
+部署和卸载证书及加速项目时，您可以立即执行操作，也可以将其添加到等待队列，与其它的部署对象一起批量部署。
 
-Using the Standby Task form, you can view all standby actions in the queue and run them all at one time.
+在待命任务页面，您可以查看队列中的所有待命任务，并批量执行。
 
-## Displaying the Standby Task Form
-You can display the Standby Task form from the Certificates, Edge Configurations, and Deployment pages.
+## 显示待命任务列表
+您可以通过证书、加速项目或部署任务入口，进入待命任务页面。
 
-### Displaying the Standby Task Form from the Certificate or Edge Configurations Page
+### 证书或加速项目入口
 
-1. In the left pane, click **Certificates** followed by **Server Certificates** or **CA Certificates**, or click **Edge Configurations > Properties**.
-2. Click a certificate name or property ID.
-3. Click the three dots next to either the **Deploy** button (for certificates) or the **Edit** button (for properties) and select **History**.
-4. Click a standby task to display the Standby Task form.
+1. 在左侧导航栏中，点击**证书**，然后选择**服务端证书**或**CA证书**；或者点击**边缘配置**，然后选择**加速项目**。
+2. 点击证书名称或加速项目 ID。
+3. 点击**部署**按钮（对于证书）或**编辑**按钮（对于加速项目）旁边的三个点，然后选择**部署历史**。
+4. 点击一个待命任务以显示待命任务队列。
 
-### Displaying the Standby Task Form from the Deployment Page
+### 部署任务入口
 
-1. In the left pane, click **Tasks > Deployment**.
-2. Click a standby task to display the Standby Task form.
+1. 在左侧导航栏中，点击**查看任务**，然后选择**配置部署**。
+2. 点击一个待命任务以打开待命任务队列页面。
 
-## Understanding the Standby Task Form
+## 了解待命任务队列
 
-The Standby Task form is organized into two subqueues.<ul><li>The top subqueue shows actions for the CDN Pro staging environment.</ul></li><ul><li>The bottom subqueue shows actions for the production environment.</ul></li>Each subqueue has its own search field for filtering standby actions in that subqueue.
+待命任务队列按目标环境分为两组。<ul><li>页面上方是演练环境的待命任务。</ul></li><ul><li>下方是生产环境的待命任务。</ul></li>每个列表都有自己的搜索框，用于筛选待命任务。
 
 <p align=center><img src="/docs/resources/images/standby_tasks.png" alt="standby task form" width="700"></p>
 
-## Adding Standby Tasks
-To add standby tasks to a subqueue:
-1. Click the **+ Add** button at the top right of a subqueue. The Add Tasks to Staging or Add Tasks to Production dialog box appears.
+## 添加待命任务
+要向某个环境添加待命任务：
+1. 点击右上角的**添加**按钮。此时会出现“将任务添加到演练”或“将任务添加到生产”的对话框。
 
 <p align=center><img src="/docs/resources/images/adding_tasks_to_staging.png" alt="adding standby tasks" width="600"></p>
 
-2. Under **Action**, select an action from the drop-down list.
-3. Click **Add new +** and then enter the first few characters in the name of the certificate or property you want to add. When the entire name appears, click it.
-4. If deploying a certificate or property, select a version number from the **Version** drop-down list. (This list does not appear when undeploying a certificate or property.)
-5. To add more tasks to this action, repeat steps 3 and 4.
-6. When you finish adding tasks, click **Add**.
+2. 在**操作**下拉列表中，选择一种操作（例如部署或卸载）。
+3. 点击**添加 +**，然后输入您要添加的证书或加速项目名称进行关键字搜索。当匹配到证书或加速项目时，点击选中。
+4. 如果部署证书或加速项目，请从**版本**下拉列表中选择版本号。（卸载证书或加速项目时不显示此列表。）
+5. 要添加更多证书或加速项目，重复步骤 3 和 4。
+6. 选完证书或加速项目后，点击对话框右下角的**添加**按钮。
 
-## Deleting Standby Actions
-To remove an individual standby action from a subqueue, click the trash icon on the far right side of the action. To remove all standby actions in a subqueue, click the trash icon next to **Version** in the header row.
+## 删除待命操作
+要删除单个待命任务，点击该待命任务最右侧的删除图标。要删除所有待命任务，请点击表头行中**版本**旁边的删除图标。
 
-**Note:** A precautionary message does not appear before you delete standby actions. Therefore, make sure you do not need a standby action before you delete it.
+**注意：**删除待命任务之前不会出现确认弹框。因此，请确保确实要删除某个待命任务。
 
-## Deploying Standby Actions
-To deploy all of the actions under **Target: Staging** or **Target: Production**, click the **Deploy** button for that subqueue. 
+## 部署待命任务
+要部署**目标环境：演练**或**目标环境：生产**下的所有任务，请点击右上角对应的**部署**按钮。 
 
-**Note:** Deploying the actions in one subqueue does not deploy the actions in the other subqueue.
-
-## Exiting the Standby Task Form
-At the top-right of the form, click the **< Back** button to exit the Standby Task form.
+## 退出待命任务页面
+点击页面右上角的**返回**按钮退出待命任务页面。

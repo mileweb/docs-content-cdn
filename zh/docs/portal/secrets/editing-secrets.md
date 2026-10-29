@@ -1,16 +1,17 @@
+# 修改保密信息
 
-# Editing Secrets
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**保密信息**。
 
-1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
-
-2. On the Secrets page, click the ID of the secret you want to edit, and then click the **Update Secret** button. 
-   <br><U>OR </u></br>
-  In the **Actions** column, click the vertical ellipsis for the secret you want to edit, and then select **Edit**.
+2. 在保密信息页面，点击您要修改的保密信息的 ID 打开详情页，然后在详情页中点击**更新保密信息**按钮。
+   <br><U>或者 </u></br>
+  在**操作**列中，点击您要修改的保密信息的编辑图标，打开“更新保密信息”页面。
 
 <p align="center"><img src="/docs/resources/images/secrets/edit-secrets.jpg" alt="Edit secrets" width="700"></p>
 
-3. Make your changes in the Update Secret form. Required fields are denoted by an asterisk (\*) and described in [Creating a Secret](</docs/portal/secrets/creating-secrets.md>).
+3. 在“更新保密信息”表单中进行更改。必填字段以星号（\*）标示。字段说明参考[创建保密信息](</docs/portal/secrets/creating-secrets.md>)。
 
-**Note:** Deployed properties using the secret will continue to use its original value at the time of deployment. If you change the secret's name, property versions referring to the old name will not pass future [validations](</docs/portal/tasks/validations.md>) until you edit the properties to remove the references or update them to use a valid secret's name. If you change the secret's value, properties using the secret must be revalidated before they can be redeployed.
+**注意：**</br>
+如果您更改了保密信息的名称，引用旧名称的加速项目版本将无法通过后续[验证](</docs/portal/tasks/validations.md>)和部署。您需要修改这些加速项目以删除引用或将引用更新为有效的保密信息名称。</br></br>
+如果您更改了保密信息的值（即受保护的敏感内容），已使用该保密信息的已部署加速项目需重新部署，敏感内容的变更才会生效。
 
-4. Click the **Update** button.
+4. 点击**更新**按钮。

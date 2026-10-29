@@ -1,5 +1,5 @@
-# Deleting a Secret
+# 删除保密信息
 
-1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
-2. In the **Actions** column on the Secrets page, click the vertical ellipsis of the secret you want to delete, and then select **Delete**.
-3. When prompted to confirm the deletion, click **OK** to delete the secret.
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**保密信息**。
+2. 在保密信息页面，点击您要删除的保密信息的 ID。
+3. 在保密信息的详情页，点击**删除**按钮。

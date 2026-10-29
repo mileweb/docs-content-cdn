@@ -1,32 +1,27 @@
-# Overview of Secrets
+# 保密信息概览
 
-Typically, a secret is a password that you share with {{title}} in order for the CDN configuration to work. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it using the secret's name via the syntax `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API.
+您在配置加速项目时，可能需要提供一些敏感信息，例如用于回源鉴权的密钥。这种敏感内容应避免明文展示，避免对外暴露。
 
-Secrets can be referenced in:
-- **Edge Logic** - Use `$SECRET(secretName)` syntax in your Edge Logic configuration.
-- **Origin Authentication** - Use `$SECRET(secretName)` for AWS S3 secret keys when [configuring origin authentication](</docs/portal/edge-configurations/managing-origins.md>).
+通过创建保密信息对象，将敏感内容存放在保密信息中，并使用 `$SECRET(secretName)` 语法引用，可避免敏感内容在控制台或 API 请求中被暴露。
 
-## Secrets Page 
+保密信息可以在以下位置引用：
+- **边缘逻辑** - 在边缘逻辑配置中使用 `$SECRET(secretName)` 引用敏感内容。
+- **源站身份验证** - 在配置[回源鉴权](</docs/portal/edge-configurations/managing-origins.md>)时，指定某个保密信息作为AWS S3鉴权算法需用到的密钥（Secret key）。
 
-Secrets are managed from the Secrets page. To display this page, click **Edge Configurations** in the left pane, and then select **Secrets**. 
+## 保密信息页面
 
-The following figure shows the key elements on the page, and the table following the figure describes them.
+保密信息在保密信息页面管理。要显示此页面，请在左侧导航栏中点击**边缘配置**，然后选择**保密信息**。
+
+下图显示了页面上的关键元素，图后的表格对它们进行了说明。
 
 <p align="center"><img src="/docs/resources/images/secrets/secrets-w-numbers.png" alt="Secret List" width="900"></p>
 
-| **Fields**   | **Description**                                                                                           |
+| **编号**   | **说明**                                                                                           |
 | :----------: | --------------------------------------------------------------------------------------------------------- |
-| 1            | A search box that you can enter any keyword to filter the secret list.                               |
-| 2            | The list of all secrets that have been created. Click an Id to query a secret.  |
-| 3            | Drop-down lists to take actions on each secret.                      |
-| 4            | The button to [create new secrets](</docs/portal/secrets/creating-secrets.md>).            |
+| 1            | 搜索框，您可以输入关键字来筛选保密信息列表。                               |
+| 2            | 已创建的保密信息的列表。点击 ID 可查询保密信息详情。  |
+| 3            | 编辑某个保密信息。                      |
+| 4            | 用于[创建新保密信息](</docs/portal/secrets/creating-secrets.md>)的按钮。            |
 
-
-
-## Secret Actions
-Each secret has a vertical ellipsis in the **Actions** column. Clicking the ellipsis shows the available actions that can be performed on the selected secret.
-<p align="center"><img src="/docs/resources/images/secrets/secrets-actions.png" alt="Secret Actions" width="900"></p>
-The actions are:
-
-- **Edit**: [Update](</docs/portal/secrets/editing-secrets.md>) the selected secret.
-- **Delete**: [Delete](</docs/portal/secrets/deleting-secrets.md>) the selected secret.
+## 保密信息操作
+每个保密信息在**操作**列中都有一个编辑图标。点击编辑图标会打开“更新保密信息”页面以[更新](</docs/portal/secrets/editing-secrets.md>)所选保密信息。要[删除](</docs/portal/secrets/deleting-secrets.md>)保密信息，请点击保密信息的 ID 打开其详情页，然后点击页面中的**删除**按钮。

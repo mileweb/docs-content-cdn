@@ -1,23 +1,19 @@
-<!--?xml version="1.0" encoding="utf-8"?-->
+# 查看部署任务
 
-# Checking Deployment and Undeployment Results
+当您发起加速项目和证书的部署时，CDN Pro 会将配置下发到全球各地的加速节点。部署任务通常会在 3 分钟内完成。如果您在提交任务后关闭了部署进度对话框，可以到此处的部署任务列表查看部署状态。
 
-When a property and its associated certificates are deployed, CDN Pro sends the configurations to thousands of edge servers around the world, and then checks that the servers loaded the configurations properly. The undeployment procedure goes through a similar process. The time to complete a deployment and undeployment task can take from 2 to 5 minutes. If you close the deployment or undeployment progress dialog box after you start the task, you can return to the task list to check the status.
-
-1. In the left pane, click **Tasks** > **Deployment**.
+1. 在左侧导航栏中，点击**查看任务**，然后选择**配置部署**。
 
 <p align="center"><img src="/docs/resources/images/tasks/tasks-deployment.png" alt="Deployment Tasks" width="700"></p>
  
-2. To filter results by submission date, click the icon at the top of the <b>Submitted</b> column, circled in the figure below, and specify a start date and end date for your search.
+2. 要按提交日期筛选列表，请点击<b>提交时间</b>列顶部的图标（下图中用圆圈标出），并指定起止时间。
 
-**Note:** You can also use the **Search** box at the top of the Deployment form to filter the results. Filtering is not case-sensitive.
+**注意：**您还可以使用顶部的**搜索**框输入关键字来搜索。关键字匹配不区分大小写。
 
 <p align="center"><img src="/docs/resources/images/tasks/deployment_time_range_filter.png" alt="Filter by date" width="700"></p>
 
-3. To filter by deployment target, click the icon at the top of the **Target** column and choose Staging or Production.
+3. 要按部署目标筛选，请点击**目标环境**列顶部的图标，然后选择演练或生产。
 
-4. To filter by deployment task status, click the icon at the top of the **Status** column and choose Waiting, In Progress, Successful, or Failed.
+4. 要按部署任务状态筛选，请点击**状态**列顶部的图标，然后选择等待中、进行中、成功或失败。
 
-5. To display details about a deployment, click an ID or task name.
-
-
+5. 要查看部署任务的详细信息，请点击 ID 或任务名称进入详情页。
