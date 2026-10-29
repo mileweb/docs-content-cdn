@@ -1,33 +1,33 @@
-# Managing Prefetch Requests
+# 内容预取
 
-CDN Pro supports a prefetch function that warms the CDN Pro cache with new content from your origin server in order to accelerate content delivery to users. When users make requests for the prefetched content, CDN Pro already has the requested content and can serve it immediately without a round trip to the origin. 
+CDN Pro 支持内容预取功能，可从源站服务器预取内容来预热 CDN Pro 缓存，从而提升加速效果。当用户请求已预取的内容时，CDN Pro 已经缓存该内容，无需往返源站即可立即提供服务。
 
-Prefetch activities are performed from the following page. To display this page, click **Content Management** > **Prefetch** in the left pane.
+预取操作在以下页面执行。要显示此页面，请在左侧导航栏中点击**内容管理**，然后选择**预取**。
 
-The following figure shows the key elements on the page, and the table following the figure describes them.
-<!-- test -->
+下图显示了页面上的关键元素，图后的表格对它们进行了说明。
+
 ![null](</docs/resources/images/content-management/prefetch1.png>)
 
-| **Fields** | **Description** |
+| **编号** | **说明** |
 | :----------: | --------------- |
-| 1 | To filter prefetches, type characters in this field and then press the Enter key. Only prefetches containing the typed characters will be shown. Filtering is not case-sensitive. To remove the filter, click the **x** icon at the right side of the search field. |
-| 2 | Each prefetch appears on its own row. Clicking an ID shows detailed information about the prefetch.|
-| 3 | The button to create prefetch requests.|
+| 1 | 用于过滤搜索预取任务列表。请在输入框中输入搜索关键字。关键字匹配不区分大小写。 |
+| 2 | 每个预取任务都单独显示在一行中。点击 ID 可查看该预取任务的详细信息。|
+| 3 | 用于创建预取任务的按钮。|
 
-## Creating a Prefetch Request
+## 创建预取任务
 
-To create a prefetch request:
+要创建预取任务：
 
-1. In the left pane, click **Content Management**, and then select **Prefetch**.
-2. At the top right of the page, click the **Create Prefetch** button. 
-3. Complete the fields in the Prefetch form. Required fields are denoted by an asterisk (```*```). The top of the form shows the percentage of the daily prefetch quota that has been used.
+1. 在左侧导航栏中，点击**内容管理**，然后选择**预取**。
+2. 在页面右上角，点击**创建预取任务**按钮。
+3. 填写预取表单中的字段。必填字段以星号（```*```）标示。表单顶部显示可用的每日预取配额。
 
 <p align=center><img src="/docs/resources/images/content-management/prefetch2.png" alt="purge form" width="900"></p>
 
-|**Fields**|**Description**|
+|**字段**|**说明**|
 |----------|---------------|
-| URLs     | Enter the URLs you want to prefetch. The URLs you prefetch must be for hostnames of properties deployed to production. Separate multiple URLs with a carriage return.|
-| Regions  | Select the regions in which the prefetch will be performed. Omitting a location means the prefetch will be performed by all servers in all regions.                       |
-| Start Time | Specify the date and time when the prefetch should be conducted. The time is specified in UTC format (for example, **2021-03-06T00:00:00Z**). <br>**Note:** Start time can be left empty to request an immediate prefetch.</br>|
+| 预取URL     | 输入您要预取的 URL。URL 中包含的域名必须是已部署到生产环境的加速项目的加速域名。用回车符分隔多个 URL。|
+| 预取地区  | 选择执行预取的区域。不指定地区表示由所有地区的服务器执行预取。                       |
+| 开始时间 | 指定应执行预取的日期和时间。时间以 UTC 格式表示（例如 **2021-03-06T00:00:00Z**）。 如未指定，则任务提交后立即执行。|
 
-4. Click **Start Prefetch**.
+4. 点击**开始预取**。
