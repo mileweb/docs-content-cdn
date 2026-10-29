@@ -1,22 +1,22 @@
-# Creating a Secret
+# 创建保密信息
 
-To create a secret, complete the Create a Secret form with required information.
+要创建保密信息，请在“创建保密信息”表单中填写必填信息。
 
-## Getting Started
+## 开始
 
-1. In the left pane, click **Edge Configurations**, and then select **Secrets**.
-2. At the top right of the Secrets page, click the **Create Secret** button. 
+1. 在左侧导航栏中，点击**边缘配置**，然后选择**保密信息**。
+2. 在保密信息页面右上角，点击**创建保密信息**按钮。
 
 <p align=center><img src="/docs/resources/images/secrets/secrets-create-secret.png" alt="create secret" width="900"></p>
 
-3. Complete the fields in the Create a Secret form. Required fields are denoted by an asterisk (\*).
+3. 填写“创建保密信息”表单中的字段。必填字段以星号（\*）标示。
 
 <p align=center><img src="/docs/resources/images/secrets/create-a-secret.png" alt="edit secret" width="800"></p>
 
-| **Fields**                | **Description**                                    |
+| **字段**                | **说明**                                    |
 | --------------------------| ---------------------------------------------------|
-| Secret Name             | Enter a unique name that helps you identify this secret. The name is case sensitive and can be 30 characters long. You can include spaces between non-space characters; however, if you add spaces at the beginning or end of the secret, the spaces will be removed. The secret name must not contain special characters such as ^ " ~ , . # $ %|
-| Secret     | Enter the secret. The secret must be 8 to 3,600 characters long. It can contain printable ASCII characters, tabs (0x09), new lines (0x0a), and returns (0x0d). |
-| Description               | Add a description to associate with this secret. |
+| 保密信息名称             | 输入一个唯一名称来帮助您识别此保密信息。名称区分大小写，最长 30 个字符。您可以使用空格；但是，如果空格在开头或结尾处，这些空格会被删除。保密信息名称不得包含特殊字符，例如 ^ " ~ , . # $ % |
+| 保密信息     | 输入需保护的敏感内容。该值必须为 8 到 3600 个字符长，可以包含可打印的 ASCII 字符、制表符（0x09）、换行符（0x0a）和回车符（0x0d）。 |
+| 描述               | 添加对该保密信息的描述。 |
 
-4. To create the secret, click the **Create Secret** button.
+4. 点击**创建保密信息**按钮提交表单。
