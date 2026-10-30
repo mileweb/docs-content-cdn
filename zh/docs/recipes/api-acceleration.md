@@ -6,7 +6,7 @@ API 调用通常被视为动态 HTTP 请求，因为响应是由服务器根据�
 * 要加速的 API 服务对外使用该域名：`api.company.com`。API 服务器要求请求的 `Host` 请求头携带此值。
 * 您当前在 DNS 提供商处配置将该域名解析到两个 IP 地址：`1.1.1.1` 和 `1.1.1.2`。
 * API 服务器使用标准的 HTTP 方法：GET、POST、PUT、DELETE、PATCH。
-* 客户端使用 `Authorization` 请求头，按照 [HTTP 基本认证](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81)的格式将鉴权信息传递给服务器。这使得 CDN Pro 服务器可以通过内置变量 `$remote_user` 轻松获取 API 用户名。注意，您不必使用实际的基本认证算法（该算法以明文形式传输密码）。您可以选择使用更复杂的算法来生成签名，例如 [CDN Pro API](/zh/cdn/apidocs#section/Authentication) 所使用的算法。
+* 客户端使用 `Authorization` 请求头，按照 [HTTP 基本认证](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81)的格式将鉴权信息传递给服务器。这使得 CDN Pro 服务器可以通过内置变量 `$remote_user` 轻松获取 API 用户名。注意，您不必使用实际的基本认证算法（该算法以明文形式传输密码）。您可以选择使用更复杂的算法来生成签名，例如 [CDN Pro API](/apidocs#section/Authentication) 所使用的算法。
 * 发送到 API 服务器的所有输入参数都在请求的查询字符串中指定。
 
 下面说明了如何使用 CDN Pro 来加速这个 API 服务：

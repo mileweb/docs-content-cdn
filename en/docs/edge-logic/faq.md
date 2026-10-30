@@ -38,7 +38,7 @@ Note: Requests that meet any of the following conditions will not be cached, irr
 * POST requests that include "Transfer-Encoding: chunked" header.
 * Responses with "Content-Type: multipart/x-mixed-replace" header.
 
-Since you are interested in the caching behavior of CDN Pro, you may want to also learn how to [customized the cache key](#how-to-include-query-parameters-andor-request-headers-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
+Since you are interested in the caching behavior of CDN Pro, you may want to also learn how to [customized the cache key](#how-do-i-include-query-parameters-request-headers-and-body-in-the-cache-key) and how [the `Vary` header is treated](#the-support-and-non-support-of-vary).
 
 ### How do I include query parameters, request headers and body in the cache key?
 

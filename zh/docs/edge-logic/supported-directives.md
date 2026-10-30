@@ -85,7 +85,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 该指令可用于在响应正文之后添加一个尾部（trailer）。默认只在状态码为200, 201, 206, 301, 302, 303, 307或308时生效。当携带 “always” 参数时，则对所有状态码生效。参数 value 可以是变量。CDN Pro 在 [开源版本](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer) 的基础上做了如下修改和增强：
 
-1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/zh/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/zh/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/zh/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/zh/cdn/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/zh/cdn/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
+1. 该指令的主要设计用途是可以在边缘逻辑里传递一些数据给7层负载均衡器，从而使实时日志可以用 [$upstream\_trailer\_*](/docs/edge-logic/built-in-variables#upstream_trailer_) 变量来获取这些数据。尽管大部分的数据都可以用 [`add_header`](#add_header) 指令通过响应头来传递，有些数据在生成响应头时还并不存在，比如：[$upstream_bytes_received](/docs/edge-logic/built-in-variables#upstream_bytes_received)，[$upstream_bytes_sent](/docs/edge-logic/built-in-variables#upstream_bytes_sent)，[$upstream_response_time](/docs/edge-logic/built-in-variables#upstream_response_time)，[$request_cpu_time](/docs/edge-logic/built-in-variables#request_cpu_time)。这些数据必须要等到响应正文结束以后才完整。使用本指令是唯一可以将这些数据传递给实时日志的方法。
 
 2. 如果来自源站的响应携带有 `Content-Length` 头，开源版本会将其去掉，并且把 `Transfer-Encoding` 改成 “chunked”。CDN Pro 修改了这个逻辑以确保客户端收到的响应保持正常编码，并仍然携带 `Content-Length` 头。本指令添加的尾部并不会出现在发给客户的响应里。
 
@@ -660,7 +660,7 @@ origin_set_header X-My-Header $header_value policy=repeat|overwrite|preserve;
 Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, Vary
 
 2. 不同层级（server/location/if）的配置会被合并。但是，如果同一个回源请求头出现在上述不同位置，则只有配置最内层的指令才会生效。
-3. CDN Pro 采用了[分层缓存结构](/zh/cdn/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
+3. CDN Pro 采用了[分层缓存结构](/docs/edge-logic/paths-to-origins)。此指令的设置默认仅在回源站时才会生效。如果您需要它也对发往父节点的请求生效，请加上 `flag=any` 这个参数。
 4. 使用参数 ```if(判定条件)``` 来设置生效条件。如果条件为真，该指令才生效。```if``` 参数需要配置在该指令的末尾。条件可以是以下之一：
 
 *   变量名，如果该变量不存在或者其值为‘0’或空，则条件不成立，否则条件成立；
@@ -671,8 +671,8 @@ Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range,
 
 1. 由于 CDN Pro 采用了分层缓存结构，因此不能使用NGINX原生的内置变量 $scheme 和 $remote_addr。如果您需要将客户端使用的协议或 IP 地址传递给源服务器，请使用以下变量：
 
-*   [$request_scheme](/zh/cdn/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
-*   [$client_real_ip](/zh/cdn/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
+*   [$request_scheme](/docs/edge-logic/built-in-variables#request_scheme): 客户端请求协议（http 或者 https）
+*   [$client_real_ip](/docs/edge-logic/built-in-variables#client_real_ip):  客户端IP地址
 
 示例如下:
 ```nginx
@@ -681,17 +681,17 @@ origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Clien
 
 除了 `$request_scheme` 和 `$client_real_ip` 之外，以下变量同样不受分层缓存结构影响，可以放心使用：
 
-*   [$client_country_code](/zh/cdn/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
-*   [$client_province_code](/zh/cdn/docs/edge-logic/built-in-variables#client_province_code):  客户端的中国省份代码
-*   [$client_asn](/zh/cdn/docs/edge-logic/built-in-variables#client_asn):  客户端所在的自治系统（AS）的编号
-*   [$client_http_version](/zh/cdn/docs/edge-logic/built-in-variables#client_http_version):  客户端请求的 HTTP 协议版本，例如 "HTTP/1.1"
+*   [$client_country_code](/docs/edge-logic/built-in-variables#client_country_code):  客户端的 ISO 3166 国家码（比如 CN/US）
+*   [$client_province_code](/docs/edge-logic/built-in-variables#client_province_code):  客户端的中国省份代码
+*   [$client_asn](/docs/edge-logic/built-in-variables#client_asn):  客户端所在的自治系统（AS）的编号
+*   [$client_http_version](/docs/edge-logic/built-in-variables#client_http_version):  客户端请求的 HTTP 协议版本，例如 "HTTP/1.1"
 
 大多数携带客户端请求信息的变量仅在边缘节点上可用。例如，与 SSL 相关的变量，如 `$ssl_cipher`、`$ssl_protocol` 和 `$ssl_fingerprint_ja4`。由于采用了分层缓存结构，请求可能会由边缘节点转发给父节点，再转发给源站。如果您想将客户端请求信息传递给源站，请使用 `flag=any`，使该指令同样对边缘节点与父节点之间的请求生效；同时使用 `policy=preserve`，避免该头部被父节点覆盖。示例如下：
 
 ```nginx
 origin_set_header X-Fingerprint-JA4 $ssl_fingerprint_ja4 policy=preserve flag=any;
 ```
-2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/zh/cdn/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
+2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
 3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。例如，当开启[分片缓存](#slice)时，服务器会根据所设置的分片大小自动生成`Range`头部。所以，不要使用该指令修改传给源站的`Range`请求头。对于不可缓存的请求，这些请求头部则仍然会原样传递给父服务器和源站。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
@@ -839,7 +839,7 @@ location / {
 
 如果该指令的参数值为“off”，则 CDN Pro 将不会缓存任何携带 Vary 头的响应。
 
-相关信息请查阅：[关于 Vary 响应头的处理方式](</zh/cdn/docs/edge-logic/faq#关于-vary-响应头的处理方式>)。
+相关信息请查阅：[关于 Vary 响应头的处理方式](</docs/edge-logic/faq#关于-vary-响应头的处理方式>)。
 
 ### [`proxy_cookie_domain`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cookie_domain)
 
@@ -937,7 +937,7 @@ proxy_ignore_cache_control no-cache no-store;
 **默认设置：** `proxy_next_upstream error timeout;` <br/>
 **可用位置：** server, location
 
-该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。本指令的一个重要功能是为源站的 [`peerFailureTimeout`](/zh/cdn/docs/edge-logic/paths-to-origins#origin-configurations) 配置定义了什么叫“失败的请求”。源自 NGINX 公共版本没有变化。
+该指令用于设置 CDN Pro 在哪些情况下向源站配置里的下一个服务器发起重试请求。本指令的一个重要功能是为源站的 [`peerFailureTimeout`](/docs/edge-logic/paths-to-origins#源站相关配置) 配置定义了什么叫“失败的请求”。源自 NGINX 公共版本没有变化。
 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
@@ -1167,7 +1167,7 @@ else if (A-E-header.contains("deflate")) A-E-header="deflate";
 else if (A-E-header.contains("br")) A-E-header="br";
 else remove A-E-header;
 ```
-不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或删除。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#the-support-and-non-support-of-vary)，CDN Pro 服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，CDN Pro 服务器将会通过把缓存的版本在线压缩或解压缩来响应。
+不难看出，该指令的默认设置（"gzip"）会将请求头 `Accept-Encoding` 的值重写为“gzip”或删除。结合 CDN Pro 的[默认缓存策略](/docs/edge-logic/faq.md#关于-vary-响应头的处理方式)，CDN Pro 服务器将仅缓存这两种编码格式中的一种。如果客户端请求另一种格式，CDN Pro 服务器将会通过把缓存的版本在线压缩或解压缩来响应。
 
 如果您使用了此指令，那么很可能您还希望 CDN Pro 能根据 `Accept-Encoding` 请求头的值来区别缓存响应。您可以通过将该请求头的值添加到cache key中来实现此目的：
 
@@ -1214,7 +1214,7 @@ set $cache_misc $cache_misc."ae=$http_accept_encoding";
 **默认设置：**	`-` <br/>
 **可用位置：** server, location, if
 
-该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) 缓存 key。
+该指令为指定的变量赋值。代码逻辑源自 Nginx 开源版本，无改动。CDN Pro 定义了一个特殊的变量 `$cache_misc`。用户可以通过给这个变量赋值来 [自定义](/docs/edge-logic/faq.md#如何将问号后参数，请求头，或者请求正文加入到缓存key中) 缓存 key。
 
 该指令属于 nginx [rewrite 模块](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html)。它在请求处理的早期阶段与同一模块中的其他指令一道被顺序（imperatively）执行。
 
@@ -1276,7 +1276,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **可用位置：** server, location
 
 该指令用于实现响应正文内容的替换。参数一为期待被替换的原始字符串，参数二为用于替换参数一的新字符串。我们对 NGINX 开源版本做了如下修改：
-1. 为了确保响应在 CDN Pro 的[层级结构](/cdn/docs/edge-logic/paths-to-origins)中不会被重复替换，本指令只会在边缘服务器上生效，不会在父节点上生效；
+1. 为了确保响应在 CDN Pro 的[层级结构](/docs/edge-logic/paths-to-origins)中不会被重复替换，本指令只会在边缘服务器上生效，不会在父节点上生效；
 2. 我们为本指令引入了 `if()` 参数来更精确地设置它生效的条件，就像我们为 [`add_header`](#add_header) 做的那样。由于扫描大的响应正文可能会引入显著的延时和 CPU 消耗，我们建议您尽可能地利用这个参数来限制本指令的作用范围，以降低对性能的影响和成本开销。
 
 请注意，当响应被压缩时，搜索和替换操作可能无法正常工作。这时候您可以使用 [`origin_set_header`](#origin_set_header) 指令来清除发往源站和父节点的 `Accept-Encoding` 请求头，以确保边缘节点收到的响应是没有压缩的:
@@ -1324,7 +1324,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置:** `upstream_origin_only off;` <br/>
 **可用位置:** server, location, if in location
 
-启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/zh/cdn/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
+启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
