@@ -37,7 +37,7 @@ CDN Pro 提供访问日志下载功能。要下载某个加速域名的访问日
 | %cltisp      | 客户端 ISP                              |
 | %cltport     | 客户端端口号                      |
 | %cltregion   | 客户端区域                           |
-| %content_code | 内容代码。可在边缘逻辑中通过[设置 $content_code 变量](</docs/edge-logic/faq.md#如何在报表中对数据进行分类>)来设置该值   |
+| %content_code | 内容代码。可在边缘逻辑中通过[设置 $content_code 变量](</docs/edge-logic/faq.md#如何在报表中对数据进行分类？>)来设置该值   |
 | %cpu_ns      | 一个请求所消耗的 CPU 时间，单位为纳秒|
 | %custom_1     | 引用您使用 [`custom_log_field` 指令](</docs/edge-logic/supported-directives.md#custom_log_field>)定义的 ID 为 1 的自定义日志字段|
 | %custom_2     | 引用您使用 [`custom_log_field` 指令](</docs/edge-logic/supported-directives.md#custom_log_field>)定义的 ID 为 2 的自定义日志字段|

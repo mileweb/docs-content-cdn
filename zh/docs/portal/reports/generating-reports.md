@@ -13,8 +13,8 @@ CDN Pro 提供报表查询功能，使您能够分析加速域名的流量、识
 | 请求数              | 查看请求数报表。分别有边缘请求数、回源请求数以及缓存命中率曲线。缓存命中率的计算方式为（边缘请求数 - 回源请求数）/ 边缘请求数。              |
 | 状态码详情   | 查看 HTTP 响应状态码的百分比。 |
 | 回源状态码详情   | 查看回源请求的 HTTP 状态码的百分比。 |
-| 回源快速通道流量   | 查看使用 <a href="/zh/cdn/docs/edge-logic/supported-directives#origin_fast_route">快速通道功能</a>加速的回源流量。 |
-| 回源快速通道请求数   | 查看使用 <a href="/zh/cdn/docs/edge-logic/supported-directives#origin_fast_route">快速通道功能</a>加速的回源请求数。 |
+| 回源快速通道流量   | 查看使用 <a href="/docs/edge-logic/supported-directives#origin_fast_route">快速通道功能</a>加速的回源流量。 |
+| 回源快速通道请求数   | 查看使用 <a href="/docs/edge-logic/supported-directives#origin_fast_route">快速通道功能</a>加速的回源请求数。 |
 | CPU时间| 查看 CDN 服务器处理请求所消耗的 CPU 时间。您可以在**秒**和**核心数**之间切换单位。例如，如果在 5 分钟间隔内统计到了 3000 秒的 CPU 时间，则表示您的加速项目在该时间段内平均占用了 10（=3000 秒/5 分钟）个物理 CPU 核心。                               |
 | 调度域名DNS请求数| 查看指定时间内客户端向您的[调度域名](</docs/portal/traffic-management/creating-edge-hostname.md>)发出的DNS请求数。                               |
 | 边缘流量汇总| 查询边缘流量统计数据。将鼠标悬停在饼图的扇形上会显示流量分布。                              |
