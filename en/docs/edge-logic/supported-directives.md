@@ -84,7 +84,7 @@ add_header X-Status-Good 1 if($upstream_response_status ~ ^[23]);
 
 Adds the specified field to the end of a response provided that the response code equals 200, 201, 206, 301, 302, 303, 307, or 308. When "always" is specified, the trailer is added regardless of the status code. Parameter value can contain variables. We made the following changes to the [open-source version](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_trailer):
 
-1. This directive is intended to be used in the Edge Logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/cdn/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/cdn/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/cdn/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/cdn/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
+1. This directive is intended to be used in the Edge Logic to pass a variable to the L7 load balancer so the real-time logger can access it with a [$upstream\_trailer\_*](/docs/edge-logic/built-in-variables#upstream_trailer_) variable. Although most variables can be passed by the [`add_header`](#add_header) directive, some of them do not have their values ready when the response header is being constructed. Here are a few of them:  [$upstream_bytes_received](/docs/edge-logic/built-in-variables#upstream_bytes_received), [$upstream_bytes_sent](/docs/edge-logic/built-in-variables#upstream_bytes_sent), [$upstream_response_time](/docs/edge-logic/built-in-variables#upstream_response_time), [$request_cpu_time](/docs/edge-logic/built-in-variables#request_cpu_time). The only way to pass them to the real-time logger is using this directive when the entire response is completed.
 
 2. If the response from upstream has a `Content-Length` header, the open-source version would remove it and convert the `Transfer-Encoding` to 'chunked'. We enhanced the logic to restore the `Content-Length` header and the regular encoding before sending the response to the client. The added trailer won't appear in the response to the client.
 
@@ -649,7 +649,7 @@ origin_set_header X-My-Header $header_value policy=repeat|overwrite|preserve;
 Server, Date, Content-Encoding, Location, Refresh, Last-Modified, Content-Range, Accept-Ranges, WWW-Authenticate, Expires, ETag, Content-Length, Content-Type, Transfer-Encoding, Connection, Keep-Alive, Accept, Accept-Charset, Accept-Encoding, Accept-Language, Age, Allow, Authorization, Content-Language, Content-Location, Content-MD5, Expect, From, Host, If-Match, If-Modified-Since, If-None-Match, If-Range, If-Unmodified-Since, Max-Forwards, Pragma, Proxy-Authenticate, Proxy-Authorization, Range, Referer, Retry-After, If-Match, TE, Trailer, Upgrade, User-Agent, Vary.
 
 2. This directive merges the configurations across different levels (server/location/if). However, if the same header name appears in multiple levels, only the deepest layer’s configuration takes effect for that header.
-3. CDN Pro has a [hierarchical cache structure](/cdn/docs/edge-logic/paths-to-origins). By default, the headers set by this directive appear only in the requests to the origin servers. If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
+3. CDN Pro has a [hierarchical cache structure](/docs/edge-logic/paths-to-origins). By default, the headers set by this directive appear only in the requests to the origin servers. If you need it to also affect the requests to parent servers, use the `flag=any` parameter.
 4. Use the new parameter  ```if(condition)``` to set the header based on some conditions. If the condition is true, the directive takes effect. The ```if``` parameter should always be configured at the end of the directive configuration. A condition may be one of the following:
 
 *   A variable name; false if the value of a variable is an empty string.
@@ -660,8 +660,8 @@ There are a few things to note when using this directive:
 
 1. Because of the hierarchical cache structure, the NGINX native built-in variables $scheme and $remote_addr cannot be used. If you need to pass the scheme or IP address used by the client to the origin servers, use the following variables:
 
-*   [$request_scheme](/cdn/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
-*   [$client_real_ip](/cdn/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
+*   [$request_scheme](/docs/edge-logic/built-in-variables#request_scheme): scheme used by the client
+*   [$client_real_ip](/docs/edge-logic/built-in-variables#client_real_ip):  client’s IP address
 
 For example:
 ```nginx
@@ -670,17 +670,17 @@ origin_set_header X-Client-IP $client_real_ip;
 
 In addition to `$request_scheme` and `$client_real_ip`, the following variables can also be safely used without concern about the hierarchical cache structure:
 
-*   [$client_country_code](/cdn/docs/edge-logic/built-in-variables#client_country_code): client’s ISO 3166 country code
-*   [$client_province_code](/cdn/docs/edge-logic/built-in-variables#client_province_code): client’s China province code
-*   [$client_asn](/cdn/docs/edge-logic/built-in-variables#client_asn): number of the AS associated with the client’s IP address
-*   [$client_http_version](/cdn/docs/edge-logic/built-in-variables#client_http_version): client’s HTTP version, like "HTTP/1.1"
+*   [$client_country_code](/docs/edge-logic/built-in-variables#client_country_code): client’s ISO 3166 country code
+*   [$client_province_code](/docs/edge-logic/built-in-variables#client_province_code): client’s China province code
+*   [$client_asn](/docs/edge-logic/built-in-variables#client_asn): number of the AS associated with the client’s IP address
+*   [$client_http_version](/docs/edge-logic/built-in-variables#client_http_version): client’s HTTP version, like "HTTP/1.1"
 
 Most variables that carry client request information are available only at the edge cache. For example, the SSL related variables such as `$ssl_cipher`, `$ssl_protocol`, and `$ssl_fingerprint_ja4`. Due to the hierarchical cache structure, a request might be forwarded from the edge cache to the parent cache and then to the origin. If you want to pass client request information to the origin, use `flag=any` so that the directive also applies to the requests between the edge cache and the parent cache, and use `policy=preserve` so that the header is not overwritten by the parent cache. For example:
 
 ```nginx
 origin_set_header X-Fingerprint-JA4 $ssl_fingerprint_ja4 policy=preserve flag=any;
 ```
-2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/cdn/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
+2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
 3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For example, when [slicing](#slice) is enabled, the servers will automatically generate the `Range` header based on size of slices. Thus, the directive shall not be used to set the `Range` header to origin. For non-cacheable requests, those client request headers will still be forwarded to upstream.
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
@@ -926,7 +926,7 @@ Specifies the HTTP method to use in requests forwarded to the origin server inst
 **Context:** server, location
 
 Specifies in which cases a request should be passed to the next server in the origin configuration. One important function of this directive is to
-define an "unsuccessful attempt" for the [`peerFailureTimeout`](/cdn/docs/edge-logic/paths-to-origins#origin-configurations) settings of the origin. No change to the public version. 
+define an "unsuccessful attempt" for the [`peerFailureTimeout`](/docs/edge-logic/paths-to-origins#origin-configurations) settings of the origin. No change to the public version. 
 
 ### [`proxy_next_upstream_timeout`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream_timeout)
 
@@ -1195,7 +1195,7 @@ Defines a secret word used to check authenticity of requested links. No change t
 **Default:**	`-` <br/>
 **Contexts:** server, location, if
 
-Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-you-include-query-parameters-andor-request-headers-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
+Assigns a value to the specified variable. No change to the public version. In particular, the cache key [can be customized](/docs/edge-logic/faq.md#how-do-i-include-query-parameters-request-headers-and-body-in-the-cache-key) by assigning a value to the `$cache_misc` variable.
 
 This directive belongs to the nginx [rewrite module](http://nginx.org/en/docs/http/ngx_http_rewrite_module.html). It is executed `imperatively` with the other directives in the same module in an early phase of the request processing.
 
@@ -1255,7 +1255,7 @@ This feature is implemented on top of this [open-source project](https://github.
 
 Sets a string to replace in the response and a replacement string. We made the following changes to the public version:
 
-1. This directive takes effect only on the edge servers, not the parent servers. This ensures the replacement happens only once across the [hierarchical structure](/cdn/docs/edge-logic/paths-to-origins) of CDN Pro.
+1. This directive takes effect only on the edge servers, not the parent servers. This ensures the replacement happens only once across the [hierarchical structure](/docs/edge-logic/paths-to-origins) of CDN Pro.
 2. We introduced the `if()` parameter to precisely set the condition for this directive to take effect, just like for the [`add_header`](#add_header) directive. Since scanning large responses can introduce significant delay and CPU consumption, we recommend using this parameter whenever possible to minimize performance hit and cost increase.
 
 Note that when the response is compressed, the search and replace may not work as desired. You can use the [`origin_set_header`](#origin_set_header) directive as follows to clear the `Accept-Encoding` field to ask for an uncompressed response from the origin and parent server:
@@ -1303,7 +1303,7 @@ Enables string replacement in responses with the specified MIME types in additio
 **Default:** `upstream_origin_only off;` <br/>
 **Contexts:** server, location, if in location
 
-Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/cdn/apidocs#operation/get-cdn-shields). For example, you may have configured an origin's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin. Even if you set directConnection to "alwaysDirect", the edge may still send retry requests to an intermediate server when the origin is not reachable directly. `upstream_origin_only on;` eliminates this possibility.
+Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/apidocs#operation/get-cdn-shields). For example, you may have configured an origin's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin. Even if you set directConnection to "alwaysDirect", the edge may still send retry requests to an intermediate server when the origin is not reachable directly. `upstream_origin_only on;` eliminates this possibility.
 
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)

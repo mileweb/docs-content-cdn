@@ -70,7 +70,7 @@ The remaining settings are intuitive. Specify the TLS ciphers in the format desc
 
 **Cache Key URI:** Controls how the URI of an incoming request is incorporated into the cache key when you use the `rewrite` directive to rewrite the URI in Edge Logic. Select **Pre-rewrite** (default) to use the unmodified URI in the cache key, or select **Post-rewrite** to use the rewritten URI instead. Note that the URI put into the cache key does not include the query string by default. To append the query string and other parameters such as request headers to the cache key, assign a value to the `$cache_misc` variable in Edge Logic.
 
-**Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-and-beian>) with the Chinese government. You can then contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
+**Has ICP Beian:** If this property must be served from servers in mainland China, make sure all hostnames [have Beian on file](</docs/edge-logic/faq.md#china-delivery-with-icp-beian>) with the Chinese government. You can then contact the [{{title}} support team](mailto:support@{{siteDomain}}) to enable this function for you. Once enabled, change the **Has ICP Beian** setting to **Yes**. 
 
 **Note:** You can set **Has ICP Beian** to **Yes** without contacting {{title}}; however, the functionality <ins>**WILL NOT**</ins> be enabled until you request activation from {{title}}.
 

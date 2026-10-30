@@ -2,7 +2,7 @@
 
 下表列出了 CDN Pro 服务器支持的所有内置变量。您可以在边缘逻辑（Edge Logic）和[实时日志](/docs/portal/edge-configurations/creating-property#实时日志)中使用。当您在控制台上编辑边缘逻辑或者实时日志格式时，如果输入`$`，系统的自动补齐功能将会为您列举出所有当前位置可支持的内置变量。表中有些变量来自Nginx开源版本，有些变量则是CDN Pro引入的。大多数变量都是只读的，只有那些标记为<span class="badge cyan">R/W</span>的变量可写。表中的<span class="badge small" title="numerical value">#</span>标记表明该内置变量的值为数值类型。
 
-要正确使用变量，需要了解请求处理的生命周期。NGINX 处理请求时会经历[多个阶段](</docs/edge-logic/declarative-imperative#timing-of-the-declarative-directives>)。在不同的阶段，NGINX 会给变量赋值或动态更新变量的值。如果过早地读取变量可能导致预期外的结果。例如，当请求还未传递到上层服务器之前，不应读取 $upstream_* 这种上游请求相关的变量。例如，$bytes_sent、$body_bytes_sent 和 $sc_completed 等变量仅在响应完成后才可用。在响应完成之前，不应去读取这些变量，即便是add_header指令（构造响应头时执行）也不例外。这几个变量应当仅在日志记录阶段使用，通过 custom_log_field 指令或实时日志读取变量。此外，有些变量（如 $request_time） 在请求生命周期中会被持续地更新。如果在这些变量最终确定之前读取，得到的值将与请求完成时的值不同。
+要正确使用变量，需要了解请求处理的生命周期。NGINX 处理请求时会经历[多个阶段](</docs/edge-logic/declarative-imperative#声明式指令的执行时间点>)。在不同的阶段，NGINX 会给变量赋值或动态更新变量的值。如果过早地读取变量可能导致预期外的结果。例如，当请求还未传递到上层服务器之前，不应读取 $upstream_* 这种上游请求相关的变量。例如，$bytes_sent、$body_bytes_sent 和 $sc_completed 等变量仅在响应完成后才可用。在响应完成之前，不应去读取这些变量，即便是add_header指令（构造响应头时执行）也不例外。这几个变量应当仅在日志记录阶段使用，通过 custom_log_field 指令或实时日志读取变量。此外，有些变量（如 $request_time） 在请求生命周期中会被持续地更新。如果在这些变量最终确定之前读取，得到的值将与请求完成时的值不同。
 
 **注意:** 表中有些变量原本也可用于7层负载均衡器逻辑中。但随着[边缘节点架构升级](</docs/edge-logic/edge-node-structure-upgrade.md>)，7层负载均衡器已被废弃。请停止使用7层负载均衡器逻辑。
 
@@ -23,7 +23,7 @@
 | <span id="client_province_code"></span><span class="var">$client_province_code</span> | 客户端的中国省份代码 | <span class="badge yellow">No</span> |
 | <span id="client_real_ip"></span><span class="var">$client_real_ip</span> | 客户端IP | <span class="badge yellow">No</span> |
 | <span id="connection_requests"></span><span class="var">$connection_requests</span> |<span class="badge small" title="numerical value">#</span> 本次连接中包含的请求次数 | <span class="badge green">Yes</span> |
-| <span id="content_code"></span><span class="var">$content_code</span> | 一个<span class="badge cyan">R/W</span>可写的变量，对内容赋予标志代码，用来[在报表中对流量进行分类](/docs/edge-logic/faq#如何在报表中对数据进行分类) | <span class="badge yellow">No</span> |
+| <span id="content_code"></span><span class="var">$content_code</span> | 一个<span class="badge cyan">R/W</span>可写的变量，对内容赋予标志代码，用来[在报表中对流量进行分类](/docs/edge-logic/faq#如何在报表中对数据进行分类？) | <span class="badge yellow">No</span> |
 | <span id="content_length"></span><span class="var">$content_length</span> |<span class="badge small" title="numerical value">#</span> 请求中 Content-Length 头部的值 | <span class="badge green">Yes</span> |
 | <span id="content_type"></span><span class="var">$content_type</span> | 请求中 Content-Type 头部的值 | <span class="badge green">Yes</span> |
 | <span id="cookie_"></span><span class="var">$cookie_<em>name</em></span> | 客户端请求中指定的 cookie 参数值。为了支持名称中包含小数点(.)的cookie，我们允许本变量名中出现该字符。这样在某些场合您会需要使用大括号{}来分隔本变量与紧跟其后的小数点符号。例如：$cookie_abc.test 和 ${cookie_abc.test} 都返回 abc.test 这个cookie的值，但是 ${cookie_abc}.test 将返回 abc 这个cookie的值外加“.test” 这个字符串 | <span class="badge green">Yes</span> |
@@ -115,5 +115,5 @@
 | <span id="upstream_response_status"></span><span class="var">$upstream_response_status</span> | 从中间层或者源站拿到的响应状态码，如本请求没有发起回源则该变量值为0 | <span class="badge yellow">No</span> |
 | <span id="upstream_response_time"></span><span class="var">$upstream_response_time</span> |<span class="badge small" title="numerical value">#</span> 从中间层或者源站获取完整响应数据所消耗的时间，单位为毫秒 | <span class="badge green">Yes</span> |
 | <span id="upstream_server_type"></span><span class="var">$upstream_server_type</span> | 'O' 代表回源站; 'C' 代表回中间层节点. | <span class="badge yellow">No</span> |
-| <span id="upstream_trailer_"></span><span class="var">$upstream\_trailer\_<em>name</em></span> | 由上层添加的尾部（trailer） 值。通常该值会通过上层的[add_trailer](/docs/edge-logic/supported-directives#add_trailer) 指令设置。该变量已废弃。 | <span class="badge green">Yes</span> |
+| <span id="upstream_trailer_"></span><span class="var">$upstream\_trailer\_<em>name</em></span> | 由上层添加的尾部（trailer） 值。通常该值会通过上层的[add_trailer](/docs/edge-logic/supported-directives#add_trailer-已废弃) 指令设置。该变量已废弃。 | <span class="badge green">Yes</span> |
 | <span id="uri"></span><span class="var">$uri</span> | [归一化](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)的请求 uri ，从'/'开始且不包含问号后查询参数 。其值会被边缘逻辑里的"[rewrite](/docs/edge-logic/supported-directives#rewrite)"指令修改。| <span class="badge green">Yes</span> |

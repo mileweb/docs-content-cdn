@@ -40,11 +40,11 @@ proxy_ignore_cache_control no-cache no-store; # 忽略源站 Cache-Control 响�
 * POST请求携带“Transfer-Encoding: chunked”头
 * 源站响应类型为“Content-Type: multipart/x-mixed-replace”
 
-如果您对 CDN Pro 的缓存行为感兴趣，您可能也希望了解 [如何设置自定义缓存Key](#如何将问号后参数或者请求头加入到缓存key中) 以及 [CDN Pro 对 `Vary` 头部的处理方式](#关于-vary-响应头的处理方式)。
+如果您对 CDN Pro 的缓存行为感兴趣，您可能也希望了解 [如何设置自定义缓存Key](#如何将问号后参数，请求头，或者请求正文加入到缓存key中) 以及 [CDN Pro 对 `Vary` 头部的处理方式](#关于-vary-响应头的处理方式)。
 
 ### 如何将问号后参数，请求头，或者请求正文加入到缓存Key中?
 
-CDN Pro 的默认行为是将域名和不包含问号后参数的请求URI加到缓存 key 中。同时 CDN Pro 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#$cache_misc>) 加入到缓存 key 中。因此您可以通过这个内置变量将关键参数加入缓存 Key。例如，将所有问号后参数加入到缓存 key ：
+CDN Pro 的默认行为是将域名和不包含问号后参数的请求URI加到缓存 key 中。同时 CDN Pro 也会将一个在边缘逻辑（Edge Logic）中可编辑的内置变量 [`$cache_misc`](</docs/edge-logic/built-in-variables.md#cache_misc>) 加入到缓存 key 中。因此您可以通过这个内置变量将关键参数加入缓存 Key。例如，将所有问号后参数加入到缓存 key ：
 ```nginx
 set $cache_misc "?$sorted_querystring_args";
 ```
