@@ -1,35 +1,35 @@
-## AWS S3 Bucket Acceleration
+## 加速 AWS S3 存储桶
 
-In this example, let’s assume we have a domain called `waytoo.digital`, and that we want to set up an Amazon Web Services (AWS) bucket on a subdomain called `files.waytoo.digital` so users can access the data in that bucket through this subdomain.
-We'll start by creating and accessing the public AWS bucket, and then we'll look into how to access the private AWS bucket.
+在本示例中，假设我们有一个域名 `waytoo.digital`，并且我们想在子域名 `files.waytoo.digital` 上设置一个 AWS 存储桶，以便用户可以通过该子域名访问存储桶中的数据。
+我们先创建并访问公有 AWS 存储桶，然后再介绍如何访问私有 AWS 存储桶。
 
-### Setting Up an S3 Bucket
+### 设置 S3 存储桶
 
-1. Log in to the AWS S3 console and create a new bucket. The creation wizard appears.
+1. 登录 AWS S3 控制台并创建一个新存储桶。此时会出现创建向导。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-bucket.png" alt="create bucket" width="720"></p>
 
-2. Enter the following bucket name(DNS qualified prefix): **files-waytoo-digital**
+2. 输入以下存储桶名称（必须是符合 DNS 要求的前缀）：**files-waytoo-digital**
 
-3. Click **Next**.
+3. 点击**下一步**。
 
-4. Skip **Configure Options**.
+4. 跳过**配置选项**。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-bucket-set-permissions.png" alt="create bucket" width="720"></p>
 
-5. For now, accept the default **Block all public access** permissions; otherwise, AWS prevents you from clicking **Next**. 
+5. 现在先接受默认的**阻止所有公共访问**权限；否则 AWS 会阻止您点击**下一步**。
 
-6. Click **Next** followed by **Save**. Your bucket is now created.
+6. 点击**下一步**，然后点击**保存**。您的存储桶已创建。
 
-7. Assign appropriate permissions for accessing the bucket contents.
-    
+7. 为访问存储桶内容分配适当的权限。
+
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-bucket-settings-permissions.png" alt="create bucket" width="720"></p>
 
-8. Uncheck the **Block all public access** check box and click **Save**.
+8. 取消勾选**阻止所有公共访问**复选框，然后点击**保存**。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-bucket-settings-cors.png" alt="create bucket" width="720"></p>
 
-9. Set up cross-origin resource sharing (CORS) by copying the following code and pasting it into the CORS configuration editor:
+9. 将以下代码复制并粘贴到 CORS 配置编辑器中，以设置跨源资源共享（CORS）：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -43,26 +43,26 @@ We'll start by creating and accessing the public AWS bucket, and then we'll look
 </CORSConfiguration>
 ```
 
-10. Upload a file to the bucket to test our setup and grant public read access to the uploaded object.
+10. 向存储桶上传一个文件以测试我们的设置，并为上传的对象授予公共读取权限。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-upload-file.png" alt="create bucket" width="720"></p>
 
-11. Click on the uploaded file in the bucket to check the uploaded object URL.
+11. 点击存储桶中上传的文件以查看上传对象的 URL。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-uploaded-file-info.png" alt="create bucket" width="500"></p>
 
-Amazon S3 uses the following URI syntax to access bucket names: `<BUCKET_NAME>.<REGION>.amazonaws.com`. Instead of returning the region, Amazon S3 returns `s3`. Regardless, we can use the bucket domain name to set up CDN Pro.
+Amazon S3 使用以下 URI 语法访问存储桶名称：`<BUCKET_NAME>.<REGION>.amazonaws.com`。Amazon S3 返回的是 `s3` 而不是区域。这个域名将作为源站地址在 CDN Pro 上配置。
 
-### Setting Up CDN Pro
+### 设置 CDN Pro
 
-Log in to the CDN Pro management console at https://console.{{siteDomain}}/cas/login?lang=zh.
+登录 CDN Pro [管理控制台](https://console.{{siteDomain}}/cas/login?lang=zh)。
 
-#### Traffic Management 
-1. In the Traffic Management page, create an edge hostname.
-   
+#### 调度管理
+1. 在调度管理页面，创建一个调度域名。
+
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-edge-hostname.png" alt="create bucket" width="720"></p>
 
-2. After creating the edge hostname, access it in terminal to make sure it works:
+2. 创建调度域名后，在终端中测试验证调度域名已部署生效：
 
 ```bash
 $ping files-waytoo-digital.qtlcdn.com
@@ -73,52 +73,52 @@ PING files-waytoo-digital.qtlcdn.com (14.0.119.186): 56 data bytes
 64 bytes from 14.0.119.186: icmp_seq=3 ttl=56 time=4.733 ms
 ```
 
-#### Server Certificates
-Now let's generate a server certificate and renew it automatically with Let’s Encrypt.
+#### 服务端证书
+现在让我们生成一个服务端证书，并使用 Let's Encrypt 自动更新证书。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-certificate.png" alt="create bucket" width="600"></p>
 
-1. Click **Certificates** and choose **Server Certificates**. In the Certificates page, click **Create Certificate**.
-2. Complete the **Certificate Name** and **Certificate Description** fields. 
-3. Set **Auto Renew** to **Let’s Encrypt**. 
-4. Click the **"Auto Generate Certificate"** tab, and then enter **files.waytoo.digital** in the **Common Name** and **SAN** fields.
-5. Click **Save Certificate** to save the settings.
+1. 点击左侧菜单栏的**证书**，选择**服务端证书**。在证书页面，点击**创建证书**。
+2. 填写**证书名称**和**证书说明**字段。
+3. 将**自动更新**设置为 **Let's Encrypt**。
+4. 点击**“自动生成”**单选框，然后在**通用名**和 **SAN** 字段中输入 **files.waytoo.digital**。
+5. 点击**保存**创建证书。
 
-#### Deploy a Certificate to the Staging Environment
-Because we saved the server certificate earlier, we can now deploy it. To make sure the certificate meets our needs, we are going to deploy it to a staging environment to test our setup before releasing the certificate to production.
+#### 将证书部署到演练环境
+保存了服务端证书后还需要部署。我们将先把它部署到演练环境进行测试，然后再发布到生产环境。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
-#### Edge Configurations
-1. In the Edge Configurations page, click **Create Property**.
+#### 边缘配置
+1. 在边缘配置页面，点击**创建加速项目**。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property.png" alt="create bucket" width="720"></p>
 
-2. Enter the **Property Name**, an optional **Description** for the property, and a **Description** of the configuration version. 
+2. 输入**加速项目名称**、**描述**，以及初始版本的**版本描述**。
 
-3. Enter at least one hostname in the **Hostnames** field. The cache identifies and handles requests for property configurations by matching the request header `Host` value with *Hostnames* field values.
-    
-4. Under **Origins**, click **Add New** to add our S3 bucket as the origin.
+3. 在**加速域名**字段中输入至少一个加速域名。CDN 服务器通过将客户端请求头 `Host` 的值与*加速域名*字段值进行匹配来识别和处理来自客户端的请求。
+
+4. 在**源站**下，点击**添加新源站**，将我们的 S3 存储桶添加为源站。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-origin.png" alt="create bucket" width="720"></p>
 
-5. **Origin name** will be used in the Edge Logic script (in our example, it's called `aws_origin`). In the **Servers** field, add our S3 bucket domain: `files-waytoo-digital.s3.amazonaws.com`.
+5. **源站名称**将在边缘逻辑（在我们的示例中，我们将它命名为 `aws_origin`）中引用。在**服务器**字段中，添加我们的 S3 存储桶域名：`files-waytoo-digital.s3.amazonaws.com`。
 
-6. Click **Validate** to make sure everything is satisfactory.
+6. 点击**验证**以确保能正常访问源站。
 
-7. Expand **Advanced Settings**, and then enter the origin hostname `files-waytoo-digital.s3.amazonaws.com` in the **Host Header** field. This value will be set as `Host` in the request header between the Edge and the Origin. This is an important step because if it is omitted, the Host's value will be `files.waytoo.digital` and Amazon S3 will respond with a `Bucket not found` error. 
+7. 展开**高级设置**，然后在 **Host请求头**字段中输入源站域名 `files-waytoo-digital.s3.amazonaws.com`。CDN 服务器的回源请求将携带这个 `Host` 请亲头。这是必要的步骤，如果未填写，则回源请求的 Host 将是 `files.waytoo.digital`，源站收到请求时将返回 `Bucket not found` 错误。
 
-8. Click **Save**.
+8. 点击**保存**。
 
-We have created an origin. Next we will create an initial Edge Logic configuration. 
+我们已经创建了一个源站。接下来，我们将创建边缘逻辑配置。
 
-9. Click the **Wizard** button.
+9. 点击**向导**按钮。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-wizard.png" alt="create bucket" width="600"></p>
 
-10. Select the previously configured origin, set cache time to 3600 minutes, and ignore cache-control headers from origin to handle cache behavior on the edge. 
+10. 选择之前配置的源站，将缓存时间设置为 3600 分钟，并忽略来自源站的 cache-control 头，以便在边缘处理缓存行为。
 
-11. Click **"OK"**. The system generates the following Edge Logic script:
+11. 点击**“确定”**。系统会生成以下边缘逻辑脚本：
 
  ```nginx
         location / { #This is the default location.
@@ -128,34 +128,34 @@ We have created an origin. Next we will create an initial Edge Logic configurati
         }
  ```
 
-You can edit this script and set up any logic you need to address your requirements. 
+您可以根据需要编辑此脚本，自定义边缘逻辑。
 
-In our example, we have everything we need for this property, except for one thing: the server certificate we want to add.
+以上步骤已经完成了加速项目大部分的配置，接下来我们还需要绑定服务端证书。
 
-12. Expand the **TLS Settings** tab. In the **TLS Certificate** field, enter the name of the certificate we created and deployed to staging.
+12. 展开 **TLS设置**标签。在 **TLS证书**字段中，点选我们已创建并部署到演练环境的证书名称。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/create-property-tls.png" alt="create bucket" width="600"></p>
-	
-13. Click <strong>Save & Validate</strong> to make sure that everything is configured properly.
 
-Assuming that no issues occurred after saving and validating, you can now deploy the property to the staging environment for testing.
+13. 点击<strong>保存并验证</strong>以提交配置，并验证配置的语法准确性。
+
+当配置验证通过后，就可以将加速项目部署到演练环境进行测试。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-staging.png" alt="create bucket" width="500"></p>
 
-#### Testing (Staging)
+#### 测试（演练环境）
 
-To test staging deployments, you should know the IP addresses of the staging server:
+要测试演练环境部署，您需要知道演练服务器的 IP 地址：
 
 ```bash
-$ dig staging.qtlgslb.com
+$ dig staging.qtlcdn.com
 ...
 ;; ANSWER SECTION:
-staging.qtlgslb.com.    59  IN  A   163.171.228.89
-staging.qtlgslb.com.    59  IN  A   163.171.230.47
+staging.qtlcdn.com.    59  IN  A   163.171.228.89
+staging.qtlcdn.com.    59  IN  A   163.171.230.47
 ...
 ```
 
-Pick one of the returned IP addresses, and check whether everything we set up and deployed works properly.
+选择一个 IP 地址发起请求，测试我们部署的配置是否正常。
 
 ```bash
 ❯ curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:163.171.228.89
@@ -168,14 +168,14 @@ date: Fri, 16 Oct 2020 03:30:16 GMT
 last-modified: Fri, 16 Oct 2020 02:36:45 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: MISS
-x-qtl-request-id: 4c394e8fd8cc514c5f1e437ac3daf969
+x-ws-request-id: 4c394e8fd8cc514c5f1e437ac3daf969
 x-via: 2.0 na-us-iad1-cache-0003 [MISS 200]
 age: 19
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
-By requesting the same item again, we will see that the cache status is **HIT**.
+再次发起请求，我们会看到缓存状态为 **HIT**。
 
 ```bash
 ❯ curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:163.171.228.89
@@ -188,28 +188,28 @@ date: Fri, 16 Oct 2020 03:30:16 GMT
 last-modified: Fri, 16 Oct 2020 02:36:45 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: HIT
-x-qtl-request-id: dfa55f3549ee4fd0824472f83d06c6c5
+x-ws-request-id: dfa55f3549ee4fd0824472f83d06c6c5
 x-via: 2.0 na-us-iad1-cache-0003 [HIT]
 age: 13
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
-Our configuration is working as expected, so let's deploy it to production.
+经测试符合预期后，让我们将加速项目部署到生产环境。
 
-#### Deployment to Production
+#### 部署到生产环境
 
-To deploy the configuration to production, use the Certificates and Edge Configurations pages. 
+要将配置部署到生产环境，请使用证书和边缘配置页面。
 
-1. Go to the Certificates page first by clicking "Certificates" and choosing "Server Certificates". Then open the certificate, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**.
+1. 首先通过点击**证书**并选择**服务端证书**进入证书页面。然后打开证书，从菜单中选择**部署**，将部署目标设置为**生产**，然后点击**立即部署**。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/deploy-to-production.png" alt="create bucket" width="500"></p>
 
-2. Go to the Edge Configurations page. Then open the property, choose Deploy from the menu, set the deployment target to **Production**, and click **Deploy Now**. 
+2. 进入边缘配置页面。然后打开加速项目，从菜单中选择**部署**，将部署目标设置为**生产**，然后点击**立即部署**。
 
-#### Testing (Production)
+#### 测试（生产环境）
 
-Before we release the property to production, we should create or change the CNAME record of our DNS and point it to the edge hostname we created earlier (`files-waytoo-digital.qtlcdn.com`).
+在将加速项目部署到生产环境之后，我们应该创建或更改 DNS 的 CNAME 记录，将加速域名指向我们之前创建的调度域名（`files-waytoo-digital.qtlcdn.com`）。
 
 ```bash
 ❯ dig files.waytoo.digital
@@ -220,7 +220,7 @@ files-waytoo-digital.qtlcdn.com. 19 IN	A	14.0.119.186
 ...
 ```
 
-You can use the production IP address to check whether everything is satisfactory before you change the DNS record:
+在更改 DNS 记录之前，您可以指定生产环境的某个 IP 地址发起请求，测试配置是否正常：
 
 ```bash
 ❯ curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:14.0.119.186
@@ -233,48 +233,48 @@ date: Fri, 16 Oct 2020 03:21:14 GMT
 last-modified: Fri, 16 Oct 2020 02:36:45 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: HIT
-x-qtl-request-id: 16a3be4dfdc381e44b90c86bec087f47
+x-ws-request-id: 16a3be4dfdc381e44b90c86bec087f47
 x-via: 2.0 as-kr-icn1-cache-0003 [HIT]
 age: 5575
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
-Congratulations. You've just accelerated the Amazon S3 bucket with **CDN Pro**!
+恭喜！您已经使用 **CDN Pro** 加速了 Amazon S3 存储桶！
 
-### Accessing Private Buckets
+### 访问私有存储桶
 
-Now let's block the public access to our bucket and set up CDN Pro to access it.
+现在让我们阻止对存储桶的公共访问，并设置 CDN Pro 回源鉴权。
 
-#### Block Public Access
+#### 阻止公共访问
 
-Previously we made our bucket public. Now, in bucket settings, we will return the default permissions to their previous settings to make the bucket private again.
+之前我们将存储桶设为公有。现在，在存储桶设置中，我们将权限恢复为默认设置，使存储桶改回为私有。
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/bucket-permissions-private.png" alt="create bucket" width="720"></p>
 
-#### Enable Origin Authentication
+#### 启用回源鉴权
 
-Now we can edit our property settings and set up the `Origin Authentication for S3`. Before doing that, make sure you know the following items:
+现在我们可以编辑加速项目，设置 `S3 源站鉴权`。在此之前，请确保您已准备好以下信息：
 
-- AWS bucket region
-- AWS access key
-- AWS access secret
+- AWS 存储桶地区
+- AWS 访问密钥
+- AWS 密钥
 
-1. Go to the Edge Configurations page and select the property you configured previously:
+1. 进入边缘配置页面，选择您之前配置的加速项目：
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-property-clone.png" alt="create bucket" width="720"></p>
 
-2. Click **Clone** to create a new configuration version. Now we can edit it. 
+2. 点击**克隆**创建一个新的配置版本。
 
-3. At the right side of the **Origins** field, click **Edit**.
+3. 在**源站**字段的右侧，点击**编辑**。
 
-4. Expand **Advanced Settings**. 
+4. 展开**高级设置**。
 
-5. Set **Authentication** to **AWS S3** and fill the required fields as follows:
+5. 将**鉴权方法**设置为 **AWS S3**，并按如下方式填写必填字段：
 
 <p align=center><img src="/docs/resources/images/recipes/aws-bucket/modify-origin-auth.jpg" alt="create bucket" width="600"></p>
 
-6. Click **Save**, and then deploy this configuration to staging. Make sure it works.
+6. 点击**保存**，然后将新版本部署到演练环境。然后发起测试请求，验证配置是否正常。
 
 ```bash
 curl -I https://files.waytoo.digital/file_1m.bin --resolve files.waytoo.digital:443:163.171.228.89
@@ -287,12 +287,11 @@ date: Fri, 16 Oct 2020 09:04:34 GMT
 last-modified: Fri, 16 Oct 2020 09:04:10 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: HIT
-x-qtl-request-id: 105b10794ee438213fac428c0ef60379
+x-ws-request-id: 105b10794ee438213fac428c0ef60379
 x-via: 2.0 na-us-iad1-cache-0003 [HIT]
 age: 16
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
-That's all there is to it!
-Now you can place your property into production.
+就这样！现在您可以将加速项目部署到生产环境了。
