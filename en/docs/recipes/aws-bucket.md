@@ -55,7 +55,7 @@ Amazon S3 uses the following URI syntax to access bucket names: `<BUCKET_NAME>.<
 
 ### Setting Up CDN Pro
 
-Log in to the CDN Pro management console at https://console.{{siteDomain}}.
+Log in to the CDN Pro management [console](https://console.{{siteDomain}}).
 
 #### Traffic Management 
 1. In the Traffic Management page, create an edge hostname.
@@ -147,11 +147,11 @@ Assuming that no issues occurred after saving and validating, you can now deploy
 To test staging deployments, you should know the IP addresses of the staging server:
 
 ```bash
-$ dig staging.qtlgslb.com
+$ dig staging.qtlcdn.com
 ...
 ;; ANSWER SECTION:
-staging.qtlgslb.com.    59  IN  A   163.171.228.89
-staging.qtlgslb.com.    59  IN  A   163.171.230.47
+staging.qtlcdn.com.    59  IN  A   163.171.228.89
+staging.qtlcdn.com.    59  IN  A   163.171.230.47
 ...
 ```
 
@@ -168,10 +168,10 @@ date: Fri, 16 Oct 2020 03:30:16 GMT
 last-modified: Fri, 16 Oct 2020 02:36:45 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: MISS
-x-qtl-request-id: 4c394e8fd8cc514c5f1e437ac3daf969
+x-ws-request-id: 4c394e8fd8cc514c5f1e437ac3daf969
 x-via: 2.0 na-us-iad1-cache-0003 [MISS 200]
 age: 19
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
@@ -188,10 +188,10 @@ date: Fri, 16 Oct 2020 03:30:16 GMT
 last-modified: Fri, 16 Oct 2020 02:36:45 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: HIT
-x-qtl-request-id: dfa55f3549ee4fd0824472f83d06c6c5
+x-ws-request-id: dfa55f3549ee4fd0824472f83d06c6c5
 x-via: 2.0 na-us-iad1-cache-0003 [HIT]
 age: 13
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
@@ -233,10 +233,10 @@ date: Fri, 16 Oct 2020 03:21:14 GMT
 last-modified: Fri, 16 Oct 2020 02:36:45 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: HIT
-x-qtl-request-id: 16a3be4dfdc381e44b90c86bec087f47
+x-ws-request-id: 16a3be4dfdc381e44b90c86bec087f47
 x-via: 2.0 as-kr-icn1-cache-0003 [HIT]
 age: 5575
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
@@ -287,10 +287,10 @@ date: Fri, 16 Oct 2020 09:04:34 GMT
 last-modified: Fri, 16 Oct 2020 09:04:10 GMT
 etag: "fcaebe20d9b3e73086dcb0ba5def8e52"
 x-cache-status: HIT
-x-qtl-request-id: 105b10794ee438213fac428c0ef60379
+x-ws-request-id: 105b10794ee438213fac428c0ef60379
 x-via: 2.0 na-us-iad1-cache-0003 [HIT]
 age: 16
-server: QTL_Cache/1.2.03
+server: nginx
 accept-ranges: bytes
 ```
 
