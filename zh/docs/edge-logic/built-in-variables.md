@@ -59,9 +59,10 @@
 | <span id="request_length"></span><span class="var">$request_length</span> |<span class="badge small" title="numerical value">#</span> 请求的长度 (包括请求的地址, http 请求头和请求正文) | <span class="badge green">Yes</span> |
 | <span id="request_method"></span><span class="var">$request_method</span> | HTTP 请求方法，例如 ：GET, POST | <span class="badge green">Yes</span> |
 | <span id="request_scheme"></span><span class="var">$request_scheme</span> | 请求协议，值为"http" 或者 "https" | <span class="badge yellow">No</span> |
-| <span id="request_ssl_handshake_time"></span><span class="var">$request_ssl_handshake_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒 | <span class="badge yellow">No</span> |
+| <span id="request_ssl_handshake_time"></span><span class="var">$request_ssl_handshake_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 ssl 握手阶段所消耗的CPU时间，单位为纳秒。不兼容 HTTP/3，建议改用 `$request_tls_handshake_time`。 | <span class="badge yellow">No</span> |
 | <span id="request_start_time"></span><span class="var">$request_start_time</span> |<span class="badge small" title="numerical value">#</span> CDN Pro接收到客户请求第一个字节的 Unix 时间戳，以秒为单位，精度到毫秒 | <span class="badge yellow">No</span> |
 | <span id="request_time"></span><span class="var">$request_time</span> |<span class="badge small" title="numerical value">#</span> 以毫秒为单位的请求处理时间，标记服务端从客户端读取第一个字节到发送最后一个字节给客户端所经过的时间。该时间等于$request_end_time，$turn_around_time和$transfer_time这3个变量的值之和。对于小请求，请求和响应通常各自一次发包完成。这种情况下，$request_end_time和$transfer_time的值为0，$request_time的值与$turn_around_time相同。 | <span class="badge green">Yes</span> |
+| <span id="request_tls_handshake_time"></span><span class="var">$request_tls_handshake_time</span> |<span class="badge small" title="numerical value">#</span> 处理该请求时，在 TLS 握手阶段所消耗的时间，单位为纳秒。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
 | <span id="request_uri"></span><span class="var">$request_uri</span> | 从'/'开始，包含问号后参数的客户端请求 URI | <span class="badge green">Yes</span> |
 | <span id="sc_completed"></span><span class="var">$sc_completed</span> |<span class="badge small" title="numerical value">#</span> 如果本次请求的所有数据都已响应给客户端则值为1，否则值为0  | <span class="badge yellow">No</span> |
 | <span id="sc_initial"></span><span class="var">$sc_initial</span> |<span class="badge small" title="numerical value">#</span> 如果本次请求的第一个字节已响应给客户端则值为1，否则值为0| <span class="badge yellow">No</span> |
@@ -81,9 +82,9 @@
 | <span id="server_protocol"></span><span class="var">$server_protocol</span> | HTTP/1.1，HTTP/2.0或HTTP/3.0 | <span class="badge green">Yes</span> |
 | <span id="service_port"></span><span class="var">$service_port</span> |<span class="badge small" title="numerical value">#</span> 接收请求的 CDN 边缘服务器端口号 | <span class="badge yellow">No</span> |
 | <span id="sorted_querystring_args"></span><span class="var">$sorted_querystring_args</span> | 该变量以 ASCII 格式输出排序后的请求URL中的问号后参数内容，它可以通过该指令进行修改 "[sorted_querystring_filter_parameter](/docs/edge-logic/supported-directives#sorted_querystring_filter_parameter)" | <span class="badge yellow">No</span> |
-| <span id="ssl_cert_alg"></span><span class="var">$ssl_cert_alg</span> | 本次 SSL 请求中所使用的证书算法，例如 RSA，EC | <span class="badge yellow">No</span> |
-| <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件 | <span class="badge green">Yes</span> |
-| <span id="ssl_ciphers"></span><span class="var">$ssl_ciphers</span> | 客户端支持的 TLS 加密套件 | <span class="badge green">Yes</span> |
+| <span id="ssl_cert_alg"></span><span class="var">$ssl_cert_alg</span> | 本次 SSL 请求中所使用的证书算法，例如 RSA，EC。不兼容 HTTP/3，建议改用 `$tls_cert_alg`。 | <span class="badge yellow">No</span> |
+| <span id="ssl_cipher"></span><span class="var">$ssl_cipher</span> | 本次 SSL 请求中所使用的 TLS 加密套件。不兼容 HTTP/3，建议改用 `$tls_cipher`。 | <span class="badge green">Yes</span> |
+| <span id="ssl_ciphers"></span><span class="var">$ssl_ciphers</span> | 客户端支持的 TLS 加密套件。不兼容 HTTP/3，建议改用 `$tls_ciphers`。 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_escaped_cert"></span><span class="var">$ssl_client_escaped_cert</span> | PEM 格式的客户端证书，经过URL编码 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_fingerprint"></span><span class="var">$ssl_client_fingerprint</span> | 客户端证书的SHA1指纹 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_i_dn"></span><span class="var">$ssl_client_i_dn</span> | 客户端证书颁发者的标识名 | <span class="badge green">Yes</span> |
@@ -95,14 +96,21 @@
 | <span id="ssl_client_v_start"></span><span class="var">$ssl_client_v_start</span> | 客户端证书的开始日期 | <span class="badge green">Yes</span> |
 | <span id="ssl_client_verify"></span><span class="var">$ssl_client_verify</span> | 客户端证书验证的结果| <span class="badge green">Yes</span> |
 | <span id="ssl_fingerprint_ja3"></span><span class="var">$ssl_fingerprint_ja3</span> | 客户端JA3指纹| <span class="badge yellow">No</span> |
-| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | 客户端JA4指纹| <span class="badge yellow">No</span> |
-| <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1" | <span class="badge green">Yes</span> |
-| <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername | <span class="badge green">Yes</span> |
+| <span id="ssl_fingerprint_ja4"></span><span class="var">$ssl_fingerprint_ja4</span> | 客户端JA4指纹。不兼容 HTTP/3，建议改用 `$tls_fingerprint_ja4`。 | <span class="badge yellow">No</span> |
+| <span id="ssl_protocol"></span><span class="var">$ssl_protocol</span> | SSL 握手协议， 例如"TLSv1.1"。不兼容 HTTP/3，建议改用 `$tls_protocol`。 | <span class="badge green">Yes</span> |
+| <span id="ssl_server_name"></span><span class="var">$ssl_server_name</span> | TLS 中 SNI 携带的 servername。不兼容 HTTP/3，建议改用 `$tls_server_name`。 | <span class="badge green">Yes</span> |
 | <span id="status"></span><span class="var">$status</span> | 响应给客户端的 HTTP 状态码 | <span class="badge green">Yes</span> |
 | <span id="tcpinfo_delivery_rate"></span><span class="var">$tcpinfo_delivery_rate</span> |<span class="badge small" title="numerical value">#</span> 客户端接收数据的速率，单位为 bytes/s | <span class="badge yellow">No</span> |
 | <span id="tcpinfo_min_rtt"></span><span class="var">$tcpinfo_min_rtt</span> |<span class="badge small" title="numerical value">#</span> 本次请求中由 tcp 协议栈统计到的最小 RTT , 单位为微秒 | <span class="badge yellow">No</span> |
 | <span id="tcpinfo_rtt"></span><span class="var">$tcpinfo_rtt</span> |<span class="badge small" title="numerical value">#</span> 本次请求中由 tcp 协议栈统计到的最后一次 RTT , 单位为微秒 | <span class="badge green">Yes</span> |
 | <span id="time_http"></span><span class="var">$time_http</span> | RFC 7231 格式下的当前系统时间，可用于响应中的 Date 头部值 | <span class="badge yellow">No</span> |
+| <span id="tls_cert_alg"></span><span class="var">$tls_cert_alg</span> | 本次请求中所使用的证书算法，例如 RSA，EC。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
+| <span id="tls_cipher"></span><span class="var">$tls_cipher</span> | 本次请求中所使用的 TLS 加密套件。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
+| <span id="tls_ciphers"></span><span class="var">$tls_ciphers</span> | 客户端支持的 TLS 加密套件。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
+| <span id="tls_fingerprint_ja4"></span><span class="var">$tls_fingerprint_ja4</span> | 客户端JA4指纹。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
+| <span id="tls_protocol"></span><span class="var">$tls_protocol</span> | TLS 握手协议，例如 "TLSv1.3"。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
+| <span id="tls_server_name"></span><span class="var">$tls_server_name</span> | TLS 中 SNI 携带的 servername。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
+| <span id="tls_session_reused"></span><span class="var">$tls_session_reused</span> | TLS 会话是否被复用。兼容 HTTP/3。 | <span class="badge yellow">No</span> |
 | <span id="transfer_time"></span><span class="var">$transfer_time</span> |<span class="badge small" title="numerical value">#</span> CDN Pro 将完整的响应正文（直到最后一个字节）发送到系统缓冲区所需的时间，单位为秒。同时支持毫秒单位的变量transfer_time_ms。| <span class="badge yellow">No</span> |
 | <span id="turn_around_time"></span><span class="var">$turn_around_time</span> |<span class="badge small" title="numerical value">#</span> CDN Pro 从发出回源请求到接收源站响应的第一个字节所需的时间，单位为秒。同时支持毫秒单位的变量turn_around_time_ms。  | <span class="badge yellow">No</span> |
 | <span id="unique_req_id"></span><span class="var">$unique_req_id</span> | 请求的唯一标识 ID | <span class="badge yellow">No</span> |
