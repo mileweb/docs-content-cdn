@@ -33,6 +33,6 @@ CDN Pro 内容分发平台使即使不熟悉 CDN 的用户也能轻松上手，�
 
 CDN Pro 内容分发平台提供功能丰富的 [API](</apidocs>)，它支持与 CDN Pro 图形界面相同的功能，并具备高级配置能力。开发人员可以通过 API 以JSON格式发送和接收数据，使其应用程序与 CDN Pro 交互。
 
-## 下一步
+## 下一步操作
 
 点击观看[快速开始使用CDN Pro](<https://www.{{siteDomain}}/wp-content/uploads/videos/cdnpro_v1.mp4>)，完成[快速开始](</docs/getting-started.md>)文档所描述的步骤。
