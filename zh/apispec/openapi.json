@@ -24665,7 +24665,7 @@
                       "x-stoplight": {
                         "id": "27n7abo5m8gg3"
                       },
-                      "description": "The API response body will be included to help with investigation of failed API calls if responseCode is in the 4xx or 5xx range."
+                      "description": "The response body returned by the API call, truncated to the first 1000 bytes."
                     }
                   },
                   "required": [

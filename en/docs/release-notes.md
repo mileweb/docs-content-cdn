@@ -1,5 +1,16 @@
 # Release Notes
 
+## October 27, 2026
+#### API updates
+* Improved the error messages returned when an incorrectly configured directive in edge logic is rejected.
+* Improved API call tracking to capture the response body (the first 1000 bytes).
+
+#### Console updates
+* Added a few TLS builtin variables to Edge Logic and the real-time log format. These work with both HTTP/3 and non-HTTP/3 requests.
+* Made the private key optional when uploading a certificate to create a new version.
+* Updated the property details page URL to reflect the displayed version and edit/clone mode.
+* Removed the Load Balancer Logic field from the property editor and merged existing load balancer logic into Edge Logic when editing a property version.
+
 ## October 13, 2026
 #### API updates
 * Fixed an issue where a secret could be deleted while a deployment that uses it was still in progress.
