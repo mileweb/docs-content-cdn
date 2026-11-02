@@ -7,7 +7,7 @@
 
 <p align=center><img src="/docs/resources/images/certificates/cacertificates.png" alt="Create new CA certificate button" width="900"></p>
 
-3. 在表单中填入证书基本信息，点击 Upload 上传链证书。必填字段用星号 (\*)进行了标注。
+3. 在表单中填入证书基本信息，点击 **上传** 按钮上传链证书。必填字段用星号 (\*)进行了标注。
 
 
 <p align="center"><img src="/docs/resources/images/certificates/create-cacertificate.png" alt="Create CA Certificate" width="600"></p>
