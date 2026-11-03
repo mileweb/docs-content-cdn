@@ -1,6 +1,6 @@
 # 如何登录
 
-1. 访问 CDN Pro 登录页面 https://console.{{siteDomain}}/cas/login?lang=zh。
+1. 访问 CDN Pro 登录页面 <https://console.{{siteDomain}}/cas/login?lang=zh>。
 
 <p align=center><img src="/docs/resources/images/accessing-portal/portal-login-{{id}}.png" alt="login page" width="300"></p>
 
