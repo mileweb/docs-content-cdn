@@ -1,6 +1,6 @@
-# {{title}} Documentation Content
+# Documentation Content
 
-Directory structure
+Directory structure of each language:
 ```
 .
 ├── apispec                 # API spec(openapi.json) here
