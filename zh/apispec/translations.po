@@ -8,119 +8,119 @@ msgstr ""
 #. /tags/0/name
 msgctxt "tag"
 msgid "Certificate Management"
-msgstr ""
+msgstr "证书管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/1/name
 msgctxt "tag"
 msgid "Property Management"
-msgstr ""
+msgstr "加速项目管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/2/name
 msgctxt "tag"
 msgid "Property Validation"
-msgstr ""
+msgstr "加速项目验证"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/3/name
 msgctxt "tag"
 msgid "Secret Management"
-msgstr ""
+msgstr "保密信息管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/4/name
 msgctxt "tag"
 msgid "Deployment Management"
-msgstr ""
+msgstr "部署管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/5/name
 msgctxt "tag"
 msgid "Hostnames"
-msgstr ""
+msgstr "加速域名"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/6/name
 msgctxt "tag"
 msgid "Edge Hostname Management"
-msgstr ""
+msgstr "调度域名管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/7/name
 msgctxt "tag"
 msgid "Reports"
-msgstr ""
+msgstr "报表"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/8/name
 msgctxt "tag"
 msgid "Annotations for Reports"
-msgstr ""
+msgstr "报表注释"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/9/name
 msgctxt "tag"
 msgid "Content Management"
-msgstr ""
+msgstr "内容管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/10/name
 msgctxt "tag"
 msgid "Portal User Management"
-msgstr ""
+msgstr "控制台用户管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/11/name
 msgctxt "tag"
 msgid "API Account Management"
-msgstr ""
+msgstr "API 账号管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/12/name
 msgctxt "tag"
 msgid "Customer Management"
-msgstr ""
+msgstr "客户管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/13/name
 msgctxt "tag"
 msgid "API Call History"
-msgstr ""
+msgstr "API 调用历史"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/14/name
 msgctxt "tag"
 msgid "CDN Product Management"
-msgstr ""
+msgstr "CDN 产品管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/15/name
 msgctxt "tag"
 msgid "API Access Control"
-msgstr ""
+msgstr "API 访问控制"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/16/name
 msgctxt "tag"
 msgid "Webhooks"
-msgstr ""
+msgstr "Webhook"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/17/name
 msgctxt "tag"
 msgid "Log Configuration Management"
-msgstr ""
+msgstr "日志配置管理"
 
 #. Tag name, shown in the menu. Translated into x-displayName.
 #. /tags/18/name
 msgctxt "tag"
 msgid "Log Aggregation Points"
-msgstr ""
+msgstr "日志汇聚点"
 
 #. /info/title
 msgid "CDN Pro API Specification"
-msgstr ""
+msgstr "CDN Pro API 规范"
 
 #. /info/description
 msgid ""
@@ -131,6 +131,11 @@ msgid ""
 "CDNProCLI/tree/master/cdn/js\">JavaScript</a>. It includes the \"cdnapi.sh\" "
 "shell script mentioned in this document's examples.</p>"
 msgstr ""
+"您可以通过 CDN Pro API 管理 CDN Pro 服务。<p><a href=\"https://github.com/"
+"mileweb/CDNProCLI\">CDNProCLI</a> 是一个命令行工具，便于在 <a href=\"https://"
+"github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> 和 <a "
+"href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</"
+"a> 中调用 API。本文档示例中使用的 \"cdnapi.sh\" 脚本就包含在其中。</p>"
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/get/description
 msgid "Get the detailed configuration of a property version."
@@ -1139,7 +1144,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/get/summary
 msgid "Get a property version"
-msgstr ""
+msgstr "获取加速项目版本"
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/get/parameters/0/description
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/patch/parameters/0/description
@@ -1163,7 +1168,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/patch/summary
 msgid "Update a property version"
-msgstr ""
+msgstr "修改加速项目版本"
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/patch/responses/204/description
 msgid "Indicates the property version was successfully updated."
@@ -1220,7 +1225,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/delete/summary
 msgid "Delete a property version"
-msgstr ""
+msgstr "删除加速项目版本"
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/delete/responses/204/description
 msgid "The property version was deleted."
@@ -1246,7 +1251,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}/get/summary
 msgid "Get a property"
-msgstr ""
+msgstr "获取加速项目"
 
 #. /paths/~1cdn~1properties~1{propertyID}/get/responses/200/description
 msgid ""
@@ -1320,7 +1325,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}/patch/summary
 msgid "Update a property"
-msgstr ""
+msgstr "修改加速项目"
 
 #. /paths/~1cdn~1properties~1{propertyID}/patch/responses/200/description
 msgid "This response indicates the property was successfully updated."
@@ -1367,7 +1372,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}/delete/summary
 msgid "Delete a Property"
-msgstr ""
+msgstr "删除加速项目"
 
 #. /paths/~1cdn~1properties~1{propertyID}/delete/description
 msgid "Delete a property by its ID."
@@ -1390,7 +1395,7 @@ msgstr ""
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/summary
 msgid "Get an edge hostname"
-msgstr ""
+msgstr "获取调度域名"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/description
 msgid "The response body contains details of the edge hostname."
@@ -1724,7 +1729,7 @@ msgstr ""
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/delete/summary
 msgid "Delete an edge hostname"
-msgstr ""
+msgstr "删除调度域名"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/delete/responses/204/description
 msgid "The edge hostname was successfully deleted."
@@ -1758,7 +1763,7 @@ msgstr ""
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/put/summary
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/patch/summary
 msgid "Update an edge hostname"
-msgstr ""
+msgstr "修改调度域名"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/put/responses/204/description
 msgid "The edge hostname was updated."
@@ -1829,7 +1834,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions/get/summary
 msgid "Get list of property versions"
-msgstr ""
+msgstr "获取加速项目版本列表"
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions/get/responses/200/description
 msgid "Returns a list of property versions."
@@ -1922,7 +1927,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions/post/summary
 msgid "Create a property version"
-msgstr ""
+msgstr "创建加速项目版本"
 
 #. /paths/~1cdn~1properties~1{propertyID}~1versions/post/responses/201/description
 msgid ""
@@ -1962,7 +1967,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties/post/summary
 msgid "Create a property"
-msgstr ""
+msgstr "创建加速项目"
 
 #. /paths/~1cdn~1properties/post/responses/201/description
 msgid ""
@@ -2004,7 +2009,7 @@ msgstr ""
 
 #. /paths/~1cdn~1properties/get/summary
 msgid "Get list of properties"
-msgstr ""
+msgstr "获取加速项目列表"
 
 #. /paths/~1cdn~1properties/get/responses/200/description
 msgid ""
@@ -2222,7 +2227,7 @@ msgstr ""
 
 #. /paths/~1cdn~1edgeHostnames/post/summary
 msgid "Create an edge hostname"
-msgstr ""
+msgstr "创建调度域名"
 
 #. /paths/~1cdn~1edgeHostnames/post/responses/201/description
 msgid ""
@@ -2273,7 +2278,7 @@ msgstr ""
 
 #. /paths/~1cdn~1edgeHostnames/get/summary
 msgid "Get a list of edge hostnames"
-msgstr ""
+msgstr "获取调度域名列表"
 
 #. /paths/~1cdn~1edgeHostnames/get/responses/200/description
 msgid "The response contains edge hostnames matching the criteria."
@@ -2383,7 +2388,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates/post/summary
 msgid "Create a certificate"
-msgstr ""
+msgstr "创建证书"
 
 #. /paths/~1cdn~1certificates/post/responses/201/description
 msgid ""
@@ -2623,7 +2628,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates/get/summary
 msgid "Get list of certificates"
-msgstr ""
+msgstr "获取证书列表"
 
 #. /paths/~1cdn~1certificates/get/responses/200/description
 msgid "The response contains a list of certificates."
@@ -2808,7 +2813,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates~1{certificateID}/get/summary
 msgid "Get a certificate"
-msgstr ""
+msgstr "获取证书"
 
 #. /paths/~1cdn~1certificates~1{certificateID}/get/responses/200/description
 msgid "The response body contains information about the certificate."
@@ -2919,7 +2924,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates~1{certificateID}/patch/summary
 msgid "Update a certificate"
-msgstr ""
+msgstr "修改证书"
 
 #. /paths/~1cdn~1certificates~1{certificateID}/patch/responses/201/description
 msgid ""
@@ -3036,7 +3041,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates~1{certificateID}/delete/summary
 msgid "Delete a certificate"
-msgstr ""
+msgstr "删除证书"
 
 #. /paths/~1cdn~1certificates~1{certificateID}/delete/responses/204/description
 msgid "This response is returned if the certificate was successfully deleted."
@@ -3060,7 +3065,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1csr/get/summary
 msgid "Download the CSR"
-msgstr ""
+msgstr "下载 CSR"
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1csr/get/description
 msgid ""
@@ -3127,7 +3132,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/get/summary
 msgid "Get a certificate version's details"
-msgstr ""
+msgstr "获取证书版本详情"
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/get/responses/200/description
 msgid "The response contains details about the version of the certificate."
@@ -3253,7 +3258,7 @@ msgstr ""
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/delete/summary
 msgid "Delete the latest version of a certificate"
-msgstr ""
+msgstr "删除证书的最新版本"
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/delete/responses/204/description
 msgid "The certificate version was deleted."
@@ -3279,7 +3284,7 @@ msgstr ""
 
 #. /paths/~1cdn~1validations/get/summary
 msgid "Get list of property validation tasks"
-msgstr ""
+msgstr "获取加速项目验证任务列表"
 
 #. /paths/~1cdn~1validations/get/responses/200/description
 msgid "A list of validation tasks"
@@ -3416,7 +3421,7 @@ msgstr ""
 
 #. /paths/~1cdn~1validations/post/summary
 msgid "Create a validation task"
-msgstr ""
+msgstr "创建验证任务"
 
 #. /paths/~1cdn~1validations/post/responses/201/description
 msgid ""
@@ -3470,7 +3475,7 @@ msgstr ""
 
 #. /paths/~1cdn~1validations~1{id}/get/summary
 msgid "Get property validation task"
-msgstr ""
+msgstr "获取加速项目验证任务"
 
 #. /paths/~1cdn~1validations~1{id}/get/responses/200/description
 msgid ""
@@ -3544,7 +3549,7 @@ msgstr ""
 
 #. /paths/~1cdn~1deploymentTasks/get/summary
 msgid "Get list of deployment tasks"
-msgstr ""
+msgstr "获取部署任务列表"
 
 #. /paths/~1cdn~1deploymentTasks/get/responses/200/description
 msgid "A list of deployment tasks is returned in the response body."
@@ -3682,7 +3687,7 @@ msgstr ""
 
 #. /paths/~1cdn~1deploymentTasks/post/summary
 msgid "Create a deployment task"
-msgstr ""
+msgstr "创建部署任务"
 
 #. /paths/~1cdn~1deploymentTasks/post/responses/201/description
 msgid ""
@@ -3846,7 +3851,7 @@ msgstr ""
 
 #. /paths/~1cdn~1deploymentTasks~1{id}/get/summary
 msgid "Get deployment task"
-msgstr ""
+msgstr "获取部署任务"
 
 #. /paths/~1cdn~1deploymentTasks~1{id}/get/responses/200/description
 msgid "The response body contains details about the deployment task."
@@ -3901,7 +3906,7 @@ msgstr ""
 
 #. /paths/~1cdn~1hostnames/get/summary
 msgid "Get list of hostnames that have been deployed"
-msgstr ""
+msgstr "获取已部署的加速域名列表"
 
 #. /paths/~1cdn~1hostnames/get/responses/200/description
 msgid "The response contains a list of hostnames that have been deployed."
@@ -4023,7 +4028,7 @@ msgstr ""
 
 #. /paths/~1cdn~1hostnames~1{hostname}/get/summary
 msgid "Get information about a specific hostname"
-msgstr ""
+msgstr "获取指定加速域名的信息"
 
 #. /paths/~1cdn~1hostnames~1{hostname}/get/responses/200/description
 msgid ""
@@ -4040,7 +4045,7 @@ msgstr ""
 
 #. /paths/~1cdn~1hostnames~1historical/get/summary
 msgid "Get historical information about hostnames"
-msgstr ""
+msgstr "获取加速域名的历史信息"
 
 #. /paths/~1cdn~1hostnames~1historical/get/responses/200/description
 msgid "The response body contains a list of hostnames."
@@ -4095,7 +4100,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1vol/post/summary
 msgid "Get edge traffic volume"
-msgstr ""
+msgstr "获取边缘流量"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/description
@@ -4322,7 +4327,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1volOrigin/post/summary
 msgid "Get origin traffic volume"
-msgstr ""
+msgstr "获取回源流量"
 
 #. /paths/~1cdn~1report~1volOrigin/post/description
 msgid ""
@@ -4344,7 +4349,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1req/post/summary
 msgid "Get edge requests"
-msgstr ""
+msgstr "获取边缘请求数"
 
 #. /paths/~1cdn~1report~1req/post/description
 msgid ""
@@ -4378,7 +4383,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1bandwidth/post/summary
 msgid "Get edge bandwidth "
-msgstr ""
+msgstr "获取边缘带宽"
 
 #. /paths/~1cdn~1report~1bandwidth/post/description
 msgid ""
@@ -4410,7 +4415,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1statusCodeDetails/post/summary
 msgid "Get edge status code details"
-msgstr ""
+msgstr "获取边缘状态码详情"
 
 #. /paths/~1cdn~1report~1statusCodeDetails/post/responses/200/content/application~1json/schema/title
 #. /paths/~1cdn~1report~1statusCodeDetailsOrigin/post/responses/200/content/application~1json/schema/title
@@ -4479,7 +4484,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1reqOrigin/post/summary
 msgid "Get the number of requests to origin"
-msgstr ""
+msgstr "获取回源请求数"
 
 #. /paths/~1cdn~1report~1reqOrigin/post/description
 msgid ""
@@ -4491,7 +4496,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1statusCodeDetailsOrigin/post/summary
 msgid "Get origin status code details"
-msgstr ""
+msgstr "获取回源状态码详情"
 
 #. /paths/~1cdn~1report~1statusCodeDetailsOrigin/post/description
 msgid ""
@@ -4504,7 +4509,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1volInterm/post/summary
 msgid "Get the intermediate traffic volume"
-msgstr ""
+msgstr "获取中间层流量"
 
 #. /paths/~1cdn~1report~1volInterm/post/description
 msgid ""
@@ -4517,7 +4522,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1upVol/post/summary
 msgid "Get the edge upload traffic volume"
-msgstr ""
+msgstr "获取边缘上传流量"
 
 #. /paths/~1cdn~1report~1upVol/post/description
 msgid ""
@@ -4532,7 +4537,7 @@ msgstr ""
 
 #. /paths/~1cdn~1annotations/post/summary
 msgid "Create an annotation for reports"
-msgstr ""
+msgstr "创建报表注释"
 
 #. /paths/~1cdn~1annotations/post/responses/201/description
 msgid ""
@@ -4609,7 +4614,7 @@ msgstr ""
 
 #. /paths/~1cdn~1purges/post/summary
 msgid "Create a purge request"
-msgstr ""
+msgstr "创建刷新请求"
 
 #. /paths/~1cdn~1purges/post/responses/201/description
 msgid ""
@@ -4749,7 +4754,7 @@ msgstr ""
 
 #. /paths/~1cdn~1purges/get/summary
 msgid "Get list of purge requests"
-msgstr ""
+msgstr "获取刷新请求列表"
 
 #. /paths/~1cdn~1purges/get/responses/200/description
 msgid "The response contains a list of purge requests."
@@ -4913,7 +4918,7 @@ msgstr ""
 
 #. /paths/~1cdn~1annotationsList/post/summary
 msgid "Get list of annotations"
-msgstr ""
+msgstr "获取注释列表"
 
 #. /paths/~1cdn~1annotationsList/post/responses/200/description
 msgid "The response body contains a list of annotations."
@@ -5039,7 +5044,7 @@ msgstr ""
 
 #. /paths/~1cdn~1annotations~1{id}/delete/summary
 msgid "Delete an annotation"
-msgstr ""
+msgstr "删除注释"
 
 #. /paths/~1cdn~1annotations~1{id}/delete/responses/204/description
 msgid "The annotation was successfully deleted."
@@ -5059,7 +5064,7 @@ msgstr ""
 
 #. /paths/~1cdn~1annotations~1{id}/get/summary
 msgid "Get an annotation"
-msgstr ""
+msgstr "获取注释"
 
 #. /paths/~1cdn~1annotations~1{id}/get/responses/200/description
 msgid "The response contains details about the annotation."
@@ -5073,7 +5078,7 @@ msgstr ""
 
 #. /paths/~1cdn~1annotations~1{id}/patch/summary
 msgid "Update an annotation"
-msgstr ""
+msgstr "修改注释"
 
 #. /paths/~1cdn~1annotations~1{id}/patch/responses/204/description
 msgid "No Content"
@@ -5102,7 +5107,7 @@ msgstr ""
 
 #. /paths/~1cdn~1purges~1{id}/get/summary
 msgid "Get purge request status"
-msgstr ""
+msgstr "获取刷新请求状态"
 
 #. /paths/~1cdn~1purges~1{id}/get/responses/200/description
 msgid "The response contains details about the purge request."
@@ -5189,7 +5194,7 @@ msgstr ""
 
 #. /paths/~1cdn~1purges~1purgeSummary/get/summary
 msgid "Get purge summary"
-msgstr ""
+msgstr "获取刷新汇总"
 
 #. /paths/~1cdn~1purges~1purgeSummary/get/responses/200/description
 msgid ""
@@ -5256,7 +5261,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1volSummary/post/summary
 #. /paths/~1cdn~1report~1volSummary/get/summary
 msgid "Get a summary of traffic volume"
-msgstr ""
+msgstr "获取流量汇总"
 
 #. /paths/~1cdn~1report~1volSummary/post/responses/200/description
 #. /paths/~1cdn~1report~1volSummary/post/responses/200/content/application~1json/schema/description
@@ -5456,7 +5461,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1contacts/post/summary
 msgid "Create a portal user account"
-msgstr ""
+msgstr "创建控制台用户账号"
 
 #. /paths/~1ngadmin~1contacts/post/responses/201/description
 msgid ""
@@ -5704,7 +5709,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1contacts/get/summary
 msgid "Get list of portal user accounts"
-msgstr ""
+msgstr "获取控制台用户账号列表"
 
 #. /paths/~1ngadmin~1contacts/get/responses/200/description
 msgid "The response body contains a list of portal users."
@@ -5820,7 +5825,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apiAccounts~1{id}/get/summary
 msgid "Get one API account"
-msgstr ""
+msgstr "获取单个 API 账号"
 
 #. /paths/~1ngadmin~1apiAccounts~1{id}/get/responses/200/description
 msgid "The response body contains details about the API account."
@@ -5891,7 +5896,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apiAccounts~1{id}/patch/summary
 msgid "Update an API account"
-msgstr ""
+msgstr "修改 API 账号"
 
 #. /paths/~1ngadmin~1apiAccounts~1{id}/patch/responses/200/description
 msgid "The account was successfully updated."
@@ -5937,7 +5942,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apiAccounts~1{id}/delete/summary
 msgid "Delete an API account"
-msgstr ""
+msgstr "删除 API 账号"
 
 #. /paths/~1ngadmin~1apiAccounts~1{id}/delete/responses/204/description
 msgid "The API account was deleted."
@@ -5953,7 +5958,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apiAccounts/post/summary
 msgid "Create an API account"
-msgstr ""
+msgstr "创建 API 账号"
 
 #. /paths/~1ngadmin~1apiAccounts/post/responses/201/description
 msgid ""
@@ -6044,7 +6049,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apiAccounts/get/summary
 msgid "Get a list of API accounts"
-msgstr ""
+msgstr "获取 API 账号列表"
 
 #. /paths/~1ngadmin~1apiAccounts/get/responses/200/description
 msgid "List of API accounts."
@@ -6136,7 +6141,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1contacts~1{id}/get/summary
 msgid "Get a portal user"
-msgstr ""
+msgstr "获取控制台用户"
 
 #. /paths/~1ngadmin~1contacts~1{id}/get/responses/200/description
 msgid "The response body contains details about the user."
@@ -6198,7 +6203,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1contacts~1{id}/delete/summary
 msgid "Delete a portal user"
-msgstr ""
+msgstr "删除控制台用户"
 
 #. /paths/~1ngadmin~1contacts~1{id}/delete/responses/204/description
 msgid "The user was successfully deleted."
@@ -6214,7 +6219,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1contacts~1{id}/patch/summary
 msgid "Update a portal user"
-msgstr ""
+msgstr "修改控制台用户"
 
 #. /paths/~1ngadmin~1contacts~1{id}/patch/responses/200/description
 msgid "The user account was updated."
@@ -6259,7 +6264,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1edgeHostnameReq/post/summary
 msgid "Get edge hostname statistics"
-msgstr ""
+msgstr "获取调度域名统计数据"
 
 #. /paths/~1cdn~1report~1edgeHostnameReq/post/responses/200/description
 msgid "The response contains the data.  It is always in UTC time."
@@ -6306,7 +6311,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1edgeHostnameReqSummary/post/summary
 #. /paths/~1cdn~1report~1edgeHostnameReqSummary/get/summary
 msgid "Get edge hostname summary statistics"
-msgstr ""
+msgstr "获取调度域名汇总统计数据"
 
 #. /paths/~1cdn~1report~1edgeHostnameReqSummary/post/responses/200/description
 #. /paths/~1cdn~1report~1edgeHostnameReqSummary/post/responses/200/content/application~1json/schema/description
@@ -6391,7 +6396,7 @@ msgstr ""
 
 #. /paths/~1cdn~1isps/get/summary
 msgid "Get a list of ISPs"
-msgstr ""
+msgstr "获取运营商列表"
 
 #. /paths/~1cdn~1isps/get/responses/200/description
 msgid ""
@@ -6443,7 +6448,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1customers~1{id}/get/summary
 msgid "Get details about a customer"
-msgstr ""
+msgstr "获取客户详情"
 
 #. /paths/~1ngadmin~1customers~1{id}/get/responses/200/description
 msgid "The response body contains details about the customer account."
@@ -6775,7 +6780,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1customers~1{id}/patch/summary
 msgid "Update a customer"
-msgstr ""
+msgstr "修改客户"
 
 #. /paths/~1ngadmin~1customers~1{id}/patch/responses/200/description
 msgid ""
@@ -6832,7 +6837,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1customers~1{id}/delete/summary
 msgid "Delete a customer"
-msgstr ""
+msgstr "删除客户"
 
 #. /paths/~1ngadmin~1customers~1{id}/delete/responses/204/description
 msgid "The customer was deleted."
@@ -6860,7 +6865,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1customers/post/summary
 msgid "Create a customer"
-msgstr ""
+msgstr "创建客户"
 
 #. /paths/~1ngadmin~1customers/post/responses/201/description
 msgid ""
@@ -6950,7 +6955,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1customers/get/summary
 msgid "Get list of customers"
-msgstr ""
+msgstr "获取客户列表"
 
 #. /paths/~1ngadmin~1customers/get/responses/200/description
 msgid "The response contains a list of customers."
@@ -7071,7 +7076,7 @@ msgstr ""
 
 #. /paths/~1cdn~1clientRegions/get/summary
 msgid "Get client regions"
-msgstr ""
+msgstr "获取客户端区域"
 
 #. /paths/~1cdn~1clientRegions/get/responses/200/description
 msgid ""
@@ -7113,7 +7118,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apicalls/get/summary
 msgid "Get a list of API calls"
-msgstr ""
+msgstr "获取 API 调用列表"
 
 #. /paths/~1ngadmin~1apicalls/get/responses/200/description
 msgid "The response body contains a summary of API calls that have been made."
@@ -7316,7 +7321,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apicalls~1{id}/get/summary
 msgid "Get details about an API call"
-msgstr ""
+msgstr "获取 API 调用详情"
 
 #. /paths/~1ngadmin~1apicalls~1{id}/get/responses/200/description
 msgid "The response body contains details about an API call."
@@ -7397,7 +7402,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1apicalls~1counts/get/summary
 msgid "Count API calls"
-msgstr ""
+msgstr "统计 API 调用次数"
 
 #. /paths/~1ngadmin~1apicalls~1counts/get/description
 msgid ""
@@ -7483,7 +7488,7 @@ msgstr ""
 
 #. /paths/~1cdn~1systemConfigs/get/summary
 msgid "Get system configuration"
-msgstr ""
+msgstr "获取系统配置"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/description
 msgid "The response contains the system configuration."
@@ -7612,7 +7617,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas/post/summary
 msgid "Create a service quota for a customer"
-msgstr ""
+msgstr "为客户创建服务配额"
 
 #. /paths/~1cdn~1serviceQuotas/post/responses/201/description
 msgid ""
@@ -8005,7 +8010,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas/get/summary
 msgid "Get a list of service quotas"
-msgstr ""
+msgstr "获取服务配额列表"
 
 #. /paths/~1cdn~1serviceQuotas/get/responses/200/description
 msgid "The response contains a list of service quotas."
@@ -8159,7 +8164,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/get/summary
 msgid "Get a service quota by service quota ID"
-msgstr ""
+msgstr "按服务配额 ID 获取服务配额"
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/get/responses/200/description
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/responses/200/description
@@ -8299,7 +8304,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/patch/summary
 msgid "Update a service quota by service quota ID"
-msgstr ""
+msgstr "按服务配额 ID 修改服务配额"
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/patch/responses/200/description
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/patch/responses/200/description
@@ -8379,7 +8384,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/delete/summary
 msgid "Delete a service quota by service quota ID"
-msgstr ""
+msgstr "按服务配额 ID 删除服务配额"
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/delete/responses/204/description
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/delete/responses/204/description
@@ -8408,7 +8413,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1fastOriginReq/post/summary
 msgid "Get origin fast route requests"
-msgstr ""
+msgstr "获取回源快速通道请求数"
 
 #. /paths/~1cdn~1report~1fastOriginReq/post/description
 msgid ""
@@ -8430,7 +8435,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1fastOriginVol/post/summary
 msgid "Get origin fast route traffic volume"
-msgstr ""
+msgstr "获取回源快速通道流量"
 
 #. /paths/~1cdn~1report~1fastOriginVol/post/responses/200/content/application~1json/schema/properties/dataUnit/description
 msgid "Unit of measurement."
@@ -8488,7 +8493,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/summary
 msgid "Get the service quota for a customer"
-msgstr ""
+msgstr "获取客户的服务配额"
 
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/responses/404/description
 msgid ""
@@ -8502,7 +8507,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/patch/summary
 msgid "Update the service quota for a customer"
-msgstr ""
+msgstr "修改客户的服务配额"
 
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/patch/description
 msgid ""
@@ -8512,7 +8517,7 @@ msgstr ""
 
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/delete/summary
 msgid "Delete the service quota for a customer"
-msgstr ""
+msgstr "删除客户的服务配额"
 
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/delete/description
 msgid ""
@@ -8524,7 +8529,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1cpuTime/post/summary
 msgid "Get CPU time used"
-msgstr ""
+msgstr "获取 CPU 使用时间"
 
 #. /paths/~1cdn~1report~1cpuTime/post/parameters/0/description
 #. /paths/~1cdn~1report~1volL7Summary/post/parameters/3/description
@@ -8552,7 +8557,7 @@ msgstr ""
 
 #. /paths/~1cdn~1hostnames~1historical~1{hostname}/get/summary
 msgid "Get historical information about one hostname"
-msgstr ""
+msgstr "获取单个加速域名的历史信息"
 
 #. /paths/~1cdn~1hostnames~1historical~1{hostname}/get/responses/200/description
 msgid "The response body contains details about the hostname."
@@ -8608,7 +8613,7 @@ msgstr ""
 
 #. /paths/~1cdn~1prefetches/post/summary
 msgid "Create a prefetch request"
-msgstr ""
+msgstr "创建预取请求"
 
 #. /paths/~1cdn~1prefetches/post/responses/201/description
 msgid ""
@@ -8691,7 +8696,7 @@ msgstr ""
 
 #. /paths/~1cdn~1prefetches/get/summary
 msgid "Get list of prefetch requests"
-msgstr ""
+msgstr "获取预取请求列表"
 
 #. /paths/~1cdn~1prefetches/get/responses/200/description
 msgid "The response contains a list of prefetch requests."
@@ -8825,7 +8830,7 @@ msgstr ""
 
 #. /paths/~1cdn~1prefetches~1{id}/get/summary
 msgid "Get prefetch request status"
-msgstr ""
+msgstr "获取预取请求状态"
 
 #. /paths/~1cdn~1prefetches~1{id}/get/responses/200/description
 msgid "The response body contains a summary of the prefetch request."
@@ -8885,7 +8890,7 @@ msgstr ""
 
 #. /paths/~1cdn~1apiPermissions/post/summary
 msgid "Create an API permission"
-msgstr ""
+msgstr "创建 API 权限"
 
 #. /paths/~1cdn~1apiPermissions/post/responses/201/description
 msgid ""
@@ -9145,7 +9150,7 @@ msgstr ""
 
 #. /paths/~1cdn~1apiPermissions~1{id}/get/summary
 msgid "Get an API permission"
-msgstr ""
+msgstr "获取 API 权限"
 
 #. /paths/~1cdn~1apiPermissions~1{id}/get/responses/200/description
 msgid "The response body contains the API account's permissions."
@@ -9211,7 +9216,7 @@ msgstr ""
 
 #. /paths/~1cdn~1apiPermissions~1{id}/patch/summary
 msgid "Update an API permission"
-msgstr ""
+msgstr "修改 API 权限"
 
 #. /paths/~1cdn~1apiPermissions~1{id}/patch/responses/204/description
 msgid "The account's API permissions were updated."
@@ -9265,7 +9270,7 @@ msgstr ""
 
 #. /paths/~1cdn~1apiPermissions~1{id}/delete/summary
 msgid "Delete an API permission"
-msgstr ""
+msgstr "删除 API 权限"
 
 #. /paths/~1cdn~1apiPermissions~1{id}/delete/responses/204/description
 msgid ""
@@ -9280,7 +9285,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1reqSummary/post/summary
 #. /paths/~1cdn~1report~1reqSummary/get/summary
 msgid "Get a summary of requests"
-msgstr ""
+msgstr "获取请求数汇总"
 
 #. /paths/~1cdn~1report~1reqSummary/post/responses/200/description
 #. /paths/~1cdn~1report~1reqSummary/post/responses/200/content/application~1json/schema/description
@@ -9379,7 +9384,7 @@ msgstr ""
 
 #. /paths/~1cdn~1webhooks/get/summary
 msgid "Get a list of webhooks"
-msgstr ""
+msgstr "获取 Webhook 列表"
 
 #. /paths/~1cdn~1webhooks/get/responses/200/description
 msgid "The response body contains a list of webhooks."
@@ -9475,7 +9480,7 @@ msgstr ""
 
 #. /paths/~1cdn~1webhooks/post/summary
 msgid "Create a webhook"
-msgstr ""
+msgstr "创建 Webhook"
 
 #. /paths/~1cdn~1webhooks/post/responses/201/description
 msgid ""
@@ -9561,7 +9566,7 @@ msgstr ""
 
 #. /paths/~1cdn~1webhooks~1{id}/get/summary
 msgid "Get a webhook"
-msgstr ""
+msgstr "获取 Webhook"
 
 #. /paths/~1cdn~1webhooks~1{id}/get/responses/200/description
 msgid "The response body contains details about the webhook."
@@ -9606,7 +9611,7 @@ msgstr ""
 
 #. /paths/~1cdn~1webhooks~1{id}/patch/summary
 msgid "Update a webhook"
-msgstr ""
+msgstr "修改 Webhook"
 
 #. /paths/~1cdn~1webhooks~1{id}/patch/responses/204/description
 msgid "The webhook was successfully updated."
@@ -9628,7 +9633,7 @@ msgstr ""
 
 #. /paths/~1cdn~1webhooks~1{id}/delete/summary
 msgid "Delete a webhook"
-msgstr ""
+msgstr "删除 Webhook"
 
 #. /paths/~1cdn~1webhooks~1{id}/delete/responses/204/description
 msgid "The webhook was deleted."
@@ -9646,7 +9651,7 @@ msgstr ""
 
 #. /paths/~1cdn~1secrets/post/summary
 msgid "Create a secret"
-msgstr ""
+msgstr "创建保密信息"
 
 #. /paths/~1cdn~1secrets/post/responses/201/description
 msgid ""
@@ -9710,7 +9715,7 @@ msgstr ""
 
 #. /paths/~1cdn~1secrets/get/summary
 msgid "Get a list of secrets"
-msgstr ""
+msgstr "获取保密信息列表"
 
 #. /paths/~1cdn~1secrets/get/responses/200/description
 msgid "The response body contains a list of secrets."
@@ -9802,7 +9807,7 @@ msgstr ""
 
 #. /paths/~1cdn~1purges~1purgeTokens/get/summary
 msgid "Get available purge requests"
-msgstr ""
+msgstr "获取可用的刷新请求数"
 
 #. /paths/~1cdn~1purges~1purgeTokens/get/responses/200/description
 msgid "The response indicates the number of available purge requests."
@@ -9828,7 +9833,7 @@ msgstr ""
 
 #. /paths/~1cdn~1secrets~1{secretID}/get/summary
 msgid "Get a secret"
-msgstr ""
+msgstr "获取保密信息"
 
 #. /paths/~1cdn~1secrets~1{secretID}/get/responses/200/description
 msgid "The response body contains details about the secret."
@@ -9903,7 +9908,7 @@ msgstr ""
 
 #. /paths/~1cdn~1secrets~1{secretID}/patch/summary
 msgid "Update a secret"
-msgstr ""
+msgstr "修改保密信息"
 
 #. /paths/~1cdn~1secrets~1{secretID}/patch/responses/204/description
 msgid "The secret was successfully updated."
@@ -9957,7 +9962,7 @@ msgstr ""
 
 #. /paths/~1cdn~1secrets~1{secretID}/delete/summary
 msgid "Delete a secret"
-msgstr ""
+msgstr "删除保密信息"
 
 #. /paths/~1cdn~1secrets~1{secretID}/delete/responses/204/description
 msgid "The secret has been deleted."
@@ -9984,7 +9989,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logConfigs/get/summary
 msgid "Get a list of log configurations"
-msgstr ""
+msgstr "获取日志配置列表"
 
 #. /paths/~1cdn~1report~1logConfigs/get/responses/200/description
 msgid "The response body contains a summary of the log configurations."
@@ -10064,7 +10069,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logConfigs/post/summary
 msgid "Create a log configuration"
-msgstr ""
+msgstr "创建日志配置"
 
 #. /paths/~1cdn~1report~1logConfigs/post/responses/201/description
 msgid ""
@@ -10229,7 +10234,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logConfigs~1{id}/get/summary
 msgid "Get a log configuration"
-msgstr ""
+msgstr "获取日志配置"
 
 #. /paths/~1cdn~1report~1logConfigs~1{id}/get/responses/200/description
 msgid "The response body contains the details of the log configuration."
@@ -10347,7 +10352,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logConfigs~1{id}/patch/summary
 msgid "Update a log configuration"
-msgstr ""
+msgstr "修改日志配置"
 
 #. /paths/~1cdn~1report~1logConfigs~1{id}/patch/responses/204/description
 msgid "The log configuration was updated."
@@ -10365,7 +10370,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logConfigs~1{id}/delete/summary
 msgid "Delete a log configuration"
-msgstr ""
+msgstr "删除日志配置"
 
 #. /paths/~1cdn~1report~1logConfigs~1{id}/delete/responses/204/description
 msgid "The log configuration was deleted."
@@ -10377,7 +10382,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logDownload/post/summary
 msgid "Get access logs for hostnames"
-msgstr ""
+msgstr "获取多个加速域名的访问日志"
 
 #. /paths/~1cdn~1report~1logDownload/post/responses/200/description
 #. /paths/~1cdn~1report~1logDownload/get/responses/200/description
@@ -10495,7 +10500,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1logDownload/get/summary
 msgid "Get access logs for a hostname"
-msgstr ""
+msgstr "获取单个加速域名的访问日志"
 
 #. /paths/~1cdn~1report~1logDownload/get/responses/200/content/application~1json/schema/properties/logs/items/properties/logUrl/description
 msgid ""
@@ -10562,7 +10567,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1bandwidthSummary/post/summary
 #. /paths/~1cdn~1report~1bandwidthSummary/get/summary
 msgid "Get a summary of traffic bandwidth"
-msgstr ""
+msgstr "获取带宽汇总"
 
 #. /paths/~1cdn~1report~1bandwidthSummary/post/responses/200/description
 #. /paths/~1cdn~1report~1bandwidthSummary/get/responses/200/description
@@ -10649,7 +10654,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1edgeStatusSummary/post/summary
 #. /paths/~1cdn~1report~1edgeStatusSummary/get/summary
 msgid "Get a summary of status codes returned by edge servers"
-msgstr ""
+msgstr "获取边缘服务器返回的状态码汇总"
 
 #. /paths/~1cdn~1report~1edgeStatusSummary/post/responses/200/description
 #. /paths/~1cdn~1report~1edgeStatusSummary/get/responses/200/description
@@ -10768,7 +10773,7 @@ msgstr ""
 
 #. /paths/~1cdn~1publicIpList/get/summary
 msgid "Get IP addresses of the CDN"
-msgstr ""
+msgstr "获取 CDN 的 IP 地址"
 
 #. /paths/~1cdn~1publicIpList/get/responses/200/description
 msgid "The response body contains the IP addresses."
@@ -10806,7 +10811,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1originStatusSummary/post/summary
 #. /paths/~1cdn~1report~1originStatusSummary/get/summary
 msgid "Get a summary of status codes returned by origin servers"
-msgstr ""
+msgstr "获取源站返回的状态码汇总"
 
 #. /paths/~1cdn~1report~1originStatusSummary/post/description
 msgid ""
@@ -10839,7 +10844,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1cpuSummary/post/summary
 #. /paths/~1cdn~1report~1cpuSummary/get/summary
 msgid "Get a summary of CPU usage"
-msgstr ""
+msgstr "获取 CPU 使用汇总"
 
 #. /paths/~1cdn~1report~1cpuSummary/post/responses/200/description
 #. /paths/~1cdn~1report~1cpuSummary/get/responses/200/description
@@ -10906,7 +10911,7 @@ msgstr ""
 
 #. /paths/~1cdn~1prefetches~1prefetchTokens/get/summary
 msgid "Get available prefetch requests"
-msgstr ""
+msgstr "获取可用的预取请求数"
 
 #. /paths/~1cdn~1prefetches~1prefetchTokens/get/responses/200/description
 msgid "The response indicates the number of prefetches available."
@@ -10927,7 +10932,7 @@ msgstr ""
 
 #. /paths/~1cdn~1shields/get/summary
 msgid "Get a list of origin shields"
-msgstr ""
+msgstr "获取源站 Shield 列表"
 
 #. /paths/~1cdn~1shields/get/responses/200/description
 msgid ""
@@ -11039,7 +11044,7 @@ msgstr ""
 
 #. /paths/~1cdn~1shields~1{id}/get/summary
 msgid "Get a shield by its ID"
-msgstr ""
+msgstr "按 ID 获取 Shield"
 
 #. /paths/~1cdn~1shields~1{id}/get/responses/200/description
 msgid "The response body contains details about the shield."
@@ -11055,7 +11060,7 @@ msgstr ""
 
 #. /paths/~1cdn~1logAggregationPoints/get/summary
 msgid "Get a list of log aggregation points."
-msgstr ""
+msgstr "获取日志汇聚点列表。"
 
 #. /paths/~1cdn~1logAggregationPoints/get/responses/200/description
 msgid "The response contains a list of log aggregation points."
@@ -11107,7 +11112,7 @@ msgstr ""
 
 #. /paths/~1cdn~1logAggregationPoints/post/summary
 msgid "Create a log aggregation point"
-msgstr ""
+msgstr "创建日志汇聚点"
 
 #. /paths/~1cdn~1logAggregationPoints/post/responses/201/description
 msgid ""
@@ -11261,7 +11266,7 @@ msgstr ""
 
 #. /paths/~1cdn~1logAggregationPoints~1{id}/get/summary
 msgid "Get details about a log aggregation point"
-msgstr ""
+msgstr "获取日志汇聚点详情"
 
 #. /paths/~1cdn~1logAggregationPoints~1{id}/get/responses/200/description
 msgid "The response body contains details about a log aggregation point."
@@ -11327,7 +11332,7 @@ msgstr ""
 
 #. /paths/~1cdn~1logAggregationPoints~1{id}/delete/summary
 msgid "Delete a log aggregation point"
-msgstr ""
+msgstr "删除日志汇聚点"
 
 #. /paths/~1cdn~1logAggregationPoints~1{id}/delete/responses/204/description
 msgid "The log aggregation point was successfully deleted."
@@ -11343,7 +11348,7 @@ msgstr ""
 
 #. /paths/~1cdn~1logAggregationPoints~1{id}/patch/summary
 msgid "Update a log aggregation point"
-msgstr ""
+msgstr "修改日志汇聚点"
 
 #. /paths/~1cdn~1logAggregationPoints~1{id}/patch/responses/204/description
 msgid "The log aggregation point was updated."
@@ -11359,7 +11364,7 @@ msgstr ""
 
 #. /paths/~1ngadmin~1ipDetails/post/summary
 msgid "Check if IP addresses belong to the CDN Pro platform"
-msgstr ""
+msgstr "检查 IP 地址是否属于 CDN Pro 平台"
 
 #. /paths/~1ngadmin~1ipDetails/post/responses/200/description
 msgid ""
@@ -11398,7 +11403,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1volL7/post/summary
 msgid "Get the L7 traffic volume"
-msgstr ""
+msgstr "获取 7 层流量"
 
 #. /paths/~1cdn~1report~1volL7/post/description
 msgid ""
@@ -11440,7 +11445,7 @@ msgstr ""
 
 #. /paths/~1cdn~1report~1bandwidthL7/post/summary
 msgid "Get the L7 traffic bandwidth"
-msgstr ""
+msgstr "获取 7 层带宽"
 
 #. /paths/~1cdn~1report~1bandwidthL7/post/description
 msgid ""
@@ -11464,7 +11469,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1volL7Summary/post/summary
 #. /paths/~1cdn~1report~1volL7Summary/get/summary
 msgid "Get a summary of L7 traffic volume"
-msgstr ""
+msgstr "获取 7 层流量汇总"
 
 #. /paths/~1cdn~1report~1volL7Summary/post/responses/200/description
 #. /paths/~1cdn~1report~1volL7Summary/get/responses/200/description
@@ -11530,7 +11535,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1bandwidthL7Summary/post/summary
 #. /paths/~1cdn~1report~1bandwidthL7Summary/get/summary
 msgid "Get a summary of layer 7 traffic bandwidth"
-msgstr ""
+msgstr "获取 7 层带宽汇总"
 
 #. /paths/~1cdn~1report~1bandwidthL7Summary/post/responses/200/description
 #. /paths/~1cdn~1report~1bandwidthL7Summary/get/responses/200/description
@@ -11583,7 +11588,7 @@ msgstr ""
 
 #. /paths/~1cdn~1originFastRouteIpList/get/summary
 msgid "Get Origin Fast Route IP List"
-msgstr ""
+msgstr "获取回源快速通道 IP 列表"
 
 #. /paths/~1cdn~1originFastRouteIpList/get/responses/200/description
 msgid "The response body contains a list of IP addresses."
@@ -11612,7 +11617,7 @@ msgstr ""
 
 #. /paths/~1cdn~1stagingServers/get/summary
 msgid "Get a list of staging servers"
-msgstr ""
+msgstr "获取演练服务器列表"
 
 #. /paths/~1cdn~1stagingServers/get/responses/200/description
 msgid "The response body contains a list of staging servers that can be used."
@@ -11647,7 +11652,7 @@ msgstr ""
 
 #. /paths/~1cdn~1logAggregationPoints~1summaryReport/get/summary
 msgid "Get a summary of log aggregation points used during a period of time."
-msgstr ""
+msgstr "获取一段时间内所用日志汇聚点的汇总。"
 
 #. /paths/~1cdn~1logAggregationPoints~1summaryReport/get/responses/200/description
 msgid "The response body contains a summary of aggregation points' use."

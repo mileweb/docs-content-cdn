@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "CDN Pro API Specification",
+    "title": "CDN Pro API 规范",
     "version": "1.0",
-    "description": "CDN Pro APIs allow you to manage the CDN Pro service.  <p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> is a command line tool that facilitates API calls in <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> and <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a>. It includes the \"cdnapi.sh\" shell script mentioned in this document's examples.</p>",
+    "description": "您可以通过 CDN Pro API 管理 CDN Pro 服务。<p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> 是一个命令行工具，便于在 <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> 和 <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a> 中调用 API。本文档示例中使用的 \"cdnapi.sh\" 脚本就包含在其中。</p>",
     "contact": {
       "url": "https://www.{{siteDomain}}"
     }
@@ -817,7 +817,7 @@
             }
           }
         },
-        "summary": "Get a property version",
+        "summary": "获取加速项目版本",
         "x-codeSamples": [
           {
             "lang": "bash",
@@ -857,7 +857,7 @@
         }
       ],
       "patch": {
-        "summary": "Update a property version",
+        "summary": "修改加速项目版本",
         "x-codeSamples": [
           {
             "lang": "bash",
@@ -1561,7 +1561,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a property version",
+        "summary": "删除加速项目版本",
         "tags": [
           "Property Management"
         ],
@@ -1662,7 +1662,7 @@
         }
       ],
       "get": {
-        "summary": "Get a property",
+        "summary": "获取加速项目",
         "tags": [
           "Property Management"
         ],
@@ -1818,7 +1818,7 @@
         "tags": [
           "Property Management"
         ],
-        "summary": "Update a property",
+        "summary": "修改加速项目",
         "responses": {
           "200": {
             "description": "This response indicates the property was successfully updated."
@@ -1985,7 +1985,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a Property",
+        "summary": "删除加速项目",
         "description": "Delete a property by its ID.",
         "operationId": "deleteProperty",
         "responses": {
@@ -2095,7 +2095,7 @@
     },
     "/cdn/edgeHostnames/{edgeHostname}": {
       "get": {
-        "summary": "Get an edge hostname",
+        "summary": "获取调度域名",
         "tags": [
           "Edge Hostname Management"
         ],
@@ -2671,7 +2671,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete an edge hostname",
+        "summary": "删除调度域名",
         "tags": [
           "Edge Hostname Management"
         ],
@@ -2775,7 +2775,7 @@
         }
       ],
       "put": {
-        "summary": "Update an edge hostname",
+        "summary": "修改调度域名",
         "responses": {
           "204": {
             "description": "The edge hostname was updated."
@@ -3179,7 +3179,7 @@
         ]
       },
       "patch": {
-        "summary": "Update an edge hostname",
+        "summary": "修改调度域名",
         "operationId": "patch-cdn-edge-hostname",
         "responses": {
           "204": {
@@ -3566,7 +3566,7 @@
       "get": {
         "description": "Get a list of all property versions. A summary of each version including its status and associated hostnames is returned.",
         "operationId": "getPropertyVersions",
-        "summary": "Get list of property versions",
+        "summary": "获取加速项目版本列表",
         "x-codeSamples": [
           {
             "lang": "bash",
@@ -3862,7 +3862,7 @@
         }
       ],
       "post": {
-        "summary": "Create a property version",
+        "summary": "创建加速项目版本",
         "responses": {
           "201": {
             "description": "A new property version was successfully created. A Location header containing the URL of the new property version is returned. Example:  <code>Location: https://ngapi.{{siteDomain}}/cdn/properties/e0d1819863b856c42635ae17/versions/8</code>",
@@ -4576,7 +4576,7 @@
     "/cdn/properties": {
       "parameters": [],
       "post": {
-        "summary": "Create a property",
+        "summary": "创建加速项目",
         "responses": {
           "201": {
             "description": "The property was successfully created. A Location header containing the URL of the new property is returned. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/properties/8fdc9c949e986564cc24b149</code>",
@@ -5386,7 +5386,7 @@
         ]
       },
       "get": {
-        "summary": "Get list of properties",
+        "summary": "获取加速项目列表",
         "tags": [
           "Property Management"
         ],
@@ -5730,7 +5730,7 @@
     },
     "/cdn/edgeHostnames": {
       "post": {
-        "summary": "Create an edge hostname",
+        "summary": "创建调度域名",
         "tags": [
           "Edge Hostname Management"
         ],
@@ -6145,7 +6145,7 @@
         "x-internal": false
       },
       "get": {
-        "summary": "Get a list of edge hostnames",
+        "summary": "获取调度域名列表",
         "tags": [
           "Edge Hostname Management"
         ],
@@ -6414,7 +6414,7 @@
     },
     "/cdn/certificates": {
       "post": {
-        "summary": "Create a certificate",
+        "summary": "创建证书",
         "tags": [
           "Certificate Management"
         ],
@@ -6765,7 +6765,7 @@
         ]
       },
       "get": {
-        "summary": "Get list of certificates",
+        "summary": "获取证书列表",
         "tags": [
           "Certificate Management"
         ],
@@ -7101,7 +7101,7 @@
         }
       ],
       "get": {
-        "summary": "Get a certificate",
+        "summary": "获取证书",
         "tags": [
           "Certificate Management"
         ],
@@ -7408,7 +7408,7 @@
         ]
       },
       "patch": {
-        "summary": "Update a certificate",
+        "summary": "修改证书",
         "responses": {
           "201": {
             "description": "A new certificate version was successfully created. The Location header will be a URL to the new certificate version. Example:  <code>Location: https://ngapi.{{siteDomain}}/cdn/certificates/329f12c1fe6708c23c31e91f/versions/5</code>",
@@ -7729,7 +7729,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a certificate",
+        "summary": "删除证书",
         "responses": {
           "204": {
             "description": "This response is returned if the certificate was successfully deleted."
@@ -7823,7 +7823,7 @@
         }
       ],
       "get": {
-        "summary": "Download the CSR",
+        "summary": "下载 CSR",
         "tags": [
           "Certificate Management"
         ],
@@ -8010,7 +8010,7 @@
         }
       ],
       "get": {
-        "summary": "Get a certificate version's details",
+        "summary": "获取证书版本详情",
         "tags": [
           "Certificate Management"
         ],
@@ -8250,7 +8250,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete the latest version of a certificate",
+        "summary": "删除证书的最新版本",
         "operationId": "delete-cdn-certificates-certificateID-versions-version",
         "x-codeSamples": [
           {
@@ -8399,7 +8399,7 @@
     },
     "/cdn/validations": {
       "get": {
-        "summary": "Get list of property validation tasks",
+        "summary": "获取加速项目验证任务列表",
         "tags": [
           "Property Validation"
         ],
@@ -8723,7 +8723,7 @@
       },
       "parameters": [],
       "post": {
-        "summary": "Create a validation task",
+        "summary": "创建验证任务",
         "tags": [
           "Property Validation"
         ],
@@ -8852,7 +8852,7 @@
         }
       ],
       "get": {
-        "summary": "Get property validation task",
+        "summary": "获取加速项目验证任务",
         "tags": [
           "Property Validation"
         ],
@@ -9039,7 +9039,7 @@
     },
     "/cdn/deploymentTasks": {
       "get": {
-        "summary": "Get list of deployment tasks",
+        "summary": "获取部署任务列表",
         "tags": [
           "Deployment Management"
         ],
@@ -9346,7 +9346,7 @@
         ]
       },
       "post": {
-        "summary": "Create a deployment task",
+        "summary": "创建部署任务",
         "tags": [
           "Deployment Management"
         ],
@@ -9779,7 +9779,7 @@
         }
       ],
       "get": {
-        "summary": "Get deployment task",
+        "summary": "获取部署任务",
         "tags": [
           "Deployment Management"
         ],
@@ -10003,7 +10003,7 @@
     },
     "/cdn/hostnames": {
       "get": {
-        "summary": "Get list of hostnames that have been deployed",
+        "summary": "获取已部署的加速域名列表",
         "tags": [
           "Hostnames"
         ],
@@ -10260,7 +10260,7 @@
         }
       ],
       "get": {
-        "summary": "Get information about a specific hostname",
+        "summary": "获取指定加速域名的信息",
         "tags": [
           "Hostnames"
         ],
@@ -10393,7 +10393,7 @@
     },
     "/cdn/hostnames/historical": {
       "get": {
-        "summary": "Get historical information about hostnames",
+        "summary": "获取加速域名的历史信息",
         "tags": [
           "Hostnames"
         ],
@@ -10573,7 +10573,7 @@
     },
     "/cdn/report/vol": {
       "post": {
-        "summary": "Get edge traffic volume",
+        "summary": "获取边缘流量",
         "tags": [
           "Reports"
         ],
@@ -11075,7 +11075,7 @@
     },
     "/cdn/report/volOrigin": {
       "post": {
-        "summary": "Get origin traffic volume",
+        "summary": "获取回源流量",
         "responses": {
           "200": {
             "description": "The response contains the data. Note that it is always in UTC time.",
@@ -11495,7 +11495,7 @@
     },
     "/cdn/report/req": {
       "post": {
-        "summary": "Get edge requests",
+        "summary": "获取边缘请求数",
         "tags": [
           "Reports"
         ],
@@ -11906,7 +11906,7 @@
     },
     "/cdn/report/bandwidth": {
       "post": {
-        "summary": "Get edge bandwidth ",
+        "summary": "获取边缘带宽",
         "tags": [
           "Reports"
         ],
@@ -12317,7 +12317,7 @@
     },
     "/cdn/report/statusCodeDetails": {
       "post": {
-        "summary": "Get edge status code details",
+        "summary": "获取边缘状态码详情",
         "tags": [
           "Reports"
         ],
@@ -12934,7 +12934,7 @@
     },
     "/cdn/report/reqOrigin": {
       "post": {
-        "summary": "Get the number of requests to origin",
+        "summary": "获取回源请求数",
         "tags": [
           "Reports"
         ],
@@ -13345,7 +13345,7 @@
     },
     "/cdn/report/statusCodeDetailsOrigin": {
       "post": {
-        "summary": "Get origin status code details",
+        "summary": "获取回源状态码详情",
         "tags": [
           "Reports"
         ],
@@ -14022,7 +14022,7 @@
     },
     "/cdn/report/volInterm": {
       "post": {
-        "summary": "Get the intermediate traffic volume",
+        "summary": "获取中间层流量",
         "tags": [
           "Reports"
         ],
@@ -14416,7 +14416,7 @@
     },
     "/cdn/report/upVol": {
       "post": {
-        "summary": "Get the edge upload traffic volume",
+        "summary": "获取边缘上传流量",
         "tags": [
           "Reports"
         ],
@@ -14810,7 +14810,7 @@
     },
     "/cdn/annotations": {
       "post": {
-        "summary": "Create an annotation for reports",
+        "summary": "创建报表注释",
         "tags": [
           "Annotations for Reports"
         ],
@@ -14962,7 +14962,7 @@
     },
     "/cdn/purges": {
       "post": {
-        "summary": "Create a purge request",
+        "summary": "创建刷新请求",
         "tags": [
           "Content Management"
         ],
@@ -15150,7 +15150,7 @@
         }
       },
       "get": {
-        "summary": "Get list of purge requests",
+        "summary": "获取刷新请求列表",
         "responses": {
           "200": {
             "description": "The response contains a list of purge requests.",
@@ -15499,7 +15499,7 @@
     },
     "/cdn/annotationsList": {
       "post": {
-        "summary": "Get list of annotations",
+        "summary": "获取注释列表",
         "tags": [
           "Annotations for Reports"
         ],
@@ -15798,7 +15798,7 @@
         }
       ],
       "delete": {
-        "summary": "Delete an annotation",
+        "summary": "删除注释",
         "tags": [
           "Annotations for Reports"
         ],
@@ -15880,7 +15880,7 @@
         ]
       },
       "get": {
-        "summary": "Get an annotation",
+        "summary": "获取注释",
         "tags": [
           "Annotations for Reports"
         ],
@@ -16057,7 +16057,7 @@
         ]
       },
       "patch": {
-        "summary": "Update an annotation",
+        "summary": "修改注释",
         "tags": [
           "Annotations for Reports"
         ],
@@ -16229,7 +16229,7 @@
         }
       ],
       "get": {
-        "summary": "Get purge request status",
+        "summary": "获取刷新请求状态",
         "tags": [
           "Content Management"
         ],
@@ -16457,7 +16457,7 @@
     },
     "/cdn/purges/purgeSummary": {
       "get": {
-        "summary": "Get purge summary",
+        "summary": "获取刷新汇总",
         "tags": [
           "Content Management"
         ],
@@ -16619,7 +16619,7 @@
     },
     "/cdn/report/volSummary": {
       "post": {
-        "summary": "Get a summary of traffic volume",
+        "summary": "获取流量汇总",
         "tags": [
           "Reports"
         ],
@@ -17216,7 +17216,7 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get a summary of traffic volume",
+        "summary": "获取流量汇总",
         "operationId": "get-cdn-report-volSummary",
         "x-codeSamples": [
           {
@@ -17676,7 +17676,7 @@
     },
     "/ngadmin/contacts": {
       "post": {
-        "summary": "Create a portal user account",
+        "summary": "创建控制台用户账号",
         "tags": [
           "Portal User Management"
         ],
@@ -18047,7 +18047,7 @@
         ]
       },
       "get": {
-        "summary": "Get list of portal user accounts",
+        "summary": "获取控制台用户账号列表",
         "tags": [
           "Portal User Management"
         ],
@@ -18357,7 +18357,7 @@
     },
     "/ngadmin/apiAccounts/{id}": {
       "get": {
-        "summary": "Get one API account",
+        "summary": "获取单个 API 账号",
         "tags": [
           "API Account Management"
         ],
@@ -18496,7 +18496,7 @@
         ]
       },
       "patch": {
-        "summary": "Update an API account",
+        "summary": "修改 API 账号",
         "tags": [
           "API Account Management"
         ],
@@ -18717,7 +18717,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an API account",
+        "summary": "删除 API 账号",
         "tags": [
           "API Account Management"
         ],
@@ -18787,7 +18787,7 @@
     },
     "/ngadmin/apiAccounts": {
       "post": {
-        "summary": "Create an API account",
+        "summary": "创建 API 账号",
         "tags": [
           "API Account Management"
         ],
@@ -19105,7 +19105,7 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get a list of API accounts",
+        "summary": "获取 API 账号列表",
         "tags": [
           "API Account Management"
         ],
@@ -19378,7 +19378,7 @@
         }
       ],
       "get": {
-        "summary": "Get a portal user",
+        "summary": "获取控制台用户",
         "tags": [
           "Portal User Management"
         ],
@@ -19652,7 +19652,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a portal user",
+        "summary": "删除控制台用户",
         "tags": [
           "Portal User Management"
         ],
@@ -19708,7 +19708,7 @@
         ]
       },
       "patch": {
-        "summary": "Update a portal user",
+        "summary": "修改控制台用户",
         "tags": [
           "Portal User Management"
         ],
@@ -19972,7 +19972,7 @@
     },
     "/cdn/report/edgeHostnameReq": {
       "post": {
-        "summary": "Get edge hostname statistics",
+        "summary": "获取调度域名统计数据",
         "tags": [
           "Reports"
         ],
@@ -20310,7 +20310,7 @@
     },
     "/cdn/report/edgeHostnameReqSummary": {
       "post": {
-        "summary": "Get edge hostname summary statistics",
+        "summary": "获取调度域名汇总统计数据",
         "tags": [
           "Reports"
         ],
@@ -20649,7 +20649,7 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get edge hostname summary statistics",
+        "summary": "获取调度域名汇总统计数据",
         "operationId": "get-cdn-report-edgeHostnameReqSummary",
         "responses": {
           "200": {
@@ -20940,7 +20940,7 @@
     },
     "/cdn/isps": {
       "get": {
-        "summary": "Get a list of ISPs",
+        "summary": "获取运营商列表",
         "responses": {
           "200": {
             "description": "The response contains a list of ISPs. You can specify an ISP's code in an <a href=\"#operation/createEdgeHostname\">edge hostname's client zone rule</a>.",
@@ -21214,7 +21214,7 @@
         }
       ],
       "get": {
-        "summary": "Get details about a customer",
+        "summary": "获取客户详情",
         "tags": [
           "Customer Management"
         ],
@@ -21641,7 +21641,7 @@
         "description": "Obtain configuration details for a customer."
       },
       "patch": {
-        "summary": "Update a customer",
+        "summary": "修改客户",
         "tags": [
           "Customer Management"
         ],
@@ -22451,7 +22451,7 @@
         }
       },
       "delete": {
-        "summary": "Delete a customer",
+        "summary": "删除客户",
         "operationId": "delete-ngadmin-customers-id",
         "responses": {
           "204": {
@@ -22520,7 +22520,7 @@
     "/ngadmin/customers": {
       "parameters": [],
       "post": {
-        "summary": "Create a customer",
+        "summary": "创建客户",
         "operationId": "post-ngadmin-customers",
         "responses": {
           "201": {
@@ -23234,7 +23234,7 @@
         }
       },
       "get": {
-        "summary": "Get list of customers",
+        "summary": "获取客户列表",
         "tags": [
           "Customer Management"
         ],
@@ -23608,7 +23608,7 @@
     },
     "/cdn/clientRegions": {
       "get": {
-        "summary": "Get client regions",
+        "summary": "获取客户端区域",
         "tags": [
           "CDN Product Management"
         ],
@@ -24213,7 +24213,7 @@
     },
     "/ngadmin/apicalls": {
       "get": {
-        "summary": "Get a list of API calls",
+        "summary": "获取 API 调用列表",
         "tags": [
           "API Call History"
         ],
@@ -24577,7 +24577,7 @@
         }
       ],
       "get": {
-        "summary": "Get details about an API call",
+        "summary": "获取 API 调用详情",
         "tags": [
           "API Call History"
         ],
@@ -24845,7 +24845,7 @@
     "/ngadmin/apicalls/counts": {
       "get": {
         "operationId": "countApiCalls",
-        "summary": "Count API calls",
+        "summary": "统计 API 调用次数",
         "description": "Returns a count of API call records made by the calling customer. Supports optional filtering by time window, request path prefix, and whether to include calls made on behalf of the caller.",
         "tags": [
           "API Call History"
@@ -25010,7 +25010,7 @@
     },
     "/cdn/systemConfigs": {
       "get": {
-        "summary": "Get system configuration",
+        "summary": "获取系统配置",
         "tags": [
           "CDN Product Management"
         ],
@@ -25473,7 +25473,7 @@
     },
     "/cdn/serviceQuotas": {
       "post": {
-        "summary": "Create a service quota for a customer",
+        "summary": "为客户创建服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -25840,7 +25840,7 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get a list of service quotas",
+        "summary": "获取服务配额列表",
         "tags": [
           "CDN Product Management"
         ],
@@ -26123,7 +26123,7 @@
         }
       ],
       "get": {
-        "summary": "Get a service quota by service quota ID",
+        "summary": "按服务配额 ID 获取服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -26556,7 +26556,7 @@
         "description": "This API allows a reseller to get a child customer's service quota by referencing its service quota ID."
       },
       "patch": {
-        "summary": "Update a service quota by service quota ID",
+        "summary": "按服务配额 ID 修改服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -26938,7 +26938,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a service quota by service quota ID",
+        "summary": "按服务配额 ID 删除服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -27050,7 +27050,7 @@
     },
     "/cdn/report/fastOriginReq": {
       "post": {
-        "summary": "Get origin fast route requests",
+        "summary": "获取回源快速通道请求数",
         "tags": [
           "Reports"
         ],
@@ -27377,7 +27377,7 @@
     },
     "/cdn/report/fastOriginVol": {
       "post": {
-        "summary": "Get origin fast route traffic volume",
+        "summary": "获取回源快速通道流量",
         "tags": [
           "Reports"
         ],
@@ -27664,7 +27664,7 @@
         }
       ],
       "get": {
-        "summary": "Get the service quota for a customer",
+        "summary": "获取客户的服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -28406,7 +28406,7 @@
         "description": "Get the CDN service quota for a customer."
       },
       "patch": {
-        "summary": "Update the service quota for a customer",
+        "summary": "修改客户的服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -28762,7 +28762,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete the service quota for a customer",
+        "summary": "删除客户的服务配额",
         "tags": [
           "CDN Product Management"
         ],
@@ -28855,7 +28855,7 @@
     },
     "/cdn/report/cpuTime": {
       "post": {
-        "summary": "Get CPU time used",
+        "summary": "获取 CPU 使用时间",
         "tags": [
           "Reports"
         ],
@@ -29197,7 +29197,7 @@
         }
       ],
       "get": {
-        "summary": "Get historical information about one hostname",
+        "summary": "获取单个加速域名的历史信息",
         "tags": [
           "Hostnames"
         ],
@@ -29386,7 +29386,7 @@
     },
     "/cdn/prefetches": {
       "post": {
-        "summary": "Create a prefetch request",
+        "summary": "创建预取请求",
         "tags": [
           "Content Management"
         ],
@@ -29573,7 +29573,7 @@
         }
       },
       "get": {
-        "summary": "Get list of prefetch requests",
+        "summary": "获取预取请求列表",
         "tags": [
           "Content Management"
         ],
@@ -29878,7 +29878,7 @@
         }
       ],
       "get": {
-        "summary": "Get prefetch request status",
+        "summary": "获取预取请求状态",
         "tags": [
           "Content Management"
         ],
@@ -30119,7 +30119,7 @@
     },
     "/cdn/apiPermissions": {
       "post": {
-        "summary": "Create an API permission",
+        "summary": "创建 API 权限",
         "tags": [
           "API Access Control"
         ],
@@ -30490,7 +30490,7 @@
         }
       ],
       "get": {
-        "summary": "Get an API permission",
+        "summary": "获取 API 权限",
         "tags": [
           "API Access Control"
         ],
@@ -30855,7 +30855,7 @@
         ]
       },
       "patch": {
-        "summary": "Update an API permission",
+        "summary": "修改 API 权限",
         "tags": [
           "API Access Control"
         ],
@@ -31229,7 +31229,7 @@
         }
       },
       "delete": {
-        "summary": "Delete an API permission",
+        "summary": "删除 API 权限",
         "tags": [
           "API Access Control"
         ],
@@ -31293,7 +31293,7 @@
     },
     "/cdn/report/reqSummary": {
       "post": {
-        "summary": "Get a summary of requests",
+        "summary": "获取请求数汇总",
         "tags": [
           "Reports"
         ],
@@ -31653,7 +31653,7 @@
         }
       },
       "get": {
-        "summary": "Get a summary of requests",
+        "summary": "获取请求数汇总",
         "operationId": "get-cdn-report-reqSummary",
         "responses": {
           "200": {
@@ -31842,7 +31842,7 @@
     },
     "/cdn/webhooks": {
       "get": {
-        "summary": "Get a list of webhooks",
+        "summary": "获取 Webhook 列表",
         "tags": [
           "Webhooks"
         ],
@@ -32034,7 +32034,7 @@
         ]
       },
       "post": {
-        "summary": "Create a webhook",
+        "summary": "创建 Webhook",
         "tags": [
           "Webhooks"
         ],
@@ -32209,7 +32209,7 @@
         }
       ],
       "get": {
-        "summary": "Get a webhook",
+        "summary": "获取 Webhook",
         "tags": [
           "Webhooks"
         ],
@@ -32364,7 +32364,7 @@
         ]
       },
       "patch": {
-        "summary": "Update a webhook",
+        "summary": "修改 Webhook",
         "tags": [
           "Webhooks"
         ],
@@ -32479,7 +32479,7 @@
         }
       },
       "delete": {
-        "summary": "Delete a webhook",
+        "summary": "删除 Webhook",
         "tags": [
           "Webhooks"
         ],
@@ -32537,7 +32537,7 @@
     },
     "/cdn/secrets": {
       "post": {
-        "summary": "Create a secret",
+        "summary": "创建保密信息",
         "tags": [
           "Secret Management"
         ],
@@ -32709,7 +32709,7 @@
         ]
       },
       "get": {
-        "summary": "Get a list of secrets",
+        "summary": "获取保密信息列表",
         "tags": [
           "Secret Management"
         ],
@@ -32925,7 +32925,7 @@
     },
     "/cdn/purges/purgeTokens": {
       "get": {
-        "summary": "Get available purge requests",
+        "summary": "获取可用的刷新请求数",
         "tags": [
           "Content Management"
         ],
@@ -33039,7 +33039,7 @@
         }
       ],
       "get": {
-        "summary": "Get a secret",
+        "summary": "获取保密信息",
         "tags": [
           "Secret Management"
         ],
@@ -33247,7 +33247,7 @@
         ]
       },
       "patch": {
-        "summary": "Update a secret",
+        "summary": "修改保密信息",
         "tags": [
           "Secret Management"
         ],
@@ -33458,7 +33458,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a secret",
+        "summary": "删除保密信息",
         "tags": [
           "Secret Management"
         ],
@@ -33568,7 +33568,7 @@
     },
     "/cdn/report/logConfigs": {
       "get": {
-        "summary": "Get a list of log configurations",
+        "summary": "获取日志配置列表",
         "tags": [
           "Log Configuration Management"
         ],
@@ -33757,7 +33757,7 @@
       },
       "parameters": [],
       "post": {
-        "summary": "Create a log configuration",
+        "summary": "创建日志配置",
         "operationId": "post-cdn-report-logConfigs",
         "x-codeSamples": [
           {
@@ -33944,7 +33944,7 @@
         }
       ],
       "get": {
-        "summary": "Get a log configuration",
+        "summary": "获取日志配置",
         "tags": [
           "Log Configuration Management"
         ],
@@ -34133,7 +34133,7 @@
         ]
       },
       "patch": {
-        "summary": "Update a log configuration",
+        "summary": "修改日志配置",
         "tags": [
           "Log Configuration Management"
         ],
@@ -34379,7 +34379,7 @@
         ]
       },
       "delete": {
-        "summary": "Delete a log configuration",
+        "summary": "删除日志配置",
         "tags": [
           "Log Configuration Management"
         ],
@@ -34463,7 +34463,7 @@
     },
     "/cdn/report/logDownload": {
       "post": {
-        "summary": "Get access logs for hostnames",
+        "summary": "获取多个加速域名的访问日志",
         "tags": [
           "Reports"
         ],
@@ -34650,7 +34650,7 @@
         }
       },
       "get": {
-        "summary": "Get access logs for a hostname",
+        "summary": "获取单个加速域名的访问日志",
         "operationId": "get-cdn-report-logDownload",
         "x-codeSamples": [
           {
@@ -34806,7 +34806,7 @@
     },
     "/cdn/report/bandwidthSummary": {
       "post": {
-        "summary": "Get a summary of traffic bandwidth",
+        "summary": "获取带宽汇总",
         "tags": [
           "Reports"
         ],
@@ -35206,7 +35206,7 @@
         }
       },
       "get": {
-        "summary": "Get a summary of traffic bandwidth",
+        "summary": "获取带宽汇总",
         "operationId": "get-cdn-report-bandwidthSummary",
         "x-codeSamples": [
           {
@@ -35421,7 +35421,7 @@
     },
     "/cdn/report/edgeStatusSummary": {
       "post": {
-        "summary": "Get a summary of status codes returned by edge servers",
+        "summary": "获取边缘服务器返回的状态码汇总",
         "tags": [
           "Reports"
         ],
@@ -35753,7 +35753,7 @@
         }
       },
       "get": {
-        "summary": "Get a summary of status codes returned by edge servers",
+        "summary": "获取边缘服务器返回的状态码汇总",
         "operationId": "get-cdn-reports-edgeStatusSummary",
         "x-codeSamples": [
           {
@@ -35948,7 +35948,7 @@
     },
     "/cdn/publicIpList": {
       "get": {
-        "summary": "Get IP addresses of the CDN",
+        "summary": "获取 CDN 的 IP 地址",
         "tags": [
           "CDN Product Management"
         ],
@@ -36114,7 +36114,7 @@
     },
     "/cdn/report/originStatusSummary": {
       "post": {
-        "summary": "Get a summary of status codes returned by origin servers",
+        "summary": "获取源站返回的状态码汇总",
         "tags": [
           "Reports"
         ],
@@ -36444,7 +36444,7 @@
         }
       },
       "get": {
-        "summary": "Get a summary of status codes returned by origin servers",
+        "summary": "获取源站返回的状态码汇总",
         "operationId": "get-cdn-reports-originStatusSummary",
         "responses": {
           "200": {
@@ -36639,7 +36639,7 @@
     },
     "/cdn/report/cpuSummary": {
       "post": {
-        "summary": "Get a summary of CPU usage",
+        "summary": "获取 CPU 使用汇总",
         "tags": [
           "Reports"
         ],
@@ -36956,7 +36956,7 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get a summary of CPU usage",
+        "summary": "获取 CPU 使用汇总",
         "tags": [
           "Reports"
         ],
@@ -37173,7 +37173,7 @@
     },
     "/cdn/prefetches/prefetchTokens": {
       "get": {
-        "summary": "Get available prefetch requests",
+        "summary": "获取可用的预取请求数",
         "tags": [
           "Content Management"
         ],
@@ -37219,7 +37219,7 @@
     },
     "/cdn/shields": {
       "get": {
-        "summary": "Get a list of origin shields",
+        "summary": "获取源站 Shield 列表",
         "tags": [
           "CDN Product Management"
         ],
@@ -37434,7 +37434,7 @@
         }
       ],
       "get": {
-        "summary": "Get a shield by its ID",
+        "summary": "按 ID 获取 Shield",
         "tags": [
           "CDN Product Management"
         ],
@@ -37571,7 +37571,7 @@
     },
     "/cdn/logAggregationPoints": {
       "get": {
-        "summary": "Get a list of log aggregation points.",
+        "summary": "获取日志汇聚点列表。",
         "tags": [
           "Log Aggregation Points"
         ],
@@ -37667,7 +37667,7 @@
         ]
       },
       "post": {
-        "summary": "Create a log aggregation point",
+        "summary": "创建日志汇聚点",
         "tags": [
           "Log Aggregation Points"
         ],
@@ -37909,7 +37909,7 @@
         }
       ],
       "get": {
-        "summary": "Get details about a log aggregation point",
+        "summary": "获取日志汇聚点详情",
         "tags": [
           "Log Aggregation Points"
         ],
@@ -38096,7 +38096,7 @@
         "parameters": []
       },
       "delete": {
-        "summary": "Delete a log aggregation point",
+        "summary": "删除日志汇聚点",
         "tags": [
           "Log Aggregation Points"
         ],
@@ -38142,7 +38142,7 @@
         "description": "Use this API to delete a log aggregation point."
       },
       "patch": {
-        "summary": "Update a log aggregation point",
+        "summary": "修改日志汇聚点",
         "tags": [
           "Log Aggregation Points"
         ],
@@ -38350,7 +38350,7 @@
     },
     "/ngadmin/ipDetails": {
       "post": {
-        "summary": "Check if IP addresses belong to the CDN Pro platform",
+        "summary": "检查 IP 地址是否属于 CDN Pro 平台",
         "tags": [
           "CDN Product Management"
         ],
@@ -38477,7 +38477,7 @@
     },
     "/cdn/report/volL7": {
       "post": {
-        "summary": "Get the L7 traffic volume",
+        "summary": "获取 7 层流量",
         "tags": [
           "Reports"
         ],
@@ -38772,7 +38772,7 @@
     },
     "/cdn/report/bandwidthL7": {
       "post": {
-        "summary": "Get the L7 traffic bandwidth",
+        "summary": "获取 7 层带宽",
         "tags": [
           "Reports"
         ],
@@ -39061,7 +39061,7 @@
     },
     "/cdn/report/volL7Summary": {
       "post": {
-        "summary": "Get a summary of L7 traffic volume",
+        "summary": "获取 7 层流量汇总",
         "tags": [
           "Reports"
         ],
@@ -39423,7 +39423,7 @@
       },
       "parameters": [],
       "get": {
-        "summary": "Get a summary of L7 traffic volume",
+        "summary": "获取 7 层流量汇总",
         "operationId": "get-cdn-report-volL7Summary",
         "x-codeSamples": [
           {
@@ -39713,7 +39713,7 @@
     },
     "/cdn/report/bandwidthL7Summary": {
       "post": {
-        "summary": "Get a summary of layer 7 traffic bandwidth",
+        "summary": "获取 7 层带宽汇总",
         "tags": [
           "Reports"
         ],
@@ -39987,7 +39987,7 @@
         }
       },
       "get": {
-        "summary": "Get a summary of layer 7 traffic bandwidth",
+        "summary": "获取 7 层带宽汇总",
         "operationId": "get-cdn-report-bandwidthL7Summary",
         "x-codeSamples": [
           {
@@ -40197,7 +40197,7 @@
     },
     "/cdn/originFastRouteIpList": {
       "get": {
-        "summary": "Get Origin Fast Route IP List",
+        "summary": "获取回源快速通道 IP 列表",
         "tags": [
           "CDN Product Management"
         ],
@@ -40272,7 +40272,7 @@
     },
     "/cdn/stagingServers": {
       "get": {
-        "summary": "Get a list of staging servers",
+        "summary": "获取演练服务器列表",
         "tags": [
           "CDN Product Management"
         ],
@@ -40379,7 +40379,7 @@
     },
     "/cdn/logAggregationPoints/summaryReport": {
       "get": {
-        "summary": "Get a summary of log aggregation points used during a period of time.",
+        "summary": "获取一段时间内所用日志汇聚点的汇总。",
         "tags": [
           "Log Aggregation Points"
         ],
@@ -40594,79 +40594,98 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new immutable version. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates, but not modify them."
+      "description": "If your content requires TLS, you must create a certificate and <a href=\"#tag/Deployment-Management\">deploy</a> it along with associated <a href=\"#tag/Property-Management\">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new immutable version. You can choose to deploy any version to staging or production. If your property's origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates, but not modify them.",
+      "x-displayName": "证书管理"
     },
     {
       "name": "Property Management",
-      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png\">"
+      "description": "A property is the configuration of one or more hostnames (domains) that need to be <a href=\"#tag/Deployment-Management\">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href=\"#tag/Property-Validation\">validated</a> again. You can <a href=\"#operation/createPropertyVersion\">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png\">",
+      "x-displayName": "加速项目管理"
     },
     {
       "name": "Property Validation",
-      "description": "After you <a href=\"#operation/createProperty\">create a property</a>, you must validate it to ensure that the settings are syntactically correct before you can <a href=\"#tag/Deployment-Management\">deploy</a> it to staging or production. The validation process is an asynchronous action. APIs are available to check the status of your validation tasks."
+      "description": "After you <a href=\"#operation/createProperty\">create a property</a>, you must validate it to ensure that the settings are syntactically correct before you can <a href=\"#tag/Deployment-Management\">deploy</a> it to staging or production. The validation process is an asynchronous action. APIs are available to check the status of your validation tasks.",
+      "x-displayName": "加速项目验证"
     },
     {
       "name": "Secret Management",
-      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)`, or by setting `origins.authentication.awsS3.secretKey` to `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API."
+      "description": "These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret's name via the syntax `$SECRET(secretName)`, or by setting `origins.authentication.awsS3.secretKey` to `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API.",
+      "x-displayName": "保密信息管理"
     },
     {
       "name": "Deployment Management",
-      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you [deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i>](</docs/portal/edge-configurations/testing-property>). <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname."
+      "description": "Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you [deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i>](</docs/portal/edge-configurations/testing-property>). <h2>Testing a property deployed to production</h2> After you <a href=\"#operation/createEdgeHostname\">create an edge hostname</a> and set your DNS server to point the edge hostname to your property's hostname, you can browse your content under the hostname.",
+      "x-displayName": "部署管理"
     },
     {
       "name": "Hostnames",
-      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#operation/createDeployment\">deployed</a> to production or staging."
+      "description": "You must <a href=\"#operation/createProperty\">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href=\"#operation/createDeployment\">deployed</a> to production or staging.",
+      "x-displayName": "加速域名"
     },
     {
       "name": "Edge Hostname Management",
-      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN Pro. Different properties' hostnames may point to the same edge hostname if the same rules apply."
+      "description": "You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN Pro. Different properties' hostnames may point to the same edge hostname if the same rules apply.",
+      "x-displayName": "调度域名管理"
     },
     {
       "name": "Reports",
-      "description": "Call our report APIs to get information about your visitors including edge and origin traffic, requests, status code details, and log files."
+      "description": "Call our report APIs to get information about your visitors including edge and origin traffic, requests, status code details, and log files.",
+      "x-displayName": "报表"
     },
     {
       "name": "Annotations for Reports",
-      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the [CDN Pro portal](https://console.{{siteDomain}}/cdn) when you look at the reports."
+      "description": "Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the [CDN Pro portal](https://console.{{siteDomain}}/cdn) when you look at the reports.",
+      "x-displayName": "报表注释"
     },
     {
       "name": "Content Management",
-      "description": "The content management APIs allow you to request an update (or purge) of your cached content ahead of the schedule determined by your <a href=\"#operation/getPropertyVersion\">property configuration</a>.  You can purge files or directories.  The purge requests are asynchronous. APIs are available for you to check the status of your purge requests. You can also prefetch URLs to warm up your cache in advance of requests from visitors. This allows you to manage traffic to your origin servers."
+      "description": "The content management APIs allow you to request an update (or purge) of your cached content ahead of the schedule determined by your <a href=\"#operation/getPropertyVersion\">property configuration</a>.  You can purge files or directories.  The purge requests are asynchronous. APIs are available for you to check the status of your purge requests. You can also prefetch URLs to warm up your cache in advance of requests from visitors. This allows you to manage traffic to your origin servers.",
+      "x-displayName": "内容管理"
     },
     {
       "name": "Portal User Management",
-      "description": "Create and manage users who access the [CDN Pro portal](https://console.{{siteDomain}}/cdn)."
+      "description": "Create and manage users who access the [CDN Pro portal](https://console.{{siteDomain}}/cdn).",
+      "x-displayName": "控制台用户管理"
     },
     {
       "name": "API Account Management",
-      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#operation/post-cdn-apiPermissions\">API permissions</a>."
+      "description": "Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href=\"#operation/post-cdn-apiPermissions\">API permissions</a>.",
+      "x-displayName": "API 账号管理"
     },
     {
       "name": "Customer Management",
-      "description": "These APIs allow you to update customer-level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts."
+      "description": "These APIs allow you to update customer-level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts.",
+      "x-displayName": "客户管理"
     },
     {
       "name": "API Call History",
-      "description": "Obtain a summary of API calls that have been made by you or on your behalf."
+      "description": "Obtain a summary of API calls that have been made by you or on your behalf.",
+      "x-displayName": "API 调用历史"
     },
     {
       "name": "CDN Product Management",
-      "description": "These APIs allow you to fetch CDN settings that apply to your account. If you are a reseller, you can use APIs to manage the service quotas of your child customers."
+      "description": "These APIs allow you to fetch CDN settings that apply to your account. If you are a reseller, you can use APIs to manage the service quotas of your child customers.",
+      "x-displayName": "CDN 产品管理"
     },
     {
       "name": "API Access Control",
-      "description": "These APIs allow you to customize what a <a href=\"#operation/post-ngadmin-apiAccounts\">CDN Pro API account</a> can do by specifying the categories of accessible endpoints."
+      "description": "These APIs allow you to customize what a <a href=\"#operation/post-ngadmin-apiAccounts\">CDN Pro API account</a> can do by specifying the categories of accessible endpoints.",
+      "x-displayName": "API 访问控制"
     },
     {
       "name": "Webhooks",
-      "description": "These APIs allow you to define webhooks or callbacks that are invoked when an asynchronous operation such as a deployment, purge, or prefetch request completes."
+      "description": "These APIs allow you to define webhooks or callbacks that are invoked when an asynchronous operation such as a deployment, purge, or prefetch request completes.",
+      "x-displayName": "Webhook"
     },
     {
       "name": "Log Configuration Management",
-      "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/get-cdn-report-logDownload\">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname."
+      "description": "These APIs allow you to customize the format of the access logs you can download using <a href=\"#operation/get-cdn-report-logDownload\">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname.",
+      "x-displayName": "日志配置管理"
     },
     {
       "name": "Log Aggregation Points",
-      "description": "These APIs allow you to create log aggregation points which are ingestion URLs that receive raw log entries from the CDN Pro servers. This option is available for those who use our realTimeLog advanced feature."
+      "description": "These APIs allow you to create log aggregation points which are ingestion URLs that receive raw log entries from the CDN Pro servers. This option is available for those who use our realTimeLog advanced feature.",
+      "x-displayName": "日志汇聚点"
     }
   ]
 }
