@@ -54,6 +54,12 @@ as the rest of the site. Extend the table when a new term is settled.
 | intermediate (layer) | 中间层 | |
 | ISP | 运营商 | |
 | test suite | 测试用例集 | |
+| client zone | 客户端分区 | client region → 客户端区域 |
+| endpoint | 接口 | |
+| scheme (HTTP/HTTPS) | 协议 | |
+| property hostname | 加速项目域名 | when contrasted with hostname (加速域名) |
+| ingest (log aggregation) | 接收 | |
+| peer | 节点 | |
 
 ## Style
 
