@@ -3,9 +3,9 @@
   "info": {
     "title": "CDN Pro API 规范",
     "version": "1.0",
-    "description": "您可以通过 CDN Pro API 管理 CDN Pro 服务。<p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> 是一个命令行工具，便于在 <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> 和 <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a> 中调用 API。本文档示例中使用的 \"cdnapi.sh\" 脚本就包含在其中。</p>",
+    "description": "您可以使用本文档介绍的 REST API 实现 CDN Pro 服务的全面自动化。<p>除本文档外，我们还提供了 <a href=\"https://github.com/mileweb/CDNProSDK\">CDNProSDK</a>，帮助您快速上手并集成 API。其 <a href=\"https://github.com/mileweb/CDNProSDK/tree/master/cdn/bash\">bash</a> 版本包含本文档示例中使用的 \"cdnapi.sh\" 脚本。</p>",
     "contact": {
-      "url": "https://www.{{siteDomain}}"
+      "url": "https://www.{{siteDomain}}/products/cdnpro/"
     }
   },
   "servers": [
