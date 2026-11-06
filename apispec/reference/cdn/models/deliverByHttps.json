@@ -1,0 +1,41 @@
+{
+  "title": "deliverByHttps",
+  "type": "object",
+  "description": "Support a DNS resource record that advertises HTTPS support (HTTP/2 and HTTP/3). Clients can potentially improve performance and privacy by making use of the information.\n\nExample:\n\n<code>\nyourEdgehostname.qtlcdn.com 1800 IN HTTPS 1 . alpn=\"h2,h3\" port=443 \n</code>\n\nThe returned DNS record does not reflect the destination a request is redirected to if a client zone rule's action is to redirect.",
+  "properties": {
+    "state": {
+      "type": "string",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "description": "Whether to advertise the HTTPS support through a DNS record."
+    },
+    "alpn": {
+      "type": "string",
+      "enum": [
+        "h2",
+        "h3",
+        "h2,h3"
+      ],
+      "description": "Indicates the supported protocols. <table><tr><th>Value</th><th>Description</td></tr><tr><td>h2</td><td>Supports HTTP/2 </td></tr><tr><td>h3</td><td>Supports HTTP/3</td></tr><tr><td>h2,h3</td><td>Supports both HTTP/2 and HTTP3</td></tr></table>This field is required if <i>state</i> is set to 'on' and ignored if it is set to 'off'."
+    },
+    "port": {
+      "type": "integer",
+      "minimum": 80,
+      "maximum": 65535,
+      "description": "The port supporting HTTPS. This field is ignored if <i>state</i> is set to 'off'.",
+      "default": 443
+    },
+    "ttl": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 86400,
+      "default": 1800,
+      "description": "Number of seconds the DNS record is valid.  This field is ignored if <i>state</i> is set to 'off'."
+    }
+  },
+  "required": [
+    "state"
+  ]
+}

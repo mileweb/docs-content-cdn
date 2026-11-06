@@ -1,0 +1,73 @@
+title: reportfiltersummary
+x-stoplight:
+  id: dw3ijyzk3shdf
+type: object
+description: 'An object that can be passed to summary report API calls to filter and group the results. For example, you can specify to return data only for a particular hostname. Resellers can also filter and group by customer IDs to distinguish their child customers.'
+x-examples:
+  Filter by a specific hostname:
+    filters:
+      hostnames:
+        - domain.info
+  Group results by hostnames:
+    groupBy:
+      - hostnames
+properties:
+  filters:
+    type: object
+    description: Filters let you refine the results that are returned.
+    properties:
+      hostnames:
+        type: array
+        description: 'List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.'
+        items:
+          type: string
+      serverGroups:
+        type: array
+        description: Indicates one or more server groups.
+        items:
+          type: string
+          enum:
+            - standard
+            - premium
+            - deluxe
+            - ultra
+            - nearChina
+            - ChinaStandard
+            - ChinaPremium
+      customerIds:
+        type: array
+        description: Resellers can limit the data by specifying IDs of child customers.
+        items:
+          type: integer
+      propertyIds:
+        type: array
+        description: 'IDs of properties for which to return data. If unspecified, data for all properties will be returned.'
+        items:
+          type: string
+      propertyHostnames:
+        type: array
+        description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+        items:
+          type: string
+      legacyTypes:
+        type: array
+        description: A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.
+        x-stoplight:
+          id: bj21fwk9w3jts
+        items:
+          x-stoplight:
+            id: bcyfc5588dpyt
+          type: string
+  groupBy:
+    type: array
+    description: 'You can group results using a combination of up to two of the following: ''hostnames'', ''serverGroups'',  ''customerIds'', ''propertyIds'', ''propertyHostnames'', and ''legacyTypes''. Only resellers can specify ''customerIds''.'
+    maxItems: 2
+    items:
+      type: string
+      enum:
+        - hostnames
+        - serverGroups
+        - customerIds
+        - propertyIds
+        - propertyHostnames
+        - legacyTypes

@@ -1,0 +1,50 @@
+name: API spec
+
+on:
+  pull_request:
+    paths:
+      - 'apispec/**'
+      - '*/apispec/**'
+      - '.github/workflows/apispec.yml'
+  push:
+    branches: [dev, master]
+    paths:
+      - 'apispec/**'
+      - '*/apispec/**'
+      - '.github/workflows/apispec.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apispec
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: apispec/.nvmrc
+          cache: npm
+          cache-dependency-path: apispec/package-lock.json
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: Rebuild specs and catalogs
+        run: npm run build
+
+      - name: Generated files are up to date
+        run: |
+          if ! git diff --exit-code --stat -- ../en/apispec ../zh/apispec; then
+            echo "::error::The generated API spec files are out of date or were edited by hand. Run 'npm run build' in apispec/ and commit the result."
+            exit 1
+          fi
+
+      - name: Translations are valid
+        run: npm run i18n:check
+
+      - name: OpenAPI lint (informational)
+        continue-on-error: true
+        run: npm run lint

@@ -1,0 +1,101 @@
+title: Edge Hostname Client Zone Rule
+type: object
+description: |-
+  This object describes how client requests from a zone are handled. A zone is a combination of a geographic region and an ISP. You can create custom rules to balance performance and cost by selecting the server groups used to deliver content.
+
+  An additional server group, "nearChina", is available if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to also deliver to other server groups, though you may create separate client zone rules for those.
+
+  If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use "ChinaStandard" and "ChinaPremium." 
+
+  Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.
+x-examples:
+  example-1:
+    region: all
+    isp: all
+    action:
+      type: deliver
+      by:
+        - standard
+  example-2:
+    region: as.cn
+    action:
+      type: deliver
+      by:
+        - standard
+        - premium
+        - deluxe
+  example-3:
+    region: apac
+    action:
+      type: reject
+  example-4:
+    region: as.cn
+    action:
+      type: redirect
+      to:
+        - redirect.cname.com
+    weight: 10
+properties:
+  region:
+    type: string
+    description: |-
+      This field indicates the region in which the rule applies. Refer to our <a href="#operation/get-cdn-clientRegions">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify "eu" as the region. You can indicate specific countries. For example, "na.us" represents the "United States of America", and "eu.fr" represents "France".
+
+      A special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify "as" in one rule and "as.cn" in another, a request from China will follow the rule for "as.cn".
+  weight:
+    type: integer
+    default: 100
+    description: |
+      When multiple actions are specified for a client zone, the weight is used to adjust the probability of a client zone rule applying to a client request.
+      Consider two rules that apply to "as.cn": <code>{"region":"as.cn", "isp":"all", "action":{"type":"deliver", "by":["standard", "premium", "deluxe"]}},
+          {"region":"as.cn", "isp":"all", "action":{"type":"redirect", "to":["alternate.cname.com"]}, "weight":10}</code>
+
+       The probability of "deliver" will be 100/(100+10) or 0.909 while the probability of "redirect" will be 10/(100+10) or 0.091.
+       
+    minimum: 1
+    maximum: 1000
+  action:
+    type: object
+    description: This object describes the action to take for requests matching the rule.
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        enum:
+          - deliver
+          - redirect
+          - reject
+        description: |
+          Defines the action to take for requests to the zone. Options are to <i>deliver</i> using one or more server groups, to <i>reject</i> the request altogether, or to <i>redirect</i> to another domain. If "reject" is specified, the client request will be redirected to a server that always responds with HTTP response code 403 representing "Forbidden". Up to one "reject" action is allowed for each client zone.
+      by:
+        type: array
+        description: 'This field is used if the action is of type "deliver". Specify one or more of the server groups (<i>standard</i>, <i>premium</i>, <i>deluxe</i>,  <i>ultra</i>, <i>nearChina</i>, <i>ChinaStandard</i>, <i>ChinaPremium</i>) to control the servers used to deliver content. <br/><br/>"nearChina" is a special server group that can be enabled for you if your domains lack ICP Beian, but you want optimal performance serving Chinese visitors. A client zone rule using nearChina cannot be configured to simultaneously deliver to other server groups, though you may create separate client zone rules to use other server groups.<br/><br/>If you have an ICP Beian license and want your content to be delivered by servers within China, you can opt to use "ChinaStandard" and "ChinaPremium." Please contact our support team if you require nearChina, ChinaStandard, or ChinaPremium.<br/><br/>If an edge hostname is not initially configured to use ChinaStandard or ChinaPremium, you will not be able to modify it later to use these two server groups. Instead, you will need to create a new edge hostname with client zone rules delivering to those server groups.'
+        items:
+          type: string
+          enum:
+            - standard
+            - premium
+            - deluxe
+            - ultra
+            - nearChina
+            - ChinaStandard
+            - ChinaPremium
+      to:
+        type: array
+        description: This field is used if the action is of type "redirect". It indicates either a single hostname OR one or more IP addresses to redirect to. This is typically an origin server or another CDN provider.
+        example: domain.com
+        minItems: 1
+        items:
+          type: string
+      enableIPv6:
+        type: boolean
+        description: Indicates whether an IPv6 address can be used. This value is used only if the client zone rule's action type is "deliver".
+        default: true
+  isp:
+    type: string
+    description: Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href="#operation/get-cdn-isps">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP.
+required:
+  - region
+  - action
+  - isp

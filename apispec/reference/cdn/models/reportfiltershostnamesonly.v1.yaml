@@ -1,0 +1,18 @@
+title: reportfiltershostnamesonly
+type: object
+description: 'An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.'
+x-examples:
+  filter by a specific hostname:
+    filters:
+      hostnames:
+        - domain.info
+properties:
+  filters:
+    type: object
+    description: Filters let you refine the results that are returned.
+    properties:
+      hostnames:
+        type: array
+        description: 'List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.'
+        items:
+          type: string

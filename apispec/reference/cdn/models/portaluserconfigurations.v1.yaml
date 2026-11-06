@@ -1,0 +1,49 @@
+title: portal user configurations
+type: object
+description: Contains settings that control the level of access given to the portal user.
+x-examples:
+  example-1:
+    isMaster: false
+    products: []
+    canImpersonate: all
+    status: suspended
+    impersonateRegions: []
+    impersonateExceptions: []
+properties:
+  isMaster:
+    type: boolean
+    default: false
+    description: Indicates whether this portal user has full access to all subscribed products.
+  products:
+    type: array
+    description: 'List of products that the user has access to. The default is no products. You can specify "CDN" to represent CDN Pro, and "HDT" for High-Speed Data Transmission. This field is ignored for master contacts, as a master contact has access to all subscribed products.'
+    items:
+      type: string
+      enum:
+        - CDN
+        - HDT
+  canImpersonate:
+    type: string
+    default: all
+    description: This setting applies to resellers only. It indicates whether the user can impersonate child customers. A value of "all" means the user can impersonate all child customers. A value of "none" means the user cannot impersonate any. This field works with the <i>impersonateExceptions</i> field.
+    enum:
+      - all
+      - none
+  status:
+    type: string
+    default: suspended
+    description: Indicates the status of the portal user account. An 'active' user has full access to the portal. A 'suspended' user cannot log in.  A 'pending' user is one that has been invited to use the portal but has not completed setting up the account.  You cannot call the <a href="#operation/createContact">Create a  portal user</a> or <a href="#operation/patch-ngadmin-contacts-id">Update a portal user</a> APIs with a status value of 'pending'.
+    enum:
+      - active
+      - suspended
+      - pending
+  impersonateExceptions:
+    type: array
+    description: 'This setting applies to resellers only.  It contains a list of customer IDs that are exceptions to the rule defined by the <i>canImpersonate</i> field. For example, if <i>canImpersonate</i> is "all" the portal user can impersonate all child customers of the reseller. Entering one or more customer IDs as exceptions will prevent the user from impersonating those particular child customers. Conversely, if <i>canImpersonate</i> is "none", entries in the exception list represent customers who can be impersonated by this user.'
+    items:
+      type: integer
+  ipWhiteList:
+    type: array
+    description: 'List of IP addresses from which the portal user can log in. This list applies in addition to the portalSettings.ipWhiteList''s addresses you can <a href="#operation/patch-ngadmin-customers-id">set up at the customer level.</a> You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>'
+    items:
+      type: string

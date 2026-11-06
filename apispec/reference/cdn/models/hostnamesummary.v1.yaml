@@ -1,0 +1,53 @@
+title: hostnamesummary
+type: object
+x-examples:
+  example-1:
+    hostname: 2.com
+    propertyInProduction: null
+    propertyInStaging:
+      propertyId: 5cada91cd9dd84000130da50
+      version: 2
+description: This object summarizes a hostname that has been deployed.
+properties:
+  hostname:
+    type: string
+    format: hostname
+    description: A hostname whose property has been deployed to production or staging.
+  propertyInProduction:
+    type:
+      - object
+      - 'null'
+    description: Describes the property deployed to production. It can be 'null' if the property is not deployed to production.
+    properties:
+      propertyId:
+        type: string
+        description: ID of property deployed to production.
+      version:
+        type: integer
+        description: Property version deployed to production.
+      certificateId:
+        type: string
+        description: ID of certificate deployed to production.
+      customerId:
+        type: integer
+        description: ID of the customer that owns the property will be returned to a reseller getting the list of hostnames using the Report-Range header with a value of self+children or children-only. It is not returned in the API call used to get information about a specific hostname.
+  propertyInStaging:
+    type:
+      - object
+      - 'null'
+    description: Describes the property deployed to staging. It can be 'null' if the property is not deployed to staging.
+    properties:
+      propertyId:
+        type: string
+        description: ID of property deployed to staging.
+      version:
+        type: integer
+        description: Version of property deployed to staging.
+      certificateId:
+        type: string
+        description: ID of certificate deployed to staging.
+      customerId:
+        type: integer
+        description: ID of the customer that owns the property will be returned to a reseller getting the list of hostnames using the Report-Range header with a value of self+children or children-only. It is not returned in the API call used to get information about a specific hostname.
+required:
+  - hostname

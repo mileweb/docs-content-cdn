@@ -1,0 +1,58 @@
+title: accessControlRule
+type: object
+description: This object defines a rule that can be used to restrict access to your content. More complex rules can be created using CDN Pro's Edge Logic.
+properties:
+  id:
+    type: string
+    maxLength: 60
+    minLength: 0
+    description: An optional ID for the access control rule.
+  conditions:
+    type: object
+    description: 'Specify the conditions that the incoming request must match. At least one condition must be specified. If multiple are specified, all must match.'
+    properties:
+      scheme:
+        type: string
+        enum:
+          - https
+          - http
+        description: Indicates whether the incoming request uses HTTP or HTTPS.
+      hostname:
+        type: string
+        description: Indicates the hostname requested. It must be one of the hostnames defined in the property. If a wildcard hostname is configured in the property, you can specify either the wildcard hostname or a specific hostname matching the wildcard. For example, if the wildcard was "*.xyz.com", then you could enter a hostname such as "w.xyz.com".
+      uri:
+        type: string
+        description: 'The URI begins with "/" and can end with "*" for prefix matching. '
+        maxLength: 500
+      serverRegions:
+        type: array
+        description: 'An array of <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166-1 alpha-2 codes</a> indicating the countries of the servers, for example, "US" to represent "United States of America".'
+        items:
+          type: string
+      clientRegions:
+        type: array
+        description: 'An array of <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO-3166-1 alpha-2 codes</a> indicating one or more countries which are the source of the client requests, for example, "CN" to represent "China".'
+        items:
+          type: string
+      clientIpRange:
+        type: array
+        description: Indicates the starting and ending IP addresses of the client requests to match against. They must be in IPv4 or IPv6 format.
+        items:
+          type: string
+          maxLength: 2
+  action:
+    type: object
+    description: Indicates the action to take in response to a request that matches the conditions of the access control rule.
+    required:
+      - statusCode
+    properties:
+      statusCode:
+        type: string
+        description: 'Indicates the HTTP status code to respond with. It must be in the range 300-309, 400-409, or 500-509 to indicate a redirection or error.'
+      message:
+        type: string
+        maxLength: 200
+        description: 'If the value of the <i>status</i> field is in the range 300-309, the <i>message</i> field''s value will be placed in a Location HTTP header returned to the client. If the <i>status</i> is in the range 400-409 or 500-509, the value will be returned in the response body to the client.'
+required:
+  - conditions
+  - action

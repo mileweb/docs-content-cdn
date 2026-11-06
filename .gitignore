@@ -6,3 +6,4 @@ CLAUDE.md
 .playwright-mcp
 portal-captures
 translation-notes
+node_modules/

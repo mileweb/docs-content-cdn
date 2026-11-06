@@ -1,0 +1,37 @@
+title: reportfiltershostnames-servergroups
+x-stoplight:
+  id: pj6r85jv2po7p
+type: object
+description: 'An object that can be passed to report API calls to filter the results. For example, you can specify to return only data for a particular hostname.'
+properties:
+  filters:
+    type: object
+    description: Filters let you refine the results that are returned.
+    properties:
+      hostnames:
+        type: array
+        description: 'List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.'
+        items:
+          type: string
+      serverGroups:
+        type: array
+        description: 'One or more server groups for which to return data. If unspecified, data for all server groups will be returned.'
+        items:
+          type: string
+          enum:
+            - standard
+            - premium
+            - deluxe
+            - ultra
+            - nearChina
+            - ChinaStandard
+            - ChinaPremium
+  groupBy:
+    type: array
+    description: 'You can group results using a combination of up to two of the following: ''hostnames'', ''serverGroups''.'
+    maxItems: 2
+    items:
+      type: string
+      enum:
+        - hostnames
+        - serverGroups

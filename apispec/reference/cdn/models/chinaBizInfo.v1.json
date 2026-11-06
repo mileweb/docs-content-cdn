@@ -1,0 +1,40 @@
+{
+  "title": "chinaBizInfo",
+  "type": "object",
+  "description": "This object contains information that is required if the customer plans to deploy to PoPs in mainland China.",
+  "properties": {
+    "category": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        999
+      ],
+      "description": "The category indicates the type of customer:\n<table>\n<tr><th>Category</th><th>Description</th></tr>\n<tr><td>1</td><td>military</td></tr>\n<tr><td>2</td><td>government</td></tr>\n<tr><td>3</td><td>insititution</td></tr>\n<tr><td>4</td><td>business</td></tr>\n<tr><td>5</td><td>person</td></tr>\n<tr><td>6</td><td>social group</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+    },
+    "idType": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        999
+      ],
+      "description": "The idType field indicates a type of ID for the customer. Its value must be specified in the idNumber field.\n<table>\n<tr><th>idType </th><th>Description</th></tr>\n<tr><td>1</td><td>business license number</td></tr>\n<tr><td>2</td><td>ID card</td></tr>\n<tr><td>3</td><td>license of organization code</td></tr>\n<tr><td>4</td><td>certificate of business corporation</td></tr>\n<tr><td>5</td><td>army code</td></tr>\n<tr><td>6</td><td>social group legal person certificate</td></tr>\n<tr><td>7</td><td>passport</td></tr>\n<tr><td>8</td><td>military ID</td></tr>\n<tr><td>9</td><td>mainland travel permit for Taiwan residents</td></tr>\n<tr><td>999</td><td>others</td></tr>\n</table>"
+    },
+    "idNumber": {
+      "type": "string",
+      "description": "An ID number corresponding to the idType that was specified. For example, if idType is 'passport', the idNumber field should be set to the passport number."
+    }
+  }
+}

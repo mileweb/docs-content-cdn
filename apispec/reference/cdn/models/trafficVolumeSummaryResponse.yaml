@@ -1,0 +1,101 @@
+title: trafficVolumeSummaryResponse
+type: object
+description: 'The response contains a summary of traffic volume by group. It can contain up to 10000 groups. If there are more than 10000 groups, the value of "isComplete" will be false. A special group "\_\_all\_\_" contains the total for all groups including those beyond the 10000 limit. When "isComplete" is true, the total is the sum of all other returned groups.'
+examples:
+  - metaData:
+      startTime: '2019-09-01T12:35:00Z'
+      endTime: '2019-09-12T12:40:00Z'
+      isComplete: true
+      dataNames:
+        - edge response
+        - fast route response
+        - fast route request
+      dataUnit: megabytes
+    groups:
+      - group: __all__
+        data:
+          - 214.57945
+          - 0
+          - 0
+  - metaData:
+      startTime: '2020-01-05T12:35:00Z'
+      endTime: '2020-01-12T12:40:00Z'
+      isComplete: true
+      dataNames:
+        - edge response
+        - fast route response
+        - fast route request
+      dataUnit: megabytes
+    groups:
+      - group: __all__
+        data:
+          - 1338301885.66941
+          - 0
+          - 0
+      - group: domain1.com
+        data:
+          - 798516559.66809
+          - 0
+          - 0
+      - group: domain2.com
+        data:
+          - 2.72993
+          - 0
+          - 0
+      - group: domain3.com
+        data:
+          - 539785323.27139
+          - 0
+          - 0
+properties:
+  metaData:
+    type: object
+    description: This object contains fields describing the data returned in the groups object.
+    properties:
+      startTime:
+        type: string
+        description: RFC 3339 date indicating the beginning of the period.
+        format: date-time
+      endTime:
+        type: string
+        description: RFC 3339 date indicating the end of the period.
+        format: date-time
+      isComplete:
+        type: boolean
+        description: 'The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>.'
+      dataNames:
+        type: array
+        description: |-
+          Indicates the type of data returned. 
+          <table>
+          <tr><th>Data Name</th><th>Description</th></tr>
+          <tr><td>edge response</td><td>edge traffic to visitors</td></tr>
+          <tr><td>edge request</td><td>traffic from visitors to edge servers</td></tr>
+          <tr><td>intermediate response</td><td>traffic from intermediate CDN Pro servers to other CDN Pro servers</td></tr>
+          <tr><td>intermediate request</td><td>traffic of requests to intermediate CDN Pro servers</td></tr>
+          <tr><td>origin response</td><td>traffic from origin servers</td></tr>
+          <tr><td>origin request</td><td>traffic to origin servers</td></tr>
+          <tr><td>fast route response</td><td>traffic from your origin accelerated through the HDT product</td></tr>
+          <tr><td>fast route request</td><td>traffic to your origin accelerated through the HDT product</td></tr>
+          </table>
+          The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.
+        items:
+          type: string
+      dataUnit:
+        type: string
+        description: Indicates the unit of measurement of the returned values.
+  groups:
+    type: array
+    description: 'This object contains the breakdown of traffic by group. '
+    items:
+      type: object
+      properties:
+        group:
+          type: string
+          description: |
+            Name of the group. "\_\_all\_\_" is a special group encompassing all groups.
+        data:
+          type: array
+          description: Data values. The units of measurement are determined by the dataUnit field.
+          items:
+            type: number
