@@ -1,0 +1,113 @@
+title: statuscodedetails
+type: object
+description: This object is returned by status code details report APIs.
+x-examples:
+  example-1:
+    dataName: edge status code
+    dataUnit: counts
+    dataSeries:
+      - timestamp: '2019-11-04T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 219
+          - statusCode: '404'
+            data: 1
+      - timestamp: '2019-11-05T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 209
+      - timestamp: '2019-11-06T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 206
+          - statusCode: '404'
+            data: 1
+          - statusCode: '504'
+            data: 1
+      - timestamp: '2019-11-07T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 104
+      - timestamp: '2019-11-08T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 320
+          - statusCode: '404'
+            data: 7
+      - timestamp: '2019-11-09T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 198
+      - timestamp: '2019-11-10T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 198
+      - timestamp: '2019-11-11T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 396
+      - timestamp: '2019-11-12T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 199
+      - timestamp: '2019-11-13T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 198
+      - timestamp: '2019-11-14T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 204
+          - statusCode: '502'
+            data: 2
+          - statusCode: '504'
+            data: 1
+      - timestamp: '2019-11-15T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 161
+      - timestamp: '2019-11-16T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 174
+      - timestamp: '2019-11-17T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 175
+      - timestamp: '2019-11-18T00:00:00Z'
+        details:
+          - statusCode: '200'
+            data: 376
+properties:
+  dataName:
+    type: string
+    description: A brief description of the data.
+  dataUnit:
+    type: string
+    description: 'Unit of measurement.  For status code APIs, it will be "counts", which indicates the number of times a status code appears.'
+    enum:
+      - counts
+  dataSeries:
+    type: array
+    description: Contains information about status codes at different points in time.
+    items:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: RFC 3339 format date indicate the beginning of an interval.
+          format: date-time
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              statusCode:
+                type: string
+                description: 'Indicates an HTTP status code, for example, "200".'
+              data:
+                type: integer
+                minimum: 0
+                description: Indicates the number of times the status code was returned.
+required:
+  - dataName

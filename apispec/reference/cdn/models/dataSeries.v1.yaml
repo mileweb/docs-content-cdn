@@ -1,0 +1,43 @@
+title: DataSeries
+description: 'A named, unit-tagged data series.'
+type: object
+required:
+  - dataName
+  - dataUnit
+  - dataSeries
+properties:
+  dataName:
+    type: string
+    description: Human-readable name of the data series.
+    example: api calls
+  dataUnit:
+    type: string
+    description: Unit of measurement for `data` values.
+    example: counts
+  dataSeries:
+    type: array
+    items:
+      title: DataPoint
+      description: A single data point with a timestamp and a numeric value.
+      type: object
+      required:
+        - timestamp
+        - data
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: RFC 3339 UTC timestamp. For the counts endpoint this is always the `startdate` (start of the query window).
+          example: '2019-03-01T10:00:00Z'
+        data:
+          type: integer
+          format: int64
+          description: The count of API calls matching the query.
+          example: 1234
+x-examples:
+  example-1:
+    dataName: api calls
+    dataUnit: counts
+    dataSeries:
+      - timestamp: '2019-03-01T10:00:00Z'
+        data: 1234

@@ -1,0 +1,41 @@
+{
+  "title": "address",
+  "type": "object",
+  "description": "Describes a physical address.",
+  "properties": {
+    "line1": {
+      "type": "string",
+      "description": "First line of the address."
+    },
+    "line2": {
+      "type": "string",
+      "description": "Second line of the address."
+    },
+    "city": {
+      "type": "string",
+      "description": "A city."
+    },
+    "state": {
+      "type": "string",
+      "description": "A state or province."
+    },
+    "zipCode": {
+      "type": "string",
+      "description": "A postal or zip code."
+    },
+    "country": {
+      "type": "string",
+      "description": "A country."
+    }
+  },
+  "x-examples": {
+    "example-1": {
+      "line1": "My Company",
+      "line2": "123 Main St. #200",
+      "city": "Santa Clara",
+      "state": "CA",
+      "zipcode": "95054",
+      "country": "USA"
+    }
+  }
+}

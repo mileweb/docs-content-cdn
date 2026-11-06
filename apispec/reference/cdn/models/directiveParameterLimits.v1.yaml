@@ -1,0 +1,35 @@
+title: directiveParameterLimits
+type: object
+description: Contains limits on values of Edge Logic directives. These override the default maximums.
+properties:
+  maxLimitRate:
+    type: integer
+    description: 'Maximum number of bytes per second that can permitted in the [limit_rate](</docs/edge-logic/supported-directives#limit_rate>) directive.'
+    minimum: 1
+  maxUpstreamKeepaliveTimeOut:
+    type: integer
+    description: "Maximum number of seconds permitted in the <i>keepAliveTimeout</i> field of a property's origin configuration."
+  maxOriginConnectTimeOut:
+    type: integer
+    minimum: 1
+    description: 'Maximum number of seconds permitted in the [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) directive.'
+  maxOriginReadTimeOut:
+    type: integer
+    description: 'Maximum number of seconds permitted in the [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>) directive.'
+    minimum: 1
+  maxOriginSendTimeOut:
+    type: integer
+    minimum: 1
+    description: 'Maximum number of seconds permitted in the [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) directive.'
+  maxClientHeaderTimeOut:
+    type: integer
+    minimum: 1
+    description: 'Maximum number of seconds permitted in the [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>) directive.'
+  maxClientSendTimeOut:
+    type: integer
+    minimum: 1
+    description: 'Maximum number of seconds permitted in the [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) directive.'
+  maxClientBodyTimeOut:
+    type: integer
+    minimum: 1
+    description: 'Maximum number of seconds permitted in the [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>) directive.'

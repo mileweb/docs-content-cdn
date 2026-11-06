@@ -1,0 +1,57 @@
+title: property
+type: object
+description: Describes a property returned by Query Property.
+x-examples:
+  example-1:
+    value:
+      name: TestProperty1572420965460
+      description: validPropertyBodyWithCertificate_PropertyEndToEndTestSteps
+      ownerCustomerId: 10000021
+      versions: 1
+      lastUpdateTime: '2019-10-30T07:36:06Z'
+      creationTime: '2019-10-30T07:36:06Z'
+properties:
+  name:
+    type: string
+    description: |
+      Name of the property.
+  description:
+    type: string
+    description: |
+      A description of the property.
+  ownerCustomerId:
+    type: integer
+    description: ID of the customer that owns this property.
+  versionInProduction:
+    type: integer
+    description: Indicates the version of the property deployed to production. The field will be omitted if the property was not yet deployed.
+  versionInStaging:
+    type: integer
+    description: Indicates the version of the property deployed to staging. The field will be omitted if the property was not yet deployed.
+  creationTime:
+    type: string
+    description: An RFC 3339 date indicating when the property was created.
+    format: date-time
+  lastUpdateTime:
+    type: string
+    description: An RFC 3339 date indicating when the property was last updated.
+    format: date-time
+  versions:
+    type: integer
+    description: |
+      Number of versions of the property.
+    minimum: 1
+  productionDeploymentTime:
+    type: string
+    x-stoplight:
+      id: pgpvdingj1c9k
+    format: date-time
+    description: RFC 3339 date indicating when the property was deployed to production.
+  stagingDeploymentTime:
+    type: string
+    x-stoplight:
+      id: gbx4yn6z4clwn
+    format: date-time
+    description: RFC 3339 date indicating when the property was deployed to staging.
+required:
+  - name

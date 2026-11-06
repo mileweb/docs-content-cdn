@@ -1,0 +1,89 @@
+title: propertyListEntry
+type: object
+description: Represents a property returned from the Query Property List API.
+x-examples:
+  example-1:
+    value:
+      id: 5c9326965efbb0000149b05c
+      name: Testproperty20190320
+      description: this is a test
+      latestVersion: 4
+      stagingVersion:
+        version: 2
+        hostnames:
+          - mydomain2.com
+      productionVersion:
+        version: 2
+        hostnames:
+          - mydomain2.com
+      lastUpdateTime: '2019-04-16T16:24:07Z'
+      creationTime: '2019-03-21T05:52:22Z'
+properties:
+  id:
+    type: string
+    description: ID of the property.
+  description:
+    type: string
+    description: |
+      A description of the property.
+  name:
+    type: string
+  creationTime:
+    type: string
+    description: RFC3339 format date indicating when the property was created.
+    format: date-time
+  lastUpdateTime:
+    type: string
+    description: |
+      RFC3339 date indicating when the property was last updated.
+    format: date-time
+  latestVersion:
+    type: integer
+    description: Latest version of the property.
+  stagingVersion:
+    type: object
+    description: Describes the version of the property deployed to staging.
+    properties:
+      version:
+        type: integer
+        description: Property version deployed to staging.
+      hostnames:
+        type: array
+        description: Hostnames of the property deployed to staging.
+        uniqueItems: true
+        items:
+          type: string
+      tlsCertificateId:
+        type: string
+        description: ID of a <a href="#tag/Certificate-Management">certificate.
+      tlsCertificateId1:
+        type: string
+        description: ID of a <a href="#tag/Certificate-Management">certificate.
+  productionVersion:
+    type: object
+    description: Describes the version of the property deployed to production.
+    properties:
+      version:
+        type: integer
+        description: Property version deployed to production.
+      hostnames:
+        type: array
+        description: Hostnames of the property deployed to production.
+        uniqueItems: true
+        items:
+          type: string
+      tlsCertificateId:
+        type: string
+        description: ID of a <a href="#tag/Certificate-Management">certificate.
+      tlsCertificateId1:
+        type: string
+        description: ID of a <a href="#tag/Certificate-Management">certificate.
+  customerId:
+    type: integer
+    description: 'If you are a reseller obtaining list of properties using the Report-Range header, this field indicates the ID of the child customer that owns the property.'
+required:
+  - id
+  - name
+  - creationTime
+  - lastUpdateTime
+  - latestVersion
