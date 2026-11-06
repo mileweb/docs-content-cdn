@@ -820,8 +820,8 @@
         "summary": "Get a property version",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e/versions/1\n"
           }
         ],
@@ -860,8 +860,8 @@
         "summary": "Update a property version",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /properties/81230c199e5f9dd381daff5e/versions/1 -j body.json -e edgelogic.el\n"
           }
         ],
@@ -1632,8 +1632,8 @@
         "description": "Delete a property version.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /properties/81230c199e5f9dd381daff5e/versions/1\n"
           }
         ],
@@ -1798,8 +1798,8 @@
         "operationId": "queryProperty",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e\n"
           }
         ],
@@ -1932,8 +1932,8 @@
         "operationId": "updateProperty",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /properties/81230c199e5f9dd381daff5e -j body.json\n"
           }
         ],
@@ -2076,8 +2076,8 @@
         ],
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /properties/81230c199e5f9dd381daff5e\n"
           }
         ],
@@ -2654,8 +2654,8 @@
         "operationId": "getEdgeHostname",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /edgeHostnames/myedgehostname.qtlgslb.com\n"
           }
         ],
@@ -2735,8 +2735,8 @@
         "operationId": "deleteEdgeHostname",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /edgeHostnames/myedgehostname.qtlgslb.com\n"
           }
         ],
@@ -2943,8 +2943,8 @@
         "description": "Use this API to update an edge hostname. Be sure to enter all fields describing your edge hostname including ones that are not changing.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PUT /edgeHostnames/myedgehostname.qtlgslb.com -j body.json\n"
           }
         ],
@@ -3348,8 +3348,8 @@
         "description": "This API allows you to update an edge hostname by sending only the fields that are changing.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /edgeHostnames/myedgehostname.qtlgslb.com -j body.json\n"
           }
         ],
@@ -3569,8 +3569,8 @@
         "summary": "Get list of property versions",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e/versions\n"
           }
         ],
@@ -4013,8 +4013,8 @@
         "operationId": "createPropertyVersion",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /properties/81230c199e5f9dd381daff5e/versions -j body.json -e edgelogic.el\n"
           }
         ],
@@ -4763,8 +4763,8 @@
         "operationId": "createProperty",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /properties -j body.json -e edgelogic.el\n"
           }
         ],
@@ -5622,8 +5622,8 @@
         "operationId": "getPropertyList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /properties\n"
           }
         ],
@@ -5920,8 +5920,8 @@
         "operationId": "createEdgeHostname",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /edgeHostnames -j body.json\n"
           }
         ],
@@ -6309,8 +6309,8 @@
         "operationId": "getEdgeHostnames",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /edgeHostnames\n"
           }
         ],
@@ -6549,8 +6549,8 @@
         "operationId": "createCertificate",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /certificates -j body.json -k key.pem -c cert.pem -a cacert.pem\n"
           }
         ],
@@ -6966,8 +6966,8 @@
         "operationId": "getCertificates",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /certificates\n"
           }
         ],
@@ -7391,8 +7391,8 @@
         "operationId": "getCertificate",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e\n"
           }
         ],
@@ -7539,8 +7539,8 @@
         "operationId": "updateCertificate",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /certificates/12330c199e5f9dd381daff5e -j body.json -k key.pem -c cert.pem -a cacert.pem\n"
           }
         ],
@@ -7791,8 +7791,8 @@
         "operationId": "deleteCertificate",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e\n"
           }
         ],
@@ -7831,8 +7831,8 @@
         "operationId": "downloadCSR",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e/csr\n"
           }
         ],
@@ -8233,8 +8233,8 @@
         "operationId": "queryCertificateVersion",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e/versions/1\n"
           }
         ],
@@ -8254,8 +8254,8 @@
         "operationId": "delete-cdn-certificates-certificateID-versions-version",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /certificates/45230c199e5f9dd381daff5e/versions/2\n"
           }
         ],
@@ -8587,8 +8587,8 @@
         "operationId": "queryPropertyValidationList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /validations\n"
           }
         ],
@@ -8783,8 +8783,8 @@
         "operationId": "createValidationTask",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /validations -j body.json\n"
           }
         ],
@@ -9019,8 +9019,8 @@
         "operationId": "queryValidationTask",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /validations/415e9495c9e77c000680c10e\n"
           }
         ],
@@ -9193,8 +9193,8 @@
         "operationId": "queryDeploymentTaskList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /deploymentTasks\n"
           }
         ],
@@ -9524,8 +9524,8 @@
         "operationId": "createDeployment",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /deploymentTasks -j body.json\n"
           }
         ],
@@ -9983,8 +9983,8 @@
         "operationId": "queryDeploymentTask",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /deploymentTasks/415e9495c9e77c000680c10e\n"
           }
         ],
@@ -10180,8 +10180,8 @@
         "operationId": "listhostnames",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /hostnames\n"
           }
         ],
@@ -10374,8 +10374,8 @@
         "operationId": "queryOneHostname",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /hostnames/myhostname.com\n"
           }
         ],
@@ -10493,8 +10493,8 @@
         "operationId": "getHistoricalHostnames",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /hostnames/historical -p -l 24H\n"
           }
         ],
@@ -10816,8 +10816,8 @@
         "operationId": "getEdgeTrafficVolume",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/vol?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -11314,8 +11314,8 @@
         "operationId": "getOriginTrafficVolume",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/volOrigin?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -11731,8 +11731,8 @@
         "description": "Gets the number of requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/req?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -12142,8 +12142,8 @@
         "operationId": "getEdgeBandwidth",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/bandwidth?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -12759,8 +12759,8 @@
         "operationId": "getEdgeStatusCodeDetails",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/statusCodeDetails?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -13170,8 +13170,8 @@
         "operationId": "getOriginRequests",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/reqOrigin?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -13847,8 +13847,8 @@
         "operationId": "getOriginStatusCodeDetails",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/statusCodeDetailsOrigin?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -14258,8 +14258,8 @@
         "operationId": "getIntermediateTraffic",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/volInterm?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -14653,8 +14653,8 @@
         "operationId": "getEdgeUploadTrafficVolume",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/upVol?type=fiveminutes -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -14876,8 +14876,8 @@
         "operationId": "createAnnotation",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /annotations -p -j body.json\n"
           }
         ],
@@ -15028,8 +15028,8 @@
         "operationId": "createPurge",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /purges -p -j body.json\n"
           }
         ],
@@ -15355,8 +15355,8 @@
         "operationId": "getPurgeRequestList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /purges\n"
           }
         ],
@@ -15664,8 +15664,8 @@
         "operationId": "queryAnnotationList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /annotationsList?type=client -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -15863,8 +15863,8 @@
         "operationId": "deleteAnnotation",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /annotations/81230c199e5f9dd381daff5e\n"
           }
         ],
@@ -16039,8 +16039,8 @@
         "operationId": "getAnnotation",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /annotations/81230c199e5f9dd381daff5e\n"
           }
         ],
@@ -16134,8 +16134,8 @@
         "operationId": "updateAnnotation",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /annotations/81230c199e5f9dd381daff5e -p -j body.json\n"
           }
         ],
@@ -16438,8 +16438,8 @@
         "operationId": "queryPurgeStatus",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /purges/12330c199e5f9dd381daff5e\n"
           }
         ],
@@ -16564,8 +16564,8 @@
         "operationId": "queryPurgeSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /purges/purgeSummary -p -m 2024-10\n"
           }
         ],
@@ -17029,8 +17029,8 @@
         "operationId": "getVolSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/volSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -17220,8 +17220,8 @@
         "operationId": "get-cdn-report-volSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/volSummary -p -m 2024-10\n"
           }
         ],
@@ -17818,8 +17818,8 @@
         "operationId": "createContact",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh POST /contacts -p -j body.json\n"
           }
         ],
@@ -18240,8 +18240,8 @@
         "operationId": "getContacts",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /contacts -p\n"
           }
         ],
@@ -18478,8 +18478,8 @@
         "operationId": "get-ngadmin-apiAccounts-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /apiAccounts/12345 -p\n"
           }
         ],
@@ -18636,8 +18636,8 @@
         "operationId": "patch-ngadmin-apiAccounts-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh PATCH /apiAccounts/12345 -p -j body.json\n"
           }
         ],
@@ -18756,8 +18756,8 @@
         "operationId": "deleteApiAccount",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh DELETE /apiAccounts/12345 -p\n"
           }
         ],
@@ -19012,8 +19012,8 @@
         "operationId": "post-ngadmin-apiAccounts",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh POST /apiAccounts -p -j body.json\n"
           }
         ],
@@ -19267,8 +19267,8 @@
         "operationId": "get-ngadmin-apiAccounts",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /apiAccounts -p\n"
           }
         ],
@@ -19634,8 +19634,8 @@
         "operationId": "get-ngadmin-contacts-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /contacts/12345 -p\n"
           }
         ],
@@ -19690,8 +19690,8 @@
         "operationId": "delete-ngadmin-contacts-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh DELETE /contacts/12345 -p\n"
           }
         ],
@@ -19764,8 +19764,8 @@
         "operationId": "patch-ngadmin-contacts-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh PATCH /contacts/12345 -p -j body.json\n"
           }
         ],
@@ -20218,8 +20218,8 @@
         "description": "Get the number of DNS requests to resolve your edge hostnames during a time period.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/edgeHostnameReq?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -20556,8 +20556,8 @@
         "operationId": "post-cdn-report-edgeHostnameReqSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/edgeHostnameReqSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -20887,8 +20887,8 @@
         "description": "Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/edgeHostnameReqSummary -p -m 2024-10\n"
           }
         ],
@@ -21158,8 +21158,8 @@
         "operationId": "get-cdn-isps",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /isps\n"
           }
         ],
@@ -21633,8 +21633,8 @@
         "operationId": "get-ngadmin-customers-ID",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /customers/me -p\n"
           }
         ],
@@ -22152,8 +22152,8 @@
         "operationId": "patch-ngadmin-customers-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh PATCH /customers/12345 -p -j body.json\n"
           }
         ],
@@ -22913,8 +22913,8 @@
         "description": "Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the <i>phone</i>, <i>address</i>, <i>responsiblePerson</i>, and <i>chinaBizInfo</i> fields for the customer before enabling deployment to China.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh POST /customers -p -j body.json\n"
           }
         ],
@@ -23498,8 +23498,8 @@
         "operationId": "get-ngadmin-customers",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /customers -p\n"
           }
         ],
@@ -24172,8 +24172,8 @@
         "operationId": "get-cdn-clientRegions",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /clientRegions\n"
           }
         ],
@@ -24437,8 +24437,8 @@
         "operationId": "get-ngadmin-apicalls",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /apicalls -p\n"
           }
         ],
@@ -24824,8 +24824,8 @@
         "operationId": "get-ngadmin-apicalls-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./adminapi.sh GET /apicalls/4567f449795483d -p\n"
           }
         ],
@@ -25463,8 +25463,8 @@
         "operationId": "get-cdn-systemConfigs",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /systemConfigs\n"
           }
         ],
@@ -25550,8 +25550,8 @@
         "operationId": "post-cdn-serviceQuotas",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /serviceQuotas -p -j body.json\n"
           }
         ],
@@ -25987,8 +25987,8 @@
         "operationId": "get-cdn-serviceQuotas",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /serviceQuotas\n"
           }
         ],
@@ -26548,8 +26548,8 @@
         "operationId": "get-cdn-serviceQuotas-serviceQuotaId",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /serviceQuotas/12345\n"
           }
         ],
@@ -26670,8 +26670,8 @@
         "operationId": "patch-cdn-serviceQuotas-serviceQuotaId",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /serviceQuotas/123456 -p -j body.json\n"
           }
         ],
@@ -27040,8 +27040,8 @@
         "operationId": "delete-cdn-serviceQuotas-serviceQuotaId",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /serviceQuotas/12345\n"
           }
         ],
@@ -27230,8 +27230,8 @@
         "operationId": "post-cdn-report-fastOriginReq",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/fastOriginReq?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -27500,8 +27500,8 @@
         "operationId": "post-cdn-report-fastOriginVol",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/fastOriginVol?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -28398,8 +28398,8 @@
         "operationId": "get-cdn-serviceQuotas-customer-customerId",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /serviceQuotas/customer/12345\n"
           }
         ],
@@ -28494,8 +28494,8 @@
         "operationId": "patch-cdn-serviceQuotas-customer-customerId",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /serviceQuotas/customer/123456 -p -j body.json\n"
           }
         ],
@@ -28845,8 +28845,8 @@
         "operationId": "delete-cdn-serviceQuotas-customer-customerId",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /serviceQuotas/customer/12345\n"
           }
         ],
@@ -29037,8 +29037,8 @@
         "operationId": "post-cdn-report-cpuTime",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/cpuTime?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -29334,8 +29334,8 @@
         "operationId": "get-cdn-hostnames-historical-hostname",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /hostnames/historical/myhostname.com\n"
           }
         ],
@@ -29463,8 +29463,8 @@
         "operationId": "post-cdn-prefetches",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /prefetches -p -j body.json\n"
           }
         ],
@@ -29763,8 +29763,8 @@
         "operationId": "get-cdn-prefetches",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /prefetches\n"
           }
         ],
@@ -30099,8 +30099,8 @@
         "operationId": "get-cdn-prefetches-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /prefetches/12330c199e5f9dd381daff5e\n"
           }
         ],
@@ -30178,8 +30178,8 @@
         "operationId": "post-cdn-apiPermissions",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /apiPermissions -p -j body.json\n"
           }
         ],
@@ -30837,8 +30837,8 @@
         "operationId": "get-cdn-apiPermissions-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /apiPermissions/123 -p\n"
           }
         ],
@@ -30951,8 +30951,8 @@
         "operationId": "patch-cdn-apiPermissions-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /apiPermissions/123 -p -j body.json\n"
           }
         ],
@@ -31273,8 +31273,8 @@
         "operationId": "delete-cdn-apiPermissions-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /apiPermissions/123 -p\n"
           }
         ],
@@ -31464,8 +31464,8 @@
         "operationId": "post-cdn-report-reqSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/reqSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -31781,8 +31781,8 @@
         "description": "Get a summary of requests during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers' requests.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/reqSummary -p -m 2024-10\n"
           }
         ],
@@ -31982,8 +31982,8 @@
         "operationId": "get-cdn-webhooks",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /webhooks -p\n"
           }
         ],
@@ -32120,8 +32120,8 @@
         "operationId": "post-cdn-webhooks",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /webhooks -p -j body.json\n"
           }
         ],
@@ -32346,8 +32346,8 @@
         "operationId": "get-cdn-webhooks-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /webhooks/12 -p\n"
           }
         ],
@@ -32405,8 +32405,8 @@
         "operationId": "patch-cdn-webhooks-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /webhooks/12 -p -j body.json\n"
           }
         ],
@@ -32517,8 +32517,8 @@
         "operationId": "delete-cdn-webhooks-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /webhooks/12 -p\n"
           }
         ],
@@ -32648,8 +32648,8 @@
         "operationId": "post-cdn-secrets",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /secrets -j body.json\n"
           }
         ],
@@ -32867,8 +32867,8 @@
         "operationId": "get-cdn-secrets",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /secrets\n"
           }
         ],
@@ -32994,8 +32994,8 @@
         "operationId": "get-cdn-purges-purgeTokens",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /purges/purgeTokens?target=production\n"
           }
         ],
@@ -33229,8 +33229,8 @@
         "operationId": "get-cdn-secrets-secretID",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /secrets/81230c199e5f9dd381daff5e\n"
           }
         ],
@@ -33395,8 +33395,8 @@
         "operationId": "patch-cdn-secrets-secretID",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /secrets -j body.json\n"
           }
         ],
@@ -33548,8 +33548,8 @@
         "operationId": "delete-cdn-secrets-secretID",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /secrets/81230c199e5f9dd381daff5e\n"
           }
         ],
@@ -33702,8 +33702,8 @@
         "operationId": "get-cdn-report-logConfigs",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/logConfigs\n"
           }
         ],
@@ -33761,8 +33761,8 @@
         "operationId": "post-cdn-report-logConfigs",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/logConfigs -j body.json\n"
           }
         ],
@@ -34115,8 +34115,8 @@
         "operationId": "get-cdn-report-logConfigs-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/logConfigs/123\n"
           }
         ],
@@ -34235,8 +34235,8 @@
         "operationId": "patch-cdn-report-logConfigs-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /report/logConfigs/1 -j body.json\n"
           }
         ],
@@ -34443,8 +34443,8 @@
         "operationId": "delete-cdn-report-logConfigs-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /report/logConfigs/123\n"
           }
         ],
@@ -34575,8 +34575,8 @@
         "operationId": "post-cdn-report-logDownload",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/logDownload -p -m 2024-10-25 -j body.json\n"
           }
         ],
@@ -34654,8 +34654,8 @@
         "operationId": "get-cdn-report-logDownload",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/logDownload?hostname=mydomain.com -p -m 2024-10-25\n"
           }
         ],
@@ -35018,8 +35018,8 @@
         "operationId": "post-cdn-report-bandwidthSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/bandwidthSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -35210,8 +35210,8 @@
         "operationId": "get-cdn-report-bandwidthSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/bandwidthSummary -p -m 2024-10\n"
           }
         ],
@@ -35592,8 +35592,8 @@
         "operationId": "post-cdn-reports-edgeStatusSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/edgeStatusSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -35757,8 +35757,8 @@
         "operationId": "get-cdn-reports-edgeStatusSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/edgeStatusSummary -p -m 2024-10\n"
           }
         ],
@@ -36104,8 +36104,8 @@
         "operationId": "get-cdn-publicIpList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /publicIpList\n"
           }
         ],
@@ -36285,8 +36285,8 @@
         "operationId": "post-cdn-reports-originStatusSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/originStatusSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -36575,8 +36575,8 @@
         "description": "Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. This report's data has a latency of up to thirty minutes.",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/originStatusSummary -p -m 2024-10\n"
           }
         ],
@@ -36800,8 +36800,8 @@
         "operationId": "post-cdn-report-cpuSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/cpuSummary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -37111,8 +37111,8 @@
         "operationId": "get-cdn-report-cpuSummary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/cpuSummary -p -m 2024-10\n"
           }
         ],
@@ -37209,8 +37209,8 @@
         "operationId": "get-cdn-prefetches-prefetchTokens",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /prefetches/prefetchTokens\n"
           }
         ],
@@ -37356,8 +37356,8 @@
         "operationId": "get-cdn-shields",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /shields\n"
           }
         ],
@@ -37551,8 +37551,8 @@
         "operationId": "get-cdn-shields-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /shields/as-jp1\n"
           }
         ],
@@ -37649,8 +37649,8 @@
         "operationId": "get-cdn-logAggregationPoints",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /logAggregationPoints\n"
           }
         ],
@@ -37781,8 +37781,8 @@
         "operationId": "post-cdn-logAggregationPoints",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /logAggregationPoints -j body.json\n"
           }
         ],
@@ -38087,8 +38087,8 @@
         "operationId": "get-cdn-logAggregationPoints-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /logAggregationPoints/12\n"
           }
         ],
@@ -38134,8 +38134,8 @@
         "operationId": "delete-cdn-logAggregationPoints-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh DELETE /logAggregationPoints/12\n"
           }
         ],
@@ -38244,8 +38244,8 @@
         "operationId": "patch-cdn-logAggregationPoints-id",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh PATCH /logAggregationPoints/12 -j body.json\n"
           }
         ],
@@ -38438,8 +38438,8 @@
         "operationId": "post-ngadmin-ipDetails",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /ipDetails -p -j body.json\n"
           }
         ],
@@ -38657,8 +38657,8 @@
         "operationId": "post-cdn-report-volL7",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/volL7?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -38952,8 +38952,8 @@
         "operationId": "post-cdn-report-bandwidthL7",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/bandwidthL7?type=daily -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -39301,8 +39301,8 @@
         "operationId": "getVolL7Summary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/volL7Summary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -39427,8 +39427,8 @@
         "operationId": "get-cdn-report-volL7Summary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/volL7Summary -p -m 2024-10\n"
           }
         ],
@@ -39873,8 +39873,8 @@
         "operationId": "post-cdn-report-bandwidthL7Summary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh POST /report/bandwidth7Summary -p -m 2024-10 -j body.json\n"
           }
         ],
@@ -39991,8 +39991,8 @@
         "operationId": "get-cdn-report-bandwidthL7Summary",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /report/bandwidthL7Summary -p -m 2024-10\n"
           }
         ],
@@ -40262,8 +40262,8 @@
         "operationId": "get-cdn-originFastRouteIpList",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /originFastRouteIpList\n"
           }
         ],
@@ -40369,8 +40369,8 @@
         "operationId": "get-cdn-stagingServers",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /stagingServers\n"
           }
         ],
@@ -40539,8 +40539,8 @@
         "operationId": "get-cdn-logAggregationPoints-summaryReport",
         "x-codeSamples": [
           {
-            "lang": "CDN Pro script",
-            "label": "CDNProCLI",
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
             "source": "./cdnapi.sh GET /logAggregationPoints/summaryReport -p -m 2025-03\n"
           }
         ],

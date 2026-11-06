@@ -104,8 +104,8 @@ paths:
                     message: The specified property ID does not exist.
       summary: Get a property version
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e/versions/1
       parameters:
@@ -130,8 +130,8 @@ paths:
     patch:
       summary: Update a property version
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /properties/81230c199e5f9dd381daff5e/versions/1 -j body.json -e edgelogic.el
       responses:
@@ -296,8 +296,8 @@ paths:
       operationId: delete-cdn-properties-propertyID-versions-version
       description: Delete a property version.
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /properties/81230c199e5f9dd381daff5e/versions/1
       parameters:
@@ -359,8 +359,8 @@ paths:
       description: Returns a summary about a property including the number of versions that have been created and which versions are deployed.
       operationId: queryProperty
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e
       parameters:
@@ -446,8 +446,8 @@ paths:
         If you wish to change a property's configuration, use the <a href="#operation/updatePropertyVersion">Update a property version API</a>.
       operationId: updateProperty
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /properties/81230c199e5f9dd381daff5e -j body.json
       requestBody:
@@ -537,8 +537,8 @@ paths:
       tags:
         - Property Management
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /properties/81230c199e5f9dd381daff5e
       parameters:
@@ -737,8 +737,8 @@ paths:
       description: This API returns information about an edge hostname including the associated client zone rules and operation history.
       operationId: getEdgeHostname
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /edgeHostnames/myedgehostname.qtlgslb.com
       parameters:
@@ -788,8 +788,8 @@ paths:
                     message: The specified edge hostname does not exist or the caller doesn't have access to this resource.
       operationId: deleteEdgeHostname
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /edgeHostnames/myedgehostname.qtlgslb.com
       description: 'Use this API to delete an edge hostname. If you have configured your DNS server with this edge hostname, you should update your DNS records before deleting it. Otherwise, visitors to the associated hostnames will see an error.'
@@ -921,8 +921,8 @@ paths:
       operationId: updateEdgeHostname
       description: Use this API to update an edge hostname. Be sure to enter all fields describing your edge hostname including ones that are not changing.
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PUT /edgeHostnames/myedgehostname.qtlgslb.com -j body.json
       tags:
@@ -1088,8 +1088,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       description: This API allows you to update an edge hostname by sending only the fields that are changing.
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /edgeHostnames/myedgehostname.qtlgslb.com -j body.json
       tags:
@@ -1137,8 +1137,8 @@ paths:
       operationId: getPropertyVersions
       summary: Get list of property versions
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /properties/81230c199e5f9dd381daff5e/versions
       tags:
@@ -1435,8 +1435,8 @@ paths:
       description: Create a new version of a property. Call this API to make additional changes to a property after you have <a href="#operation/createDeployment">deployed it to production or staging</a>.
       operationId: createPropertyVersion
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /properties/81230c199e5f9dd381daff5e/versions -j body.json -e edgelogic.el
       tags:
@@ -1589,8 +1589,8 @@ paths:
       description: Creates a property to define the configuration of one or more hostnames (domains) to deploy to the CDN servers.
       operationId: createProperty
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /properties -j body.json -e edgelogic.el
       requestBody:
@@ -1746,8 +1746,8 @@ paths:
       description: 'The API returns a summary of properties including the ID, latest version number, comments, staging version number, production version number, and last update time of each one. Use query parameters to filter the list of returned properties.'
       operationId: getPropertyList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /properties
       parameters:
@@ -1982,8 +1982,8 @@ paths:
       description: This API enables you to create edge hostnames to control how requests from different client zones are handled. You must create CNAME DNS records to point your properties' hostnames to an edge hostname created using this API in order for the CDN to handle your content.
       operationId: createEdgeHostname
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /edgeHostnames -j body.json
       requestBody:
@@ -2148,8 +2148,8 @@ paths:
                     message: Client zone with region 'na.us' and isp 'us_cox' can have at most one 'deliver' action.
       operationId: getEdgeHostnames
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /edgeHostnames
       description: 'Get a list of edge hostnames. Specify search, offset, and limit parameters to filter your results. The default is to return the most recently updated edge hostname first.'
@@ -2305,8 +2305,8 @@ paths:
                     message: A certificate with the same name already exists for the customer.
       operationId: createCertificate
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /certificates -j body.json -k key.pem -c cert.pem -a cacert.pem
       description: Create a certificate along with its first version. You can choose to upload the key/certificate pair or generate a self-signed one.
@@ -2582,8 +2582,8 @@ paths:
                     message: 'The valid sort by values for this endpoint are ''creationTime'', lastUpdateTime'' when caOnly=true is specified.'
       operationId: getCertificates
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /certificates
       description: 'Get a list of available certificates including each certificate''s ID, name, version deployed to production, version deployed to staging, the latest version number, when the certificate was last updated, and when the certificate expires. By default, certificates are returned in order of most recently updated first. Use query parameters to filter the list of returned certificates.'
@@ -2886,8 +2886,8 @@ paths:
       description: Gets details about a certificate including the versions of the certificate and who is using it.
       operationId: getCertificate
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e
       parameters:
@@ -2980,8 +2980,8 @@ paths:
                     message: The specified certificate ID does not exist.
       operationId: updateCertificate
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /certificates/12330c199e5f9dd381daff5e -j body.json -k key.pem -c cert.pem -a cacert.pem
       description: 'Update a certificate using this API. The fields are the same as those in the <a href="#operation/createCertificate">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href="#operation/createDeployment">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN Pro may still serve content using an older version of the certificate.'
@@ -3120,8 +3120,8 @@ paths:
       description: This API lets you delete a certificate that is not being used in production or staging.
       operationId: deleteCertificate
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /certificates/12330c199e5f9dd381daff5e
       tags:
@@ -3146,8 +3146,8 @@ paths:
       description: 'Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href="#operation/updateCertificate">Update a certificate API</a>. This API cannot be used for CA certificates.'
       operationId: downloadCSR
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e/csr
       responses:
@@ -3471,8 +3471,8 @@ paths:
       description: 'Obtain details about a certificate version including the expiration date, algorithm and key length, fingerprint, and whether it is deployed in production and staging.'
       operationId: queryCertificateVersion
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /certificates/12330c199e5f9dd381daff5e/versions/1
       parameters:
@@ -3485,8 +3485,8 @@ paths:
       summary: Delete the latest version of a certificate
       operationId: delete-cdn-certificates-certificateID-versions-version
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /certificates/45230c199e5f9dd381daff5e/versions/2
       responses:
@@ -3711,8 +3711,8 @@ paths:
                     message: Invalid field 'status'.
       operationId: queryPropertyValidationList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /validations
       description: 'Get a list of property validation tasks including the associated property ID, version, submission time, and status. Filter the results using the query parameters.'
@@ -3845,8 +3845,8 @@ paths:
       description: This API validates a property version. You must call this API before you can <a href="#operation/createDeployment">deploy the property version</a> to staging or production. Your property will be checked for correct syntax.
       operationId: createValidationTask
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /validations -j body.json
       requestBody:
@@ -4017,8 +4017,8 @@ paths:
                     message: The specified validation task ID does not exist.
       operationId: queryValidationTask
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /validations/415e9495c9e77c000680c10e
       description: This API returns details about a validation task.
@@ -4138,8 +4138,8 @@ paths:
       description: 'Get a summary of deployment tasks. Filter results using the query parameters. If you specify more than one query parameter, only the tasks meeting all criteria will be returned.'
       operationId: queryDeploymentTaskList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /deploymentTasks
       parameters:
@@ -4361,8 +4361,8 @@ paths:
         After a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href="#operation/createPropertyVersion">creating a new property version</a> with your desired changes.
       operationId: createDeployment
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /deploymentTasks -j body.json
       requestBody:
@@ -4608,8 +4608,8 @@ paths:
                     message: The specified deployment task ID does not exist.
       operationId: queryDeploymentTask
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /deploymentTasks/415e9495c9e77c000680c10e
       description: 'Get details about a deployment task including the associated actions, when it was submitted, its status, and additional details if the deployment failed.'
@@ -4689,8 +4689,8 @@ paths:
       description: Get a list of hostnames belonging to properties that have been deployed to production or staging.
       operationId: listhostnames
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /hostnames
       parameters:
@@ -4772,8 +4772,8 @@ paths:
       description: This API returns information about a specific hostname belonging to a property that has been deployed to production or staging.
       operationId: queryOneHostname
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /hostnames/myhostname.com
       parameters:
@@ -4850,8 +4850,8 @@ paths:
       description: Get a list of hostnames belonging to properties that were successfully <a href="#tag/Deployment-Management">deployed</a> to production or staging during a particular timeframe.
       operationId: getHistoricalHostnames
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /hostnames/historical -p -l 24H
       parameters:
@@ -4984,8 +4984,8 @@ paths:
         Get the edge traffic volume in megabytes during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.
       operationId: getEdgeTrafficVolume
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/vol?type=fiveminutes -p -m 2024-10 -j body.json
       requestBody:
@@ -5141,8 +5141,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getOriginTrafficVolume
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/volOrigin?type=fiveminutes -p -m 2024-10 -j body.json
       description: |-
@@ -5295,8 +5295,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       description: Gets the number of requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/req?type=fiveminutes -p -m 2024-10 -j body.json
       requestBody:
@@ -5442,8 +5442,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getEdgeBandwidth
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/bandwidth?type=fiveminutes -p -m 2024-10 -j body.json
       description: |
@@ -5630,8 +5630,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getEdgeStatusCodeDetails
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/statusCodeDetails?type=fiveminutes -p -m 2024-10 -j body.json
       description: 'Gets details about HTTP status codes returned by requests to CDN Pro edge servers during a time period. Query parameters let you specify the time period, scheme, and granularity so you can monitor changes during the period. Filter the results further by passing a <i>filters</i> object in the request. This report''s data has a latency of up to thirty minutes.'
@@ -5825,8 +5825,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getOriginRequests
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/reqOrigin?type=fiveminutes -p -m 2024-10 -j body.json
       description: Get the number of requests to your origin servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of less than two minutes.
@@ -6042,8 +6042,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getOriginStatusCodeDetails
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/statusCodeDetailsOrigin?type=fiveminutes -p -m 2024-10 -j body.json
       description: 'Gets details about HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and granularity so you can monitor changes during the period. Filter the results further by passing a <i>filters</i> object in the request. This report''s data has a latency of up to thirty minutes.'
@@ -6237,8 +6237,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getIntermediateTraffic
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/volInterm?type=fiveminutes -p -m 2024-10 -j body.json
       description: |
@@ -6426,8 +6426,8 @@ paths:
         Note: The overhead of TCP, IP, and MAC headers is not included in this API's results.
       operationId: getEdgeUploadTrafficVolume
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/upVol?type=fiveminutes -p -m 2024-10 -j body.json
       requestBody:
@@ -6578,8 +6578,8 @@ paths:
       description: This API allows you to create an annotation for a report shown in the CDN Pro portal. The request body lets you specify the conditions under which the annotation appears along with the text to show.
       operationId: createAnnotation
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /annotations -p -j body.json
       requestBody:
@@ -6683,8 +6683,8 @@ paths:
       description: Create a purge request to force a refresh of the content stored in the CDN Pro cache servers.  You may wish to do this if you just updated content on your origin server and want visitors to see the changes right away rather than wait for the updates to propagate according to the schedule defined in your property configuration.
       operationId: createPurge
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /purges -p -j body.json
       requestBody:
@@ -6943,8 +6943,8 @@ paths:
                     message: The valid sort order values are asc or desc.
       operationId: getPurgeRequestList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /purges
       description: Get a list of purge requests. Purge records are retained for fifteen days. Filter the list by specifying query parameters.
@@ -7103,8 +7103,8 @@ paths:
                     message: Parameter 'enddate' is required.
       operationId: queryAnnotationList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /annotationsList?type=client -p -m 2024-10 -j body.json
       parameters:
@@ -7215,8 +7215,8 @@ paths:
       description: Delete a report annotation.
       operationId: deleteAnnotation
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /annotations/81230c199e5f9dd381daff5e
       parameters:
@@ -7284,8 +7284,8 @@ paths:
                     message: The specified annotation ID does not exist.
       operationId: getAnnotation
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /annotations/81230c199e5f9dd381daff5e
       description: Retrieve details about a report annotation including the conditions in which it will appear in a CDN Pro report.
@@ -7345,8 +7345,8 @@ paths:
       description: Update a report annotation. It will appear within CDN Pro portal reports when its conditions are met.
       operationId: updateAnnotation
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /annotations/81230c199e5f9dd381daff5e -p -j body.json
       requestBody:
@@ -7575,8 +7575,8 @@ paths:
       description: Get information about a purge request including its associated hostnames and status.
       operationId: queryPurgeStatus
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /purges/12330c199e5f9dd381daff5e
       parameters:
@@ -7663,8 +7663,8 @@ paths:
                     message: An invalid target was specified. It must be either 'staging' or 'production' or left empty.
       operationId: queryPurgeSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /purges/purgeSummary -p -m 2024-10
       description: Returns a summary of purge requests that were made during a time period. Query parameters let you specify the timeframe and target environment.
@@ -7910,8 +7910,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getVolSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/volSummary -p -m 2024-10 -j body.json
       description: |
@@ -7970,8 +7970,8 @@ paths:
       summary: Get a summary of traffic volume
       operationId: get-cdn-report-volSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/volSummary -p -m 2024-10
       responses:
@@ -8301,8 +8301,8 @@ paths:
       description: 'Create a CDN Pro portal user account. The loginName field must be unique (the comparison is case insensitive) and cannot contain leading or trailing whitespace. If you delete a user, you cannot reuse the old loginName.'
       operationId: createContact
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh POST /contacts -p -j body.json
       requestBody:
@@ -8532,8 +8532,8 @@ paths:
                     message: The valid isMaster values are true and false.
       operationId: getContacts
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /contacts -p
       description: 'Get a list of CDN Pro portal users. Use the query parameters to filter the results. If you are a reseller you may use the <i>Report-Range</i> request header to get a list of user accounts from child customers as well, or use the On-Behalf-Of header to get results from a single child customer.'
@@ -8697,8 +8697,8 @@ paths:
                     message: The specified account ID does not exist or the caller doesn't have access to this resource.
       operationId: get-ngadmin-apiAccounts-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /apiAccounts/12345 -p
       description: Get details about an API account.
@@ -8806,8 +8806,8 @@ paths:
                     message: One or more product names are not valid.
       operationId: patch-ngadmin-apiAccounts-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh PATCH /apiAccounts/12345 -p -j body.json
       parameters:
@@ -8887,8 +8887,8 @@ paths:
       description: Delete an API account.
       operationId: deleteApiAccount
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh DELETE /apiAccounts/12345 -p
       parameters:
@@ -9057,8 +9057,8 @@ paths:
                     message: This apiName already exists.
       operationId: post-ngadmin-apiAccounts
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh POST /apiAccounts -p -j body.json
       description: |-
@@ -9243,8 +9243,8 @@ paths:
                     message: Type should be "operator" or "read-only".
       operationId: get-ngadmin-apiAccounts
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /apiAccounts -p
       description: 'Get a list of API accounts belonging to you. You can filter the results using query parameters. If you are a reseller, you can also use the Report-Range header to get all the API accounts from your child customers as well.'
@@ -9460,8 +9460,8 @@ paths:
                     message: The requested contact does not exist or you do not have required permission.
       operationId: get-ngadmin-contacts-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /contacts/12345 -p
       description: Return information about a CDN Pro portal user.
@@ -9496,8 +9496,8 @@ paths:
                     message: The requested contact does not exist or you do not have required permission.
       operationId: delete-ngadmin-contacts-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh DELETE /contacts/12345 -p
       description: Delete a CDN Pro portal user account using this API.
@@ -9544,8 +9544,8 @@ paths:
                     message: The loginName specified contains leading or trailing spaces.
       operationId: patch-ngadmin-contacts-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh PATCH /contacts/12345 -p -j body.json
       description: Update a CDN Pro portal user account. Only fields in the request body will be updated.
@@ -9728,8 +9728,8 @@ paths:
       operationId: post-cdn-report-edgeHostnameReq
       description: Get the number of DNS requests to resolve your edge hostnames during a time period.
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/edgeHostnameReq?type=daily -p -m 2024-10 -j body.json
       parameters:
@@ -9866,8 +9866,8 @@ paths:
                     message: The max time span must be no more than 366 days.
       operationId: post-cdn-report-edgeHostnameReqSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/edgeHostnameReqSummary -p -m 2024-10 -j body.json
       description: Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.
@@ -10000,8 +10000,8 @@ paths:
                     message: 'Invalid group name(s): "abc". We only support grouping by "edgeHostnames".'
       description: Obtain a summary of DNS requests for one or more edge hostnames during a time period. This API allows you to see the actual number of requests for each edge hostname.
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/edgeHostnameReqSummary -p -m 2024-10
       tags:
@@ -10152,8 +10152,8 @@ paths:
                     message: The valid sort order values are asc and desc.
       operationId: get-cdn-isps
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /isps
       description: Obtain a list of ISPs that can be used in <a href="#operation/createEdgeHostname">edge hostname client zone rules</a>.
@@ -10251,8 +10251,8 @@ paths:
                     message: The specified customer ID does not exist or the caller doesn't have access to this resource.
       operationId: get-ngadmin-customers-ID
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /customers/me -p
       description: Obtain configuration details for a customer.
@@ -10377,8 +10377,8 @@ paths:
                     message: The specified customer ID does not exist or the caller doesn't have access to this resource.
       operationId: patch-ngadmin-customers-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh PATCH /customers/12345 -p -j body.json
       description: 'Update a customer account. Settings within the <i>configs</i> field can only be set by a reseller on behalf of a child customer. A child customer''s access to a product can only be removed if they are not currently using resources. For example, the child should not have any remaining deployed properties.'
@@ -10650,8 +10650,8 @@ paths:
                     message: The maximum number of child customers has been reached.
       description: 'Resellers can use this API to create a child customer. If the customer requires deployment to PoPs in mainland China the reseller is responsible for collecting and verifying the <i>phone</i>, <i>address</i>, <i>responsiblePerson</i>, and <i>chinaBizInfo</i> fields for the customer before enabling deployment to China.'
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh POST /customers -p -j body.json
       tags:
@@ -10938,8 +10938,8 @@ paths:
                     message: This user is not allowed to perform this request.
       operationId: get-ngadmin-customers
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /customers -p
       description: |
@@ -11304,8 +11304,8 @@ paths:
                     message: The valid sort order values are asc and desc.
       operationId: get-cdn-clientRegions
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /clientRegions
       description: Get a list of client regions that can be used in <a href="#operation/createEdgeHostname">edge hostname client zone rules</a>. Query parameters allow you to filter and sort the results.
@@ -11493,8 +11493,8 @@ paths:
                     message: The status code 'abc' is invalid.
       operationId: get-ngadmin-apicalls
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /apicalls -p
       description: 'Retrieve a list of recent API calls that have been made by you or on your behalf. API calls triggered by portal users are included as well. Query parameters allow you to filter results. By default, API calls made in the last 24 hours will be returned if the startdate and enddate parameters are unspecified.'
@@ -11782,8 +11782,8 @@ paths:
                     message: The request does not exist.
       operationId: get-ngadmin-apicalls-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./adminapi.sh GET /apicalls/4567f449795483d -p
       description: 'Get details about an API call including its response status, request and response headers, and caller''s IP address.'
@@ -12269,8 +12269,8 @@ paths:
                     oldestPropertyValidationTime: '2021-10-23T00:00:00Z'
       operationId: get-cdn-systemConfigs
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /systemConfigs
       description: 'This API returns system configuration settings including supported [Edge Logic directives](</docs/edge-logic/supported-directives>), advanced Edge Logic directives, the default pricing for traffic, and nonstandard ports that can handle HTTP and HTTPS requests. Please note that your account may not have access to the advanced Edge Logic directives or features. Please contact our support team if you require access to a particular directive, feature, or port that is not listed.'
@@ -12326,8 +12326,8 @@ paths:
                     message: 'Invalid hostname: "testabc.abracadabra.com". The domain "testabc.abracadabra.com" is reserved for another customer.'
       operationId: post-cdn-serviceQuotas
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /serviceQuotas -p -j body.json
       description: 'A reseller can use this API to define CDN Pro service quotas for a child customer. The child customer cannot have quota levels greater than those of the reseller. '
@@ -12625,8 +12625,8 @@ paths:
                     message: The offset must be a valid non-negative integer.
       operationId: get-cdn-serviceQuotas
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /serviceQuotas
       description: <b>Resellers</b> can use this API to obtain a list of service quotas of their child customers. Optional query parameters let you filter the results.
@@ -12803,8 +12803,8 @@ paths:
                     message: The serviceQuotaId is not for a child customer of the caller.
       operationId: get-cdn-serviceQuotas-serviceQuotaId
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /serviceQuotas/12345
       description: This API allows a reseller to get a child customer's service quota by referencing its service quota ID.
@@ -12881,8 +12881,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-serviceQuotas-serviceQuotaId
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /serviceQuotas/123456 -p -j body.json
       description: This API allows a reseller to update a child customer's service quota by referencing its service quota ID.
@@ -12967,8 +12967,8 @@ paths:
                     message: This customer still has properties deployed in production. They must be deleted before the configuration can be deleted.
       operationId: delete-cdn-serviceQuotas-serviceQuotaId
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /serviceQuotas/12345
       description: 'This API allows a reseller to delete a child customer''s service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href="#operation/createDeployment">deployed</a> in the staging or production environments.'
@@ -13020,8 +13020,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-fastOriginReq
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/fastOriginReq?type=daily -p -m 2024-10 -j body.json
       description: 'Return the number of requests to your origin server that uses our [fast route feature](</docs/edge-logic/supported-directives#origin_fast_route>) to make the connections faster and more reliable.'
@@ -13204,8 +13204,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-fastOriginVol
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/fastOriginVol?type=daily -p -m 2024-10 -j body.json
       description: 'Return the traffic to your origin server that uses our [fast route feature](</docs/edge-logic/supported-directives#origin_fast_route>) to make the connections faster and more reliable.'
@@ -13410,8 +13410,8 @@ paths:
                     billUsingStripe: false
       operationId: get-cdn-serviceQuotas-customer-customerId
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /serviceQuotas/customer/12345
       description: Get the CDN service quota for a customer.
@@ -13472,8 +13472,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-serviceQuotas-customer-customerId
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /serviceQuotas/customer/123456 -p -j body.json
       description: This API allows a reseller to update an existing service quota for a child customer.
@@ -13547,8 +13547,8 @@ paths:
                     message: This customer still has edge hostnames deployed in production. They must be deleted before the service quota can be deleted.
       operationId: delete-cdn-serviceQuotas-customer-customerId
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /serviceQuotas/customer/12345
       description: 'This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href="#operation/createDeployment">deployed</a> in the staging or production environments.'
@@ -13602,8 +13602,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-cpuTime
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/cpuTime?type=daily -p -m 2024-10 -j body.json
       parameters:
@@ -13803,8 +13803,8 @@ paths:
                     message: 'An invalid target was specified. It must be either ''staging'', ''production'', ''all'', or left empty.'
       operationId: get-cdn-hostnames-historical-hostname
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /hostnames/historical/myhostname.com
       description: This API returns information about a hostname's deployments to production and staging. Query parameters let you specify a timeframe to search and where the hostname was deployed.
@@ -13889,8 +13889,8 @@ paths:
                     message: Invalid prefetch header. The header name shouldn't be empty.
       operationId: post-cdn-prefetches
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /prefetches -p -j body.json
       description: |
@@ -14103,8 +14103,8 @@ paths:
                     message: The offset must be a valid non-negative integer.
       operationId: get-cdn-prefetches
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /prefetches
       description: Get a list of prefetch requests. Prefetch records are retained for fifteen days. Filter the list by specifying query parameters.
@@ -14337,8 +14337,8 @@ paths:
                     message: The specified prefetch task ID does not exist or has been deleted.
       operationId: get-cdn-prefetches-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /prefetches/12330c199e5f9dd381daff5e
       description: Get details on the status of a prefetch request.
@@ -14388,8 +14388,8 @@ paths:
                     message: Please specify the apiAccountId.
       operationId: post-cdn-apiPermissions
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /apiPermissions -p -j body.json
       description: |-
@@ -14882,8 +14882,8 @@ paths:
                     message: Permission is not found.
       operationId: get-cdn-apiPermissions-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /apiPermissions/123 -p
       description: 'Return an API account''s permissions, both custom ones as well as the defaults. If you have not set an API account''s permissions, you will get a 404 HTTP response. To specify the permissions of a new API account, you must <a href="#operation/post-cdn-apiPermissions">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href="#operation/patch-cdn-apiPermissions-id">API to modify the permissions</a> further if needed.'
@@ -14954,8 +14954,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-apiPermissions-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /apiPermissions/123 -p -j body.json
       parameters:
@@ -15189,8 +15189,8 @@ paths:
                     message: The API account does not have custom API permissions.
       operationId: delete-cdn-apiPermissions-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /apiPermissions/123 -p
       description: Delete custom permissions for an API account.
@@ -15258,8 +15258,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-reqSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/reqSummary -p -m 2024-10 -j body.json
       description: 'Get a summary of requests during a time period. You can filter and group results by hostnames, server groups, property IDs, or property hostnames. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers'' requests.'
@@ -15342,8 +15342,8 @@ paths:
                     message: 'Invalid group name(s): "serverGroups1". We only support grouping by "hostnames","serverGroups","customerIds","propertyHostnames","propertyIds","legacyTypes".'
       description: 'Get a summary of requests during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. If you are a reseller, you can also group by customerIds to distinguish your child customers'' requests.'
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/reqSummary -p -m 2024-10
       parameters:
@@ -15481,8 +15481,8 @@ paths:
                     message: The value of limit should be an integer.
       operationId: get-cdn-webhooks
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /webhooks -p
       description: 'Get a list of webhooks that have been defined. You can reference a webhook when <a href="#operation/createDeployment">creating a deployment task</a>, <a href="#operation/createPurge">creating a purge request</a>, <a href="#operation/post-cdn-prefetches">creating a prefetch request</a>, or <a href="#operation/createValidationTask">creating a validation task</a>.'
@@ -15572,8 +15572,8 @@ paths:
                     message: The number of webhooks exceeded the account maximum.
       operationId: post-cdn-webhooks
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /webhooks -p -j body.json
       description: 'Create a webhook. It can be used to notify you when an asynchronous task completes. You can reference a webhook when <a href="#operation/createDeployment">creating a deployment task</a>, <a href="#operation/createPurge">creating a purge request</a>, <a href="#operation/post-cdn-prefetches">creating a prefetch request</a>, or <a href="#operation/createValidationTask">creating a validation task</a>.'
@@ -15756,8 +15756,8 @@ paths:
                     message: The specified webhook ID does not exist.
       operationId: get-cdn-webhooks-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /webhooks/12 -p
       description: This API returns details about a webhook including its URL and metadata about its use.
@@ -15794,8 +15794,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-webhooks-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /webhooks/12 -p -j body.json
       description: Update a webhook. Only the fields in the request body will be updated.
@@ -15882,8 +15882,8 @@ paths:
                     message: The specified webhook ID does not exist.
       operationId: delete-cdn-webhooks-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /webhooks/12 -p
       description: 'Delete a webhook. If an asychronous task using it is still in progress, the webhook may not be called when the task completes.'
@@ -15966,8 +15966,8 @@ paths:
                     message: The name already exists.
       operationId: post-cdn-secrets
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /secrets -j body.json
       description: 'Create a secret to protect sensitive text from being exposed in a property''s Edge Logic or origins. Refer to the secret in your property''s Edge Logic using the <code>$SECRET(secretName)</code> syntax. You can also set <code>origins.authentication.awsS3.secretKey</code> to <code>$SECRET(secretName)</code>. When you deploy the property, references to <code>$SECRET(secretName)</code> will be replaced by the text.'
@@ -16119,8 +16119,8 @@ paths:
                     message: Please enter valid credentials.
       operationId: get-cdn-secrets
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /secrets
       description: Get a list of secrets that have been defined. Filter the results using the query parameters.
@@ -16203,8 +16203,8 @@ paths:
                     message: An invalid target was specified. It must be either 'staging' or 'production' or left empty.
       operationId: get-cdn-purges-purgeTokens
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /purges/purgeTokens?target=production
       description: 'This API indicates the number of directory and file purge requests you can make in the staging or production environments. Your <a href="#operation/get-cdn-serviceQuotas-customer-customerId">service quota</a> specifies a daily limit on file and directory purges for production and staging environments. You can temporarily exceed the limit during a day, but it will reduce the number of purges available during the next day.'
@@ -16363,8 +16363,8 @@ paths:
                     message: The specified secret ID does not exist.
       operationId: get-cdn-secrets-secretID
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /secrets/81230c199e5f9dd381daff5e
       description: Get details about a secret including its usage in properties deployed to staging and production. Usage includes references in Edge Logic as well as in <code>origins.authentication.awsS3.secretKey</code>.
@@ -16467,8 +16467,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-secrets-secretID
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /secrets -j body.json
       description: 'Update a secret using this API. Deployed properties using the secret will continue to use its original value at the time of deployment. If you change the secret''s name, property versions referring to the old name will not pass future validations until you edit the properties to remove the references or update them to use a valid secret''s name. If you change the secret''s value, properties using the secret must be revalidated before they can be redeployed. '
@@ -16566,8 +16566,8 @@ paths:
                     message: The secret cannot be deleted because it is in use on production or staging.
       operationId: delete-cdn-secrets-secretID
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /secrets/81230c199e5f9dd381daff5e
       parameters:
@@ -16670,8 +16670,8 @@ paths:
                     message: The offset must be a valid non-negative integer.
       operationId: get-cdn-report-logConfigs
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/logConfigs
       description: Obtain a list of log configurations you have created.
@@ -16710,8 +16710,8 @@ paths:
       summary: Create a log configuration
       operationId: post-cdn-report-logConfigs
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/logConfigs -j body.json
       responses:
@@ -16881,8 +16881,8 @@ paths:
                     message: The specified log config ID does not exist or the caller doesn't have access to this resource.
       operationId: get-cdn-report-logConfigs-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/logConfigs/123
       description: Retrieve a log configuration.
@@ -16957,8 +16957,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-report-logConfigs-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /report/logConfigs/1 -j body.json
       description: Update a log configuration's settings. It can take up to 40 minutes for the revision to take effect.
@@ -17032,8 +17032,8 @@ paths:
                     message: The specified log config ID does not exist or the caller doesn't have access to this resource.
       operationId: delete-cdn-report-logConfigs-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /report/logConfigs/123
       description: Delete a log configuration.
@@ -17120,8 +17120,8 @@ paths:
                     message: Parameter 'startdate' is required.
       operationId: post-cdn-report-logDownload
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/logDownload -p -m 2024-10-25 -j body.json
       parameters:
@@ -17203,8 +17203,8 @@ paths:
       summary: Get access logs for a hostname
       operationId: get-cdn-report-logDownload
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/logDownload?hostname=mydomain.com -p -m 2024-10-25
       responses:
@@ -17401,8 +17401,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-bandwidthSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/bandwidthSummary -p -m 2024-10 -j body.json
       description: 'Get a summary of traffic bandwidth during a time period. You can filter and group results by hostnames or server groups. If you are a reseller, you can also filter and group by customerIds to distinguish your child customers'' traffic.'
@@ -17534,8 +17534,8 @@ paths:
       summary: Get a summary of traffic bandwidth
       operationId: get-cdn-report-bandwidthSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/bandwidthSummary -p -m 2024-10
       responses:
@@ -17657,8 +17657,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-reports-edgeStatusSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/edgeStatusSummary -p -m 2024-10 -j body.json
       description: Gets a summary of HTTP status codes returned by requests to the CDN Pro edge servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.
@@ -17772,8 +17772,8 @@ paths:
       summary: Get a summary of status codes returned by edge servers
       operationId: get-cdn-reports-edgeStatusSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/edgeStatusSummary -p -m 2024-10
       responses:
@@ -17975,8 +17975,8 @@ paths:
                       - '2a01:53c0:ff03:ffff:0000:0000:0000:0000/64'
       operationId: get-cdn-publicIpList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /publicIpList
       description: 'Get a list of IP addresses used by CDN Pro. If your property''s origin configuration uses the directConnection setting ''noDirect'', and its Edge Logic does not use the [origin fast route directive](</docs/edge-logic/supported-directives#origin_fast_route>), you can restrict access to your origin servers by updating your allow lists with these IP addresses. Since the CDN''s IP addresses can periodically change, we recommend that you check once a day and update your allow lists.'
@@ -18034,8 +18034,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-reports-originStatusSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/originStatusSummary -p -m 2024-10 -j body.json
       description: Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period and scheme. Filter the results further by passing a <i>filters</i> object in the request. This report's data has a latency of up to thirty minutes.
@@ -18171,8 +18171,8 @@ paths:
                     message: 'Invalid group name(s): "x". We only support grouping by "hostnames","serverGroups","customerIds","propertyHostnames".'
       description: 'Gets a summary of HTTP status codes returned by requests to your origin servers during a time period. Query parameters let you specify the time period, scheme, and whether to group the results. This report''s data has a latency of up to thirty minutes.'
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/originStatusSummary -p -m 2024-10
       tags:
@@ -18262,8 +18262,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-cpuSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/cpuSummary -p -m 2024-10 -j body.json
       description: Obtain a summary of CPU usage by edge and intermediate servers.
@@ -18415,8 +18415,8 @@ paths:
                     message: 'Invalid parameter ''scheme'': ''a''. The value of the scheme parameter must be ''http'', ''https'' or ''all''.'
       operationId: get-cdn-report-cpuSummary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/cpuSummary -p -m 2024-10
       description: Obtain a summary of CPU usage by edge and intermediate servers.
@@ -18480,8 +18480,8 @@ paths:
                     prefetchTokens: 200
       operationId: get-cdn-prefetches-prefetchTokens
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /prefetches/prefetchTokens
       description: 'This API indicates the number of prefetch requests you can make. Your <a href="#operation/get-cdn-serviceQuotas-customer-customerId">service quota</a> specifies a daily limit on prefetch requests. You can temporarily exceed the limit during a day, but it will reduce the number of prefetches available during the next day.'
@@ -18584,8 +18584,8 @@ paths:
                     message: The value of On-Behalf-Of is invalid.
       operationId: get-cdn-shields
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /shields
       description: |-
@@ -18723,8 +18723,8 @@ paths:
                     message: The shieldId does not exist or the caller does not have permission to access it.
       operationId: get-cdn-shields-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /shields/as-jp1
       description: 'Obtain information about a shield which can be used as an extra layer between the CDN Pro edge servers and your origin servers. This is an advanced feature. If you require this feature, please contact our support team.'
@@ -18790,8 +18790,8 @@ paths:
                         lastUpdateTime: '2022-09-09T20:15:22.558+0000'
       operationId: get-cdn-logAggregationPoints
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /logAggregationPoints
       description: Get a list of log aggregation points that are used to collect raw server logs.
@@ -18877,8 +18877,8 @@ paths:
                     message: The customer already has a log aggregation point with the same name.
       operationId: post-cdn-logAggregationPoints
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /logAggregationPoints -j body.json
       description: Create a new log aggregation point where batches of logs are sent together rather than individually. The maximum number of log aggregation points that can be created by a customer are defined in the customer's service quota.
@@ -19108,8 +19108,8 @@ paths:
                     message: The specified log aggregation ID does not exist or the caller doesn't have access to this resource.
       operationId: get-cdn-logAggregationPoints-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /logAggregationPoints/12
       description: Use this API to get details about a log aggregation point.
@@ -19139,8 +19139,8 @@ paths:
                     message: The specified log aggregation ID does not exist or the caller doesn't have access to this resource.
       operationId: delete-cdn-logAggregationPoints-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /logAggregationPoints/12
       description: Use this API to delete a log aggregation point.
@@ -19209,8 +19209,8 @@ paths:
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
       operationId: patch-cdn-logAggregationPoints-id
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /logAggregationPoints/12 -j body.json
       description: Use this API to update a log aggregation point.
@@ -19343,8 +19343,8 @@ paths:
               examples: {}
       operationId: post-ngadmin-ipDetails
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /ipDetails -p -j body.json
       description: This API allows you to check whether one or more IP addresses belong to the CDN Pro platform.
@@ -19414,8 +19414,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-volL7
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/volL7?type=daily -p -m 2024-10 -j body.json
       description: Get the OSI layer 7 traffic volume in megabytes during a time period. Query parameters let you specify the time period and granularity of data. Filter the results further by passing a filters object in the request. This report's data has a latency of less than two minutes.
@@ -19541,8 +19541,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-bandwidthL7
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/bandwidthL7?type=daily -p -m 2024-10 -j body.json
       description: Get the OSI layer 7 traffic bandwidth in Mbps during a time period. Query parameters let you specify the time period and granularity of data. Filter the results further by passing a filters object in the request. This report's data has a latency of less than two minutes.
@@ -19685,8 +19685,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: getVolL7Summary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/volL7Summary -p -m 2024-10 -j body.json
       description: |
@@ -19771,8 +19771,8 @@ paths:
       summary: Get a summary of L7 traffic volume
       operationId: get-cdn-report-volL7Summary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/volL7Summary -p -m 2024-10
       responses:
@@ -19920,8 +19920,8 @@ paths:
                     message: 'Invalid propertyHostname(s): ''notAHostname''.'
       operationId: post-cdn-report-bandwidthL7Summary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /report/bandwidth7Summary -p -m 2024-10 -j body.json
       description: Get a summary of layer 7 traffic bandwidth during a time period. You can filter and group results by hostnames or content codes. (Content codes can be defined in your properties' <i>loadBalancerLogic</i> field using the $content_code variable.)
@@ -19999,8 +19999,8 @@ paths:
       summary: Get a summary of layer 7 traffic bandwidth
       operationId: get-cdn-report-bandwidthL7Summary
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /report/bandwidthL7Summary -p -m 2024-10
       parameters:
@@ -20124,8 +20124,8 @@ paths:
                       - 'ff80:54c1:ff0a:0000:0000:0000:0000:0000/64'
       operationId: get-cdn-originFastRouteIpList
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /originFastRouteIpList
       description: |
@@ -20197,8 +20197,8 @@ paths:
                         ipVersion: 6
       operationId: get-cdn-stagingServers
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /stagingServers
       description: This API returns a list of IP addresses of servers that can be used to test deployments of properties and certificates to 'staging'. We recommend deploying to 'staging' and testing before deploying to 'production'.
@@ -20271,8 +20271,8 @@ paths:
                     message: Logs are only available for the past 31 days. Please specify a time frame within this period.
       operationId: get-cdn-logAggregationPoints-summaryReport
       x-codeSamples:
-        - lang: CDN Pro script
-          label: CDNProCLI
+        - lang: bash
+          label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /logAggregationPoints/summaryReport -p -m 2025-03
       parameters:
