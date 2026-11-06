@@ -3,9 +3,9 @@
   "info": {
     "title": "CDN Pro API Specification",
     "version": "1.0",
-    "description": "CDN Pro APIs allow you to manage the CDN Pro service.  <p><a href=\"https://github.com/mileweb/CDNProCLI\">CDNProCLI</a> is a command line tool that facilitates API calls in <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/bash\">bash</a> and <a href=\"https://github.com/mileweb/CDNProCLI/tree/master/cdn/js\">JavaScript</a>. It includes the \"cdnapi.sh\" shell script mentioned in this document's examples.</p>",
+    "description": "The REST API described in this document can be used to fully automate the CDN Pro service. <p>Along with this document, we also created <a href=\"https://github.com/mileweb/CDNProSDK\">CDNProSDK</a> to help you get started with the API and integrate it. Its <a href=\"https://github.com/mileweb/CDNProSDK/tree/master/cdn/bash\">bash</a> version includes the \"cdnapi.sh\" shell script used in this document's examples.</p>",
     "contact": {
-      "url": "https://www.{{siteDomain}}"
+      "url": "https://www.{{siteDomain}}/products/cdnpro/"
     }
   },
   "servers": [
