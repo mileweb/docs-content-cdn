@@ -89,8 +89,12 @@ DOCS_REPO_CACHE_DIR=/tmp/docs-preview DOCS_REPO_DEV_SYNC=0 NEXT_PUBLIC_DOCS_PROD
 ```
 
 Open `http://localhost:3000/en/cdn/apidocs` and `http://localhost:3000/zh/cdn/apidocs`.
-Re-run the `rsync` after each build. `NEXT_PUBLIC_DOCS_REPO_BRANCH` must name a branch that
-exists in your copy (the copy's checked-out branch is what is shown either way).
+Re-run the `rsync` after each build; the page shows whatever files are in the copy, whichever
+branch is checked out.
+
+Known limits of the Chinese page (Redoc 2.0.0-rc.40): most of Redoc's own UI text
+("Responses", "Request Body schema", ...) stays English, and its search box finds nothing for
+Chinese queries because its index drops non-Latin characters. English queries still work.
 
 ## Editing with Stoplight Studio
 
