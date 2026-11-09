@@ -134,7 +134,7 @@
                         },
                         "hostnames": {
                           "type": "array",
-                          "description": "与该加速项目关联的加速域名。有效值为完全限定域名（例如 www.domain.com）或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
+                          "description": "与该加速项目关联的加速域名。有效值为完全限定域名(例如 www.domain.com) 或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
                           "items": {
                             "type": "string"
                           }
@@ -1042,7 +1042,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "与该加速项目关联的加速域名。有效值为完全限定域名（例如 www.domain.com）或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
+                    "description": "与该加速项目关联的加速域名。有效值为完全限定域名(例如 www.domain.com) 或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
                     "items": {
                       "type": "string"
                     }
@@ -4060,7 +4060,7 @@
                   },
                   "hostnames": {
                     "type": "array",
-                    "description": "与该加速项目关联的加速域名。有效值为完全限定域名（例如 www.domain.com）或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
+                    "description": "与该加速项目关联的加速域名。有效值为完全限定域名(例如 www.domain.com) 或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
                     "items": {
                       "type": "string"
                     }
@@ -4819,7 +4819,7 @@
                       },
                       "hostnames": {
                         "type": "array",
-                        "description": "与该加速项目关联的加速域名。有效值为完全限定域名（例如 www.domain.com）或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
+                        "description": "与该加速项目关联的加速域名。有效值为完全限定域名(例如 www.domain.com) 或泛域名（例如 *.domain.com）。同一时间内，任一加速域名只能存在于一个已部署的加速项目中。但泛域名可以与您拥有的其他加速域名重叠。",
                         "items": {
                           "type": "string"
                         }
@@ -6600,7 +6600,7 @@
                       "LE",
                       "off"
                     ],
-                    "description": "指定 \"LE\" 表示请求我们在证书即将过期时通过 Let's Encrypt（https://letsencrypt.org/docs/challenge-types/）自动更新您的证书。如果 caOnly 为 <i>true</i>，此字段必须为 <i>off</i>，因为自动更新不适用于 CA 证书。",
+                    "description": "指定 \"LE\" 表示请求我们在证书即将过期时通过 Let's Encrypt(https://letsencrypt.org/docs/challenge-types/) 自动更新您的证书。如果 caOnly 为 <i>true</i>，此字段必须为 <i>off</i>，因为自动更新不适用于 CA 证书。",
                     "default": "off"
                   },
                   "newVersion": {
@@ -7205,7 +7205,7 @@
                         "Off",
                         "LE"
                       ],
-                      "description": "值为 \"LE\" 表示已启用通过 Let's Encrypt（https://letsencrypt.org/docs/challenge-types/）自动更新。对于 CA 证书，此字段始终为 <i>Off</i>，因为自动更新不适用于 CA 证书。"
+                      "description": "值为 \"LE\" 表示已启用通过 Let's Encrypt(https://letsencrypt.org/docs/challenge-types/) 自动更新。对于 CA 证书，此字段始终为 <i>Off</i>，因为自动更新不适用于 CA 证书。"
                     },
                     "usageInProduction": {
                       "type": "array",
