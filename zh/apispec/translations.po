@@ -14212,7 +14212,7 @@ msgstr ""
 "您可以通过克隆（或复制）现有版本来<a href=\"#operation/"
 "createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为加速域名创建"
 "加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-"
-"cdn/en/docs/resources/images/getting-started-flowchart.png\">"
+"cdn/zh/docs/resources/images/getting-started-flowchart.png\">"
 
 #. /tags/2/description
 msgid ""
