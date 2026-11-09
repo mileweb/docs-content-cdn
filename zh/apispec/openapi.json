@@ -40599,7 +40599,7 @@
     },
     {
       "name": "Property Management",
-      "description": "加速项目是一个或多个加速域名（域名）的配置，需要<a href=\"#tag/Deployment-Management\">部署</a>到 CDN Pro 服务器上。一个加速项目可以有多个版本。已部署的加速项目版本不能再修改或再次<a href=\"#tag/Property-Validation\">验证</a>。您可以通过克隆（或复制）现有版本来<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为加速域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png\">",
+      "description": "加速项目是一个或多个加速域名（域名）的配置，需要<a href=\"#tag/Deployment-Management\">部署</a>到 CDN Pro 服务器上。一个加速项目可以有多个版本。已部署的加速项目版本不能再修改或再次<a href=\"#tag/Property-Validation\">验证</a>。您可以通过克隆（或复制）现有版本来<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为加速域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/zh/docs/resources/images/getting-started-flowchart.png\">",
       "x-displayName": "加速项目管理"
     },
     {
