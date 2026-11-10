@@ -1,0 +1,50 @@
+title: reportfilters
+type: object
+description: 'An object that can be passed to report API calls to filter the results. For example, you can specify to only return data for a particular hostname.'
+x-examples:
+  Filter by a specific hostname:
+    filters:
+      hostnames:
+        - domain.info
+properties:
+  filters:
+    type: object
+    description: Filters let you refine the results that are returned.
+    properties:
+      hostnames:
+        type: array
+        description: 'List of hostnames for which to return data. The hostnames are the values of the Host header sent by clients making requests for content. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned. '
+        items:
+          type: string
+      serverGroups:
+        type: array
+        description: 'One or more server groups for which to return data. If unspecified, data for all server groups will be returned.'
+        items:
+          type: string
+          enum:
+            - standard
+            - premium
+            - deluxe
+            - ultra
+            - nearChina
+            - ChinaStandard
+            - ChinaPremium
+      propertyIds:
+        type: array
+        description: 'IDs of properties for which to return data. If unspecified, data for all properties will be returned.'
+        items:
+          type: string
+      propertyHostnames:
+        type: array
+        description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+        items:
+          type: string
+      legacyTypes:
+        type: array
+        x-stoplight:
+          id: y9sid9e79f72w
+        description: 'A list of service types for which to return data. This field is only useful for customers whose contracts stipulate service types.'
+        items:
+          x-stoplight:
+            id: mcxfnr7oms1jk
+          type: string

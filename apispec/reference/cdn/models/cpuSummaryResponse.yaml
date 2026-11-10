@@ -1,0 +1,69 @@
+title: cpuSummaryResponse
+type: object
+description: 'The response contains a summary of CPU usage. It can contain up to 10000 groups. If there are more than 10000 groups, the value of "isComplete" will be false. A special group "\_\_all\_\_" contains the total for all groups including those beyond the 10000 limit. When "isComplete" is true, the total is the sum of all other returned groups.'
+examples:
+  - metaData:
+      startTime: '2022-05-10T00:00:00Z'
+      endTime: '2022-05-31T00:00:00Z'
+      isComplete: true
+      dataNames:
+        - edge cpu time
+        - intermediate cpu time
+      dataUnit: seconds
+    groups:
+      - group: __all__
+        data:
+          - 74.32706
+          - 1.94213
+properties:
+  metaData:
+    type: object
+    description: This object contains fields describing the data returned in the groups object.
+    properties:
+      startTime:
+        type: string
+        description: RFC 3339 date indicating the beginning of the period.
+        format: date-time
+      endTime:
+        type: string
+        description: RFC 3339 date indicating the end of the period.
+        format: date-time
+      isComplete:
+        type: boolean
+        description: 'The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>.'
+      dataNames:
+        type: array
+        description: |-
+          Indicates the type of data returned. 
+          <table>
+          <tr><th>Data Name</th><th>Description</th></tr>
+          <tr><td>edge cpu time</td><td>CPU usage by edge servers</td></tr>
+          <tr><td>intermediate cpu time</td><td>CPU usage by intermediate CDN Pro servers</td></tr>
+          </table>
+          The order of the entries in <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> data array in the response.
+        items:
+          type: string
+      dataUnit:
+        type: string
+        description: Indicates the unit of measurement of the returned values.
+    required:
+      - startTime
+      - endTime
+      - isComplete
+      - dataNames
+      - dataUnit
+  groups:
+    type: array
+    description: 'This object contains the breakdown of CPU usage by group. '
+    items:
+      type: object
+      properties:
+        group:
+          type: string
+          description: |
+            Name of the group. "\_\_all\_\_" is a special group encompassing all groups.
+        data:
+          type: array
+          description: Data values. The units of measurement are determined by the dataUnit field.
+          items:
+            type: number

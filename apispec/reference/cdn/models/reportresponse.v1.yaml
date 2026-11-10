@@ -1,0 +1,62 @@
+title: reportResponse
+type: object
+description: Contains data returned by a report.
+x-examples:
+  example-1:
+    dataName: edge response volume
+    dataUnit: megabytes
+    dataSeries:
+      - timestamp: '2019-10-30T00:00:00Z'
+        data: 0
+      - timestamp: '2019-10-31T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-01T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-02T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-03T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-04T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-05T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-06T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-07T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-08T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-09T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-10T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-11T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-12T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-13T00:00:00Z'
+        data: 0
+      - timestamp: '2019-11-14T00:00:00Z'
+        data: 0
+properties:
+  dataName:
+    type: string
+    description: A brief description of the data.
+  dataUnit:
+    type: string
+    description: Unit of measurement. This will depend on the report API.
+  dataSeries:
+    type: array
+    description: The data points.
+    items:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: 'An RFC 3339 format date representing the beginning of a time interval. It is always in <b>UTC</b> time. For example:  <code>"timestamp": "2019-10-29T01:00:00Z"</code>'
+          format: date-time
+        data:
+          type: number
+          description: A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit of measurement.
+required:
+  - dataName

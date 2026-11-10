@@ -1,0 +1,123 @@
+title: propertyVersion
+type: object
+description: This describes a property version. It includes all of the configuration along with information about its deployment status.
+x-examples:
+  example-1:
+    value:
+      version: 1
+      configs:
+        description: validPropertyVersionAllFields_PropertySteps
+        cacheKeyHostname: testdomain-t1572317034478.mydomain.info
+        tlsCertificateId: 8fde2798385e3d0db19bc330
+        tlsMinVersion: '1.1'
+        tlsMaxVersion: '1.2'
+        tlsCiphers: 'ALL:-MD5'
+        syntaxVersion: '1'
+        hasBeian: false
+        schemeInCacheKey: true
+        requestHandlers:
+          preprocess: {}
+          prehtlookup: {}
+          posthtlookup: {}
+          origins: {}
+          mod4origin: {}
+          cachetime: {}
+          mod4client: {}
+          responseDone: {}
+        hostnames:
+          - testdomain-t1572317034478.mydomain.info
+          - testdomain-t1572317034478.mydomain.info
+        origins:
+          - name: my_origin_1572317034478
+            supportedProtocol: both
+            hostHeader: autohostheader.com
+            directConnection: alwaysDirect
+            servers:
+              - mydomain.info
+        edgeLogic: 'location / {origin_pass my_origin_1572317034478;} return 200;'
+        allowProtocolDowngrade: false
+      status:
+        lastValidationStatus: NotValidated
+        frozen: false
+        creationTime: '2019-10-29T02:43:53Z'
+        lastUpdateTime: '2019-10-29T02:43:56Z'
+        inProduction: false
+        inStaging: false
+properties:
+  version:
+    type: integer
+    description: Identifies the property version.
+    minimum: 1
+  configs:
+    $ref: ./propertyconfiguration.v1.yaml
+  status:
+    type: object
+    description: Summarizes the property version's validation and deployment status.
+    properties:
+      lastValidationStatus:
+        type: string
+        enum:
+          - Validated
+          - NotValidated
+        description: Indicates whether the property version has been validated.
+      frozen:
+        type: boolean
+        description: Indicates whether changes can still be made to the property version. A property version that has been deployed to production or staging will be frozen and can no longer be modified. A new property version must be created to edit the property.
+      creationTime:
+        type: string
+        description: RFC 3339 date indicating when the property version was created.
+      lastUpdateTime:
+        type: string
+        description: RFC 3339 date indicating when the property version was last updated.
+      inProduction:
+        type: boolean
+        description: Indicates whether the property version is currently deployed in the production environment.
+      inStaging:
+        type: boolean
+        description: Indicates whether the property version is currently deployed in the staging environment.
+      warning:
+        type: string
+        description: 'This field can appear if the property definition has issues that might impact its use. For example, if the property is created or updated with a reference to an incompatible certificate, the warning can indicate the certificate is expired or does not support the property''s hostname.'
+      lastValidationCacheVersion:
+        type: string
+        x-stoplight: null
+        id: 314imcgbbd0a5
+        description: Indicates the version of cache most recently used to validate the property version. It will be empty if the property version has not yet been validated.
+      lastStagingDeployment:
+        type: string
+        x-stoplight:
+          id: a9td9qagjo8vc
+        format: date-time
+        example: '2024-03-28T00:07:04Z'
+        description: 'If the property version is currently deployed to staging, this field indicates the RFC 3339 date when the deployment occurred.'
+      lastProductionDeployment:
+        type: string
+        x-stoplight:
+          id: svknhhk9brkqd
+        format: date-time
+        example: '2024-03-29T00:04:04Z'
+        description: 'If the property version is currently deployed to production, this field indicates the RFC 3339 date when the deployment occurred.'
+      lastValidationTime:
+        type: string
+        x-stoplight:
+          id: z40k75sudy1lk
+        format: date-time
+        description: 'If the property version has been validated, this field indicates the RFC 3339 date when it was last validated.'
+      secrets:
+        type: array
+        description: Array of secrets referenced by the property version.
+        items:
+          type: string        
+      deleted:
+        type: boolean
+        x-stoplight:
+          id: 33rxo1tc8j7p9
+        description: Indicates whether the property version has been deleted.
+    required:
+      - lastValidationStatus
+      - frozen
+      - creationTime
+      - inProduction
+      - inStaging
+required:
+  - version

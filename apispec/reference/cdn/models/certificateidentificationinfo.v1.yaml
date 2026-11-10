@@ -1,0 +1,39 @@
+title: certificateIdentificationInfo
+type: object
+description: Information submitted when generating a self-signed certificate.
+x-examples:
+  example-1: {}
+properties:
+  country:
+    type: string
+    description: An ISO-3166 country code.
+    minLength: 2
+    maxLength: 2
+  state:
+    type: string
+    description: A state or province.
+  city:
+    type: string
+    description: A city.
+  company:
+    type: string
+    description: A company name.
+  department:
+    type: string
+    description: The department associated with the certificate.
+  commonName:
+    type: string
+    description: A common name for the certificate.
+  email:
+    type: string
+    description: An email address.
+    format: email
+  subjectAlternativeNames:
+    type: array
+    description: "Hostnames that this certificate will serve. Each entry must be a valid hostname such as <i>domain.com</i> or a wildcard hostname beginning with '*' such as <i>*.domain.com</i>."
+    example: 'domain.com, *.domain.com'
+    items:
+      type: string
+required:
+  - commonName
+  - subjectAlternativeNames

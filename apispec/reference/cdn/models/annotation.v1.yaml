@@ -1,0 +1,53 @@
+title: annotation
+type: object
+x-examples:
+  example-1:
+    id: 5dd50f04ace0440001632799
+    time: '2019-11-20T12:01:40Z'
+    hostnames:
+      - domain.info
+    clientRegions:
+      - na
+      - sa
+    type: client
+    comments: A major release
+description: This describes an annotation to reports shown on the CDN Pro portal.
+properties:
+  id:
+    type: string
+    description: An ID representing the annotation.
+    minLength: 1
+  time:
+    type: string
+    description: RFC 3339 date indicating when the annotation applies.
+    format: date-time
+  hostnames:
+    type: array
+    description: The applicable hostnames.
+    items:
+      type: string
+  clientRegions:
+    type: array
+    description: One or more client regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an edge hostname API</a>.
+    items:
+      type: string
+  type:
+    type: string
+    description: Describes the type of annotation. Operation annotations can only be created by {{title}}.
+    enum:
+      - client
+      - operation
+      - configuration
+  comments:
+    type: string
+    description: Text shown in the report on the CDN Pro portal.
+  serverRegions:
+    type: array
+    description: One or more server regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an edge hostname API</a>.
+    items:
+      type: string
+required:
+  - id
+  - time
+  - type
+  - comments

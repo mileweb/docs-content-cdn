@@ -1,0 +1,116 @@
+{
+  "title": "customerresponse",
+  "type": "object",
+  "description": "Customer account details",
+  "examples": [
+    {
+      "customerId": 0,
+      "apiName": "string",
+      "name": "string",
+      "phone": "string",
+      "address": {
+        "line1": "string",
+        "line2": "string",
+        "city": "string",
+        "state": "string",
+        "zipCode": "string",
+        "country": "string"
+      },
+      "configs": {
+        "apiRate": 64,
+        "apiAccountLimit": 3,
+        "type": "regular",
+        "products": [
+          "CDN"
+        ],
+        "status": "suspended",
+        "description": "string",
+        "regionalOffice": "string",
+        "parentId": "string",
+        "contactLimit": 20
+      },
+      "portalSettings": {
+        "enforce2fa": false,
+        "passwordExpirationDays": 90,
+        "logoutIdleTime": 900,
+        "ipWhiteList": [
+          "0.0.0.0/0"
+        ]
+      },
+      "ipWhiteList": [
+        "0.0.0.0/0"
+      ],
+      "chinaBizInfo": {
+        "category": 1,
+        "idType": 1,
+        "idNumber": "string"
+      }
+    }
+  ],
+  "properties": {
+    "customerId": {
+      "type": "integer",
+      "description": "ID of the customer account."
+    },
+    "apiName": {
+      "type": "string",
+      "description": "Administrator API account name.",
+      "minLength": 1,
+      "maxLength": 60,
+      "pattern": "^[a-zA-Z0-9\\-_\\.@]+"
+    },
+    "name": {
+      "type": "string",
+      "description": "Customer name.",
+      "maxLength": 128
+    },
+    "phone": {
+      "type": "string",
+      "description": "A phone number.\n"
+    },
+    "address": {
+      "$ref": "./address.v1.json"
+    },
+    "configs": {
+      "$ref": "./customerconfigsupdatable.v1.json"
+    },
+    "portalSettings": {
+      "$ref": "./customerportalsettings.v1.json"
+    },
+    "ipWhiteList": {
+      "type": "array",
+      "default": [
+        "0.0.0.0/0","::/0"
+      ],
+      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\",\"::/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
+      "items": {
+        "type": "string"
+      }
+    },
+    "chinaBizInfo": {
+      "$ref": "./chinaBizInfo.v1.json"
+    },
+    "language": {
+      "type": "string",
+      "description": "Indicates the preferred language used in notification messages. A user can log into the console and set a personal preferred language.\n<br/>\n<table>\n<tr><th>Value</th><th>Language</th></tr>\n<tr><td>en</td><td>English</td></tr>\n<tr><td>cn</td><td>Chinese</td></tr>\n<tr><td>jp</td><td>Japanese</td></tr>\n<tr><td>kr</td><td>Korean</td></tr>\n</table>",
+      "enum": [
+        "en",
+        "cn",
+        "jp",
+        "kr"
+      ],
+      "default": "en"
+    },
+    "emailAddress": {
+      "type": "string",
+      "description": "Email address for the customer.",
+      "format": "email"
+    }
+  },
+  "required": [
+    "customerId",
+    "apiName",
+    "name",
+    "emailAddress"
+  ]
+}

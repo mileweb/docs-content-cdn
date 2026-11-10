@@ -1,0 +1,37 @@
+{
+  "title": "customerPortalSettings",
+  "type": "object",
+  "description": "These settings apply to your users accessing the CDN Pro portal.",
+  "properties": {
+    "enforce2fa": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set to <i>true</i> to use two factor authentication to improve security."
+    },
+    "passwordExpirationDays": {
+      "type": "integer",
+      "default": 90,
+      "description": "Indicates how many days a portal user's password can remain the same before it must be updated. The user will be emailed a warning in advance of the expiration.",
+      "minimum": 0,
+      "maximum": 365
+    },
+    "logoutIdleTime": {
+      "type": "integer",
+      "default": 900,
+      "minimum": 300,
+      "maximum": 7200,
+      "description": "Number of seconds the portal user can be idle before being automatically logged out."
+    },
+    "ipWhiteList": {
+      "type": "array",
+      "default": [
+        "0.0.0.0/0", "::/0"
+      ],
+      "description": "List of IP addresses from which portal users can log in.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\", \"::/0\"], which permits logins from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-examples": {}
+}

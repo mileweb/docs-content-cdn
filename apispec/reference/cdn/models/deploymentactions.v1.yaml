@@ -1,0 +1,33 @@
+title: deploymentActions
+type: array
+description: This array contains all the actions related to a deployment. They can include deployment and removal of properties and certificates to the staging or production environments.
+x-examples:
+  example-1:
+    - action: deploy_property
+      propertyId: 8f551d008689dc22d3bb980b
+      version: '1'
+    - certificateId: 61c0dcc92ef4ea6a9ff8c09f
+      action: deploy_cert
+      version: '1'
+items:
+  type: object
+  properties:
+    action:
+      type: string
+      description: 'Describe an action to take. You can deploy a property, remove a property, deploy a certificate, or remove a certificate.'
+      enum:
+        - deploy_property
+        - remove_property
+        - deploy_cert
+        - remove_cert
+    propertyId:
+      type: string
+      description: ID of the property to deploy or remove from the staging or production environment.
+    certificateId:
+      type: string
+      description: Indicates the certificate to deploy or remove from the staging or production environment.
+    version:
+      type: string
+      description: Indicates the version of the certificate or property to deploy or remove.
+  required:
+    - action

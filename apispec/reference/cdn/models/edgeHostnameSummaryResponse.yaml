@@ -1,0 +1,74 @@
+title: edgeHostnameSummaryResponse
+type: object
+description: 'The response contains a summary of DNS requests by edge hostname. It can contain up to 10000 groups representing a breakdown of requests by 10000 edge hostnames. If there are more than 10000 groups, the value of "isComplete" will be false. A special group "\_\_all\_\_" contains the total for all groups including those beyond the 10000 limit.  When "isComplete" is true, the total is the sum of all other returned groups.'
+examples:
+  - metaData:
+      startTime: '2020-01-28T12:35:00Z'
+      endTime: '2020-01-29T12:40:00Z'
+      isComplete: true
+      dataNames:
+        - edgeHostname dns request
+      dataUnit: counts
+    groups:
+      - group: __all__
+        data:
+          - 18
+      - group: report1580294661282.qtlcdn.com.
+        data:
+          - 10
+      - group: report1580297455005.qtlcdn.com.
+        data:
+          - 2
+      - group: report1580299885881.qtlcdn.com.
+        data:
+          - 2
+      - group: test.t1580282270963.qtlcdn.com.
+        data:
+          - 1
+      - group: test.t1580282275253.qtlcdn.com.
+        data:
+          - 1
+      - group: test.t1580282280011.qtlcdn.com.
+        data:
+          - 2
+properties:
+  metaData:
+    type: object
+    description: This object contains fields describing the data returned in the groups object.
+    properties:
+      startTime:
+        type: string
+        description: RFC 3339 date indicating the beginning of the period.
+        format: date-time
+      endTime:
+        type: string
+        description: RFC 3339 date indicating the end of the period.
+        format: date-time
+      isComplete:
+        type: boolean
+        description: 'The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>.'
+      dataNames:
+        type: array
+        description: 'Indicates the type of data returned: "edgeHostname dns request"'
+        items:
+          type: string
+      dataUnit:
+        type: string
+        description: Indicates the unit of measurement of the returned values.
+    required:
+      - isComplete
+  groups:
+    type: array
+    description: This object contains the breakdown of DNS requests by group. Groups are determined by the request body.
+    items:
+      type: object
+      properties:
+        group:
+          type: string
+          description: |
+            Name of a group.  "\_\_all\_\_" is a special group encompassing all groups.
+        data:
+          type: array
+          description: Data value. The units of measurement are determined by the dataUnit field.
+          items:
+            type: number

@@ -1,0 +1,59 @@
+type: object
+x-examples:
+  Example 1:
+    metaData:
+      startTime: '2023-07-01T00:00:00Z'
+      endTime: '2023-08-01T00:00:00Z'
+      isComplete: true
+      dataNames:
+        - average bandwidth
+        - peak bandwidth
+        - peak bandwidth timestamp
+      dataUnit: megabits per second
+    groups:
+      - group: __all__
+        data:
+          - 0.00698
+          - 1.78078
+          - '2023-07-13T10:55:00Z'
+examples: []
+description: Response to the bandwidthL7Summary API
+properties:
+  metaData:
+    type: object
+    properties:
+      startTime:
+        type: string
+        description: RFC 3339 date indicating the beginning of the period.
+        format: date-time
+      endTime:
+        type: string
+        description: RFC 3339 date indicating the end.
+        format: date-time
+      isComplete:
+        type: boolean
+        description: 'The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>.'
+      dataNames:
+        type: array
+        description: Indicates the type of data returned.
+        items:
+          type: string
+      dataUnit:
+        type: string
+        description: Indicates the unit of measurement of the returned values.
+    required:
+      - isComplete
+  groups:
+    type: array
+    description: This object contains the breakdown of traffic by group. Groups are determined by the request body.
+    items:
+      type: object
+      properties:
+        group:
+          type: string
+          description: Name of a group. "__all__" is a special group encompassing all groups.
+        data:
+          type: array
+          description: Data values. The units of measurement are determined by the dataUnit field.
+          items:
+            type: number

@@ -1,0 +1,61 @@
+title: originStatusCodeSummaryResponse
+type: object
+description: 'The response contains a summary of status codes returned by your origin servers. It can contain up to 10000 groups. If there are more than 10000 groups, the value of "isComplete" will be false. A special group "\_\_all\_\_" contains the total for all groups including those beyond the 10000 limit. When "isComplete" is true, the total is the sum of all other returned groups.'
+examples:
+  - metaData:
+      startTime: '2022-01-01T00:00:00Z'
+      endTime: '2022-02-01T01:00:00Z'
+      isComplete: true
+      dataNames:
+        - '200'
+        - '404'
+      dataUnit: counts
+    groups:
+      - group: __all__
+        data:
+          - 87
+          - 141
+      - group: 'standard,123456'
+        data:
+          - 87
+          - 141
+properties:
+  metaData:
+    type: object
+    description: This object contains fields describing the data returned in the groups object.
+    properties:
+      startTime:
+        type: string
+        description: RFC 3339 date indicating the beginning of the period.
+        format: date-time
+      endTime:
+        type: string
+        description: RFC 3339 date indicating the end of the period.
+        format: date-time
+      isComplete:
+        type: boolean
+        description: 'The response can contain up to 10000 groups. If there are more groups, <i>isComplete</i> will be <i>false</i>.'
+      dataNames:
+        type: array
+        description: A list of HTTP status codes represented as strings. The order of the entries in the <i>dataNames</i> array corresponds to the order of values returned in the <i>data</i> array in the response.
+        items:
+          type: string
+      dataUnit:
+        type: string
+        description: Indicates the unit of measurement of the returned values.
+    required:
+      - isComplete
+  groups:
+    type: array
+    description: This object contains the breakdown of requests by group.
+    items:
+      type: object
+      properties:
+        group:
+          type: string
+          description: Name of a group.  "\_\_all\_\_" is a special group encompassing all groups.
+        data:
+          type: array
+          description: Data values. The units of measurement are determined by the dataUnit field.
+          items:
+            type: number
