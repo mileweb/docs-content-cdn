@@ -499,6 +499,36 @@ else { ... }
 
 响应正文给客户端时，配置值以内的正文将不进行限速，超过配置的值之后的响应的将受到速率限制。可配范围为 [1-8]m，单位为字节。
 
+### [`limit_req`](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req)
+
+<span class="badge dark">高级</span> <span class="badge green">修改增强</span>
+
+**使用语法：** `limit_req ZONE_NAME [BURST_NUM] [nodelay|DELAY_NUM] RATE;` <br/>
+**默认设置：** `-` <br/>
+**可用位置：** server, location
+
+基于加速域名和客户端 IP 限制请求频次。此指令是[开源版本](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req)的修改增强版，无需单独使用 `limit_req_zone` 指令。`ZONE_NAME` 是速率限制区域的任意名称，使用相同 `ZONE_NAME` 的多个 `limit_req` 指令共享同一个限制。可选的 `BURST_NUM` 设置允许超过速率的请求数量的上限，可选的 `nodelay` 关键字（或 `DELAY_NUM`）控制如何处理超出速率的请求。`RATE` 指定允许的速率，例如 `10r/s` 或 `30r/m`。
+
+### [`limit_req_dry_run`](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req_dry_run)
+
+<span class="badge dark">高级</span>
+
+**使用语法：** `limit_req_dry_run on|off;` <br/>
+**默认设置：** `limit_req_dry_run off;` <br/>
+**可用位置：** server, location
+
+启用演练模式。启用后，请求会被计入速率限制统计，但不会真正被拦截。默认值为 `off`。
+
+### [`limit_req_status`](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req_status)
+
+<span class="badge dark">高级</span>
+
+**使用语法：** `limit_req_status [CODE ...];` <br/>
+**默认设置：** `limit_req_status 503;` <br/>
+**可用位置：** server, location
+
+设置对被拦截的请求返回的状态码。默认值为 `503`。
+
 ### [`location`](http://nginx.org/en/docs/http/ngx_http_core_module.html#location)
 
 <span class="badge">标准</span>
