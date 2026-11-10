@@ -495,11 +495,11 @@ Sets the initial amount of traffic (in bytes) after which the further transmissi
 
 <span class="badge dark">advanced</span> <span class="badge green">Enhanced</span>
 
-**Syntax:** `limit_req ZONE_NAME [BURST_NUM] [nodelay|DELAY_NUM] RATE;` <br/>
+**Syntax:** `limit_req zone=host_ip_zone [BURST_NUM] [nodelay|DELAY_NUM] RATE;` <br/>
 **Default:** `-` <br/>
 **Context:** server, location
 
-Limits the request rate based on the hostname and client IP address. This is a modified version of the [open-source directive](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req) that does not require a separate `limit_req_zone` directive. The `ZONE_NAME` is an arbitrary name for the rate-limit zone; multiple `limit_req` directives using the same `ZONE_NAME` share the same limit. The optional `BURST_NUM` sets the maximum number of requests allowed to exceed the rate, and the optional `nodelay` keyword (or a `DELAY_NUM`) controls how excess requests are handled. `RATE` specifies the allowed rate, such as `10r/s` or `30r/m`.
+Limits the request rate based on the hostname and client IP address. This is a modified version of the [open-source directive](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req) that does not require a separate `limit_req_zone` directive; the zone must always be set to `zone=host_ip_zone`. The optional `BURST_NUM` sets the maximum number of requests allowed to exceed the rate, and the optional `nodelay` keyword (or a `DELAY_NUM`) controls how excess requests are handled. `RATE` specifies the allowed rate, such as `10r/s` or `30r/m`.
 
 ### [`limit_req_dry_run`](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req_dry_run)
 
@@ -515,7 +515,7 @@ Enables the dry run mode. When enabled, requests are accounted for rate limiting
 
 <span class="badge dark">advanced</span>
 
-**Syntax:** `limit_req_status [CODE ...];` <br/>
+**Syntax:** `limit_req_status CODE;` <br/>
 **Default:** `limit_req_status 503;` <br/>
 **Context:** server, location
 
