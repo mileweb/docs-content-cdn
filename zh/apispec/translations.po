@@ -1745,7 +1745,7 @@ msgid ""
 "ChinaStandard or ChinaPremium server group.\n"
 msgstr ""
 "表示您是否拥有在中国提供服务的备案许可。如果有，则可以使用 ChinaStandard 或 "
-"ChinaPremium 服务器组，由位于中国大陆境内的服务器提供内容。\n"
+"ChinaPremium 节点组，由位于中国大陆境内的服务器提供内容。\n"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/history/items/properties/configuration/properties/clientZones/items/title
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/configs/properties/clientZones/items/title
@@ -1778,11 +1778,11 @@ msgid ""
 "ChinaPremium."
 msgstr ""
 "此对象描述如何处理来自某个分区的客户端请求。分区是地理区域与运营商的组合。您"
-"可以通过选择用于分发内容的服务器组来创建自定义规则，以平衡性能与成本。\n"
+"可以通过选择用于分发内容的节点组来创建自定义规则，以平衡性能与成本。\n"
 "\n"
 "如果您的域名没有 ICP 备案，但又希望为中国访问者提供最佳性能，可以使用额外的服"
 "务器组 \"nearChina\"。使用 nearChina 的客户端分区规则不能同时配置为由其他服务"
-"器组分发，但您可以为其他服务器组另行创建客户端分区规则。\n"
+"器组分发，但您可以为其他节点组另行创建客户端分区规则。\n"
 "\n"
 "如果您拥有 ICP 备案许可，并希望由中国境内的服务器分发您的内容，可以选择使用 "
 "\"ChinaStandard\" 和 \"ChinaPremium.\" \n"
@@ -1867,7 +1867,7 @@ msgid ""
 "responds with HTTP response code 403 representing \"Forbidden\". Up to one "
 "\"reject\" action is allowed for each client zone.\n"
 msgstr ""
-"定义对该分区请求所执行的操作。可选项包括：使用一个或多个服务器组进行分发"
+"定义对该分区请求所执行的操作。可选项包括：使用一个或多个节点组进行分发"
 "（<i>deliver</i>）、直接拒绝请求（<i>reject</i>），或重定向到其他域名"
 "（<i>redirect</i>）。如果指定 \"reject\"，客户端请求将被重定向到一台始终返回 "
 "HTTP 响应码 403（表示 \"Forbidden\"）的服务器。每个客户端分区最多允许一个 "
@@ -1895,18 +1895,18 @@ msgid ""
 "Instead, you will need to create a new edge hostname with client zone rules "
 "delivering to those server groups."
 msgstr ""
-"当操作类型为 \"deliver\" 时使用此字段。指定一个或多个服务器组（<i>standard</"
+"当操作类型为 \"deliver\" 时使用此字段。指定一个或多个节点组（<i>standard</"
 "i>、<i>premium</i>、<i>deluxe</i>、<i>ultra</i>、<i>nearChina</i>、"
 "<i>ChinaStandard</i>、<i>ChinaPremium</i>）以控制用于分发内容的服务器。<br/"
-"><br/>\"nearChina\" 是一个特殊的服务器组，如果您的域名没有 ICP 备案，但又希望"
-"为中国访问者提供最佳性能，可以为您启用该服务器组。使用 nearChina 的客户端分区"
-"规则不能同时配置为由其他服务器组分发，但您可以另行创建客户端分区规则来使用其"
-"他服务器组。<br/><br/>如果您拥有 ICP 备案许可，并希望由中国境内的服务器分发您"
-"的内容，可以选择使用 \"ChinaStandard\" 和 \"ChinaPremium.\" 如果您需要 "
-"nearChina、ChinaStandard 或 ChinaPremium，请联系我们的技术支持团队。<br/><br/"
-">如果调度域名最初未配置为使用 ChinaStandard 或 ChinaPremium，则之后无法将其修"
-"改为使用这两个服务器组。您需要创建一个新的调度域名，并配置由这些服务器组分发"
-"的客户端分区规则。"
+"><br/>\"nearChina\" 是一个特殊的节点组，如果您的域名没有 ICP 备案，但又希望为"
+"中国访问者提供最佳性能，可以为您启用该节点组。使用 nearChina 的客户端分区规则"
+"不能同时配置为由其他节点组分发，但您可以另行创建客户端分区规则来使用其他节点"
+"组。<br/><br/>如果您拥有 ICP 备案许可，并希望由中国境内的服务器分发您的内容，"
+"可以选择使用 \"ChinaStandard\" 和 \"ChinaPremium.\" 如果您需要 nearChina、"
+"ChinaStandard 或 ChinaPremium，请联系我们的技术支持团队。<br/><br/>如果调度域"
+"名最初未配置为使用 ChinaStandard 或 ChinaPremium，则之后无法将其修改为使用这"
+"两个节点组。您需要创建一个新的调度域名，并配置由这些节点组分发的客户端分区规"
+"则。"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/history/items/properties/configuration/properties/clientZones/items/properties/action/properties/to/description
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/configs/properties/clientZones/items/properties/action/properties/to/description
@@ -2182,11 +2182,10 @@ msgid ""
 msgstr ""
 "指定规则以控制如何处理来自各客户端分区的请求。您必须至少创建一条覆盖所有区域"
 "和所有运营商的规则。例如，如果您可以使用 standard、premium、deluxe 和 ultra "
-"服务器组，可以创建以下规则，允许由多个服务器组处理请求，以获得尽可能好的性"
-"能：\n"
+"节点组，可以创建以下规则，允许由多个节点组处理请求，以获得尽可能好的性能：\n"
 "<code>{\"region\":\"all\", \"isp\":\"all\", \"action\":{\"type\":\"deliver\","
 "\"by\":[\"standard\",\"premium\",\"deluxe\",\"ultra\"]}}</code>。<br/>如果您"
-"更关注潜在成本，可以选择不同的服务器组来平衡成本和性能需求。"
+"更关注潜在成本，可以选择不同的节点组来平衡成本和性能需求。"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/put/requestBody/description
 msgid ""
@@ -2807,7 +2806,7 @@ msgid ""
 "hostname. The server groups are specified when you create a client zone rule "
 "for a <a href=\"#operation/createEdgeHostname\">new edge hostname</a>. "
 msgstr ""
-"表示可用于服务此调度域名的最高级服务器组。服务器组在您为<a href=\"#operation/"
+"表示可用于服务此调度域名的最高级节点组。节点组在您为<a href=\"#operation/"
 "createEdgeHostname\">新的调度域名</a>创建客户端分区规则时指定。"
 
 #. /paths/~1cdn~1edgeHostnames/get/responses/200/content/application~1json/schema/properties/edgeHostnames/items/properties/customerId/description
@@ -2895,9 +2894,9 @@ msgid ""
 "standard, premium, deluxe, ultra, and nearChina). Only edge hostnames whose "
 "client zone rules reference the server groups will be returned."
 msgstr ""
-"以逗号分隔的服务器组列表（chinaStandard、chinaPremium、standard、premium、"
-"deluxe、ultra 和 nearChina）。仅返回其客户端分区规则引用了这些服务器组的调度"
-"域名。"
+"以逗号分隔的节点组列表（chinaStandard、chinaPremium、standard、premium、"
+"deluxe、ultra 和 nearChina）。仅返回其客户端分区规则引用了这些节点组的调度域"
+"名。"
 
 #. /paths/~1cdn~1certificates/post/summary
 msgid "Create a certificate"
@@ -5049,7 +5048,7 @@ msgstr ""
 msgid ""
 "One or more server groups for which to return data. If unspecified, data for "
 "all server groups will be returned."
-msgstr "要返回数据的一个或多个服务器组。如果未指定，将返回所有服务器组的数据。"
+msgstr "要返回数据的一个或多个节点组。如果未指定，将返回所有节点组的数据。"
 
 #. /paths/~1cdn~1report~1vol/post/requestBody/content/application~1json/schema/properties/filters/properties/propertyIds/description
 #. /paths/~1cdn~1report~1vol/post/requestBody/content/application~1xml/schema/properties/filters/properties/propertyIds/description
@@ -5205,8 +5204,7 @@ msgstr ""
 msgid ""
 "The request body can include filters to customize the results. By default, "
 "data from all hostnames and server groups will be included."
-msgstr ""
-"请求体可包含过滤条件以自定义结果。默认包含所有加速域名和服务器组的数据。"
+msgstr "请求体可包含过滤条件以自定义结果。默认包含所有加速域名和节点组的数据。"
 
 #. /paths/~1cdn~1report~1req/post/summary
 msgid "Get edge requests"
@@ -6448,8 +6446,8 @@ msgid ""
 "child customers' traffic.\n"
 msgstr ""
 "获取一段时间内边缘、中间层（CDN Pro 服务器之间）和回源流量的汇总。您可以按加"
-"速域名、服务器组、加速项目 ID 或加速项目的加速域名筛选和分组结果。如果您是代"
-"理商，还可以按 customerIds 筛选和分组，以区分各子客户的流量。\n"
+"速域名、节点组、加速项目 ID 或加速项目的加速域名筛选和分组结果。如果您是代理"
+"商，还可以按 customerIds 筛选和分组，以区分各子客户的流量。\n"
 
 #. /paths/~1cdn~1report~1volSummary/post/parameters/1/description
 #. /paths/~1cdn~1report~1volL7Summary/post/parameters/1/description
@@ -6493,7 +6491,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1bandwidthSummary/post/requestBody/content/application~1json/schema/properties/filters/properties/serverGroups/description
 #. (+3 more)
 msgid "Indicates one or more server groups."
-msgstr "表示一个或多个服务器组。"
+msgstr "表示一个或多个节点组。"
 
 #. /paths/~1cdn~1report~1volSummary/post/requestBody/content/application~1json/schema/properties/filters/properties/customerIds/description
 #. /paths/~1cdn~1report~1reqSummary/post/requestBody/content/application~1json/schema/properties/filters/properties/customerIds/description
@@ -8932,29 +8930,29 @@ msgstr "描述流量和请求的价格。"
 msgid ""
 "Describes the price for each gigabyte of traffic used  within each server "
 "group."
-msgstr "描述各服务器组中每 GB 流量的价格。"
+msgstr "描述各节点组中每 GB 流量的价格。"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/content/application~1json/schema/properties/publishedPrice/properties/perGB/properties/standard/description
 msgid ""
 "Price in US dollars per gigabyte of traffic using the standard server group."
-msgstr "使用 standard 服务器组时每 GB 流量的价格（美元）。"
+msgstr "使用 standard 节点组时每 GB 流量的价格（美元）。"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/content/application~1json/schema/properties/publishedPrice/properties/perGB/properties/premium/description
 msgid ""
 "Price in US dollars per gigabyte of traffic using the premium server group."
-msgstr "使用 premium 服务器组时每 GB 流量的价格（美元）。"
+msgstr "使用 premium 节点组时每 GB 流量的价格（美元）。"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/content/application~1json/schema/properties/publishedPrice/properties/perGB/properties/deluxe/description
 msgid ""
 "Price in US dollars per gigabyte of traffic using the deluxe server group, "
 "formerly referred to as \"premium+\""
 msgstr ""
-"使用 deluxe 服务器组（以前称为 \"premium+\"）时每 GB 流量的价格（美元）。"
+"使用 deluxe 节点组（以前称为 \"premium+\"）时每 GB 流量的价格（美元）。"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/content/application~1json/schema/properties/publishedPrice/properties/perGB/properties/ultra/description
 msgid ""
 "Price in US dollars per gigabyte of traffic using the ultra server group."
-msgstr "使用 ultra 服务器组时每 GB 流量的价格（美元）。"
+msgstr "使用 ultra 节点组时每 GB 流量的价格（美元）。"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/content/application~1json/schema/properties/publishedPrice/properties/perMHttpsReq/description
 msgid "Price in US dollars of one million HTTPS requests."
@@ -8996,9 +8994,9 @@ msgid ""
 msgstr ""
 "可通过服务配额 API 为客户开通的高级功能列表。\"realTimeLog\" 是一项高级功能，"
 "允许客户在收到访问者对内容的请求时实时监控这些请求。\"nearChina\" 是一项高级"
-"功能，允许使用特殊的服务器组，为未办理 ICP 备案的域名向中国境内的访问者提供更"
-"好的性能。\"originShield\" 允许在加速项目的源站服务器前增加一层额外的服务器。"
-"如果您需要使用高级功能，请联系我们的技术支持团队。"
+"功能，允许使用特殊的节点组，为未办理 ICP 备案的域名向中国境内的访问者提供更好"
+"的性能。\"originShield\" 允许在加速项目的源站服务器前增加一层额外的服务器。如"
+"果您需要使用高级功能，请联系我们的技术支持团队。"
 
 #. /paths/~1cdn~1systemConfigs/get/responses/200/content/application~1json/schema/properties/oldestPropertyValidationTime/description
 msgid ""
@@ -9294,8 +9292,8 @@ msgstr ""
 "可用功能可在<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 的"
 "响应中找到。目前支持的功能包括：\"realTimeLog\"，允许客户实时监控来自其客户端"
 "的请求；\"nearChina\"，允许没有 ICP 备案的客户使用由靠近中国大陆的节点组成的"
-"服务器组；以及 \"originShield\"，在 CDN Pro 边缘服务器与源站服务器之间增加一"
-"层额外的服务器。如果您需要某项高级功能，请联系我们的技术支持团队。"
+"节点组；以及 \"originShield\"，在 CDN Pro 边缘服务器与源站服务器之间增加一层"
+"额外的服务器。如果您需要某项高级功能，请联系我们的技术支持团队。"
 
 #. /paths/~1cdn~1serviceQuotas/post/requestBody/content/application~1json/schema/properties/directiveParameterLimits/title
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/get/responses/200/content/application~1json/schema/properties/directiveParameterLimits/title
@@ -9510,11 +9508,11 @@ msgid ""
 "<i>premium</i> and <i>standard</i>; <i>premium</i> includes <i>standard</i>; "
 "and <i>ChinaPremium</i> includes <i>ChinaStandard</i>."
 msgstr ""
-"允许客户使用的服务器组列表，可用于平衡性能与成本。拥有较高级别服务器组的使用"
-"权限即包含较低级别服务器组的使用权限。具体而言，<i>ultra</i> 包含 "
-"<i>standard</i>、<i>premium</i> 和 <i>deluxe</i>；<i>deluxe</i> 包含 "
-"<i>premium</i> 和 <i>standard</i>；<i>premium</i> 包含 <i>standard</i>；"
-"<i>ChinaPremium</i> 包含 <i>ChinaStandard</i>。"
+"允许客户使用的节点组列表，可用于平衡性能与成本。拥有较高级别节点组的使用权限"
+"即包含较低级别节点组的使用权限。具体而言，<i>ultra</i> 包含 <i>standard</i>、"
+"<i>premium</i> 和 <i>deluxe</i>；<i>deluxe</i> 包含 <i>premium</i> 和 "
+"<i>standard</i>；<i>premium</i> 包含 <i>standard</i>；<i>ChinaPremium</i> 包"
+"含 <i>ChinaStandard</i>。"
 
 #. /paths/~1cdn~1serviceQuotas/post/requestBody/content/application~1json/schema/properties/privateDomains/description
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/get/responses/200/content/application~1json/schema/properties/privateDomains/description
@@ -9829,9 +9827,9 @@ msgid ""
 msgstr ""
 "客户可使用的高级功能列表。目前支持的功能包括：\"realTimeLog\"，允许客户在收到"
 "请求时实时监控来自其客户端的请求；\"nearChina\"，允许没有 ICP 备案的客户使用"
-"由靠近中国大陆的节点组成的服务器组；以及 \"originShield\"，在 CDN Pro 边缘服"
-"务器与源站服务器之间增加一层额外的服务器。如果您需要某项高级功能，请联系我们"
-"的技术支持团队。"
+"由靠近中国大陆的节点组成的节点组；以及 \"originShield\"，在 CDN Pro 边缘服务"
+"器与源站服务器之间增加一层额外的服务器。如果您需要某项高级功能，请联系我们的"
+"技术支持团队。"
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/get/responses/200/content/application~1json/schema/properties/billUsingStripe/description
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/responses/200/content/application~1json/schema/properties/billUsingStripe/description
@@ -9851,7 +9849,7 @@ msgstr "RFC 3339 格式的日期，表示客户的 CDN Pro 服务被终止的时
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/responses/200/content/application~1json/schema/properties/allowedServerGroups/description
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/responses/404/content/application~1json/schema/properties/allowedServerGroups/description
 msgid "List of server groups that the customer is permitted to use."
-msgstr "允许客户使用的服务器组列表。"
+msgstr "允许客户使用的节点组列表。"
 
 #. /paths/~1cdn~1serviceQuotas~1{serviceQuotaId}/get/responses/200/content/application~1json/schema/properties/creationTime/description
 #. /paths/~1cdn~1serviceQuotas~1customer~1{customerId}/get/responses/200/content/application~1json/schema/properties/creationTime/description
@@ -9955,8 +9953,8 @@ msgid ""
 "<i>standard</i>; <i>premium</i> includes <i>standard</i>; and "
 "<i>ChinaPremium</i> includes <i>ChinaStandard</i>."
 msgstr ""
-"允许客户使用的服务器组列表，可用于管理成本。拥有较高级别服务器组的使用权限即"
-"包含较低级别服务器组的使用权限。具体而言，<i>ultra</i> 包含 <i>standard</i>、"
+"允许客户使用的节点组列表，可用于管理成本。拥有较高级别节点组的使用权限即包含"
+"较低级别节点组的使用权限。具体而言，<i>ultra</i> 包含 <i>standard</i>、"
 "<i>premium</i> 和 <i>deluxe</i>；<i>deluxe</i> 包含 <i>premium</i> 和 "
 "<i>standard</i>；<i>premium</i> 包含 <i>standard</i>；<i>ChinaPremium</i> 包"
 "含 <i>ChinaStandard</i>。"
@@ -10163,7 +10161,7 @@ msgstr "获取处理您内容请求所使用的 CPU 时间（单位：秒）。"
 #. /paths/~1cdn~1report~1cpuTime/post/requestBody/content/application~1json/schema/properties/filters/description
 msgid ""
 "Filter results by specifying hostnames, server groups, or property hostnames."
-msgstr "通过指定加速域名、服务器组或加速项目域名来过滤结果。"
+msgstr "通过指定加速域名、节点组或加速项目域名来过滤结果。"
 
 #. /paths/~1cdn~1hostnames~1historical~1{hostname}/get/summary
 msgid "Get historical information about one hostname"
@@ -11116,9 +11114,9 @@ msgid ""
 "you are a reseller, you can also filter and group by customerIds to "
 "distinguish your child customers' requests."
 msgstr ""
-"获取一段时间内的请求数汇总。您可以按加速域名、服务器组、加速项目 ID 或加速项"
-"目的加速域名筛选和分组结果。如果您是代理商，还可以按 customerIds 筛选和分组，"
-"以区分各子客户的请求数。"
+"获取一段时间内的请求数汇总。您可以按加速域名、节点组、加速项目 ID 或加速项目"
+"的加速域名筛选和分组结果。如果您是代理商，还可以按 customerIds 筛选和分组，以"
+"区分各子客户的请求数。"
 
 #. /paths/~1cdn~1report~1reqSummary/post/parameters/1/description
 #. /paths/~1cdn~1report~1reqSummary/get/parameters/2/description
@@ -12809,8 +12807,8 @@ msgid ""
 "also filter and group by customerIds to distinguish your child customers' "
 "traffic."
 msgstr ""
-"获取一段时间内的带宽汇总。您可以按加速域名或服务器组对结果进行过滤和分组。如"
-"果您是代理商，还可以按 customerIds 进行过滤和分组，以区分各子客户的流量。"
+"获取一段时间内的带宽汇总。您可以按加速域名或节点组对结果进行过滤和分组。如果"
+"您是代理商，还可以按 customerIds 进行过滤和分组，以区分各子客户的流量。"
 
 #. /paths/~1cdn~1report~1bandwidthSummary/post/parameters/3/description
 #. /paths/~1cdn~1report~1bandwidthSummary/get/parameters/3/description

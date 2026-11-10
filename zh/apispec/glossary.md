@@ -29,7 +29,7 @@ as the rest of the site. Extend the table when a new term is settled.
 | annotation | 注释 | |
 | log configuration | 日志配置 | real-time log → 实时日志, access log → 访问日志 |
 | log aggregation point | 日志汇聚点 | |
-| server group | 服务器组 | |
+| server group | 节点组 | |
 | customer | 客户 | |
 | child customer | 子客户 | |
 | reseller | 代理商 | |
