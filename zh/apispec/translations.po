@@ -3850,6 +3850,15 @@ msgstr ""
 "RFC3339 格式的日期，表示该证书版本的过期时间。此字段仅针对服务端证书返回，不"
 "针对 CA 证书返回。"
 
+#. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/get/responses/200/content/application~1json/schema/properties/notBeforeTime/description
+msgid ""
+"An RFC 3339 format date indicating when the certificate's validity starts. "
+"This field will be returned only for a server certificate not a CA "
+"certificate."
+msgstr ""
+"RFC 3339 格式的日期，表示证书有效期的起始时间。此字段仅针对服务端证书返回，不"
+"针对 CA 证书返回。"
+
 #. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/get/responses/200/content/application~1json/schema/properties/creationTime/description
 msgid ""
 "An RFC 3339 format date indicating when the certificate version was created."
@@ -3950,6 +3959,12 @@ msgid ""
 msgstr ""
 "该证书版本是否可以删除。如果某个版本不是唯一的版本，且从未部署到演练环境或生"
 "产环境，则可以删除。"
+
+#. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/get/responses/200/content/application~1json/schema/properties/certificate/description
+msgid ""
+"The certificate in PEM format. This field will be returned only for a server "
+"certificate not a CA certificate."
+msgstr "PEM 格式的证书内容。此字段仅针对服务端证书返回，不针对 CA 证书返回。"
 
 #. /paths/~1cdn~1certificates~1{certificateID}~1versions~1{version}/get/description
 msgid ""

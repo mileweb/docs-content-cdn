@@ -8036,6 +8036,11 @@
                       "description": "An RFC3339 format date indicating when the certificate version expires. This field will be returned only for a server certificate not a CA certificate.",
                       "format": "date-time"
                     },
+                    "notBeforeTime": {
+                      "type": "string",
+                      "description": "An RFC 3339 format date indicating when the certificate's validity starts. This field will be returned only for a server certificate not a CA certificate.",
+                      "format": "date-time"
+                    },
                     "creationTime": {
                       "type": "string",
                       "description": "An RFC 3339 format date indicating when the certificate version was created.",
@@ -8121,6 +8126,10 @@
                       },
                       "description": "Whether or not the certificate version can be deleted. A version can be deleted if it is not the only version, and it has never been deployed to staging or production."
                     },
+                    "certificate": {
+                      "type": "string",
+                      "description": "The certificate in PEM format. This field will be returned only for a server certificate not a CA certificate."
+                    },
                     "caOnly": {
                       "type": "boolean",
                       "x-stoplight": {
@@ -8140,6 +8149,7 @@
                     "value": {
                       "version": 1,
                       "expirationTime": "2019-11-21T23:06:53Z",
+                      "notBeforeTime": "2019-11-11T23:06:53Z",
                       "creationTime": "2019-11-11T23:06:53Z",
                       "subject": "E=aaa@domaincom,OU=QA,O=MyCompany,L=US,ST=someState,C=UA,CN=new.testdomain.com",
                       "signatureAlgo": "SHA256withRSA",
@@ -8157,6 +8167,7 @@
                       "issuer": "C=US,O=DigiCert Inc,OU=www.digicert.com,CN=DigiCert High Assurance EV Root CA",
                       "type": "uploaded",
                       "deletable": false,
+                      "certificate": "-----BEGIN CERTIFICATE-----\\nMIIB...\\n-----END CERTIFICATE-----",
                       "caOnly": false
                     }
                   }

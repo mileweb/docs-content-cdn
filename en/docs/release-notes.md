@@ -1,5 +1,15 @@
 # Release Notes
 
+## November 10, 2026
+#### API updates
+* Added the `certificate` and `notBeforeTime` fields to the certificate version query response. These fields return the server certificate in PEM format and the time when its validity starts.
+* Fixed an issue where updating an API account with an empty `products` array did not clear the account's existing products.
+
+#### Console updates
+* Made the `limit_req`, `limit_req_status`, and `limit_req_dry_run` directives available to upgraded customers.
+* Improved the report charts to preserve the selected hostnames and service type when the date range is changed.
+* Fixed an issue where a language change was not synchronized between the Admin and CDN portals during an active session.
+
 ## October 27, 2026
 #### API updates
 * Improved the error messages returned when an incorrectly configured directive in edge logic is rejected.
