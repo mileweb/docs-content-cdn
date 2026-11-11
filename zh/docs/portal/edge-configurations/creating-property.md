@@ -16,7 +16,7 @@
 
 <p align=center><img src="/docs/resources/images/edge-configurations/create-a-property.jpg" alt="edit property" width="600"></p>
 
-| **字段**                | **说明**                                    |
+| <span class="label-col">**字段**</span> | **说明**                                    |
 | --------------------------| ---------------------------------------------------|
 | 加速项目名称             | 输入一个有助于您识别此加速项目的名称。|
 | 描述               | 为此加速项目添加描述。 |
