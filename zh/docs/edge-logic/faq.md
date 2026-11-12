@@ -263,7 +263,7 @@ elseif ($uri ~ ^/xyz(/|$)) {
 
 * **报表查询**
 
-[查询7层流量](</apidocs#operation/post-cdn-report-volL7>)和[查询7层带宽](</apidocs#operation/post-cdn-report-bandwidthL7>)API接口支持在请求体中的`filters`参数指定“contentCodes”。 [查询7层流量汇总数据](</apidocs#operation/getVolL7Summary>)和[查询7层流量带宽汇总数据](</apidocs#operation/post-cdn-report-bandwidthL7Summary>)API接口支持在请求体中的`filters`和`groupBy`参数指定“contentCodes”。
+[查询7层流量](</apidocs/reports/post-cdn-report-voll7>)和[查询7层带宽](</apidocs/reports/post-cdn-report-bandwidthl7>)API接口支持在请求体中的`filters`参数指定“contentCodes”。 [查询7层流量汇总数据](</apidocs/reports/getvoll7summary>)和[查询7层流量带宽汇总数据](</apidocs/reports/post-cdn-report-bandwidthl7summary>)API接口支持在请求体中的`filters`和`groupBy`参数指定“contentCodes”。
 
 您可以使用这些API接口基于内容代码查询报表数据。例如，如果您需要查询以“abc”和“xyz”为标识的内容所产生的流量的明细，可调用“查询7层流量”接口，在请求体中指定`{"filters":{"contentCodes":["abc","xyz"]}}`。如果您需要查询同样的内容所产生的流量的汇总数据，则可调用“查询7层流量汇总数据”接口，在请求体中指定`{"filters":{"contentCodes":["abc","xyz"]},"groupBy":["contentCodes"]}`。
 
