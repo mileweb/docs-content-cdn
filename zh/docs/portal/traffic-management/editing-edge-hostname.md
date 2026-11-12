@@ -18,7 +18,7 @@
 
 <p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="create client region rule" width="550"></p>
 
-| **字段**        | **说明**   |
+| <span class="label-col">**字段**</span>        | **说明**   |
 | ----------------- | ----------------- |
 | 访客地区     | 选择定义此访客分区的地理区域。我们目前支持国家/地区级别的粒度。|
 | 访客运营商        | 选择定义此访客分区的一个或多个运营商。 |
@@ -46,7 +46,7 @@
 
 7. 要使用 DNS 记录来宣告 HTTPS 支持并允许兼容的客户端更快地连接，请点击**高级设置**，并更新以下字段：
 
-| **字段**        | **说明**                                                           |
+| <span class="label-col">**字段**</span>        | **说明**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
 | 创建HTTPS记录  | 选择<strong>开启</strong>以使用HTTPS类型的 DNS 记录。  |
 | ALPN | 选择支持的协议。  |
