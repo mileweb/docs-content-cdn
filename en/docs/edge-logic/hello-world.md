@@ -13,7 +13,7 @@ For more information about these two directives, refer to the NGINX documentatio
 
 <p align=center><img src="/docs/resources/images/edge-logic/helloworld.png" alt="hello world" width="500"></p>
 
-If you use the [API to create the property](</apidocs#operation/createProperty>), the following is the complete JSON of the property configuration:
+If you use the [API to create the property](</apidocs/property-management/createproperty>), the following is the complete JSON of the property configuration:
 
 ```testdomain.json :```
 ```json

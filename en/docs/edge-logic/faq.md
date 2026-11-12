@@ -181,7 +181,7 @@ available, the request is blocked, with an error that says the quota has been ex
 sliding window.
 
 The capacity of the bucket and the filling rate are controlled by the `configs.apiMaxBurst` and `configs.apiRate` fields
-in the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>). For example,
+in the [customer management API](</apidocs/customer-management/patch-ngadmin-customers-id>). For example,
 if the customer has `configs.apiMaxBurst = 45` and `configs.apiRate = 120`, tokens are added to the bucket at a
 fixed rate of 120 tokens per minute, and the total capacity of the bucket is 45. The bucket is refilled in a
 "greedy" manner. CDN Pro tries to add tokens to the bucket as soon as possible. For example, refilling at
@@ -206,7 +206,7 @@ response header `x-rate-limit-retry-after-seconds: Y` to tell the client to retr
 
 * **Best Practices for Avoiding Rate Limiting Errors**
 
-1. Check the API request history. [“GET /ngadmin/apicalls”](</apidocs#operation/get-ngadmin-apicalls>)
+1. Check the API request history. [“GET /ngadmin/apicalls”](</apidocs/api-call-history/get-ngadmin-apicalls>)
 shows the API calls you have made.  (The customer admin API credential is required to call this API.)
 Carefully check the records for potential abuses.
 
@@ -228,7 +228,7 @@ requests into one. For example, if you want to monitor the traffic volume of a l
 
    Another example is purging multiple files in one request instead of making an API call for each purge URL.
    If there are thousands of purge URLs that follow a certain pattern, use directory or regex purge by specifying
-   the `dirUrls` or `regexPatterns` fields when [creating a purge request](</apidocs#operation/createPurge>). The number of requests should not scale as you acquire more domains, properties, and other resources.
+   the `dirUrls` or `regexPatterns` fields when [creating a purge request](</apidocs/content-management/createpurge>). The number of requests should not scale as you acquire more domains, properties, and other resources.
 
 3. If you call the API through scripts, it should be resilient to intermittent or non-specific errors. The script
 should honor the `x-rate-limit-retry-after-seconds` header and retry the request after a delay. Consider including a
@@ -245,7 +245,7 @@ If there is a legitimate need to increase the rate limit or burst ceiling, the t
 
 3. Unauthorized API calls such as signups and login attempts consume tokens from the bucket corresponding to the client’s IP address. This bucket has a default capacity of 30 tokens and a refill rate of 60 per minute.
 
-4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs#operation/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
+4. Modifications to the `configs.apiRate` and `configs.apiMaxBurst` using the [customer management API](</apidocs/customer-management/patch-ngadmin-customers-id>) do not take effect immediately. It typically takes 10-15 minutes to change the refill rate and refill the bucket.
 
 ### How to classify traffic in reports based on custom rules?
 
@@ -292,7 +292,7 @@ elseif ($uri ~ ^/xyz(/|$)) {
 
 * **Reporting**
 
-The [GET layer 7 traffic volume](</apidocs#operation/post-cdn-report-volL7>) and [GET layer 7 traffic bandwidth](</apidocs#operation/post-cdn-report-bandwidthL7>) report APIs accept "contentCodes" in the `filters` parameter in the request body. The [GET summary of layer 7 traffic volume](</apidocs#operation/getVolL7Summary>) and [GET summary of layer 7 traffic bandwidth](</apidocs#operation/post-cdn-report-bandwidthL7Summary>) report APIs accept "contentCodes" in the `filters` and `groupBy` parameters in the request body. 
+The [GET layer 7 traffic volume](</apidocs/reports/post-cdn-report-voll7>) and [GET layer 7 traffic bandwidth](</apidocs/reports/post-cdn-report-bandwidthl7>) report APIs accept "contentCodes" in the `filters` parameter in the request body. The [GET summary of layer 7 traffic volume](</apidocs/reports/getvoll7summary>) and [GET summary of layer 7 traffic bandwidth](</apidocs/reports/post-cdn-report-bandwidthl7summary>) report APIs accept "contentCodes" in the `filters` and `groupBy` parameters in the request body. 
 
 You can use these report APIs to get reports based on content codes. For instance, if you need a time series report of traffic volume for the content which is identified by the codes "abc" and "xyz", make a request to the "GET layer 7 traffic volume" API with `{"filters":{"contentCodes":["abc","xyz"]}}` in the request body. If you want a summary report of traffic volume for the same content,  make a request to the "GET summary of layer 7 traffic volume" API with `{"filters":{"contentCodes":["abc","xyz"]},"groupBy":["contentCodes"]}` in the request body.
 
