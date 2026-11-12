@@ -10,7 +10,7 @@ CDN Pro provides a staging environment for you to test your property configurati
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-EN-1.jpg" alt="staging servers" width="400"></p>
 
-You can also get a list of current IP addresses by calling our [staging servers API](</apidocs#operation/get-cdn-stagingServers>).
+You can also get a list of current IP addresses by calling our [staging servers API](</apidocs/cdn-product-management/get-cdn-stagingservers>).
 
 Pick one of the IP addresses. The corresponding ```location``` field indicates the country where the staging server is located. If your property hostname has an ICP Beian license, you can use an IP address in China. Otherwise, choose an IP address in another country to avoid getting an HTTP 451 'Unavailable for Legal Reasons' status error.
 

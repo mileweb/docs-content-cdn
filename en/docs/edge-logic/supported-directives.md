@@ -710,7 +710,7 @@ Most variables that carry client request information are available only at the e
 ```nginx
 origin_set_header X-Fingerprint-JA4 $ssl_fingerprint_ja4 policy=preserve flag=any;
 ```
-2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/apidocs#operation/createPropertyVersion). Otherwise, you will get a validation error.
+2. Do not use this directive to set the `Host` header to origin. Instead, use the "origins.hostHeader" field of [the property JSON](/apidocs/property-management/createpropertyversion). Otherwise, you will get a validation error.
 3. The edge servers forward most client request header fields to the parent servers and the origin, except for these ones: `If-Modified-Since`, `If-Unmodified-Since`, `If-None-Match`, `If-Match`, `Range`, and `If-Range`. For cacheable requests, the servers will automatically regenerate these fields based on the cache policy when fetching from the origin. For example, when [slicing](#slice) is enabled, the servers will automatically generate the `Range` header based on size of slices. Thus, the directive shall not be used to set the `Range` header to origin. For non-cacheable requests, those client request headers will still be forwarded to upstream.
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
@@ -1333,7 +1333,7 @@ Enables string replacement in responses with the specified MIME types in additio
 **Default:** `upstream_origin_only off;` <br/>
 **Contexts:** server, location, if in location
 
-Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/apidocs#operation/get-cdn-shields). For example, you may have configured an origin's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin. Even if you set directConnection to "alwaysDirect", the edge may still send retry requests to an intermediate server when the origin is not reachable directly. `upstream_origin_only on;` eliminates this possibility.
+Enable or disable origin only upstreaming. When set to on, a matching request is forwarded directly to the origin, bypassing any intermediate cache including [origin shields](/apidocs/cdn-product-management/get-cdn-shields). For example, you may have configured an origin's directConnection setting to "noDirect" to always use an intermediate cache or "auto" for us to dynamically determine the best course, by default. The upstream_origin_only directive lets you bypass that setting and allow a subset of requests to go directly to the origin. Even if you set directConnection to "alwaysDirect", the edge may still send retry requests to an intermediate server when the origin is not reachable directly. `upstream_origin_only on;` eliminates this possibility.
 
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)

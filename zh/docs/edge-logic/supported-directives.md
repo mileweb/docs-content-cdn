@@ -721,7 +721,7 @@ origin_set_header X-Client-IP $client_real_ip; # 将客户端IP添加到 X-Clien
 ```nginx
 origin_set_header X-Fingerprint-JA4 $ssl_fingerprint_ja4 policy=preserve flag=any;
 ```
-2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/apidocs#operation/createPropertyVersion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
+2. 不要使用该指令修改传给源站的 `Host` 请求头。这个需求请使用 [加速项配置](/apidocs/property-management/createpropertyversion) 中的“origins.hostHeader”字段来完成。否则在配置校验环节将出现校验失败。
 3. CDN Pro 的边缘服务器会默认将来自客户端的大多数请求头部原样传递给父服务器和源站，只有这几个例外：`If-Modified-Since`，`If-Unmodified-Since`，`If-None-Match`，`If-Match`，`Range`，以及 `If-Range`。对于可缓存的请求，CDN Pro 服务器在回源的时候会根据缓存策略自动重新生成这些头部。例如，当开启[分片缓存](#slice)时，服务器会根据所设置的分片大小自动生成`Range`头部。所以，不要使用该指令修改传给源站的`Range`请求头。对于不可缓存的请求，这些请求头部则仍然会原样传递给父服务器和源站。
 
 ### [`proxy_cache_background_update`](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_background_update)
@@ -1354,7 +1354,7 @@ header_name的值不能是“etag”。该值不区分大小写。
 **默认设置:** `upstream_origin_only off;` <br/>
 **可用位置:** server, location, if in location
 
-启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/apidocs#operation/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
+启用或禁用直接回源。 当开启时，用户请求将被直接转发到源站，不经过任何中间缓存节点，包括 [shield节点](/apidocs/cdn-product-management/get-cdn-shields)。 当您在加速项目的源站配置中指定回源方式为"不直连"或"自动选择"时，可以使用该指令将部分请求（例如鉴权请求）直接转发到源站。即使你指定回源方式为“总是直连”，CDN Pro 边缘服务器仍然会在直连源站失败的时候尝试将请求发往中间缓存节点。使用本指令 `upstream_origin_only on;` 完全消除了这个可能性。
 
 ### [`valid_referers`](http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers)
 
