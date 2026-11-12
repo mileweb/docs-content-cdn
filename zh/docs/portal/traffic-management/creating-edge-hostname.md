@@ -8,7 +8,7 @@
 
 <p align=center><img src="/docs/resources/images/traffic-management/create-edge-hostname.png" alt="cname overview page" width="800"></p>
 
-| **字段**                               | **说明**                     |
+| <span class="label-col">**字段**</span>                               | **说明**                     |
 | ---------------------------------------- | ----------------------------------- |
 | 描述 | 此字段会自动填入新调度域名创建者的姓名。您可根据需要接受或修改此描述。 |
 | 域名       | 手动输入调度域名的前缀，或点击**自动生成**按钮随机生成。 |
@@ -20,7 +20,7 @@
 
 <p align=center><img src="/docs/resources/images/traffic-management/create-client-zone-rule.png" alt="createclient region rule" width="550"></p>
 
-| **字段**        | **说明**                                                           |
+| <span class="label-col">**字段**</span>        | **说明**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
 | 访客地区     | 选择定义此访客分区的地理区域。|
 | 访客运营商        | 选择定义此访客分区的一个或多个运营商。|
@@ -32,7 +32,7 @@
 
 5. 要使用 DNS 记录来宣告您的 HTTPS 支持情况，允许客户端更高效地进行协议协商，请点击**高级设置**，并填写以下字段：
 
-| **字段**        | **说明**                                                           |
+| <span class="label-col">**字段**</span>        | **说明**                                                           |
 | ----------------- | ------------------------------------------------------------------------- |
 | 创建HTTPS记录  | 选择<strong>开启</strong>以使用HTTPS类型的 DNS 记录。  |
 | ALPN | 选择支持的协议。  |
