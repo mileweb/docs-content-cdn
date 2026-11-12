@@ -15,7 +15,7 @@
 
 <p align="center"><img src="/docs/resources/images/edge-configurations/property-add-origin.png" alt="Upload Certificate Version" width="650"></p>
 
-| **字段**             | **说明**                                       |
+| <span class="label-col">**字段**</span>             | **说明**                                       |
 | ---------------------- | ----------------------------------------------------- |
 | 自动检测            | 此按钮仅在创建新加速项目时出现。点击此按钮时，CDN Pro 会尝试解析您为加速项目输入的加速域名的 IP 地址。解析结果可能是也可能不是您要使用的源站。请仔细核对结果。|
 | 源站名称            | 用于标识此源站的名称。[边缘逻辑](</docs/edge-logic/intro.md>)中的 [`origin_pass` 指令](</docs/edge-logic/supported-directives.md#origin_pass>)使用此名称来引用此源站。|
