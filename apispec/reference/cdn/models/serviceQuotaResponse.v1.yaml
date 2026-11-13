@@ -142,7 +142,7 @@ properties:
     description: Total number of secrets that can be created.
   edgeHostnameZones:
     type: array
-    description: 'List of zones specifying the domains that can be used for <a href="#tag/Edge-Hostname-Management">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain''s authoritative DNS to us.'
+    description: 'List of zones specifying the domains that can be used for <a href="/apidocs/edge-hostname-management">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain''s authoritative DNS to us.'
     items:
       type: object
       properties:
@@ -154,13 +154,13 @@ properties:
           description: 'Whether the domain has ICP Beian, which is required for content to be hosted on servers in China. If set to true, every property''s hostname that points to an edge hostname using this domain must have ICP Beian.'
   maxFilePurgeEntries:
     type: integer
-    description: Maximum number of file URLs that can be included in the fileUrls field of a <a href="#operation/createPurge">purge request</a>.
+    description: Maximum number of file URLs that can be included in the fileUrls field of a <a href="/apidocs/content-management/createpurge">purge request</a>.
     minimum: 1
     default: 1000
   maxDirPurgeEntries:
     type: integer
     minimum: 1
-    description: Maximum number of directory URLs that can be included in the dirUrls field of a <a href="#operation/createPurge">purge request</a>.
+    description: Maximum number of directory URLs that can be included in the dirUrls field of a <a href="/apidocs/content-management/createpurge">purge request</a>.
     default: 20
   accountManagerEmail:
     type: string
@@ -171,7 +171,7 @@ properties:
     format: date-time
   allowedLbDirectives:
     type: array
-    description: 'A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href="#operation/get-cdn-systemConfigs">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.'
+    description: 'A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.'
     items:
       type: string
   allowedServerGroups:

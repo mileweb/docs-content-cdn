@@ -197,7 +197,7 @@
                               },
                               "shield": {
                                 "type": "string",
-                                "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"#operation/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
+                                "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"/apidocs/cdn-product-management/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
                               },
                               "keepAliveTimeout": {
                                 "type": "integer",
@@ -250,7 +250,7 @@
                               },
                               "tlsCertificateId": {
                                 "type": "string",
-                                "description": "引用一个用于与源站服务器进行认证的<a href=\"#tag/Certificate-Management\">证书</a>。该证书也必须已部署。"
+                                "description": "引用一个用于与源站服务器进行认证的<a href=\"/apidocs/certificate-management\">证书</a>。该证书也必须已部署。"
                               },
                               "authentication": {
                                 "type": "object",
@@ -345,7 +345,7 @@
                           "properties": {
                             "http": {
                               "type": "array",
-                              "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                              "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -354,7 +354,7 @@
                             },
                             "https": {
                               "type": "array",
-                              "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                              "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                               "items": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -365,11 +365,11 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
+                          "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
                         },
                         "tlsCertificateId1": {
                           "type": "string",
-                          "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
+                          "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
                         },
                         "tlsMinVersion": {
                           "type": "string",
@@ -437,7 +437,7 @@
                         },
                         "disableCertAutomation": {
                           "type": "boolean",
-                          "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"#operation/createCertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
+                          "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
                           "default": false
                         },
                         "accessControlRules": {
@@ -599,7 +599,7 @@
                         },
                         "loadBalancerLogic ": {
                           "type": "string",
-                          "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
+                          "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
                           "maxLength": 65530,
                           "deprecated": true
                         }
@@ -873,7 +873,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "如果加速项目引用的证书已过期或不支持该加速项目的加速域名，则会出现此响应头。详情请调用<a href=\"#operation/getPropertyVersion\">获取加速项目版本</a> API。"
+                "description": "如果加速项目引用的证书已过期或不支持该加速项目的加速域名，则会出现此响应头。详情请调用<a href=\"/apidocs/property-management/getpropertyversion\">获取加速项目版本</a> API。"
               }
             }
           },
@@ -998,7 +998,7 @@
             }
           }
         },
-        "description": "您可以通过此 API 修改加速项目版本。请注意，已部署到生产环境或演练环境的加速项目版本会被“冻结”，无法再修改，唯一的例外是版本描述仍可修改。如果加速项目版本已被冻结，您应改为<a href=\"#operation/createPropertyVersion\">创建一个新的加速项目版本</a>并在其中进行所需的修改。",
+        "description": "您可以通过此 API 修改加速项目版本。请注意，已部署到生产环境或演练环境的加速项目版本会被“冻结”，无法再修改，唯一的例外是版本描述仍可修改。如果加速项目版本已被冻结，您应改为<a href=\"/apidocs/property-management/createpropertyversion\">创建一个新的加速项目版本</a>并在其中进行所需的修改。",
         "operationId": "updatePropertyVersion",
         "tags": [
           "Property Management"
@@ -1105,7 +1105,7 @@
                         },
                         "shield": {
                           "type": "string",
-                          "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"#operation/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
+                          "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"/apidocs/cdn-product-management/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
                         },
                         "keepAliveTimeout": {
                           "type": "integer",
@@ -1158,7 +1158,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "引用一个用于与源站服务器进行认证的<a href=\"#tag/Certificate-Management\">证书</a>。该证书也必须已部署。"
+                          "description": "引用一个用于与源站服务器进行认证的<a href=\"/apidocs/certificate-management\">证书</a>。该证书也必须已部署。"
                         },
                         "authentication": {
                           "type": "object",
@@ -1253,7 +1253,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                        "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -1262,7 +1262,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                        "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -1273,11 +1273,11 @@
                   },
                   "tlsCertificateId": {
                     "type": "string",
-                    "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
+                    "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
                   },
                   "tlsCertificateId1": {
                     "type": "string",
-                    "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
+                    "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -1345,7 +1345,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"#operation/createCertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
+                    "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
                     "default": false
                   },
                   "accessControlRules": {
@@ -1507,7 +1507,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
+                    "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
                     "maxLength": 65530,
                     "deprecated": true
                   }
@@ -1928,7 +1928,7 @@
             }
           }
         },
-        "description": "此接口用于修改加速项目的名称和描述，不影响其各个版本。\n\n如果您要修改加速项目的配置，请使用<a href=\"#operation/updatePropertyVersion\">修改加速项目版本 API</a>。",
+        "description": "此接口用于修改加速项目的名称和描述，不影响其各个版本。\n\n如果您要修改加速项目的配置，请使用<a href=\"/apidocs/property-management/updatepropertyversion\">修改加速项目版本 API</a>。",
         "operationId": "updateProperty",
         "x-codeSamples": [
           {
@@ -2209,7 +2209,7 @@
                                   "properties": {
                                     "region": {
                                       "type": "string",
-                                      "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"#operation/get-cdn-clientRegions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
+                                      "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"/apidocs/cdn-product-management/get-cdn-clientregions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
                                     },
                                     "weight": {
                                       "type": "integer",
@@ -2268,7 +2268,7 @@
                                     },
                                     "isp": {
                                       "type": "string",
-                                      "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"#operation/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
+                                      "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"/apidocs/cdn-product-management/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
                                     }
                                   },
                                   "required": [
@@ -2441,7 +2441,7 @@
                             "properties": {
                               "region": {
                                 "type": "string",
-                                "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"#operation/get-cdn-clientRegions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
+                                "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"/apidocs/cdn-product-management/get-cdn-clientregions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
                               },
                               "weight": {
                                 "type": "integer",
@@ -2500,7 +2500,7 @@
                               },
                               "isp": {
                                 "type": "string",
-                                "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"#operation/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
+                                "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"/apidocs/cdn-product-management/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
                               }
                             },
                             "required": [
@@ -3014,7 +3014,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"#operation/get-cdn-clientRegions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
+                          "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"/apidocs/cdn-product-management/get-cdn-clientregions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
                         },
                         "weight": {
                           "type": "integer",
@@ -3073,7 +3073,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"#operation/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
+                          "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"/apidocs/cdn-product-management/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
                         }
                       },
                       "required": [
@@ -3415,7 +3415,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"#operation/get-cdn-clientRegions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
+                          "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"/apidocs/cdn-product-management/get-cdn-clientregions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
                         },
                         "weight": {
                           "type": "integer",
@@ -3474,7 +3474,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"#operation/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
+                          "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"/apidocs/cdn-product-management/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
                         }
                       },
                       "required": [
@@ -3878,7 +3878,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "如果加速项目引用的证书已过期或不支持该加速项目的加速域名，则会出现此响应头。详情请调用<a href=\"#operation/getPropertyVersion\">获取加速项目版本</a> API。"
+                "description": "如果加速项目引用的证书已过期或不支持该加速项目的加速域名，则会出现此响应头。详情请调用<a href=\"/apidocs/property-management/getpropertyversion\">获取加速项目版本</a> API。"
               }
             }
           },
@@ -4009,7 +4009,7 @@
             }
           }
         },
-        "description": "创建加速项目的新版本。在您<a href=\"#operation/createDeployment\">将加速项目部署到生产环境或演练环境</a>之后，如需对其做进一步修改，请调用此 API。",
+        "description": "创建加速项目的新版本。在您<a href=\"/apidocs/deployment-management/createdeployment\">将加速项目部署到生产环境或演练环境</a>之后，如需对其做进一步修改，请调用此 API。",
         "operationId": "createPropertyVersion",
         "x-codeSamples": [
           {
@@ -4123,7 +4123,7 @@
                         },
                         "shield": {
                           "type": "string",
-                          "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"#operation/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
+                          "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"/apidocs/cdn-product-management/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
                         },
                         "keepAliveTimeout": {
                           "type": "integer",
@@ -4176,7 +4176,7 @@
                         },
                         "tlsCertificateId": {
                           "type": "string",
-                          "description": "引用一个用于与源站服务器进行认证的<a href=\"#tag/Certificate-Management\">证书</a>。该证书也必须已部署。"
+                          "description": "引用一个用于与源站服务器进行认证的<a href=\"/apidocs/certificate-management\">证书</a>。该证书也必须已部署。"
                         },
                         "authentication": {
                           "type": "object",
@@ -4271,7 +4271,7 @@
                     "properties": {
                       "http": {
                         "type": "array",
-                        "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                        "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -4280,7 +4280,7 @@
                       },
                       "https": {
                         "type": "array",
-                        "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                        "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                         "items": {
                           "type": "integer",
                           "minimum": 0,
@@ -4291,11 +4291,11 @@
                   },
                   "tlsCertificateId": {
                     "type": "string",
-                    "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
+                    "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
                   },
                   "tlsCertificateId1": {
                     "type": "string",
-                    "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
+                    "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
                   },
                   "tlsMinVersion": {
                     "type": "string",
@@ -4363,7 +4363,7 @@
                   },
                   "disableCertAutomation": {
                     "type": "boolean",
-                    "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"#operation/createCertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
+                    "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
                     "default": false
                   },
                   "accessControlRules": {
@@ -4525,7 +4525,7 @@
                   },
                   "loadBalancerLogic ": {
                     "type": "string",
-                    "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
+                    "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
                     "maxLength": 65530,
                     "deprecated": true
                   }
@@ -4592,7 +4592,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "如果加速项目引用的证书已过期或不支持该加速项目的加速域名，则会出现此响应头。详情请调用<a href=\"#operation/getPropertyVersion\">获取加速项目版本</a> API。"
+                "description": "如果加速项目引用的证书已过期或不支持该加速项目的加速域名，则会出现此响应头。详情请调用<a href=\"/apidocs/property-management/getpropertyversion\">获取加速项目版本</a> API。"
               }
             }
           },
@@ -4882,7 +4882,7 @@
                             },
                             "shield": {
                               "type": "string",
-                              "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"#operation/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
+                              "description": "引用一个源站 Shield 的 ID。源站 Shield 代表一组服务器，由这些服务器而非 CDN Pro 边缘服务器向您的源站服务器发起请求，从而进一步减少源站的流量。这是一项高级功能，需联系我们的技术支持团队开通。<a href=\"/apidocs/cdn-product-management/get-cdn-shields\">源站 Shield API</a> 提供可用 Shield 及其 IP 地址的列表。建议选择所在区域离您的源站服务器最近的 Shield。在中国使用 Shield 时，您的加速项目必须将 'hasBeian' 设置为 <i>true</i>。如果您的源站服务器配置了访问控制列表，请将所选 Shield 的 IP 加入其中。"
                             },
                             "keepAliveTimeout": {
                               "type": "integer",
@@ -4935,7 +4935,7 @@
                             },
                             "tlsCertificateId": {
                               "type": "string",
-                              "description": "引用一个用于与源站服务器进行认证的<a href=\"#tag/Certificate-Management\">证书</a>。该证书也必须已部署。"
+                              "description": "引用一个用于与源站服务器进行认证的<a href=\"/apidocs/certificate-management\">证书</a>。该证书也必须已部署。"
                             },
                             "authentication": {
                               "type": "object",
@@ -5030,7 +5030,7 @@
                         "properties": {
                           "http": {
                             "type": "array",
-                            "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                            "description": "除 80 以外用于处理 HTTP 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -5039,7 +5039,7 @@
                           },
                           "https": {
                             "type": "array",
-                            "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"#operation/get-cdn-systemConfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
+                            "description": "除 443 以外用于处理 HTTPS 请求的端口列表。可用值可在 <a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">systemConfigs</a> API 的响应中找到。如需使用其他端口，请联系我们的技术支持团队。",
                             "items": {
                               "type": "integer",
                               "minimum": 0,
@@ -5050,11 +5050,11 @@
                       },
                       "tlsCertificateId": {
                         "type": "string",
-                        "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
+                        "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。指定证书以便为该加速项目的加速域名启用 HTTPS。证书类型可以是 RSA 或 EC。"
                       },
                       "tlsCertificateId1": {
                         "type": "string",
-                        "description": "引用一个<a href=\"#tag/Certificate-Management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
+                        "description": "引用一个<a href=\"/apidocs/certificate-management\">证书</a>。可选择指定第二个证书，用于该加速项目加速域名的 HTTPS。其类型（RSA 或 EC）必须与 <i>tlsCertificateId</i> 中指定的证书不同。当您的加速域名有两个可用证书时，客户端和服务器会在请求时协商选择其中一个证书用于 SSL，这有助于提升性能和容错能力。只设置 <i>tlsCertificateId1</i> 字段而不设置 <i>tlsCertificateId</i> 字段是无效的。\n"
                       },
                       "tlsMinVersion": {
                         "type": "string",
@@ -5122,7 +5122,7 @@
                       },
                       "disableCertAutomation": {
                         "type": "boolean",
-                        "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"#operation/createCertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
+                        "description": "默认情况下，CDN Pro 会接管 /.well-known/{acme-challenge, pki-validation} 目录下的内容，以支持加速项目的证书自动更新。如果您出于某种原因需要在源站自行管理这两个目录（例如实现您自己的证书自动更新机制），可以将此配置项的值设置为 <i>true</i> 以禁用默认行为。有关我们对证书自动更新的支持，请参阅<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中 <i>autoRenew</i> 字段的说明。",
                         "default": false
                       },
                       "accessControlRules": {
@@ -5284,7 +5284,7 @@
                       },
                       "loadBalancerLogic ": {
                         "type": "string",
-                        "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
+                        "description": "此字段允许您输入[边缘逻辑](</docs/edge-logic/intro>)来定制负载均衡，可以使用部分[指令](</docs/edge-logic/supported-directives>)。请参阅<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 响应中 <i>baseLbDirectives</i> 字段列出的基础指令。目前包括 \"if\"、\"else\"、\"elseif\"、\"set\"、\"return\"、\"add_header\"、\"deny\"、\"allow\"、\"access_log_sampling\" 和 \"proxy_set_header\"。此外，系统配置 API 的 <i>advancedLbDirectives</i> 中列出的部分高级边缘逻辑指令可根据需要为您的账号开通。如需使用其中任何指令，请联系我们的技术支持团队。<br/> 使用示例：<br /><code>\nif ($http_user_agent = bot) { return 403;}\n</code>\n\n <b>注意：</b>由于 CDN Pro 边缘节点结构升级，loadBalancerLogic 字段即将弃用，请避免使用该字段。所有支持的指令都应仅在 edgeLogic 字段中配置。更多详情请参阅[此指南](</docs/edge-logic/edge-node-structure-upgrade>)。",
                         "maxLength": 65530,
                         "deprecated": true
                       }
@@ -5473,11 +5473,11 @@
                               },
                               "tlsCertificateId": {
                                 "type": "string",
-                                "description": "<a href=\"#tag/Certificate-Management\">证书的 ID。"
+                                "description": "<a href=\"/apidocs/certificate-management\">证书的 ID。"
                               },
                               "tlsCertificateId1": {
                                 "type": "string",
-                                "description": "<a href=\"#tag/Certificate-Management\">证书的 ID。"
+                                "description": "<a href=\"/apidocs/certificate-management\">证书的 ID。"
                               }
                             }
                           },
@@ -5499,11 +5499,11 @@
                               },
                               "tlsCertificateId": {
                                 "type": "string",
-                                "description": "<a href=\"#tag/Certificate-Management\">证书的 ID。"
+                                "description": "<a href=\"/apidocs/certificate-management\">证书的 ID。"
                               },
                               "tlsCertificateId1": {
                                 "type": "string",
-                                "description": "<a href=\"#tag/Certificate-Management\">证书的 ID。"
+                                "description": "<a href=\"/apidocs/certificate-management\">证书的 ID。"
                               }
                             }
                           },
@@ -5933,7 +5933,7 @@
                 "properties": {
                   "edgeHostname": {
                     "type": "string",
-                    "description": "用于您 DNS 服务器设置的域名。当您的加速项目部署到生产环境后，您应修改 DNS 服务器，使该加速项目各加速域名的 CNAME 记录指向此值。调度域名应由至少十个字符加上允许的后缀（如 \".qtlcdn.com\"）组成（例如 abcdefg123.qtlcdn.com）。您的<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">服务配额</a>中可能包含 <i>edgeHostnameZones</i> 字段。如果包含，则调度域名使用的后缀应为其中列出的值之一。",
+                    "description": "用于您 DNS 服务器设置的域名。当您的加速项目部署到生产环境后，您应修改 DNS 服务器，使该加速项目各加速域名的 CNAME 记录指向此值。调度域名应由至少十个字符加上允许的后缀（如 \".qtlcdn.com\"）组成（例如 abcdefg123.qtlcdn.com）。您的<a href=\"/apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid\">服务配额</a>中可能包含 <i>edgeHostnameZones</i> 字段。如果包含，则调度域名使用的后缀应为其中列出的值之一。",
                     "example": "testabcde.123.qtlcdn.com"
                   },
                   "description": {
@@ -5989,7 +5989,7 @@
                       "properties": {
                         "region": {
                           "type": "string",
-                          "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"#operation/get-cdn-clientRegions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
+                          "description": "此字段表示规则适用的区域。请参阅我们的<a href=\"/apidocs/cdn-product-management/get-cdn-clientregions\">获取客户端区域 API</a> 以获取有效的区域代码。例如，如果您希望创建覆盖整个欧洲的规则，只需将区域指定为 \"eu\"。您也可以指定具体国家。例如，\"na.us\" 表示 \"United States of America\"（美国），\"eu.fr\" 表示 \"France\"（法国）。\n\n可以使用特殊的客户端区域 “all” 来指定规则适用于全球。如果指定的区域存在重叠，则以更具体的区域为准。例如，如果您在一条规则中指定 \"as\"，在另一条规则中指定 \"as.cn\"，则来自中国的请求将遵循 \"as.cn\" 的规则。"
                         },
                         "weight": {
                           "type": "integer",
@@ -6048,7 +6048,7 @@
                         },
                         "isp": {
                           "type": "string",
-                          "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"#operation/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
+                          "description": "如果规则仅适用于来自特定运营商（ISP，Internet Service Provider）的请求，请指定代表该运营商的代码。请调用我们的<a href=\"/apidocs/cdn-product-management/get-cdn-isps\">获取支持的运营商列表 API</a>。指定 'all' 表示所有运营商，而不是某个特定运营商。如果希望规则适用于多个运营商，请指定以逗号分隔的列表，最多包含 10 个运营商代码。"
                         }
                       },
                       "required": [
@@ -6187,7 +6187,7 @@
                           },
                           "highestServerGroup": {
                             "type": "string",
-                            "description": "表示可用于服务此调度域名的最高级节点组。节点组在您为<a href=\"#operation/createEdgeHostname\">新的调度域名</a>创建客户端分区规则时指定。",
+                            "description": "表示可用于服务此调度域名的最高级节点组。节点组在您为<a href=\"/apidocs/edge-hostname-management/createedgehostname\">新的调度域名</a>创建客户端分区规则时指定。",
                             "enum": [
                               "standard",
                               "premium",
@@ -6791,7 +6791,7 @@
                         "properties": {
                           "certificateId": {
                             "type": "string",
-                            "description": "表示该证书的 ID。您可以使用此 ID <a href=\"#operation/getCertificate\">获取证书详情</a>。"
+                            "description": "表示该证书的 ID。您可以使用此 ID <a href=\"/apidocs/certificate-management/getcertificate\">获取证书详情</a>。"
                           },
                           "name": {
                             "type": "string",
@@ -7149,7 +7149,7 @@
                     },
                     "versions": {
                       "type": "array",
-                      "description": "描述已创建的证书版本。您可以调用<a href=\"#operation/queryCertificateVersion\">获取证书版本详情 API</a> 获取每个版本的更多详情。",
+                      "description": "描述已创建的证书版本。您可以调用<a href=\"/apidocs/certificate-management/querycertificateversion\">获取证书版本详情 API</a> 获取每个版本的更多详情。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -7544,7 +7544,7 @@
             "source": "./cdnapi.sh PATCH /certificates/12330c199e5f9dd381daff5e -j body.json -k key.pem -c cert.pem -a cacert.pem\n"
           }
         ],
-        "description": "使用此 API 修改证书。其字段与<a href=\"#operation/createCertificate\">创建证书 API</a> 中的字段相同。如果该证书正被已部署到生产环境或演练环境的加速项目使用，建议您在调用此 API 后<a href=\"#operation/createDeployment\">创建部署任务</a>来部署更新后的证书，否则 CDN Pro 可能仍会使用旧版本的证书提供内容。",
+        "description": "使用此 API 修改证书。其字段与<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中的字段相同。如果该证书正被已部署到生产环境或演练环境的加速项目使用，建议您在调用此 API 后<a href=\"/apidocs/deployment-management/createdeployment\">创建部署任务</a>来部署更新后的证书，否则 CDN Pro 可能仍会使用旧版本的证书提供内容。",
         "tags": [
           "Certificate Management"
         ],
@@ -7593,11 +7593,11 @@
                     "properties": {
                       "privateKey": {
                         "type": "string",
-                        "description": "如果未提供，将从证书的最新版本复制该值。有关格式的详情，请参阅<a href=\"#operation/createCertificate\">创建证书 API</a> 中 <i>privateKey</i> 字段的说明。对于 CA 证书，不应指定此字段。"
+                        "description": "如果未提供，将从证书的最新版本复制该值。有关格式的详情，请参阅<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中 <i>privateKey</i> 字段的说明。对于 CA 证书，不应指定此字段。"
                       },
                       "certificate": {
                         "type": "string",
-                        "description": "如果未提供，将从证书的最新版本复制该值。有关格式的详情，请参阅<a href=\"#operation/createCertificate\">创建证书 API</a> 中 <i>certificate</i> 字段的说明。对于 CA 证书，不应指定此字段。"
+                        "description": "如果未提供，将从证书的最新版本复制该值。有关格式的详情，请参阅<a href=\"/apidocs/certificate-management/createcertificate\">创建证书 API</a> 中 <i>certificate</i> 字段的说明。对于 CA 证书，不应指定此字段。"
                       },
                       "chainCert": {
                         "type": "string",
@@ -7827,7 +7827,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "description": "获取证书签名请求（CSR）信息。您可以将其提交给证书颁发机构申请证书。获得证书后，请使用<a href=\"#operation/updateCertificate\">修改证书 API</a> 更新到我们的系统中。此 API 不能用于 CA 证书。",
+        "description": "获取证书签名请求（CSR）信息。您可以将其提交给证书颁发机构申请证书。获得证书后，请使用<a href=\"/apidocs/certificate-management/updatecertificate\">修改证书 API</a> 更新到我们的系统中。此 API 不能用于 CA 证书。",
         "operationId": "downloadCSR",
         "x-codeSamples": [
           {
@@ -8392,7 +8392,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "description": "如果证书的最新版本从未部署过，可以使用此接口将其删除。下次<a href=\"#operation/updateCertificate\">将证书更新为新版本</a>时，该版本号将被重新使用。"
+        "description": "如果证书的最新版本从未部署过，可以使用此接口将其删除。下次<a href=\"/apidocs/certificate-management/updatecertificate\">将证书更新为新版本</a>时，该版本号将被重新使用。"
       }
     },
     "/cdn/certificates/{certificateID}/versions/latest": {
@@ -8429,7 +8429,7 @@
                     },
                     "validations": {
                       "type": "array",
-                      "description": "验证任务摘要。您可以调用<a href=\"#operation/queryValidationTask\">获取加速项目验证任务 API</a> 获取验证任务的更多详情。",
+                      "description": "验证任务摘要。您可以调用<a href=\"/apidocs/property-validation/queryvalidationtask\">获取加速项目验证任务 API</a> 获取验证任务的更多详情。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -8790,7 +8790,7 @@
             }
           }
         },
-        "description": "此 API 用于验证加速项目版本。在<a href=\"#operation/createDeployment\">将加速项目版本部署</a>到演练环境或生产环境之前，您必须先调用此 API。系统会检查您的加速项目语法是否正确。",
+        "description": "此 API 用于验证加速项目版本。在<a href=\"/apidocs/deployment-management/createdeployment\">将加速项目版本部署</a>到演练环境或生产环境之前，您必须先调用此 API。系统会检查您的加速项目语法是否正确。",
         "operationId": "createValidationTask",
         "x-codeSamples": [
           {
@@ -9071,7 +9071,7 @@
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "表示该部署任务的 ID。您可以调用<a href=\"#operation/queryDeploymentTask\">获取部署任务 API</a> 获取任务的更多信息。"
+                            "description": "表示该部署任务的 ID。您可以调用<a href=\"/apidocs/deployment-management/querydeploymenttask\">获取部署任务 API</a> 获取任务的更多信息。"
                           },
                           "name": {
                             "type": "string",
@@ -9363,7 +9363,7 @@
         ],
         "responses": {
           "201": {
-            "description": "部署任务已创建。响应中的 Location 头包含指向新任务的 URL。您可以调用<a href=\"#operation/queryDeploymentTask\">获取部署状态的 API</a>。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>",
+            "description": "部署任务已创建。响应中的 Location 头包含指向新任务的 URL。您可以调用<a href=\"/apidocs/deployment-management/querydeploymenttask\">获取部署状态的 API</a>。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>",
             "headers": {
               "Location": {
                 "schema": {
@@ -9531,7 +9531,7 @@
             }
           }
         },
-        "description": "创建部署任务，将您的加速项目或证书部署到演练环境或生产环境，或将其移除。演练环境可用于测试加速项目，确保其行为正确后再向最终用户提供服务。更多信息请参阅[测试加速项目](</docs/portal/edge-configurations/testing-property>)。\n\n如果加速项目使用了证书，而该证书尚未部署到目标环境，此 API 将返回错误。对于服务端证书，如果证书的主题备用名称（SAN）不包含加速项目版本中指定的加速域名，也将返回错误。包含通配符域名的 SAN 只支持与通配符同一级别的子域名。例如，通配符 '*.xyz.com' 支持 'abc.xyz.com'，但不支持 'def.abc.xyz.com'。\n\n加速项目版本部署后将被冻结，无法再做修改。您可以<a href=\"#operation/createPropertyVersion\">创建一个新的加速项目版本</a>并在其中进行所需的修改。",
+        "description": "创建部署任务，将您的加速项目或证书部署到演练环境或生产环境，或将其移除。演练环境可用于测试加速项目，确保其行为正确后再向最终用户提供服务。更多信息请参阅[测试加速项目](</docs/portal/edge-configurations/testing-property>)。\n\n如果加速项目使用了证书，而该证书尚未部署到目标环境，此 API 将返回错误。对于服务端证书，如果证书的主题备用名称（SAN）不包含加速项目版本中指定的加速域名，也将返回错误。包含通配符域名的 SAN 只支持与通配符同一级别的子域名。例如，通配符 '*.xyz.com' 支持 'abc.xyz.com'，但不支持 'def.abc.xyz.com'。\n\n加速项目版本部署后将被冻结，无法再做修改。您可以<a href=\"/apidocs/property-management/createpropertyversion\">创建一个新的加速项目版本</a>并在其中进行所需的修改。",
         "operationId": "createDeployment",
         "x-codeSamples": [
           {
@@ -10500,7 +10500,7 @@
             }
           }
         },
-        "description": "获取在特定时间段内成功<a href=\"#tag/Deployment-Management\">部署</a>到生产环境或演练环境的加速项目所包含的加速域名列表。",
+        "description": "获取在特定时间段内成功<a href=\"/apidocs/deployment-management\">部署</a>到生产环境或演练环境的加速项目所包含的加速域名列表。",
         "operationId": "getHistoricalHostnames",
         "x-codeSamples": [
           {
@@ -10885,7 +10885,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -10970,7 +10970,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -11387,7 +11387,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -11800,7 +11800,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -12212,7 +12212,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -12826,7 +12826,7 @@
                         "x-stoplight": {
                           "id": "vp862bdcy80lg"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "4l5ja1mbry8fg"
@@ -13240,7 +13240,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -13914,7 +13914,7 @@
                         "x-stoplight": {
                           "id": "1n47fnqutm60h"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "7o66s8rn8glrl"
@@ -14368,7 +14368,7 @@
                         "x-stoplight": {
                           "id": "ei6xx3xrgfc4x"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "zgppvc20as3ou"
@@ -14700,7 +14700,7 @@
                         "x-stoplight": {
                           "id": "sfux8slx3yrfv"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "0zlfnd0v8ua2q"
@@ -14911,14 +14911,14 @@
                   },
                   "serverRegions": {
                     "type": "array",
-                    "description": "一个或多个服务器区域。请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a> 中有关区域的信息。",
+                    "description": "一个或多个服务器区域。请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a> 中有关区域的信息。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "一个或多个客户端区域。请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a> 中有关区域的信息。",
+                    "description": "一个或多个客户端区域。请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a> 中有关区域的信息。",
                     "items": {
                       "type": "string"
                     }
@@ -14979,7 +14979,7 @@
         ],
         "responses": {
           "201": {
-            "description": "刷新请求已成功创建。<i>Location</i> 头包含对该刷新请求的引用。请调用<a href=\"#operation/queryPurgeStatus\">获取刷新请求状态 API</a> 查看其状态。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>。",
+            "description": "刷新请求已成功创建。<i>Location</i> 头包含对该刷新请求的引用。请调用<a href=\"/apidocs/content-management/querypurgestatus\">获取刷新请求状态 API</a> 查看其状态。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>。",
             "headers": {
               "Location": {
                 "schema": {
@@ -15183,7 +15183,7 @@
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "与刷新请求关联的 ID。您可以调用<a href=\"#operation/queryPurgeStatus\">查询刷新请求状态 API</a> 获取更多相关信息。"
+                            "description": "与刷新请求关联的 ID。您可以调用<a href=\"/apidocs/content-management/querypurgestatus\">查询刷新请求状态 API</a> 获取更多相关信息。"
                           },
                           "submissionTime": {
                             "type": "string",
@@ -15242,7 +15242,7 @@
                           },
                           "apiAccountId": {
                             "type": "string",
-                            "description": "用于创建该刷新请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">接口</a>创建时，才会设置此值。"
+                            "description": "用于创建该刷新请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">接口</a>创建时，才会设置此值。"
                           },
                           "regexEntries": {
                             "type": "integer",
@@ -15568,7 +15568,7 @@
                           },
                           "clientRegions": {
                             "type": "array",
-                            "description": "一个或多个客户端区域。有关区域的信息，请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a>。",
+                            "description": "一个或多个客户端区域。有关区域的信息，请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a>。",
                             "items": {
                               "type": "string"
                             }
@@ -15588,7 +15588,7 @@
                           },
                           "serverRegions": {
                             "type": "array",
-                            "description": "一个或多个服务器区域。有关区域的信息，请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a>。",
+                            "description": "一个或多个服务器区域。有关区域的信息，请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a>。",
                             "items": {
                               "type": "string"
                             }
@@ -15939,7 +15939,7 @@
                     },
                     "clientRegions": {
                       "type": "array",
-                      "description": "一个或多个客户端区域。有关区域的信息，请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a>。",
+                      "description": "一个或多个客户端区域。有关区域的信息，请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a>。",
                       "items": {
                         "type": "string"
                       }
@@ -15959,7 +15959,7 @@
                     },
                     "serverRegions": {
                       "type": "array",
-                      "description": "一个或多个服务器区域。有关区域的信息，请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a>。",
+                      "description": "一个或多个服务器区域。有关区域的信息，请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a>。",
                       "items": {
                         "type": "string"
                       }
@@ -16184,14 +16184,14 @@
                   },
                   "clientRegions": {
                     "type": "array",
-                    "description": "一个或多个客户端区域。请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a> 中有关区域的信息。",
+                    "description": "一个或多个客户端区域。请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a> 中有关区域的信息。",
                     "items": {
                       "type": "string"
                     }
                   },
                   "serverRegions": {
                     "type": "array",
-                    "description": "一个或多个服务器区域。请参阅<a href=\"#operation/createEdgeHostname\">创建调度域名 API</a> 中有关区域的信息。",
+                    "description": "一个或多个服务器区域。请参阅<a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名 API</a> 中有关区域的信息。",
                     "items": {
                       "type": "string"
                     }
@@ -16365,7 +16365,7 @@
                     },
                     "apiAccountId": {
                       "type": "string",
-                      "description": "用于创建该刷新请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">接口</a>创建时，才会设置此值。"
+                      "description": "用于创建该刷新请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">接口</a>创建时，才会设置此值。"
                     },
                     "webhook": {
                       "type": "string",
@@ -17156,7 +17156,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -17969,7 +17969,7 @@
                       "status": {
                         "type": "string",
                         "default": "suspended",
-                        "description": "表示控制台用户账号的状态。'active' 用户拥有控制台的完全访问权限。'suspended' 用户无法登录。'pending' 用户是指已被邀请使用控制台但尚未完成账号设置的用户。调用<a href=\"#operation/createContact\">创建控制台用户</a>或<a href=\"#operation/patch-ngadmin-contacts-id\">修改控制台用户</a> API 时，status 的值不能为 'pending'。",
+                        "description": "表示控制台用户账号的状态。'active' 用户拥有控制台的完全访问权限。'suspended' 用户无法登录。'pending' 用户是指已被邀请使用控制台但尚未完成账号设置的用户。调用<a href=\"/apidocs/portal-user-management/createcontact\">创建控制台用户</a>或<a href=\"/apidocs/portal-user-management/patch-ngadmin-contacts-id\">修改控制台用户</a> API 时，status 的值不能为 'pending'。",
                         "enum": [
                           "active",
                           "suspended",
@@ -17985,7 +17985,7 @@
                       },
                       "ipWhiteList": {
                         "type": "array",
-                        "description": "允许该控制台用户从中登录的 IP 地址列表。此列表是在您可以<a href=\"#operation/patch-ngadmin-customers-id\">在客户级别设置的</a> portalSettings.ipWhiteList 地址之外额外生效的。您可以指定一个范围、单个 IP 地址或 CIDR 表示法的 IP。也允许使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
+                        "description": "允许该控制台用户从中登录的 IP 地址列表。此列表是在您可以<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">在客户级别设置的</a> portalSettings.ipWhiteList 地址之外额外生效的。您可以指定一个范围、单个 IP 地址或 CIDR 表示法的 IP。也允许使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
                         "items": {
                           "type": "string"
                         }
@@ -18662,7 +18662,7 @@
             "description": "如果您是代理商，可以使用此请求头指定子客户的 ID。"
           }
         ],
-        "description": "修改 API 账号的设置。如果您需要更改 API 账号的默认权限，请调用 API <a href=\"#operation/post-cdn-apiPermissions\">创建自定义 API 权限对象</a>。",
+        "description": "修改 API 账号的设置。如果您需要更改 API 账号的默认权限，请调用 API <a href=\"/apidocs/api-access-control/post-cdn-apipermissions\">创建自定义 API 权限对象</a>。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -19028,7 +19028,7 @@
             "source": "./adminapi.sh POST /apiAccounts -p -j body.json\n"
           }
         ],
-        "description": "除管理员 API 账号外，您还可以创建其他 API 账号来调用 CDN Pro API。您可以授予 <i>read-only</i> 权限，仅允许使用 HTTP GET 方法调用 API 接口；或授予 <i>operator</i> 权限，还允许创建、修改和删除加速项目、证书等对象。\n<br/><br/>创建 API 账号后，您必须调用 <a \nhref=\"#operation/post-cdn-apiPermissions\">创建自定义权限的 API</a> 为其定义可访问的接口。之后，您可以调用<a href=\"#operation/patch-cdn-apiPermissions-id\">修改权限的 API</a> 做进一步修改。",
+        "description": "除管理员 API 账号外，您还可以创建其他 API 账号来调用 CDN Pro API。您可以授予 <i>read-only</i> 权限，仅允许使用 HTTP GET 方法调用 API 接口；或授予 <i>operator</i> 权限，还允许创建、修改和删除加速项目、证书等对象。\n<br/><br/>创建 API 账号后，您必须调用 <a \nhref=\"/apidocs/api-access-control/post-cdn-apipermissions\">创建自定义权限的 API</a> 为其定义可访问的接口。之后，您可以调用<a href=\"/apidocs/api-access-control/patch-cdn-apipermissions-id\">修改权限的 API</a> 做进一步修改。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -19495,7 +19495,7 @@
                         "status": {
                           "type": "string",
                           "default": "suspended",
-                          "description": "表示控制台用户账号的状态。'active' 用户拥有控制台的完全访问权限。'suspended' 用户无法登录。'pending' 用户是指已被邀请使用控制台但尚未完成账号设置的用户。调用<a href=\"#operation/createContact\">创建控制台用户</a>或<a href=\"#operation/patch-ngadmin-contacts-id\">修改控制台用户</a> API 时，status 的值不能为 'pending'。",
+                          "description": "表示控制台用户账号的状态。'active' 用户拥有控制台的完全访问权限。'suspended' 用户无法登录。'pending' 用户是指已被邀请使用控制台但尚未完成账号设置的用户。调用<a href=\"/apidocs/portal-user-management/createcontact\">创建控制台用户</a>或<a href=\"/apidocs/portal-user-management/patch-ngadmin-contacts-id\">修改控制台用户</a> API 时，status 的值不能为 'pending'。",
                           "enum": [
                             "active",
                             "suspended",
@@ -19511,7 +19511,7 @@
                         },
                         "ipWhiteList": {
                           "type": "array",
-                          "description": "允许该控制台用户从中登录的 IP 地址列表。此列表是在您可以<a href=\"#operation/patch-ngadmin-customers-id\">在客户级别设置的</a> portalSettings.ipWhiteList 地址之外额外生效的。您可以指定一个范围、单个 IP 地址或 CIDR 表示法的 IP。也允许使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
+                          "description": "允许该控制台用户从中登录的 IP 地址列表。此列表是在您可以<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">在客户级别设置的</a> portalSettings.ipWhiteList 地址之外额外生效的。您可以指定一个范围、单个 IP 地址或 CIDR 表示法的 IP。也允许使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
                           "items": {
                             "type": "string"
                           }
@@ -19911,7 +19911,7 @@
                       "status": {
                         "type": "string",
                         "default": "suspended",
-                        "description": "表示控制台用户账号的状态。'active' 用户拥有控制台的完全访问权限。'suspended' 用户无法登录。'pending' 用户是指已被邀请使用控制台但尚未完成账号设置的用户。调用<a href=\"#operation/createContact\">创建控制台用户</a>或<a href=\"#operation/patch-ngadmin-contacts-id\">修改控制台用户</a> API 时，status 的值不能为 'pending'。",
+                        "description": "表示控制台用户账号的状态。'active' 用户拥有控制台的完全访问权限。'suspended' 用户无法登录。'pending' 用户是指已被邀请使用控制台但尚未完成账号设置的用户。调用<a href=\"/apidocs/portal-user-management/createcontact\">创建控制台用户</a>或<a href=\"/apidocs/portal-user-management/patch-ngadmin-contacts-id\">修改控制台用户</a> API 时，status 的值不能为 'pending'。",
                         "enum": [
                           "active",
                           "suspended",
@@ -19927,7 +19927,7 @@
                       },
                       "ipWhiteList": {
                         "type": "array",
-                        "description": "允许该控制台用户从中登录的 IP 地址列表。此列表是在您可以<a href=\"#operation/patch-ngadmin-customers-id\">在客户级别设置的</a> portalSettings.ipWhiteList 地址之外额外生效的。您可以指定一个范围、单个 IP 地址或 CIDR 表示法的 IP。也允许使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
+                        "description": "允许该控制台用户从中登录的 IP 地址列表。此列表是在您可以<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">在客户级别设置的</a> portalSettings.ipWhiteList 地址之外额外生效的。您可以指定一个范围、单个 IP 地址或 CIDR 表示法的 IP。也允许使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\\\"1.1.1.1-1.1.1.8\\\", \\\"1.2.3.4\\\", \\\"1.5.5.0/24\\\"]</code>",
                         "items": {
                           "type": "string"
                         }
@@ -19945,7 +19945,7 @@
                   },
                   "reset2fa": {
                     "type": "boolean",
-                    "description": "设置为 <i>true</i> 可强制用户在登录时重新完成双因素认证的设置流程。仅当您为提高安全性而选择要求双因素认证时才适用。您可以在<a href=\"#operation/patch-ngadmin-customers-id\">修改您的账号</a>时将 <i>enforce2fa</i> 设置为 <i>true</i> 来启用此功能。使用 <i>reset2fa</i> 的一个常见原因是用户换了新手机。"
+                    "description": "设置为 <i>true</i> 可强制用户在登录时重新完成双因素认证的设置流程。仅当您为提高安全性而选择要求双因素认证时才适用。您可以在<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">修改您的账号</a>时将 <i>enforce2fa</i> 设置为 <i>true</i> 来启用此功能。使用 <i>reset2fa</i> 的一个常见原因是用户换了新手机。"
                   },
                   "linkedAccount": {
                     "type": "string",
@@ -20954,7 +20954,7 @@
         "summary": "获取运营商列表",
         "responses": {
           "200": {
-            "description": "响应包含运营商列表。您可以在<a href=\"#operation/createEdgeHostname\">调度域名的客户端分区规则</a>中指定运营商代码。",
+            "description": "响应包含运营商列表。您可以在<a href=\"/apidocs/edge-hostname-management/createedgehostname\">调度域名的客户端分区规则</a>中指定运营商代码。",
             "content": {
               "application/json": {
                 "schema": {
@@ -21174,7 +21174,7 @@
             "source": "./cdnapi.sh GET /isps\n"
           }
         ],
-        "description": "获取可在<a href=\"#operation/createEdgeHostname\">调度域名客户端分区规则</a>中使用的运营商列表。",
+        "description": "获取可在<a href=\"/apidocs/edge-hostname-management/createedgehostname\">调度域名客户端分区规则</a>中使用的运营商列表。",
         "parameters": [
           {
             "schema": {
@@ -21203,7 +21203,7 @@
             },
             "in": "query",
             "name": "regionCode",
-            "description": "将返回的运营商限定为在特定区域运营的运营商。<i>regionCode</i> 的值应为<a href=\"#operation/get-cdn-clientRegions\">客户端区域 API</a> 返回的区域代码之一。"
+            "description": "将返回的运营商限定为在特定区域运营的运营商。<i>regionCode</i> 的值应为<a href=\"/apidocs/cdn-product-management/get-cdn-clientregions\">客户端区域 API</a> 返回的区域代码之一。"
           }
         ],
         "tags": [
@@ -21499,7 +21499,7 @@
                         "0.0.0.0/0",
                         "::/0"
                       ],
-                      "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"#operation/post-ngadmin-apiAccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\",\"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。\n\n",
+                      "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\",\"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -21926,7 +21926,7 @@
                         "0.0.0.0/0",
                         "::/0"
                       ],
-                      "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"#operation/post-ngadmin-apiAccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\",\"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。\n\n",
+                      "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\",\"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。\n\n",
                       "items": {
                         "type": "string"
                       }
@@ -22385,7 +22385,7 @@
                     "default": [
                       "0.0.0.0/0,::/0"
                     ],
-                    "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"#operation/post-ngadmin-apiAccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\",\"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。代理商的子客户可以根据自身需求修改此设置。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。",
+                    "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\",\"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。代理商的子客户可以根据自身需求修改此设置。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。",
                     "items": {
                       "type": "string"
                     }
@@ -22495,7 +22495,7 @@
             }
           },
           "409": {
-            "description": "无法删除该客户，因为该客户仍配置有产品。请先<a href=\"#operation/patch-ngadmin-customers-id\">修改客户</a>以移除产品，然后重试。",
+            "description": "无法删除该客户，因为该客户仍配置有产品。请先<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">修改客户</a>以移除产品，然后重试。",
             "content": {
               "application/json": {
                 "schema": {
@@ -22521,7 +22521,7 @@
             }
           }
         },
-        "description": "过去，代理商可以使用此 API 删除子客户。此 API 现已弃用。代理商可以改为通过<a href=\"#operation/patch-ngadmin-customers-id\">修改客户</a>配置来停用子客户：移除其产品，并将其状态修改为 \"suspended\"。\n",
+        "description": "过去，代理商可以使用此 API 删除子客户。此 API 现已弃用。代理商可以改为通过<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">修改客户</a>配置来停用子客户：移除其产品，并将其状态修改为 \"suspended\"。\n",
         "tags": [
           "Customer Management"
         ],
@@ -22961,7 +22961,7 @@
                   },
                   "ipWhiteList": {
                     "type": "array",
-                    "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"#operation/post-ngadmin-apiAccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\", \"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。代理商的子客户可以根据自身需求修改此设置。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。\n",
+                    "description": "允许使用 API 账号发起 API 调用的 IP 地址列表。此列表与每个 <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">API 账号</a>各自的 IP 列表配合使用。您可以指定 IP 范围、单个 IP 地址或 CIDR 格式的 IP，也可以使用压缩和非压缩格式的 IPv6 地址。示例：<code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>。默认值为 [\"0.0.0.0/0\", \"::/0\"]，即允许来自所有 IP 地址的 API 调用。为了安全起见，我们强烈建议您指定贵公司的相应 IP 地址。代理商的子客户可以根据自身需求修改此设置。来自被禁止 IP 的 API 调用将收到 HTTP 403 响应，响应体为 <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>。\n",
                     "default": [
                       "0.0.0.0/0",
                       "::/0"
@@ -23271,7 +23271,7 @@
                         "properties": {
                           "customerId": {
                             "type": "integer",
-                            "description": "客户 ID。将其传给<a href=\"#operation/get-ngadmin-customers-ID\">获取客户详情 API</a> 可获取更多信息。",
+                            "description": "客户 ID。将其传给<a href=\"/apidocs/customer-management/get-ngadmin-customers-id\">获取客户详情 API</a> 可获取更多信息。",
                             "minimum": 0
                           },
                           "parentId": {
@@ -24188,7 +24188,7 @@
             "source": "./cdnapi.sh GET /clientRegions\n"
           }
         ],
-        "description": "获取可在<a href=\"#operation/createEdgeHostname\">调度域名客户端区域规则</a>中使用的客户端区域列表。您可以通过查询参数筛选和排序结果。",
+        "description": "获取可在<a href=\"/apidocs/edge-hostname-management/createedgehostname\">调度域名客户端区域规则</a>中使用的客户端区域列表。您可以通过查询参数筛选和排序结果。",
         "parameters": [
           {
             "schema": {
@@ -24217,7 +24217,7 @@
             },
             "in": "query",
             "name": "ispCode",
-            "description": "将返回的区域限定为某运营商提供服务的区域。该值应为<a href=\"#operation/get-cdn-isps\">运营商 API</a> 返回的运营商代码之一。"
+            "description": "将返回的区域限定为某运营商提供服务的区域。该值应为<a href=\"/apidocs/cdn-product-management/get-cdn-isps\">运营商 API</a> 返回的运营商代码之一。"
           }
         ]
       }
@@ -24496,7 +24496,7 @@
             },
             "in": "query",
             "name": "caller",
-            "description": "通过指定 API 账号名称或 API 账号 ID 来过滤结果。您可以通过获取 <a href=\"#operation/get-ngadmin-apiAccounts\">API 账号列表</a>得到 ID。"
+            "description": "通过指定 API 账号名称或 API 账号 ID 来过滤结果。您可以通过获取 <a href=\"/apidocs/api-account-management/get-ngadmin-apiaccounts\">API 账号列表</a>得到 ID。"
           },
           {
             "schema": {
@@ -24584,7 +24584,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "该 ID 是调用 CDN Pro API 时 Qtl-Request-Id 响应头中返回的值，也可以在<a href=\"#operation/get-ngadmin-apicalls\">获取 API 调用列表</a>时获得。"
+          "description": "该 ID 是调用 CDN Pro API 时 Qtl-Request-Id 响应头中返回的值，也可以在<a href=\"/apidocs/api-call-history/get-ngadmin-apicalls\">获取 API 调用列表</a>时获得。"
         }
       ],
       "get": {
@@ -25617,7 +25617,7 @@
                   },
                   "allowDeploymentInChina": {
                     "type": "boolean",
-                    "description": "表示是否允许部署到中国大陆的 PoP。在中国境内的服务器上托管网页内容需要 ICP 备案。代理商在为子客户启用中国境内部署之前，必须收集并核实子客户的名称、地址、电话、负责人以及中国业务信息。这些信息在<a href=\"#operation/post-ngadmin-customers\">创建</a>或<a href=\"#operation/patch-ngadmin-customers-id\">修改</a>客户时指定。",
+                    "description": "表示是否允许部署到中国大陆的 PoP。在中国境内的服务器上托管网页内容需要 ICP 备案。代理商在为子客户启用中国境内部署之前，必须收集并核实子客户的名称、地址、电话、负责人以及中国业务信息。这些信息在<a href=\"/apidocs/customer-management/post-ngadmin-customers\">创建</a>或<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">修改</a>客户时指定。",
                     "default": false
                   },
                   "hostnameLimit": {
@@ -25684,7 +25684,7 @@
                   },
                   "advancedFeatures": {
                     "type": "array",
-                    "description": "客户可使用的高级功能列表。\n可用功能可在<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 的响应中找到。目前支持的功能包括：\"realTimeLog\"，允许客户实时监控来自其客户端的请求；\"nearChina\"，允许没有 ICP 备案的客户使用由靠近中国大陆的节点组成的节点组；以及 \"originShield\"，在 CDN Pro 边缘服务器与源站服务器之间增加一层额外的服务器。如果您需要某项高级功能，请联系我们的技术支持团队。",
+                    "description": "客户可使用的高级功能列表。\n可用功能可在<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 的响应中找到。目前支持的功能包括：\"realTimeLog\"，允许客户实时监控来自其客户端的请求；\"nearChina\"，允许没有 ICP 备案的客户使用由靠近中国大陆的节点组成的节点组；以及 \"originShield\"，在 CDN Pro 边缘服务器与源站服务器之间增加一层额外的服务器。如果您需要某项高级功能，请联系我们的技术支持团队。",
                     "items": {
                       "type": "string"
                     }
@@ -25753,7 +25753,7 @@
                   },
                   "edgeHostnameZones": {
                     "type": "array",
-                    "description": "区域列表，指定可用于<a href=\"#tag/Edge-Hostname-Management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
+                    "description": "区域列表，指定可用于<a href=\"/apidocs/edge-hostname-management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -25771,18 +25771,18 @@
                   "maxFilePurgeEntries": {
                     "type": "integer",
                     "minimum": 1,
-                    "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
+                    "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
                     "default": 1000
                   },
                   "maxDirPurgeEntries": {
                     "type": "integer",
                     "minimum": 1,
-                    "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
+                    "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
                     "default": 20
                   },
                   "allowedLbDirectives": {
                     "type": "array",
-                    "description": "除<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
+                    "description": "除<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
                     "items": {
                       "type": "string"
                     }
@@ -25877,7 +25877,7 @@
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "服务配额 ID。您可以使用它<a href=\"#operation/get-cdn-serviceQuotas-serviceQuotaId\">获取该服务配额的更多详情</a>。"
+                            "description": "服务配额 ID。您可以使用它<a href=\"/apidocs/cdn-product-management/get-cdn-servicequotas-servicequotaid\">获取该服务配额的更多详情</a>。"
                           },
                           "customerId": {
                             "type": "integer",
@@ -26130,7 +26130,7 @@
           "name": "serviceQuotaId",
           "in": "path",
           "required": true,
-          "description": "指定服务配额 ID。该 ID 在<a href=\"#operation/post-cdn-serviceQuotas\">创建服务配额</a>时返回。"
+          "description": "指定服务配额 ID。该 ID 在<a href=\"/apidocs/cdn-product-management/post-cdn-servicequotas\">创建服务配额</a>时返回。"
         }
       ],
       "get": {
@@ -26368,7 +26368,7 @@
                     },
                     "edgeHostnameZones": {
                       "type": "array",
-                      "description": "区域列表，指定可用于<a href=\"#tag/Edge-Hostname-Management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
+                      "description": "区域列表，指定可用于<a href=\"/apidocs/edge-hostname-management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -26385,14 +26385,14 @@
                     },
                     "maxFilePurgeEntries": {
                       "type": "integer",
-                      "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
+                      "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
                       "minimum": 1,
                       "default": 1000
                     },
                     "maxDirPurgeEntries": {
                       "type": "integer",
                       "minimum": 1,
-                      "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
+                      "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
                       "default": 20
                     },
                     "accountManagerEmail": {
@@ -26406,7 +26406,7 @@
                     },
                     "allowedLbDirectives": {
                       "type": "array",
-                      "description": "除<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
+                      "description": "除<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
                       "items": {
                         "type": "string"
                       }
@@ -26784,7 +26784,7 @@
                   },
                   "allowDeploymentInChina": {
                     "type": "boolean",
-                    "description": "表示是否允许部署到中国大陆的 PoP。在中国境内的服务器上托管网页内容需要 ICP 备案。代理商在为子客户启用中国境内部署之前，必须收集并核实子客户的名称、地址、电话、负责人以及中国业务信息。这些信息在<a href=\"#operation/post-ngadmin-customers\">创建</a>或<a href=\"#operation/patch-ngadmin-customers-id\">修改</a>客户时指定。",
+                    "description": "表示是否允许部署到中国大陆的 PoP。在中国境内的服务器上托管网页内容需要 ICP 备案。代理商在为子客户启用中国境内部署之前，必须收集并核实子客户的名称、地址、电话、负责人以及中国业务信息。这些信息在<a href=\"/apidocs/customer-management/post-ngadmin-customers\">创建</a>或<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">修改</a>客户时指定。",
                     "default": false
                   },
                   "trialDeadline": {
@@ -26863,7 +26863,7 @@
                   },
                   "edgeHostnameZones": {
                     "type": "array",
-                    "description": "区域列表，指定可用于<a href=\"#tag/Edge-Hostname-Management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
+                    "description": "区域列表，指定可用于<a href=\"/apidocs/edge-hostname-management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -26881,13 +26881,13 @@
                   "maxFilePurgeEntries": {
                     "type": "integer",
                     "minimum": 1,
-                    "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
+                    "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
                     "default": 1000
                   },
                   "maxDirPurgeEntries": {
                     "type": "integer",
                     "minimum": 1,
-                    "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
+                    "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
                     "default": 20
                   },
                   "accountManagerEmail": {
@@ -26896,7 +26896,7 @@
                   },
                   "allowedLbDirectives": {
                     "type": "array",
-                    "description": "除<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
+                    "description": "除<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
                     "items": {
                       "type": "string"
                     }
@@ -27056,7 +27056,7 @@
             "source": "./cdnapi.sh DELETE /serviceQuotas/12345\n"
           }
         ],
-        "description": "代理商可以通过此 API，按服务配额 ID 删除子客户的服务配额。只有当该客户在演练环境或生产环境中没有任何已<a href=\"#operation/createDeployment\">部署</a>的加速项目、证书或调度域名时，删除操作才会成功。"
+        "description": "代理商可以通过此 API，按服务配额 ID 删除子客户的服务配额。只有当该客户在演练环境或生产环境中没有任何已<a href=\"/apidocs/deployment-management/createdeployment\">部署</a>的加速项目、证书或调度域名时，删除操作才会成功。"
       }
     },
     "/cdn/report/fastOriginReq": {
@@ -27344,7 +27344,7 @@
                         "x-stoplight": {
                           "id": "lqxm2c3pw8i4o"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "m1663kd95zi89"
@@ -27607,7 +27607,7 @@
                         "x-stoplight": {
                           "id": "2ahs2gd9fedy5"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "x3l9wy5zc03qr"
@@ -27909,7 +27909,7 @@
                     },
                     "edgeHostnameZones": {
                       "type": "array",
-                      "description": "区域列表，指定可用于<a href=\"#tag/Edge-Hostname-Management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
+                      "description": "区域列表，指定可用于<a href=\"/apidocs/edge-hostname-management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -27926,14 +27926,14 @@
                     },
                     "maxFilePurgeEntries": {
                       "type": "integer",
-                      "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
+                      "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
                       "minimum": 1,
                       "default": 1000
                     },
                     "maxDirPurgeEntries": {
                       "type": "integer",
                       "minimum": 1,
-                      "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
+                      "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
                       "default": 20
                     },
                     "accountManagerEmail": {
@@ -27947,7 +27947,7 @@
                     },
                     "allowedLbDirectives": {
                       "type": "array",
-                      "description": "除<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
+                      "description": "除<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
                       "items": {
                         "type": "string"
                       }
@@ -28289,7 +28289,7 @@
                     },
                     "edgeHostnameZones": {
                       "type": "array",
-                      "description": "区域列表，指定可用于<a href=\"#tag/Edge-Hostname-Management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
+                      "description": "区域列表，指定可用于<a href=\"/apidocs/edge-hostname-management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -28306,14 +28306,14 @@
                     },
                     "maxFilePurgeEntries": {
                       "type": "integer",
-                      "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
+                      "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
                       "minimum": 1,
                       "default": 1000
                     },
                     "maxDirPurgeEntries": {
                       "type": "integer",
                       "minimum": 1,
-                      "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
+                      "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
                       "default": 20
                     },
                     "accountManagerEmail": {
@@ -28327,7 +28327,7 @@
                     },
                     "allowedLbDirectives": {
                       "type": "array",
-                      "description": "除<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
+                      "description": "除<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
                       "items": {
                         "type": "string"
                       }
@@ -28608,7 +28608,7 @@
                   },
                   "allowDeploymentInChina": {
                     "type": "boolean",
-                    "description": "表示是否允许部署到中国大陆的 PoP。在中国境内的服务器上托管网页内容需要 ICP 备案。代理商在为子客户启用中国境内部署之前，必须收集并核实子客户的名称、地址、电话、负责人以及中国业务信息。这些信息在<a href=\"#operation/post-ngadmin-customers\">创建</a>或<a href=\"#operation/patch-ngadmin-customers-id\">修改</a>客户时指定。",
+                    "description": "表示是否允许部署到中国大陆的 PoP。在中国境内的服务器上托管网页内容需要 ICP 备案。代理商在为子客户启用中国境内部署之前，必须收集并核实子客户的名称、地址、电话、负责人以及中国业务信息。这些信息在<a href=\"/apidocs/customer-management/post-ngadmin-customers\">创建</a>或<a href=\"/apidocs/customer-management/patch-ngadmin-customers-id\">修改</a>客户时指定。",
                     "default": false
                   },
                   "trialDeadline": {
@@ -28687,7 +28687,7 @@
                   },
                   "edgeHostnameZones": {
                     "type": "array",
-                    "description": "区域列表，指定可用于<a href=\"#tag/Edge-Hostname-Management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
+                    "description": "区域列表，指定可用于<a href=\"/apidocs/edge-hostname-management\">调度域名</a>的域名。默认值为 <i>qtlcdn.com</i>。您创建的每个新调度域名都是 .qtlcdn.com 的子域名（例如 abcdefghi123.qtlcdn.com）。如果您是代理商，并希望改用自己的域名作为后缀，请联系我们将此功能加入您的合同。您需要将该域名的权威 DNS 委派给我们。",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -28705,13 +28705,13 @@
                   "maxFilePurgeEntries": {
                     "type": "integer",
                     "minimum": 1,
-                    "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
+                    "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 fileUrls 字段中可包含的文件 URL 的最大数量。",
                     "default": 1000
                   },
                   "maxDirPurgeEntries": {
                     "type": "integer",
                     "minimum": 1,
-                    "description": "<a href=\"#operation/createPurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
+                    "description": "<a href=\"/apidocs/content-management/createpurge\">刷新请求</a>的 dirUrls 字段中可包含的目录 URL 的最大数量。",
                     "default": 20
                   },
                   "accountManagerEmail": {
@@ -28720,7 +28720,7 @@
                   },
                   "allowedLbDirectives": {
                     "type": "array",
-                    "description": "除<a href=\"#operation/get-cdn-systemConfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
+                    "description": "除<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置 API</a> 中列出的基本负载均衡指令外，可在加速项目的 loadBalancerLogic 字段中使用的高级 Edge Logic 指令列表。如果您需要高级负载均衡指令，请联系我们的技术支持团队。",
                     "items": {
                       "type": "string"
                     }
@@ -28861,7 +28861,7 @@
             "source": "./cdnapi.sh DELETE /serviceQuotas/customer/12345\n"
           }
         ],
-        "description": "代理商可以通过此 API 删除子客户的服务配额对象。只有当该客户在演练环境或生产环境中没有任何已<a href=\"#operation/createDeployment\">部署</a>的加速项目、证书或调度域名时，删除操作才会成功。"
+        "description": "代理商可以通过此 API 删除子客户的服务配额对象。只有当该客户在演练环境或生产环境中没有任何已<a href=\"/apidocs/deployment-management/createdeployment\">部署</a>的加速项目、证书或调度域名时，删除操作才会成功。"
       }
     },
     "/cdn/report/cpuTime": {
@@ -29154,7 +29154,7 @@
                         "x-stoplight": {
                           "id": "nxltuijj3k8kc"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "sh7xgsk607hna"
@@ -29403,7 +29403,7 @@
         ],
         "responses": {
           "201": {
-            "description": "预取请求已成功创建。<i>Location</i> 头中包含对该预取请求的引用。请调用<a href=\"#operation/get-cdn-prefetches-id\">获取预取请求状态 API</a> 来查看其状态。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>。",
+            "description": "预取请求已成功创建。<i>Location</i> 头中包含对该预取请求的引用。请调用<a href=\"/apidocs/content-management/get-cdn-prefetches-id\">获取预取请求状态 API</a> 来查看其状态。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>。",
             "headers": {
               "Location": {
                 "schema": {
@@ -29658,7 +29658,7 @@
                           },
                           "apiAccountId": {
                             "type": "string",
-                            "description": "用于创建该预取请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">接口</a>创建时，才会设置此值。"
+                            "description": "用于创建该预取请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">接口</a>创建时，才会设置此值。"
                           },
                           "ownerCustomerId": {
                             "type": "integer",
@@ -29992,7 +29992,7 @@
                         },
                         "apiAccountId": {
                           "type": "string",
-                          "description": "用于创建该预取请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"#operation/post-ngadmin-apiAccounts\">接口</a>创建时，才会设置此值。"
+                          "description": "用于创建该预取请求的 API 账号的 ID。仅当该 API 账号是通过我们的 /ngadmin/apiAccounts <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">接口</a>创建时，才会设置此值。"
                         }
                       },
                       "required": [
@@ -30194,7 +30194,7 @@
             "source": "./cdnapi.sh POST /apiPermissions -p -j body.json\n"
           }
         ],
-        "description": "控制 <a href=\"#operation/post-ngadmin-apiAccounts\">API 账号</a>可以访问哪些 CDN 接口。这些权限与 API 账号的类型（<i>operator</i> 或 <i>read-only</i>）配合使用。例如，出于安全考虑，您可以将 read-only API 账号限制为只能使用加速项目管理 API。这样，该 API 账号可以查看您的加速项目配置，但不能修改，也不允许调用其他 API。\n\n每个新 API 账号在使用之前，您都必须调用此 API 为其创建权限。为 API 账号创建自定义 API 权限后，您可以调用<a href=\"#operation/patch-cdn-apiPermissions-id\">修改权限 API</a> 进一步修改其权限。",
+        "description": "控制 <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">API 账号</a>可以访问哪些 CDN 接口。这些权限与 API 账号的类型（<i>operator</i> 或 <i>read-only</i>）配合使用。例如，出于安全考虑，您可以将 read-only API 账号限制为只能使用加速项目管理 API。这样，该 API 账号可以查看您的加速项目配置，但不能修改，也不允许调用其他 API。\n\n每个新 API 账号在使用之前，您都必须调用此 API 为其创建权限。为 API 账号创建自定义 API 权限后，您可以调用<a href=\"/apidocs/api-access-control/patch-cdn-apipermissions-id\">修改权限 API</a> 进一步修改其权限。",
         "parameters": [
           {
             "schema": {
@@ -30225,7 +30225,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Certificate-Management\">证书管理</a>（/cdn/certificates）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取证书列表或证书详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/certificate-management\">证书管理</a>（/cdn/certificates）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取证书列表或证书详情。",
                         "enum": [
                           true,
                           false,
@@ -30238,7 +30238,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Property-Management\">加速项目管理</a>（/cdn/properties）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取加速项目列表或加速项目详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/property-management\">加速项目管理</a>（/cdn/properties）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取加速项目列表或加速项目详情。",
                         "enum": [
                           true,
                           false,
@@ -30251,7 +30251,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Edge-Hostname-Management\">调度域名管理</a>（/cdn/edgeHostnames）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取调度域名列表或调度域名详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/edge-hostname-management\">调度域名管理</a>（/cdn/edgeHostnames）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取调度域名列表或调度域名详情。",
                         "enum": [
                           true,
                           false,
@@ -30264,7 +30264,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Property-Validation\">加速项目验证</a>（/cdn/validations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取验证任务列表或验证任务详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/property-validation\">加速项目验证</a>（/cdn/validations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取验证任务列表或验证任务详情。",
                         "enum": [
                           true,
                           false,
@@ -30284,7 +30284,7 @@
                           "both",
                           "read"
                         ],
-                        "description": "API 账号是否可以使用<a href=\"#tag/Deployment-Management\">部署管理</a>（/cdn/deploymentTasks）接口将加速项目和证书部署到演练环境、生产环境、同时部署到演练环境和生产环境，或完全不能部署。可以为 operator API 账号指定值 'read'，将其限制为只能获取部署任务列表或部署任务详情。"
+                        "description": "API 账号是否可以使用<a href=\"/apidocs/deployment-management\">部署管理</a>（/cdn/deploymentTasks）接口将加速项目和证书部署到演练环境、生产环境、同时部署到演练环境和生产环境，或完全不能部署。可以为 operator API 账号指定值 'read'，将其限制为只能获取部署任务列表或部署任务详情。"
                       },
                       "purges": {
                         "type": [
@@ -30292,7 +30292,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#operation/createPurge\">刷新</a>（/cdn/purges）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取刷新请求列表或刷新请求详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/content-management/createpurge\">刷新</a>（/cdn/purges）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取刷新请求列表或刷新请求详情。",
                         "enum": [
                           true,
                           false,
@@ -30305,7 +30305,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#operation/post-cdn-prefetches\">预取</a>（/cdn/prefetches）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取预取请求列表或预取请求详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/content-management/post-cdn-prefetches\">预取</a>（/cdn/prefetches）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取预取请求列表或预取请求详情。",
                         "enum": [
                           true,
                           false,
@@ -30318,7 +30318,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Annotations-for-Reports\">报表注释</a>（/cdn/annotations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取注释列表或注释详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/annotations-for-reports\">报表注释</a>（/cdn/annotations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取注释列表或注释详情。",
                         "enum": [
                           true,
                           false,
@@ -30331,7 +30331,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#tag/API-Access-Control\">API 权限</a>（/cdn/apiPermissions）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 API 权限详情。此权限设置为 'true' 的 operator API 账号虽然可以管理其他权限，但不能再将此权限授予同一客户下的其他 API 账号。不过，代理商的 operator API 账号可以代表子客户的 API 账号管理此权限。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/api-access-control\">API 权限</a>（/cdn/apiPermissions）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 API 权限详情。此权限设置为 'true' 的 operator API 账号虽然可以管理其他权限，但不能再将此权限授予同一客户下的其他 API 账号。不过，代理商的 operator API 账号可以代表子客户的 API 账号管理此权限。",
                         "enum": [
                           true,
                           false,
@@ -30343,7 +30343,7 @@
                           "boolean"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#operation/get-cdn-systemConfigs\">系统配置</a>（/cdn/systemConfigs）接口。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置</a>（/cdn/systemConfigs）接口。",
                         "enum": [
                           true,
                           false
@@ -30354,7 +30354,7 @@
                           "boolean"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Reports\">报表</a>（/cdn/report）接口。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/reports\">报表</a>（/cdn/report）接口。",
                         "enum": [
                           true,
                           false
@@ -30366,7 +30366,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#operation/post-cdn-serviceQuotas\">服务配额</a>（/cdn/serviceQuotas）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取服务配额列表或服务配额详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/cdn-product-management/post-cdn-servicequotas\">服务配额</a>（/cdn/serviceQuotas）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取服务配额列表或服务配额详情。",
                         "enum": [
                           true,
                           false,
@@ -30378,7 +30378,7 @@
                           "boolean"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Hostnames\">加速域名</a>（/cdn/hostnames）接口。\n",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/hostnames\">加速域名</a>（/cdn/hostnames）接口。\n",
                         "enum": [
                           true,
                           false
@@ -30390,7 +30390,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问 <a href=\"#tag/Webhooks\">Webhook</a>（/cdn/webhooks）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 Webhook 列表或 Webhook 详情。",
+                        "description": "API 账号是否可以访问 <a href=\"/apidocs/webhooks\">Webhook</a>（/cdn/webhooks）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 Webhook 列表或 Webhook 详情。",
                         "enum": [
                           true,
                           false,
@@ -30403,7 +30403,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Secret-Management\">保密信息管理</a>（/cdn/secrets）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取保密信息列表或保密信息详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/secret-management\">保密信息管理</a>（/cdn/secrets）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取保密信息列表或保密信息详情。",
                         "enum": [
                           true,
                           false,
@@ -30416,7 +30416,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Log-Configuration-Management\">日志配置</a>（/cdn/logConfigs）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取日志配置列表或日志配置详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/log-configuration-management\">日志配置</a>（/cdn/logConfigs）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取日志配置列表或日志配置详情。",
                         "enum": [
                           true,
                           false,
@@ -30438,7 +30438,7 @@
                       },
                       "properties": {
                         "type": "array",
-                        "description": "可访问的加速项目 ID。如果在此字段中指定了加速项目 ID，则加速项目管理接口仅限于访问这些加速项目。此外，由于加速域名是在加速项目定义中指定的，对加速项目的任何限制也会限制通过其他 API 接口（包括报表、日志配置管理、加速域名和内容管理）可访问的加速域名。例如，调用<a href=\"#tag/Hostnames\">加速域名</a>（/cdn/hostnames）接口时，仅当加速域名属于允许的加速项目时才会返回其信息。同样，<a href=\"#tag/Reports\">报表</a>（/cdn/report）接口仅返回属于允许的加速项目的加速域名的数据。",
+                        "description": "可访问的加速项目 ID。如果在此字段中指定了加速项目 ID，则加速项目管理接口仅限于访问这些加速项目。此外，由于加速域名是在加速项目定义中指定的，对加速项目的任何限制也会限制通过其他 API 接口（包括报表、日志配置管理、加速域名和内容管理）可访问的加速域名。例如，调用<a href=\"/apidocs/hostnames\">加速域名</a>（/cdn/hostnames）接口时，仅当加速域名属于允许的加速项目时才会返回其信息。同样，<a href=\"/apidocs/reports\">报表</a>（/cdn/report）接口仅返回属于允许的加速项目的加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -30535,7 +30535,7 @@
                             "string"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Certificate-Management\">证书管理</a>（/cdn/certificates）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取证书列表或证书详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/certificate-management\">证书管理</a>（/cdn/certificates）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取证书列表或证书详情。",
                           "enum": [
                             true,
                             false,
@@ -30548,7 +30548,7 @@
                             "string"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Property-Management\">加速项目管理</a>（/cdn/properties）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取加速项目列表或加速项目详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/property-management\">加速项目管理</a>（/cdn/properties）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取加速项目列表或加速项目详情。",
                           "enum": [
                             true,
                             false,
@@ -30561,7 +30561,7 @@
                             "string"
                           ],
                           "default": false,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Edge-Hostname-Management\">调度域名管理</a>（/cdn/edgeHostnames）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取调度域名列表或调度域名详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/edge-hostname-management\">调度域名管理</a>（/cdn/edgeHostnames）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取调度域名列表或调度域名详情。",
                           "enum": [
                             true,
                             false,
@@ -30574,7 +30574,7 @@
                             "string"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Property-Validation\">加速项目验证 </a>（/cdn/validations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取验证任务列表或验证任务详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/property-validation\">加速项目验证 </a>（/cdn/validations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取验证任务列表或验证任务详情。",
                           "enum": [
                             true,
                             false,
@@ -30594,7 +30594,7 @@
                             "both",
                             "read"
                           ],
-                          "description": "API 账号是否可以使用<a href=\"#tag/Deployment-Management\">部署管理</a>（/cdn/deploymentTasks）接口将加速项目和证书部署到演练环境、生产环境、同时部署到演练环境和生产环境，或完全不能部署。可以为 operator API 账号指定值 'read'，将其限制为只能获取部署任务列表或部署任务详情。"
+                          "description": "API 账号是否可以使用<a href=\"/apidocs/deployment-management\">部署管理</a>（/cdn/deploymentTasks）接口将加速项目和证书部署到演练环境、生产环境、同时部署到演练环境和生产环境，或完全不能部署。可以为 operator API 账号指定值 'read'，将其限制为只能获取部署任务列表或部署任务详情。"
                         },
                         "purges": {
                           "type": [
@@ -30602,7 +30602,7 @@
                             "boolean"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#operation/createPurge\">刷新</a>（/cdn/purges）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取刷新请求列表或刷新请求详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/content-management/createpurge\">刷新</a>（/cdn/purges）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取刷新请求列表或刷新请求详情。",
                           "enum": [
                             true,
                             false,
@@ -30615,7 +30615,7 @@
                             "boolean"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#operation/post-cdn-prefetches\">预取</a>（/cdn/prefetches）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取预取请求列表或预取请求详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/content-management/post-cdn-prefetches\">预取</a>（/cdn/prefetches）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取预取请求列表或预取请求详情。",
                           "enum": [
                             true,
                             false,
@@ -30628,7 +30628,7 @@
                             "boolean"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Annotations-for-Reports\">报表注释</a>（/cdn/annotations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取注释列表或注释详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/annotations-for-reports\">报表注释</a>（/cdn/annotations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取注释列表或注释详情。",
                           "enum": [
                             true,
                             false,
@@ -30641,7 +30641,7 @@
                             "boolean"
                           ],
                           "default": false,
-                          "description": "API 账号是否可以访问<a href=\"#tag/API-Access-Control\">API 权限</a>（/cdn/apiPermissions）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 API 权限详情。此权限设置为 'true' 的 operator API 账号虽然可以管理其他权限，但不能再将此权限授予同一客户下的其他 API 账号。不过，代理商的 operator API 账号可以代表子客户的 API 账号管理此权限。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/api-access-control\">API 权限</a>（/cdn/apiPermissions）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 API 权限详情。此权限设置为 'true' 的 operator API 账号虽然可以管理其他权限，但不能再将此权限授予同一客户下的其他 API 账号。不过，代理商的 operator API 账号可以代表子客户的 API 账号管理此权限。",
                           "enum": [
                             true,
                             false,
@@ -30651,12 +30651,12 @@
                         "systemConfigs": {
                           "type": "boolean",
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#operation/get-cdn-systemConfigs\">系统配置</a>（/cdn/systemConfigs）接口。"
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置</a>（/cdn/systemConfigs）接口。"
                         },
                         "reports": {
                           "type": "boolean",
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Reports\">报表</a>（/cdn/report）接口。"
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/reports\">报表</a>（/cdn/report）接口。"
                         },
                         "serviceQuotas": {
                           "type": [
@@ -30664,7 +30664,7 @@
                             "boolean"
                           ],
                           "default": false,
-                          "description": "API 账号是否可以访问<a href=\"#operation/post-cdn-serviceQuotas\">服务配额</a>（/cdn/serviceQuotas）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取服务配额列表或服务配额详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/cdn-product-management/post-cdn-servicequotas\">服务配额</a>（/cdn/serviceQuotas）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取服务配额列表或服务配额详情。",
                           "enum": [
                             true,
                             false,
@@ -30674,7 +30674,7 @@
                         "hostnames": {
                           "type": "boolean",
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Hostnames\">加速域名</a>（/cdn/hostnames）接口。\n"
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/hostnames\">加速域名</a>（/cdn/hostnames）接口。\n"
                         },
                         "webhooks": {
                           "type": [
@@ -30682,7 +30682,7 @@
                             "boolean"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问 <a href=\"#tag/Webhooks\">Webhook</a>（/cdn/webhooks）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 Webhook 列表或 Webhook 详情。",
+                          "description": "API 账号是否可以访问 <a href=\"/apidocs/webhooks\">Webhook</a>（/cdn/webhooks）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 Webhook 列表或 Webhook 详情。",
                           "enum": [
                             true,
                             false,
@@ -30695,7 +30695,7 @@
                             "boolean"
                           ],
                           "default": true,
-                          "description": "API 账号是否可以访问<a href=\"#tag/Secret-Management\">保密信息管理</a>（/cdn/secrets）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取保密信息列表或保密信息详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/secret-management\">保密信息管理</a>（/cdn/secrets）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取保密信息列表或保密信息详情。",
                           "enum": [
                             true,
                             false,
@@ -30707,7 +30707,7 @@
                             "string",
                             "boolean"
                           ],
-                          "description": "API 账号是否可以访问<a href=\"#tag/Log-Configuration-Management\">日志配置</a>（/cdn/logConfigs）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取日志配置列表或日志配置详情。",
+                          "description": "API 账号是否可以访问<a href=\"/apidocs/log-configuration-management\">日志配置</a>（/cdn/logConfigs）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取日志配置列表或日志配置详情。",
                           "default": false,
                           "enum": [
                             true,
@@ -30748,7 +30748,7 @@
                         },
                         "properties": {
                           "type": "array",
-                          "description": "可访问的加速项目 ID。如果在此字段中指定了加速项目 ID，则加速项目管理接口仅限于访问这些加速项目。此外，由于加速域名是在加速项目定义中指定的，对加速项目的任何限制也会限制通过其他 API 接口（包括报表、日志配置管理、加速域名和内容管理）可访问的加速域名。例如，调用<a href=\"#tag/Hostnames\">加速域名</a>（/cdn/hostnames）接口时，仅当加速域名属于允许的加速项目时才会返回其信息。同样，<a href=\"#tag/Reports\">报表</a>（/cdn/report）接口仅返回属于允许的加速项目的加速域名的数据。",
+                          "description": "可访问的加速项目 ID。如果在此字段中指定了加速项目 ID，则加速项目管理接口仅限于访问这些加速项目。此外，由于加速域名是在加速项目定义中指定的，对加速项目的任何限制也会限制通过其他 API 接口（包括报表、日志配置管理、加速域名和内容管理）可访问的加速域名。例如，调用<a href=\"/apidocs/hostnames\">加速域名</a>（/cdn/hostnames）接口时，仅当加速域名属于允许的加速项目时才会返回其信息。同样，<a href=\"/apidocs/reports\">报表</a>（/cdn/report）接口仅返回属于允许的加速项目的加速域名的数据。",
                           "items": {
                             "type": "string"
                           }
@@ -30853,7 +30853,7 @@
             "source": "./cdnapi.sh GET /apiPermissions/123 -p\n"
           }
         ],
-        "description": "返回 API 账号的权限，包括自定义权限和默认权限。如果您尚未设置 API 账号的权限，将收到 404 HTTP 响应。要为新 API 账号指定权限，您必须为该 API 账号<a href=\"#operation/post-cdn-apiPermissions\">创建 API 权限</a>对象并进行自定义设置。之后如有需要，您可以调用<a href=\"#operation/patch-cdn-apiPermissions-id\">修改权限的 API</a> 做进一步修改。",
+        "description": "返回 API 账号的权限，包括自定义权限和默认权限。如果您尚未设置 API 账号的权限，将收到 404 HTTP 响应。要为新 API 账号指定权限，您必须为该 API 账号<a href=\"/apidocs/api-access-control/post-cdn-apipermissions\">创建 API 权限</a>对象并进行自定义设置。之后如有需要，您可以调用<a href=\"/apidocs/api-access-control/patch-cdn-apipermissions-id\">修改权限的 API</a> 做进一步修改。",
         "parameters": [
           {
             "schema": {
@@ -30985,7 +30985,7 @@
             "description": "资源预期的最后修改日期和时间，采用 RFC 1123 格式。如果资源在此日期之后被修改，服务器将以 412 响应拒绝该请求。"
           }
         ],
-        "description": "修改 API 账号的权限。如果您尚未自定义 API 账号的权限，必须先<a href=\"#operation/post-cdn-apiPermissions\">创建自定义 API 权限</a>，否则此 API 将返回 404 响应。",
+        "description": "修改 API 账号的权限。如果您尚未自定义 API 账号的权限，必须先<a href=\"/apidocs/api-access-control/post-cdn-apipermissions\">创建自定义 API 权限</a>，否则此 API 将返回 404 响应。",
         "requestBody": {
           "content": {
             "application/json": {
@@ -31002,7 +31002,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Certificate-Management\">证书管理</a>（/cdn/certificates）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取证书列表或证书详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/certificate-management\">证书管理</a>（/cdn/certificates）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取证书列表或证书详情。",
                         "enum": [
                           true,
                           false,
@@ -31015,7 +31015,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Property-Management\">加速项目管理</a>（/cdn/properties）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取加速项目列表或加速项目详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/property-management\">加速项目管理</a>（/cdn/properties）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取加速项目列表或加速项目详情。",
                         "enum": [
                           true,
                           false,
@@ -31028,7 +31028,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Edge-Hostname-Management\">调度域名管理</a>（/cdn/edgeHostnames）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取调度域名列表或调度域名详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/edge-hostname-management\">调度域名管理</a>（/cdn/edgeHostnames）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取调度域名列表或调度域名详情。",
                         "enum": [
                           true,
                           false,
@@ -31041,7 +31041,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Property-Validation\">加速项目验证</a>（/cdn/validations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取验证任务列表或验证任务详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/property-validation\">加速项目验证</a>（/cdn/validations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取验证任务列表或验证任务详情。",
                         "enum": [
                           true,
                           false,
@@ -31061,7 +31061,7 @@
                           "both",
                           "read"
                         ],
-                        "description": "API 账号是否可以使用<a href=\"#tag/Deployment-Management\">部署管理</a>（/cdn/deploymentTasks）接口将加速项目和证书部署到演练环境、生产环境、同时部署到演练环境和生产环境，或完全不能部署。可以为 operator API 账号指定值 'read'，将其限制为只能获取部署任务列表或部署任务详情。"
+                        "description": "API 账号是否可以使用<a href=\"/apidocs/deployment-management\">部署管理</a>（/cdn/deploymentTasks）接口将加速项目和证书部署到演练环境、生产环境、同时部署到演练环境和生产环境，或完全不能部署。可以为 operator API 账号指定值 'read'，将其限制为只能获取部署任务列表或部署任务详情。"
                       },
                       "purges": {
                         "type": [
@@ -31069,7 +31069,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#operation/createPurge\">刷新</a>（/cdn/purges）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取刷新请求列表或刷新请求详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/content-management/createpurge\">刷新</a>（/cdn/purges）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取刷新请求列表或刷新请求详情。",
                         "enum": [
                           true,
                           false,
@@ -31082,7 +31082,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#operation/post-cdn-prefetches\">预取</a>（/cdn/prefetches）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取预取请求列表或预取请求详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/content-management/post-cdn-prefetches\">预取</a>（/cdn/prefetches）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取预取请求列表或预取请求详情。",
                         "enum": [
                           true,
                           false,
@@ -31095,7 +31095,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Annotations-for-Reports\">报表注释</a>（/cdn/annotations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取注释列表或注释详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/annotations-for-reports\">报表注释</a>（/cdn/annotations）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取注释列表或注释详情。",
                         "enum": [
                           true,
                           false,
@@ -31108,7 +31108,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#tag/API-Access-Control\">API 权限</a>（/cdn/apiPermissions）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 API 权限详情。此权限设置为 'true' 的 operator API 账号虽然可以管理其他权限，但不能再将此权限授予同一客户下的其他 API 账号。不过，代理商的 operator API 账号可以代表子客户的 API 账号管理此权限。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/api-access-control\">API 权限</a>（/cdn/apiPermissions）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 API 权限详情。此权限设置为 'true' 的 operator API 账号虽然可以管理其他权限，但不能再将此权限授予同一客户下的其他 API 账号。不过，代理商的 operator API 账号可以代表子客户的 API 账号管理此权限。",
                         "enum": [
                           true,
                           false,
@@ -31118,12 +31118,12 @@
                       "systemConfigs": {
                         "type": "boolean",
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#operation/get-cdn-systemConfigs\">系统配置</a>（/cdn/systemConfigs）接口。"
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/cdn-product-management/get-cdn-systemconfigs\">系统配置</a>（/cdn/systemConfigs）接口。"
                       },
                       "reports": {
                         "type": "boolean",
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Reports\">报表</a>（/cdn/report）接口。"
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/reports\">报表</a>（/cdn/report）接口。"
                       },
                       "serviceQuotas": {
                         "type": [
@@ -31131,7 +31131,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#operation/post-cdn-serviceQuotas\">服务配额</a>（/cdn/serviceQuotas）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取服务配额列表或服务配额详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/cdn-product-management/post-cdn-servicequotas\">服务配额</a>（/cdn/serviceQuotas）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取服务配额列表或服务配额详情。",
                         "enum": [
                           true,
                           false,
@@ -31141,7 +31141,7 @@
                       "hostnames": {
                         "type": "boolean",
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Hostnames\">加速域名</a>（/cdn/hostnames）接口。\n"
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/hostnames\">加速域名</a>（/cdn/hostnames）接口。\n"
                       },
                       "webhooks": {
                         "type": [
@@ -31149,7 +31149,7 @@
                           "string"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问 <a href=\"#tag/Webhooks\">Webhook</a>（/cdn/webhooks）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 Webhook 列表或 Webhook 详情。",
+                        "description": "API 账号是否可以访问 <a href=\"/apidocs/webhooks\">Webhook</a>（/cdn/webhooks）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取 Webhook 列表或 Webhook 详情。",
                         "enum": [
                           true,
                           false,
@@ -31162,7 +31162,7 @@
                           "boolean"
                         ],
                         "default": true,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Secret-Management\">保密信息管理</a>（/cdn/secrets）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取保密信息列表或保密信息详情。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/secret-management\">保密信息管理</a>（/cdn/secrets）接口。可以为 operator API 账号指定值 'read'，将其限制为只能获取保密信息列表或保密信息详情。",
                         "enum": [
                           true,
                           false,
@@ -31175,7 +31175,7 @@
                           "string"
                         ],
                         "default": false,
-                        "description": "API 账号是否可以访问<a href=\"#tag/Log-Configuration-Management\">日志配置</a>（/cdn/logConfigs）接口。",
+                        "description": "API 账号是否可以访问<a href=\"/apidocs/log-configuration-management\">日志配置</a>（/cdn/logConfigs）接口。",
                         "enum": [
                           true,
                           false,
@@ -31197,7 +31197,7 @@
                       },
                       "properties": {
                         "type": "array",
-                        "description": "可访问的加速项目 ID。如果在此字段中指定了加速项目 ID，则加速项目管理接口仅限于访问这些加速项目。此外，由于加速域名是在加速项目定义中指定的，对加速项目的任何限制也会限制通过其他 API 接口（包括报表、日志配置管理、加速域名和内容管理）可访问的加速域名。例如，调用<a href=\"#tag/Hostnames\">加速域名</a>（/cdn/hostnames）接口时，仅当加速域名属于允许的加速项目时才会返回其信息。同样，<a href=\"#tag/Reports\">报表</a>（/cdn/report）接口仅返回属于允许的加速项目的加速域名的数据。",
+                        "description": "可访问的加速项目 ID。如果在此字段中指定了加速项目 ID，则加速项目管理接口仅限于访问这些加速项目。此外，由于加速域名是在加速项目定义中指定的，对加速项目的任何限制也会限制通过其他 API 接口（包括报表、日志配置管理、加速域名和内容管理）可访问的加速域名。例如，调用<a href=\"/apidocs/hostnames\">加速域名</a>（/cdn/hostnames）接口时，仅当加速域名属于允许的加速项目时才会返回其信息。同样，<a href=\"/apidocs/reports\">报表</a>（/cdn/report）接口仅返回属于允许的加速项目的加速域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -31593,7 +31593,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -31998,7 +31998,7 @@
             "source": "./cdnapi.sh GET /webhooks -p\n"
           }
         ],
-        "description": "获取已定义的 Webhook 列表。您可以在<a href=\"#operation/createDeployment\">创建部署任务</a>、<a href=\"#operation/createPurge\">创建刷新请求</a>、<a href=\"#operation/post-cdn-prefetches\">创建预取请求</a>或<a href=\"#operation/createValidationTask\">创建验证任务</a>时引用 Webhook。",
+        "description": "获取已定义的 Webhook 列表。您可以在<a href=\"/apidocs/deployment-management/createdeployment\">创建部署任务</a>、<a href=\"/apidocs/content-management/createpurge\">创建刷新请求</a>、<a href=\"/apidocs/content-management/post-cdn-prefetches\">创建预取请求</a>或<a href=\"/apidocs/property-validation/createvalidationtask\">创建验证任务</a>时引用 Webhook。",
         "parameters": [
           {
             "schema": {
@@ -32136,7 +32136,7 @@
             "source": "./cdnapi.sh POST /webhooks -p -j body.json\n"
           }
         ],
-        "description": "创建 Webhook。Webhook 可用于在异步任务完成时通知您。您可以在<a href=\"#operation/createDeployment\">创建部署任务</a>、<a href=\"#operation/createPurge\">创建刷新请求</a>、<a href=\"#operation/post-cdn-prefetches\">创建预取请求</a>或<a href=\"#operation/createValidationTask\">创建验证任务</a>时引用 Webhook。",
+        "description": "创建 Webhook。Webhook 可用于在异步任务完成时通知您。您可以在<a href=\"/apidocs/deployment-management/createdeployment\">创建部署任务</a>、<a href=\"/apidocs/content-management/createpurge\">创建刷新请求</a>、<a href=\"/apidocs/content-management/post-cdn-prefetches\">创建预取请求</a>或<a href=\"/apidocs/property-validation/createvalidationtask\">创建验证任务</a>时引用 Webhook。",
         "parameters": [
           {
             "schema": {
@@ -32170,7 +32170,7 @@
                   },
                   "credentials": {
                     "type": "object",
-                    "description": "传递给该 URL 的凭据（可选）。如果需要凭据，您的服务器应以与我们相同的方式支持 HTTP Basic 认证，请参阅<a href=\"#section/Authentication\">认证概述</a>。特别是，<i>password</i> 将是使用当前日期编码后的 secretKey。",
+                    "description": "传递给该 URL 的凭据（可选）。如果需要凭据，您的服务器应以与我们相同的方式支持 HTTP Basic 认证，请参阅<a href=\"/apidocs\">认证概述</a>。特别是，<i>password</i> 将是使用当前日期编码后的 secretKey。",
                     "properties": {
                       "user": {
                         "type": "string",
@@ -32257,7 +32257,7 @@
                     },
                     "credentials": {
                       "type": "object",
-                      "description": "传递给该 URL 的凭据（可选）。如果需要凭据，您的服务器应以与我们相同的方式支持 HTTP Basic 认证，请参阅<a href=\"#section/Authentication\">认证概述</a>。特别是，<i>password</i> 将是使用当前日期编码后的 secretKey。",
+                      "description": "传递给该 URL 的凭据（可选）。如果需要凭据，您的服务器应以与我们相同的方式支持 HTTP Basic 认证，请参阅<a href=\"/apidocs\">认证概述</a>。特别是，<i>password</i> 将是使用当前日期编码后的 secretKey。",
                       "properties": {
                         "user": {
                           "type": "string",
@@ -32463,7 +32463,7 @@
                   },
                   "credentials": {
                     "type": "object",
-                    "description": "传递给该 URL 的凭据（可选）。如果需要凭据，您的服务器应以与我们相同的方式支持 HTTP Basic 认证，请参阅<a href=\"#section/Authentication\">认证概述</a>。特别是，<i>password</i> 将是使用当前日期编码后的 secretKey。",
+                    "description": "传递给该 URL 的凭据（可选）。如果需要凭据，您的服务器应以与我们相同的方式支持 HTTP Basic 认证，请参阅<a href=\"/apidocs\">认证概述</a>。特别是，<i>password</i> 将是使用当前日期编码后的 secretKey。",
                     "properties": {
                       "user": {
                         "type": "string",
@@ -33010,7 +33010,7 @@
             "source": "./cdnapi.sh GET /purges/purgeTokens?target=production\n"
           }
         ],
-        "description": "本 API 用于查询您在演练环境或生产环境中可发起的目录刷新请求和文件刷新请求的数量。您的<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">服务配额</a>规定了生产环境和演练环境中文件刷新和目录刷新的每日上限。您可以在某一天内临时超出该上限，但这会减少次日可用的刷新次数。",
+        "description": "本 API 用于查询您在演练环境或生产环境中可发起的目录刷新请求和文件刷新请求的数量。您的<a href=\"/apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid\">服务配额</a>规定了生产环境和演练环境中文件刷新和目录刷新的每日上限。您可以在某一天内临时超出该上限，但这会减少次日可用的刷新次数。",
         "parameters": [
           {
             "schema": {
@@ -33530,7 +33530,7 @@
             }
           },
           "409": {
-            "description": "该保密信息正在生产环境或演练环境中使用，无法删除。您可以调用<a href=\"#operation/get-cdn-secrets-secretID\">获取保密信息 API</a>，查看使用该保密信息的已部署加速项目。",
+            "description": "该保密信息正在生产环境或演练环境中使用，无法删除。您可以调用<a href=\"/apidocs/secret-management/get-cdn-secrets-secretid\">获取保密信息 API</a>，查看使用该保密信息的已部署加速项目。",
             "content": {
               "application/json": {
                 "schema": {
@@ -33867,7 +33867,7 @@
             }
           }
         },
-        "description": "创建日志配置，用于设置一个或多个加速域名的<a href=\"#operation/post-cdn-report-logDownload\">访问日志</a>格式。必须存在适用的日志配置，您才能获取某个加速域名的日志。日志配置最多可能需要 40 分钟才能生效。",
+        "description": "创建日志配置，用于设置一个或多个加速域名的<a href=\"/apidocs/reports/post-cdn-report-logdownload\">访问日志</a>格式。必须存在适用的日志配置，您才能获取某个加速域名的日志。日志配置最多可能需要 40 分钟才能生效。",
         "tags": [
           "Log Configuration Management"
         ],
@@ -34621,7 +34621,7 @@
             "required": true
           }
         ],
-        "description": "获取您已部署的加速项目中一个或多个加速域名的请求访问日志。 这些日志包含 2 小时或更早之前的请求数据。默认情况下，仅可获取过去 14 天内的日志，日志按时段拆分为多个文件，每个文件覆盖一天中的一段时间。\n\n要获取某个加速域名的日志，您必须先<a href=\"#operation/post-cdn-report-logConfigs\">创建适用于该加速域名的日志配置</a>，以指定日志格式。 只有在适用的日志配置创建之后对您内容发起的请求才会被记录，否则将没有可下载的日志。\n\n例如，假设您定义的日志配置格式如下：\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n本 API 将返回可用日志的列表，例如：\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2024-03-21T00:00:00Z\",\n          \"dateTo\":\"2024-03-21T00:29:59Z\",\n          \"fileSize\":105878,          \"logUrl\":\"https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd1e39\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nlogUrl 字段包含一个 URL，指向经过 gzip 压缩的日志文件，文件由如下格式的行组成：<br/>\n<pre>\n9.8.7.6 - [21/Mar/2024:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n\n该 URL 的有效期为 24 小时。如果之后需要再次下载日志，您必须重新调用本 API 以获取新的 URL。\n",
+        "description": "获取您已部署的加速项目中一个或多个加速域名的请求访问日志。 这些日志包含 2 小时或更早之前的请求数据。默认情况下，仅可获取过去 14 天内的日志，日志按时段拆分为多个文件，每个文件覆盖一天中的一段时间。\n\n要获取某个加速域名的日志，您必须先<a href=\"/apidocs/log-configuration-management/post-cdn-report-logconfigs\">创建适用于该加速域名的日志配置</a>，以指定日志格式。 只有在适用的日志配置创建之后对您内容发起的请求才会被记录，否则将没有可下载的日志。\n\n例如，假设您定义的日志配置格式如下：\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n本 API 将返回可用日志的列表，例如：\n\n<pre>\n{\n  \"logs\":[\n          {\n          \"dateFrom\":\"2024-03-21T00:00:00Z\",\n          \"dateTo\":\"2024-03-21T00:29:59Z\",\n          \"fileSize\":105878,          \"logUrl\":\"https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd1e39\",\n          \"hostname\":\"mydomain.domain.info\"\n          }\n        ]\n}\n</pre>\n\nlogUrl 字段包含一个 URL，指向经过 gzip 压缩的日志文件，文件由如下格式的行组成：<br/>\n<pre>\n9.8.7.6 - [21/Mar/2024:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n\n该 URL 的有效期为 24 小时。如果之后需要再次下载日志，您必须重新调用本 API 以获取新的 URL。\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -34770,7 +34770,7 @@
             }
           }
         },
-        "description": "获取您已部署的加速项目中某个加速域名的请求访问日志。 这些日志包含 2 小时或更早之前的请求数据。默认情况下，仅可获取过去 14 天内的日志，日志按时段拆分为多个文件，每个文件覆盖一天中的一段时间。\n\n要获取日志，您必须先<a href=\"#operation/post-cdn-report-logConfigs\">创建适用于该加速域名的日志配置</a>，以指定日志格式。 只有在适用的日志配置创建之后对您内容发起的请求才会被记录，否则将没有可下载的日志。\n\n例如，假设您定义的日志配置格式如下：\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n本 API 将返回可用日志的列表，例如：\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2024-03-21T00:00:00Z\",\n            \"dateTo\":\"2024-03-21T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd10000\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nlogUrl 字段包含一个 URL，指向经过 gzip 压缩的日志文件，文件由如下格式的行组成：<br/>\n<pre>\n9.8.7.6 - [21/Mar/2024:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n该 URL 的有效期为 24 小时。如果之后需要再次下载日志，您必须重新调用本 API 以获取新的 URL。",
+        "description": "获取您已部署的加速项目中某个加速域名的请求访问日志。 这些日志包含 2 小时或更早之前的请求数据。默认情况下，仅可获取过去 14 天内的日志，日志按时段拆分为多个文件，每个文件覆盖一天中的一段时间。\n\n要获取日志，您必须先<a href=\"/apidocs/log-configuration-management/post-cdn-report-logconfigs\">创建适用于该加速域名的日志配置</a>，以指定日志格式。 只有在适用的日志配置创建之后对您内容发起的请求才会被记录，否则将没有可下载的日志。\n\n例如，假设您定义的日志配置格式如下：\n<br/>\n<pre>\n%cltip %rmtuser [%utctime] \"%method %url %protocol\" %statuscode %rspsize \"%referer\" \"%ua\" %rsptime\n</pre>\n\n本 API 将返回可用日志的列表，例如：\n\n<pre>\n{\n  \"logs\":[\n          {\n            \"dateFrom\":\"2024-03-21T00:00:00Z\",\n            \"dateTo\":\"2024-03-21T00:29:59Z\",               \n            \"fileSize\":105878,\n            \"logUrl\":\"https://logdcenter.chinanetcenter.com/logd/v2/download/0621c8fc87ba5d548ab0a878ff6f077351d082ecdf60cbd6d60e98?traceId=ac6d696c657765625f74657374cf0000018e604202d8cd10000\",\n            \"hostname\":\"mydomain.domain.info\"\n            }\n          ]\n}\n</pre>\n\nlogUrl 字段包含一个 URL，指向经过 gzip 压缩的日志文件，文件由如下格式的行组成：<br/>\n<pre>\n9.8.7.6 - [21/Mar/2024:19:59:57 +0000] \"GET http://mydomain.domain.info/i/js/tab.js HTTP/1.1\" 304 529 \"http://mydomain.domain.info/?q=downloads\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36\" 76\n</pre>\n该 URL 的有效期为 24 小时。如果之后需要再次下载日志，您必须重新调用本 API 以获取新的 URL。",
         "parameters": [
           {
             "schema": {
@@ -35157,7 +35157,7 @@
                         "x-stoplight": {
                           "id": "2oj27my7kpnf0"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "udmn4zwqpdzmc"
@@ -35691,7 +35691,7 @@
                         "x-stoplight": {
                           "id": "sgabpxa0ax0a3"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "brqrkoqjvl2br"
@@ -36382,7 +36382,7 @@
                         "x-stoplight": {
                           "id": "v7s8exy4v404l"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "lef5ocpzn0e1l"
@@ -36899,7 +36899,7 @@
                         "x-stoplight": {
                           "id": "ca0kvexzomn89"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "x-stoplight": {
                             "id": "qihaigfsh9fmo"
@@ -37225,7 +37225,7 @@
             "source": "./cdnapi.sh GET /prefetches/prefetchTokens\n"
           }
         ],
-        "description": "本 API 用于查询您可发起的预取请求数量。您的<a href=\"#operation/get-cdn-serviceQuotas-customer-customerId\">服务配额</a>规定了预取请求的每日上限。您可以在某一天内临时超出该上限，但这会减少次日可用的预取次数。"
+        "description": "本 API 用于查询您可发起的预取请求数量。您的<a href=\"/apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid\">服务配额</a>规定了预取请求的每日上限。您可以在某一天内临时超出该上限，但这会减少次日可用的预取次数。"
       }
     },
     "/cdn/shields": {
@@ -37684,7 +37684,7 @@
         ],
         "responses": {
           "201": {
-            "description": "日志汇聚点已成功创建。Location 头中包含新日志汇聚点的 URL。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/logAggregationPoints/123ab3dda4081d2ca71898fd</code>。\n\n响应体中包含 ingestURL 字段，其中的 URL 可用于<a href=\"#operation/createProperty\">加速项目 realTimeLog 设置</a>的 <i>logUrl</i> 字段。",
+            "description": "日志汇聚点已成功创建。Location 头中包含新日志汇聚点的 URL。示例：<code>Location: https://ngapi.{{siteDomain}}/cdn/logAggregationPoints/123ab3dda4081d2ca71898fd</code>。\n\n响应体中包含 ingestURL 字段，其中的 URL 可用于<a href=\"/apidocs/property-management/createproperty\">加速项目 realTimeLog 设置</a>的 <i>logUrl</i> 字段。",
             "content": {
               "application/json": {
                 "schema": {
@@ -37877,7 +37877,7 @@
                   },
                   "destinationAuthCertificateId": {
                     "type": "string",
-                    "description": "引用<a href=\"#operation/createCertificate\">在 CDN Pro 中创建的证书</a>的 ID。系统将使用该证书的最新版本。证书无需部署到演练环境或生产环境即可在日志汇聚点中使用。如果指定了 destinationAuthCertificateId，则 destinationAuthCertificate 字段应为空。"
+                    "description": "引用<a href=\"/apidocs/certificate-management/createcertificate\">在 CDN Pro 中创建的证书</a>的 ID。系统将使用该证书的最新版本。证书无需部署到演练环境或生产环境即可在日志汇聚点中使用。如果指定了 destinationAuthCertificateId，则 destinationAuthCertificate 字段应为空。"
                   },
                   "prefix": {
                     "type": "string",
@@ -38033,13 +38033,13 @@
                         },
                         "ingestURL": {
                           "type": "string",
-                          "description": "用于从边缘服务器收集原始日志条目、再将其批量发送到目标 URL 的 URL。使用方法是将此 URL 填入<a href=\"#operation/createProperty\">加速项目 realTimeLog 设置中的 logURL 字段。"
+                          "description": "用于从边缘服务器收集原始日志条目、再将其批量发送到目标 URL 的 URL。使用方法是将此 URL 填入<a href=\"/apidocs/property-management/createproperty\">加速项目 realTimeLog 设置中的 logURL 字段。"
                         }
                       }
                     },
                     "destinationAuthCertificateId": {
                       "type": "string",
-                      "description": "如果在创建时指定了<a href=\"#operation/createCertificate\">在 CDN Pro 中创建的证书</a>，则此字段引用该证书的 ID。"
+                      "description": "如果在创建时指定了<a href=\"/apidocs/certificate-management/createcertificate\">在 CDN Pro 中创建的证书</a>，则此字段引用该证书的 ID。"
                     },
                     "destinationAuthCertificateVersion": {
                       "type": "integer",
@@ -38339,7 +38339,7 @@
                   },
                   "destinationAuthCertificateId": {
                     "type": "string",
-                    "description": "引用<a href=\"#operation/createCertificate\">在 CDN Pro 中创建的证书</a>的 ID。系统将使用该证书的最新版本。证书无需部署到演练环境或生产环境即可在日志汇聚点中使用。如果指定了 destinationAuthCertificateId，则 destinationAuthCertificate 字段应为空。"
+                    "description": "引用<a href=\"/apidocs/certificate-management/createcertificate\">在 CDN Pro 中创建的证书</a>的 ID。系统将使用该证书的最新版本。证书无需部署到演练环境或生产环境即可在日志汇聚点中使用。如果指定了 destinationAuthCertificateId，则 destinationAuthCertificate 字段应为空。"
                   }
                 }
               }
@@ -38756,7 +38756,7 @@
                         "x-stoplight": {
                           "id": "2ft1h9g17tv0y"
                         },
-                        "description": "要返回数据的加速项目域名列表。这些值对应于加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传递 'abc.test.com' 作为 Host 头。在这种情况下，'\\*.test.com' 是可以通过此字段筛选的加速项目域名，而 'abc.test.com' 是可以通过 hostnames 字段筛选的加速域名。默认返回所有加速项目域名的数据。\n",
+                        "description": "要返回数据的加速项目域名列表。这些值对应于加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传递 'abc.test.com' 作为 Host 头。在这种情况下，'\\*.test.com' 是可以通过此字段筛选的加速项目域名，而 'abc.test.com' 是可以通过 hostnames 字段筛选的加速域名。默认返回所有加速项目域名的数据。\n",
                         "items": {
                           "x-stoplight": {
                             "id": "q1s9vg72rmopa"
@@ -39048,7 +39048,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -39396,7 +39396,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应于加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 ''*.test.com''，客户端请求内容时可能传递 ''abc.test.com'' 作为 Host 头。在这种情况下，''\\*.test.com'' 是可以通过此字段筛选的加速项目域名，而 ''abc.test.com'' 是可以通过 hostnames 字段筛选的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应于加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 ''*.test.com''，客户端请求内容时可能传递 ''abc.test.com'' 作为 Host 头。在这种情况下，''\\*.test.com'' 是可以通过此字段筛选的加速项目域名，而 ''abc.test.com'' 是可以通过 hostnames 字段筛选的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -39962,7 +39962,7 @@
                       },
                       "propertyHostnames": {
                         "type": "array",
-                        "description": "要返回数据的加速项目域名列表。这些值对应于加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"#operation/createProperty\">创建加速项目</a>来加速 ''*.test.com''，客户端请求内容时可能传递 ''abc.test.com'' 作为 Host 头。在这种情况下，''\\*.test.com'' 是可以通过此字段筛选的加速项目域名，而 ''abc.test.com'' 是可以通过 hostnames 字段筛选的加速域名。默认返回所有加速项目域名的数据。",
+                        "description": "要返回数据的加速项目域名列表。这些值对应于加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 ''*.test.com''，客户端请求内容时可能传递 ''abc.test.com'' 作为 Host 头。在这种情况下，''\\*.test.com'' 是可以通过此字段筛选的加速项目域名，而 ''abc.test.com'' 是可以通过 hostnames 字段筛选的加速域名。默认返回所有加速项目域名的数据。",
                         "items": {
                           "type": "string"
                         }
@@ -40605,17 +40605,17 @@
   "tags": [
     {
       "name": "Certificate Management",
-      "description": "如果您的内容需要使用 TLS，您必须创建证书，并将其与相关的<a href=\"#tag/Property-Management\">加速项目</a>一起<a href=\"#tag/Deployment-Management\">部署</a>。出于测试目的，您可以创建自签名证书。证书是有版本的，每次修改证书都会生成一个新的不可变版本。您可以选择将任意版本部署到演练环境或生产环境。如果您加速项目的源站要求使用证书进行身份验证，您也应调用 API 创建所需证书、上传证书并进行部署，以便使用该证书。如果您是代理商，可以将证书共享给子客户，子客户可以使用这些证书，但不能修改。",
+      "description": "如果您的内容需要使用 TLS，您必须创建证书，并将其与相关的<a href=\"/apidocs/property-management\">加速项目</a>一起<a href=\"/apidocs/deployment-management\">部署</a>。出于测试目的，您可以创建自签名证书。证书是有版本的，每次修改证书都会生成一个新的不可变版本。您可以选择将任意版本部署到演练环境或生产环境。如果您加速项目的源站要求使用证书进行身份验证，您也应调用 API 创建所需证书、上传证书并进行部署，以便使用该证书。如果您是代理商，可以将证书共享给子客户，子客户可以使用这些证书，但不能修改。",
       "x-displayName": "证书管理"
     },
     {
       "name": "Property Management",
-      "description": "加速项目是一个或多个加速域名（域名）的配置，需要<a href=\"#tag/Deployment-Management\">部署</a>到 CDN Pro 服务器上。一个加速项目可以有多个版本。已部署的加速项目版本不能再修改或再次<a href=\"#tag/Property-Validation\">验证</a>。您可以通过克隆（或复制）现有版本来<a href=\"#operation/createPropertyVersion\">创建加速项目的新版本</a>。<p>下图展示了为加速域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/zh/docs/resources/images/getting-started-flowchart.png\">",
+      "description": "加速项目是一个或多个加速域名（域名）的配置，需要<a href=\"/apidocs/deployment-management\">部署</a>到 CDN Pro 服务器上。一个加速项目可以有多个版本。已部署的加速项目版本不能再修改或再次<a href=\"/apidocs/property-validation\">验证</a>。您可以通过克隆（或复制）现有版本来<a href=\"/apidocs/property-management/createpropertyversion\">创建加速项目的新版本</a>。<p>下图展示了为加速域名创建加速服务的步骤。</p><img src=\"/static/content-assets/mileweb/docs-content-cdn/zh/docs/resources/images/getting-started-flowchart.png\">",
       "x-displayName": "加速项目管理"
     },
     {
       "name": "Property Validation",
-      "description": "<a href=\"#operation/createProperty\">创建加速项目</a>后，您必须先对其进行验证，确保设置的语法正确，然后才能将其<a href=\"#tag/Deployment-Management\">部署</a>到演练环境或生产环境。验证过程是异步操作。您可以通过相关 API 查询验证任务的状态。",
+      "description": "<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>后，您必须先对其进行验证，确保设置的语法正确，然后才能将其<a href=\"/apidocs/deployment-management\">部署</a>到演练环境或生产环境。验证过程是异步操作。您可以通过相关 API 查询验证任务的状态。",
       "x-displayName": "加速项目验证"
     },
     {
@@ -40625,12 +40625,12 @@
     },
     {
       "name": "Deployment Management",
-      "description": "部署是将您的加速项目和证书配置推送到 CDN Pro 缓存服务器的过程。我们强烈建议您[先部署到<i>演练</i>环境测试配置，再部署到<i>生产</i>环境](</docs/portal/edge-configurations/testing-property>)。<h2>测试已部署到生产环境的加速项目</h2> <a href=\"#operation/createEdgeHostname\">创建调度域名</a>并在 DNS 服务器上将加速项目的加速域名指向该调度域名后，您即可通过该加速域名浏览您的内容。",
+      "description": "部署是将您的加速项目和证书配置推送到 CDN Pro 缓存服务器的过程。我们强烈建议您[先部署到<i>演练</i>环境测试配置，再部署到<i>生产</i>环境](</docs/portal/edge-configurations/testing-property>)。<h2>测试已部署到生产环境的加速项目</h2> <a href=\"/apidocs/edge-hostname-management/createedgehostname\">创建调度域名</a>并在 DNS 服务器上将加速项目的加速域名指向该调度域名后，您即可通过该加速域名浏览您的内容。",
       "x-displayName": "部署管理"
     },
     {
       "name": "Hostnames",
-      "description": "您必须<a href=\"#operation/createProperty\">创建加速项目</a>才能在 CDN Pro 上管理您的配置。您可以通过多个 API 获取已<a href=\"#operation/createDeployment\">部署</a>到生产环境或演练环境的加速项目中加速域名（或域名）的汇总信息。",
+      "description": "您必须<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>才能在 CDN Pro 上管理您的配置。您可以通过多个 API 获取已<a href=\"/apidocs/deployment-management/createdeployment\">部署</a>到生产环境或演练环境的加速项目中加速域名（或域名）的汇总信息。",
       "x-displayName": "加速域名"
     },
     {
@@ -40650,7 +40650,7 @@
     },
     {
       "name": "Content Management",
-      "description": "您可以通过内容管理 API 请求更新（或刷新）缓存内容，而不必等到<a href=\"#operation/getPropertyVersion\">加速项目配置</a>所确定的时间。您可以刷新文件或目录。刷新请求是异步的，您可以通过相关 API 查询刷新请求的状态。您还可以预取 URL，在访问者请求到达之前预热缓存，从而管理发往源站服务器的流量。",
+      "description": "您可以通过内容管理 API 请求更新（或刷新）缓存内容，而不必等到<a href=\"/apidocs/property-management/getpropertyversion\">加速项目配置</a>所确定的时间。您可以刷新文件或目录。刷新请求是异步的，您可以通过相关 API 查询刷新请求的状态。您还可以预取 URL，在访问者请求到达之前预热缓存，从而管理发往源站服务器的流量。",
       "x-displayName": "内容管理"
     },
     {
@@ -40660,7 +40660,7 @@
     },
     {
       "name": "API Account Management",
-      "description": "创建和管理用于调用 CDN Pro API 的其他 API 账号。您可以通过指定 <a href=\"#operation/post-cdn-apiPermissions\">API 权限</a>来自定义 API 账号可访问的接口集合。",
+      "description": "创建和管理用于调用 CDN Pro API 的其他 API 账号。您可以通过指定 <a href=\"/apidocs/api-access-control/post-cdn-apipermissions\">API 权限</a>来自定义 API 账号可访问的接口集合。",
       "x-displayName": "API 账号管理"
     },
     {
@@ -40680,7 +40680,7 @@
     },
     {
       "name": "API Access Control",
-      "description": "您可以通过这些 API 指定可访问的接口类别，从而自定义 <a href=\"#operation/post-ngadmin-apiAccounts\">CDN Pro API 账号</a>的权限范围。",
+      "description": "您可以通过这些 API 指定可访问的接口类别，从而自定义 <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">CDN Pro API 账号</a>的权限范围。",
       "x-displayName": "API 访问控制"
     },
     {
@@ -40690,7 +40690,7 @@
     },
     {
       "name": "Log Configuration Management",
-      "description": "您可以通过这些 API 自定义可使用<a href=\"#operation/get-cdn-report-logDownload\">我们的 API</a> 下载的访问日志格式。只有在您为某个加速域名定义了适用的日志配置格式之后发起的请求，才能获取该加速域名的日志。",
+      "description": "您可以通过这些 API 自定义可使用<a href=\"/apidocs/reports/get-cdn-report-logdownload\">我们的 API</a> 下载的访问日志格式。只有在您为某个加速域名定义了适用的日志配置格式之后发起的请求，才能获取该加速域名的日志。",
       "x-displayName": "日志配置管理"
     },
     {
