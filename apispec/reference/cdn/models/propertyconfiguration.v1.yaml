@@ -144,7 +144,7 @@ properties:
             "alwaysDirect" means we always directly connect to this origin.
         shield:
           type: string
-          description: 'Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href="#operation/get-cdn-shields">origin shields API</a> provides a list of available shields along with their IP addresses. It is best if you select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have ''hasBeian'' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use.'
+          description: 'Refers to the ID of an origin shield representing a set of servers that will make requests to your origin servers rather than the CDN Pro edge servers. This can help further reduce traffic to your origin. This is an advanced feature that can be enabled by contacting our support team. The <a href="/apidocs/cdn-product-management/get-cdn-shields">origin shields API</a> provides a list of available shields along with their IP addresses. It is best if you select a shield whose region is closest to your origin servers. Use of a shield in China requires your property have ''hasBeian'' set to <i>true</i>. If your origin servers have an access control list, add the IPs of the shield you choose to use.'
         keepAliveTimeout:
           type: integer
           default: 60
@@ -186,7 +186,7 @@ properties:
           description: 'Defines the maximum number of simultaneous connections to the origin. The default is ''0'', which indicates connections are unlimited.'
         tlsCertificateId:
           type: string
-          description: Refers to a <a href="#tag/Certificate-Management">certificate</a> used to authenticate with the origin server. This certificate must also be deployed.
+          description: Refers to a <a href="/apidocs/certificate-management">certificate</a> used to authenticate with the origin server. This certificate must also be deployed.
         authentication:
           type: object
           description: |-
@@ -279,25 +279,25 @@ properties:
     properties:
       http:
         type: array
-        description: 'This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href="#operation/get-cdn-systemConfigs">systemConfigs</a> API''s response. If you need another port, please contact our support team.'
+        description: 'This is a list of ports other than 80 which are used to handle HTTP requests. The available values can be found in the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">systemConfigs</a> API''s response. If you need another port, please contact our support team.'
         items:
           type: integer
           minimum: 0
           maximum: 65535
       https:
         type: array
-        description: 'This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href="#operation/get-cdn-systemConfigs">systemConfigs</a> API''s response. If you need another port, please contact our support team.'
+        description: 'This is a list of ports other than 443 which are used to handle HTTPS requests. The available values can be found in the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">systemConfigs</a> API''s response. If you need another port, please contact our support team.'
         items:
           type: integer
           minimum: 0
           maximum: 65535
   tlsCertificateId:
     type: string
-    description: Refers to a <a href="#tag/Certificate-Management">certificate</a>. Specify a certificate to enable HTTPS for the hostnames of this property. It can be of type RSA or EC.
+    description: Refers to a <a href="/apidocs/certificate-management">certificate</a>. Specify a certificate to enable HTTPS for the hostnames of this property. It can be of type RSA or EC.
   tlsCertificateId1:
     type: string
     description: |
-      Refers to a <a href="#tag/Certificate-Management">certificate</a>. Optionally specify a second certificate to be used for HTTPS for the hostnames of this property. It must be of a different type (RSA or EC) than the certificate specified in <i>tlsCertificateId</i>. When there are two certificates available for your hostnames, the client and server will negotiate at the time of requests to pick one of the certificates for SSL. This could mean better performance and fault tolerance.  It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field.
+      Refers to a <a href="/apidocs/certificate-management">certificate</a>. Optionally specify a second certificate to be used for HTTPS for the hostnames of this property. It must be of a different type (RSA or EC) than the certificate specified in <i>tlsCertificateId</i>. When there are two certificates available for your hostnames, the client and server will negotiate at the time of requests to pick one of the certificates for SSL. This could mean better performance and fault tolerance.  It is invalid to set only the <i>tlsCertificateId1</i> field without setting the <i>tlsCertificateId</i> field.
   tlsMinVersion:
     type: string
     default: 1
@@ -352,7 +352,7 @@ properties:
     description: ID of a CA certificate. This field is required if tlsVerifyClient is <i>on</i> or <i>optional</i>.
   disableCertAutomation:
     type: boolean
-    description: 'By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href="#operation/createCertificate">Create a certificate API</a>.'
+    description: 'By default, CDN Pro takes control of the contents under the /.well-known/{acme-challenge, pki-validation} directories to support certificate auto-renew for properties. If for any reason you need to manage these two directories by yourself on the origin, for example, to implement your own certificate auto-renew mechanism, you can use this configuration option to disable the default behavior by setting its value to <i>true</i>. For more information about our support for certificate auto-renewal, refer to the description of the <i>autoRenew</i> field in the <a href="/apidocs/certificate-management/createcertificate">Create a certificate API</a>.'
     default: false
   accessControlRules:
     type: array
@@ -420,7 +420,7 @@ properties:
   'loadBalancerLogic ':
     type: string
     description: |-
-      This field allows you to enter [Edge Logic](</docs/edge-logic/intro>) to customize load balancing. A subset of the [directives](</docs/edge-logic/supported-directives>)  can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href="#operation/get-cdn-systemConfigs">system configuration API</a>. Currently, these include "if", "else", "elseif", "set", "return", "add_header", "deny", "allow", "access_log_sampling", and "proxy_set_header." In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>
+      This field allows you to enter [Edge Logic](</docs/edge-logic/intro>) to customize load balancing. A subset of the [directives](</docs/edge-logic/supported-directives>)  can be used. Refer to the basic directives listed in the <i>baseLbDirectives</i> field of the response to the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration API</a>. Currently, these include "if", "else", "elseif", "set", "return", "add_header", "deny", "allow", "access_log_sampling", and "proxy_set_header." In addition, some advanced Edge Logic directives, identified by the system configuration API's <i>advancedLbDirectives</i>, can be enabled for your account if needed. Please contact our support team if you require any of them. <br/> Example use: <br /><code>
       if ($http_user_agent = bot) { return 403;}
       </code>
 

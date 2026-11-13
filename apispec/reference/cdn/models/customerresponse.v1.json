@@ -82,7 +82,7 @@
       "default": [
         "0.0.0.0/0","::/0"
       ],
-      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"#operation/post-ngadmin-apiAccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\",\"::/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
+      "description": "List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href=\"/apidocs/api-account-management/post-ngadmin-apiaccounts\">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>  The default is [\"0.0.0.0/0\",\"::/0\"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses for your company. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{\"code\" : \"AccessDenied\", \"message\" : \"This request is rejected due to IP restriction.\"}</code>.\n\n",
       "items": {
         "type": "string"
       }

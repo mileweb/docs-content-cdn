@@ -28,7 +28,7 @@ properties:
       type: string
   clientRegions:
     type: array
-    description: One or more client regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an edge hostname API</a>.
+    description: One or more client regions. Refer to the information about regions in the <a href="/apidocs/edge-hostname-management/createedgehostname">Create an edge hostname API</a>.
     items:
       type: string
   type:
@@ -43,7 +43,7 @@ properties:
     description: Text shown in the report on the CDN Pro portal.
   serverRegions:
     type: array
-    description: One or more server regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an edge hostname API</a>.
+    description: One or more server regions. Refer to the information about regions in the <a href="/apidocs/edge-hostname-management/createedgehostname">Create an edge hostname API</a>.
     items:
       type: string
 required:

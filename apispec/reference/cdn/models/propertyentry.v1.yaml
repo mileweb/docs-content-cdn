@@ -55,10 +55,10 @@ properties:
           type: string
       tlsCertificateId:
         type: string
-        description: ID of a <a href="#tag/Certificate-Management">certificate.
+        description: ID of a <a href="/apidocs/certificate-management">certificate.
       tlsCertificateId1:
         type: string
-        description: ID of a <a href="#tag/Certificate-Management">certificate.
+        description: ID of a <a href="/apidocs/certificate-management">certificate.
   productionVersion:
     type: object
     description: Describes the version of the property deployed to production.
@@ -74,10 +74,10 @@ properties:
           type: string
       tlsCertificateId:
         type: string
-        description: ID of a <a href="#tag/Certificate-Management">certificate.
+        description: ID of a <a href="/apidocs/certificate-management">certificate.
       tlsCertificateId1:
         type: string
-        description: ID of a <a href="#tag/Certificate-Management">certificate.
+        description: ID of a <a href="/apidocs/certificate-management">certificate.
   customerId:
     type: integer
     description: 'If you are a reseller obtaining list of properties using the Report-Range header, this field indicates the ID of the child customer that owns the property.'
