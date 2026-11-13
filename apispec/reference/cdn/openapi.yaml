@@ -141,7 +141,7 @@ paths:
             Warning:
               schema:
                 type: string
-              description: This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href="#operation/getPropertyVersion">Get a property version</a> API for details.
+              description: This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href="/apidocs/property-management/getpropertyversion">Get a property version</a> API for details.
         '400':
           description: The request was invalid. Refer to the response body for details.
           content:
@@ -218,7 +218,7 @@ paths:
                   value:
                     code: PreconditionFailed
                     message: The resource has been modified since the date specified in the If-Unmodified-Since header.
-      description: 'This API lets you update a property version. Please note that a property version that has already been deployed to production or staging is ''frozen'' and cannot be updated again. The only exception is that the version description can be updated. If a property version is frozen, you should instead <a href="#operation/createPropertyVersion">create a new property version</a> with your desired changes.'
+      description: 'This API lets you update a property version. Please note that a property version that has already been deployed to production or staging is ''frozen'' and cannot be updated again. The only exception is that the version description can be updated. If a property version is frozen, you should instead <a href="/apidocs/property-management/createpropertyversion">create a new property version</a> with your desired changes.'
       operationId: updatePropertyVersion
       tags:
         - Property Management
@@ -443,7 +443,7 @@ paths:
       description: |-
         This endpoint changes the name and description of a property. Its versions are unaffected.
 
-        If you wish to change a property's configuration, use the <a href="#operation/updatePropertyVersion">Update a property version API</a>.
+        If you wish to change a property's configuration, use the <a href="/apidocs/property-management/updatepropertyversion">Update a property version API</a>.
       operationId: updateProperty
       x-codeSamples:
         - lang: bash
@@ -1351,7 +1351,7 @@ paths:
             Warning:
               schema:
                 type: string
-              description: This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href="#operation/getPropertyVersion">Get a property version</a> API for details.
+              description: This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href="/apidocs/property-management/getpropertyversion">Get a property version</a> API for details.
         '400':
           description: The request was invalid. Refer to the response body for details.
           content:
@@ -1432,7 +1432,7 @@ paths:
                   value:
                     code: InvalidPropertyId
                     message: The specified property ID does not exist.
-      description: Create a new version of a property. Call this API to make additional changes to a property after you have <a href="#operation/createDeployment">deployed it to production or staging</a>.
+      description: Create a new version of a property. Call this API to make additional changes to a property after you have <a href="/apidocs/deployment-management/createdeployment">deployed it to production or staging</a>.
       operationId: createPropertyVersion
       x-codeSamples:
         - lang: bash
@@ -1481,7 +1481,7 @@ paths:
             Warning:
               schema:
                 type: string
-              description: This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href="#operation/getPropertyVersion">Get a property version</a> API for details.
+              description: This header will appear if the property refers to a certificate that is expired or does not support the property's hostname. Call <a href="/apidocs/property-management/getpropertyversion">Get a property version</a> API for details.
         '400':
           description: The request was invalid. Refer to the response body for details.
           content:
@@ -1994,7 +1994,7 @@ paths:
               properties:
                 edgeHostname:
                   type: string
-                  description: 'A hostname to use in your DNS server settings. When your property has been deployed to production, you should modify your DNS server so that the CNAME records of the property''s hostnames refer to this value. The edge hostname should consist of at least ten characters followed by a permitted suffix such as ".qtlcdn.com" (for example, abcdefg123.qtlcdn.com). Your <a href="#operation/get-cdn-serviceQuotas-customer-customerId">service quota</a> may include an <i>edgeHostnameZones</i> field. If it does, the suffix used for your edge hostname should be one of the listed values. '
+                  description: 'A hostname to use in your DNS server settings. When your property has been deployed to production, you should modify your DNS server so that the CNAME records of the property''s hostnames refer to this value. The edge hostname should consist of at least ten characters followed by a permitted suffix such as ".qtlcdn.com" (for example, abcdefg123.qtlcdn.com). Your <a href="/apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid">service quota</a> may include an <i>edgeHostnameZones</i> field. If it does, the suffix used for your edge hostname should be one of the listed values. '
                   example: testabcde.123.qtlcdn.com
                 description:
                   type: string
@@ -2070,7 +2070,7 @@ paths:
                           description: <i>true</i> indicates that domains being accelerated have a Beian license allowing content to be served by servers in mainland China.
                         highestServerGroup:
                           type: string
-                          description: 'Indicates the highest server group that can be used to serve this edge hostname. The server groups are specified when you create a client zone rule for a <a href="#operation/createEdgeHostname">new edge hostname</a>. '
+                          description: 'Indicates the highest server group that can be used to serve this edge hostname. The server groups are specified when you create a client zone rule for a <a href="/apidocs/edge-hostname-management/createedgehostname">new edge hostname</a>. '
                           enum:
                             - standard
                             - premium
@@ -2457,7 +2457,7 @@ paths:
                       properties:
                         certificateId:
                           type: string
-                          description: An ID representing the certificate. You can <a href="#operation/getCertificate">GET details about the certificate</a> using this ID.
+                          description: An ID representing the certificate. You can <a href="/apidocs/certificate-management/getcertificate">GET details about the certificate</a> using this ID.
                         name:
                           type: string
                           description: Name of the certificate.
@@ -2715,7 +2715,7 @@ paths:
                     description: A description of the certificate.
                   versions:
                     type: array
-                    description: Describes the versions of the certificate that have been created. You can obtain further details about each version by calling the <a href="#operation/queryCertificateVersion">Query a certificate version's details API</a>.
+                    description: Describes the versions of the certificate that have been created. You can obtain further details about each version by calling the <a href="/apidocs/certificate-management/querycertificateversion">Query a certificate version's details API</a>.
                     items:
                       type: object
                       properties:
@@ -2984,7 +2984,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh PATCH /certificates/12330c199e5f9dd381daff5e -j body.json -k key.pem -c cert.pem -a cacert.pem
-      description: 'Update a certificate using this API. The fields are the same as those in the <a href="#operation/createCertificate">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href="#operation/createDeployment">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN Pro may still serve content using an older version of the certificate.'
+      description: 'Update a certificate using this API. The fields are the same as those in the <a href="/apidocs/certificate-management/createcertificate">Create a certificate API</a>. If the certificate is currently used by properties deployed to production or staging, we recommend that you follow this API call by <a href="/apidocs/deployment-management/createdeployment">creating a deployment task</a> to deploy the updated certificate. Otherwise, CDN Pro may still serve content using an older version of the certificate.'
       tags:
         - Certificate Management
       requestBody:
@@ -3024,10 +3024,10 @@ paths:
                   properties:
                     privateKey:
                       type: string
-                      description: 'If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>privateKey</i> field in the <a href="#operation/createCertificate">Create a certificate API</a> for details about the format. This field should not be specified for CA certificates.'
+                      description: 'If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>privateKey</i> field in the <a href="/apidocs/certificate-management/createcertificate">Create a certificate API</a> for details about the format. This field should not be specified for CA certificates.'
                     certificate:
                       type: string
-                      description: 'If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>certificate</i> field in the <a href="#operation/createCertificate">Create a certificate API</a> for details about the format. This field should not be specified for CA certificates.'
+                      description: 'If not present, the value will be copied from the latest version of the certificate. Please refer to the description of the <i>certificate</i> field in the <a href="/apidocs/certificate-management/createcertificate">Create a certificate API</a> for details about the format. This field should not be specified for CA certificates.'
                     chainCert:
                       type: string
                       description: 'This field must be filled in if the <i>privateKey</i> and <i>certificate</i> fields are both omitted. If you are creating a new version of a CA certificate, you must specify this field. In this case, only the chain certificate will be updated. The chain certificate must be in PEM format.'
@@ -3143,7 +3143,7 @@ paths:
       summary: Download the CSR
       tags:
         - Certificate Management
-      description: 'Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href="#operation/updateCertificate">Update a certificate API</a>. This API cannot be used for CA certificates.'
+      description: 'Obtain the certificate signing request (CSR) information. You can take it to a certificate authority to apply for a certificate. Once you have it, you should update our system using the <a href="/apidocs/certificate-management/updatecertificate">Update a certificate API</a>. This API cannot be used for CA certificates.'
       operationId: downloadCSR
       x-codeSamples:
         - lang: bash
@@ -3575,7 +3575,7 @@ paths:
                     message: The latest version cannot be deleted because it is in deployment history.
       tags:
         - Certificate Management
-      description: This endpoint can be used to delete the latest version of a certificate if it was never deployed before. The version number will be reused the next time the certificate is <a href="#operation/updateCertificate">updated to a new version</a>.
+      description: This endpoint can be used to delete the latest version of a certificate if it was never deployed before. The version number will be reused the next time the certificate is <a href="/apidocs/certificate-management/updatecertificate">updated to a new version</a>.
   '/cdn/certificates/{certificateID}/versions/latest':
     parameters:
       - schema:
@@ -3603,7 +3603,7 @@ paths:
                     minimum: 0
                   validations:
                     type: array
-                    description: Summarizes validation tasks. Further details about a validation task can be obtained by calling the <a href="#operation/queryValidationTask">Query a property validation task API</a>.
+                    description: Summarizes validation tasks. Further details about a validation task can be obtained by calling the <a href="/apidocs/property-validation/queryvalidationtask">Query a property validation task API</a>.
                     items:
                       type: object
                       properties:
@@ -3851,7 +3851,7 @@ paths:
                   value:
                     code: InvalidCertificate
                     message: The certificate 1234567abcdefghijklmn specified for 'tlsClientCACertId' in the property does not exist.
-      description: This API validates a property version. You must call this API before you can <a href="#operation/createDeployment">deploy the property version</a> to staging or production. Your property will be checked for correct syntax.
+      description: This API validates a property version. You must call this API before you can <a href="/apidocs/deployment-management/createdeployment">deploy the property version</a> to staging or production. Your property will be checked for correct syntax.
       operationId: createValidationTask
       x-codeSamples:
         - lang: bash
@@ -4059,7 +4059,7 @@ paths:
                       properties:
                         id:
                           type: string
-                          description: ID representing the deployment task. You can obtain more information about a task by calling the <a href="#operation/queryDeploymentTask">Query deployment task API</a>.
+                          description: ID representing the deployment task. You can obtain more information about a task by calling the <a href="/apidocs/deployment-management/querydeploymenttask">Query deployment task API</a>.
                         name:
                           type: string
                           description: Name of the deployment task.
@@ -4255,7 +4255,7 @@ paths:
         - Deployment Management
       responses:
         '201':
-          description: 'The deployment task has been created. The Location header in the response contains a URL to the new task. You can call our <a href="#operation/queryDeploymentTask">API to get the status of the deployment</a>. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>'
+          description: 'The deployment task has been created. The Location header in the response contains a URL to the new task. You can call our <a href="/apidocs/deployment-management/querydeploymenttask">API to get the status of the deployment</a>. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/deploymentTasks/ac8e3085-ef92-4c12-ab1b-19b18ac9383c</code>'
           headers:
             Location:
               schema:
@@ -4367,7 +4367,7 @@ paths:
 
         If a property uses a certificate, an error will be returned by this API if the certificate has not yet been deployed to the target environment. For server certificates, an error will be returned if the certificate's Subject Alternative Name (SAN) does not include the hostnames specified in the property version. A SAN with a wildcard hostname will support subdomains only at the same level as the wildcard. For instance, the wildcard '*.xyz.com' supports 'abc.xyz.com' but not 'def.abc.xyz.com'.
 
-        After a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href="#operation/createPropertyVersion">creating a new property version</a> with your desired changes.
+        After a property version is deployed, it will be frozen to prevent additional changes. You can modify the property by <a href="/apidocs/property-management/createpropertyversion">creating a new property version</a> with your desired changes.
       operationId: createDeployment
       x-codeSamples:
         - lang: bash
@@ -4856,7 +4856,7 @@ paths:
                   value:
                     code: InvalidTarget
                     message: 'An invalid target was specified. It must be either ''staging'', ''production'', ''all'', or left empty.'
-      description: Get a list of hostnames belonging to properties that were successfully <a href="#tag/Deployment-Management">deployed</a> to production or staging during a particular timeframe.
+      description: Get a list of hostnames belonging to properties that were successfully <a href="/apidocs/deployment-management">deployed</a> to production or staging during a particular timeframe.
       operationId: getHistoricalHostnames
       x-codeSamples:
         - lang: bash
@@ -5683,7 +5683,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: vp862bdcy80lg
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: 4l5ja1mbry8fg
@@ -6095,7 +6095,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: 1n47fnqutm60h
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: 7o66s8rn8glrl
@@ -6322,7 +6322,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: ei6xx3xrgfc4x
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: zgppvc20as3ou
@@ -6464,7 +6464,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: sfux8slx3yrfv
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: 0zlfnd0v8ua2q
@@ -6607,12 +6607,12 @@ paths:
                     type: string
                 serverRegions:
                   type: array
-                  description: One or more server regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an Edge Hostname API</a>.
+                  description: One or more server regions. Refer to the information about regions in the <a href="/apidocs/edge-hostname-management/createedgehostname">Create an Edge Hostname API</a>.
                   items:
                     type: string
                 clientRegions:
                   type: array
-                  description: One or more client regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an Edge Hostname API</a>.
+                  description: One or more client regions. Refer to the information about regions in the <a href="/apidocs/edge-hostname-management/createedgehostname">Create an Edge Hostname API</a>.
                   items:
                     type: string
                 type:
@@ -6654,7 +6654,7 @@ paths:
         - Content Management
       responses:
         '201':
-          description: 'The purge request was successfully created. The <i>Location</i> header includes a reference to the purge request.  Call the <a href="#operation/queryPurgeStatus">Get Purge Request status API</a> to check its status. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.'
+          description: 'The purge request was successfully created. The <i>Location</i> header includes a reference to the purge request.  Call the <a href="/apidocs/content-management/querypurgestatus">Get Purge Request status API</a> to check its status. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/purges/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.'
           headers:
             Location:
               schema:
@@ -6823,7 +6823,7 @@ paths:
                       properties:
                         id:
                           type: string
-                          description: ID associated with the purge request. You can call the <a href="#operation/queryPurgeStatus">Query purge request status API</a> to get further information about it.
+                          description: ID associated with the purge request. You can call the <a href="/apidocs/content-management/querypurgestatus">Query purge request status API</a> to get further information about it.
                         submissionTime:
                           type: string
                           description: An RFC 3339 date indicating when the purge request was created.
@@ -6870,7 +6870,7 @@ paths:
                           description: Indicates the corresponding API request ID.
                         apiAccountId:
                           type: string
-                          description: ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="#operation/post-ngadmin-apiAccounts">endpoint</a>.
+                          description: ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">endpoint</a>.
                         regexEntries:
                           type: integer
                           minimum: 0
@@ -7388,12 +7388,12 @@ paths:
                   description: Text describing the event. This will appear in the report.
                 clientRegions:
                   type: array
-                  description: One or more client regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an Edge Hostname API</a>.
+                  description: One or more client regions. Refer to the information about regions in the <a href="/apidocs/edge-hostname-management/createedgehostname">Create an Edge Hostname API</a>.
                   items:
                     type: string
                 serverRegions:
                   type: array
-                  description: One or more server regions. Refer to the information about regions in the <a href="#operation/createEdgeHostname">Create an Edge Hostname API</a>.
+                  description: One or more server regions. Refer to the information about regions in the <a href="/apidocs/edge-hostname-management/createedgehostname">Create an Edge Hostname API</a>.
                   items:
                     type: string
               required:
@@ -7518,7 +7518,7 @@ paths:
                     description: 'If a reseller performs a purge on behalf of a child customer, then this field will be present and indicate the reseller''s ID.'
                   apiAccountId:
                     type: string
-                    description: ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="#operation/post-ngadmin-apiAccounts">endpoint</a>.
+                    description: ID of the API account used to create the purge request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">endpoint</a>.
                   webhook:
                     type: string
                     description: ID of a webhook to call when the purge task completes.
@@ -8825,7 +8825,7 @@ paths:
           in: header
           name: On-Behalf-Of
           description: 'If you are a reseller, you can use this header to specify the ID of a child customer.'
-      description: 'Update an API account''s settings. If you need to change the default permissions of the API account, call our API to <a href="#operation/post-cdn-apiPermissions">create a custom API permission object</a>.'
+      description: 'Update an API account''s settings. If you need to change the default permissions of the API account, call our API to <a href="/apidocs/api-access-control/post-cdn-apipermissions">create a custom API permission object</a>.'
       requestBody:
         content:
           application/json:
@@ -9073,7 +9073,7 @@ paths:
       description: |-
         Create an API account that can be used to call CDN Pro APIs in addition to your administrator API account. You can grant <i>read-only</i> access, which permits calling API endpoints using the HTTP GET method only, OR <i>operator</i> access, which also allows creating, updating, and deleting objects like properties and certificates. 
         <br/><br/>After creating an API account, you must call our <a 
-        href="#operation/post-cdn-apiPermissions">API to create custom permissions</a> for it and define the endpoints that can be accessed. After that, you can make additional changes by calling our <a href="#operation/patch-cdn-apiPermissions-id">API to modify the permissions</a>.
+        href="/apidocs/api-access-control/post-cdn-apipermissions">API to create custom permissions</a> for it and define the endpoints that can be accessed. After that, you can make additional changes by calling our <a href="/apidocs/api-access-control/patch-cdn-apipermissions-id">API to modify the permissions</a>.
       requestBody:
         content:
           application/json:
@@ -9636,7 +9636,7 @@ paths:
                   description: New password for the user. We recommend that users set their own passwords through our portal.
                 reset2fa:
                   type: boolean
-                  description: Set to <i>true</i> to force the user to go through the two factor authentication setup process when logging in. This applies only if you have chosen to require two factor authentication for improved security. You can enable the feature by setting <i>enforce2fa</i> to <i>true</i> when <a href="#operation/patch-ngadmin-customers-id">updating your account</a>. A common reason to use <i>reset2fa</i> is when the user switches to a new phone.
+                  description: Set to <i>true</i> to force the user to go through the two factor authentication setup process when logging in. This applies only if you have chosen to require two factor authentication for improved security. You can enable the feature by setting <i>enforce2fa</i> to <i>true</i> when <a href="/apidocs/customer-management/patch-ngadmin-customers-id">updating your account</a>. A common reason to use <i>reset2fa</i> is when the user switches to a new phone.
                 linkedAccount:
                   type: string
                   x-stoplight:
@@ -10047,7 +10047,7 @@ paths:
       summary: Get a list of ISPs
       responses:
         '200':
-          description: The response contains a list of ISPs. You can specify an ISP's code in an <a href="#operation/createEdgeHostname">edge hostname's client zone rule</a>.
+          description: The response contains a list of ISPs. You can specify an ISP's code in an <a href="/apidocs/edge-hostname-management/createedgehostname">edge hostname's client zone rule</a>.
           content:
             application/json:
               schema:
@@ -10165,7 +10165,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /isps
-      description: Obtain a list of ISPs that can be used in <a href="#operation/createEdgeHostname">edge hostname client zone rules</a>.
+      description: Obtain a list of ISPs that can be used in <a href="/apidocs/edge-hostname-management/createedgehostname">edge hostname client zone rules</a>.
       parameters:
         - schema:
             type: string
@@ -10185,7 +10185,7 @@ paths:
             type: string
           in: query
           name: regionCode
-          description: Limit returned ISPs to those operating in a particular region. The value of <i>regionCode</i> should be one of the codes representing a region returned by the <a href="#operation/get-cdn-clientRegions">client regions API</a>.
+          description: Limit returned ISPs to those operating in a particular region. The value of <i>regionCode</i> should be one of the codes representing a region returned by the <a href="/apidocs/cdn-product-management/get-cdn-clientregions">client regions API</a>.
       tags:
         - CDN Product Management
     parameters: []
@@ -10419,7 +10419,7 @@ paths:
                   type: array
                   default:
                     - '0.0.0.0/0,::/0'
-                  description: 'List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href="#operation/post-ngadmin-apiAccounts">API account</a>''s individual IP list. You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>["1.1.1.1-1.1.1.8", "1.2.3.4", "1.5.5.0/24"]</code>  The default is ["0.0.0.0/0","::/0"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{"code" : "AccessDenied", "message" : "This request is rejected due to IP restriction."}</code>.'
+                  description: 'List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">API account</a>''s individual IP list. You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>["1.1.1.1-1.1.1.8", "1.2.3.4", "1.5.5.0/24"]</code>  The default is ["0.0.0.0/0","::/0"], which permits API calls from all IP addresses.  For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements.  API calls from forbidden IPs would get an HTTP 403 response with a body <code>{"code" : "AccessDenied", "message" : "This request is rejected due to IP restriction."}</code>.'
                   items:
                     type: string
                 chinaBizInfo:
@@ -10474,7 +10474,7 @@ paths:
                     code: InvalidCustomerId
                     message: The specified customer ID does not exist or the caller doesn't have access to this resource.
         '409':
-          description: The customer could not be deleted because it is still configured with a product. <a href="#operation/patch-ngadmin-customers-id">Update the customer</a> to remove the product before trying again.
+          description: The customer could not be deleted because it is still configured with a product. <a href="/apidocs/customer-management/patch-ngadmin-customers-id">Update the customer</a> to remove the product before trying again.
           content:
             application/json:
               schema:
@@ -10490,7 +10490,7 @@ paths:
                     code: HasProducts
                     message: This customer still has access to at least one product. The caller has to call update customer API first to remove all product access.
       description: |
-        In the past, resellers could use this API to delete a child customer. This API has been deprecated. A reseller can instead disable a child customer by <a href="#operation/patch-ngadmin-customers-id">updating the customer</a>'s configuration to remove its products and modifying its status to "suspended".
+        In the past, resellers could use this API to delete a child customer. This API has been deprecated. A reseller can instead disable a child customer by <a href="/apidocs/customer-management/patch-ngadmin-customers-id">updating the customer</a>'s configuration to remove its products and modifying its status to "suspended".
       tags:
         - Customer Management
       deprecated: true
@@ -10691,7 +10691,7 @@ paths:
                 ipWhiteList:
                   type: array
                   description: |
-                    List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href="#operation/post-ngadmin-apiAccounts">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>["1.1.1.1-1.1.1.8", "1.2.3.4", "1.5.5.0/24"]</code>  The default is ["0.0.0.0/0", "::/0"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{"code" : "AccessDenied", "message" : "This request is rejected due to IP restriction."}</code>.
+                    List of IP addresses from which API calls using API accounts are permitted. This list works with each <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">API account</a>'s individual IP list.  You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>["1.1.1.1-1.1.1.8", "1.2.3.4", "1.5.5.0/24"]</code>  The default is ["0.0.0.0/0", "::/0"], which permits API calls from all IP addresses. For security, we strongly recommend specifying appropriate IP addresses in your company. Child customers of a reseller can modify this setting to meet their requirements. API calls from forbidden IPs would get an HTTP 403 response with a body <code>{"code" : "AccessDenied", "message" : "This request is rejected due to IP restriction."}</code>.
                   default:
                     - 0.0.0.0/0
                     - '::/0'
@@ -10782,7 +10782,7 @@ paths:
                       properties:
                         customerId:
                           type: integer
-                          description: Customer ID. Pass it to the <a href="#operation/get-ngadmin-customers-ID">Get Customer Details API</a> to retrieve more information.
+                          description: Customer ID. Pass it to the <a href="/apidocs/customer-management/get-ngadmin-customers-id">Get Customer Details API</a> to retrieve more information.
                           minimum: 0
                         parentId:
                           type: integer
@@ -11317,7 +11317,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /clientRegions
-      description: Get a list of client regions that can be used in <a href="#operation/createEdgeHostname">edge hostname client zone rules</a>. Query parameters allow you to filter and sort the results.
+      description: Get a list of client regions that can be used in <a href="/apidocs/edge-hostname-management/createedgehostname">edge hostname client zone rules</a>. Query parameters allow you to filter and sort the results.
       parameters:
         - schema:
             type: string
@@ -11338,7 +11338,7 @@ paths:
             type: string
           in: query
           name: ispCode
-          description: Limit the returned regions to those where an ISP operates. The value should be one of the ISP codes returned by the <a href="#operation/get-cdn-isps">ISPs API</a>.
+          description: Limit the returned regions to those where an ISP operates. The value should be one of the ISP codes returned by the <a href="/apidocs/cdn-product-management/get-cdn-isps">ISPs API</a>.
   /ngadmin/apicalls:
     get:
       summary: Get a list of API calls
@@ -11536,7 +11536,7 @@ paths:
             type: string
           in: query
           name: caller
-          description: Filter results by specifying the API account name or API account ID. You can get IDs by obtaining a <a href="#operation/get-ngadmin-apiAccounts">list of your API accounts</a>.
+          description: Filter results by specifying the API account name or API account ID. You can get IDs by obtaining a <a href="/apidocs/api-account-management/get-ngadmin-apiaccounts">list of your API accounts</a>.
         - schema:
             type: string
           in: query
@@ -11593,7 +11593,7 @@ paths:
         name: id
         in: path
         required: true
-        description: The ID is a value returned in the Qtl-Request-Id header when making a CDN Pro API call. It is also available when <a href="#operation/get-ngadmin-apicalls">getting a list of API calls</a>.
+        description: The ID is a value returned in the Qtl-Request-Id header when making a CDN Pro API call. It is also available when <a href="/apidocs/api-call-history/get-ngadmin-apicalls">getting a list of API calls</a>.
     get:
       summary: Get details about an API call
       tags:
@@ -12382,7 +12382,7 @@ paths:
                   default: 0
                 allowDeploymentInChina:
                   type: boolean
-                  description: 'Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer''s name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href="#operation/post-ngadmin-customers">creating</a> or <a href="#operation/patch-ngadmin-customers-id">updating</a> a customer.'
+                  description: 'Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer''s name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href="/apidocs/customer-management/post-ngadmin-customers">creating</a> or <a href="/apidocs/customer-management/patch-ngadmin-customers-id">updating</a> a customer.'
                   default: false
                 hostnameLimit:
                   type: integer
@@ -12437,7 +12437,7 @@ paths:
                   type: array
                   description: |-
                     List of advanced features available to the customer.
-                    Available features can be found in the response of the <a href="#operation/get-cdn-systemConfigs">system configuration API</a>. Currently supported features include: "realTimeLog", which allows a customer to monitor requests from their client as they occur; "nearChina" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and "originShield", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.
+                    Available features can be found in the response of the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration API</a>. Currently supported features include: "realTimeLog", which allows a customer to monitor requests from their client as they occur; "nearChina" allowing a customer without ICP Beian to use a server group consisting of nodes close to mainland China; and "originShield", which provides an extra layer of servers between the CDN Pro edge servers and origin servers. Please contact our support team if you require an advanced feature.
                   items:
                     type: string
                 directiveParameterLimits:
@@ -12457,7 +12457,7 @@ paths:
                   minimum: 0
                 edgeHostnameZones:
                   type: array
-                  description: 'List of zones specifying the domains that can be used for <a href="#tag/Edge-Hostname-Management">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain''s authoritative DNS to us.'
+                  description: 'List of zones specifying the domains that can be used for <a href="/apidocs/edge-hostname-management">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain''s authoritative DNS to us.'
                   items:
                     type: object
                     properties:
@@ -12470,16 +12470,16 @@ paths:
                 maxFilePurgeEntries:
                   type: integer
                   minimum: 1
-                  description: Maximum number of file URLs that can be included in the fileUrls field of a <a href="#operation/createPurge">purge request</a>.
+                  description: Maximum number of file URLs that can be included in the fileUrls field of a <a href="/apidocs/content-management/createpurge">purge request</a>.
                   default: 1000
                 maxDirPurgeEntries:
                   type: integer
                   minimum: 1
-                  description: Maximum number of directory URLs that can be included in the dirUrls field of a <a href="#operation/createPurge">purge request</a>.
+                  description: Maximum number of directory URLs that can be included in the dirUrls field of a <a href="/apidocs/content-management/createpurge">purge request</a>.
                   default: 20
                 allowedLbDirectives:
                   type: array
-                  description: 'A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href="#operation/get-cdn-systemConfigs">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.'
+                  description: 'A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.'
                   items:
                     type: string
                 allowedServerGroups:
@@ -12554,7 +12554,7 @@ paths:
                       properties:
                         id:
                           type: string
-                          description: A service quota ID. You can use this to <a href="#operation/get-cdn-serviceQuotas-serviceQuotaId">get more details about the service quota</a>.
+                          description: A service quota ID. You can use this to <a href="/apidocs/cdn-product-management/get-cdn-servicequotas-servicequotaid">get more details about the service quota</a>.
                         customerId:
                           type: integer
                           description: ID of the customer.
@@ -12723,7 +12723,7 @@ paths:
         name: serviceQuotaId
         in: path
         required: true
-        description: Specify the service quota ID. It is returned when <a href="#operation/post-cdn-serviceQuotas">creating a service quota</a>.
+        description: Specify the service quota ID. It is returned when <a href="/apidocs/cdn-product-management/post-cdn-servicequotas">creating a service quota</a>.
     get:
       summary: Get a service quota by service quota ID
       tags:
@@ -12980,7 +12980,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /serviceQuotas/12345
-      description: 'This API allows a reseller to delete a child customer''s service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href="#operation/createDeployment">deployed</a> in the staging or production environments.'
+      description: 'This API allows a reseller to delete a child customer''s service quota by referencing its service quota ID. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href="/apidocs/deployment-management/createdeployment">deployed</a> in the staging or production environments.'
   /cdn/report/fastOriginReq:
     post:
       summary: Get origin fast route requests
@@ -13107,7 +13107,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: lqxm2c3pw8i4o
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: m1663kd95zi89
@@ -13284,7 +13284,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: 2ahs2gd9fedy5
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: x3l9wy5zc03qr
@@ -13560,7 +13560,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh DELETE /serviceQuotas/customer/12345
-      description: 'This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href="#operation/createDeployment">deployed</a> in the staging or production environments.'
+      description: 'This API allows a reseller to remove a service quota object for a child customer. The deletion will only work if the customer does not have any properties, certificates, or edge hostnames <a href="/apidocs/deployment-management/createdeployment">deployed</a> in the staging or production environments.'
   /cdn/report/cpuTime:
     post:
       summary: Get CPU time used
@@ -13690,7 +13690,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: nxltuijj3k8kc
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: sh7xgsk607hna
@@ -13852,7 +13852,7 @@ paths:
         - Content Management
       responses:
         '201':
-          description: 'The prefetch request was successfully created. The <i>Location</i> header includes a reference to the prefetch request.  Call the <a href="#operation/get-cdn-prefetches-id">Get Prefetch Request status API</a> to check its status. Example, <code>Location: https://ngapi.{{siteDomain}}/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.'
+          description: 'The prefetch request was successfully created. The <i>Location</i> header includes a reference to the prefetch request.  Call the <a href="/apidocs/content-management/get-cdn-prefetches-id">Get Prefetch Request status API</a> to check its status. Example, <code>Location: https://ngapi.{{siteDomain}}/cdn/prefetches/e91e8674-c2c5-4440-a1de-8b2ea99293dd</code>.'
           headers:
             Location:
               schema:
@@ -14038,7 +14038,7 @@ paths:
                             type: string
                         apiAccountId:
                           type: string
-                          description: ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="#operation/post-ngadmin-apiAccounts">endpoint</a>.
+                          description: ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">endpoint</a>.
                         ownerCustomerId:
                           type: integer
                           minimum: 1
@@ -14270,7 +14270,7 @@ paths:
                         description: 'If a reseller performs a prefetch on behalf of a child customer, this field will be present and indicate the reseller''s ID.'
                       apiAccountId:
                         type: string
-                        description: ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="#operation/post-ngadmin-apiAccounts">endpoint</a>.
+                        description: ID of the API account used to create the prefetch request. This value is only set if the API account was created using our /ngadmin/apiAccounts <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">endpoint</a>.
                     required:
                       - id
                       - submissionTime
@@ -14402,9 +14402,9 @@ paths:
           source: |
             ./cdnapi.sh POST /apiPermissions -p -j body.json
       description: |-
-        Control which CDN endpoints an <a href="#operation/post-ngadmin-apiAccounts">API account</a> can access. The permissions work with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security, you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs. 
+        Control which CDN endpoints an <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">API account</a> can access. The permissions work with the API account's type, <i>operator</i> or <i>read-only</i>. For example, for security, you can limit a read-only API account to the property management APIs. This would allow the API account to see your property configurations but not make changes to them; it would not be permitted to call other APIs. 
 
-        You must call this API to create permissions for each new API account before it can be used. After you create a custom API permission for the API account, you can update its permissions further by calling our <a href="#operation/patch-cdn-apiPermissions-id">update permission API</a>.
+        You must call this API to create permissions for each new API account before it can be used. After you create a custom API permission for the API account, you can update its permissions further by calling our <a href="/apidocs/api-access-control/patch-cdn-apipermissions-id">update permission API</a>.
       parameters:
         - schema:
             type: string
@@ -14429,7 +14429,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Certificate-Management">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.
+                      description: Whether the API account can access the <a href="/apidocs/certificate-management">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.
                       enum:
                         - true
                         - false
@@ -14439,7 +14439,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Property-Management">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.
+                      description: Whether the API account can access the <a href="/apidocs/property-management">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.
                       enum:
                         - true
                         - false
@@ -14449,7 +14449,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: Whether the API account can access the <a href="#tag/Edge-Hostname-Management">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.
+                      description: Whether the API account can access the <a href="/apidocs/edge-hostname-management">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.
                       enum:
                         - true
                         - false
@@ -14459,7 +14459,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Property-Validation">property validation</a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.
+                      description: Whether the API account can access the <a href="/apidocs/property-validation">property validation</a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.
                       enum:
                         - true
                         - false
@@ -14475,13 +14475,13 @@ paths:
                         - production
                         - both
                         - read
-                      description: 'Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href="#tag/Deployment-Management">deployment management</a> (/cdn/deploymentTasks) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task''s details.'
+                      description: 'Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href="/apidocs/deployment-management">deployment management</a> (/cdn/deploymentTasks) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task''s details.'
                     purges:
                       type:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#operation/createPurge">purge</a> (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.
+                      description: Whether the API account can access the <a href="/apidocs/content-management/createpurge">purge</a> (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.
                       enum:
                         - true
                         - false
@@ -14491,7 +14491,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#operation/post-cdn-prefetches">prefetch</a> (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.
+                      description: Whether the API account can access the <a href="/apidocs/content-management/post-cdn-prefetches">prefetch</a> (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.
                       enum:
                         - true
                         - false
@@ -14501,7 +14501,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Annotations-for-Reports">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.
+                      description: Whether the API account can access the <a href="/apidocs/annotations-for-reports">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.
                       enum:
                         - true
                         - false
@@ -14511,7 +14511,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: 'Whether the API account can access the <a href="#tag/API-Access-Control">API permission</a> (/cdn/apiPermissions) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting an API permission''s details. An operator API account with this permission set to ''true'' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller''s operator API account could manage this permission on behalf of child customers'' API accounts though.'
+                      description: 'Whether the API account can access the <a href="/apidocs/api-access-control">API permission</a> (/cdn/apiPermissions) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting an API permission''s details. An operator API account with this permission set to ''true'' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller''s operator API account could manage this permission on behalf of child customers'' API accounts though.'
                       enum:
                         - true
                         - false
@@ -14520,7 +14520,7 @@ paths:
                       type:
                         - boolean
                       default: true
-                      description: Whether the API account can access the <a href="#operation/get-cdn-systemConfigs">system configuration</a> (/cdn/systemConfigs) endpoint.
+                      description: Whether the API account can access the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration</a> (/cdn/systemConfigs) endpoint.
                       enum:
                         - true
                         - false
@@ -14528,7 +14528,7 @@ paths:
                       type:
                         - boolean
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Reports">reports</a> (/cdn/report) endpoints.
+                      description: Whether the API account can access the <a href="/apidocs/reports">reports</a> (/cdn/report) endpoints.
                       enum:
                         - true
                         - false
@@ -14537,7 +14537,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: Whether the API account can access the <a href="#operation/post-cdn-serviceQuotas">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.
+                      description: Whether the API account can access the <a href="/apidocs/cdn-product-management/post-cdn-servicequotas">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.
                       enum:
                         - true
                         - false
@@ -14547,7 +14547,7 @@ paths:
                         - boolean
                       default: true
                       description: |
-                        Whether the API account can access the <a href="#tag/Hostnames">hostnames</a> (/cdn/hostnames) endpoints.
+                        Whether the API account can access the <a href="/apidocs/hostnames">hostnames</a> (/cdn/hostnames) endpoints.
                       enum:
                         - true
                         - false
@@ -14556,7 +14556,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Webhooks">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.
+                      description: Whether the API account can access the <a href="/apidocs/webhooks">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.
                       enum:
                         - true
                         - false
@@ -14566,7 +14566,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Secret-Management">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.
+                      description: Whether the API account can access the <a href="/apidocs/secret-management">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.
                       enum:
                         - true
                         - false
@@ -14576,7 +14576,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: Whether the API account can access the <a href="#tag/Log-Configuration-Management">log configuration</a> (/cdn/logConfigs) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of log configurations or a log configuration's details.
+                      description: Whether the API account can access the <a href="/apidocs/log-configuration-management">log configuration</a> (/cdn/logConfigs) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of log configurations or a log configuration's details.
                       enum:
                         - true
                         - false
@@ -14592,7 +14592,7 @@ paths:
                         type: string
                     properties:
                       type: array
-                      description: 'IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href="#tag/Hostnames">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href="#tag/Reports">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.'
+                      description: 'IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href="/apidocs/hostnames">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href="/apidocs/reports">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.'
                       items:
                         type: string
                     edgeHostnames:
@@ -14657,7 +14657,7 @@ paths:
                           - boolean
                           - string
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Certificate-Management">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.
+                        description: Whether the API account can access the <a href="/apidocs/certificate-management">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.
                         enum:
                           - true
                           - false
@@ -14667,7 +14667,7 @@ paths:
                           - boolean
                           - string
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Property-Management">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.
+                        description: Whether the API account can access the <a href="/apidocs/property-management">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.
                         enum:
                           - true
                           - false
@@ -14677,7 +14677,7 @@ paths:
                           - boolean
                           - string
                         default: false
-                        description: Whether the API account can access the <a href="#tag/Edge-Hostname-Management">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.
+                        description: Whether the API account can access the <a href="/apidocs/edge-hostname-management">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.
                         enum:
                           - true
                           - false
@@ -14687,7 +14687,7 @@ paths:
                           - boolean
                           - string
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Property-Validation">property validation </a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.
+                        description: Whether the API account can access the <a href="/apidocs/property-validation">property validation </a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.
                         enum:
                           - true
                           - false
@@ -14703,13 +14703,13 @@ paths:
                           - production
                           - both
                           - read
-                        description: 'Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href="#tag/Deployment-Management">deployment management</a> (/cdn/deploymentTasks) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task''s details.'
+                        description: 'Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href="/apidocs/deployment-management">deployment management</a> (/cdn/deploymentTasks) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task''s details.'
                       purges:
                         type:
                           - string
                           - boolean
                         default: true
-                        description: Whether the API account can access the <a href="#operation/createPurge">purge</a> (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.
+                        description: Whether the API account can access the <a href="/apidocs/content-management/createpurge">purge</a> (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.
                         enum:
                           - true
                           - false
@@ -14719,7 +14719,7 @@ paths:
                           - string
                           - boolean
                         default: true
-                        description: Whether the API account can access the <a href="#operation/post-cdn-prefetches">prefetch</a>   (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.
+                        description: Whether the API account can access the <a href="/apidocs/content-management/post-cdn-prefetches">prefetch</a>   (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.
                         enum:
                           - true
                           - false
@@ -14729,7 +14729,7 @@ paths:
                           - string
                           - boolean
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Annotations-for-Reports">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.
+                        description: Whether the API account can access the <a href="/apidocs/annotations-for-reports">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.
                         enum:
                           - true
                           - false
@@ -14739,7 +14739,7 @@ paths:
                           - string
                           - boolean
                         default: false
-                        description: 'Whether the API account can access the <a href="#tag/API-Access-Control">API permissions</a> (/cdn/apiPermissions) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting an API permission''s details. An operator API account with this permission set to ''true'' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller''s operator API account could manage this permission on behalf of child customers'' API accounts though.'
+                        description: 'Whether the API account can access the <a href="/apidocs/api-access-control">API permissions</a> (/cdn/apiPermissions) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting an API permission''s details. An operator API account with this permission set to ''true'' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller''s operator API account could manage this permission on behalf of child customers'' API accounts though.'
                         enum:
                           - true
                           - false
@@ -14747,17 +14747,17 @@ paths:
                       systemConfigs:
                         type: boolean
                         default: true
-                        description: Whether the API account can access the <a href="#operation/get-cdn-systemConfigs">system configuration</a> (/cdn/systemConfigs) endpoint.
+                        description: Whether the API account can access the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration</a> (/cdn/systemConfigs) endpoint.
                       reports:
                         type: boolean
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Reports">reports</a> (/cdn/report) endpoints.
+                        description: Whether the API account can access the <a href="/apidocs/reports">reports</a> (/cdn/report) endpoints.
                       serviceQuotas:
                         type:
                           - string
                           - boolean
                         default: false
-                        description: Whether the API account can access the <a href="#operation/post-cdn-serviceQuotas">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.
+                        description: Whether the API account can access the <a href="/apidocs/cdn-product-management/post-cdn-servicequotas">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.
                         enum:
                           - true
                           - false
@@ -14766,13 +14766,13 @@ paths:
                         type: boolean
                         default: true
                         description: |
-                          Whether the API account can access the <a href="#tag/Hostnames">hostnames</a> (/cdn/hostnames) endpoints.
+                          Whether the API account can access the <a href="/apidocs/hostnames">hostnames</a> (/cdn/hostnames) endpoints.
                       webhooks:
                         type:
                           - string
                           - boolean
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Webhooks">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.
+                        description: Whether the API account can access the <a href="/apidocs/webhooks">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.
                         enum:
                           - true
                           - false
@@ -14782,7 +14782,7 @@ paths:
                           - string
                           - boolean
                         default: true
-                        description: Whether the API account can access the <a href="#tag/Secret-Management">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.
+                        description: Whether the API account can access the <a href="/apidocs/secret-management">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.
                         enum:
                           - true
                           - false
@@ -14791,7 +14791,7 @@ paths:
                         type:
                           - string
                           - boolean
-                        description: Whether the API account can access the <a href="#tag/Log-Configuration-Management">log configuration</a> (/cdn/logConfigs) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of log configurations or a log configuration's details.
+                        description: Whether the API account can access the <a href="/apidocs/log-configuration-management">log configuration</a> (/cdn/logConfigs) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of log configurations or a log configuration's details.
                         default: false
                         enum:
                           - true
@@ -14825,7 +14825,7 @@ paths:
                           type: string
                       properties:
                         type: array
-                        description: 'IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href="#tag/Hostnames">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href="#tag/Reports">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.'
+                        description: 'IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href="/apidocs/hostnames">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href="/apidocs/reports">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.'
                         items:
                           type: string
                       edgeHostnames:
@@ -14895,7 +14895,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /apiPermissions/123 -p
-      description: 'Return an API account''s permissions, both custom ones as well as the defaults. If you have not set an API account''s permissions, you will get a 404 HTTP response. To specify the permissions of a new API account, you must <a href="#operation/post-cdn-apiPermissions">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href="#operation/patch-cdn-apiPermissions-id">API to modify the permissions</a> further if needed.'
+      description: 'Return an API account''s permissions, both custom ones as well as the defaults. If you have not set an API account''s permissions, you will get a 404 HTTP response. To specify the permissions of a new API account, you must <a href="/apidocs/api-access-control/post-cdn-apipermissions">create an API permission</a> object for your API account with custom settings. Later, you can call our <a href="/apidocs/api-access-control/patch-cdn-apipermissions-id">API to modify the permissions</a> further if needed.'
       parameters:
         - schema:
             type: string
@@ -14978,7 +14978,7 @@ paths:
           in: header
           name: If-Unmodified-Since
           description: 'The date and time at which the resource is expected to have been last modified, in RFC 1123 format. If the resource has been modified after this date, the server will reject the request with a 412 response.'
-      description: 'Update permissions for an API account. If you have not yet customized the permissions of an API account, you must first <a href="#operation/post-cdn-apiPermissions">create a custom API permission</a>. Otherwise, this API will return a 404 response.'
+      description: 'Update permissions for an API account. If you have not yet customized the permissions of an API account, you must first <a href="/apidocs/api-access-control/post-cdn-apipermissions">create a custom API permission</a>. Otherwise, this API will return a 404 response.'
       requestBody:
         content:
           application/json:
@@ -14994,7 +14994,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Certificate-Management">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.
+                      description: Whether the API account can access the <a href="/apidocs/certificate-management">certificate management</a> (/cdn/certificates) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of certificates or a certificate's details.
                       enum:
                         - true
                         - false
@@ -15004,7 +15004,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Property-Management">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.
+                      description: Whether the API account can access the <a href="/apidocs/property-management">property management</a> (/cdn/properties) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of properties or a property's details.
                       enum:
                         - true
                         - false
@@ -15014,7 +15014,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: Whether the API account can access the <a href="#tag/Edge-Hostname-Management">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.
+                      description: Whether the API account can access the <a href="/apidocs/edge-hostname-management">edge hostname management</a> (/cdn/edgeHostnames) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of edge hostnames or an edge hostname's details.
                       enum:
                         - true
                         - false
@@ -15024,7 +15024,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Property-Validation">property validation</a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.
+                      description: Whether the API account can access the <a href="/apidocs/property-validation">property validation</a> (/cdn/validations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of validation tasks or a validation task's details.
                       enum:
                         - true
                         - false
@@ -15040,13 +15040,13 @@ paths:
                         - production
                         - both
                         - read
-                      description: 'Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href="#tag/Deployment-Management">deployment management</a> (/cdn/deploymentTasks) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task''s details.'
+                      description: 'Whether the API account can deploy properties and certificates to staging, production, both staging and production, or not at all using the <a href="/apidocs/deployment-management">deployment management</a> (/cdn/deploymentTasks) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting the list of deployment tasks or a deployment task''s details.'
                     purges:
                       type:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#operation/createPurge">purge</a>  (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.
+                      description: Whether the API account can access the <a href="/apidocs/content-management/createpurge">purge</a>  (/cdn/purges) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of purge requests or a purge request's details.
                       enum:
                         - true
                         - false
@@ -15056,7 +15056,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#operation/post-cdn-prefetches">prefetch</a>   (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.
+                      description: Whether the API account can access the <a href="/apidocs/content-management/post-cdn-prefetches">prefetch</a>   (/cdn/prefetches) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of prefetch requests or a prefetch request's details.
                       enum:
                         - true
                         - false
@@ -15066,7 +15066,7 @@ paths:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Annotations-for-Reports">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.
+                      description: Whether the API account can access the <a href="/apidocs/annotations-for-reports">report annotations</a> (/cdn/annotations) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of annotations or an annotation's details.
                       enum:
                         - true
                         - false
@@ -15076,7 +15076,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: 'Whether the API account can access the <a href="#tag/API-Access-Control">API permissions</a>  (/cdn/apiPermissions) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting an API permission''s details. An operator API account with this permission set to ''true'' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller''s operator API account could manage this permission on behalf of child customers'' API accounts though.'
+                      description: 'Whether the API account can access the <a href="/apidocs/api-access-control">API permissions</a>  (/cdn/apiPermissions) endpoints. The value ''read'' can be given to an operator API account to restrict it to getting an API permission''s details. An operator API account with this permission set to ''true'' cannot, in turn, grant it to another API account under the same customer though it can manage other permissions. A reseller''s operator API account could manage this permission on behalf of child customers'' API accounts though.'
                       enum:
                         - true
                         - false
@@ -15084,17 +15084,17 @@ paths:
                     systemConfigs:
                       type: boolean
                       default: true
-                      description: Whether the API account can access the <a href="#operation/get-cdn-systemConfigs">system configuration</a> (/cdn/systemConfigs) endpoint.
+                      description: Whether the API account can access the <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration</a> (/cdn/systemConfigs) endpoint.
                     reports:
                       type: boolean
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Reports">reports</a> (/cdn/report) endpoints.
+                      description: Whether the API account can access the <a href="/apidocs/reports">reports</a> (/cdn/report) endpoints.
                     serviceQuotas:
                       type:
                         - boolean
                         - string
                       default: false
-                      description: Whether the API account can access the <a href="#operation/post-cdn-serviceQuotas">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.
+                      description: Whether the API account can access the <a href="/apidocs/cdn-product-management/post-cdn-servicequotas">service quotas</a> (/cdn/serviceQuotas) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of service quotas or a service quota's details.
                       enum:
                         - true
                         - false
@@ -15103,13 +15103,13 @@ paths:
                       type: boolean
                       default: true
                       description: |
-                        Whether the API account can access the <a href="#tag/Hostnames">hostnames</a> (/cdn/hostnames) endpoints.
+                        Whether the API account can access the <a href="/apidocs/hostnames">hostnames</a> (/cdn/hostnames) endpoints.
                     webhooks:
                       type:
                         - boolean
                         - string
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Webhooks">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.
+                      description: Whether the API account can access the <a href="/apidocs/webhooks">webhooks</a> (/cdn/webhooks) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of webhooks or a webhook's details.
                       enum:
                         - true
                         - false
@@ -15119,7 +15119,7 @@ paths:
                         - string
                         - boolean
                       default: true
-                      description: Whether the API account can access the <a href="#tag/Secret-Management">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.
+                      description: Whether the API account can access the <a href="/apidocs/secret-management">secret management</a> (/cdn/secrets) endpoints. The value 'read' can be given to an operator API account to restrict it to getting the list of secrets or a secret's details.
                       enum:
                         - true
                         - false
@@ -15129,7 +15129,7 @@ paths:
                         - boolean
                         - string
                       default: false
-                      description: Whether the API account can access the <a href="#tag/Log-Configuration-Management">log configuration</a> (/cdn/logConfigs) endpoints.
+                      description: Whether the API account can access the <a href="/apidocs/log-configuration-management">log configuration</a> (/cdn/logConfigs) endpoints.
                       enum:
                         - true
                         - false
@@ -15145,7 +15145,7 @@ paths:
                         type: string
                     properties:
                       type: array
-                      description: 'IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href="#tag/Hostnames">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href="#tag/Reports">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.'
+                      description: 'IDs of properties that can be accessed. If you specify property IDs in this field, property management endpoints are limited to the accessible properties. In addition, because hostnames are specified in property definitions, any restrictions on properties also limit the hostnames that are accessible through other API endpoints including reports, log configuration management, hostnames, and content management. For example, calls to the <a href="/apidocs/hostnames">hostnames</a> (/cdn/hostnames) endpoints will return information about hostnames only if they belong to the list of allowed properties. Similarly, the <a href="/apidocs/reports">reports</a> (/cdn/report) endpoints will return data only for hostnames belonging to the allowed properties.'
                       items:
                         type: string
                     edgeHostnames:
@@ -15494,7 +15494,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /webhooks -p
-      description: 'Get a list of webhooks that have been defined. You can reference a webhook when <a href="#operation/createDeployment">creating a deployment task</a>, <a href="#operation/createPurge">creating a purge request</a>, <a href="#operation/post-cdn-prefetches">creating a prefetch request</a>, or <a href="#operation/createValidationTask">creating a validation task</a>.'
+      description: 'Get a list of webhooks that have been defined. You can reference a webhook when <a href="/apidocs/deployment-management/createdeployment">creating a deployment task</a>, <a href="/apidocs/content-management/createpurge">creating a purge request</a>, <a href="/apidocs/content-management/post-cdn-prefetches">creating a prefetch request</a>, or <a href="/apidocs/property-validation/createvalidationtask">creating a validation task</a>.'
       parameters:
         - schema:
             type: integer
@@ -15585,7 +15585,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh POST /webhooks -p -j body.json
-      description: 'Create a webhook. It can be used to notify you when an asynchronous task completes. You can reference a webhook when <a href="#operation/createDeployment">creating a deployment task</a>, <a href="#operation/createPurge">creating a purge request</a>, <a href="#operation/post-cdn-prefetches">creating a prefetch request</a>, or <a href="#operation/createValidationTask">creating a validation task</a>.'
+      description: 'Create a webhook. It can be used to notify you when an asynchronous task completes. You can reference a webhook when <a href="/apidocs/deployment-management/createdeployment">creating a deployment task</a>, <a href="/apidocs/content-management/createpurge">creating a purge request</a>, <a href="/apidocs/content-management/post-cdn-prefetches">creating a prefetch request</a>, or <a href="/apidocs/property-validation/createvalidationtask">creating a validation task</a>.'
       parameters:
         - schema:
             type: string
@@ -15626,7 +15626,7 @@ paths:
                     </code>
                 credentials:
                   type: object
-                  description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="#section/Authentication">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
+                  description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
                   properties:
                     user:
                       type: string
@@ -15700,7 +15700,7 @@ paths:
                     maxLength: 250
                   credentials:
                     type: object
-                    description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="#section/Authentication">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
+                    description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
                     properties:
                       user:
                         type: string
@@ -15853,7 +15853,7 @@ paths:
                     </code>
                 credentials:
                   type: object
-                  description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="#section/Authentication">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
+                  description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
                   properties:
                     user:
                       type: string
@@ -16216,7 +16216,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /purges/purgeTokens?target=production
-      description: 'This API indicates the number of directory and file purge requests you can make in the staging or production environments. Your <a href="#operation/get-cdn-serviceQuotas-customer-customerId">service quota</a> specifies a daily limit on file and directory purges for production and staging environments. You can temporarily exceed the limit during a day, but it will reduce the number of purges available during the next day.'
+      description: 'This API indicates the number of directory and file purge requests you can make in the staging or production environments. Your <a href="/apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid">service quota</a> specifies a daily limit on file and directory purges for production and staging environments. You can temporarily exceed the limit during a day, but it will reduce the number of purges available during the next day.'
       parameters:
         - schema:
             type: string
@@ -16558,7 +16558,7 @@ paths:
                     code: InvalidSecretId
                     message: The specified secret ID does not exist.
         '409':
-          description: The secret is in use in production or staging and cannot be deleted. You can call the <a href="#operation/get-cdn-secrets-secretID">Get a secret API</a> to identify the deployed properties using the secret.
+          description: The secret is in use in production or staging and cannot be deleted. You can call the <a href="/apidocs/secret-management/get-cdn-secrets-secretid">Get a secret API</a> to identify the deployed properties using the secret.
           content:
             application/json:
               schema:
@@ -16780,7 +16780,7 @@ paths:
                   value:
                     code: TooManyLogConfigs
                     message: Number of log configs exceeded account maximum.
-      description: Create a log configuration used to format the <a href="#operation/post-cdn-report-logDownload">access logs</a> for one or more hostnames. An applicable log configuration must exist for you to obtain logs for a hostname. It can take up to 40 minutes for the log configuration to take effect.
+      description: Create a log configuration used to format the <a href="/apidocs/reports/post-cdn-report-logdownload">access logs</a> for one or more hostnames. An applicable log configuration must exist for you to obtain logs for a hostname. It can take up to 40 minutes for the log configuration to take effect.
       tags:
         - Log Configuration Management
       requestBody:
@@ -17156,7 +17156,7 @@ paths:
       description: |
         Get access logs representing requests to one or more hostnames in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.
 
-        To obtain logs for a hostname, you must first specify the format of the logs by <a href="#operation/post-cdn-report-logConfigs">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.
+        To obtain logs for a hostname, you must first specify the format of the logs by <a href="/apidocs/log-configuration-management/post-cdn-report-logconfigs">creating a log configuration</a> that applies to the hostname. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.
 
         For example, suppose you define a log configuration format as follows:
         <br/>
@@ -17285,7 +17285,7 @@ paths:
       description: |-
         Get access logs representing requests to a hostname in your deployed properties. These logs contain data from requests made 2 or more hours earlier. By default, only logs within the past 14 days are available, and they are separated into files each covering part of a day.
 
-        To obtain logs, you must first specify the format of the logs by <a href="#operation/post-cdn-report-logConfigs">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.
+        To obtain logs, you must first specify the format of the logs by <a href="/apidocs/log-configuration-management/post-cdn-report-logconfigs">creating a log configuration</a> that applies to the hostame. Requests to your content made after the applicable log configuration has been created will be logged. Otherwise, no logs will be available for download.
 
         For example, suppose you define a log configuration format as follows:
         <br/>
@@ -17504,7 +17504,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: 2oj27my7kpnf0
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: udmn4zwqpdzmc
@@ -17733,7 +17733,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: sgabpxa0ax0a3
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: brqrkoqjvl2br
@@ -18108,7 +18108,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: v7s8exy4v404l
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: lef5ocpzn0e1l
@@ -18338,7 +18338,7 @@ paths:
                       type: array
                       x-stoplight:
                         id: ca0kvexzomn89
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         x-stoplight:
                           id: qihaigfsh9fmo
@@ -18493,7 +18493,7 @@ paths:
           label: CDNProSDK-bash
           source: |
             ./cdnapi.sh GET /prefetches/prefetchTokens
-      description: 'This API indicates the number of prefetch requests you can make. Your <a href="#operation/get-cdn-serviceQuotas-customer-customerId">service quota</a> specifies a daily limit on prefetch requests. You can temporarily exceed the limit during a day, but it will reduce the number of prefetches available during the next day.'
+      description: 'This API indicates the number of prefetch requests you can make. Your <a href="/apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid">service quota</a> specifies a daily limit on prefetch requests. You can temporarily exceed the limit during a day, but it will reduce the number of prefetches available during the next day.'
   /cdn/shields:
     get:
       summary: Get a list of origin shields
@@ -18819,7 +18819,7 @@ paths:
           description: |-
             The log aggregation point was sucessfully created. The Location header contains a URL to the new log aggregation point. Example: <code>Location: https://ngapi.{{siteDomain}}/cdn/logAggregationPoints/123ab3dda4081d2ca71898fd</code>. 
 
-            The response body includes an ingestURL field containing a URL that can be used in the <i>logUrl</i> field of the <a href="#operation/createProperty">realTimeLog setting in a property</a>.
+            The response body includes an ingestURL field containing a URL that can be used in the <i>logUrl</i> field of the <a href="/apidocs/property-management/createproperty">realTimeLog setting in a property</a>.
           content:
             application/json:
               schema:
@@ -18954,7 +18954,7 @@ paths:
                       - value
                 destinationAuthCertificateId:
                   type: string
-                  description: 'Refers to the ID of a <a href="#operation/createCertificate">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty.'
+                  description: 'Refers to the ID of a <a href="/apidocs/certificate-management/createcertificate">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty.'
                 prefix:
                   type: string
                   x-stoplight:
@@ -19079,10 +19079,10 @@ paths:
                         format: date-time
                       ingestURL:
                         type: string
-                        description: URL used to collect raw log entries from the edge servers before sending them in a batch to the destination URL. Use this URL by entering it into the logURL field of the <a href="#operation/createProperty">realTimeLog settings of a property.
+                        description: URL used to collect raw log entries from the edge servers before sending them in a batch to the destination URL. Use this URL by entering it into the logURL field of the <a href="/apidocs/property-management/createproperty">realTimeLog settings of a property.
                   destinationAuthCertificateId:
                     type: string
-                    description: Refers to the ID of a <a href="#operation/createCertificate">certificate created in CDN Pro</a> if this was specified while creating the certificate.
+                    description: Refers to the ID of a <a href="/apidocs/certificate-management/createcertificate">certificate created in CDN Pro</a> if this was specified while creating the certificate.
                   destinationAuthCertificateVersion:
                     type: integer
                     minimum: 1
@@ -19285,7 +19285,7 @@ paths:
                       - value
                 destinationAuthCertificateId:
                   type: string
-                  description: 'Refers to the ID of a <a href="#operation/createCertificate">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty.'
+                  description: 'Refers to the ID of a <a href="/apidocs/certificate-management/createcertificate">certificate created in CDN Pro</a>. The latest version of the certificate will be used. The certificate does not need to be deployed to staging or production for it to be used in a log aggregation point. If destinationAuthCertificateId is specified, the destinationAuthCertificate field should be empty.'
         description: The request body contains the fields to update.
       parameters:
         - schema:
@@ -19491,7 +19491,7 @@ paths:
                       x-stoplight:
                         id: 2ft1h9g17tv0y
                       description: |
-                        A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.
+                        A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate '*.test.com', a client could request content and pass a Host header of 'abc.test.com'. In this case, '\*.test.com' is a property hostname you can filter by using this field while 'abc.test.com' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.
                       items:
                         x-stoplight:
                           id: q1s9vg72rmopa
@@ -19615,7 +19615,7 @@ paths:
                         type: string
                     propertyHostnames:
                       type: array
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         type: string
                     contentCodes:
@@ -19756,7 +19756,7 @@ paths:
                         type: string
                     propertyHostnames:
                       type: array
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''''*.test.com'''', a client could request content and pass a Host header of ''''abc.test.com''''. In this case, ''''\*.test.com'''' is a property hostname you can filter by using this field while ''''abc.test.com'''' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''''*.test.com'''', a client could request content and pass a Host header of ''''abc.test.com''''. In this case, ''''\*.test.com'''' is a property hostname you can filter by using this field while ''''abc.test.com'''' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         type: string
                 groupBy:
@@ -19986,7 +19986,7 @@ paths:
                         type: string
                     propertyHostnames:
                       type: array
-                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''''*.test.com'''', a client could request content and pass a Host header of ''''abc.test.com''''. In this case, ''''\*.test.com'''' is a property hostname you can filter by using this field while ''''abc.test.com'''' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''''*.test.com'''', a client could request content and pass a Host header of ''''abc.test.com''''. In this case, ''''\*.test.com'''' is a property hostname you can filter by using this field while ''''abc.test.com'''' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
                       items:
                         type: string
                 groupBy:
@@ -20350,17 +20350,17 @@ components:
         A more advanced Bash script allowing you to make calls to many CDN Pro APIs is available <a href="https://github.com/mileweb/CDNProSDK/tree/master/cdn/bash">here</a>.
 tags:
   - name: Certificate Management
-    description: 'If your content requires TLS, you must create a certificate and <a href="#tag/Deployment-Management">deploy</a> it along with associated <a href="#tag/Property-Management">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new immutable version. You can choose to deploy any version to staging or production. If your property''s origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates, but not modify them.'
+    description: 'If your content requires TLS, you must create a certificate and <a href="/apidocs/deployment-management">deploy</a> it along with associated <a href="/apidocs/property-management">properties</a>.  For test purposes, you can create a self-signed certificate. Certificates are versioned. Each update to a certificate generates a new immutable version. You can choose to deploy any version to staging or production. If your property''s origin requires authentication using a certificate, you should also call the API to create the required certificate, upload it, and deploy to use it. If you are a reseller, you may share your certificates with your child customers who can then use the certificates, but not modify them.'
   - name: Property Management
-    description: A property is the configuration of one or more hostnames (domains) that need to be <a href="#tag/Deployment-Management">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href="#tag/Property-Validation">validated</a> again. You can <a href="#operation/createPropertyVersion">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src="/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png">
+    description: A property is the configuration of one or more hostnames (domains) that need to be <a href="/apidocs/deployment-management">deployed</a> to the CDN Pro servers. A property can have multiple versions. A property version that has been deployed cannot be updated or <a href="/apidocs/property-validation">validated</a> again. You can <a href="/apidocs/property-management/createpropertyversion">create a new version of a property</a> by making a clone (or copy) of an existing version. <p>The following figure shows the steps for creating an acceleration service for a hostname.</p><img src="/static/content-assets/mileweb/docs-content-cdn/en/docs/resources/images/getting-started-flowchart.png">
   - name: Property Validation
-    description: 'After you <a href="#operation/createProperty">create a property</a>, you must validate it to ensure that the settings are syntactically correct before you can <a href="#tag/Deployment-Management">deploy</a> it to staging or production. The validation process is an asynchronous action. APIs are available to check the status of your validation tasks.'
+    description: 'After you <a href="/apidocs/property-management/createproperty">create a property</a>, you must validate it to ensure that the settings are syntactically correct before you can <a href="/apidocs/deployment-management">deploy</a> it to staging or production. The validation process is an asynchronous action. APIs are available to check the status of your validation tasks.'
   - name: Secret Management
     description: 'These APIs allow you to define secrets that are used to hide sensitive information, such as preventing a password from being visible in an API call or within the CDN Pro portal. For example, a secret could be a key used to authenticate client requests to your origin server. By creating a secret and referring to it in your [Edge Logic](</docs/edge-logic/intro>) using the secret''s name via the syntax `$SECRET(secretName)`, or by setting `origins.authentication.awsS3.secretKey` to `$SECRET(secretName)`, the key itself would not be exposed when viewing a property through the CDN Pro portal or fetching it using the CDN Pro API.'
   - name: Deployment Management
-    description: 'Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you [deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i>](</docs/portal/edge-configurations/testing-property>). <h2>Testing a property deployed to production</h2> After you <a href="#operation/createEdgeHostname">create an edge hostname</a> and set your DNS server to point the edge hostname to your property''s hostname, you can browse your content under the hostname.'
+    description: 'Deployment is the process of pushing out your property and certificate configurations to the CDN Pro cache servers. We highly recommend you [deploy to our <i>staging</i> environment to test your configurations before deploying to <i>production</i>](</docs/portal/edge-configurations/testing-property>). <h2>Testing a property deployed to production</h2> After you <a href="/apidocs/edge-hostname-management/createedgehostname">create an edge hostname</a> and set your DNS server to point the edge hostname to your property''s hostname, you can browse your content under the hostname.'
   - name: Hostnames
-    description: You must <a href="#operation/createProperty">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href="#operation/createDeployment">deployed</a> to production or staging.
+    description: You must <a href="/apidocs/property-management/createproperty">create properties</a> to manage your configurations on CDN Pro. Several APIs are available that allow you to get summarized information about the hostnames (or domains) of properties that have been <a href="/apidocs/deployment-management/createdeployment">deployed</a> to production or staging.
   - name: Edge Hostname Management
     description: You must create an edge hostname for properties deployed to production. You can define rules to apply to visitors from different client zones that are combinations of geographic regions and ISPs.  You must modify your DNS records to point each property's hostnames to an edge hostname in order for visitor requests to be handled by CDN Pro. Different properties' hostnames may point to the same edge hostname if the same rules apply.
   - name: Reports
@@ -20368,11 +20368,11 @@ tags:
   - name: Annotations for Reports
     description: 'Add text annotations to highlight events related to traffic to your hostnames. These annotations will appear in the [CDN Pro portal](https://console.{{siteDomain}}/cdn) when you look at the reports.'
   - name: Content Management
-    description: The content management APIs allow you to request an update (or purge) of your cached content ahead of the schedule determined by your <a href="#operation/getPropertyVersion">property configuration</a>.  You can purge files or directories.  The purge requests are asynchronous. APIs are available for you to check the status of your purge requests. You can also prefetch URLs to warm up your cache in advance of requests from visitors. This allows you to manage traffic to your origin servers.
+    description: The content management APIs allow you to request an update (or purge) of your cached content ahead of the schedule determined by your <a href="/apidocs/property-management/getpropertyversion">property configuration</a>.  You can purge files or directories.  The purge requests are asynchronous. APIs are available for you to check the status of your purge requests. You can also prefetch URLs to warm up your cache in advance of requests from visitors. This allows you to manage traffic to your origin servers.
   - name: Portal User Management
     description: 'Create and manage users who access the [CDN Pro portal](https://console.{{siteDomain}}/cdn).'
   - name: API Account Management
-    description: Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href="#operation/post-cdn-apiPermissions">API permissions</a>.
+    description: Create and manage additional API accounts used to call the CDN Pro APIs. You can customize which set of endpoints the API accounts can access by specifying <a href="/apidocs/api-access-control/post-cdn-apipermissions">API permissions</a>.
   - name: Customer Management
     description: 'These APIs allow you to update customer-level portal settings and contact information as well as to reset the administrator API key. Resellers can also create, update, delete, and get a list of customer accounts.'
   - name: API Call History
@@ -20380,10 +20380,10 @@ tags:
   - name: CDN Product Management
     description: 'These APIs allow you to fetch CDN settings that apply to your account. If you are a reseller, you can use APIs to manage the service quotas of your child customers.'
   - name: API Access Control
-    description: These APIs allow you to customize what a <a href="#operation/post-ngadmin-apiAccounts">CDN Pro API account</a> can do by specifying the categories of accessible endpoints.
+    description: These APIs allow you to customize what a <a href="/apidocs/api-account-management/post-ngadmin-apiaccounts">CDN Pro API account</a> can do by specifying the categories of accessible endpoints.
   - name: Webhooks
     description: 'These APIs allow you to define webhooks or callbacks that are invoked when an asynchronous operation such as a deployment, purge, or prefetch request completes.'
   - name: Log Configuration Management
-    description: These APIs allow you to customize the format of the access logs you can download using <a href="#operation/get-cdn-report-logDownload">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname.
+    description: These APIs allow you to customize the format of the access logs you can download using <a href="/apidocs/reports/get-cdn-report-logdownload">our API</a>. Logs are available for a hostname only for requests that are made after you have defined an applicable log configuration format for the hostname.
   - name: Log Aggregation Points
     description: These APIs allow you to create log aggregation points which are ingestion URLs that receive raw log entries from the CDN Pro servers. This option is available for those who use our realTimeLog advanced feature.
