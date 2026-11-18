@@ -11247,10 +11247,15 @@ msgstr ""
 "code>、<code>Read Timeout</code>、<code>TLS Error</code>、<code>Proxy Error</"
 "code>。如果该 Webhook 自创建或上次修改 URL 以来尚未被调用，则不返回此字段。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/lastStatusTime/description
-#. /paths/~1cdn~1webhooks~1{id}/get/responses/200/content/application~1json/schema/properties/metaData/properties/lastStatusTime/description
-msgid "RFC 3339 date indicating when lastStatus was recorded."
-msgstr "表示 lastStatus 记录时间的 RFC 3339 日期。"
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/lastDurationInSec/description
+#. /paths/~1cdn~1webhooks~1{id}/get/responses/200/content/application~1json/schema/properties/metaData/properties/lastDurationInSec/description
+msgid ""
+"How long the most recent call took in seconds, to three decimal places, "
+"including any retries and the pauses between them. Omitted when lastStatus "
+"is."
+msgstr ""
+"最近一次调用的耗时（秒，保留三位小数），包括所有重试及重试之间的等待时间。未"
+"返回 lastStatus 时也不返回此字段。"
 
 #. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/hasCredentials/description
 msgid "Whether the webhook requires credentials to access."
@@ -14445,6 +14450,9 @@ msgid ""
 msgstr ""
 "您可以通过这些 API 创建日志汇聚点，即从 CDN Pro 服务器接收原始日志条目的接收 "
 "URL。此选项适用于使用 realTimeLog 高级功能的客户。"
+
+#~ msgid "RFC 3339 date indicating when lastStatus was recorded."
+#~ msgstr "表示 lastStatus 记录时间的 RFC 3339 日期。"
 
 #~ msgid ""
 #~ "That URL that will be called when the asynchronous task has completed. "

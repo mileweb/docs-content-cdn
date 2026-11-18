@@ -31919,10 +31919,10 @@
                             "type": "string",
                             "description": "Result of the most recent call, after retries. Either the HTTP status code returned by your server, such as <code>200</code> or <code>503</code>, or one of: <code>DNS Failed</code>, <code>Invalid IP</code>, <code>Unreachable</code>, <code>Connect Timeout</code>, <code>Read Timeout</code>, <code>TLS Error</code>, <code>Proxy Error</code>. Omitted if the webhook has not been called since it was created or since its URL last changed."
                           },
-                          "lastStatusTime": {
-                            "type": "string",
-                            "description": "RFC 3339 date indicating when lastStatus was recorded.",
-                            "format": "date-time"
+                          "lastDurationInSec": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "How long the most recent call took in seconds, to three decimal places, including any retries and the pauses between them. Omitted when lastStatus is."
                           },
                           "hasCredentials": {
                             "type": "boolean",
@@ -31959,7 +31959,7 @@
                           "lastCallTime": "2021-04-21T08:02:11Z",
                           "totalCalls": 1,
                           "lastStatus": "200",
-                          "lastStatusTime": "2021-04-21T08:02:12Z",
+                          "lastDurationInSec": 0.412,
                           "hasCredentials": true
                         }
                       ]
@@ -32318,10 +32318,10 @@
                           "type": "string",
                           "description": "Result of the most recent call, after retries. Either the HTTP status code returned by your server, such as <code>200</code> or <code>503</code>, or one of: <code>DNS Failed</code>, <code>Invalid IP</code>, <code>Unreachable</code>, <code>Connect Timeout</code>, <code>Read Timeout</code>, <code>TLS Error</code>, <code>Proxy Error</code>. Omitted if the webhook has not been called since it was created or since its URL last changed."
                         },
-                        "lastStatusTime": {
-                          "type": "string",
-                          "description": "RFC 3339 date indicating when lastStatus was recorded.",
-                          "format": "date-time"
+                        "lastDurationInSec": {
+                          "type": "number",
+                          "format": "double",
+                          "description": "How long the most recent call took in seconds, to three decimal places, including any retries and the pauses between them. Omitted when lastStatus is."
                         }
                       },
                       "required": [
@@ -32349,7 +32349,7 @@
                         "lastCallTime": "2021-04-21T08:02:11Z",
                         "totalCalls": 1,
                         "lastStatus": "Read Timeout",
-                        "lastStatusTime": "2021-04-21T08:03:47Z"
+                        "lastDurationInSec": 92.031
                       }
                     }
                   }

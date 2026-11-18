@@ -31919,10 +31919,10 @@
                             "type": "string",
                             "description": "最近一次调用（含重试）的结果。取值为您的服务器返回的 HTTP 状态码（例如 <code>200</code> 或 <code>503</code>），或以下之一：<code>DNS Failed</code>、<code>Invalid IP</code>、<code>Unreachable</code>、<code>Connect Timeout</code>、<code>Read Timeout</code>、<code>TLS Error</code>、<code>Proxy Error</code>。如果该 Webhook 自创建或上次修改 URL 以来尚未被调用，则不返回此字段。"
                           },
-                          "lastStatusTime": {
-                            "type": "string",
-                            "description": "表示 lastStatus 记录时间的 RFC 3339 日期。",
-                            "format": "date-time"
+                          "lastDurationInSec": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "最近一次调用的耗时（秒，保留三位小数），包括所有重试及重试之间的等待时间。未返回 lastStatus 时也不返回此字段。"
                           },
                           "hasCredentials": {
                             "type": "boolean",
@@ -31959,7 +31959,7 @@
                           "lastCallTime": "2021-04-21T08:02:11Z",
                           "totalCalls": 1,
                           "lastStatus": "200",
-                          "lastStatusTime": "2021-04-21T08:02:12Z",
+                          "lastDurationInSec": 0.412,
                           "hasCredentials": true
                         }
                       ]
@@ -32318,10 +32318,10 @@
                           "type": "string",
                           "description": "最近一次调用（含重试）的结果。取值为您的服务器返回的 HTTP 状态码（例如 <code>200</code> 或 <code>503</code>），或以下之一：<code>DNS Failed</code>、<code>Invalid IP</code>、<code>Unreachable</code>、<code>Connect Timeout</code>、<code>Read Timeout</code>、<code>TLS Error</code>、<code>Proxy Error</code>。如果该 Webhook 自创建或上次修改 URL 以来尚未被调用，则不返回此字段。"
                         },
-                        "lastStatusTime": {
-                          "type": "string",
-                          "description": "表示 lastStatus 记录时间的 RFC 3339 日期。",
-                          "format": "date-time"
+                        "lastDurationInSec": {
+                          "type": "number",
+                          "format": "double",
+                          "description": "最近一次调用的耗时（秒，保留三位小数），包括所有重试及重试之间的等待时间。未返回 lastStatus 时也不返回此字段。"
                         }
                       },
                       "required": [
@@ -32349,7 +32349,7 @@
                         "lastCallTime": "2021-04-21T08:02:11Z",
                         "totalCalls": 1,
                         "lastStatus": "Read Timeout",
-                        "lastStatusTime": "2021-04-21T08:03:47Z"
+                        "lastDurationInSec": 92.031
                       }
                     }
                   }
