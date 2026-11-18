@@ -583,7 +583,7 @@ paths:
                           enum:
                             - creation
                             - update
-                            - deletion
+                            - delete
                           description: Indicates the action taken.
                         time:
                           type: string
