@@ -31915,6 +31915,15 @@
                             "description": "Total number of times the webhook has been called.",
                             "minimum": 0
                           },
+                          "lastStatus": {
+                            "type": "string",
+                            "description": "Result of the most recent call, after retries. Either the HTTP status code returned by your server, such as <code>200</code> or <code>503</code>, or one of: <code>DNS Failed</code>, <code>Invalid IP</code>, <code>Unreachable</code>, <code>Connect Timeout</code>, <code>Read Timeout</code>, <code>TLS Error</code>, <code>Proxy Error</code>. Omitted if the webhook has not been called since it was created or since its URL last changed."
+                          },
+                          "lastStatusTime": {
+                            "type": "string",
+                            "description": "RFC 3339 date indicating when lastStatus was recorded.",
+                            "format": "date-time"
+                          },
                           "hasCredentials": {
                             "type": "boolean",
                             "description": "Whether the webhook requires credentials to access."
@@ -31947,7 +31956,10 @@
                           "name": "purgeNotification",
                           "description": "Tell me when the purge has completed",
                           "creationTime": "2021-04-20T13:18:49Z",
-                          "totalCalls": 0,
+                          "lastCallTime": "2021-04-21T08:02:11Z",
+                          "totalCalls": 1,
+                          "lastStatus": "200",
+                          "lastStatusTime": "2021-04-21T08:02:12Z",
                           "hasCredentials": true
                         }
                       ]
@@ -32091,6 +32103,12 @@
                       "message": "The entered value for URL is invalid or longer than 250 characters."
                     }
                   },
+                  "URL not allowed": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL must resolve to a public internet address."
+                    }
+                  },
                   "Invalid credential": {
                     "value": {
                       "code": "InvalidCredential",
@@ -32166,7 +32184,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "That URL that will be called when the asynchronous task has completed. The HTTP POST method will be used. The body will in JSON format:\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
+                    "description": "That URL that will be called when the asynchronous task has completed. The HTTP POST method will be used. The body will in JSON format:\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nThe URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call."
                   },
                   "credentials": {
                     "type": "object",
@@ -32295,6 +32313,15 @@
                           "type": "integer",
                           "minimum": 0,
                           "description": "Number of times the webhook has been called."
+                        },
+                        "lastStatus": {
+                          "type": "string",
+                          "description": "Result of the most recent call, after retries. Either the HTTP status code returned by your server, such as <code>200</code> or <code>503</code>, or one of: <code>DNS Failed</code>, <code>Invalid IP</code>, <code>Unreachable</code>, <code>Connect Timeout</code>, <code>Read Timeout</code>, <code>TLS Error</code>, <code>Proxy Error</code>. Omitted if the webhook has not been called since it was created or since its URL last changed."
+                        },
+                        "lastStatusTime": {
+                          "type": "string",
+                          "description": "RFC 3339 date indicating when lastStatus was recorded.",
+                          "format": "date-time"
                         }
                       },
                       "required": [
@@ -32319,7 +32346,10 @@
                       },
                       "metaData": {
                         "creationTime": "2021-04-20T13:18:49Z",
-                        "totalCalls": 0
+                        "lastCallTime": "2021-04-21T08:02:11Z",
+                        "totalCalls": 1,
+                        "lastStatus": "Read Timeout",
+                        "lastStatusTime": "2021-04-21T08:03:47Z"
                       }
                     }
                   }
@@ -32382,6 +32412,38 @@
         "responses": {
           "204": {
             "description": "The webhook was successfully updated."
+          },
+          "400": {
+            "description": "The request was invalid. Refer to the response body for details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid URL": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The entered value for URL is invalid or longer than 250 characters."
+                    }
+                  },
+                  "URL not allowed": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL must resolve to a public internet address."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "description": "The webhook could not be updated."
@@ -32459,7 +32521,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "That URL that will be called when the asynchronous task has completed. The HTTP POST method will be used. The body will in JSON format:\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
+                    "description": "That URL that will be called when the asynchronous task has completed. The HTTP POST method will be used. The body will in JSON format:\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nThe URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call."
                   },
                   "credentials": {
                     "type": "object",

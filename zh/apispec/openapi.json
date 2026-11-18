@@ -31915,6 +31915,15 @@
                             "description": "Webhook 被调用的总次数。",
                             "minimum": 0
                           },
+                          "lastStatus": {
+                            "type": "string",
+                            "description": "最近一次调用（含重试）的结果。取值为您的服务器返回的 HTTP 状态码（例如 <code>200</code> 或 <code>503</code>），或以下之一：<code>DNS Failed</code>、<code>Invalid IP</code>、<code>Unreachable</code>、<code>Connect Timeout</code>、<code>Read Timeout</code>、<code>TLS Error</code>、<code>Proxy Error</code>。如果该 Webhook 自创建或上次修改 URL 以来尚未被调用，则不返回此字段。"
+                          },
+                          "lastStatusTime": {
+                            "type": "string",
+                            "description": "表示 lastStatus 记录时间的 RFC 3339 日期。",
+                            "format": "date-time"
+                          },
                           "hasCredentials": {
                             "type": "boolean",
                             "description": "访问该 Webhook 是否需要凭据。"
@@ -31947,7 +31956,10 @@
                           "name": "purgeNotification",
                           "description": "Tell me when the purge has completed",
                           "creationTime": "2021-04-20T13:18:49Z",
-                          "totalCalls": 0,
+                          "lastCallTime": "2021-04-21T08:02:11Z",
+                          "totalCalls": 1,
+                          "lastStatus": "200",
+                          "lastStatusTime": "2021-04-21T08:02:12Z",
                           "hasCredentials": true
                         }
                       ]
@@ -32091,6 +32103,12 @@
                       "message": "The entered value for URL is invalid or longer than 250 characters."
                     }
                   },
+                  "URL not allowed": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL must resolve to a public internet address."
+                    }
+                  },
                   "Invalid credential": {
                     "value": {
                       "code": "InvalidCredential",
@@ -32166,7 +32184,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
+                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nURL 必须使用 http 或 https，且不能包含用户名或密码。其主机必须解析为公网地址：无法解析的域名、私有地址和保留地址，以及我们自己的 CDN 域名都会被拒绝，并返回 <code>InvalidURL</code>。每次调用前都会再次检查该地址。系统不会跟随重定向，因此 3xx 响应视为调用失败。"
                   },
                   "credentials": {
                     "type": "object",
@@ -32295,6 +32313,15 @@
                           "type": "integer",
                           "minimum": 0,
                           "description": "Webhook 被调用的次数。"
+                        },
+                        "lastStatus": {
+                          "type": "string",
+                          "description": "最近一次调用（含重试）的结果。取值为您的服务器返回的 HTTP 状态码（例如 <code>200</code> 或 <code>503</code>），或以下之一：<code>DNS Failed</code>、<code>Invalid IP</code>、<code>Unreachable</code>、<code>Connect Timeout</code>、<code>Read Timeout</code>、<code>TLS Error</code>、<code>Proxy Error</code>。如果该 Webhook 自创建或上次修改 URL 以来尚未被调用，则不返回此字段。"
+                        },
+                        "lastStatusTime": {
+                          "type": "string",
+                          "description": "表示 lastStatus 记录时间的 RFC 3339 日期。",
+                          "format": "date-time"
                         }
                       },
                       "required": [
@@ -32319,7 +32346,10 @@
                       },
                       "metaData": {
                         "creationTime": "2021-04-20T13:18:49Z",
-                        "totalCalls": 0
+                        "lastCallTime": "2021-04-21T08:02:11Z",
+                        "totalCalls": 1,
+                        "lastStatus": "Read Timeout",
+                        "lastStatusTime": "2021-04-21T08:03:47Z"
                       }
                     }
                   }
@@ -32382,6 +32412,38 @@
         "responses": {
           "204": {
             "description": "Webhook 修改成功。"
+          },
+          "400": {
+            "description": "请求无效。详情请参阅响应体。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid URL": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The entered value for URL is invalid or longer than 250 characters."
+                    }
+                  },
+                  "URL not allowed": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL must resolve to a public internet address."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "description": "无法修改该 Webhook。"
@@ -32459,7 +32521,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>"
+                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nURL 必须使用 http 或 https，且不能包含用户名或密码。其主机必须解析为公网地址：无法解析的域名、私有地址和保留地址，以及我们自己的 CDN 域名都会被拒绝，并返回 <code>InvalidURL</code>。每次调用前都会再次检查该地址。系统不会跟随重定向，因此 3xx 响应视为调用失败。"
                   },
                   "credentials": {
                     "type": "object",
