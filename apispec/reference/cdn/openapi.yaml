@@ -15443,6 +15443,13 @@ paths:
                           type: integer
                           description: Total number of times the webhook has been called.
                           minimum: 0
+                        lastStatus:
+                          type: string
+                          description: 'Result of the most recent call, after retries. Either the HTTP status code returned by your server, such as <code>200</code> or <code>503</code>, or one of: <code>DNS Failed</code>, <code>Invalid IP</code>, <code>Unreachable</code>, <code>Connect Timeout</code>, <code>Read Timeout</code>, <code>TLS Error</code>, <code>Proxy Error</code>. Omitted if the webhook has not been called since it was created or since its URL last changed.'
+                        lastDurationInSec:
+                          type: number
+                          format: double
+                          description: How long the most recent call took in seconds, to three decimal places, including any retries and the pauses between them. Omitted when lastStatus is.
                         hasCredentials:
                           type: boolean
                           description: Whether the webhook requires credentials to access.
@@ -15466,7 +15473,10 @@ paths:
                         name: purgeNotification
                         description: Tell me when the purge has completed
                         creationTime: '2021-04-20T13:18:49Z'
-                        totalCalls: 0
+                        lastCallTime: '2021-04-21T08:02:11Z'
+                        totalCalls: 1
+                        lastStatus: '200'
+                        lastDurationInSec: 0.412
                         hasCredentials: true
         '400':
           description: The request was invaild. Refer to the response body for details.
@@ -15559,6 +15569,10 @@ paths:
                   value:
                     code: InvalidURL
                     message: The entered value for URL is invalid or longer than 250 characters.
+                URL not allowed:
+                  value:
+                    code: InvalidURL
+                    message: The URL must resolve to a public internet address.
                 Invalid credential:
                   value:
                     code: InvalidCredential
@@ -15624,6 +15638,7 @@ paths:
                       ]
                     }
                     </code>
+                    The URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call.
                 credentials:
                   type: object
                   description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
@@ -15730,6 +15745,13 @@ paths:
                         type: integer
                         minimum: 0
                         description: Number of times the webhook has been called.
+                      lastStatus:
+                        type: string
+                        description: 'Result of the most recent call, after retries. Either the HTTP status code returned by your server, such as <code>200</code> or <code>503</code>, or one of: <code>DNS Failed</code>, <code>Invalid IP</code>, <code>Unreachable</code>, <code>Connect Timeout</code>, <code>Read Timeout</code>, <code>TLS Error</code>, <code>Proxy Error</code>. Omitted if the webhook has not been called since it was created or since its URL last changed.'
+                      lastDurationInSec:
+                        type: number
+                        format: double
+                        description: How long the most recent call took in seconds, to three decimal places, including any retries and the pauses between them. Omitted when lastStatus is.
                     required:
                       - creationTime
                 required:
@@ -15746,7 +15768,10 @@ paths:
                       secretKey: adqwefqfrferw
                     metaData:
                       creationTime: '2021-04-20T13:18:49Z'
-                      totalCalls: 0
+                      lastCallTime: '2021-04-21T08:02:11Z'
+                      totalCalls: 1
+                      lastStatus: Read Timeout
+                      lastDurationInSec: 92.031
         '404':
           description: The specified webhook was not found.
           content:
@@ -15783,6 +15808,26 @@ paths:
       responses:
         '204':
           description: The webhook was successfully updated.
+        '400':
+          description: The request was invalid. Refer to the response body for details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                Invalid URL:
+                  value:
+                    code: InvalidURL
+                    message: The entered value for URL is invalid or longer than 250 characters.
+                URL not allowed:
+                  value:
+                    code: InvalidURL
+                    message: The URL must resolve to a public internet address.
         '404':
           description: The webhook could not be updated.
         '412':
@@ -15851,6 +15896,7 @@ paths:
                       ]
                     }
                     </code>
+                    The URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call.
                 credentials:
                   type: object
                   description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
