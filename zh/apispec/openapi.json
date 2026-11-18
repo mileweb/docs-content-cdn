@@ -2135,7 +2135,7 @@
                             "enum": [
                               "creation",
                               "update",
-                              "deletion"
+                              "delete"
                             ],
                             "description": "表示所执行的操作。"
                           },
