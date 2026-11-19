@@ -15406,7 +15406,7 @@ paths:
                     type: integer
                     description: Total number of webhooks. The number returned in the webhooks array may be fewer depending on your query parameters.
                     minimum: 0
-                  webooks:
+                  webhooks:
                     type: array
                     description: A list of webhooks
                     items:
@@ -15455,7 +15455,7 @@ paths:
                         - hasCredentials
                 required:
                   - count
-                  - webooks
+                  - webhooks
               examples:
                 example-1:
                   value:

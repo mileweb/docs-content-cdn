@@ -11223,54 +11223,54 @@ msgid ""
 "fewer depending on your query parameters."
 msgstr "Webhook 总数。根据查询参数的不同，webhooks 数组中返回的数量可能更少。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/description
 msgid "A list of webhooks"
 msgstr "Webhook 列表"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/description
 msgid "List of webhooks."
 msgstr "Webhook 列表。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/customerId/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/customerId/description
 msgid "Refers to a customer."
 msgstr "指代一个客户。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/id/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/id/description
 msgid "ID of the webhook."
 msgstr "Webhook 的 ID。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/name/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/name/description
 #. /paths/~1cdn~1webhooks/post/requestBody/content/application~1json/schema/properties/name/description
 #. /paths/~1cdn~1webhooks~1{id}/get/responses/200/content/application~1json/schema/properties/name/description
 #. (+1 more)
 msgid "Name of the webhook."
 msgstr "Webhook 的名称。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/description/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/description/description
 #. /paths/~1cdn~1webhooks~1{id}/get/responses/200/content/application~1json/schema/properties/description/description
 #. /paths/~1cdn~1webhooks~1{id}/patch/requestBody/content/application~1json/schema/properties/description/description
 msgid "An optional description of the webhook."
 msgstr "Webhook 的描述（可选）。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/creationTime/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/creationTime/description
 #. /paths/~1cdn~1webhooks~1{id}/get/responses/200/content/application~1json/schema/properties/metaData/properties/creationTime/description
 msgid "RFC 3339 date indicating when the webhook was created."
 msgstr "表示 Webhook 创建时间的 RFC 3339 日期。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/lastUpdateTime/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/lastUpdateTime/description
 #. /paths/~1cdn~1webhooks~1{id}/get/responses/200/content/application~1json/schema/properties/metaData/properties/lastUpdatetime/description
 msgid "RFC 3339 date indicating when the webhook was last updated."
 msgstr "表示 Webhook 最后修改时间的 RFC 3339 日期。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/lastCallTime/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/lastCallTime/description
 msgid "RFC 3339 date indicating when the webhook was last called."
 msgstr "表示 Webhook 最后一次被调用时间的 RFC 3339 日期。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/totalCalls/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/totalCalls/description
 msgid "Total number of times the webhook has been called."
 msgstr "Webhook 被调用的总次数。"
 
-#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webooks/items/properties/hasCredentials/description
+#. /paths/~1cdn~1webhooks/get/responses/200/content/application~1json/schema/properties/webhooks/items/properties/hasCredentials/description
 msgid "Whether the webhook requires credentials to access."
 msgstr "访问该 Webhook 是否需要凭据。"
 

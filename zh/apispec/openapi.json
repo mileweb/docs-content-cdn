@@ -31870,7 +31870,7 @@
                       "description": "Webhook 总数。根据查询参数的不同，webhooks 数组中返回的数量可能更少。",
                       "minimum": 0
                     },
-                    "webooks": {
+                    "webhooks": {
                       "type": "array",
                       "description": "Webhook 列表",
                       "items": {
@@ -31933,7 +31933,7 @@
                   },
                   "required": [
                     "count",
-                    "webooks"
+                    "webhooks"
                   ]
                 },
                 "examples": {
