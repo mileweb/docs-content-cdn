@@ -31870,7 +31870,7 @@
                       "description": "Total number of webhooks. The number returned in the webhooks array may be fewer depending on your query parameters.",
                       "minimum": 0
                     },
-                    "webooks": {
+                    "webhooks": {
                       "type": "array",
                       "description": "A list of webhooks",
                       "items": {
@@ -31942,7 +31942,7 @@
                   },
                   "required": [
                     "count",
-                    "webooks"
+                    "webhooks"
                   ]
                 },
                 "examples": {
