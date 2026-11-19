@@ -32100,13 +32100,31 @@
                   "Invalid URL": {
                     "value": {
                       "code": "InvalidURL",
-                      "message": "The entered value for URL is invalid or longer than 250 characters."
+                      "message": "The entered value for URL is not a valid URL."
+                    }
+                  },
+                  "URL too long": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL is longer than 250 characters."
+                    }
+                  },
+                  "URL scheme not allowed": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL has to begin with http:// or https://."
+                    }
+                  },
+                  "Host not resolvable": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The hostname hooks.example.com is not resolvable."
                     }
                   },
                   "URL not allowed": {
                     "value": {
                       "code": "InvalidURL",
-                      "message": "The URL must resolve to a public internet address."
+                      "message": "The hostname intranet.example.com resolves to a private or reserved address, not a public internet address."
                     }
                   },
                   "Invalid credential": {
@@ -32184,7 +32202,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nURL 必须使用 http 或 https，且不能包含用户名或密码。其主机必须解析为公网地址：无法解析的域名、私有地址和保留地址，以及我们自己的 CDN 域名都会被拒绝，并返回 <code>InvalidURL</code>。每次调用前都会再次检查该地址。系统不会跟随重定向，因此 3xx 响应视为调用失败。"
+                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nURL 必须使用 http 或 https，且不能包含用户名或密码。其主机必须解析为公网地址：无法解析的域名、私有地址和保留地址，以及我们自己的 CDN 域名都会被拒绝，并返回 <code>InvalidURL</code>，错误信息会说明 URL 违反了哪条规则。每次调用前都会再次检查该地址。系统不会跟随重定向，因此 3xx 响应视为调用失败。"
                   },
                   "credentials": {
                     "type": "object",
@@ -32432,13 +32450,31 @@
                   "Invalid URL": {
                     "value": {
                       "code": "InvalidURL",
-                      "message": "The entered value for URL is invalid or longer than 250 characters."
+                      "message": "The entered value for URL is not a valid URL."
+                    }
+                  },
+                  "URL too long": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL is longer than 250 characters."
+                    }
+                  },
+                  "URL scheme not allowed": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The URL has to begin with http:// or https://."
+                    }
+                  },
+                  "Host not resolvable": {
+                    "value": {
+                      "code": "InvalidURL",
+                      "message": "The hostname hooks.example.com is not resolvable."
                     }
                   },
                   "URL not allowed": {
                     "value": {
                       "code": "InvalidURL",
-                      "message": "The URL must resolve to a public internet address."
+                      "message": "The hostname intranet.example.com resolves to a private or reserved address, not a public internet address."
                     }
                   }
                 }
@@ -32521,7 +32557,7 @@
                   "url": {
                     "type": "string",
                     "maxLength": 250,
-                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nURL 必须使用 http 或 https，且不能包含用户名或密码。其主机必须解析为公网地址：无法解析的域名、私有地址和保留地址，以及我们自己的 CDN 域名都会被拒绝，并返回 <code>InvalidURL</code>。每次调用前都会再次检查该地址。系统不会跟随重定向，因此 3xx 响应视为调用失败。"
+                    "description": "异步任务完成时将调用的 URL。调用使用 HTTP POST 方法，请求体为 JSON 格式：\n<code>\n{ \"subject\": \"{some text}\",\n  \"taskType\": \"{task type}\",\n  \"taskList\": [\n    { \"taskId\": \"{task id 1}\",\n      ...\n    },\n    { \"taskId\": \"{task id 2}\",\n      ...\n    }\n  ]\n}\n</code>\nURL 必须使用 http 或 https，且不能包含用户名或密码。其主机必须解析为公网地址：无法解析的域名、私有地址和保留地址，以及我们自己的 CDN 域名都会被拒绝，并返回 <code>InvalidURL</code>，错误信息会说明 URL 违反了哪条规则。每次调用前都会再次检查该地址。系统不会跟随重定向，因此 3xx 响应视为调用失败。"
                   },
                   "credentials": {
                     "type": "object",

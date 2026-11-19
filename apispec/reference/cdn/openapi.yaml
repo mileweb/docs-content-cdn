@@ -15568,11 +15568,23 @@ paths:
                 Invalid URL:
                   value:
                     code: InvalidURL
-                    message: The entered value for URL is invalid or longer than 250 characters.
+                    message: The entered value for URL is not a valid URL.
+                URL too long:
+                  value:
+                    code: InvalidURL
+                    message: The URL is longer than 250 characters.
+                URL scheme not allowed:
+                  value:
+                    code: InvalidURL
+                    message: The URL has to begin with http:// or https://.
+                Host not resolvable:
+                  value:
+                    code: InvalidURL
+                    message: The hostname hooks.example.com is not resolvable.
                 URL not allowed:
                   value:
                     code: InvalidURL
-                    message: The URL must resolve to a public internet address.
+                    message: The hostname intranet.example.com resolves to a private or reserved address, not a public internet address.
                 Invalid credential:
                   value:
                     code: InvalidCredential
@@ -15638,7 +15650,7 @@ paths:
                       ]
                     }
                     </code>
-                    The URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call.
+                    The URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>, and the message says which rule the URL broke. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call.
                 credentials:
                   type: object
                   description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
@@ -15823,11 +15835,23 @@ paths:
                 Invalid URL:
                   value:
                     code: InvalidURL
-                    message: The entered value for URL is invalid or longer than 250 characters.
+                    message: The entered value for URL is not a valid URL.
+                URL too long:
+                  value:
+                    code: InvalidURL
+                    message: The URL is longer than 250 characters.
+                URL scheme not allowed:
+                  value:
+                    code: InvalidURL
+                    message: The URL has to begin with http:// or https://.
+                Host not resolvable:
+                  value:
+                    code: InvalidURL
+                    message: The hostname hooks.example.com is not resolvable.
                 URL not allowed:
                   value:
                     code: InvalidURL
-                    message: The URL must resolve to a public internet address.
+                    message: The hostname intranet.example.com resolves to a private or reserved address, not a public internet address.
         '404':
           description: The webhook could not be updated.
         '412':
@@ -15896,7 +15920,7 @@ paths:
                       ]
                     }
                     </code>
-                    The URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call.
+                    The URL must use http or https and must not contain a user name or password. Its host must resolve to a public internet address: names that do not resolve, private and reserved addresses, and our own CDN domains are rejected with <code>InvalidURL</code>, and the message says which rule the URL broke. The address is checked again before each call. Redirects are not followed, so a 3xx response counts as a failed call.
                 credentials:
                   type: object
                   description: 'Optional credentials passed to the URL. If requiring credentials your server should support HTTP Basic authentication the same way we do. Refer to <a href="/apidocs">Authentication summary</a>. In particular, the <i>password</i> will be the secretKey encoded with the current date.'
