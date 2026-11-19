@@ -36367,7 +36367,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "startdate",
@@ -36376,7 +36377,8 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "in": "query",
             "name": "enddate",
