@@ -18097,12 +18097,14 @@ paths:
       parameters:
         - schema:
             type: string
+            format: date-time
           in: query
           name: startdate
           description: 'RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2021-09-05T00:00:00Z</code> '
           required: true
         - schema:
             type: string
+            format: date-time
           in: query
           name: enddate
           description: 'RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2021-09-05T10:00:00Z</code> Due to latency associated with new traffic data, enddate should be no later than five minutes before the current time. This ensures you get the most accurate results.'
