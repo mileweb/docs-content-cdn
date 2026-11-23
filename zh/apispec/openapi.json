@@ -33023,8 +33023,7 @@
             },
             "in": "query",
             "name": "target",
-            "required": true,
-            "description": "表示环境。"
+            "description": "表示环境。若未指定，默认为 'production'。"
           },
           {
             "schema": {

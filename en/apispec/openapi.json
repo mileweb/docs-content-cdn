@@ -33023,8 +33023,7 @@
             },
             "in": "query",
             "name": "target",
-            "required": true,
-            "description": "Indicates the environment."
+            "description": "Indicates the environment. Defaults to 'production' if not specified."
           },
           {
             "schema": {

@@ -6313,7 +6313,6 @@ msgstr ""
 "时区偏移。示例：<code>enddate=2019-10-30T00:00:00Z</code>"
 
 #. /paths/~1cdn~1purges~1purgeSummary/get/parameters/3/description
-#. /paths/~1cdn~1purges~1purgeTokens/get/parameters/0/description
 msgid "Indicates the environment."
 msgstr "表示环境。"
 
@@ -11754,6 +11753,10 @@ msgstr ""
 "量。您的<a href=\"/apidocs/cdn-product-management/get-cdn-servicequotas-"
 "customer-customerid\">服务配额</a>规定了生产环境和演练环境中文件刷新和目录刷"
 "新的每日上限。您可以在某一天内临时超出该上限，但这会减少次日可用的刷新次数。"
+
+#. /paths/~1cdn~1purges~1purgeTokens/get/parameters/0/description
+msgid "Indicates the environment. Defaults to 'production' if not specified."
+msgstr "表示环境。若未指定，默认为 'production'。"
 
 #. /paths/~1cdn~1secrets~1{secretID}/get/summary
 msgid "Get a secret"
