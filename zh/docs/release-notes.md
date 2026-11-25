@@ -231,7 +231,7 @@
 ## 2026年01月21日
 
 #### API变更
-* [加速域名部署历史查询接口](</apidocs#operation/get-cdn-hostnames-historical-hostname>)支持对部署历史排序。
+* [加速域名部署历史查询接口](</apidocs/hostnames/get-cdn-hostnames-historical-hostname>)支持对部署历史排序。
 
 #### 控制台变更
 * 改进加速项目配置页中origin shields列表的展示。
@@ -275,7 +275,7 @@
 
 ## 2025年11月7日
 #### API变更
-* 修复[日志汇聚点报表查询接口](</apidocs#operation/get-cdn-logAggregationPoints-summaryReport>)在特定场景下查不到数据的bug。
+* 修复[日志汇聚点报表查询接口](</apidocs/log-aggregation-points/get-cdn-logaggregationpoints-summaryreport>)在特定场景下查不到数据的bug。
 
 #### 控制台变更
 * 改进加速项目列表页面，错误信息的展示。
@@ -418,7 +418,7 @@
 ## March 3, 2025
 
 #### API updates
-* Fixed issue in which "InvalidCertificateId" error is returned when trying to [create a logAggregationPoint](</apidocs#operation/post-cdn-logAggregationPoints>) with destinationAuthCertificateId.
+* Fixed issue in which "InvalidCertificateId" error is returned when trying to [create a logAggregationPoint](</apidocs/log-aggregation-points/post-cdn-logaggregationpoints>) with destinationAuthCertificateId.
 
 #### Console updates
 * Supported merging of loadBalancerLogic into edgeLogic field. loadBalancerLogic will be deprecated.
@@ -443,8 +443,8 @@
 
 ## January 7, 2025
 #### API updates
-* Added “Mainland China” as a [prefetch](</apidocs#operation/post-cdn-prefetches>) region.
-* Returned default for ipWhiteList when [retrieving contact details](</apidocs#operation/get-ngadmin-contacts-id>).
+* Added “Mainland China” as a [prefetch](</apidocs/content-management/post-cdn-prefetches>) region.
+* Returned default for ipWhiteList when [retrieving contact details](</apidocs/portal-user-management/get-ngadmin-contacts-id>).
 
 #### Console updates
 * Removed Antarctica from the list of supported prefetch regions.
@@ -478,10 +478,10 @@
 ## November 18, 2024
 #### API updates
 * Added missing information to details of API calls which result in 401 and 403 responses.
-* Improved handling of concurrent requests to [create API permissions](</apidocs#operation/post-cdn-apiPermissions>).
+* Improved handling of concurrent requests to [create API permissions](</apidocs/api-access-control/post-cdn-apipermissions>).
 * Supported IPv6 addresses in the whitelists used to manage access to APIs and the portal.
 * Fixed deployment and undeployment dates of properties and historic hostnames.
-* Fixed problems with [deleting an API permission](</apidocs#operation/delete-cdn-apiPermissions-id>).
+* Fixed problems with [deleting an API permission](</apidocs/api-access-control/delete-cdn-apipermissions-id>).
 
 #### Console updates
 * Supported specification of IPv6 addresses for an origin server in property configurations.
@@ -502,14 +502,14 @@
 
 ## September 29, 2024
 #### API updates
-* Changed dataNames field in the [request summary report](</apidocs#operation/post-cdn-report-reqSummary>) API's response.
+* Changed dataNames field in the [request summary report](</apidocs/reports/post-cdn-report-reqsummary>) API's response.
 * Added creationTime and lastUpdateTime to service quota object.
 * Added property version description to deployment notification email.
 
 
 ## September 19, 2024
 #### API updates
-* Fixed error in the [secrets list API](</apidocs#operation/get-cdn-secrets>) handling some characters.
+* Fixed error in the [secrets list API](</apidocs/secret-management/get-cdn-secrets>) handling some characters.
 * Limited an edge hostname’s client zone rule to redirect to up to 15 IP addresses.
 
 
@@ -538,9 +538,9 @@
 
 ## August 2, 2024
 #### API updates
-* Fixed accuracy of [validation task](</apidocs#operation/queryValidationTask>)’s finishTime.
+* Fixed accuracy of [validation task](</apidocs/property-validation/queryvalidationtask>)’s finishTime.
 * Restricted wildcard certificates to supporting subdomains at the same level as the wildcard hostname.
-* Improved error handling of [deployment task creation](</apidocs#operation/createDeployment>).
+* Improved error handling of [deployment task creation](</apidocs/deployment-management/createdeployment>).
 
 #### Console updates
 * Allowed report users to filter and group by property hostnames.
@@ -555,11 +555,11 @@
 
 ## July 16, 2024
 #### API updates
-* Allowed up to 10 custom log fields in [log configurations](</apidocs#operation/post-cdn-report-logConfigs>).
-* Added support for [deletion of the latest certificate version](</apidocs#operation/delete-cdn-certificates-certificateID-versions-version>).
+* Allowed up to 10 custom log fields in [log configurations](</apidocs/log-configuration-management/post-cdn-report-logconfigs>).
+* Added support for [deletion of the latest certificate version](</apidocs/certificate-management/delete-cdn-certificates-certificateid-versions-version>).
 * Fixed issue with hostnames API returning an error.
-* Updated [request summary report API](</apidocs#operation/post-cdn-report-reqSummary>) to return intermediate and origin request data.
-* Rejected [deployment tasks](</apidocs#operation/createDeployment>) of properties or certificates if they are already being removed.
+* Updated [request summary report API](</apidocs/reports/post-cdn-report-reqsummary>) to return intermediate and origin request data.
+* Rejected [deployment tasks](</apidocs/deployment-management/createdeployment>) of properties or certificates if they are already being removed.
 
 #### Console updates
 * Improved DNS-01 certificate creation.
@@ -585,11 +585,11 @@
 
 #### API updates
 * Removed duplicate IP address from one origin shield.
-* Ensured API access is limited to an API account's [list of allowed properties](</apidocs#operation/post-cdn-apiPermissions>), if specified. Notably, only hostnames of those properties will be accessible. For example, if an API account is permitted to access a single property, then report APIs would return data only for hostnames associated with that one property.
+* Ensured API access is limited to an API account's [list of allowed properties](</apidocs/api-access-control/post-cdn-apipermissions>), if specified. Notably, only hostnames of those properties will be accessible. For example, if an API account is permitted to access a single property, then report APIs would return data only for hostnames associated with that one property.
 
 ## May 17, 2024
 #### API updates
-* Updated the [get service quotas list API](</apidocs#operation/get-cdn-serviceQuotas>) to support search and advancedFeatures query parameters. The search parameter lets you specify a keyword to find in the field values of the allowedCacheDirectives, allowedLbDirectives, allowedServerGroups, allowedLegacyTypes, and advancedFeatures fields within the service quotas while the advancedFeatures parameter lets you find service quotas with a particular advanced feature enabled.
+* Updated the [get service quotas list API](</apidocs/cdn-product-management/get-cdn-servicequotas>) to support search and advancedFeatures query parameters. The search parameter lets you specify a keyword to find in the field values of the allowedCacheDirectives, allowedLbDirectives, allowedServerGroups, allowedLegacyTypes, and advancedFeatures fields within the service quotas while the advancedFeatures parameter lets you find service quotas with a particular advanced feature enabled.
 * Ensured the correct enforcement of a service quota’s edgeHostnameLimit.
 * Moved the description and estimatedBandwidth fields out of the history array of the edge hostname object.
 
@@ -616,13 +616,13 @@
 
 ## April 8, 2024
 #### API updates
-* Added support for filtering [deployment tasks](</apidocs#operation/queryDeploymentTaskList>) and [validation tasks](</apidocs#operation/queryPropertyValidationList>) by their status.
+* Added support for filtering [deployment tasks](</apidocs/deployment-management/querydeploymenttasklist>) and [validation tasks](</apidocs/property-validation/querypropertyvalidationlist>) by their status.
 
 ## March 27, 2024
 #### API updates
 * Ignored the trialDeadline field if updating a service quota for a non-trial customer.
 * Increased the number of characters permitted in the property version description to 10000.
-* Ensured the [IP details API](</apidocs#operation/post-ngadmin-ipDetails>) works correctly with IPv6 addresses.
+* Ensured the [IP details API](</apidocs/cdn-product-management/post-ngadmin-ipdetails>) works correctly with IPv6 addresses.
 
 #### Console updates
 * Fixed the link to online help from Test Suites page.
@@ -630,8 +630,8 @@
 ## March 18, 2024
 #### API updates
 * Handled concurrent requests more gracefully.
-* Updated the [edge hostname list API](</apidocs#operation/getEdgeHostnames>) to support filtering by server groups.
-* Updated the [get historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>) to return the history of deployments to staging.
+* Updated the [edge hostname list API](</apidocs/edge-hostname-management/getedgehostnames>) to support filtering by server groups.
+* Updated the [get historical hostname API](</apidocs/hostnames/get-cdn-hostnames-historical-hostname>) to return the history of deployments to staging.
 
 #### Console updates
 * Fixed error messages for edge hostname user interface to be in the user’s preferred language.
@@ -649,9 +649,9 @@
 
 ## February 1, 2024
 #### API updates
-* Updated [historical hostnames API](</apidocs#operation/getHistoricalHostnames>) to return hostnames deployed to the staging environment and added the target parameter to allow caller to choose between ‘production’, ‘staging’, and ‘all'.
+* Updated [historical hostnames API](</apidocs/hostnames/gethistoricalhostnames>) to return hostnames deployed to the staging environment and added the target parameter to allow caller to choose between ‘production’, ‘staging’, and ‘all'.
 * Updated trial service expiration warning email to be in the customer’s preferred language.
-* Fixed [get certificate details API](</apidocs#operation/getCertificate>) to correctly reflect use of the certificate in a property.
+* Fixed [get certificate details API](</apidocs/certificate-management/getcertificate>) to correctly reflect use of the certificate in a property.
 * Required shareWith to be specified when sharingMethod is set to ‘some’ when creating or updating a certificate.
 * Fixed issues with some summary report APIs.
 
@@ -674,9 +674,9 @@
 ## January 3, 2024
 #### API updates
 * Checked whether a certificate being deployed would stop supporting a hostname in a deployed property.
-* Ensured the _all_ field appears first in the responses of the [edge status summary](</apidocs#operation/post-cdn-reports-edgeStatusSummary>) and [origin status summary](</apidocs#operation/post-cdn-reports-originStatusSummary>) report APIs.
+* Ensured the _all_ field appears first in the responses of the [edge status summary](</apidocs/reports/post-cdn-reports-edgestatussummary>) and [origin status summary](</apidocs/reports/post-cdn-reports-originstatussummary>) report APIs.
 * Returned an appropriate error if the user tries to create a log configuration with an invalid hostname.
-* Improved error handling when an invalid target is specified in the [certificate list API](</apidocs#operation/getCertificates>).
+* Improved error handling when an invalid target is specified in the [certificate list API](</apidocs/certificate-management/getcertificates>).
 * Improved handling if a deployment task references properties that do not exist.
 * Improved deployment notification email when a deployment task is created to remove a property or certificate without specifying its version.
 * Rejected duplicate deployment attempts.
@@ -685,7 +685,7 @@
 ## December 22, 2023
 #### API updates
 * Ensured certificate expiration notification emails are in the customer’s preferred language.
-* Rejected duplicate names in [purge request's](</apidocs#operation/createPurge>) fileHeaders field.
+* Rejected duplicate names in [purge request's](</apidocs/content-management/createpurge>) fileHeaders field.
 * Fixed certificate auto-renewal issues related to an inconsistent algorithm used by the private key.
 * Fixed sending of deployment notifications.
 
@@ -697,8 +697,8 @@
 ## December 13, 2023
 #### API updates
 * Ensured APIs treat edge hostnames as case-insensitive.
-* Updated [create property](</apidocs#operation/createProperty>), [create property version](</apidocs#operation/createPropertyVersion>), and [update property version](</apidocs#operation/updatePropertyVersion>) APIs to return a Warning header if there is an inconsistency in a certificate referenced by the property. Scenarios include a certificate that does not support a hostname defined in the property or a certificate which is expired.
-* Improved the warning message for [deleting a service quota](</apidocs#operation/delete-cdn-serviceQuotas-customer-customerId>) if the customer still has edge hostnames.
+* Updated [create property](</apidocs/property-management/createproperty>), [create property version](</apidocs/property-management/createpropertyversion>), and [update property version](</apidocs/property-management/updatepropertyversion>) APIs to return a Warning header if there is an inconsistency in a certificate referenced by the property. Scenarios include a certificate that does not support a hostname defined in the property or a certificate which is expired.
+* Improved the warning message for [deleting a service quota](</apidocs/cdn-product-management/delete-cdn-servicequotas-customer-customerid>) if the customer still has edge hostnames.
 
 #### Console updates
 * Removed leading and trailing spaces in purge and prefetch input boxes.
@@ -707,8 +707,8 @@
 ## December 4, 2023
 #### API updates
 * Ensured edge hostnames are case insensitive.
-* Updated [create property](</apidocs#operation/createProperty>), [create property version](</apidocs#operation/createPropertyVersion>), and [update property version](</apidocs#operation/updatePropertyVersion>) APIs to return a Warning header if there is an inconsistency in a certificate referenced by the property. Scenarios include a certificate that does not support a hostname defined in the property or a certificate which is expired. Details of the warning can be found by calling the [get property version](</apidocs#operation/getPropertyVersion>) API.
-* Improved the warning message of the [delete a service quota](</apidocs#operation/delete-cdn-serviceQuotas-customer-customerId>) API if the customer still has edge hostnames.
+* Updated [create property](</apidocs/property-management/createproperty>), [create property version](</apidocs/property-management/createpropertyversion>), and [update property version](</apidocs/property-management/updatepropertyversion>) APIs to return a Warning header if there is an inconsistency in a certificate referenced by the property. Scenarios include a certificate that does not support a hostname defined in the property or a certificate which is expired. Details of the warning can be found by calling the [get property version](</apidocs/property-management/getpropertyversion>) API.
+* Improved the warning message of the [delete a service quota](</apidocs/cdn-product-management/delete-cdn-servicequotas-customer-customerid>) API if the customer still has edge hostnames.
 
 #### Console updates
 * Removed leading and trailing spaces in the purge and prefetch input boxes.
@@ -731,7 +731,7 @@
 ## November 1, 2023
 #### API updates
 * Improved an error message shown when an edge hostname is updated or deleted while an update is already in progress.
-* Enabled support for filtering [fast route traffic volume report](</apidocs#operation/post-cdn-report-fastOriginVol>) by property hostnames, property IDs, and server groups.
+* Enabled support for filtering [fast route traffic volume report](</apidocs/reports/post-cdn-report-fastoriginvol>) by property hostnames, property IDs, and server groups.
 
 #### Console updates
 * Ensured password expiration reminders are sent to portal users.
@@ -757,8 +757,8 @@
 ## September 27, 2023
 #### API updates
 * Validated whether the portal user is logging in from an allowed IP address if the customer or user has an ipWhiteList setting.
-* Added support to the [summary of layer 7 traffic API](</apidocs#operation/getVolL7Summary>) for grouping by property hostnames.
-* Added submissionTime, finishTime, configuration, status and statusDetails to the history array in the response of the [GET edgehostname API](</apidocs#operation/getEdgeHostname>).
+* Added support to the [summary of layer 7 traffic API](</apidocs/reports/getvoll7summary>) for grouping by property hostnames.
+* Added submissionTime, finishTime, configuration, status and statusDetails to the history array in the response of the [GET edgehostname API](</apidocs/edge-hostname-management/getedgehostname>).
 * Updated prefetch validation to reject regions that are not among the 7 supported continents.
 * Updated logAggregationPoint creation and update APIs to support reference to a certificate created using the CDN Pro certificate API.
 * Added support for ‘compactJson’ in real-time log.
@@ -769,10 +769,10 @@
 ## September 8, 2023
 #### API updates
 * Ensured CDN Pro trial warning email is sent in the customer’s preferred language.
-* Allowed all API accounts to access supported [regions](</apidocs/#operation/get-cdn-clientRegions>) and [ISPs](</apidocs#operation/get-cdn-publicIpList>).
-* Added support for filtering by server groups to the following report APIs: [fast origin requests](</apidocs#operation/post-cdn-report-fastOriginReq>), [status code details](</apidocs#operation/getEdgeStatusCodeDetails>), and [origin status code details](</apidocs#operation/getOriginStatusCodeDetails>).
+* Allowed all API accounts to access supported [regions](</apidocs/#operation/get-cdn-clientRegions>) and [ISPs](</apidocs/cdn-product-management/get-cdn-publiciplist>).
+* Added support for filtering by server groups to the following report APIs: [fast origin requests](</apidocs/reports/post-cdn-report-fastoriginreq>), [status code details](</apidocs/reports/getedgestatuscodedetails>), and [origin status code details](</apidocs/reports/getoriginstatuscodedetails>).
 * Fixed HTTP response code when updating an API account.
-* Fixed response to [L7 bandwidth summary report](</apidocs#operation/post-cdn-report-bandwidthL7Summary>) when an invalid hostname is specified.
+* Fixed response to [L7 bandwidth summary report](</apidocs/reports/post-cdn-report-bandwidthl7summary>) when an invalid hostname is specified.
 
 #### Console updates
 * Highlighted traffic within the user-specified time range in traffic volume and request reports.
@@ -893,10 +893,10 @@
 ## March 6, 2023
 #### API updates
 * Improved message in response to invalid deployment.
-* Required customers [creating an edge hostname](</apidocs#operation/createEdgeHostname>) to explicitly define a rule covering all regions and ISPs rather than creating a default rule for them.
+* Required customers [creating an edge hostname](</apidocs/edge-hostname-management/createedgehostname>) to explicitly define a rule covering all regions and ISPs rather than creating a default rule for them.
 * Ensured that suspensionDate is not set if a service quota is initially created with a suspended status.
 * Made the customer’s description field optional.
-* Fixed error returned when [updating a customer](</apidocs#operation/patch-ngadmin-customers-id>).
+* Fixed error returned when [updating a customer](</apidocs/customer-management/patch-ngadmin-customers-id>).
 * Fixed validation of API names.
 
 #### Portal updates
@@ -906,7 +906,7 @@
 
 ## February 23, 2023
 #### API updates
-* Extended [API permissions](</apidocs#operation/post-cdn-apiPermissions>) to allow restricting access to specific resources using the allowedResources field.
+* Extended [API permissions](</apidocs/api-access-control/post-cdn-apipermissions>) to allow restricting access to specific resources using the allowedResources field.
 * Modified property origin authentication to allow non-AWS storage.
 * Handled the case of updating a customer whose initial portal user has been deleted.
 * Updated the response codes of some API calls from 402 to the more appropriate 403.
@@ -958,7 +958,7 @@
 
 ## January 10, 2023
 #### API updates
-* Added an [API to return the list of HDT servers](</apidocs#operation/get-cdn-originFastRouteIpList>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>) feature.
+* Added an [API to return the list of HDT servers](</apidocs/cdn-product-management/get-cdn-originfastrouteiplist>) used by the [origin_fast_route](</docs/edge-logic/supported-directives#origin_fast_route>) feature.
 * Allowed changing of customer’s IP white list back to the default setting.
 * Removed any extra whitespaces in the certificates, chain certificates, and private keys.
 
@@ -1017,9 +1017,9 @@
 ## November 25, 2022
 #### API updates
 * Added endpoint to return shield given its ID.
-* Added usedInProperties field to the response of the [shield list API](</apidocs#operation/get-cdn-shields>) to indicate whether a shield is in use by any of your properties.
+* Added usedInProperties field to the response of the [shield list API](</apidocs/cdn-product-management/get-cdn-shields>) to indicate whether a shield is in use by any of your properties.
 * Prevented removal of a child customer’s property if there is traffic to the corresponding hostnames.
-* Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>).
+* Improved [service quota update API](</apidocs/cdn-product-management/patch-cdn-servicequotas-customer-customerid>).
 * Improved deployment to handle certificates with line breaks.
 
 #### Portal updates
@@ -1035,9 +1035,9 @@
 
 ## November 11, 2022
 #### API updates
-* Fixed an error in the response of the [edge hostname list API](</apidocs#operation/getEdgeHostnames>).
+* Fixed an error in the response of the [edge hostname list API](</apidocs/edge-hostname-management/getedgehostnames>).
 * Improved validation of origin server settings when 127.0.0.1 or localhost is used as a server to disallow use of nonpublic ports.
-* Improved validation of the dpaAgreedBy field when [updating a customer](</apidocs#operation/patch-ngadmin-customers-id>).
+* Improved validation of the dpaAgreedBy field when [updating a customer](</apidocs/customer-management/patch-ngadmin-customers-id>).
 * Improved validation of the report APIs’ filters field in the request body.
 * Removed extra whitespaces in certificates.
 
@@ -1156,10 +1156,10 @@
 * Added support for timezones offset by :30 or :45 minutes in portal user's setting.
 * Prevented sharing of a certificate with a non-existent customer.
 * Added support for originShield as an advanced feature, allowing you to add an extra layer between the CDN Pro edge servers and your origin servers.
-* Supported filtering of [requests](</apidocs#operation/getEdgeRequests>) by serverGroups.
+* Supported filtering of [requests](</apidocs/reports/getedgerequests>) by serverGroups.
 * Fixed maximum value of childCustomerLimit to match specification.
 * Improved validation of Edge Logic, in particular, the [keepalive_timeout](</docs/edge-logic/supported-directives#keepalive_timeout>) and [custom_log_field](</docs/edge-logic/supported-directives#keepalive_timeout>) directives.
-* Improved [service quota update API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>)’s handling of edge cases.
+* Improved [service quota update API](</apidocs/cdn-product-management/patch-cdn-servicequotas-customer-customerid>)’s handling of edge cases.
 * Improved message for invalid apiMaxBurst value.
 * Improved handling of default service quota for child customers.
 
@@ -1177,14 +1177,14 @@
 ## August 11, 2022
 #### API updates
 * Improved error handling when summary report APIs are called with invalid customer IDs.
-* Improved error handling when [creating service quotas](</apidocs#operation/post-cdn-serviceQuotas>) with invalid settings.
+* Improved error handling when [creating service quotas](</apidocs/cdn-product-management/post-cdn-servicequotas>) with invalid settings.
 * Ensured updates to a customer's portalSettings work correctly.
 * Improved error handling for invalid references to a certificate.
-* Added the customerId field to the [annotations list API](</apidocs#operation/queryAnnotationList>)’s response.
-* Fixed filter support in the [annotation list API](</apidocs#operation/queryAnnotationList>).
+* Added the customerId field to the [annotations list API](</apidocs/annotations-for-reports/queryannotationlist>)’s response.
+* Fixed filter support in the [annotation list API](</apidocs/annotations-for-reports/queryannotationlist>).
 * Improved assignment of default limits for a child customer.
 * Improved the create and update service quota APIs to handle null values.
-* Fixed the [property list API](</apidocs#operation/getPropertyList>)’s hasConfig filter to support the keepAliveTimeout field.
+* Fixed the [property list API](</apidocs/property-management/getpropertylist>)’s hasConfig filter to support the keepAliveTimeout field.
 * Increased notification limit from 2000 to 4000 characters.
 * Ensured that the Beian status check sends emails to customers warning of expired Beian licenses which affects use of PoPs in China.
 * Corrected enforcement of values of the [limit_rate Edge Logic directive](</docs/edge-logic/supported-directives#limit_rate>).
@@ -1209,7 +1209,7 @@
 * Fixed issue with copying limits to child customers.
 * Ensured that less expensive server groups are shown in the edge hostname API when a customer uses the higher level group.
 * Ensured that the Report-Range header is consistently implemented among our APIs.
-* Added support for the prefetchLevel field when requesting a [prefetch](</apidocs#operation/post-cdn-prefetches>). It defaults to Parent and can be set to Edge if necessary.
+* Added support for the prefetchLevel field when requesting a [prefetch](</apidocs/content-management/post-cdn-prefetches>). It defaults to Parent and can be set to Edge if necessary.
 * Improved error handling if creating a validation task for a property with an incorrectly terminated directive in "loadBalancerLogic".
 * Ensured that updating customer configs works as expected.
 * Ensured that API rate limits are set correctly for child customers.
@@ -1257,7 +1257,7 @@
 * Fixed an error when the [limit_rate directive](</docs/edge-logic/supported-directives#limit_rate>) is used.
 * Updated load balancer logic to support the [custom_log_field Edge Logic directive](</docs/edge-logic/supported-directives#custom_log_field>).
 * Ensured appropriate setting of child customers’ API limits.
-* Added support for the %srvip setting in the [log configuration](</apidocs#operation/post-cdn-report-logConfigs>) format to show the IP address of the CDN server handling a request.
+* Added support for the %srvip setting in the [log configuration](</apidocs/log-configuration-management/post-cdn-report-logconfigs>) format to show the IP address of the CDN server handling a request.
 * Prevented client request headers from being passed to a real-time log server.
 
 #### Portal updates
@@ -1305,7 +1305,7 @@
 ## June 2, 2022
 #### API updates
 * Updated support for API rate limiting. Each customer has an apiRate and apiMaxBurst setting that limits the number of API calls that can be made in a short period of time.
-* Added regexEntries field in the [purge list API’s response](</apidocs#operation/getPurgeRequestList>).
+* Added regexEntries field in the [purge list API’s response](</apidocs/content-management/getpurgerequestlist>).
 * Prevented duplicate server groups from being added to a client zone rule of an edge hostname.
 * Improved error handling when requesting the service quota of a customer without the CDN Pro service.
 * Improved management of server groups for customers with child customers.
@@ -1347,7 +1347,7 @@
 * Ensured that email notifications are sent to all portal users identified as ‘master’.
 * Improved description of undeployment task when a customer is suspended.
 * Relaxed validation of the [access_log_sampling directive](</docs/edge-logic/supported-directives#access_log_downsample>) to permit variables.
-* Added support for three [log configuration](</apidocs#operation/post-cdn-report-logConfigs>) fields: %querystr, %reqhdrsize, %reqsize.
+* Added support for three [log configuration](</apidocs/log-configuration-management/post-cdn-report-logconfigs>) fields: %querystr, %reqhdrsize, %reqsize.
 
 
 #### Portal updates
@@ -1431,8 +1431,8 @@
 * Improved error handling when null values are passed.
 * Fixed response to APIs when offset exceeds the total number of records.
 * Ensured that a child customer can check the API call made on behalf of them.
-* Updated the [certificate details API](</apidocs#operation/queryCertificateVersion>) to show the issuer of the certificate.
-* Fixed error returning [certificate list](</apidocs#operation/getCertificates>).
+* Updated the [certificate details API](</apidocs/certificate-management/querycertificateversion>) to show the issuer of the certificate.
+* Fixed error returning [certificate list](</apidocs/certificate-management/getcertificates>).
 
 #### Portal updates
 * Added support for log configuration in the portal. Users must create a log configuration that applies to a hostname in order to download access logs for it.
@@ -1472,14 +1472,14 @@
 #### API updates
 * Improved customer creation error handling when attempting to recreate a customer.
 * Added support for peerFailureTimeout field in property’s origin settings to control retries when an origin server is inaccessible.
-* Improved [webhook creation](</apidocs#operation/post-cdn-webhooks>) error handling when invalid credentials are specified.
-* Added support for Report-Range header in the [log configuration list API](</apidocs#operation/get-cdn-report-logConfigs>).
-* Added edge request, intermediate response, intermediate request, origin response, origin request to the [traffic volume summary report](</apidocs#operation/get-cdn-report-volSummary>).
+* Improved [webhook creation](</apidocs/webhooks/post-cdn-webhooks>) error handling when invalid credentials are specified.
+* Added support for Report-Range header in the [log configuration list API](</apidocs/log-configuration-management/get-cdn-report-logconfigs>).
+* Added edge request, intermediate response, intermediate request, origin response, origin request to the [traffic volume summary report](</apidocs/reports/get-cdn-report-volsummary>).
 * Fixed error that occurred if a regular expression purge passed a URL ending with  “\?”
 * Improved efficiency of checking for recent traffic to hostnames  when deploying or undeploying properties.
-* Ensured that variedFields field is returned in the response of the [purge list API](</apidocs#operation/getPurgeRequestList>).
+* Ensured that variedFields field is returned in the response of the [purge list API](</apidocs/content-management/getpurgerequestlist>).
 * Fixed response to API called after service has been suspended.
-* Sorted the dataNames in [edge status summary](</apidocs#operation/get-cdn-reports-edgeStatusSummary>) and [origin status summary](</apidocs#operation/get-cdn-reports-originStatusSummary>) APIs.
+* Sorted the dataNames in [edge status summary](</apidocs/reports/get-cdn-reports-edgestatussummary>) and [origin status summary](</apidocs/reports/get-cdn-reports-originstatussummary>) APIs.
 * Ensured that groupBy in the summary report APIs supports up to two items.
 
 
@@ -1494,19 +1494,19 @@
 
 ## January 21, 2022
 #### API updates
-* Support hostname filter in query string of the [log download API](</apidocs#operation/get-cdn-report-logDownload>).
-* Improved error handling when a user tries to [create an edge hostname](</apidocs#operation/createEdgeHostname>) using illegal characters.
-* Added support for Report-Range header in the [purge list](</apidocs#operation/getPurgeRequestList>) and [prefetch list](</apidocs#operation/get-cdn-prefetches>) APIs.
+* Support hostname filter in query string of the [log download API](</apidocs/reports/get-cdn-report-logdownload>).
+* Improved error handling when a user tries to [create an edge hostname](</apidocs/edge-hostname-management/createedgehostname>) using illegal characters.
+* Added support for Report-Range header in the [purge list](</apidocs/content-management/getpurgerequestlist>) and [prefetch list](</apidocs/content-management/get-cdn-prefetches>) APIs.
 * Allowed the billUsingStripe serviceQuota field to be set to null.
 * Allowed groupBy to be used in the query string of summary reports. This is useful when calling the report APIs using the GET method.
-* Added [edge status summary API](</apidocs#operation/get-cdn-reports-edgeStatusSummary>) to summarize status codes returned by edge servers.
-* Added [origin status summary API](</apidocs#operation/get-cdn-reports-originStatusSummary>) to summarize status codes returned by origin servers.
+* Added [edge status summary API](</apidocs/reports/get-cdn-reports-edgestatussummary>) to summarize status codes returned by edge servers.
+* Added [origin status summary API](</apidocs/reports/get-cdn-reports-originstatussummary>) to summarize status codes returned by origin servers.
 * Prevented duplicate certificate and property versions from being created if multiple requests were received at the same time.
 * Improved error handling for invalid impersonation attempts.
-* Improved error message for invalid maxSuccessRate filter passed to the [purge list](</apidocs#operation/getPurgeRequestList>) API.
-* Fixed response of [edge hostname request summary](</apidocs#operation/get-cdn-report-edgeHostnameReqSummary>) API.
+* Improved error message for invalid maxSuccessRate filter passed to the [purge list](</apidocs/content-management/getpurgerequestlist>) API.
+* Fixed response of [edge hostname request summary](</apidocs/reports/get-cdn-report-edgehostnamereqsummary>) API.
 * Supported access_log_sampling directive in loadBalancerLogic.
-* Added support for several variables (%cltregion, %cltisp, %cltport, and %reqrange) to the [log configuration format](</apidocs#operation/post-cdn-report-logConfigs>).
+* Added support for several variables (%cltregion, %cltisp, %cltport, and %reqrange) to the [log configuration format](</apidocs/log-configuration-management/post-cdn-report-logconfigs>).
 
 #### Portal updates
 * Improved handling of user with limited permissions to access role management in the portal.
@@ -1520,7 +1520,7 @@
 
 ## January 7, 2022
 #### API updates
-* Added createTime and updateTime fields to the response of the [Get a log configuration API](</apidocs#operation/get-cdn-report-logConfigs-id>). 
+* Added createTime and updateTime fields to the response of the [Get a log configuration API](</apidocs/log-configuration-management/get-cdn-report-logconfigs-id>). 
 * Fixed role name limit enforcement to match specification (128 character maximum).
 * Fixed error handling of purge task with null value for fileUrls, /regexPatterns, or dirUrls.
 * Removed the API key from the response of the Get customer API. For security, the key will be returned only when creating a customer or resetting the customer's key.
@@ -1538,12 +1538,12 @@
 * Improved error handling of portal user creation and updates.
 * Improved error handling of edge hostname creation and updates.
 * Improved error handling of unauthorized request for customer details.
-* Improved error handling of invalid input when [creating an API permission](</apidocs#operation/post-cdn-apiPermissions>).
-* Ensured [prefetch list](</apidocs#operation/getPurgeRequestList>) contains only unique URLs.
+* Improved error handling of invalid input when [creating an API permission](</apidocs/api-access-control/post-cdn-apipermissions>).
+* Ensured [prefetch list](</apidocs/content-management/getpurgerequestlist>) contains only unique URLs.
 * Improved error handling of ICP Beian status check.
 * Allowed access to secrets to be limited by API permissions.
 * Ensured permissions are respected for annotations API.
-* Added target, action, and maxSuccessRate query parameters to the [purge request list API](</apidocs#operation/getPurgeRequestList>).
+* Added target, action, and maxSuccessRate query parameters to the [purge request list API](</apidocs/content-management/getpurgerequestlist>).
 * Improve error code and message when deploying a property using a secret that has been updated.
 * Added Get public IPs API.
 * Improved the InvalidContentType error message for API calls.
@@ -1557,13 +1557,13 @@
 ## December 21, 2021
 #### API updates
 * Corrected error message for ResponsiblePersonTooLong code when a reseller creates or updates a customer.
-* Ensured that a reseller's operator API account can request a [reset of a child customer’s API key](</apidocs#operation/patch-ngadmin-customers-id>).
+* Ensured that a reseller's operator API account can request a [reset of a child customer’s API key](</apidocs/customer-management/patch-ngadmin-customers-id>).
 * Ensured that a child customer can request the parent’s name.
 * Improved error message when a deployment task is created with an empty property ID.
-* Ensured that a [report annotation](</apidocs#operation/createAnnotation>) can be created for wildcard hostname *.com.
-* Added maxFilePurgeEntries and maxDirPurgeEntries to [service quota](</apidocs#operation/post-cdn-serviceQuotas>) to limit the number of entries that can be submitted in a single purge request.
+* Ensured that a [report annotation](</apidocs/annotations-for-reports/createannotation>) can be created for wildcard hostname *.com.
+* Added maxFilePurgeEntries and maxDirPurgeEntries to [service quota](</apidocs/cdn-product-management/post-cdn-servicequotas>) to limit the number of entries that can be submitted in a single purge request.
 * Added support for a new Edge Logic directive, http2_max_concurrent_streams, with a default of 64 and maximum of 512 to support domains with small objects requiring higher levels of concurrency.
-* Added support for regular expression [purge](</apidocs#operation/createPurge>).
+* Added support for regular expression [purge](</apidocs/content-management/createpurge>).
 * Ensured that logConfigLimit specified in the service quota is properly enforced.
 * Ensured that reseller can perform actions such as querying or updating a suspended child customer.
 
@@ -1581,12 +1581,12 @@
 ## December 1, 2021
 #### API updates
 * Fixed error message when a prefetch request is created with an invalid header value.
-* Improved error handling of the [webhooks list API](</apidocs#operation/get-cdn-webhooks>).
-* Improved error handling of the filter in [annotation list API](</apidocs#operation/queryAnnotationList>).
+* Improved error handling of the [webhooks list API](</apidocs/webhooks/get-cdn-webhooks>).
+* Improved error handling of the filter in [annotation list API](</apidocs/annotations-for-reports/queryannotationlist>).
 * Fixed status code when attempting to update an edge hostname’s Beian status.
 * Fixed salutation in email notifications of account changes.
-* Fixed [traffic volume summary](</apidocs#operation/getVolSummary>)’s response to account for a special situation of domain served from the local IP address 127.0.0.1.
-* Added loadBalancerLogic field to property definition, allowing custom code to be inserted into the NGINX LB block. A field, loadBalancerDirectives, was added to the [systemConfigs API](</apidocs#operation/get-cdn-systemConfigs>) to indicate the directives that can be used. These updates allow code to be added to reject DDoS requests.
+* Fixed [traffic volume summary](</apidocs/reports/getvolsummary>)’s response to account for a special situation of domain served from the local IP address 127.0.0.1.
+* Added loadBalancerLogic field to property definition, allowing custom code to be inserted into the NGINX LB block. A field, loadBalancerDirectives, was added to the [systemConfigs API](</apidocs/cdn-product-management/get-cdn-systemconfigs>) to indicate the directives that can be used. These updates allow code to be added to reject DDoS requests.
 
 #### Portal updates
 * Fixed pagination of portal user list page.
@@ -1603,12 +1603,12 @@
 ## November 17, 2021
 #### API updates
 * Fixed error handling when querying the status of an invalid, non-existent prefetch.
-* Fixed error handling when [creating a prefetch](</apidocs#operation/post-cdn-prefetches>) with an invalid start time.
-* Fixed [log configuration creation](</apidocs#operation/post-cdn-report-logConfigs>) to respect limit.
-* Improved error handling in [portal user management APIs](</apidocs#tag/Portal-User-Management>).
-* Fixed versions in response to the [property list API](</apidocs#operation/getPropertyList>).
+* Fixed error handling when [creating a prefetch](</apidocs/content-management/post-cdn-prefetches>) with an invalid start time.
+* Fixed [log configuration creation](</apidocs/log-configuration-management/post-cdn-report-logconfigs>) to respect limit.
+* Improved error handling in [portal user management APIs](</apidocs/portal-user-management>).
+* Fixed versions in response to the [property list API](</apidocs/property-management/getpropertylist>).
 * Updated links to refer to CDN Pro on our website.
-* Added [bandwidth summary report API](</apidocs#operation/post-cdn-report-bandwidthSummary>), allowing you to get summary of traffic bandwidth during a timespan.
+* Added [bandwidth summary report API](</apidocs/reports/post-cdn-report-bandwidthsummary>), allowing you to get summary of traffic bandwidth during a timespan.
 
 #### Portal updates
 * Enhanced property search to support searching by configurations.
@@ -1621,11 +1621,11 @@
 
 ## November 3, 2021
 #### API updates
-* Revised the access log implementation. You must [create a log configuration](</apidocs#operation/post-cdn-report-logConfigs>) to obtain logs for your hostnames. A log configuration is essentially a custom format you define to meet your needs.
-* Fixed error getting a long [list of properties](</apidocs#operation/getPropertyList>).
-* Fixed an error that occurred if [creating](</apidocs#operation/createContact>) or [updating a portal user](</apidocs#operation/patch-ngadmin-contacts-id>) with an email address more than 74 characters long.
-* Allowed more flexible use of the wildcard character, ‘*’, in [purge requests](</apidocs#operation/createPurge>).
-* Allowed up to 20 URLs to be specified in a [directory purge](</apidocs#operation/createPurge>).
+* Revised the access log implementation. You must [create a log configuration](</apidocs/log-configuration-management/post-cdn-report-logconfigs>) to obtain logs for your hostnames. A log configuration is essentially a custom format you define to meet your needs.
+* Fixed error getting a long [list of properties](</apidocs/property-management/getpropertylist>).
+* Fixed an error that occurred if [creating](</apidocs/portal-user-management/createcontact>) or [updating a portal user](</apidocs/portal-user-management/patch-ngadmin-contacts-id>) with an email address more than 74 characters long.
+* Allowed more flexible use of the wildcard character, ‘*’, in [purge requests](</apidocs/content-management/createpurge>).
+* Allowed up to 20 URLs to be specified in a [directory purge](</apidocs/content-management/createpurge>).
 
 #### Portal updates
 * Improved error handling if an invalid cache time is entered in the origin configuration.
@@ -1651,15 +1651,15 @@
 
 ## October 1, 2021
 #### API updates
-* Allowed resellers to use a different domain for [edge hostnames](</apidocs#operation/createEdgeHostname>) instead of our defaults. Resellers need to contact us for more information.
-* Fixed error message when [creating a deployment task](</apidocs#operation/createDeployment>) with an invalid property ID.
+* Allowed resellers to use a different domain for [edge hostnames](</apidocs/edge-hostname-management/createedgehostname>) instead of our defaults. Resellers need to contact us for more information.
+* Fixed error message when [creating a deployment task](</apidocs/deployment-management/createdeployment>) with an invalid property ID.
 * Prevented suspended customer from making calls to an API.
 * Ensured child customer cannot have higher limits than a reseller.
-* Fixed error handling when a reseller tries to [update a customer](</apidocs#operation/patch-ngadmin-customers-id>) with invalid configs field.
+* Fixed error handling when a reseller tries to [update a customer](</apidocs/customer-management/patch-ngadmin-customers-id>) with invalid configs field.
 * Ensured that default usage limits for a child customer are set properly.
 * Ensured edge hostnames begin with at least 10 characters before the suffix.
 * Ensured proper cache key is set even if the [auth_request directive](</docs/edge-logic/supported-directives#auth_request>) overrides $uri.
-* Enhanced [purge](</apidocs#operation/createPurge>) to support prefix purges (for example, http://test.domain2.com/mydir/a* to purge files starting with “a” and  "http://test.domain2.com/mydir/a** “ to purge all files and subdirectories starting with 'a')
+* Enhanced [purge](</apidocs/content-management/createpurge>) to support prefix purges (for example, http://test.domain2.com/mydir/a* to purge files starting with “a” and  "http://test.domain2.com/mydir/a** “ to purge all files and subdirectories starting with 'a')
 
 #### Portal updates
 * Fixed some Russian translation issues.
@@ -1683,18 +1683,18 @@
 
 ## September 8, 2021
 #### API updates
-* Returned error code InvalidApiAccountId if an incorrect API account ID is specified when calling [API permissions](</apidocs#tag/API-Access-Control>) endpoints.
+* Returned error code InvalidApiAccountId if an incorrect API account ID is specified when calling [API permissions](</apidocs/api-access-control>) endpoints.
 * Enforced the logConfigs API permission.
-* Added responsiblePerson and emailAddress fields to the [customer list API](</apidocs#operation/get-ngadmin-customers>)’s response.
+* Added responsiblePerson and emailAddress fields to the [customer list API](</apidocs/customer-management/get-ngadmin-customers>)’s response.
 * Added support for nearChina in reports. “nearChina” is an advanced feature that can be enabled for those without ICP Beian who want to maximize performance for visitors in China. Please contact us if you require this feature.
 * Prevented the HDT product from being removed if the customer was still using resources.
 * Prevented property using a shared certificate from being deployed if the owner of the shared certificate stopped sharing it. The property must be updated to use another certificate or no certificate before it can be deployed.
 * Added support for advanced Edge Logic directive proxy_ignore_client_abort which is useful for our real-time log feature.
 * Fixed creation of API permission.
 * Fixed removal of the ECP product from a customer.
-* Fixed error handling when invalid values are specified for usageLimitDays and usageLimitDollars of the [serviceQuotas APIs](</apidocs#tag/CDN-Product-Management>).
-* Ensured that read-only API accounts can call [report APIs](</apidocs#tag/Reports>).
-* Ensured that [service quota creation](</apidocs#operation/post-cdn-serviceQuotas>) does not require specifying directiveParameterLimits. Defaults apply.
+* Fixed error handling when invalid values are specified for usageLimitDays and usageLimitDollars of the [serviceQuotas APIs](</apidocs/cdn-product-management>).
+* Ensured that read-only API accounts can call [report APIs](</apidocs/reports>).
+* Ensured that [service quota creation](</apidocs/cdn-product-management/post-cdn-servicequotas>) does not require specifying directiveParameterLimits. Defaults apply.
 
 #### Portal updates
 * Improved the self-signup page to describe our promotional offers.
@@ -1713,9 +1713,9 @@
 ## August 25, 2021
 #### API updates
 * Allowed [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>), and [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>) Edge Logic directives to be used in location blocks. Previously, they were supported only in server blocks.
-* Fixed reseller [creation of a service quota for a child customer](</apidocs#operation/post-cdn-serviceQuotas>) if the reseller has no explicit usage limits.
-* Improved error message for the InvalidIds code that can be returned by our [portal user list API](</apidocs#operation/getContacts>).
-* Improved error message for the CertificateMismatch code which can be returned when [creating a deployment task](</apidocs#operation/createDeployment>) if the certificate's Subject Alternative Name does not include the hostnames in your property.
+* Fixed reseller [creation of a service quota for a child customer](</apidocs/cdn-product-management/post-cdn-servicequotas>) if the reseller has no explicit usage limits.
+* Improved error message for the InvalidIds code that can be returned by our [portal user list API](</apidocs/portal-user-management/getcontacts>).
+* Improved error message for the CertificateMismatch code which can be returned when [creating a deployment task](</apidocs/deployment-management/createdeployment>) if the certificate's Subject Alternative Name does not include the hostnames in your property.
 
 #### Portal updates
 * Added pie charts to the origin status code details and status code details reports, allowing you to see the percentages of returned status codes.
@@ -1731,7 +1731,7 @@
 * Improved validation of report annotations.
 * Enforced IP allow lists for API calls.
 * Improved validation of portal user configuration.
-* Allowed reseller to call [deployment management APIs](</apidocs#tag/Deployment-Management>) on behalf of customer if needed.
+* Allowed reseller to call [deployment management APIs](</apidocs/deployment-management>) on behalf of customer if needed.
 * Fixed notification-related bug.
 
 #### Portal updates
@@ -1748,13 +1748,13 @@
 
 ## July 28, 2021
 #### API updates
-* Fixed [portal user list API](</apidocs#operation/getContacts>)'s handling of the ids query parameter.
-* Ensured an operator API account of a reseller can [create an API permission](</apidocs#operation/post-cdn-apiPermissions>) for an API account of their customer.
+* Fixed [portal user list API](</apidocs/portal-user-management/getcontacts>)'s handling of the ids query parameter.
+* Ensured an operator API account of a reseller can [create an API permission](</apidocs/api-access-control/post-cdn-apipermissions>) for an API account of their customer.
 * Allowed a single task to deploy a new certificate version along with the property using it instead of requiring separate deployment tasks.
 * Improved Edge Logic validation to ensure that nested location blocks have a content handler.
 * Improved handling of customer deletion when the customer is still using resources.
 * Improved validation of hostnames used in a property.
-* Updated [deployment](</apidocs#operation/createDeployment>) to support the Check-Certificate header to bypass checking of expired certificates and hostnames missing from the certificate’s SAN. This may be useful in some circumstances for testing, though it should not normally be used in production, since browsers would discourage visitors from accessing your content.
+* Updated [deployment](</apidocs/deployment-management/createdeployment>) to support the Check-Certificate header to bypass checking of expired certificates and hostnames missing from the certificate’s SAN. This may be useful in some circumstances for testing, though it should not normally be used in production, since browsers would discourage visitors from accessing your content.
 * Improved certificate verification.
 * Ensured that query strings of URLs that are purged are respected.
 
@@ -1771,11 +1771,11 @@
 #### API updates
 
 * Improved validation of API calls made by resellers.
-* Improved error handling of [secret management APIs](</apidocs#tag/Secret-Management>).
+* Improved error handling of [secret management APIs](</apidocs/secret-management>).
 * Added support for “operation” report annotations that {{title}} may use to identify operational changes. We expect these to be infrequent.
 * Made API query parameters case-insensitive for ease of use.
-* Fixed [annotation list](</apidocs#operation/queryAnnotationList>) to include recently updated annotations.
-* Fixed [search for secret by its ID](</apidocs#operation/get-cdn-secrets>).
+* Fixed [annotation list](</apidocs/annotations-for-reports/queryannotationlist>) to include recently updated annotations.
+* Fixed [search for secret by its ID](</apidocs/secret-management/get-cdn-secrets>).
 
 #### Portal updates
 
@@ -1789,8 +1789,8 @@
 
 #### API updates
 
-* Added [secret management](</apidocs#tag/Secret-Management>) APIs you can use to improve security by preventing sensitive text from being exposed in Edge Logic.
-* Allowed you to show [report annotations](</apidocs#tag/Annotations-for-Reports>) for property deployments, certificate deployments, and edge hostname updates.
+* Added [secret management](</apidocs/secret-management>) APIs you can use to improve security by preventing sensitive text from being exposed in Edge Logic.
+* Allowed you to show [report annotations](</apidocs/annotations-for-reports>) for property deployments, certificate deployments, and edge hostname updates.
 * Added “proxy_next_upstream off;” in NGINX configuration to avoid latency related to using the [real-time log feature](</docs/portal/edge-configurations/creating-property#实时日志>).
 
 
@@ -1806,9 +1806,9 @@
 ## June 14, 2021
 
 #### API updates
-* Updated a customer's [list of users](</apidocs#operation/getContacts>) to indicate whether the users have full access to all products.
+* Updated a customer's [list of users](</apidocs/portal-user-management/getcontacts>) to indicate whether the users have full access to all products.
 * Ensured an error is returned if you try to create a property with duplicate hostnames.
-* Updated [API calls](</apidocs#operation/get-ngadmin-apicalls>) to return data from the last 30 days by default.
+* Updated [API calls](</apidocs/api-call-history/get-ngadmin-apicalls>) to return data from the last 30 days by default.
 * Reduced the latency associated with real-time log implementation.
 
 #### Portal updates
@@ -1837,8 +1837,8 @@
 #### API updates
 
 * Added support for $remote_user and $client_real_ip in loadBalancerHashKey.
-* Added support for [webhooks](</apidocs#tag/Webhooks>) in asynchronous operations (validation, deployment, purge, prefetch) to notify you when the operations complete.
-* Improved [property list API’s](</apidocs#operation/getPropertyList>) "hasConfig" filter to support searching fields.
+* Added support for [webhooks](</apidocs/webhooks>) in asynchronous operations (validation, deployment, purge, prefetch) to notify you when the operations complete.
+* Improved [property list API’s](</apidocs/property-management/getpropertylist>) "hasConfig" filter to support searching fields.
 * Added a check of traffic before deleting an edge hostname to avoid accidental deletion.
 
 #### Portal updates
@@ -1864,17 +1864,17 @@
 ## April 21, 2021
 
 #### API updates
-* Added the [requests summary report](</apidocs#operation/post-cdn-report-reqSummary>) to summarize requests to the CDN Pro edge servers.
-* Ensured the ‘latestVersion’ field is returned when [getting a property’s details](</apidocs#operation/queryProperty>).
-* Fixed responses for the [customer list API](</apidocs#operation/get-ngadmin-customers>) when filtering using the regionalOffice parameter.
+* Added the [requests summary report](</apidocs/reports/post-cdn-report-reqsummary>) to summarize requests to the CDN Pro edge servers.
+* Ensured the ‘latestVersion’ field is returned when [getting a property’s details](</apidocs/property-management/queryproperty>).
+* Fixed responses for the [customer list API](</apidocs/customer-management/get-ngadmin-customers>) when filtering using the regionalOffice parameter.
 * Improved management of purge quotas.
 * Improved efficiency of [realtime_log_downsample](</docs/edge-logic/supported-directives#realtime_log_downsample>).
 * Trimmed real-time log format string.
-* Extended [property list API](</apidocs#operation/getPropertyList>)'s hasConfig filter to allow searching subfields of property version.
-* Added support for "children-only" Report-Range header in [API account list](</apidocs#operation/get-ngadmin-apiAccounts>) API for resellers.
-* Added support for "children-only" Report-Range header in [portal user list](</apidocs#operation/getContacts>) API for resellers.
-* Fixed the [property list API](</apidocs#operation/getPropertyList>) to avoid returning property if version matching a hasConfig filter was already deleted.
-* Fixed an error in the [log download API](</apidocs#operation/get-cdn-report-logDownload>).
+* Extended [property list API](</apidocs/property-management/getpropertylist>)'s hasConfig filter to allow searching subfields of property version.
+* Added support for "children-only" Report-Range header in [API account list](</apidocs/api-account-management/get-ngadmin-apiaccounts>) API for resellers.
+* Added support for "children-only" Report-Range header in [portal user list](</apidocs/portal-user-management/getcontacts>) API for resellers.
+* Fixed the [property list API](</apidocs/property-management/getpropertylist>) to avoid returning property if version matching a hasConfig filter was already deleted.
+* Fixed an error in the [log download API](</apidocs/reports/get-cdn-report-logdownload>).
 
 #### Portal updates
 * Prevented a purge task from being created until at least one file or directory has been specified.
@@ -1885,9 +1885,9 @@
 
 ## April 9, 2021
 #### API updates
-* Added [prefetch APIs](</apidocs#operation/post-cdn-prefetches>) allowing you to warm up the cache in advance of visitor requests for your content.
-* Fixed the [customer list API’s](</apidocs#operation/get-ngadmin-customers>) response to include products used by each customer.
-* Allowed resellers to use the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>).
+* Added [prefetch APIs](</apidocs/content-management/post-cdn-prefetches>) allowing you to warm up the cache in advance of visitor requests for your content.
+* Fixed the [customer list API’s](</apidocs/customer-management/get-ngadmin-customers>) response to include products used by each customer.
+* Allowed resellers to use the Report-Range header in [certificate list API](</apidocs/certificate-management/getcertificates>).
 
 #### Portal updates
 * Added support for disabling HTTP2.
@@ -1897,12 +1897,12 @@
 ## March 26, 2021
 #### API updates
 
-* Added support for [custom API account permissions](</apidocs#tag/API-Account-Management>), giving you more control over who can access or update your configurations.
+* Added support for [custom API account permissions](</apidocs/api-account-management>), giving you more control over who can access or update your configurations.
 * Fixed the validation of contactLimit and apiAccountLimit when resellers create and update customers.
-* Allowed resellers to use the Report-Range header in [deploymentTasks](</apidocs#operation/queryDeploymentTaskList>), [validations](</apidocs#operation/queryPropertyValidationList>), [edge hostnames](</apidocs#operation/getEdgeHostnames>), [hostnames](</apidocs#operation/listhostnames>), and [service quotas](</apidocs#operation/get-cdn-serviceQuotas>) APIs.
+* Allowed resellers to use the Report-Range header in [deploymentTasks](</apidocs/deployment-management/querydeploymenttasklist>), [validations](</apidocs/property-validation/querypropertyvalidationlist>), [edge hostnames](</apidocs/edge-hostname-management/getedgehostnames>), [hostnames](</apidocs/hostnames/listhostnames>), and [service quotas](</apidocs/cdn-product-management/get-cdn-servicequotas>) APIs.
 * Added support for overriding the sample rate of real-time log in CS.
 * Added a check for Beian status when deploying a property to staging.
-* Added tlsCertificateId in [property list API](</apidocs#operation/getPropertyList>).
+* Added tlsCertificateId in [property list API](</apidocs/property-management/getpropertylist>).
 
 #### Portal updates
 * Added support for a template to initialize self-signed (“auto-generated”) certificates.
@@ -1917,7 +1917,7 @@
 #### API updates
 * Prevented resellers from deleting a suspended customer who still has access to a product like CDN Pro.
 * Fixed an issue affecting generation of a Sectigo DCV file.
-* Allowed resellers to use the Report-Range header in [property list API](</apidocs#operation/getPropertyList>).
+* Allowed resellers to use the Report-Range header in [property list API](</apidocs/property-management/getpropertylist>).
 
 #### Portal updates
 * Fixed the display of property and certificate name in standby task.
@@ -1927,9 +1927,9 @@
 
 #### API updates
 * Improved error handling of administration APIs.
-* Added an API to [get a specific historical hostname](</apidocs#operation/get-cdn-hostnames-historical-hostname>), so you can check which hostnames were active in the past.
-* Improved validation of maxClientSendTimeOut values in [service quota API's](</apidocs#operation/post-cdn-serviceQuotas>) ‘directiveParameterLimits’.
-* Added support for "oldestPropertyValidationTime" in [systemConfigs](</apidocs#operation/get-cdn-systemConfigs>).
+* Added an API to [get a specific historical hostname](</apidocs/hostnames/get-cdn-hostnames-historical-hostname>), so you can check which hostnames were active in the past.
+* Improved validation of maxClientSendTimeOut values in [service quota API's](</apidocs/cdn-product-management/post-cdn-servicequotas>) ‘directiveParameterLimits’.
+* Added support for "oldestPropertyValidationTime" in [systemConfigs](</apidocs/cdn-product-management/get-cdn-systemconfigs>).
 
 #### Portal updates
 * Improved the user interface for creating and updating certificates.
@@ -1940,7 +1940,7 @@
 ## February 11, 2021
 
 #### API updates
-* Improved an error message in [portal user creation API](</apidocs#operation/createContact>).
+* Improved an error message in [portal user creation API](</apidocs/portal-user-management/createcontact>).
 * Improved property validation.
 * Fixed error handling when using invalid or unauthorized Edge Logic directives.
 * Fixed enforcement of limits used in timeout-related directives such as [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>).
@@ -1962,7 +1962,7 @@
 * Improved validation of Edge Logic in properties.
 * Fixed error handling when invalid or unauthorized directives are used in a property.
 * Improved validation of timeout-related settings in a service quota’s directiveParameterLimits.
-* Updated [service quota creation](</apidocs#operation/post-cdn-serviceQuotas>) to support the advancedFeatures field.
+* Updated [service quota creation](</apidocs/cdn-product-management/post-cdn-servicequotas>) to support the advancedFeatures field.
 
 #### Portal updates
 * Added search and filter parameters in URLs of property, edge hostname, certificate, and purge list pages to make them easier to bookmark.
@@ -1997,7 +1997,7 @@
 * Added support for 6 new Edge Logic directives:
 [origin_connect_timeout](</docs/edge-logic/supported-directives#origin_connect_timeout>), [origin_read_timeout](</docs/edge-logic/supported-directives#origin_read_timeout>), and [origin_send_timeout](</docs/edge-logic/supported-directives#origin_send_timeout>) for you to manage communications with your origin servers and  [client_header_timeout](</docs/edge-logic/supported-directives#client_header_timeout>), [client_body_timeout](</docs/edge-logic/supported-directives#client_body_timeout>), and [client_send_timeout](</docs/edge-logic/supported-directives#client_send_timeout>) for you to manage communications with the clients.
 * Limited the [realtime_log_downsample](</docs/edge-logic/supported-directives#realtime_log_downsample>) directive to the server block of Edge Logic.
-* We now require the isp field to be specified in a client zone rule when [creating an edge hostname](</apidocs#operation/createEdgeHostname>).
+* We now require the isp field to be specified in a client zone rule when [creating an edge hostname](</apidocs/edge-hostname-management/createedgehostname>).
 
 
 #### Portal updates
@@ -2018,10 +2018,10 @@
 * Limited an edge hostname’s client zone rule to a maximum of 10 ISPs.
 * Added impersonatingParentCustomerId to identify the reseller (or parent) customer performing an action like purge, validation, or deployment on behalf of their customer.
 * Removed redundant target field returned in the purge summary response.
-* Improved [querying for API calls](</apidocs#operation/get-ngadmin-apicalls>) when using a path parameter with an asterisk character.
-* Returned customerId field in [API calls](</apidocs#operation/get-ngadmin-apicalls-id>) and [portal users](</apidocs#operation/getContacts>) APIs.
+* Improved [querying for API calls](</apidocs/api-call-history/get-ngadmin-apicalls>) when using a path parameter with an asterisk character.
+* Returned customerId field in [API calls](</apidocs/api-call-history/get-ngadmin-apicalls-id>) and [portal users](</apidocs/portal-user-management/getcontacts>) APIs.
 * Returned an error if the user tries to deploy a certificate with an invalid certificate version.
-* Added support for advancedFeauresList and directiveParameterLimits in CDN Pro [service quota object](</apidocs#operation/post-cdn-serviceQuotas>). These manage access to advanced CDN Pro features and specification of limits on some Edge Logic directives.
+* Added support for advancedFeauresList and directiveParameterLimits in CDN Pro [service quota object](</apidocs/cdn-product-management/post-cdn-servicequotas>). These manage access to advanced CDN Pro features and specification of limits on some Edge Logic directives.
 
 #### Portal updates
 * Improved error handling in the property creation and edit pages when an invalid edge hostname is specified.
@@ -2035,12 +2035,12 @@
 ## December 7, 2020
 
 #### API updates
-* Added support for non-standard HTTP and HTTPS ports by specifying them in a extraServicePorts field of a property configuration. Also return extraServicePorts in the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>). Please contact us if you require a port that isn't yet allowed.
+* Added support for non-standard HTTP and HTTPS ports by specifying them in a extraServicePorts field of a property configuration. Also return extraServicePorts in the [system configuration API](</apidocs/cdn-product-management/get-cdn-systemconfigs>). Please contact us if you require a port that isn't yet allowed.
 * Prevented deletion of a property whose deployment is still in progress.
 * Supported querying validation history of a deleted property.
-* Enhanced [property list API](</apidocs#operation/getPropertyList>) to support searching for a value that is not present in the configuration.
-* Allowed resellers to use the Report-Range header in [API account list](</apidocs#operation/get-ngadmin-apiAccounts>).
-* Updated [traffic volume summary report](</apidocs#operation/getVolSummary>) to support the protocol parameter.
+* Enhanced [property list API](</apidocs/property-management/getpropertylist>) to support searching for a value that is not present in the configuration.
+* Allowed resellers to use the Report-Range header in [API account list](</apidocs/api-account-management/get-ngadmin-apiaccounts>).
+* Updated [traffic volume summary report](</apidocs/reports/getvolsummary>) to support the protocol parameter.
 * Modified property validation to allow the 'if' parameter in Edge Logic.
 
 #### Portal updates
@@ -2053,9 +2053,9 @@
 #### API updates
 * Added disableHttp2 property configuration option to allow you to disable support for HTTP/2 and use HTTP 1.1 only.
 * Added cacheKeyUri property configuration option to control when the URL is incorporated into the cache key.
-* Updated [edge requests report](</apidocs#operation/getEdgeRequests>) to support the Accept HTTP header with quality values.
+* Updated [edge requests report](</apidocs/reports/getedgerequests>) to support the Accept HTTP header with quality values.
 * Improved validation of Edge Logic using [eval_func](</docs/edge-logic/supported-directives#eval_func>).
-* Improved [hostnames API](</apidocs#operation/listhostnames>).
+* Improved [hostnames API](</apidocs/hostnames/listhostnames>).
 * Added the origin_selection_algorithm directive so you can control the selection of an IP address if an origin resolves to multiple IP addresses.
 
 #### Portal updates
@@ -2066,7 +2066,7 @@
 
 ## November 6, 2020
 #### API updates
-* Updated [get property validation task API](</apidocs#operation/queryValidationTask>) to return cache version as well.
+* Updated [get property validation task API](</apidocs/property-validation/queryvalidationtask>) to return cache version as well.
 * Allowed a wildcard hostname to overlap with another hostname owned by the same customer.
 
 #### Portal updates
@@ -2077,7 +2077,7 @@
 
 ## October 22, 2020
 #### API updates
-* The [traffic volume summary report](</apidocs#operation/getVolSummary>) now supports grouping of results by customerIds.
+* The [traffic volume summary report](</apidocs/reports/getvolsummary>) now supports grouping of results by customerIds.
 * Improved error message when the user uses an unauthorized or unsupported directive.
 * If a reseller performs a validation, deployment, or purge on behalf of their customer, we track the caller’s API account.
 * Added 3 new Edge Logic directives: proxy_cache_lock to better control traffic to the origin servers, proxy_cache_lock_age to specify a time after which another request may be made, and [proxy_cache_lock_timeout](</docs/edge-logic/supported-directives#proxy_cache_lock_timeout>) to set a timeout for proxy_cache_lock.
@@ -2094,11 +2094,11 @@
 
 ## October 7, 2020
 #### API updates
-* Added [CPU time report](</apidocs#operation/post-cdn-report-cpuTime>) to display CPU time used to handle requests for your content.
-* Allowed resellers to use the ‘Report-Range: children-only’ header in [API calls](</apidocs#operation/get-ngadmin-apicalls>) to get a summary of API calls made in their customers' accounts.
+* Added [CPU time report](</apidocs/reports/post-cdn-report-cputime>) to display CPU time used to handle requests for your content.
+* Allowed resellers to use the ‘Report-Range: children-only’ header in [API calls](</apidocs/api-call-history/get-ngadmin-apicalls>) to get a summary of API calls made in their customers' accounts.
 * Enabled the [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) to support the "Host" header.
-* Allowed query of [fast route request](</apidocs#operation/post-cdn-report-fastOriginReq>) and [fast route traffic](</apidocs#operation/post-cdn-report-fastOriginVol>) reports for domain names with wildcard "*".
-* Improved error checking of [portal user list](</apidocs#operation/post-cdn-report-fastOriginVol>) and [API account list](</apidocs#operation/get-ngadmin-apiAccounts>).
+* Allowed query of [fast route request](</apidocs/reports/post-cdn-report-fastoriginreq>) and [fast route traffic](</apidocs/reports/post-cdn-report-fastoriginvol>) reports for domain names with wildcard "*".
+* Improved error checking of [portal user list](</apidocs/reports/post-cdn-report-fastoriginvol>) and [API account list](</apidocs/api-account-management/get-ngadmin-apiaccounts>).
 
 #### Portal updates
 * Improved page navigation.
@@ -2107,12 +2107,12 @@
 
 ## September 24, 2020
 #### API updates
-* Added support for startdate and enddate parameters for querying [validation](</apidocs#operation/queryPropertyValidationList>) and [deployment task](</apidocs#operation/queryDeploymentTaskList>) lists.
+* Added support for startdate and enddate parameters for querying [validation](</apidocs/property-validation/querypropertyvalidationlist>) and [deployment task](</apidocs/deployment-management/querydeploymenttasklist>) lists.
 * Allowed deletion of a property version.
-* Updated [service quota API](</apidocs#operation/patch-cdn-serviceQuotas-customer-customerId>).
-* Added fast route traffic to the [traffic volume summary report](</apidocs#operation/getVolSummary>) to show traffic accelerated by the [High-Speed Data Transmission product](<https://www.{{siteDomain}}/high-speed-data-transmission/>).
+* Updated [service quota API](</apidocs/cdn-product-management/patch-cdn-servicequotas-customer-customerid>).
+* Added fast route traffic to the [traffic volume summary report](</apidocs/reports/getvolsummary>) to show traffic accelerated by the [High-Speed Data Transmission product](<https://www.{{siteDomain}}/high-speed-data-transmission/>).
 * Supported CSR validation by more certificate authorities, not just Let’s Encrypt.
-* Improved error handling of parameters when [getting purge requests](</apidocs#operation/getPurgeRequestList>).
+* Improved error handling of parameters when [getting purge requests](</apidocs/content-management/getpurgerequestlist>).
 
 #### Portal updates
 * Improved display of pages listing items.
@@ -2126,7 +2126,7 @@
 ## September 10, 2020
 #### API updates
 * Supported specification of weights when defining origin servers of a property.
-* Supported X-Forwarded-Scheme header when [purging a file](</apidocs#operation/createPurge>).  This ensures purges work if the property’s Edge Logic does a redirection from HTTP to HTTPS.
+* Supported X-Forwarded-Scheme header when [purging a file](</apidocs/content-management/createpurge>).  This ensures purges work if the property’s Edge Logic does a redirection from HTTP to HTTPS.
 
 #### Portal updates
 * For usability, supported click to copy hostnames when editing a property.
@@ -2136,18 +2136,18 @@
 
 ## August 28, 2020
 #### API updates
-* Added support for filtering the [ISPs list](</apidocs#operation/get-cdn-isps>) by region.
-* Added support for filtering the [region list](</apidocs#operation/get-cdn-clientRegions>) by ISP.
+* Added support for filtering the [ISPs list](</apidocs/cdn-product-management/get-cdn-isps>) by region.
+* Added support for filtering the [region list](</apidocs/cdn-product-management/get-cdn-clientregions>) by ISP.
 * Added support for multiple ISPs in a client zone rule.
 * Added support for origin_host in the real-time log feature.
 * Allowed all customers to use these directives: [sorted_querystring_filter_parameter](</docs/edge-logic/supported-directives#sorted_querystring_filter_parameter>) to remove some query parameters; [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) to disable processing of certain cache-control directives in the response from the origin; [slice](</docs/edge-logic/supported-directives#slice>) to set the size of the slices when fetching large files from the origin; and [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) to add, delete, or overwrite the response header fields from the origin before any other processing.
 * Added [slice_ignore_etag directive](</docs/edge-logic/supported-directives#slice_ignore_etag>) to disable ETag consistency check of sliced files.
 * Made it easier for a reseller to purge a directory or file on behalf of their customer.
-* Added [fast route origin request report API](</apidocs#operation/post-cdn-report-fastOriginReq>) to show the origin requests accelerated by the High-Speed Data Transmission product.
-* Added [fast route origin traffic report API](</apidocs#operation/post-cdn-report-fastOriginVol>) to show the origin traffic accelerated by the High-Speed Data Transmission product.
+* Added [fast route origin request report API](</apidocs/reports/post-cdn-report-fastoriginreq>) to show the origin requests accelerated by the High-Speed Data Transmission product.
+* Added [fast route origin traffic report API](</apidocs/reports/post-cdn-report-fastoriginvol>) to show the origin traffic accelerated by the High-Speed Data Transmission product.
 * Updated report APIs to support UTC+13 and UTC+14 time zones.
 * Allowed purging of URLs with upper and lower case characters.
-* Fixed [historical hostnames API](</apidocs#operation/getHistoricalHostnames>) to omit properties that have only deployed to staging.
+* Fixed [historical hostnames API](</apidocs/hostnames/gethistoricalhostnames>) to omit properties that have only deployed to staging.
 * Supported keepalive_timeout in the origin section of a property definition.
 
 #### Portal updates
@@ -2204,7 +2204,7 @@
 * Updated support for China PoPs.
 * Allowed strings in Edge Logic to span multiple lines.
 * Allowed hyphens and periods in an origin name.
-* Added the [system configuration API](</apidocs#operation/get-cdn-systemConfigs>) to return system settings.
+* Added the [system configuration API](</apidocs/cdn-product-management/get-cdn-systemconfigs>) to return system settings.
 
 #### Portal updates
 * Updated the portal links to help pages.
@@ -2217,7 +2217,7 @@
 #### API updates
 * Updated property validation to show the line number if an error is found in the Edge Logic.
 * Added optional tlsSessionTimeout field to the property configuration to control the TLS session ticket timeout.
-* Updated [edge hostname request report](</apidocs#operation/post-cdn-report-edgeHostnameReq>) and [edge hostname request summary](</apidocs#operation/post-cdn-report-edgeHostnameReqSummary>) report APIs.
+* Updated [edge hostname request report](</apidocs/reports/post-cdn-report-edgehostnamereq>) and [edge hostname request summary](</apidocs/reports/post-cdn-report-edgehostnamereqsummary>) report APIs.
 
 #### Portal Updates
 * Fixed purge request progress dialog.
@@ -2233,7 +2233,7 @@
 ## May 22, 2020
 #### API updates
 * Updated limit on purge requests to a maximum of 1000 files and 5 directories at a time.
-* Improved [property list API's](</apidocs#operation/getPropertyList>) filtering.
+* Improved [property list API's](</apidocs/property-management/getpropertylist>) filtering.
 * Introduced [origin_limit_rate directive](</docs/edge-logic/supported-directives#origin_limit_rate>) allowing you to limit the speed at which the response is read from the origin server.
 * Introduced [origin_set_header directive](</docs/edge-logic/supported-directives#origin_set_header>) allowing you to redefine or append fields to the request header passed to the origin server.
 * Introduced advanced directive [origin_header_modify](</docs/edge-logic/supported-directives#origin_header_modify>) allowing you to add, delete, or overwrite the response header fields from the origin before any other processing.
@@ -2248,11 +2248,11 @@
 ## May 8, 2020
 
 #### API updates
-* Fixed the [report APIs’](</apidocs#tag/Reports>) support for wildcards in the hostname filter.
+* Fixed the [report APIs’](</apidocs/reports>) support for wildcards in the hostname filter.
 * Implemented a service to monitor Beian status of domains served by PoPs in China. 
 * Allowed disabling of  support for IPv6 within a client zone rule.
 * Ensured that non-printable characters can only appear in Edge Logic if quoted.
-* Improved [property list API](</apidocs#operation/getPropertyList>)'s filtering support.
+* Improved [property list API](</apidocs/property-management/getpropertylist>)'s filtering support.
 
 #### Portal updates
 * Changed real-time logging format field to make it easier to use.
@@ -2261,7 +2261,7 @@
 
 #### API updates
 * Allowed notifications to be sent to extra recipients.
-* Implemented [CDN product management APIs](</apidocs#tag/CDN-Product-Management>).
+* Implemented [CDN product management APIs](</apidocs/cdn-product-management>).
 * Updated support for trials.
 * Fixed validation of Edge Logic to allow non-Latin characters.
 
@@ -2276,7 +2276,7 @@
 * Added support for limiting the number of portal users.
 * Made regionalOffice field required.
 * Support filtering search of customers based on the regionalOffice field.
-* Support [updating an edge hostname using PATCH](</apidocs#operation/patch-cdn-edge-hostname>).
+* Support [updating an edge hostname using PATCH](</apidocs/edge-hostname-management/patch-cdn-edge-hostname>).
 * Enhanced security to provide additional notifications when settings have been changed.
 * Supported trial customers.
 
@@ -2285,7 +2285,7 @@
 #### API updates
 * Increased security of portal users.
 * Increased security by notifying of account changes.
-* Allowed search of [client regions](</apidocs#operation/get-cdn-clientRegions>) by keyword.
+* Allowed search of [client regions](</apidocs/cdn-product-management/get-cdn-clientregions>) by keyword.
 * Fixed use of redirectHttpToHttps with multiple hostnames.
 
 #### Portal updates
@@ -2295,8 +2295,8 @@
 
 ## March 10, 2020
 #### API updates
-* Ensured email address is required when [creating an API account](</apidocs#operation/post-ngadmin-apiAccounts>).
-* Enhanced [ISP list API](</apidocs#operation/get-cdn-isps>) to support search by keyword and sorting of results.
+* Ensured email address is required when [creating an API account](</apidocs/api-account-management/post-ngadmin-apiaccounts>).
+* Enhanced [ISP list API](</apidocs/cdn-product-management/get-cdn-isps>) to support search by keyword and sorting of results.
 * Improved certificate expiration notice.
 
 #### Portal updates
@@ -2307,10 +2307,10 @@
 
 ## February 26, 2020
 #### API updates
-* Allowed filtering by Beian status in [edge hostnames list API](</apidocs#operation/getEdgeHostnames>).
-* Enhanced [API call history](</apidocs#operation/get-ngadmin-apicalls>) for resellers. We also updated it to return HTTP response statuses of API calls.
-* Enabled [portal user list API](</apidocs#operation/getContacts>) to return results based on status of the user accounts.
-* Allowed users of [customer list API](</apidocs#operation/get-ngadmin-customers>) to search by ‘regional offices’.
+* Allowed filtering by Beian status in [edge hostnames list API](</apidocs/edge-hostname-management/getedgehostnames>).
+* Enhanced [API call history](</apidocs/api-call-history/get-ngadmin-apicalls>) for resellers. We also updated it to return HTTP response statuses of API calls.
+* Enabled [portal user list API](</apidocs/portal-user-management/getcontacts>) to return results based on status of the user accounts.
+* Allowed users of [customer list API](</apidocs/customer-management/get-ngadmin-customers>) to search by ‘regional offices’.
 
 #### Portal updates
 * Improved email about expiring password.
@@ -2318,9 +2318,9 @@
 
 ## February 13, 2020
 #### API updates
-* Fixed [customer update API](</apidocs#operation/patch-ngadmin-customers-id>) to properly handle null fields.
-* Improved security of [Get API Account](</apidocs#operation/get-ngadmin-apiAccounts-id>). 
-* Enhanced [get edge hostname API](</apidocs#operation/getEdgeHostname>)'s response.
+* Fixed [customer update API](</apidocs/customer-management/patch-ngadmin-customers-id>) to properly handle null fields.
+* Improved security of [Get API Account](</apidocs/api-account-management/get-ngadmin-apiaccounts-id>). 
+* Enhanced [get edge hostname API](</apidocs/edge-hostname-management/getedgehostname>)'s response.
 
 #### Portal updates
 * Fixed sorting of results on the pages which contain lists of items.
@@ -2332,8 +2332,8 @@
 ## January 29, 2020
 #### API updates
 * Improved support for auto-renewal of SSL certificates.
-* Added [edge hostname statistics report](</apidocs#operation/post-cdn-report-edgeHostnameReq>).
-* Added [edge hostname summary report API](</apidocs#operation/post-cdn-report-edgeHostnameReqSummary>).
+* Added [edge hostname statistics report](</apidocs/reports/post-cdn-report-edgehostnamereq>).
+* Added [edge hostname summary report API](</apidocs/reports/post-cdn-report-edgehostnamereqsummary>).
 * Supported email notification about TLS certificates that are expiring soon.
 
 #### Portal updates
@@ -2344,7 +2344,7 @@
 
 ## January 10, 2020
 #### API updates
-* Allowed resellers to use the Report-Range header in the [API calls function](</apidocs#operation/get-ngadmin-apicalls>) to further customize their search of API call history.
+* Allowed resellers to use the Report-Range header in the [API calls function](</apidocs/api-call-history/get-ngadmin-apicalls>) to further customize their search of API call history.
 
 #### Portal updates
 * Fixed sorting on Roles page.
@@ -2353,9 +2353,9 @@
 
 ## January 3, 2020
 #### API updates
-* Enhanced [customer list API](</apidocs#operation/get-ngadmin-customers>)'s filtering.
+* Enhanced [customer list API](</apidocs/customer-management/get-ngadmin-customers>)'s filtering.
 * Limited API request body size.
-* Updated [get service quota API](</apidocs#operation/get-cdn-serviceQuotas-customer-customerId>) to support 'me' as a parameter value allowing you to see your own settings.
+* Updated [get service quota API](</apidocs/cdn-product-management/get-cdn-servicequotas-customer-customerid>) to support 'me' as a parameter value allowing you to see your own settings.
 * Updated summary report APIs' responses to include a special group __all__ which consists of total traffic or requests of all groups.
 
 #### Portal updates
@@ -2366,7 +2366,7 @@
 #### API updates
 * Supported getting expiration times of certificates deployed to production and staging.
 * Changed certificate number from decimal to hexadecimal value for consistency with browsers and other tools.
-* Allowed resellers to filter results using the Report-Range header when retrieving [API accounts](</apidocs#operation/get-ngadmin-apiAccounts>) and [portal users](</apidocs#operation/getContacts>).
+* Allowed resellers to filter results using the Report-Range header when retrieving [API accounts](</apidocs/api-account-management/get-ngadmin-apiaccounts>) and [portal users](</apidocs/portal-user-management/getcontacts>).
 * Supported auto-renewal of certificates.
 * Sorted validation task list by submission time by default.
 * Ensured that read-only API accounts can make calls to report APIs.
@@ -2381,11 +2381,11 @@
 #### API updates
 * Fixed support for protocol downgrade to apply only if the property has a certificate.
 * Added support for ISPs in an edge hostname's client zone rules.
-* Supported [search of purge tasks](</apidocs#operation/getPurgeRequestList>) by ID.
-* Supported hasConfig query parameter when getting a [list of properties](</apidocs#operation/getPropertyList>).
-* Added [system configuration API](</apidocs#operation/get-cdn-systemConfigs>).
-* Allowed resellers to use the Report-Range header to filter the [list of properties](</apidocs#operation/getPropertyList>).
-* Added [portal user management APIs](</apidocs#tag/Portal-User-Management>) to allow callers to create, update, query, and delete users.
+* Supported [search of purge tasks](</apidocs/content-management/getpurgerequestlist>) by ID.
+* Supported hasConfig query parameter when getting a [list of properties](</apidocs/property-management/getpropertylist>).
+* Added [system configuration API](</apidocs/cdn-product-management/get-cdn-systemconfigs>).
+* Allowed resellers to use the Report-Range header to filter the [list of properties](</apidocs/property-management/getpropertylist>).
+* Added [portal user management APIs](</apidocs/portal-user-management>) to allow callers to create, update, query, and delete users.
 
 #### Portal updates
 * Auto-populated form fields when creating a new certificate version.
@@ -2396,11 +2396,11 @@
 
 ## November 14, 2019
 #### API updates
-* Added [staging servers API](</apidocs#operation/get-cdn-stagingServers>) to get the IP addresses of staging servers you can use to test your properties before deploying to production.
-* Fixed impersonation support of [API calls](</apidocs#operation/get-ngadmin-apicalls>).
+* Added [staging servers API](</apidocs/cdn-product-management/get-cdn-stagingservers>) to get the IP addresses of staging servers you can use to test your properties before deploying to production.
+* Fixed impersonation support of [API calls](</apidocs/api-call-history/get-ngadmin-apicalls>).
 * Ensure certificates must be <=36kB to avoid problems with IE browser.
-* Enhanced [customer list API](</apidocs#operation/post-ngadmin-customers>) to support new filters.
-* Updated [customer management API](</apidocs#tag/Customer-Management>) to support portalSettings field which includes enabling two factor authentication, password expiration, session logout, and IP whitelist.
+* Enhanced [customer list API](</apidocs/customer-management/post-ngadmin-customers>) to support new filters.
+* Updated [customer management API](</apidocs/customer-management>) to support portalSettings field which includes enabling two factor authentication, password expiration, session logout, and IP whitelist.
 * Added support for separate purge quotas for staging and production.
 
 #### Portal updates
@@ -2415,7 +2415,7 @@
 #### API updates
 * Ensured customers of resellers can have any of the products available to the reseller.
 * Added apiName to the edge hostname deployment history
-* Added apiName to the [API calls](</apidocs#operation/get-ngadmin-apicalls-id>) response.
+* Added apiName to the [API calls](</apidocs/api-call-history/get-ngadmin-apicalls-id>) response.
 Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_ignore_cache_control>) directive allowing you to disable processing of certain cache control directives in the response from the origin.
 
 #### Portal updates
@@ -2427,8 +2427,8 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 #### API updates
 * Improved report API calls.
 * Supported sorting of certificates.
-* Allowed resellers to use the Report-Range header in [certificate list API](</apidocs#operation/getCertificates>).
-* Improved [status code details](</apidocs#operation/getEdgeStatusCodeDetails>) and [origin status code details](</apidocs#operation/getOriginStatusCodeDetails>) reports.
+* Allowed resellers to use the Report-Range header in [certificate list API](</apidocs/certificate-management/getcertificates>).
+* Improved [status code details](</apidocs/reports/getedgestatuscodedetails>) and [origin status code details](</apidocs/reports/getoriginstatuscodedetails>) reports.
 * Allowed all customers to use the proxy_buffering directive.
 
 #### Portal updates
@@ -2468,7 +2468,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 #### API updates
 * Added support for real-time logs (also known as download notification).
 * Improved error handling.
-* Added API support for [enabling two factor authentication (2FA)](</apidocs#operation/patch-ngadmin-customers-id>) and [resetting a user](</apidocs#operation/patch-ngadmin-contacts-id>) which is useful if they change phones.
+* Added API support for [enabling two factor authentication (2FA)](</apidocs/customer-management/patch-ngadmin-customers-id>) and [resetting a user](</apidocs/portal-user-management/patch-ngadmin-contacts-id>) which is useful if they change phones.
 
 #### Portal updates
 
@@ -2490,7 +2490,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 #### API updates
 * Added support for email notifications of events.
 * Fixed support for protocol downgrade option.
-* Updated [get certificate version API](</apidocs#operation/queryCertificateVersion>).
+* Updated [get certificate version API](</apidocs/certificate-management/querycertificateversion>).
 
 #### Portal updates
 * Supported additional languages.
@@ -2529,7 +2529,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 #### API updates
 * Added products, emailAddress, and responsiblePerson fields to the customer resource.
 * Validated [slice](</docs/edge-logic/supported-directives#slice>), [limit_rate](</docs/edge-logic/supported-directives#limit_rate>), and [limit_rate_after](</docs/edge-logic/supported-directives#limit_rate_after>) Edge Logic directives.
-* Added [CDN Product Management APIs](</apidocs#tag/CDN-Product-Management>).
+* Added [CDN Product Management APIs](</apidocs/cdn-product-management>).
 
 #### Portal updates
 * Updated client region values.
@@ -2547,7 +2547,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## June 3, 2019
 #### API updates
-* Supported pagination and searches in [account list API](</apidocs#operation/get-ngadmin-apiAccounts>).
+* Supported pagination and searches in [account list API](</apidocs/api-account-management/get-ngadmin-apiaccounts>).
 * Updated support for testing deployments to staging.
 * Supported gzip compression in API responses.
 * Supported longer origin timeouts.
@@ -2563,7 +2563,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## May 16, 2019
 #### API updates
-* Added support for [searching purge history by hostname](</apidocs#operation/getPurgeRequestList>).
+* Added support for [searching purge history by hostname](</apidocs/content-management/getpurgerequestlist>).
 * Updated [supported Edge Logic directives](</docs/edge-logic/supported-directives>).
 * Updated certificate APIs.
 * Fixed purge issues.
@@ -2576,10 +2576,10 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## April 16, 2019
 
 #### API updates
-* Enhanced [get customer API](/apidocs#operation/get-ngadmin-customers-ID).
+* Enhanced [get customer API](/apidocs/customer-management/get-ngadmin-customers-id).
 * Fixed directory purge.
 * Supported retrieving the identities of properties and domains using a certificate in staging and production.
-* Allowed resellers to [search for multiple customers by their IDs](</apidocs#operation/get-ngadmin-customers>).
+* Allowed resellers to [search for multiple customers by their IDs](</apidocs/customer-management/get-ngadmin-customers>).
 
 #### Portal updates
 * Required users to confirm changes before deploying a property.
@@ -2605,7 +2605,7 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 #### API updates
 * Split purge quota into separate file and directory quotas.
 * Added support for returning the customer ID that owns various resources.
-* Improved [status code details](</apidocs#operation/getEdgeStatusCodeDetails>) report.
+* Improved [status code details](</apidocs/reports/getedgestatuscodedetails>) report.
 * Updated cache key hostname processing.
 
 #### Portal updates
@@ -2614,15 +2614,15 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## March 4, 2019
 #### API updates
 * Improved deployment.
-* Updated [certificate update API](</apidocs#operation/updateCertificate>).
-* Updated [purge API](</apidocs#operation/queryPurgeStatus>) to expose success rate and improve validation of URLs.
+* Updated [certificate update API](</apidocs/certificate-management/updatecertificate>).
+* Updated [purge API](</apidocs/content-management/querypurgestatus>) to expose success rate and improve validation of URLs.
 
 
 ## February 19, 2019
 #### API updates
-* Improved validation when [creating a customer account](</apidocs#operation/post-ngadmin-customers>).
+* Improved validation when [creating a customer account](</apidocs/customer-management/post-ngadmin-customers>).
 * Fixed issues with the property converter.
-* Improved the [get property version API](</apidocs#operation/getPropertyVersion>).
+* Improved the [get property version API](</apidocs/property-management/getpropertyversion>).
 * Encoded URI and query string in purge requests.
 * Improved purge APIs further.
 
@@ -2657,58 +2657,58 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## January 8, 2019
 #### API updates
-* Supported folder [purge](</apidocs#operation/createPurge>).
-* Fixed [historical hostname API](</apidocs#operation/get-cdn-hostnames-historical-hostname>).
+* Supported folder [purge](</apidocs/content-management/createpurge>).
+* Fixed [historical hostname API](</apidocs/hostnames/get-cdn-hostnames-historical-hostname>).
 * Improved security.
 * Improved client zone rules of edge hostnames.
 
 ## December 20, 2018
 #### API updates.
-* Allowed querying for [purge statistics](</apidocs#operation/queryPurgeSummary>).
-* Updated [historical hostname API](</apidocs#operation/getHistoricalHostnames>).
+* Allowed querying for [purge statistics](</apidocs/content-management/querypurgesummary>).
+* Updated [historical hostname API](</apidocs/hostnames/gethistoricalhostnames>).
 * Improved encryption of certificate keys.
-* Added APIs for [logs](</apidocs#operation/get-cdn-report-logDownload>) and [intermediate traffic](</apidocs#operation/getIntermediateTraffic>).
-* Added [Get property version list API](</apidocs#operation/getPropertyVersions>).
+* Added APIs for [logs](</apidocs/reports/get-cdn-report-logdownload>) and [intermediate traffic](</apidocs/reports/getintermediatetraffic>).
+* Added [Get property version list API](</apidocs/property-management/getpropertyversions>).
 * Improved error handling.
 
 ## December 3, 2018
 #### API updates
 * Updated APIs for auditing.
 * Improved identification of failures in property deployment.
-* Added [historical hostname list API](</apidocs#operation/getHistoricalHostnames>).
-* Supported filtering in [report APIs](</apidocs#tag/Reports>).
+* Added [historical hostname list API](</apidocs/hostnames/gethistoricalhostnames>).
+* Supported filtering in [report APIs](</apidocs/reports>).
 
 ## November 19, 2018
 #### API updates
 * Added allowedCacheDirectives to control access to resource-intensive NGINX directives.
-* Updated [edge hostname API](</apidocs#operation/createEdgeHostname>).
+* Updated [edge hostname API](</apidocs/edge-hostname-management/createedgehostname>).
 
 ## November 6, 2018
 #### API updates
 * Improved error messages.
 * Improved CSR downloads.
-* Improved [edge hostname APIs](</apidocs#tag/Edge-Hostname-Management>).
+* Improved [edge hostname APIs](</apidocs/edge-hostname-management>).
 
 ## October 22, 2018
 #### API updates
-* Updated output of [Get API Account](</apidocs#operation/get-ngadmin-apiAccounts-id>).
+* Updated output of [Get API Account](</apidocs/api-account-management/get-ngadmin-apiaccounts-id>).
 * Improved validation of edge hostnames' clientZones.
 
 ## September 21, 2018
 #### API updates
 * Updated property validation and conversion.
-* Enhanced [customer list API](</apidocs#operation/get-ngadmin-customers>).
+* Enhanced [customer list API](</apidocs/customer-management/get-ngadmin-customers>).
 
 ## September 13, 2018
 #### API updates
 * Improved validation.
-* Updated annotation and [edge hostname creation](</apidocs#operation/createEdgeHostname>). 
+* Updated annotation and [edge hostname creation](</apidocs/edge-hostname-management/createedgehostname>). 
 
 
 ## August 30, 2018
 #### API updates
 * Updated report annotation.
-* Improved [validation of properties](</apidocs#operation/createValidationTask>).
+* Improved [validation of properties](</apidocs/property-validation/createvalidationtask>).
 
 ## August 13, 2018
 #### API updates
@@ -2721,12 +2721,12 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## July 3, 2018
 #### API updates
 * Improved error handling.
-* Improved [property creation API](/apidocs#operation/createPropertyVersion).
+* Improved [property creation API](/apidocs/property-management/createpropertyversion).
 
 ## June 18, 2018
 #### API updates
-* Fixed [get hostname API](</apidocs#operation/queryOneHostname>).
-* Supported [searching for property validation task](</apidocs#operation/queryPropertyValidationList>) by keyword.
+* Fixed [get hostname API](</apidocs/hostnames/queryonehostname>).
+* Supported [searching for property validation task](</apidocs/property-validation/querypropertyvalidationlist>) by keyword.
 
 #### API updates
 * Improved certificate and account management.
@@ -2737,11 +2737,11 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 
 ## May 10, 2018
 #### API updates
-* Improved [property update API](</apidocs#operation/getPropertyVersion>).
+* Improved [property update API](</apidocs/property-management/getpropertyversion>).
 
 ## February 23, 2018
 #### API updates
-* Improved error handling when [creating API accounts](</apidocs#operation/deleteApiAccount>).
+* Improved error handling when [creating API accounts](</apidocs/api-account-management/deleteapiaccount>).
 * Required encryption of private keys
 * Improved getting property details.
 * Fixed handling of suspended customers.
@@ -2751,9 +2751,9 @@ Added [proxy_ignore_cache_control](</docs/edge-logic/supported-directives#proxy_
 ## February 9, 2018
 #### API updates
 * Improved API account updates.
-* Updated [customer list API](</apidocs#operation/post-ngadmin-customers>).
+* Updated [customer list API](</apidocs/customer-management/post-ngadmin-customers>).
 
 ## January 26, 2018
 #### API updates
-* Fixed issues in [API account list](</apidocs#operation/post-ngadmin-apiAccounts>) and [update API account](</apidocs#operation/patch-ngadmin-apiAccounts-id>).
+* Fixed issues in [API account list](</apidocs/api-account-management/post-ngadmin-apiaccounts>) and [update API account](</apidocs/api-account-management/patch-ngadmin-apiaccounts-id>).
 * Improved error handling of property validations.

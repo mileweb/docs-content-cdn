@@ -36,7 +36,7 @@ properties:
           type: string
       propertyHostnames:
         type: array
-        description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="#operation/createProperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+        description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
         items:
           type: string
       legacyTypes:

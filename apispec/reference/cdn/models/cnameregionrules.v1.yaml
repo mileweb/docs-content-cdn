@@ -39,7 +39,7 @@ properties:
   region:
     type: string
     description: |-
-      This field indicates the region in which the rule applies. Refer to our <a href="#operation/get-cdn-clientRegions">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify "eu" as the region. You can indicate specific countries. For example, "na.us" represents the "United States of America", and "eu.fr" represents "France".
+      This field indicates the region in which the rule applies. Refer to our <a href="/apidocs/cdn-product-management/get-cdn-clientregions">API to get client regions</a> to get valid region codes. For example, if you wish to create a rule that covers all of Europe, simply specify "eu" as the region. You can indicate specific countries. For example, "na.us" represents the "United States of America", and "eu.fr" represents "France".
 
       A special client region “all” can be used to specify that the rule applies to the entire world. If overlapping regions are specified, the more specific one takes precedence. For example, if you specify "as" in one rule and "as.cn" in another, a request from China will follow the rule for "as.cn".
   weight:
@@ -94,7 +94,7 @@ properties:
         default: true
   isp:
     type: string
-    description: Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href="#operation/get-cdn-isps">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP.
+    description: Specify the code representing an ISP (Internet Service Provider) if the rule only applies to requests from a particular ISP. Call our <a href="/apidocs/cdn-product-management/get-cdn-isps">API to get a list of supported ISPs</a>. Specify 'all' to indicate all ISPs rather than a particular one. Specify a comma-separated list of up to 10 ISP codes if you want your rule to apply to more than one ISP.
 required:
   - region
   - action

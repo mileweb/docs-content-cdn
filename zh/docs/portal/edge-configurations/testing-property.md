@@ -10,7 +10,7 @@ CDN Pro 提供了演练环境，供您在不影响生产环境的情况下测试
 
 <p align=center><img src="/docs/resources/images/edge-configurations/property-deployment-CH-1.jpg" alt="staging servers" width="400"></p>
 
-您也可以通过调用我们的[演练环境服务器 API](</apidocs#operation/get-cdn-stagingServers>)获取当前的 IP 地址列表。
+您也可以通过调用我们的[演练环境服务器 API](</apidocs/cdn-product-management/get-cdn-stagingservers>)获取当前的 IP 地址列表。
 
 选择一个 IP 地址。其中的 ```location``` 字段表示演练服务器所在的国家或地区。如果您的加速域名已有 ICP备案，可以使用位于中国的 IP 地址。否则，请选择其他国家的 IP 地址，以避免出现 HTTP 451 'Unavailable for Legal Reasons'（因法律原因不可用）状态错误。
 

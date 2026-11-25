@@ -77,7 +77,7 @@ properties:
       This setting applies to trial customers. It is used to limit traffic use. It represents the number of days over which the traffic amount designated by the <i>usageLimitDollar</i> field can be used. For example, a value of 90 for <i>usageLimitDays</i> and 50 for <i>usageLimitDollar</i> means the customer can use up to $50 worth of total traffic over a 90 day period.
   allowDeploymentInChina:
     type: boolean
-    description: 'Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer''s name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href="#operation/post-ngadmin-customers">creating</a> or <a href="#operation/patch-ngadmin-customers-id">updating</a> a customer.'
+    description: 'Indicates whether deployment to PoPs in mainland China is permitted. An ICP Beian license is required for web content to be hosted on servers within China. A reseller must collect and verify a child customer''s name, address, phone, responsible person, and China business information before enabling deployment to China. Those settings are specified when <a href="/apidocs/customer-management/post-ngadmin-customers">creating</a> or <a href="/apidocs/customer-management/patch-ngadmin-customers-id">updating</a> a customer.'
     default: false
   trialDeadline:
     type: string
@@ -105,7 +105,7 @@ properties:
     description: Total number of secrets that can be created.
   edgeHostnameZones:
     type: array
-    description: 'List of zones specifying the domains that can be used for <a href="#tag/Edge-Hostname-Management">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain''s authoritative DNS to us.'
+    description: 'List of zones specifying the domains that can be used for <a href="/apidocs/edge-hostname-management">edge hostnames</a>. Our default is <i>qtlcdn.com</i>. Each new edge hostname you create is a subdomain of .qtlcdn.com (for example, abcdefghi123.qtlcdn.com). If you are a reseller and want to use your own domain as the suffix instead, please contact us about adding this feature to your contract. You will need to delegate the domain''s authoritative DNS to us.'
     items:
       type: object
       properties:
@@ -118,19 +118,19 @@ properties:
   maxFilePurgeEntries:
     type: integer
     minimum: 1
-    description: Maximum number of file URLs that can be included in the fileUrls field of a <a href="#operation/createPurge">purge request</a>.
+    description: Maximum number of file URLs that can be included in the fileUrls field of a <a href="/apidocs/content-management/createpurge">purge request</a>.
     default: 1000
   maxDirPurgeEntries:
     type: integer
     minimum: 1
-    description: Maximum number of directory URLs that can be included in the dirUrls field of a <a href="#operation/createPurge">purge request</a>.
+    description: Maximum number of directory URLs that can be included in the dirUrls field of a <a href="/apidocs/content-management/createpurge">purge request</a>.
     default: 20
   accountManagerEmail:
     type: string
     description: An email address representing the account manager.
   allowedLbDirectives:
     type: array
-    description: 'A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href="#operation/get-cdn-systemConfigs">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.'
+    description: 'A list of advanced Edge Logic directives that can be used in the loadBalancerLogic field of a property in addition to the set of basic load balancer directives listed in the  <a href="/apidocs/cdn-product-management/get-cdn-systemconfigs">system configuration API</a>. If you require an advanced load balancer directive, please contact our support team.'
     items:
       type: string
   allowedServerGroups:

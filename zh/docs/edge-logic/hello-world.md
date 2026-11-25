@@ -13,7 +13,7 @@ location / {
 
 <p align=center><img src="/docs/resources/images/edge-logic/helloworld.png" alt="hello world" width="500"></p>
 
-如果您希望[通过API来创建加速项](</apidocs#operation/createProperty>) ，您可以将代码以如下格式放到JSON文件的"version.edgeLogic"字段中：
+如果您希望[通过API来创建加速项](</apidocs/property-management/createproperty>) ，您可以将代码以如下格式放到JSON文件的"version.edgeLogic"字段中：
 
 ```testdomain.json :```
 ```json

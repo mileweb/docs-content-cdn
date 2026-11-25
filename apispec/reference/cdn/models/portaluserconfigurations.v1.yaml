@@ -32,7 +32,7 @@ properties:
   status:
     type: string
     default: suspended
-    description: Indicates the status of the portal user account. An 'active' user has full access to the portal. A 'suspended' user cannot log in.  A 'pending' user is one that has been invited to use the portal but has not completed setting up the account.  You cannot call the <a href="#operation/createContact">Create a  portal user</a> or <a href="#operation/patch-ngadmin-contacts-id">Update a portal user</a> APIs with a status value of 'pending'.
+    description: Indicates the status of the portal user account. An 'active' user has full access to the portal. A 'suspended' user cannot log in.  A 'pending' user is one that has been invited to use the portal but has not completed setting up the account.  You cannot call the <a href="/apidocs/portal-user-management/createcontact">Create a  portal user</a> or <a href="/apidocs/portal-user-management/patch-ngadmin-contacts-id">Update a portal user</a> APIs with a status value of 'pending'.
     enum:
       - active
       - suspended
@@ -44,6 +44,6 @@ properties:
       type: integer
   ipWhiteList:
     type: array
-    description: 'List of IP addresses from which the portal user can log in. This list applies in addition to the portalSettings.ipWhiteList''s addresses you can <a href="#operation/patch-ngadmin-customers-id">set up at the customer level.</a> You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>'
+    description: 'List of IP addresses from which the portal user can log in. This list applies in addition to the portalSettings.ipWhiteList''s addresses you can <a href="/apidocs/customer-management/patch-ngadmin-customers-id">set up at the customer level.</a> You can specify a range, an individual IP address, or an IP in CIDR notation. Compressed and uncompressed IPv6 addresses are also permitted. Example: <code>[\"1.1.1.1-1.1.1.8\", \"1.2.3.4\", \"1.5.5.0/24\"]</code>'
     items:
       type: string
