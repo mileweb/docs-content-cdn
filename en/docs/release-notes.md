@@ -1,5 +1,14 @@
 # Release Notes
 
+## November 24, 2026
+#### API updates
+* Added the [edge average RTT report](</apidocs/reports/post-cdn-report-avgedgertt>), which returns the average round trip time between our edge servers and your clients, in microseconds.
+* Added a `status` field to the responses of the [edge hostname](</apidocs/edge-hostname-management/getedgehostname>) and [edge hostname list](</apidocs/edge-hostname-management/getedgehostnames>) APIs. The field shows whether the edge hostname is being created, updated, or deleted, is active, or failed its latest operation. The edge hostname list can now also be filtered by status.
+
+#### Console updates
+* Improved the signup page so that the security check completes even when one of the CAPTCHA hosts is slow or unreachable.
+* Improved the message shown when no access logs are found, so it tells you whether a log configuration is missing or the selected date range has no requests.
+
 ## November 10, 2026
 #### API updates
 * Added the `certificate` and `notBeforeTime` fields to the certificate version query response. These fields return the server certificate in PEM format and the time when its validity starts.
