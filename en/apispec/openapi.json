@@ -37608,7 +37608,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "groupby",
+            "name": "groupBy",
             "description": "You can group results using any combination of up to two of 'hostnames', 'serverGroups', 'customerIds', and 'propertyHostnames' by specifying a comma-separated list of the keywords. Only resellers can specify 'customerIds'."
           },
           {

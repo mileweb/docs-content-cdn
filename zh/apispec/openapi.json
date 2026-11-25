@@ -37608,7 +37608,7 @@
               "type": "string"
             },
             "in": "query",
-            "name": "groupby",
+            "name": "groupBy",
             "description": "您可以通过指定以逗号分隔的关键字列表，使用 'hostnames'、'serverGroups'、'customerIds' 和 'propertyHostnames' 中最多两项的任意组合对结果进行分组。只有代理商可以指定 'customerIds'。"
           },
           {
