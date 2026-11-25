@@ -644,6 +644,15 @@ paths:
                     description: RFC 3339 format date indicating when the edge hostname was created.
                     example: '2019-11-11T23:34:59Z'
                     format: date-time
+                  status:
+                    type: string
+                    description: 'The current status of the edge hostname, derived from its latest operation. Possible values are: <table><tr><th>Value</th><th>Description</th></tr><tr><td>creating</td><td>A creation operation is in progress.</td></tr><tr><td>updating</td><td>An update operation is in progress.</td></tr><tr><td>active</td><td>The latest operation succeeded and the edge hostname is in service.</td></tr><tr><td>deleting</td><td>A deletion operation is in progress.</td></tr><tr><td>error</td><td>The latest operation (creation, update, or deletion) failed.</td></tr></table>'
+                    enum:
+                      - creating
+                      - updating
+                      - active
+                      - deleting
+                      - error
                   ownerCustomerId:
                     type: integer
                     description: Indicates the customer account that owns the edge hostname.
@@ -697,6 +706,7 @@ paths:
                       geoFences: []
                     creationTime: '2023-09-01T23:54:47Z'
                     lastUpdateTime: '2023-09-01T23:54:47Z'
+                    status: active
                     history:
                       - apiName: myapiname
                         operation: creation
@@ -2079,6 +2089,15 @@ paths:
                         customerId:
                           type: integer
                           description: ID of the customer that owns the edge hostname will be returned in response to a reseller using the Report-Range header with a value of self+children or children-only.
+                        status:
+                          type: string
+                          description: 'The current status of the edge hostname, derived from its latest operation. Possible values are: <table><tr><th>Value</th><th>Description</th></tr><tr><td>creating</td><td>A creation operation is in progress.</td></tr><tr><td>updating</td><td>An update operation is in progress.</td></tr><tr><td>active</td><td>The latest operation succeeded and the edge hostname is in service.</td></tr><tr><td>deleting</td><td>A deletion operation is in progress.</td></tr><tr><td>error</td><td>The latest operation (creation, update, or deletion) failed.</td></tr></table>'
+                          enum:
+                            - creating
+                            - updating
+                            - active
+                            - deleting
+                            - error
                       required:
                         - edgeHostname
                         - description
@@ -2102,12 +2121,14 @@ paths:
                         description: my edge hostname
                         hasBeian: false
                         highestServerGroup: standard
+                        status: active
                         lastUpdateTime: '2019-12-04T19:44:12Z'
                         creationTime: '2019-12-04T19:44:12Z'
                       - edgeHostname: cdn.admtl.com.qtlgslb.com
                         description: ''
                         hasBeian: false
                         highestServerGroup: standard
+                        status: active
                         lastUpdateTime: '2019-11-21T00:15:35Z'
                         creationTime: '2019-11-21T00:15:35Z'
         '400':
@@ -2217,6 +2238,11 @@ paths:
           in: query
           name: serverGroups
           description: 'Comma-separated list of server groups ( chinaStandard, chinaPremium, standard, premium, deluxe, ultra, and nearChina). Only edge hostnames whose client zone rules reference the server groups will be returned.'
+        - schema:
+            type: string
+          in: query
+          name: status
+          description: 'Comma-separated list of edge hostname statuses (<i>creating</i>, <i>updating</i>, <i>active</i>, <i>deleting</i>, and <i>error</i>). Matching is case-insensitive. Only edge hostnames whose current status matches any of the specified values will be returned. By default, edge hostnames in all statuses are returned.'
   /cdn/certificates:
     post:
       summary: Create a certificate
@@ -13711,6 +13737,137 @@ paths:
                     hostnames:
                       - endtoendsds.domain.info
         description: 'The request body can include filters to customize the results. By default, data from all hostnames and server groups will be included.'
+  /cdn/report/avgEdgeRtt:
+    post:
+      summary: Get the average edge round trip time
+      tags:
+        - Reports
+      responses:
+        '200':
+          description: The response contains the data. Note that it is always in UTC time.
+          content:
+            application/json:
+              schema:
+                $ref: ./models/reportresponse.v1.yaml
+              examples:
+                example-1:
+                  value:
+                    dataName: Edge Average Round Trip Time
+                    dataUnit: microseconds
+                    dataSeries:
+                      - timestamp: '2026-01-01T00:00:00Z'
+                        data: 33400
+                      - timestamp: '2026-01-01T00:05:00Z'
+                        data: 37200
+        '400':
+          description: The request is invalid. Refer to the response body for details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                Invalid scheme:
+                  value:
+                    code: InvalidScheme
+                    message: 'Invalid parameter ''scheme'': ''invalid''. The value of the scheme parameter must be ''http'', ''https'' or ''all''.'
+                Invalid report range:
+                  value:
+                    code: InvalidReportRange
+                    message: 'Invalid parameter ''Report-Range'': ''all''. The value of the Report-Range header must be ''self-only'', ''self+children'' or ''children-only''.'
+                Invalid time span:
+                  value:
+                    code: InvalidTimeSpan
+                    message: The max time span of 'daily' report must be no more than 366 days.
+                Invalid property hostnames:
+                  value:
+                    code: InvalidPropertyHostnames
+                    message: 'Invalid propertyHostname(s): ''notAHostname''.'
+      operationId: post-cdn-report-avgEdgeRtt
+      x-codeSamples:
+        - lang: bash
+          label: CDNProSDK-bash
+          source: |
+            ./cdnapi.sh POST /report/avgEdgeRtt?type=daily -p -m 2024-10 -j body.json
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Report-Range
+          description: An optional header that resellers can use to specify whether to include data from children customers. <table><tr><th>Value</th><th>Behavior</th></tr><tr><td>self-only</td><td>Include hostnames from the caller.</td></tr><tr><td>children-only</td><td>Only hostnames owned by children customers will be included.</td></tr><tr><td>self+children</td><td>Include data from hostnames of both the caller and children customers.</td></tr></table>
+        - schema:
+            type: string
+          in: header
+          name: On-Behalf-Of
+          description: 'If you are a reseller, you can use this header to specify the ID of a child customer.'
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: startdate
+          description: 'RFC 3339 date indicating the beginning of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>startdate=2019-10-30T00:00:00Z</code> Your startdate may be rounded down to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data beginning 2019-09-05T03:00:00Z.'
+          required: true
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: enddate
+          description: 'RFC 3339 date indicating the end of the time period. The time must be specified using the UTC timezone; it cannot be an offset. Example: <code>enddate=2019-11-14T00:00:00Z</code> Your enddate may be rounded up to the nearest minute, hour, or day depending on the <i>type</i> parameter. For example, if you enter <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>, the response includes data ending 2019-09-05T04:00:00Z.'
+          required: true
+        - schema:
+            type: string
+            enum:
+              - fiveminutes
+              - hourly
+              - daily
+              - monthly
+          in: query
+          name: type
+          description: 'Indicates the granularity of returned data. By default, 00:00:00 in UTC is used as the beginning of a day. If you wish to use a different offset from UTC, you can append -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14. For example, <code>type=daily+8</code> means the day as defined in UTC+8 time.'
+          required: true
+        - schema:
+            type: string
+            default: all
+          in: query
+          name: scheme
+          description: Choose whether to include HTTP and HTTPS traffic in the results. The default "all" includes both types of traffic.
+      description: Get the average round trip time (RTT) between CDN Pro edge servers and clients for your content. The value is reported in microseconds and is averaged over all measured requests in each time interval.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  type: object
+                  description: 'Filter results by specifying hostnames, property hostnames, or property IDs.'
+                  properties:
+                    hostnames:
+                      type: array
+                      description: 'List of hostnames for which to return data. Wildcard hostnames such as *.domain.com are also permitted. If unspecified, data from all hostnames will be returned.'
+                      items:
+                        type: string
+                    propertyHostnames:
+                      type: array
+                      description: 'A list of property hostnames for which to return data. These correspond to values in the <i>hostnames</i> field of a property configuration. These can differ from the value sent in an HTTP request. For example, if you <a href="/apidocs/property-management/createproperty">create a property</a> to accelerate ''*.test.com'', a client could request content and pass a Host header of ''abc.test.com''. In this case, ''\*.test.com'' is a property hostname you can filter by using this field while ''abc.test.com'' is a hostname you can filter by using the hostnames field. By default, data for all property hostnames is returned.'
+                      items:
+                        type: string
+                    propertyIds:
+                      type: array
+                      description: 'IDs of properties for which to return data. If unspecified, data for all properties will be returned.'
+                      items:
+                        type: string
+            examples:
+              Return data for a specific hostname only:
+                value:
+                  filters:
+                    hostnames:
+                      - endtoendsds.domain.info
+        description: 'The request body can include filters to customize the results. By default, data from all hostnames will be included.'
   '/cdn/hostnames/historical/{hostname}':
     parameters:
       - schema:

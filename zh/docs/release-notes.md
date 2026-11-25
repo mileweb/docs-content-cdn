@@ -1,5 +1,14 @@
 # 发布日志
 
+## 2026年11月24日
+#### API 更新
+* 新增[边缘平均往返时延报表](</apidocs/reports/post-cdn-report-avgedgertt>)，返回边缘服务器与客户端之间的平均往返时延，单位为微秒。
+* [调度域名](</apidocs/edge-hostname-management/getedgehostname>)和[调度域名列表](</apidocs/edge-hostname-management/getedgehostnames>)接口的响应中新增 `status` 字段，用于显示调度域名是否正在创建、更新或删除、是否已生效，以及最近一次操作是否失败。调度域名列表还支持按状态过滤。
+
+#### 控制台更新
+* 改进了注册页面，避免因图形验证码加载异常而无法提交注册信息。
+* 改进了未找到访问日志可下载时的提示信息，让您能够分辨是缺少日志配置，还是所选时间范围内没有请求。
+
 ## 2026年11月10日
 #### API 更新
 * 证书版本查询接口的响应中新增了 `certificate` 和 `notBeforeTime` 字段，用于返回服务器证书的 PEM 格式内容及其有效期的起始时间。

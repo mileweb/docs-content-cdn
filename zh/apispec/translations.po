@@ -1426,7 +1426,7 @@ msgstr "获取加速项目版本"
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/get/parameters/0/description
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/patch/parameters/0/description
 #. /paths/~1cdn~1properties~1{propertyID}~1versions~1{version}/delete/parameters/0/description
-#. (+108 more)
+#. (+109 more)
 msgid ""
 "If you are a reseller, you can use this header to specify the ID of a child "
 "customer."
@@ -2057,6 +2057,25 @@ msgstr "表示调度域名最后修改时间的 RFC 3339 格式日期。"
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/creationTime/description
 msgid "RFC 3339 format date indicating when the edge hostname was created."
 msgstr "表示调度域名创建时间的 RFC 3339 格式日期。"
+
+#. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/status/description
+#. /paths/~1cdn~1edgeHostnames/get/responses/200/content/application~1json/schema/properties/edgeHostnames/items/properties/status/description
+msgid ""
+"The current status of the edge hostname, derived from its latest operation. "
+"Possible values are: <table><tr><th>Value</th><th>Description</th></"
+"tr><tr><td>creating</td><td>A creation operation is in progress.</td></"
+"tr><tr><td>updating</td><td>An update operation is in progress.</td></"
+"tr><tr><td>active</td><td>The latest operation succeeded and the edge "
+"hostname is in service.</td></tr><tr><td>deleting</td><td>A deletion "
+"operation is in progress.</td></tr><tr><td>error</td><td>The latest "
+"operation (creation, update, or deletion) failed.</td></tr></table>"
+msgstr ""
+"调度域名的当前状态，根据其最近一次操作得出。可能的取值如下：<table><tr><th>值"
+"</th><th>说明</th></tr><tr><td>creating</td><td>创建操作正在进行中。</td></"
+"tr><tr><td>updating</td><td>更新操作正在进行中。</td></tr><tr><td>active</"
+"td><td>最近一次操作已成功，调度域名已生效。</td></tr><tr><td>deleting</"
+"td><td>删除操作正在进行中。</td></tr><tr><td>error</td><td>最近一次操作（创"
+"建、更新或删除）失败。</td></tr></table>"
 
 #. /paths/~1cdn~1edgeHostnames~1{edgeHostname}/get/responses/200/content/application~1json/schema/properties/ownerCustomerId/description
 msgid "Indicates the customer account that owns the edge hostname."
@@ -2906,6 +2925,18 @@ msgstr ""
 "以逗号分隔的节点组列表（chinaStandard、chinaPremium、standard、premium、"
 "deluxe、ultra 和 nearChina）。仅返回其客户端分区规则引用了这些节点组的调度域"
 "名。"
+
+#. /paths/~1cdn~1edgeHostnames/get/parameters/9/description
+msgid ""
+"Comma-separated list of edge hostname statuses (<i>creating</i>, "
+"<i>updating</i>, <i>active</i>, <i>deleting</i>, and <i>error</i>). Matching "
+"is case-insensitive. Only edge hostnames whose current status matches any of "
+"the specified values will be returned. By default, edge hostnames in all "
+"statuses are returned."
+msgstr ""
+"以逗号分隔的调度域名状态列表（<i>creating</i>、<i>updating</i>、<i>active</"
+"i>、<i>deleting</i> 和 <i>error</i>）。匹配不区分大小写。仅返回当前状态与所列"
+"任一值匹配的调度域名。默认返回所有状态的调度域名。"
 
 #. /paths/~1cdn~1certificates/post/summary
 msgid "Create a certificate"
@@ -4937,49 +4968,49 @@ msgstr "获取边缘流量"
 #. /paths/~1cdn~1report~1vol/post/responses/200/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/description
 #. /paths/~1cdn~1report~1req/post/responses/200/description
-#. (+11 more)
+#. (+12 more)
 msgid "The response contains the data. Note that it is always in UTC time."
 msgstr "响应包含数据。请注意，时间始终为 UTC 时间。"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/title
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/title
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/title
-#. (+9 more)
+#. (+10 more)
 msgid "reportResponse"
 msgstr "reportResponse"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/description
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/description
-#. (+9 more)
+#. (+10 more)
 msgid "Contains data returned by a report."
 msgstr "包含报表返回的数据。"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/properties/dataName/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/properties/dataName/description
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/properties/dataName/description
-#. (+12 more)
+#. (+13 more)
 msgid "A brief description of the data."
 msgstr "数据的简要描述。"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/properties/dataUnit/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/properties/dataUnit/description
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/properties/dataUnit/description
-#. (+9 more)
+#. (+10 more)
 msgid "Unit of measurement. This will depend on the report API."
 msgstr "计量单位，取决于具体的报表 API。"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/properties/dataSeries/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/properties/dataSeries/description
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/properties/dataSeries/description
-#. (+9 more)
+#. (+10 more)
 msgid "The data points."
 msgstr "数据点。"
 
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/properties/dataSeries/items/properties/timestamp/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/properties/dataSeries/items/properties/timestamp/description
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/properties/dataSeries/items/properties/timestamp/description
-#. (+9 more)
+#. (+10 more)
 msgid ""
 "An RFC 3339 format date representing the beginning of a time interval. It is "
 "always in <b>UTC</b> time. For example:  <code>\"timestamp\": "
@@ -4991,7 +5022,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1vol/post/responses/200/content/application~1json/schema/properties/dataSeries/items/properties/data/description
 #. /paths/~1cdn~1report~1volOrigin/post/responses/200/content/application~1json/schema/properties/dataSeries/items/properties/data/description
 #. /paths/~1cdn~1report~1req/post/responses/200/content/application~1json/schema/properties/dataSeries/items/properties/data/description
-#. (+9 more)
+#. (+10 more)
 msgid ""
 "A value at that timestamp. Refer to the <i>dataUnit</i> field for the unit "
 "of measurement."
@@ -4999,8 +5030,8 @@ msgstr "该时间戳对应的值。计量单位请参阅 <i>dataUnit</i> 字段�
 
 #. /paths/~1cdn~1report~1vol/post/responses/400/description
 #. /paths/~1cdn~1report~1cpuTime/post/responses/400/description
-#. /paths/~1cdn~1secrets/post/responses/400/description
-#. (+2 more)
+#. /paths/~1cdn~1report~1avgEdgeRtt/post/responses/400/description
+#. (+3 more)
 msgid "The request is invalid. Refer to the response body for details."
 msgstr "请求无效。详情请参阅响应体。"
 
@@ -5066,7 +5097,7 @@ msgstr "要返回数据的一个或多个节点组。如果未指定，将返回
 #. /paths/~1cdn~1report~1vol/post/requestBody/content/application~1json/schema/properties/filters/properties/propertyIds/description
 #. /paths/~1cdn~1report~1vol/post/requestBody/content/application~1xml/schema/properties/filters/properties/propertyIds/description
 #. /paths/~1cdn~1report~1volOrigin/post/requestBody/content/application~1json/schema/properties/filters/properties/propertyIds/description
-#. (+15 more)
+#. (+16 more)
 msgid ""
 "IDs of properties for which to return data. If unspecified, data for all "
 "properties will be returned."
@@ -5075,7 +5106,7 @@ msgstr "要返回数据的加速项目的 ID。如果未指定，将返回所有
 #. /paths/~1cdn~1report~1vol/post/requestBody/content/application~1json/schema/properties/filters/properties/propertyHostnames/description
 #. /paths/~1cdn~1report~1vol/post/requestBody/content/application~1xml/schema/properties/filters/properties/propertyHostnames/description
 #. /paths/~1cdn~1report~1volOrigin/post/requestBody/content/application~1json/schema/properties/filters/properties/propertyHostnames/description
-#. (+17 more)
+#. (+18 more)
 msgid ""
 "A list of property hostnames for which to return data. These correspond to "
 "values in the <i>hostnames</i> field of a property configuration. These can "
@@ -5115,7 +5146,7 @@ msgstr "请求体可包含过滤条件以自定义结果。默认包含所有加
 #. /paths/~1cdn~1report~1vol/post/parameters/0/description
 #. /paths/~1cdn~1report~1volOrigin/post/parameters/0/description
 #. /paths/~1cdn~1report~1req/post/parameters/0/description
-#. (+9 more)
+#. (+10 more)
 msgid ""
 "RFC 3339 date indicating the beginning of the time period. The time must be "
 "specified using the UTC timezone; it cannot be an offset. Example: "
@@ -5134,7 +5165,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1vol/post/parameters/1/description
 #. /paths/~1cdn~1report~1volOrigin/post/parameters/1/description
 #. /paths/~1cdn~1report~1bandwidth/post/parameters/1/description
-#. (+8 more)
+#. (+9 more)
 msgid ""
 "RFC 3339 date indicating the end of the time period. The time must be "
 "specified using the UTC timezone; it cannot be an offset. Example: "
@@ -5152,7 +5183,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1vol/post/parameters/2/description
 #. /paths/~1cdn~1report~1volOrigin/post/parameters/2/description
 #. /paths/~1cdn~1report~1cpuTime/post/parameters/4/description
-#. (+2 more)
+#. (+3 more)
 msgid ""
 "Indicates the granularity of returned data. By default, 00:00:00 in UTC is "
 "used as the beginning of a day. If you wish to use a different offset from "
@@ -5168,7 +5199,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1vol/post/parameters/3/description
 #. /paths/~1cdn~1report~1volOrigin/post/parameters/3/description
 #. /paths/~1cdn~1report~1req/post/parameters/3/description
-#. (+9 more)
+#. (+10 more)
 msgid ""
 "Choose whether to include HTTP and HTTPS traffic in the results. The default "
 "\"all\" includes both types of traffic."
@@ -5283,6 +5314,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1bandwidth/post/requestBody/description
 #. /paths/~1cdn~1report~1volInterm/post/requestBody/description
 #. /paths/~1cdn~1report~1upVol/post/requestBody/description
+#. (+1 more)
 msgid ""
 "The request body can include filters to customize the results. By default, "
 "data from all hostnames will be included."
@@ -5360,7 +5392,7 @@ msgstr ""
 #. /paths/~1cdn~1report~1statusCodeDetails/post/requestBody/content/application~1json/schema/properties/filters/properties/hostnames/description
 #. /paths/~1cdn~1report~1statusCodeDetailsOrigin/post/requestBody/content/application~1json/schema/properties/filters/properties/hostnames/description
 #. /paths/~1cdn~1report~1volInterm/post/requestBody/content/application~1json/schema/properties/filters/properties/hostnames/description
-#. (+12 more)
+#. (+13 more)
 msgid ""
 "List of hostnames for which to return data. Wildcard hostnames such as "
 "*.domain.com are also permitted. If unspecified, data from all hostnames "
@@ -10167,9 +10199,9 @@ msgid "Get CPU time used"
 msgstr "获取 CPU 使用时间"
 
 #. /paths/~1cdn~1report~1cpuTime/post/parameters/0/description
+#. /paths/~1cdn~1report~1avgEdgeRtt/post/parameters/0/description
 #. /paths/~1cdn~1report~1volL7Summary/post/parameters/3/description
-#. /paths/~1cdn~1report~1volL7Summary/get/parameters/4/description
-#. (+2 more)
+#. (+3 more)
 msgid ""
 "An optional header that resellers can use to specify whether to include data "
 "from children customers. <table><tr><th>Value</th><th>Behavior</th></"
@@ -10194,6 +10226,24 @@ msgstr "获取处理您内容请求所使用的 CPU 时间（单位：秒）。"
 msgid ""
 "Filter results by specifying hostnames, server groups, or property hostnames."
 msgstr "通过指定加速域名、节点组或加速项目域名来过滤结果。"
+
+#. /paths/~1cdn~1report~1avgEdgeRtt/post/summary
+msgid "Get the average edge round trip time"
+msgstr "获取边缘平均往返时延"
+
+#. /paths/~1cdn~1report~1avgEdgeRtt/post/description
+msgid ""
+"Get the average round trip time (RTT) between CDN Pro edge servers and "
+"clients for your content. The value is reported in microseconds and is "
+"averaged over all measured requests in each time interval."
+msgstr ""
+"获取您的加速内容在 CDN Pro 边缘服务器与客户端之间的平均往返时延（RTT）。该值"
+"以微秒为单位，为每个时间段内所有已测量请求的平均值。"
+
+#. /paths/~1cdn~1report~1avgEdgeRtt/post/requestBody/content/application~1json/schema/properties/filters/description
+msgid ""
+"Filter results by specifying hostnames, property hostnames, or property IDs."
+msgstr "通过指定加速域名、加速项目域名或加速项目 ID 来过滤结果。"
 
 #. /paths/~1cdn~1hostnames~1historical~1{hostname}/get/summary
 msgid "Get historical information about one hostname"
@@ -14512,6 +14562,16 @@ msgid ""
 msgstr ""
 "您可以通过这些 API 创建日志汇聚点，即从 CDN Pro 服务器接收原始日志条目的接收 "
 "URL。此选项适用于使用 realTimeLog 高级功能的客户。"
+
+#~ msgid ""
+#~ "Comma-separated list of edge hostname statuses (<i>creating</i>, "
+#~ "<i>updating</i>, <i>active</i>, <i>deleting</i>, and <i>error</i>). Only "
+#~ "edge hostnames whose current status matches any of the specified values "
+#~ "will be returned. By default, edge hostnames in all statuses are returned."
+#~ msgstr ""
+#~ "以逗号分隔的调度域名状态列表（<i>creating</i>、<i>updating</i>、"
+#~ "<i>active</i>、<i>deleting</i> 和 <i>error</i>）。仅返回当前状态与所列任一"
+#~ "值匹配的调度域名。默认返回所有状态的调度域名。"
 
 #~ msgid "RFC 3339 date indicating when lastStatus was recorded."
 #~ msgstr "表示 lastStatus 记录时间的 RFC 3339 日期。"

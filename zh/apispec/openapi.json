@@ -2366,6 +2366,17 @@
                       "example": "2019-11-11T23:34:59Z",
                       "format": "date-time"
                     },
+                    "status": {
+                      "type": "string",
+                      "description": "调度域名的当前状态，根据其最近一次操作得出。可能的取值如下：<table><tr><th>值</th><th>说明</th></tr><tr><td>creating</td><td>创建操作正在进行中。</td></tr><tr><td>updating</td><td>更新操作正在进行中。</td></tr><tr><td>active</td><td>最近一次操作已成功，调度域名已生效。</td></tr><tr><td>deleting</td><td>删除操作正在进行中。</td></tr><tr><td>error</td><td>最近一次操作（创建、更新或删除）失败。</td></tr></table>",
+                      "enum": [
+                        "creating",
+                        "updating",
+                        "active",
+                        "deleting",
+                        "error"
+                      ]
+                    },
                     "ownerCustomerId": {
                       "type": "integer",
                       "description": "表示拥有该调度域名的客户账号。",
@@ -2587,6 +2598,7 @@
                       },
                       "creationTime": "2023-09-01T23:54:47Z",
                       "lastUpdateTime": "2023-09-01T23:54:47Z",
+                      "status": "active",
                       "history": [
                         {
                           "apiName": "myapiname",
@@ -6198,6 +6210,17 @@
                           "customerId": {
                             "type": "integer",
                             "description": "当代理商使用值为 self+children 或 children-only 的 Report-Range 请求头时，响应中会返回拥有该调度域名的客户的 ID。"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "调度域名的当前状态，根据其最近一次操作得出。可能的取值如下：<table><tr><th>值</th><th>说明</th></tr><tr><td>creating</td><td>创建操作正在进行中。</td></tr><tr><td>updating</td><td>更新操作正在进行中。</td></tr><tr><td>active</td><td>最近一次操作已成功，调度域名已生效。</td></tr><tr><td>deleting</td><td>删除操作正在进行中。</td></tr><tr><td>error</td><td>最近一次操作（创建、更新或删除）失败。</td></tr></table>",
+                            "enum": [
+                              "creating",
+                              "updating",
+                              "active",
+                              "deleting",
+                              "error"
+                            ]
                           }
                         },
                         "required": [
@@ -6231,6 +6254,7 @@
                           "description": "my edge hostname",
                           "hasBeian": false,
                           "highestServerGroup": "standard",
+                          "status": "active",
                           "lastUpdateTime": "2019-12-04T19:44:12Z",
                           "creationTime": "2019-12-04T19:44:12Z"
                         },
@@ -6239,6 +6263,7 @@
                           "description": "",
                           "hasBeian": false,
                           "highestServerGroup": "standard",
+                          "status": "active",
                           "lastUpdateTime": "2019-11-21T00:15:35Z",
                           "creationTime": "2019-11-21T00:15:35Z"
                         }
@@ -6408,6 +6433,14 @@
             "in": "query",
             "name": "serverGroups",
             "description": "以逗号分隔的节点组列表（chinaStandard、chinaPremium、standard、premium、deluxe、ultra 和 nearChina）。仅返回其客户端分区规则引用了这些节点组的调度域名。"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "status",
+            "description": "以逗号分隔的调度域名状态列表（<i>creating</i>、<i>updating</i>、<i>active</i>、<i>deleting</i> 和 <i>error</i>）。匹配不区分大小写。仅返回当前状态与所列任一值匹配的调度域名。默认返回所有状态的调度域名。"
           }
         ]
       }
@@ -29193,6 +29226,314 @@
             }
           },
           "description": "请求体可包含过滤条件以自定义结果。默认包含所有加速域名和节点组的数据。"
+        }
+      }
+    },
+    "/cdn/report/avgEdgeRtt": {
+      "post": {
+        "summary": "获取边缘平均往返时延",
+        "tags": [
+          "Reports"
+        ],
+        "responses": {
+          "200": {
+            "description": "响应包含数据。请注意，时间始终为 UTC 时间。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "reportResponse",
+                  "type": "object",
+                  "description": "包含报表返回的数据。",
+                  "x-examples": {
+                    "example-1": {
+                      "dataName": "edge response volume",
+                      "dataUnit": "megabytes",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2019-10-30T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-10-31T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-01T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-02T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-03T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-04T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-05T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-06T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-07T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-08T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-09T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-10T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-11T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-12T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-13T00:00:00Z",
+                          "data": 0
+                        },
+                        {
+                          "timestamp": "2019-11-14T00:00:00Z",
+                          "data": 0
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "dataName": {
+                      "type": "string",
+                      "description": "数据的简要描述。"
+                    },
+                    "dataUnit": {
+                      "type": "string",
+                      "description": "计量单位，取决于具体的报表 API。"
+                    },
+                    "dataSeries": {
+                      "type": "array",
+                      "description": "数据点。",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "description": "RFC 3339 格式的日期，表示时间区间的开始，始终为 <b>UTC</b> 时间。例如：<code>\"timestamp\": \"2019-10-29T01:00:00Z\"</code>",
+                            "format": "date-time"
+                          },
+                          "data": {
+                            "type": "number",
+                            "description": "该时间戳对应的值。计量单位请参阅 <i>dataUnit</i> 字段。"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataName"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "dataName": "Edge Average Round Trip Time",
+                      "dataUnit": "microseconds",
+                      "dataSeries": [
+                        {
+                          "timestamp": "2026-01-01T00:00:00Z",
+                          "data": 33400
+                        },
+                        {
+                          "timestamp": "2026-01-01T00:05:00Z",
+                          "data": 37200
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求无效。详情请参阅响应体。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid scheme": {
+                    "value": {
+                      "code": "InvalidScheme",
+                      "message": "Invalid parameter 'scheme': 'invalid'. The value of the scheme parameter must be 'http', 'https' or 'all'."
+                    }
+                  },
+                  "Invalid report range": {
+                    "value": {
+                      "code": "InvalidReportRange",
+                      "message": "Invalid parameter 'Report-Range': 'all'. The value of the Report-Range header must be 'self-only', 'self+children' or 'children-only'."
+                    }
+                  },
+                  "Invalid time span": {
+                    "value": {
+                      "code": "InvalidTimeSpan",
+                      "message": "The max time span of 'daily' report must be no more than 366 days."
+                    }
+                  },
+                  "Invalid property hostnames": {
+                    "value": {
+                      "code": "InvalidPropertyHostnames",
+                      "message": "Invalid propertyHostname(s): 'notAHostname'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-cdn-report-avgEdgeRtt",
+        "x-codeSamples": [
+          {
+            "lang": "bash",
+            "label": "CDNProSDK-bash",
+            "source": "./cdnapi.sh POST /report/avgEdgeRtt?type=daily -p -m 2024-10 -j body.json\n"
+          }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Report-Range",
+            "description": "可选的请求头，代理商可用它指定是否包含子客户的数据。<table><tr><th>值</th><th>行为</th></tr><tr><td>self-only</td><td>包含调用者的加速域名。</td></tr><tr><td>children-only</td><td>仅包含子客户拥有的加速域名。</td></tr><tr><td>self+children</td><td>同时包含调用者和子客户的加速域名的数据。</td></tr></table>"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "On-Behalf-Of",
+            "description": "如果您是代理商，可以使用此请求头指定子客户的 ID。"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "startdate",
+            "description": "RFC 3339 格式的日期，表示时间段的开始时间。时间必须使用 UTC 时区指定，不能使用时区偏移。示例：<code>startdate=2019-10-30T00:00:00Z</code> 根据 <i>type</i> 参数的不同，您的 startdate 可能会向下取整到最近的分钟、小时或天。例如，如果您输入 <code>startdate=2019-09-05T03:14:01Z&type=hourly</code>，响应将包含从 2019-09-05T03:00:00Z 开始的数据。",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "enddate",
+            "description": "RFC 3339 格式的日期，表示时间段的结束时间。时间必须使用 UTC 时区指定，不能使用时区偏移。示例：<code>enddate=2019-11-14T00:00:00Z</code> 根据 <i>type</i> 参数的不同，您的 enddate 可能会向上取整到最近的分钟、小时或天。例如，如果您输入 <code>enddate=2019-09-05T03:14:01Z&type=hourly</code>，响应将包含截至 2019-09-05T04:00:00Z 的数据。",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "fiveminutes",
+                "hourly",
+                "daily",
+                "monthly"
+              ]
+            },
+            "in": "query",
+            "name": "type",
+            "description": "指定返回数据的粒度。默认以 UTC 时间 00:00:00 作为一天的开始。如果您希望使用不同的 UTC 偏移量，可以追加 -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10, +11, +12, +13, +14。例如，<code>type=daily+8</code> 表示按 UTC+8 时间定义的一天。",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "选择结果中是否包含 HTTP 和 HTTPS 流量。默认值 \"all\" 包含这两种流量。"
+          }
+        ],
+        "description": "获取您的加速内容在 CDN Pro 边缘服务器与客户端之间的平均往返时延（RTT）。该值以微秒为单位，为每个时间段内所有已测量请求的平均值。",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "description": "通过指定加速域名、加速项目域名或加速项目 ID 来过滤结果。",
+                    "properties": {
+                      "hostnames": {
+                        "type": "array",
+                        "description": "要返回数据的加速域名列表。也允许使用通配符域名，例如 *.domain.com。如果未指定，将返回所有加速域名的数据。",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyHostnames": {
+                        "type": "array",
+                        "description": "要返回数据的加速项目域名列表。这些值对应加速项目配置中 <i>hostnames</i> 字段的值，可能与 HTTP 请求中发送的值不同。例如，如果您<a href=\"/apidocs/property-management/createproperty\">创建加速项目</a>来加速 '*.test.com'，客户端请求内容时可能传入 'abc.test.com' 作为 Host 请求头。在这种情况下，'\\*.test.com' 是可通过此字段过滤的加速项目域名，而 'abc.test.com' 是可通过 hostnames 字段过滤的加速域名。默认返回所有加速项目域名的数据。",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "propertyIds": {
+                        "type": "array",
+                        "description": "要返回数据的加速项目的 ID。如果未指定，将返回所有加速项目的数据。",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Return data for a specific hostname only": {
+                  "value": {
+                    "filters": {
+                      "hostnames": [
+                        "endtoendsds.domain.info"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "请求体可包含过滤条件以自定义结果。默认包含所有加速域名的数据。"
         }
       }
     },
